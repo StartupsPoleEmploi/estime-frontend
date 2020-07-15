@@ -4,7 +4,7 @@ about: This template provides a basic structure for user story issues.
 
 ---
 
-# :green_check_mark: Liste des critères d'acceptance
+# :dart: Liste des critères d'acceptance
 
 - [ ] Criteria n°1
 - [ ] Criteria n°2
