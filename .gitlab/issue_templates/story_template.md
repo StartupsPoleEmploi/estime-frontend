@@ -14,7 +14,3 @@ Title template : En tant que *ACTEUR*, je soushaite *[...]*
 2. - [ ] Task n°2
 
 
-# :hourglass: Estimation totale en heures : ?
-
-
-
