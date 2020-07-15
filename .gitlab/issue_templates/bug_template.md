@@ -2,6 +2,6 @@
 
 ### :repeat: Etapes pour reproduire
 
-### Résultat attendu
+### :dart: Résultat attendu
 
 ### Résultat actuel
