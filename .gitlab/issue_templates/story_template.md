@@ -1,4 +1,4 @@
-# :mag_right:  Description de la story
+# Description de la story
 
 
 ### :dart: Liste des critères d'acceptance
