@@ -9,18 +9,14 @@ about: This template provides a basic structure for user story issues.
 - [ ] Criteria n°1
 - [ ] Criteria n°2
 
-# Story point : 
 
-- [ ] 1
-- [ ] 2
+# Liste des tâches
 
-# Task list
 1. - [ ] Task n°1
 2. - [ ] Task n°2
 
 
-
-# Estimation en jours : 
+# Estimation totale en heures : 12h
 
 
 
