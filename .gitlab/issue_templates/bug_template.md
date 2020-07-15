@@ -1,7 +1,5 @@
 # Description du bug
 
-BUG - *[...]*
-
 ### :repeat: Etapes pour reproduire
 
 1. étape 1
