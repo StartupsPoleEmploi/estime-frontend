@@ -16,7 +16,7 @@ about: This template provides a basic structure for user story issues.
 2. - [ ] Task n°2
 
 
-# :calendar: Estimation totale en heures : ?
+# :hourglass: Estimation totale en heures : ?
 
 
 
