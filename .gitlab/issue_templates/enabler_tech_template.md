@@ -1,7 +1,5 @@
 # Description de l'enabler
 
-Enabler Tech - *[..]*
-
 ### :memo: Liste des tâches
 
 1. - [ ] Task n°1
