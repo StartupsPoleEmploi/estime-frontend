@@ -4,7 +4,7 @@ about: This template provides a basic structure for user story issues.
 
 ---
 
-# Acceptance criteria (This is something that can be verified to show that this user story is satisfied.)
+# Liste des critères d'acceptance
 
 - [ ] Criteria n°1
 - [ ] Criteria n°2
@@ -16,7 +16,7 @@ about: This template provides a basic structure for user story issues.
 2. - [ ] Task n°2
 
 
-# Estimation totale en heures : 12h
+# Estimation totale en heures : ?
 
 
 
