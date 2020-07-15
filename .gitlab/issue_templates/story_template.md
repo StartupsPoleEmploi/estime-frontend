@@ -11,7 +11,8 @@ about: This template provides a basic structure for user story issues.
 
 # Story point : 
 
-[ ] Criteria n°1 -  [ ] Criteria n°1 -  [ ] Criteria n°1
+- [ ] 1
+- [ ] 2
 
 # Task list
 1. - [ ] Task n°1
