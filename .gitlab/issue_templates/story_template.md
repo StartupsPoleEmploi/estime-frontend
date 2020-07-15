@@ -1,14 +1,13 @@
-Title template : En tant que *ACTEUR*, je soushaite *[...]*
+# Description de la story
 
 
-
-# :dart: Liste des critères d'acceptance
+## :dart: Liste des critères d'acceptance
 
 - [ ] Criteria n°1
 - [ ] Criteria n°2
 
 
-# :memo: Liste des tâches
+## :memo: Liste des tâches
 
 1. - [ ] Task n°1
 2. - [ ] Task n°2
