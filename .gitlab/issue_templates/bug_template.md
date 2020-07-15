@@ -2,8 +2,8 @@
 
 ### :repeat: Etapes pour reproduire
 
-1. description étape 1
-2. description étape 2
+1. étape 1
+2. étape 2
 
 ### :dart: Résultat attendu
 
