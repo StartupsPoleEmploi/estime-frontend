@@ -1,6 +1,6 @@
 # Description du bug
 
-### Etapes pour reproduire
+### :repeat: Etapes pour reproduire
 
 ### Résultat attendu
 
