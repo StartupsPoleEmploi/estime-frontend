@@ -43,6 +43,6 @@ deploy_estime_web_application:
         - mkdir -p ~/.ssh
     script:
         - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/docker-compose/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime
-        - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime && ./deploy.sh $CI_REGISTRY_IMAGE $USER_GITLAB_DOCKER_REGISTRY $CI_BUILD_TOKEN"
+        - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
 
 
