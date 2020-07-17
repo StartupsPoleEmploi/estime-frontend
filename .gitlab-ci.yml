@@ -32,7 +32,7 @@ deploy_web_application:
         - master
     before_script:
         - apt-get update -qq
-        - apt-get install -y -qq openssh-client rsync
+        - apt-get install -y -qq openssh-client rsync iputils-ping
         # ajout du serveur comme host connu
         - mkdir ~/.ssh
         - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
@@ -43,7 +43,7 @@ deploy_web_application:
         - mkdir -p ~/.ssh
     script:
         #- rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/docker-compose/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime
-        - ping 192.168.4.128
+        - ping -c 4 192.168.4.128
         - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
 
 
