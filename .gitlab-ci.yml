@@ -1,0 +1,13 @@
+stages:
+    - build-angular-application
+
+build_angular_application :
+    stage: build-angular-application
+    image:
+        name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
+        entrypoint: [""]
+    script:
+        - npm run build:prod
+    artifacts:
+        paths:
+            - ./dist
