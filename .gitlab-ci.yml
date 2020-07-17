@@ -1,10 +1,10 @@
 stages:
-    - build-estime-web-application
-    - build-estime--web-application-docker-image
-    - deploy-estime-web-application
+    - build-web-application
+    - build-docker-image
+    - deploy-web-application
 
-build_estime_web_application :
-    stage: build-estime-web-application
+build_web_application :
+    stage: build-web-application
     image:
         name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
         entrypoint: [""]
@@ -14,8 +14,8 @@ build_estime_web_application :
         paths:
             - ./dist
 
-build_estime_web_application_docker_image:
-    stage: build-estime--web-application-docker-image
+build_docker_image:
+    stage: build-docker-image
     image:
         name: gcr.io/kaniko-project/executor:debug
         entrypoint: [""]
@@ -26,8 +26,8 @@ build_estime_web_application_docker_image:
     only:
         - master
 
-deploy_estime_web_application:
-    stage: deploy-estime-web-application
+deploy_web_application:
+    stage: deploy-web-application
     only:
         - master
     before_script:
