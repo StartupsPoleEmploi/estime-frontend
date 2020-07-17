@@ -1,5 +1,6 @@
 stages:
     - build-angular-application
+    - build-docker-image
 
 build_angular_application :
     stage: build-angular-application
