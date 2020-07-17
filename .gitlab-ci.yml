@@ -11,3 +11,16 @@ build_angular_application :
     artifacts:
         paths:
             - ./dist
+
+build_docker_image:
+    stage: build-docker-image
+    image:
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    script:
+        # build de l'image docker contenant le site web et push de celle-ci dans le container registry
+        - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+        - /kaniko/executor --context $CI_PROJECT_DIR/deployment --dockerfile $CI_PROJECT_DIR/deployment/Dockerfile --destination $CI_REGISTRY_IMAGE
+    only:
+        - master
+

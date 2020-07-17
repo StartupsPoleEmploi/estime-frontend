@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  estime-frontend:
+    image: registry.beta.pole-emploi.fr/estime/estime-frontend
+    networks:
+     - estime-application-network
+networks:
+  estime-application-network:
+    name: docker-shared-network
