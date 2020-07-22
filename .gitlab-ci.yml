@@ -6,43 +6,45 @@ stages:
 build_application :
     stage: build-application
     image:
-        name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
-        entrypoint: [""]
+      name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
+      entrypoint: [""]
     script:
-        - npm run build:prod
+      - npm run build:prod
     artifacts:
-        paths:
-            - ./dist
+      paths:
+        - ./dist
+    cache:
+      key: "$CI_BUILD_REF_NAME"
+      paths:
+        - node_modules/
 
 build_docker_image:
     stage: build-docker-image
     image:
-        name: gcr.io/kaniko-project/executor:debug
-        entrypoint: [""]
+      name: gcr.io/kaniko-project/executor:debug
+      entrypoint: [""]
     script:
-        # build de l'image docker contenant le site web et push de celle-ci dans le container registry
-        - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-        - /kaniko/executor --context $CI_PROJECT_DIR/deployment --dockerfile $CI_PROJECT_DIR/deployment/Dockerfile --destination $CI_REGISTRY_IMAGE
+      # build de l'image docker contenant le site web et push de celle-ci dans le container registry
+      - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+      - /kaniko/executor --context $CI_PROJECT_DIR/deployment --dockerfile $CI_PROJECT_DIR/deployment/Dockerfile --destination $CI_REGISTRY_IMAGE
     only:
-        - master
+      - master
 
 deploy_application:
     stage: deploy-application
     only:
-        - master
+      - master
     before_script:
-        - apt-get update -qq
-        - apt-get install -y -qq openssh-client rsync iputils-ping
-        # ajout du serveur comme host connu
-        - mkdir ~/.ssh
-        - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
-        - chmod 644 ~/.ssh/known_hosts
-        # ajout SSH_PRIVATE_KEY dans agent store
-        - eval $(ssh-agent -s)
-        - ssh-add <(echo "$SSH_PRIVATE_KEY")
-        - mkdir -p ~/.ssh
+      - apt-get update -qq
+      - apt-get install -y -qq openssh-client rsync iputils-ping
+      # ajout du serveur comme host connu
+      - mkdir ~/.ssh
+      - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+      - chmod 644 ~/.ssh/known_hosts
+      # ajout SSH_PRIVATE_KEY dans agent store
+      - eval $(ssh-agent -s)
+      - ssh-add <(echo "$SSH_PRIVATE_KEY")
+      - mkdir -p ~/.ssh
     script:
-        - rsync -avz --no-perms --no-owner --no-group --exclude "$CI_PROJECT_DIR/deployment/Dockerfile" -e 'ssh'  $CI_PROJECT_DIR/deployment/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
-        - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
-
-
+      - rsync -avz --no-perms --no-owner --no-group --exclude "$CI_PROJECT_DIR/deployment/Dockerfile" -e 'ssh'  $CI_PROJECT_DIR/deployment/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
