@@ -1,10 +1,10 @@
 stages:
-    - build-web-application
+    - build-application
     - build-docker-image
-    - deploy-web-application
+    - deploy-application
 
-build_web_application :
-    stage: build-web-application
+build_application :
+    stage: build-application
     image:
         name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
         entrypoint: [""]
@@ -26,8 +26,8 @@ build_docker_image:
     only:
         - master
 
-deploy_web_application:
-    stage: deploy-web-application
+deploy_application:
+    stage: deploy-application
     only:
         - master
     before_script:
