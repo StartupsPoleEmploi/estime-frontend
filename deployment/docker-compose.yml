@@ -4,11 +4,11 @@ services:
   estime-frontend:
     image: registry.beta.pole-emploi.fr/estime/estime-frontend
     networks:
-     - estime-application-network
+     - estime-frontend-network
     ports:
       - 80:80
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
 networks:
-  estime-application-network:
+  estime-frontend-network:
     name: docker-shared-network
