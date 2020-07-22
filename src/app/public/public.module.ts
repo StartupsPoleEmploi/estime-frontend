@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommunModule } from '../commun/commun.module';
+import { CommunModule } from '@app/commun/commun.module';
 
-import { PublicRoutingModule } from './public-routing.module';
-import { HomepageComponent } from './homepage/homepage.component';
+import { PublicRoutingModule } from '@app/public/public-routing.module';
+import { HomepageComponent } from '@app/public/homepage/homepage.component';
 
 
 
