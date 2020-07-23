@@ -13,7 +13,7 @@ build_application :
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - src/*
+        - src/**/*
     artifacts:
       paths:
         - ./dist
