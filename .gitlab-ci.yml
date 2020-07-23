@@ -38,8 +38,6 @@ build_docker_image:
 
 deploy_application:
     stage: deploy-application
-    only:
-      - master
     before_script:
       - apt-get update -qq
       - apt-get install -y -qq openssh-client rsync iputils-ping
