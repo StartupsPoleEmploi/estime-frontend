@@ -1,10 +1,6 @@
 #connect to private container registry
 echo "$3" | docker login -u $2 --password-stdin $1
 
-#pull images used in docker-compose
-docker-compose pull
-
-
 container_name=estime-frontend
 # if new version is passed and container exists, update estime-frontend image
 if [ ! -z "$4" ] && [sudo docker container ls -a --format '{{.Names}}' | grep -Eq "^${container_name}\$"]; then
