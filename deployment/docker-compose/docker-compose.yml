@@ -7,8 +7,7 @@ services:
      - estime-frontend-network
     ports:
       - 80:80
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+
 networks:
   estime-frontend-network:
     name: docker-shared-network
