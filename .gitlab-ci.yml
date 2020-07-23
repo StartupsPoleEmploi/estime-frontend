@@ -46,5 +46,5 @@ deploy_application:
       - ssh-add <(echo "$SSH_PRIVATE_KEY")
       - mkdir -p ~/.ssh
     script:
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/docker-swarm $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/docker-swarm/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
