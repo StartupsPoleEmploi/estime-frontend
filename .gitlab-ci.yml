@@ -13,7 +13,12 @@ build_application :
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
+        - angular.json
+        - deployment/Dockerfile
+        - deployment/nginx-conf/*
+        - package.json
         - src/**/*
+        - tsconfig.base.json
     artifacts:
       paths:
         - ./dist
@@ -34,7 +39,12 @@ build_docker_image:
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - src/*
+        - angular.json
+        - deployment/Dockerfile
+        - deployment/nginx-conf/*
+        - package.json
+        - src/**/*
+        - tsconfig.base.json
 
 deploy_application:
     stage: deploy-application
@@ -54,4 +64,9 @@ deploy_application:
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - src/*
+        - angular.json
+        - deployment/Dockerfile
+        - deployment/nginx-conf/*
+        - package.json
+        - src/**/*
+        - tsconfig.base.json
