@@ -10,7 +10,7 @@ container_name=estime-frontend
 if [ ! -z "$4" ] && [sudo docker container ls -a --format '{{.Names}}' | grep -Eq "^${container_name}\$"]; then
   docker service update --image registry.beta.pole-emploi.fr/estime/estime-frontend:$4 estime-frontend
 else
-  docker stack deploy -c estime-frontend-stack.yml estime-frontend
+  docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend
 fi
 
 #clean docker environment
