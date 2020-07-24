@@ -33,7 +33,7 @@ build_docker_image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
-      # build de l'image docker contenant le site web et push de celle-ci dans le container registry
+      # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR/deployment --dockerfile $CI_PROJECT_DIR/deployment/Dockerfile --destination $CI_REGISTRY_IMAGE
     rules:
@@ -51,15 +51,18 @@ deploy_application:
     before_script:
       - apt-get update -qq
       - apt-get install -y -qq openssh-client rsync iputils-ping
-      # ajout du serveur comme host connu
+      # add target server in known hosts
       - mkdir ~/.ssh
       - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
-      # ajout SSH_PRIVATE_KEY dans agent store
+      # add SSH_PRIVATE_KEY in agent store
       - eval $(ssh-agent -s)
       - ssh-add <(echo "$SSH_PRIVATE_KEY")
       - mkdir -p ~/.ssh
     script:
+      # rsync to activate if needed to update estime-frontend-stack.yml
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/docker-swarm/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
