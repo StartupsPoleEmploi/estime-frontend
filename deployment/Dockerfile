@@ -1,7 +1,10 @@
 FROM nginx:1.16-alpine
 
-RUN apk add --update \
+RUN apk --no-cache update && \
+    apk --no-cache upgrade && \
+    apk --no-cache add \
     curl \
+    tzdata \
     && rm -rf /var/cache/apk/*
 
 COPY ./nginx-conf/default.conf /etc/nginx/conf.d/

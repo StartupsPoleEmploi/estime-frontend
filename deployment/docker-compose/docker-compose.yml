@@ -3,6 +3,8 @@ version: '3.8'
 services:
   estime-frontend:
     image: registry.beta.pole-emploi.fr/estime/estime-frontend
+    environment:
+      - TZ=Europe/Paris
     networks:
      - estime-frontend-network
     ports:
