@@ -11,6 +11,13 @@ services:
       - 80:80
     deploy:
       replicas: 2
+      resources:
+        reservations:
+          cpus: 50m
+          memory: 128Mi
+        limits:
+          cpus: 100m
+          memory: 256Mi
       update_config:
         parallelism: 1
         delay: 10s
