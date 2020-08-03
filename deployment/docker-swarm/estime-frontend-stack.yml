@@ -13,10 +13,10 @@ services:
       replicas: 2
       resources:
         reservations:
-          cpus: 50m
+          cpus: '0.05'
           memory: 128Mi
         limits:
-          cpus: 100m
+          cpus: '0.10'
           memory: 256Mi
       update_config:
         parallelism: 1
