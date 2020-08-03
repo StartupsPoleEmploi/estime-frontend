@@ -1,14 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/scss/buttons";
+@import "assets/scss/font";
 @import "assets/scss/types";
 @import "assets/scss/variables";
-
-@font-face {
-  font-family: 'Filson Pro Bold';
-  src: url('assets/font/filson-pro/7af422d3673e325273ef7450c569aa73.eot');
-  src: local('Filson Pro Bold'), local('FilsonPro-Bold'),
-  url('assets/font/filson-pro/7af422d3673e325273ef7450c569aa73.eot?#iefix') format('embedded-opentype'),
-  url('assets/font/filson-pro/7af422d3673e325273ef7450c569aa73.woff') format('woff'),
-  url('assets/font/filson-pro/7af422d3673e325273ef7450c569aa73.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}

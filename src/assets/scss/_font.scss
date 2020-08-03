@@ -1,0 +1,51 @@
+
+@font-face {
+  font-family: 'Filson Pro';
+  src: url('../font/filson-pro/7af422d3673e325273ef7450c569aa73.eot');
+  src: local('Filson Pro'), local('FilsonPro'),
+  url('../font/filson-pro/7af422d3673e325273ef7450c569aa73.eot?#iefix') format('embedded-opentype'),
+  url('../font/filson-pro/7af422d3673e325273ef7450c569aa73.woff') format('woff'),
+  url('../font/filson-pro/7af422d3673e325273ef7450c569aa73.ttf') format('truetype');
+}
+
+.font-effect {
+  font-family: "Arial";
+  color: #686868;
+}
+
+.font-effect-title {
+  font-family: 'Filson Pro';
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #686868;
+}
+
+
+h1 {
+  @extend .font-effect-title;
+  font-size: 2rem;
+}
+
+h2 {
+  @extend .font-effect-title;
+  font-size: 1.6rem;
+}
+
+h3 {
+  @extend .font-effect-title;
+  font-size: 1.2rem;
+}
+
+h4 , h5, h6 {
+  @extend .font-effect-title;
+  font-size: 0.9rem;
+}
+
+p, span {
+  @extend .font-effect
+}
+
+.btn {
+  @extend .font-effect;
+  font-size: 1.2rem;
+}
