@@ -1,9 +1,28 @@
 @import "../../../assets/scss/variables";
 
 .jumbotron {
-  @media #{$large-device} {
-    min-height: 30rem;
+  padding-top: unset;
+  padding-bottom: unset;
+  .container-fluid {
+    @media #{$large-device} {
+      background-image: url("../../../assets/images/background.png");
+      background-size: 100% 100%;
+      height: 100%;
+      min-height: 30rem;
+      h2 {
+        padding-top: 11rem;
+      }
+    }
+
+    #div-logo-estime {
+      padding-top: 0.8rem;
+      @media #{$small-device} {
+        text-align: center;
+        padding-bottom: 2rem;
+      }
+    }
   }
+
 }
 
 .etapes-section {
