@@ -1,4 +1,4 @@
-$mobile:                          "screen and (max-width:767px)";
-$tablette:                        "screen and (min-width:768px) and (max-width:1024px)";
-$medium:                          "screen and (min-width:1025px) and (max-width:1199px)";
-$desktop:                         "screen and (min-width:1200px)";
+$small-device:                "screen and (max-width:768px)";
+$medium-device:               "screen and (min-width:768px)";
+$large-device:                "screen and (min-width: 992px)";
+$extra-large-device:          "screen and (min-width: 1200px)";

@@ -1,7 +1,7 @@
 @import "../../../assets/scss/variables";
 
 .jumbotron {
-  @media #{$medium},#{$desktop}{
+  @media #{$large-device},#{$extra-large-device} {
     min-height: 30rem;
   }
 }
@@ -51,7 +51,7 @@
   background: none;
   h2  {
     line-height: 2.3rem;
-    @media #{$medium},#{$desktop}{
+    @media #{$large-device},#{$extra-large-device} {
       width: 55%;
     }
   }
