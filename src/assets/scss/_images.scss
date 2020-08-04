@@ -1,3 +1,9 @@
 #logo-estime {
-  width: 20rem;
+  @media #{$mobile},#{$tablette}{
+    width: 15rem;
+  }
+  @media #{$medium},#{$desktop}{
+    width: 20%;
+    margin-left: 2rem;
+  }
 }
