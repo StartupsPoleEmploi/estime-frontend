@@ -1,8 +1,8 @@
 #logo-estime {
-  @media #{$small-device},#{$medium-device} {
+  @media #{$small-device} {
     width: 20rem;
   }
-  @media #{$large-device},#{$extra-large-device} {
+  @media #{$large-device} {
     width: 20%;
     margin-left: 2rem;
   }

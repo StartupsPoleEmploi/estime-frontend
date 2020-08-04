@@ -1,6 +1,6 @@
 body {
   width :100% ;
-  @media #{$large-device},#{$extra-large-device} {
+  @media #{$large-device} {
     background-image: url("../images/background.png");
     height: 40rem;
     background-position: center;
@@ -12,7 +12,7 @@ body {
 }
 
 .header-container {
-  height: 22%;
+  height: 19%;
   min-height: 7rem;
   @media #{$small-device} {
     text-align: center;
