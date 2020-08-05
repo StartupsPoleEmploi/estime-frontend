@@ -21,8 +21,8 @@
     }
     h2  {
       line-height: 2.3rem;
-      padding-top: 11rem;
       @media #{$large-device} {
+        padding-top: 11rem;
         width: 55%;
       }
     }
