@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/utile/auth-service.component';
+import { AuthService } from '../../core/services/utile/auth-service.service';
+import { RoutesEnum } from "@enumerations/routes.enum";
 
 @Component({
   selector: 'app-signin-callback',
@@ -13,7 +14,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
 
   ngOnInit() {
     this._authService.completeLogin().then(user => {
-      this._router.navigate(['/recapitulatif-infos-de'], { replaceUrl: true });
+      this._router.navigate([RoutesEnum.RECAPITULATIF_INFOS_DE], { replaceUrl: true });
     })
   }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from "./commun/services/utile/auth-service.component";
 
 @Component({
   selector: 'app-root',
@@ -8,17 +7,12 @@ import { AuthService } from "./commun/services/utile/auth-service.component";
 })
 export class AppComponent implements OnInit {
   title = 'estime';
-  isLoggedIn = false;
 
-  constructor(private authService: AuthService) {
-    this.authService.loginChanged.subscribe(loggedIn =>  {
-      this.isLoggedIn = loggedIn;
-    })
+  constructor() {
+
   }
 
   ngOnInit() {
-    this.authService.isLoggedIn().then(loggedIn => {
-      this.isLoggedIn = loggedIn;
-    })
+
   }
 }

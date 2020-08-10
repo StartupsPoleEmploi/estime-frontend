@@ -14,8 +14,8 @@
       "@enumerations/*": ["app/commun/enumerations/*"],
       "@environments/*": ["environments/*"],
       "@models/*": ["app/commun/models/*"],
-      "@services/*": ["app/commun/services/*"],
-      "@services-utiles/*": ["app/commun/services/utile/*"]
+      "@services/*": ["app/core/services/*"],
+      "@services-utiles/*": ["app/core/services/utile/*"]
 
     },
     "importHelpers": true,

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, InjectionToken } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { environment } from '@environments/environment';
-import { Environment } from "@models/environment.model";
+import { Environment } from "@app/commun/models/environment";
 
 @NgModule({
   declarations: [

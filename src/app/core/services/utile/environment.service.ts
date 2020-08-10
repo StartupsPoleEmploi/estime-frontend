@@ -1,6 +1,6 @@
-import {InjectionToken, Injectable, Inject, Optional} from '@angular/core';
+import {InjectionToken} from '@angular/core';
 import {environment} from '@environments/environment';
-import { Environment } from "app/commun/models/environment.model";
+import { Environment } from '@models/environment';
 
 export const ENVIRONMENT = new InjectionToken<{ [key: string]: any }>('environment');
 

@@ -1,3 +1,4 @@
 export enum RoutesEnum {
-    HOMEPAGE = 'homepage'
+    HOMEPAGE = '/',
+    RECAPITULATIF_INFOS_DE = '/recapitulatif-infos-de'
 }

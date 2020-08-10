@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AideService } from '@services/api-estime/aide.service';
-import { Aide } from '@app/commun/models/aide.model';
-import { AuthService } from '@app/commun/services/utile/auth-service.component';
+
+import { AuthService } from '@services-utiles/auth-service.service';
+import { Aide } from "@models/aide";
+
 
 @Component({
   selector: 'app-homepage',
