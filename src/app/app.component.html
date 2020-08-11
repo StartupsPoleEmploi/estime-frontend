@@ -1,5 +1,12 @@
+<header *ngIf="this.isLoggedIn" class="vertical-center">
+  <div class="container-fluid my-auto d-block">
+      <img id="logo-estime"  src="./assets/images/logo-estime.svg" />
+      <img id="logo-pole-emploi" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
+      <a (click)="logout()">Se deconnecter</a>
+  </div>
+</header>
 <router-outlet></router-outlet>
-<footer class="p-3 text-right text-light vertical-center">
+<footer *ngIf="!this.isLoggedIn" class="p-3">
   <div class="container-fluid">
   </div>
 </footer>

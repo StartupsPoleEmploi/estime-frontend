@@ -1,4 +1,33 @@
+@import "../assets/scss/variables";
+
 footer {
   height: 8rem;
   background-color: black;
+}
+
+header {
+  .container-fluid {
+    a {
+      margin-top: 1rem;
+      float: right;
+      cursor: pointer;
+    }
+
+    #logo-estime {
+      margin-top: 0.5rem;
+      width: 10rem;
+      margin-right: 1.5rem;
+      @media #{$medium-device}, #{$large-device} {
+        width: 12%;
+      }
+    }
+
+    #logo-pole-emploi {
+      margin-top: 0.5rem;
+      width: 6rem;
+      @media #{$medium-device}, #{$large-device}  {
+        width: 6%;
+      }
+    }
+  }
 }

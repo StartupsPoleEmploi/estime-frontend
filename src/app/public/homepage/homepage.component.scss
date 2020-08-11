@@ -18,18 +18,27 @@
     min-height: 30rem;
   }
   .container-fluid {
-    #div-logo {
+    .div-logo {
       @media #{$small-device} {
         margin-top: 2rem;
       }
-    }
-    #div-logo-estime {
-      padding-top: 0.8rem;
-      @media #{$small-device} {
-        text-align: center;
-        padding-bottom: 2rem;
+      #logo-estime {
+        width: 10rem;
+        margin-right: 1.5rem;
+        @media #{$medium-device}, #{$large-device} {
+          width: 12%;
+          margin-top: 2rem;
+        }
+      }
+      #logo-pole-emploi {
+        width: 6rem;
+        @media #{$medium-device}, #{$large-device}  {
+          width: 6%;
+          margin-top: 2rem;
+        }
       }
     }
+
     button {
       margin-top: 1rem;
       font-size: 1.6rem;
@@ -48,6 +57,9 @@
       }
     }
     .container-fluid {
+      //TODO JLA à décommenter
+      //position: fixed;
+      //z-index: -100;
       margin-left: 0rem;
       background-color: white;
       width: 100%;

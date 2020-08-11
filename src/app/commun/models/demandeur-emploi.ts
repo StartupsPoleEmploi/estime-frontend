@@ -9,11 +9,11 @@ export class DemandeurEmploi extends Individu {
   mesAides: Array<Aide>;
 
   constructor(
-    accessTokenInfo: AccessTokenInfo,
+    donneesAccessToken: AccessTokenInfo,
     nom: string,
     prenom: string,
     email: string
   ) {
-    super(accessTokenInfo, nom, prenom, email);
+    super(donneesAccessToken, nom, prenom, email);
   }
 }

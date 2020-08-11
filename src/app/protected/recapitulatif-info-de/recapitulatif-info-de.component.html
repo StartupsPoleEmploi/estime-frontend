@@ -1,16 +1,8 @@
-<div class="container" style="padding: 10px;">
-  <p style="font-size: 20px;">Informations du DE connecté :</p>
+<div class="container mt-5" style="padding: 10px;">
+  <p style="font-size: 20px;">Bienvenue {{this.demandeurEmploiConnecte.prenom}} {{this.demandeurEmploiConnecte.nom}}</p>
 
-  <table class="table" style="width: 75%;">
+  <table class="table">
     <tbody>
-      <tr>
-        <th scope="row">Nom</th>
-        <td>{{this.demandeurEmploiConnecte.nom}}</td>
-      </tr>
-      <tr>
-        <th scope="row">Prénom</th>
-        <td>{{this.demandeurEmploiConnecte.prenom}}</td>
-      </tr>
       <tr>
         <th scope="row">Email</th>
         <td>{{this.demandeurEmploiConnecte.email}}</td>

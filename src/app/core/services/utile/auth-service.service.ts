@@ -14,7 +14,9 @@ export class AuthService {
 
   private demandeurEmploiConnecte: DemandeurEmploi;
   private donneesAutorisationOIDC: DonneesAutorisationOIDC;
-  private loginChangedSubject = new Subject<boolean>();
+  private isLoggedInChangedSubject = new Subject<boolean>();
+
+  loginChanged = this.isLoggedInChangedSubject.asObservable();
 
   private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'oidc.authorizeData';
   private static readonly DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY = 'application.demandeurEmploiConnecte';
@@ -35,19 +37,26 @@ export class AuthService {
   completeLogin() {
     return this.authentifierDemandeurEmploi().then(demandeurEmploi => {
         this.demandeurEmploiConnecte = demandeurEmploi;
+        this.isLoggedInChangedSubject.next(true);
         this.sessionStorageService.store(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
         return demandeurEmploi;
     });
   }
 
   logout() {
+    this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.document.location.href = this.getPoleEmploiIdentityServerDeconnexionURI();
   }
 
   completeLogout() {
-    this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
-    this.sessionStorageService.clear(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+  }
+
+  isLoggedIn():boolean {
+    this.demandeurEmploiConnecte =  this.sessionStorageService.retrieve(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+    this.isLoggedInChangedSubject.next(true);
+    return !!this.demandeurEmploiConnecte;
   }
 
   getDemandeurEmploiConnecte(): DemandeurEmploi {
@@ -67,7 +76,7 @@ export class AuthService {
 
   private getPoleEmploiIdentityServerDeconnexionURI():string  {
     return `${this.environment.oidcPoleEmploiIdentityServerURL}/compte/deconnexion?` +
-    `&id_token_hint=${this.demandeurEmploiConnecte.accessTokenInfo.idToken}` +
+    `&id_token_hint=${this.demandeurEmploiConnecte.donneesAccessToken.idToken}` +
     `&redirect_uri=${this.environment.oidcRedirectURI}signout-callback`
     ;
   }
