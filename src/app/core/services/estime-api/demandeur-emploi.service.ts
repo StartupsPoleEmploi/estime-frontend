@@ -19,4 +19,8 @@ export class DemandeurEmploiService {
   public authentifier(donneesAutorisationOIDC: DonneesAutorisationOIDC) {
     return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}authentifier`, donneesAutorisationOIDC).toPromise();
   }
+
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi) {
+    return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}simuler_mes_aides`, demandeurEmploi).toPromise();
+  }
 }

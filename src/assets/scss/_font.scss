@@ -9,12 +9,12 @@
 }
 
 .font-effect {
-  font-family: "Arial";
+  font-family: "Roboto",Helvetica,Arial,sans-serif;
   color: #686868;
 }
 
 .font-effect-title {
-  font-family: 'Filson Pro';
+  font-family: "Roboto",Helvetica,Arial,sans-serif;
   font-weight: bold;
   letter-spacing: 2px;
   color: #686868;
@@ -23,17 +23,17 @@
 
 h1 {
   @extend .font-effect-title;
-  font-size: 2rem;
+  font-size: 2.375rem;
 }
 
 h2 {
   @extend .font-effect-title;
-  font-size: 1.6rem;
+  font-size: 2.0625rem;
 }
 
 h3 {
   @extend .font-effect-title;
-  font-size: 1.2rem;
+  font-size: 24px;
 }
 
 h4 , h5, h6 {
@@ -42,10 +42,11 @@ h4 , h5, h6 {
 }
 
 p, span {
-  @extend .font-effect
+  @extend .font-effect;
+  font-size: 1.2rem;
 }
 
 .btn {
   @extend .font-effect;
-  font-size: 1.2rem;
+  font-size: 0.875rem;
 }

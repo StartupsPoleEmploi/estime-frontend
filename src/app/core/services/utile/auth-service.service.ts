@@ -12,7 +12,7 @@ import { DemandeurEmploiService } from "@services/estime-api/demandeur-emploi.se
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private demandeurEmploi: DemandeurEmploi;
+  private demandeurEmploiConnecte: DemandeurEmploi;
   private donneesAutorisationOIDC: DonneesAutorisationOIDC;
   private loginChangedSubject = new Subject<boolean>();
 
@@ -34,8 +34,8 @@ export class AuthService {
 
   completeLogin() {
     return this.authentifierDemandeurEmploi().then(demandeurEmploi => {
-        this.demandeurEmploi = demandeurEmploi;
-        this.sessionStorageService.store(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploi);
+        this.demandeurEmploiConnecte = demandeurEmploi;
+        this.sessionStorageService.store(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
         return demandeurEmploi;
     });
   }
@@ -48,6 +48,10 @@ export class AuthService {
     this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
     this.sessionStorageService.clear(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+  }
+
+  getDemandeurEmploiConnecte(): DemandeurEmploi {
+    return this.demandeurEmploiConnecte;
   }
 
   private getPoleEmploiIdentityServerConnexionURI():string  {
@@ -63,7 +67,7 @@ export class AuthService {
 
   private getPoleEmploiIdentityServerDeconnexionURI():string  {
     return `${this.environment.oidcPoleEmploiIdentityServerURL}/compte/deconnexion?` +
-    `&id_token_hint=${this.demandeurEmploi.accessTokenInfo.idToken}` +
+    `&id_token_hint=${this.demandeurEmploiConnecte.accessTokenInfo.idToken}` +
     `&redirect_uri=${this.environment.oidcRedirectURI}signout-callback`
     ;
   }

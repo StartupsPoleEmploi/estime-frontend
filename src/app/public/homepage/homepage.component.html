@@ -1,39 +1,40 @@
 <div class="jumbotron">
   <div class="container-fluid">
-    <div id="div-logo-estime">
-      <img id="logo-estime" src="./assets/images/logo-estime.png" />
+    <div id="div-logo">
+      <img id="logo-estime"  src="./assets/images/logo-estime.svg" />
+      <img id="logo-pole-emploi" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
     </div>
-    <div class="container">
-      <h2>Reprenez un emploi en sachant ce que vous allez gagner demain.</h2>
-      <button type="button" class="btn btn-primary pe-connect mt-2" (click)="login()">Je commence<i class="fas fa-arrow-right ml-2"></i></button>
+    <div class="container-fluid">
+      <h1><p>Vous reprenez un emploi ?</p>Estime calcule le montant de vos aides pour les mois à venir.</h1>
+      <button type="button" class="btn btn-primary pe-connect mt-2" (click)="login()">Je commence<img class="ml-2" src="./assets/images/icon-bt-primaire.svg" /></button>
     </div>
   </div>
 </div>
-<section class="etapes-section p-3">
+<section class="etapes-section p-3 mb-5">
   <h2 class="text-center">3 étapes pour obtenir votre simulation financière</h2>
-  <div class="container mt-3">
+  <div class="container-fluid mt-5">
     <div class="card-deck">
-      <div class="card">
+      <div class="card ml-5 mr-5">
         <div class="card-header bg-white border-bottom-0 vertical-center">
           <img class="d-block mx-auto" src="../../../assets/images/account_circle.png" />
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <p class="card-text">Connectez-vous et confirmez vos informations.</p>
         </div>
       </div>
-      <div class="card">
+      <div class="card ml-5 mr-5">
         <div class="card-header bg-white border-bottom-0 vertical-center">
           <img class="d-block mx-auto" src="../../../assets/images/description.png" />
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <p class="card-text">Indiquez le montant de votre prochain contrat de travail.</p>
         </div>
       </div>
-      <div class="card">
+      <div class="card mr-5 ml-5">
         <div class="card-header bg-white border-bottom-0 vertical-center">
           <img class="d-block mx-auto" src="../../../assets/images/done.png" />
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <p class="card-text">Obtenez le montant total de vos ressources pour les 6 mois à venir.</p>
         </div>
       </div>
@@ -42,7 +43,7 @@
 </section>
 <section class="questions-section p-3 mt-4">
   <h2 class="text-center">Les questions qui nous sont souvent posées</h2>
-  <div class="container">
+  <div class="container-fluid">
     <div class="card-deck">
       <div class="card">
         <div class="card-header border-bottom-0">
@@ -60,6 +61,25 @@
         <div class="card-body mt-2">
           <h3 class="card-title">C'est quoi le rechargement des droits ?</h3>
           <p class="card-text text-justify">Plus vous travaillez, plus vous pourrez acquérir de nouveaux droits qui viendront « recharger » votre compte d’allocations une fois le droit en cours épuisé. Pour en bénéficier, il faut avoir travaillé au moins 150 heures durant la période d’indemnisation, dans le cadre d’un ou de plusieurs contrats (CDD, CDI, intérim).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="temoignages-section p-3 mt-4">
+  <h2 class="text-center">Témoignages</h2>
+  <div class="container-fluid mt-5">
+    <div class="card-deck">
+      <div class="card">
+        <div class="card-text text-center">
+          <p>"Ce service est super utile."</p>
+          <p class="author-temoignage">Guillaume</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-text text-center">
+          <p>"C'est bien de traiter la partie financière sur un service tier."</p>
+          <p class="author-temoignage">Sola</p>
         </div>
       </div>
     </div>
