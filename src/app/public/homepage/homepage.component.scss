@@ -81,6 +81,9 @@
   @media #{$small-device} {
     background-color: #a7f1e3;
   }
+  @media #{$large-device}, #{$medium-device} {
+    margin-bottom: 30px;
+  }
   .card {
     box-shadow: 0 0 19px 0 rgba(27,43,103,0.2);
     border-radius: 1rem;
