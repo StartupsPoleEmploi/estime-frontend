@@ -11,7 +11,20 @@
     max-width: 160%;
     min-height: 30rem;
   }
+
+  @media #{$medium-device} {
+    background-image: url("../../../assets/images/backgroung-homepage.svg");
+    background-size: 110% 150%;
+    height: 30rem;
+    max-width: 160%;
+    min-height: 30rem;
+  }
   .container-fluid {
+    #div-logo {
+      @media #{$small-device} {
+        text-align: center;
+      }
+    }
     #div-logo-estime {
       padding-top: 0.8rem;
       @media #{$small-device} {
@@ -24,9 +37,9 @@
     }
     h1  {
       line-height: 3rem;
-      @media #{$large-device} {
+      @media #{$medium-device}, #{$large-device} {
         padding-top: 6rem;
-        width: 80%;
+        width: 85%;
       }
       p {
         font-weight: normal;
@@ -34,10 +47,10 @@
       }
     }
     .container-fluid {
-      margin-left: 10px;
+      margin-left: 0rem;
       background-color: white;
-      height: 365px;
-      width: 931px;
+      width: 50rem;
+      height: 25rem;
     }
   }
 }

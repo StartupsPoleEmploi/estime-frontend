@@ -1,2 +1,6 @@
-$small-device:                "screen and (max-width:768px)";
-$large-device:                "screen and (min-width: 769px)";
+//$small-device:                "screen and (max-width:768px)";
+//$desktop:                "screen and (min-width: 769px)";
+
+$small-device:                          "screen and (max-width:768px)";
+$medium-device:                        "screen and (min-width:769px) and (max-width:1309px)";
+$large-device:                          "screen and (min-width:1310px)";
