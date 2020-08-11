@@ -1,21 +1,16 @@
 #logo-estime {
-  @media #{$small-device} {
-    width: 10rem;
-  }
+  width: 10rem;
+  margin-right: 1.5rem;
   @media #{$medium-device}, #{$large-device} {
     width: 12%;
-    margin-left: 1rem;
     margin-top: 2rem;
   }
 }
 
 #logo-pole-emploi {
-  @media #{$small-device} {
-    width: 6rem;
-  }
+  width: 6rem;
   @media #{$medium-device}, #{$large-device}  {
     width: 6%;
-    margin-left: 2rem;
     margin-top: 2rem;
   }
 

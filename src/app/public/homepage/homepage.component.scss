@@ -4,28 +4,19 @@
   background: none;
   padding-top: unset;
   padding-bottom: unset;
-
-  @media #{$small-device} {
-    margin-top: 1rem;
-  }
-
-  @media #{$medium-device} {
+  margin-top: 1rem;
+  @media #{$medium-device}, #{$large-device} {
+    margin-bottom: 0;
+    margin-top: 0;
     background-image: url("../../../assets/images/backgroung-homepage.svg");
     background-size: 125% 150%;
+    @media  #{$large-device} {
+      background-size: 100% 150%;
+    }
     height: 30rem;
     max-width: 160%;
     min-height: 30rem;
   }
-
-  @media #{$large-device} {
-    background-image: url("../../../assets/images/backgroung-homepage.svg");
-    background-size: 100% 150%;
-    height: 30rem;
-    max-width: 160%;
-    min-height: 30rem;
-  }
-
-
   .container-fluid {
     #div-logo {
       @media #{$small-device} {
@@ -40,19 +31,17 @@
       }
     }
     button {
+      margin-top: 1rem;
       font-size: 1.6rem;
     }
     h1  {
-      line-height: 3rem;
       @media #{$medium-device}, #{$large-device} {
         padding-top: 6rem;
         width: 85%;
       }
       p {
         font-weight: normal;
-        @media #{$small-device} {
-          font-size: 1.9rem;
-        }
+        font-size: 1.9rem;
         @media #{$medium-device}, #{$large-device}  {
           font-size: 2.375rem;
         }
@@ -61,18 +50,17 @@
     .container-fluid {
       margin-left: 0rem;
       background-color: white;
-      @media #{$small-device} {
-        width: 100%;
-        margin-top:1rem;
-      }
-      @media #{$medium-device} {
+      width: 100%;
+      margin-top:2rem;
+      @media #{$medium-device}, #{$large-device} {
+        margin-top:0;
+        height: 28rem;
         width: 66%;
-        height: 28rem;
+        @media #{$large-device} {
+          width: 50%;
+        }
       }
-      @media #{$large-device} {
-        width: 50%;
-        height: 28rem;
-      }
+
     }
   }
 }
@@ -106,6 +94,14 @@
     }
     .card-body {
       padding-top: unset;
+      .card-text {
+        font-size: 1.1250rem;
+        @media #{$medium-device}, #{$large-device}  {
+          font-size: 1.6rem;
+        }
+        margin-bottom: 12%;
+        margin-top: 5%;
+      }
     }
   }
 }
@@ -123,8 +119,11 @@
         border-radius: 0.6rem;
         color: #24CCB8;
         background-color: white;
-        font-size: 1.9rem;
+        font-size: 3rem;
       }
+    }
+    .card-title {
+      text-align: left;
     }
   }
 }
