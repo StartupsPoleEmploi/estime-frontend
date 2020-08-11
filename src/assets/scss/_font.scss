@@ -23,12 +23,22 @@
 
 h1 {
   @extend .font-effect-title;
-  font-size: 2.375rem;
+  @media #{$small-device} {
+    font-size: 1.9rem;
+  }
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 2.375rem;
+  }
 }
 
 h2 {
   @extend .font-effect-title;
-  font-size: 2.0625rem;
+  @media #{$small-device} {
+    font-size: 1.5875rem;
+  }
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 2.0625rem;
+  }
 }
 
 h3 {

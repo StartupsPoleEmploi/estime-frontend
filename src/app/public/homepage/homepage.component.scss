@@ -4,6 +4,10 @@
   background: none;
   padding-top: unset;
   padding-bottom: unset;
+  @media #{$small-device} {
+    margin-top: 1rem;
+  }
+
   @media #{$large-device} {
     background-image: url("../../../assets/images/backgroung-homepage.svg");
     background-size: 100% 150%;
@@ -22,6 +26,7 @@
   .container-fluid {
     #div-logo {
       @media #{$small-device} {
+        margin-top: 2rem;
         text-align: center;
       }
     }
@@ -43,13 +48,24 @@
       }
       p {
         font-weight: normal;
-        font-size: 2.375rem;
+        @media #{$small-device} {
+          font-size: 1.9rem;
+        }
+        @media #{$medium-device}, #{$large-device}  {
+          font-size: 2.375rem;
+        }
       }
     }
     .container-fluid {
       margin-left: 0rem;
       background-color: white;
-      width: 50rem;
+      @media #{$small-device} {
+        width: 16.5rem;
+        margin-top:1rem;
+      }
+      @media #{$medium-device}, #{$large-device} {
+        width: 50rem;
+      }
       height: 25rem;
     }
   }
