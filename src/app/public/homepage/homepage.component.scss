@@ -123,14 +123,14 @@
       img {
         margin-top: 2rem;
         width: 2.5rem;
-        @media #{$medium-device}, #{$large-device}  {
-          width: 2.7rem;
+        @media #{$medium-device}, #{$large-device} {
+          width: 3.3rem;
         }
       }
       #icon-account-bleu, #icon-check-orange {
         width: 3.2rem;
         @media #{$medium-device}, #{$large-device}  {
-          width: 3.5rem;
+          width: 4rem;
         }
       }
     }
