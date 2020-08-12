@@ -122,13 +122,13 @@
       height: 6rem;
       img {
         margin-top: 2rem;
-        width: 2.5rem;
+        width: 2.8rem;
         @media #{$medium-device}, #{$large-device} {
           width: 3.3rem;
         }
       }
       #icon-account-bleu, #icon-check-orange {
-        width: 3.2rem;
+        width: 3.5rem;
         @media #{$medium-device}, #{$large-device}  {
           width: 4rem;
         }
@@ -163,9 +163,9 @@
           border-radius: 0.6rem;
           color: #24CCB8;
           background-color: white;
-          font-size: 2.3rem;
+          font-size: 2.6rem;
           @media #{$medium-device}, #{$large-device}  {
-            width: 2.5rem;
+            font-size: 2.7rem;
           }
           font-weight: unset;
         }
