@@ -24,9 +24,9 @@
     margin-bottom: 0;
     margin-top: 0;
     background-image: url("../../../assets/images/backgroung-homepage.svg");
-    background-size: 145% 150%;
+    background-size: 133% 110%;
     @media  #{$large-device} {
-      background-size: 100% 160%;
+      background-size: 110% 160%;
     }
     height: 30rem;
     max-width: 160%;
@@ -41,15 +41,21 @@
         width: 9rem;
         margin-right: 1.5rem;
         @media #{$medium-device}, #{$large-device} {
-          width: 9%;
           margin-top: 2rem;
+          width: 11%;
+          @media #{$large-device} {
+            width: 9%;
+          }
         }
       }
       #logo-pole-emploi {
         width: 5rem;
         @media #{$medium-device}, #{$large-device}  {
-          width: 5%;
           margin-top: 2rem;
+          width: 6%;
+          @media #{$large-device} {
+            width: 5%;
+          }
         }
       }
     }
@@ -67,7 +73,7 @@
     h1  {
       font-weight: bold;
       @media #{$medium-device}, #{$large-device} {
-        padding-top: 6rem;
+        padding-top: 7rem;
         width: 85%;
       }
       p {
