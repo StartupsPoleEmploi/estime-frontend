@@ -106,6 +106,12 @@
           width: 13%;
         }
       }
+      #icon-account-bleu, #icon-check-orange {
+        width: 24%;
+        @media #{$medium-device}, #{$large-device}  {
+          width: 17%;
+        }
+      }
     }
     .card-body {
       padding-top: unset;
