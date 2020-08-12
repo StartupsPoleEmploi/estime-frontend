@@ -39,10 +39,10 @@ h3 {
 
 h4 , h5, h6 {
   @extend .font-effect-title;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .btn, p, span {
   @extend .font-effect;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }

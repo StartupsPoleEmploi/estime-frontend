@@ -60,10 +60,17 @@
       }
     }
     .div-button {
+      margin-top: 2rem;
       @media #{$small-device} {
         text-align: center;
       }
       button {
+        display: flex;
+        #text-button-div {
+          width: 100%;
+          margin-left: 2.5rem;
+          margin-right: 1.5rem;
+        }
         @media #{$small-device} {
           width: 100%;
         }
