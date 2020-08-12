@@ -122,15 +122,15 @@
       height: 6rem;
       img {
         margin-top: 2rem;
-        width: 18%;
+        width: 2.5rem;
         @media #{$medium-device}, #{$large-device}  {
-          width: 13%;
+          width: 2.7rem;
         }
       }
       #icon-account-bleu, #icon-check-orange {
-        width: 22%;
+        width: 3.2rem;
         @media #{$medium-device}, #{$large-device}  {
-          width: 17%;
+          width: 3.5rem;
         }
       }
     }
