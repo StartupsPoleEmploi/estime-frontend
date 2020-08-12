@@ -5,7 +5,6 @@
 
 .font-effect-title {
   font-family: "Roboto",Helvetica,Arial,sans-serif;
-  font-weight: bold;
   color: #686868;
 }
 
@@ -30,7 +29,7 @@ h2 {
 
 h3 {
   @extend .font-effect-title;
-  font-size: 1.1250rem;
+  font-size: 1.350rem;
   text-align: left;
   @media #{$medium-device}, #{$large-device}  {
     font-size: 1.6rem;
