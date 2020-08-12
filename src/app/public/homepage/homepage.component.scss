@@ -163,7 +163,10 @@
           border-radius: 0.6rem;
           color: #24CCB8;
           background-color: white;
-          font-size: 2.5rem;
+          font-size: 2.3rem;
+          @media #{$medium-device}, #{$large-device}  {
+            width: 2.5rem;
+          }
           font-weight: unset;
         }
       }
