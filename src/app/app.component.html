@@ -1,9 +1,13 @@
-<header *ngIf="this.isLoggedIn" class="vertical-center">
-  <div class="container-fluid my-auto d-block">
+<header class="vertical-center">
+  <div class="container-fluid">
+    <div class="container-fluid my-auto d-block">
       <img id="logo-estime"  src="./assets/images/logo-estime.svg" />
       <img id="logo-pole-emploi" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
-      <a (click)="logout()">Se deconnecter</a>
+      <div id="div-beta" class="d-inline ml-3">BETA</div>
+      <a  *ngIf="this.isLoggedIn"  (click)="logout()">Se deconnecter</a>
+    </div>
   </div>
+
 </header>
 <router-outlet></router-outlet>
 <footer *ngIf="!this.isLoggedIn" class="p-3">

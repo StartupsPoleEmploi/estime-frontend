@@ -6,6 +6,9 @@ footer {
 }
 
 header {
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
   .container-fluid {
     a {
       margin-top: 1rem;
@@ -13,9 +16,19 @@ header {
       cursor: pointer;
     }
 
+    #div-beta {
+      background-color: #DEEEFF;
+      padding: 0.2rem;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 17px;
+      color: #1B2B67;
+      font-size: 12px;
+    }
+
     #logo-estime {
       margin-top: 0.5rem;
-      width: 10rem;
+      width: 5rem;
       margin-right: 1.5rem;
       @media #{$medium-device}, #{$large-device} {
         width: 12%;
@@ -23,8 +36,8 @@ header {
     }
 
     #logo-pole-emploi {
-      margin-top: 0.5rem;
-      width: 6rem;
+      width: 2.7rem;
+      margin-top: 0.4rem;
       @media #{$medium-device}, #{$large-device}  {
         width: 6%;
       }

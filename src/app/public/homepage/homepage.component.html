@@ -1,99 +1,99 @@
 <div class="jumbotron">
   <div class="container-fluid">
-    <div class="div-logo">
-      <img id="logo-estime"  src="./assets/images/logo-estime.svg" />
-      <img id="logo-pole-emploi" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
+    <h3>Et si vous repreniez un emploi ?</h3><h1>Estime calcule le montant de vos aides pour les mois à venir.</h1>
+    <div class="div-button">
+      <button type="button" class="btn btn-primary pe-connect mt-3 vertical-center" (click)="login()"><div id="text-button-div">Se connecter avec pôle emploi</div></button>
     </div>
-    <div class="container-fluid">
-        <h1><p>Vous reprenez un emploi ?</p>Estime calcule le montant de vos aides pour les mois à venir.</h1>
-        <div class="div-button">
-          <button type="button" class="btn btn-primary pe-connect mt-3 vertical-center" (click)="login()"><div id="text-button-div">JE COMMENCE</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
-        </div>
-    </div>
-  </div>
+    <h2 class="mt-4">Vos ressources complètes</h2>
+    <h3>Grâce à Estime, vous allez voir <b>les aides et les ressources personnalisées pour les mois à venir.</b></h3>
+    <h3 class="mt-4">Pour vous donner une vision globale, nous allons utiliser les données <b>Pôle emploi et CAF.</b></h3>
+   </div>
 </div>
-<section class="etapes-section p-3">
-  <div class="container-fluid mb-4">
-    <h2 class="mt-4 mb-5">3 étapes pour obtenir votre simulation financière</h2>
-    <div class="card-deck">
-      <div class="card first-card">
-        <div class="card-header bg-white border-bottom-0 vertical-center">
-          <img id="icon-account-bleu" class="d-block mx-auto" src="../../../assets/images/icon-account-bleu.svg" />
-        </div>
-        <div class="card-body text-center">
-          <p class="card-text">Connectez-vous et confirmez vos informations.</p>
-        </div>
-      </div>
-      <div class="card middle-card">
-        <div class="card-header bg-white border-bottom-0 vertical-center">
-          <img class="d-block mx-auto" src="../../../assets/images/icon-file-jaune.svg" />
-        </div>
-        <div class="card-body text-center">
-          <p class="card-text">Indiquez le montant de votre prochain contrat de travail.</p>
-        </div>
-      </div>
-      <div class="card last-card">
-        <div class="card-header bg-white border-bottom-0 vertical-center">
-          <img id="icon-check-orange" class="d-block mx-auto" src="../../../assets/images/icon-check-orange.svg" />
-        </div>
-        <div class="card-body text-center">
-          <p class="card-text">Obtenez le montant total de vos ressources pour les 6 mois à venir.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="questions-section p-3">
-  <div class="container-fluid  mb-4">
-    <h2 class="mt-4 mb-5">Les questions qui nous sont souvent posées</h2>
-    <div class="card-deck">
-      <div class="card first-card">
-        <div class="card-header border-bottom-0">
-          <span class="badge">1</span>
-        </div>
-        <div class="card-body mt-2">
-          <h3 class="card-title">Est-ce que je peux continuer à toucher des allocations chômage en retravaillant ?</h3>
-          <p class="card-text text-justify">C'est possible de bénéficier d'un complément d'ARE quand on retravaille, selon le nouveau salaire. ESTIME va vous aider à visualiser tout cela.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header border-bottom-0">
-          <span class="badge">2</span>
-        </div>
-        <div class="card-body mt-2">
-          <h3 class="card-title">C'est quoi le rechargement des droits ?</h3>
-          <p class="card-text text-justify">Plus vous travaillez, plus vous pourrez acquérir de nouveaux droits qui viendront « recharger » votre compte d’allocations une fois le droit en cours épuisé. Pour en bénéficier, il faut avoir travaillé au moins 150 heures durant la période d’indemnisation, dans le cadre d’un ou de plusieurs contrats (CDD, CDI, intérim).</p>
+<div class="div-image-estime-smartphone">
+  <img class="image-estime-smartphone" src="../../../assets/images/background-homepage.svg">
+</div>
+<section class="etapes-section">
+  <div class="container-fluid">
+    <div class="container-fluid">
+      <h2 class="text-center">Pour obtenir votre simulation financière</h2>
+      <div class="row">
+          <div class="col-sm-4 py-2">
+              <div class="card card-body h-100">
+                <div class="row">
+                  <div class="col-2 div-numero-etape">1.</div>
+                  <div class="col-10 div-text-etape">Connectez-vous et indiquez le montant de votre prochain contrat de travail.</div>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-4 py-2">
+              <div class="card h-100">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-2 div-numero-etape">2.</div>
+                    <div class="col-10 div-text-etape">Complétez les informations pour la simulation. Vous aurez besoin de votre relevé CAF et de votre notification de droit Pôle emploi.</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm-4 py-2">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2 div-numero-etape">3.</div>
+                  <div class="col-10 div-text-etape">Obtenez le montant total de vos ressources pour les 6 mois à venir.</div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section class="temoignages-section p-3">
-  <div class="container-fluid mb-4">
-    <h2 class="mt-4 mb-5">Témoignages</h2>
+<section class="questions-section">
+  <div class="container-fluid">
+    <div class="container-fluid">
+      <h2 class="text-center">Questions les + fréquentes</h2>
+      <div class="row">
+          <div class="col-sm-6 py-2">
+              <div class="card card-body h-100">
+                <h3 class="card-title">Est-ce que je peux continuer à toucher des allocations chômage en retravaillant ?</h3>
+                <p class="card-text">C'est possible de bénéficier d'un complément d'ARE quand on retravaille, selon le nouveau salaire.</p>
+                <p>Estime va vous aider à visualiser tout cela.</p>
+              </div>
+          </div>
+          <div class="col-sm-6 py-2">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="card-title">Quels types d'aides existent ?</h3>
+                  <p class="card-text">En fonction du contrat et de votre situation, il existe des aides à la mobilité, à la garde d'enfants, la prime d'activité...</p>
+                  <p class="card-text">Estime va vous aider à y voir plus clair.</p>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="temoignages-section">
+  <div class="container-fluid">
+    <h2>Nos utilisateurs approuvent !</h2>
     <div class="card-deck">
       <div class="card first-card">
         <div class="card-text">
-          <p>"Ce service est super utile."</p>
-          <p class="author-temoignage">Guillaume</p>
+          <p>"C'est très bien de savoir qu'on va pas perdre, j'avais très peur de perdre des aides, de ne pas y arriver."</p>
+          <p class="author-temoignage">Ibanez</p>
         </div>
       </div>
       <div class="card">
         <div class="card-text">
-          <p>"Oh my god ! It's a fucking good simulator."</p>
-          <p class="author-temoignage">Elizabeth</p>
+          <p>"Je recommande. C'est une bonne idée et un bon site. Il suffit de lire et c'est compréhensif par tous."</p>
+          <p class="author-temoignage">Cynthia</p>
         </div>
       </div>
       <div class="card">
         <div class="card-text">
-          <p>"Il n'y a pas de bons ou de mauvais simulateurs, mais le simulateur Estime est top !"</p>
-          <p class="author-temoignage">Jean-Tasse</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-text">
-          <p>"C'est bien de traiter la partie financière sur un service entier."</p>
-          <p class="author-temoignage">Sola</p>
+          <p>"C'est vraiement du pas à pas, facile à comprendre et à faire"</p>
+          <p class="author-temoignage">Rémi</p>
         </div>
       </div>
     </div>
