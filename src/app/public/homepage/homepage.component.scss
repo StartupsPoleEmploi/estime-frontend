@@ -1,30 +1,27 @@
 @import "../../../assets/scss/variables";
 
 
-.jumbotron {
+.presentation-section {
   background-color: #fbfbfb;
+  margin-bottom: unset;
   margin-top: 0.5rem;
   padding-top: 2rem;
   padding-bottom: unset;
   .container-fluid {
-    .container-fluid {
-      margin-left: 0;
-      padding-left: 0;
-      width: 100%;
-      .div-button {
-        @media #{$small-device} {
-          text-align: center;
+    h1, h2, h3 {
+        text-align: left;
+    }
+    .div-button {
+      button {
+        width: 95%;
+        max-width: 350px;
+        @media #{$medium-device}, #{$large-device} {
+          width: 60%;
         }
-        button {
-          display: flex;
-          #text-button-div {
-            width: 100%;
-            margin-left: 2.5rem;
-            margin-right: 1.5rem;
-          }
-          @media #{$small-device} {
-            width: 100%;
-          }
+        #text-button-div {
+          text-align: center;
+          font-weight: bold;
+          width: 100%;
         }
       }
     }
@@ -35,7 +32,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  @media #{$small-device} {
+    width: 80%;
+  }
 }
 
 .etapes-section {
@@ -58,7 +57,6 @@
   .div-text-etape {
     padding-top: 10px;
     padding-left: 0;
-    padding-bottom: 1.5rem;
     font-size: 1.5rem;
   }
 
@@ -93,6 +91,7 @@
     padding-bottom: 2rem;
   }
   .card {
+    background-color: #fbfbfb;
     border:none;
     box-shadow: none;
     .card-text {

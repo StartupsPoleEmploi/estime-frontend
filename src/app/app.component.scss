@@ -1,14 +1,53 @@
 @import "../assets/scss/variables";
 
+#logo-estime {
+  margin-top: 0.5rem;
+  width: 5rem;
+  margin-right: 1.5rem;
+  @media #{$medium-device}, #{$large-device} {
+    width: 9%;
+  }
+}
+
+#logo-pole-emploi {
+  width: 2.7rem;
+  @media #{$medium-device}, #{$large-device}  {
+    width: 3.5rem;
+  }
+}
+
 footer {
-  height: 8rem;
-  background-color: black;
+  background-color: white;
+  font-size: 0.8rem;
+  height: 7rem;
+  margin-top: 1rem;
+  #copyright-div {
+    margin-top: 1.5rem;
+    text-align: center;
+    @media #{$medium-device}, #{$large-device}  {
+      float: right;
+      margin-left: auto;
+    }
+    font-size: 0.7rem;
+  }
+  .container-fluid {
+    .row {
+      margin-top: 2.5rem;
+      div {
+        margin-top:auto;
+      }
+    }
+  }
+
 }
 
 header {
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
   padding-top: 0.9rem;
   padding-bottom: 0.9rem;
+  #logo-pole-emploi {
+    margin-top: 0.4rem;
+  }
   .container-fluid {
     a {
       margin-top: 1rem;
@@ -26,21 +65,6 @@ header {
       font-size: 12px;
     }
 
-    #logo-estime {
-      margin-top: 0.5rem;
-      width: 5rem;
-      margin-right: 1.5rem;
-      @media #{$medium-device}, #{$large-device} {
-        width: 12%;
-      }
-    }
 
-    #logo-pole-emploi {
-      width: 2.7rem;
-      margin-top: 0.4rem;
-      @media #{$medium-device}, #{$large-device}  {
-        width: 6%;
-      }
-    }
   }
 }
