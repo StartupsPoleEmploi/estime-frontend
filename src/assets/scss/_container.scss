@@ -1,5 +1,16 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  position: relative;
+  display : table;
   width :100% ;
+  background-color: #fbfbfb;
+  padding-bottom: 5em;
 }
 
 .container-fluid {

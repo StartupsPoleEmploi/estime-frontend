@@ -1,4 +1,4 @@
-export class AccessTokenInfo {
+export class InformationsAccessTokenPeConnect {
 
   accessToken: string;
   expireIn: number;

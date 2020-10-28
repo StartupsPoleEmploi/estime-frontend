@@ -1,0 +1,23 @@
+.container-fluid {
+  margin-top: 2rem;
+  .card {
+    border: none;
+    max-width: 650px;
+    margin: auto;
+    #p-simulation {
+      color: #3853B9;
+    }
+    button {
+      display: flex;
+      max-width: 300px ;
+      margin: auto;
+      #text-button-div {
+        width: 100%;
+        margin: auto;
+        margin-left: 2.5rem !important;
+        margin-right: 1.5rem !important;
+      }
+
+    }
+  }
+}

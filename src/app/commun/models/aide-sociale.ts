@@ -1,19 +1,22 @@
-export class Aide {
+export class AideSociale {
 
-  id: string;
+  code: string;
   nom: string;
   description: string;
   demarcheObtention: string;
+  montant: number;
 
   constructor(
-    id: string,
+    code: string,
     nom: string,
     description: string,
-    demarcheObtention: string
+    demarcheObtention: string,
+    montant: number
   ) {
-    this.id = id;
+    this.code = code;
     this.nom = nom;
     this.description = description;
     this.demarcheObtention = demarcheObtention;
+    this.montant = montant;
   }
 }

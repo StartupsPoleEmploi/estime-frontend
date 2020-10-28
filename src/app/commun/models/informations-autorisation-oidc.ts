@@ -1,4 +1,4 @@
-export class DonneesAutorisationOIDC {
+export class InformationAutorisationOIDC {
 
   clientId: string;
   code: string;

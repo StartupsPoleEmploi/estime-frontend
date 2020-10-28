@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RecapitulatifInfoDeComponent } from './recapitulatif-info-de/recapitulatif-info-de.component';
-
+import { AvantDeCommencerSimulationComponent } from "./avant-de-commencer-simulation/avant-de-commencer-simulation.component";
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
 
 
 const routes: Routes = [
-  {path: 'recapitulatif-infos-de', component: RecapitulatifInfoDeComponent }
+  {path: RoutesEnum.AVANT_COMMENCER_SIMULATION, component: AvantDeCommencerSimulationComponent }
 ];
 
 @NgModule({

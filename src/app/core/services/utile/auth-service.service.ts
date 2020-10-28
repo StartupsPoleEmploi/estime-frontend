@@ -5,21 +5,22 @@ import { Subject } from 'rxjs';
 import { SessionStorageService } from "ngx-webstorage";
 import { Environment } from '@models/environment';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { DonneesAutorisationOIDC } from '@models/donnees-autorisation-oidc';
+import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
+import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { DemandeurEmploiService } from "@services/estime-api/demandeur-emploi.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private demandeurEmploiConnecte: DemandeurEmploi;
-  private donneesAutorisationOIDC: DonneesAutorisationOIDC;
+  private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
+  private informationAutorisationOIDC: InformationAutorisationOIDC;
   private isLoggedInChangedSubject = new Subject<boolean>();
 
   loginChanged = this.isLoggedInChangedSubject.asObservable();
 
   private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'oidc.authorizeData';
-  private static readonly DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY = 'application.demandeurEmploiConnecte';
+  private static readonly INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY = 'application.informationsAccessTokenIndividuConnecte';
 
   constructor(private activatedRoute: ActivatedRoute,
               @Inject(DOCUMENT) private document: Document,
@@ -35,17 +36,17 @@ export class AuthService {
   }
 
   completeLogin() {
-    return this.authentifierDemandeurEmploi().then(demandeurEmploi => {
-        this.demandeurEmploiConnecte = demandeurEmploi;
+    return this.authentifierDemandeurEmploi().then(informationsAccessTokenIndividuConnecte => {
+        this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
         this.isLoggedInChangedSubject.next(true);
-        this.sessionStorageService.store(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
-        return demandeurEmploi;
+        this.sessionStorageService.store(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY, this.informationsAccessTokenIndividuConnecte);
+        return informationsAccessTokenIndividuConnecte;
     });
   }
 
   logout() {
     this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
-    this.sessionStorageService.clear(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
     this.document.location.href = this.getPoleEmploiIdentityServerDeconnexionURI();
   }
 
@@ -54,29 +55,29 @@ export class AuthService {
   }
 
   isLoggedIn():boolean {
-    this.demandeurEmploiConnecte =  this.sessionStorageService.retrieve(AuthService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+    this.informationsAccessTokenIndividuConnecte =  this.sessionStorageService.retrieve(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
     this.isLoggedInChangedSubject.next(true);
-    return !!this.demandeurEmploiConnecte;
+    return !!this.informationsAccessTokenIndividuConnecte;
   }
 
-  getDemandeurEmploiConnecte(): DemandeurEmploi {
-    return this.demandeurEmploiConnecte;
+  getDemandeurEmploiConnecte(): InformationsAccessTokenPeConnect {
+    return this.informationsAccessTokenIndividuConnecte;
   }
 
   private getPoleEmploiIdentityServerConnexionURI():string  {
     return `${this.environment.oidcPoleEmploiIdentityServerURL}/connexion/oauth2/authorize?` +
     'realm=%2Findividu&response_type=code' +
-    `&client_id=${this.donneesAutorisationOIDC.clientId}` +
+    `&client_id=${this.informationAutorisationOIDC.clientId}` +
     `&scope=${this.environment.oidcScope}` +
-    `&redirect_uri=${this.donneesAutorisationOIDC.redirectURI}` +
-    `&state=${this.donneesAutorisationOIDC.state}` +
-    `&nonce=${this.donneesAutorisationOIDC.nonce}`
+    `&redirect_uri=${this.informationAutorisationOIDC.redirectURI}` +
+    `&state=${this.informationAutorisationOIDC.state}` +
+    `&nonce=${this.informationAutorisationOIDC.nonce}`
     ;
   }
 
   private getPoleEmploiIdentityServerDeconnexionURI():string  {
     return `${this.environment.oidcPoleEmploiIdentityServerURL}/compte/deconnexion?` +
-    `&id_token_hint=${this.demandeurEmploiConnecte.donneesAccessToken.idToken}` +
+    `&id_token_hint=${this.informationsAccessTokenIndividuConnecte.idToken}` +
     `&redirect_uri=${this.environment.oidcRedirectURI}signout-callback`
     ;
   }
@@ -90,17 +91,17 @@ export class AuthService {
   }
 
   private authentifierDemandeurEmploi() {
-    this.donneesAutorisationOIDC =  this.sessionStorageService.retrieve(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
-    this.donneesAutorisationOIDC.code = this.activatedRoute.snapshot.queryParams.code;
-    if(this.activatedRoute.snapshot.queryParams.state === this.donneesAutorisationOIDC.state) {
-      return this.demandeurEmploiService.authentifier(this.donneesAutorisationOIDC);
+    this.informationAutorisationOIDC =  this.sessionStorageService.retrieve(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
+    this.informationAutorisationOIDC.code = this.activatedRoute.snapshot.queryParams.code;
+    if(this.activatedRoute.snapshot.queryParams.state === this.informationAutorisationOIDC.state) {
+      return this.demandeurEmploiService.authentifier(this.informationAutorisationOIDC);
     } else {
       this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
     }
   }
 
   private createOidcAuthorizeInformation() {
-    this.donneesAutorisationOIDC = new DonneesAutorisationOIDC(
+    this.informationAutorisationOIDC = new InformationAutorisationOIDC(
       this.environment.oidcClientId,
       '',
       this.generateRandomValue(),
@@ -108,6 +109,6 @@ export class AuthService {
       this.generateRandomValue()
     );
 
-    this.sessionStorageService.store(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.donneesAutorisationOIDC);
+    this.sessionStorageService.store(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.informationAutorisationOIDC);
   }
 }
