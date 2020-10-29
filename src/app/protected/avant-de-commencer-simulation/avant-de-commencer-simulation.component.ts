@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AvantDeCommencerSimulationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  redirectVersPageMonContratDeTravail() {
+    this.router.navigate([RoutesEnum.MON_CONTRAT_DE_TRAVAIL], { replaceUrl: true });
+  }
 }

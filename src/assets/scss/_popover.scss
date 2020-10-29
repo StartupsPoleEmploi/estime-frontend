@@ -1,0 +1,30 @@
+
+.popover {
+  background: $color-blue-4;
+  color: white;
+  font-size: 0.8rem !important;
+  p {
+    font-size: 0.8rem !important;
+  }
+}
+
+.close-popover {
+  cursor: pointer;
+}
+
+/* Needed to have the triangle match the grey background of the popover */
+.popover.top .arrow:after {
+  border-top-color: $color-blue-4;
+}
+
+.popover.right .arrow:after {
+  border-right-color: $color-blue-4;
+}
+
+.popover.bottom .arrow:after {
+  border-bottom-color: $color-blue-4;
+}
+
+.popover.right .arrow:after {
+  border-left-color: $color-blue-4;
+}

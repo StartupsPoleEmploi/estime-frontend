@@ -17,7 +17,9 @@
 }
 
 footer {
-  background-color: white;
+  display: block;
+  width: 100vw;
+  background-color: $color-white-1;
   bottom: 0;
   font-size: 0.8rem;
   height: 7rem;
@@ -54,10 +56,9 @@ header {
     margin-top: 0.4rem;
   }
   .container-fluid {
-    a {
+    button {
       margin-top: 1rem;
       float: right;
-      cursor: pointer;
     }
 
     #div-beta {

@@ -9,12 +9,12 @@ import { RoutesEnum } from "@enumerations/routes.enum";
 })
 
 export class SigninRedirectCallbackComponent implements OnInit {
-  constructor(private _authService: AuthService,
-              private _router: Router) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
-    this._authService.completeLogin().then(user => {
-      this._router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+    this.authService.completeLogin().then(user => {
+      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
     })
   }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>stopwatch</title>
+    <desc>Created with Sketch.</desc>
+    <g id="wireframes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Avant_propos" transform="translate(-576.000000, -496.000000)" fill="#3853B9" fill-rule="nonzero">
+            <g id="Group" transform="translate(576.000000, 496.000000)">
+                <g id="stopwatch">
+                    <path d="M9,20 C4.03714286,20 0,15.9628571 0,11 C0,6.03714286 4.03714286,2 9,2 C13.9628571,2 18,6.03714286 18,11 C18,15.9628571 13.9628571,20 9,20 Z M9,3.28571429 C4.746,3.28571429 1.28571429,6.74685714 1.28571429,11 C1.28571429,15.2531429 4.746,18.7142857 9,18.7142857 C13.254,18.7142857 16.7142857,15.2531429 16.7142857,11 C16.7142857,6.74685714 13.254,3.28571429 9,3.28571429 Z" id="Shape"></path>
+                    <polygon id="Path" points="9 7 10 7 10 12 9 12"></polygon>
+                    <polygon id="Path" points="6 0 12 0 12 1 6 1"></polygon>
+                    <polygon id="Path" points="9 1 10 1 10 3 9 3"></polygon>
+                    <polygon id="Path" transform="translate(15.882560, 4.556103) rotate(-45.000000) translate(-15.882560, -4.556103) " points="14.4696107 3.90515109 17.2774751 3.94528321 17.2955093 5.20705571 14.4876449 5.16692359"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
