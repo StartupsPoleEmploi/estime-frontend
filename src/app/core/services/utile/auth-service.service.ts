@@ -4,14 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { SessionStorageService } from "ngx-webstorage";
 import { Environment } from '@models/environment';
-import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
 import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 import { RoutesEnum } from '@enumerations/routes.enum';
-import { DemandeurEmploiService } from "@services/estime-api/demandeur-emploi.service";
+import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
+import { DemandeurEmploiConnecteService } from "@services/utile/demandeur-emploi-connecte.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+
+
+  private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'estime.peOIDC.authorizeData';
 
   private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
   private informationAutorisationOIDC: InformationAutorisationOIDC;
@@ -19,12 +22,11 @@ export class AuthService {
 
   loginChanged = this.isLoggedInChangedSubject.asObservable();
 
-  private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'oidc.authorizeData';
-  private static readonly INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY = 'application.informationsAccessTokenIndividuConnecte';
 
   constructor(private activatedRoute: ActivatedRoute,
               @Inject(DOCUMENT) private document: Document,
-              private demandeurEmploiService: DemandeurEmploiService,
+              private estimeApiService: EstimeApiService,
+              private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
               private environment: Environment,
               private router: Router,
               private sessionStorageService: SessionStorageService) {
@@ -38,30 +40,20 @@ export class AuthService {
   completeLogin() {
     return this.authentifierDemandeurEmploi().then(informationsAccessTokenIndividuConnecte => {
         this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
+        this.demandeurEmploiConnecteService.createDemandeurEmploiConnecte();
         this.isLoggedInChangedSubject.next(true);
-        this.sessionStorageService.store(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY, this.informationsAccessTokenIndividuConnecte);
         return informationsAccessTokenIndividuConnecte;
     });
   }
 
   logout() {
+    this.sessionStorageService.clear(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
-    this.sessionStorageService.clear(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
     this.document.location.href = this.getPoleEmploiIdentityServerDeconnexionURI();
   }
 
   completeLogout() {
     this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
-  }
-
-  isLoggedIn():boolean {
-    this.informationsAccessTokenIndividuConnecte =  this.sessionStorageService.retrieve(AuthService.INFORMATIONS_ACCESS_TOKEN_INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
-    this.isLoggedInChangedSubject.next(true);
-    return !!this.informationsAccessTokenIndividuConnecte;
-  }
-
-  getDemandeurEmploiConnecte(): InformationsAccessTokenPeConnect {
-    return this.informationsAccessTokenIndividuConnecte;
   }
 
   private getPoleEmploiIdentityServerConnexionURI():string  {
@@ -94,7 +86,7 @@ export class AuthService {
     this.informationAutorisationOIDC =  this.sessionStorageService.retrieve(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
     this.informationAutorisationOIDC.code = this.activatedRoute.snapshot.queryParams.code;
     if(this.activatedRoute.snapshot.queryParams.state === this.informationAutorisationOIDC.state) {
-      return this.demandeurEmploiService.authentifier(this.informationAutorisationOIDC);
+      return this.estimeApiService.authentifier(this.informationAutorisationOIDC);
     } else {
       this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
     }
@@ -108,7 +100,10 @@ export class AuthService {
       `${this.environment.oidcRedirectURI}signin-callback`,
       this.generateRandomValue()
     );
-
     this.sessionStorageService.store(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.informationAutorisationOIDC);
   }
+
+
+
+
 }

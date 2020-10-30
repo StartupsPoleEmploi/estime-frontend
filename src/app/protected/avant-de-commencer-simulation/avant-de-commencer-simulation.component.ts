@@ -15,6 +15,6 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   }
 
   redirectVersPageMonContratDeTravail() {
-    this.router.navigate([RoutesEnum.MON_CONTRAT_DE_TRAVAIL], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 }

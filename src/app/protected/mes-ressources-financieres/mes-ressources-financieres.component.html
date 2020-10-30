@@ -1,0 +1,112 @@
+<div class="container-fluid form-container-fluid">
+  <h1 class="h1-style-2">4. Mes ressources finançières actuelles</h1>
+  <div class="text-under-h1">* Tous les champs sont obligatoires</div>
+  <div class="card card-body card-form">
+    <form (ngSubmit)="redirectVersPageSuivante()">
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="top-ass-percu">J'ai perçu le mois précédent de l'ASS (Allocation de Solidarité Spécifique)</label>
+        </div>
+        <div class="row">
+          <div class="form-check form-check-inline">
+            <input id="top-ass-percu-oui" name="top-ass-percu"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiairePrestationSolidarite" [value]="true" disabled>
+            <label class="form-check-label" for="oui">oui</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input id="top-ass-percu-non" name="top-ass-percu"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiairePrestationSolidarite"  [value]="false" disabled>
+            <label class="form-check-label" for="non">non</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="montant-ass">Montant journalier net de votre allocation</label>
+        </div>
+        <div class="row">
+          <input id="montant-ass" name="montant-ass" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.montantJournalierNetAllocationSolidariteSpecifique">
+          <div class="text-side-input">€ net/jour</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="date-ouverture-droit-ass">Date dernière ouverture de droit à l'ASS</label>
+        </div>
+        <div class="row">
+          <input id="date-ouverture-droit-ass" name="date-ouverture-droit-ass" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="top-ass-percu">J'ai déjà cumulé l'ASS + un salaire au cours des 3 derniers mois</label>
+        </div>
+        <div class="row">
+          <div class="form-check form-check-inline">
+            <input id="top-ass-plus-salaire-oui" name="top-ass-plus-salaire"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasASSPlusSalaireCumule" (click)="setNombreMoisCumulesASSPercueEtSalaire(true)" [value]="true">
+            <label class="form-check-label" for="oui">oui</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input id="top-ass-plus-salaire-non" name="top-ass-plus-salaire"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasASSPlusSalaireCumule" (click)="setNombreMoisCumulesASSPercueEtSalaire(false)" [value]="false">
+            <label class="form-check-label" for="non">non</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasASSPlusSalaireCumule === true">
+        <div class="row flex-column">
+          <label class="label" for="nombre-mois-cumul-ass-salaire">Nombre de mois ASS + salaire cumulés</label>
+          <select id="nombre-mois-cumul-ass-salaire" name="nombre-mois-cumul-ass-salaire" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesASSPercueEtSalaire" class="fit-content form-control" data-width="auto" >
+            <option *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions" [value]="nombreMois.value">{{ nombreMois.label }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group flex-column">
+        <div class="row mb-3">
+          <span>Autre(s) ressource(s) perçue(s) le mois précédent</span>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+            <label class="label label-left-style-1" for="montant-pension-alimentaire">Pension alimentaire</label>
+          </div>
+          <div class="col-12 col-md-8 pl-0 d-inline d-flex">
+            <input id="montant-pension-alimentaire" name="montant-pension-alimentaire" type="number" min="0" class="max-with-input-type-montant form-control" [value]="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.montantPensionAlimentaire">
+            <span class="text-side-input">€ net</span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+            <label class="label label-left-style-1" for="montant-af">Allocations Familiales (AF)</label>
+          </div>
+          <div class="col-12 col-md-8 pl-0 d-inline d-flex">
+            <input id="montant-af" name="montant-af" type="number" min="0" class="max-with-input-type-montant form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.montantAllocationFamiliale">
+            <span class="text-side-input">€ net</span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+            <label class="label label-left-style-1" for="montant-asf">Allocations de Soutien Familial (ASF)</label>
+          </div>
+          <div class="col-12 col-md-8 pl-0 d-inline d-flex">
+            <input id="montant-asf" name="montant-asf" type="number" min="0" class="max-with-input-type-montant form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.montantAllocationSoutienFamiliale">
+            <span class="text-side-input">€ net</span>
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+            <label class="label label-left-style-1" for="montant-apl">Allocations Logement (APL, ALF, ALS)</label>
+          </div>
+          <div class="col-12 col-md-8 pl-0 d-inline d-flex">
+            <input id="montant-apl" name="montant-apl" type="number" min="0" class="max-with-input-type-montant form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.montantAllocationLogement">
+            <span class="text-side-input">€ net</span>
+          </div>
+        </div>
+      </div>
+      <div class="div-buttons-form row">
+        <div class="col-12 col-md-6">
+          <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+        </div>
+        <div class="col-12 col-md-6 order-md-first">
+          <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

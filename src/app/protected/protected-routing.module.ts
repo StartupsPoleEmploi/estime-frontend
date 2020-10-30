@@ -3,13 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AvantDeCommencerSimulationComponent } from "@app/protected/avant-de-commencer-simulation/avant-de-commencer-simulation.component";
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { MonContratTravailComponent } from '@app/protected/mon-contrat-travail/mon-contrat-travail.component';
+import { MesInformationsIdentiteComponent } from '@app/protected/mes-informations-identite/mes-informations-identite.component';
+import { MonFuturTravailComponent } from './mon-futur-travail/mon-futur-travail.component';
+import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
+import { MesRessourcesFinancieresComponent } from './mes-ressources-financieres/mes-ressources-financieres.component';
+import { ResultatMaSimulationComponent } from './resultat-ma-simulation/resultat-ma-simulation.component';
 
 
 
 const routes: Routes = [
   {path: RoutesEnum.AVANT_COMMENCER_SIMULATION, component: AvantDeCommencerSimulationComponent },
-  {path: RoutesEnum.MON_CONTRAT_DE_TRAVAIL, component: MonContratTravailComponent }
+  {path: RoutesEnum.MA_SITUATION_FAMILIALE, component: MaSituationFamilialeComponent },
+  {path: RoutesEnum.MES_INFORMATIONS_IDENTITE, component: MesInformationsIdentiteComponent },
+  {path: RoutesEnum.MES_RESSOURCES_FINANCIERES, component: MesRessourcesFinancieresComponent },
+  {path: RoutesEnum.MON_FUTUR_DE_TRAVAIL, component: MonFuturTravailComponent },
+  {path: RoutesEnum.RESULAT_MA_SIMULATION, component: ResultatMaSimulationComponent },
 ];
 
 @NgModule({

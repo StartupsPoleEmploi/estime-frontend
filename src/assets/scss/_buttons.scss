@@ -21,8 +21,13 @@
 .btn-primary-style-0  {
   border: none;
   color: $color-blue-2;
-  display: flex;
-  margin: auto;
+  display: inline-flex;
+  margin-top: 1rem;
+  @media #{$medium-device}, #{$large-device} {
+    margin-top: 0;
+    margin: auto;
+    display: flex;
+  }
   &:not(:disabled):not(.disabled):active, &:hover, &:focus {
     background-color: none;
     border: none;
@@ -71,13 +76,16 @@
   }
 }
 
-.div-buttons-form {
-  .btn-primary-style-3 {
-    margin-left: 1rem;
-  }
-  .btn-primary-style-0 {
-    margin-right: 1rem;
-  }
+
+
+.radio-button-style-1 {
+  border-color: $color-blue-2;
+}
+
+.radio-button-style-1:not(:disabled):not(.disabled).active {
+  color: $color-white-1;
+  background-color: $color-blue-2;
+  border-color: $color-blue-2;
 }
 
 

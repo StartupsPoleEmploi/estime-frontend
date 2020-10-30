@@ -23,10 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    if(this.isLoggedIn) {
-      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
-    }
+
   }
 
   logout() {

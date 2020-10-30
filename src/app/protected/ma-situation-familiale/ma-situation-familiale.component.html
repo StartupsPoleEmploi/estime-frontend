@@ -1,0 +1,41 @@
+<div class="container-fluid form-container-fluid">
+  <h1 class="h1-style-2">2. Ma situation familiale</h1>
+  <div class="text-under-h1">* Tous les champs sont obligatoires</div>
+  <div class="card card-body card-form">
+    <form (ngSubmit)="redirectVersPageSuivante()">
+      <div class="form-group">
+        <div class="form-group">
+          <div class="row">
+            <label class="label" for="personne-a-charge">Nombre d'enfant(s) ou de personne(s) à charge</label>
+          </div>
+          <div class="row">
+            <input id="personne-a-charge" name="personne-a-charge" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge">
+          </div>
+        </div>
+        <div class="row">
+          <label class="label" for="situation-familiale">Votre situation familiale</label>
+        </div>
+        <div class="row">
+          <label name="situation-familiale" class="btn radio-button-style-1" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="false" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()">Seul.e</label>
+          <label name="situation-familiale" class="btn radio-button-style-1 ml-2" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="true" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()">En couple</label>
+        </div>
+      </div>
+      <div class="row card card-body" *ngIf="demandeurEmploiConnecte.situationFamiliale.isEnCouple">
+        <span class="title-card">Ressource(s) finançière(s) de votre conjoint :</span>
+        <div class="form-group">
+          <div class="row">
+            <label class="label" for="salaire-conjoint">Salaire mensuel net</label>
+          </div>
+          <div class="row">
+            <input id="salaire-conjoint" name="salaire-conjoint" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale">
+            <div class="text-side-input">€</div>
+          </div>
+        </div>
+      </div>
+      <div class="div-buttons-form row">
+        <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
+        <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+      </div>
+    </form>
+  </div>
+</div>

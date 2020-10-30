@@ -1,3 +1,24 @@
+.form-container-fluid {
+  margin-top: 2rem;
+}
+
+.div-buttons-form {
+  margin-top: 3.5rem;
+  .btn-primary-style-3 {
+    margin-left: 1rem;
+  }
+  .btn-primary-style-0 {
+    margin-right: 1rem;
+  }
+}
+
+.fit-content {
+  min-width: fit-content;
+  max-width: fit-content;
+}
+
+
+
 .card-form {
   margin-top: 2rem;
   padding-left: 1.7rem;
@@ -10,6 +31,11 @@
     font-size: 0.9rem;
   }
 
+  .max-with-input-type-montant {
+    max-width: 85px !important;
+  }
+
+
   select {
     font-size: 0.9rem;
     width: auto;
@@ -20,15 +46,35 @@
     vertical-align: inherit;
   }
 
-  .label {
+  .label, span {
     color: $color-blue-2;
     font-weight: 500;
     margin-bottom: 0;
   }
   .text-side-input {
-
     margin-bottom: auto;
     margin-left: 0.5rem;
     margin-top: auto;
+    font-weight: 300;
+    color: black;
+  }
+
+  .card {
+    margin-right: 25px;
+    margin-top: 1rem;
+    padding-left: 1.7rem;
+    .title-card {
+      margin-bottom: 1rem;
+      margin-top: -1rem;
+      margin-left: -1rem;
+      text-decoration-line: underline;
+    }
+  }
+
+  .label-left-style-1 {
+    font-weight: 400;
+    margin-right: 0.3rem;
+    margin-top: auto;
+    margin-bottom: auto;
   }
 }

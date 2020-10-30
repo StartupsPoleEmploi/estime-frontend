@@ -1,0 +1,54 @@
+<div class="container-fluid form-container-fluid">
+  <h1 class="h1-style-2">2. Mes informations d'identité</h1>
+  <div class="text-under-h1">* Tous les champs sont obligatoires</div>
+  <div class="card card-body card-form">
+    <form (ngSubmit)="redirectVersPageSuivante()">
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="code-postal">Votre code postal</label>
+        </div>
+        <div class="row">
+          <input id="code-postal" name="code-postal" type="number" maxlength="5" class="form-control" placeholder="ex : 75001"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.codePostal">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="date-naissance">Votre date de naissance</label>
+        </div>
+        <div class="row">
+          <input id="date-naissance" name="date-naissance" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.dateNaissance">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="label" for="nationalite">Votre nationalité</label>
+        </div>
+        <div class="row">
+          <select id="nationalite" name="nationalite" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.nationalite" class="form-control" data-width="auto" (ngModelChange)="setTitreSejourEnFranceValide($event)" >
+            <option *ngFor="let nationalite of nationaliteSelectOptions" [value]="nationalite.label">{{ nationalite.label }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.informationsIdentite.nationalite == 'autre'">
+        <div class="row">
+          <label class="label" for="titre-sejour">Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide</label>
+        </div>
+        <div class="row">
+          <div class="form-check form-check-inline">
+            <input id="titre-sejour-ok" name="titre-sejour"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide" value="true">
+            <label class="form-check-label" for="titre-sejour-ok">oui</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input id="titre-sejour-ko" name="titre-sejour"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide"  value="false">
+            <label class="form-check-label" for="titre-sejour-ko">non</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="div-buttons-form row">
+        <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
+        <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+      </div>
+    </form>
+  </div>
+</div>

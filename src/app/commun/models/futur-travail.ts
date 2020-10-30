@@ -1,8 +1,12 @@
 export class FuturTravail {
-  nombreMoisContrat: number;
+  nombreMoisContratCDD: number;
   distanceKmAllerRetourDuDomicile: number;
   nombreHeuresTravailleesSemaine: number;
   nombreTrajetsDomicileTravail: number;
   salaireMensuelNet: number;
   typeContrat: string;
+
+  constructor() {
+  }
+
 }

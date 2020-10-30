@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid form-container-fluid">
   <h1 class="h1-style-2">1. Mon futur travail</h1>
   <div class="text-under-h1">* Tous les champs sont obligatoires</div>
   <div class="card card-body card-form">
@@ -10,19 +10,19 @@
           </div>
           <div class="row">
             <div class="form-check form-check-inline">
-              <input id="cdi" name="type-contrat"  type="radio" class="form-check-input" [(ngModel)]="futurTravail.typeContrat" value="CDI">
+              <input id="cdi" name="type-contrat"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.futurTravail.typeContrat" (click)="setNombreMoisContrat('CDI')" value="CDI">
               <label class="form-check-label" for="cdi">CDI</label>
             </div>
             <div class="form-check form-check-inline">
-              <input id="cdd" name="type-contrat"  type="radio" class="form-check-input" [(ngModel)]="futurTravail.typeContrat"  value="CDD">
+              <input id="cdd" name="type-contrat"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.futurTravail.typeContrat" (click)="setNombreMoisContrat('CDD')" value="CDD">
               <label class="form-check-label" for="cdd">CDD</label>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-10 form-group" *ngIf="futurTravail.typeContrat == 'CDD'">
+        <div class="col-6 col-md-10 form-group" *ngIf="demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD'">
             <label class="label" for="nombre-mois-cdd">Nombre de mois</label>
-            <select id="nombre-mois-cdd" name="nombre-mois-cdd" [(ngModel)]="futurTravail.nombreMoisContrat" class="form-control" data-width="auto" >
-              <option *ngFor="let nombreMois of nombreMoisCDDOptions" [value]="nombreMois.value">{{ nombreMois.label }}</option>
+            <select id="nombre-mois-cdd" name="nombre-mois-cdd" [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD" class="form-control" data-width="auto" >
+              <option *ngFor="let nombreMois of nombreMoisCDDSelectOptions" [value]="nombreMois.value">{{ nombreMois.label }}</option>
             </select>
         </div>
       </div>
@@ -31,17 +31,16 @@
           <label class="label" for="duree-hebdomadaire">Nombre d'heures travaillées</label>
         </div>
         <div class="row">
-          <input id="duree-hebdomadaire" name="duree-hebdomadaire" type="text" class="form-control" placeholder="Nombre d'heures">
+          <input id="duree-hebdomadaire" name="duree-hebdomadaire" type="text" class="form-control" placeholder="Nombre d'heures"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine">
           <div class="text-side-input">par semaine</div>
         </div>
       </div>
       <div class="form-group">
         <div class="row flex-column">
           <label class="label" for="salaire-mensuel-net">Salaire mensuel net<i class="interrogation-icon btn far fa-question-circle" [popover]="popoversalairenettemplate" #popoversalairenet="bs-popover" placement="right"></i></label>
-
         </div>
         <div class="row">
-          <input id="salaire-mensuel-net" name="salaire-mensuel-net" type="text" class="form-control" placeholder="Montant">
+          <input id="salaire-mensuel-net" name="salaire-mensuel-net" type="text" class="form-control" placeholder="Montant"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
           <div class="text-side-input">€</div>
         </div>
       </div>
@@ -50,7 +49,7 @@
           <label class="label" for="distance-domicile-lieu-travail">Distance de votre domicile à votre lieu de travail</label>
         </div>
         <div class="row">
-          <input id="distance-domicile-lieu-travail" name="distance-domicile-lieu-travail" type="text" class="form-control" placeholder="Distance">
+          <input id="distance-domicile-lieu-travail" name="distance-domicile-lieu-travail" type="text" class="form-control" placeholder="Distance" [(ngModel)]="demandeurEmploiConnecte.futurTravail.distanceKmAllerRetourDuDomicile">
           <div class="text-side-input">km</div>
         </div>
       </div>
@@ -59,7 +58,7 @@
           <label class="label" for="nombre-trajet-mensuel">Trajets de votre domicile à votre lieu de travail</label>
         </div>
         <div class="row">
-          <input id="nombre-trajet-mensuel" name="nombre-trajet-mensuel" type="text" class="form-control" placeholder="Nombre">
+          <input id="nombre-trajet-mensuel" name="nombre-trajet-mensuel" type="text" class="form-control" placeholder="Nombre"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreTrajetsDomicileTravail">
           <div class="text-side-input">par mois</div>
         </div>
       </div>

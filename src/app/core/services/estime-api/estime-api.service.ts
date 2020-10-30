@@ -6,7 +6,7 @@ import { InformationAutorisationOIDC } from '@models/informations-autorisation-o
 import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 
 @Injectable({providedIn: 'root'})
-export class DemandeurEmploiService {
+export class EstimeApiService {
 
   private pathDemandeurEmploiService: string;
 
