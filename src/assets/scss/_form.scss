@@ -17,7 +17,66 @@
   max-width: fit-content;
 }
 
+form.submitted input.ng-invalid, form.submitted select.ng-invalid, input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border: 1px solid $color-error;
+}
 
+form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::before {
+
+  border-color: $color-error;
+}
+
+
+
+
+.error-input-message {
+  color: $color-error !important;
+  font-size: 0.7rem;
+  margin-top: 2px;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: $color-blue-2;
+  background-color: $color-blue-2;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: black;
+  box-shadow: none;
+}
+
+/***** hide arrow number display by default *****/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/** end hide arrow **/
+
+/** change style after autofill **/
+
+input:-webkit-autofill {
+  -webkit-box-shadow:0 0 0 50px white inset; /* Change the color to your own background color */
+  -webkit-text-fill-color: #333;
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px white inset;/*your box-shadow*/
+  -webkit-text-fill-color: #333;
+}
+
+
+
+
+/** end change style after autofill **/
 
 .card-form {
   margin-top: 2rem;
@@ -25,6 +84,8 @@
   @media #{$medium-device}, #{$large-device} {
     padding-left: 4rem;
   }
+
+
 
   input {
     max-width: 150px;

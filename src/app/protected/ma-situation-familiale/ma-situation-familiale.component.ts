@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { Router } from '@angular/router';
@@ -38,15 +38,7 @@ export class MaSituationFamilialeComponent implements OnInit {
     }
   }
 
-  setDemandeurEmploiConjoint() {
-    if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      const conjoint = new Personne();
-      conjoint.ressourcesFinancieres = new RessourcesFinancieres();
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint = conjoint;
-    } else {
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
-    }
-  }
+
 
 
 

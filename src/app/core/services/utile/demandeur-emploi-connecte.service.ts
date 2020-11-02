@@ -5,6 +5,9 @@ import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { FuturTravail } from '@app/commun/models/futur-travail';
+import { InformationsIdentite } from '@app/commun/models/informations-identite';
+import { SituationFamiliale } from '@app/commun/models/situation-familiale';
 
 @Injectable({providedIn: 'root'})
 export class DemandeurEmploiConnecteService {
@@ -37,12 +40,20 @@ export class DemandeurEmploiConnecteService {
 
     this.demandeurEmploiConnecte = new DemandeurEmploi();
 
+    const futurTravail = new FuturTravail();
+    this.demandeurEmploiConnecte.futurTravail = futurTravail;
+
+    this.demandeurEmploiConnecte.informationsIdentite = new InformationsIdentite();
+
+    this.demandeurEmploiConnecte.situationFamiliale = new SituationFamiliale();
+
     const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
     beneficiaireAidesSociales.beneficiairePrestationSolidarite = true;
     this.demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
 
     const ressourcesFinancieres = new RessourcesFinancieres();
     const allocationsPE = new AllocationsPoleEmploi();
+    allocationsPE.hasASSPlusSalaireCumule = false;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
 
     const allocationsCAF = new AllocationsCAF();

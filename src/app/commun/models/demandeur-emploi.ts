@@ -8,10 +8,10 @@ import { RessourcesFinancieres } from './ressources-financieres';
 export class DemandeurEmploi {
 
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
-  futurTravail = new FuturTravail();
-  informationsIdentite = new InformationsIdentite();
-  ressourcesFinancieres = new RessourcesFinancieres();
-  situationFamiliale = new SituationFamiliale();
+  futurTravail: FuturTravail;
+  informationsIdentite: InformationsIdentite;
+  ressourcesFinancieres: RessourcesFinancieres;
+  situationFamiliale: SituationFamiliale;
 
   constructor() {
   }

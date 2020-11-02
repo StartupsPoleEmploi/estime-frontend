@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
+import { FormGroup } from '@angular/forms';
+import { NumberUtileService } from '@app/core/services/utile/number-util.service';
 
 @Component({
   selector: 'app-mon-futur-travail',
@@ -11,7 +14,9 @@ import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demande
 })
 export class MonFuturTravailComponent implements OnInit {
 
+  submitted = false;
   demandeurEmploiConnecte: DemandeurEmploi;
+  typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
 
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
@@ -24,6 +29,7 @@ export class MonFuturTravailComponent implements OnInit {
 
   constructor(
     private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    public numberUtileService: NumberUtileService,
     private router: Router
     ) {
 
@@ -33,21 +39,25 @@ export class MonFuturTravailComponent implements OnInit {
     this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
   }
 
-  redirectVersPageSuivante() {
+  redirectVersPageSuivante(form: FormGroup) {
     console.log(this.demandeurEmploiConnecte);
-    this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-    this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
+    console.log(form);
+    this.submitted = true;
+    if(form.valid) {
+      this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
+    }
+
   }
+
 
   redirectVersPagePrecedente() {
     this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
   }
 
-  setNombreMoisContrat(typeContrat: string) {
-    if(typeContrat === 'CDI') {
+  unsetNombreMoisContrat(typeContrat: string) {
+    if(typeContrat === this.typesContratTavailEnum.CDI) {
       this.demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD = null;
-    } else {
-      this.demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD = 1;
     }
   }
 }

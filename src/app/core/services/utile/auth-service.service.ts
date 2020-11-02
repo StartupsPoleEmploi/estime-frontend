@@ -15,6 +15,7 @@ export class AuthService {
 
 
   private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'estime.peOIDC.authorizeData';
+  private static readonly OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY = 'estime.peOIDC.individuAccessToken';
 
   private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
   private informationAutorisationOIDC: InformationAutorisationOIDC;
@@ -40,15 +41,25 @@ export class AuthService {
   completeLogin() {
     return this.authentifierDemandeurEmploi().then(informationsAccessTokenIndividuConnecte => {
         this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
+        this.sessionStorageService.store(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, informationsAccessTokenIndividuConnecte);
         this.demandeurEmploiConnecteService.createDemandeurEmploiConnecte();
         this.isLoggedInChangedSubject.next(true);
         return informationsAccessTokenIndividuConnecte;
     });
   }
 
+  isLoggedIn():boolean {
+    if(!this.informationsAccessTokenIndividuConnecte) {
+      this.informationsAccessTokenIndividuConnecte =  this.sessionStorageService.retrieve(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
+    }
+    return !!this.informationsAccessTokenIndividuConnecte;
+  }
+
+
   logout() {
     this.sessionStorageService.clear(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
     this.document.location.href = this.getPoleEmploiIdentityServerDeconnexionURI();
   }
 

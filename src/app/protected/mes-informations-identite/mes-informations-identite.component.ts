@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
+import { Personne } from '@models/personne';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
 
 @Component({
   selector: 'app-mes-informations-identite',
@@ -40,6 +42,18 @@ export class MesInformationsIdentiteComponent implements OnInit {
   setTitreSejourEnFranceValide(nationalite: string) {
     if(nationalite !== 'autre') {
       this.demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide = null;
+    } else {
+      this.demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide = true;
+    }
+  }
+
+  setDemandeurEmploiConjoint() {
+    if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
+      const conjoint = new Personne();
+      conjoint.ressourcesFinancieres = new RessourcesFinancieres();
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint = conjoint;
+    } else {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
     }
   }
 }

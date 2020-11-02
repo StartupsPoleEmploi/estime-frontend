@@ -2,7 +2,7 @@
   <h1 class="h1-style-2">4. Mes ressources finançières actuelles</h1>
   <div class="text-under-h1">* Tous les champs sont obligatoires</div>
   <div class="card card-body card-form">
-    <form (ngSubmit)="redirectVersPageSuivante()">
+    <form (ngSubmit)="redirectVersPageSuivante()" #formRessourcesFinancieres="ngForm">
       <div class="form-group">
         <div class="row">
           <label class="label" for="top-ass-percu">J'ai perçu le mois précédent de l'ASS (Allocation de Solidarité Spécifique)</label>
@@ -23,17 +23,19 @@
           <label class="label" for="montant-ass">Montant journalier net de votre allocation</label>
         </div>
         <div class="row">
-          <input id="montant-ass" name="montant-ass" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.montantJournalierNetAllocationSolidariteSpecifique">
+          <input id="montant-ass" name="montant-ass" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.montantJournalierNetAllocationSolidariteSpecifique" required #montantJournalierASS="ngModel">
           <div class="text-side-input">€ net/jour</div>
         </div>
+        <span class="row required-message" *ngIf="!montantJournalierASS.valid && montantJournalierASS.touched">Cette donnée est obligatoire.</span>
       </div>
       <div class="form-group">
         <div class="row">
           <label class="label" for="date-ouverture-droit-ass">Date dernière ouverture de droit à l'ASS</label>
         </div>
         <div class="row">
-          <input id="date-ouverture-droit-ass" name="date-ouverture-droit-ass" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique">
+          <input id="date-ouverture-droit-ass" name="date-ouverture-droit-ass" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique" required #dateOuvertureDroitASS="ngModel">
         </div>
+        <span class="row required-message" *ngIf="!dateOuvertureDroitASS.valid && dateOuvertureDroitASS.touched">Cette donnée est obligatoire.</span>
       </div>
       <div class="form-group">
         <div class="row">
@@ -101,7 +103,7 @@
       </div>
       <div class="div-buttons-form row">
         <div class="col-12 col-md-6">
-          <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+          <button class="btn btn-primary-style-3" type="submit" [disabled]="!formRessourcesFinancieres.valid"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
         </div>
         <div class="col-12 col-md-6 order-md-first">
           <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
