@@ -2,64 +2,66 @@
   <h1 class="h1-style-2">2. Mes informations personnelles</h1>
   <div class="text-under-h1">* Tous les champs sont obligatoires</div>
   <div class="card card-body card-form">
-    <form (ngSubmit)="redirectVersPageSuivante()" #formInformationsIdentite="ngForm">
+    <form (ngSubmit)="redirectVersPageSuivante(formInformationsIdentite)" [ngClass]="{'submitted':submitted}" #formInformationsIdentite="ngForm">
       <div class="form-group">
         <div class="row">
-          <label class="label" for="code-postal">Votre code postal</label>
+          <label class="label" for="codePostal">* Votre code postal</label>
         </div>
         <div class="row">
-          <input id="code-postal" name="code-postal" type="number" maxlength="5" class="form-control" placeholder="ex : 75001"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.codePostal" required #codePostal="ngModel">
+          <input id="codePostal" name="codePostal" type="number" maxlength="5" class="form-control" placeholder="ex : 75001"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.codePostal" required #codePostal="ngModel">
         </div>
-        <span class="row required-message" *ngIf="!codePostal.valid && codePostal.touched">Cette donnée est obligatoire.</span>
+        <span class="row error-input-message" *ngIf="(submitted || codePostal.touched)  && codePostal.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
         <div class="row">
-          <label class="label" for="date-naissance">Votre date de naissance</label>
+          <label class="label" for="dateNaissance">* Votre date de naissance</label>
         </div>
         <div class="row">
-          <input id="date-naissance" name="date-naissance" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.dateNaissance" required #dateNaissance="ngModel">
+          <input id="dateNaissance" name="dateNaissance" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.dateNaissance" required #dateNaissance="ngModel">
         </div>
-        <span class="row required-message" *ngIf="!dateNaissance.valid && dateNaissance.touched">Cette donnée est obligatoire.</span>
+        <span class="row error-input-message" *ngIf="(submitted || dateNaissance.touched)  && dateNaissance.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
         <div class="row">
-          <label class="label" for="situation-familiale">Votre situation familiale</label>
+          <label class="label" for="situationFamiliale">* Votre situation familiale</label>
         </div>
         <div class="row">
-          <label name="situation-familiale" class="btn radio-button-style-1" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="false" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()" required>Seul.e</label>
-          <label name="situation-familiale" class="btn radio-button-style-1 ml-2" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="true" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()" required>En couple</label>
+          <label name="situationFamiliale" class="btn radio-button-style-1" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="false" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()" required #situationFamiliale="ngModel">Seul.e</label>
+          <label name="situationFamiliale" class="btn radio-button-style-1 ml-2" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple" [btnRadio]="true" tabindex="0" role="button" (click)="setDemandeurEmploiConjoint()" required #situationFamiliale="ngModel">En couple</label>
         </div>
+        <span class="row error-input-message" *ngIf="(submitted || situationFamiliale.touched)  && situationFamiliale.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
         <div class="row">
-          <label class="label" for="nationalite">Votre nationalité</label>
+          <label class="label" for="nationalite">* Votre nationalité</label>
         </div>
         <div class="row">
-          <select id="nationalite" name="nationalite" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.nationalite" class="form-control" data-width="auto" (ngModelChange)="setTitreSejourEnFranceValide($event)" required #nationalite="ngModel">
+          <select id="nationalite" name="nationalite" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.nationalite" class="form-control" data-width="auto" (ngModelChange)="unsetTitreSejourEnFranceValide($event)" required #nationalite="ngModel">
             <option *ngFor="let nationalite of nationaliteSelectOptions" [value]="nationalite.label">{{ nationalite.label }}</option>
           </select>
         </div>
-        <span class="row required-message" *ngIf="!nationalite.valid && nationalite.touched">Cette donnée est obligatoire.</span>
+        <span class="row error-input-message" *ngIf="(submitted || nationalite.touched)  && nationalite.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group" *ngIf="demandeurEmploiConnecte.informationsIdentite.nationalite == 'autre'">
         <div class="row">
-          <label class="label" for="titre-sejour">Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide</label>
+          <label class="label" for="titreSejourValide">Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide</label>
         </div>
         <div class="row">
-          <div class="form-check form-check-inline">
-            <input id="titre-sejour-ok" name="titre-sejour"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide" [value]="true" required>
-            <label class="form-check-label" for="titre-sejour-ok">oui</label>
+          <div class="custom-control custom-radio">
+            <input id="titreSejourValideTrue" name="titreSejourValide"  type="radio" class="custom-control-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide" [value]="true" required #titreSejourValide="ngModel">
+            <label class="custom-control-label" for="titreSejourValideTrue">oui</label>
           </div>
-          <div class="form-check form-check-inline">
-            <input id="titre-sejour-ko" name="titre-sejour"  type="radio" class="form-check-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide"  [value]="false" required>
-            <label class="form-check-label" for="titre-sejour-ko">non</label>
+          <div class="custom-control custom-radio ml-2">
+            <input id="titreSejourValideFalse" name="titreSejourValide"  type="radio" class="custom-control-input" [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide"  [value]="false" required #titreSejourValide="ngModel">
+            <label class="custom-control-label" for="titreSejourValideFalse">non</label>
           </div>
         </div>
+        <span class="row error-input-message" *ngIf="(submitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">Ce champ est obligatoire</span>
       </div>
 
       <div class="div-buttons-form row">
         <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
-        <button class="btn btn-primary-style-3" type="submit" [disabled]="!formInformationsIdentite.valid"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+        <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
       </div>
     </form>
   </div>

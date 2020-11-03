@@ -40,14 +40,11 @@ export class MonFuturTravailComponent implements OnInit {
   }
 
   redirectVersPageSuivante(form: FormGroup) {
-    console.log(this.demandeurEmploiConnecte);
-    console.log(form);
     this.submitted = true;
     if(form.valid) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
       this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
     }
-
   }
 
 

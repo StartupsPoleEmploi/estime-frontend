@@ -5,6 +5,7 @@ import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demande
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Personne } from '@models/personne';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-mes-informations-identite',
@@ -14,6 +15,8 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 export class MesInformationsIdentiteComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
+  submitted = false;
+
   nationaliteSelectOptions = [
     { label: "française"},
     { label: "ressortissant européen ou suisse"},
@@ -33,17 +36,17 @@ export class MesInformationsIdentiteComponent implements OnInit {
     this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 
-  redirectVersPageSuivante() {
-    console.log(this.demandeurEmploiConnecte);
-    this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-    this.router.navigate([RoutesEnum.MA_SITUATION_FAMILIALE], { replaceUrl: true });
+  redirectVersPageSuivante(form: FormGroup) {
+    this.submitted = true;
+    if(form.valid) {
+      this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      this.router.navigate([RoutesEnum.MA_SITUATION_FAMILIALE], { replaceUrl: true });
+    }
   }
 
-  setTitreSejourEnFranceValide(nationalite: string) {
+  unsetTitreSejourEnFranceValide(nationalite: string) {
     if(nationalite !== 'autre') {
       this.demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide = null;
-    } else {
-      this.demandeurEmploiConnecte.informationsIdentite.titreSejourEnFranceValide = true;
     }
   }
 

@@ -17,17 +17,20 @@
   max-width: fit-content;
 }
 
-form.submitted input.ng-invalid, form.submitted select.ng-invalid, input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+
+form.submitted input.ng-invalid,
+form.submitted select.ng-invalid,
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
   border: 1px solid $color-error;
 }
 
+.radio-button-style-1.ng-invalid.ng-touched,
+form.submitted .radio-button-style-1.ng-invalid,
 form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::before {
 
   border-color: $color-error;
 }
-
-
-
 
 .error-input-message {
   color: $color-error !important;
