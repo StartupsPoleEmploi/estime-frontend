@@ -39,8 +39,8 @@ form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::befor
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: $color-blue-2;
-  background-color: $color-blue-2;
+  border-color: $color-blue-1;
+  background-color: $color-blue-1;
   box-shadow: none;
 }
 

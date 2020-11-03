@@ -1,28 +1,35 @@
 <div class="container-fluid form-container-fluid">
-  <h1 class="h1-style-2">2. Mes informations personnelles</h1>
-  <div class="text-under-h1">* Tous les champs sont obligatoires</div>
+  <h1 class="h1-style-2">2. Ma situation</h1>
+  <div class="text-under-h1">Tous les champs marqués d'un * sont obligatoires</div>
   <div class="card card-body card-form">
     <form (ngSubmit)="redirectVersPageSuivante(formInformationsIdentite)" [ngClass]="{'submitted':submitted}" #formInformationsIdentite="ngForm">
       <div class="form-group">
-        <div class="row">
+        <div class="row mb-2">
           <label class="label" for="codePostal">* Votre code postal</label>
         </div>
         <div class="row">
-          <input id="codePostal" name="codePostal" type="number" maxlength="5" class="form-control" placeholder="ex : 75001"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.codePostal" required #codePostal="ngModel">
+          <input id="codePostal" name="codePostal" type="text" (keypress)="numberUtileService.authoriserNumericOnly($event)" maxlength="5" class="form-control" placeholder="ex : 75001"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.codePostal" required #codePostal="ngModel">
         </div>
         <span class="row error-input-message" *ngIf="(submitted || codePostal.touched)  && codePostal.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
-        <div class="row">
+        <div class="row  mb-2">
           <label class="label" for="dateNaissance">* Votre date de naissance</label>
         </div>
-        <div class="row">
-          <input id="dateNaissance" name="dateNaissance" type="date" class="form-control fit-content" placeholder="JJ/MM/AAAA"  [(ngModel)]="demandeurEmploiConnecte.informationsIdentite.dateNaissance" required #dateNaissance="ngModel">
+        <div class="form-group">
+          <div class="row btn-group-input-date">
+            <input name="jourDateNaissance" (focus)="onFocusJourDateNaissance()" class="form-control jour-input" (change)="onChangeOrKeyUpDateNaissanceJour($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissanceJour($event)" (keypress)="this.numberUtileService.authoriserNumericOnly($event)" placeholder="JJ" [(ngModel)]="dateNaissance.jour" required #jourDateNaissance="ngModel">
+            <input name="moisDateNaissance" (focus)="onFocusJourDateNaissance()" class="form-control mois-input" (change)="onChangeOrKeyUpDateNaissanceMois($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissanceMois($event)" (keypress)="this.numberUtileService.authoriserNumericOnly($event)" placeholder="MM" [(ngModel)]="dateNaissance.mois" required #moisDateNaissance="ngModel">
+            <input name="anneeDateNaissance" class="form-control annee-input" maxlength="4" type="text" min="1900" (keypress)="numberUtileService.authoriserNumericOnly($event)" placeholder="AAAA" [(ngModel)]="dateNaissance.annee" required #anneeDateNaissance="ngModel">
+         </div>
+         <span class="row error-input-message" *ngIf="(submitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">Le jour de la date de naissance est obligatoires</span>
+         <span class="row error-input-message" *ngIf="(submitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">Le mois de la date de naissance est obligatoires</span>
+         <span class="row error-input-message" *ngIf="(submitted || anneeDateNaissance.touched) && anneeDateNaissance.errors?.required">L'année de la date de naissance est obligatoires</span>
+         <span class="row error-input-message" *ngIf="submitted  && dateNaissance.messageErreurFormat">{{dateNaissance.messageErreurFormat}}</span>
         </div>
-        <span class="row error-input-message" *ngIf="(submitted || dateNaissance.touched)  && dateNaissance.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
-        <div class="row">
+        <div class="row mb-2">
           <label class="label" for="situationFamiliale">* Votre situation familiale</label>
         </div>
         <div class="row">
@@ -32,7 +39,7 @@
         <span class="row error-input-message" *ngIf="(submitted || situationFamiliale.touched)  && situationFamiliale.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
-        <div class="row">
+        <div class="row mb-2">
           <label class="label" for="nationalite">* Votre nationalité</label>
         </div>
         <div class="row">
@@ -43,7 +50,7 @@
         <span class="row error-input-message" *ngIf="(submitted || nationalite.touched)  && nationalite.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group" *ngIf="demandeurEmploiConnecte.informationsIdentite.nationalite == 'autre'">
-        <div class="row">
+        <div class="row mb-2">
           <label class="label" for="titreSejourValide">Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide</label>
         </div>
         <div class="row">

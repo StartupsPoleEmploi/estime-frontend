@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Personne } from '@app/commun/models/personne';
 import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
+import { FormGroup } from '@angular/forms';
+import { InformationsIdentite } from '@app/commun/models/informations-identite';
+import { NumberUtileService } from '@app/core/services/utile/number-util.service';
 
 @Component({
   selector: 'app-ma-situation-familiale',
@@ -13,10 +16,26 @@ import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres
 })
 export class MaSituationFamilialeComponent implements OnInit {
 
+  submitted = false;
   demandeurEmploiConnecte: DemandeurEmploi;
+  moisSelectOptions  = [
+    { value: "01" },
+    { value: "02" },
+    { value: "03" },
+    { value: "04" },
+    { value: "05" },
+    { value: "06" },
+    { value: "07" },
+    { value: "08" },
+    { value: "09" },
+    { value: "10" },
+    { value: "11" },
+    { value: "12" }
+  ];
 
   constructor(
     private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    public numberUtileService: NumberUtileService,
     private router: Router
   ) { }
 
@@ -28,18 +47,31 @@ export class MaSituationFamilialeComponent implements OnInit {
     this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
   }
 
-  redirectVersPageSuivante() {
-    console.log(this.demandeurEmploiConnecte);
-    this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-    if(this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge > 0) {
-      this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
-    } else {
-      this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
+  redirectVersPageSuivante(form: FormGroup): void {
+    this.submitted = true;
+    if(form.valid) {
+      this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      if(this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge > 0) {
+        this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
+      } else {
+        this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
+      }
     }
   }
 
+  removePersonneACharge(): void {
+    this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge = this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge - 1;
+    this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.pop();
+  }
 
-
-
-
+  addPersonneACharge(): void {
+    this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge = this.demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge + 1;
+    if(!this.demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      this.demandeurEmploiConnecte.situationFamiliale.personnesACharge = new Array<Personne>();
+    }
+    const personne = new Personne();
+    personne.informationsIdentite = new InformationsIdentite();
+    this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.push(personne);
+    console.log(this.demandeurEmploiConnecte);
+  }
 }

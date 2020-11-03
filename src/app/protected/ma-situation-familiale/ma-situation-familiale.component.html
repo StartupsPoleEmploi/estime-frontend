@@ -1,17 +1,37 @@
 <div class="container-fluid form-container-fluid">
   <h1 class="h1-style-2">3. Mes personnes à charge</h1>
-  <div class="text-under-h1">* Tous les champs sont obligatoires</div>
+  <div class="text-under-h1">Tous les champs marqués d'un * sont obligatoires</div>
   <div class="card card-body card-form">
-    <form (ngSubmit)="redirectVersPageSuivante()" #formPersonnesACharge="ngForm">
+    <form (ngSubmit)="redirectVersPageSuivante(formPersonnesACharge)" [ngClass]="{'submitted':submitted}" #formPersonnesACharge="ngForm">
       <div class="form-group">
-        <div class="form-group">
           <div class="row">
-            <label class="label" for="personne-a-charge">Nombre d'enfant(s) ou de personne(s) à charge</label>
+            <label class="label" for="nombrePersonneACharge">* Nombre d'enfant(s) ou de personne(s) à charge</label>
           </div>
           <div class="row">
-            <input id="personne-a-charge" name="personne-a-charge" type="number" min="0" class="form-control" value="0" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge" required #personnesACharges="ngModel">
+            <div class="btn-group-input-compteur">
+              <button type="button" class="btn" [disabled]="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge === 0" (click)="removePersonneACharge()">-</button>
+              <span>{{demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge}}</span>
+              <button type="button" class="btn" (click)="addPersonneACharge()">+</button>
+            </div>
           </div>
-          <span class="row required-message" *ngIf="!personnesACharges.valid && personnesACharges.touched">Cette donnée est obligatoire.</span>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge > 0">
+        <div class="row">
+          <label class="label" for="personnesACharge">* Date de naissance</label>
+        </div>
+        <div class="row mt-2" *ngFor="let personneACharge of demandeurEmploiConnecte.situationFamiliale.personnesACharge; let index = index;">
+          <div class="col-12 col-md-2 pl-0 mt-auto mb-auto">
+            <label class="label label-left-style-1" for="montant-pension-alimentaire">Personne {{index + 1}} {{personneACharge.informationsIdentite.dateNaissance}}</label>
+          </div>
+          <div class="col-12 col-md-10 pl-0 mt-auto mb-auto">
+            <div class="btn-group-input-date">
+               <input class="form-control day-input" maxlength="2" type="text" min="0" (keypress)="numberUtileService.authoriserNumericOnly($event)" placeholder="JJ">
+               <select class="form-control month-input" >
+                <option *ngFor="let mois of moisSelectOptions" [value]="mois.value">{{ mois.value }}</option>
+               </select>
+               <input class="form-control year-input" maxlength="4" type="text" min="1900" (keypress)="numberUtileService.authoriserNumericOnly($event)" placeholder="AAAA">
+            </div>
+          </div>
         </div>
       </div>
       <div class="div-buttons-form row">

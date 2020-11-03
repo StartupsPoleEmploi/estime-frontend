@@ -5,7 +5,7 @@
     <form (ngSubmit)="redirectVersPageSuivante(futurTravailForm)" [ngClass]="{'submitted':submitted}" #futurTravailForm="ngForm">
       <div class="row">
         <div class="col-6 col-md-2 form-group">
-          <div class="row">
+          <div class="row mb-1">
             <label class="label" for="typeContrat">* Type de contrat</label>
           </div>
           <div class="row">
@@ -17,23 +17,24 @@
               <input id="typeContratCDD" name="typeContrat"  type="radio" class="custom-control-input" [(ngModel)]="demandeurEmploiConnecte.futurTravail.typeContrat" [value]="typesContratTavailEnum.CDD" required #typeContrat="ngModel">
               <label class="custom-control-label" for="typeContratCDD">{{typesContratTavailEnum.CDD}}</label>
             </div>
-            <span class="error-input-message" *ngIf="(submitted || typeContrat.touched)  && typeContrat.errors?.required">Ce champ est obligatoire</span>
           </div>
+          <span class="row error-input-message" *ngIf="(submitted || typeContrat.touched)  && typeContrat.errors?.required">Ce champ est obligatoire</span>
         </div>
         <div class="col-6 col-md-10 form-group" *ngIf="demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD'">
-            <label class="label" for="nombreMoisCDD">* Nombre de mois</label>
+            <label class="label mb-2" for="nombreMoisCDD">* Nombre de mois</label>
             <select id="nombreMoisCDD" name="nombreMoisCDD" [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD" class="form-control" data-width="auto" required #nombreMoisCDD="ngModel">
+              <option [value]="null">Sélectionner</option>
               <option *ngFor="let nombreMois of nombreMoisCDDSelectOptions" [value]="nombreMois.value">{{ nombreMois.label }}</option>
             </select>
             <span class="error-input-message" *ngIf="(submitted || nombreMoisCDD.touched)  && nombreMoisCDD.errors?.required">Ce champ est obligatoire</span>
         </div>
       </div>
       <div class="form-group">
-        <div class="row flex-column">
+        <div class="row flex-column mb-2">
           <label class="label" for="dureeHebdomadaire">* Nombre d'heures travaillées</label>
         </div>
         <div class="row">
-          <input id="dureeHebdomadaire" (keypress)="numberUtileService.authoriserNumericOnly($event)" name="dureeHebdomadaire"  type="number" min="0" class="form-control" placeholder="Nombre d'heures"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine" required #dureeHebdomadaire="ngModel">
+          <input id="dureeHebdomadaire" (keypress)="numberUtileService.authoriserNumericOnly($event)" name="dureeHebdomadaire"  type="text" min="0" maxlength="2" class="form-control" placeholder="Nombre d'heures"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine" required #dureeHebdomadaire="ngModel">
           <span class="text-side-input">par semaine</span>
         </div>
         <span class="row error-input-message" *ngIf="(submitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.required">Ce champ est obligatoire</span>
@@ -44,27 +45,27 @@
           <label class="label" for="salaire-mensuel-net">* Salaire mensuel net<i class="interrogation-icon btn far fa-question-circle" [popover]="popoversalairenettemplate" #popoversalairenet="bs-popover" placement="right"></i></label>
         </div>
         <div class="row">
-          <input id="salaireMensuelNet" name="salaireMensuelNet" type="number" (keypress)="numberUtileService.authoriserNumericOnly($event)" min="0" class="form-control" placeholder="Montant"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet" required #salaireMensuelNet="ngModel">
+          <input id="salaireMensuelNet" name="salaireMensuelNet" type="text" (keypress)="numberUtileService.authoriserNumericOnly($event)" min="0" maxlength="6" class="form-control" placeholder="Montant"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet" required #salaireMensuelNet="ngModel">
           <span class="text-side-input">€</span>
         </div>
         <span class="row error-input-message" *ngIf="(submitted || salaireMensuelNet.touched)  && salaireMensuelNet.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
-        <div class="row flex-column">
+        <div class="row flex-column mb-2">
           <label class="label" for="distance-domicile-lieu-travail">* Distance de votre domicile à votre lieu de travail</label>
         </div>
         <div class="row">
-          <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail" type="number" (keypress)="numberUtileService.authoriserNumericOnly($event)" min="0" class="form-control" placeholder="Distance" [(ngModel)]="demandeurEmploiConnecte.futurTravail.distanceKmAllerRetourDuDomicile" required #distanceDomicileLieuTravail="ngModel">
+          <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail" type="text" (keypress)="numberUtileService.authoriserNumericOnly($event)" min="0" maxlength="4" class="form-control" placeholder="Distance" [(ngModel)]="demandeurEmploiConnecte.futurTravail.distanceKmAllerRetourDuDomicile" required #distanceDomicileLieuTravail="ngModel">
           <span class="text-side-input">km</span>
         </div>
         <span class="row error-input-message" *ngIf="(submitted || distanceDomicileLieuTravail.touched)  && distanceDomicileLieuTravail.errors?.required">Ce champ est obligatoire</span>
       </div>
       <div class="form-group">
-        <div class="row flex-column">
+        <div class="row flex-column mb-2">
           <label class="label" for="nombreTrajetsDomicileTravail">* Trajets de votre domicile à votre lieu de travail</label>
         </div>
         <div class="row">
-          <input id="nombreTrajetsDomicileTravail" name="nombreTrajetsDomicileTravail" type="number" min="0" (keypress)="numberUtileService.authoriserNumericOnly($event)" class="form-control" placeholder="Nombre"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreTrajetsDomicileTravail" required #nombreTrajetsDomicileTravail="ngModel">
+          <input id="nombreTrajetsDomicileTravail" name="nombreTrajetsDomicileTravail" type="text" min="0" maxlength="2" (keypress)="numberUtileService.authoriserNumericOnly($event)" class="form-control" placeholder="Nombre"  [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreTrajetsDomicileTravail" required #nombreTrajetsDomicileTravail="ngModel">
           <span class="text-side-input">par mois</span>
         </div>
         <span class="row error-input-message" *ngIf="(submitted || nombreTrajetsDomicileTravail.touched)  && nombreTrajetsDomicileTravail.errors?.required">Ce champ est obligatoire</span>

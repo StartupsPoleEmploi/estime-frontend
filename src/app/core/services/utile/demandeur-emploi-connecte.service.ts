@@ -41,11 +41,14 @@ export class DemandeurEmploiConnecteService {
     this.demandeurEmploiConnecte = new DemandeurEmploi();
 
     const futurTravail = new FuturTravail();
+    futurTravail.nombreMoisContratCDD = null;
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
 
     this.demandeurEmploiConnecte.informationsIdentite = new InformationsIdentite();
 
-    this.demandeurEmploiConnecte.situationFamiliale = new SituationFamiliale();
+    const situationFamiliale = new SituationFamiliale();
+    situationFamiliale.nombrePersonnesACharge = 0;
+    this.demandeurEmploiConnecte.situationFamiliale = situationFamiliale;
 
     const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
     beneficiaireAidesSociales.beneficiairePrestationSolidarite = true;

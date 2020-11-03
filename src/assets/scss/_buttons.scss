@@ -1,3 +1,49 @@
+.btn:focus  {
+  box-shadow: none;
+}
+
+.btn-group-input-date {
+  display: flex !important;
+  .jour-input {
+    min-width: 45px;
+    max-width: 45px;
+  }
+  .mois-input {
+    margin-left: 4px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  .annee-input {
+    min-width: 65px;
+    margin-left: 4px;
+    max-width: 65px;
+  }
+
+  select.default-value {
+    color: #808080;
+  }
+}
+
+.btn-group-input-compteur {
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  button {
+    font-weight: bold;
+    &:disabled {
+      opacity: 0.35 !important;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  span {
+    vertical-align: middle;
+  }
+}
+
 .primary-button-base {
   background-color: $color-blue-3;
   border: none;
@@ -80,6 +126,9 @@
 
 .radio-button-style-1 {
   border-color: $color-blue-2;
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .radio-button-style-1:not(:disabled):not(.disabled).active {
