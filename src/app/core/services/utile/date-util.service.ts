@@ -40,6 +40,17 @@ export class DateUtileService {
     return errorFormatMessage;
   }
 
+  isDateDecomposeeSaisieValide(dateDecomposee: DateDecomposee): boolean {
+    let isDateDecomposeeSaisieValide = false;
+    if(!dateDecomposee.messageErreurFormat
+      && dateDecomposee.jour
+      && dateDecomposee.mois
+      && dateDecomposee.annee) {
+        isDateDecomposeeSaisieValide = true;
+    }
+    return isDateDecomposeeSaisieValide;
+  }
+
   getDateDecomposeeFromDate(dateADecompose: Date): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
     if(dateADecompose) {

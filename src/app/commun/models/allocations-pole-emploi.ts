@@ -6,5 +6,7 @@ export class AllocationsPoleEmploi {
   hasASSPlusSalaireCumule: boolean;
   montantJournalierNetAllocationRetourEmploi: number;
   montantJournalierNetAllocationSolidariteSpecifique: number;
+  montantMensuelNetAllocationRetourEmploi: number;
+  montantMensuelNetAllocationSolidariteSpecifique: number;
   nombreMoisCumulesASSPercueEtSalaire: number;
 }

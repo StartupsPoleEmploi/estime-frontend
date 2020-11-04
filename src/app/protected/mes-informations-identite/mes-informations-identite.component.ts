@@ -5,11 +5,11 @@ import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demande
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Personne } from '@models/personne';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
-import { FormGroup, FormControl } from '@angular/forms';
-import { NumberUtileService } from '@app/core/services/utile/number-util.service';
+import { FormGroup } from '@angular/forms';
+import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateDecomposee } from "@models/date-decomposee";
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
-import { IfStmt } from '@angular/compiler';
+import { InformationsIdentite } from '@app/commun/models/informations-identite';
 
 @Component({
   selector: 'app-mes-informations-identite',
@@ -19,7 +19,7 @@ import { IfStmt } from '@angular/compiler';
 export class MesInformationsIdentiteComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
-  submitted = false;
+  isInformationsIdentiteFormSubmitted = false;
   moisSelectOptions  = [
     { value: "01" },
     { value: "02" },
@@ -48,47 +48,27 @@ export class MesInformationsIdentiteComponent implements OnInit {
   constructor(
     private dateUtileService: DateUtileService,
     private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
-    public numberUtileService: NumberUtileService,
+    public controleChampFormulaireService: ControleChampFormulaireService,
     private router: Router
   ) { }
-
-  onChangeOrKeyUpDateNaissanceJour(event) {
-    event.stopPropagation();
-    const value = this.dateNaissance.jour;
-    if(value.length === 2) {
-      this.moisDateNaissanceInput.nativeElement.focus();
-    }
-  }
-
-  onChangeOrKeyUpDateNaissanceMois(event) {
-    event.stopPropagation();
-    const value = this.dateNaissance.mois;
-    if(value.length === 2) {
-      this.anneeDateNaissanceInput.nativeElement.focus();
-    }
-  }
-
-  onFocusJourDateNaissance() {
-    this.dateNaissance.messageErreurFormat = undefined;
-  }
-
 
   ngOnInit(): void {
     this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromDate(this.demandeurEmploiConnecte.informationsIdentite.dateNaissance);
   }
 
+
   redirectVersPagePrecedente() {
-    this.saveDateDemandeurEmploiConnecte();
+    this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 
   redirectVersPageSuivante(form: FormGroup) {
-    this.submitted = true;
-    this.saveDateDemandeurEmploiConnecte();
+    this.isInformationsIdentiteFormSubmitted = true;
+    this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if(form.valid && !this.dateNaissance.messageErreurFormat) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      this.router.navigate([RoutesEnum.MA_SITUATION_FAMILIALE], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
     }
   }
 
@@ -98,22 +78,60 @@ export class MesInformationsIdentiteComponent implements OnInit {
     }
   }
 
-  setDemandeurEmploiConjoint() {
-    if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      const conjoint = new Personne();
-      conjoint.ressourcesFinancieres = new RessourcesFinancieres();
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint = conjoint;
-    } else {
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
+  /*** gestion du conjoint ***/
+
+  removeConjoint(): void {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
+  }
+
+  addConjoint(): void {
+    const conjoint = new Personne();
+    conjoint.ressourcesFinancieres = new RessourcesFinancieres();
+    conjoint.informationsIdentite = new InformationsIdentite();
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint = conjoint;
+  }
+
+  isSituationConjointIncorrect(): boolean {
+    return !this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSalarie
+    && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSansEmploi;
+  }
+
+  isConjointIsSansEmploiSelectionne() {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSalarie = false;
+  }
+
+  isConjointIsSalarieSelectionne() {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSansEmploi = false;
+  }
+
+
+
+  /** gestion saisie date naissance **/
+
+  onChangeOrKeyUpDateNaissanceJour(event) {
+    event.stopPropagation();
+    const value = this.dateNaissance.jour;
+    if(value && value.length === 2) {
+      this.moisDateNaissanceInput.nativeElement.focus();
     }
   }
-  saveDateDemandeurEmploiConnecte() {
+
+  onChangeOrKeyUpDateNaissanceMois(event) {
+    event.stopPropagation();
+    const value = this.dateNaissance.mois;
+    if(value && value.length === 2) {
+      this.anneeDateNaissanceInput.nativeElement.focus();
+    }
+  }
+
+  onFocusDateNaissance() {
+    this.dateNaissance.messageErreurFormat = undefined;
+  }
+
+  checkAndSaveDateNaissanceDemandeurEmploiConnecte() {
     this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissance);
-    if(!this.dateNaissance.messageErreurFormat
-      && this.dateNaissance.jour
-      && this.dateNaissance.mois
-      && this.dateNaissance.annee) {
-        this.demandeurEmploiConnecte.informationsIdentite.dateNaissance = this.dateUtileService.getDateFromDateDecomposee(this.dateNaissance);
-   }
+    if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)) {
+      this.demandeurEmploiConnecte.informationsIdentite.dateNaissance = this.dateUtileService.getDateFromDateDecomposee(this.dateNaissance);
+    }
   }
 }

@@ -1,0 +1,57 @@
+<div class="container-fluid form-container-fluid">
+  <h1 class="h1-style-2">4. Les ressource(s) finançière(s) de votre conjoint(e)</h1>
+  <div class="text-under-h1">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}</div>
+  <div class="card card-body card-form">
+    <form (ngSubmit)="redirectVersPageSuivante(ressourcesFinancieresConjointForm)" [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}" #ressourcesFinancieresConjointForm="ngForm">
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSalarie" >
+        <div class="row mb-2">
+          <label class="label" for="salaireNet">* Salaire net</label>
+        </div>
+        <div class="row">
+          <input name="salaireNet" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.montantSalaireNet" required placeholder="Montant" #salaireNet="ngModel">
+          <span class="text-side-input">€ net du dernier mois</span>
+        </div>
+        <span class="row error-input-message" *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet.touched)  && salaireNet.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
+        <span class="row error-input-message" *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet.touched)  && salaireNet.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSansEmploi" >
+        <div class="row mb-2">
+          <label class="label" for="montantARE">Si bénéficiaire de l'allocation de retour à l'emploi</label>
+        </div>
+        <div class="row">
+          <input name="montantARE" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.montantMensuelNetAllocationRetourEmploi" placeholder="Montant" #montantARE="ngModel">
+          <span class="text-side-input">€ net du mois dernier</span>
+        </div>
+        <span class="row error-input-message" *ngIf="(isRessourcesFinancieresConjointFormSubmitted || montantARE.touched)  && montantARE.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSansEmploi" >
+        <div class="row mb-2">
+          <label class="label" for="montantASS">Si bénéficiaire de l'allocation de solidarité spécifique</label>
+        </div>
+        <div class="row">
+          <input name="montantASS" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.montantMensuelNetAllocationSolidariteSpecifique" placeholder="Montant" #montantASS="ngModel">
+          <span class="text-side-input">€ net du mois dernier</span>
+        </div>
+        <span class="row error-input-message" *ngIf="(isRessourcesFinancieresConjointFormSubmitted || montantASS.touched)  && montantASS.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+      </div>
+      <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isHandicape" >
+        <div class="row mb-2">
+          <label class="label" for="montantAAH">Allocation aux adultes handicapées</label>
+        </div>
+        <div class="row">
+          <input name="montantAAH" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.montantAllocationAdultesHandicapes" placeholder="Montant" #montantAAH="ngModel">
+          <span class="text-side-input">€ net du mois dernier</span>
+        </div>
+        <span class="row error-input-message" *ngIf="(isRessourcesFinancieresConjointFormSubmitted || montantASS.touched)  && montantASS.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+      </div>
+      <div class="div-buttons-form row">
+        <div class="col-12 col-md-6">
+          <button class="btn btn-primary-style-3" type="submit"><div class="text-button">Suivant</div><div><img src="./assets/images/icon-bt-primaire.svg" /></div></button>
+        </div>
+        <div class="col-12 col-md-6 order-md-first">
+          <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

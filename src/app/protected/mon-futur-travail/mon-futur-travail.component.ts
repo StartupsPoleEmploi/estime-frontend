@@ -5,7 +5,7 @@ import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
 import { FormGroup } from '@angular/forms';
-import { NumberUtileService } from '@app/core/services/utile/number-util.service';
+import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 
 @Component({
   selector: 'app-mon-futur-travail',
@@ -14,9 +14,10 @@ import { NumberUtileService } from '@app/core/services/utile/number-util.service
 })
 export class MonFuturTravailComponent implements OnInit {
 
-  submitted = false;
+  isFuturTravailFormSubmitted = false;
   demandeurEmploiConnecte: DemandeurEmploi;
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
+
 
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
@@ -29,7 +30,7 @@ export class MonFuturTravailComponent implements OnInit {
 
   constructor(
     private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
-    public numberUtileService: NumberUtileService,
+    public controleChampFormulaireService: ControleChampFormulaireService,
     private router: Router
     ) {
 
@@ -40,7 +41,7 @@ export class MonFuturTravailComponent implements OnInit {
   }
 
   redirectVersPageSuivante(form: FormGroup) {
-    this.submitted = true;
+    this.isFuturTravailFormSubmitted = true;
     if(form.valid) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
       this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });

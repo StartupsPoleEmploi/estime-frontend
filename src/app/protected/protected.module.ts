@@ -10,6 +10,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
 import { MesRessourcesFinancieresComponent } from './mes-ressources-financieres/mes-ressources-financieres.component';
 import { ResultatMaSimulationComponent } from './resultat-ma-simulation/resultat-ma-simulation.component';
+import { RessourcesFinancieresConjointComponent } from './ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ResultatMaSimulationComponent } from './resultat-ma-simulation/resultat
     MesInformationsIdentiteComponent,
     MaSituationFamilialeComponent,
     MesRessourcesFinancieresComponent,
-    ResultatMaSimulationComponent
+    ResultatMaSimulationComponent,
+    RessourcesFinancieresConjointComponent
   ],
   imports: [
     ButtonsModule.forRoot(),

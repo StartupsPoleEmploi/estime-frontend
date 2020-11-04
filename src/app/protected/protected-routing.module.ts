@@ -8,6 +8,7 @@ import { MonFuturTravailComponent } from './mon-futur-travail/mon-futur-travail.
 import { MaSituationFamilialeComponent } from './ma-situation-familiale/ma-situation-familiale.component';
 import { MesRessourcesFinancieresComponent } from './mes-ressources-financieres/mes-ressources-financieres.component';
 import { ResultatMaSimulationComponent } from './resultat-ma-simulation/resultat-ma-simulation.component';
+import { RessourcesFinancieresConjointComponent } from './ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: RoutesEnum.MES_INFORMATIONS_IDENTITE, component: MesInformationsIdentiteComponent },
   {path: RoutesEnum.MES_RESSOURCES_FINANCIERES, component: MesRessourcesFinancieresComponent },
   {path: RoutesEnum.MON_FUTUR_DE_TRAVAIL, component: MonFuturTravailComponent },
+  {path: RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT, component: RessourcesFinancieresConjointComponent },
   {path: RoutesEnum.RESULAT_MA_SIMULATION, component: ResultatMaSimulationComponent },
 ];
 

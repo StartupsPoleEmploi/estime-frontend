@@ -6,5 +6,6 @@ export enum RoutesEnum {
     MES_INFORMATIONS_IDENTITE = 'mes-informations-identite',
     MES_PERSONNES_A_CHARGE = 'mes-personnes-a-charge',
     MES_RESSOURCES_FINANCIERES = 'mes-ressources-financieres',
+    RESSOURCES_FINANCIERES_CONJOINT = 'ressources-financieres-conjoint',
     RESULAT_MA_SIMULATION = 'resultat-ma-simulation'
 }

@@ -44,6 +44,10 @@ form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::befor
   box-shadow: none;
 }
 
+.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: $color-blue-1;
+}
+
 .form-control:focus {
   border-color: black;
   box-shadow: none;

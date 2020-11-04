@@ -4,16 +4,16 @@
   <div class="card card-body card-form">
     <form (ngSubmit)="redirectVersPageSuivante(formPersonnesACharge)" [ngClass]="{'submitted':submitted}" #formPersonnesACharge="ngForm">
       <div class="form-group">
-          <div class="row">
-            <label class="label" for="nombrePersonneACharge">* Nombre d'enfant(s) ou de personne(s) à charge</label>
+        <div class="row mb-2">
+          <label class="label" for="nombrePersonneACharge">* Nombre d'enfant(s) ou de personne(s) à charge</label>
+        </div>
+        <div class="row">
+          <div class="btn-group-input-compteur">
+            <button type="button" class="btn" [disabled]="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge === 0" (click)="removePersonneACharge()">-</button>
+            <span>{{demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge}}</span>
+            <button type="button" class="btn" (click)="addPersonneACharge()">+</button>
           </div>
-          <div class="row">
-            <div class="btn-group-input-compteur">
-              <button type="button" class="btn" [disabled]="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge === 0" (click)="removePersonneACharge()">-</button>
-              <span>{{demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge}}</span>
-              <button type="button" class="btn" (click)="addPersonneACharge()">+</button>
-            </div>
-          </div>
+        </div>
       </div>
       <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.nombrePersonnesACharge > 0">
         <div class="row">
@@ -25,11 +25,11 @@
           </div>
           <div class="col-12 col-md-10 pl-0 mt-auto mb-auto">
             <div class="btn-group-input-date">
-               <input class="form-control day-input" maxlength="2" type="text" min="0" (keypress)="numberUtileService.authoriserNumericOnly($event)" placeholder="JJ">
+               <input class="form-control day-input" maxlength="2" type="text" min="0" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="JJ">
                <select class="form-control month-input" >
                 <option *ngFor="let mois of moisSelectOptions" [value]="mois.value">{{ mois.value }}</option>
                </select>
-               <input class="form-control year-input" maxlength="4" type="text" min="1900" (keypress)="numberUtileService.authoriserNumericOnly($event)" placeholder="AAAA">
+               <input class="form-control year-input" maxlength="4" type="text" min="1900" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="AAAA">
             </div>
           </div>
         </div>

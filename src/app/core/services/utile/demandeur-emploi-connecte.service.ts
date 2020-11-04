@@ -9,7 +9,7 @@ import { FuturTravail } from '@app/commun/models/futur-travail';
 import { InformationsIdentite } from '@app/commun/models/informations-identite';
 import { SituationFamiliale } from '@app/commun/models/situation-familiale';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {
 
   public static readonly DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY = 'estime.demandeur-emploi';
@@ -23,7 +23,7 @@ export class DemandeurEmploiConnecteService {
   }
 
   getDemandeurEmploiConnecte(): DemandeurEmploi {
-    if(!this.demandeurEmploiConnecte) {
+    if (!this.demandeurEmploiConnecte) {
       this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     }
     return this.demandeurEmploiConnecte;
@@ -32,6 +32,12 @@ export class DemandeurEmploiConnecteService {
   public setDemandeurEmploiConnecte(demandeurEmploi: DemandeurEmploi): void {
     this.demandeurEmploiConnecte = demandeurEmploi;
     this.saveDemandeurEmploiConnecteInSessionStorage();
+  }
+
+  public hasSituationExceptionnelle(): boolean {
+    return this.demandeurEmploiConnecte.informationsIdentite.hasRevenusImmobilier
+      || this.demandeurEmploiConnecte.informationsIdentite.isCreateurEntreprise
+      || this.demandeurEmploiConnecte.informationsIdentite.isHandicape;
   }
 
   public createDemandeurEmploiConnecte() {
@@ -44,7 +50,9 @@ export class DemandeurEmploiConnecteService {
     futurTravail.nombreMoisContratCDD = null;
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
 
-    this.demandeurEmploiConnecte.informationsIdentite = new InformationsIdentite();
+    const informationsIdentite = new InformationsIdentite();
+    informationsIdentite.nationalite = null;
+    this.demandeurEmploiConnecte.informationsIdentite = informationsIdentite;
 
     const situationFamiliale = new SituationFamiliale();
     situationFamiliale.nombrePersonnesACharge = 0;
@@ -56,7 +64,7 @@ export class DemandeurEmploiConnecteService {
 
     const ressourcesFinancieres = new RessourcesFinancieres();
     const allocationsPE = new AllocationsPoleEmploi();
-    allocationsPE.hasASSPlusSalaireCumule = false;
+    allocationsPE.nombreMoisCumulesASSPercueEtSalaire = null;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
 
     const allocationsCAF = new AllocationsCAF();

@@ -4,10 +4,9 @@ import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demande
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Personne } from '@app/commun/models/personne';
-import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 import { FormGroup } from '@angular/forms';
 import { InformationsIdentite } from '@app/commun/models/informations-identite';
-import { NumberUtileService } from '@app/core/services/utile/number-util.service';
+import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 
 @Component({
   selector: 'app-ma-situation-familiale',
@@ -35,7 +34,7 @@ export class MaSituationFamilialeComponent implements OnInit {
 
   constructor(
     private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
-    public numberUtileService: NumberUtileService,
+    public controleChampFormulaireService: ControleChampFormulaireService,
     private router: Router
   ) { }
 
