@@ -34,8 +34,10 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
 
   redirectVersPageSuivante(form: FormGroup) {
     this.isRessourcesFinancieresConjointFormSubmitted = true;
+    console.log(this.demandeurEmploiConnecte);
     if(form.valid) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
     }
   }
 

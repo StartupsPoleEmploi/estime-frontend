@@ -1,7 +1,7 @@
 import {Injectable, Inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Environment } from '../../../commun/models/environment';
-import { DemandeurEmploi } from '../../../commun/models/demandeur-emploi';
+import { Environment } from '@models/environment';
+import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
 import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 
@@ -17,11 +17,11 @@ export class EstimeApiService {
     this.pathDemandeurEmploiService = `${this.environment.apiEstimeURL}demandeurs_emploi/`;
   }
 
-  public authentifier(informationAutorisationOIDC: InformationAutorisationOIDC) {
+  public authentifier(informationAutorisationOIDC: InformationAutorisationOIDC): Promise<InformationsAccessTokenPeConnect> {
     return this.http.post<InformationsAccessTokenPeConnect>(`${this.pathDemandeurEmploiService}authentifier`, informationAutorisationOIDC).toPromise();
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi) {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<DemandeurEmploi> {
     return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}simuler_mes_aides`, demandeurEmploi).toPromise();
   }
 }

@@ -1,0 +1,113 @@
+<div class="container-fluid form-container-fluid">
+  <h1 class="h1-style-2">3. Mes personnes à charge</h1>
+  <div class="text-under-h1">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}</div>
+  <div class="card card-body card-form">
+    <div class="row">
+      <button class="btn btn-primary-style-3" (click)="ajouterPersonneACharge()">
+        <div class="text-button">Ajouter une personne</div>
+      </button>
+    </div>
+    <div class="card card-body card-form" *ngIf="isNouvellePersonneFormDisplay === true">
+      <form (ngSubmit)="validerAjoutPersonneACharge(personnesAChargeForm)" [ngClass]="{'submitted':isPersonnesAChargeFormSubmitted}" #personnesAChargeForm="ngForm">
+        <div class="form-group">
+          <div class="row  mb-2">
+            <label class="label" for="dateNaissance">* Date de naissance</label>
+          </div>
+          <div class="form-group">
+            <div class="row btn-group-input-date">
+              <input name="jourDateNaissanceNouvellePersonne" (focus)="onFocusDateNaissanceNouvellePersonne()" class="form-control jour-input" (change)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)" (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="JJ" [(ngModel)]="dateNaissanceNouvellePersonne.jour" required #jourDateNaissanceNouvellePersonne="ngModel">
+              <input name="moisDateNaissanceNouvellePersonne" (focus)="onFocusDateNaissanceNouvellePersonne()" class="form-control mois-input" (change)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)" (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="MM" [(ngModel)]="dateNaissanceNouvellePersonne.mois" required #moisDateNaissanceNouvellePersonne="ngModel">
+              <input name="anneeDateNaissanceNouvellePersonne" (focus)="onFocusDateNaissanceNouvellePersonne()" class="form-control annee-input" maxlength="4" type="text" min="1900" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="AAAA" [(ngModel)]="dateNaissanceNouvellePersonne.annee" (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeAnnee($event)" required #anneeDateNaissanceNouvellePersonne="ngModel">
+            </div>
+            <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">{{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}</span>
+            <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">{{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}</span>
+            <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">{{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}</span>
+            <span class="row error-input-message" *ngIf="isPersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">{{dateNaissanceNouvellePersonne.messageErreurFormat}}</span>
+          </div>
+        </div>
+        <div class="form-group" *ngIf="isNouvellePersonneSituationFormDisplay === true">
+          <div class="row mb-2">
+            <label class="label" for="situation">* Cette personne est</label>
+          </div>
+          <div class="row">
+            <label name="isHandicape" class="btn radio-button-style-1" [(ngModel)]="personneAChargeAAjouter.informationsIdentite.isHandicape" btnCheckbox tabindex="0" role="button"  #isHandicape="ngModel">en situation de handicap</label>
+            <label name="isSalarie" class="btn radio-button-style-1 ml-2" [(ngModel)]="personneAChargeAAjouter.informationsIdentite.isSalarie" btnCheckbox tabindex="0" role="button"  #isSalarie="ngModel" (click)="isSalarieSelectionne()">salarié(e) ou étudiant(e) salarié(e)</label>
+            <label name="isSansEmploi" class="btn radio-button-style-1 ml-2" [(ngModel)]="personneAChargeAAjouter.informationsIdentite.isSansEmploi" btnCheckbox tabindex="0" role="button" #isSansEmploi="ngModel" (click)="isSansEmploiSelectionne()">sans emploi</label>
+          </div>
+          <span class="row error-input-message" *ngIf="isPersonnesAChargeFormSubmitted   && isSituationNouvellePersonneIncorrect()">{{controleChampFormulaireService.MESSAGE_SITUATION_CONJOINT_INCORRECTE}}</span>
+        </div>
+        <div class="form-group" *ngIf="personneAChargeAAjouter.informationsIdentite.isSalarie" >
+          <div class="row mb-2">
+            <label class="label" for="salaireNet">* Salaire net</label>
+          </div>
+          <div class="row">
+            <input name="salaireNet" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.montantSalaireNet" required placeholder="Montant" #salaireNet="ngModel">
+            <span class="text-side-input">€ net du dernier mois</span>
+          </div>
+          <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
+          <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+        </div>
+        <div class="form-group" *ngIf="personneAChargeAAjouter.informationsIdentite.isSansEmploi" >
+          <div class="row mb-2">
+            <label class="label" for="montantARE">Si bénéficiaire de l'allocation de retour à l'emploi</label>
+          </div>
+          <div class="row">
+            <input name="montantARE" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.montantMensuelNetAllocationRetourEmploi" placeholder="Montant" #montantARE="ngModel">
+            <span class="text-side-input">€ net du mois dernier</span>
+          </div>
+          <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || montantARE?.touched)  && montantARE?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+        </div>
+        <div class="form-group" *ngIf="personneAChargeAAjouter.informationsIdentite.isSansEmploi" >
+          <div class="row mb-2">
+            <label class="label" for="montantASS">Si bénéficiaire de l'allocation de solidarité spécifique</label>
+          </div>
+          <div class="row">
+            <input name="montantASS" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.montantMensuelNetAllocationSolidariteSpecifique" placeholder="Montant" #montantASS="ngModel">
+            <span class="text-side-input">€ net du mois dernier</span>
+          </div>
+          <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || montantASS?.touched)  && montantASS?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+        </div>
+        <div class="form-group" *ngIf="personneAChargeAAjouter.informationsIdentite.isHandicape" >
+          <div class="row mb-2">
+            <label class="label" for="montantAAH">Allocation aux adultes handicapées</label>
+          </div>
+          <div class="row">
+            <input name="montantAAH" type="text" pattern="{{controleChampFormulaireService.REGEX_MONTANT}}" (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="6" class="form-control" [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsCAF.montantAllocationAdultesHandicapes" placeholder="Montant" #montantAAH="ngModel">
+            <span class="text-side-input">€ net du mois dernier</span>
+          </div>
+          <span class="row error-input-message" *ngIf="(isPersonnesAChargeFormSubmitted || montantAAH?.touched)  && montantAAH?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+        </div>
+        <div class="div-buttons-form row ml-auto mr-auto">
+          <button class="btn btn-success" type="submit">
+            <div class="text-button">Valider</div>
+          </button>
+          <button class="btn btn-warning ml-2" (click)="annulerAjoutPersonneACharge()">
+            <div class="text-button">Annuler</div>
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="row" *ngIf="demandeurEmploiConnecte.situationFamiliale?.personnesACharge?.length > 0 && isNouvellePersonneFormDisplay === false">
+        <div class="card" *ngFor="let personne of demandeurEmploiConnecte.situationFamiliale.personnesACharge;let indexOfelement=index;">
+          <div class="card-body">
+            <h5 class="card-title">Personne  {{indexOfelement + 1}}</h5>
+            <p class="card-text">{{personne.informationsIdentite.dateNaissance | date: 'dd/MM/yyyy'}}</p>
+            <button class="btn btn-primary" (click)="modifierPersonneACharge(personne)"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger ml-2" (click)="supprimerPersonneACharge(indexOfelement)"><i class="fas fa-trash-alt"></i></button>
+          </div>
+        </div>
+    </div>
+    <div class="div-buttons-form row" *ngIf="isNouvellePersonneFormDisplay === false">
+      <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()">
+        <div><img src="./assets/images/return-arrow.svg" /></div>
+        <div class="text-button">Retour</div>
+      </button>
+      <button class="btn btn-primary-style-3" (click)="redirectVersPageSuivante()">
+        <div class="text-button">Suivant</div>
+        <div><img src="./assets/images/icon-bt-primaire.svg" /></div>
+      </button>
+    </div>
+
+
+  </div>
+</div>

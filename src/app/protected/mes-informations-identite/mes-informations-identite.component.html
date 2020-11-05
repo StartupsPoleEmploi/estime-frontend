@@ -20,7 +20,7 @@
           <div class="row btn-group-input-date">
             <input name="jourDateNaissance" (focus)="onFocusDateNaissance()" class="form-control jour-input" (change)="onChangeOrKeyUpDateNaissanceJour($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissanceJour($event)" (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="JJ" [(ngModel)]="dateNaissance.jour" required #jourDateNaissance="ngModel">
             <input name="moisDateNaissance" (focus)="onFocusDateNaissance()" class="form-control mois-input" (change)="onChangeOrKeyUpDateNaissanceMois($event)" maxlength="2" type="text" min="0" (keyup)="onChangeOrKeyUpDateNaissanceMois($event)" (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="MM" [(ngModel)]="dateNaissance.mois" required #moisDateNaissance="ngModel">
-            <input name="anneeDateNaissance" class="form-control annee-input" maxlength="4" type="text" min="1900" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="AAAA" [(ngModel)]="dateNaissance.annee" required #anneeDateNaissance="ngModel">
+            <input name="anneeDateNaissance" (focus)="onFocusDateNaissance()" class="form-control annee-input" maxlength="4" type="text" min="1900" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" placeholder="AAAA" [(ngModel)]="dateNaissance.annee" required #anneeDateNaissance="ngModel">
           </div>
           <span class="row error-input-message" *ngIf="(isInformationsIdentiteFormSubmitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">{{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}</span>
           <span class="row error-input-message" *ngIf="(isInformationsIdentiteFormSubmitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">{{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}</span>
@@ -78,7 +78,7 @@
       </div>
       <div class="form-group" *ngIf="demandeurEmploiConnecte.situationFamiliale.isEnCouple">
         <div class="row mb-2">
-          <label class="label" for="situationConjoint">Votre conjoint(e) est</label>
+          <label class="label" for="situationConjoint">* Votre conjoint(e) est</label>
         </div>
         <div class="row">
           <label name="conjointIsHandicape" class="btn radio-button-style-1" [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isHandicape" btnCheckbox tabindex="0" role="button"  #conjointIsHandicape="ngModel">en situation de handicap</label>

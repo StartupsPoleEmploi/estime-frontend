@@ -12,6 +12,10 @@ export class DateUtileService {
     return new Date(annee, mois, 0).getDate();
   }
 
+  isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
+    return this.checkFormat(dateDecomposee) === undefined;
+  }
+
   checkFormat(dateDecomposee: DateDecomposee): string {
     let errorFormatMessage = undefined;
     const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
@@ -36,6 +40,10 @@ export class DateUtileService {
     }
     if(dateDecomposee.annee && dateDecomposee.annee.length != 4) {
       errorFormatMessage = "L'année doit être au format AAAA";
+    }
+    const annee = new Date().getFullYear();
+    if(parseInt(dateDecomposee.annee) > annee) {
+      errorFormatMessage = "L'année ne peut pas être supérieure à l'année en cours";
     }
     return errorFormatMessage;
   }

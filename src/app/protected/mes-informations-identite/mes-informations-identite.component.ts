@@ -10,6 +10,8 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DateDecomposee } from "@models/date-decomposee";
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { InformationsIdentite } from '@app/commun/models/informations-identite';
+import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
 
 @Component({
   selector: 'app-mes-informations-identite',
@@ -20,20 +22,6 @@ export class MesInformationsIdentiteComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
   isInformationsIdentiteFormSubmitted = false;
-  moisSelectOptions  = [
-    { value: "01" },
-    { value: "02" },
-    { value: "03" },
-    { value: "04" },
-    { value: "05" },
-    { value: "06" },
-    { value: "07" },
-    { value: "08" },
-    { value: "09" },
-    { value: "10" },
-    { value: "11" },
-    { value: "12" }
-  ];
   dateNaissance: DateDecomposee;
 
   @ViewChild('moisDateNaissance', { read: ElementRef }) moisDateNaissanceInput:ElementRef;
@@ -66,9 +54,11 @@ export class MesInformationsIdentiteComponent implements OnInit {
   redirectVersPageSuivante(form: FormGroup) {
     this.isInformationsIdentiteFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
-    if(form.valid && !this.dateNaissance.messageErreurFormat) {
+    if(form.valid
+      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)
+      && (!this.demandeurEmploiConnecte.situationFamiliale.isEnCouple || (this.demandeurEmploiConnecte.situationFamiliale.isEnCouple && !this.isSituationConjointIncorrect()))) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
     }
   }
 
@@ -87,6 +77,8 @@ export class MesInformationsIdentiteComponent implements OnInit {
   addConjoint(): void {
     const conjoint = new Personne();
     conjoint.ressourcesFinancieres = new RessourcesFinancieres();
+    conjoint.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
+    conjoint.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
     conjoint.informationsIdentite = new InformationsIdentite();
     this.demandeurEmploiConnecte.situationFamiliale.conjoint = conjoint;
   }
@@ -103,8 +95,6 @@ export class MesInformationsIdentiteComponent implements OnInit {
   isConjointIsSalarieSelectionne() {
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsIdentite.isSansEmploi = false;
   }
-
-
 
   /** gestion saisie date naissance **/
 

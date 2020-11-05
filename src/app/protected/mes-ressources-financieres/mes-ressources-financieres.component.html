@@ -1,5 +1,5 @@
 <div class="container-fluid form-container-fluid">
-  <h1 class="h1-style-2">3. Mes ressources actuelles</h1>
+  <h1 class="h1-style-2">4. Mes ressources actuelles</h1>
   <div class="text-under-h1">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}</div>
   <div class="card card-body card-form">
     <form (ngSubmit)="redirectVersPageSuivante(ressourcesFinancieresForm)" [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}" #ressourcesFinancieresForm="ngForm">
@@ -85,12 +85,12 @@
               <span class="text-side-input">€ net du mois dernier</span>
             </div>
             <div class="row">
-              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantAAH.touched)  && montantAAH.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
-              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantAAH.touched)  && montantAAH.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantAAH?.touched)  && montantAAH?.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
+              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantAAH?.touched)  && montantAAH?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
             </div>
           </div>
         </div>
-        <div class="row mt-3" *ngIf="demandeurEmploiConnecte.informationsIdentite.isCreateurEntreprise">
+        <div class="row mt-3" *ngIf="demandeurEmploiConnecte.informationsIdentite.isCreateurEntreprise === true">
           <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
             <label class="label label-left-style-1" for="montantCreateurEntreprise">* Revenus créateur d'entreprise</label>
           </div>
@@ -100,13 +100,13 @@
               <span class="text-side-input">€ net total des 3 derniers mois</span>
             </div>
             <div class="row">
-              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantCreateurEntreprise.touched)  && montantCreateurEntreprise.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
-              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantCreateurEntreprise.touched)  && montantCreateurEntreprise.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
+              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantCreateurEntreprise?.touched)  && montantCreateurEntreprise?.errors?.required">{{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}</span>
+              <span class="error-input-message" *ngIf="(isRessourcesFinancieresFormSubmitted || montantCreateurEntreprise?.touched)  && montantCreateurEntreprise?.errors?.pattern">{{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="demandeurEmploiConnecte.informationsIdentite.hasRevenusImmobilier">
+      <div class="row" *ngIf="demandeurEmploiConnecte.informationsIdentite.hasRevenusImmobilier === true">
         <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
           <label class="label label-left-style-1" for="montantRevenusImmobilier">* Revenus immobilier</label>
         </div>
@@ -159,7 +159,7 @@
       <div class="div-buttons-form row">
         <div class="col-12 col-md-6">
           <button class="btn btn-primary-style-3" type="submit">
-            <div class="text-button">Suivant</div>
+            <div class="text-button">{{getLibelleBoutonValidationFormulaire()}}</div>
             <div><img src="./assets/images/icon-bt-primaire.svg" /></div>
           </button>
         </div>

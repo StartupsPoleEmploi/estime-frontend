@@ -7,6 +7,7 @@ import { FormGroup } from '@angular/forms';
 import { DateDecomposee } from '@models/date-decomposee';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 
 @Component({
   selector: 'app-mes-ressources-financieres',
@@ -28,21 +29,33 @@ export class MesRessourcesFinancieresComponent implements OnInit {
   ];
 
   constructor(
+    public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
     public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
-    public controleChampFormulaireService: ControleChampFormulaireService,
+    public estimeApiService: EstimeApiService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.initialisationPage();
+  }
+
+  initialisationPage() {
     this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromDate(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique);
   }
 
+  getLibelleBoutonValidationFormulaire():string {
+    let libelleBoutonValidationFormulaire = "Obtenir ma simulation";
+    if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
+      libelleBoutonValidationFormulaire = "Suivant";
+    }
+    return libelleBoutonValidationFormulaire;
+  }
   onChangeOrKeyUpDateDerniereOuvertureASSJour(event) {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.jour;
-    if(value.length === 2) {
+    if(value && value.length === 2) {
       this.moisDateDerniereOuvertureASSInput.nativeElement.focus();
     }
   }
@@ -50,7 +63,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
   onChangeOrKeyUpDateDerniereOuvertureASSMois(event) {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.mois;
-    if(value.length === 2) {
+    if(value && value.length === 2) {
       this.anneeDateDerniereOuvertureASSInput.nativeElement.focus();
     }
   }
@@ -61,7 +74,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
 
   redirectVersPagePrecedente() {
     this.checkAndSaveDateDernierOuvertureDroitASS();
-    this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
   }
 
   redirectVersPageSuivante(form: FormGroup) {
@@ -72,7 +85,15 @@ export class MesRessourcesFinancieresComponent implements OnInit {
       if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
         this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
       } else {
-        this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
+        this.estimeApiService.simulerMesAides(this.demandeurEmploiConnecte).then(
+          (demandeurEmploi) => {
+            this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+            this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+          }, (erreur) => {
+            const test = "coucou";
+            //TODO JLA : traiter l'erreur
+          }
+        );
       }
     }
   }

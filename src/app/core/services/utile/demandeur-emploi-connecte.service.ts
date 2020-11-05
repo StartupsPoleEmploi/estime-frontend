@@ -29,6 +29,7 @@ export class DemandeurEmploiConnecteService {
     return this.demandeurEmploiConnecte;
   }
 
+
   public setDemandeurEmploiConnecte(demandeurEmploi: DemandeurEmploi): void {
     this.demandeurEmploiConnecte = demandeurEmploi;
     this.saveDemandeurEmploiConnecteInSessionStorage();
@@ -46,9 +47,8 @@ export class DemandeurEmploiConnecteService {
 
     this.demandeurEmploiConnecte = new DemandeurEmploi();
 
-    const futurTravail = new FuturTravail();
-    futurTravail.nombreMoisContratCDD = null;
-    this.demandeurEmploiConnecte.futurTravail = futurTravail;
+    this.demandeurEmploiConnecte.futurTravail =  new FuturTravail();
+    this.demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD = null;
 
     const informationsIdentite = new InformationsIdentite();
     informationsIdentite.nationalite = null;
@@ -76,7 +76,7 @@ export class DemandeurEmploiConnecteService {
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
-  private saveDemandeurEmploiConnecteInSessionStorage() {
+  public saveDemandeurEmploiConnecteInSessionStorage() {
     this.sessionStorageService.store(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
   }
 }
