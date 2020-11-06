@@ -78,9 +78,9 @@ export class DateUtileService {
     const dateDecomposee = new DateDecomposee();
     if(dateADecompose) {
       const dateADecomposeTab = dateADecompose.split("-");
-      dateDecomposee.jour = dateADecomposeTab[0];
+      dateDecomposee.jour = dateADecomposeTab[2];
       dateDecomposee.mois = dateADecomposeTab[1];
-      dateDecomposee.annee = dateADecomposeTab[2];
+      dateDecomposee.annee = dateADecomposeTab[0];
     } else {
       dateDecomposee.mois = null;
     }
