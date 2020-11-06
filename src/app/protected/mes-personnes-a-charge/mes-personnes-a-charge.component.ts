@@ -2,17 +2,17 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { Router } from '@angular/router';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { FormGroup } from '@angular/forms';
-import { Personne } from '@app/commun/models/personne';
-import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { Personne } from '@models/personne';
+import { DateDecomposee } from '@models/date-decomposee';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { InformationsIdentite } from '@app/commun/models/informations-identite';
+import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
-import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { AllocationsCAF } from '@models/allocations-caf';
+import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 
 @Component({
   selector: 'app-mes-personnes-a-charge',
@@ -45,7 +45,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   redirectVersPagePrecedente() {
-    this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES], { replaceUrl: true });
   }
 
   redirectVersPageSuivante() {
@@ -62,7 +62,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   ajouterPersonneACharge() {
     this.isNouvellePersonneFormDisplay = true;
     this.personneAChargeAAjouter = new Personne();
-    this.personneAChargeAAjouter.informationsIdentite = new InformationsIdentite();
+    this.personneAChargeAAjouter.informationsPersonnelles = new InformationsPersonnelles();
     const ressourcesFinancieres = new RessourcesFinancieres();
     ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
     ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
@@ -81,7 +81,9 @@ export class MesPersonnesAChargeComponent implements OnInit {
   validerAjoutPersonneACharge(form: FormGroup) {
     this.isPersonnesAChargeFormSubmitted = true;
     this.checkAndSaveDateNaissanceNouvellePersonneConnecte();
-    if (form.valid && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
+    if (form.valid && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)
+        && (!this.isNouvellePersonneSituationFormDisplay
+            || this.isNouvellePersonneSituationFormDisplay && !this.isSituationNouvellePersonneIncorrect())) {
       if(!this.isModeModification) {
         if(!this.demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
           this.demandeurEmploiConnecte.situationFamiliale.personnesACharge = new Array<Personne>();
@@ -94,15 +96,36 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.isNouvellePersonneFormDisplay = false;
       this.isPersonnesAChargeFormSubmitted = false;
     }
-    console.log(this.demandeurEmploiConnecte);
   }
 
-  isSalarieSelectionne() {
-    this.personneAChargeAAjouter.informationsIdentite.isSansEmploi = false;
+  isSituationNouvellePersonneIncorrect(): boolean {
+    return !this.personneAChargeAAjouter.informationsPersonnelles.isSalarie
+    && !this.personneAChargeAAjouter.informationsPersonnelles.isSansEmploi;
   }
 
-  isSansEmploiSelectionne() {
-    this.personneAChargeAAjouter.informationsIdentite.isSalarie = false;
+  isSalarieClicked(): void {
+    this.personneAChargeAAjouter.informationsPersonnelles.isSansEmploi = false;
+    this.personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+    this.personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+    this.personneAChargeAAjouter.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    if(!this.personneAChargeAAjouter.informationsPersonnelles.isSalarie) {
+      this.personneAChargeAAjouter.ressourcesFinancieres.salaireNet = null;
+    }
+  }
+
+  isSansEmploiClicked(): void {
+    this.personneAChargeAAjouter.informationsPersonnelles.isSalarie = false;
+    this.personneAChargeAAjouter.ressourcesFinancieres.salaireNet = null;
+    if(!this.personneAChargeAAjouter.informationsPersonnelles.isSansEmploi) {
+      this.personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+      this.personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+    }
+  }
+
+  isHandicapeClicked(): void {
+    if(!this.personneAChargeAAjouter.informationsPersonnelles.isHandicape) {
+      this.personneAChargeAAjouter.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
+    }
   }
 
   gererAffichageNouvellePersonneSituationForm() {
@@ -114,14 +137,9 @@ export class MesPersonnesAChargeComponent implements OnInit {
     }
   }
 
-  isSituationNouvellePersonneIncorrect(): boolean {
-    return !this.personneAChargeAAjouter.informationsIdentite.isSalarie
-    && !this.personneAChargeAAjouter.informationsIdentite.isSansEmploi;
-  }
-
   modifierPersonneACharge(personneAModifier: Personne) {
     this.personneAChargeAAjouter = {...personneAModifier};
-    this.dateNaissanceNouvellePersonne = this.dateUtileService.getDateDecomposeeFromDate(this.personneAChargeAAjouter.informationsIdentite.dateNaissance);
+    this.dateNaissanceNouvellePersonne = this.dateUtileService.getDateDecomposeeFromStringDate(this.personneAChargeAAjouter.informationsPersonnelles.dateNaissance);
     this.isNouvellePersonneFormDisplay = true;
     this.isModeModification = true;
   }
@@ -157,7 +175,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   checkAndSaveDateNaissanceNouvellePersonneConnecte() {
     this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissanceNouvellePersonne);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
-      this.personneAChargeAAjouter.informationsIdentite.dateNaissance = this.dateUtileService.getDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
+      this.personneAChargeAAjouter.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
     }
   }
 

@@ -104,13 +104,12 @@ export class AuthService {
   }
 
   private createOidcAuthorizeInformation() {
-    this.informationAutorisationOIDC = new InformationAutorisationOIDC(
-      this.environment.oidcClientId,
-      '',
-      this.generateRandomValue(),
-      `${this.environment.oidcRedirectURI}signin-callback`,
-      this.generateRandomValue()
-    );
+    this.informationAutorisationOIDC = new InformationAutorisationOIDC();
+    this.informationAutorisationOIDC.clientId = this.environment.oidcClientId;
+    this.informationAutorisationOIDC.nonce = this.generateRandomValue(),
+    this.informationAutorisationOIDC.redirectURI = `${this.environment.oidcRedirectURI}signin-callback`;
+    this.informationAutorisationOIDC.state = this.generateRandomValue();
+
     this.sessionStorageService.store(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.informationAutorisationOIDC);
   }
 

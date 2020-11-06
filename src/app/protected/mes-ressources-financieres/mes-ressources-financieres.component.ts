@@ -19,8 +19,8 @@ export class MesRessourcesFinancieresComponent implements OnInit {
   demandeurEmploiConnecte: DemandeurEmploi;
   isRessourcesFinancieresFormSubmitted = false;
   dateDernierOuvertureDroitASS: DateDecomposee;
-  @ViewChild('moisDateDerniereOuvertureASS', { read: ElementRef }) moisDateDerniereOuvertureASSInput:ElementRef;
-  @ViewChild('anneeDateDerniereOuvertureASS', { read: ElementRef }) anneeDateDerniereOuvertureASSInput:ElementRef;
+  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
+  @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput:ElementRef;
 
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
@@ -42,7 +42,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
 
   initialisationPage() {
     this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
-    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromDate(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique);
+    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
   }
 
   getLibelleBoutonValidationFormulaire():string {
@@ -52,23 +52,23 @@ export class MesRessourcesFinancieresComponent implements OnInit {
     }
     return libelleBoutonValidationFormulaire;
   }
-  onChangeOrKeyUpDateDerniereOuvertureASSJour(event) {
+  onChangeOrKeyUpDateDerniereOuvertureDroitASSJour(event) {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.jour;
     if(value && value.length === 2) {
-      this.moisDateDerniereOuvertureASSInput.nativeElement.focus();
+      this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
   }
 
-  onChangeOrKeyUpDateDerniereOuvertureASSMois(event) {
+  onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event) {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.mois;
     if(value && value.length === 2) {
-      this.anneeDateDerniereOuvertureASSInput.nativeElement.focus();
+      this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
   }
 
-  onFocusDateDerniereOuvertureASS() {
+  onFocusDateDerniereOuvertureDroitASS() {
     this.dateDernierOuvertureDroitASS.messageErreurFormat = undefined;
   }
 
@@ -98,16 +98,16 @@ export class MesRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  unsetNombreMoisCumulesASSPercueEtSalaire(hasASSPlusSalaireCumule: boolean) {
-    if(!hasASSPlusSalaireCumule) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesASSPercueEtSalaire = null;
+  hasCumuleAssEtSalaireClicked(hasCumuleAssEtSalaire: boolean) {
+    if(!hasCumuleAssEtSalaire) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = 0;
     }
   }
 
   checkAndSaveDateDernierOuvertureDroitASS() {
     this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormat(this.dateDernierOuvertureDroitASS);
     if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitAllocationSolidariteSpecifique = this.dateUtileService.getDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
 

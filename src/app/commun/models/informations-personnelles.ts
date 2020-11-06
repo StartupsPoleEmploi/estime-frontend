@@ -1,6 +1,6 @@
-export class InformationsIdentite {
+export class InformationsPersonnelles {
   codePostal: string;
-  dateNaissance: Date;
+  dateNaissance: string;
   email: string;
   hasRevenusImmobilier: boolean;
   isHandicape: boolean;
@@ -11,6 +11,5 @@ export class InformationsIdentite {
   nationalite: string;
   nom: string;
   prenom: string;
-  residentPlusDe5ansEnFrance: boolean;
   titreSejourEnFranceValide: boolean;
 }

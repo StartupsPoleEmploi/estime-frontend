@@ -74,6 +74,23 @@ export class DateUtileService {
     return dateDecomposee;
   }
 
+  getDateDecomposeeFromStringDate(dateADecompose: string) {
+    const dateDecomposee = new DateDecomposee();
+    if(dateADecompose) {
+      const dateADecomposeTab = dateADecompose.split("-");
+      dateDecomposee.jour = dateADecomposeTab[0];
+      dateDecomposee.mois = dateADecomposeTab[1];
+      dateDecomposee.annee = dateADecomposeTab[2];
+    } else {
+      dateDecomposee.mois = null;
+    }
+    return dateDecomposee;
+  }
+
+  getStringDateFromDateDecomposee(dateADecompose: DateDecomposee): string {
+    return `${dateADecompose.annee}-${dateADecompose.mois}-${dateADecompose.jour}`;
+  }
+
   getDateFromDateDecomposee(dateADecompose: DateDecomposee): Date {
     const dateFormat = new Date(
       parseInt(dateADecompose.annee),

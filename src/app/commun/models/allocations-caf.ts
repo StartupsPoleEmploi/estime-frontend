@@ -1,8 +1,6 @@
 export class AllocationsCAF {
-  montantAllocationAdultesHandicapes: number;
-  montantAllocationFamiliale: number;
-  montantAllocationLogement: number;
-  montantAllocationSoutienFamiliale: number;
-  montantComplementFamiliale: number;
-  montantPensionAlimentaire: number;
+  allocationMensuelleNetAAH: number;
+  allocationMensuelleNetRSA: number;
+  allocationsFamilialesMensuellesNetFoyer: number;
+  allocationsLogementMensuellesNetFoyer: number;
 }

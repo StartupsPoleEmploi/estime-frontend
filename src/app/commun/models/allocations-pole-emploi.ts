@@ -1,12 +1,11 @@
 export class AllocationsPoleEmploi {
-  codeIndemnisation: string;
-  dateDerniereOuvertureDroitAllocationSolidariteSpecifique: Date;
-  dateReliquatAllocationRetourEmploi: Date;
-  dureeReliquatAllocationRetourEmploi: number;
-  hasASSPlusSalaireCumule: boolean;
-  montantJournalierNetAllocationRetourEmploi: number;
-  montantJournalierNetAllocationSolidariteSpecifique: number;
-  montantMensuelNetAllocationRetourEmploi: number;
-  montantMensuelNetAllocationSolidariteSpecifique: number;
-  nombreMoisCumulesASSPercueEtSalaire: number;
+  allocationJournaliereNetARE: number;
+  allocationJournaliereNetASS: number;
+  allocationMensuelleNetARE: number;
+  allocationMensuelleNetASS: number;
+  dateDerniereOuvertureDroitASS: string;
+  dateReliquatARE: string;
+  dureeReliquatARE: number;
+  hasCumuleAssEtSalaire: boolean;
+  nombreMoisCumulesAssEtSalaire: number;
 }

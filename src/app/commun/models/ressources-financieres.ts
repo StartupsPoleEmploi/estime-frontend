@@ -4,7 +4,7 @@ import { AllocationsCAF } from "@models/allocations-caf";
 export class RessourcesFinancieres {
   allocationsCAF: AllocationsCAF;
   allocationsPoleEmploi: AllocationsPoleEmploi;
-  montantSalaireNet: number;
-  montantCreateurEntreprise: number;
-  montantRevenusImmobilier: number;
+  salaireNet: number;
+  revenusCreateurEntreprise: number;
+  revenusImmobilier: number;
 }

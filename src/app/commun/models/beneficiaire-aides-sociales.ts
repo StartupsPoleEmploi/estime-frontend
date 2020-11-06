@@ -1,9 +1,6 @@
 export class BeneficiaireAidesSociales {
-
-  beneficiairePrestationSolidarite: boolean;
-  beneficiaireAssuranceChomage: boolean;
+  beneficiaireASS: boolean;
+  beneficiaireARE: boolean;
   beneficiaireRSA: boolean;
   beneficiaireAAH: boolean;
-
-  constructor() { }
 }

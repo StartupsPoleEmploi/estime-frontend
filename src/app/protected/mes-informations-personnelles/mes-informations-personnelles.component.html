@@ -1,0 +1,348 @@
+<div class="container-fluid form-container-fluid">
+    <h1 class="h1-style-2">2. Ma situation</h1>
+    <div class="text-under-h1">
+        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+    </div>
+    <div class="card card-body card-form">
+        <form
+            (ngSubmit)="redirectVersPageSuivante(informationsPersonnellesForm)"
+            [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
+            #informationsPersonnellesForm="ngForm">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="codePostal">
+                        * Votre code postal
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        id="codePostal"
+                        name="codePostal"
+                        type="text"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        maxlength="5"
+                        class="form-control"
+                        placeholder="ex : 75001"
+                        [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.codePostal"
+                        required
+                        #codePostal="ngModel">
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="form-group">
+                <div class="row  mb-2">
+                    <label
+                        class="label"
+                        for="dateNaissance">
+                        * Votre date de naissance
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="row btn-group-input-date">
+                        <input
+                            name="jourDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control jour-input"
+                            (change)="onChangeOrKeyUpDateNaissanceJour($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissanceJour($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="JJ"
+                            [(ngModel)]="dateNaissance.jour"
+                            required
+                            #jourDateNaissance="ngModel">
+                        <input
+                            name="moisDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control mois-input"
+                            (change)="onChangeOrKeyUpDateNaissanceMois($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissanceMois($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="MM"
+                            [(ngModel)]="dateNaissance.mois"
+                            required
+                            #moisDateNaissance="ngModel">
+                        <input
+                            name="anneeDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control annee-input"
+                            maxlength="4"
+                            type="text"
+                            min="1900"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="AAAA"
+                            [(ngModel)]="dateNaissance.annee"
+                            required
+                            #anneeDateNaissance="ngModel">
+                    </div>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || anneeDateNaissance.touched) && anneeDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="isInformationsPersonnellesFormSubmitted  && dateNaissance.messageErreurFormat">
+                        {{dateNaissance.messageErreurFormat}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="nationalite">
+                        * Votre nationalité
+                    </label>
+                </div>
+                <div class="row">
+                    <select
+                        id="nationalite"
+                        name="nationalite"
+                        [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.nationalite"
+                        class="form-control"
+                        data-width="auto"
+                        (ngModelChange)="unsetTitreSejourEnFranceValide($event)"
+                        required
+                        #nationalite="ngModel">
+                        <option [value]="null">Sélectionner</option>
+                        <option
+                            *ngFor="let nationalite of nationaliteSelectOptions"
+                            [value]="nationalite.label">
+                            {{ nationalite.label }}
+                        </option>
+                    </select>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="demandeurEmploiConnecte.informationsPersonnelles.nationalite == 'autre'">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="titreSejourValide">
+                        Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="custom-control custom-radio">
+                        <input
+                            id="titreSejourValideTrue"
+                            name="titreSejourValide"
+                            type="radio"
+                            class="custom-control-input"
+                            [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.titreSejourEnFranceValide"
+                            [value]="true"
+                            required
+                            #titreSejourValide="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="titreSejourValideTrue">
+                            oui
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio ml-2">
+                        <input
+                            id="titreSejourValideFalse"
+                            name="titreSejourValide"
+                            type="radio"
+                            class="custom-control-input"
+                            [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.titreSejourEnFranceValide"
+                            [value]="false"
+                            required
+                            #titreSejourValide="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="titreSejourValideFalse">
+                            non
+                        </label>
+                    </div>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationsExceptionnelles">
+                        Vous êtes
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        name="isHandicape"
+                        class="btn radio-button-style-1"
+                        [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.isHandicape"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #isHandicape="ngModel"
+                        (click)="isHandicapeClicked()">
+                        en situation de handicap
+                    </label>
+                    <label
+                        name="isCreateurEntreprise"
+                        class="btn radio-button-style-1 ml-2"
+                        [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.isCreateurEntreprise"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #isCreateurEntreprise="ngModel"
+                        (click)="isCreateurEntrepriseClicked()">
+                        créateur d'entreprise
+                    </label>
+                    <label
+                        name="hasRevenusImmobilier"
+                        class="btn radio-button-style-1 ml-2"
+                        [(ngModel)]="demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #hasRevenusImmobilier="ngModel"
+                        (click)="hasRevenusImmobilierClicked()">
+                        bénéficiaire de revenus immobilier
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationFamiliale">
+                        * Votre situation familiale
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        name="situationFamiliale"
+                        class="btn radio-button-style-1"
+                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple"
+                        [btnRadio]="false"
+                        tabindex="0"
+                        role="button"
+                        (click)="removeConjoint()"
+                        required
+                        #situationFamiliale="ngModel">
+                        Seul.e
+                    </label>
+                    <label
+                        name="situationFamiliale"
+                        class="btn radio-button-style-1 ml-2"
+                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.isEnCouple"
+                        [btnRadio]="true"
+                        tabindex="0"
+                        role="button"
+                        (click)="addConjoint()"
+                        required
+                        #situationFamiliale="ngModel">
+                        En couple
+                    </label>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || situationFamiliale.touched)  && situationFamiliale.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="demandeurEmploiConnecte.situationFamiliale.isEnCouple">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationConjoint">
+                        * Votre conjoint(e) est
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        name="conjointIsHandicape"
+                        class="btn radio-button-style-1"
+                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #conjointIsHandicape="ngModel"
+                        (click)="isConjointHandicapeClicked()">
+                        en situation de handicap
+                    </label>
+                    <label
+                        name="conjointIsSalarie"
+                        class="btn radio-button-style-1 ml-2"
+                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #conjointIsSalarie="ngModel"
+                        (click)="isConjointSalarieClicked()">
+                        salarié(e)
+                    </label>
+                    <label
+                        name="conjointIsSansEmploi"
+                        class="btn radio-button-style-1 ml-2"
+                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #conjointIsSansEmploi="ngModel"
+                        (click)="isConjointSansEmploiClicked()">
+                        sans emploi
+                    </label>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="isInformationsPersonnellesFormSubmitted   && isSituationConjointIncorrect()">
+                    {{controleChampFormulaireService.MESSAGE_SITUATION_INCORRECTE}}
+                </span>
+            </div>
+            <div class="div-buttons-form row">
+                <button
+                    class="btn btn-primary-style-0"
+                    (click)="redirectVersPagePrecedente()">
+                    <div>
+                        <img src="./assets/images/return-arrow.svg">
+                    </div>
+                    <div class="text-button">Retour</div>
+                </button>
+                <button
+                    class="btn btn-primary-style-3"
+                    type="submit">
+                    <div class="text-button">Suivant</div>
+                    <div>
+                        <img src="./assets/images/icon-bt-primaire.svg">
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

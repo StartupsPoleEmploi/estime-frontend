@@ -4,10 +4,10 @@ import { SessionStorageService } from "ngx-webstorage";
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { FuturTravail } from '@app/commun/models/futur-travail';
-import { InformationsIdentite } from '@app/commun/models/informations-identite';
-import { SituationFamiliale } from '@app/commun/models/situation-familiale';
+import { AllocationsCAF } from '@models/allocations-caf';
+import { FuturTravail } from '@models/futur-travail';
+import { InformationsPersonnelles } from '@models/informations-personnelles';
+import { SituationFamiliale } from '@models/situation-familiale';
 
 @Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {
@@ -36,9 +36,9 @@ export class DemandeurEmploiConnecteService {
   }
 
   public hasSituationExceptionnelle(): boolean {
-    return this.demandeurEmploiConnecte.informationsIdentite.hasRevenusImmobilier
-      || this.demandeurEmploiConnecte.informationsIdentite.isCreateurEntreprise
-      || this.demandeurEmploiConnecte.informationsIdentite.isHandicape;
+    return this.demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier
+      || this.demandeurEmploiConnecte.informationsPersonnelles.isCreateurEntreprise
+      || this.demandeurEmploiConnecte.informationsPersonnelles.isHandicape;
   }
 
   public createDemandeurEmploiConnecte() {
@@ -50,28 +50,25 @@ export class DemandeurEmploiConnecteService {
     this.demandeurEmploiConnecte.futurTravail =  new FuturTravail();
     this.demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD = null;
 
-    const informationsIdentite = new InformationsIdentite();
-    informationsIdentite.nationalite = null;
-    this.demandeurEmploiConnecte.informationsIdentite = informationsIdentite;
+    const informationsPersonnelles = new InformationsPersonnelles();
+    informationsPersonnelles.nationalite = null;
+    this.demandeurEmploiConnecte.informationsPersonnelles = informationsPersonnelles;
 
-    const situationFamiliale = new SituationFamiliale();
-    situationFamiliale.nombrePersonnesACharge = 0;
-    this.demandeurEmploiConnecte.situationFamiliale = situationFamiliale;
+    this.demandeurEmploiConnecte.situationFamiliale = new SituationFamiliale();
 
     const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
-    beneficiaireAidesSociales.beneficiairePrestationSolidarite = true;
+    beneficiaireAidesSociales.beneficiaireASS = true;
     this.demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
 
     const ressourcesFinancieres = new RessourcesFinancieres();
     const allocationsPE = new AllocationsPoleEmploi();
-    allocationsPE.nombreMoisCumulesASSPercueEtSalaire = null;
+    allocationsPE.nombreMoisCumulesAssEtSalaire = null;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
 
     const allocationsCAF = new AllocationsCAF();
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
 
     this.demandeurEmploiConnecte.ressourcesFinancieres = ressourcesFinancieres;
-
 
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }

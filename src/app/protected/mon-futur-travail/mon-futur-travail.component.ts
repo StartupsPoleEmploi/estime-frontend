@@ -44,7 +44,7 @@ export class MonFuturTravailComponent implements OnInit {
     this.isFuturTravailFormSubmitted = true;
     if(form.valid) {
       this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      this.router.navigate([RoutesEnum.MES_INFORMATIONS_IDENTITE], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES], { replaceUrl: true });
     }
   }
 

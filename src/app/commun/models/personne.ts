@@ -1,11 +1,7 @@
-import { InformationsIdentite } from "@models/informations-identite";
+import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 
 export class Personne {
-
-  informationsIdentite: InformationsIdentite;
+  informationsPersonnelles: InformationsPersonnelles;
   ressourcesFinancieres: RessourcesFinancieres;
-
-  constructor() {
-  }
 }

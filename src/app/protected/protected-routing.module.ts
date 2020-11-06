@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AvantDeCommencerSimulationComponent } from "@app/protected/avant-de-commencer-simulation/avant-de-commencer-simulation.component";
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { MesInformationsIdentiteComponent } from '@app/protected/mes-informations-identite/mes-informations-identite.component';
+import { MesInformationsPersonnellesComponent } from '@app/protected/mes-informations-personnelles/mes-informations-personnelles.component';
 import { MonFuturTravailComponent } from './mon-futur-travail/mon-futur-travail.component';
 import { MesRessourcesFinancieresComponent } from './mes-ressources-financieres/mes-ressources-financieres.component';
 import { ResultatMaSimulationComponent } from './resultat-ma-simulation/resultat-ma-simulation.component';
@@ -14,7 +14,7 @@ import { MesPersonnesAChargeComponent } from './mes-personnes-a-charge/mes-perso
 
 const routes: Routes = [
   {path: RoutesEnum.AVANT_COMMENCER_SIMULATION, component: AvantDeCommencerSimulationComponent },
-  {path: RoutesEnum.MES_INFORMATIONS_IDENTITE, component: MesInformationsIdentiteComponent },
+  {path: RoutesEnum.MES_INFORMATIONS_PERSONNELLES, component: MesInformationsPersonnellesComponent },
   {path: RoutesEnum.MES_PERSONNES_A_CHARGE, component: MesPersonnesAChargeComponent },
   {path: RoutesEnum.MES_RESSOURCES_FINANCIERES, component: MesRessourcesFinancieresComponent },
   {path: RoutesEnum.MON_FUTUR_DE_TRAVAIL, component: MonFuturTravailComponent },
