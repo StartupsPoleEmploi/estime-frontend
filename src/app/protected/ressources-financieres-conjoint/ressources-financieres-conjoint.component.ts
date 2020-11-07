@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { FormGroup } from '@angular/forms';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { Personne } from '@app/commun/models/personne';
 
 @Component({
   selector: 'app-ressources-financieres-conjoint',
@@ -15,30 +16,28 @@ import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 export class RessourcesFinancieresConjointComponent implements OnInit {
 
   isRessourcesFinancieresConjointFormSubmitted = false;
-  demandeurEmploiConnecte: DemandeurEmploi;
+  conjoint: Personne;
 
   constructor(
-    private dateUtileService: DateUtileService,
-    private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
     public controleChampFormulaireService: ControleChampFormulaireService,
+    private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    this.conjoint = demandeurEmploiConnecte.situationFamiliale.conjoint;
   }
 
-  redirectVersPagePrecedente() {
+  onClickButtonRetour() {
     this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
   }
 
-  redirectVersPageSuivante(form: FormGroup) {
+  onSubmitRessourcesFinancieresConjointForm(form: FormGroup) {
     this.isRessourcesFinancieresConjointFormSubmitted = true;
-    console.log(this.demandeurEmploiConnecte);
     if(form.valid) {
-      this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+      this.demandeurEmploiConnecteService.setRessourceFinanciereConjoint(this.conjoint);
+      this.demandeurEmploiConnecteService.simulerMesAides();
     }
   }
-
 }

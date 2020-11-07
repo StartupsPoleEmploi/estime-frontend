@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { DateUtileService } from './date-util.service';
-import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { DateDecomposee } from '@models/date-decomposee';
+import { InformationsPersonnelles } from '@models/informations-personnelles';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { AllocationsCAF } from '@models/allocations-caf';
+import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
+import { Personne } from '@models/personne';
 
 @Injectable({providedIn: 'root'})
 export class PersonneUtileService {
@@ -19,5 +24,15 @@ export class PersonneUtileService {
     const dateAge = new Date(diffEnMilliseconds);
     const ageEnAnnee = Math.abs(dateAge.getUTCFullYear() - 1970);
     return ageEnAnnee >= this.AGE_LEGAL_POUR_TRAVAILLE ? true : false;
+  }
+
+
+  public creerPersonne(): Personne {
+    const personne = new Personne();
+    personne.informationsPersonnelles = new InformationsPersonnelles();
+    personne.ressourcesFinancieres = new RessourcesFinancieres();
+    personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
+    personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+    return personne;
   }
 }

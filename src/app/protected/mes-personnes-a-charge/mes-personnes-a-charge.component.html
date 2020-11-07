@@ -6,17 +6,18 @@
     <div class="card card-body card-form">
         <div class="row">
             <button
+                name="btnAjouterPersonne"
                 class="btn btn-primary-style-3"
-                (click)="ajouterPersonneACharge()">
+                (click)="onClickButtonAjouterPersonne()">
                 <div class="text-button">Ajouter une personne</div>
             </button>
         </div>
         <div
             class="card card-body card-form"
-            *ngIf="isNouvellePersonneFormDisplay === true">
+            *ngIf="isNouvellePersonneAChargeFormDisplay === true">
             <form
-                (ngSubmit)="validerAjoutPersonneACharge(personnesAChargeForm)"
-                [ngClass]="{'submitted':isPersonnesAChargeFormSubmitted}"
+                (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
+                [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}"
                 #personnesAChargeForm="ngForm">
                 <div class="form-group">
                     <div class="row  mb-2">
@@ -72,29 +73,29 @@
                         </div>
                         <span
                             class="row error-input-message"
-                            *ngIf="(isPersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">
+                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="(isPersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">
+                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="(isPersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">
+                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="isPersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">
+                            *ngIf="isNouvellePersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">
                             {{dateNaissanceNouvellePersonne.messageErreurFormat}}
                         </span>
                     </div>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="isNouvellePersonneSituationFormDisplay === true">
+                    *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay === true">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -106,46 +107,46 @@
                         <label
                             name="isHandicape"
                             class="btn radio-button-style-1"
-                            [(ngModel)]="personneAChargeAAjouter.informationsPersonnelles.isHandicape"
+                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isHandicape"
                             btnCheckbox
                             tabindex="0"
                             role="button"
-                            (click)="isHandicapeClicked()"
+                            (click)="onClickCheckBoxIsHandicape()"
                             #isHandicape="ngModel">
-                            en situation de handicap
+                            {{situationPersonneEnum.HANDICAPE}}
                         </label>
                         <label
                             name="isSalarie"
                             class="btn radio-button-style-1 ml-2"
-                            [(ngModel)]="personneAChargeAAjouter.informationsPersonnelles.isSalarie"
+                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSalarie"
                             btnCheckbox
                             tabindex="0"
                             role="button"
                             #isSalarie="ngModel"
-                            (click)="isSalarieClicked()">
-                            salarié(e) ou étudiant(e) salarié(e)
+                            (click)="onClickCheckBoxIsSalarie()">
+                            {{situationPersonneEnum.SALARIE_OU_ETUDIANT_SALARIE}}
                         </label>
                         <label
                             name="isSansEmploi"
                             class="btn radio-button-style-1 ml-2"
-                            [(ngModel)]="personneAChargeAAjouter.informationsPersonnelles.isSansEmploi"
+                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi"
                             btnCheckbox
                             tabindex="0"
                             role="button"
                             #isSansEmploi="ngModel"
-                            (click)="isSansEmploiClicked()">
-                            sans emploi
+                            (click)="onClickCheckBoxIsSansEmploi()">
+                            {{situationPersonneEnum.SANS_EMPLOI}}
                         </label>
                     </div>
                     <span
                         class="row error-input-message"
-                        *ngIf="isPersonnesAChargeFormSubmitted  && isSituationNouvellePersonneIncorrect()">
+                        *ngIf="isNouvellePersonnesAChargeFormSubmitted  && !isSituationNouvellePersonneCorrect()">
                         {{controleChampFormulaireService.MESSAGE_SITUATION_INCORRECTE}}
                     </span>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="personneAChargeAAjouter.informationsPersonnelles.isSalarie">
+                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSalarie">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -162,7 +163,7 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.salaireNet"
+                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.salaireNet"
                             required
                             placeholder="Montant"
                             #salaireNet="ngModel">
@@ -170,18 +171,18 @@
                     </div>
                     <span
                         class="row error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
                         class="row error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="personneAChargeAAjouter.informationsPersonnelles.isSansEmploi">
+                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -198,20 +199,20 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
                             placeholder="Montant"
                             #allocationMensuelleNetRSA="ngModel">
                         <span class="text-side-input">€ net du mois dernier</span>
                     </div>
                     <span
                         class="row error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="personneAChargeAAjouter.informationsPersonnelles.isSansEmploi">
+                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -228,20 +229,20 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
+                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
                             placeholder="Montant"
                             #allocationMensuelleNetARE="ngModel">
                         <span class="text-side-input">€ net du mois dernier</span>
                     </div>
                     <span
                         class="row  error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="personneAChargeAAjouter.informationsPersonnelles.isSansEmploi">
+                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -258,20 +259,20 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
+                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
                             placeholder="Montant"
                             #allocationMensuelleNetASS="ngModel">
                         <span class="text-side-input">€ net du mois dernier</span>
                     </div>
                     <span
                         class="row error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
                 <div
                     class="form-group"
-                    *ngIf="personneAChargeAAjouter.informationsPersonnelles.isHandicape">
+                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isHandicape">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -288,14 +289,14 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="personneAChargeAAjouter.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                             placeholder="Montant"
                             #allocationMensuelleNetAAH="ngModel">
                         <span class="text-side-input">€ net du mois dernier</span>
                     </div>
                     <span
                         class="row error-input-message"
-                        *ngIf="(isPersonnesAChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
@@ -307,7 +308,7 @@
                     </button>
                     <button
                         class="btn btn-warning ml-2"
-                        (click)="annulerAjoutPersonneACharge()">
+                        (click)="onClickButonnAnnuler()">
                         <div class="text-button">Annuler</div>
                     </button>
                 </div>
@@ -315,23 +316,25 @@
         </div>
         <div
             class="row"
-            *ngIf="demandeurEmploiConnecte.situationFamiliale?.personnesACharge?.length > 0 && isNouvellePersonneFormDisplay === false">
+            *ngIf="personnesACharge?.length > 0 && isNouvellePersonneAChargeFormDisplay === false">
             <div
                 class="card"
-                *ngFor="let personne of demandeurEmploiConnecte.situationFamiliale.personnesACharge;let indexOfelement=index;">
+                *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                 <div class="card-body">
                     <h5 class="card-title">Personne {{indexOfelement + 1}}</h5>
                     <p class="card-text">
                         {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
                     </p>
                     <button
+                        name="btnModifierPersonneACharge"
                         class="btn btn-primary"
-                        (click)="modifierPersonneACharge(personne)">
+                        (click)="onClickButtonModifierPersonneACharge(personne)">
                         <i class="fas fa-edit"></i>
                     </button>
                     <button
+                        name="btnSupprimerPersonneACharge"
                         class="btn btn-danger ml-2"
-                        (click)="supprimerPersonneACharge(indexOfelement)">
+                        (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </div>
@@ -339,10 +342,10 @@
         </div>
         <div
             class="div-buttons-form row"
-            *ngIf="isNouvellePersonneFormDisplay === false">
+            *ngIf="isNouvellePersonneAChargeFormDisplay === false">
             <button
                 class="btn btn-primary-style-0"
-                (click)="redirectVersPagePrecedente()">
+                (click)="onClickButtonRetour()">
                 <div>
                     <img src="./assets/images/return-arrow.svg">
                 </div>
@@ -350,7 +353,7 @@
             </button>
             <button
                 class="btn btn-primary-style-3"
-                (click)="redirectVersPageSuivante()">
+                (click)="onClickButtonSuivant()">
                 <div class="text-button">Suivant</div>
                 <div>
                     <img src="./assets/images/icon-bt-primaire.svg">

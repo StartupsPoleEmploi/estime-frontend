@@ -7,12 +7,12 @@
     </div>
     <div class="card card-body card-form">
         <form
-            (ngSubmit)="redirectVersPageSuivante(ressourcesFinancieresConjointForm)"
+            (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
             [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
             #ressourcesFinancieresConjointForm="ngForm">
             <div
                 class="form-group"
-                *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie">
+                *ngIf="conjoint.informationsPersonnelles.isSalarie">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -29,7 +29,7 @@
                         min="0"
                         maxlength="6"
                         class="form-control"
-                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.salaireNet"
                         required
                         placeholder="Montant"
                         #salaireNet="ngModel">
@@ -48,7 +48,7 @@
             </div>
             <div
                     class="form-group"
-                    *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi">
+                    *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
                     <div class="row mb-2">
                         <label
                             class="label"
@@ -65,7 +65,7 @@
                             min="0"
                             maxlength="6"
                             class="form-control"
-                            [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                            [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
                             placeholder="Montant"
                             #allocationMensuelleNetRSA="ngModel">
                         <span class="text-side-input">€ net du mois dernier</span>
@@ -78,7 +78,7 @@
                 </div>
             <div
                 class="form-group"
-                *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi">
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -95,7 +95,7 @@
                         min="0"
                         maxlength="6"
                         class="form-control"
-                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
                         placeholder="Montant"
                         #allocationMensuelleNetARE="ngModel">
                     <span class="text-side-input">€ net du mois dernier</span>
@@ -108,7 +108,7 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi">
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -125,7 +125,7 @@
                         min="0"
                         maxlength="6"
                         class="form-control"
-                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
                         placeholder="Montant"
                         #allocationMensuelleNetASS="ngModel">
                     <span class="text-side-input">€ net du mois dernier</span>
@@ -138,7 +138,7 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape">
+                *ngIf="conjoint.informationsPersonnelles.isHandicape">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -155,7 +155,7 @@
                         min="0"
                         maxlength="6"
                         class="form-control"
-                        [(ngModel)]="demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                         placeholder="Montant"
                         #allocationMensuelleNetAAH="ngModel">
                     <span class="text-side-input">€ net du mois dernier</span>
@@ -180,7 +180,7 @@
                 <div class="col-12 col-md-6 order-md-first">
                     <button
                         class="btn btn-primary-style-0"
-                        (click)="redirectVersPagePrecedente()">
+                        (click)="onClickButtonRetour()">
                         <div>
                             <img src="./assets/images/return-arrow.svg">
                         </div>

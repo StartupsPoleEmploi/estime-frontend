@@ -5,7 +5,7 @@
     </div>
     <div class="card card-body card-form">
         <form
-            (ngSubmit)="redirectVersPageSuivante(ressourcesFinancieresForm)"
+            (ngSubmit)="onSubmitRessourcesFinancieresForm(ressourcesFinancieresForm)"
             [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}"
             #ressourcesFinancieresForm="ngForm">
             <div class="form-group">
@@ -23,7 +23,7 @@
                             name="hasASSPercu"
                             type="radio"
                             class="custom-control-input"
-                            [(ngModel)]="demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireASS"
+                            [(ngModel)]="demandeurEmploiConnecteService.getDemandeurEmploiConnecte().beneficiaireAidesSociales.beneficiaireASS"
                             [value]="true">
                         <label
                             class="custom-control-label"
@@ -37,7 +37,6 @@
                             name="hasASSPercu"
                             type="radio"
                             class="custom-control-input"
-                            [(ngModel)]="demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireASS"
                             [value]="false"
                             disabled>
                         <label
@@ -65,7 +64,7 @@
                         min="0"
                         maxlength="6"
                         class="form-control"
-                        [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
+                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
                         required
                         placeholder="Montant"
                         #allocationJournaliereNetASS="ngModel">
@@ -169,8 +168,8 @@
                             name="hasCumuleAssEtSalaire"
                             type="radio"
                             class="custom-control-input"
-                            [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                            (click)="hasCumuleAssEtSalaireClicked(true)"
+                            [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
+                            (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
                             required
                             [value]="true"
                             #hasCumuleAssEtSalaire="ngModel">
@@ -186,9 +185,9 @@
                             name="hasCumuleAssEtSalaire"
                             type="radio"
                             class="custom-control-input"
-                            [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
+                            [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
                             [value]="false"
-                            (click)="hasCumuleAssEtSalaireClicked(false)"
+                            (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
                             required
                             #hasCumuleAssEtSalaire="ngModel">
                         <label
@@ -206,7 +205,7 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === true">
+                *ngIf="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === true">
                 <div class="row flex-column">
                     <label
                         class="label mb-2"
@@ -215,12 +214,12 @@
                     </label>
                     <select
                         name="nombreMoisCumulAssSalaire"
-                        [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
+                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
                         class="fit-content form-control"
                         data-width="auto"
                         required
                         #nombreMoisCumulAssSalaire="ngModel">
-                        <option [value]="null">Sélectionner</option>
+                        <option [value]="null" disabled>Sélectionner</option>
                         <option
                             *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
                             [value]="nombreMois.value">
@@ -242,7 +241,7 @@
                 </div>
                 <div
                     class="row mt-3"
-                    *ngIf="demandeurEmploiConnecte.informationsPersonnelles.isHandicape">
+                    *ngIf="demandeurEmploiConnecteService.isHandicape()">
                     <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
                         <label
                             class="label label-left-style-1"
@@ -260,7 +259,7 @@
                                 min="0"
                                 class="max-with-input-type-montant form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
+                                [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
                                 required
                                 #allocationMensuelleNetAAH="ngModel">
                             <span class="text-side-input">€ net du mois dernier</span>
@@ -281,7 +280,7 @@
                 </div>
                 <div
                     class="row mt-3"
-                    *ngIf="demandeurEmploiConnecte.informationsPersonnelles.isCreateurEntreprise === true">
+                    *ngIf="demandeurEmploiConnecteService.isCreateurEntreprise()">
                     <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
                         <label
                             class="label label-left-style-1"
@@ -299,7 +298,7 @@
                                 min="0"
                                 class="max-with-input-type-montant form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise"
+                                [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise"
                                 required
                                 #revenusCreateurEntreprise="ngModel">
                             <span class="text-side-input">€ net total des 3 derniers mois</span>
@@ -321,7 +320,7 @@
             </div>
             <div
                 class="row"
-                *ngIf="demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true">
+                *ngIf="demandeurEmploiConnecteService.hasRevenusImmobilier()">
                 <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
                     <label
                         class="label label-left-style-1"
@@ -339,7 +338,7 @@
                             min="0"
                             class="max-with-input-type-montant form-control"
                             placeholder="Montant"
-                            [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier"
+                            [(ngModel)]="ressourcesFinancieres.revenusImmobilier"
                             required
                             #revenusImmobilier="ngModel">
                         <span class="text-side-input">€ net total des 3 derniers mois</span>
@@ -382,7 +381,7 @@
                                 min="0"
                                 class="max-with-input-type-montant form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
+                                [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
                                 required
                                 #allocationsLogementMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€ net total du mois dernier</span>
@@ -419,7 +418,7 @@
                                 min="0"
                                 class="max-with-input-type-montant form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
+                                [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
                                 required
                                 #allocationsFamilialesMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€ net total du mois dernier</span>
@@ -455,7 +454,7 @@
                 <div class="col-12 col-md-6 order-md-first">
                     <button
                         class="btn btn-primary-style-0"
-                        (click)="redirectVersPagePrecedente()">
+                        (click)="onClickButtonRetour()">
                         <div>
                             <img src="./assets/images/return-arrow.svg">
                         </div>

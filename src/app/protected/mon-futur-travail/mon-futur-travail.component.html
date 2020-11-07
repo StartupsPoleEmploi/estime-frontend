@@ -5,7 +5,7 @@
     </div>
     <div class="card card-body card-form">
         <form
-            (ngSubmit)="redirectVersPageSuivante(futurTravailForm)"
+            (ngSubmit)="onSubmitFuturTravailForm(futurTravailForm)"
             [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
             #futurTravailForm="ngForm">
             <div class="row">
@@ -24,7 +24,7 @@
                                 name="typeContrat"
                                 type="radio"
                                 class="custom-control-input"
-                                [(ngModel)]="demandeurEmploiConnecte.futurTravail.typeContrat"
+                                [(ngModel)]="futurTravail.typeContrat"
                                 (click)="unsetNombreMoisContrat(typesContratTavailEnum.CDI)"
                                 [value]="typesContratTavailEnum.CDI"
                                 required
@@ -41,7 +41,7 @@
                                 name="typeContrat"
                                 type="radio"
                                 class="custom-control-input"
-                                [(ngModel)]="demandeurEmploiConnecte.futurTravail.typeContrat"
+                                [(ngModel)]="futurTravail.typeContrat"
                                 [value]="typesContratTavailEnum.CDD"
                                 required
                                 #typeContrat="ngModel">
@@ -60,7 +60,7 @@
                 </div>
                 <div
                     class="col-6 col-md-10 form-group"
-                    *ngIf="demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD'">
+                    *ngIf="futurTravail.typeContrat == 'CDD'">
                     <label
                         class="label mb-2"
                         for="nombreMoisCDD">
@@ -69,7 +69,7 @@
                     <select
                         id="nombreMoisCDD"
                         name="nombreMoisCDD"
-                        [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD"
+                        [(ngModel)]="futurTravail.nombreMoisContratCDD"
                         class="form-control"
                         data-width="auto"
                         required
@@ -106,7 +106,7 @@
                         maxlength="2"
                         class="form-control"
                         placeholder="Nombre d'heures"
-                        [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine"
+                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                         required
                         #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">par semaine</span>
@@ -142,7 +142,7 @@
                         maxlength="10"
                         class="form-control"
                         placeholder="Montant"
-                        [(ngModel)]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet"
+                        [(ngModel)]="futurTravail.salaireMensuelNet"
                         required
                         #salaireMensuelNet="ngModel">
                     <span class="text-side-input">€ net/mois</span>
@@ -176,7 +176,7 @@
                         maxlength="4"
                         class="form-control"
                         placeholder="Distance"
-                        [(ngModel)]="demandeurEmploiConnecte.futurTravail.distanceKmDomicileTravail"
+                        [(ngModel)]="futurTravail.distanceKmDomicileTravail"
                         required
                         #distanceDomicileLieuTravail="ngModel">
                     <span class="text-side-input">km</span>
@@ -205,7 +205,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                         class="form-control"
                         placeholder="Nombre"
-                        [(ngModel)]="demandeurEmploiConnecte.futurTravail.nombreTrajetsDomicileTravail"
+                        [(ngModel)]="futurTravail.nombreTrajetsDomicileTravail"
                         required
                         #nombreTrajetsDomicileTravail="ngModel">
                     <span class="text-side-input">par mois</span>
@@ -219,7 +219,7 @@
             <div class="div-buttons-form row">
                 <button
                     class="btn btn-primary-style-0"
-                    (click)="redirectVersPagePrecedente()">
+                    (click)="onClickButtonRetour()">
                     <div>
                         <img src="./assets/images/return-arrow.svg">
                     </div>
