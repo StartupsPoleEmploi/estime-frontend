@@ -13,6 +13,10 @@ import { SituationPersonne } from "@models/situation-personne";
 import { SessionStorageService } from "ngx-webstorage";
 import { EstimeApiService } from '../estime-api/estime-api.service';
 import { PersonneUtileService } from './personne-utile.service';
+import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AideSociale } from '@app/commun/models/aide-sociale';
 
 @Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {
@@ -39,6 +43,49 @@ export class DemandeurEmploiConnecteService {
         return Promise.reject();
       }
     );
+  }
+
+  public calculerMontantTotalRessourcesMois(simulation: SimulationMensuelle): number {
+    const ressourcesFinancieres = this.demandeurEmploiConnecte.ressourcesFinancieres;
+
+    const salaireFuturTravail = this.getMontantSafe(this.demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
+    const montantAllocationsPoleEmploi = this.calculerMontantAllocationsPoleEmploi(ressourcesFinancieres.allocationsPoleEmploi);
+    const montantAllocationsCAF = this.calculerMontantAllocationsCAF(ressourcesFinancieres.allocationsCAF);
+    const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
+
+    return salaireFuturTravail + montantAllocationsPoleEmploi + montantAllocationsCAF + montantTotalAidesMoisSimule;
+  }
+
+  private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
+    let montant = 0;
+    if(simulation.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
+        montant += this.getMontantSafe(aide.montant);
+      }
+    }
+    return montant;
+  }
+
+
+  private calculerMontantAllocationsPoleEmploi(allocationsPoleEmploi: AllocationsPoleEmploi) {
+    const montant = this.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetARE)
+    + this.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetASS);
+    return montant
+  }
+
+  private calculerMontantAllocationsCAF(allocationsCAF: AllocationsCAF) {
+    const montant = this.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH)
+    + this.getMontantSafe(allocationsCAF.allocationMensuelleNetRSA)
+    + this.getMontantSafe(allocationsCAF.allocationsFamilialesMensuellesNetFoyer)
+    + this.getMontantSafe(allocationsCAF.allocationsLogementMensuellesNetFoyer);
+    return montant
+  }
+
+  private getMontantSafe(montant: number) {
+    if(montant !== undefined && montant !== null) {
+      return montant;
+    }
+    return 0;
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {

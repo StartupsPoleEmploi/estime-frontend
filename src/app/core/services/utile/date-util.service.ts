@@ -4,6 +4,21 @@ import { DateDecomposee } from "@models/date-decomposee";
 @Injectable({providedIn: 'root'})
 export class DateUtileService {
 
+  mois = [
+    { label: "Janvier", value: 1 },
+    { label: "Février", value: 2 },
+    { label: "Mars", value: 3 },
+    { label: "Avril", value: 4 },
+    { label: "Mai", value: 5 },
+    { label: "Juin", value: 6 },
+    { label: "Juillet", value: 7 },
+    { label: "Août", value: 8 },
+    { label: "Septembre", value: 9 },
+    { label: "Octobre", value: 10 },
+    { label: "Novembre", value: 11 },
+    { label: "Décembre", value: 12 },
+  ];
+
   isBissextile(annee: number): boolean {
     return (annee % 100 === 0) ? (annee % 400 === 0) : (annee % 4 === 0);
   }
@@ -14,6 +29,12 @@ export class DateUtileService {
 
   isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
     return this.checkFormat(dateDecomposee) === undefined;
+  }
+
+  getDateTitleSimulation(dateSimulation: string): string {
+    const dateSimulationSplit = dateSimulation.split('-');
+    const moisLabel = this.getLibelleMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
+    return `${moisLabel} ${dateSimulationSplit[0]}`;
   }
 
   checkFormat(dateDecomposee: DateDecomposee): string {
@@ -108,5 +129,15 @@ export class DateUtileService {
 
   private isJourOuMoisValide(valueJourOuMois: string): boolean {
     return valueJourOuMois.length === 2 && valueJourOuMois !== "00"
+  }
+
+  private getLibelleMoisByMoisNumber(moisNumber: number): string {
+    let moisLabel = '';
+    this.mois.forEach(mois => {
+      if(moisNumber === mois.value) {
+        moisLabel = mois.label;
+      }
+    });
+    return moisLabel;
   }
 }

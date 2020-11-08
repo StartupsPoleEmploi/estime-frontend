@@ -1,0 +1,41 @@
+.simulation-btn-group {
+  background-color: white;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  label {
+    padding: 3px !important;
+    margin-bottom: 0;
+    border-radius: 8px;
+    padding: 0;
+    &:not(.last-simulation-btn) {
+      .vl {
+        border-left: 2px solid #E8E8E8;
+        margin-bottom: 5px;
+        margin-top: 5px;
+      }
+    }
+    &.active {
+      .card {
+        background-color: #D6D9E4;
+      }
+    }
+    .card {
+      background-color: white;
+      border: 0px;
+      border-radius: 8px;
+      margin-right: 3px;
+      .card-title {
+        font-size: 1rem;
+        color: #1B2B67;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      .card-text {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+    }
+  }
+}

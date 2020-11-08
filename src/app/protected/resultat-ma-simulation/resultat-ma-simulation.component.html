@@ -1,6 +1,43 @@
 <div class="container-fluid form-container-fluid">
-  <h1 class="h1-style-2">{{getTitrePage()}}</h1>
-  <div class="row">
-    <button class="btn btn-primary-style-0" (click)="redirectVersPagePrecedente()"><div><img src="./assets/images/return-arrow.svg" /></div><div class="text-button">Retour</div></button>
-  </div>
+    <h1 class="row h1-style-2">{{getTitrePage()}}</h1>
+    <div class="row">
+        <h4 class="h4-style-3">
+            Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+        </h4>
+    </div>
+    <div class="row btn-group flex-wrap simulation-btn-group d-inline-flex">
+        <label
+            *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
+            [ngClass]="{'last-simulation-btn': isLastCardSimulation(index)}"
+            class="btn"
+            [btnRadio]="simulationMensuel"
+            tabindex="0"
+            [(ngModel)]="simulationSelected"
+            role="button">
+            <div class="d-inline-flex">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{getTitleCardSimulation(simulationMensuel)}}
+                        </h5>
+                        <p class="card-text">
+                            {{demandeurEmploiConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
+                        </p>
+                    </div>
+                </div>
+                <div class="vl"></div>
+
+            </div>
+        </label>
+    </div>
+    <div class="row">
+        <button
+            class="btn btn-primary-style-0"
+            (click)="redirectVersPagePrecedente()">
+            <div>
+                <img src="./assets/images/return-arrow.svg">
+            </div>
+            <div class="text-button">Retour</div>
+        </button>
+    </div>
 </div>

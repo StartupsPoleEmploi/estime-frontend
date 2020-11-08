@@ -43,6 +43,20 @@ h2 {
 
 }
 
+.h2-style-1 {
+  @extend .font-effect-title;
+  text-align: center;
+  color: #1B2B67;
+  font-size: 1.7rem;
+}
+
+.h2-style-3 {
+  @extend .font-effect-title;
+  text-align: center;
+  color: #1B2B67;
+  font-size: 1.7rem;
+}
+
 h3 {
   @extend .font-effect-title;
   font-size: 1.7rem;
@@ -55,6 +69,13 @@ h4 , h5, h6 {
   @extend .font-effect-title;
   font-size: 1.2rem;
   text-align: center;
+}
+
+.h4-style-3 {
+  @extend .font-effect-title;
+  text-align: left;
+  color: #1B2B67;
+  font-size: 1.3rem;
 }
 
 p, span {
