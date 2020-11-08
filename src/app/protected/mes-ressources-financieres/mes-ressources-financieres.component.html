@@ -1,4 +1,5 @@
 <div class="container-fluid form-container-fluid">
+    <alert type="danger" *ngIf="messageErreur">{{messageErreur}}</alert>
     <h1 class="h1-style-2">4. Mes ressources actuelles</h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
@@ -219,7 +220,7 @@
                         data-width="auto"
                         required
                         #nombreMoisCumulAssSalaire="ngModel">
-                        <option [value]="null" disabled>Sélectionner</option>
+                        <option [value]="0" disabled>Sélectionner</option>
                         <option
                             *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
                             [value]="nombreMois.value">

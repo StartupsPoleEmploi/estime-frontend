@@ -22,6 +22,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
+  messageErreur: string;
   ressourcesFinancieres: RessourcesFinancieres;
 
   @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
@@ -59,14 +60,18 @@ export class MesRessourcesFinancieresComponent implements OnInit {
       if(this.demandeurEmploiConnecteService.isEnCouple()) {
         this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
       } else {
-        this.demandeurEmploiConnecteService.simulerMesAides();
+        this.demandeurEmploiConnecteService.simulerMesAides().then(
+          (erreur) => {
+            this.messageErreur = "Impossible d'obtenir votre simulation. Merci d'essayer de nouveau et de contacter le support Estime si le problème persiste."
+          }
+        );
       }
     }
   }
 
   public onClickRadioButtonHasCumuleAssEtSalaire(): void {
     if(!this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire) {
-      this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = null;
+      this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = 0;
     }
   }
 
@@ -92,7 +97,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
     } else {
       this.ressourcesFinancieres = new RessourcesFinancieres();
       const allocationsPE = new AllocationsPoleEmploi();
-      allocationsPE.nombreMoisCumulesAssEtSalaire = null;
+      allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
       this.ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
       const allocationsCAF = new AllocationsCAF();
       this.ressourcesFinancieres.allocationsCAF = allocationsCAF;

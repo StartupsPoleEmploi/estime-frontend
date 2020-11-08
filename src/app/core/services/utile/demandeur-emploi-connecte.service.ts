@@ -1,25 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { NumberUtileService } from "@app/core/services/utile/number-util.service";
+import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { SessionStorageService } from "ngx-webstorage";
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { FuturTravail } from '@models/futur-travail';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
-import { SituationFamiliale } from '@models/situation-familiale';
-import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { Personne } from '@models/personne';
-import { EstimeApiService } from '../estime-api/estime-api.service';
-import { Router } from '@angular/router';
-import { RoutesEnum } from '@enumerations/routes.enum';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { SituationFamiliale } from '@models/situation-familiale';
 import { SituationPersonne } from "@models/situation-personne";
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { SessionStorageService } from "ngx-webstorage";
+import { EstimeApiService } from '../estime-api/estime-api.service';
 import { PersonneUtileService } from './personne-utile.service';
 
 @Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {
-
-  public static readonly DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY = 'estime.demandeur-emploi';
 
   private demandeurEmploiConnecte: DemandeurEmploi;
 
@@ -33,33 +29,21 @@ export class DemandeurEmploiConnecteService {
 
   }
 
-  public createDemandeurEmploiConnecte(): void {
+  public simulerMesAides(): Promise<any> {
 
-    //TODO JLA sera fait à terme côté serveur
-    this.demandeurEmploiConnecte = new DemandeurEmploi();
-
-    const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
-    beneficiaireAidesSociales.beneficiaireASS = true;
-    this.demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
-
-    this.saveDemandeurEmploiConnecteInSessionStorage();
-  }
-
-  public simulerMesAides(): void {
-    this.estimeApiService.simulerMesAides(this.demandeurEmploiConnecte).then(
+    return this.estimeApiService.simulerMesAides(this.demandeurEmploiConnecte).then(
       (demandeurEmploi) => {
         this.setDemandeurEmploiConnecte(demandeurEmploi);
         this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
       }, (erreur) => {
-        //TODO JLA : traiter l'erreur
-        throw new Error(erreur);
+        return erreur;
       }
     );
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
-      this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+      this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     }
     return this.demandeurEmploiConnecte;
   }
@@ -221,6 +205,6 @@ export class DemandeurEmploiConnecteService {
   }
 
   private saveDemandeurEmploiConnecteInSessionStorage(): void {
-    this.sessionStorageService.store(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
+    this.sessionStorageService.store(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
   }
 }

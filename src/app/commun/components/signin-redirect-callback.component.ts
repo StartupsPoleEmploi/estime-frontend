@@ -13,8 +13,11 @@ export class SigninRedirectCallbackComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.completeLogin().then(informationsAccessTokenPeConnect => {
+    this.authService.completeLogin().then(
+      (demandeur) => {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
-    })
+    }, (erreur) => {
+      this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+    });
   }
 }

@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HomepageComponent implements OnInit {
 
+  messageErreur: string;
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -20,8 +22,9 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     if(this.authService.isLoggedIn()) {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+    } else {
+      this.messageErreur = this.authService.getMessageErreur();
     }
-
   }
 
   login() {

@@ -3,13 +3,14 @@ import { CommunModule } from '@app/commun/commun.module';
 
 import { PublicRoutingModule } from '@app/public/public-routing.module';
 import { HomepageComponent } from '@app/public/homepage/homepage.component';
-
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 @NgModule({
   declarations: [
     HomepageComponent
   ],
   imports: [
+    AlertModule.forRoot(),
     CommunModule,
     PublicRoutingModule
   ]

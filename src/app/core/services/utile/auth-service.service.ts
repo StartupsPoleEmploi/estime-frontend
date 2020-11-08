@@ -9,17 +9,15 @@ import { InformationsAccessTokenPeConnect } from "@models/informations-access-to
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
 import { DemandeurEmploiConnecteService } from "@services/utile/demandeur-emploi-connecte.service";
+import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-
-  private static readonly OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY = 'estime.peOIDC.authorizeData';
-  private static readonly OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY = 'estime.peOIDC.individuAccessToken';
-
   private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
   private informationAutorisationOIDC: InformationAutorisationOIDC;
   private isLoggedInChangedSubject = new Subject<boolean>();
+  private messageErreur: string;
 
   loginChanged = this.isLoggedInChangedSubject.asObservable();
 
@@ -39,27 +37,42 @@ export class AuthService {
   }
 
   completeLogin() {
-    return this.authentifierDemandeurEmploi().then(informationsAccessTokenIndividuConnecte => {
+    return this.authentifierDemandeurEmploi().then(
+      (informationsAccessTokenIndividuConnecte) => {
         this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
-        this.sessionStorageService.store(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, informationsAccessTokenIndividuConnecte);
-        this.demandeurEmploiConnecteService.createDemandeurEmploiConnecte();
-        this.isLoggedInChangedSubject.next(true);
-        return informationsAccessTokenIndividuConnecte;
-    });
+        this.sessionStorageService.store(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, informationsAccessTokenIndividuConnecte);
+        return this.estimeApiService.getDemandeurEmploi().then(
+          (demandeurEmploi) => {
+            this.isLoggedInChangedSubject.next(true);
+            this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+            return demandeurEmploi;
+          }, (erreur) => {
+            this.messageErreur = "La connexion au service est impossible."
+            this.clearSessionStorage();
+            return Promise.reject(erreur);
+          }
+        );
+      }, (erreur) => {
+        this.messageErreur = "La connexion au service est impossible."
+        return Promise.reject(erreur);
+      }
+    );
+  }
+
+  getMessageErreur(): string {
+    return this.messageErreur;
   }
 
   isLoggedIn():boolean {
     if(!this.informationsAccessTokenIndividuConnecte) {
-      this.informationsAccessTokenIndividuConnecte =  this.sessionStorageService.retrieve(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
+      this.informationsAccessTokenIndividuConnecte =  this.sessionStorageService.retrieve(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
     }
     return !!this.informationsAccessTokenIndividuConnecte;
   }
 
 
   logout() {
-    this.sessionStorageService.clear(DemandeurEmploiConnecteService.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
-    this.sessionStorageService.clear(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
-    this.sessionStorageService.clear(AuthService.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
+    this.clearSessionStorage();
     this.document.location.href = this.getPoleEmploiIdentityServerDeconnexionURI();
   }
 
@@ -94,7 +107,7 @@ export class AuthService {
   }
 
   private authentifierDemandeurEmploi() {
-    this.informationAutorisationOIDC =  this.sessionStorageService.retrieve(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
+    this.informationAutorisationOIDC =  this.sessionStorageService.retrieve(KeysSessionStorageEnum.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
     this.informationAutorisationOIDC.code = this.activatedRoute.snapshot.queryParams.code;
     if(this.activatedRoute.snapshot.queryParams.state === this.informationAutorisationOIDC.state) {
       return this.estimeApiService.authentifier(this.informationAutorisationOIDC);
@@ -110,10 +123,14 @@ export class AuthService {
     this.informationAutorisationOIDC.redirectURI = `${this.environment.oidcRedirectURI}signin-callback`;
     this.informationAutorisationOIDC.state = this.generateRandomValue();
 
-    this.sessionStorageService.store(AuthService.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.informationAutorisationOIDC);
+    this.sessionStorageService.store(KeysSessionStorageEnum.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY, this.informationAutorisationOIDC);
   }
 
-
+  private clearSessionStorage():void {
+    this.sessionStorageService.clear(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(KeysSessionStorageEnum.OIDC_AUTHORIZE_DATA_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);
+  }
 
 
 }
