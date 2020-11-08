@@ -1,3 +1,4 @@
+<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
 <div class="container-fluid form-container-fluid">
     <alert type="danger" *ngIf="messageErreur">{{messageErreur}}</alert>
     <h1 class="h1-style-2">4. Mes ressources actuelles</h1>

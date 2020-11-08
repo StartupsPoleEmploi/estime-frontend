@@ -10,6 +10,7 @@ import { RoutesEnum } from '@enumerations/routes.enum';
 import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
 import { DemandeurEmploiConnecteService } from "@services/utile/demandeur-emploi-connecte.service";
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
+import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -36,7 +37,7 @@ export class AuthService {
     this.document.location.href = this.getPoleEmploiIdentityServerConnexionURI();
   }
 
-  completeLogin() {
+  completeLogin(): Promise<void> {
     return this.authentifierDemandeurEmploi().then(
       (informationsAccessTokenIndividuConnecte) => {
         this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
@@ -45,16 +46,18 @@ export class AuthService {
           (demandeurEmploi) => {
             this.isLoggedInChangedSubject.next(true);
             this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
-            return demandeurEmploi;
+            return Promise.resolve();
           }, (erreur) => {
-            this.messageErreur = "La connexion au service est impossible."
+            console.log(erreur);
+            this.messageErreur = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
             this.clearSessionStorage();
-            return Promise.reject(erreur);
+            return Promise.reject();
           }
         );
       }, (erreur) => {
-        this.messageErreur = "La connexion au service est impossible."
-        return Promise.reject(erreur);
+        console.log(erreur);
+        this.messageErreur = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
+        return Promise.reject();
       }
     );
   }

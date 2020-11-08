@@ -29,14 +29,14 @@ export class DemandeurEmploiConnecteService {
 
   }
 
-  public simulerMesAides(): Promise<any> {
-
+  public simulerMesAides(): Promise<void> {
     return this.estimeApiService.simulerMesAides(this.demandeurEmploiConnecte).then(
       (demandeurEmploi) => {
         this.setDemandeurEmploiConnecte(demandeurEmploi);
-        this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+        return Promise.resolve();
       }, (erreur) => {
-        return erreur;
+        console.log(erreur);
+        return Promise.reject();
       }
     );
   }

@@ -1,6 +1,6 @@
 <header class="vertical-center">
   <div class="container-fluid vertical-center my-auto d-block">
-      <img id="logo-estime"  src="./assets/images/logo-estime.svg" />
+      <img id="logo-estime"  src="./assets/images/logo-estime.svg" (click)="onClickLogoEstime()"/>
       <img id="logo-pole-emploi" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
       <div id="div-beta" class="d-inline ml-3"><b>BETA</b></div>
       <button class="btn btn-primary-style-1" *ngIf="this.isLoggedIn"  (click)="logout()">Se deconnecter</button>

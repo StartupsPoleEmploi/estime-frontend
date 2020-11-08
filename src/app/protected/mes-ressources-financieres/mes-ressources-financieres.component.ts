@@ -11,6 +11,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 import { AllocationsCAF } from '@models/allocations-caf';
+import { MessagesErreurEnum } from "@app/commun/enumerations/messages-erreur.enum";
 
 @Component({
   selector: 'app-mes-ressources-financieres',
@@ -21,6 +22,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
 
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
   dateDernierOuvertureDroitASS: DateDecomposee;
+  isPageLoadingDisplay = false;
   isRessourcesFinancieresFormSubmitted = false;
   messageErreur: string;
   ressourcesFinancieres: RessourcesFinancieres;
@@ -60,9 +62,14 @@ export class MesRessourcesFinancieresComponent implements OnInit {
       if(this.demandeurEmploiConnecteService.isEnCouple()) {
         this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
       } else {
+        this.isPageLoadingDisplay = true;
         this.demandeurEmploiConnecteService.simulerMesAides().then(
-          (erreur) => {
-            this.messageErreur = "Impossible d'obtenir votre simulation. Merci d'essayer de nouveau et de contacter le support Estime si le problème persiste."
+          () => {
+            this.isPageLoadingDisplay = false;
+            this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+          },() => {
+            this.isPageLoadingDisplay = false;
+            this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
           }
         );
       }
