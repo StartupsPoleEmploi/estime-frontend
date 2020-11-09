@@ -78,6 +78,20 @@ h4 , h5, h6 {
   font-size: 1.3rem;
 }
 
+.h5-style-1 {
+  @extend .font-effect-title;
+  text-align: left;
+  color: #23333C;
+  font-size: 1.1rem;
+}
+
+.h5-style-2 {
+  @extend .font-effect-title;
+  text-align: left;
+  color: #1B2B67;
+  font-size: 1.1rem;
+}
+
 p, span {
   @extend .font-effect;
   font-size: 1rem;

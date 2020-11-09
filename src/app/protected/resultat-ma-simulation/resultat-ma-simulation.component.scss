@@ -1,3 +1,27 @@
+.card-group-ressources, .list-group, .list-group-item {
+  border: 0;
+}
+
+.list-group {
+  padding: 10px;
+}
+
+.list-group-item {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+hr {
+  display: block;
+  height: 0;
+  border: 0;
+  border-top: 1px solid #E8E8E8;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .simulation-btn-group {
   background-color: white;
   border-bottom-right-radius: 8px;
@@ -34,8 +58,78 @@
       }
       .card-text {
         font-size: 1.3rem;
-        font-weight: bold;
+        font-weight: 900;
       }
     }
   }
+}
+
+.span-organisme {
+  color:#1B2B67;
+}
+
+.col-montant {
+  padding-right: 0;
+  span {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: black;
+   }
+}
+
+.span-libelle-aide {
+  color: #23333C;
+  font-weight: bold;
+}
+
+.ressources-block {
+  .card {
+    width: 95%;
+  }
+  .card-ressource {
+    background-color: #D6D9E4;
+    border-radius: 8px;
+    max-height: 40px;
+    max-width: fit-content;
+    min-width: 43px;
+    padding: 5px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    text-align: center;
+    span {
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    &.paie {
+      background-color: #83C5BE;
+    }
+    &.ass {
+      background-color: #ADE8F4
+    }
+    &.aah {
+      background-color:#F8CF8D;
+    }
+    &.rsa {
+      background-color: #f4adad
+    }
+    &.apl {
+      background-color: #ecf4ad;
+    }
+    &.af {
+      background-color: #FFC6FF;
+    }
+    &.agepi {
+      background-color: #BDB2FF;
+    }
+    &.am {
+      background-color: #F1A378;
+    }
+    &.pa {
+      background-color: #D6D9E4;
+    }
+  }
+}
+
+.ml-perso-15 {
+  margin-left: 15px;
 }

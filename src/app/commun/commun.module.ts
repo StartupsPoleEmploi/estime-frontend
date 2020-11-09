@@ -5,9 +5,11 @@ import { SignoutRedirectCallbackComponent } from '@app/commun/components/signout
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
+import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
 
 @NgModule({
   declarations: [
+    CallbackPipe,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     NotFoundComponent,
@@ -18,6 +20,7 @@ import { PageLoadingComponent } from "./components/page-loading/page-loading.com
     CommonModule
   ],
   exports: [
+    CallbackPipe,
     CommonModule,
     PageLoadingComponent
   ]
