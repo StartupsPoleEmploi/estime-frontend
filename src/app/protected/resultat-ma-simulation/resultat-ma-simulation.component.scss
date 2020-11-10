@@ -77,6 +77,44 @@ hr {
    }
 }
 
+.aide-selected-description-card {
+  border: 0;
+  .card-body {
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+  }
+  p {
+    font-size: 0.8rem !important;
+  }
+  h5 {
+    margin-bottom: 0.2rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: left;
+  }
+  h6 {
+    font-size: 0.9rem;
+    text-align: left;
+    font-weight: 800;
+    margin-bottom: 0.1rem;
+  }
+  hr {
+    border-bottom-right-radius: 10px;
+    margin: 0;
+    &.agepi {
+      border-top: 7px solid #BDB2FF;
+    }
+    &.am {
+      border-top: 7px solid #F1A378;
+    }
+    &.pa {
+      border-top: 7px solid #D6D9E4;
+    }
+  }
+
+}
+
+
 .span-libelle-aide {
   color: #23333C;
   font-weight: bold;

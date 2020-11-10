@@ -18,6 +18,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   demandeurEmploiConnecte: DemandeurEmploi;
   simulationsMensuelles: Array<SimulationMensuelle>;
   simulationSelected:SimulationMensuelle;
+  aideSocialeSelected: AideSociale;
 
   constructor(
     private dateUtileService: DateUtileService,
@@ -31,18 +32,30 @@ export class ResultatMaSimulationComponent implements OnInit {
     this.loadData();
   }
 
-  private loadData(): void {
-    this.demandeurEmploiConnecte  = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
-    this.simulationSelected = this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles[0];
+  public onClickButtonSimulationMensuelle(): void {
+    this.selectFirstAideSociale();
+  }
+
+
+  public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
+    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
+  }
+
+  public getMontantASS(): number {
+    let montant = 0;
+    if(this.simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          montant = aide.montant;
+        }
+      }
+    }
+    return montant;
   }
 
   public getTitleCardSimulation(simulationMensuelle: SimulationMensuelle): string {
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
     return this.dateUtileService.getDateTitleSimulation(dateSimulation);
-  }
-
-  public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
-    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
   }
 
   public hasAidesObtenir(): boolean {
@@ -64,18 +77,6 @@ export class ResultatMaSimulationComponent implements OnInit {
     return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1;
   }
 
-  public getMontantASS(): number {
-    let montant = 0;
-    if(this.simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          montant = aide.montant;
-        }
-      }
-    }
-    return montant;
-  }
-
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
     for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
@@ -86,7 +87,7 @@ export class ResultatMaSimulationComponent implements OnInit {
     return index === size - 1;
   }
 
-  redirectVersPagePrecedente() {
+  public onClickButtonRetour(): void {
     if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple){
       this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
     } else {
@@ -94,12 +95,32 @@ export class ResultatMaSimulationComponent implements OnInit {
     }
   }
 
-  getTitrePage() {
+  public getTitrePage(): string {
     let titre = "5. Résultat de ma simulation";
     if(this.demandeurEmploiConnecte.situationFamiliale.isEnCouple){
       titre = "6. Résultat de ma simulation";
     }
     return titre;
   }
+
+  private loadData(): void {
+    this.demandeurEmploiConnecte  = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    this.simulationSelected = this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles[0];
+    this.selectFirstAideSociale();
+  }
+
+  private selectFirstAideSociale(): void {
+    if(this.hasAidesObtenir()) {
+      let index = 0;
+      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+        if((index === 0 && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) || index === 2) {
+          this.aideSocialeSelected = aide;
+        }
+        index ++;
+      }
+    }
+  }
+
+
 
 }
