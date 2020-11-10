@@ -5,7 +5,7 @@
             Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
-    <div class="row btn-group flex-wrap simulation-btn-group d-inline-flex">
+    <div class="row btn-group simulation-btn-group">
         <label
             *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{'last-simulation-btn': isLastCardSimulation(index)}"
@@ -232,7 +232,7 @@
                     <p [innerHTML]="aideSocialeSelected.conditionsAcces"></p>
                     <h6>DEMARCHE D'OBTENTION</h6>
                     <p [innerHTML]="aideSocialeSelected.demarcheObtention"></p>
-                </div>
+                  </div>
             </div>
 
         </div>

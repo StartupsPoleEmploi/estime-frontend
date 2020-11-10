@@ -17,6 +17,8 @@
   }
 }
 
+
+
 .card-group-ressources, .list-group, .list-group-item {
   border: 0;
 }
@@ -51,11 +53,13 @@ hr {
 }
 
 .simulation-btn-group {
+  width: 100%;
   background-color: white;
   border-bottom-right-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
+
   label {
     padding: 3px !important;
     margin-bottom: 0;
