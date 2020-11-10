@@ -5,31 +5,31 @@
             Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
-    <div class="row btn-group simulation-btn-group">
+    <div class="row">
+      <div class="btn-group simulation-btn-group flex-wrap">
         <label
             *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{'last-simulation-btn': isLastCardSimulation(index)}"
-            class="btn"
+            class="btn col-12 col-md-2"
             [btnRadio]="simulationMensuel"
             tabindex="0"
             [(ngModel)]="simulationSelected"
             role="button"
             (click)="onClickButtonSimulationMensuelle()">
-            <div class="d-inline-flex">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            {{getTitleCardSimulation(simulationMensuel)}}
-                        </h5>
-                        <p class="card-text">
-                            {{demandeurEmploiConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
-                        </p>
-                    </div>
+            <div class="div-simulationMensuel p-1">
+              <div class="card w-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        {{getTitleCardSimulation(simulationMensuel)}}
+                    </h5>
+                    <p class="card-text">
+                        {{demandeurEmploiConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
+                    </p>
                 </div>
-                <div class="vl"></div>
-
+            </div>
             </div>
         </label>
+      </div>
     </div>
     <div class="row mt-3 ressources-block">
         <div class="col-6">
@@ -237,7 +237,7 @@
 
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-5">
         <button
             class="btn btn-primary-style-0"
             (click)="onClickButtonRetour()">

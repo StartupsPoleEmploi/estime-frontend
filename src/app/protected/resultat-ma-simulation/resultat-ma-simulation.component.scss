@@ -61,15 +61,15 @@ hr {
   border-top-left-radius: 8px;
 
   label {
-    padding: 3px !important;
+    padding-bottom: 3px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 3px ;
     margin-bottom: 0;
     border-radius: 8px;
-    padding: 0;
     &:not(.last-simulation-btn) {
-      .vl {
-        border-left: 2px solid #E8E8E8;
-        margin-bottom: 5px;
-        margin-top: 5px;
+      .div-simulationMensuel {
+        border-right: 2px solid #E8E8E8;
       }
     }
     &.active {
