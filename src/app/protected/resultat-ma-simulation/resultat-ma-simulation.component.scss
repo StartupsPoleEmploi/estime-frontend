@@ -1,5 +1,30 @@
+#aides-a-obtenir {
+  width: 100%;
+  padding: 0.4rem 1rem;
+  margin-top: 5px;
+  button {
+    text-align: left;
+    .row {
+      padding-left: 6px;
+    }
+    &.active {
+      background-color: #E8E8E8;
+    }
+  }
+  hr {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
 .card-group-ressources, .list-group, .list-group-item {
   border: 0;
+}
+
+.card-group-ressources {
+  button {
+    width: 100%;
+  }
 }
 
 .list-group {
@@ -9,6 +34,9 @@
 .list-group-item {
   padding-top: 0;
   padding-bottom: 0;
+  .row {
+    padding-left: 6px;
+  }
 }
 
 hr {
@@ -70,11 +98,18 @@ hr {
 
 .col-montant {
   padding-right: 0;
+  text-align: right;
   span {
     font-weight: 800;
     font-size: 1.1rem;
     color: black;
    }
+}
+
+.picto-col {
+  font-weight: bold;
+  min-width: 30px;
+  max-width: 30px;
 }
 
 .aide-selected-description-card {
@@ -118,6 +153,7 @@ hr {
 .span-libelle-aide {
   color: #23333C;
   font-weight: bold;
+
 }
 
 .ressources-block {

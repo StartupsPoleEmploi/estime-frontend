@@ -53,6 +53,14 @@ export class ResultatMaSimulationComponent implements OnInit {
     return montant;
   }
 
+  public isAideSocialListIsAideSocialeSelected(aideSociale: AideSociale): boolean {
+    return aideSociale.code === this.aideSocialeSelected.code;
+  }
+
+  public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
+    this.aideSocialeSelected = aideSociale;
+  }
+
   public getTitleCardSimulation(simulationMensuelle: SimulationMensuelle): string {
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
     return this.dateUtileService.getDateTitleSimulation(dateSimulation);
@@ -118,6 +126,8 @@ export class ResultatMaSimulationComponent implements OnInit {
         }
         index ++;
       }
+    } else {
+      this.aideSocialeSelected = null;
     }
   }
 

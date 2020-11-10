@@ -42,14 +42,15 @@
                                 <div class="col-2 card-ressource paie mt-auto mb-auto">
                                     <span>PAIE</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <span class="span-libelle-aide">Salaire net</span>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>
                                         {{demandeurEmploiConnecte.futurTravail.salaireMensuelNet}} €
                                     </span>
                                 </div>
+                                <div class="col-1 mt-auto mb-auto  ml-0 mr-2  picto-col"></div>
                             </div>
                             <hr>
                         </li>
@@ -60,15 +61,16 @@
                                 <div class="col-2 card-ressource ass mt-auto mb-auto">
                                     <span>ASS</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <div class="row flex-column">
                                         <span class="span-libelle-aide ml-perso-15">Allocation de Solidarité Spécifique</span>
-                                        <span class="span-organisme ml-perso-15">CAF</span>
+                                        <span class="span-organisme ml-perso-15">Pôle emploi</span>
                                     </div>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>{{getMontantASS()}} €</span>
                                 </div>
+                                <div class="col-1 mt-auto mb-auto  ml-0 mr-2  picto-col"></div>
                             </div>
                             <hr>
                         </li>
@@ -79,17 +81,18 @@
                                 <div class="col-2 card-ressource aah mt-auto mb-auto">
                                     <span>AAH</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <div class="row flex-column">
                                         <span class="span-libelle-aide ml-perso-15">Allocation aux Adultes Handicapés</span>
                                         <span class="span-organisme ml-perso-15">CAF</span>
                                     </div>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>
                                         {{demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH}} €
                                     </span>
                                 </div>
+                                <div class="col-1 mt-auto mb-auto  ml-0 mr-2  picto-col"></div>
                             </div>
                             <hr>
                         </li>
@@ -100,17 +103,18 @@
                                 <div class="col-2 card-ressource rsa mt-auto mb-auto">
                                     <span>RSA</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <div class="row flex-column">
                                         <span class="span-libelle-aide ml-perso-15">Revenu de Solidarité Active</span>
                                         <span class="span-organisme ml-perso-15">CAF</span>
                                     </div>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>
                                         {{demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA}} €
                                     </span>
                                 </div>
+                                <div class="col-1 mt-auto mb-auto  ml-0 mr-2  picto-col"></div>
                             </div>
                             <hr>
                         </li>
@@ -121,17 +125,18 @@
                                 <div class="col-2 card-ressource apl mt-auto mb-auto">
                                     <span>APL</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <div class="row flex-column">
                                         <span class="span-libelle-aide ml-perso-15">Allocations logement du foyer</span>
                                         <span class="span-organisme ml-perso-15">CAF</span>
                                     </div>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>
                                         {{demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer}} €
                                     </span>
                                 </div>
+                                <div class="col-1 mt-auto mb-auto ml-0 mr-2  picto-col"></div>
                             </div>
                             <hr>
                         </li>
@@ -142,17 +147,18 @@
                                 <div class="col-2 card-ressource af mt-auto mb-auto">
                                     <span>AF</span>
                                 </div>
-                                <div class="col-8 mt-auto mb-auto">
+                                <div class="col-7 mt-auto mb-auto">
                                     <div class="row flex-column">
                                         <span class="span-libelle-aide ml-perso-15">Allocations familiales du foyer</span>
                                         <span class="span-organisme ml-perso-15">CAF</span>
                                     </div>
                                 </div>
-                                <div class="col-2 mt-auto mb-auto col-montant">
+                                <div class="col-2 mt-auto mb-auto ml-auto mr-0 col-montant">
                                     <span>
                                         {{demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer}} €
                                     </span>
                                 </div>
+                                <div class="col-1 ml-0 mr-2 mt-auto mb-auto picto-col"></div>
                             </div>
                         </li>
                     </ul>
@@ -170,34 +176,49 @@
                 class="row mt-3"
                 *ngIf="hasAidesObtenir()">
                 <div class="card card-group-ressources">
-                    <ul class="list-group list-group-flush">
-                        <li
-                            class="list-group-item"
+                    <div
+                        id="aides-a-obtenir"
+                        class="btn-group-vertical"
+                        role="group">
+                        <div
+                            class="w-100"
                             *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
-                            <div class="row">
-                                <div
-                                    class="col-2 card-ressource mt-auto mb-auto"
-                                    [ngClass]="[aideKeyValue.value.code.toLowerCase()]">
-                                    <span>{{aideKeyValue.value.code}}</span>
-                                </div>
-                                <div class="col-8 mt-auto mb-auto">
-                                    <div class="row flex-column">
-                                        <span class="span-libelle-aide ml-perso-15">{{aideKeyValue.value.nom}}</span>
-                                        <span class="span-organisme ml-perso-15">{{aideKeyValue.value.organisme}}</span>
+                            <button
+                                type="button"
+                                role="button"
+                                class="btn"
+                                tabindex="0"
+                                [ngClass]="{'active': isAideSocialListIsAideSocialeSelected(aideKeyValue.value)}"
+                                (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
+                                <div class="row">
+                                    <div
+                                        class="col-2 card-ressource mt-auto mb-auto"
+                                        [ngClass]="[aideKeyValue.value.code.toLowerCase()]">
+                                        <span>{{aideKeyValue.value.code}}</span>
                                     </div>
+                                    <div class="col-7 col-sm-auto mt-auto mb-auto">
+                                        <div class="row flex-column">
+                                            <span class="span-libelle-aide ml-perso-15">{{aideKeyValue.value.nom}}</span>
+                                            <span class="span-organisme ml-perso-15">{{aideKeyValue.value.organisme}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 mt-auto ml-auto mr-0 mb-auto col-montant">
+                                        <span>{{aideKeyValue.value.montant}} €</span>
+                                    </div>
+                                    <div class="col-1 col-sm-auto ml-0 mr-2 mt-auto mb-auto col-montant picto-col">></div>
+
                                 </div>
-                                <div class="col-2 mt-auto mb-auto  col-montant">
-                                    <span>{{aideKeyValue.value.montant}} €</span>
-                                </div>
-                            </div>
+                            </button>
                             <hr *ngIf="!isLastAideKeyValue(index)">
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="card col-6 aide-selected-description-card">
-            <div class="card-body" *ngIf="aideSocialeSelected">
+        <div
+            class="card col-6 aide-selected-description-card"
+            *ngIf="aideSocialeSelected">
+            <div class="card-body">
                 <div class="card-title">
                     <h5>
                         {{aideSocialeSelected.nom}} ({{aideSocialeSelected.organisme}})
