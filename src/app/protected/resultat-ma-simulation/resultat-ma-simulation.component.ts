@@ -36,29 +36,8 @@ export class ResultatMaSimulationComponent implements OnInit {
     this.selectFirstAideSociale();
   }
 
-
-  public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
-    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
-  }
-
-  public getMontantASS(): number {
-    let montant = 0;
-    if(this.simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          montant = aide.montant;
-        }
-      }
-    }
-    return montant;
-  }
-
-  public isAideSocialListIsAideSocialeSelected(aideSociale: AideSociale): boolean {
-    return aideSociale.code === this.aideSocialeSelected.code;
-  }
-
-  public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    this.aideSocialeSelected = aideSociale;
+  public changeAideSocialeSelected(aideSocialeSelected: AideSociale) {
+    this.aideSocialeSelected = aideSocialeSelected;
   }
 
   public getTitleCardSimulation(simulationMensuelle: SimulationMensuelle): string {
@@ -66,33 +45,8 @@ export class ResultatMaSimulationComponent implements OnInit {
     return this.dateUtileService.getDateTitleSimulation(dateSimulation);
   }
 
-  public hasAidesObtenir(): boolean {
-    let hasAidesObtenir = false;
-    if(Object.entries(this.simulationSelected.mesAides).length > 1) {
-      hasAidesObtenir = true;
-    }
-    if(Object.entries(this.simulationSelected.mesAides).length === 1) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          hasAidesObtenir = true;
-        }
-      }
-    }
-    return hasAidesObtenir;
-  }
-
   public isLastCardSimulation(index: number): boolean {
     return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1;
-  }
-
-  public isLastAideKeyValue(index: number): boolean {
-    let size = 0;
-    for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-      if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-        size += 1;
-      }
-    }
-    return index === size - 1;
   }
 
   public onClickButtonRetour(): void {
@@ -117,6 +71,21 @@ export class ResultatMaSimulationComponent implements OnInit {
     this.selectFirstAideSociale();
   }
 
+  public hasAidesObtenir(): boolean {
+    let hasAidesObtenir = false;
+    if(Object.entries(this.simulationSelected.mesAides).length > 1) {
+      hasAidesObtenir = true;
+    }
+    if(Object.entries(this.simulationSelected.mesAides).length === 1) {
+      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+        if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          hasAidesObtenir = true;
+        }
+      }
+    }
+    return hasAidesObtenir;
+  }
+
   private selectFirstAideSociale(): void {
     if(this.hasAidesObtenir()) {
       let index = 0;
@@ -130,7 +99,4 @@ export class ResultatMaSimulationComponent implements OnInit {
       this.aideSocialeSelected = null;
     }
   }
-
-
-
 }

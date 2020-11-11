@@ -1,0 +1,20 @@
+<div
+    class="card"
+    *ngIf="aideSocialeSelected">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>
+                {{aideSocialeSelected.nom}} ({{aideSocialeSelected.organisme}})
+            </h5>
+            <hr [ngClass]="aideSocialeSelected.code.toLowerCase()">
+        </div>
+        <div class="card-text">
+            <h6>DÉFINITION</h6>
+            <p [innerHTML]="aideSocialeSelected.description"></p>
+            <h6>CONDITIONS D’ACCÈS</h6>
+            <p [innerHTML]="aideSocialeSelected.conditionsAcces"></p>
+            <h6>DEMARCHE D'OBTENTION</h6>
+            <p [innerHTML]="aideSocialeSelected.demarcheObtention"></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+@import "../../../../../assets/scss/variables";
+
+.row {
+  padding-left: 6px;
+  .card-code-ressource {
+    background-color: $color-grey-1;
+    border-radius: 8px;
+    max-height: 40px;
+    max-width: fit-content;
+    min-width: 43px;
+    padding: 5px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    text-align: center;
+    span {
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    &.paie {
+      background-color: $color-green-1;
+    }
+    &.ass {
+      background-color: $color-blue-4;
+    }
+    &.aah {
+      background-color: $color-orange-3;
+    }
+    &.rsa {
+      background-color: $color-red-2;
+    }
+    &.apl {
+      background-color: $color-yellow-1;
+    }
+    &.af {
+      background-color: $color-violet-2;
+    }
+    &.agepi {
+      background-color: $color-violet-1;
+    }
+    &.am {
+      background-color: $color-orange-2
+    }
+    &.pa {
+      background-color: $color-grey-1;
+    }
+  }
+  .span-libelle-aide {
+    color: $color-blue-1;
+    font-weight: bold;
+    margin-left: 15px;
+  }
+  .span-organisme {
+    color: $color-blue-2;
+    margin-left: 15px;
+  }
+  .col-montant {
+    padding-right: 0;
+    text-align: right;
+    span {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: $color-black-1;
+    }
+  }
+  .col-picto-arrow {
+    font-weight: bold;
+    min-width: 30px;
+    max-width: 30px;
+  }
+}
+

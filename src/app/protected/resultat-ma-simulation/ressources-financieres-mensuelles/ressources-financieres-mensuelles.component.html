@@ -1,0 +1,113 @@
+<h5 class="row h5-style-1">Mes ressources et aides actuelles</h5>
+<div class="row mt-3">
+    <div class="card">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <app-item-ressource-actuelle
+                    codeRessource="PAIE"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Salaire net"
+                    [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
+                </app-item-ressource-actuelle>
+                <hr>
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="montantASS && montantASS > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="ASS"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Allocation de Solidarité Spécifique"
+                    [montantRessource]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet"
+                    organismeRessource="Pôle emploi">
+                </app-item-ressource-actuelle>
+                <hr>
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="AAH"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Allocation aux Adultes Handicapés"
+                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                    organismeRessource="CAF">
+                </app-item-ressource-actuelle>
+                <hr>
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="RSA"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Revenu de Solidarité Active"
+                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                    organismeRessource="CAF">
+                </app-item-ressource-actuelle>
+                <hr>
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="APL"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Allocations logement du foyer"
+                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer"
+                    organismeRessource="CAF">
+                </app-item-ressource-actuelle>
+                <hr>
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="AF"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Allocations familiales du foyer"
+                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
+                    organismeRessource="CAF">
+                </app-item-ressource-actuelle>
+            </li>
+        </ul>
+    </div>
+</div>
+<h5
+    class="row h5-style-2 mt-4"
+    *ngIf="hasAidesObtenir()">
+    <img
+        src="./assets/images/hand-finger-right.svg"
+        class="mr-2">
+    Les aides que vous pourriez obtenir
+</h5>
+<div
+    class="row mt-3"
+    *ngIf="hasAidesObtenir()">
+    <div class="card">
+        <div
+            class="btn-group-vertical"
+            role="group">
+            <div
+                class="w-100"
+                *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
+                <button
+                    type="button"
+                    role="button"
+                    class="btn"
+                    tabindex="0"
+                    [ngClass]="{'active': isAideSocialListIsAideSocialeSelected(aideKeyValue.value)}"
+                    (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="aideKeyValue.value.code"
+                        [isColPictoArrowDisplay]="true"
+                        [libelleRessource]="aideKeyValue.value.nom"
+                        [montantRessource]="aideKeyValue.value.montant"
+                        [organismeRessource]="aideKeyValue.value.organisme">
+                    </app-item-ressource-actuelle>
+                </button>
+                <hr *ngIf="!isLastAideKeyValue(index)">
+            </div>
+        </div>
+    </div>
+</div>
