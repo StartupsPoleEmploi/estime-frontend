@@ -90,6 +90,10 @@
   color: $color-blue-2;
   border: 1px $color-blue-2 solid;
   border-radius: 100px;
+  &:hover {
+    background-color: $color-blue-1;
+    color: $color-white-1;
+  }
 }
 
 .btn-primary-style-2 {
@@ -111,6 +115,10 @@
   @extend .primary-button-base;
   margin: auto;
   max-width: 300px ;
+  &:hover {
+    background-color: $color-blue-2;
+    color: $color-white-2;
+  }
   .text-button {
     width: 100%;
     margin: auto;

@@ -1,18 +1,32 @@
-//$small-device:                "screen and (max-width:768px)";
-//$desktop:                "screen and (min-width: 769px)";
-
 $small-device:  "screen and (max-width:1023px)";
 $medium-device: "screen and (min-width:1024px) and (max-width:1309px)";
 $large-device:  "screen and (min-width:1310px)";
 
+$color-black-1: black;
+
 $color-blue-1: #23333C;
 $color-blue-2: #1B2B67;
 $color-blue-3: #3853B9;
-$color-blue-4: #DEEEFF;
+$color-blue-4: #ADE8F4;
+$color-blue-5: #DEEEFF;
+
+$color-green-1: #bfcfce;
+
+$color-grey-1: #D6D9E4;
+$color-grey-2: #E8E8E8;
 
 $color-orange-1: #FF810B;
+$color-orange-2: #F1A378;
+$color-orange-3: #F8CF8D;
+
+$color-red-1: red;
+$color-red-2: #F4ADAD;
+
+$color-violet-1: #BDB2FF;
+$color-violet-2: #FFC6FF;
 
 $color-white-1: white ;
-$color-white-2: #fbfbfb;
+$color-white-2: #FBFBFB;
 
-$color-error: red;
+$color-yellow-1: #ECF4AD;
+

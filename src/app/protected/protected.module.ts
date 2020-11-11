@@ -12,6 +12,11 @@ import { MesRessourcesFinancieresComponent } from '@app/protected/mes-ressources
 import { ResultatMaSimulationComponent } from '@app/protected/resultat-ma-simulation/resultat-ma-simulation.component';
 import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { MesPersonnesAChargeComponent } from '@app/protected/mes-personnes-a-charge/mes-personnes-a-charge.component';
+import { RessourcesFinancieresMensuellesComponent } from './resultat-ma-simulation/ressources-financieres-mensuelles/ressources-financieres-mensuelles.component';
+import { DetailAideSocialeComponent } from './resultat-ma-simulation/detail-aide-sociale/detail-aide-sociale.component';
+import { ItemRessourceActuelleComponent } from './resultat-ma-simulation/ressources-financieres-mensuelles/item-ressource-actuelle/item-ressource-actuelle.component';
+import { FormPersonneAChargeComponent } from './mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge.component';
+import { FormPersonneAChargeSituationComponent } from './mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge-situation/form-personne-a-charge-situation.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { MesPersonnesAChargeComponent } from '@app/protected/mes-personnes-a-cha
     MesRessourcesFinancieresComponent,
     MonFuturTravailComponent,
     RessourcesFinancieresConjointComponent,
-    ResultatMaSimulationComponent
+    ResultatMaSimulationComponent,
+    RessourcesFinancieresMensuellesComponent,
+    DetailAideSocialeComponent,
+    ItemRessourceActuelleComponent,
+    FormPersonneAChargeComponent,
+    FormPersonneAChargeSituationComponent
   ],
   imports: [
     AlertModule.forRoot(),

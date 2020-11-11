@@ -4,342 +4,66 @@
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
     </div>
     <div class="card card-body card-form">
+        <div class="row mb-3">
+            <label class="label">
+                Nombre d'enfant(s) ou de personne(s) à charge
+            </label>
+        </div>
         <div class="row">
-            <button
-                name="btnAjouterPersonne"
-                class="btn btn-primary-style-3"
-                (click)="onClickButtonAjouterPersonne()">
-                <div class="text-button">Ajouter une personne</div>
-            </button>
-        </div>
-        <div
-            class="card card-body card-form"
-            *ngIf="isNouvellePersonneAChargeFormDisplay === true">
-            <form
-                (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
-                [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}"
-                #personnesAChargeForm="ngForm">
-                <div class="form-group">
-                    <div class="row  mb-2">
-                        <label
-                            class="label"
-                            for="dateNaissance">
-                            * Date de naissance
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <div class="row btn-group-input-date">
-                            <input
-                                name="jourDateNaissanceNouvellePersonne"
-                                (focus)="onFocusDateNaissanceNouvellePersonne()"
-                                class="form-control jour-input"
-                                (change)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
-                                maxlength="2"
-                                type="text"
-                                min="0"
-                                (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
-                                (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                placeholder="JJ"
-                                [(ngModel)]="dateNaissanceNouvellePersonne.jour"
-                                required
-                                #jourDateNaissanceNouvellePersonne="ngModel">
-                            <input
-                                name="moisDateNaissanceNouvellePersonne"
-                                (focus)="onFocusDateNaissanceNouvellePersonne()"
-                                class="form-control mois-input"
-                                (change)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
-                                maxlength="2"
-                                type="text"
-                                min="0"
-                                (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
-                                (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                placeholder="MM"
-                                [(ngModel)]="dateNaissanceNouvellePersonne.mois"
-                                required
-                                #moisDateNaissanceNouvellePersonne="ngModel">
-                            <input
-                                name="anneeDateNaissanceNouvellePersonne"
-                                (focus)="onFocusDateNaissanceNouvellePersonne()"
-                                class="form-control annee-input"
-                                maxlength="4"
-                                type="text"
-                                min="1900"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                placeholder="AAAA"
-                                [(ngModel)]="dateNaissanceNouvellePersonne.annee"
-                                (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeAnnee($event)"
-                                required
-                                #anneeDateNaissanceNouvellePersonne="ngModel">
+            <div class="card-deck">
+                    <div
+                        class="card card-personne card-personne-list"
+                        *ngFor="let personne of personnesACharge;let indexOfelement=index;">
+                        <div class="card-header">
+                            <i
+                                class="fas fa-times-circle float-right"
+                                (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
+                            </i>
                         </div>
-                        <span
-                            class="row error-input-message"
-                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-                        </span>
-                        <span
-                            class="row error-input-message"
-                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-                        </span>
-                        <span
-                            class="row error-input-message"
-                            *ngIf="(isNouvellePersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-                        </span>
-                        <span
-                            class="row error-input-message"
-                            *ngIf="isNouvellePersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">
-                            {{dateNaissanceNouvellePersonne.messageErreurFormat}}
-                        </span>
+                        <div class="card-body d-flex align-items-center">
+                            <div class="row">
+                                <div class="col-3 col-card-body">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="col-9 col-card-body">
+                                    <span class="span-personne">Personne {{indexOfelement + 1}}</span>
+                                    <span>
+                                        {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a
+                                class="float-right"
+                                (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
+                                Modifier
+                            </a>
+                        </div>
                     </div>
-                </div>
                 <div
-                    class="form-group"
-                    *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay === true">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="situation">
-                            * Cette personne est
-                        </label>
+                    class="card card-personne card-add-personne"
+                    (click)="onClickButtonAjouterPersonne()">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="row">
+                            <div class="col-3 col-card-body">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="col-9 col-card-body">
+                                <span>Ajouter une personne</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <label
-                            name="isHandicape"
-                            class="btn radio-button-style-1"
-                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isHandicape"
-                            btnCheckbox
-                            tabindex="0"
-                            role="button"
-                            (click)="onClickCheckBoxIsHandicape()"
-                            #isHandicape="ngModel">
-                            {{situationPersonneEnum.HANDICAPE}}
-                        </label>
-                        <label
-                            name="isSalarie"
-                            class="btn radio-button-style-1 ml-2"
-                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSalarie"
-                            btnCheckbox
-                            tabindex="0"
-                            role="button"
-                            #isSalarie="ngModel"
-                            (click)="onClickCheckBoxIsSalarie()">
-                            {{situationPersonneEnum.SALARIE_OU_ETUDIANT_SALARIE}}
-                        </label>
-                        <label
-                            name="isSansEmploi"
-                            class="btn radio-button-style-1 ml-2"
-                            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi"
-                            btnCheckbox
-                            tabindex="0"
-                            role="button"
-                            #isSansEmploi="ngModel"
-                            (click)="onClickCheckBoxIsSansEmploi()">
-                            {{situationPersonneEnum.SANS_EMPLOI}}
-                        </label>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="isNouvellePersonnesAChargeFormSubmitted  && !isSituationNouvellePersonneCorrect()">
-                        {{controleChampFormulaireService.MESSAGE_SITUATION_INCORRECTE}}
-                    </span>
-                </div>
-                <div
-                    class="form-group"
-                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSalarie">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="salaireNet">
-                            * Salaire net
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="salaireNet"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.salaireNet"
-                            required
-                            placeholder="Montant"
-                            #salaireNet="ngModel">
-                        <span class="text-side-input">€ net du dernier mois</span>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-                <div
-                    class="form-group"
-                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="allocationMensuelleNetRSA">
-                            Si bénéficiaire du revenu de solidarité active (RSA)
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="allocationMensuelleNetRSA"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
-                            placeholder="Montant"
-                            #allocationMensuelleNetRSA="ngModel">
-                        <span class="text-side-input">€ net du mois dernier</span>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-                <div
-                    class="form-group"
-                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="allocationMensuelleNetARE">
-                            Si bénéficiaire de l'allocation de retour à l'emploi (ARE)
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="allocationMensuelleNetARE"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
-                            placeholder="Montant"
-                            #allocationMensuelleNetARE="ngModel">
-                        <span class="text-side-input">€ net du mois dernier</span>
-                    </div>
-                    <span
-                        class="row  error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-                <div
-                    class="form-group"
-                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploi">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="allocationMensuelleNetASS">
-                            Si bénéficiaire de l'allocation de solidarité spécifique (ASS)
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="allocationMensuelleNetASS"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
-                            placeholder="Montant"
-                            #allocationMensuelleNetASS="ngModel">
-                        <span class="text-side-input">€ net du mois dernier</span>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-                <div
-                    class="form-group"
-                    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isHandicape">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="allocationMensuelleNetAAH">
-                            Allocation aux adultes handicapées (AAH)
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="allocationMensuelleNetAAH"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
-                            placeholder="Montant"
-                            #allocationMensuelleNetAAH="ngModel">
-                        <span class="text-side-input">€ net du mois dernier</span>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-                <div class="div-buttons-form row ml-auto mr-auto">
-                    <button
-                        class="btn btn-success"
-                        type="submit">
-                        <div class="text-button">Valider</div>
-                    </button>
-                    <button
-                        class="btn btn-warning ml-2"
-                        (click)="onClickButonnAnnuler()">
-                        <div class="text-button">Annuler</div>
-                    </button>
-                </div>
-            </form>
-        </div>
-        <div
-            class="row"
-            *ngIf="personnesACharge?.length > 0 && isNouvellePersonneAChargeFormDisplay === false">
-            <div
-                class="card"
-                *ngFor="let personne of personnesACharge;let indexOfelement=index;">
-                <div class="card-body">
-                    <h5 class="card-title">Personne {{indexOfelement + 1}}</h5>
-                    <p class="card-text">
-                        {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
-                    </p>
-                    <button
-                        name="btnModifierPersonneACharge"
-                        class="btn btn-primary"
-                        (click)="onClickButtonModifierPersonneACharge(personne)">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button
-                        name="btnSupprimerPersonneACharge"
-                        class="btn btn-danger ml-2"
-                        (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
                 </div>
             </div>
         </div>
+        <app-form-personne-a-charge
+            *ngIf="isNouvellePersonneAChargeFormDisplay === true"
+            [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
+            [nouvellePersonneACharge]="nouvellePersonneACharge"
+            [numeroNouvellePersonne]="numeroNouvellePersonne"
+            (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
+        </app-form-personne-a-charge>
         <div
             class="div-buttons-form row"
             *ngIf="isNouvellePersonneAChargeFormDisplay === false">
@@ -360,6 +84,5 @@
                 </div>
             </button>
         </div>
-
     </div>
 </div>

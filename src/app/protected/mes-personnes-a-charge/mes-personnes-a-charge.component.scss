@@ -1,0 +1,61 @@
+@import "../../../assets/scss/variables";
+
+.card-personne {
+  .card-body {
+    line-height: 1;
+    max-width: 160px;
+    margin: 0;
+    padding: 0.8rem;
+
+    .col-card-body {
+      margin: auto;
+      i {
+        font-size: 1.5rem;
+      }
+      .span-personne {
+        color: $color-blue-3;
+        font-weight: 600;
+      }
+    }
+  }
+  .card-header {
+    background-color: unset;
+    border-bottom: 0;
+    border-top: 0;
+    padding-top: 0.3rem;
+    padding-right: 0.3rem;
+    padding-bottom: 0;
+    i {
+      cursor: pointer;
+    }
+  }
+  .card-footer {
+    background-color: unset;
+    border-bottom: 0;
+    border-top: 0;
+    padding-bottom: 0.3rem;
+    padding-right: 0.3rem;
+    padding-top: 0;
+    a {
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      color: $color-blue-1;
+    }
+  }
+}
+
+.card-personne-list {
+border: 1px solid black;
+}
+
+
+.card-add-personne {
+  cursor: pointer;
+  .card-body {
+    margin-bottom: 0.2rem;
+    span {
+      color: $color-blue-1;
+    }
+  }
+}

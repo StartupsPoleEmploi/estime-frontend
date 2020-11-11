@@ -26,6 +26,10 @@ export class PersonneUtileService {
     return ageEnAnnee >= this.AGE_LEGAL_POUR_TRAVAILLE ? true : false;
   }
 
+  public isSituationCorrect(personne: Personne): boolean {
+    return personne.informationsPersonnelles.isSalarie
+    || personne.informationsPersonnelles.isSansEmploi;
+  }
 
   public creerPersonne(): Personne {
     const personne = new Personne();

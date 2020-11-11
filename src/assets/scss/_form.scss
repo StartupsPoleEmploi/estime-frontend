@@ -22,18 +22,18 @@ form.submitted input.ng-invalid,
 form.submitted select.ng-invalid,
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
-  border: 1px solid $color-error;
+  border: 1px solid $color-red-1;
 }
 
 .radio-button-style-1.ng-invalid.ng-touched,
 form.submitted .radio-button-style-1.ng-invalid,
 form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::before {
 
-  border-color: $color-error;
+  border-color: $color-red-1;
 }
 
 .error-input-message {
-  color: $color-error !important;
+  color: $color-red-1 !important;
   font-size: 0.7rem;
   margin-top: 2px;
 }

@@ -6,9 +6,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
 import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
+import { AutofocusDirective } from "@app/commun/directives/autofocus.directive";
 
 @NgModule({
   declarations: [
+    AutofocusDirective,
     CallbackPipe,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
@@ -20,6 +22,7 @@ import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
     CommonModule
   ],
   exports: [
+    AutofocusDirective,
     CallbackPipe,
     CommonModule,
     PageLoadingComponent

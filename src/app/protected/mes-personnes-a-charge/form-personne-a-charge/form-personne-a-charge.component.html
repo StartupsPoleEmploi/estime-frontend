@@ -1,0 +1,103 @@
+<div class="row card">
+    <div class="card-title">
+        <span>Personne {{numeroNouvellePersonne}}</span>
+        <i
+            class="fas fa-times-circle mb-2 mr-2 float-right"
+            (click)="onClickButtonAnnuler()">
+        </i>
+    </div>
+    <div class="card-body">
+        <form
+            (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
+            [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}"
+            #personnesAChargeForm="ngForm">
+            <div class="form-group">
+                <div class="mb-2">
+                    <label
+                        class="label"
+                        for="dateNaissance">
+                        * Date de naissance
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group-input-date">
+                        <input
+                            name="jourDateNaissanceNouvellePersonne"
+                            (focus)="onFocusDateNaissanceNouvellePersonne()"
+                            class="form-control jour-input"
+                            (change)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="JJ"
+                            [(ngModel)]="dateNaissanceNouvellePersonne.jour"
+                            required
+                            #jourDateNaissanceNouvellePersonne="ngModel"
+                            ngAutofocus>
+                        <input
+                            name="moisDateNaissanceNouvellePersonne"
+                            (focus)="onFocusDateNaissanceNouvellePersonne()"
+                            class="form-control mois-input"
+                            (change)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="MM"
+                            [(ngModel)]="dateNaissanceNouvellePersonne.mois"
+                            required
+                            #moisDateNaissanceNouvellePersonne="ngModel">
+                        <input
+                            name="anneeDateNaissanceNouvellePersonne"
+                            (focus)="onFocusDateNaissanceNouvellePersonne()"
+                            class="form-control annee-input"
+                            maxlength="4"
+                            type="text"
+                            min="1900"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="AAAA"
+                            [(ngModel)]="dateNaissanceNouvellePersonne.annee"
+                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeAnnee()"
+                            required
+                            #anneeDateNaissanceNouvellePersonne="ngModel">
+                    </div>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="isNouvellePersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">
+                        {{dateNaissanceNouvellePersonne.messageErreurFormat}}
+                    </span>
+                </div>
+            </div>
+            <app-form-personne-a-charge-situation
+                *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay === true"
+                [nouvellePersonneACharge]="nouvellePersonneACharge"
+                [isNouvellePersonnesAChargeFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted">
+            </app-form-personne-a-charge-situation>
+            <div class="div-buttons-form row ml-auto mr-auto">
+                <button
+                    class="btn btn-primary-style-1 ml-auto mr-auto"
+                    type="submit">
+                    <div class="text-button">Valider</div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

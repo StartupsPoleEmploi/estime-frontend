@@ -23,16 +23,23 @@
                       type="text"
                       (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                       maxlength="5"
+                      minlength="5"
                       class="form-control"
                       placeholder="ex : 75001"
                       [(ngModel)]="informationsPersonnelles.codePostal"
                       required
-                      #codePostal="ngModel">
+                      #codePostal="ngModel"
+                      ngAutofocus>
               </div>
               <span
                   class="row error-input-message"
                   *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
                   {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+              </span>
+              <span
+                  class="row error-input-message"
+                  *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
+                  {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
               </span>
           </div>
           <div class="form-group">
