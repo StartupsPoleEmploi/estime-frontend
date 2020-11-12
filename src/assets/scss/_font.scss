@@ -1,11 +1,11 @@
 .font-effect {
   font-family: "Lato","Roboto",Helvetica;
-  color: #23333C;
+  color: $color-blue-1;
 }
 
 .font-effect-title {
   font-family: "Lato","Roboto",Helvetica;
-  color: #23333C;
+  color: $color-blue-1;
 }
 
 h1 {
@@ -22,7 +22,7 @@ h1 {
 .h1-style-1 {
   @extend .font-effect-title;
   text-align: center;
-  color: #1B2B67;
+  color: $color-blue-2;
   font-size: 1.7rem;
 }
 
@@ -30,12 +30,16 @@ h1 {
   @extend .font-effect-title;
   @extend .h1-style-1;
   text-align: left;
+  font-size: 1.5rem;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1.7rem;
+  }
 }
 
 .text-under-h1 {
   margin-top: -0.5rem;
   font-size: 0.9rem;
-  color: #1B2B67;
+  color: $color-blue-2;
 }
 
 
@@ -50,14 +54,14 @@ h2 {
 .h2-style-1 {
   @extend .font-effect-title;
   text-align: center;
-  color: #1B2B67;
+  color: $color-blue-2;
   font-size: 1.7rem;
 }
 
 .h2-style-3 {
   @extend .font-effect-title;
   text-align: center;
-  color: #1B2B67;
+  color: $color-blue-2;
   font-size: 1.7rem;
 }
 
@@ -78,7 +82,7 @@ h4 , h5, h6 {
 .h4-style-3 {
   @extend .font-effect-title;
   text-align: left;
-  color: #1B2B67;
+  color: $color-blue-2;
   font-size: 1.3rem;
 }
 
@@ -92,7 +96,7 @@ h4 , h5, h6 {
 .h5-style-2 {
   @extend .font-effect-title;
   text-align: left;
-  color: #1B2B67;
+  color: $color-blue-2;
   font-size: 1.1rem;
 }
 

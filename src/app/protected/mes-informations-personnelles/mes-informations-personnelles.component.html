@@ -218,8 +218,9 @@
                       {{situationPersonneEnum.HANDICAPE}}
                   </label>
                   <label
+                      id="btn-is-createur-entreprise"
                       name="isCreateurEntreprise"
-                      class="btn radio-button-style-1 ml-2"
+                      class="btn radio-button-style-1"
                       [(ngModel)]="informationsPersonnelles.isCreateurEntreprise"
                       btnCheckbox
                       tabindex="0"
@@ -229,8 +230,9 @@
                       {{situationPersonneEnum.CREATEUR_ENTREPRISE}}
                   </label>
                   <label
+                      id="btn-has-revenus-immobilier"
                       name="hasRevenusImmobilier"
-                      class="btn radio-button-style-1 ml-2"
+                      class="btn radio-button-style-1"
                       [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
                       btnCheckbox
                       tabindex="0"
@@ -302,8 +304,9 @@
                   </label>
                   <label
                       #conjointIsSalarie="ngModel"
+                      id="btn-conjoint-is-salarie"
                       name="conjointIsSalarie"
-                      class="btn radio-button-style-1 ml-2"
+                      class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
@@ -313,8 +316,9 @@
                   </label>
                   <label
                       #conjointIsSansEmploi="ngModel"
+                      id="btn-conjoint-is-sans-emploi"
                       name="conjointIsSansEmploi"
-                      class="btn radio-button-style-1 ml-2"
+                      class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"

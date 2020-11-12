@@ -1,0 +1,21 @@
+@import "../../../assets/scss/variables";
+
+#btn-is-createur-entreprise, #btn-has-revenus-immobilier {
+  margin-top: 0.5rem;
+  @media #{$medium-device}, #{$large-device}  {
+    margin-left: 0.5rem;
+    margin-top: 0rem;
+  }
+}
+
+#btn-conjoint-is-salarie {
+  margin-left: 0.5rem;
+}
+
+#btn-conjoint-is-sans-emploi {
+  margin-top: 0.5rem;
+  @media #{$medium-device}, #{$large-device}  {
+    margin-left: 0.5rem;
+    margin-top: 0rem;
+  }
+}

@@ -34,13 +34,19 @@
   }
   .numero-etape {
     color : $color-orange-1;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: 600;
     padding-left: 0;
     padding-right: 0;
+    @media #{$medium-device}, #{$large-device}  {
+      font-size: 2.5rem;
+    }
   }
   .text-etape {
-    padding-top: 16px;
+    padding-top: 12px;
+    @media #{$medium-device}, #{$large-device}  {
+      padding-top: 16px;
+    }
     padding-left: 0;
     padding-right: 2rem;
     font-size: 1.5rem;

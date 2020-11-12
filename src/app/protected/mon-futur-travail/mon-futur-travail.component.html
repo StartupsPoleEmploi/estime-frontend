@@ -9,7 +9,7 @@
             [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
             #futurTravailForm="ngForm">
             <div class="row">
-                <div class="col-6 col-md-2 form-group">
+                <div class="col-12 col-md-2 form-group">
                     <div class="row mb-1">
                         <label
                             class="label"
@@ -59,7 +59,7 @@
                     </span>
                 </div>
                 <div
-                    class="col-6 col-md-10 form-group"
+                    class="col-12 col-md-10 form-group form-group-nombre-mois"
                     *ngIf="futurTravail.typeContrat == 'CDD'">
                     <label
                         class="label mb-2"
@@ -105,11 +105,10 @@
                         min="0"
                         maxlength="2"
                         class="form-control"
-                        placeholder="Nombre d'heures"
+                        placeholder="Nombre"
                         [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                         required
-                        #dureeHebdomadaire="ngModel"
-                        ngAutofocus>
+                        #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">par semaine</span>
                 </div>
                 <span

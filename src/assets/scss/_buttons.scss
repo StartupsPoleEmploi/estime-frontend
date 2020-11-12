@@ -18,6 +18,13 @@
   }
 }
 
+.button-se-connecter-pe {
+  @media #{$medium-device}, #{$large-device}  {
+    min-height: 3rem;
+  }
+  max-height: 3rem;
+}
+
 .btn-group-input-date {
   display: flex !important;
   .jour-input {
@@ -67,7 +74,10 @@
   color: $color-white-1 !important;
   display: flex;
   font-family: "Lato", sans-serif !important;
-  padding: 0.2rem 0 0.2rem 0rem;
+  padding: 0.3rem 0 0.3rem 0rem;
+  @media #{$medium-device}, #{$large-device}  {
+    padding: 0.2rem 0 0.2rem 0rem;
+  }
   text-decoration: none;
   &:not(:disabled):not(.disabled):active, &:hover, &:focus {
     background-color: $color-blue-3;
@@ -84,12 +94,7 @@
   border: none;
   color: $color-blue-2;
   display: inline-flex;
-  margin-top: 1rem;
-  @media #{$medium-device}, #{$large-device} {
-    margin-top: 0;
-    margin: auto;
-    display: flex;
-  }
+  margin: auto;
   &:not(:disabled):not(.disabled):active, &:hover, &:focus {
     background-color: none;
     border: none;

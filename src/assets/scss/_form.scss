@@ -86,34 +86,28 @@ input:-webkit-autofill:focus {
 /** end change style after autofill **/
 
 .card-form {
+  border: 0;
   margin-top: 2rem;
   padding-left: 1.7rem;
   @media #{$medium-device}, #{$large-device} {
     padding-left: 4rem;
   }
-
-
-
   input {
-    max-width: 150px;
+    max-width: 100px;
+    @media #{$medium-device}, #{$large-device} {
+      max-width: 150px;
+    }
     font-size: 0.9rem;
   }
-
-  .max-with-input-type-montant {
-    max-width: 85px !important;
-  }
-
-
   select {
     font-size: 0.9rem;
+    max-width: 230px;
     width: auto;
   }
-
   .interrogation-icon {
     margin: auto;
     vertical-align: inherit;
   }
-
   .label, span {
     color: $color-blue-2;
     font-weight: 500;
@@ -126,18 +120,6 @@ input:-webkit-autofill:focus {
     font-weight: 300;
     color: black;
   }
-
-  .card {
-    margin-right: 25px;
-    margin-top: 1rem;
-    .title-card {
-      margin-bottom: 1rem;
-      margin-top: -1rem;
-      margin-left: -1rem;
-      text-decoration-line: underline;
-    }
-  }
-
   .label-left-style-1 {
     font-weight: 400;
     margin-right: 0.3rem;
