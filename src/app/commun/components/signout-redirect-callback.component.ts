@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '@services-utiles/auth-service.service';
-import { RoutesEnum } from "@enumerations/routes.enum";
+import { AuthenticationService } from '@app/core/services/utile/authentication.service';
 
 @Component({
   selector: 'app-signout-callback',
@@ -9,10 +7,13 @@ import { RoutesEnum } from "@enumerations/routes.enum";
 })
 
 export class SignoutRedirectCallbackComponent implements OnInit {
-  constructor(private _authService: AuthService,
-              private _router: Router) { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) {
+
+  }
 
   ngOnInit() {
-    this._authService.completeLogout();
+    this.authenticationService.completeLogout();
   }
 }

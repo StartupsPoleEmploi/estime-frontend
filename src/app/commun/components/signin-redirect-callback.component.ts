@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/utile/auth-service.service';
+import { AuthenticationService } from '@app/core/services/utile/authentication.service';
 import { RoutesEnum } from "@enumerations/routes.enum";
 
 @Component({
@@ -9,11 +9,11 @@ import { RoutesEnum } from "@enumerations/routes.enum";
 })
 
 export class SigninRedirectCallbackComponent implements OnInit {
-  constructor(private authService: AuthService,
+  constructor(private authenticationService: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.completeLogin().then(
+    this.authenticationService.completeLogin().then(
       (demandeur) => {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
     }, (erreur) => {

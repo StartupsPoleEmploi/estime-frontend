@@ -1,11 +1,11 @@
-import {Injectable, Inject} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Environment } from '@models/environment';
-import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
-import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
-import { SessionStorageService } from 'ngx-webstorage';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
+import { DemandeurEmploi } from '@models/demandeur-emploi';
+import { Environment } from '@models/environment';
+import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
+import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Injectable({providedIn: 'root'})
 export class EstimeApiService {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
-import { RoutesEnum } from '@enumerations/routes.enum';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { FuturTravail } from '@models/futur-travail';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
@@ -13,10 +15,6 @@ import { SituationPersonne } from "@models/situation-personne";
 import { SessionStorageService } from "ngx-webstorage";
 import { EstimeApiService } from '../estime-api/estime-api.service';
 import { PersonneUtileService } from './personne-utile.service';
-import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AideSociale } from '@app/commun/models/aide-sociale';
 
 @Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {

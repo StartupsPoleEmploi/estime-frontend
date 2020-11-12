@@ -8,12 +8,12 @@ import { InformationAutorisationOIDC } from '@models/informations-autorisation-o
 import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
-import { DemandeurEmploiConnecteService } from "@services/utile/demandeur-emploi-connecte.service";
+import { DemandeurEmploiConnecteService } from "@app/core/services/utile/demandeur-emploi-connecte.service";
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
 import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
 
 @Injectable({providedIn: 'root'})
-export class AuthService {
+export class AuthenticationService {
 
   private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
   private informationAutorisationOIDC: InformationAutorisationOIDC;

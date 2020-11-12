@@ -1,6 +1,10 @@
-.btn:focus  {
-  box-shadow: none;
+.btn {
+  font-size: 0.8rem;
+  &:focus  {
+    box-shadow: none;
+  }
 }
+
 
 .btn-group-input-date {
   display: flex !important;
@@ -51,7 +55,7 @@
   color: $color-white-1 !important;
   display: flex;
   font-family: "Lato", sans-serif !important;
-  padding: 6px 10px 5px 13px;
+  padding: 0.2rem 0 0.2rem 0.5rem;
   text-decoration: none;
   &:not(:disabled):not(.disabled):active, &:hover, &:focus {
     background-color: $color-blue-3;

@@ -1,7 +1,7 @@
 @import "../../../assets/scss/variables";
 
 
-.presentation-section {
+#section-presentation {
   margin-bottom: unset;
   margin-top: 0.5rem;
   padding-top: 2rem;
@@ -10,19 +10,13 @@
     h1, h2, h3 {
         text-align: left;
     }
+    p {
+        font-size: 1.3rem;
+    }
   }
 }
 
-.image-estime-smartphone {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  @media #{$small-device} {
-    width: 80%;
-  }
-}
-
-.etapes-section {
+#section-etapes {
   background-color: $color-blue-2;
   color: $color-white-1;
   padding-bottom: 2rem;
@@ -34,12 +28,14 @@
   h2 {
     color: $color-white-1;
   }
-  .div-numero-etape {
+  .numero-etape {
     color : $color-orange-1;
     font-size: 2rem;
     font-weight: 500;
+    padding-left: 0;
+    padding-right: 0;
   }
-  .div-text-etape {
+  .text-etape {
     padding-top: 10px;
     padding-left: 0;
     font-size: 1.5rem;
@@ -47,7 +43,7 @@
 
 }
 
-.questions-section {
+#section-questions {
   background-color: $color-blue-5;
   padding-bottom: 2rem;
   padding-top: 2rem;
@@ -58,16 +54,22 @@
       border:none;
       border-radius: 8px;
       box-shadow: none;
-      .card-title {
-        color: $color-blue-2;
-        font-weight: 500;
-        font-size: 1.2rem;
+      .card-body {
+        padding-top: 0;
+      }
+      .card-header {
+        border:none;
+        background-color: $color-white-1;
+        h3 {
+          color: $color-blue-2;
+          font-weight: 600;
+          font-size: 1.2rem;
+        }
       }
   }
-
 }
 
-.temoignages-section {
+#section-temoignages {
   padding-bottom: 2rem;
   padding-top: 2rem;
   h2 {
@@ -88,3 +90,18 @@
     }
   }
 }
+
+.image-homepage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  @media #{$small-device} {
+    width: 80%;
+  }
+}
+
+
+
+
+
+
