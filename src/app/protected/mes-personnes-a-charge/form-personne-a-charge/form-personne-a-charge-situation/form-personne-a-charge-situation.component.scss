@@ -1,0 +1,14 @@
+@import "../../../../../assets/scss/variables";
+
+.btn {
+  max-height: 3rem;
+}
+
+#btn-is-salarie, #btn-is-sans-emploi {
+  margin-top: 0.5rem;
+  @media #{$medium-device}, #{$large-device}  {
+    margin-left: 0.5rem;
+    margin-top: 0;
+  }
+
+}
