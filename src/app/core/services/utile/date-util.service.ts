@@ -31,7 +31,11 @@ export class DateUtileService {
     return this.checkFormat(dateDecomposee) === undefined;
   }
 
-  getDateTitleSimulation(dateSimulation: string): string {
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateSimulation
+   */
+  getDateStringFormat(dateSimulation: string): string {
     const dateSimulationSplit = dateSimulation.split('-');
     const moisLabel = this.getLibelleMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
     return `${moisLabel} ${dateSimulationSplit[0]}`;

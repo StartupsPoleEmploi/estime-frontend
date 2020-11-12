@@ -59,6 +59,14 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 
+  public onClickSituationFamiliale(): void {
+    if(this.isEnCouple) {
+      this.situationConjoint = new SituationPersonne(false, false, false);
+    } else {
+      this.demandeurEmploiConnecteService.unsetConjoint();
+    }
+  }
+
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();

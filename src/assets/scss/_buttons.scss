@@ -152,6 +152,31 @@
   }
 }
 
+.btn-obtenir-ma-simulation {
+  @extend .primary-button-base;
+  margin: auto;
+  max-width: 130px ;
+  @media #{$medium-device}, #{$large-device}   {
+    margin-left: 1rem;
+    max-width: 300px;
+  }
+  width: fit-content;
+  &:hover {
+    background-color: $color-blue-2;
+    color: $color-white-2;
+  }
+  .text-button {
+    width: 100%;
+    margin-left: 1rem;
+    line-height: 0.9rem;
+  }
+  img {
+    max-width: 25px;
+    margin-left: 0.5rem;
+    margin-right: 0.8rem;
+  }
+}
+
 
 .radio-button-style-1 {
   border-color: $color-blue-2;

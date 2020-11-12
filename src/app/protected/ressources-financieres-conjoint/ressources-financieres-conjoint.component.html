@@ -12,12 +12,42 @@
             #ressourcesFinancieresConjointForm="ngForm">
             <div
                 class="form-group"
+                *ngIf="conjoint.informationsPersonnelles.isHandicape">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetAAH">
+                        Allocation aux adultes handicapées, allocation du dernier mois
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetAAH"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                        placeholder="Montant"
+                        #allocationMensuelleNetAAH="ngModel">
+                    <span class="text-side-input">€</span>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+            <div
+                class="form-group"
                 *ngIf="conjoint.informationsPersonnelles.isSalarie">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="salaireNet">
-                        * Salaire net
+                        * Salaire net du dernier mois
                     </label>
                 </div>
                 <div class="row">
@@ -33,7 +63,7 @@
                         required
                         placeholder="Montant"
                         #salaireNet="ngModel">
-                    <span class="text-side-input">€ net du dernier mois</span>
+                    <span class="text-side-input">€</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -47,35 +77,35 @@
                 </span>
             </div>
             <div
-                    class="form-group"
-                    *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
-                    <div class="row mb-2">
-                        <label
-                            class="label"
-                            for="allocationMensuelleNetRSA">
-                            Si bénéficiaire du revenu de solidarité active (RSA)
-                        </label>
-                    </div>
-                    <div class="row">
-                        <input
-                            name="allocationMensuelleNetRSA"
-                            type="text"
-                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                            min="0"
-                            maxlength="6"
-                            class="form-control"
-                            [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
-                            placeholder="Montant"
-                            #allocationMensuelleNetRSA="ngModel">
-                        <span class="text-side-input">€ net du mois dernier</span>
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
+                class="form-group"
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetRSA">
+                        Si bénéficiaire du revenu de solidarité active (RSA), allocation du dernier mois
+                    </label>
                 </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetRSA"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                        placeholder="Montant"
+                        #allocationMensuelleNetRSA="ngModel">
+                    <span class="text-side-input">€</span>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
             <div
                 class="form-group"
                 *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
@@ -83,7 +113,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetARE">
-                        Si bénéficiaire de l'allocation de retour à l'emploi (ARE)
+                        Si bénéficiaire de l'allocation de retour à l'emploi (ARE), allocation du dernier mois
                     </label>
                 </div>
                 <div class="row">
@@ -98,7 +128,7 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
                         placeholder="Montant"
                         #allocationMensuelleNetARE="ngModel">
-                    <span class="text-side-input">€ net du mois dernier</span>
+                    <span class="text-side-input">€</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -113,7 +143,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetASS">
-                        Si bénéficiaire de l'allocation de solidarité spécifique (ASS)
+                        Si bénéficiaire de l'allocation de solidarité spécifique (ASS), allocation du dernier mois
                     </label>
                 </div>
                 <div class="row">
@@ -128,7 +158,7 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
                         placeholder="Montant"
                         #allocationMensuelleNetASS="ngModel">
-                    <span class="text-side-input">€ net du mois dernier</span>
+                    <span class="text-side-input">€</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -136,57 +166,23 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
-            <div
-                class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isHandicape">
-                <div class="row mb-2">
-                    <label
-                        class="label"
-                        for="allocationMensuelleNetAAH">
-                        Allocation aux adultes handicapées
-                    </label>
-                </div>
-                <div class="row">
-                    <input
-                        name="allocationMensuelleNetAAH"
-                        type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        min="0"
-                        maxlength="6"
-                        class="form-control"
-                        [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
-                        placeholder="Montant"
-                        #allocationMensuelleNetAAH="ngModel">
-                    <span class="text-side-input">€ net du mois dernier</span>
-                </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
             <div class="div-buttons-form row">
-                <div class="col-12 col-md-6">
-                    <button
-                        class="btn btn-primary-style-3"
-                        type="submit">
-                        <div class="text-button">Obtenir ma simulation</div>
-                        <div>
-                            <img src="./assets/images/icon-bt-primaire.svg">
-                        </div>
-                    </button>
-                </div>
-                <div class="col-12 col-md-6 order-md-first">
-                    <button
-                        class="btn btn-primary-style-0"
-                        (click)="onClickButtonRetour()">
-                        <div>
-                            <img src="./assets/images/return-arrow.svg">
-                        </div>
-                        <div class="text-button">Retour</div>
-                    </button>
-                </div>
+                <button
+                    class="btn btn-primary-style-0"
+                    (click)="onClickButtonRetour()">
+                    <div>
+                        <img src="./assets/images/return-arrow.svg">
+                    </div>
+                    <div class="text-button">Retour</div>
+                </button>
+                <button
+                    class="btn btn-obtenir-ma-simulation"
+                    type="submit">
+                    <div class="text-button">Obtenir ma simulation</div>
+                    <div>
+                        <img src="./assets/images/icon-bt-primaire.svg">
+                    </div>
+                </button>
             </div>
         </form>
     </div>

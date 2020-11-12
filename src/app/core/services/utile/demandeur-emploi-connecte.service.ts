@@ -140,15 +140,27 @@ export class DemandeurEmploiConnecteService {
   }
 
   public unsetAllocationMensuelleNetAAH(): void {
-    this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetConjoint(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
   }
 
   public unsetRevenusCreateurEntreprise(): void {
     this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise = null;
+    this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
   public unsetRevenusImmobilier(): void {
     this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier = null;
+    this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
   public hasRevenusImmobilier(): boolean {

@@ -7,6 +7,9 @@
   padding-top: 2rem;
   padding-bottom: unset;
   .container-fluid {
+    h1 {
+      line-height: 3rem;
+    }
     h1, h2, h3 {
         text-align: left;
     }

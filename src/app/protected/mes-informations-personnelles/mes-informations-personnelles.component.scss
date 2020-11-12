@@ -8,11 +8,16 @@
   }
 }
 
-#btn-conjoint-is-salarie {
+#btn-conjoint-is-sans-emploi {
+  margin-top: 0.5rem;
   margin-left: 0.5rem;
+  @media #{$medium-device}, #{$large-device}  {
+    margin-left: 0.5rem;
+    margin-top: 0rem;
+  }
 }
 
-#btn-conjoint-is-sans-emploi {
+#btn-conjoint-is-salarie {
   margin-top: 0.5rem;
   @media #{$medium-device}, #{$large-device}  {
     margin-left: 0.5rem;

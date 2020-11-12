@@ -16,7 +16,6 @@ import { AideSociale } from '@app/commun/models/aide-sociale';
 export class ResultatMaSimulationComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
-  simulationsMensuelles: Array<SimulationMensuelle>;
   simulationSelected:SimulationMensuelle;
   aideSocialeSelected: AideSociale;
 
@@ -32,7 +31,9 @@ export class ResultatMaSimulationComponent implements OnInit {
     this.loadData();
   }
 
-  public onClickButtonSimulationMensuelle(): void {
+  public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
+    this.simulationSelected = simulationMensuel;
+    this.aideSocialeSelected = null;
     this.selectFirstAideSociale();
   }
 
@@ -40,13 +41,21 @@ export class ResultatMaSimulationComponent implements OnInit {
     this.aideSocialeSelected = aideSocialeSelected;
   }
 
-  public getTitleCardSimulation(simulationMensuelle: SimulationMensuelle): string {
+  public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
-    return this.dateUtileService.getDateTitleSimulation(dateSimulation);
+    return this.dateUtileService.getDateStringFormat(dateSimulation);
   }
 
   public isLastCardSimulation(index: number): boolean {
     return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1;
+  }
+
+  public isSimulationMensuelleListIsSimulationMensuelleSelected(simulationMensuelle: SimulationMensuelle): boolean {
+    return simulationMensuelle.datePremierJourMoisSimule === this.simulationSelected.datePremierJourMoisSimule;
+  }
+
+  public isLastSimulationMensuelle(index: number) {
+    return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1
   }
 
   public onClickButtonRetour(): void {
@@ -88,12 +97,10 @@ export class ResultatMaSimulationComponent implements OnInit {
 
   private selectFirstAideSociale(): void {
     if(this.hasAidesObtenir()) {
-      let index = 0;
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if((index === 0 && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) || index === 2) {
-          this.aideSocialeSelected = aide;
+        if(!this.aideSocialeSelected && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+            this.aideSocialeSelected = aide;
         }
-        index ++;
       }
     } else {
       this.aideSocialeSelected = null;

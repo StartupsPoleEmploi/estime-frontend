@@ -125,5 +125,8 @@ input:-webkit-autofill:focus {
     margin-right: 0.3rem;
     margin-top: auto;
     margin-bottom: auto;
+    @media #{$small-device} {
+      font-size: 0.9rem;
+    }
   }
 }

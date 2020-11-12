@@ -1,6 +1,12 @@
-<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
+<app-page-loading
+    *ngIf="isPageLoadingDisplay"
+    message="Calcul de votre simulation en cours..."></app-page-loading>
 <div class="container-fluid form-container-fluid">
-    <alert type="danger" *ngIf="messageErreur">{{messageErreur}}</alert>
+    <alert
+        type="danger"
+        *ngIf="messageErreur">
+        {{messageErreur}}
+    </alert>
     <h1 class="h1-style-2">4. Mes ressources actuelles</h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
@@ -71,7 +77,7 @@
                         placeholder="Montant"
                         #allocationJournaliereNetASS="ngModel"
                         ngAutofocus>
-                    <span class="text-side-input">€ net/jour</span>
+                    <span class="text-side-input">€</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -222,7 +228,11 @@
                         data-width="auto"
                         required
                         #nombreMoisCumulAssSalaire="ngModel">
-                        <option [value]="0" disabled>Sélectionner</option>
+                        <option
+                            [value]="0"
+                            disabled>
+                            Sélectionner
+                        </option>
                         <option
                             *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
                             [value]="nombreMois.value">
@@ -249,7 +259,7 @@
                         <label
                             class="label label-left-style-1"
                             for="allocationMensuelleNetAAH">
-                            * Allocations aux adultes handicapées
+                            * Allocation aux adultes handicapées du mois dernier
                         </label>
                     </div>
                     <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -265,7 +275,7 @@
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
                                 required
                                 #allocationMensuelleNetAAH="ngModel">
-                            <span class="text-side-input">€ net du mois dernier</span>
+                            <span class="text-side-input">€</span>
                         </div>
                         <div class="row">
                             <span
@@ -288,7 +298,7 @@
                         <label
                             class="label label-left-style-1"
                             for="revenusCreateurEntreprise">
-                            * Revenus créateur d'entreprise
+                            * Revenus net créateur d'entreprise des 3 derniers mois
                         </label>
                     </div>
                     <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -304,7 +314,7 @@
                                 [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise"
                                 required
                                 #revenusCreateurEntreprise="ngModel">
-                            <span class="text-side-input">€ net total des 3 derniers mois</span>
+                            <span class="text-side-input">€</span>
                         </div>
                         <div class="row">
                             <span
@@ -328,7 +338,7 @@
                     <label
                         class="label label-left-style-1"
                         for="revenusImmobilier">
-                        * Revenus immobilier
+                        * Revenus net immobilier des 3 derniers mois
                     </label>
                 </div>
                 <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -344,7 +354,7 @@
                             [(ngModel)]="ressourcesFinancieres.revenusImmobilier"
                             required
                             #revenusImmobilier="ngModel">
-                        <span class="text-side-input">€ net total des 3 derniers mois</span>
+                        <span class="text-side-input">€</span>
                     </div>
                     <div class="row">
                         <span
@@ -363,7 +373,7 @@
             <div class="form-group flex-column mt-3">
                 <div class="row mb-3 flex-column">
                     <label class="label">
-                        Les ressource(s) perçue(s) par mon foyer
+                        Les ressource(s) perçue(s) par mon foyer le mois dernier
                     </label>
                 </div>
                 <div class="row">
@@ -387,7 +397,7 @@
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
                                 required
                                 #allocationsLogementMensuellesNetFoyer="ngModel">
-                            <span class="text-side-input">€ net total du mois dernier</span>
+                            <span class="text-side-input">€</span>
                         </div>
                         <div class="row">
                             <span
@@ -424,7 +434,7 @@
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
                                 required
                                 #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                            <span class="text-side-input">€ net total du mois dernier</span>
+                            <span class="text-side-input">€</span>
                         </div>
                         <div class="row">
                             <span
@@ -442,28 +452,24 @@
                 </div>
             </div>
             <div class="div-buttons-form row">
-                <div class="col-12 col-md-6">
-                    <button
-                        class="btn btn-primary-style-3"
-                        type="submit">
-                        <div class="text-button">
-                            {{getLibelleBoutonValidationFormulaire()}}
-                        </div>
-                        <div>
-                            <img src="./assets/images/icon-bt-primaire.svg">
-                        </div>
-                    </button>
-                </div>
-                <div class="col-12 col-md-6 order-md-first">
-                    <button
-                        class="btn btn-primary-style-0"
-                        (click)="onClickButtonRetour()">
-                        <div>
-                            <img src="./assets/images/return-arrow.svg">
-                        </div>
-                        <div class="text-button">Retour</div>
-                    </button>
-                </div>
+                <button
+                    class="btn btn-primary-style-0"
+                    (click)="onClickButtonRetour()">
+                    <div>
+                        <img src="./assets/images/return-arrow.svg">
+                    </div>
+                    <div class="text-button">Retour</div>
+                </button>
+                <button
+                    class="btn btn-obtenir-ma-simulation"
+                    type="submit">
+                    <div class="text-button">
+                        {{getLibelleBoutonValidationFormulaire()}}
+                    </div>
+                    <div>
+                        <img src="./assets/images/icon-bt-primaire.svg">
+                    </div>
+                </button>
             </div>
         </form>
     </div>
