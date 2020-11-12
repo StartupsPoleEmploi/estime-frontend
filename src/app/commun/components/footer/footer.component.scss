@@ -1,0 +1,52 @@
+@import "../../../../assets/scss/variables";
+
+#logo-pole-emploi-footer {
+  width: 2.7rem;
+  @media #{$medium-device}, #{$large-device}  {
+    width: 3.5rem;
+  }
+}
+
+footer {
+  display: block;
+  width: 100vw;
+  background-color: $color-white-1;
+  bottom: 0;
+  font-size: 0.8rem;
+  height: 7rem;
+  left: 0;
+  margin-top: 1rem;
+  position: absolute;
+  right: 0;
+  #div-copyright {
+    text-align: center;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+    span {
+      font-size: 0.6rem;
+    }
+    @media #{$medium-device}, #{$large-device}  {
+      padding-bottom: 0;
+      margin-top: auto;
+      text-align: right;
+    }
+  }
+  #div-cgu {
+    text-align: right;
+    @media #{$medium-device}, #{$large-device}  {
+      text-align: left;
+    }
+    a {
+      text-decoration: underline;
+      text-underline-position: under;
+    }
+  }
+  .container-fluid {
+    .row {
+      margin-top: 2.5rem;
+      div {
+        margin-top:auto;
+      }
+    }
+  }
+}

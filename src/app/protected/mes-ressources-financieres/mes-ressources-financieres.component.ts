@@ -11,7 +11,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 import { AllocationsCAF } from '@models/allocations-caf';
-import { MessagesErreurEnum } from "@app/commun/enumerations/messages-erreur.enum";
+import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
 
 @Component({
   selector: 'app-mes-ressources-financieres',

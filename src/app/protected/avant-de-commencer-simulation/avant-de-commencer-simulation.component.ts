@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { Router } from '@angular/router';
 
 @Component({

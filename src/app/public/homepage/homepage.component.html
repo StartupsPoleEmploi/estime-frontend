@@ -63,11 +63,15 @@
             <div
                 class="col-sm-4"
                 *ngFor="let etape of etapesSimulation; let index = index;">
-                <div class="card card-body h-100">
-                    <div class="row">
-                        <div class="col-3 ml-0 mr-0 numero-etape">{{index + 1}}.</div>
-                        <div class="col-9 text-etape">{{etape}}</div>
+                <div class="card h-100">
+                  <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="col-auto ml-0 mr-0 pl-0 pr-0">
+                          <span class="numero-etape">{{index + 1}}.</span>
+                        </div>
+                        <div class="ml-1 col-auto text-etape">{{etape}}</div>
                     </div>
+                  </div>
                 </div>
             </div>
         </div>

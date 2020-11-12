@@ -1,0 +1,65 @@
+@import "../../../../assets/scss/variables";
+
+header {
+  background-color: white;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  #logo-estime-header {
+    width: 5rem;
+    @media #{$medium-device}, #{$large-device} {
+      width: 7rem;
+    }
+    cursor: pointer;
+  }
+  #logo-pole-emploi-header {
+    width: 2.7rem;
+    margin-left: 8px;
+    @media #{$medium-device}, #{$large-device} {
+      width: 3.5rem;
+    }
+  }
+  #div-beta {
+    border-radius: 1rem;
+    background-color: $color-blue-5;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    height: 1.8rem;
+    margin-bottom: auto;
+    margin-top: auto;
+    span {
+      color: $color-blue-2;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: auto;
+      margin-bottom: auto;
+      line-height: 1.8rem;
+      vertical-align: middle;
+    }
+  }
+  .container-fluid {
+    .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .btn-signout {
+      float: right;
+      &.d-sm-none {
+        background-color: unset;
+        border: none;
+        display: flex;
+        font-size: 1.2rem;
+        color: $color-blue-1;
+        margin-top: auto;
+        margin-bottom: auto;
+        &:not(:disabled):not(.disabled):active,
+        &:hover,
+        &:focus {
+          background-color: unset;
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

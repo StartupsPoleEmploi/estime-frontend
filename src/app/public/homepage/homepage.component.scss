@@ -24,20 +24,25 @@
   .card {
     background-color: inherit;
     border: none;
+    .card-body {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
   h2 {
     color: $color-white-1;
   }
   .numero-etape {
     color : $color-orange-1;
-    font-size: 2rem;
-    font-weight: 500;
+    font-size: 2.5rem;
+    font-weight: 600;
     padding-left: 0;
     padding-right: 0;
   }
   .text-etape {
-    padding-top: 10px;
+    padding-top: 16px;
     padding-left: 0;
+    padding-right: 2rem;
     font-size: 1.5rem;
   }
 
@@ -96,7 +101,7 @@
   margin-left: auto;
   margin-right: auto;
   @media #{$small-device} {
-    width: 80%;
+    width: 100%;
   }
 }
 

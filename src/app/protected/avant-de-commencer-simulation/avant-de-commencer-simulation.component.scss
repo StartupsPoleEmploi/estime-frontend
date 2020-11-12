@@ -6,8 +6,13 @@
     border: none;
     max-width: 650px;
     margin: auto;
-    #p-simulation {
+    #div-warning-simulation-duree {
       color: $color-blue-3;
+      font-size: 0.8rem;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1rem;
+      }
+
     }
   }
 }

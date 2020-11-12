@@ -14,6 +14,9 @@ h1 {
   font-size: 1.8rem;
   text-align: center;
   font-weight: bold;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 2.2rem;
+  }
 }
 
 .h1-style-1 {

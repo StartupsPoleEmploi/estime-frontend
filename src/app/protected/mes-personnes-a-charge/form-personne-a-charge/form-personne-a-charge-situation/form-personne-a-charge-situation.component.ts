@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Personne } from '@app/commun/models/personne';
-import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
+import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
 

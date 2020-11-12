@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AvantDeCommencerSimulationComponent } from "@app/protected/avant-de-commencer-simulation/avant-de-commencer-simulation.component";
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { MesInformationsPersonnellesComponent } from '@app/protected/mes-informations-personnelles/mes-informations-personnelles.component';
 import { MonFuturTravailComponent } from './mon-futur-travail/mon-futur-travail.component';
 import { MesRessourcesFinancieresComponent } from './mes-ressources-financieres/mes-ressources-financieres.component';

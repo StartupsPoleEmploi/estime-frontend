@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Personne } from '@models/personne';
@@ -12,8 +12,8 @@ import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationPersonne } from '@app/commun/models/situation-personne';
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
-import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
-import { SituationsFamilialesEnum } from "@app/commun/enumerations/situations-familiales.enum";
+import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
+import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
 
 @Component({
   selector: 'app-mes-informations-personnelles',

@@ -5,6 +5,7 @@ import { environment } from '@environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { CommunModule } from './commun/commun.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { CoreModule } from './core/core.module';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    CommunModule,
     CoreModule
   ],
   providers: [

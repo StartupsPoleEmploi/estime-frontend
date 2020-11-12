@@ -5,7 +5,7 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { Router } from '@angular/router';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { FormGroup } from '@angular/forms';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { Personne } from '@app/commun/models/personne';
 
 @Component({

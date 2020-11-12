@@ -1,0 +1,13 @@
+<header>
+  <div class="container-fluid">
+    <div class="row">
+      <img id="logo-estime-header"  src="./assets/images/logo-estime.svg" (click)="onClickLogoEstime()"/>
+      <img id="logo-pole-emploi-header" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
+      <div id="div-beta" class="ml-2">
+        <span>BETA</span>
+      </div>
+      <button class="btn btn-primary-style-1 btn-signout d-none d-sm-block mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()">Se deconnecter</button>
+      <button class="btn-signout d-block d-sm-none mr-0 ml-auto"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+</header>

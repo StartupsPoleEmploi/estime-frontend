@@ -6,7 +6,7 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DateDecomposee } from '@app/commun/models/date-decomposee';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
+import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 
 @Component({
   selector: 'app-form-personne-a-charge',

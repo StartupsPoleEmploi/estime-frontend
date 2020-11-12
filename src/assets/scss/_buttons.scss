@@ -1,10 +1,22 @@
 .btn {
   font-size: 0.8rem;
+  @media #{$medium-device}, #{$large-device}  {
+    min-height: 2.5rem;
+  }
+  max-height: 2.5rem;
+  margin-top: auto;
+  margin-bottom: auto;
   &:focus  {
     box-shadow: none;
   }
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1rem;
+  }
+  div  {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 }
-
 
 .btn-group-input-date {
   display: flex !important;
@@ -55,7 +67,7 @@
   color: $color-white-1 !important;
   display: flex;
   font-family: "Lato", sans-serif !important;
-  padding: 0.2rem 0 0.2rem 0.5rem;
+  padding: 0.2rem 0 0.2rem 0rem;
   text-decoration: none;
   &:not(:disabled):not(.disabled):active, &:hover, &:focus {
     background-color: $color-blue-3;
@@ -119,21 +131,21 @@
   @extend .primary-button-base;
   margin: auto;
   max-width: 300px ;
+  width: fit-content;
   &:hover {
     background-color: $color-blue-2;
     color: $color-white-2;
   }
   .text-button {
     width: 100%;
-    margin: auto;
-    margin-left: 2.5rem !important;
-    margin-right: 1.5rem !important;
+    margin-left: 1rem;
   }
   img {
     max-width: 25px;
+    margin-left: 0.5rem;
+    margin-right: 0.8rem;
   }
 }
-
 
 
 .radio-button-style-1 {

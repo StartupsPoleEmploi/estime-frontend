@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { Router } from '@angular/router';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';

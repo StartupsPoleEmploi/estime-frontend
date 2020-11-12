@@ -8,15 +8,19 @@ import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AutofocusDirective,
     CallbackPipe,
+    FooterComponent,
+    HeaderComponent,
+    NotFoundComponent,
+    PageLoadingComponent,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
-    NotFoundComponent,
-    PageLoadingComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -27,6 +31,8 @@ import { PageLoadingComponent } from "./components/page-loading/page-loading.com
     AutofocusDirective,
     CallbackPipe,
     CommonModule,
+    FooterComponent,
+    HeaderComponent,
     PageLoadingComponent
   ]
 })
