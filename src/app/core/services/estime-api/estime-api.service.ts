@@ -32,7 +32,7 @@ export class EstimeApiService {
 
   public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<DemandeurEmploi> {
     const headers = this.getHttpHeaders();
-    return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi/simuler_mes_aides`, demandeurEmploi, {headers : headers}).toPromise();
+    return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}/simuler_aides`, demandeurEmploi, {headers : headers}).toPromise();
   }
 
 
