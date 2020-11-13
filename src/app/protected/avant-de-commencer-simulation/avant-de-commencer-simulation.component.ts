@@ -33,5 +33,6 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
         this.isPageLoadingDisplay = false;
         console.log(erreur);
       }
+    );
   }
 }
