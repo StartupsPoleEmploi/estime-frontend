@@ -13,7 +13,7 @@ export class PageLoadingComponent implements OnInit {
 
   ngOnInit() {
 		if (this.message == null) {
-			this.message = "chargement en cours...";
+			this.message = "Veuillez patienter...";
 		}
 	}
 }

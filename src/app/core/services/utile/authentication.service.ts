@@ -42,18 +42,7 @@ export class AuthenticationService {
       (informationsAccessTokenIndividuConnecte) => {
         this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
         this.sessionStorageService.store(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, informationsAccessTokenIndividuConnecte);
-        return this.estimeApiService.getDemandeurEmploi().then(
-          (demandeurEmploi) => {
-            this.isLoggedInChangedSubject.next(true);
-            this.demandeurEmploiConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
-            return Promise.resolve();
-          }, (erreur) => {
-            console.log(erreur);
-            this.messageErreur = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
-            this.clearSessionStorage();
-            return Promise.reject();
-          }
-        );
+        this.isLoggedInChangedSubject.next(true);
       }, (erreur) => {
         console.log(erreur);
         this.messageErreur = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
