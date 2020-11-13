@@ -203,6 +203,11 @@
                       class="label"
                       for="situationsExceptionnelles">
                       Vous êtes
+                      <i
+                      class="interrogation-icon btn far fa-question-circle"
+                      [popover]="popoverSituationDemandeurTemplate"
+                      #popoverSituationDemandeur="bs-popover"
+                      placement="right"></i>
                   </label>
               </div>
               <div class="row">
@@ -356,3 +361,26 @@
       </form>
   </div>
 </div>
+
+<ng-template #popoverSituationDemandeurTemplate>
+  <div class="container">
+      <div class="close-popover row">
+          <i
+              class="fas fa-times-circle mb-2 ml-auto"
+              (click)="popoverSituationDemandeur.hide()"></i>
+      </div>
+      <div class="row">
+        <p>
+
+          <b>Pourquoi me pose-t-on ces questions ?</b>
+        </p>
+
+          <p>
+            Ces situations et les montants des revenus associés ont une incidence sur le calcul de la prime d’activité.
+          </p>
+          <p>
+            C’est pourquoi, il est important de les déclarer.
+          </p>
+      </div>
+  </div>
+</ng-template>

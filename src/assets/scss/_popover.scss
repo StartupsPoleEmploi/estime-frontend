@@ -1,11 +1,26 @@
+popover-container {
+  @media #{$small-device} {
+    width: 95%;
+  }
+}
 
 .popover {
   background: $color-blue-5;
   color: white;
-  font-size: 0.8rem !important;
+  font-size: 0.7rem !important;
   p {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
+  @media #{$medium-device}, #{$large-device} {
+    font-size: 0.8rem !important;
+    p {
+      font-size: 0.8rem !important;
+    }
+  }
+}
+
+.popover-body {
+  padding: 0.5rem 0.2rem;
 }
 
 .close-popover {

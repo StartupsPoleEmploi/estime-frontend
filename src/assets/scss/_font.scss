@@ -82,21 +82,30 @@ h4 , h5, h6 {
   @extend .font-effect-title;
   text-align: left;
   color: $color-blue-2;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1.3rem;
+  }
 }
 
 .h5-style-1 {
   @extend .font-effect-title;
   text-align: left;
   color: #23333C;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1.1rem;
+  }
 }
 
 .h5-style-2 {
   @extend .font-effect-title;
   text-align: left;
   color: $color-blue-2;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1.1rem;
+  }
 }
 
 p, span {

@@ -126,8 +126,8 @@
                         * Salaire mensuel net
                         <i
                             class="interrogation-icon btn far fa-question-circle"
-                            [popover]="popoversalairenettemplate"
-                            #popoversalairenet="bs-popover"
+                            [popover]="popoverSalaireNetTemplate"
+                            #popoverSalaireNet="bs-popover"
                             placement="right"></i>
                     </label>
                 </div>
@@ -238,12 +238,12 @@
     </div>
 </div>
 
-<ng-template #popoversalairenettemplate>
+<ng-template #popoverSalaireNetTemplate>
     <div class="container">
-        <div class="close-popover row float-right">
+        <div class="close-popover row">
             <i
-                class="fas fa-times-circle mb-2"
-                (click)="popoversalairenet.hide()"></i>
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverSalaireNet.hide()"></i>
         </div>
         <div class="row">
             <b>Qu'est ce que le salaire brut et net ?</b>
@@ -263,5 +263,4 @@
             </p>
         </div>
     </div>
-
 </ng-template>

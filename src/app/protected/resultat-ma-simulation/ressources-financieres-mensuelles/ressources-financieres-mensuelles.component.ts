@@ -4,6 +4,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { AideSociale } from '@app/commun/models/aide-sociale';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -21,7 +22,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
 
   constructor(
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService
+    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    private screenService: ScreenService
   ) { }
 
   ngOnInit(): void {
@@ -47,21 +49,24 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   public hasAidesObtenir(): boolean {
     let hasAidesObtenir = false;
-    if(Object.entries(this.simulationSelected.mesAides).length > 1) {
-      hasAidesObtenir = true;
-    }
-    if(Object.entries(this.simulationSelected.mesAides).length === 1) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          hasAidesObtenir = true;
+    if(this.simulationSelected) {
+      if(Object.entries(this.simulationSelected.mesAides).length > 1) {
+        hasAidesObtenir = true;
+      }
+      if(Object.entries(this.simulationSelected.mesAides).length === 1) {
+        for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+          if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+            hasAidesObtenir = true;
+          }
         }
       }
     }
+
     return hasAidesObtenir;
   }
 
-  public isAideSocialListIsAideSocialeSelected(aideSociale: AideSociale): boolean {
-    return aideSociale.code === this.aideSocialeSelected.code;
+  public isAideSocialSelected(aideSociale: AideSociale): boolean {
+    return this.aideSocialeSelected && aideSociale.code === this.aideSocialeSelected.code;
   }
 
   public isLastAideKeyValue(index: number): boolean {
@@ -75,7 +80,11 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    this.aideSocialeSelected = aideSociale;
+    if(this.screenService.isOnSmartphone && this.isAideSocialSelected(aideSociale)) {
+      this.aideSocialeSelected = null;
+    } else  {
+      this.aideSocialeSelected = aideSociale;
+    }
     this.newAideSocialeSelected.emit(aideSociale);
   }
 }

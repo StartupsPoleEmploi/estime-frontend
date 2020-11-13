@@ -1,27 +1,41 @@
 @import "../../../assets/scss/variables";
 
 .card-deck {
-  background-color: $color-white-1;
+  border:0;
   border-radius: 8px;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  margin-bottom: 0;
+  @media #{$medium-device}, #{$large-device} {
+    background-color: $color-white-1;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
   .first-card {
     border:0;
-    border-radius: 0 !important;
+    border-radius: 8px;
     margin-left: 0;
     margin-right: 0;
-    @media #{$medium-device}, #{$large-device}  {
-      &:not(.isLastCard){
+    margin-bottom: 10px;
+    width: 100%;
+    @media #{$medium-device}, #{$large-device} {
+      margin-bottom: 0px;
+      &:not(.isLastCard) {
         border-right: 2px solid $color-grey-1 !important;
         border-radius: 0 !important;
       }
     }
     .second-card {
-      margin: 5px;
       border: 0;
+      margin-bottom: 0;
+      @media #{$medium-device}, #{$large-device} {
+        margin: 5px;
+      }
       cursor: pointer;
       .card-body {
-        border-radius: 8px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        @media #{$medium-device}, #{$large-device} {
+          border-radius: 8px;
+        }
         text-align: center;
         &.active {
           background-color: $color-grey-1;
@@ -32,11 +46,15 @@
           font-weight: bold;
         }
         span {
-          @media #{$medium-device}, #{$large-device}  {
+          @media #{$medium-device}, #{$large-device} {
             font-size: 1.3rem;
           }
           font-weight: 900;
         }
+      }
+      .card-footer {
+        background-color: unset;
+        padding-bottom: 0;
       }
     }
   }
