@@ -42,8 +42,18 @@ header {
       margin-left: 0;
       margin-right: 0;
     }
+
     .btn-signout {
       float: right;
+      &:not(:disabled):not(.disabled):active, &:hover, &:focus {
+        background-color: none;
+        border: none;
+        box-shadow: none;
+        outline: none;
+      }
+      &:hover {
+        color: $color-blue-3 !important;
+      }
       &.d-sm-none {
         background-color: unset;
         border: none;

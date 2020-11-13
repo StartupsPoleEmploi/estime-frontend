@@ -7,7 +7,7 @@
         <span>BETA</span>
       </div>
       <button class="btn btn-primary-style-1 btn-signout d-none d-sm-block mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()">Se deconnecter</button>
-      <button class="btn-signout d-block d-sm-none mr-0 ml-auto"><i class="fas fa-sign-out-alt"></i></button>
+      <button class="btn-signout d-block d-sm-none mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
     </div>
   </div>
 </header>
