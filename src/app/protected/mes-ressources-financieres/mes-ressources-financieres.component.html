@@ -75,6 +75,7 @@
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
                         required
                         placeholder="Montant"
+                        inputmode="decimal"
                         #allocationJournaliereNetASS="ngModel"
                         ngAutofocus>
                     <span class="text-side-input">€</span>
@@ -113,6 +114,7 @@
                             placeholder="JJ"
                             [(ngModel)]="dateDernierOuvertureDroitASS.jour"
                             required
+                            inputmode="numeric"
                             #jourDateDerniereOuvertureDroitASS="ngModel">
                         <input
                             name="moisDateDerniereOuvertureDroitASS"
@@ -127,6 +129,7 @@
                             placeholder="MM"
                             [(ngModel)]="dateDernierOuvertureDroitASS.mois"
                             required
+                            inputmode="numeric"
                             #moisDateDerniereOuvertureDroitASS="ngModel">
                         <input
                             name="anneeDateDerniereOuvertureDroitASS"
@@ -138,6 +141,7 @@
                             placeholder="AAAA"
                             [(ngModel)]="dateDernierOuvertureDroitASS.annee"
                             required
+                            inputmode="numeric"
                             #anneeDateDerniereOuvertureDroitASS="ngModel">
                     </div>
                     <span
@@ -274,6 +278,7 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
                                 required
+                                inputmode="decimal"
                                 #allocationMensuelleNetAAH="ngModel">
                             <span class="text-side-input">€</span>
                         </div>
@@ -313,6 +318,7 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise"
                                 required
+                                inputmode="decimal"
                                 #revenusCreateurEntreprise="ngModel">
                             <span class="text-side-input">€</span>
                         </div>
@@ -353,6 +359,7 @@
                             placeholder="Montant"
                             [(ngModel)]="ressourcesFinancieres.revenusImmobilier"
                             required
+                            inputmode="decimal"
                             #revenusImmobilier="ngModel">
                         <span class="text-side-input">€</span>
                     </div>
@@ -396,6 +403,7 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
                                 required
+                                inputmode="decimal"
                                 #allocationsLogementMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€</span>
                         </div>
@@ -433,6 +441,7 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
                                 required
+                                inputmode="decimal"
                                 #allocationsFamilialesMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€</span>
                         </div>

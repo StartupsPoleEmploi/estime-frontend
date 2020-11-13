@@ -29,6 +29,7 @@
                       [(ngModel)]="informationsPersonnelles.codePostal"
                       required
                       #codePostal="ngModel"
+                      inputmode="numeric"
                       ngAutofocus>
               </div>
               <span
@@ -65,6 +66,7 @@
                           placeholder="JJ"
                           [(ngModel)]="dateNaissance.jour"
                           required
+                          inputmode="numeric"
                           #jourDateNaissance="ngModel">
                       <input
                           name="moisDateNaissance"
@@ -79,6 +81,7 @@
                           placeholder="MM"
                           [(ngModel)]="dateNaissance.mois"
                           required
+                          inputmode="numeric"
                           #moisDateNaissance="ngModel">
                       <input
                           name="anneeDateNaissance"
@@ -91,6 +94,7 @@
                           placeholder="AAAA"
                           [(ngModel)]="dateNaissance.annee"
                           required
+                          inputmode="numeric"
                           #anneeDateNaissance="ngModel">
                   </div>
                   <span

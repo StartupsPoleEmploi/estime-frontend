@@ -108,6 +108,7 @@
                         placeholder="Nombre"
                         [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                         required
+                        inputmode="numeric"
                         #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">par semaine</span>
                 </div>
@@ -144,6 +145,7 @@
                         placeholder="Montant"
                         [(ngModel)]="futurTravail.salaireMensuelNet"
                         required
+                        inputmode="decimal"
                         #salaireMensuelNet="ngModel">
                     <span class="text-side-input">€</span>
                 </div>
@@ -178,6 +180,7 @@
                         placeholder="Distance"
                         [(ngModel)]="futurTravail.distanceKmDomicileTravail"
                         required
+                        inputmode="numeric"
                         #distanceDomicileLieuTravail="ngModel">
                     <span class="text-side-input">km</span>
                 </div>
@@ -207,6 +210,7 @@
                         placeholder="Nombre"
                         [(ngModel)]="futurTravail.nombreTrajetsDomicileTravail"
                         required
+                        inputmode="numeric"
                         #nombreTrajetsDomicileTravail="ngModel">
                     <span class="text-side-input">par mois</span>
                 </div>
