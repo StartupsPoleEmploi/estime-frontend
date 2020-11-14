@@ -3,4 +3,5 @@ export class AllocationsCAF {
   allocationMensuelleNetRSA: number;
   allocationsFamilialesMensuellesNetFoyer: number;
   allocationsLogementMensuellesNetFoyer: number;
+  pensionsAlimentairesFoyer: number;
 }

@@ -316,7 +316,7 @@
                                 min="0"
                                 class="max-with-input-type-montant form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise"
+                                [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
                                 required
                                 inputmode="decimal"
                                 #revenusCreateurEntreprise="ngModel">
@@ -357,7 +357,7 @@
                             min="0"
                             class="max-with-input-type-montant form-control"
                             placeholder="Montant"
-                            [(ngModel)]="ressourcesFinancieres.revenusImmobilier"
+                            [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
                             required
                             inputmode="decimal"
                             #revenusImmobilier="ngModel">
@@ -459,6 +459,44 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                  <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+                      <label
+                          class="label label-left-style-1"
+                          for="montantPersionsAlimentairesFoyer">
+                          * Pensions alimentaires du foyer
+                      </label>
+                  </div>
+                  <div class="col-12 col-md-8  mt-auto mb-auto">
+                      <div class="row pl-0 d-inline d-flex">
+                          <input
+                              name="montantPersionsAlimentairesFoyer"
+                              pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                              (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                              type="text"
+                              min="0"
+                              class="max-with-input-type-montant form-control"
+                              placeholder="Montant"
+                              [(ngModel)]="ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer"
+                              required
+                              inputmode="decimal"
+                              #pensionsAlimentairesFoyer="ngModel">
+                          <span class="text-side-input">€</span>
+                      </div>
+                      <div class="row">
+                          <span
+                              class="error-input-message"
+                              *ngIf="(isRessourcesFinancieresFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.required">
+                              {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                          </span>
+                          <span
+                              class="error-input-message"
+                              *ngIf="(isRessourcesFinancieresFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.pattern">
+                              {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                          </span>
+                      </div>
+                  </div>
+              </div>
             </div>
             <div class="div-buttons-form row">
                 <button

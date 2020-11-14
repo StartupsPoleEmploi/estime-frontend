@@ -191,12 +191,12 @@ export class DemandeurEmploiConnecteService {
   }
 
   public unsetRevenusCreateurEntreprise(): void {
-    this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise = null;
+    this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = null;
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
   public unsetRevenusImmobilier(): void {
-    this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier = null;
+    this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois = null;
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
@@ -255,8 +255,8 @@ export class DemandeurEmploiConnecteService {
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
     }
     ressourcesFinancieres.salaireNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaireNet);
-    ressourcesFinancieres.revenusCreateurEntreprise = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusCreateurEntreprise);
-    ressourcesFinancieres.revenusImmobilier = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier);
+    ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
+    ressourcesFinancieres.revenusImmobilier3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier3DerniersMois);
     return ressourcesFinancieres;
   }
 

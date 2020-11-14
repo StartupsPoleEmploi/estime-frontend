@@ -5,6 +5,6 @@ export class RessourcesFinancieres {
   allocationsCAF: AllocationsCAF;
   allocationsPoleEmploi: AllocationsPoleEmploi;
   salaireNet: number;
-  revenusCreateurEntreprise: number;
-  revenusImmobilier: number;
+  revenusCreateurEntreprise3DerniersMois: number;
+  revenusImmobilier3DerniersMois: number;
 }
