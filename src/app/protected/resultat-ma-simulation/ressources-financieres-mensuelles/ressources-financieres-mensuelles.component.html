@@ -9,7 +9,7 @@
                     libelleRessource="Salaire net"
                     [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="getMontantASS() > 0">
+                <hr *ngIf="isItemSalaireIsNotLast()">
             </li>
             <li
                 class="list-group-item"
@@ -21,7 +21,7 @@
                     [montantRessource]="this.getMontantASS()"
                     organismeRessource="Pôle emploi">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0">
+                <hr *ngIf="isItemAssIsNotLast()">
             </li>
             <li
                 class="list-group-item"
@@ -33,7 +33,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0">
+                <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
                 class="list-group-item"
@@ -45,7 +45,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0">
+                <hr *ngIf="isItemRsaIsNotLast()">
             </li>
             <li
                 class="list-group-item"
@@ -57,7 +57,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0">
+                <hr *ngIf="isItemAplIsNotLast()">
             </li>
             <li
                 class="list-group-item"
