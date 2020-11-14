@@ -10,7 +10,7 @@ import { Observable, Subscription, fromEvent } from 'rxjs';
 })
 export class ItemRessourceActuelleComponent implements OnInit {
 
-  isOnSmartphone: boolean;
+  isSmallScreen: boolean;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
 
@@ -29,7 +29,7 @@ export class ItemRessourceActuelleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isOnSmartphone = this.screenService.isOnSmartphone();
+    this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
   ngOnDestroy() {
@@ -39,7 +39,7 @@ export class ItemRessourceActuelleComponent implements OnInit {
   private gererResizeScreen(): void {
     this.resizeObservable = fromEvent(window, 'resize')
     this.resizeSubscription = this.resizeObservable.subscribe( evt => {
-      this.isOnSmartphone = this.screenService.isOnSmartphone();
+      this.isSmallScreen = this.screenService.isSmallScreen();
     })
   }
 

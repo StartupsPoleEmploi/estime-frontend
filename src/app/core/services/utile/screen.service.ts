@@ -9,7 +9,7 @@ export class ScreenService {
   constructor() {
   }
 
-  public isOnSmartphone(): boolean {
+  public isSmallScreen(): boolean {
     const widthScreen = window.innerWidth;
     return widthScreen < this.sizeScreenMaxSmartphone;
   }

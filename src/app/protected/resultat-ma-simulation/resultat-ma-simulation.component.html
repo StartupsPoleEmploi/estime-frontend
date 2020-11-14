@@ -5,7 +5,7 @@
             Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
-    <div class="row " [ngClass]="{'card-deck': !isOnSmartphone, 'card-sm-simulations': isOnSmartphone}">
+    <div class="row " [ngClass]="{'card-deck': !isSmallScreen, 'card-sm-simulations': isSmallScreen}">
         <div
             class="card first-card"
             *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
@@ -26,7 +26,7 @@
                                 {{demandeurEmploiConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                             </span>
                         </div>
-                        <div *ngIf="isOnSmartphone" class="col-1 p-0  ml-auto mr-1">
+                        <div *ngIf="isSmallScreen" class="col-1 p-0  ml-auto mr-1">
                             <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
                                 <i class="fas fa-chevron-down"></i>
                             </span>
@@ -38,7 +38,7 @@
                 </div>
                 <div
                     class="card-footer"
-                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && isOnSmartphone">
+                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && isSmallScreen">
                     <app-ressources-financieres-mensuelles
                         class="col-12"
                         [simulationSelected]="simulationSelected"
@@ -49,7 +49,7 @@
         </div>
     </div>
     <div
-        *ngIf="simulationSelected && !isOnSmartphone">
+        *ngIf="simulationSelected && !isSmallScreen">
         <div class="row mt-3">
             <app-ressources-financieres-mensuelles
                 class="col-6"

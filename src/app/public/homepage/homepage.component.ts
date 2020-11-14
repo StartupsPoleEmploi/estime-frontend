@@ -8,6 +8,8 @@ import { QuestionService } from "@app/core/services/utile/question.service";
 import { Question } from '@models/question';
 import { TemoignageService } from "@app/core/services/utile/temoignage.service";
 import { Temoignage } from '@app/commun/models/temoignage';
+import { Observable, Subscription, fromEvent } from 'rxjs';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-homepage',
@@ -17,8 +19,11 @@ import { Temoignage } from '@app/commun/models/temoignage';
 export class HomepageComponent implements OnInit {
 
   etapesSimulation: Array<string>;
+  isSmallScreen: boolean;
   messageErreur: string;
   questions: Array<Question>;
+  resizeObservable: Observable<Event>;
+  resizeSubscription: Subscription;
   temoignages: Array<Temoignage>;
 
   constructor(
@@ -26,14 +31,22 @@ export class HomepageComponent implements OnInit {
     private etapeSimulationService: EtapeSimulationService,
     private questionService: QuestionService,
     private router: Router,
+    private screenService: ScreenService,
     private temoignageService: TemoignageService
-    ) { }
+    ) {
+      this.gererResizeScreen();
+    }
 
   ngOnInit() {
     this.checkDemandeurEmploiConnecte();
     this.loadEtapesSimulation();
     this.loadQuestions();
     this.loadTemoignages();
+    this.isSmallScreen = this.screenService.isSmallScreen();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
   public login(): void {
@@ -58,5 +71,12 @@ export class HomepageComponent implements OnInit {
     } else {
       this.messageErreur = this.authenticationService.getMessageErreur();
     }
+  }
+
+  private gererResizeScreen(): void {
+    this.resizeObservable = fromEvent(window, 'resize')
+    this.resizeSubscription = this.resizeObservable.subscribe( evt => {
+      this.isSmallScreen = this.screenService.isSmallScreen();
+    })
   }
 }

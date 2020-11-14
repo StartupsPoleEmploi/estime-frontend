@@ -23,7 +23,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-6 d-sm-none d-md-block">
+            <div *ngIf="!isSmallScreen" class="col-md-6">
                 <img
                     class="image-homepage"
                     src="../../../assets/images/homepage-calculette.svg">

@@ -19,7 +19,7 @@ export class ResultatMaSimulationComponent implements OnInit {
 
   aideSocialeSelected: AideSociale;
   demandeurEmploiConnecte: DemandeurEmploi;
-  isOnSmartphone: boolean;
+  isSmallScreen: boolean;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
   simulationSelected: SimulationMensuelle;
@@ -35,7 +35,7 @@ export class ResultatMaSimulationComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    this.isOnSmartphone = this.screenService.isOnSmartphone();
+    this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
   ngOnDestroy() {
@@ -43,7 +43,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
-    if (this.screenService.isOnSmartphone()) {
+    if (this.screenService.isSmallScreen()) {
       this.traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel);
     } else {
       this.simulationSelected = simulationMensuel;
@@ -109,14 +109,14 @@ export class ResultatMaSimulationComponent implements OnInit {
   private gererResizeScreen(): void {
     this.resizeObservable = fromEvent(window, 'resize')
     this.resizeSubscription = this.resizeObservable.subscribe( evt => {
-      this.isOnSmartphone = this.screenService.isOnSmartphone();
+      this.isSmallScreen = this.screenService.isSmallScreen();
     })
   }
 
   private loadData(): void {
     this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
     //si l'utilisateur est sur smartphone, aucune préselection
-    if (!this.screenService.isOnSmartphone()) {
+    if (!this.screenService.isSmallScreen()) {
       this.simulationSelected = this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles[0];
       this.selectFirstAideSociale();
     }
