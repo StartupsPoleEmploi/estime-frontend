@@ -183,6 +183,9 @@
   &:focus {
     box-shadow: none;
   }
+  max-width: fit-content;
+  margin-right: 0.3rem;
+  margin-top:0.3rem;
 }
 
 .radio-button-style-1:not(:disabled):not(.disabled).active {

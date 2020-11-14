@@ -58,7 +58,9 @@ export class DemandeurEmploiConnecteService {
     let montant = 0;
     if(simulation.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
-        montant += this.getMontantSafe(aide.montant);
+        if(aide) {
+          montant += this.getMontantSafe(aide.montant);
+        }
       }
     }
     return montant;
