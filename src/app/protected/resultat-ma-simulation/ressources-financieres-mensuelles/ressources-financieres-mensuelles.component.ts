@@ -78,7 +78,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    if(this.screenService.isOnSmartphone() && this.isAideSocialSelected(aideSociale)) {
+    if(this.screenService.isSmallScreen() && this.isAideSocialSelected(aideSociale)) {
       this.aideSocialeSelected = null;
     } else  {
       this.aideSocialeSelected = aideSociale;
