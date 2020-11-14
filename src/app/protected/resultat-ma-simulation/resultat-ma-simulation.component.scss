@@ -9,53 +9,54 @@
     padding-bottom: 5px;
     padding-top: 5px;
   }
-  .first-card {
-    border:0;
-    border-radius: 8px;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
+}
+
+.first-card {
+  border:0;
+  border-radius: 8px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  @media #{$medium-device}, #{$large-device} {
+    margin-bottom: 0px;
+    &:not(.isLastCard) {
+      border-right: 2px solid $color-grey-1 !important;
+      border-radius: 0 !important;
+    }
+  }
+  .second-card {
+    border: 0;
+    margin-bottom: 0;
     @media #{$medium-device}, #{$large-device} {
-      margin-bottom: 0px;
-      &:not(.isLastCard) {
-        border-right: 2px solid $color-grey-1 !important;
-        border-radius: 0 !important;
+      margin: 5px;
+    }
+    cursor: pointer;
+    .card-body {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      @media #{$medium-device}, #{$large-device} {
+        border-radius: 8px;
+      }
+      text-align: center;
+      &.active {
+        background-color: $color-grey-1;
+      }
+      #span-mois-annee {
+        font-size: 1rem;
+        color: $color-blue-2;
+        font-weight: bold;
+      }
+      span {
+        @media #{$medium-device}, #{$large-device} {
+          font-size: 1.3rem;
+        }
+        font-weight: 900;
       }
     }
-    .second-card {
-      border: 0;
-      margin-bottom: 0;
-      @media #{$medium-device}, #{$large-device} {
-        margin: 5px;
-      }
-      cursor: pointer;
-      .card-body {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        @media #{$medium-device}, #{$large-device} {
-          border-radius: 8px;
-        }
-        text-align: center;
-        &.active {
-          background-color: $color-grey-1;
-        }
-        #span-mois-annee {
-          font-size: 1rem;
-          color: $color-blue-2;
-          font-weight: bold;
-        }
-        span {
-          @media #{$medium-device}, #{$large-device} {
-            font-size: 1.3rem;
-          }
-          font-weight: 900;
-        }
-      }
-      .card-footer {
-        background-color: unset;
-        padding-bottom: 0;
-      }
+    .card-footer {
+      background-color: unset;
+      padding-bottom: 0;
     }
   }
 }

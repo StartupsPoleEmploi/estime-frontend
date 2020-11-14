@@ -101,7 +101,9 @@ input:-webkit-autofill:focus {
   }
   select {
     font-size: 0.9rem;
-    max-width: 230px;
+    @media #{$small-device} {
+      max-width: 230px;
+    }
     width: auto;
   }
   .interrogation-icon {

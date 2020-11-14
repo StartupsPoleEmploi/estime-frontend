@@ -5,7 +5,7 @@
             Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
-    <div class="row card-deck">
+    <div class="row " [ngClass]="{'card-deck': !isOnSmartphone, 'card-sm-simulations': isOnSmartphone}">
         <div
             class="card first-card"
             *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
@@ -26,13 +26,19 @@
                                 {{demandeurEmploiConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                             </span>
                         </div>
-                        <div class="col-1 p-0  ml-auto mr-1 d-sm-none">
-                            <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)"><i class="fas fa-chevron-down"></i></span>
-                            <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)"><i class="fas fa-chevron-right"></i></span>
+                        <div *ngIf="isOnSmartphone" class="col-1 p-0  ml-auto mr-1">
+                            <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
+                                <i class="fas fa-chevron-down"></i>
+                            </span>
+                            <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
+                                <i class="fas fa-chevron-right"></i>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer d-sm-none" *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
+                <div
+                    class="card-footer"
+                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && isOnSmartphone">
                     <app-ressources-financieres-mensuelles
                         class="col-12"
                         [simulationSelected]="simulationSelected"
@@ -42,7 +48,8 @@
             </div>
         </div>
     </div>
-    <div class="d-none d-sm-block" *ngIf="simulationSelected">
+    <div
+        *ngIf="simulationSelected && !isOnSmartphone">
         <div class="row mt-3">
             <app-ressources-financieres-mensuelles
                 class="col-6"

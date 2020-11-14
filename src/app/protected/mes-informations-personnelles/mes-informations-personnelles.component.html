@@ -310,7 +310,8 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isHandicape">
+                      [(ngModel)]="situationConjoint.isHandicape"
+                      (click)="onClickCheckBoxConjointIsHandicape()">
                       {{situationPersonneEnum.HANDICAPE}}
                   </label>
                   <label
@@ -322,7 +323,7 @@
                       tabindex="0"
                       role="button"
                       [(ngModel)]="situationConjoint.isSalarie"
-                      (click)="situationConjoint.isSansEmploi = false">
+                      (click)="onClickCheckBoxConjointIsSalarie()">
                       {{situationPersonneEnum.SALARIE}}
                   </label>
                   <label
@@ -334,7 +335,7 @@
                       tabindex="0"
                       role="button"
                       [(ngModel)]="situationConjoint.isSansEmploi"
-                      (click)="situationConjoint.isSalarie = false">
+                      (click)="onClickCheckBoxConjointIsSansEmploi()">
                       {{situationPersonneEnum.SANS_EMPLOI}}
                   </label>
               </div>

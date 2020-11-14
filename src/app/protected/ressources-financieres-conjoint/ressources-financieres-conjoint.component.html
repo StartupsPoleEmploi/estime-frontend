@@ -1,3 +1,6 @@
+<app-page-loading
+    *ngIf="isPageLoadingDisplay"
+    message="Calcul de votre simulation en cours..."></app-page-loading>
 <div class="container-fluid form-container-fluid">
     <h1 class="h1-style-2">
         5. Les ressource(s) finançière(s) de votre conjoint(e)
@@ -17,7 +20,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetAAH">
-                        Allocation aux adultes handicapées, allocation du dernier mois
+                        Si bénéficiaire de l'allocation aux adultes handicapées, montant perçu le mois dernier
                     </label>
                 </div>
                 <div class="row">
@@ -48,7 +51,7 @@
                     <label
                         class="label"
                         for="salaireNet">
-                        * Salaire net du dernier mois
+                        * Salaire net
                     </label>
                 </div>
                 <div class="row">
@@ -85,7 +88,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetRSA">
-                        Si bénéficiaire du revenu de solidarité active (RSA), allocation du dernier mois
+                        Si bénéficiaire du revenu de solidarité active (RSA), montant perçu le mois dernier
                     </label>
                 </div>
                 <div class="row">
@@ -116,7 +119,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetARE">
-                        Si bénéficiaire de l'allocation de retour à l'emploi (ARE), allocation du dernier mois
+                        Si bénéficiaire de l'allocation de retour à l'emploi (ARE), montant perçu le mois dernier
                     </label>
                 </div>
                 <div class="row">
@@ -147,7 +150,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetASS">
-                        Si bénéficiaire de l'allocation de solidarité spécifique (ASS), allocation du dernier mois
+                        Si bénéficiaire de l'allocation de solidarité spécifique (ASS), montant perçu le mois dernier
                     </label>
                 </div>
                 <div class="row">

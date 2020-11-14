@@ -99,16 +99,16 @@
                 <div class="row">
                     <input
                         id="dureeHebdomadaire"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         name="dureeHebdomadaire"
                         type="text"
                         min="0"
-                        maxlength="2"
+                        maxlength="4"
                         class="form-control"
                         placeholder="Nombre"
                         [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                         required
-                        inputmode="numeric"
+                        inputmode="decimal"
                         #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">par semaine</span>
                 </div>

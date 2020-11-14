@@ -105,6 +105,7 @@ export class DemandeurEmploiConnecteService {
 
   public setFuturTravail(futurTravail: FuturTravail) {
     futurTravail.salaireMensuelNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaireMensuelNet);
+    futurTravail.nombreHeuresTravailleesSemaine = this.numberUtileService.replaceCommaByDot(futurTravail.nombreHeuresTravailleesSemaine);
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
@@ -149,6 +150,42 @@ export class DemandeurEmploiConnecteService {
   public unsetConjoint(): void {
     if(this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetConjointMontantAAH(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = 0;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetConjointSalaire(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = 0;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetConjointAllocationsPE(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = 0;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = 0;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetConjointAllocationRSA(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
       this.saveDemandeurEmploiConnecteInSessionStorage();
     }
   }

@@ -67,6 +67,24 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxConjointIsHandicape(): void {
+    if(!this.situationConjoint.isHandicape) {
+      this.demandeurEmploiConnecteService.unsetConjointMontantAAH();
+    }
+  }
+
+  public onClickCheckBoxConjointIsSalarie(): void {
+    this.situationConjoint.isSansEmploi = false;
+    this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
+    this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
+  }
+
+  public onClickCheckBoxConjointIsSansEmploi(): void {
+    this.situationConjoint.isSalarie = false;
+    this.demandeurEmploiConnecteService.unsetConjointSalaire();
+
+  }
+
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();

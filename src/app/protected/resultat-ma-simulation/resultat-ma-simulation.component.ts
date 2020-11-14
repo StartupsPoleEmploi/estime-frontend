@@ -8,6 +8,7 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
 import { AideSociale } from '@app/commun/models/aide-sociale';
 import { ScreenService } from "@app/core/services/utile/screen.service";
+import { Observable, Subscription, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-resultat-ma-simulation',
@@ -16,9 +17,12 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 })
 export class ResultatMaSimulationComponent implements OnInit {
 
-  demandeurEmploiConnecte: DemandeurEmploi;
-  simulationSelected: SimulationMensuelle;
   aideSocialeSelected: AideSociale;
+  demandeurEmploiConnecte: DemandeurEmploi;
+  isOnSmartphone: boolean;
+  resizeObservable: Observable<Event>;
+  resizeSubscription: Subscription;
+  simulationSelected: SimulationMensuelle;
 
   constructor(
     private dateUtileService: DateUtileService,
@@ -26,11 +30,16 @@ export class ResultatMaSimulationComponent implements OnInit {
     private router: Router,
     private screenService: ScreenService
   ) {
-
+    this.gererResizeScreen();
   }
 
   ngOnInit(): void {
     this.loadData();
+    this.isOnSmartphone = this.screenService.isOnSmartphone();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription.unsubscribe();
   }
 
   public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
@@ -95,6 +104,13 @@ export class ResultatMaSimulationComponent implements OnInit {
       }
     }
     return hasAidesObtenir;
+  }
+
+  private gererResizeScreen(): void {
+    this.resizeObservable = fromEvent(window, 'resize')
+    this.resizeSubscription = this.resizeObservable.subscribe( evt => {
+      this.isOnSmartphone = this.screenService.isOnSmartphone();
+    })
   }
 
   private loadData(): void {

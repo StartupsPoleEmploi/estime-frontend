@@ -14,7 +14,6 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
-  montantASS: number;
 
   @Input() simulationSelected: SimulationMensuelle;
   @Input() aideSocialeSelected: AideSociale;
@@ -28,14 +27,13 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   ngOnInit(): void {
     this.demandeurEmploiConnecte  = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
-    this.montantASS = this.getMontantASS();
   }
 
   public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
     return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
   }
 
-  private getMontantASS(): number {
+  public getMontantASS(): number {
     let montant = 0;
     if(this.simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
@@ -80,7 +78,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    if(this.screenService.isOnSmartphone && this.isAideSocialSelected(aideSociale)) {
+    if(this.screenService.isOnSmartphone() && this.isAideSocialSelected(aideSociale)) {
       this.aideSocialeSelected = null;
     } else  {
       this.aideSocialeSelected = aideSociale;

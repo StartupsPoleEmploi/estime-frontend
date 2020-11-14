@@ -7,6 +7,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { FormGroup } from '@angular/forms';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { Personne } from '@app/commun/models/personne';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 
 @Component({
   selector: 'app-ressources-financieres-conjoint',
@@ -15,8 +16,10 @@ import { Personne } from '@app/commun/models/personne';
 })
 export class RessourcesFinancieresConjointComponent implements OnInit {
 
-  isRessourcesFinancieresConjointFormSubmitted = false;
   conjoint: Personne;
+  isPageLoadingDisplay = false;
+  isRessourcesFinancieresConjointFormSubmitted = false;
+  messageErreur: string;
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
@@ -38,6 +41,16 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     if(form.valid) {
       this.demandeurEmploiConnecteService.setRessourceFinanciereConjoint(this.conjoint);
       this.demandeurEmploiConnecteService.simulerMesAides();
+      this.isPageLoadingDisplay = true;
+      this.demandeurEmploiConnecteService.simulerMesAides().then(
+        () => {
+          this.isPageLoadingDisplay = false;
+          this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+        },() => {
+          this.isPageLoadingDisplay = false;
+          this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
+        }
+      );
     }
   }
 }

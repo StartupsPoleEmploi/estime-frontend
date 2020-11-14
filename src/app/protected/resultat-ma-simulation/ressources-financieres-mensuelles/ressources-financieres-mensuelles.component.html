@@ -9,19 +9,19 @@
                     libelleRessource="Salaire net"
                     [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
                 </app-item-ressource-actuelle>
-                <hr>
+                <hr *ngIf="getMontantASS() > 0">
             </li>
             <li
                 class="list-group-item"
-                *ngIf="montantASS && montantASS > 0">
+                *ngIf="getMontantASS() > 0">
                 <app-item-ressource-actuelle
                     codeRessource="ASS"
                     [isColPictoArrowDisplay]="false"
                     libelleRessource="Allocation de Solidarité Spécifique"
-                    [montantRessource]="demandeurEmploiConnecte.futurTravail.salaireMensuelNet"
+                    [montantRessource]="this.getMontantASS()"
                     organismeRessource="Pôle emploi">
                 </app-item-ressource-actuelle>
-                <hr>
+                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0">
             </li>
             <li
                 class="list-group-item"
@@ -33,7 +33,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr>
+                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0">
             </li>
             <li
                 class="list-group-item"
@@ -45,7 +45,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr>
+                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0">
             </li>
             <li
                 class="list-group-item"
@@ -57,7 +57,7 @@
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
-                <hr>
+                <hr *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0">
             </li>
             <li
                 class="list-group-item"
