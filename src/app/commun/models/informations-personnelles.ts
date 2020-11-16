@@ -5,7 +5,6 @@ export class InformationsPersonnelles {
   hasRevenusImmobilier: boolean;
   isHandicape: boolean;
   isCreateurEntreprise: boolean;
-  isEtudiantSalarie: boolean;
   isSalarie: boolean;
   isSansEmploiAvecRessource: boolean;
   isSansEmploiSansRessource: boolean;
