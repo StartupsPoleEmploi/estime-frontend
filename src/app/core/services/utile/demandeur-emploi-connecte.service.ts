@@ -25,7 +25,6 @@ export class DemandeurEmploiConnecteService {
     private estimeApiService: EstimeApiService,
     private numberUtileService: NumberUtileService,
     public personneUtileService: PersonneUtileService,
-    private router: Router,
     private sessionStorageService: SessionStorageService
   ) {
 
@@ -202,6 +201,12 @@ export class DemandeurEmploiConnecteService {
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
+  public hasPersonneACharge(): boolean {
+    return this.demandeurEmploiConnecte.situationFamiliale.personnesACharge
+    && this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0;
+  }
+
+
   public hasRevenusImmobilier(): boolean {
     return this.demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true
   }
@@ -229,8 +234,11 @@ export class DemandeurEmploiConnecteService {
     if (situationConjoint.isSalarie) {
       this.modifierSituationConjointEnSalarie();
     }
-    if (situationConjoint.isSansEmploi) {
-      this.modifierSituationConjointEnSansEmploi();
+    if (situationConjoint.isSansEmploiAvecRessource) {
+      this.modifierSituationConjointEnSansEmploiAvecRessource();
+    }
+    if (situationConjoint.isSansEmploiSansRessource) {
+      this.modifierSituationConjointEnSansEmploiSansRessource();
     }
   }
 
@@ -269,24 +277,40 @@ export class DemandeurEmploiConnecteService {
     }
   }
 
-  private modifierSituationConjointEnSansEmploi() {
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi = true;
+  private modifierSituationConjointEnSansEmploiAvecRessource() {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = true;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = false;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
-    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi) {
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource) {
+      this.unsetRessourcesAllocations();
     }
+  }
+
+  private modifierSituationConjointEnSansEmploiSansRessource() {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = true;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
+    this.unsetRessourcesAllocations();
   }
 
   private modifierSituationConjointEnSalarie() {
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = true;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi = false;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = false;
+    this.unsetRessourcesAllocations();
     if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
+    }
+  }
+
+  private unsetRessourcesAllocations(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+    }
+    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
     }
   }
 
@@ -297,7 +321,8 @@ export class DemandeurEmploiConnecteService {
     }
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape = situationConjoint.isHandicape;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = situationConjoint.isSalarie;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploi = situationConjoint.isSansEmploi;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = situationConjoint.isSansEmploiSansRessource;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = situationConjoint.isSansEmploiSansRessource;
   }
 
   private saveDemandeurEmploiConnecteInSessionStorage(): void {

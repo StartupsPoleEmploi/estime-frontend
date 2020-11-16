@@ -206,7 +206,7 @@
                   <label
                       class="label"
                       for="situationsExceptionnelles">
-                      Vous êtes
+                      Vous percevez
                       <i
                       class="interrogation-icon btn far fa-question-circle"
                       [popover]="popoverSituationDemandeurTemplate"
@@ -299,7 +299,7 @@
                   <label
                       class="label"
                       for="situationConjoint">
-                      * Votre conjoint(e) est
+                      * Votre conjoint(e) perçoit
                   </label>
               </div>
               <div class="row">
@@ -316,7 +316,6 @@
                   </label>
                   <label
                       #conjointIsSalarie="ngModel"
-                      id="btn-conjoint-is-salarie"
                       name="conjointIsSalarie"
                       class="btn radio-button-style-1"
                       btnCheckbox
@@ -327,23 +326,28 @@
                       {{situationPersonneEnum.SALARIE}}
                   </label>
                   <label
-                      #conjointIsSansEmploi="ngModel"
-                      id="btn-conjoint-is-sans-emploi"
-                      name="conjointIsSansEmploi"
+                      #conjointIsSansEmploiAvecRessource="ngModel"
+                      name="conjointIsSansEmploiAvecRessource"
                       class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isSansEmploi"
-                      (click)="onClickCheckBoxConjointIsSansEmploi()">
-                      {{situationPersonneEnum.SANS_EMPLOI}}
+                      [(ngModel)]="situationConjoint.isSansEmploiAvecRessource"
+                      (click)="onClickCheckBoxConjointIsSansEmploiAvecRessource()">
+                      {{situationPersonneEnum.SANS_EMPLOI_AVEC_RESSOURCE}}
+                  </label>
+                  <label
+                      #conjointIsSansEmploiSansRessource="ngModel"
+                      name="conjointIsSansEmploiSansRessource"
+                      class="btn radio-button-style-1"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      [(ngModel)]="situationConjoint.isSansEmploiSansRessource"
+                      (click)="onClickCheckBoxConjointIsSansEmploiSansRessource()">
+                      {{situationPersonneEnum.SANS_EMPLOI_SANS_RESSOURCE}}
                   </label>
               </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="isInformationsPersonnellesFormSubmitted  && !isSituationConjointCorrect()">
-                  {{controleChampFormulaireService.MESSAGE_SITUATION_INCORRECTE}}
-              </span>
           </div>
           <div class="div-buttons-form row">
               <button

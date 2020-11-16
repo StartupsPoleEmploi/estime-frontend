@@ -16,6 +16,7 @@ import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 export class FormPersonneAChargeComponent implements OnInit {
 
   @Input() dateNaissanceNouvellePersonne: DateDecomposee;
+  @Input() isModeModification: boolean;
   @Input() nouvellePersonneACharge: Personne;
   @Input() numeroNouvellePersonne: number;
 
@@ -58,19 +59,24 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
-    return form.valid && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)
-      && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
-        || (this.isNouvellePersonneAChargeSituationFormGroupDisplay
-          && this.personneUtileService.isSituationCorrect(this.nouvellePersonneACharge)))
+    return form.valid && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne);
   }
 
-  private gererAffichageNouvellePersonneSituationForm(): void {
+  public isNouvellePersonneSituationFormDisplay(): boolean {
+    let isNouvellePersonneSituationFormDisplay = false;
     if (this.dateUtileService.isFormatDateValide(this.dateNaissanceNouvellePersonne)
       && this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
-      this.isNouvellePersonneAChargeSituationFormGroupDisplay = true;
-    } else {
-      this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
+        isNouvellePersonneSituationFormDisplay = true;
     }
+    return isNouvellePersonneSituationFormDisplay;
+  }
+
+  public getLibelleButtonSubmitForm(): string {
+    let libelle = 'Ajouter';
+    if(this.isModeModification) {
+      libelle = 'Modifier';
+    }
+    return libelle;
   }
 
   private resetNouvellePersonneAChargeForm(): void {
@@ -84,7 +90,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     event.stopPropagation();
     const value = this.dateNaissanceNouvellePersonne.jour;
     if (value && value.length === 2) {
-      this.gererAffichageNouvellePersonneSituationForm();
+      this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
       this.moisDateNaissanceNouvellePersonneInput.nativeElement.focus();
     }
   }
@@ -93,13 +99,13 @@ export class FormPersonneAChargeComponent implements OnInit {
     event.stopPropagation();
     const value = this.dateNaissanceNouvellePersonne.mois;
     if (value && value.length === 2) {
-      this.gererAffichageNouvellePersonneSituationForm();
+      this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
       this.anneeDateNaissanceNouvellePersonneInput.nativeElement.focus();
     }
   }
 
   public onChangeOrKeyUpDateNaissancePersonneAChargeAnnee(): void {
-    this.gererAffichageNouvellePersonneSituationForm();
+    this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
   }
 
   public onFocusDateNaissanceNouvellePersonne(): void {

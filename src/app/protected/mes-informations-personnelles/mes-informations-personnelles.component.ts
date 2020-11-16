@@ -61,7 +61,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   public onClickSituationFamiliale(): void {
     if(this.isEnCouple) {
-      this.situationConjoint = new SituationPersonne(false, false, false);
+      this.situationConjoint = new SituationPersonne(false, false, false, false);
     } else {
       this.demandeurEmploiConnecteService.unsetConjoint();
     }
@@ -74,15 +74,26 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointIsSalarie(): void {
-    this.situationConjoint.isSansEmploi = false;
-    this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
-    this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
+    this.situationConjoint.isSansEmploiSansRessource = false;
+    if(!this.situationConjoint.isSalarie) {
+      this.demandeurEmploiConnecteService.unsetConjointSalaire();
+    }
   }
 
-  public onClickCheckBoxConjointIsSansEmploi(): void {
-    this.situationConjoint.isSalarie = false;
-    this.demandeurEmploiConnecteService.unsetConjointSalaire();
+  public onClickCheckBoxConjointIsSansEmploiAvecRessource(): void {
+    this.situationConjoint.isSansEmploiSansRessource = false;
+    if(!this.situationConjoint.isSansEmploiAvecRessource) {
+      this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
+      this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
+    }
+  }
 
+  public onClickCheckBoxConjointIsSansEmploiSansRessource(): void {
+    this.situationConjoint.isSalarie = false;
+    this.situationConjoint.isSansEmploiAvecRessource = false;
+    this.demandeurEmploiConnecteService.unsetConjointSalaire();
+    this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
+    this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
@@ -128,8 +139,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     return form.valid
-      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)
-      && this.isSituationFamilialeCorrecte();
+      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance);
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
@@ -149,22 +159,13 @@ export class MesInformationsPersonnellesComponent implements OnInit {
         this.situationConjoint = new SituationPersonne(
           conjoint.informationsPersonnelles.isHandicape,
           conjoint.informationsPersonnelles.isSalarie,
-          conjoint.informationsPersonnelles.isSansEmploi
+          conjoint.informationsPersonnelles.isSansEmploiAvecRessource,
+          conjoint.informationsPersonnelles.isSansEmploiSansRessource
         );
       }
     } else {
-      this.situationConjoint = new SituationPersonne(false, false, false);
+      this.situationConjoint = new SituationPersonne(false, false, false, false);
     }
-  }
-
-  public isSituationConjointCorrect(): boolean {
-    return this.situationConjoint.isSalarie
-      || this.situationConjoint.isSansEmploi;
-  }
-
-  private isSituationFamilialeCorrecte() {
-    return !this.isEnCouple
-      || (this.isEnCouple && this.isSituationConjointCorrect());
   }
 
   /** gestion évènements champ date naissance  **/

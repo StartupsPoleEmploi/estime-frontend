@@ -55,7 +55,7 @@
                                 <i class="fas fa-user-plus"></i>
                             </div>
                             <div class="col-9 col-card-body">
-                                <span>Ajouter une personne</span>
+                                <span>Ajouter un enfant ou une personne à charge</span>
                             </div>
                         </div>
                     </div>
@@ -65,6 +65,7 @@
         <app-form-personne-a-charge
             *ngIf="isNouvellePersonneAChargeFormDisplay === true"
             [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
+            [isModeModification]="isModeModification"
             [nouvellePersonneACharge]="nouvellePersonneACharge"
             [numeroNouvellePersonne]="numeroNouvellePersonne"
             (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">

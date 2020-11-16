@@ -60,7 +60,7 @@
                     <label
                         class="label"
                         for="allocationJournaliereNetASS">
-                        * Montant journalier net de votre allocation
+                        * Montant de votre allocation
                     </label>
                 </div>
                 <div class="row">
@@ -79,6 +79,8 @@
                         #allocationJournaliereNetASS="ngModel"
                         ngAutofocus>
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">net/jour</span>
+
                 </div>
                 <span
                     class="row error-input-message"
@@ -254,7 +256,7 @@
                 class="form-group flex-column"
                 *ngIf="demandeurEmploiConnecteService.hasSituationExceptionnelle()">
                 <div class="row mb-3 flex-column">
-                    <label class="label">Mes autre(s) ressource(s) perçue(s)</label>
+                    <label class="label">Autre(s) ressource(s) perçue(s)</label>
                 </div>
                 <div
                     class="row mt-3"
@@ -263,7 +265,7 @@
                         <label
                             class="label label-left-style-1"
                             for="allocationMensuelleNetAAH">
-                            * Allocation aux adultes handicapées du mois dernier
+                            * Allocation Adulte Handicapé (AAH)
                         </label>
                     </div>
                     <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -281,6 +283,7 @@
                                 inputmode="decimal"
                                 #allocationMensuelleNetAAH="ngModel">
                             <span class="text-side-input">€</span>
+                            <span class="text-2-side-input">du mois dernier</span>
                         </div>
                         <div class="row">
                             <span
@@ -303,7 +306,7 @@
                         <label
                             class="label label-left-style-1"
                             for="revenusCreateurEntreprise">
-                            * Revenus net créateur d'entreprise des 3 derniers mois
+                            * Revenus en tant que travailleur indépendant
                         </label>
                     </div>
                     <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -321,6 +324,7 @@
                                 inputmode="decimal"
                                 #revenusCreateurEntreprise="ngModel">
                             <span class="text-side-input">€</span>
+                            <span class="text-2-side-input">net total 3 derniers mois</span>
                         </div>
                         <div class="row">
                             <span
@@ -344,7 +348,7 @@
                     <label
                         class="label label-left-style-1"
                         for="revenusImmobilier">
-                        * Revenus net immobilier des 3 derniers mois
+                        * Revenus immobilier
                     </label>
                 </div>
                 <div class="col-12 col-md-8  mt-auto mb-auto">
@@ -362,6 +366,7 @@
                             inputmode="decimal"
                             #revenusImmobilier="ngModel">
                         <span class="text-side-input">€</span>
+                        <span class="text-2-side-input">net total 3 derniers mois</span>
                     </div>
                     <div class="row">
                         <span
@@ -380,7 +385,7 @@
             <div class="form-group flex-column mt-3">
                 <div class="row mb-3 flex-column">
                     <label class="label">
-                        Les ressource(s) perçue(s) par mon foyer le mois dernier
+                        Ressource(s) perçue(s) par mon foyer
                     </label>
                 </div>
                 <div class="row">
@@ -406,6 +411,7 @@
                                 inputmode="decimal"
                                 #allocationsLogementMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€</span>
+                            <span class="text-2-side-input">net du mois dernier</span>
                         </div>
                         <div class="row">
                             <span
@@ -421,7 +427,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3" *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
                     <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
                         <label
                             class="label label-left-style-1"
@@ -444,6 +450,7 @@
                                 inputmode="decimal"
                                 #allocationsFamilialesMensuellesNetFoyer="ngModel">
                             <span class="text-side-input">€</span>
+                            <span class="text-2-side-input">net du mois dernier</span>
                         </div>
                         <div class="row">
                             <span
@@ -459,7 +466,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row mt-3" *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
                   <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
                       <label
                           class="label label-left-style-1"
@@ -482,6 +489,7 @@
                               inputmode="decimal"
                               #pensionsAlimentairesFoyer="ngModel">
                           <span class="text-side-input">€</span>
+                          <span class="text-2-side-input">net du mois dernier</span>
                       </div>
                       <div class="row">
                           <span

@@ -90,15 +90,15 @@
                 </div>
             </div>
             <app-form-personne-a-charge-situation
-                *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay === true"
+                *ngIf="isNouvellePersonneSituationFormDisplay()"
                 [nouvellePersonneACharge]="nouvellePersonneACharge"
                 [isNouvellePersonnesAChargeFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted">
             </app-form-personne-a-charge-situation>
-            <div class="div-buttons-form row ml-auto mr-auto">
+            <div class="div-buttons-form">
                 <button
-                    class="btn btn-primary-style-1 ml-auto mr-auto"
+                    class="btn btn-primary-style-1"
                     type="submit">
-                    <div class="text-button">Valider</div>
+                    <div class="text-button">{{getLibelleButtonSubmitForm()}}</div>
                 </button>
             </div>
         </form>

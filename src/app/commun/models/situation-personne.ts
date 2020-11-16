@@ -1,11 +1,13 @@
 export class SituationPersonne {
   isHandicape: boolean;
   isSalarie: boolean;
-  isSansEmploi: boolean;
+  isSansEmploiAvecRessource: boolean;
+  isSansEmploiSansRessource: boolean;
 
-  constructor(isHandicape: boolean, isSalarie: boolean, isSansEmploi: boolean) {
+  constructor(isHandicape: boolean, isSalarie: boolean, isSansEmploiAvecRessource: boolean, isSansEmploiSansRessource: boolean) {
     this.isHandicape = isHandicape;
     this.isSalarie = isSalarie;
-    this.isSansEmploi = isSansEmploi;
+    this.isSansEmploiAvecRessource = isSansEmploiAvecRessource;
+    this.isSansEmploiSansRessource = isSansEmploiSansRessource;
   }
 }

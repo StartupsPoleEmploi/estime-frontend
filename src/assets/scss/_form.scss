@@ -93,6 +93,8 @@ input:-webkit-autofill:focus {
     padding-left: 4rem;
   }
   input {
+    margin-top: auto;
+    margin-bottom: auto;
     max-width: 100px;
     @media #{$medium-device}, #{$large-device} {
       max-width: 150px;
@@ -101,10 +103,12 @@ input:-webkit-autofill:focus {
   }
   select {
     font-size: 0.9rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: auto;
     @media #{$small-device} {
       max-width: 230px;
     }
-    width: auto;
   }
   .interrogation-icon {
     margin: auto;
@@ -121,6 +125,13 @@ input:-webkit-autofill:focus {
     margin-top: auto;
     font-weight: 300;
     color: black;
+  }
+  .text-2-side-input {
+    @extend .text-side-input;
+    @media #{$small-device} {
+      line-height: 1rem;
+      max-width: 100px;
+    }
   }
   .label-left-style-1 {
     font-weight: 400;

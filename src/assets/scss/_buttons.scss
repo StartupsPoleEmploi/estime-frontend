@@ -1,25 +1,25 @@
 .btn {
   font-size: 0.8rem;
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     min-height: 2.5rem;
   }
   max-height: 2.5rem;
   margin-top: auto;
-  margin-bottom: auto;
-  &:focus  {
+  //margin-bottom: auto;
+  &:focus {
     box-shadow: none;
   }
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     font-size: 1rem;
   }
-  div  {
+  div {
     margin-top: auto;
     margin-bottom: auto;
   }
 }
 
 .button-se-connecter-pe {
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     min-height: 3rem;
   }
   max-height: 3rem;
@@ -75,11 +75,13 @@
   display: flex;
   font-family: "Lato", sans-serif !important;
   padding: 0.3rem 0 0.3rem 0rem;
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     padding: 0.2rem 0 0.2rem 0rem;
   }
   text-decoration: none;
-  &:not(:disabled):not(.disabled):active, &:hover, &:focus {
+  &:not(:disabled):not(.disabled):active,
+  &:hover,
+  &:focus {
     background-color: $color-blue-3;
     border: none;
     box-shadow: none;
@@ -90,12 +92,14 @@
   }
 }
 
-.btn-primary-style-0  {
+.btn-primary-style-0 {
   border: none;
   color: $color-blue-2;
   display: inline-flex;
   margin: auto;
-  &:not(:disabled):not(.disabled):active, &:hover, &:focus {
+  &:not(:disabled):not(.disabled):active,
+  &:hover,
+  &:focus {
     background-color: none;
     border: none;
     box-shadow: none;
@@ -107,7 +111,7 @@
   }
 }
 
-.btn-primary-style-1  {
+.btn-primary-style-1 {
   color: $color-blue-2;
   border: 1px $color-blue-2 solid;
   border-radius: 100px;
@@ -135,7 +139,7 @@
 .btn-primary-style-3 {
   @extend .primary-button-base;
   margin: auto;
-  max-width: 300px ;
+  max-width: 300px;
   width: fit-content;
   &:hover {
     background-color: $color-blue-2;
@@ -155,8 +159,8 @@
 .btn-obtenir-ma-simulation {
   @extend .primary-button-base;
   margin: auto;
-  max-width: 130px ;
-  @media #{$medium-device}, #{$large-device}   {
+  max-width: 130px;
+  @media #{$medium-device}, #{$large-device} {
     margin-left: 1rem;
     max-width: 300px;
   }
@@ -177,15 +181,16 @@
   }
 }
 
-
 .radio-button-style-1 {
   border-color: $color-blue-2;
+  max-height: unset !important;
+  max-width: fit-content;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+  text-align: left;
   &:focus {
     box-shadow: none;
   }
-  max-width: fit-content;
-  margin-right: 0.3rem;
-  margin-top:0.3rem;
 }
 
 .radio-button-style-1:not(:disabled):not(.disabled).active {
@@ -193,7 +198,3 @@
   background-color: $color-blue-2;
   border-color: $color-blue-2;
 }
-
-
-
-

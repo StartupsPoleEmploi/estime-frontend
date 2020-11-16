@@ -1,8 +1,8 @@
 export enum SituationPersonneEnum {
-  BENEFICIAIRE_REVENUS_IMMOBILIER = "bénéficiaire de revenus immobilier",
-  CREATEUR_ENTREPRISE = "créateur d'entreprise",
-  HANDICAPE = "en situation de handicape",
-  SALARIE = "salarié(e)",
-  SALARIE_OU_ETUDIANT_SALARIE = "salarié(e) ou étudiant(e) salarié(e)",
-  SANS_EMPLOI = "sans emploi"
+  BENEFICIAIRE_REVENUS_IMMOBILIER = "des revenus immobilier",
+  CREATEUR_ENTREPRISE = "des revenus en tant que travailleur indépendant",
+  HANDICAPE = "l'AAH (Allocation Adulte Handicapé)",
+  SALARIE = "un salaire",
+  SANS_EMPLOI_AVEC_RESSOURCE = "l'ARE, l'ASS ou le RSA",
+  SANS_EMPLOI_SANS_RESSOURCE = "aucune ressource"
 }

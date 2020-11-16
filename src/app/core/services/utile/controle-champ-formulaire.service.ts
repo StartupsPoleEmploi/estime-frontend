@@ -11,7 +11,6 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_JOUR_OBLIGATOIRE = "Le jour est obligatoire";
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
   MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
-  MESSAGE_SITUATION_INCORRECTE = "Sélectioner à minima salarié(e) ou sans emploi";
 
   isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;

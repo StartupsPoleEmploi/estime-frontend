@@ -3,7 +3,7 @@
     message="Calcul de votre simulation en cours..."></app-page-loading>
 <div class="container-fluid form-container-fluid">
     <h1 class="h1-style-2">
-        5. Les ressource(s) finançière(s) de votre conjoint(e)
+        5. Ressource(s) finançière(s) de votre conjoint(e)
     </h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
@@ -20,7 +20,7 @@
                     <label
                         class="label"
                         for="allocationMensuelleNetAAH">
-                        Si bénéficiaire de l'allocation aux adultes handicapées, montant perçu le mois dernier
+                        * Allocation Adulte Handicapé (AAH)
                     </label>
                 </div>
                 <div class="row">
@@ -35,14 +35,23 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                         placeholder="Montant"
                         inputmode="decimal"
+                        required
                         #allocationMensuelleNetAAH="ngModel">
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+                <div class="row">
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
+                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                  </span>
+                  <span
+                      class="row error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
+                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                  </span>
+                </div>
             </div>
             <div
                 class="form-group"
@@ -51,7 +60,7 @@
                     <label
                         class="label"
                         for="salaireNet">
-                        * Salaire net
+                        * Salaire
                     </label>
                 </div>
                 <div class="row">
@@ -69,26 +78,29 @@
                         inputmode="decimal"
                         #salaireNet="ngModel">
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">net</span>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+                <div class="row">
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                  </span>
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                  </span>
+                </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetRSA">
-                        Si bénéficiaire du revenu de solidarité active (RSA), montant perçu le mois dernier
+                        * Revenu Solidarité Active (RSA)
                     </label>
                 </div>
                 <div class="row">
@@ -103,23 +115,32 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
                         placeholder="Montant"
                         inputmode="decimal"
+                        required
                         #allocationMensuelleNetRSA="ngModel">
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+                <div class="row">
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.required">
+                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                  </span>
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                  </span>
+                </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetARE">
-                        Si bénéficiaire de l'allocation de retour à l'emploi (ARE), montant perçu le mois dernier
+                        Allocation Retour Emploi (ARE)
                     </label>
                 </div>
                 <div class="row">
@@ -134,23 +155,32 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
                         placeholder="Montant"
                         inputmode="decimal"
+                        required
                         #allocationMensuelleNetARE="ngModel">
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+                <div class="row">
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                  </span>
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                  </span>
+                </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploi">
+                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetASS">
-                        Si bénéficiaire de l'allocation de solidarité spécifique (ASS), montant perçu le mois dernier
+                        * Allocation Solidarité Spécifique (ASS)
                     </label>
                 </div>
                 <div class="row">
@@ -165,14 +195,23 @@
                         [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
                         placeholder="Montant"
                         inputmode="decimal"
+                        required
                         #allocationMensuelleNetASS="ngModel">
                     <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+                <div class="row">
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                  </span>
+                  <span
+                      class="error-input-message"
+                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                  </span>
+                </div>
             </div>
             <div class="div-buttons-form row">
                 <button

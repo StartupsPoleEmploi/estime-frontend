@@ -3,6 +3,7 @@ import { Personne } from '@app/commun/models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
+import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -18,6 +19,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
+    public demandeurEmploiConnecteService : DemandeurEmploiConnecteService,
     public personneUtileService: PersonneUtileService
   ) { }
 
@@ -31,22 +33,33 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxIsSalarie(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploi = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiSansRessource = false;
     if(!this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
       this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
     }
   }
 
-  public onClickCheckBoxIsSansEmploi(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
-    if(!this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploi) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+  public onClickCheckBoxIsSansEmploiAvecRessource(): void {
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiSansRessource = false;
+    if(!this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource) {
+      this.unsetRessourcesAllocations();
     }
   }
 
+  public onClickCheckBoxIsSansEmploiSansRessource(): void {
+    this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
+    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource = false;
+    this.unsetRessourcesAllocations();
+  }
+
+  private unsetRessourcesAllocations(): void {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+    }
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    }
+  }
 }
