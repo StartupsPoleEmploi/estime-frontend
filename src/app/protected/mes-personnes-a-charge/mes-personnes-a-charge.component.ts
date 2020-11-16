@@ -61,6 +61,10 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.isNouvellePersonneAChargeFormDisplay = false;
       this.isModeModification = false;
     }
+    if(this.personnesACharge && this.personnesACharge.length === 0) {
+      this.demandeurEmploiConnecteService.unsetAllocationsFamiliales();
+      this.demandeurEmploiConnecteService.unsetPensionsAlimentaires();
+    }
   }
 
   public onClickButtonRetour(): void {

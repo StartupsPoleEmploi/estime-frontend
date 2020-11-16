@@ -141,6 +141,20 @@ export class DemandeurEmploiConnecteService {
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
+  public unsetAllocationsFamiliales(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
+  public unsetPensionsAlimentaires(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = 0;
+      this.saveDemandeurEmploiConnecteInSessionStorage();
+    }
+  }
+
   public unsetAllocationMensuelleNetAAH(): void {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
@@ -240,6 +254,7 @@ export class DemandeurEmploiConnecteService {
     if (situationConjoint.isSansEmploiSansRessource) {
       this.modifierSituationConjointEnSansEmploiSansRessource();
     }
+    this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
   /**
