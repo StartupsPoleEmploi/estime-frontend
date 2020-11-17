@@ -6,8 +6,8 @@ export class InformationsPersonnelles {
   isHandicape: boolean;
   isCreateurEntreprise: boolean;
   isSalarie: boolean;
-  isSansEmploiAvecRessource: boolean;
-  isSansEmploiSansRessource: boolean;
+  hasRessourceAideEmploi: boolean;
+  isSansRessource: boolean;
   nationalite: string;
   nom: string;
   prenom: string;

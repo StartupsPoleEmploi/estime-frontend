@@ -1,3 +1,12 @@
+.fa-info-circle {
+  span {
+    font-size: 0.9rem!important;
+    color: black!important;
+    font-weight: 300 !important;
+    vertical-align: middle!important;
+  }
+}
+
 .form-container-fluid {
   margin-top: 2rem;
 }
@@ -111,8 +120,7 @@ input:-webkit-autofill:focus {
     }
   }
   .interrogation-icon {
-    margin: auto;
-    vertical-align: inherit;
+    cursor: pointer;
   }
   .label, span {
     color: $color-blue-2;

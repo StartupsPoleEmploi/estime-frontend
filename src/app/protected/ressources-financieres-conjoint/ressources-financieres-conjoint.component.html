@@ -13,8 +13,12 @@
             (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
             [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
             #ressourcesFinancieresConjointForm="ngForm">
+            <i class="row mt-auto mb-auto fas fa-info-circle"
+            *ngIf="!conjoint.informationsPersonnelles.isSalarie && conjoint.informationsPersonnelles.hasRessourceAideEmploi">
+                <span class="mt-auto mb-auto ml-1">indiquer 0 si aucun montant</span>
+            </i>
             <div
-                class="form-group"
+                class="form-group mt-3"
                 *ngIf="conjoint.informationsPersonnelles.isHandicape">
                 <div class="row mb-2">
                     <label
@@ -41,16 +45,16 @@
                     <span class="text-2-side-input">du mois dernier</span>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="row error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
                 </div>
             </div>
             <div
@@ -81,21 +85,21 @@
                     <span class="text-2-side-input">net</span>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
                 </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
+                *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -121,21 +125,21 @@
                     <span class="text-2-side-input">du mois dernier</span>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
                 </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
+                *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi && !conjoint.informationsPersonnelles.isSalarie">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -161,21 +165,21 @@
                     <span class="text-2-side-input">du mois dernier</span>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
                 </div>
             </div>
             <div
                 class="form-group"
-                *ngIf="conjoint.informationsPersonnelles.isSansEmploiAvecRessource">
+                *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi && !conjoint.informationsPersonnelles.isSalarie">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -201,16 +205,16 @@
                     <span class="text-2-side-input">du mois dernier</span>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
                 </div>
             </div>
             <div class="div-buttons-form row">

@@ -220,6 +220,18 @@ export class DemandeurEmploiConnecteService {
     && this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0;
   }
 
+  public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {
+    let hasPersonneAChargeAvecRessourcesFinancieres = false;
+    if(this.demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
+        if(personne.ressourcesFinancieres) {
+          hasPersonneAChargeAvecRessourcesFinancieres = true;
+        }
+      });
+    }
+    return hasPersonneAChargeAvecRessourcesFinancieres;
+  }
+
 
   public hasRevenusImmobilier(): boolean {
     return this.demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true
@@ -243,15 +255,23 @@ export class DemandeurEmploiConnecteService {
     return this.demandeurEmploiConnecte.informationsPersonnelles.isHandicape;
   }
 
+  public hasConjointSituationAvecRessource(): boolean {
+    return this.demandeurEmploiConnecte.situationFamiliale.isEnCouple
+    && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource
+    && (this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie
+      || this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape
+      || this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi)
+  }
+
   public modifierSituationConjoint(situationConjoint: SituationPersonne) {
     this.modifierSituationConjointHandicape(situationConjoint);
     if (situationConjoint.isSalarie) {
       this.modifierSituationConjointEnSalarie();
     }
-    if (situationConjoint.isSansEmploiAvecRessource) {
+    if (situationConjoint.hasRessourceAideEmploi) {
       this.modifierSituationConjointEnSansEmploiAvecRessource();
     }
-    if (situationConjoint.isSansEmploiSansRessource) {
+    if (situationConjoint.isSansRessource) {
       this.modifierSituationConjointEnSansEmploiSansRessource();
     }
     this.saveDemandeurEmploiConnecteInSessionStorage();
@@ -293,17 +313,17 @@ export class DemandeurEmploiConnecteService {
   }
 
   private modifierSituationConjointEnSansEmploiAvecRessource() {
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = true;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi = true;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = false;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
-    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource) {
+    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi) {
       this.unsetRessourcesAllocations();
     }
   }
 
   private modifierSituationConjointEnSansEmploiSansRessource() {
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = true;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource = true;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi = false;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = false;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
     this.unsetRessourcesAllocations();
@@ -311,8 +331,8 @@ export class DemandeurEmploiConnecteService {
 
   private modifierSituationConjointEnSalarie() {
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = true;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiAvecRessource = false;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi = false;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource = false;
     this.unsetRessourcesAllocations();
     if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
@@ -336,8 +356,8 @@ export class DemandeurEmploiConnecteService {
     }
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape = situationConjoint.isHandicape;
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie = situationConjoint.isSalarie;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = situationConjoint.isSansEmploiSansRessource;
-    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansEmploiSansRessource = situationConjoint.isSansEmploiSansRessource;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi = situationConjoint.hasRessourceAideEmploi;
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource = situationConjoint.isSansRessource;
   }
 
   private saveDemandeurEmploiConnecteInSessionStorage(): void {

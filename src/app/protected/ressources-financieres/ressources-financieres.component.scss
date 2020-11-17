@@ -1,0 +1,25 @@
+@import "../../../assets/scss/variables";
+
+.block-ressources {
+  button {
+    background-color: $color-white-1;
+    border-radius: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid $color-grey-1;
+    color: $color-blue-1;
+    margin-top: 1rem;
+    min-height: 5rem;
+    max-height: unset;
+    width: 100%;
+    .euro-sign {
+      width: 2rem;
+    }
+    .text-button {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+  }
+
+}

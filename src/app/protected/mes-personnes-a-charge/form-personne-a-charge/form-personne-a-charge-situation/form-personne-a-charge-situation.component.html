@@ -30,28 +30,33 @@
             {{situationPersonneEnum.SALARIE}}
         </label>
         <label
-            name="isSansEmploiAvecRessource"
+            name="hasRessourceAideEmploi"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource"
+            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi"
             btnCheckbox
             tabindex="0"
             role="button"
-            #isSansEmploi="ngModel"
-            (click)="onClickCheckBoxIsSansEmploiAvecRessource()">
-            {{situationPersonneEnum.SANS_EMPLOI_AVEC_RESSOURCE}}
+            #hasRessourceAideEmploi="ngModel"
+            (click)="onClickCheckBoxHasRessourceAideEmploi()">
+            {{situationPersonneEnum.RESSOURCE_AIDE_EMPLOI}}
         </label>
         <label
-            name="isSansEmploiSansRessource"
+            name="isSansRessource"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansEmploiSansRessource"
+            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansRessource"
             btnCheckbox
             tabindex="0"
             role="button"
             #isSansEmploi="ngModel"
-            (click)="onClickCheckBoxIsSansEmploiSansRessource()">
-            {{situationPersonneEnum.SANS_EMPLOI_SANS_RESSOURCE}}
+            (click)="onClickCheckBoxIsSansRessource()">
+            {{situationPersonneEnum.SANS_RESSOURCE}}
         </label>
     </div>
+</div>
+<div class="mb-3" *ngIf="this.nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi === true && !nouvellePersonneACharge.informationsPersonnelles.isSalarie">
+  <i class="mt-auto mb-auto fas fa-info-circle">
+    <span class="mt-auto mb-auto ml-1">indiquer 0 si aucun montant</span>
+  </i>
 </div>
 <div
     class="form-group"
@@ -135,7 +140,7 @@
 </div>
 <div
     class="form-group"
-    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource">
+    *ngIf="nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi">
     <div class="row mb-2">
         <label
             class="label"
@@ -175,7 +180,7 @@
 </div>
 <div
     class="form-group"
-    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource">
+    *ngIf="nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi && !nouvellePersonneACharge.informationsPersonnelles.isSalarie">
     <div class="row mb-2">
         <label
             class="label"
@@ -215,7 +220,7 @@
 </div>
 <div
     class="form-group"
-    *ngIf="nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource">
+    *ngIf="nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi && !nouvellePersonneACharge.informationsPersonnelles.isSalarie">
     <div class="row mb-2">
         <label
             class="label"

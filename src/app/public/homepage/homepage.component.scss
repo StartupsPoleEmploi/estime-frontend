@@ -24,9 +24,16 @@
   color: $color-white-1;
   padding-bottom: 2rem;
   padding-top: 2rem;
+  @media #{$large-device} {
+    .container-fluid {
+      padding-left : 15rem;
+      padding-right: 15rem;
+    }
+  }
   .card {
     background-color: inherit;
     border: none;
+    padding: 1rem;
     .card-body {
       padding-left: 0;
       padding-right: 0;
@@ -61,6 +68,19 @@
   background-color: $color-blue-5;
   padding-bottom: 2rem;
   padding-top: 2rem;
+  @media #{$medium-device} {
+    .container-fluid {
+      padding-left : 15rem;
+      padding-right: 15rem;
+    }
+  }
+  @media #{$large-device} {
+    .container-fluid {
+      padding-left : 30rem;
+      padding-right: 30rem;
+    }
+  }
+
   h2 {
     padding-bottom: 2rem;
   }
@@ -86,6 +106,12 @@
 #section-temoignages {
   padding-bottom: 2rem;
   padding-top: 2rem;
+  @media #{$large-device} {
+    .container-fluid {
+      padding-left : 25rem;
+      padding-right: 25rem;
+    }
+  }
   h2 {
     padding-bottom: 2rem;
   }

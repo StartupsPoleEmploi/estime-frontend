@@ -33,23 +33,23 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxIsSalarie(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiSansRessource = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     if(!this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
       this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
     }
   }
 
-  public onClickCheckBoxIsSansEmploiAvecRessource(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiSansRessource = false;
-    if(!this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource) {
+  public onClickCheckBoxHasRessourceAideEmploi(): void {
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource= false;
+    if(!this.nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi) {
       this.unsetRessourcesAllocations();
     }
   }
 
-  public onClickCheckBoxIsSansEmploiSansRessource(): void {
+  public onClickCheckBoxIsSansRessource(): void {
     this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
     this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansEmploiAvecRessource = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     this.unsetRessourcesAllocations();
   }
 

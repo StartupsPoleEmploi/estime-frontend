@@ -1,0 +1,120 @@
+<app-page-loading
+    *ngIf="isPageLoadingDisplay"
+    message="Calcul de votre simulation en cours..."></app-page-loading>
+<div class="container-fluid form-container-fluid">
+    <alert
+        type="danger"
+        *ngIf="messageErreur">
+        {{messageErreur}}
+    </alert>
+    <h1 class="h1-style-2">4. Ressources finançières actuelles</h1>
+    <div class="text-under-h1">
+        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+    </div>
+    <div class="block-ressources">
+        <div id="block-vos-ressources">
+            <button
+                type="button"
+                role="button"
+                class="btn"
+                (click)="onClickButtonVosRessources()">
+                <div class="row ml-2">
+                    <img class="euro-sign" src="./assets/images/euro.svg">
+                    <span class="text-button ml-3 mt-auto mb-auto">Vos ressources</span>
+                    <i
+                        *ngIf="isVosRessourcesDisplay"
+                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                    <i
+                        *ngIf="!isVosRessourcesDisplay"
+                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                </div>
+            </button>
+            <app-vos-ressources-financieres
+                *ngIf="isVosRessourcesDisplay"
+                [ressourcesFinancieres]="ressourcesFinancieres"
+                (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter($event)">
+            </app-vos-ressources-financieres>
+        </div>
+        <div
+            *ngIf="demandeurEmploiConnecteService.hasConjointSituationAvecRessource()"
+            id="block-ressources-conjoint">
+            <button
+                type="button"
+                role="button"
+                class="btn"
+                (click)="onClickButtonRessourcesConjoint()">
+                <div class="row ml-2">
+                    <img class="euro-sign" src="./assets/images/euro.svg">
+                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) de votre conjoint(e)</span>
+                    <i
+                        *ngIf="isRessourcesConjointDisplay"
+                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                    <i
+                        *ngIf="!isRessourcesConjointDisplay"
+                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                </div>
+            </button>
+
+        </div>
+        <div
+            *ngIf="demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()"
+            id="block-ressources-personnes-a-charge">
+            <button
+                type="button"
+                role="button"
+                class="btn"
+                (click)="onClickButtonRessourcesPersonnesCharge()">
+                <div class="row ml-2">
+                  <img class="euro-sign" src="./assets/images/euro.svg">
+                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) personne(s) à charge</span>
+                    <i
+                        *ngIf="isRessourcesPersonnesChargeDisplay"
+                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                    <i
+                        *ngIf="!isRessourcesPersonnesChargeDisplay"
+                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                </div>
+            </button>
+
+        </div>
+        <div id="block-ressources-foyer">
+            <button
+                type="button"
+                role="button"
+                class="btn"
+                (click)="onClickButtonRessourcesFoyer()">
+                <div class="row ml-2">
+                  <img class="euro-sign" src="./assets/images/euro.svg">
+                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) du foyer</span>
+                    <i
+                        *ngIf="isRessourcesFoyerDisplay"
+                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                    <i
+                        *ngIf="!isRessourcesFoyerDisplay"
+                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                </div>
+            </button>
+            <app-ressources-financieres-foyer
+                *ngIf="isRessourcesFoyerDisplay"
+                [ressourcesFinancieres]="ressourcesFinancieres"></app-ressources-financieres-foyer>
+        </div>
+    </div>
+    <div class="div-buttons-form row">
+        <button
+            class="btn btn-primary-style-0"
+            (click)="onClickButtonRetour()">
+            <div>
+                <img src="./assets/images/return-arrow.svg">
+            </div>
+            <div class="text-button">Retour</div>
+        </button>
+        <button
+            class="btn btn-obtenir-ma-simulation"
+            type="submit">
+            <div class="text-button">Obtenir ma simulation</div>
+            <div>
+                <img src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
+    </div>
+</div>

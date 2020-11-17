@@ -8,7 +8,7 @@ import { AvantDeCommencerSimulationComponent } from '@app/protected/avant-de-com
 import { MonFuturTravailComponent } from '@app/protected/mon-futur-travail/mon-futur-travail.component';
 import { MesInformationsPersonnellesComponent } from '@app/protected/mes-informations-personnelles/mes-informations-personnelles.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { MesRessourcesFinancieresComponent } from '@app/protected/mes-ressources-financieres/mes-ressources-financieres.component';
+import { VosRessourcesFinancieresComponent } from '@app/protected/ressources-financieres/vos-ressources-financieres/vos-ressources-financieres.component';
 import { ResultatMaSimulationComponent } from '@app/protected/resultat-ma-simulation/resultat-ma-simulation.component';
 import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { MesPersonnesAChargeComponent } from '@app/protected/mes-personnes-a-charge/mes-personnes-a-charge.component';
@@ -17,24 +17,32 @@ import { DetailAideSocialeComponent } from './resultat-ma-simulation/detail-aide
 import { ItemRessourceActuelleComponent } from './resultat-ma-simulation/ressources-financieres-mensuelles/item-ressource-actuelle/item-ressource-actuelle.component';
 import { FormPersonneAChargeComponent } from './mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge.component';
 import { FormPersonneAChargeSituationComponent } from './mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge-situation/form-personne-a-charge-situation.component';
+import { RessourcesFinancieresComponent } from './ressources-financieres/ressources-financieres.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/ressources-financieres-foyer/ressources-financieres-foyer.component';
 
 @NgModule({
   declarations: [
     AvantDeCommencerSimulationComponent,
+    DetailAideSocialeComponent,
+    FormPersonneAChargeComponent,
+    FormPersonneAChargeSituationComponent,
+    ItemRessourceActuelleComponent,
     MesInformationsPersonnellesComponent,
     MesPersonnesAChargeComponent,
-    MesRessourcesFinancieresComponent,
     MonFuturTravailComponent,
+    RessourcesFinancieresComponent,
     RessourcesFinancieresConjointComponent,
-    ResultatMaSimulationComponent,
+    RessourcesFinancieresFoyerComponent,
     RessourcesFinancieresMensuellesComponent,
-    DetailAideSocialeComponent,
-    ItemRessourceActuelleComponent,
-    FormPersonneAChargeComponent,
-    FormPersonneAChargeSituationComponent
+    ResultatMaSimulationComponent,
+    VosRessourcesFinancieresComponent
   ],
   imports: [
+    AccordionModule.forRoot(),
     AlertModule.forRoot(),
+    BrowserAnimationsModule,
     ButtonsModule.forRoot(),
     CommunModule,
     FormsModule,

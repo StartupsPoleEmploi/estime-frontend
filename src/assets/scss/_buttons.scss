@@ -156,6 +156,17 @@
   }
 }
 
+.btn-primary-style-4 {
+  background-color: $color-blue-3;
+  color: $color-white-1;
+  border: 0;
+  border-radius: 100px;
+  &:hover {
+    background-color: $color-blue-1;
+    color: $color-white-1;
+  }
+}
+
 .btn-obtenir-ma-simulation {
   @extend .primary-button-base;
   margin: auto;

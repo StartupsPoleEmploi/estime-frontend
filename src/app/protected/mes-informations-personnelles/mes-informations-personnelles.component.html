@@ -207,11 +207,11 @@
                       class="label"
                       for="situationsExceptionnelles">
                       Vous percevez
-                      <i
-                      class="interrogation-icon btn far fa-question-circle"
-                      [popover]="popoverSituationDemandeurTemplate"
-                      #popoverSituationDemandeur="bs-popover"
-                      placement="right"></i>
+                      <img class="interrogation-icon"
+                    src="./assets/images/question.svg"
+                    [popover]="popoverSituationDemandeurTemplate"
+                    #popoverSituationDemandeur="bs-popover"
+                    placement="right">
                   </label>
               </div>
               <div class="row">
@@ -326,26 +326,26 @@
                       {{situationPersonneEnum.SALARIE}}
                   </label>
                   <label
-                      #conjointIsSansEmploiAvecRessource="ngModel"
-                      name="conjointIsSansEmploiAvecRessource"
+                      #conjointHasRessourceAideEmploi="ngModel"
+                      name="conjointHasRessourceAideEmploi"
                       class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isSansEmploiAvecRessource"
-                      (click)="onClickCheckBoxConjointIsSansEmploiAvecRessource()">
-                      {{situationPersonneEnum.SANS_EMPLOI_AVEC_RESSOURCE}}
+                      [(ngModel)]="situationConjoint.hasRessourceAideEmploi"
+                      (click)="onClickCheckBoxConjointHasRessourceAideEmploi()">
+                      {{situationPersonneEnum.RESSOURCE_AIDE_EMPLOI}}
                   </label>
                   <label
-                      #conjointIsSansEmploiSansRessource="ngModel"
-                      name="conjointIsSansEmploiSansRessource"
+                      #conjointIsSansRessource="ngModel"
+                      name="conjointIsSansRessource"
                       class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isSansEmploiSansRessource"
-                      (click)="onClickCheckBoxConjointIsSansEmploiSansRessource()">
-                      {{situationPersonneEnum.SANS_EMPLOI_SANS_RESSOURCE}}
+                      [(ngModel)]="situationConjoint.isSansRessource"
+                      (click)="onClickCheckBoxConjointIsSansRessource()">
+                      {{situationPersonneEnum.SANS_RESSOURCE}}
                   </label>
               </div>
           </div>

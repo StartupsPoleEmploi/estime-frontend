@@ -72,7 +72,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonSuivant(): void {
-    this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
   }
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {

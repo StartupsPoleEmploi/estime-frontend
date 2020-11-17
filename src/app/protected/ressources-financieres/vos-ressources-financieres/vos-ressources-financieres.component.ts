@@ -1,31 +1,26 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { RoutesEnum } from '@enumerations/routes.enum';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { Router } from '@angular/router';
+import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DateDecomposee } from '@models/date-decomposee';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
-import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
-import { AllocationsCAF } from '@models/allocations-caf';
-import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
+import { DateDecomposee } from '@models/date-decomposee';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
 
 @Component({
-  selector: 'app-mes-ressources-financieres',
-  templateUrl: './mes-ressources-financieres.component.html',
-  styleUrls: ['./mes-ressources-financieres.component.scss']
+  selector: 'app-vos-ressources-financieres',
+  templateUrl: './vos-ressources-financieres.component.html',
+  styleUrls: ['./vos-ressources-financieres.component.scss']
 })
-export class MesRessourcesFinancieresComponent implements OnInit {
+export class VosRessourcesFinancieresComponent implements OnInit {
 
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
   dateDernierOuvertureDroitASS: DateDecomposee;
-  isPageLoadingDisplay = false;
   isRessourcesFinancieresFormSubmitted = false;
-  messageErreur: string;
-  ressourcesFinancieres: RessourcesFinancieres;
+
+  @Input() ressourcesFinancieres: RessourcesFinancieres;
+
+  @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
   @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput:ElementRef;
@@ -39,19 +34,11 @@ export class MesRessourcesFinancieresComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
-    public estimeApiService: EstimeApiService,
-    private router: Router
+    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService
   ) { }
 
   ngOnInit(): void {
-    this.loadDataRessourcesFinancieres();
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
-  }
-
-  public onClickButtonRetour(): void {
-    this.checkAndSaveDateDernierOuvertureDroitASS();
-    this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
   }
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
@@ -59,20 +46,7 @@ export class MesRessourcesFinancieresComponent implements OnInit {
     this.checkAndSaveDateDernierOuvertureDroitASS();
     if(form.valid) {
       this.demandeurEmploiConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
-      if(this.demandeurEmploiConnecteService.isEnCouple()) {
-        this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
-      } else {
-        this.isPageLoadingDisplay = true;
-        this.demandeurEmploiConnecteService.simulerMesAides().then(
-          () => {
-            this.isPageLoadingDisplay = false;
-            this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
-          },() => {
-            this.isPageLoadingDisplay = false;
-            this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
-          }
-        );
-      }
+      this.validationVosRessourcesEventEmitter.emit();
     }
   }
 
@@ -82,32 +56,10 @@ export class MesRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public getLibelleBoutonValidationFormulaire():string {
-    let libelleBoutonValidationFormulaire = "Obtenir ma simulation";
-    if(this.demandeurEmploiConnecteService.isEnCouple()) {
-      libelleBoutonValidationFormulaire = "Suivant";
-    }
-    return libelleBoutonValidationFormulaire;
-  }
-
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
     this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormat(this.dateDernierOuvertureDroitASS);
     if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
-    }
-  }
-
-  private loadDataRessourcesFinancieres(): void {
-    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres) {
-      this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
-    } else {
-      this.ressourcesFinancieres = new RessourcesFinancieres();
-      const allocationsPE = new AllocationsPoleEmploi();
-      allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
-      this.ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
-      const allocationsCAF = new AllocationsCAF();
-      this.ressourcesFinancieres.allocationsCAF = allocationsCAF;
     }
   }
 

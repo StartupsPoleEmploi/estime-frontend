@@ -74,23 +74,23 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointIsSalarie(): void {
-    this.situationConjoint.isSansEmploiSansRessource = false;
+    this.situationConjoint.isSansRessource = false;
     if(!this.situationConjoint.isSalarie) {
       this.demandeurEmploiConnecteService.unsetConjointSalaire();
     }
   }
 
-  public onClickCheckBoxConjointIsSansEmploiAvecRessource(): void {
-    this.situationConjoint.isSansEmploiSansRessource = false;
-    if(!this.situationConjoint.isSansEmploiAvecRessource) {
+  public onClickCheckBoxConjointHasRessourceAideEmploi(): void {
+    this.situationConjoint.isSansRessource = false;
+    if(!this.situationConjoint.hasRessourceAideEmploi) {
       this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
       this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
     }
   }
 
-  public onClickCheckBoxConjointIsSansEmploiSansRessource(): void {
+  public onClickCheckBoxConjointIsSansRessource(): void {
     this.situationConjoint.isSalarie = false;
-    this.situationConjoint.isSansEmploiAvecRessource = false;
+    this.situationConjoint.hasRessourceAideEmploi = false;
     this.demandeurEmploiConnecteService.unsetConjointSalaire();
     this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
     this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
@@ -159,8 +159,8 @@ export class MesInformationsPersonnellesComponent implements OnInit {
         this.situationConjoint = new SituationPersonne(
           conjoint.informationsPersonnelles.isHandicape,
           conjoint.informationsPersonnelles.isSalarie,
-          conjoint.informationsPersonnelles.isSansEmploiAvecRessource,
-          conjoint.informationsPersonnelles.isSansEmploiSansRessource
+          conjoint.informationsPersonnelles.hasRessourceAideEmploi,
+          conjoint.informationsPersonnelles.isSansRessource
         );
       }
     } else {

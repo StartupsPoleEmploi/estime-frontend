@@ -1,0 +1,130 @@
+<div class="card card-body card-form">
+    <form
+        (ngSubmit)="onSubmitRessourcesFinancieresFoyerForm(ressourcesFinancieresFoyerForm)"
+        [ngClass]="{'submitted':isRessourcesFinancieresFoyerFormSubmitted}"
+        #ressourcesFinancieresFoyerForm="ngForm">
+        <div class="form-group flex-column mt-3">
+            <div class="row">
+                <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+                    <label
+                        class="label label-left-style-1"
+                        for="montantAllocationsLogement">
+                        Allocations logement du foyer
+                    </label>
+                </div>
+                <div class="col-12 col-md-8  mt-auto mb-auto">
+                    <div class="row pl-0 d-inline d-flex">
+                        <input
+                            name="allocationsLogementMensuellesNetFoyer"
+                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                            type="text"
+                            min="0"
+                            class="max-with-input-type-montant form-control"
+                            placeholder="Montant"
+                            [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
+                            required
+                            inputmode="decimal"
+                            #allocationsLogementMensuellesNetFoyer="ngModel">
+                        <span class="text-side-input">€</span>
+                        <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
+                    </div>
+                    <div class="row">
+                        <span
+                            class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyer.touched)  && allocationsLogementMensuellesNetFoyer.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="row mt-3"
+                *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
+                <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+                    <label
+                        class="label label-left-style-1"
+                        for="allocationsFamilialesMensuellesNetFoyer">
+                        * Allocations familiales du foyer
+                    </label>
+                </div>
+                <div class="col-12 col-md-8  mt-auto mb-auto">
+                    <div class="row  pl-0 d-inline d-flex">
+                        <input
+                            name="allocationsFamilialesMensuellesNetFoyer"
+                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                            type="text"
+                            min="0"
+                            class="max-with-input-type-montant form-control"
+                            placeholder="Montant"
+                            [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
+                            required
+                            inputmode="decimal"
+                            #allocationsFamilialesMensuellesNetFoyer="ngModel">
+                        <span class="text-side-input">€</span>
+                        <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
+                    </div>
+                    <div class="row">
+                        <span
+                            class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer.touched)  && allocationsFamilialesMensuellesNetFoyer.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                        <span
+                            class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer.touched)  && allocationsFamilialesMensuellesNetFoyer.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="row mt-3"
+                *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
+                <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
+                    <label
+                        class="label label-left-style-1"
+                        for="montantPersionsAlimentairesFoyer">
+                        * Pensions alimentaires du foyer
+                    </label>
+                </div>
+                <div class="col-12 col-md-8  mt-auto mb-auto">
+                    <div class="row pl-0 d-inline d-flex">
+                        <input
+                            name="montantPersionsAlimentairesFoyer"
+                            pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                            type="text"
+                            min="0"
+                            class="max-with-input-type-montant form-control"
+                            placeholder="Montant"
+                            [(ngModel)]="ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer"
+                            required
+                            inputmode="decimal"
+                            #pensionsAlimentairesFoyer="ngModel">
+                        <span class="text-side-input">€</span>
+                        <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
+                    </div>
+                    <div class="row">
+                        <span
+                            class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                        <span
+                            class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-buttons-form row">
+          <button class="btn btn-primary-style-4">
+              <div class="text-button">Valider</div>
+          </button>
+        </div>
+    </form>
+</div>

@@ -47,29 +47,6 @@
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemRsaIsNotLast()">
             </li>
-            <li
-                class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0">
-                <app-item-ressource-actuelle
-                    codeRessource="APL"
-                    [isColPictoArrowDisplay]="false"
-                    libelleRessource="Allocations logement du foyer"
-                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer"
-                    organismeRessource="CAF">
-                </app-item-ressource-actuelle>
-                <hr *ngIf="isItemAplIsNotLast()">
-            </li>
-            <li
-                class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0">
-                <app-item-ressource-actuelle
-                    codeRessource="AF"
-                    [isColPictoArrowDisplay]="false"
-                    libelleRessource="Allocations familiales du foyer"
-                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
-                    organismeRessource="CAF">
-                </app-item-ressource-actuelle>
-            </li>
         </ul>
     </div>
 </div>

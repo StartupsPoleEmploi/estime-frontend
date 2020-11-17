@@ -74,7 +74,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   public getLibelleButtonSubmitForm(): string {
     let libelle = 'Ajouter';
     if(this.isModeModification) {
-      libelle = 'Modifier';
+      libelle = 'Valider';
     }
     return libelle;
   }
