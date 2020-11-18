@@ -77,7 +77,7 @@ export class ResultatMaSimulationComponent implements OnInit {
     if (this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
       this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
     } else {
-      this.router.navigate([RoutesEnum.MES_RESSOURCES_FINANCIERES], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
     }
   }
 

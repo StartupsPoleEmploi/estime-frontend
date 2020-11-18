@@ -1,12 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
+import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
+import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
+import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
+import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 
 @Component({
   selector: 'app-ressources-financieres',
@@ -22,16 +28,35 @@ export class RessourcesFinancieresComponent implements OnInit {
   isPageLoadingDisplay = false;
   messageErreur: string;
   ressourcesFinancieres: RessourcesFinancieres;
+  beneficiaireAidesSociales: BeneficiaireAidesSociales;
+  dateDernierOuvertureDroitASS: DateDecomposee;
+  isRessourcesFinancieresFormSubmitted = false;
+  isRessourcesFinancieresFormInvalide = false;
+
+  nombreMoisCumulAssSalaireSelectOptions = [
+    { label: "1 mois", value: 1, default: true },
+    { label: "2 mois", value: 2, default: false },
+    { label: "3 mois", value: 3, default: false }
+  ];
+
+  @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
+  @ViewChild(RessourcesFinancieresFoyerComponent) ressourcesFinancieresFoyerComponent: RessourcesFinancieresFoyerComponent;
+  @ViewChild(RessourcesFinancieresConjointComponent) ressourcesFinancieresConjointComponent: RessourcesFinancieresConjointComponent;
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
+    private dateUtileService: DateUtileService,
     public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
     private router: Router
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.loadDataRessourcesFinancieres();
+    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
   }
+
 
   public onClickButtonVosRessources(): void {
     this.isVosRessourcesDisplay = !this.isVosRessourcesDisplay;
@@ -50,15 +75,18 @@ export class RessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickButtonObtenirSimulation(): void {
-    this.demandeurEmploiConnecteService.simulerMesAides().then(
-          () => {
-            this.isPageLoadingDisplay = false;
-            this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
-          },() => {
-            this.isPageLoadingDisplay = false;
-            this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
-          }
-        );
+    if(this.isSaisieFormulairesValide()) {
+      this.isPageLoadingDisplay = true;
+      this.demandeurEmploiConnecteService.simulerMesAides().then(
+        () => {
+          this.isPageLoadingDisplay = false;
+          this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+        },() => {
+          this.isPageLoadingDisplay = false;
+          this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
+        }
+      );
+    }
   }
 
   public onClickButtonRetour(): void {
@@ -67,18 +95,35 @@ export class RessourcesFinancieresComponent implements OnInit {
 
   public traiterValidationVosRessourcesEventEmitter(): void {
     this.isVosRessourcesDisplay = false;
-    if(this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()) {
+    if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()) {
       this.isRessourcesConjointDisplay = true;
-    } else if(this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres) {
+    } else if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
   }
 
+  public traiterValidationRessourcesFinancieresConjointEventEmitter(): void {
+    this.isRessourcesConjointDisplay = false;
+    if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+      this.isRessourcesPersonnesChargeDisplay = true;
+    } else {
+      this.isRessourcesFoyerDisplay = true;
+    }
+  }
+
+  public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
+    this.isRessourcesFoyerDisplay = true;
+  }
+
+  public traiterValidationRessourcesFinancieresFoyerEventEmitter(): void {
+    this.isRessourcesFoyerDisplay = false;
+  }
+
   private loadDataRessourcesFinancieres(): void {
     const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres) {
+    if (demandeurEmploiConnecte.ressourcesFinancieres) {
       this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
     } else {
       this.ressourcesFinancieres = new RessourcesFinancieres();
@@ -88,5 +133,22 @@ export class RessourcesFinancieresComponent implements OnInit {
       const allocationsCAF = new AllocationsCAF();
       this.ressourcesFinancieres.allocationsCAF = allocationsCAF;
     }
+  }
+
+  private isSaisieFormulairesValide(): boolean {
+    let isSaisieFormulairesValide = true;
+    if (!this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid) {
+      this.isVosRessourcesDisplay = true;
+      isSaisieFormulairesValide = false;
+    }
+    if (!this.ressourcesFinancieresFoyerComponent.ressourcesFinancieresFoyerForm.valid) {
+      this.isRessourcesFoyerDisplay = true;
+      isSaisieFormulairesValide = false;
+    }
+    if (!this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
+      this.isRessourcesConjointDisplay = true;
+      isSaisieFormulairesValide = false;
+    }
+    return isSaisieFormulairesValide;
   }
 }

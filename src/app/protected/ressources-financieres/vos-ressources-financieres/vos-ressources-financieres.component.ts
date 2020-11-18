@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
@@ -19,11 +19,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   isRessourcesFinancieresFormSubmitted = false;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
-
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
-  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput:ElementRef;
+  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
+  @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm:FormGroup;
 
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
@@ -38,6 +38,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    const test = this.ressourcesFinancieres;
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
   }
 

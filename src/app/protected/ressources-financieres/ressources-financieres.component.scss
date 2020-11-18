@@ -1,7 +1,7 @@
 @import "../../../assets/scss/variables";
 
 .block-ressources {
-  button {
+  .accordion-button {
     background-color: $color-white-1;
     border-radius: 0;
     border-top-left-radius: 4px;
@@ -21,5 +21,27 @@
     }
 
   }
-
 }
+
+.text-2-side-input-style-inline {
+  @media #{$small-device} {
+    font-size: 0.9rem;
+  }
+}
+
+.text-alert {
+  color: $color-red-1;
+}
+
+.card-body {
+  border-radius: 0;
+  border: 1px solid $color-grey-1;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top: 0;
+  margin-top: 0;
+  padding-left: 4rem;
+  padding-top: 1.5rem;
+}
+
+

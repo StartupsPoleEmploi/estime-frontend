@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -12,6 +12,8 @@ import { FormGroup } from '@angular/forms';
 export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   isRessourcesFinancieresFoyerFormSubmitted = false;
+
+  @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm:FormGroup;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 

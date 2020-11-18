@@ -1,0 +1,87 @@
+<div class="card card-body card-form">
+    <form
+        (ngSubmit)="onSubmitRessourcesFinancieresPersonnesChargeForm(ressourcesFinancieresPersonnesChargeForm)"
+        [ngClass]="{'submitted':isRessourcesFinancieresPersonnesChargeFormSubmitted}"
+        #ressourcesFinancieresPersonnesChargeForm="ngForm">
+        <div
+            class="form-group"
+            *ngFor="let personneDTO of personnesDTO">
+            <span>Personne {{personneDTO.index + 1}} ({{personneDTO.personne.informationsPersonnelles.dateNaissance}})</span>
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi && !personneDTO.personne.informationsPersonnelles.isSalarie">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetARE">
+                        Allocation Retour Emploi (ARE)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetARE"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control d-inline"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetARE="ngModel">
+                    <span class="text-side-input d-inline">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi && !personneDTO.personne.informationsPersonnelles.isSalarie">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetASS">
+                        Allocation Solidarité Spécifique (ASS)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetASS"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control d-inline"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetASS="ngModel">
+                    <span class="text-side-input d-inline">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="div-buttons-form row">
+            <button
+                class="btn btn-primary-style-4"
+                type="submit">
+                <div class="text-button">Valider</div>
+            </button>
+        </div>
+    </form>
+</div>

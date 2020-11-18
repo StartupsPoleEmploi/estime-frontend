@@ -16,10 +16,12 @@
             <button
                 type="button"
                 role="button"
-                class="btn"
+                class="btn accordion-button"
                 (click)="onClickButtonVosRessources()">
                 <div class="row ml-2">
-                    <img class="euro-sign" src="./assets/images/euro.svg">
+                    <img
+                        class="euro-sign"
+                        src="./assets/images/euro.svg">
                     <span class="text-button ml-3 mt-auto mb-auto">Vos ressources</span>
                     <i
                         *ngIf="isVosRessourcesDisplay"
@@ -30,9 +32,9 @@
                 </div>
             </button>
             <app-vos-ressources-financieres
-                *ngIf="isVosRessourcesDisplay"
+                [hidden]="!isVosRessourcesDisplay"
                 [ressourcesFinancieres]="ressourcesFinancieres"
-                (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter($event)">
+                (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter()">
             </app-vos-ressources-financieres>
         </div>
         <div
@@ -41,10 +43,12 @@
             <button
                 type="button"
                 role="button"
-                class="btn"
+                class="btn accordion-button"
                 (click)="onClickButtonRessourcesConjoint()">
                 <div class="row ml-2">
-                    <img class="euro-sign" src="./assets/images/euro.svg">
+                    <img
+                        class="euro-sign"
+                        src="./assets/images/euro.svg">
                     <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) de votre conjoint(e)</span>
                     <i
                         *ngIf="isRessourcesConjointDisplay"
@@ -54,7 +58,11 @@
                         class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
                 </div>
             </button>
+            <app-ressources-financieres-conjoint
+                [hidden]="!isRessourcesConjointDisplay"
+                (validationRessourcesConjointEventEmitter)="traiterValidationRessourcesFinancieresConjointEventEmitter()">
 
+            </app-ressources-financieres-conjoint>
         </div>
         <div
             *ngIf="demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()"
@@ -62,10 +70,12 @@
             <button
                 type="button"
                 role="button"
-                class="btn"
+                class="btn accordion-button"
                 (click)="onClickButtonRessourcesPersonnesCharge()">
                 <div class="row ml-2">
-                  <img class="euro-sign" src="./assets/images/euro.svg">
+                    <img
+                        class="euro-sign"
+                        src="./assets/images/euro.svg">
                     <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) personne(s) à charge</span>
                     <i
                         *ngIf="isRessourcesPersonnesChargeDisplay"
@@ -75,16 +85,22 @@
                         class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
                 </div>
             </button>
+            <app-ressources-financieres-personnes-a-charge
+                [hidden]="!isRessourcesPersonnesChargeDisplay"
+                (validationRessourcesPersonnesChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
 
+            </app-ressources-financieres-personnes-a-charge>
         </div>
         <div id="block-ressources-foyer">
             <button
                 type="button"
                 role="button"
-                class="btn"
+                class="btn accordion-button"
                 (click)="onClickButtonRessourcesFoyer()">
                 <div class="row ml-2">
-                  <img class="euro-sign" src="./assets/images/euro.svg">
+                    <img
+                        class="euro-sign"
+                        src="./assets/images/euro.svg">
                     <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) du foyer</span>
                     <i
                         *ngIf="isRessourcesFoyerDisplay"
@@ -95,8 +111,9 @@
                 </div>
             </button>
             <app-ressources-financieres-foyer
-                *ngIf="isRessourcesFoyerDisplay"
-                [ressourcesFinancieres]="ressourcesFinancieres"></app-ressources-financieres-foyer>
+                [hidden]="!isRessourcesFoyerDisplay"
+                [ressourcesFinancieres]="ressourcesFinancieres"
+                (validationRessourcesFoyerEventEmitter)="traiterValidationRessourcesFinancieresFoyerEventEmitter()"></app-ressources-financieres-foyer>
         </div>
     </div>
     <div class="div-buttons-form row">
@@ -110,7 +127,8 @@
         </button>
         <button
             class="btn btn-obtenir-ma-simulation"
-            type="submit">
+            type="button"
+            (click)="onClickButtonObtenirSimulation()">
             <div class="text-button">Obtenir ma simulation</div>
             <div>
                 <img src="./assets/images/icon-bt-primaire.svg">

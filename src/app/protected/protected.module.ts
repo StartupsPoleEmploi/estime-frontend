@@ -10,7 +10,7 @@ import { MesInformationsPersonnellesComponent } from '@app/protected/mes-informa
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { VosRessourcesFinancieresComponent } from '@app/protected/ressources-financieres/vos-ressources-financieres/vos-ressources-financieres.component';
 import { ResultatMaSimulationComponent } from '@app/protected/resultat-ma-simulation/resultat-ma-simulation.component';
-import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
+import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { MesPersonnesAChargeComponent } from '@app/protected/mes-personnes-a-charge/mes-personnes-a-charge.component';
 import { RessourcesFinancieresMensuellesComponent } from './resultat-ma-simulation/ressources-financieres-mensuelles/ressources-financieres-mensuelles.component';
 import { DetailAideSocialeComponent } from './resultat-ma-simulation/detail-aide-sociale/detail-aide-sociale.component';
@@ -21,6 +21,7 @@ import { RessourcesFinancieresComponent } from './ressources-financieres/ressour
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/ressources-financieres-foyer/ressources-financieres-foyer.component';
+import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres/ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/re
     RessourcesFinancieresFoyerComponent,
     RessourcesFinancieresMensuellesComponent,
     ResultatMaSimulationComponent,
-    VosRessourcesFinancieresComponent
+    VosRessourcesFinancieresComponent,
+    RessourcesFinancieresPersonnesAChargeComponent
   ],
   imports: [
     AccordionModule.forRoot(),
