@@ -6,7 +6,129 @@
         <div
             class="form-group"
             *ngFor="let personneDTO of personnesDTO">
-            <span>Personne {{personneDTO.index + 1}} ({{personneDTO.personne.informationsPersonnelles.dateNaissance}})</span>
+            <span class="libelle-personne row">
+                Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat2(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
+            </span>
+            <div
+                class="form-group mt-2"
+                *ngIf="personneDTO.personne.informationsPersonnelles.isHandicape">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetAAH">
+                        * Allocation Adulte Handicapé (AAH)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetAAH"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetAAH="ngModel">
+                    <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.isSalarie">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="salaireNet">
+                        * Salaire
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="salaireNet"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.salaireNet"
+                        required
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        #salaireNet="ngModel">
+                    <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">net</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetRSA">
+                        * Revenu Solidarité Active (RSA)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetRSA"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetRSA="ngModel">
+                    <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
             <div
                 class="form-group"
                 *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi && !personneDTO.personne.informationsPersonnelles.isSalarie">
@@ -65,12 +187,12 @@
                 <div class="row">
                     <span
                         class="error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
                         class="error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>

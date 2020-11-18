@@ -22,7 +22,15 @@
                     <img
                         class="euro-sign"
                         src="./assets/images/euro.svg">
-                    <span class="text-button ml-3 mt-auto mb-auto">Vos ressources</span>
+                    <div class="row flex-column ml-3 row-text-button">
+                        <span class="text-button">Vos ressources</span>
+                        <span *ngIf="!isVosRessourcesDisplay && montantRevenusVosRessources > 0">
+                            Total des revenus : {{montantRevenusVosRessources}}
+                        </span>
+                        <span *ngIf="!isVosRessourcesDisplay && montantAidesVosRessources > 0">
+                            Total des aides : {{montantAidesVosRessources}}
+                        </span>
+                    </div>
                     <i
                         *ngIf="isVosRessourcesDisplay"
                         class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
@@ -49,7 +57,15 @@
                     <img
                         class="euro-sign"
                         src="./assets/images/euro.svg">
-                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) de votre conjoint(e)</span>
+                    <div class="row flex-column ml-3 row-text-button">
+                        <span class="text-button">Ressource(s) de votre conjoint(e)</span>
+                        <span *ngIf="!isRessourcesConjointDisplay && montantRevenusRessourcesConjoint > 0">
+                            Total des revenus : {{montantRevenusVosRessources}}
+                        </span>
+                        <span *ngIf="!isRessourcesConjointDisplay && montantAidesRessourcesConjoint > 0">
+                            Total des aides : {{montantAidesVosRessources}}
+                        </span>
+                    </div>
                     <i
                         *ngIf="isRessourcesConjointDisplay"
                         class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
@@ -76,7 +92,16 @@
                     <img
                         class="euro-sign"
                         src="./assets/images/euro.svg">
-                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) personne(s) à charge</span>
+                    <div class="row flex-column ml-3 row-text-button">
+                        <span class="text-button">Ressource(s) personne(s) à charge</span>
+                        <span *ngIf="!isRessourcesPersonnesChargeDisplay && montantRevenusPersonnesCharge > 0">
+                            Total revenus : {{montantRevenusPersonnesCharge}}
+                        </span>
+                        <span *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesPersonnesCharge > 0">
+                            Total des aides : {{montantAidesPersonnesCharge}}
+                        </span>
+                    </div>
+                    <span class="text-button ml-3 mt-auto mb-auto"></span>
                     <i
                         *ngIf="isRessourcesPersonnesChargeDisplay"
                         class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
@@ -87,7 +112,7 @@
             </button>
             <app-ressources-financieres-personnes-a-charge
                 [hidden]="!isRessourcesPersonnesChargeDisplay"
-                (validationRessourcesPersonnesChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
+                (validationRessourcesPersonnesAChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
 
             </app-ressources-financieres-personnes-a-charge>
         </div>
@@ -101,7 +126,10 @@
                     <img
                         class="euro-sign"
                         src="./assets/images/euro.svg">
-                    <span class="text-button ml-3 mt-auto mb-auto">Ressource(s) du foyer</span>
+                    <div class="row flex-column ml-3 row-text-button">
+                        <span class="text-button">Ressource(s) du foyer</span>
+                        <span *ngIf="!isRessourcesFoyerDisplay && montantAidesFoyer > 0">Total des aides : {{montantAidesFoyer}}</span>
+                    </div>
                     <i
                         *ngIf="isRessourcesFoyerDisplay"
                         class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>

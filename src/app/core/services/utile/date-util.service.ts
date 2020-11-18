@@ -41,6 +41,15 @@ export class DateUtileService {
     return `${moisLabel} ${dateSimulationSplit[0]}`;
   }
 
+  /**
+   * transforme YYYY-MM-DD en JJ/MM/YYYY
+   * @param date
+   */
+  getDateStringFormat2(date: string): string {
+    const dateSimulationSplit = date.split('-');
+    return dateSimulationSplit[2] + '/' + dateSimulationSplit[1] + '/' + dateSimulationSplit[0];
+  }
+
   checkFormat(dateDecomposee: DateDecomposee): string {
     let errorFormatMessage = undefined;
     const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));

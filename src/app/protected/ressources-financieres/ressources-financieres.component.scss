@@ -15,9 +15,15 @@
     .euro-sign {
       width: 2rem;
     }
-    .text-button {
-      font-weight: 700;
-      font-size: 1.1rem;
+    .row-text-button {
+      text-align: left;
+      .text-button {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: $color-blue-3;
+        font-weight: bold;
+      }
+
     }
 
   }

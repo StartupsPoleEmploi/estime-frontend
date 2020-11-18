@@ -6,6 +6,7 @@ import { PersonneUtileService } from '@app/core/services/utile/personne-utile.se
 import { Personne } from '@models/personne';
 import { PersonneDTO } from '@app/commun/models/dto/personne-dto';
 import { FormGroup, NgForm } from '@angular/forms';
+import { DateUtileService } from '@app/core/services/utile/date-util.service';
 
 @Component({
   selector: 'app-ressources-financieres-personnes-a-charge',
@@ -24,6 +25,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
+    public dateUtileService: DateUtileService,
     public demandeurEmploiConnecteService : DemandeurEmploiConnecteService,
     public personneUtileService: PersonneUtileService
   ) { }
@@ -34,6 +36,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
     if(form.valid) {
+      this.demandeurEmploiConnecteService.modifierRessourcesFinancierePersonnesCharge(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
     }
   }

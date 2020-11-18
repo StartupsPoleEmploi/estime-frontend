@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
-import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { AllocationsCAF } from '@models/allocations-caf';
+import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
+import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
@@ -15,6 +15,7 @@ import { SituationPersonne } from "@models/situation-personne";
 import { SessionStorageService } from "ngx-webstorage";
 import { EstimeApiService } from '../estime-api/estime-api.service';
 import { PersonneUtileService } from './personne-utile.service';
+import { PersonneDTO } from '@models/dto/personne-dto';
 
 @Injectable({ providedIn: 'root' })
 export class DemandeurEmploiConnecteService {
@@ -87,6 +88,78 @@ export class DemandeurEmploiConnecteService {
     return 0;
   }
 
+  public getMontantRevenusVosRessources(): number {
+    const montant = this.getMontantSafe(this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois)
+    + this.getMontantSafe(this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois)
+    return montant;
+  }
+
+  public getMontantRevenusRessourcesConjoint(): number {
+    const ressourcesFinancieresConjoint = this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
+    return this.getMontantSafe(ressourcesFinancieresConjoint.salaireNet);
+  }
+
+  public getMontantRevenusRessourcesPersonnesCharge(): number {
+    let montant = 0;
+    this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
+      if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+        const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
+        montant += this.getMontantSafe(ressourcesFinancieresPersonne.salaireNet);
+      }
+    });
+    return montant;
+  }
+
+  public getMontantAidesVosRessources(): number {
+    let montant = 0;
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      montant += this.getMontantSafe(this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
+    }
+    return montant;
+  }
+
+  public getMontantAidesRessourcesConjoint(): number {
+    const ressourcesFinancieresConjoint = this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
+    return this.getMontantAidesRessources(ressourcesFinancieresConjoint);
+  }
+
+  public getMontantAidesRessourcesPersonnesCharge(): number {
+    let montant = 0;
+    this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
+      if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+        const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
+        montant += this.getMontantAidesRessources(ressourcesFinancieresPersonne);
+      }
+    });
+    return montant;
+  }
+
+  public getMontantAidesRessourcesFoyer(): number {
+    let montant = 0;
+    const ressourcesFinancieresFoyer = this.demandeurEmploiConnecte.ressourcesFinancieres;
+    if(ressourcesFinancieresFoyer.allocationsCAF) {
+      montant += ressourcesFinancieresFoyer.allocationsCAF.allocationsFamilialesMensuellesNetFoyer;
+      montant += ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer;
+      montant += ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer;
+    }
+    return montant;
+  }
+
+  private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {
+    let montant = 0;
+    if(ressourcesFinancieres.allocationsCAF) {
+      const allocationsCAF  = ressourcesFinancieres.allocationsCAF;
+      montant += this.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH)
+      + this.getMontantSafe(allocationsCAF.allocationMensuelleNetRSA);
+    }
+    if(ressourcesFinancieres.allocationsPoleEmploi) {
+      const allocationsPoleEmploi  = ressourcesFinancieres.allocationsPoleEmploi;
+      montant += this.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetARE)
+      + this.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetASS);
+    }
+    return montant;
+  }
+
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
       this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
@@ -101,6 +174,14 @@ export class DemandeurEmploiConnecteService {
 
   public setPersonnesACharge(personnesACharge: Array<Personne>) {
     this.demandeurEmploiConnecte.situationFamiliale.personnesACharge = personnesACharge;
+    this.saveDemandeurEmploiConnecteInSessionStorage();
+  }
+
+  public modifierRessourcesFinancierePersonnesCharge(personnesDTO: Array<PersonneDTO>): void {
+    personnesDTO.forEach(personneDTO => {
+      personneDTO.personne.ressourcesFinancieres = this.replaceCommaByDotMontantsRessourcesFinancieres(personneDTO.personne.ressourcesFinancieres);
+      this.demandeurEmploiConnecte.situationFamiliale.personnesACharge[personneDTO.index].ressourcesFinancieres = personneDTO.personne.ressourcesFinancieres;
+    });
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
@@ -300,6 +381,7 @@ export class DemandeurEmploiConnecteService {
       ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer);
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
+      ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer);
     }
     ressourcesFinancieres.salaireNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaireNet);
     ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
