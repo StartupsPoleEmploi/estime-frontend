@@ -47,7 +47,10 @@
 }
 
 .card-personne-list {
-border: 1px solid black;
+  border: 1px solid black;
+  img {
+    margin-left: 10px;
+  }
 }
 
 
@@ -58,5 +61,9 @@ border: 1px solid black;
     span {
       color: $color-blue-1;
     }
+  }
+  img {
+    width: 1.7rem;
+    margin-left: 14px;
   }
 }

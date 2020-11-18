@@ -7,7 +7,7 @@ import { AllocationsCAF } from '@models/allocations-caf';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 import { Personne } from '@models/personne';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class PersonneUtileService {
 
   private readonly AGE_LEGAL_POUR_TRAVAILLE = 16;
@@ -33,5 +33,18 @@ export class PersonneUtileService {
     personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
     personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
     return personne;
+  }
+
+  public hasRessourcesFinancieres(personne: Personne): boolean {
+    let hasRessourcesFinancieres = false;
+    if (personne.informationsPersonnelles) {
+      if (!personne.informationsPersonnelles.isSansRessource
+        && (personne.informationsPersonnelles.isSalarie
+          || personne.informationsPersonnelles.isHandicape
+          || personne.informationsPersonnelles.hasRessourceAideEmploi)) {
+            hasRessourcesFinancieres = true;
+      }
+    }
+    return hasRessourcesFinancieres;
   }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
+    <title>account_circle-24px</title>
+    <desc>Created with Sketch.</desc>
+    <g id="wireframes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Q_step3_3" transform="translate(-239.000000, -514.000000)">
+            <g id="account_circle-24px" transform="translate(236.000000, 512.000000)">
+                <path d="M19.5,3 C10.944,3 4,9.944 4,18.5 C4,27.056 10.944,34 19.5,34 C28.056,34 35,27.056 35,18.5 C35,9.944 28.056,3 19.5,3 Z M19.5,7.65 C22.073,7.65 24.15,9.727 24.15,12.3 C24.15,14.873 22.073,16.95 19.5,16.95 C16.927,16.95 14.85,14.873 14.85,12.3 C14.85,9.727 16.927,7.65 19.5,7.65 Z M19.5,29.66 C15.625,29.66 12.1995,27.676 10.2,24.669 C10.2465,21.5845 16.4,19.895 19.5,19.895 C22.5845,19.895 28.7535,21.5845 28.8,24.669 C26.8005,27.676 23.375,29.66 19.5,29.66 Z" id="Shape" stroke="#23333C" stroke-width="2" fill-rule="nonzero"></path>
+                <polygon id="Shape" points="0 0 38 0 38 38 0 38"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

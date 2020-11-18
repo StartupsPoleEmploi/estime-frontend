@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
@@ -15,6 +15,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 
+  @Output() validationRessourcesFoyerEventEmitter = new EventEmitter<void>();
+
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public demandeurEmploiConnecteService: DemandeurEmploiConnecteService
@@ -26,7 +28,10 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
-
+    if(form.valid) {
+      this.demandeurEmploiConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
+      this.validationRessourcesFoyerEventEmitter.emit();
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommunModule } from '@app/commun/commun.module';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ProtectedRoutingModule } from '@app/protected/protected-routing.module';
@@ -46,6 +46,7 @@ import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/re
     ButtonsModule.forRoot(),
     CommunModule,
     FormsModule,
+    ReactiveFormsModule,
     PopoverModule.forRoot(),
     ProtectedRoutingModule
   ]

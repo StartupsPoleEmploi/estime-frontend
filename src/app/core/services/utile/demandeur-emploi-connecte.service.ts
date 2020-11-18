@@ -196,6 +196,11 @@ export class DemandeurEmploiConnecteService {
     }
   }
 
+  public unsetConjointRessourcesFinancieres(): void {
+    this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres = null;
+    this.saveDemandeurEmploiConnecteInSessionStorage();
+  }
+
   public unsetConjointAllocationRSA(): void {
     if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint
       && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
@@ -224,7 +229,7 @@ export class DemandeurEmploiConnecteService {
     let hasPersonneAChargeAvecRessourcesFinancieres = false;
     if(this.demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       this.demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
-        if(personne.ressourcesFinancieres) {
+        if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
           hasPersonneAChargeAvecRessourcesFinancieres = true;
         }
       });
@@ -257,10 +262,7 @@ export class DemandeurEmploiConnecteService {
 
   public hasConjointSituationAvecRessource(): boolean {
     return this.demandeurEmploiConnecte.situationFamiliale.isEnCouple
-    && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource
-    && (this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isSalarie
-      || this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.isHandicape
-      || this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRessourceAideEmploi)
+    && this.personneUtileService.hasRessourcesFinancieres(this.demandeurEmploiConnecte.situationFamiliale.conjoint);
   }
 
   public modifierSituationConjoint(situationConjoint: SituationPersonne) {
