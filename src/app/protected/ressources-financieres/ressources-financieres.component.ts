@@ -122,8 +122,8 @@ export class RessourcesFinancieresComponent implements OnInit {
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesConjoint();
-    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantAidesRessourcesConjoint();
+    this.montantRevenusRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesConjoint();
+    this.montantAidesRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantAidesRessourcesConjoint();
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
@@ -158,18 +158,18 @@ export class RessourcesFinancieresComponent implements OnInit {
       this.isVosRessourcesDisplay = true;
       isSaisieFormulairesValide = false;
     }
-    if (!this.ressourcesFinancieresFoyerComponent.ressourcesFinancieresFoyerForm.valid) {
-      this.isRessourcesFoyerDisplay = true;
-      isSaisieFormulairesValide = false;
-    }
     if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()
     && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
       this.isRessourcesConjointDisplay = true;
       isSaisieFormulairesValide = false;
     }
-    if (!this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid
-      && this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+    if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()
+    && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
       this.isRessourcesPersonnesChargeDisplay = true;
+      isSaisieFormulairesValide = false;
+    }
+    if (!this.ressourcesFinancieresFoyerComponent.ressourcesFinancieresFoyerForm.valid) {
+      this.isRessourcesFoyerDisplay = true;
       isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;

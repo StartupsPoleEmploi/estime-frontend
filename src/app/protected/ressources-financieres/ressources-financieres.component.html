@@ -18,25 +18,33 @@
                 role="button"
                 class="btn accordion-button"
                 (click)="onClickButtonVosRessources()">
-                <div class="row ml-2">
-                    <img
-                        class="euro-sign"
-                        src="./assets/images/euro.svg">
-                    <div class="row flex-column ml-3 row-text-button">
-                        <span class="text-button">Vos ressources</span>
-                        <span *ngIf="!isVosRessourcesDisplay && montantRevenusVosRessources > 0">
-                            Total des revenus : {{montantRevenusVosRessources}}
-                        </span>
-                        <span *ngIf="!isVosRessourcesDisplay && montantAidesVosRessources > 0">
-                            Total des aides : {{montantAidesVosRessources}}
-                        </span>
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img
+                                class="euro-sign"
+                                src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div class="text-button">Vos ressources</div>
+                            <div *ngIf="!isVosRessourcesDisplay && montantRevenusVosRessources > 0">
+                                Total des revenus : {{montantRevenusVosRessources}} €
+                            </div>
+                            <div *ngIf="!isVosRessourcesDisplay && montantAidesVosRessources > 0">
+                                Total des aides : {{montantAidesVosRessources}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i
+                                    *ngIf="isVosRessourcesDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i
+                                    *ngIf="!isVosRessourcesDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
                     </div>
-                    <i
-                        *ngIf="isVosRessourcesDisplay"
-                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                    <i
-                        *ngIf="!isVosRessourcesDisplay"
-                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
                 </div>
             </button>
             <app-vos-ressources-financieres
@@ -53,25 +61,33 @@
                 role="button"
                 class="btn accordion-button"
                 (click)="onClickButtonRessourcesConjoint()">
-                <div class="row ml-2">
-                    <img
-                        class="euro-sign"
-                        src="./assets/images/euro.svg">
-                    <div class="row flex-column ml-3 row-text-button">
-                        <span class="text-button">Ressource(s) de votre conjoint(e)</span>
-                        <span *ngIf="!isRessourcesConjointDisplay && montantRevenusRessourcesConjoint > 0">
-                            Total des revenus : {{montantRevenusVosRessources}}
-                        </span>
-                        <span *ngIf="!isRessourcesConjointDisplay && montantAidesRessourcesConjoint > 0">
-                            Total des aides : {{montantAidesVosRessources}}
-                        </span>
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img
+                                class="euro-sign"
+                                src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div class="text-button">Ressources conjoint(e)</div>
+                            <div *ngIf="!isRessourcesConjointDisplay && montantRevenusRessourcesConjoint > 0">
+                                Total revenus : {{montantRevenusRessourcesConjoint}} €
+                            </div>
+                            <div *ngIf="!isRessourcesConjointDisplay && montantAidesRessourcesConjoint > 0">
+                                Total aides : {{montantAidesRessourcesConjoint}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i
+                                    *ngIf="isRessourcesConjointDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i
+                                    *ngIf="!isRessourcesConjointDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
                     </div>
-                    <i
-                        *ngIf="isRessourcesConjointDisplay"
-                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                    <i
-                        *ngIf="!isRessourcesConjointDisplay"
-                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
                 </div>
             </button>
             <app-ressources-financieres-conjoint
@@ -88,27 +104,34 @@
                 role="button"
                 class="btn accordion-button"
                 (click)="onClickButtonRessourcesPersonnesCharge()">
-                <div class="row ml-2">
-                    <img
-                        class="euro-sign"
-                        src="./assets/images/euro.svg">
-                    <div class="row flex-column ml-3 row-text-button">
-                        <span class="text-button">Ressource(s) personne(s) à charge</span>
-                        <span *ngIf="!isRessourcesPersonnesChargeDisplay && montantRevenusPersonnesCharge > 0">
-                            Total revenus : {{montantRevenusPersonnesCharge}}
-                        </span>
-                        <span *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesPersonnesCharge > 0">
-                            Total des aides : {{montantAidesPersonnesCharge}}
-                        </span>
-                    </div>
-                    <span class="text-button ml-3 mt-auto mb-auto"></span>
-                    <i
-                        *ngIf="isRessourcesPersonnesChargeDisplay"
-                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                    <i
-                        *ngIf="!isRessourcesPersonnesChargeDisplay"
-                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                </div>
+                <div class="container-fluid container-fluid-button">
+                  <div class="row">
+                      <div class="col-2 col-md-1 col-euro-sign">
+                          <img
+                              class="euro-sign"
+                              src="./assets/images/euro.svg">
+                      </div>
+                      <div class="col-9 col-md-10 col-text-button">
+                          <div class="text-button">Ressources personne(s) à charge</div>
+                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantRevenusPersonnesCharge > 0">
+                              Total revenus : {{montantRevenusPersonnesCharge}} €
+                          </div>
+                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesPersonnesCharge > 0">
+                              Total aides : {{montantAidesPersonnesCharge}} €
+                          </div>
+                      </div>
+                      <div class="col-1 col-md-1 col-chevron">
+                          <div>
+                              <i
+                                  *ngIf="isRessourcesPersonnesChargeDisplay"
+                                  class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                              <i
+                                  *ngIf="!isRessourcesPersonnesChargeDisplay"
+                                  class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             </button>
             <app-ressources-financieres-personnes-a-charge
                 [hidden]="!isRessourcesPersonnesChargeDisplay"
@@ -122,21 +145,31 @@
                 role="button"
                 class="btn accordion-button"
                 (click)="onClickButtonRessourcesFoyer()">
-                <div class="row ml-2">
-                    <img
-                        class="euro-sign"
-                        src="./assets/images/euro.svg">
-                    <div class="row flex-column ml-3 row-text-button">
-                        <span class="text-button">Ressource(s) du foyer</span>
-                        <span *ngIf="!isRessourcesFoyerDisplay && montantAidesFoyer > 0">Total des aides : {{montantAidesFoyer}}</span>
-                    </div>
-                    <i
-                        *ngIf="isRessourcesFoyerDisplay"
-                        class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                    <i
-                        *ngIf="!isRessourcesFoyerDisplay"
-                        class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                </div>
+                <div class="container-fluid container-fluid-button">
+                  <div class="row">
+                      <div class="col-2 col-md-1 col-euro-sign">
+                          <img
+                              class="euro-sign"
+                              src="./assets/images/euro.svg">
+                      </div>
+                      <div class="col-9 col-md-10 col-text-button">
+                          <div class="text-button">Ressources du foyer</div>
+                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesFoyer > 0">
+                              Total aides : {{montantAidesFoyer}} €
+                          </div>
+                      </div>
+                      <div class="col-1 col-md-1 col-chevron">
+                          <div>
+                              <i
+                                  *ngIf="isRessourcesPersonnesChargeDisplay"
+                                  class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                              <i
+                                  *ngIf="!isRessourcesPersonnesChargeDisplay"
+                                  class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                          </div>
+                      </div>
+                  </div>
+              </div>
             </button>
             <app-ressources-financieres-foyer
                 [hidden]="!isRessourcesFoyerDisplay"
