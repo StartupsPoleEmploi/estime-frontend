@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   estime-frontend:
-    image: registry.beta.pole-emploi.fr/estime/estime-frontend
+    image: registry.beta.pole-emploi.fr/estime/estime-frontend:rc
     environment:
       - TZ=Europe/Paris
     networks:

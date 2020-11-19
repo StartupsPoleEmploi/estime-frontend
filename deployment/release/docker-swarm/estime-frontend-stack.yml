@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  estime-frontend:
+    image: registry.beta.pole-emploi.fr/estime/estime-frontend:release
+    environment:
+      - TZ=Europe/Paris
+    networks:
+     - estime
+    ports:
+      - 80:80
+    deploy:
+      replicas: 2
+      resources:
+        reservations:
+          cpus: '0.05'
+          memory: 128Mi
+        limits:
+          cpus: '0.10'
+          memory: 256Mi
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+networks:
+  estime:
+    external: true
+    name: estime
