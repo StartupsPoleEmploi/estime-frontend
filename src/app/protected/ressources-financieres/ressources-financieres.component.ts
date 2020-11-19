@@ -111,7 +111,7 @@ export class RessourcesFinancieresComponent implements OnInit {
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantRevenusVosRessources();
+    this.montantRevenusVosRessources= this.demandeurEmploiConnecteService.getMontantRevenusVosRessources();
     this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantAidesVosRessources();
   }
 
