@@ -8,4 +8,4 @@ RUN apk --no-cache update && \
     && rm -rf /var/cache/apk/*
 
 COPY ./nginx-conf/default.conf /etc/nginx/conf.d/
-COPY ../dist/estime /usr/share/nginx/html
+COPY ../../dist/estime /usr/share/nginx/html
