@@ -11,7 +11,7 @@
             </span>
             <div
                 class="form-group mt-2"
-                *ngIf="personneDTO.personne.informationsPersonnelles.isHandicape">
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireAAH">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -51,7 +51,7 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="personneDTO.personne.informationsPersonnelles.isSalarie">
+                *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -91,7 +91,7 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi">
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireRSA">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -131,12 +131,12 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi && !personneDTO.personne.informationsPersonnelles.isSalarie">
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireARE">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetARE">
-                        Allocation Retour Emploi (ARE)
+                        * Allocation Retour Emploi (ARE)
                     </label>
                 </div>
                 <div class="row">
@@ -159,12 +159,12 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="personneDTO.personne.informationsPersonnelles.hasRessourceAideEmploi && !personneDTO.personne.informationsPersonnelles.isSalarie">
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireASS">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetASS">
-                        Allocation Solidarité Spécifique (ASS)
+                        * Allocation Solidarité Spécifique (ASS)
                     </label>
                 </div>
                 <div class="row">

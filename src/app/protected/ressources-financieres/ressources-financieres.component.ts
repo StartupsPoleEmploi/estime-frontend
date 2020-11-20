@@ -2,18 +2,20 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
 import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
 import { DateDecomposee } from '@app/commun/models/date-decomposee';
 import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
+import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
+import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { RessourcesFinancieresUtileService } from "@app/core/services/utile/ressources-financieres-utiles.service";
 import { RessourcesFinancieresConjointComponent } from '@app/protected/ressources-financieres/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
-import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
+import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 
 @Component({
   selector: 'app-ressources-financieres',
@@ -22,17 +24,25 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-fin
 })
 export class RessourcesFinancieresComponent implements OnInit {
 
+  beneficiaireAidesSociales: BeneficiaireAidesSociales;
+  dateDernierOuvertureDroitASS: DateDecomposee;
+
+  //gestion affichage accordions
   isVosRessourcesDisplay = true;
   isRessourcesConjointDisplay = false;
   isRessourcesPersonnesChargeDisplay = false;
   isRessourcesFoyerDisplay = false;
+
+  //gestion du formulaire
+  isRessourcesFinancieresFormInvalide = false;
+  isRessourcesFinancieresFormSubmitted = false;
+
+  //appel service http : gestion loading et erreur
   isPageLoadingDisplay = false;
   messageErreur: string;
+
   ressourcesFinancieres: RessourcesFinancieres;
-  beneficiaireAidesSociales: BeneficiaireAidesSociales;
-  dateDernierOuvertureDroitASS: DateDecomposee;
-  isRessourcesFinancieresFormSubmitted = false;
-  isRessourcesFinancieresFormInvalide = false;
+
   montantAidesFoyer: number;
   montantAidesPersonnesCharge: number;
   montantAidesRessourcesConjoint: number;
@@ -47,6 +57,7 @@ export class RessourcesFinancieresComponent implements OnInit {
     { label: "3 mois", value: 3, default: false }
   ];
 
+  //récupération des composants enfants
   @ViewChild(RessourcesFinancieresConjointComponent) ressourcesFinancieresConjointComponent: RessourcesFinancieresConjointComponent;
   @ViewChild(RessourcesFinancieresFoyerComponent) ressourcesFinancieresFoyerComponent: RessourcesFinancieresFoyerComponent;
   @ViewChild(RessourcesFinancieresPersonnesAChargeComponent) ressourcesFinancieresPersonnesAChargeComponent: RessourcesFinancieresPersonnesAChargeComponent;
@@ -55,7 +66,11 @@ export class RessourcesFinancieresComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    public deConnecteService: DeConnecteService,
+    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private estimeApiService: EstimeApiService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     private router: Router
   ) {
 
@@ -66,7 +81,6 @@ export class RessourcesFinancieresComponent implements OnInit {
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
     this.calculerMontantsRessourcesFinancieres();
   }
-
 
   public onClickButtonVosRessources(): void {
     this.isVosRessourcesDisplay = !this.isVosRessourcesDisplay;
@@ -87,7 +101,8 @@ export class RessourcesFinancieresComponent implements OnInit {
   public onClickButtonObtenirSimulation(): void {
     if (this.isSaisieFormulairesValide()) {
       this.isPageLoadingDisplay = true;
-      this.demandeurEmploiConnecteService.simulerMesAides().then(
+      const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+      this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).then(
         () => {
           this.isPageLoadingDisplay = false;
           this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
@@ -105,53 +120,48 @@ export class RessourcesFinancieresComponent implements OnInit {
 
   public traiterValidationVosRessourcesEventEmitter(): void {
     this.isVosRessourcesDisplay = false;
-    if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()
+    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
     && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
       this.isRessourcesConjointDisplay = true;
-    } else if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()
+    } else if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
     && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantRevenusVosRessources= this.demandeurEmploiConnecteService.getMontantRevenusVosRessources();
-    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantAidesVosRessources();
+    this.montantRevenusVosRessources= this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
+    this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
   }
 
   public traiterValidationRessourcesFinancieresConjointEventEmitter(): void {
     this.isRessourcesConjointDisplay = false;
-    if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantRevenusRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesConjoint();
-    this.montantAidesRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantAidesRessourcesConjoint();
+    this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
+    this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
     this.isRessourcesPersonnesChargeDisplay = false;
     this.isRessourcesFoyerDisplay = true;
-    this.montantAidesPersonnesCharge = this.demandeurEmploiConnecteService.getMontantAidesRessourcesPersonnesCharge();
-    this.montantRevenusPersonnesCharge = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesPersonnesCharge();
+    this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
+    this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
   }
 
   public traiterValidationRessourcesFinancieresFoyerEventEmitter(): void {
-    this.montantAidesFoyer = this.demandeurEmploiConnecteService.getMontantAidesRessourcesFoyer();
+    this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
     this.isRessourcesFoyerDisplay = false;
   }
 
   private loadDataRessourcesFinancieres(): void {
-    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
     } else {
-      this.ressourcesFinancieres = new RessourcesFinancieres();
-      const allocationsPE = new AllocationsPoleEmploi();
-      allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
-      this.ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
-      const allocationsCAF = new AllocationsCAF();
-      this.ressourcesFinancieres.allocationsCAF = allocationsCAF;
+      this.ressourcesFinancieres = this.ressourcesFinancieresUtileService.creerRessourcesFinancieres();
     }
   }
 
@@ -161,12 +171,12 @@ export class RessourcesFinancieresComponent implements OnInit {
       this.isVosRessourcesDisplay = true;
       isSaisieFormulairesValide = false;
     }
-    if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()
+    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
     && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
       this.isRessourcesConjointDisplay = true;
       isSaisieFormulairesValide = false;
     }
-    if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()
+    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
     && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
       this.isRessourcesPersonnesChargeDisplay = true;
       isSaisieFormulairesValide = false;
@@ -179,12 +189,12 @@ export class RessourcesFinancieresComponent implements OnInit {
   }
 
   private calculerMontantsRessourcesFinancieres(): void {
-    this.montantRevenusVosRessources= this.demandeurEmploiConnecteService.getMontantRevenusVosRessources();
-    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantAidesVosRessources();
-    this.montantRevenusRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesConjoint();
-    this.montantAidesRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantAidesRessourcesConjoint();
-    this.montantAidesPersonnesCharge = this.demandeurEmploiConnecteService.getMontantAidesRessourcesPersonnesCharge();
-    this.montantRevenusPersonnesCharge = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesPersonnesCharge();
-    this.montantAidesFoyer = this.demandeurEmploiConnecteService.getMontantAidesRessourcesFoyer();
+    this.montantRevenusVosRessources= this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
+    this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
+    this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
+    this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
+    this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
+    this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
+    this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
   }
 }

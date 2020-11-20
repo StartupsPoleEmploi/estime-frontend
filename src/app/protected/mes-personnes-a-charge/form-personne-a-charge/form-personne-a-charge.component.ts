@@ -1,12 +1,10 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Personne } from '@app/commun/models/personne';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { Personne } from '@app/commun/models/personne';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
+import { DateUtileService } from '@app/core/services/utile/date-util.service';
 
 @Component({
   selector: 'app-form-personne-a-charge',
@@ -15,6 +13,10 @@ import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 })
 export class FormPersonneAChargeComponent implements OnInit {
 
+  isNouvellePersonneAChargeSituationFormGroupDisplay = false;
+  isNouvellePersonnesAChargeFormSubmitted = false;
+  isSituationNotValide = false;
+
   @Input() dateNaissanceNouvellePersonne: DateDecomposee;
   @Input() isModeModification: boolean;
   @Input() nouvellePersonneACharge: Personne;
@@ -22,9 +24,7 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   @Output() ajoutNouvellePersonneEventEmitter = new EventEmitter<boolean>();
 
-  isNouvellePersonneAChargeSituationFormGroupDisplay = false;
-  isNouvellePersonnesAChargeFormSubmitted = false;
-
+  //récupération d'éléments HTML
   @ViewChild('moisDateNaissanceNouvellePersonne', { read: ElementRef }) moisDateNaissanceNouvellePersonneInput: ElementRef;
   @ViewChild('anneeDateNaissanceNouvellePersonne', { read: ElementRef }) anneeDateNaissanceNouvellePersonneInput: ElementRef;
 
@@ -35,6 +35,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
   }
 
   public onSubmitNouvellePersonneAChargeForm(form: FormGroup): void {
@@ -49,17 +50,6 @@ export class FormPersonneAChargeComponent implements OnInit {
   public onClickButtonAnnuler(): void {
     this.resetNouvellePersonneAChargeForm();
     this.ajoutNouvellePersonneEventEmitter.emit(false);
-  }
-
-  private checkAndSaveDateNaissanceNouvellePersonneConnecte(): void {
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissanceNouvellePersonne);
-    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
-      this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
-    }
-  }
-
-  private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
-    return form.valid && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne);
   }
 
   public isNouvellePersonneSituationFormDisplay(): boolean {
@@ -82,6 +72,30 @@ export class FormPersonneAChargeComponent implements OnInit {
   private resetNouvellePersonneAChargeForm(): void {
     this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
     this.isNouvellePersonnesAChargeFormSubmitted = false;
+  }
+
+  private checkAndSaveDateNaissanceNouvellePersonneConnecte(): void {
+    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissanceNouvellePersonne);
+    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
+      this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
+    }
+  }
+
+  private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
+    this.isSituationNotValide = !this.isSituationValide();
+    return form.valid
+    && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)
+    && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
+      || (this.isNouvellePersonneAChargeSituationFormGroupDisplay && !this.isSituationNotValide))
+  }
+
+  private isSituationValide(): boolean {
+    return this.nouvellePersonneACharge.informationsPersonnelles.salarie
+    || this.nouvellePersonneACharge.informationsPersonnelles.sansRessource
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA;
   }
 
   /** gestion évènements champ date naissance personne à charge **/

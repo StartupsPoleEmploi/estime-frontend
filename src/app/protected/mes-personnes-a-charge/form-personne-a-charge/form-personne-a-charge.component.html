@@ -90,9 +90,10 @@
                 </div>
             </div>
             <app-form-personne-a-charge-situation
-                *ngIf="isNouvellePersonneSituationFormDisplay()"
+                *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay"
                 [nouvellePersonneACharge]="nouvellePersonneACharge"
-                [isNouvellePersonnesAChargeFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted">
+                [isNouvellePersonnesAChargeFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
+                [isSituationNotValide]="isSituationNotValide">
             </app-form-personne-a-charge-situation>
             <div class="div-buttons-form">
                 <button

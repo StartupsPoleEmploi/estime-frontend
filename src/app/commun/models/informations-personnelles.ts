@@ -3,11 +3,9 @@ export class InformationsPersonnelles {
   dateNaissance: string;
   email: string;
   hasRevenusImmobilier: boolean;
-  isHandicape: boolean;
-  isCreateurEntreprise: boolean;
-  isSalarie: boolean;
-  hasRessourceAideEmploi: boolean;
-  isSansRessource: boolean;
+  createurEntreprise: boolean;
+  salarie: boolean;
+  sansRessource: boolean;
   nationalite: string;
   nom: string;
   prenom: string;

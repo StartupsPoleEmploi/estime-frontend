@@ -7,7 +7,7 @@
         *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
-    <h1 class="h1-style-2">4. Ressources finançières actuelles</h1>
+    <h1 class="h1-style-2">4. Ressources financières actuelles</h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
     </div>
@@ -27,10 +27,10 @@
                         </div>
                         <div class="col-9 col-md-10 col-text-button">
                             <div class="text-button">Vos ressources</div>
-                            <div *ngIf="!isVosRessourcesDisplay && montantRevenusVosRessources > 0">
+                            <div *ngIf="!isVosRessourcesDisplay">
                                 Total des revenus : {{montantRevenusVosRessources}} €
                             </div>
-                            <div *ngIf="!isVosRessourcesDisplay && montantAidesVosRessources > 0">
+                            <div *ngIf="!isVosRessourcesDisplay">
                                 Total des aides : {{montantAidesVosRessources}} €
                             </div>
                         </div>
@@ -54,7 +54,7 @@
             </app-vos-ressources-financieres>
         </div>
         <div
-            *ngIf="demandeurEmploiConnecteService.hasConjointSituationAvecRessource()"
+            *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()"
             id="block-ressources-conjoint">
             <button
                 type="button"
@@ -70,11 +70,11 @@
                         </div>
                         <div class="col-9 col-md-10 col-text-button">
                             <div class="text-button">Ressources conjoint(e)</div>
-                            <div *ngIf="!isRessourcesConjointDisplay && montantRevenusRessourcesConjoint > 0">
+                            <div *ngIf="!isRessourcesConjointDisplay">
                                 Total revenus : {{montantRevenusRessourcesConjoint}} €
                             </div>
-                            <div *ngIf="!isRessourcesConjointDisplay && montantAidesRessourcesConjoint > 0">
-                                Total aides : {{montantAidesRessourcesConjoint}} €
+                            <div *ngIf="!isRessourcesConjointDisplay">
+                                Total des aides : {{montantAidesRessourcesConjoint}} €
                             </div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
@@ -97,7 +97,7 @@
             </app-ressources-financieres-conjoint>
         </div>
         <div
-            *ngIf="demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()"
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()"
             id="block-ressources-personnes-a-charge">
             <button
                 type="button"
@@ -113,11 +113,11 @@
                       </div>
                       <div class="col-9 col-md-10 col-text-button">
                           <div class="text-button">Ressources personne(s) à charge</div>
-                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantRevenusPersonnesCharge > 0">
+                          <div *ngIf="!isRessourcesPersonnesChargeDisplay">
                               Total revenus : {{montantRevenusPersonnesCharge}} €
                           </div>
-                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesPersonnesCharge > 0">
-                              Total aides : {{montantAidesPersonnesCharge}} €
+                          <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                              Total des aides : {{montantAidesPersonnesCharge}} €
                           </div>
                       </div>
                       <div class="col-1 col-md-1 col-chevron">
@@ -154,8 +154,8 @@
                       </div>
                       <div class="col-9 col-md-10 col-text-button">
                           <div class="text-button">Ressources du foyer</div>
-                          <div *ngIf="!isRessourcesFoyerDisplay && montantAidesFoyer > 0">
-                              Total aides : {{montantAidesFoyer}} €
+                          <div *ngIf="!isRessourcesFoyerDisplay">
+                              Total des aides : {{montantAidesFoyer}} €
                           </div>
                       </div>
                       <div class="col-1 col-md-1 col-chevron">

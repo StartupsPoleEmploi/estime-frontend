@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
@@ -21,12 +21,12 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
 
   constructor(
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    public deConnecteService: DeConnecteService,
     private screenService: ScreenService
   ) { }
 
   ngOnInit(): void {
-    this.demandeurEmploiConnecte  = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    this.demandeurEmploiConnecte  = this.deConnecteService.getDemandeurEmploiConnecte();
   }
 
   public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {

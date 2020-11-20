@@ -1,8 +1,10 @@
 export enum SituationPersonneEnum {
+  AAH = "l'AAH (Allocation Adulte Handicapé)",
+  ASS ="l'ASS",
+  ARE = "l'ARE",
   BENEFICIAIRE_REVENUS_IMMOBILIER = "des revenus immobilier",
   CREATEUR_ENTREPRISE = "des revenus en tant que travailleur indépendant",
-  HANDICAPE = "l'AAH (Allocation Adulte Handicapé)",
+  RSA = "le RSA",
   SALARIE = "un salaire",
-  RESSOURCE_AIDE_EMPLOI = "l'ARE, l'ASS ou le RSA",
   SANS_RESSOURCE = "aucune ressource"
 }

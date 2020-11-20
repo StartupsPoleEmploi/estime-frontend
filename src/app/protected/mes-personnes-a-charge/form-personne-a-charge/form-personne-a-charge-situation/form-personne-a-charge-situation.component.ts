@@ -1,9 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Personne } from '@app/commun/models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -14,52 +12,105 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   @Input() nouvellePersonneACharge: Personne;
   @Input() isNouvellePersonnesAChargeFormSubmitted: boolean;
+  @Input() isSituationNotValide: boolean;
 
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    public demandeurEmploiConnecteService : DemandeurEmploiConnecteService,
-    public personneUtileService: PersonneUtileService
+    public controleChampFormulaireService: ControleChampFormulaireService
   ) { }
 
   ngOnInit(): void {
   }
 
-  public onClickCheckBoxIsHandicape(): void {
-    if(!this.nouvellePersonneACharge.informationsPersonnelles.isHandicape) {
+  public onClickCheckBoxHasAAH(): void {
+    if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+    }
+  }
+
+  public onClickCheckBoxHasARE(): void {
+    if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = 0;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+      this.unsetASS();
+      this.unsetRSA();
+    }
+  }
+
+  public onClickCheckBoxHasASS(): void {
+    if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = 0;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+      this.unsetARE();
+      this.unsetRSA();
+    }
+  }
+
+  public onClickCheckBoxHasRSA(): void {
+    if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+      this.unsetARE();
+      this.unsetASS();
     }
   }
 
   public onClickCheckBoxIsSalarie(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
-    if(!this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
-    }
-  }
-
-  public onClickCheckBoxHasRessourceAideEmploi(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource= false;
-    if(!this.nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi) {
-      this.unsetRessourcesAllocations();
+    if(!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = 0;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
   public onClickCheckBoxIsSansRessource(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
-    this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
+    this.unsetSalaire();
     this.unsetRessourcesAllocations();
   }
 
   private unsetRessourcesAllocations(): void {
-    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
-    }
+    this.unsetARE();
+    this.unsetASS();
+    this.unsetAAH();
+    this.unsetRSA();
+  }
+
+  private unsetSalaire(): void {
+    this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
+    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = 0;
+  }
+
+  private unsetAAH(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = 0;
+    }
+  }
+
+  private unsetASS(): void {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = 0;
+    }
+  }
+
+  private unsetARE(): void {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE= false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = 0;
+    }
+  }
+
+  private unsetRSA(): void {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
     }
   }
 }

@@ -3,14 +3,9 @@
         (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
         #ressourcesFinancieresConjointForm="ngForm">
-        <i
-            class="row mt-auto mb-auto fas fa-info-circle"
-            *ngIf="!conjoint.informationsPersonnelles.isSalarie && conjoint.informationsPersonnelles.hasRessourceAideEmploi">
-            <span class="mt-auto mb-auto ml-1">indiquer 0 si aucun montant</span>
-        </i>
         <div
             class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.isHandicape">
+            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireAAH">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -50,7 +45,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.isSalarie">
+            *ngIf="conjoint.informationsPersonnelles.salarie">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -90,7 +85,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi">
+            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireRSA">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -130,12 +125,12 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi && !conjoint.informationsPersonnelles.isSalarie">
+            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireARE">
             <div class="row mb-2">
                 <label
                     class="label"
                     for="allocationMensuelleNetARE">
-                    Allocation Retour Emploi (ARE)
+                    * Allocation Retour Emploi (ARE)
                 </label>
             </div>
             <div class="row">
@@ -170,7 +165,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.hasRessourceAideEmploi && !conjoint.informationsPersonnelles.isSalarie">
+            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireASS">
             <div class="row mb-2">
                 <label
                     class="label"

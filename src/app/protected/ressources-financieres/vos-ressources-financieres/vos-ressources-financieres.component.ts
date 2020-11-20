@@ -2,10 +2,13 @@ import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter }
 import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
+import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service";
+
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -34,7 +37,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService
+    public deConnecteService: DeConnecteService,
+    public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
+    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService
+
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +52,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     this.isRessourcesFinancieresFormSubmitted = true;
     this.checkAndSaveDateDernierOuvertureDroitASS();
     if(form.valid) {
-      this.demandeurEmploiConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
+      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit();
     }
   }

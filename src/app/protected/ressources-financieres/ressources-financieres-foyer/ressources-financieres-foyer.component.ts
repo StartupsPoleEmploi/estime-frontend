@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { FormGroup, NgForm } from '@angular/forms';
+import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -21,7 +22,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService
+    public deConnecteService: DeConnecteService,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService
   ) {
 
   }
@@ -31,7 +33,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
     if(form.valid) {
-      this.demandeurEmploiConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
+      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationRessourcesFoyerEventEmitter.emit();
     }
   }

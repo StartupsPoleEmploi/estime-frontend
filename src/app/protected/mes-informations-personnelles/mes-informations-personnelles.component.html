@@ -216,26 +216,26 @@
               </div>
               <div class="row">
                   <label
-                      name="isHandicape"
+                      name="beneficiaireAAH"
                       class="btn radio-button-style-1"
-                      [(ngModel)]="informationsPersonnelles.isHandicape"
+                      [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      #isHandicape="ngModel"
-                      (click)="isHandicapeClicked()">
-                      {{situationPersonneEnum.HANDICAPE}}
+                      #beneficiaireAAH="ngModel"
+                      (click)="onClickCheckBoxHasAAH()">
+                      {{situationPersonneEnum.AAH}}
                   </label>
                   <label
                       id="btn-is-createur-entreprise"
-                      name="isCreateurEntreprise"
+                      name="createurEntreprise"
                       class="btn radio-button-style-1 mt-perso-sm ml-perso-lm"
-                      [(ngModel)]="informationsPersonnelles.isCreateurEntreprise"
+                      [(ngModel)]="informationsPersonnelles.createurEntreprise"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      #isCreateurEntreprise="ngModel"
-                      (click)="isCreateurEntrepriseClicked()">
+                      #createurEntreprise="ngModel"
+                      (click)="onClickCheckBoxIsCreateurEntreprise()">
                       {{situationPersonneEnum.CREATEUR_ENTREPRISE}}
                   </label>
                   <label
@@ -247,7 +247,7 @@
                       tabindex="0"
                       role="button"
                       #hasRevenusImmobilier="ngModel"
-                      (click)="hasRevenusImmobilierClicked()">
+                      (click)="onClickCheckBoxHasRevenusImmobilier()">
                       {{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}
                   </label>
               </div>
@@ -256,45 +256,45 @@
               <div class="row mb-2">
                   <label
                       class="label"
-                      for="situationFamiliale">
+                      for="situationFamilialeDemandeur">
                       * Votre situation familiale
                   </label>
               </div>
               <div class="row">
                   <label
-                      #situationFamiliale="ngModel"
-                      (click)="onClickSituationFamiliale()"
-                      name="situationFamiliale"
+                      #situationFamilialeDemandeur="ngModel"
+                      (click)="onClickCheckBoxSituationFamiliale()"
+                      name="situationFamilialeDemandeur"
                       class="btn radio-button-style-1"
                       [btnRadio]="false"
                       tabindex="0"
                       role="button"
                       required
-                      [(ngModel)]="isEnCouple">
+                      [(ngModel)]="situationFamiliale.isEnCouple">
                       {{situationsFamilialesEnum.SEULE}}
                   </label>
                   <label
-                      #situationFamiliale="ngModel"
-                      (click)="onClickSituationFamiliale()"
-                      name="situationFamiliale"
+                      #situationFamilialeDemandeur="ngModel"
+                      (click)="onClickCheckBoxSituationFamiliale()"
+                      name="situationFamilialeDemandeur"
                       class="btn radio-button-style-1 ml-1"
                       [btnRadio]="true"
                       tabindex="0"
                       role="button"
                       required
-                      [(ngModel)]="isEnCouple">
+                      [(ngModel)]="situationFamiliale.isEnCouple">
                       {{situationsFamilialesEnum.EN_COUPLE}}
                   </label>
               </div>
               <span
                   class="row error-input-message"
-                  *ngIf="(isInformationsPersonnellesFormSubmitted || situationFamiliale.touched)  && situationFamiliale.errors?.required">
+                  *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
                   {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
               </span>
           </div>
           <div
               class="form-group"
-              *ngIf="isEnCouple === true">
+              *ngIf="situationFamiliale.isEnCouple === true">
               <div class="row mb-2">
                   <label
                       class="label"
@@ -304,15 +304,15 @@
               </div>
               <div class="row">
                   <label
-                      #conjointIsHandicape="ngModel"
-                      name="conjointIsHandicape"
+                      #conjointHasAAH="ngModel"
+                      name="conjointHasAAH"
                       class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isHandicape"
-                      (click)="onClickCheckBoxConjointIsHandicape()">
-                      {{situationPersonneEnum.HANDICAPE}}
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH"
+                      (click)="onClickCheckBoxConjointHasAAH()">
+                      {{situationPersonneEnum.AAH}}
                   </label>
                   <label
                       #conjointIsSalarie="ngModel"
@@ -321,20 +321,42 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isSalarie"
+                      [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
                       (click)="onClickCheckBoxConjointIsSalarie()">
                       {{situationPersonneEnum.SALARIE}}
                   </label>
                   <label
-                      #conjointHasRessourceAideEmploi="ngModel"
-                      name="conjointHasRessourceAideEmploi"
+                      #conjointHasRSA="ngModel"
+                      name="conjointHasRSA"
                       class="btn radio-button-style-1"
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.hasRessourceAideEmploi"
-                      (click)="onClickCheckBoxConjointHasRessourceAideEmploi()">
-                      {{situationPersonneEnum.RESSOURCE_AIDE_EMPLOI}}
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA"
+                      (click)="onClickCheckBoxConjointHasRSA()">
+                      {{situationPersonneEnum.RSA}}
+                  </label>
+                  <label
+                      #conjointHasARE="ngModel"
+                      name="conjointHasARE"
+                      class="btn radio-button-style-1"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE"
+                      (click)="onClickCheckBoxConjointHasARE()">
+                      {{situationPersonneEnum.ARE}}
+                  </label>
+                  <label
+                      #conjointHasASS="ngModel"
+                      name="conjointHasASS"
+                      class="btn radio-button-style-1"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS"
+                      (click)="onClickCheckBoxConjointHasASS()">
+                      {{situationPersonneEnum.ASS}}
                   </label>
                   <label
                       #conjointIsSansRessource="ngModel"
@@ -343,11 +365,16 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationConjoint.isSansRessource"
+                      [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
                       (click)="onClickCheckBoxConjointIsSansRessource()">
                       {{situationPersonneEnum.SANS_RESSOURCE}}
                   </label>
               </div>
+              <span
+                  class="row error-input-message"
+                  *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
+                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+              </span>
           </div>
           <div class="div-buttons-form row">
               <button

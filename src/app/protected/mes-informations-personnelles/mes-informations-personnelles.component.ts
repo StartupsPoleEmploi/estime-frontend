@@ -1,19 +1,19 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { RoutesEnum } from '@enumerations/routes.enum';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { Personne } from '@models/personne';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
+import { SituationFamiliale } from '@app/commun/models/situation-familiale';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { DateDecomposee } from "@models/date-decomposee";
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
-import { InformationsPersonnelles } from '@models/informations-personnelles';
-import { SituationPersonne } from '@app/commun/models/situation-personne';
+import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
-import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
+import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
+import { DateDecomposee } from "@models/date-decomposee";
+import { DemandeurEmploi } from '@models/demandeur-emploi';
+import { InformationsPersonnelles } from '@models/informations-personnelles';
 
 @Component({
   selector: 'app-mes-informations-personnelles',
@@ -22,11 +22,12 @@ import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.en
 })
 export class MesInformationsPersonnellesComponent implements OnInit {
 
+  beneficiaireAidesSociales: BeneficiaireAidesSociales;
   dateNaissance: DateDecomposee;
   informationsPersonnelles: InformationsPersonnelles;
   isInformationsPersonnellesFormSubmitted = false;
-  isEnCouple: boolean;
-  situationConjoint: SituationPersonne;
+  isSituationConjointNotValide = false;
+  situationFamiliale: SituationFamiliale;
 
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
@@ -41,14 +42,16 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   ];
 
   constructor(
-    private dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
     public controleChampFormulaireService: ControleChampFormulaireService,
-    private router: Router
+    private dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    private router: Router,
+    private situationFamilialeUtileService: SituationFamilialeUtileService
   ) { }
 
   ngOnInit(): void {
-    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.beneficiaireAidesSociales  = demandeurEmploiConnecte.beneficiaireAidesSociales;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance);
@@ -59,49 +62,34 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 
-  public onClickSituationFamiliale(): void {
-    if(this.isEnCouple) {
-      this.situationConjoint = new SituationPersonne(false, false, false, false);
-    } else {
-      this.demandeurEmploiConnecteService.unsetConjoint();
+  public onClickCheckBoxSituationFamiliale(): void {
+    this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
+  }
+
+  public onClickCheckBoxIsCreateurEntreprise(): void {
+    if (!this.informationsPersonnelles.createurEntreprise) {
+      this.deConnecteService.unsetRevenusCreateurEntreprise();
     }
   }
 
-  public onClickCheckBoxConjointIsHandicape(): void {
-    if(!this.situationConjoint.isHandicape) {
-      this.demandeurEmploiConnecteService.unsetConjointMontantAAH();
+  public onClickCheckBoxHasAAH(): void {
+    if (!this.beneficiaireAidesSociales.beneficiaireAAH) {
+      this.deConnecteService.unsetAllocationMensuelleNetAAH();
     }
   }
 
-  public onClickCheckBoxConjointIsSalarie(): void {
-    this.situationConjoint.isSansRessource = false;
-    if(!this.situationConjoint.isSalarie) {
-      this.demandeurEmploiConnecteService.unsetConjointSalaire();
+  public onClickCheckBoxHasRevenusImmobilier(): void {
+    if (!this.informationsPersonnelles.hasRevenusImmobilier) {
+      this.deConnecteService.unsetRevenusImmobilier();
     }
-  }
-
-  public onClickCheckBoxConjointHasRessourceAideEmploi(): void {
-    this.situationConjoint.isSansRessource = false;
-    if(!this.situationConjoint.hasRessourceAideEmploi) {
-      this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
-      this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
-    }
-  }
-
-  public onClickCheckBoxConjointIsSansRessource(): void {
-    this.situationConjoint.isSalarie = false;
-    this.situationConjoint.hasRessourceAideEmploi = false;
-    this.demandeurEmploiConnecteService.unsetConjointSalaire();
-    this.demandeurEmploiConnecteService.unsetConjointAllocationRSA();
-    this.demandeurEmploiConnecteService.unsetConjointAllocationsPE();
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      this.demandeurEmploiConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
-      this.demandeurEmploiConnecteService.setSituationFamiliale(this.isEnCouple, this.situationConjoint);
+      this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
+      this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
     }
   }
@@ -112,23 +100,69 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     }
   }
 
-  public isHandicapeClicked(): void {
-    if (!this.informationsPersonnelles.isHandicape) {
-      this.demandeurEmploiConnecteService.unsetAllocationMensuelleNetAAH();
+  /************ est en couple, gestion situation conjoint *******************************/
+
+  public isSituationConjointValide(): boolean {
+    return this.situationFamiliale.conjoint.informationsPersonnelles.salarie
+    || this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource
+    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH
+    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE
+    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS
+    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA;
+  }
+
+  public onClickCheckBoxConjointHasAAH(): void {
+    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH) {
+      this.deConnecteService.unsetConjointAllocationAAH();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
     }
   }
 
-  public isCreateurEntrepriseClicked(): void {
-    if (!this.informationsPersonnelles.isCreateurEntreprise) {
-      this.demandeurEmploiConnecteService.unsetRevenusCreateurEntreprise();
+  public onClickCheckBoxConjointHasASS(): void {
+    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS) {
+      this.deConnecteService.unsetConjointAllocationASS();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.deConnecteService.unsetConjointAllocationARE();
+      this.deConnecteService.unsetConjointAllocationRSA();
     }
   }
 
-  public hasRevenusImmobilierClicked(): void {
-    if (!this.informationsPersonnelles.hasRevenusImmobilier) {
-      this.demandeurEmploiConnecteService.unsetRevenusImmobilier();
+  public onClickCheckBoxConjointHasARE(): void {
+    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE) {
+      this.deConnecteService.unsetConjointAllocationARE();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.deConnecteService.unsetConjointAllocationASS();
+      this.deConnecteService.unsetConjointAllocationRSA();
     }
   }
+
+  public onClickCheckBoxConjointHasRSA(): void {
+    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA) {
+      this.deConnecteService.unsetConjointAllocationRSA();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.deConnecteService.unsetConjointAllocationARE();
+      this.deConnecteService.unsetConjointAllocationASS();
+    }
+  }
+
+  public onClickCheckBoxConjointIsSalarie(): void {
+    if(!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
+      this.deConnecteService.unsetConjointSalaire();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
+  public onClickCheckBoxConjointIsSansRessource(): void {
+    this.deConnecteService.unsetConjointSalaire();
+    this.deConnecteService.unsetConjointtAllocationsAidesSociales();
+  }
+
+  /************ private methods ************************/
 
   private checkAndSaveDateNaissanceDemandeurEmploiConnecte(): void {
     this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissance);
@@ -138,8 +172,11 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
-      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance);
+      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)
+      && (!this.situationFamiliale.isEnCouple
+        || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
@@ -153,18 +190,9 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
     if(demandeurEmploiConnecte.situationFamiliale) {
-      this.isEnCouple = demandeurEmploiConnecte.situationFamiliale.isEnCouple;
-      if(this.isEnCouple) {
-        const conjoint = demandeurEmploiConnecte.situationFamiliale.conjoint;
-        this.situationConjoint = new SituationPersonne(
-          conjoint.informationsPersonnelles.isHandicape,
-          conjoint.informationsPersonnelles.isSalarie,
-          conjoint.informationsPersonnelles.hasRessourceAideEmploi,
-          conjoint.informationsPersonnelles.isSansRessource
-        );
-      }
+      this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
     } else {
-      this.situationConjoint = new SituationPersonne(false, false, false, false);
+      this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
     }
   }
 

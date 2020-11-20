@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef, HostListener } from '@angular/core';
-import { RoutesEnum } from '@enumerations/routes.enum';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
+import { AideSociale } from '@app/commun/models/aide-sociale';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
-import { AideSociale } from '@app/commun/models/aide-sociale';
 import { ScreenService } from "@app/core/services/utile/screen.service";
-import { Observable, Subscription, fromEvent } from 'rxjs';
+import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
+import { RoutesEnum } from '@enumerations/routes.enum';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-resultat-ma-simulation',
@@ -26,7 +26,7 @@ export class ResultatMaSimulationComponent implements OnInit {
 
   constructor(
     private dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    public deConnecteService: DeConnecteService,
     private router: Router,
     private screenService: ScreenService
   ) {
@@ -114,7 +114,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     //si l'utilisateur est sur smartphone, aucune préselection
     if (!this.screenService.isSmallScreen()) {
       this.simulationSelected = this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles[0];

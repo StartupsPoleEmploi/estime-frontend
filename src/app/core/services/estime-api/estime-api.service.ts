@@ -6,6 +6,7 @@ import { Environment } from '@models/environment';
 import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
 import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
 import { SessionStorageService } from 'ngx-webstorage';
+import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 
 @Injectable({providedIn: 'root'})
 export class EstimeApiService {
@@ -13,6 +14,7 @@ export class EstimeApiService {
   private pathDemandeurEmploiService: string;
 
   constructor(
+    private deConnecteService: DeConnecteService,
     private environment: Environment,
     private http: HttpClient,
     private sessionStorageService: SessionStorageService
@@ -30,11 +32,18 @@ export class EstimeApiService {
     return this.http.get<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi`, {headers : headers}).toPromise();
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<DemandeurEmploi> {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<void> {
     const headers = this.getHttpHeaders();
-    return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi/simuler_mes_aides`, demandeurEmploi, {headers : headers}).toPromise();
+    return this.http.post<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi/simuler_mes_aides`, demandeurEmploi, {headers : headers}).toPromise().then(
+      (demandeurEmploi) => {
+        this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+        return Promise.resolve();
+      }, (erreur) => {
+        console.log(erreur);
+        return Promise.reject();
+      }
+    );
   }
-
 
   private getHttpHeaders(): HttpHeaders {
     const informationsAccessTokenPeConnect = this.sessionStorageService.retrieve(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY);

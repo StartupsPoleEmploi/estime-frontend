@@ -1,12 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { Personne } from '@models/personne';
 import { PersonneDTO } from '@app/commun/models/dto/personne-dto';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 
 @Component({
   selector: 'app-ressources-financieres-personnes-a-charge',
@@ -26,7 +26,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
-    public demandeurEmploiConnecteService : DemandeurEmploiConnecteService,
+    public deConnecteService : DeConnecteService,
     public personneUtileService: PersonneUtileService
   ) { }
 
@@ -36,7 +36,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
     if(form.valid) {
-      this.demandeurEmploiConnecteService.modifierRessourcesFinancierePersonnesCharge(this.personnesDTO);
+      this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
     }
   }
@@ -48,7 +48,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   private loadData(): void {
     this.personnesDTO = new Array<PersonneDTO>();
-    const demandeurConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     demandeurConnecte.situationFamiliale.personnesACharge.forEach((personne, index) => {
       if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
         const personneDTO = new PersonneDTO();

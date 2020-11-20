@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 
 @Component({
   selector: 'app-mes-personnes-a-charge',
@@ -30,8 +32,9 @@ export class MesPersonnesAChargeComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
-    private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    private deConnecteService: DeConnecteService,
     public personneUtileService: PersonneUtileService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     private router: Router
   ) { }
 
@@ -56,14 +59,14 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public onClickButtonSupprimerPersonneACharge(index: number): void {
     this.personnesACharge.splice(index, 1);
-    this.demandeurEmploiConnecteService.setPersonnesACharge(this.personnesACharge);
+    this.deConnecteService.setPersonnesACharge(this.personnesACharge);
     if(this.numeroNouvellePersonne === index + 1) {
       this.isNouvellePersonneAChargeFormDisplay = false;
       this.isModeModification = false;
     }
     if(this.personnesACharge && this.personnesACharge.length === 0) {
-      this.demandeurEmploiConnecteService.unsetAllocationsFamiliales();
-      this.demandeurEmploiConnecteService.unsetPensionsAlimentaires();
+      this.deConnecteService.unsetAllocationsFamiliales();
+      this.deConnecteService.unsetPensionsAlimentaires();
     }
   }
 
@@ -80,17 +83,15 @@ export class MesPersonnesAChargeComponent implements OnInit {
       if (!this.isModeModification) {
         this.personnesACharge.push(this.nouvellePersonneACharge);
       }
-      this.nouvellePersonneACharge.ressourcesFinancieres = this.demandeurEmploiConnecteService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
-      this.demandeurEmploiConnecteService.setPersonnesACharge(this.personnesACharge);
+      this.nouvellePersonneACharge.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
+      this.deConnecteService.setPersonnesACharge(this.personnesACharge);
     }
     this.isModeModification = false;
     this.isNouvellePersonneAChargeFormDisplay = false;
   }
 
-
-
   private loadDataPersonnesACharge() {
-    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       this.personnesACharge = demandeurEmploiConnecte.situationFamiliale.personnesACharge;
     } else {

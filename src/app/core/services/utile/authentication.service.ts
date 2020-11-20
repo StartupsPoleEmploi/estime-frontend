@@ -1,16 +1,15 @@
-import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { SessionStorageService } from "ngx-webstorage";
-import { Environment } from '@models/environment';
-import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
-import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
-import { RoutesEnum } from '@enumerations/routes.enum';
 import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
-import { DemandeurEmploiConnecteService } from "@app/core/services/utile/demandeur-emploi-connecte.service";
 import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
 import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
+import { RoutesEnum } from '@enumerations/routes.enum';
+import { Environment } from '@models/environment';
+import { InformationsAccessTokenPeConnect } from "@models/informations-access-token-pe-connect";
+import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
+import { SessionStorageService } from "ngx-webstorage";
+import { Subject } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -26,7 +25,6 @@ export class AuthenticationService {
   constructor(private activatedRoute: ActivatedRoute,
               @Inject(DOCUMENT) private document: Document,
               private estimeApiService: EstimeApiService,
-              private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
               private environment: Environment,
               private router: Router,
               private sessionStorageService: SessionStorageService) {

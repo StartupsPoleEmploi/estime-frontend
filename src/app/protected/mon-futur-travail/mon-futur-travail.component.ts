@@ -1,12 +1,11 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { RoutesEnum } from '@enumerations/routes.enum';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { DemandeurEmploiConnecteService } from '@app/core/services/utile/demandeur-emploi-connecte.service';
-import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { Router } from '@angular/router';
 import { FuturTravail } from '@app/commun/models/futur-travail';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { RoutesEnum } from '@enumerations/routes.enum';
+import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
 
 @Component({
   selector: 'app-mon-futur-travail',
@@ -29,7 +28,7 @@ export class MonFuturTravailComponent implements OnInit {
   ];
 
   constructor(
-    private demandeurEmploiConnecteService: DemandeurEmploiConnecteService,
+    private deConnecteService: DeConnecteService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     private router: Router
     ) {
@@ -41,7 +40,7 @@ export class MonFuturTravailComponent implements OnInit {
   }
 
   private loadDataFuturTravail(): void {
-    const demandeurEmploiConnecte = this.demandeurEmploiConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if(demandeurEmploiConnecte.futurTravail) {
       this.futurTravail = demandeurEmploiConnecte.futurTravail;
     } else {
@@ -57,7 +56,7 @@ export class MonFuturTravailComponent implements OnInit {
   public onSubmitFuturTravailForm(form: FormGroup): void {
     this.isFuturTravailFormSubmitted = true;
     if(form.valid) {
-      this.demandeurEmploiConnecteService.setFuturTravail(this.futurTravail);
+      this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES], { replaceUrl: true });
     }
   }

@@ -22,6 +22,7 @@
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
                     inputmode="decimal"
+                    ngAutofocus
                     #allocationsLogementMensuellesNetFoyer="ngModel">
                 <span class="text-side-input">€</span>
                 <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
@@ -36,7 +37,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneACharge()">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -69,7 +70,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="demandeurEmploiConnecteService.hasPersonneACharge()">
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneACharge()">
             <div class="row mb-2">
                 <label
                     class="label"

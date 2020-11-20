@@ -8,42 +8,64 @@
     </div>
     <div class="row">
         <label
-            name="isHandicape"
+            name="beneficiaireAAH"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isHandicape"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH"
             btnCheckbox
             tabindex="0"
             role="button"
-            (click)="onClickCheckBoxIsHandicape()"
-            #isHandicape="ngModel">
-            {{situationPersonneEnum.HANDICAPE}}
+            (click)="onClickCheckBoxHasAAH()"
+            #beneficiaireAAH="ngModel">
+            {{situationPersonneEnum.AAH}}
         </label>
         <label
-            name="isSalarie"
+            name="salarie"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSalarie"
+            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.salarie"
             btnCheckbox
             tabindex="0"
             role="button"
-            #isSalarie="ngModel"
+            #salarie="ngModel"
             (click)="onClickCheckBoxIsSalarie()">
             {{situationPersonneEnum.SALARIE}}
         </label>
         <label
-            name="hasRessourceAideEmploi"
+            name="beneficiaireRSA"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.hasRessourceAideEmploi"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
             btnCheckbox
             tabindex="0"
             role="button"
             #hasRessourceAideEmploi="ngModel"
-            (click)="onClickCheckBoxHasRessourceAideEmploi()">
-            {{situationPersonneEnum.RESSOURCE_AIDE_EMPLOI}}
+            (click)="onClickCheckBoxHasRSA()">
+            {{situationPersonneEnum.RSA}}
         </label>
         <label
-            name="isSansRessource"
+            name="beneficiaireARE"
             class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSansRessource"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE"
+            btnCheckbox
+            tabindex="0"
+            role="button"
+            #hasRessourceAideEmploi="ngModel"
+            (click)="onClickCheckBoxHasARE()">
+            {{situationPersonneEnum.ARE}}
+        </label>
+        <label
+            name="beneficiaireASS"
+            class="btn radio-button-style-1"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS"
+            btnCheckbox
+            tabindex="0"
+            role="button"
+            #hasRessourceAideEmploi="ngModel"
+            (click)="onClickCheckBoxHasASS()">
+            {{situationPersonneEnum.ASS}}
+        </label>
+        <label
+            name="sansRessource"
+            class="btn radio-button-style-1"
+            [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource"
             btnCheckbox
             tabindex="0"
             role="button"
@@ -51,5 +73,12 @@
             (click)="onClickCheckBoxIsSansRessource()">
             {{situationPersonneEnum.SANS_RESSOURCE}}
         </label>
+    </div>
+    <div class="row">
+      <span
+            class="error-input-message"
+            *ngIf="isNouvellePersonnesAChargeFormSubmitted && isSituationNotValide">
+            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+        </span>
     </div>
 </div>
