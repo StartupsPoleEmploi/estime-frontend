@@ -1,5 +1,53 @@
 @import "../../../assets/scss/variables";
 
+#div-h4-ressources-estimees {
+  margin-top: 2rem;
+}
+
+#card-revenus-actuels {
+  .card {
+    border: 0;
+    text-align: center;
+    width: fit-content;
+    padding: 0.4rem 1rem;
+    @media #{$small-device} {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media #{$medium-device}, #{$large-device} {
+      margin-left: -60px;
+    }
+    h3 {
+      color: $color-blue-2;
+      font-weight: 600;
+      margin-bottom: -10px;
+      font-size: 1.1rem;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1.2rem;
+      }
+    }
+    span {
+      font-weight: 900;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+
+.alert-resultat-simulation {
+  border: 1px solid $color-black-2;
+  padding: 0.5rem;
+  img {
+    width: 1.2rem;
+  }
+  span {
+    color: $color-black-2;
+    font-size: 0.9rem;
+  }
+}
+
 .card-deck {
   border:0;
   border-radius: 8px;

@@ -15,6 +15,12 @@ export class DeConnecteRessourcesFinancieresService {
 
   }
 
+  getMontantTotalVosRessources(): number {
+    let montant = this.getMontantRevenusVosRessources();
+    montant += this.getMontantAidesVosRessources();
+    return montant;
+  }
+
   public getMontantRevenusVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
@@ -52,11 +58,13 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantAidesVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
-      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
-    }
-    if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
-      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS);
+    if(demandeurEmploiConnecte.ressourcesFinancieres) {
+      if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
+      }
+      if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS);
+      }
     }
     return montant;
   }

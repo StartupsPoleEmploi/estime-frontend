@@ -1,8 +1,27 @@
 <div class="container-fluid form-container-fluid">
-    <h1 class="row h1-style-2">{{getTitrePage()}}</h1>
-    <div class="row">
+    <h1 class="row h1-style-2">5. Résultat de ma simulation</h1>
+    <div class="row mt-4">
+      <div class="alert alert-light alert-resultat-simulation" role="alert">
+        <img src="./assets/images/info.svg">
+        <span class="ml-2">Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.</span>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-12 col-md-6 pl-0 mt-auto mb-auto">
         <h4 class="h4-style-3">
-            Détail de mes ressources pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+            Mes ressources actuelles avant reprise emploi
+        </h4>
+      </div>
+      <div id="card-revenus-actuels" class="col-12 col-md-6">
+        <div class="card">
+          <h3>Revenus et aides</h3>
+          <span>{{deConnecteRessourcesFinancieresService.getMontantTotalVosRessources()}} €</span>
+        </div>
+      </div>
+    </div>
+    <div id="div-h4-ressources-estimees" class="row">
+        <h4 class="h4-style-3">
+            Mes ressources estimées après reprise d'emploi pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
     <div class="row " [ngClass]="{'card-deck': !isSmallScreen, 'card-sm-simulations': isSmallScreen}">

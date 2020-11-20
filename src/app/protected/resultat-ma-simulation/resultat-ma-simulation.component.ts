@@ -9,6 +9,7 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Component({
   selector: 'app-resultat-ma-simulation',
@@ -27,6 +28,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   constructor(
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private router: Router,
     private screenService: ScreenService
   ) {
@@ -80,16 +82,6 @@ export class ResultatMaSimulationComponent implements OnInit {
       this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
     }
   }
-
-  public getTitrePage(): string {
-    let titre = "5. Résultat de ma simulation";
-    if (this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      titre = "6. Résultat de ma simulation";
-    }
-    return titre;
-  }
-
-
 
   public hasAidesObtenir(): boolean {
     let hasAidesObtenir = false;
