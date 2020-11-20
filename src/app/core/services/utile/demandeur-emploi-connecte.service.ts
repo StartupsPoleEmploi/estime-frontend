@@ -138,9 +138,9 @@ export class DemandeurEmploiConnecteService {
     let montant = 0;
     const ressourcesFinancieresFoyer = this.demandeurEmploiConnecte.ressourcesFinancieres;
     if(ressourcesFinancieresFoyer.allocationsCAF) {
-      montant += ressourcesFinancieresFoyer.allocationsCAF.allocationsFamilialesMensuellesNetFoyer;
-      montant += ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer;
-      montant += ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer;
+      montant += this.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsFamilialesMensuellesNetFoyer);
+      montant += this.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer);
+      montant += this.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer);
     }
     return montant;
   }

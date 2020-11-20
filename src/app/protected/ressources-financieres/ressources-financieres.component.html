@@ -154,17 +154,17 @@
                       </div>
                       <div class="col-9 col-md-10 col-text-button">
                           <div class="text-button">Ressources du foyer</div>
-                          <div *ngIf="!isRessourcesPersonnesChargeDisplay && montantAidesFoyer > 0">
+                          <div *ngIf="!isRessourcesFoyerDisplay && montantAidesFoyer > 0">
                               Total aides : {{montantAidesFoyer}} €
                           </div>
                       </div>
                       <div class="col-1 col-md-1 col-chevron">
                           <div>
                               <i
-                                  *ngIf="isRessourcesPersonnesChargeDisplay"
+                                  *ngIf="isRessourcesFoyerDisplay"
                                   class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
                               <i
-                                  *ngIf="!isRessourcesPersonnesChargeDisplay"
+                                  *ngIf="!isRessourcesFoyerDisplay"
                                   class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
                           </div>
                       </div>
