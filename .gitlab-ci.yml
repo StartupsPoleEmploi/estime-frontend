@@ -31,7 +31,7 @@ build_application :
         - node_modules/
 
 build-docker-image-release-candidate:
-    stage: build-docker-image-rc
+    stage: build-docker-image-release-candidate
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
@@ -80,7 +80,7 @@ deploy_application_recette:
         - tsconfig.base.json
 
 build-docker-image-release:
-    stage: build-docker-image
+    stage: build-docker-image-release
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
