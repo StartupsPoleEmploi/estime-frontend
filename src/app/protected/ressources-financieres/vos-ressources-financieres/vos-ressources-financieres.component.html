@@ -1,375 +1,368 @@
 <div class="card card-body card-form">
-  <form
-      (ngSubmit)="onSubmitRessourcesFinancieresForm(vosRessourcesFinancieresForm)"
-      [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}"
-      #vosRessourcesFinancieresForm="ngForm">
-      <div class="form-group">
-          <div class="row mb-2">
-              <label
-                  class="label"
-                  for="hasASSPercu">
-                  * J'ai perçu le mois précédent de l'ASS (Allocation de Solidarité Spécifique)
-              </label>
-          </div>
-          <div class="row">
-              <div class="custom-control custom-radio">
-                  <input
-                      id="hasASSPercuOui"
-                      name="hasASSPercu"
-                      type="radio"
-                      class="custom-control-input"
-                      [(ngModel)]="demandeurEmploiConnecteService.getDemandeurEmploiConnecte().beneficiaireAidesSociales.beneficiaireASS"
-                      [value]="true">
-                  <label
-                      class="custom-control-label"
-                      for="hasASSPercuOui">
-                      oui
-                  </label>
-              </div>
-              <div class="custom-control custom-radio  ml-2">
-                  <input
-                      id="hasASSPercuNon"
-                      name="hasASSPercu"
-                      type="radio"
-                      class="custom-control-input"
-                      [value]="false"
-                      disabled>
-                  <label
-                      class="custom-control-label"
-                      for="hasASSPercuNon">
-                      non
-                  </label>
-              </div>
-          </div>
-      </div>
-      <div class="form-group">
-          <div class="row mb-2">
-              <label
-                  class="label"
-                  for="allocationJournaliereNetASS">
-                  * Montant de votre allocation
-              </label>
-          </div>
-          <div class="row">
-              <input
-                  name="allocationJournaliereNetASS"
-                  type="text"
-                  pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                  (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                  min="0"
-                  maxlength="6"
-                  class="form-control"
-                  [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
-                  required
-                  placeholder="Montant"
-                  inputmode="decimal"
-                  #allocationJournaliereNetASS="ngModel"
-                  ngAutofocus>
-              <span class="text-side-input">€</span>
-              <span class="text-2-side-input">net/jour</span>
-          </div>
-          <span
-              class="row error-input-message"
-              *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetASS.touched)  && allocationJournaliereNetASS.errors?.required">
-              {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-          </span>
-          <span
-              class="row error-input-message"
-              *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetASS.touched)  && allocationJournaliereNetASS.errors?.pattern">
-              {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-          </span>
-      </div>
-      <div class="form-group">
-          <div class="row  mb-2">
-              <label
-                  class="label"
-                  for="dateDerniereOuvertureDroitASS">
-                  * Date dernière ouverture de droit à l'ASS
-              </label>
-          </div>
-          <div class="form-group">
-              <div class="row btn-group-input-date">
-                  <input
-                      name="jourDateDerniereOuvertureDroitASS"
-                      (focus)="onFocusDateDerniereOuvertureDroitASS()"
-                      class="form-control jour-input"
-                      (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
-                      maxlength="2"
-                      type="text"
-                      min="0"
-                      (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
-                      (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                      placeholder="JJ"
-                      [(ngModel)]="dateDernierOuvertureDroitASS.jour"
-                      required
-                      inputmode="numeric"
-                      #jourDateDerniereOuvertureDroitASS="ngModel">
-                  <input
-                      name="moisDateDerniereOuvertureDroitASS"
-                      (focus)="onFocusDateDerniereOuvertureDroitASS()"
-                      class="form-control mois-input"
-                      (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
-                      maxlength="2"
-                      type="text"
-                      min="0"
-                      (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
-                      (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                      placeholder="MM"
-                      [(ngModel)]="dateDernierOuvertureDroitASS.mois"
-                      required
-                      inputmode="numeric"
-                      #moisDateDerniereOuvertureDroitASS="ngModel">
-                  <input
-                      name="anneeDateDerniereOuvertureDroitASS"
-                      class="form-control annee-input"
-                      maxlength="4"
-                      type="text"
-                      min="1900"
-                      (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                      placeholder="AAAA"
-                      [(ngModel)]="dateDernierOuvertureDroitASS.annee"
-                      required
-                      inputmode="numeric"
-                      #anneeDateDerniereOuvertureDroitASS="ngModel">
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isRessourcesFinancieresFormSubmitted || jourDateDerniereOuvertureDroitASS.touched)  && jourDateDerniereOuvertureDroitASS.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-              </span>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isRessourcesFinancieresFormSubmitted || moisDateDerniereOuvertureDroitASS.touched)  && moisDateDerniereOuvertureDroitASS.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-              </span>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isRessourcesFinancieresFormSubmitted || anneeDateDerniereOuvertureDroitASS.touched) && anneeDateDerniereOuvertureDroitASS.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-              </span>
-              <span
-                  class="row error-input-message"
-                  *ngIf="isRessourcesFinancieresFormSubmitted  && dateDernierOuvertureDroitASS.messageErreurFormat">
-                  {{dateDernierOuvertureDroitASS.messageErreurFormat}}
-              </span>
-          </div>
-      </div>
-      <div class="form-group">
-          <div class="row mb-2">
-              <label
-                  class="label"
-                  for="hasCumuleAssEtSalaire">
-                  * J'ai déjà cumulé l'ASS + un salaire au cours des 3 derniers mois
-              </label>
-          </div>
-          <div class="row">
-              <div class="custom-control custom-radio">
-                  <input
-                      id="hasCumuleAssEtSalaireOui"
-                      name="hasCumuleAssEtSalaire"
-                      type="radio"
-                      class="custom-control-input"
-                      [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                      (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
-                      required
-                      [value]="true"
-                      #hasCumuleAssEtSalaire="ngModel">
-                  <label
-                      class="custom-control-label"
-                      for="hasCumuleAssEtSalaireOui">
-                      oui
-                  </label>
-              </div>
-              <div class="custom-control custom-radio ml-2">
-                  <input
-                      id="hasCumuleAssEtSalaireNon"
-                      name="hasCumuleAssEtSalaire"
-                      type="radio"
-                      class="custom-control-input"
-                      [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                      [value]="false"
-                      (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
-                      required
-                      #hasCumuleAssEtSalaire="ngModel">
-                  <label
-                      class="custom-control-label"
-                      for="hasCumuleAssEtSalaireNon">
-                      non
-                  </label>
-              </div>
-          </div>
-          <span
-              class="row error-input-message"
-              *ngIf="(isRessourcesFinancieresFormSubmitted || hasCumuleAssEtSalaire.touched)  && hasCumuleAssEtSalaire.errors?.required">
-              {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-          </span>
-      </div>
-      <div
-          class="form-group"
-          *ngIf="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === true">
-          <div class="row flex-column">
-              <label
-                  class="label mb-2"
-                  for="nombreMoisCumulAssSalaire">
-                  * Nombre de mois ASS + salaire cumulés
-              </label>
-              <select
-                  name="nombreMoisCumulAssSalaire"
-                  [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
-                  class="fit-content form-control"
-                  data-width="auto"
-                  required
-                  #nombreMoisCumulAssSalaire="ngModel">
-                  <option
-                      [value]="0"
-                      disabled>
-                      Sélectionner
-                  </option>
-                  <option
-                      *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
-                      [value]="nombreMois.value">
-                      {{ nombreMois.label }}
-                  </option>
-              </select>
-              <span
-                  class="error-input-message"
-                  *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && nombreMoisCumulAssSalaire.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-          </div>
-      </div>
-      <div
-          class="form-group"
-          *ngIf="demandeurEmploiConnecteService.hasSituationExceptionnelle()">
-          <div
-              class="row mb-2"
-              *ngIf="demandeurEmploiConnecteService.isHandicape()">
-              <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
-                  <label
-                      class="label label-left-style-1"
-                      for="allocationMensuelleNetAAH">
-                      * Allocation Adulte Handicapé (AAH)
-                  </label>
-              </div>
-              <div class="col-12 col-md-8  mt-auto mb-auto">
-                  <div class="row pl-0 d-inline d-flex">
-                      <input
-                          name="allocationMensuelleNetAAH"
-                          pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                          (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                          type="text"
-                          min="0"
-                          class="max-with-input-type-montant form-control"
-                          placeholder="Montant"
-                          [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
-                          required
-                          inputmode="decimal"
-                          #allocationMensuelleNetAAH="ngModel">
-                      <span class="text-side-input">€</span>
-                      <span class="text-2-side-input text-2-side-input-style-inline">du mois dernier</span>
-                  </div>
-                  <div class="row">
-                      <span
-                          class="error-input-message"
-                          *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
-                          {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                      </span>
-                      <span
-                          class="error-input-message"
-                          *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
-                          {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                      </span>
-                  </div>
-              </div>
-          </div>
-          <div
-              class="row mt-3"
-              *ngIf="demandeurEmploiConnecteService.isCreateurEntreprise()">
-              <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
-                  <label
-                      class="label label-left-style-1"
-                      for="revenusCreateurEntreprise">
-                      * Revenus en tant que travailleur indépendant
-                  </label>
-              </div>
-              <div class="col-12 col-md-8  mt-auto mb-auto">
-                  <div class="row pl-0 d-inline d-flex">
-                      <input
-                          name="revenusCreateurEntreprise"
-                          pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                          (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                          type="text"
-                          min="0"
-                          class="max-with-input-type-montant form-control"
-                          placeholder="Montant"
-                          [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
-                          required
-                          inputmode="decimal"
-                          #revenusCreateurEntreprise="ngModel">
-                      <span class="text-side-input">€</span>
-                      <span class="text-2-side-input text-2-side-input-style-inline">net total 3 derniers mois</span>
-                  </div>
-                  <div class="row">
-                      <span
-                          class="error-input-message"
-                          *ngIf="(isRessourcesFinancieresFormSubmitted || revenusCreateurEntreprise?.touched)  && revenusCreateurEntreprise?.errors?.required">
-                          {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                      </span>
-                      <span
-                          class="error-input-message"
-                          *ngIf="(isRessourcesFinancieresFormSubmitted || revenusCreateurEntreprise?.touched)  && revenusCreateurEntreprise?.errors?.pattern">
-                          {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                      </span>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div
-          class="row"
-          *ngIf="demandeurEmploiConnecteService.hasRevenusImmobilier()">
-          <div class="col-12 col-md-4 pl-0 mt-auto mb-auto">
-              <label
-                  class="label label-left-style-1"
-                  for="revenusImmobilier">
-                  * Revenus immobilier
-              </label>
-          </div>
-          <div class="col-12 col-md-8  mt-auto mb-auto">
-              <div class="row pl-0 d-inline d-flex">
-                  <input
-                      name="revenusImmobilier"
-                      pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                      (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                      type="text"
-                      min="0"
-                      class="max-with-input-type-montant form-control"
-                      placeholder="Montant"
-                      [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
-                      required
-                      inputmode="decimal"
-                      #revenusImmobilier="ngModel">
-                  <span class="text-side-input">€</span>
-                  <span class="text-2-side-input text-2-side-input-style-inline">net total 3 derniers mois</span>
-              </div>
-              <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
-              </div>
-          </div>
-      </div>
-      <div class="div-buttons-form row">
-          <button class="btn btn-primary-style-4" type="submit">
-              <div class="text-button">Valider</div>
-          </button>
-      </div>
-  </form>
+    <form
+        (ngSubmit)="onSubmitRessourcesFinancieresForm(vosRessourcesFinancieresForm)"
+        [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}"
+        #vosRessourcesFinancieresForm="ngForm">
+        <div class="form-group">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="hasASSPercu">
+                    * J'ai perçu le mois précédent de l'ASS (Allocation de Solidarité Spécifique)
+                </label>
+            </div>
+            <div class="row">
+                <div class="custom-control custom-radio">
+                    <input
+                        id="hasASSPercuOui"
+                        name="hasASSPercu"
+                        type="radio"
+                        class="custom-control-input"
+                        [(ngModel)]="demandeurEmploiConnecteService.getDemandeurEmploiConnecte().beneficiaireAidesSociales.beneficiaireASS"
+                        [value]="true">
+                    <label
+                        class="custom-control-label"
+                        for="hasASSPercuOui">
+                        oui
+                    </label>
+                </div>
+                <div class="custom-control custom-radio  ml-2">
+                    <input
+                        id="hasASSPercuNon"
+                        name="hasASSPercu"
+                        type="radio"
+                        class="custom-control-input"
+                        [value]="false"
+                        disabled>
+                    <label
+                        class="custom-control-label"
+                        for="hasASSPercuNon">
+                        non
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="allocationJournaliereNetASS">
+                    * Montant de votre allocation
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="allocationJournaliereNetASS"
+                    type="text"
+                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    min="0"
+                    maxlength="6"
+                    class="form-control"
+                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
+                    required
+                    placeholder="Montant"
+                    inputmode="decimal"
+                    #allocationJournaliereNetASS="ngModel"
+                    ngAutofocus>
+                <span class="text-side-input">€</span>
+                <span class="text-2-side-input">net/jour</span>
+            </div>
+            <span
+                class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetASS.touched)  && allocationJournaliereNetASS.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+            <span
+                class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetASS.touched)  && allocationJournaliereNetASS.errors?.pattern">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+            </span>
+        </div>
+        <div class="form-group">
+            <div class="row  mb-2">
+                <label
+                    class="label"
+                    for="dateDerniereOuvertureDroitASS">
+                    * Date dernière ouverture de droit à l'ASS
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="row btn-group-input-date">
+                    <input
+                        name="jourDateDerniereOuvertureDroitASS"
+                        (focus)="onFocusDateDerniereOuvertureDroitASS()"
+                        class="form-control jour-input"
+                        (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
+                        maxlength="2"
+                        type="text"
+                        min="0"
+                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        placeholder="JJ"
+                        [(ngModel)]="dateDernierOuvertureDroitASS.jour"
+                        required
+                        inputmode="numeric"
+                        #jourDateDerniereOuvertureDroitASS="ngModel">
+                    <input
+                        name="moisDateDerniereOuvertureDroitASS"
+                        (focus)="onFocusDateDerniereOuvertureDroitASS()"
+                        class="form-control mois-input"
+                        (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
+                        maxlength="2"
+                        type="text"
+                        min="0"
+                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        placeholder="MM"
+                        [(ngModel)]="dateDernierOuvertureDroitASS.mois"
+                        required
+                        inputmode="numeric"
+                        #moisDateDerniereOuvertureDroitASS="ngModel">
+                    <input
+                        name="anneeDateDerniereOuvertureDroitASS"
+                        class="form-control annee-input"
+                        maxlength="4"
+                        type="text"
+                        min="1900"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        placeholder="AAAA"
+                        [(ngModel)]="dateDernierOuvertureDroitASS.annee"
+                        required
+                        inputmode="numeric"
+                        #anneeDateDerniereOuvertureDroitASS="ngModel">
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || jourDateDerniereOuvertureDroitASS.touched)  && jourDateDerniereOuvertureDroitASS.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || moisDateDerniereOuvertureDroitASS.touched)  && moisDateDerniereOuvertureDroitASS.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || anneeDateDerniereOuvertureDroitASS.touched) && anneeDateDerniereOuvertureDroitASS.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="isRessourcesFinancieresFormSubmitted  && dateDernierOuvertureDroitASS.messageErreurFormat">
+                    {{dateDernierOuvertureDroitASS.messageErreurFormat}}
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="hasCumuleAssEtSalaire">
+                    * J'ai déjà cumulé l'ASS + un salaire au cours des 3 derniers mois
+                </label>
+            </div>
+            <div class="row">
+                <div class="custom-control custom-radio">
+                    <input
+                        id="hasCumuleAssEtSalaireOui"
+                        name="hasCumuleAssEtSalaire"
+                        type="radio"
+                        class="custom-control-input"
+                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
+                        (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
+                        required
+                        [value]="true"
+                        #hasCumuleAssEtSalaire="ngModel">
+                    <label
+                        class="custom-control-label"
+                        for="hasCumuleAssEtSalaireOui">
+                        oui
+                    </label>
+                </div>
+                <div class="custom-control custom-radio ml-2">
+                    <input
+                        id="hasCumuleAssEtSalaireNon"
+                        name="hasCumuleAssEtSalaire"
+                        type="radio"
+                        class="custom-control-input"
+                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
+                        [value]="false"
+                        (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
+                        required
+                        #hasCumuleAssEtSalaire="ngModel">
+                    <label
+                        class="custom-control-label"
+                        for="hasCumuleAssEtSalaireNon">
+                        non
+                    </label>
+                </div>
+            </div>
+            <span
+                class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || hasCumuleAssEtSalaire.touched)  && hasCumuleAssEtSalaire.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === true">
+            <div class="row flex-column">
+                <label
+                    class="label mb-2"
+                    for="nombreMoisCumulAssSalaire">
+                    * Nombre de mois ASS + salaire cumulés
+                </label>
+                <select
+                    name="nombreMoisCumulAssSalaire"
+                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
+                    class="fit-content form-control"
+                    data-width="auto"
+                    required
+                    #nombreMoisCumulAssSalaire="ngModel">
+                    <option
+                        [value]="0"
+                        disabled>
+                        Sélectionner
+                    </option>
+                    <option
+                        *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
+                        [value]="nombreMois.value">
+                        {{ nombreMois.label }}
+                    </option>
+                </select>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && nombreMoisCumulAssSalaire.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="demandeurEmploiConnecteService.hasSituationExceptionnelle()">
+            <div
+                class="row mb-2"
+                *ngIf="demandeurEmploiConnecteService.isHandicape()">
+                <label
+                    class="label"
+                    for="allocationMensuelleNetAAH">
+                    * Allocation Adulte Handicapé (AAH)
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="allocationMensuelleNetAAH"
+                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
+                    required
+                    inputmode="decimal"
+                    #allocationMensuelleNetAAH="ngModel">
+                <span class="text-side-input">€</span>
+                <span class="text-2-side-input text-2-side-input-style-inline">du mois dernier</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="demandeurEmploiConnecteService.isCreateurEntreprise()">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="revenusCreateurEntreprise">
+                    * Revenus en tant que travailleur indépendant
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="revenusCreateurEntreprise"
+                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
+                    required
+                    inputmode="decimal"
+                    #revenusCreateurEntreprise="ngModel">
+                <span class="text-side-input">€</span>
+                <span class="text-2-side-input text-2-side-input-style-inline">net total 3 derniers mois</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusCreateurEntreprise?.touched)  && revenusCreateurEntreprise?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusCreateurEntreprise?.touched)  && revenusCreateurEntreprise?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="demandeurEmploiConnecteService.hasRevenusImmobilier()">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="revenusImmobilier">
+                    * Revenus immobilier
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="revenusImmobilier"
+                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
+                    required
+                    inputmode="decimal"
+                    #revenusImmobilier="ngModel">
+                <span class="text-side-input">€</span>
+                <span class="text-2-side-input text-2-side-input-style-inline">net total 3 derniers mois</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div class="div-buttons-form row">
+            <button
+                class="btn btn-primary-style-4"
+                type="submit">
+                <div class="text-button">Valider</div>
+            </button>
+        </div>
+    </form>
 </div>
-
