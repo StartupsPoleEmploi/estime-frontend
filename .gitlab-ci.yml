@@ -89,16 +89,6 @@ build-docker-image-release:
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR/deployment/release --dockerfile $CI_PROJECT_DIR/deployment/release/Dockerfile --destination $CI_REGISTRY_IMAGE:release
     when: manual
-    rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-      changes:
-        - angular.json
-        - deployment/Dockerfile
-        - deployment/docker-swarm/*
-        - deployment/nginx-conf/*
-        - package.json
-        - src/**/*
-        - tsconfig.base.json
 
 deploy_application_production:
     stage: deploy-application-production
@@ -119,13 +109,3 @@ deploy_application_production:
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP_PROD "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
-    rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-      changes:
-        - angular.json
-        - deployment/Dockerfile
-        - deployment/docker-swarm/*
-        - deployment/nginx-conf/*
-        - package.json
-        - src/**/*
-        - tsconfig.base.json
