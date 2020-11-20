@@ -64,6 +64,7 @@ export class RessourcesFinancieresComponent implements OnInit {
   ngOnInit(): void {
     this.loadDataRessourcesFinancieres();
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
+    this.calculerMontantsRessourcesFinancieres();
   }
 
 
@@ -104,9 +105,11 @@ export class RessourcesFinancieresComponent implements OnInit {
 
   public traiterValidationVosRessourcesEventEmitter(): void {
     this.isVosRessourcesDisplay = false;
-    if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()) {
+    if (this.demandeurEmploiConnecteService.hasConjointSituationAvecRessource()
+    && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
       this.isRessourcesConjointDisplay = true;
-    } else if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+    } else if (this.demandeurEmploiConnecteService.hasPersonneAChargeAvecRessourcesFinancieres()
+    && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
@@ -173,5 +176,15 @@ export class RessourcesFinancieresComponent implements OnInit {
       isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
+  }
+
+  private calculerMontantsRessourcesFinancieres(): void {
+    this.montantRevenusVosRessources= this.demandeurEmploiConnecteService.getMontantRevenusVosRessources();
+    this.montantAidesVosRessources = this.demandeurEmploiConnecteService.getMontantAidesVosRessources();
+    this.montantRevenusRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesConjoint();
+    this.montantAidesRessourcesConjoint = this.demandeurEmploiConnecteService.getMontantAidesRessourcesConjoint();
+    this.montantAidesPersonnesCharge = this.demandeurEmploiConnecteService.getMontantAidesRessourcesPersonnesCharge();
+    this.montantRevenusPersonnesCharge = this.demandeurEmploiConnecteService.getMontantRevenusRessourcesPersonnesCharge();
+    this.montantAidesFoyer = this.demandeurEmploiConnecteService.getMontantAidesRessourcesFoyer();
   }
 }
