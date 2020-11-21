@@ -10,6 +10,8 @@ import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/deConnecte-simulation-aides-sociales.service";
 
 @Component({
   selector: 'app-resultat-ma-simulation',
@@ -23,12 +25,14 @@ export class ResultatMaSimulationComponent implements OnInit {
   isSmallScreen: boolean;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
+  simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
 
   constructor(
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     private router: Router,
     private screenService: ScreenService
   ) {
@@ -36,7 +40,8 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadData();
+    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.loadDataSimulationAidesSociales();
     this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
@@ -64,7 +69,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   public isLastCardSimulation(index: number): boolean {
-    return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1;
+    return index === this.simulationAidesSociales.simulationsMensuelles.length - 1;
   }
 
   public isSimulationMensuelleSelected(simulationMensuelle: SimulationMensuelle): boolean {
@@ -72,7 +77,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   public isLastSimulationMensuelle(index: number) {
-    return index === this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length - 1
+    return index === this.simulationAidesSociales.simulationsMensuelles.length - 1
   }
 
   public onClickButtonRetour(): void {
@@ -105,11 +110,11 @@ export class ResultatMaSimulationComponent implements OnInit {
     })
   }
 
-  private loadData(): void {
-    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+  private loadDataSimulationAidesSociales(): void {
+    this.simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();
     //si l'utilisateur est sur smartphone, aucune préselection
     if (!this.screenService.isSmallScreen()) {
-      this.simulationSelected = this.demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles[0];
+      this.simulationSelected = this.simulationAidesSociales.simulationsMensuelles[0];
       this.selectFirstAideSociale();
     }
   }

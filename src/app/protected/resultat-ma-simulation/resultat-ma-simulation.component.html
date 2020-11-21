@@ -21,13 +21,13 @@
     </div>
     <div id="div-h4-ressources-estimees" class="row">
         <h4 class="h4-style-3">
-            Mes ressources estimées après reprise d'emploi pour les {{demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+            Mes ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
         </h4>
     </div>
     <div class="row " [ngClass]="{'card-deck': !isSmallScreen, 'card-sm-simulations': isSmallScreen}">
         <div
             class="card first-card"
-            *ngFor="let simulationMensuel of demandeurEmploiConnecte.simulationAidesSociales.simulationsMensuelles; let index = index;"
+            *ngFor="let simulationMensuel of simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
             <div class="card second-card">
                 <div

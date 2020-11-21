@@ -24,7 +24,8 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
 
   redirectVersPageMonContratDeTravail() {
     this.isPageLoadingDisplay = true;
-    this.estimeApiService.getDemandeurEmploi().then(
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.estimeApiService.completerInformationsDemandeurEmploi(demandeurEmploiConnecte).then(
       (demandeurEmploi) => {
         this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
         this.isPageLoadingDisplay = false;

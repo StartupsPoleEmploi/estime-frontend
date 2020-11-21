@@ -10,6 +10,5 @@ export class DemandeurEmploi {
   futurTravail: FuturTravail;
   informationsPersonnelles: InformationsPersonnelles;
   ressourcesFinancieres: RessourcesFinancieres;
-  simulationAidesSociales: SimulationAidesSociales;
   situationFamiliale: SituationFamiliale;
 }

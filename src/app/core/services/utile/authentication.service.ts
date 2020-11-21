@@ -10,6 +10,10 @@ import { InformationsAccessTokenPeConnect } from "@models/informations-access-to
 import { InformationAutorisationOIDC } from '@models/informations-autorisation-oidc';
 import { SessionStorageService } from "ngx-webstorage";
 import { Subject } from 'rxjs';
+import { DeConnecteService } from "@app/core/services/demandeur-emploi-connecte/de-connecte.service";
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
+import { MessageErreur } from "@models/message-erreur";
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
@@ -17,12 +21,13 @@ export class AuthenticationService {
   private informationsAccessTokenIndividuConnecte: InformationsAccessTokenPeConnect;
   private informationAutorisationOIDC: InformationAutorisationOIDC;
   private isLoggedInChangedSubject = new Subject<boolean>();
-  private messageErreur: string;
+  private messageErreur: MessageErreur;
 
   loginChanged = this.isLoggedInChangedSubject.asObservable();
 
 
   constructor(private activatedRoute: ActivatedRoute,
+              private deConnecteService: DeConnecteService,
               @Inject(DOCUMENT) private document: Document,
               private estimeApiService: EstimeApiService,
               private environment: Environment,
@@ -37,19 +42,27 @@ export class AuthenticationService {
 
   completeLogin(): Promise<void> {
     return this.authentifierDemandeurEmploi().then(
-      (informationsAccessTokenIndividuConnecte) => {
-        this.informationsAccessTokenIndividuConnecte = informationsAccessTokenIndividuConnecte;
-        this.sessionStorageService.store(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, informationsAccessTokenIndividuConnecte);
+      (individu) => {
+        this.informationsAccessTokenIndividuConnecte = individu.informationsAccessTokenPeConnect;
+        const demandeurEmploiConnecte = this.creerDemandeurEmploiConnecte(individu.beneficiaireAidesSociales);
+        this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploiConnecte);
+        this.sessionStorageService.store(KeysSessionStorageEnum.OIDC_INDIVIDU_ACCESS_TOKEN_STORAGE_SESSION_KEY, this.informationsAccessTokenIndividuConnecte);
         this.isLoggedInChangedSubject.next(true);
-      }, (erreur) => {
-        console.log(erreur);
-        this.messageErreur = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
+      }, (httpErrorResponse) => {
+        console.log(httpErrorResponse.error);
+        this.messageErreur = new MessageErreur();
+        if(httpErrorResponse.error.code) {
+          this.messageErreur.code = httpErrorResponse.error.code;
+          this.messageErreur.message = httpErrorResponse.error.message;
+        } else {
+          this.messageErreur.message = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
+        }
         return Promise.reject();
       }
     );
   }
 
-  getMessageErreur(): string {
+  getMessageErreur(): MessageErreur {
     return this.messageErreur;
   }
 
@@ -68,6 +81,12 @@ export class AuthenticationService {
 
   completeLogout() {
     this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+  }
+
+  private creerDemandeurEmploiConnecte(beneficiaireAidesSociales: BeneficiaireAidesSociales): DemandeurEmploi {
+    const demandeurEmploiConnecte = new DemandeurEmploi();
+    demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
+    return demandeurEmploiConnecte;
   }
 
   private getPoleEmploiIdentityServerConnexionURI():string  {

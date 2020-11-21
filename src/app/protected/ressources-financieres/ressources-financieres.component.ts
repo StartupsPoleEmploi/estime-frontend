@@ -16,6 +16,7 @@ import { RessourcesFinancieresConjointComponent } from '@app/protected/ressource
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
+import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/deConnecte-simulation-aides-sociales.service";
 
 @Component({
   selector: 'app-ressources-financieres',
@@ -68,6 +69,7 @@ export class RessourcesFinancieresComponent implements OnInit {
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private estimeApiService: EstimeApiService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
@@ -103,10 +105,12 @@ export class RessourcesFinancieresComponent implements OnInit {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
       this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).then(
-        () => {
+        (simulationAidesSociales) => {
+          this.deConnecteSimulationAidesSocialesService.setSimulationAidesSociales(simulationAidesSociales);
           this.isPageLoadingDisplay = false;
           this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
-        }, () => {
+        }, (erreur) => {
+          console.log(erreur);
           this.isPageLoadingDisplay = false;
           this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
         }

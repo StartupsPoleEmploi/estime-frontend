@@ -10,6 +10,9 @@ import { TemoignageService } from "@app/core/services/utile/temoignage.service";
 import { Temoignage } from '@app/commun/models/temoignage';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { MessageErreur } from '@app/commun/models/message-erreur';
+import { CodesMessagesErreurEnum } from "@enumerations/codes-messages-erreur.enum";
+import { NiveauMessagesErreurEnum } from "@enumerations/niveaux-message-erreur";
 
 @Component({
   selector: 'app-homepage',
@@ -20,7 +23,8 @@ export class HomepageComponent implements OnInit {
 
   etapesSimulation: Array<string>;
   isSmallScreen: boolean;
-  messageErreur: string;
+  messageErreur: MessageErreur;
+  niveauMessageErreur = 'danger';
   questions: Array<Question>;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
@@ -70,6 +74,13 @@ export class HomepageComponent implements OnInit {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
     } else {
       this.messageErreur = this.authenticationService.getMessageErreur();
+      if(this.messageErreur) {
+        if(this.messageErreur.code && this.messageErreur.code === CodesMessagesErreurEnum.INDIVIDU_NON_BENEFICIAIRE_MINIMA_SOCIAUX) {
+          this.niveauMessageErreur = NiveauMessagesErreurEnum.INFO;
+        } else {
+          this.niveauMessageErreur = NiveauMessagesErreurEnum.ERROR;
+        }
+      }
     }
   }
 

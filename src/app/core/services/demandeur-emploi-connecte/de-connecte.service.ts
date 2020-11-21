@@ -60,21 +60,6 @@ export class DeConnecteService {
     this.saveDemandeurEmploiConnecteInSessionStorage();
   }
 
-  /** public setConjointSituation(situationConjoint: SituationPersonne) {
-     this.setConjointSituationHandicape(situationConjoint);
-     if (situationConjoint.salarie) {
-       this.setConjointSituationSalarie();
-     }
-     if (situationConjoint.hasRessourceAideEmploi) {
-       this.setConjointSituatioRessourceAideEmploi();
-     }
-     if (situationConjoint.sansRessource) {
-       this.setConjointSituationSansRessource();
-     }
-     this.saveDemandeurEmploiConnecteInSessionStorage();
-   }**/
-
-
   public setDemandeurEmploiConnecte(demandeurEmploi: DemandeurEmploi): void {
     this.demandeurEmploiConnecte = demandeurEmploi;
     this.saveDemandeurEmploiConnecteInSessionStorage();
