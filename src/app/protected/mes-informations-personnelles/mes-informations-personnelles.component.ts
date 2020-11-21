@@ -51,7 +51,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.beneficiaireAidesSociales  = demandeurEmploiConnecte.beneficiaireAidesSociales;
+    this.beneficiaireAidesSociales = demandeurEmploiConnecte.beneficiaireAidesSociales;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance);
@@ -103,16 +103,17 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   /************ est en couple, gestion situation conjoint *******************************/
 
   public isSituationConjointValide(): boolean {
-    return this.situationFamiliale.conjoint.informationsPersonnelles.salarie
-    || this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource
-    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH
-    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE
-    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS
-    || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA;
+    return this.situationFamiliale.conjoint
+      && (this.situationFamiliale.conjoint.informationsPersonnelles.salarie
+        || this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA);
   }
 
   public onClickCheckBoxConjointHasAAH(): void {
-    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH) {
       this.deConnecteService.unsetConjointAllocationAAH();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -120,7 +121,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasASS(): void {
-    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS) {
       this.deConnecteService.unsetConjointAllocationASS();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -130,7 +131,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasARE(): void {
-    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE) {
       this.deConnecteService.unsetConjointAllocationARE();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -140,7 +141,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasRSA(): void {
-    if(!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA) {
       this.deConnecteService.unsetConjointAllocationRSA();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -150,7 +151,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointIsSalarie(): void {
-    if(!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
+    if (!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
       this.deConnecteService.unsetConjointSalaire();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -180,7 +181,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if(!demandeurEmploiConnecte.informationsPersonnelles) {
+    if (!demandeurEmploiConnecte.informationsPersonnelles) {
       this.informationsPersonnelles = new InformationsPersonnelles();
       this.informationsPersonnelles.nationalite = null;
     } else {
@@ -189,7 +190,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   }
 
   private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if(demandeurEmploiConnecte.situationFamiliale) {
+    if (demandeurEmploiConnecte.situationFamiliale) {
       this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
     } else {
       this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();

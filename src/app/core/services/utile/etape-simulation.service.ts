@@ -16,8 +16,8 @@ export class EtapeSimulationService {
 
   private initEtapesSimulation(): void {
     this.etapesSimulation = new Array<string>();
-    this.etapesSimulation.push('Connectez-vous et indiquez le montant de votre prochain contrat de travail.');
+    this.etapesSimulation.push('Connectez-vous et indiquez le montant du salaire de votre prochain contrat de travail.');
     this.etapesSimulation.push('Complétez les informations pour la simulation. Vous aurez besoin de votre relevé CAF et de votre notification de droit Pôle emploi.');
-    this.etapesSimulation.push('Obtenez le montant total de vos ressources pour les 6 mois à venir.');
+    this.etapesSimulation.push('Obtenez le montant détaillé de vos ressources mois par mois.');
   }
 }

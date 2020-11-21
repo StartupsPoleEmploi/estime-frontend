@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -12,6 +13,7 @@ import { RoutesEnum } from '@enumerations/routes.enum';
 export class AvantDeCommencerSimulationComponent implements OnInit {
 
   isPageLoadingDisplay = false;
+  messageErreur: string;
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -33,6 +35,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
       }, (erreur) => {
         this.isPageLoadingDisplay = false;
         console.log(erreur);
+        this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
       }
     );
   }

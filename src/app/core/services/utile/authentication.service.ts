@@ -51,7 +51,7 @@ export class AuthenticationService {
       }, (httpErrorResponse) => {
         console.log(httpErrorResponse.error);
         this.messageErreur = new MessageErreur();
-        if(httpErrorResponse.error.code) {
+        if(httpErrorResponse.error && httpErrorResponse.error.code) {
           this.messageErreur.code = httpErrorResponse.error.code;
           this.messageErreur.message = httpErrorResponse.error.message;
         } else {

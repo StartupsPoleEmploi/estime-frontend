@@ -21,15 +21,15 @@
       color: $color-blue-2;
       font-weight: 600;
       margin-bottom: -10px;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       @media #{$medium-device}, #{$large-device} {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
     }
     span {
       font-weight: 900;
       @media #{$medium-device}, #{$large-device} {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
       }
     }
   }
@@ -44,7 +44,7 @@
   }
   span {
     color: $color-black-2;
-    font-size: 0.9rem;
+    font-style: italic;
   }
 }
 

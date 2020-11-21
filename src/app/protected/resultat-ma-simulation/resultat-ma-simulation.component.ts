@@ -81,11 +81,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    if (this.demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES_CONJOINT], { replaceUrl: true });
-    } else {
-      this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
-    }
+    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
   }
 
   public hasAidesObtenir(): boolean {

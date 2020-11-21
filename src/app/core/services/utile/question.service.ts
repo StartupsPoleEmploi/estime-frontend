@@ -19,13 +19,12 @@ export class QuestionService {
     this.questions = new Array<Question>();
 
     const question1 = new Question();
-    question1.question = "Est-ce que je peux continuer à toucher des allocations chômage en retravaillant ?";
-    question1.reponse = "C'est possible de bénéficier d'un complément d'ARE quand on retravaille, selon le nouveau salaire.<br><br>Estime va vous aider à visualiser tout cela."
+    question1.question = "Puis-je continuer à percevoir l’Allocation de Solidarité Spécifique en reprenant un emploi ?";
+    question1.reponse = "Les demandeurs d’emploi qui bénéficient de l’Allocation de Solidarité Spécifique peuvent, dans certaines limites, cumuler leur allocation avec les revenus d’une nouvelle activité professionnelle.<br><br>Estime est là pour vous aider à l’évaluer !"
     this.questions.push(question1);
 
     const question2 = new Question();
     question2.question = "Quels types d'aides existent ?";
-    question2.reponse = "En fonction du contrat et de votre situation, il existe des aides à la mobilité, à la garde d'enfants, la prime d'activité...<br><br>Estime va vous aider à y voir plus clair."
     this.questions.push(question2);
   }
 }

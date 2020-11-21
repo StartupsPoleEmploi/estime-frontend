@@ -15,9 +15,9 @@ export class NumberUtileService {
     return numberToTransform;
   }
 
-  public getMontantSafe(montant: number) {
+  public getMontantSafe(montant: any) {
     if(montant !== undefined && montant !== null) {
-      return montant;
+      return parseFloat(montant);
     }
     return 0;
   }
