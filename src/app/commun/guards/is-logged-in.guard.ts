@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/core/services/utile/authentication.service';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { RoutesEnum } from "@enumerations/routes.enum";
 
 @Injectable({
@@ -10,13 +10,13 @@ import { RoutesEnum } from "@enumerations/routes.enum";
 export class IsLoggedInGuard implements CanActivate {
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private router: Router
   ) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      const isLoggedIn = this.authenticationService.isLoggedIn();
+      const isLoggedIn = this.authorizationService.isLoggedIn();
       if(!isLoggedIn) {
         this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
       }

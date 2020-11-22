@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '@app/core/services/utile/authentication.service';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 
 @Component({
   selector: 'app-signout-callback',
@@ -8,12 +8,12 @@ import { AuthenticationService } from '@app/core/services/utile/authentication.s
 
 export class SignoutRedirectCallbackComponent implements OnInit {
   constructor(
-    private authenticationService: AuthenticationService
+    private authorizationService: AuthorizationService
   ) {
 
   }
 
   ngOnInit() {
-    this.authenticationService.completeLogout();
+    this.authorizationService.completeLogout();
   }
 }

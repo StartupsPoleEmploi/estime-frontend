@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/core/services/utile/authentication.service';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
 @Component({
@@ -13,12 +13,12 @@ export class SigninRedirectCallbackComponent implements OnInit {
   isPageLoadingDisplay = false;
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private router: Router) { }
 
   ngOnInit() {
     this.isPageLoadingDisplay = true;
-    this.authenticationService.completeLogin().then(
+    this.authorizationService.completeLogin().then(
       (demandeur) => {
         this.isPageLoadingDisplay = false;
         this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });

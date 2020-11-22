@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '@app/core/services/utile/authentication.service';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 
 @Component({
@@ -12,20 +12,20 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private router: Router
   ) {
-    this.authenticationService.loginChanged.subscribe(loggedIn =>  {
+    this.authorizationService.loginChanged.subscribe(loggedIn =>  {
       this.isLoggedIn = loggedIn;
     })
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authenticationService.isLoggedIn();
+    this.isLoggedIn = this.authorizationService.isLoggedIn();
   }
 
   public logout(): void {
-    this.authenticationService.logout();
+    this.authorizationService.logout();
   }
 
   public onClickLogoEstime(): void {

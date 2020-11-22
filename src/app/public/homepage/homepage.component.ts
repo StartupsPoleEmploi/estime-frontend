@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthenticationService } from '@app/core/services/utile/authentication.service';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { Router } from '@angular/router';
 import { EtapeSimulationService } from '@app/core/services/utile/etape-simulation.service';
@@ -31,7 +31,7 @@ export class HomepageComponent implements OnInit {
   temoignages: Array<Temoignage>;
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authorizationService: AuthorizationService,
     private etapeSimulationService: EtapeSimulationService,
     private questionService: QuestionService,
     private router: Router,
@@ -54,7 +54,7 @@ export class HomepageComponent implements OnInit {
   }
 
   public login(): void {
-    this.authenticationService.login();
+    this.authorizationService.login();
   }
 
   private loadEtapesSimulation(): void {
@@ -70,10 +70,10 @@ export class HomepageComponent implements OnInit {
   }
 
   private checkDemandeurEmploiConnecte():void {
-    if(this.authenticationService.isLoggedIn()) {
+    if(this.authorizationService.isLoggedIn()) {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
     } else {
-      this.messageErreur = this.authenticationService.getMessageErreur();
+      this.messageErreur = this.authorizationService.getMessageErreur();
       if(this.messageErreur) {
         if(this.messageErreur.code && this.messageErreur.code === CodesMessagesErreurEnum.INDIVIDU_NON_BENEFICIAIRE_MINIMA_SOCIAUX) {
           this.niveauMessageErreur = NiveauMessagesErreurEnum.INFO;

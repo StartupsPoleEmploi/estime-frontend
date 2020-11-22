@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
-import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
+import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { PersonneDTO } from '@models/dto/personne-dto';
 import { FuturTravail } from '@models/futur-travail';
@@ -44,7 +44,7 @@ export class DeConnecteService {
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
-      this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+      this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     }
     return this.demandeurEmploiConnecte;
   }
@@ -239,6 +239,6 @@ export class DeConnecteService {
   }
 
   private saveDemandeurEmploiConnecteInSessionStorage(): void {
-    this.sessionStorageService.store(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
+    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
   }
 }

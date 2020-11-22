@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Environment } from "@app/commun/models/environment";
 import { environment } from '@environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
 import { CommunModule } from './commun/commun.module';
-
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { CommunModule } from './commun/commun.module';
     CoreModule
   ],
   providers: [
-    {provide: Environment, useValue: environment}
+    {provide: Environment, useValue: environment},
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

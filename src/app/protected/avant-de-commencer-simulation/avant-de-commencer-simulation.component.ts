@@ -25,18 +25,22 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   }
 
   redirectVersPageMonContratDeTravail() {
-    this.isPageLoadingDisplay = true;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.estimeApiService.completerInformationsDemandeurEmploi(demandeurEmploiConnecte).then(
-      (demandeurEmploi) => {
-        this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
-        this.isPageLoadingDisplay = false;
-        this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
-      }, (erreur) => {
-        this.isPageLoadingDisplay = false;
-        console.log(erreur);
-        this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
-      }
-    );
+    if(!demandeurEmploiConnecte) {
+      this.isPageLoadingDisplay = true;
+      this.estimeApiService.creerDemandeurEmploi().then(
+        (demandeurEmploi) => {
+          this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+          this.isPageLoadingDisplay = false;
+          this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
+        }, (erreur) => {
+          this.isPageLoadingDisplay = false;
+          console.log(erreur);
+          this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
+        }
+      );
+    } else {
+      this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
+    }
   }
 }

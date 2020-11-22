@@ -1,4 +1,4 @@
-export class InformationAutorisationOIDC {
+export class PeConnectPayload {
   clientId: string;
   code: string;
   nonce: string;

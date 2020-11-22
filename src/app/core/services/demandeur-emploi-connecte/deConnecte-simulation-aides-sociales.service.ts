@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SimulationAidesSociales } from "@models/simulation-aides-sociales";
 import { SessionStorageService } from "ngx-webstorage";
-import { KeysSessionStorageEnum } from "@enumerations/keys-session-storage.enum";
+import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSimulationAidesSocialesService {
@@ -16,7 +16,7 @@ export class DeConnecteSimulationAidesSocialesService {
 
   public getSimulationAidesSociales(): SimulationAidesSociales {
     if (!this.simulationAidesSociales) {
-      this.simulationAidesSociales = this.sessionStorageService.retrieve(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
+      this.simulationAidesSociales = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
     }
     return this.simulationAidesSociales;
   }
@@ -27,6 +27,6 @@ export class DeConnecteSimulationAidesSocialesService {
   }
 
   private saveSimulationAidesSocialesInSessionStorage(): void {
-    this.sessionStorageService.store(KeysSessionStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAidesSociales);
+    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAidesSociales);
   }
 }
