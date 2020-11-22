@@ -29,6 +29,7 @@ export class TemoignageService {
     this.temoignages.push(temoignage2);
 
     const temoignage3 = new Temoignage();
+    temoignage3.temoignage = '"C’est vraiment du pas-à-pas, facile à comprendre et à faire."';
     temoignage3.auteur = "Rémi"
     this.temoignages.push(temoignage3);
   }

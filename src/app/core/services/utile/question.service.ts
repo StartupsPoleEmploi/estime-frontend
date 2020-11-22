@@ -25,6 +25,7 @@ export class QuestionService {
 
     const question2 = new Question();
     question2.question = "Quels types d'aides existent ?";
+    question2.reponse = "En fonction de votre contrat de travail et de votre situation, il existe différentes aides possibles : aide à la mobilité, à la garde d’enfant , à la prime d’activité…<br><br>Estime va vous aider à y voir plus clair."
     this.questions.push(question2);
   }
 }
