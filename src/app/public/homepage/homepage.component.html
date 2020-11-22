@@ -7,8 +7,8 @@
             {{messageErreur.message}}
         </alert>
         </div>
-        <div class="row">
-            <div class="col-12 col-md-6">
+        <div id="div-presentation-estime" class="row">
+            <div class="col-12 col-md-8">
                 <h3>Vous avez besoin de connaître votre budget en cas de reprise d’emploi ?</h3>
                 <h1>
                   Estime calcule le montant de vos allocations et aides auxquelles vous pourriez prétendre.
@@ -25,7 +25,7 @@
                     </button>
                 </div>
             </div>
-            <div *ngIf="!isSmallScreen" class="col-md-6">
+            <div *ngIf="!isSmallScreen" class="col-md-4">
                 <img
                     class="image-homepage"
                     src="../../../assets/images/homepage-calculette.svg">

@@ -7,7 +7,9 @@
 #section-presentation {
   margin-bottom: unset;
   margin-top: 0.5rem;
-  padding-top: 2rem;
+  @media #{$medium-device}, #{$large-device}  {
+    padding-top: 2rem;
+  }
   padding-bottom: unset;
   .container-fluid {
     h1 {
