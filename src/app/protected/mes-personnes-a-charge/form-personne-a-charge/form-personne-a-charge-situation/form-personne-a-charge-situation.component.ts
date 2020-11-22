@@ -63,7 +63,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxIsSalarie(): void {
     if(!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
@@ -83,34 +83,34 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   private unsetSalaire(): void {
     this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
   }
 
   private unsetAAH(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
     }
   }
 
   private unsetASS(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
     }
   }
 
   private unsetARE(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE= false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
     }
   }
 
   private unsetRSA(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
     }
   }
 }
