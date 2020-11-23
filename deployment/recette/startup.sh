@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 function replace_env_properties {
 	log 'replace tokens env properties in main.js'
