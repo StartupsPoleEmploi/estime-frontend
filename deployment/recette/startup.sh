@@ -1,8 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 function replace_env_properties {
 	log 'replace tokens env properties in main.js'
-  perl -i -p -e "s|%%pe-connect.client-id%%|${PEAMA_URL}|g" usr/share/nginx/html/main*.js
 
   perl -i -p -e '
 	  $PE_CONNECT_CLIENT_ID=qw('$PE_CONNECT_CLIENT_ID');
@@ -17,6 +16,7 @@ function replace_env_properties {
 
 function replace_tagCommander_url {
 	log 'replace tagcommander script url in index.html'
+
 	perl -i -p -e "s|'%%tagcommander.script.url%%'|${TAG_COMMANDER_SCRIPT_URL}|g" usr/share/nginx/html/index.html
 }
 
@@ -27,7 +27,7 @@ start_nginx() {
 
 function start {
   replace_env_properties &&
-	replace_tagCommander_url
+	replace_tagCommander_url &&
 	start_nginx
 }
 
