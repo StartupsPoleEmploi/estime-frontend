@@ -12,5 +12,3 @@ COPY ../../dist/estime /usr/share/nginx/html
 
 COPY startup.sh .
 RUN chmod +x ./startup.sh
-
-ENTRYPOINT ./startup.sh
