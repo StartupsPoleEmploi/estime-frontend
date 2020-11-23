@@ -9,14 +9,13 @@ function replace_env_properties {
   perl -i -p -e "s|pe-connect.identity-server-url|${PE_CONNECT_IDENTITY_SERVER_URL}|g" usr/share/nginx/html/main*.js
 }
 
-
 function replace_tagCommander_url {
 	log 'replace tagcommander script url in index.html'
 
 	perl -i -p -e "s|tagcommander.script.url|${TAG_COMMANDER_SCRIPT_URL}|g" usr/share/nginx/html/index.html
 }
 
-start_nginx() {
+function start_nginx {
 	log 'start nginx'
 	nginx -g "daemon off;"
 }
