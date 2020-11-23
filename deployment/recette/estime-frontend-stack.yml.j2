@@ -4,12 +4,12 @@ services:
   estime-frontend:
     image: registry.beta.pole-emploi.fr/estime/estime-frontend:release-candidate
     environment:
-      - PE_CONNECT_CLIENT_ID: "{{ PE_CONNECT_CLIENT_ID }}"
-      - PE_CONNECT_REDIRECT_URI: "{{ PE_CONNECT_REDIRECT_URI }}"
-      - PE_CONNECT_SCOPE: "{{ PE_CONNECT_SCOPE }}"
-      - PE_CONNECT_IDENTITY_SERVER_URL: "{{ PE_CONNECT_IDENTITY_SERVER_URL }}"
-      - TAG_COMMANDER_SCRIPT_URL: "{{ TAG_COMMANDER_SCRIPT_URL }}"
-      - TZ: "Europe/Paris"
+      PE_CONNECT_CLIENT_ID: "{{ PE_CONNECT_CLIENT_ID }}"
+      PE_CONNECT_REDIRECT_URI: "{{ PE_CONNECT_REDIRECT_URI }}"
+      PE_CONNECT_SCOPE: "{{ PE_CONNECT_SCOPE }}"
+      PE_CONNECT_IDENTITY_SERVER_URL: "{{ PE_CONNECT_IDENTITY_SERVER_URL }}"
+      TAG_COMMANDER_SCRIPT_URL: "{{ TAG_COMMANDER_SCRIPT_URL }}"
+      TZ: "Europe/Paris"
     networks:
      - estime
     ports:
