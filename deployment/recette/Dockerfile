@@ -15,4 +15,4 @@ COPY ../../dist/estime /usr/share/nginx/html
 COPY scripts ${APP_DIR}
 RUN chmod +x ${APP_DIR}/*.sh
 
-ENTRYPOINT ${APP_DIR}/startup.sh
+# ENTRYPOINT ${APP_DIR}/startup.sh
