@@ -33,7 +33,6 @@ generate-docker-stack-recette:
   script:
     - cd deployment/recette
     - p2 -t estime-frontend-stack.yml.j2 -o ./dist/estime-frontend-stack.yml
-    - cat ./dist/estime-frontend-stack.yml
   artifacts:
     paths:
       - ./deployment/recette/dist
@@ -48,10 +47,9 @@ build-docker-image-release-candidate:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
-      - cat ./deployment/recette/dist/estime-frontend-stack.yml
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR/deployment/recette --dockerfile $CI_PROJECT_DIR/deployment/release-candidate/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
+      - /kaniko/executor --context $CI_PROJECT_DIR/deployment/recette --dockerfile $CI_PROJECT_DIR/deployment/recette/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
