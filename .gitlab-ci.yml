@@ -69,8 +69,9 @@ deploy_application_recette:
       - ssh-add <(echo "$SSH_PRIVATE_KEY")
       - mkdir -p ~/.ssh
     script:
+      - cat ./deployment/recette/dist/estime-frontend-stack.yml
       # rsync to activate if needed to update estime-frontend-stack.yml
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/release-candidate/docker-swarm/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/recette/dist/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
