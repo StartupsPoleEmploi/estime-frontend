@@ -1,8 +1,9 @@
 export class Environment {
   readonly production: boolean;
   readonly apiEstimeURL: string;
-  readonly oidcClientId: string;
-  readonly oidcRedirectURI: string;
-  readonly oidcScope: string;
-  readonly oidcPoleEmploiIdentityServerURL: string;
+  readonly peconnectClientid: string;
+  readonly peconnectRedirecturi: string;
+  readonly peconnectScope: string;
+  readonly peconnectIdentityServerURL: string;
+  readonly tagCommanderScriptUrl: string;
 }

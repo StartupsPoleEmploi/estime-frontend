@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  estime-frontend:
+    image: estime/estime-frontend
+    environment:
+      - TZ=Europe/Paris
+    ports:
+      - 80:80

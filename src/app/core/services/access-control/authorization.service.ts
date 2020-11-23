@@ -75,10 +75,10 @@ export class AuthorizationService {
   }
 
   private getPoleEmploiIdentityServerConnexionURI():string  {
-    return `${this.environment.oidcPoleEmploiIdentityServerURL}/connexion/oauth2/authorize?` +
+    return `${this.environment.peconnectIdentityServerURL}/connexion/oauth2/authorize?` +
     'realm=%2Findividu&response_type=code' +
     `&client_id=${this.peConnectPayload.clientId}` +
-    `&scope=${this.environment.oidcScope}` +
+    `&scope=${this.environment.peconnectScope}` +
     `&redirect_uri=${this.peConnectPayload.redirectURI}` +
     `&state=${this.peConnectPayload.state}` +
     `&nonce=${this.peConnectPayload.nonce}`
@@ -87,9 +87,9 @@ export class AuthorizationService {
 
   private getPoleEmploiIdentityServerDeconnexionURI():string  {
     const peConnectAuthorization = this.cookiesPeConnectAuthorizationService.getFromCookies();
-    return `${this.environment.oidcPoleEmploiIdentityServerURL}/compte/deconnexion?` +
+    return `${this.environment.peconnectIdentityServerURL}/compte/deconnexion?` +
     `&id_token_hint=${peConnectAuthorization.idToken}` +
-    `&redirect_uri=${this.environment.oidcRedirectURI}signout-callback`
+    `&redirect_uri=${this.environment.peconnectRedirecturi}signout-callback`
     ;
   }
 
@@ -113,9 +113,9 @@ export class AuthorizationService {
 
   private createPeConnectPayload() {
     this.peConnectPayload = new PeConnectPayload();
-    this.peConnectPayload.clientId = this.environment.oidcClientId;
+    this.peConnectPayload.clientId = this.environment.peconnectClientid;
     this.peConnectPayload.nonce = this.generateRandomValue(),
-    this.peConnectPayload.redirectURI = `${this.environment.oidcRedirectURI}signin-callback`;
+    this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}signin-callback`;
     this.peConnectPayload.state = this.generateRandomValue();
 
     this.sessionStorageService.store(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY, this.peConnectPayload);

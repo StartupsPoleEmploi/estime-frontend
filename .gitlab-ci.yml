@@ -1,5 +1,6 @@
 stages:
     - build-application
+    - generate-docker-stack-recette
     - build-docker-image-release-candidate
     - deploy-application-recette
     - build-docker-image-release
@@ -15,13 +16,7 @@ build_application :
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - angular.json
-        - deployment/Dockerfile
-        - deployment/docker-swarm/*
-        - deployment/nginx-conf/*
-        - package.json
         - src/**/*
-        - tsconfig.base.json
     artifacts:
       paths:
         - ./dist
@@ -30,25 +25,37 @@ build_application :
       paths:
         - node_modules/
 
+generate-docker-stack-recette:
+  stage: generate-docker-stack-recette
+  image:
+    # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
+    name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
+  script:
+    - cd deployment/recette
+    - p2 -t estime-frontend-stack.yml.j2 -o ./dist/estime-frontend-stack.yml
+    - cat ./dist/estime-frontend-stack.yml
+  artifacts:
+    paths:
+      - ./deployment/recette/dist
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
+
 build-docker-image-release-candidate:
     stage: build-docker-image-release-candidate
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
+      - cat ./deployment/recette/dist/estime-frontend-stack.yml
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR/deployment/release-candidate --dockerfile $CI_PROJECT_DIR/deployment/release-candidate/Dockerfile --destination $CI_REGISTRY_IMAGE:rc
+      - /kaniko/executor --context $CI_PROJECT_DIR/deployment/recette --dockerfile $CI_PROJECT_DIR/deployment/release-candidate/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - angular.json
-        - deployment/Dockerfile
-        - deployment/docker-swarm/*
-        - deployment/nginx-conf/*
-        - package.json
         - src/**/*
-        - tsconfig.base.json
 
 deploy_application_recette:
     stage: deploy-application-recette
@@ -68,16 +75,7 @@ deploy_application_recette:
       - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/release-candidate/docker-swarm/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
-    rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-      changes:
-        - angular.json
-        - deployment/Dockerfile
-        - deployment/docker-swarm/*
-        - deployment/nginx-conf/*
-        - package.json
-        - src/**/*
-        - tsconfig.base.json
+    when: manual
 
 build-docker-image-release:
     stage: build-docker-image-release
