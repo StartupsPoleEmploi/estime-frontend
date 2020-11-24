@@ -30,6 +30,6 @@ RUN mkdir -p var/run && \
     chown -R nginx:nginx /var/run/nginx.pid
 
 #use non root user nginx
-USER nginx
+#USER nginx
 
-ENTRYPOINT ./startup.sh
+#ENTRYPOINT ./startup.sh
