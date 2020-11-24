@@ -26,8 +26,9 @@ RUN chown nginx:nginx startup.sh && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d
 
-RUN touch /var/run/nginx.pid
-RUN chown -R nginx:nginx /var/run/nginx.pid
+RUN mkdir -p var/run && \
+    touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid
 
 #use non root user nginx
 USER nginx
