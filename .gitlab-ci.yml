@@ -49,7 +49,7 @@ build-docker-image-release-candidate:
     script:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR/docker/recette/docker-image --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
+      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
