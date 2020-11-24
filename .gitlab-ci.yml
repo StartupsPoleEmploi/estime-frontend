@@ -1,9 +1,10 @@
 stages:
     - build-application
     - generate-docker-stack-recette
-    - build-docker-image-release-candidate
+    - build-docker-image-recette
     - deploy-application-recette
-    - build-docker-image-release
+    - generate-docker-stack-production
+    - build-docker-image-production
     - deploy-application-production
 
 build_application :
@@ -41,8 +42,8 @@ generate-docker-stack-recette:
       changes:
         - src/**/*
 
-build-docker-image-release-candidate:
-    stage: build-docker-image-release-candidate
+build-docker-image-recette:
+    stage: build-docker-image-recette
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
@@ -75,15 +76,28 @@ deploy_application_recette:
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
 
-build-docker-image-release:
-    stage: build-docker-image-release
+generate-docker-stack-production:
+  stage: generate-docker-stack-production
+  image:
+    # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
+    name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
+  script:
+    - cd docker/production
+    - p2 -t estime-frontend-stack.yml.j2 -o estime-frontend-stack.yml
+  artifacts:
+    paths:
+      - ./docker/production
+  when: manual
+
+build-docker-image-production:
+    stage: build-docker-image-production
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR/deployment/release --dockerfile $CI_PROJECT_DIR/deployment/release/Dockerfile --destination $CI_REGISTRY_IMAGE:release
+      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/production/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release
     when: manual
 
 deploy_application_production:
@@ -101,7 +115,7 @@ deploy_application_production:
       - mkdir -p ~/.ssh
     script:
       # rsync to activate if needed to update estime-frontend-stack.yml
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/deployment/release/docker-swarm/ $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/scripts/deploy.sh $CI_PROJECT_DIR/docker/production/estime-frontend-stack.yml $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP_PROD "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
