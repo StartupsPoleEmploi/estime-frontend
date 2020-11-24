@@ -20,7 +20,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Docker 
 
-docker build -f ./deployment/local/Dockerfile . -t estime-frontend
+docker build -f ./docker/local/docker-image/Dockerfile . -t estime-frontend
 
 ## Running end-to-end tests
 

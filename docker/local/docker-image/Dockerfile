@@ -7,7 +7,7 @@ RUN apk --no-cache update && \
     tzdata \
     && rm -rf /var/cache/apk/*
 
-#copy conf NGINX
+#copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
 COPY ./docker/local/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 
@@ -28,7 +28,6 @@ RUN mkdir -p /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_
     touch  /tmp/nginx.pid && \
     chown -R nginx:nginx /tmp
 
-#use non root user nginx
 USER nginx
 
 ENTRYPOINT ./startup.sh
