@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 function replace_properties_in_main {
   log 'replace properties in main.js'

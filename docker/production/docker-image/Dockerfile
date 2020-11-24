@@ -3,7 +3,6 @@ FROM nginx:1.16-alpine
 RUN apk --no-cache update && \
     apk --no-cache upgrade && \
     apk --no-cache add \
-    bash  \
     perl \
     tzdata \
     && rm -rf /var/cache/apk/*
@@ -25,9 +24,9 @@ RUN chown nginx:nginx startup.sh && \
     chown -R nginx:nginx /var/cache/nginx && \
     chown -R nginx:nginx /var/log/nginx && \
     chown -R nginx:nginx /etc/nginx/conf.d
-RUN mkdir -p var/run && \
-    touch /var/run/nginx.pid && \
-    chown -R nginx:nginx /var/run/nginx.pid
+RUN mkdir -p /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp && \
+    touch  /tmp/nginx.pid && \
+    chown -R nginx:nginx /tmp
 
 #use non root user nginx
 USER nginx
