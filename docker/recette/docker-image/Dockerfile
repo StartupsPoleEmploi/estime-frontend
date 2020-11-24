@@ -32,4 +32,4 @@ RUN mkdir -p var/run && \
 #use non root user nginx
 USER nginx
 
-ENTRYPOINT ./startup.sh
+#ENTRYPOINT ./startup.sh
