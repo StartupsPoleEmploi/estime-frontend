@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
+import { SessionExpiredService } from '@app/core/services/access-control/session-expired.service';
 
 @Component({
   selector: 'app-signout-callback',
@@ -8,12 +9,18 @@ import { AuthorizationService } from '@app/core/services/access-control/authoriz
 
 export class SignoutRedirectCallbackComponent implements OnInit {
   constructor(
-    private authorizationService: AuthorizationService
+    private authorizationService: AuthorizationService,
+    private sessionExpiredService: SessionExpiredService
   ) {
 
   }
 
   ngOnInit() {
-    this.authorizationService.completeLogout();
+
+    if(this.sessionExpiredService.isBackAfterSessionExpired()) {
+      this.authorizationService.login();
+    } else {
+      this.authorizationService.completeLogout();
+    }
   }
 }

@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { RoutesEnum } from "@enumerations/routes.enum";
+import { SessionExpiredService } from "@app/core/services/access-control/session-expired.service";
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IsLoggedInGuard implements CanActivate {
 
+
+
   constructor(
     private authorizationService: AuthorizationService,
+    private deConnecteService: DeConnecteService,
+    private sessionExpiredService: SessionExpiredService,
     private router: Router
   ) {
   }
@@ -18,9 +23,13 @@ export class IsLoggedInGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
       const isLoggedIn = this.authorizationService.isLoggedIn();
       if(!isLoggedIn) {
-        this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+        const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+        if(demandeurConnecte){
+          this.sessionExpiredService.openModal(route);
+        } else {
+          this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+        }
       }
       return isLoggedIn;
   }
-
 }

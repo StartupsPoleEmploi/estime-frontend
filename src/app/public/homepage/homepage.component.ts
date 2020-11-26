@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
-import { RoutesEnum } from '@enumerations/routes.enum';
 import { Router } from '@angular/router';
+import { MessageErreur } from '@app/commun/models/message-erreur';
+import { Temoignage } from '@app/commun/models/temoignage';
+import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
 import { EtapeSimulationService } from '@app/core/services/utile/etape-simulation.service';
 import { QuestionService } from "@app/core/services/utile/question.service";
-import { Question } from '@models/question';
-import { TemoignageService } from "@app/core/services/utile/temoignage.service";
-import { Temoignage } from '@app/commun/models/temoignage';
-import { Observable, Subscription, fromEvent } from 'rxjs';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { MessageErreur } from '@app/commun/models/message-erreur';
+import { TemoignageService } from "@app/core/services/utile/temoignage.service";
 import { CodesMessagesErreurEnum } from "@enumerations/codes-messages-erreur.enum";
 import { NiveauMessagesErreurEnum } from "@enumerations/niveaux-message-erreur";
+import { RoutesEnum } from '@enumerations/routes.enum';
+import { Question } from '@models/question';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-homepage',

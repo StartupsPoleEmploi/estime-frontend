@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="onClickButtonClosePopup()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    Votre session a expiré, vous devez vous reconnecter pour continuer votre simulation.
+</div>
+<div class="modal-footer">
+    <button
+        type="button"
+        class="btn btn-primary-style-2 button-se-connecter-pe"
+        (click)="onClickButtonSeConnecterAvecPE()">
+        <div>
+            <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
+        </div>
+        <div class="text-button">Se connecter avec pôle emploi</div>
+    </button>
+</div>

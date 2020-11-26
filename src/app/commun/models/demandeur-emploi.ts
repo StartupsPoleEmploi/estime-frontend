@@ -5,6 +5,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { SituationFamiliale } from "@models/situation-familiale";
 
 export class DemandeurEmploi {
+  idPoleEmploi: string;
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
   futurTravail: FuturTravail;
   informationsPersonnelles: InformationsPersonnelles;

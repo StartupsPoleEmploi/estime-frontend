@@ -32,7 +32,7 @@ export class ResultatMaSimulationComponent implements OnInit {
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
+    public deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     private router: Router,
     private screenService: ScreenService
   ) {

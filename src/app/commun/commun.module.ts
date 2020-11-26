@@ -10,6 +10,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalSessionExpiredComponent } from './components/modal-session-expired/modal-session-expired.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,13 @@ import { HeaderComponent } from './components/header/header.component';
     PageLoadingComponent,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
+    ModalSessionExpiredComponent,
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
-    CommonModule
+    CommonModule,
+    ModalModule.forRoot()
   ],
   exports: [
     AutofocusDirective,

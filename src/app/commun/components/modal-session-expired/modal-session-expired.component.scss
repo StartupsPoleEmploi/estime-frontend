@@ -1,0 +1,39 @@
+@import "../../../../assets/scss/variables";
+
+
+
+.modal-base {
+  background-color: $color-blue-2;
+  color: $color-white-1;
+}
+
+.modal-header {
+  @extend .modal-base;
+  border-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  button {
+    opacity: unset !important;
+    span {
+      font-size: 1.5rem;
+      color: $color-white-1;
+    }
+    &:focus {
+      outline: unset;
+    }
+  }
+}
+
+.modal-body {
+  @extend .modal-base;
+  font-weight: 500;
+  text-align: center;
+}
+
+.modal-footer {
+  button {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+

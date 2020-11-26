@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { SimulationAidesSociales } from "@models/simulation-aides-sociales";
 import { SessionStorageService } from "ngx-webstorage";
 import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
+import { DeConnecteService } from './de-connecte.service';
+import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { NumberUtileService } from '../utile/number-util.service';
+import { AllocationsCAF } from '@app/commun/models/allocations-caf';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSimulationAidesSocialesService {
@@ -9,6 +13,8 @@ export class DeConnecteSimulationAidesSocialesService {
   private simulationAidesSociales: SimulationAidesSociales;
 
   constructor(
+    private deConnecteService: DeConnecteService,
+    private numberUtileService: NumberUtileService,
     private sessionStorageService: SessionStorageService
   ) {
 
@@ -24,6 +30,34 @@ export class DeConnecteSimulationAidesSocialesService {
   public setSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): void {
     this.simulationAidesSociales = simulationAidesSociales;
     this.saveSimulationAidesSocialesInSessionStorage();
+  }
+
+  public calculerMontantTotalRessourcesMois(simulation: SimulationMensuelle): number {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
+
+    const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
+    const montantAllocationsCAF = this.calculerMontantAllocationsCAF(ressourcesFinancieres.allocationsCAF);
+    const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
+
+    return salaireFuturTravail + montantAllocationsCAF + montantTotalAidesMoisSimule;
+  }
+
+  private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
+    let montant = 0;
+    if (simulation.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
+        if (aide) {
+          montant += this.numberUtileService.getMontantSafe(aide.montant);
+        }
+      }
+    }
+    return montant;
+  }
+
+  private calculerMontantAllocationsCAF(allocationsCAF: AllocationsCAF) {
+    const montant = this.numberUtileService.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH);
+    return montant
   }
 
   private saveSimulationAidesSocialesInSessionStorage(): void {

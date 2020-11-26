@@ -15,12 +15,6 @@ export class DeConnecteRessourcesFinancieresService {
 
   }
 
-  getMontantTotalVosRessources(): number {
-    let montant = this.getMontantRevenusVosRessources();
-    montant += this.getMontantAidesVosRessources();
-    return montant;
-  }
-
   public getMontantRevenusVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();

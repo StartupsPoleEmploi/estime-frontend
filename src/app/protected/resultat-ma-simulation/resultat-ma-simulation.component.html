@@ -15,7 +15,7 @@
       <div id="card-revenus-actuels" class="col-12 col-md-6">
         <div class="card">
           <h3>Revenus et aides</h3>
-          <span>{{deConnecteRessourcesFinancieresService.getMontantTotalVosRessources()}} €</span>
+          <span>{{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €</span>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-4 p-0 mt-auto mb-auto ml-auto mr-0 col-md-12">
                             <span>
-                                {{deConnecteService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
+                                {{deConnecteSimulationAidesSocialesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                             </span>
                         </div>
                         <div *ngIf="isSmallScreen" class="col-1 p-0  ml-auto mr-1">

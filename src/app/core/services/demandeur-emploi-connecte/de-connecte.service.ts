@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
+import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
+import { NumberUtileService } from "@app/core/services/utile/number-util.service";
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { PersonneDTO } from '@models/dto/personne-dto';
 import { FuturTravail } from '@models/futur-travail';
@@ -10,11 +12,6 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageService } from "ngx-webstorage";
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
-import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
-import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
-import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
 
 
 @Injectable({ providedIn: 'root' })
@@ -29,17 +26,6 @@ export class DeConnecteService {
     private sessionStorageService: SessionStorageService
   ) {
 
-  }
-
-  public calculerMontantTotalRessourcesMois(simulation: SimulationMensuelle): number {
-    const ressourcesFinancieres = this.demandeurEmploiConnecte.ressourcesFinancieres;
-
-    const salaireFuturTravail = this.numberUtileService.getMontantSafe(this.demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
-    const montantAllocationsPoleEmploi = this.calculerMontantAllocationsPoleEmploi(ressourcesFinancieres.allocationsPoleEmploi);
-    const montantAllocationsCAF = this.calculerMontantAllocationsCAF(ressourcesFinancieres.allocationsCAF);
-    const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
-
-    return salaireFuturTravail + montantAllocationsPoleEmploi + montantAllocationsCAF + montantTotalAidesMoisSimule;
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
@@ -211,32 +197,6 @@ export class DeConnecteService {
   }
 
   /************** private methods *********************************************/
-
-  private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
-    let montant = 0;
-    if (simulation.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
-        if (aide) {
-          montant += this.numberUtileService.getMontantSafe(aide.montant);
-        }
-      }
-    }
-    return montant;
-  }
-
-  private calculerMontantAllocationsPoleEmploi(allocationsPoleEmploi: AllocationsPoleEmploi) {
-    const montant = this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetARE)
-      + this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetASS);
-    return montant
-  }
-
-  private calculerMontantAllocationsCAF(allocationsCAF: AllocationsCAF) {
-    const montant = this.numberUtileService.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH)
-      + this.numberUtileService.getMontantSafe(allocationsCAF.allocationMensuelleNetRSA)
-      + this.numberUtileService.getMontantSafe(allocationsCAF.allocationsFamilialesMensuellesNetFoyer)
-      + this.numberUtileService.getMontantSafe(allocationsCAF.allocationsLogementMensuellesNetFoyer);
-    return montant
-  }
 
   private saveDemandeurEmploiConnecteInSessionStorage(): void {
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);

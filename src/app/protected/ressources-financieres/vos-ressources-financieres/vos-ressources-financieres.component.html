@@ -239,44 +239,6 @@
             </div>
         </div>
         <div
-            class="form-group">
-            <div class="row mb-2">
-                <label
-                    class="label"
-                    for="allocationMensuelleNetAAH">
-                    * Allocation ASS
-                </label>
-            </div>
-            <div class="row">
-                <input
-                    name="allocationMensuelleNetASS"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    min="0"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS "
-                    required
-                    inputmode="decimal"
-                    #allocationMensuelleNetASS="ngModel">
-                <span class="text-side-input">€</span>
-                <span class="text-2-side-input text-2-side-input-style-inline">du mois dernier</span>
-            </div>
-            <div class="row">
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
-        </div>
-        <div
             class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()">
             <div class="row mb-2">
