@@ -35,6 +35,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
   }
 
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
+    this.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
     if(form.valid) {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
