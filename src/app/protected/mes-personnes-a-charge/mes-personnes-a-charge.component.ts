@@ -103,4 +103,15 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.personnesACharge = new Array<Personne>();
     }
   }
+
+  /******* */
+
+  public handleKeyUpOnButtonAjouterPersonne(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonAjouterPersonne();
+    }
+  }
+
+
+
 }

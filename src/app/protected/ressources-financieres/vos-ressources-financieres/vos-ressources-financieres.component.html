@@ -7,45 +7,6 @@
             <div class="row mb-2">
                 <label
                     class="label"
-                    for="beneficiaireASSPercu">
-                    * Je suis bénéficiare de l'ASS (Allocation de Solidarité Spécifique)
-                </label>
-            </div>
-            <div class="row">
-                <div class="custom-control custom-radio">
-                    <input
-                        id="beneficiaireASSPercuOui"
-                        name="beneficiaireASSPercu"
-                        type="radio"
-                        class="custom-control-input"
-                        [(ngModel)]="deConnecteService.getDemandeurEmploiConnecte().beneficiaireAidesSociales.beneficiaireASS"
-                        [value]="true">
-                    <label
-                        class="custom-control-label"
-                        for="beneficiaireASSPercuOui">
-                        oui
-                    </label>
-                </div>
-                <div class="custom-control custom-radio  ml-2">
-                    <input
-                        id="beneficiaireASSPercuNon"
-                        name="beneficiaireASSPercu"
-                        type="radio"
-                        class="custom-control-input"
-                        [value]="false"
-                        disabled>
-                    <label
-                        class="custom-control-label"
-                        for="beneficiaireASSPercuNon">
-                        non
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row mb-2">
-                <label
-                    class="label"
                     for="allocationJournaliereNetASS">
                     * Montant net de votre allocation journalière
                 </label>
@@ -166,14 +127,15 @@
                 <div class="custom-control custom-radio">
                     <input
                         id="hasCumuleAssEtSalaireOui"
-                        name="hasCumuleAssEtSalaire"
+                        name="hasCumuleAssEtSalaireOui"
                         type="radio"
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
                         (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
                         required
                         [value]="true"
-                        #hasCumuleAssEtSalaire="ngModel">
+                        #hasCumuleAssEtSalaire="ngModel"
+                        (keyup)="handleKeyUpOnButtonHasCumuleAssEtSalaire($event, true)">
                     <label
                         class="custom-control-label"
                         for="hasCumuleAssEtSalaireOui">
@@ -183,14 +145,15 @@
                 <div class="custom-control custom-radio ml-2">
                     <input
                         id="hasCumuleAssEtSalaireNon"
-                        name="hasCumuleAssEtSalaire"
+                        name="hasCumuleAssEtSalaireNon"
                         type="radio"
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
                         [value]="false"
                         (click)="onClickRadioButtonHasCumuleAssEtSalaire()"
                         required
-                        #hasCumuleAssEtSalaire="ngModel">
+                        #hasCumuleAssEtSalaire="ngModel"
+                        (keyup)="handleKeyUpOnButtonHasCumuleAssEtSalaire($event, false)">
                     <label
                         class="custom-control-label"
                         for="hasCumuleAssEtSalaireNon">

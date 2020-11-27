@@ -74,6 +74,35 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     this.unsetRessourcesAllocations();
   }
 
+  public handleKeyUpOnButtonSituation(e: any, situationConjoint: string) {
+    if (e.keyCode === 13) {
+      if(situationConjoint === this.situationPersonneEnum.AAH) {
+        this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH;
+        this.onClickCheckBoxHasAAH();
+      }
+      if(situationConjoint === this.situationPersonneEnum.SALARIE) {
+        this.nouvellePersonneACharge.informationsPersonnelles.salarie = !this.nouvellePersonneACharge.informationsPersonnelles.salarie;
+        this.onClickCheckBoxIsSalarie();
+      }
+      if(situationConjoint === this.situationPersonneEnum.RSA) {
+        this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA;
+        this.onClickCheckBoxHasRSA();
+      }
+      if(situationConjoint === this.situationPersonneEnum.ARE) {
+        this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE;
+        this.onClickCheckBoxHasARE();
+      }
+      if(situationConjoint === this.situationPersonneEnum.ASS) {
+        this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS;
+        this.onClickCheckBoxHasASS();
+      }
+      if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
+        this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = !this.nouvellePersonneACharge.informationsPersonnelles.sansRessource;
+        this.onClickCheckBoxIsSansRessource();
+      }
+    }
+  }
+
   private unsetRessourcesAllocations(): void {
     this.unsetARE();
     this.unsetASS();

@@ -1,7 +1,11 @@
 @import "../../../assets/scss/variables";
 
-.card-personne {
+.card-personne-list {
+  border: 1px solid black;
   min-height: 103px;
+  img {
+    margin-left: 10px;
+  }
   .card-body {
     line-height: 1;
     max-width: 205px;
@@ -46,24 +50,39 @@
   }
 }
 
-.card-personne-list {
-  border: 1px solid black;
-  img {
-    margin-left: 10px;
+.button-card-add-personne {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  background-color: unset;
+  padding: 0;
+  max-height: 105px;
+  @media #{$medium-device}, #{$large-device} {
+    margin-left: 15px;
   }
-}
-
-
-.card-add-personne {
-  cursor: pointer;
-  .card-body {
-    margin-bottom: 0.2rem;
-    span {
-      color: $color-blue-1;
+  &:hover, &:focus {
+    border-color: $color-black-1;
+    box-shadow: -1px 1px 6px 2px $color-black-3;
+  }
+  .card-add-personne {
+    min-height: 103px;
+    border: 0;
+    margin-left: 0;
+    margin-right: 0;
+    cursor: pointer;
+    .card-body {
+      line-height: 1;
+      max-width: 205px;
+      margin: 0;
+      padding: 0.8rem;
+      cursor: pointer;
+      margin-bottom: 0.2rem;
+      span {
+        color: $color-blue-1;
+      }
     }
-  }
-  img {
-    width: 1.7rem;
-    margin-left: 14px;
+    img {
+      width: 1.7rem;
+      margin-left: 14px;
+    }
   }
 }

@@ -9,6 +9,9 @@
     #div-info-simulation {
       color: $color-blue-3;
       font-size: 0.8rem;
+      border: 1px solid $color-blue-3;
+      border-radius: 4px;
+      padding: 8px;
       @media #{$medium-device}, #{$large-device} {
         font-size: 1rem;
       }
@@ -17,6 +20,9 @@
         line-height: 0.9;
         span {
           font-size: 0.7rem;
+          @media #{$medium-device}, #{$large-device} {
+            font-size: 0.8rem;
+          }
           color: $color-blue-3;
         }
       }

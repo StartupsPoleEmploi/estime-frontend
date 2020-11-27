@@ -63,6 +63,13 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
+  public handleKeyUpOnButtonHasCumuleAssEtSalaire(event: any, value: boolean) {
+    if (event.keyCode === 13) {
+      this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire = value;
+      this.onClickRadioButtonHasCumuleAssEtSalaire();
+    }
+  }
+
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
     this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormat(this.dateDernierOuvertureDroitASS);
     if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {

@@ -66,4 +66,13 @@ export class MonFuturTravailComponent implements OnInit {
       this.futurTravail.nombreMoisContratCDD = null;
     }
   }
+
+
+  /************ gestion évènements press enter ************************/
+
+  public handleKeyUpOnButtonTypeContrat(event: any, typeContrat: string) {
+    if (event.keyCode === 13) {
+      this.futurTravail.typeContrat = typeContrat;
+    }
+  }
 }

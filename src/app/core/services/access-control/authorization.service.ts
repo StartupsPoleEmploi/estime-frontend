@@ -40,7 +40,7 @@ export class AuthorizationService {
   }
 
   public loginAfterSessionExpired(): void {
-    this.killSessionPeConnectExpiredSoon();
+    this.login();
   }
 
   public completeLogin(): Promise<void> {
@@ -154,12 +154,5 @@ export class AuthorizationService {
       this.individuConnected = this.cookiesIndividuService.getFromCookies();
     }
     return this.individuConnected;
-  }
-
-  private killSessionPeConnectExpiredSoon(): void {
-    const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI();
-    if(poleEmploiIdentityServerDeconnexionURI !== null) {
-      this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
-    }
   }
 }

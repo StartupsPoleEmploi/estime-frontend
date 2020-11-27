@@ -1,5 +1,5 @@
 export enum SituationPersonneEnum {
-  AAH = "l'AAH (Allocation Adulte Handicapé)",
+  AAH = "l'AAH",
   ASS ="l'ASS",
   ARE = "l'ARE",
   BENEFICIAIRE_REVENUS_IMMOBILIER = "des revenus immobilier",

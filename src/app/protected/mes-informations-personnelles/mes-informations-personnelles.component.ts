@@ -62,7 +62,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
   }
 
-  public onClickCheckBoxSituationFamiliale(): void {
+    public onClickCheckBoxSituationFamiliale(): void {
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
   }
 
@@ -99,6 +99,62 @@ export class MesInformationsPersonnellesComponent implements OnInit {
       this.informationsPersonnelles.titreSejourEnFranceValide = null;
     }
   }
+
+  /************ gestion évènements press enter ************************/
+
+  public handleKeyUpOnButtonSituationFamiliale(event: any, value: boolean) {
+    if (event.keyCode === 13) {
+      this.situationFamiliale.isEnCouple = value;
+      this.onClickCheckBoxSituationFamiliale();
+    }
+  }
+
+  public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string) {
+    if (event.keyCode === 13) {
+      if(situationPersonne === this.situationPersonneEnum.AAH) {
+        this.beneficiaireAidesSociales.beneficiaireAAH = !this.beneficiaireAidesSociales.beneficiaireAAH;
+        this.onClickCheckBoxHasAAH();
+      }
+      if(situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
+        this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
+        this.onClickCheckBoxIsCreateurEntreprise();
+      }
+      if(situationPersonne === this.situationPersonneEnum.CREATEUR_ENTREPRISE) {
+        this.informationsPersonnelles.createurEntreprise = !this.informationsPersonnelles.createurEntreprise;
+        this.onClickCheckBoxIsCreateurEntreprise();
+      }
+    }
+  }
+
+  public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string) {
+    if (e.keyCode === 13) {
+      if(situationConjoint === this.situationPersonneEnum.AAH) {
+        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH;
+        this.onClickCheckBoxConjointHasAAH();
+      }
+      if(situationConjoint === this.situationPersonneEnum.SALARIE) {
+        this.situationFamiliale.conjoint.informationsPersonnelles.salarie = !this.situationFamiliale.conjoint.informationsPersonnelles.salarie;
+        this.onClickCheckBoxConjointIsSalarie();
+      }
+      if(situationConjoint === this.situationPersonneEnum.RSA) {
+        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA;
+        this.onClickCheckBoxConjointHasRSA();
+      }
+      if(situationConjoint === this.situationPersonneEnum.ARE) {
+        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE;
+        this.onClickCheckBoxConjointHasARE();
+      }
+      if(situationConjoint === this.situationPersonneEnum.ASS) {
+        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS;
+        this.onClickCheckBoxConjointHasASS();
+      }
+      if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
+        this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = !this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource;
+        this.onClickCheckBoxConjointIsSansRessource();
+      }
+    }
+  }
+
 
   /************ est en couple, gestion situation conjoint *******************************/
 

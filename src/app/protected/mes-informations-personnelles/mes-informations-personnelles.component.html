@@ -1,422 +1,450 @@
 <div class="container-fluid form-container-fluid">
-  <h1 class="h1-style-2">2. Ma situation</h1>
-  <div class="text-under-h1">
-      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
-  </div>
-  <div class="card card-body card-form">
-      <form
-          (ngSubmit)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
-          [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
-          #informationsPersonnellesForm="ngForm">
-          <div class="form-group">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="codePostal">
-                      * Votre code postal
-                  </label>
-              </div>
-              <div class="row">
-                  <input
-                      id="codePostal"
-                      name="codePostal"
-                      type="text"
-                      (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                      maxlength="5"
-                      minlength="5"
-                      class="form-control"
-                      placeholder="ex : 75001"
-                      [(ngModel)]="informationsPersonnelles.codePostal"
-                      required
-                      #codePostal="ngModel"
-                      inputmode="numeric"
-                      ngAutofocus>
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
-                  {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
-              </span>
-          </div>
-          <div class="form-group">
-              <div class="row  mb-2">
-                  <label
-                      class="label"
-                      for="dateNaissance">
-                      * Votre date de naissance
-                  </label>
-              </div>
-              <div class="form-group">
-                  <div class="row btn-group-input-date">
-                      <input
-                          name="jourDateNaissance"
-                          (focus)="onFocusDateNaissance()"
-                          class="form-control jour-input"
-                          (change)="onChangeOrKeyUpDateNaissanceJour($event)"
-                          maxlength="2"
-                          type="text"
-                          min="0"
-                          (keyup)="onChangeOrKeyUpDateNaissanceJour($event)"
-                          (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                          placeholder="JJ"
-                          [(ngModel)]="dateNaissance.jour"
-                          required
-                          inputmode="numeric"
-                          #jourDateNaissance="ngModel">
-                      <input
-                          name="moisDateNaissance"
-                          (focus)="onFocusDateNaissance()"
-                          class="form-control mois-input"
-                          (change)="onChangeOrKeyUpDateNaissanceMois($event)"
-                          maxlength="2"
-                          type="text"
-                          min="0"
-                          (keyup)="onChangeOrKeyUpDateNaissanceMois($event)"
-                          (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                          placeholder="MM"
-                          [(ngModel)]="dateNaissance.mois"
-                          required
-                          inputmode="numeric"
-                          #moisDateNaissance="ngModel">
-                      <input
-                          name="anneeDateNaissance"
-                          (focus)="onFocusDateNaissance()"
-                          class="form-control annee-input"
-                          maxlength="4"
-                          type="text"
-                          min="1900"
-                          (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                          placeholder="AAAA"
-                          [(ngModel)]="dateNaissance.annee"
-                          required
-                          inputmode="numeric"
-                          #anneeDateNaissance="ngModel">
-                  </div>
-                  <span
-                      class="row error-input-message"
-                      *ngIf="(isInformationsPersonnellesFormSubmitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="row error-input-message"
-                      *ngIf="(isInformationsPersonnellesFormSubmitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="row error-input-message"
-                      *ngIf="(isInformationsPersonnellesFormSubmitted || anneeDateNaissance.touched) && anneeDateNaissance.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="row error-input-message"
-                      *ngIf="isInformationsPersonnellesFormSubmitted  && dateNaissance.messageErreurFormat">
-                      {{dateNaissance.messageErreurFormat}}
-                  </span>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="nationalite">
-                      * Votre nationalité
-                  </label>
-              </div>
-              <div class="row">
-                  <select
-                      id="nationalite"
-                      name="nationalite"
-                      [(ngModel)]="informationsPersonnelles.nationalite"
-                      class="form-control"
-                      data-width="auto"
-                      (ngModelChange)="unsetTitreSejourEnFranceValide($event)"
-                      required
-                      #nationalite="ngModel">
-                      <option [value]="null" disabled>Sélectionner</option>
-                      <option
-                          *ngFor="let nationalite of nationaliteSelectOptions"
-                          [value]="nationalite.label">
-                          {{ nationalite.label }}
-                      </option>
-                  </select>
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-          </div>
-          <div
-              class="form-group"
-              *ngIf="informationsPersonnelles.nationalite == 'autre'">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="titreSejourValide">
-                      Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
-                  </label>
-              </div>
-              <div class="row">
-                  <div class="custom-control custom-radio">
-                      <input
-                          id="titreSejourValideTrue"
-                          name="titreSejourValide"
-                          type="radio"
-                          class="custom-control-input"
-                          [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
-                          [value]="true"
-                          required
-                          #titreSejourValide="ngModel">
-                      <label
-                          class="custom-control-label"
-                          for="titreSejourValideTrue">
-                          oui
-                      </label>
-                  </div>
-                  <div class="custom-control custom-radio ml-2">
-                      <input
-                          id="titreSejourValideFalse"
-                          name="titreSejourValide"
-                          type="radio"
-                          class="custom-control-input"
-                          [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
-                          [value]="false"
-                          required
-                          #titreSejourValide="ngModel">
-                      <label
-                          class="custom-control-label"
-                          for="titreSejourValideFalse">
-                          non
-                      </label>
-                  </div>
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="(isInformationsPersonnellesFormSubmitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-          </div>
-          <div class="form-group">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="situationsExceptionnelles">
-                      Vous percevez
-                      <img class="interrogation-icon"
-                    src="./assets/images/question.svg"
-                    [popover]="popoverSituationDemandeurTemplate"
-                    #popoverSituationDemandeur="bs-popover"
-                    placement="right">
-                  </label>
-              </div>
-              <div class="row">
-                  <label
-                      name="beneficiaireAAH"
-                      class="btn radio-button-style-1"
-                      [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      #beneficiaireAAH="ngModel"
-                      (click)="onClickCheckBoxHasAAH()">
-                      {{situationPersonneEnum.AAH}}
-                  </label>
-                  <label
-                      id="btn-is-createur-entreprise"
-                      name="createurEntreprise"
-                      class="btn radio-button-style-1 mt-perso-sm ml-perso-lm"
-                      [(ngModel)]="informationsPersonnelles.createurEntreprise"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      #createurEntreprise="ngModel"
-                      (click)="onClickCheckBoxIsCreateurEntreprise()">
-                      {{situationPersonneEnum.CREATEUR_ENTREPRISE}}
-                  </label>
-                  <label
-                      id="btn-has-revenus-immobilier"
-                      name="hasRevenusImmobilier"
-                      class="btn radio-button-style-1 mt-perso-sm ml-perso-lm"
-                      [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      #hasRevenusImmobilier="ngModel"
-                      (click)="onClickCheckBoxHasRevenusImmobilier()">
-                      {{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}
-                  </label>
-              </div>
-          </div>
-          <div class="form-group">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="situationFamilialeDemandeur">
-                      * Votre situation familiale
-                  </label>
-              </div>
-              <div class="row">
-                  <label
-                      #situationFamilialeDemandeur="ngModel"
-                      (click)="onClickCheckBoxSituationFamiliale()"
-                      name="situationFamilialeDemandeur"
-                      class="btn radio-button-style-1"
-                      [btnRadio]="false"
-                      tabindex="0"
-                      role="button"
-                      required
-                      [(ngModel)]="situationFamiliale.isEnCouple">
-                      {{situationsFamilialesEnum.SEULE}}
-                  </label>
-                  <label
-                      #situationFamilialeDemandeur="ngModel"
-                      (click)="onClickCheckBoxSituationFamiliale()"
-                      name="situationFamilialeDemandeur"
-                      class="btn radio-button-style-1 ml-1"
-                      [btnRadio]="true"
-                      tabindex="0"
-                      role="button"
-                      required
-                      [(ngModel)]="situationFamiliale.isEnCouple">
-                      {{situationsFamilialesEnum.EN_COUPLE}}
-                  </label>
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-          </div>
-          <div
-              class="form-group"
-              *ngIf="situationFamiliale.isEnCouple === true">
-              <div class="row mb-2">
-                  <label
-                      class="label"
-                      for="situationConjoint">
-                      * Votre conjoint(e) perçoit
-                  </label>
-              </div>
-              <div class="row">
-                  <label
-                      #conjointHasAAH="ngModel"
-                      name="conjointHasAAH"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH"
-                      (click)="onClickCheckBoxConjointHasAAH()">
-                      {{situationPersonneEnum.AAH}}
-                  </label>
-                  <label
-                      #conjointIsSalarie="ngModel"
-                      name="conjointIsSalarie"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
-                      (click)="onClickCheckBoxConjointIsSalarie()">
-                      {{situationPersonneEnum.SALARIE}}
-                  </label>
-                  <label
-                      #conjointHasRSA="ngModel"
-                      name="conjointHasRSA"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA"
-                      (click)="onClickCheckBoxConjointHasRSA()">
-                      {{situationPersonneEnum.RSA}}
-                  </label>
-                  <label
-                      #conjointHasARE="ngModel"
-                      name="conjointHasARE"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE"
-                      (click)="onClickCheckBoxConjointHasARE()">
-                      {{situationPersonneEnum.ARE}}
-                  </label>
-                  <label
-                      #conjointHasASS="ngModel"
-                      name="conjointHasASS"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS"
-                      (click)="onClickCheckBoxConjointHasASS()">
-                      {{situationPersonneEnum.ASS}}
-                  </label>
-                  <label
-                      #conjointIsSansRessource="ngModel"
-                      name="conjointIsSansRessource"
-                      class="btn radio-button-style-1"
-                      btnCheckbox
-                      tabindex="0"
-                      role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
-                      (click)="onClickCheckBoxConjointIsSansRessource()">
-                      {{situationPersonneEnum.SANS_RESSOURCE}}
-                  </label>
-              </div>
-              <span
-                  class="row error-input-message"
-                  *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
-                  {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-              </span>
-          </div>
-          <div class="div-buttons-form row">
-              <button
-                  class="btn btn-primary-style-0"
-                  (click)="onClickButtonRetour()">
-                  <div>
-                      <img src="./assets/images/return-arrow.svg">
-                  </div>
-                  <div class="text-button">Retour</div>
-              </button>
-              <button
-                  class="btn btn-primary-style-3"
-                  type="submit">
-                  <div class="text-button">Suivant</div>
-                  <div>
-                      <img src="./assets/images/icon-bt-primaire.svg">
-                  </div>
-              </button>
-          </div>
-      </form>
-  </div>
+    <h1 class="h1-style-2">2. Ma situation</h1>
+    <div class="text-under-h1">
+        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+    </div>
+    <div class="card card-body card-form">
+        <form
+            (ngSubmit)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
+            [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
+            #informationsPersonnellesForm="ngForm">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="codePostal">
+                        * Votre code postal
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        id="codePostal"
+                        name="codePostal"
+                        type="text"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                        maxlength="5"
+                        minlength="5"
+                        class="form-control"
+                        placeholder="ex : 75001"
+                        [(ngModel)]="informationsPersonnelles.codePostal"
+                        required
+                        #codePostal="ngModel"
+                        inputmode="numeric"
+                        ngAutofocus>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
+                    {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
+                </span>
+            </div>
+            <div class="form-group">
+                <div class="row  mb-2">
+                    <label
+                        class="label"
+                        for="dateNaissance">
+                        * Votre date de naissance
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="row btn-group-input-date">
+                        <input
+                            name="jourDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control jour-input"
+                            (change)="onChangeOrKeyUpDateNaissanceJour($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissanceJour($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="JJ"
+                            [(ngModel)]="dateNaissance.jour"
+                            required
+                            inputmode="numeric"
+                            #jourDateNaissance="ngModel">
+                        <input
+                            name="moisDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control mois-input"
+                            (change)="onChangeOrKeyUpDateNaissanceMois($event)"
+                            maxlength="2"
+                            type="text"
+                            min="0"
+                            (keyup)="onChangeOrKeyUpDateNaissanceMois($event)"
+                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="MM"
+                            [(ngModel)]="dateNaissance.mois"
+                            required
+                            inputmode="numeric"
+                            #moisDateNaissance="ngModel">
+                        <input
+                            name="anneeDateNaissance"
+                            (focus)="onFocusDateNaissance()"
+                            class="form-control annee-input"
+                            maxlength="4"
+                            type="text"
+                            min="1900"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            placeholder="AAAA"
+                            [(ngModel)]="dateNaissance.annee"
+                            required
+                            inputmode="numeric"
+                            #anneeDateNaissance="ngModel">
+                    </div>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isInformationsPersonnellesFormSubmitted || anneeDateNaissance.touched) && anneeDateNaissance.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="isInformationsPersonnellesFormSubmitted  && dateNaissance.messageErreurFormat">
+                        {{dateNaissance.messageErreurFormat}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="nationalite">
+                        * Votre nationalité
+                    </label>
+                </div>
+                <div class="row">
+                    <select
+                        id="nationalite"
+                        name="nationalite"
+                        [(ngModel)]="informationsPersonnelles.nationalite"
+                        class="form-control"
+                        data-width="auto"
+                        (ngModelChange)="unsetTitreSejourEnFranceValide($event)"
+                        required
+                        #nationalite="ngModel">
+                        <option
+                            [value]="null"
+                            disabled>
+                            Sélectionner
+                        </option>
+                        <option
+                            *ngFor="let nationalite of nationaliteSelectOptions"
+                            [value]="nationalite.label">
+                            {{ nationalite.label }}
+                        </option>
+                    </select>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="informationsPersonnelles.nationalite == 'autre'">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="titreSejourValide">
+                        Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="custom-control custom-radio">
+                        <input
+                            id="titreSejourValideTrue"
+                            name="titreSejourValide"
+                            type="radio"
+                            class="custom-control-input"
+                            [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
+                            [value]="true"
+                            required
+                            #titreSejourValide="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="titreSejourValideTrue">
+                            oui
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio ml-2">
+                        <input
+                            id="titreSejourValideFalse"
+                            name="titreSejourValide"
+                            type="radio"
+                            class="custom-control-input"
+                            [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
+                            [value]="false"
+                            required
+                            #titreSejourValide="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="titreSejourValideFalse">
+                            non
+                        </label>
+                    </div>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationsExceptionnelles">
+                        Vous percevez
+                        <img
+                            class="interrogation-icon"
+                            src="./assets/images/question.svg"
+                            [popover]="popoverSituationDemandeurTemplate"
+                            #popoverSituationDemandeur="bs-popover"
+                            placement="right">
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        name="beneficiaireASS"
+                        class="btn radio-button-style-1"
+                        [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #beneficiaireAAH="ngModel"
+                        disabled>
+                        {{situationPersonneEnum.ASS}}
+                    </label>
+                    <label
+                        name="beneficiaireAAH"
+                        class="btn radio-button-style-1"
+                        [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #beneficiaireAAH="ngModel"
+                        (click)="onClickCheckBoxHasAAH()"
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
+                        {{situationPersonneEnum.AAH}}
+                    </label>
+                    <label
+                        id="btn-is-createur-entreprise"
+                        name="createurEntreprise"
+                        class="btn radio-button-style-1 mt-perso-sm ml-perso-lm"
+                        [(ngModel)]="informationsPersonnelles.createurEntreprise"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #createurEntreprise="ngModel"
+                        (click)="onClickCheckBoxIsCreateurEntreprise()"
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.CREATEUR_ENTREPRISE)">
+                        {{situationPersonneEnum.CREATEUR_ENTREPRISE}}
+                    </label>
+                    <label
+                        id="btn-has-revenus-immobilier"
+                        name="hasRevenusImmobilier"
+                        class="btn radio-button-style-1 mt-perso-sm ml-perso-lm"
+                        [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #hasRevenusImmobilier="ngModel"
+                        (click)="onClickCheckBoxHasRevenusImmobilier()"
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
+                        {{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationFamilialeDemandeur">
+                        * Votre situation familiale
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        #situationFamilialeDemandeur="ngModel"
+                        (click)="onClickCheckBoxSituationFamiliale()"
+                        name="situationFamilialeDemandeur"
+                        class="btn radio-button-style-1"
+                        [btnRadio]="false"
+                        tabindex="0"
+                        role="button"
+                        required
+                        [(ngModel)]="situationFamiliale.isEnCouple"
+                        (keyup)="handleKeyUpOnButtonSituationFamiliale($event, false)">
+                        {{situationsFamilialesEnum.SEULE}}
+                    </label>
+                    <label
+                        #situationFamilialeDemandeur="ngModel"
+                        (click)="onClickCheckBoxSituationFamiliale()"
+                        name="situationFamilialeDemandeur"
+                        class="btn radio-button-style-1 ml-1"
+                        [btnRadio]="true"
+                        tabindex="0"
+                        role="button"
+                        required
+                        [(ngModel)]="situationFamiliale.isEnCouple"
+                        (keyup)="handleKeyUpOnButtonSituationFamiliale($event, true)">
+                        {{situationsFamilialesEnum.EN_COUPLE}}
+                    </label>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="situationFamiliale.isEnCouple === true">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="situationConjoint">
+                        * Votre conjoint(e) perçoit
+                    </label>
+                </div>
+                <div class="row">
+                    <label
+                        #conjointHasAAH="ngModel"
+                        name="conjointHasAAH"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH"
+                        (click)="onClickCheckBoxConjointHasAAH()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
+                        {{situationPersonneEnum.AAH}}
+                    </label>
+                    <label
+                        #conjointIsSalarie="ngModel"
+                        name="conjointIsSalarie"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
+                        (click)="onClickCheckBoxConjointIsSalarie()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
+                        {{situationPersonneEnum.SALARIE}}
+                    </label>
+                    <label
+                        #conjointHasRSA="ngModel"
+                        name="conjointHasRSA"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA"
+                        (click)="onClickCheckBoxConjointHasRSA()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
+                        {{situationPersonneEnum.RSA}}
+                    </label>
+                    <label
+                        #conjointHasARE="ngModel"
+                        name="conjointHasARE"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE"
+                        (click)="onClickCheckBoxConjointHasARE()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
+                        {{situationPersonneEnum.ARE}}
+                    </label>
+                    <label
+                        #conjointHasASS="ngModel"
+                        name="conjointHasASS"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS"
+                        (click)="onClickCheckBoxConjointHasASS()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
+                        {{situationPersonneEnum.ASS}}
+                    </label>
+                    <label
+                        #conjointIsSansRessource="ngModel"
+                        name="conjointIsSansRessource"
+                        class="btn radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
+                        (click)="onClickCheckBoxConjointIsSansRessource()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">
+                        {{situationPersonneEnum.SANS_RESSOURCE}}
+                    </label>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="div-buttons-form row">
+                <button
+                    class="btn btn-primary-style-0"
+                    (click)="onClickButtonRetour()"
+                    type="button">
+                    <div>
+                        <img src="./assets/images/return-arrow.svg">
+                    </div>
+                    <div class="text-button">Retour</div>
+                </button>
+                <button
+                    class="btn btn-primary-style-3"
+                    type="submit">
+                    <div class="text-button">Suivant</div>
+                    <div>
+                        <img src="./assets/images/icon-bt-primaire.svg">
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <ng-template #popoverSituationDemandeurTemplate>
-  <div class="container">
-      <div class="close-popover row">
-          <i
-              class="fas fa-times-circle mb-2 ml-auto"
-              (click)="popoverSituationDemandeur.hide()"></i>
-      </div>
-      <div class="row">
-        <p>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2 ml-auto"
+                (click)="popoverSituationDemandeur.hide()"></i>
+        </div>
+        <div class="row">
+            <p>
 
-          <b>Pourquoi me pose-t-on ces questions ?</b>
-        </p>
+                <b>Pourquoi me pose-t-on ces questions ?</b>
+            </p>
 
-          <p>
-            Ces situations et les montants des revenus associés ont une incidence sur le calcul de la prime d’activité.
-          </p>
-          <p>
-            C’est pourquoi, il est important de les déclarer.
-          </p>
-      </div>
-  </div>
+            <p>
+                Ces situations et les montants des revenus associés ont une incidence sur le calcul de la prime d’activité.
+            </p>
+            <p>
+                C’est pourquoi, il est important de les déclarer.
+            </p>
+        </div>
+    </div>
 </ng-template>

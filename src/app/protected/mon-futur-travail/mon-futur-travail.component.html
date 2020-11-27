@@ -21,14 +21,15 @@
                         <div class="custom-control custom-radio">
                             <input
                                 id="typeContratCDI"
-                                name="typeContrat"
+                                name="typeContratCDI"
                                 type="radio"
                                 class="custom-control-input"
                                 [(ngModel)]="futurTravail.typeContrat"
                                 (click)="unsetNombreMoisContrat(typesContratTavailEnum.CDI)"
                                 [value]="typesContratTavailEnum.CDI"
                                 required
-                                #typeContrat="ngModel">
+                                #typeContrat="ngModel"
+                                (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDI)">
                             <label
                                 class="custom-control-label"
                                 for="typeContratCDI">
@@ -38,13 +39,14 @@
                         <div class="custom-control custom-radio ml-2">
                             <input
                                 id="typeContratCDD"
-                                name="typeContrat"
+                                name="typeContratCDD"
                                 type="radio"
                                 class="custom-control-input"
                                 [(ngModel)]="futurTravail.typeContrat"
                                 [value]="typesContratTavailEnum.CDD"
                                 required
-                                #typeContrat="ngModel">
+                                #typeContrat="ngModel"
+                                (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDD)">
                             <label
                                 class="custom-control-label"
                                 for="typeContratCDD">
@@ -125,11 +127,12 @@
                         class="label"
                         for="salaire-mensuel-net">
                         * Salaire mensuel net
-                        <img class="interrogation-icon"
-                    src="./assets/images/question.svg"
-                    [popover]="popoverSalaireNetTemplate"
-                    #popoverSalaireNet="bs-popover"
-                    placement="right">
+                        <img
+                            class="interrogation-icon"
+                            src="./assets/images/question.svg"
+                            [popover]="popoverSalaireNetTemplate"
+                            #popoverSalaireNet="bs-popover"
+                            placement="right">
                     </label>
                 </div>
                 <div class="row">
@@ -196,6 +199,12 @@
                         class="label"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de trajets aller
+                        <img
+                            class="interrogation-icon"
+                            src="./assets/images/question.svg"
+                            [popover]="popoverNombreTrajetTemplate"
+                            #popoverNombreTrajet="bs-popover"
+                            placement="right">
                     </label>
                 </div>
                 <div class="row">
@@ -220,25 +229,26 @@
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
-            <div class="div-buttons-form row">
-                <button
-                    class="btn btn-primary-style-0"
-                    (click)="onClickButtonRetour()">
-                    <div>
-                        <img src="./assets/images/return-arrow.svg">
-                    </div>
-                    <div class="text-button">Retour</div>
-                </button>
-                <button
-                    class="btn btn-primary-style-3"
-                    type="submit">
-                    <div class="text-button">Suivant</div>
-                    <div>
-                        <img src="./assets/images/icon-bt-primaire.svg">
-                    </div>
-                </button>
-            </div>
         </form>
+        <div class="div-buttons-form row">
+          <button
+              class="btn btn-primary-style-0"
+              (click)="onClickButtonRetour()">
+              <div>
+                  <img src="./assets/images/return-arrow.svg">
+              </div>
+              <div class="text-button">Retour</div>
+          </button>
+          <button
+              class="btn btn-primary-style-3"
+              type="submit"
+              (click)="onSubmitFuturTravailForm(futurTravailForm)">
+              <div class="text-button">Suivant</div>
+              <div>
+                  <img src="./assets/images/icon-bt-primaire.svg">
+              </div>
+          </button>
+      </div>
     </div>
 </div>
 
@@ -267,4 +277,24 @@
             </p>
         </div>
     </div>
+</ng-template>
+
+<ng-template #popoverNombreTrajetTemplate>
+  <div class="container">
+      <div class="close-popover row">
+          <i
+              class="fas fa-times-circle mb-2  ml-auto"
+              (click)="popoverNombreTrajet.hide()"></i>
+      </div>
+      <div class="row">
+          <p><b>Les informations sur vos trajets permettront de déterminer le montant de l'aide à la mobilité auquel vous pourrez prétendre.</b></p>
+          <p><b>Exemples de calculs :</b></p>
+          <p>
+            Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc indiquer  <b>20 trajets aller par mois (5 allers x 4 semaines)</b>.
+          </p>
+          <p>
+            Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le weekend le temps de sa période d'essai d'un mois. Il va indiquer <b>4 trajets aller par mois (4 weekends par mois)</b>.
+          </p>
+      </div>
+  </div>
 </ng-template>

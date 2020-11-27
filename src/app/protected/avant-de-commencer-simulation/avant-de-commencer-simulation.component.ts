@@ -24,7 +24,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  redirectVersPageMonContratDeTravail() {
+  onClickButtonJeContinue() {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if(!demandeurEmploiConnecte) {
       this.isPageLoadingDisplay = true;

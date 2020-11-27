@@ -49,22 +49,30 @@
                         </a>
                     </div>
                 </div>
-                <div
-                    class="card card-personne card-add-personne"
-                    (click)="onClickButtonAjouterPersonne()">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="row">
-                            <div class="col-3 col-card-body">
-                                <img src="./assets/images/ajouter-personne.svg">
-                            </div>
-                            <div class="col-9 col-card-body">
-                                <span>
-                                    Ajouter un enfant ou une personne à charge
-                                </span>
+                <button
+                    name="button-card-add-personne"
+                    class="button-card-add-personne"
+                    (keyup)="handleKeyUpOnButtonAjouterPersonne($event)">
+                    <div
+                        class="card card-add-personne"
+                        (click)="onClickButtonAjouterPersonne()"
+                       >
+                        <div class="card-body d-flex align-items-center">
+                            <div
+                                id="row-card-body-add-personne"
+                                class="row">
+                                <div class="col-3 col-card-body">
+                                    <img src="./assets/images/ajouter-personne.svg">
+                                </div>
+                                <div class="col-9 col-card-body">
+                                    <span>
+                                        Ajouter un enfant ou une personne à charge
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </button>
             </div>
         </div>
         <app-form-personne-a-charge

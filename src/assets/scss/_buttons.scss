@@ -103,6 +103,9 @@
     background-color: none;
     border: none;
     box-shadow: none;
+    .text-button {
+      text-decoration: underline;
+    }
   }
   .text-button {
     margin: auto;
@@ -115,7 +118,7 @@
   color: $color-blue-2;
   border: 1px $color-blue-2 solid;
   border-radius: 100px;
-  &:hover {
+  &:hover, &:focus {
     background-color: $color-blue-1;
     color: $color-white-1;
   }
@@ -141,7 +144,7 @@
   margin: auto;
   max-width: 300px;
   width: fit-content;
-  &:hover {
+  &:hover, &:focus {
     background-color: $color-blue-2;
     color: $color-white-2;
   }
@@ -161,7 +164,7 @@
   color: $color-white-1;
   border: 0;
   border-radius: 100px;
-  &:hover {
+  &:hover, &:focus {
     background-color: $color-blue-1;
     color: $color-white-1;
   }
@@ -176,7 +179,7 @@
     max-width: 300px;
   }
   width: fit-content;
-  &:hover {
+  &:hover, &:focus {
     background-color: $color-blue-2;
     color: $color-white-2;
   }
@@ -199,8 +202,9 @@
   margin-right: 0.3rem;
   margin-top: 0.3rem;
   text-align: left;
-  &:focus {
-    box-shadow: none;
+  &:hover, &:focus {
+    border-color: $color-black-1;
+    box-shadow: -1px 1px 6px 2px $color-black-3;
   }
 }
 

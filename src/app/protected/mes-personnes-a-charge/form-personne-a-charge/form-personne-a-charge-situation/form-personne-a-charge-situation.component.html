@@ -15,7 +15,8 @@
             tabindex="0"
             role="button"
             (click)="onClickCheckBoxHasAAH()"
-            #beneficiaireAAH="ngModel">
+            #beneficiaireAAH="ngModel"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.AAH)">
             {{situationPersonneEnum.AAH}}
         </label>
         <label
@@ -26,7 +27,8 @@
             tabindex="0"
             role="button"
             #salarie="ngModel"
-            (click)="onClickCheckBoxIsSalarie()">
+            (click)="onClickCheckBoxIsSalarie()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SALARIE)">
             {{situationPersonneEnum.SALARIE}}
         </label>
         <label
@@ -37,7 +39,8 @@
             tabindex="0"
             role="button"
             #hasRessourceAideEmploi="ngModel"
-            (click)="onClickCheckBoxHasRSA()">
+            (click)="onClickCheckBoxHasRSA()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.RSA)">
             {{situationPersonneEnum.RSA}}
         </label>
         <label
@@ -48,7 +51,8 @@
             tabindex="0"
             role="button"
             #hasRessourceAideEmploi="ngModel"
-            (click)="onClickCheckBoxHasARE()">
+            (click)="onClickCheckBoxHasARE()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.ARE)">
             {{situationPersonneEnum.ARE}}
         </label>
         <label
@@ -59,7 +63,8 @@
             tabindex="0"
             role="button"
             #hasRessourceAideEmploi="ngModel"
-            (click)="onClickCheckBoxHasASS()">
+            (click)="onClickCheckBoxHasASS()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.ASS)">
             {{situationPersonneEnum.ASS}}
         </label>
         <label
@@ -70,7 +75,8 @@
             tabindex="0"
             role="button"
             #isSansEmploi="ngModel"
-            (click)="onClickCheckBoxIsSansRessource()">
+            (click)="onClickCheckBoxIsSansRessource()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SANS_RESSOURCE)">
             {{situationPersonneEnum.SANS_RESSOURCE}}
         </label>
     </div>
