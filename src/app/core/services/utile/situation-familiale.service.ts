@@ -14,7 +14,7 @@ export class SituationFamilialeUtileService {
 
   public creerSituationFamiliale(): SituationFamiliale {
     const situationFamiliale = new SituationFamiliale();
-    situationFamiliale.conjoint = this.personneUtileService.creerPersonne();
+    situationFamiliale.conjoint = this.personneUtileService.creerPersonne(true);
     return situationFamiliale;
   }
 }

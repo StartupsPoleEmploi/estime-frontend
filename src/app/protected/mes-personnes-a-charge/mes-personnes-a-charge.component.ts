@@ -44,7 +44,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public onClickButtonAjouterPersonne(): void {
     this.isNouvellePersonneAChargeFormDisplay = true;
-    this.nouvellePersonneACharge = this.personneUtileService.creerPersonne();
+    this.nouvellePersonneACharge = this.personneUtileService.creerPersonne(false);
     this.dateNaissanceNouvellePersonne = new DateDecomposee();
     this.numeroNouvellePersonne = this.personnesACharge.length + 1;
   }
@@ -80,10 +80,15 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {
     if (isAjoutPersonneSubmit) {
+      if(this.nouvellePersonneACharge.ressourcesFinancieres) {
+        this.nouvellePersonneACharge.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
+      }
       if (!this.isModeModification) {
         this.personnesACharge.push(this.nouvellePersonneACharge);
+      } else {
+        this.personnesACharge[this.numeroNouvellePersonne - 1] = this.nouvellePersonneACharge;
       }
-      this.nouvellePersonneACharge.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
+
       this.deConnecteService.setPersonnesACharge(this.personnesACharge);
     }
     this.isModeModification = false;

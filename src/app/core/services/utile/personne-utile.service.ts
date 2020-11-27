@@ -20,15 +20,17 @@ export class PersonneUtileService {
 
   }
 
-  public creerPersonne(): Personne {
+  public creerPersonne(isAvecRessourcesFinancieres: boolean): Personne {
     const personne = new Personne();
     personne.beneficiaireAidesSociales = new BeneficiaireAidesSociales(false, false, false, false);
     personne.informationsPersonnelles = new InformationsPersonnelles();
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
-    personne.ressourcesFinancieres = new RessourcesFinancieres();
-    personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
-    personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+    if(isAvecRessourcesFinancieres) {
+      personne.ressourcesFinancieres = new RessourcesFinancieres();
+      personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
+      personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+    }
     return personne;
   }
 

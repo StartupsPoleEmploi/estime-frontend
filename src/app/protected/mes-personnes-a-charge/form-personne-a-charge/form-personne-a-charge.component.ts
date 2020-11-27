@@ -5,6 +5,9 @@ import { Personne } from '@app/commun/models/personne';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
+import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
 
 @Component({
   selector: 'app-form-personne-a-charge',
@@ -54,9 +57,15 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   public isNouvellePersonneSituationFormDisplay(): boolean {
     let isNouvellePersonneSituationFormDisplay = false;
-    if (this.dateUtileService.isFormatDateValide(this.dateNaissanceNouvellePersonne)
-      && this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
+    if (this.dateUtileService.isFormatDateValide(this.dateNaissanceNouvellePersonne)) {
+      if(this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
         isNouvellePersonneSituationFormDisplay = true;
+        if(!this.nouvellePersonneACharge.ressourcesFinancieres) {
+          this.creerRessourcesFinancieres();
+        }
+      } else {
+        this.unsetRessourcesFinancieres();
+      }
     }
     return isNouvellePersonneSituationFormDisplay;
   }
@@ -96,6 +105,20 @@ export class FormPersonneAChargeComponent implements OnInit {
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA;
+  }
+
+  private unsetRessourcesFinancieres(): void {
+    this.nouvellePersonneACharge.ressourcesFinancieres = null;
+    this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.createurEntreprise = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
+  }
+
+  private creerRessourcesFinancieres(): void {
+    this.nouvellePersonneACharge.ressourcesFinancieres = new RessourcesFinancieres();
+    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
+    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
   }
 
   /** gestion évènements champ date naissance personne à charge **/

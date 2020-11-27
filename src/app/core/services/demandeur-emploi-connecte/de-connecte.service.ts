@@ -86,7 +86,7 @@ export class DeConnecteService {
     if(!situationFamiliale.isEnCouple) {
       this.unsetConjoint();
     } else if(!situationFamiliale.conjoint) {
-      situationFamiliale.conjoint = this.personneUtileService.creerPersonne();
+      situationFamiliale.conjoint = this.personneUtileService.creerPersonne(true);
     }
     this.demandeurEmploiConnecte.situationFamiliale = situationFamiliale;
     this.saveDemandeurEmploiConnecteInSessionStorage();
