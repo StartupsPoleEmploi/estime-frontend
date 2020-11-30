@@ -8,13 +8,6 @@
             </h5>
             <hr [ngClass]="aideSocialeSelected.code.toLowerCase()">
         </div>
-        <div class="card-text">
-            <h6>DÉFINITION</h6>
-            <p [innerHTML]="aideSocialeSelected.description"></p>
-            <h6>CONDITIONS D’ACCÈS</h6>
-            <p [innerHTML]="aideSocialeSelected.conditionsAcces"></p>
-            <h6>DEMARCHE D'OBTENTION</h6>
-            <p [innerHTML]="aideSocialeSelected.demarcheObtention"></p>
-        </div>
+        <div id="block-detail-aide" class="card-text" [innerHTML]="aideSocialeSelected.detail"></div>
     </div>
 </div>
