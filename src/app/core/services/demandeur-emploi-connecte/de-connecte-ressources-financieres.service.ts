@@ -3,11 +3,13 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { DateUtileService } from '../utile/date-util.service';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {
 
   constructor(
+    private dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService
@@ -57,7 +59,8 @@ export class DeConnecteRessourcesFinancieresService {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       }
       if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
-        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS);
+        const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
+        montant += nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS);
       }
     }
     return montant;

@@ -24,6 +24,7 @@
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
                     inputmode="decimal"
                     ngAutofocus
+                    (click)="$event.target.select()"
                     #allocationsLogementMensuellesNetFoyer="ngModel">
                 <span class="text-side-input">€</span>
                 <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
@@ -58,6 +59,7 @@
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
                     inputmode="decimal"
+                    (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
                 <span class="text-side-input">€</span>
                 <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>
@@ -92,6 +94,7 @@
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer"
                     inputmode="decimal"
+                    (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
                 <span class="text-side-input">€</span>
                 <span class="text-2-side-input text-2-side-input-style-inline">net du mois dernier</span>

@@ -27,6 +27,13 @@ export class DateUtileService {
     return new Date(annee, mois, 0).getDate();
   }
 
+  getNombreJoursMoisPrecedent(): number {
+    const dateJour = new Date();
+    const month = dateJour.getMonth();
+    const year =  dateJour.getFullYear();
+    return this.getNombreJoursMois(month, year);
+  }
+
   isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
     return this.checkFormat(dateDecomposee) === undefined;
   }
