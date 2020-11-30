@@ -22,12 +22,21 @@
                     - votre
                     <span class="text-important">
                         dernière notification ASS Pôle Emploi
+                        <a target="_blank" href="./assets/documents/attestation-ass.pdf"><img
+                          class="interrogation-icon"
+                          src="./assets/images/question.svg"
+                          placement="right"></a>
                     </span>
                   </span>
                   <br>
                   <span class="text-document">
                     - votre
-                    <span class="text-important ">notification de droits CAF</span>
+                    <span class="text-important ">notification de droits CAF
+                      <a target="_blank" href="./assets/documents/attestation-caf.pdf"><img
+                        class="interrogation-icon"
+                        src="./assets/images/question.svg"
+                        placement="right"></a>
+                    </span>
                   </span>
                 </p>
                 <div
@@ -59,3 +68,16 @@
 
     </div>
 </div>
+
+<ng-template #popoverDocPoleEmploiTemplate>
+  <div class="container">
+      <div class="close-popover row">
+          <i
+              class="fas fa-times-circle mb-2  ml-auto"
+              (click)="popoverDocPoleEmploi.hide()"></i>
+      </div>
+      <div class="row">
+        <embed src="./assets/documents/attestation-ass.pdf" type="application/pdf" width="100%" height="600px" />
+      </div>
+  </div>
+</ng-template>
