@@ -46,7 +46,7 @@ export class SessionExpiredService {
     }
   }
 
-  private saveRouteActivatedInSessionStorage(routeActivated: string): void {
+  public saveRouteActivatedInSessionStorage(routeActivated: string): void {
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_ROUTE_ACTIVATED_STORAGE_SESSION_KEY, routeActivated);
   }
 
