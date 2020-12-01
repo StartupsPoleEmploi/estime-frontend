@@ -22,6 +22,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres/ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-fin
     ReactiveFormsModule,
     PopoverModule.forRoot(),
     ProtectedRoutingModule
-  ]
+  ],
+  providers: [BnNgIdleService]
 })
 export class ProtectedModule { }

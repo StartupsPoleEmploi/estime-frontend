@@ -25,11 +25,12 @@ export class IsLoggedInGuard implements CanActivate {
       if(!isLoggedIn) {
         const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
         if(demandeurConnecte){
-          this.sessionExpiredService.saveRouteActivatedInSessionStorage(route.routeConfig.path);
           this.authorizationService.login();
         } else {
           this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
         }
+      } else {
+        this.sessionExpiredService.saveRouteActivatedInSessionStorage(route.routeConfig.path);
       }
       return isLoggedIn;
   }

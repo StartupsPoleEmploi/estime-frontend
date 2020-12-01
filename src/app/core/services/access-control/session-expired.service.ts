@@ -7,6 +7,7 @@ import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { DeConnecteService } from "@app/core/services/demandeur-emploi-connecte/de-connecte.service";
 import { CookiesIndividuService } from "@app/core/services/access-control/cookies-individu.service";
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Injectable({ providedIn: 'root' })
 export class SessionExpiredService {
@@ -19,6 +20,7 @@ export class SessionExpiredService {
   };
 
   constructor(
+    private bnNgIdleService: BnNgIdleService,
     private cookiesIndividuService: CookiesIndividuService,
     private deConnecteService: DeConnecteService,
     private modalService: BsModalService,
@@ -28,8 +30,16 @@ export class SessionExpiredService {
 
   }
 
-  public openModal(route: ActivatedRouteSnapshot): void {
-    this.saveRouteActivatedInSessionStorage(route.routeConfig.path);
+  public startWatchingUserActivity() {
+    //once the user is idle for 19 minutes then the subscribe method will get invoked
+    this.bnNgIdleService.startWatching(1140).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.openModal();
+      }
+    });
+  }
+
+  public openModal(): void {
     this.modalService.show(ModalSessionExpiredComponent, this.config);
   }
 
