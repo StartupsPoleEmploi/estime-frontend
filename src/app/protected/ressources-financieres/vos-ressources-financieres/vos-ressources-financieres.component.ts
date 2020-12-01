@@ -58,7 +58,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickRadioButtonHasCumuleAssEtSalaire(): void {
-    if(!this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire) {
+    if(this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === false) {
       this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = 0;
     }
   }
