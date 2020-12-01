@@ -3,9 +3,9 @@ import { SimulationAidesSociales } from "@models/simulation-aides-sociales";
 import { SessionStorageService } from "ngx-webstorage";
 import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 import { DeConnecteService } from './de-connecte.service';
-import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
+import { AllocationsCAF } from '@models/allocations-caf';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSimulationAidesSocialesService {

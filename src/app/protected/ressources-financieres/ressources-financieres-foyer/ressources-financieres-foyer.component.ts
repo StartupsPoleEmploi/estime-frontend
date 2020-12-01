@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";

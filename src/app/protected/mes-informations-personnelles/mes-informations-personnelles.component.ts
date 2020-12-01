@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
-import { SituationFamiliale } from '@app/commun/models/situation-familiale';
+import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { SituationFamiliale } from '@models/situation-familiale';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";

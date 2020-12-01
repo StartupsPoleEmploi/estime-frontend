@@ -4,8 +4,6 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { BnNgIdleService } from 'bn-ng-idle';
-import { SessionExpiredService } from '@app/core/services/access-control/session-expired.service';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -20,12 +18,10 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   constructor(
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
-    private router: Router,
-    private sessionExpiredService: SessionExpiredService
+    private router: Router
     ) { }
 
   ngOnInit(): void {
-   // this.sessionExpiredService.startWatchingUserActivity();
   }
 
   public onClickButtonJeContinue(): void {

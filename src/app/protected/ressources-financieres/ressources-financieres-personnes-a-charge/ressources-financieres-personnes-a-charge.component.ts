@@ -3,7 +3,7 @@ import { SituationPersonneEnum } from '@app/commun/enumerations/situations-perso
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { Personne } from '@models/personne';
-import { PersonneDTO } from '@app/commun/models/dto/personne-dto';
+import { PersonneDTO } from '@models/dto/personne-dto';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';

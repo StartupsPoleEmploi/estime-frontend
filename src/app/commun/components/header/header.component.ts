@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
+import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
+import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 
 @Component({
   selector: 'app-header',
@@ -12,20 +13,21 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false
 
   constructor(
-    private authorizationService: AuthorizationService,
+    private individuConnectedService: IndividuConnectedService,
+    private peConnectService: PeConnectService,
     private router: Router
   ) {
-    this.authorizationService.loginChanged.subscribe(loggedIn =>  {
+    this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
       this.isLoggedIn = loggedIn;
     })
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authorizationService.isLoggedIn();
+    this.isLoggedIn = this.individuConnectedService.isLoggedIn();
   }
 
   public logout(): void {
-    this.authorizationService.logout();
+    this.peConnectService.logout();
   }
 
   public onClickLogoEstime(): void {

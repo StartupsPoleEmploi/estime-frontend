@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
-import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
-import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { DateDecomposee } from '@models/date-decomposee';
 import { AllocationsCAF } from "@models/allocations-caf";
 import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
 import { InformationsPersonnelles } from "@models/informations-personnelles";

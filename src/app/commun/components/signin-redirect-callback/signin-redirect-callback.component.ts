@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
+import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { SessionExpiredService } from '@app/core/services/access-control/session-expired.service';
+import { SessionPeConnectExpiredService } from "@app/core/services/connexion/session-pe-connect-expired.service";
 
 @Component({
   selector: 'app-signin-redirect-callback',
@@ -16,7 +16,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
   constructor(
     private authorizationService: AuthorizationService,
     private router: Router,
-    private sessionExpiredService: SessionExpiredService
+    private sessionPeConnectExpiredService: SessionPeConnectExpiredService
   ) {
 
   }
@@ -26,8 +26,8 @@ export class SigninRedirectCallbackComponent implements OnInit {
     this.authorizationService.completeLogin().then(
       (demandeur) => {
         this.isPageLoadingDisplay = false;
-        if(this.sessionExpiredService.isBackAfterSessionExpired()) {
-          this.sessionExpiredService.navigateToRouteActivated();
+        if(this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
+          this.sessionPeConnectExpiredService.navigateToRouteActivated();
         } else {
           this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
         }

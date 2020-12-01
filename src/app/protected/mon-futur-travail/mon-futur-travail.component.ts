@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FuturTravail } from '@app/commun/models/futur-travail';
+import { FuturTravail } from '@models/futur-travail';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RoutesEnum } from '@enumerations/routes.enum';

@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PeConnectPayload } from '@app/commun/models/pe-connect-payload';
-import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { PeConnectPayload } from '@models/pe-connect-payload';
+import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
 import { Individu } from '@models/individu';
-import { CookiesIndividuService } from '../access-control/cookies-individu.service';
+import { CookiesEstimeService } from '../storage/cookies-estime.service';
 
 @Injectable({ providedIn: 'root' })
 export class EstimeApiService {
@@ -15,7 +15,7 @@ export class EstimeApiService {
   constructor(
     private environment: Environment,
     private http: HttpClient,
-    private cookiesIndividuService: CookiesIndividuService
+    private cookiesEstimeService: CookiesEstimeService
   ) {
 
     this.pathDemandeurEmploiService = `${this.environment.apiEstimeURL}individus/`;
@@ -27,8 +27,8 @@ export class EstimeApiService {
 
   public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
     const options = this.getHttpHeaders();
-    const individu = this.cookiesIndividuService.getFromCookies();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi`, individu, options).toPromise();
+    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi`, individuConnected, options).toPromise();
   }
 
   public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAidesSociales> {
@@ -37,14 +37,13 @@ export class EstimeApiService {
   }
 
   private getHttpHeaders() {
-    const individu = this.cookiesIndividuService.getFromCookies();
+    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
 
     const optionRequete = {
       headers: new HttpHeaders({
-        'Authorization': `Bearer ${individu.peConnectAuthorization.idToken}`
+        'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`
       })
     };
-
     return optionRequete;
   }
 }

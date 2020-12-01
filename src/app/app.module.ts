@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { Environment } from "@app/commun/models/environment";
+import { Environment } from "@models/environment";
 import { environment } from '@environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageErreur } from '@app/commun/models/message-erreur';
-import { Temoignage } from '@app/commun/models/temoignage';
-import { AuthorizationService } from '@app/core/services/access-control/authorization.service';
+import { MessageErreur } from '@models/message-erreur';
+import { Temoignage } from '@models/temoignage';
+import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
+import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
+import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
 import { EtapeSimulationService } from '@app/core/services/utile/etape-simulation.service';
 import { QuestionService } from "@app/core/services/utile/question.service";
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -12,7 +14,6 @@ import { NiveauMessagesErreurEnum } from "@enumerations/niveaux-message-erreur";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { Question } from '@models/question';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-homepage',
@@ -33,6 +34,8 @@ export class HomepageComponent implements OnInit {
   constructor(
     private authorizationService: AuthorizationService,
     private etapeSimulationService: EtapeSimulationService,
+    private individuConnectedService: IndividuConnectedService,
+    private peConnectService: PeConnectService,
     private questionService: QuestionService,
     private router: Router,
     private screenService: ScreenService,
@@ -54,7 +57,7 @@ export class HomepageComponent implements OnInit {
   }
 
   public login(): void {
-    this.authorizationService.login();
+    this.peConnectService.login();
   }
 
   private loadEtapesSimulation(): void {
@@ -70,7 +73,7 @@ export class HomepageComponent implements OnInit {
   }
 
   private checkDemandeurEmploiConnecte():void {
-    if(this.authorizationService.isLoggedIn()) {
+    if(this.individuConnectedService.isLoggedIn()) {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
     } else {
       this.messageErreur = this.authorizationService.getMessageErreur();

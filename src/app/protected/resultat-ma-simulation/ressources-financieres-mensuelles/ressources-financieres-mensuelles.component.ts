@@ -3,7 +3,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
-import { AideSociale } from '@app/commun/models/aide-sociale';
+import { AideSociale } from '@models/aide-sociale';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({

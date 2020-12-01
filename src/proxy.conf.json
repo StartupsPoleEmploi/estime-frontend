@@ -1,7 +1,0 @@
-{
-  "/estime/v1/*": {
-      "target": "http://localhost:8081",
-      "secure": false,
-      "logLevel": "debug"
-  }
-}

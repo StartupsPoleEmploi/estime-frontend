@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AideSociale } from '@app/commun/models/aide-sociale';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
+import { AideSociale } from '@models/aide-sociale';
+import { DemandeurEmploi } from '@models/demandeur-emploi';
+import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
@@ -10,7 +10,7 @@ import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/deConnecte-simulation-aides-sociales.service";
 
 @Component({

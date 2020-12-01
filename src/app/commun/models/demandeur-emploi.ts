@@ -1,4 +1,4 @@
-import { InformationsPersonnelles } from "@app/commun/models/informations-personnelles";
+import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { BeneficiaireAidesSociales } from "@models/beneficiaire-aides-sociales";
 import { FuturTravail } from "@models/futur-travail";
 import { RessourcesFinancieres } from '@models/ressources-financieres';

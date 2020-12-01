@@ -60,7 +60,7 @@ export class DeConnecteRessourcesFinancieresService {
       }
       if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
         const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
-        montant += nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS);
+        montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS));
       }
     }
     return montant;

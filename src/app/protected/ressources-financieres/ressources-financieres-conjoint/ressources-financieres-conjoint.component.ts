@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Personne } from '@app/commun/models/personne';
+import { Personne } from '@models/personne';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 

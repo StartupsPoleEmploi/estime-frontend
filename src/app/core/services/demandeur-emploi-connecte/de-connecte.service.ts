@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
-import { BeneficiaireAidesSociales } from '@app/commun/models/beneficiaire-aides-sociales';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { PersonneDTO } from '@models/dto/personne-dto';
 import { FuturTravail } from '@models/futur-travail';
@@ -10,7 +9,7 @@ import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { Personne } from '@models/personne';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { SituationFamiliale } from '@models/situation-familiale';
-import { SessionStorageService } from "ngx-webstorage";
+import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 
 
@@ -23,49 +22,49 @@ export class DeConnecteService {
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
-    private sessionStorageService: SessionStorageService
+    private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
 
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
-      this.demandeurEmploiConnecte = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+      this.demandeurEmploiConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
     }
     return this.demandeurEmploiConnecte;
   }
 
   public setBeneficiaireAidesSociales(beneficiaireAidesSociales: BeneficiaireAidesSociales): void {
     this.demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setConjointRessourcesFinancieres(conjoint: Personne) {
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(conjoint.ressourcesFinancieres);
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres = ressourcesFinancieresMontantsAvecDot;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setDemandeurEmploiConnecte(demandeurEmploi: DemandeurEmploi): void {
     this.demandeurEmploiConnecte = demandeurEmploi;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setInformationsPersonnelles(informationsPersonnelles: InformationsPersonnelles): void {
     this.demandeurEmploiConnecte.informationsPersonnelles = informationsPersonnelles;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setFuturTravail(futurTravail: FuturTravail) {
     futurTravail.salaireMensuelNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaireMensuelNet);
     futurTravail.nombreHeuresTravailleesSemaine = this.numberUtileService.replaceCommaByDot(futurTravail.nombreHeuresTravailleesSemaine);
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setPersonnesACharge(personnesACharge: Array<Personne>) {
     this.demandeurEmploiConnecte.situationFamiliale.personnesACharge = personnesACharge;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setPersonnesChargeRessourcesFinancieres(personnesDTO: Array<PersonneDTO>): void {
@@ -73,13 +72,13 @@ export class DeConnecteService {
       personneDTO.personne.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(personneDTO.personne.ressourcesFinancieres);
       this.demandeurEmploiConnecte.situationFamiliale.personnesACharge[personneDTO.index].ressourcesFinancieres = personneDTO.personne.ressourcesFinancieres;
     });
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);
     this.demandeurEmploiConnecte.ressourcesFinancieres = ressourcesFinancieresMontantsAvecDot;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public setSituationFamiliale(situationFamiliale: SituationFamiliale): void {
@@ -89,27 +88,27 @@ export class DeConnecteService {
       situationFamiliale.conjoint = this.personneUtileService.creerPersonne(true);
     }
     this.demandeurEmploiConnecte.situationFamiliale = situationFamiliale;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public unsetAllocationsFamiliales(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetAllocationMensuelleNetAAH(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetConjoint(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
@@ -127,7 +126,7 @@ export class DeConnecteService {
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
       }
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
@@ -138,7 +137,7 @@ export class DeConnecteService {
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
       }
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
@@ -149,7 +148,7 @@ export class DeConnecteService {
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
       }
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
@@ -160,13 +159,13 @@ export class DeConnecteService {
       && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
       }
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetConjointRessourcesFinancieres(): void {
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres = null;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public unsetConjointSalaire(): void {
@@ -175,30 +174,25 @@ export class DeConnecteService {
       if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
       }
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetPensionsAlimentaires(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = 0;
-      this.saveDemandeurEmploiConnecteInSessionStorage();
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetRevenusCreateurEntreprise(): void {
     this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = null;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public unsetRevenusImmobilier(): void {
     this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois = null;
-    this.saveDemandeurEmploiConnecteInSessionStorage();
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
-  /************** private methods *********************************************/
-
-  private saveDemandeurEmploiConnecteInSessionStorage(): void {
-    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, this.demandeurEmploiConnecte);
-  }
 }

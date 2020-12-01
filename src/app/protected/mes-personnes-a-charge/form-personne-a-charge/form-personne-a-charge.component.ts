@@ -1,13 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DateDecomposee } from '@app/commun/models/date-decomposee';
-import { Personne } from '@app/commun/models/personne';
+import { DateDecomposee } from '@models/date-decomposee';
+import { Personne } from '@models/personne';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
-import { AllocationsCAF } from '@app/commun/models/allocations-caf';
-import { AllocationsPoleEmploi } from '@app/commun/models/allocations-pole-emploi';
+import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { AllocationsCAF } from '@models/allocations-caf';
+import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 
 @Component({
   selector: 'app-form-personne-a-charge',
