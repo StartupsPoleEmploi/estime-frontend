@@ -131,7 +131,7 @@
                         type="radio"
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                        (click)="onClickButtonRadioHasCumuleAssEtSalaire()"
+                        (click)="onClickButtonRadioHasCumuleAssEtSalaire(true)"
                         required
                         [value]="true"
                         #hasCumuleAssEtSalaire="ngModel"
@@ -150,7 +150,7 @@
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
                         [value]="false"
-                        (click)="onClickButtonRadioHasCumuleAssEtSalaire()"
+                        (click)="onClickButtonRadioHasCumuleAssEtSalaire(false)"
                         required
                         #hasCumuleAssEtSalaire="ngModel"
                         (keyup)="handleKeyUpOnButtonHasCumuleAssEtSalaire($event, false)">

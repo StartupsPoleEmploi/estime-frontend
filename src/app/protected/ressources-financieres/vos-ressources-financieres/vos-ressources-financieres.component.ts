@@ -57,8 +57,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public onClickButtonRadioHasCumuleAssEtSalaire(): void {
-    if(this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === false) {
+  public onClickButtonRadioHasCumuleAssEtSalaire(hasCumuleAssEtSalaire: boolean): void {
+    if(hasCumuleAssEtSalaire === false) {
       this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = 0;
     }
   }
@@ -66,7 +66,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public handleKeyUpOnButtonHasCumuleAssEtSalaire(event: any, value: boolean) {
     if (event.keyCode === 13) {
       this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire = value;
-      this.onClickButtonRadioHasCumuleAssEtSalaire();
+      this.onClickButtonRadioHasCumuleAssEtSalaire(value);
     }
   }
 
