@@ -6,6 +6,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
 import { Individu } from '@models/individu';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { IndividuConnectedService } from '../connexion/individu-connected.service';
 
 @Injectable({ providedIn: 'root' })
 export class EstimeApiService {
@@ -15,7 +16,7 @@ export class EstimeApiService {
   constructor(
     private environment: Environment,
     private http: HttpClient,
-    private cookiesEstimeService: CookiesEstimeService
+    private individuConnectedService: IndividuConnectedService
   ) {
 
     this.pathDemandeurEmploiService = `${this.environment.apiEstimeURL}individus/`;
@@ -27,7 +28,7 @@ export class EstimeApiService {
 
   public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
     const options = this.getHttpHeaders();
-    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
+    const individuConnected = this.individuConnectedService.getIndividuConnected();
     return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi`, individuConnected, options).toPromise();
   }
 
@@ -37,7 +38,7 @@ export class EstimeApiService {
   }
 
   private getHttpHeaders() {
-    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
+    const individuConnected = this.individuConnectedService.getIndividuConnected();
 
     const optionRequete = {
       headers: new HttpHeaders({

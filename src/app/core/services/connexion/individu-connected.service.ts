@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { Individu } from '@models/individu';
-import { Subject, Observable } from 'rxjs';
-import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
+import { Observable, Subject } from 'rxjs';
+import { CookiesEstimeService } from '../storage/cookies-estime.service';
 
 @Injectable({ providedIn: 'root' })
 export class IndividuConnectedService {
 
+  individuConnected: Individu;
   isStatutIndividuChangedChangedSubject: Subject<boolean>;
   statutIndividuChanged: Observable<boolean>;
 
@@ -17,7 +17,15 @@ export class IndividuConnectedService {
     this.statutIndividuChanged = this.isStatutIndividuChangedChangedSubject.asObservable();
   }
 
+  public getIndividuConnected(): Individu {
+    if(this.individuConnected === null) {
+      this.individuConnected = this.cookiesEstimeService.getIndividuConnected();
+    }
+    return this.individuConnected;
+  }
+
   public saveIndividuConnected(indidivu: Individu): void {
+    this.individuConnected = indidivu;
     this.cookiesEstimeService.storeIndividuConnecte(indidivu);
     this.isStatutIndividuChangedChangedSubject.next(true);
   }

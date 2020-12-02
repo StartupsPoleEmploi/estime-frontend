@@ -31,15 +31,11 @@ export class SessionPeConnectExpiredService {
 
   public startCheckUserInactivity(sessionExpireIn: number) {
     //appelé quand la session utilisateur PE Connect a expirée
-    this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
+    this.bnNgIdleService.startWatching(20).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         this.openModal();
       }
     });
-  }
-
-  public stopCheckUserInactivity() {
-    this.bnNgIdleService.stopTimer();
   }
 
   public openModal(): void {

@@ -6,6 +6,8 @@ import { CookiesEstimeService } from "@app/core/services/storage/cookies-estime.
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
+import { SessionPeConnectExpiredService } from '@app/core/services/connexion/session-pe-connect-expired.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   selector: 'app-modal-session-expired',
@@ -21,6 +23,7 @@ export class ModalSessionExpiredComponent implements OnInit {
     private cookiesEstimeService: CookiesEstimeService,
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
+    private bnNgIdleService: BnNgIdleService,
     private sessionStorageEstimeService: SessionStorageEstimeService,
     private router: Router
   ) {
@@ -31,6 +34,9 @@ export class ModalSessionExpiredComponent implements OnInit {
   }
 
   public onClickButtonClosePopup(): void {
+
+    this.bnNgIdleService.stopTimer();
+
     this.bsModalRef.hide();
     this.individuConnectedService.emitIndividuConnectedLogoutEvent();
 
