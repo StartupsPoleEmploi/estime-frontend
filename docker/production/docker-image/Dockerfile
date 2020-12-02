@@ -7,10 +7,6 @@ RUN apk --no-cache update && \
     tzdata \
     && rm -rf /var/cache/apk/*
 
-#copy conf NGINX
-COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
-COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
-
 #copy application sources
 COPY ./dist/estime /usr/share/nginx/html
 
