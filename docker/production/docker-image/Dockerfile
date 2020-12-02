@@ -7,6 +7,12 @@ RUN apk --no-cache update && \
     tzdata \
     && rm -rf /var/cache/apk/*
 
+#copy conf NGINX
+COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
+COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
+RUN mkdir /etc/nginx/ssl && \
+    ./docker/production/docker-image/nginx-conf/options-ssl-nginx.conf /etc/nginx/ssl/
+
 #copy application sources
 COPY ./dist/estime /usr/share/nginx/html
 

@@ -116,8 +116,6 @@ deploy_application_production:
     script:
       # rsync config files on server
       - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/scripts/deploy.sh $CI_PROJECT_DIR/docker/production/estime-frontend-stack.yml $HOST_SERVER_USER@$HOST_SERVER_IP_PROD:/home/docker/estime-frontend
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/nginx-conf/nginx.conf $HOST_SERVER_USER@$HOST_SERVER_IP_PROD:/home/docker/estime-frontend/etc/nginx
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/production/nginx-conf/default.conf $HOST_SERVER_USER@$HOST_SERVER_IP_PROD:/home/docker/estime-frontend/etc/nginx/conf.d
       - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/production/nginx-conf/options-ssl-nginx.conf $HOST_SERVER_USER@$HOST_SERVER_IP_PROD:/home/docker/estime-frontend/etc/nginx/ssl
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP_PROD "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"

@@ -30,7 +30,6 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
-      - ./etc/nginx:/etc/nginx
       - ./etc/nginx/conf.d:/etc/nginx/conf.d
       - ./etc/nginx/ssl:/etc/nginx/ssl
 
