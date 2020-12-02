@@ -14,6 +14,7 @@ services:
      - estime
     ports:
       - 80:8888
+      - 443:443
     deploy:
       replicas: 2
       resources:
@@ -28,6 +29,8 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
+    volumes:
+      - ./etc/nginx/ssl:/etc/nginx/ssl
 
 networks:
   estime:
