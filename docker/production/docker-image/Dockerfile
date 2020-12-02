@@ -9,7 +9,6 @@ RUN apk --no-cache update && \
 
 #copy conf NGINX
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
-COPY ./docker/commun/nginx-conf/options-ssl-nginx.conf /etc/nginx/ssl
 COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 
 #copy application sources
