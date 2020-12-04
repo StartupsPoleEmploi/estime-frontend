@@ -108,7 +108,7 @@ export class RessourcesFinancieresComponent implements OnInit {
         (simulationAidesSociales) => {
           this.deConnecteSimulationAidesSocialesService.setSimulationAidesSociales(simulationAidesSociales);
           this.isPageLoadingDisplay = false;
-          this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION], { replaceUrl: true });
+          this.router.navigate([RoutesEnum.RESULAT_MA_SIMULATION]);
         }, (erreur) => {
           console.log(erreur);
           this.isPageLoadingDisplay = false;
@@ -119,7 +119,7 @@ export class RessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE]);
   }
 
   public traiterValidationVosRessourcesEventEmitter(): void {

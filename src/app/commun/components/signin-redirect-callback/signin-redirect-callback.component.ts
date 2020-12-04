@@ -29,11 +29,11 @@ export class SigninRedirectCallbackComponent implements OnInit {
         if(this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
           this.sessionPeConnectExpiredService.navigateToRouteActivated();
         } else {
-          this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+          this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
         }
       }, (erreur) => {
         this.isPageLoadingDisplay = false;
-        this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+        this.router.navigate([RoutesEnum.HOMEPAGE]);
       });
   }
 

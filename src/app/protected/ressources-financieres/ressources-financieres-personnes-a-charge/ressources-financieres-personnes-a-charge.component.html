@@ -10,46 +10,6 @@
                 Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat2(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
             </span>
             <div
-                class="form-group mt-2"
-                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireAAH">
-                <div class="row mb-2">
-                    <label
-                        class="label"
-                        for="allocationMensuelleNetAAH">
-                        * Allocation Adulte Handicapé (AAH)
-                    </label>
-                </div>
-                <div class="row">
-                    <input
-                        name="allocationMensuelleNetAAH"
-                        type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        min="0"
-                        maxlength="6"
-                        class="form-control"
-                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
-                        placeholder="Montant"
-                        inputmode="decimal"
-                        required
-                        #allocationMensuelleNetAAH="ngModel">
-                    <span class="text-side-input">€</span>
-                    <span class="text-2-side-input">du mois dernier</span>
-                </div>
-                <div class="row">
-                    <span
-                        class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                </div>
-            </div>
-            <div
                 class="form-group"
                 *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
                 <div class="row mb-2">
@@ -91,12 +51,80 @@
             </div>
             <div
                 class="form-group"
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireARE">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetARE">
+                        * ARE (Allocation Retour Emploi)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetARE"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control d-inline"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetARE="ngModel">
+                    <span class="text-side-input d-inline">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireASS">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="allocationMensuelleNetASS">
+                        * ASS (Allocation Solidarité Spécifique)
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="allocationMensuelleNetASS"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control d-inline"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #allocationMensuelleNetASS="ngModel">
+                    <span class="text-side-input d-inline">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
+            <div
+                class="form-group"
                 *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireRSA">
                 <div class="row mb-2">
                     <label
                         class="label"
                         for="allocationMensuelleNetRSA">
-                        * Revenu Solidarité Active (RSA)
+                        * RSA (Revenu Solidarité Active)
                     </label>
                 </div>
                 <div class="row">
@@ -130,69 +158,41 @@
                 </div>
             </div>
             <div
-                class="form-group"
-                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireARE">
+                class="form-group mt-2"
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireAAH">
                 <div class="row mb-2">
                     <label
                         class="label"
-                        for="allocationMensuelleNetARE">
-                        * Allocation Retour Emploi (ARE)
+                        for="allocationMensuelleNetAAH">
+                        * AAH (Allocation Adulte Handicapé)
                     </label>
                 </div>
                 <div class="row">
                     <input
-                        name="allocationMensuelleNetARE"
+                        name="allocationMensuelleNetAAH"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         min="0"
                         maxlength="6"
-                        class="form-control d-inline"
-                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE"
+                        class="form-control"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
                         placeholder="Montant"
                         inputmode="decimal"
                         required
-                        #allocationMensuelleNetARE="ngModel">
-                    <span class="text-side-input d-inline">€</span>
-                    <span class="text-2-side-input">du mois dernier</span>
-                </div>
-            </div>
-            <div
-                class="form-group"
-                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiaireASS">
-                <div class="row mb-2">
-                    <label
-                        class="label"
-                        for="allocationMensuelleNetASS">
-                        * Allocation Solidarité Spécifique (ASS)
-                    </label>
-                </div>
-                <div class="row">
-                    <input
-                        name="allocationMensuelleNetASS"
-                        type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        min="0"
-                        maxlength="6"
-                        class="form-control d-inline"
-                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS"
-                        placeholder="Montant"
-                        inputmode="decimal"
-                        required
-                        #allocationMensuelleNetASS="ngModel">
-                    <span class="text-side-input d-inline">€</span>
+                        #allocationMensuelleNetAAH="ngModel">
+                    <span class="text-side-input">€</span>
                     <span class="text-2-side-input">du mois dernier</span>
                 </div>
                 <div class="row">
                     <span
                         class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
-                        class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                        class="row error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>

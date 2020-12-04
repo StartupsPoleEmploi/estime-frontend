@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit {
 
   private checkDemandeurEmploiConnecte():void {
     if(this.individuConnectedService.isLoggedIn()) {
-      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
     } else {
       this.messageErreur = this.authorizationService.getMessageErreur();
       if(this.messageErreur) {

@@ -45,7 +45,7 @@ export class ModalSessionExpiredComponent implements OnInit {
 
     this.sessionStorageEstimeService.clear();
     this.cookiesEstimeService.clear();
-    this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
   public onClickButtonSeConnecterAvecPE(): void {

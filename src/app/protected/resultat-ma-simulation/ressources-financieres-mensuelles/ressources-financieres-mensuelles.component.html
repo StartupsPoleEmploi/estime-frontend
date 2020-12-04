@@ -47,6 +47,27 @@
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemRsaIsNotLast()">
             </li>
+            <li
+            class="list-group-item"
+            *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0">
+            <app-item-ressource-actuelle
+                codeRessource="IMMO"
+                [isColPictoArrowDisplay]="false"
+                libelleRessource="Revenus immobilier"
+                [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
+            </app-item-ressource-actuelle>
+            <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
+           </li>
+           <li
+            class="list-group-item"
+            *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
+            <app-item-ressource-actuelle
+                codeRessource="ENT"
+                [isColPictoArrowDisplay]="false"
+                libelleRessource="Revenus travailleur indépendant"
+                [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
+            </app-item-ressource-actuelle>
+           </li>
         </ul>
     </div>
 </div>

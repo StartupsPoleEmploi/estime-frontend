@@ -30,7 +30,7 @@ export class IsLoggedInGuard implements CanActivate {
         if(demandeurConnecte){
           this.peConnectService.login();
         } else {
-          this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+          this.router.navigate([RoutesEnum.HOMEPAGE]);
         }
       }
       return isLoggedIn;

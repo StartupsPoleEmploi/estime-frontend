@@ -66,6 +66,24 @@ export class DeConnecteRessourcesFinancieresService {
     return montant;
   }
 
+  public getRevenusImmobilierSur1Mois(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois) {
+      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois / 3);
+    }
+    return montant;
+  }
+
+  public getRevenusTravailleurIndependantSur1Mois(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois) {
+      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois / 3);
+    }
+    return montant;
+  }
+
   public getMontantAidesRessourcesConjoint(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();

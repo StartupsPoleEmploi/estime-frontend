@@ -94,6 +94,9 @@ input:-webkit-autofill:focus {
 
 /** end change style after autofill **/
 
+
+
+
 .card-form {
   border: 0;
   margin-top: 2rem;
@@ -102,22 +105,41 @@ input:-webkit-autofill:focus {
     padding-left: 4rem;
   }
   input {
+    color: $color-blue-1;
+    font-size: 1rem;
+    font-weight: bold;
     margin-top: auto;
     margin-bottom: auto;
     max-width: 100px;
     @media #{$medium-device}, #{$large-device} {
       max-width: 150px;
     }
-    font-size: 0.9rem;
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      font-size: 0.9rem;
+      opacity: 1; /* Firefox */
+      color: rgba(35,51,60,0.7)!important;
+      font-weight: 400 !important;
+    }
+
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      font-size: 0.9rem;
+      color: rgba(35,51,60,0.7)!important;
+      font-weight: 400 !important;
+    }
   }
   select {
-    font-size: 0.9rem;
+    color: $color-blue-1;
+    font-size: 1rem;
     margin-top: auto;
     margin-bottom: auto;
     width: auto;
     @media #{$small-device} {
-      max-width: 230px;
+      max-width: 235px;
     }
+
+  }
+  .option-selected {
+    font-weight: bold;
   }
   .interrogation-icon {
     cursor: pointer;

@@ -70,14 +70,6 @@ export class FormPersonneAChargeComponent implements OnInit {
     return isNouvellePersonneSituationFormDisplay;
   }
 
-  public getLibelleButtonSubmitForm(): string {
-    let libelle = 'Ajouter';
-    if(this.isModeModification) {
-      libelle = 'Valider';
-    }
-    return libelle;
-  }
-
   private resetNouvellePersonneAChargeForm(): void {
     this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
     this.isNouvellePersonnesAChargeFormSubmitted = false;

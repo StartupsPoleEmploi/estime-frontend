@@ -71,11 +71,11 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES]);
   }
 
   public onClickButtonSuivant(): void {
-    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES]);
   }
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {

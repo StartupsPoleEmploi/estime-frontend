@@ -31,6 +31,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public onClickLogoEstime(): void {
-    this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 }

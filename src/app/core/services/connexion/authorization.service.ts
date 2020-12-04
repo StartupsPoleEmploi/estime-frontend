@@ -37,7 +37,7 @@ export class AuthorizationService {
 
   public completeLogout(): void {
     this.individuConnectedService.emitIndividuConnectedLogoutEvent();
-    this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
   public getMessageErreur(): MessageErreur {
@@ -53,7 +53,7 @@ export class AuthorizationService {
     if (this.activatedRoute.snapshot.queryParams.state === peConnectPayload.state) {
       return this.estimeApiService.authentifier(peConnectPayload);
     } else {
-      this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.HOMEPAGE]);
     }
   }
 

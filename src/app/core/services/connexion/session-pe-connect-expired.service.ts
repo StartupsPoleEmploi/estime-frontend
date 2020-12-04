@@ -63,12 +63,12 @@ export class SessionPeConnectExpiredService {
 
   private traiterReconnexionMemeIndividu(): void {
     const pathRouteActivated = this.sessionStorageEstimeService.getPathRouteActivatedByUser();
-    this.router.navigate([pathRouteActivated], { replaceUrl: true });
+    this.router.navigate([pathRouteActivated]);
     this.sessionStorageEstimeService.clearPathRouteActivatedByUser();
   }
 
   private traiterReconnexionIndividuDifferent(): void {
     this.sessionStorageEstimeService.clear();
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 }

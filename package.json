@@ -3,7 +3,7 @@
   "version": "1.0.0-RC",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --port 9001",
+    "start": "ng serve --open --host localhost.estime --port 9001",
     "build:dev": "ng build",
     "build:prod": "npm install && ng build --prod ",
     "test": "ng test",

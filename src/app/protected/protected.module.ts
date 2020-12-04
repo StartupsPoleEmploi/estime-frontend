@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres/ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres/ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -46,12 +48,14 @@ import { BnNgIdleService } from 'bn-ng-idle';
     AccordionModule.forRoot(),
     AlertModule.forRoot(),
     BrowserAnimationsModule,
+    BrowserModule,
     ButtonsModule.forRoot(),
     CommunModule,
     FormsModule,
     ReactiveFormsModule,
     PopoverModule.forRoot(),
-    ProtectedRoutingModule
+    ProtectedRoutingModule,
+    RouterModule
   ],
   providers: [BnNgIdleService]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FuturTravail } from '@models/futur-travail';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -39,6 +39,9 @@ export class MonFuturTravailComponent implements OnInit {
     this.loadDataFuturTravail();
   }
 
+
+
+
   private loadDataFuturTravail(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if(demandeurEmploiConnecte.futurTravail) {
@@ -50,14 +53,14 @@ export class MonFuturTravailComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 
   public onSubmitFuturTravailForm(form: FormGroup): void {
     this.isFuturTravailFormSubmitted = true;
     if(form.valid) {
       this.deConnecteService.setFuturTravail(this.futurTravail);
-      this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.MES_INFORMATIONS_PERSONNELLES]);
     }
   }
 

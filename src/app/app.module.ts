@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommunModule } from './commun/commun.module';
 import { CoreModule } from './core/core.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     BrowserModule,
     CommunModule,
-    CoreModule
+    CoreModule,
+    RouterModule
   ],
   providers: [
     {provide: Environment, useValue: environment},

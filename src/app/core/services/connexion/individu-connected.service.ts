@@ -18,7 +18,7 @@ export class IndividuConnectedService {
   }
 
   public getIndividuConnected(): Individu {
-    if(this.individuConnected === null) {
+    if(!this.individuConnected) {
       this.individuConnected = this.cookiesEstimeService.getIndividuConnected();
     }
     return this.individuConnected;

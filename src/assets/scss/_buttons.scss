@@ -196,7 +196,7 @@
 }
 
 .radio-button-style-1 {
-  border-color: $color-blue-2;
+  border-color: $color-blue-1;
   max-height: unset !important;
   max-width: fit-content;
   margin-right: 0.3rem;
@@ -210,6 +210,6 @@
 
 .radio-button-style-1:not(:disabled):not(.disabled).active {
   color: $color-white-1;
-  background-color: $color-blue-2;
-  border-color: $color-blue-2;
+  background-color: $color-blue-1;
+  border-color: $color-blue-1;
 }

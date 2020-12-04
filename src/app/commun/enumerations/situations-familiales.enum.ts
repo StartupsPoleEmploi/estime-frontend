@@ -1,4 +1,4 @@
 export enum SituationsFamilialesEnum {
-  SEULE = "seul(e)",
+  SEULE = "seul.e",
   EN_COUPLE = "en couple"
 }

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-
+import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from "@app/commun/components/not-found/not-found.component";
 import { SigninRedirectCallbackComponent } from '@app/commun/components/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from '@app/commun/components/signout-redirect-callback.component';
-import { NotFoundComponent } from "@app/commun/components/not-found/not-found.component";
-
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 const routes: Routes = [
@@ -17,8 +15,12 @@ const routes: Routes = [
 
 ];
 
+
+
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes)
+  ],
   exports: [RouterModule]
 })
 export class PublicRoutingModule { }

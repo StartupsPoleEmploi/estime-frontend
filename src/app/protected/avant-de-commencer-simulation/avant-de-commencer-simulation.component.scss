@@ -17,11 +17,19 @@
       }
       #text-info-simulation {
         padding-left: 0;
-        line-height: 0.9;
+        line-height: 18px;
+        span {
+          font-size: 0.8rem;
+          color: $color-blue-3;
+        }
+      }
+      #text-info-simulation2 {
+        padding-left: 0;
+        line-height: 18px;
         span {
           font-size: 0.7rem;
           @media #{$medium-device}, #{$large-device} {
-            font-size: 0.8rem;
+            font-size: 12px;
           }
           color: $color-blue-3;
         }

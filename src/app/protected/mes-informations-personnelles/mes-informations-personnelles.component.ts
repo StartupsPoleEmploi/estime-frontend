@@ -59,7 +59,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   public onClickButtonRetour(): void {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
-    this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL]);
   }
 
     public onClickCheckBoxSituationFamiliale(): void {
@@ -90,7 +90,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
-      this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE], { replaceUrl: true });
+      this.router.navigate([RoutesEnum.MES_PERSONNES_A_CHARGE]);
     }
   }
 

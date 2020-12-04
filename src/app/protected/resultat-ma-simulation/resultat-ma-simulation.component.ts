@@ -81,7 +81,7 @@ export class ResultatMaSimulationComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES], { replaceUrl: true });
+    this.router.navigate([RoutesEnum.RESSOURCES_FINANCIERES]);
   }
 
   public hasAidesObtenir(): boolean {

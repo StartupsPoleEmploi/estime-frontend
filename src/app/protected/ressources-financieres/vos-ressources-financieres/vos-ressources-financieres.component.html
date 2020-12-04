@@ -182,6 +182,7 @@
                     class="fit-content form-control"
                     data-width="auto"
                     required
+                    [ngClass]="{'option-selected': ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire !== 0}"
                     #nombreMoisCumulAssSalaire="ngModel">
                     <option
                         [value]="0"

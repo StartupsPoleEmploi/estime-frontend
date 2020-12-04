@@ -26,7 +26,6 @@ export class RessourcesFinancieresUtileService {
     return ressourcesFinancieres;
   }
 
-
   /**
    * Méthode permettant de remplacer les virgules présentes dans les montants
    * pour lesquels on autorise l'utilisateur à saisir un montant avec une virgule ou un point.

@@ -5,6 +5,7 @@ import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { AideSociale } from '@models/aide-sociale';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -22,6 +23,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   constructor(
     public deConnecteService: DeConnecteService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private screenService: ScreenService
   ) { }
 
@@ -92,6 +94,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
+
   }
 
   public isItemAssIsNotLast(): boolean {
@@ -99,20 +104,24 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 
   public isItemAahIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 
   public isItemRsaIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 
-  public isItemAplIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
+  public isItemRevenusImmobilierIsNotLast(): boolean {
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 }

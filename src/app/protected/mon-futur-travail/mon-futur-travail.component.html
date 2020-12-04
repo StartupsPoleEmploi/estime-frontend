@@ -75,6 +75,7 @@
                         class="form-control"
                         data-width="auto"
                         required
+                        [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
                         #nombreMoisCDD="ngModel">
                         <option [value]="null">Sélectionner</option>
                         <option
@@ -107,7 +108,7 @@
                         min="0"
                         maxlength="4"
                         class="form-control"
-                        placeholder="Nombre"
+                        placeholder="Nombre heures"
                         [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                         required
                         inputmode="decimal"
