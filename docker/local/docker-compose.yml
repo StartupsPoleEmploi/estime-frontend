@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   estime-frontend:
-    image: estime-frontend
+    image: estime-frontend:release-candidate
     ports:
       - 3000:8888
     environment:
