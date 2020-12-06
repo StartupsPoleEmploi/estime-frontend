@@ -8,9 +8,9 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/*
 
 #conf fail2ban
-RUN mkdir -p /var/run/fail2ban \
-&& mkdir -p /var/log \
-&& touch /var/log/auth.log
+RUN mkdir -p /var/run/fail2ban
+RUN mkdir -p /var/log
+RUN touch /var/log/auth.log
 COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/
 COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
 
