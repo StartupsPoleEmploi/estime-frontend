@@ -5,12 +5,14 @@ RUN apt-get update \
       fail2ban \
       perl \
       tzdata \
+      vim \
   && rm -rf /var/lib/apt/lists/*
 
 #conf fail2ban
 RUN mkdir -p /var/run/fail2ban/
 COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/jail.local
 COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
+RUN mkdir /var/run/toto
 
 #copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
