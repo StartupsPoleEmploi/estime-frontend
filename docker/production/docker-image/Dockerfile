@@ -9,10 +9,10 @@ RUN apt-get update \
 
 #conf fail2ban
 RUN mkdir -p /var/run/fail2ban
-COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/
+COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/jail.local
 COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
 
-#copy conf NGINX
+#copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
 COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 
@@ -34,7 +34,6 @@ RUN chown nginx:nginx startup.sh \
  && chown -R nginx:nginx /tmp  \
  && chown -R nginx:nginx /var/run/fail2ban
 
-#use non root user nginx
 USER nginx
 
 ENTRYPOINT ./startup.sh
