@@ -9,9 +9,7 @@ RUN apt-get update \
 
 #conf fail2ban
 RUN mkdir -p /var/run/fail2ban
-RUN mkdir -p /var/log
-RUN touch /var/log/auth.log
-COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/
+COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/jail.local
 COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
 
 #copy conf NGINX
