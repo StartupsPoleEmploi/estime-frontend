@@ -28,8 +28,6 @@ services:
         delay: 10s
       restart_policy:
         condition: on-failure
-    volumes:
-      - ./var/log/auth.log:/var/log/auth.log
 
 networks:
   estime:
