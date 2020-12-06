@@ -20,7 +20,7 @@ function start_nginx {
 
 function start_fail2ban {
   log 'start fail2ban'
-  #fail2ban-client -x start
+  fail2ban-client -x start
 }
 
 function start {

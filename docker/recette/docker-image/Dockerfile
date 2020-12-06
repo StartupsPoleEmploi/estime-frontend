@@ -5,15 +5,14 @@ RUN apt-get update \
       fail2ban \
       perl \
       tzdata \
-      vim \
   && rm -rf /var/lib/apt/lists/*
 
 #conf fail2ban
-RUN mkdir -pv /var/run/fail2ban/
+RUN mkdir -p /etc/fail2ban/run
+
+COPY ./docker/commun/fail2ban/fail2ban.conf /etc/fail2ban/
 COPY ./docker/commun/fail2ban/jail.conf /etc/fail2ban/jail.local
 COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
-RUN mkdir -pv /var/run/toto
-RUN mkdir -pv /etc/fail2ban/run
 
 #copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
@@ -35,7 +34,7 @@ RUN chown nginx:nginx startup.sh \
  && mkdir -p /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp \
  && touch  /tmp/nginx.pid \
  && chown -R nginx:nginx /tmp  \
- && chown -R nginx:nginx /var/run/fail2ban
+ && chown -R nginx:nginx /etc/fail2ban/run
 
 USER nginx
 
