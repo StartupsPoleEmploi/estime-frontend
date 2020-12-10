@@ -8,13 +8,6 @@ stages:
     - deploy-application-production
 
 build_application :
-    stage: build
-    tags:
-      - shell_executor
-    script:
-      - [...]
-
-build_application :
     stage: build-application
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
