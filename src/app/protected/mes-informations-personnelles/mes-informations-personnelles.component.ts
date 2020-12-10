@@ -29,8 +29,9 @@ export class MesInformationsPersonnellesComponent implements OnInit {
   isSituationConjointNotValide = false;
   situationFamiliale: SituationFamiliale;
 
-  situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
+  nationalitesEnum: typeof NationalitesEnum = NationalitesEnum;
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
+  situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
   @ViewChild('moisDateNaissance', { read: ElementRef }) moisDateNaissanceInput: ElementRef;
   @ViewChild('anneeDateNaissance', { read: ElementRef }) anneeDateNaissanceInput: ElementRef;
