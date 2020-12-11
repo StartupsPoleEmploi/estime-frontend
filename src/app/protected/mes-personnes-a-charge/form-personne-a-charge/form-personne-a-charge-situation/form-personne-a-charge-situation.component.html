@@ -8,18 +8,6 @@
     </div>
     <div class="row">
         <label
-            name="beneficiaireAAH"
-            class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH"
-            btnCheckbox
-            tabindex="0"
-            role="button"
-            (click)="onClickCheckBoxHasAAH()"
-            #beneficiaireAAH="ngModel"
-            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.AAH)">
-            {{situationPersonneEnum.AAH}}
-        </label>
-        <label
             name="salarie"
             class="btn radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.salarie"
@@ -30,18 +18,6 @@
             (click)="onClickCheckBoxIsSalarie()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SALARIE)">
             {{situationPersonneEnum.SALARIE}}
-        </label>
-        <label
-            name="beneficiaireRSA"
-            class="btn radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
-            btnCheckbox
-            tabindex="0"
-            role="button"
-            #hasRessourceAideEmploi="ngModel"
-            (click)="onClickCheckBoxHasRSA()"
-            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.RSA)">
-            {{situationPersonneEnum.RSA}}
         </label>
         <label
             name="beneficiaireARE"
@@ -66,6 +42,30 @@
             (click)="onClickCheckBoxHasASS()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.ASS)">
             {{situationPersonneEnum.ASS}}
+        </label>
+        <label
+            name="beneficiaireRSA"
+            class="btn radio-button-style-1"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
+            btnCheckbox
+            tabindex="0"
+            role="button"
+            #hasRessourceAideEmploi="ngModel"
+            (click)="onClickCheckBoxHasRSA()"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.RSA)">
+            {{situationPersonneEnum.RSA}}
+        </label>
+        <label
+            name="beneficiaireAAH"
+            class="btn radio-button-style-1"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH"
+            btnCheckbox
+            tabindex="0"
+            role="button"
+            (click)="onClickCheckBoxHasAAH()"
+            #beneficiaireAAH="ngModel"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.AAH)">
+            {{situationPersonneEnum.AAH}}
         </label>
         <label
             name="sansRessource"
