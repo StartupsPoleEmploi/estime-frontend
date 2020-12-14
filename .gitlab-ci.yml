@@ -14,7 +14,6 @@ build_frontend_application :
       entrypoint: [""]
     script:
       - npm run build:prod
-    allow_failure: false
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -61,8 +60,10 @@ build-docker-image-recette:
     dependencies:
       - build_frontend_application
     when: on_success
-    only:
-    - triggers
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
 
 generate-docker-stack-recette:
   stage: generate-docker-stack-recette
@@ -75,6 +76,9 @@ generate-docker-stack-recette:
   artifacts:
     paths:
       - ./docker/recette
+  dependencies:
+      - build-docker-image-recette
+  when: on_success
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
