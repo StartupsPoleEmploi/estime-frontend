@@ -61,6 +61,8 @@ build-docker-image-recette:
     dependencies:
       - build_frontend_application
     when: on_success
+    only:
+    - triggers
 
 generate-docker-stack-recette:
   stage: generate-docker-stack-recette
