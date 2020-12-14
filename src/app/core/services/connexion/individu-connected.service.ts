@@ -35,6 +35,7 @@ export class IndividuConnectedService {
   }
 
   public isLoggedIn(): boolean {
-    return this.cookiesEstimeService.getIndividuConnected() !== null;
+    const isLoggedIn = this.cookiesEstimeService.getIndividuConnected() !== null;
+    return isLoggedIn;
   }
 }

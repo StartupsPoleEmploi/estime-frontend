@@ -7,7 +7,6 @@
 
     <div class="card card-body card-form">
         <form
-            (ngSubmit)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
             [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
             #informationsPersonnellesForm="ngForm">
             <div class="form-group">
@@ -172,13 +171,14 @@
                     <div class="custom-control custom-radio">
                         <input
                             id="titreSejourValideTrue"
-                            name="titreSejourValide"
+                            name="titreSejourValideTrue"
                             type="radio"
                             class="custom-control-input"
                             [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
                             [value]="true"
                             required
-                            #titreSejourValide="ngModel">
+                            #titreSejourValide="ngModel"
+                            (keyup)="handleKeyUpOnButtonTitreSejour($event, true)">
                         <label
                             class="custom-control-label"
                             for="titreSejourValideTrue">
@@ -188,13 +188,14 @@
                     <div class="custom-control custom-radio ml-2">
                         <input
                             id="titreSejourValideFalse"
-                            name="titreSejourValide"
+                            name="titreSejourValideFalse"
                             type="radio"
                             class="custom-control-input"
                             [(ngModel)]="informationsPersonnelles.titreSejourEnFranceValide"
                             [value]="false"
                             required
-                            #titreSejourValide="ngModel">
+                            #titreSejourValide="ngModel"
+                            (keyup)="handleKeyUpOnButtonTitreSejour($event, false)">
                         <label
                             class="custom-control-label"
                             for="titreSejourValideFalse">
@@ -406,26 +407,27 @@
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
-            <div class="div-buttons-form row">
-                <button
-                    class="btn btn-primary-style-0"
-                    (click)="onClickButtonRetour()"
-                    type="button">
-                    <div>
-                        <img src="./assets/images/return-arrow.svg">
-                    </div>
-                    <div class="text-button">Retour</div>
-                </button>
-                <button
-                    class="btn btn-primary-style-3"
-                    type="submit">
-                    <div class="text-button">Suivant</div>
-                    <div>
-                        <img src="./assets/images/icon-bt-primaire.svg">
-                    </div>
-                </button>
-            </div>
         </form>
+        <div class="div-buttons-form row">
+            <button
+                class="btn btn-primary-style-0"
+                (click)="onClickButtonRetour()"
+                type="button">
+                <div>
+                    <img src="./assets/images/return-arrow.svg">
+                </div>
+                <div class="text-button">Retour</div>
+            </button>
+            <button
+                class="btn btn-primary-style-3"
+                type="submit"
+                (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">
+                <div class="text-button">Suivant</div>
+                <div>
+                    <img src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+        </div>
     </div>
 </div>
 

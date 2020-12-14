@@ -103,14 +103,20 @@ export class MesInformationsPersonnellesComponent implements OnInit {
 
   /************ gestion évènements press enter ************************/
 
-  public handleKeyUpOnButtonSituationFamiliale(event: any, value: boolean) {
+  public handleKeyUpOnButtonTitreSejour(event: any, value: boolean): void  {
+    if (event.keyCode === 13) {
+      this.informationsPersonnelles.titreSejourEnFranceValide = value;
+    }
+  }
+
+  public handleKeyUpOnButtonSituationFamiliale(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.situationFamiliale.isEnCouple = value;
       this.onClickCheckBoxSituationFamiliale();
     }
   }
 
-  public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string) {
+  public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void  {
     if (event.keyCode === 13) {
       if(situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAidesSociales.beneficiaireAAH = !this.beneficiaireAidesSociales.beneficiaireAAH;
@@ -127,7 +133,7 @@ export class MesInformationsPersonnellesComponent implements OnInit {
     }
   }
 
-  public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string) {
+  public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string): void  {
     if (e.keyCode === 13) {
       if(situationConjoint === this.situationPersonneEnum.AAH) {
         this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH;
