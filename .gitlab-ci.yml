@@ -59,6 +59,7 @@ build-docker-image-recette:
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     dependencies:
     - build_frontend_application
+    when: on_success
 
 generate-docker-stack-recette:
   stage: generate-docker-stack-recette
