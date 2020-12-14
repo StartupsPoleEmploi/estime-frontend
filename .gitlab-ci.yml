@@ -94,11 +94,6 @@ deploy_application_recette:
       - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/scripts/deploy.sh $CI_PROJECT_DIR/docker/recette/estime-frontend-stack.yml $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
-    dependencies:
-    - build-docker-image-recette
-    - generate-docker-stack-recette
-    only:
-      - on_success
     when: manual
 
 build-docker-image-production:
