@@ -74,6 +74,8 @@ generate-docker-stack-recette:
   artifacts:
     paths:
       - ./docker/recette
+  dependencies:
+    - build_frontend_application
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
