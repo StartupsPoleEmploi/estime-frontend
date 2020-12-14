@@ -1,12 +1,13 @@
 stages:
     - build-application
-    - build-docker-configuration
+    - build-docker-image-recette
+    - generate-docker-stack-recette
     - deploy-application-recette
     - build-docker-image-production
     - generate-docker-stack-production
     - deploy-application-production
 
-build_frontend_application :
+build_application :
     stage: build-application
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
@@ -35,7 +36,7 @@ sonar_quality_analyse :
       SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
-    - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=estime-frontend -Dsonar.sources=${CI_PROJECT_DIR}/src/app
+    - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.projectKey=estime-frontend -Dsonar.sources=src
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -48,7 +49,7 @@ sonar_quality_analyse :
 
 
 build-docker-image-recette:
-    stage: build-docker-configuration
+    stage: build-docker-image-recette
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
@@ -56,15 +57,13 @@ build-docker-image-recette:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
-    dependencies:
-    - build_frontend_application
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
 
 generate-docker-stack-recette:
-  stage: build-docker-configuration
+  stage: generate-docker-stack-recette
   image:
     # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
     name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
@@ -74,8 +73,6 @@ generate-docker-stack-recette:
   artifacts:
     paths:
       - ./docker/recette
-  dependencies:
-    - build_frontend_application
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
