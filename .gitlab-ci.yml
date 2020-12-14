@@ -57,9 +57,6 @@ build-docker-image-recette:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
-    dependencies:
-      - build_frontend_application
-    when: on_success
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -76,9 +73,6 @@ generate-docker-stack-recette:
   artifacts:
     paths:
       - ./docker/recette
-  dependencies:
-      - build-docker-image-recette
-  when: on_success
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
