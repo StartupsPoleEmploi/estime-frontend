@@ -1,7 +1,6 @@
 stages:
     - build-application
-    - build-docker-image-recette
-    - generate-docker-stack-recette
+    - build-docker-configuration-recette
     - deploy-application-recette
     - build-docker-image-production
     - generate-docker-stack-production
@@ -48,8 +47,8 @@ sonar_quality_analyse :
       - .sonar/cache
 
 
-build-docker-image-recette:
-    stage: build-docker-image-recette
+build-docker-image:
+    stage: build-docker-configuration-recette
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
@@ -62,8 +61,8 @@ build-docker-image-recette:
       changes:
         - src/**/*
 
-generate-docker-stack-recette:
-  stage: generate-docker-stack-recette
+generate-docker-stack:
+  stage: build-docker-configuration-recette
   image:
     # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
     name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
