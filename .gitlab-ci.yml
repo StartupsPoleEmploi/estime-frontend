@@ -34,7 +34,7 @@ sonar_quality_analyse :
       SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
-    - sonar-scanner -Dsonar.qualitygate.wait=true
+    - sonar-scanner -Dsonar.qualitygate.wait=true -Dsonar.sources=${CI_PROJECT_DIR}/src -Dsonar.exclusions=${CI_PROJECT_DIR}/dist/**/*,${CI_PROJECT_DIR}/node_modules/**/* -Dsonar.tests=${CI_PROJECT_DIR}/src -Dsonar.typescript.tsconfigPath=${CI_PROJECT_DIR}/tsconfig.sonar.json
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
