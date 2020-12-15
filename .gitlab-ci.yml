@@ -35,7 +35,7 @@ sonar_quality_analyse :
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
     - ls
-    - sonar-scanner -Dsonar.qualitygate.wait=true
+    - sonar-scanner -X -Dsonar.qualitygate.wait=true
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
