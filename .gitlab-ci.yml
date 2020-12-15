@@ -11,7 +11,7 @@ build_frontend_application :
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
       entrypoint: [""]
     script:
-      - npm run build:prod
+      #- npm run build:prod
       - npm run sonar
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
