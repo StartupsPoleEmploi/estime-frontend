@@ -30,6 +30,29 @@ build_frontend_application :
       <<: *global_cache
       policy: pull
 
+sonar_quality_analyse2 :
+    stage: build-application
+    image:
+      name: sonarsource/sonar-scanner-cli:latest
+    variables:
+      SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
+      SONAR_HOST_URL: "${SONAR_BETA_PE_HOST_URL}"
+      SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
+      GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
+    script:
+    - ls
+    - sonar-scanner
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
+    allow_failure: true
+    cache:
+      key: ${CI_JOB_NAME}
+      paths:
+      - .sonar/cache
+
+
 sonar_quality_analyse :
     stage: build-application
     image:
