@@ -33,7 +33,8 @@ build_frontend_application :
 sonar_quality_analyse :
     stage: build-application
     image:
-      name: sonarsource/sonar-scanner-cli:latest
+      name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
+      entrypoint: [""]
     variables:
       SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
       SONAR_HOST_URL: "${SONAR_BETA_PE_HOST_URL}"
