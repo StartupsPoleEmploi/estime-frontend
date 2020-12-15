@@ -1,0 +1,10 @@
+/*
+  This is tsconfig is not used for compilation. It is here to support sonarqube.
+*/
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "rootDir": "src"
+  }
+}
