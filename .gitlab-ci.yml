@@ -12,6 +12,7 @@ build_frontend_application :
       entrypoint: [""]
     script:
       - npm run build:prod
+      - npm run sonar
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
