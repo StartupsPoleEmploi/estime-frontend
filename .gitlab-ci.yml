@@ -41,7 +41,7 @@ sonar_quality_analyse2 :
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
     - ls
-    - sonar-scanner
+    - sonar-scanner -Dsonar.qualitygate.wait=true
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -65,7 +65,7 @@ sonar_quality_analyse :
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
     - npm install
-    - sonar-scanner
+    - npm run sonar -- -Dsonar.host.url=https://sonarqube.beta.pole-emploi.fr -Dsonar.login=085940cf6314da1f63d110d63e78e9081f20c800
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
