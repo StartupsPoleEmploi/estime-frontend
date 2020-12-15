@@ -100,17 +100,35 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private unsetRessourcesFinancieres(): void {
-    this.nouvellePersonneACharge.ressourcesFinancieres = null;
-    this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
-    this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-    this.nouvellePersonneACharge.informationsPersonnelles.createurEntreprise = false;
-    this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
+    if(this.nouvellePersonneACharge.ressourcesFinancieres) {
+      this.nouvellePersonneACharge.ressourcesFinancieres = null;
+    }
+    this.resetInformationsPersonnelles();
+    this.resetBeneficiaireAidesSociales();
   }
 
   private creerRessourcesFinancieres(): void {
     this.nouvellePersonneACharge.ressourcesFinancieres = new RessourcesFinancieres();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+  }
+
+  private resetInformationsPersonnelles(): void {
+    if(this.nouvellePersonneACharge.informationsPersonnelles) {
+      this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.createurEntreprise = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
+     }
+  }
+
+  private resetBeneficiaireAidesSociales(): void {
+    if(this.nouvellePersonneACharge.beneficiaireAidesSociales) {
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH = false;
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE = false;
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
+    }
   }
 
   /** gestion évènements champ date naissance personne à charge **/
