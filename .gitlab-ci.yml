@@ -61,6 +61,12 @@ cypress-e2e:
       changes:
         - src/**/*
     allow_failure: true
+    artifacts:
+      when: always
+      paths:
+        - cypress/videos/**/*.mp4
+        - cypress/screenshots/**/*.png
+      expire_in: 1 day
     cache:
       <<: *global_cache
 
