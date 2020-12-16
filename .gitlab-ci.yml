@@ -50,6 +50,7 @@ cypress-e2e:
     image:
       name: cypress/base:10
     script:
+    - npm install
     - npm run cy:run:record
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
