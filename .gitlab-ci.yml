@@ -60,7 +60,6 @@ cypress-e2e:
     - npm ci
     - npx cypress cache path
     - npx cypress cache list
-    - $(npm bin)/print-env CI
     - npm run cy:verify
     - npm run cy:info
     - npm run e2e:record
