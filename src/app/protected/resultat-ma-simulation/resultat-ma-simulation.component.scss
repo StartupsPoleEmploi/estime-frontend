@@ -14,12 +14,6 @@
       margin-left: auto;
       margin-right: auto;
     }
-    @media #{$medium-device} {
-      margin-left: -60px;
-    }
-    @media #{$large-device} {
-      margin-left: -190px;
-    }
     h3 {
       color: $color-blue-2;
       font-weight: 600;
