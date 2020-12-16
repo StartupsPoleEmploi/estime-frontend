@@ -45,6 +45,24 @@ sonar_quality_analyse :
       paths:
       - .sonar/cache
 
+cypress-e2e:
+    stage: build-application
+    image:
+      name: cypress/base:10
+    script:
+    - npm run cy:run:record
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
+    allow_failure: true
+    artifacts:
+      when: always
+      paths:
+        - cypress/videos/**/*.mp4
+        - cypress/screenshots/**/*.png
+      expire_in: 1 day
+
 build-docker-image-recette:
     stage: build-docker-configuration-recette
     image:
