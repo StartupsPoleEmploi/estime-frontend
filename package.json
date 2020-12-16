@@ -3,7 +3,7 @@
   "version": "1.0.0-RC",
   "scripts": {
     "build:dev": "ng build",
-    "build:prod": "npm install && ng build --prod ",
+    "build:prod": "npm ci && ng build --prod ",
     "cy:verify": "cypress verify",
     "cy:info": "cypress info",
     "cy:version": "cypress version",

@@ -57,23 +57,12 @@ cypress-e2e:
     image:
       name: cypress/base:10
     script:
-    - npm ci
-    - npx cypress cache path
-    - npx cypress cache list
-    - npm run cy:verify
-    - npm run cy:info
     - npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
     allow_failure: true
-    artifacts:
-      when: always
-      paths:
-        - cypress/videos/**/*.mp4
-        - cypress/screenshots/**/*.png
-      expire_in: 1 day
     cache:
       <<: *global_cache
       policy: pull
