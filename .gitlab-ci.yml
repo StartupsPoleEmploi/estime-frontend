@@ -62,7 +62,7 @@ cypress-e2e:
     - npx cypress cache list
     - npm run cy:verify
     - npm run cy:info
-    - npm run e2e:record
+    - npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
