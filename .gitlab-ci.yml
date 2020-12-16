@@ -6,13 +6,12 @@ stages:
     - deploy-application-production
 
 cache: &global_cache
-  key: ${CI_COMMIT_REF_SLUG}
+  key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
   paths:
     - .npm
     - cache/Cypress
     - node_modules
     - .sonar/cache
-  policy: pull-push
 
 build_frontend_application :
     stage: build-application
@@ -30,7 +29,6 @@ build_frontend_application :
         - ./dist
     cache:
       <<: *global_cache
-      policy: pull
 
 sonar_quality_analyse :
     stage: build-application
@@ -50,7 +48,6 @@ sonar_quality_analyse :
     allow_failure: true
     cache:
       <<: *global_cache
-      policy: pull
 
 cypress-e2e:
     stage: build-application
@@ -65,7 +62,6 @@ cypress-e2e:
     allow_failure: true
     cache:
       <<: *global_cache
-      policy: pull
 
 build-docker-image-recette:
     stage: build-docker-configuration-recette
