@@ -5,6 +5,15 @@ stages:
     - build-docker-configuration-production
     - deploy-application-production
 
+cache: &global_cache
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+    - cache/Cypress
+    - node_modules
+    - .sonar/cache
+  policy: pull-push
+
 build_frontend_application :
     stage: build-application
     image:
@@ -20,9 +29,8 @@ build_frontend_application :
       paths:
         - ./dist
     cache:
-      key: ${CI_COMMIT_REF_SLUG}
-      paths:
-        - node_modules/
+      <<: *global_cache
+      policy: pull
 
 sonar_quality_analyse :
     stage: build-application
@@ -41,17 +49,21 @@ sonar_quality_analyse :
         - src/**/*
     allow_failure: true
     cache:
-      key: ${CI_JOB_NAME}
-      paths:
-      - .sonar/cache
+      <<: *global_cache
+      policy: pull
 
 cypress-e2e:
     stage: build-application
     image:
       name: cypress/base:10
     script:
-    - npm install
-    - npm run cy:run:record
+    - npm ci
+    - npx cypress cache path
+    - npx cypress cache list
+    - $(npm bin)/print-env CI
+    - npm run cy:verify
+    - npm run cy:info
+    - npm run e2e:record
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -63,6 +75,9 @@ cypress-e2e:
         - cypress/videos/**/*.mp4
         - cypress/screenshots/**/*.png
       expire_in: 1 day
+    cache:
+      <<: *global_cache
+      policy: pull
 
 build-docker-image-recette:
     stage: build-docker-configuration-recette

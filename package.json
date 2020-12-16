@@ -2,16 +2,21 @@
   "name": "estime",
   "version": "1.0.0-RC",
   "scripts": {
-    "cy:open": "cypress open",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress info",
+    "cy:version": "cypress version",
+    "cy:cache:list": "cypress cache list",
     "cy:run": "cypress run",
     "cy:run:record": "cypress run --record",
+    "cy:open": "cypress open",
     "ng": "ng",
     "start": "ng serve --open --host localhost.estime --port 9001",
     "build:dev": "ng build",
     "build:prod": "npm install && ng build --prod ",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "cypress run",
+    "e2e:record": "cypress run --record"
   },
   "private": true,
   "dependencies": {
