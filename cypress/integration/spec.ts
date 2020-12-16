@@ -1,4 +1,6 @@
-describe('En tant qu\'utilisateur, lorsque j\'accède au service Estime sur https//estime.beta.pole-emploi.fr', () => {
+const specTitle = require("cypress-sonarqube-reporter/specTitle");
+
+describe(specTitle('En tant qu\'utilisateur, lorsque j\'accède au service Estime sur https//estime.beta.pole-emploi.fr'), () => {
   beforeEach(() => {
     cy.visit('/');
   });

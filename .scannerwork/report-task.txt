@@ -2,5 +2,5 @@ projectKey=estime-frontend
 serverUrl=https://sonarqube.beta.pole-emploi.fr
 serverVersion=8.2.0.32929
 dashboardUrl=https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend
-ceTaskId=AXZnLYtCPeagRHXYGlHc
-ceTaskUrl=https://sonarqube.beta.pole-emploi.fr/api/ce/task?id=AXZnLYtCPeagRHXYGlHc
+ceTaskId=AXZrVdoYLtoe56miVVpj
+ceTaskUrl=https://sonarqube.beta.pole-emploi.fr/api/ce/task?id=AXZrVdoYLtoe56miVVpj
