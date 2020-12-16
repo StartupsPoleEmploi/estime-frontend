@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PeConnectPayload } from '@models/pe-connect-payload';
-import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
 import { Individu } from '@models/individu';
-import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { PeConnectPayload } from '@models/pe-connect-payload';
+import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { IndividuConnectedService } from '../connexion/individu-connected.service';
 
 @Injectable({ providedIn: 'root' })

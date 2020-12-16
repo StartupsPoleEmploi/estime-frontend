@@ -1,12 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
-import { PeConnectPayload } from '@models/pe-connect-payload';
+import { Individu } from '@app/commun/models/individu';
 import { Environment } from '@models/environment';
+import { PeConnectPayload } from '@models/pe-connect-payload';
 import { SessionStorageService } from "ngx-webstorage";
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
-import { IndividuConnectedService } from './individu-connected.service';
-import { Individu } from '@app/commun/models/individu';
 
 @Injectable({ providedIn: 'root' })
 export class PeConnectService {

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
-import { SessionStorageEstimeService } from "@app/core/services/storage/session-storage-estime.service";
-import { CookiesEstimeService } from "@app/core/services/storage/cookies-estime.service";
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
-import { SessionPeConnectExpiredService } from '@app/core/services/connexion/session-pe-connect-expired.service';
+import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
+import { CookiesEstimeService } from "@app/core/services/storage/cookies-estime.service";
+import { SessionStorageEstimeService } from "@app/core/services/storage/session-storage-estime.service";
 import { BnNgIdleService } from 'bn-ng-idle';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-modal-session-expired',
