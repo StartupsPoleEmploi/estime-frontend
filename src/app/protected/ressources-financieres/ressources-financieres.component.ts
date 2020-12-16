@@ -16,7 +16,7 @@ import { RessourcesFinancieresConjointComponent } from '@app/protected/ressource
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
-import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/deConnecte-simulation-aides-sociales.service";
+import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 
 @Component({
   selector: 'app-ressources-financieres',

@@ -11,7 +11,7 @@ import { RoutesEnum } from '@enumerations/routes.enum';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
-import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/deConnecte-simulation-aides-sociales.service";
+import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 
 @Component({
   selector: 'app-resultat-ma-simulation',
@@ -91,7 +91,7 @@ export class ResultatMaSimulationComponent implements OnInit {
     }
     if (Object.entries(this.simulationSelected.mesAides).length === 1) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if (codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+        if (aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
           hasAidesObtenir = true;
         }
       }

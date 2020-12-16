@@ -55,7 +55,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       }
       if(Object.entries(this.simulationSelected.mesAides).length === 1) {
         for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-          if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
             hasAidesObtenir = true;
           }
         }
@@ -72,7 +72,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
     for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-      if(codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+      if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
         size += 1;
       }
     }

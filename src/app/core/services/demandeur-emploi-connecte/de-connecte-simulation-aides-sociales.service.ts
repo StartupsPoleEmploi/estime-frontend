@@ -47,7 +47,7 @@ export class DeConnecteSimulationAidesSocialesService {
     let montant = 0;
     if (simulation.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
-        if (aide) {
+        if (codeAide && aide) {
           montant += this.numberUtileService.getMontantSafe(aide.montant);
         }
       }

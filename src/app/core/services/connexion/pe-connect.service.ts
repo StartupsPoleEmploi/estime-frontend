@@ -67,8 +67,8 @@ export class PeConnectService {
   private createPeConnectPayload(): void {
     this.peConnectPayload = new PeConnectPayload();
     this.peConnectPayload.clientId = this.environment.peconnectClientid;
-    this.peConnectPayload.nonce = this.generateRandomValue(),
-      this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}signin-callback`;
+    this.peConnectPayload.nonce = this.generateRandomValue();
+    this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}signin-callback`;
     this.peConnectPayload.state = this.generateRandomValue();
 
     this.sessionStorageService.store(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY, this.peConnectPayload);

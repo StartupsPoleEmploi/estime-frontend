@@ -44,7 +44,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const test = this.ressourcesFinancieres;
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
   }
 
