@@ -8,9 +8,9 @@ stages:
 cache: &global_cache
   key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
   paths:
-    - .npm
+    - .npm/
     - cache/Cypress
-    - node_modules
+    - node_modules/
     - .sonar/cache
 
 build_frontend_application :
@@ -54,6 +54,7 @@ cypress-e2e:
     image:
       name: cypress/base:10
     script:
+    - npm ci
     - npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
