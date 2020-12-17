@@ -23,6 +23,7 @@
                     <div class="btn-group-input-date">
                         <input
                             name="jourDateNaissanceNouvellePersonne"
+                            data-testid="input-jour-date-naissance"
                             (focus)="onFocusDateNaissanceNouvellePersonne()"
                             class="form-control jour-input"
                             (change)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
@@ -39,6 +40,7 @@
                             ngAutofocus>
                         <input
                             name="moisDateNaissanceNouvellePersonne"
+                            data-testid="input-mois-date-naissance"
                             (focus)="onFocusDateNaissanceNouvellePersonne()"
                             class="form-control mois-input"
                             (change)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
@@ -54,6 +56,7 @@
                             #moisDateNaissanceNouvellePersonne="ngModel">
                         <input
                             name="anneeDateNaissanceNouvellePersonne"
+                            data-testid="input-annee-date-naissance"
                             (focus)="onFocusDateNaissanceNouvellePersonne()"
                             class="form-control annee-input"
                             maxlength="4"
@@ -98,7 +101,9 @@
             <div class="div-buttons-form">
                 <button
                     class="btn btn-primary-style-4"
-                    type="submit">
+                    type="submit"
+                    data-testid="btn-valider-personne-charge"
+                    >
                     <div class="text-button">Valider</div>
                 </button>
             </div>

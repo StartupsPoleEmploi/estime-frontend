@@ -21,6 +21,7 @@
                             <input
                                 id="typeContratCDI"
                                 name="typeContratCDI"
+                                data-testid="btn-type-contrat-cdi"
                                 type="radio"
                                 class="custom-control-input"
                                 [(ngModel)]="futurTravail.typeContrat"
@@ -39,6 +40,7 @@
                             <input
                                 id="typeContratCDD"
                                 name="typeContratCDD"
+                                data-testid="btn-type-contrat-cdd"
                                 type="radio"
                                 class="custom-control-input"
                                 [(ngModel)]="futurTravail.typeContrat"
@@ -70,6 +72,7 @@
                     <select
                         id="nombreMoisCDD"
                         name="nombreMoisCDD"
+                        data-testid="select-nombre--mois-cdd"
                         [(ngModel)]="futurTravail.nombreMoisContratCDD"
                         class="form-control"
                         data-width="auto"
@@ -103,6 +106,7 @@
                         id="dureeHebdomadaire"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         name="dureeHebdomadaire"
+                        data-testid="input-duree-hebdomadaire"
                         type="text"
                         min="0"
                         maxlength="4"
@@ -140,6 +144,7 @@
                         id="salaireMensuelNet"
                         pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
                         name="salaireMensuelNet"
+                        data-testid="input-salaire-mensuel-net"
                         type="text"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         min="0"
@@ -175,6 +180,7 @@
                     <input
                         id="distanceDomicileLieuTravail"
                         name="distanceDomicileLieuTravail"
+                        data-testid="input-distance-domicile-lieu-travail"
                         type="text"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                         min="0"
@@ -211,6 +217,7 @@
                     <input
                         id="nombreTrajetsDomicileTravail"
                         name="nombreTrajetsDomicileTravail"
+                        data-testid="input-nombre-trajets-domicile-travail"
                         type="text"
                         min="0"
                         maxlength="2"
@@ -233,7 +240,8 @@
         <div class="div-buttons-form row">
           <button
               class="btn btn-primary-style-0"
-              (click)="onClickButtonRetour()">
+              (click)="onClickButtonRetour()"
+              data-testid="btn-futur-travail-retour">
               <div>
                   <img src="./assets/images/return-arrow.svg">
               </div>
@@ -242,6 +250,7 @@
           <button
               class="btn btn-primary-style-3"
               type="submit"
+              data-testid="btn-futur-travail-suivant"
               (click)="onSubmitFuturTravailForm(futurTravailForm)">
               <div class="text-button">Suivant</div>
               <div>

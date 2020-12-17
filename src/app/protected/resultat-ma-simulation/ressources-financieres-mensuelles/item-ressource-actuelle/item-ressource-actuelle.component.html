@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" data-testid="row-montant-ressource">
     <div class="col-1 col-md-2 card-code-ressource paie mt-auto mb-auto"
          [ngClass]="[codeRessource.toLowerCase()]">
         <span>{{codeRessource}}</span>
@@ -9,8 +9,8 @@
             <span *ngIf="organismeRessource" class="span-organisme">{{organismeRessource}}</span>
         </div>
     </div>
-    <div class="col-3 col-md-2 mt-auto mb-auto ml-auto col-montant">
-        <span>
+    <div class="col-3 col-md-2 mt-auto mb-auto ml-auto col-montant" data-testid="col-montant-ressource">
+        <span data-testid="span-montant-ressource">
             {{montantRessource}} €
         </span>
     </div>

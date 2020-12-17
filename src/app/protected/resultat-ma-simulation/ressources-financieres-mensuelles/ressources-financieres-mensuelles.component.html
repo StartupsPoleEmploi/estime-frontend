@@ -5,6 +5,7 @@
             <li class="list-group-item">
                 <app-item-ressource-actuelle
                     codeRessource="PAIE"
+                    data-testid="row-paie"
                     [isColPictoArrowDisplay]="false"
                     libelleRessource="Salaire net"
                     [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
@@ -16,6 +17,7 @@
                 *ngIf="getMontantASS() > 0">
                 <app-item-ressource-actuelle
                     codeRessource="ASS"
+                    data-testid="row-ass"
                     [isColPictoArrowDisplay]="false"
                     libelleRessource="Allocation de Solidarité Spécifique"
                     [montantRessource]="this.getMontantASS()"

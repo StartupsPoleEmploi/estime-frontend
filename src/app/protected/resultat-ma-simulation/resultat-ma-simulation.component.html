@@ -15,7 +15,7 @@
       <div id="card-revenus-actuels" class="col-12 col-md-6">
         <div class="card">
           <h3>Revenus et aides</h3>
-          <span>{{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €</span>
+          <span data-testid="span-revenus-aides-actuelles">{{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €</span>
         </div>
       </div>
     </div>
@@ -33,6 +33,7 @@
                 <div
                     [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel)}"
                     class="card-body"
+                    data-testid="card-simulation-mensuel"
                     (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
                     <div class="row">
                         <div class="col-6 mt-auto mb-auto p-0 col-md-12">

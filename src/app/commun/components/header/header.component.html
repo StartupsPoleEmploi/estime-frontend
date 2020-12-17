@@ -6,8 +6,8 @@
       <div id="div-beta" class="ml-2">
         <span>BETA</span>
       </div>
-      <button class="btn btn-primary-style-1 btn-signout d-none d-sm-block mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()">Se deconnecter</button>
-      <img id="signout-sm" class="d-block d-sm-none ml-auto mr-2" *ngIf="this.isLoggedIn" (click)="logout()" src="./assets/images/signout.svg" />
+      <button class="btn btn-primary-style-1 btn-signout d-none d-sm-block mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()" data-testid=btn-se-deconnecter>Se deconnecter</button>
+      <img id="signout-sm" class="d-block d-sm-none ml-auto mr-2" *ngIf="this.isLoggedIn" (click)="logout()" src="./assets/images/signout.svg"/>
     </div>
   </div>
 </header>

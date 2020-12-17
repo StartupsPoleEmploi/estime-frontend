@@ -132,6 +132,7 @@
                     <select
                         id="nationalite"
                         name="nationalite"
+                        data-testid="select-nationalite"
                         [(ngModel)]="informationsPersonnelles.nationalite"
                         class="form-control"
                         [ngClass]="{'option-selected':this.informationsPersonnelles.nationalite !== null}"
@@ -289,6 +290,7 @@
                         (click)="onClickCheckBoxSituationFamiliale()"
                         name="situationFamilialeDemandeur"
                         class="btn radio-button-style-1"
+                        data-testid="btn-situation-familiale-seul"
                         [btnRadio]="false"
                         tabindex="0"
                         role="button"
@@ -410,6 +412,7 @@
         </form>
         <div class="div-buttons-form row">
             <button
+                data-testid="btn-ma-situation-retour"
                 class="btn btn-primary-style-0"
                 (click)="onClickButtonRetour()"
                 type="button">
@@ -419,6 +422,7 @@
                 <div class="text-button">Retour</div>
             </button>
             <button
+                data-testid="btn-ma-situation-suivant"
                 class="btn btn-primary-style-3"
                 type="submit"
                 (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">

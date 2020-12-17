@@ -15,6 +15,7 @@
                 <input
                     name="allocationsLogementMensuellesNetFoyer"
                     pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    data-testid="input-apl"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     min="0"
@@ -50,6 +51,7 @@
             <div class="row">
                 <input
                     name="allocationsFamilialesMensuellesNetFoyer"
+                    data-testid="input-af"
                     pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
@@ -108,7 +110,10 @@
             </div>
         </div>
         <div class="div-buttons-form row">
-            <button class="btn btn-primary-style-4" type="submit">
+            <button
+              class="btn btn-primary-style-4"
+              type="submit"
+              data-testid="btn-ressources-foyer-valider">
                 <div class="text-button">Valider</div>
             </button>
         </div>

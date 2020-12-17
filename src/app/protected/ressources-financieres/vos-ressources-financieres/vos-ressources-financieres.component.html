@@ -14,6 +14,7 @@
                 <input
                     name="allocationJournaliereNetASS"
                     type="text"
+                    data-testid="input-allocation-journaliere-net-ass"
                     pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     min="0"
@@ -51,6 +52,7 @@
                 <div class="row btn-group-input-date">
                     <input
                         name="jourDateDerniereOuvertureDroitASS"
+                        data-testid="input-jour-date-derniere-ouverture-droit-ass"
                         (focus)="onFocusDateDerniereOuvertureDroitASS()"
                         class="form-control jour-input"
                         (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
@@ -66,6 +68,7 @@
                         #jourDateDerniereOuvertureDroitASS="ngModel">
                     <input
                         name="moisDateDerniereOuvertureDroitASS"
+                        data-testid="input-mois-date-derniere-ouverture-droit-ass"
                         (focus)="onFocusDateDerniereOuvertureDroitASS()"
                         class="form-control mois-input"
                         (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
@@ -81,6 +84,7 @@
                         #moisDateDerniereOuvertureDroitASS="ngModel">
                     <input
                         name="anneeDateDerniereOuvertureDroitASS"
+                        data-testid="input-annee-date-derniere-ouverture-droit-ass"
                         class="form-control annee-input"
                         maxlength="4"
                         type="text"
@@ -127,6 +131,7 @@
                     <input
                         id="hasCumuleAssEtSalaireOui"
                         name="hasCumuleAssEtSalaireOui"
+                        data-testid="btn-has-cumule-ass-et-salaire-oui"
                         type="radio"
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
@@ -145,6 +150,7 @@
                     <input
                         id="hasCumuleAssEtSalaireNon"
                         name="hasCumuleAssEtSalaireNon"
+                        data-testid="btn-has-cumule-ass-et-salaire-non"
                         type="radio"
                         class="custom-control-input"
                         [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
@@ -325,6 +331,7 @@
     <div class="div-buttons-form row">
       <button
           class="btn btn-primary-style-4"
+          data-testid="btn-vos-ressources-valider"
           (click)="onSubmitRessourcesFinancieresForm(vosRessourcesFinancieresForm)">
           <div class="text-button">Valider</div>
       </button>
