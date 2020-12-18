@@ -53,10 +53,11 @@ cypress-e2e:
     stage: build-application
     image:
       name: cypress/base:10
+    variables:
+      SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
     script:
+    - echo "$SONAR_TOKEN"
     - npm ci
-    - echo $SONAR_BETA_TOKEN
-    - echo '$SONAR_BETA_TOKEN'
     - print-env
     - npm run e2e
     rules:
