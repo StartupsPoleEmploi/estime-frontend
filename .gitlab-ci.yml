@@ -55,8 +55,7 @@ cypress-e2e:
       name: cypress/base:10
     script:
     - npm ci
-    - echo 'coucou'
-    - echo $PATH
+    - echo ${SONAR_BETA_TOKEN}
     - print-env
     - npm run e2e
     rules:
