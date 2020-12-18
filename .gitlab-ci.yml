@@ -57,7 +57,7 @@ cypress-e2e:
     - cd cypress/ci
     - p2 -t environment.ts.j2 -o ../environment.ts
     - cd ../..
-    - cat environment.ts
+    - cat cypress/environment.ts
     #- npm ci
     #- print-env
     #- npm run e2e
