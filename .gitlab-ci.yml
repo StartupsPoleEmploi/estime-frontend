@@ -56,7 +56,7 @@ cypress-e2e:
     script:
     - cd cypress/ci
     - cp hosts /etc/hosts
-    - p2 -t environment.ts.j2 -o ../environment.ts
+    - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
     - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
     - cd ../..
     - npm ci
