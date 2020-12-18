@@ -54,19 +54,14 @@ cypress-e2e:
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
-    - whoami
     - cd cypress/ci
-    - cat /etc/hosts
     - cp hosts /etc/hosts
-    - cat /etc/hosts
     - p2 -t environment.ts.j2 -o ../environment.ts
     - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
     - cd ../..
-    - cat cypress/environment.ts
-    - cat src/environments/environment.local.ts
-    #- npm ci
-    #- print-env
-    #- npm run e2e
+    - npm ci
+    - npm run start:ci &
+    - npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
