@@ -17,7 +17,7 @@
     "e2e:record": "cypress run --record",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --open --host localhost.estime --port 9001",
+    "start": "ng serve --open --host localhost.estime --port 9005",
     "start:ci": "ng serve --host localhost.estime --port 9001",
     "test": "ng test",
     "sonar": "sonar-scanner"

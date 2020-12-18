@@ -60,9 +60,9 @@ cypress-e2e:
     - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
     - cd ../..
     - npm ci
+    - npm install -g wait-on
     - npm run start:ci &
-    - sleep 60
-    - curl http://localhost.estime:9001/
+    - npm & wait-on http://localhost.estime:9001/
     - npm run cy:run:local
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
