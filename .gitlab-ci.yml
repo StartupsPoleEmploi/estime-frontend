@@ -61,7 +61,7 @@ cypress-e2e:
     - cd ../..
     - npm ci
     - npm run start:ci &
-    - npm run e2e
+    - npm run cy:run:local
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -70,7 +70,6 @@ cypress-e2e:
     artifacts:
       when: always
       paths:
-        - cypress/videos/**/*.mp4
         - cypress/screenshots/**/*.png
       expire_in: 1 day
     cache:
