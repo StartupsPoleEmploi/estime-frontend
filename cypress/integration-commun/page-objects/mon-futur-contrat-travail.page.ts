@@ -28,7 +28,6 @@ class MonFuturContratTravailPage {
 
   public clickOnSuivant(): void {
     cy.get('[data-testid=btn-futur-travail-suivant]').click();
-    cy.wait(1000);
   }
 }
 export default MonFuturContratTravailPage

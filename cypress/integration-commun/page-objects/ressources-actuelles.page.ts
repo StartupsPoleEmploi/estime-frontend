@@ -24,7 +24,6 @@ class RessourcesActuellesPage {
 
   public clickOnValiderRessourcesFoyer(): void {
     cy.get('[data-testid=btn-ressources-foyer-valider]').click();
-    cy.wait(1000);
   }
 
   public clickOnValiderVosRessources(): void {
@@ -33,6 +32,7 @@ class RessourcesActuellesPage {
 
   public clickOnObtenirMaSimulation(): void {
     cy.get('[data-testid=btn-obtenir-simulation]').click();
+    //wait pour attendre le retour du service effectuant la simulation
     cy.wait(3000);
   }
 }

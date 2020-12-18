@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["../node_modules/cypress", "**/*.ts", "utile/utile.js"],
+  "include": ["../node_modules/cypress", "**/*.ts", "integration-commun/utile/estime-session.service.ts"],
   "compilerOptions": {
     "sourceMap": false
   }

@@ -6,6 +6,7 @@ class HomePage {
   clickOnSeConnecterAvecPoleEmploi(nomUtilisateur: string, motDePasse: string) {
     cy.get('[data-testid=btn-pe-connect]').click();;
 
+    //wait pour affichage mise PE Connect
     cy.wait(3000);
 
     const mirePeConnectPage = new MirePeConnectPage();

@@ -1,41 +1,30 @@
 const specTitleSimulationDeASS = require("cypress-sonarqube-reporter/specTitle");
-import HomePage from '../../../support/page-objects/home.page';
-import MonFuturContratTravailPage from '../../../support/page-objects/mon-futur-contrat-travail.page';
-import MaSituationPage from '../../../support/page-objects/ma-situation.page'
+import HomePage from '../../../integration-commun/page-objects/home.page';
+import MonFuturContratTravailPage from '../../../integration-commun/page-objects/mon-futur-contrat-travail.page';
+import MaSituationPage from '../../../integration-commun/page-objects/ma-situation.page'
 import { NationalitesEnum } from '../../../../src/app/commun/enumerations/nationalites.enum'
-import PersonnesAChargePage from '../../../support/page-objects/personnes-a-charge.page';
-import RessourcesActuellesPage from '../../../support/page-objects/ressources-actuelles.page'
-import ResultatMaSimulationPage from '../../../support/page-objects/resultat-ma-simulation.page'
-import AvantDeCommencerPage from '../../../support/page-objects/avant-de-commencer.page'
-import HeaderSection from '../../../support/section-objects/header.section'
+import PersonnesAChargePage from '../../../integration-commun/page-objects/personnes-a-charge.page';
+import RessourcesActuellesPage from '../../../integration-commun/page-objects/ressources-actuelles.page'
+import ResultatMaSimulationPage from '../../../integration-commun/page-objects/resultat-ma-simulation.page'
+import AvantDeCommencerPage from '../../../integration-commun/page-objects/avant-de-commencer.page'
+import HeaderSection from '../../../integration-commun/section-objects/header.section'
+import EstimeSessionService from '../../../integration-commun/utile/estime-session.service'
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS'), () => {
 
   beforeEach(() => {
-    cy.clearLocalStorage();
-    cy.clearCookies();
-    cy.window().then(window => window.sessionStorage.clear());
     cy.visit('http://localhost.estime:9001/');
   });
 
   afterEach(() => {
-    let cookieValue: any = document.cookie.split('; ').find(row => row.startsWith('estime.peConnectIndividu')).split('=')[1];
-
-    cookieValue = cookieValue.replaceAll('%7B', '{');
-    cookieValue = cookieValue.replaceAll('%22', '"');
-    cookieValue = cookieValue.replaceAll('%7D', '}');
-    cookieValue = cookieValue.replaceAll('%3A', ':');
-    cookieValue = cookieValue.replaceAll('%2C', ',');
-    console.log(cookieValue);
-    const individu = JSON.parse(cookieValue);
-    console.log(individu);
+    const estimeSessionService = new EstimeSessionService();
+    estimeSessionService.clearEstimeSession();
   });
-
 
   it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
-    const primeActivite = "61";
+    const primeActivite = "83";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi('CaroASS', 'Muscoli.1');
@@ -95,8 +84,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.clickOnMois(5);
     resultatMaSimulationPage.checkMontantSalaire(salaire);
     resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
-
-    cy.wait(3000);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();

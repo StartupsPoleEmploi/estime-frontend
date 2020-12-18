@@ -2,12 +2,10 @@ class PersonnesAChargePage {
 
   public clickOnSuivant(): void {
     cy.get('[data-testid=btn-personnes-charge-suivant]').click();
-    cy.wait(1000);
   }
 
   public clickOnValider(): void {
     cy.get('[data-testid=btn-valider-personne-charge]').click();
-    cy.wait(1000);
   }
 
   clickOnAjouterUnePersonneACharge(): void {
