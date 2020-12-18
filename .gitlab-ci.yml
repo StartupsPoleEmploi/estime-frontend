@@ -55,11 +55,13 @@ cypress-e2e:
       name: cypress/base:10
     variables:
       SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
+      TEST: "HELLO WORLD"
     script:
     - echo "$SONAR_TOKEN"
-    - npm ci
-    - print-env
-    - npm run e2e
+    - echo "$TEST"
+    #- npm ci
+    #- print-env
+    #- npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
