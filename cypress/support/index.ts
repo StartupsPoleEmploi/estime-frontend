@@ -15,3 +15,6 @@
 
 // When a command from ./commands is ready to use, import with `import './commands'` syntax
 // import './commands';
+
+// Import cypress code-coverage collector plugin
+import '@cypress/code-coverage/support';

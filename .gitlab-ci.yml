@@ -55,6 +55,8 @@ cypress-e2e:
       name: cypress/base:10
     script:
     - npm ci
+    - echo 'coucou'
+    - echo $PATH
     - print-env
     - npm run e2e
     rules:

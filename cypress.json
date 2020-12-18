@@ -7,5 +7,6 @@
   "pluginsFile": "cypress/plugins/index.js",
   "fixturesFolder": "cypress/fixtures",
   "reporter": "cypress-sonarqube-reporter",
-  "baseUrl": "https://estime.beta.pole-emploi.fr/"
+  "baseUrl": "http://localhost.estime:9001/",
+  "chromeWebSecurity": false
 }
