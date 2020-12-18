@@ -55,7 +55,7 @@ cypress-e2e:
       name: cypress/base:10
     script:
     - npm ci
-    - $(npm bin)/print-env CI
+    - print-env
     - npm run e2e
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
