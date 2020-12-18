@@ -9,11 +9,12 @@ import ResultatMaSimulationPage from '../../../integration-commun/page-objects/r
 import AvantDeCommencerPage from '../../../integration-commun/page-objects/avant-de-commencer.page'
 import HeaderSection from '../../../integration-commun/section-objects/header.section'
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service'
+import { environment } from '../../../environment'
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS'), () => {
 
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit(environment.urlApplication);
   });
 
   afterEach(() => {
@@ -27,7 +28,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "83";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi('CaroASS', 'Muscoli.1');
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -95,7 +96,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "61";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi('CaroASS', 'Muscoli.1');
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -164,7 +165,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "104";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi('CaroASS', 'Muscoli.1');
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -237,7 +238,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "84";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi('CaroASS', 'Muscoli.1');
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();

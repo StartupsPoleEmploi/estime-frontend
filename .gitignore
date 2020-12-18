@@ -45,6 +45,7 @@ testem.log
 
 #cypress
 cypress/screenshots/**.*
+cypress/environment.ts
 
 # System Files
 .DS_Store

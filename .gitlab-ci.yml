@@ -52,13 +52,12 @@ sonar_quality_analyse :
 cypress-e2e:
     stage: build-application
     image:
-      name: cypress/base:10
-    variables:
-      SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
-      TEST: "HELLO WORLD"
+      name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
-    - echo "$SONAR_TOKEN"
-    - echo "$TEST"
+    - cd cypress/ci
+    - p2 -t environment.ts.j2 -o ../environment.ts
+    - cd ../..
+    - cat environment.ts
     #- npm ci
     #- print-env
     #- npm run e2e
