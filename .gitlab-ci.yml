@@ -61,7 +61,7 @@ cypress-e2e:
     - cd ../..
     - npm ci
     - npm run start:ci &
-    - sleep(20)
+    - sleep 20
     - curl http://localhost.estime:9001/
     - npm run cy:run:local
     rules:
