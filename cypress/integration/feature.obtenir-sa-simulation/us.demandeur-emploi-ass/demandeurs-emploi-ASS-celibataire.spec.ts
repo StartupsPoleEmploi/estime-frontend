@@ -13,7 +13,7 @@ import EstimeSessionService from '../../../integration-commun/utile/estime-sessi
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS'), () => {
 
   beforeEach(() => {
-    cy.visit('http://localhost.estime:9001/');
+    cy.visit('/');
   });
 
   afterEach(() => {
