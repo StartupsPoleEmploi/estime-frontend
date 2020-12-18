@@ -1,0 +1,24 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+export const environment = {
+  production: false,
+  apiEstimeURL: 'https://estime.beta.pole-emploi.fr/estime/v1/',
+  /** OpenID Connect PE properties ***/
+  peconnectClientid: '{{ PE_CONNECT_CLIENT_ID }}',
+  peconnectRedirecturi: 'http://localhost.estime:9001/',
+  peconnectScope: '{{ PE_CONNECT_SCOPE }}',
+  peconnectIdentityServerURL: '{{ PE_CONNECT_IDENTITY_SERVER_URL }}',
+  tagCommanderScriptUrl: ''
+};
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
