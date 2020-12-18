@@ -18,14 +18,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
   });
 
   afterEach(() => {
-    //const estimeSessionService = new EstimeSessionService();
-    //estimeSessionService.clearEstimeSession();
+    const estimeSessionService = new EstimeSessionService();
+    estimeSessionService.clearEstimeSession();
   });
 
-  it('Test 1', () => {
-    cy.contains('Estime calcule le montant de vos allocations et des aides auxquelles vous pourriez prétendre.');
-  });
-  /*it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, je souhaite obtenir ma simulation', () => {
+  it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
     const primeActivite = "83";
@@ -310,7 +307,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
-  });*/
+  });
 });
 
 
