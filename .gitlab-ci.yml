@@ -35,6 +35,7 @@ cypress-e2e:
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
+    - ls -l
     - cd cypress/ci
     - cp hosts /etc/hosts
     - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
@@ -45,6 +46,8 @@ cypress-e2e:
     - npm run start:ci &
     - npm & wait-on http://localhost.estime:9001/
     - npm run cy:run
+    - ls -l
+    - ls -l cypress/screenshots
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -55,7 +58,7 @@ cypress-e2e:
       paths:
         - coverage
         - cypress/screenshots/**/*.png
-        - dist/dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
+        - cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
     cache:
       <<: *global_cache
 
