@@ -1,6 +1,6 @@
 stages:
-    - build-application
-    - build-docker-configuration-recette
+    - build-phase-1
+    - build-phase-2
     - deploy-application-recette
     - build-docker-configuration-production
     - deploy-application-production
@@ -14,7 +14,7 @@ cache: &global_cache
     - .sonar/cache
 
 build_frontend_application :
-    stage: build-application
+    stage: build-phase-1
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
       entrypoint: [""]
@@ -31,22 +31,20 @@ build_frontend_application :
       <<: *global_cache
 
 cypress-e2e:
-    stage: build-application
+    stage: build-phase-1
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
-    - cd cypress/ci
     - cp hosts /etc/hosts
+    - cd cypress/ci
     - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
     - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
     - cd ../..
     - npm ci
     - npm install -g wait-on
     - npm run start:ci &
-    - npm & wait-on http://localhost.estime:9001/
+    - wait-on http://localhost.estime:9001/
     - npm run cy:run
-    - ls -l dist
-    - ls -l cypress
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -62,7 +60,7 @@ cypress-e2e:
       <<: *global_cache
 
 build-docker-image-recette:
-    stage: build-docker-configuration-recette
+    stage: build-phase-2
     image:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
@@ -78,7 +76,7 @@ build-docker-image-recette:
     - build_frontend_application
 
 generate-docker-stack-recette:
-  stage: build-docker-configuration-recette
+  stage: build-phase-2
   image:
     # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
     name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
@@ -94,7 +92,7 @@ generate-docker-stack-recette:
         - src/**/*
 
 sonar_quality_analyse :
-    stage: build-docker-configuration-recette
+    stage: build-phase-2
     image:
       name: sonarsource/sonar-scanner-cli:latest
     variables:
@@ -103,8 +101,6 @@ sonar_quality_analyse :
       SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
-    - ls -l coverage
-    - ls -l dist
     - sonar-scanner -Dsonar.qualitygate.wait=true
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
