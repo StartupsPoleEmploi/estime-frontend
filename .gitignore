@@ -44,11 +44,11 @@ testem.log
 
 
 #cypress
-cypress/screenshots/**.*
+cypress/screenshots
 cypress/environment.ts
 
 #nyc
-./nyc_output
+.nyc_output
 
 # System Files
 .DS_Store

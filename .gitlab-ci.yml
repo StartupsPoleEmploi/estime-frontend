@@ -72,8 +72,9 @@ cypress-e2e:
     artifacts:
       when: always
       paths:
+        - coverage
         - cypress/screenshots/**/*.png
-      expire_in: 1 day
+        - dist/dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
     cache:
       <<: *global_cache
 
