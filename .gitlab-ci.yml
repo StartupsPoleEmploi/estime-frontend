@@ -77,6 +77,8 @@ build-docker-image-recette:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
+    dependencies:
+    - build_frontend_application
 
 generate-docker-stack-recette:
   stage: build-docker-configuration-recette
