@@ -28,7 +28,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "83";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -96,7 +96,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "61";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -165,7 +165,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "104";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();
@@ -238,7 +238,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const primeActivite = "84";
 
     const homePage = new HomePage();
-    homePage.clickOnSeConnecterAvecPoleEmploi(environment.userPeConnect, environment.mdpUserPeConnect);
+    homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
 
     const avantDeCommencerPage = new AvantDeCommencerPage();
     avantDeCommencerPage.clickOnJeCommence();

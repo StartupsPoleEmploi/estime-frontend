@@ -109,6 +109,8 @@ sonar_quality_analyse :
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
+    dependencies:
+    - cypress-e2e
     allow_failure: true
     cache:
       <<: *global_cache
