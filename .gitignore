@@ -47,6 +47,9 @@ testem.log
 cypress/screenshots/**.*
 cypress/environment.ts
 
+#nyc
+./nyc_output
+
 # System Files
 .DS_Store
 Thumbs.db
