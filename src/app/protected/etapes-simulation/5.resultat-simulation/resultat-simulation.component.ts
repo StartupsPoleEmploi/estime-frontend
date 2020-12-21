@@ -10,6 +10,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { fromEvent, Observable, Subscription } from 'rxjs';
+import { SimulationPdfMakerService } from "@app/core/services/utile/simulation-pdf-maker.service";
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -33,7 +34,8 @@ export class ResultatSimulationComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
-    private screenService: ScreenService
+    private screenService: ScreenService,
+    private simulationPdfMakerService:SimulationPdfMakerService
   ) {
     this.gererResizeScreen();
   }
@@ -46,6 +48,10 @@ export class ResultatSimulationComponent implements OnInit {
 
   ngOnDestroy() {
     this.resizeSubscription.unsubscribe();
+  }
+
+  public onClickButtonImprimerMaSimulation(): void {
+    this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulationAidesSociales);
   }
 
   public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
