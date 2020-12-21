@@ -34,6 +34,10 @@ export class SessionStorageEstimeService {
     return this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_ROUTE_ACTIVATED_STORAGE_SESSION_KEY);
   }
 
+  public getNumeroEtapeSimulation(): string {
+    return this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_NUMERO_ETAPE_SIMULATION_STORAGE_SESSION_KEY);
+  }
+
   public getPayloadPeConnect(): PeConnectPayload {
     return this.sessionStorageService.retrieve(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY);
   }
@@ -44,5 +48,9 @@ export class SessionStorageEstimeService {
 
   public storeRouteActivatedByUser(route: ActivatedRouteSnapshot): void {
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_ROUTE_ACTIVATED_STORAGE_SESSION_KEY, route.routeConfig.path);
+  }
+
+  public storeNumeroEtapeSimulation(numeroEtapeSimulation: number): void {
+    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_NUMERO_ETAPE_SIMULATION_STORAGE_SESSION_KEY, numeroEtapeSimulation);
   }
 }

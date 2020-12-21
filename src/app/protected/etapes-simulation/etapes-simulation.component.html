@@ -1,0 +1,25 @@
+<app-fil-etapes-simulation *ngIf="!isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-simulation>
+<app-contrat-travail
+    *ngIf="etapeActive === 1"
+    (validationEtapeEventEmitter)="traiterEtapeValidee()"
+    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
+</app-contrat-travail>
+<app-ma-situation
+    *ngIf="etapeActive === 2"
+    (validationEtapeEventEmitter)="traiterEtapeValidee()"
+    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
+</app-ma-situation>
+<app-mes-personnes-a-charge
+    *ngIf="etapeActive === 3"
+    (validationEtapeEventEmitter)="traiterEtapeValidee()"
+    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
+</app-mes-personnes-a-charge>
+<app-ressources-actuelles
+    *ngIf="etapeActive === 4"
+    (validationEtapeEventEmitter)="traiterEtapeValidee()"
+    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
+</app-ressources-actuelles>
+<app-resultat-simulation
+    *ngIf="etapeActive === 5"
+    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
+</app-resultat-simulation>

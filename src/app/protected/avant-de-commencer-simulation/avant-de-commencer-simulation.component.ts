@@ -32,7 +32,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
         (demandeurEmploi) => {
           this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
           this.isPageLoadingDisplay = false;
-          this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL]);
+          this.router.navigate([RoutesEnum.ETAPES_SIMULATION]);
         }, (erreur) => {
           this.isPageLoadingDisplay = false;
           console.log(erreur);
@@ -40,7 +40,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
         }
       );
     } else {
-      this.router.navigate([RoutesEnum.MON_FUTUR_DE_TRAVAIL]);
+      this.router.navigate([RoutesEnum.ETAPES_SIMULATION]);
     }
   }
 

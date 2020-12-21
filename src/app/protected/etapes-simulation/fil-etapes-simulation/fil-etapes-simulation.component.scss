@@ -1,0 +1,118 @@
+@import "../../../../assets/scss/variables";
+
+#checkmark {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  margin-top: 2px;
+}
+
+#checkmark:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 17px;
+  background-color: #fff;
+  left: 11px;
+  top: -1px;
+}
+
+#checkmark:after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  background-color: #fff;
+  left: 4px;
+  top: 14px;
+}
+
+.div-fil-etapes-simulation {
+  margin-bottom: 80px;
+  .etapes {
+    width: 100%;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 auto;
+    .etape {
+      font-size: 13px;
+      position: relative;
+      text-align: center;
+      width: 33.33%;
+      &:not(:first-child)::after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 1px;
+        background-color: $color-grey-1;
+        top: 50%;
+        left: -35%;
+        z-index: -1;
+      }
+      .numero-etape {
+        align-items: center;
+        background-color: white;
+        border: 1px solid $color-grey-1;
+        border-radius: 50%;
+        color: $color-blue-2;
+        cursor: auto;
+        display: inline-flex;
+        height: 31px;
+        justify-content: center;
+        opacity: 0.7;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        width: 31px;
+        span {
+          font-size: 13px;
+          margin-top: 1px;
+        }
+      }
+      .titre-etape {
+        bottom: -5px;
+        color: $color-blue-2;
+        height: 0;
+        left: 0;
+        margin: auto 0;
+        opacity: 0.7;
+        position: absolute;
+        right: 0;
+      }
+    }
+    .etape-active {
+      .numero-etape {
+        span {
+          color: $color-white-1;
+          font-weight: 700;
+        }
+        opacity: unset;
+        background-color: $color-blue-3;
+        border-color: $color-blue-3;
+      }
+      .titre-etape {
+        color: $color-blue-3;
+        opacity: unset;
+      }
+      &:not(:first-child)::after {
+        background-color: $color-blue-2 !important;
+      }
+    }
+    .etape-completee {
+      .numero-etape {
+        background-color: $color-blue-2;
+        border-color: $color-blue-2;
+        opacity: unset;
+      }
+      .titre-etape {
+        opacity: unset;
+        color: $color-blue-2;
+      }
+    }
+  }
+}

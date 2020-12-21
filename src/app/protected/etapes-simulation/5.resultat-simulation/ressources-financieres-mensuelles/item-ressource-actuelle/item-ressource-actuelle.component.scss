@@ -1,0 +1,103 @@
+@import "../../../../../../assets/scss/variables";
+
+.row {
+  padding-left: 5px;
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 6px;
+  }
+  .card-code-ressource {
+    background-color: $color-grey-1;
+    border-radius: 8px;
+    min-height: 35px;
+    max-width: fit-content;
+    min-width: 35px;
+    padding: 2px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    @media #{$medium-device}, #{$large-device} {
+      max-height: 40px;
+      min-width: 43px;
+      padding: 5px;
+      padding-bottom: 8px;
+      padding-top: 8px;
+    }
+    text-align: center;
+    span {
+      font-size: 0.6rem;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 0.7rem;
+      }
+      font-weight: bold;
+    }
+    &.paie {
+      background-color: $color-green-1;
+    }
+    &.immo {
+      background-color: $color-green-2;
+    }
+    &.indp {
+      background-color: $color-green-3;
+    }
+    &.ass {
+      background-color: $color-blue-4;
+    }
+    &.aah, &.are {
+      background-color: $color-orange-3;
+    }
+    &.rsa {
+      background-color: $color-blue-4;
+    }
+    &.apl {
+      background-color: $color-red-3;
+    }
+    &.af {
+      background-color: $color-red-4;
+    }
+    &.agepi {
+      background-color: $color-violet-2;
+    }
+    &.am {
+      background-color: $color-orange-2;
+    }
+    &.pa {
+      background-color: $color-violet-1;
+    }
+  }
+  .span-libelle-aide {
+    color: $color-blue-1;
+    font-weight: bold;
+    margin-left: 15px;
+    @media #{$small-device} {
+      font-size: 0.9rem;
+    }
+  }
+  .span-organisme {
+    color: $color-blue-2;
+    margin-left: 15px;
+    @media #{$small-device} {
+      font-size: 0.9rem;
+    }
+  }
+  .col-montant {
+    padding-right: 0;
+    text-align: right;
+    span {
+      font-weight: 800;
+      font-size: 0.8rem;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1.1rem;
+      }
+      color: $color-black-1;
+    }
+  }
+  .col-picto-arrow {
+    font-weight: bold;
+    min-width: 30px;
+    max-width: 30px;
+  }
+  .span-chevron {
+    @media #{$small-device} {
+      font-size: 0.8rem;
+    }
+  }
+}

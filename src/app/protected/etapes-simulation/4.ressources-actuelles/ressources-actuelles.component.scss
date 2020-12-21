@@ -1,0 +1,52 @@
+@import "../../../../assets/scss/variables";
+
+.block-ressources {
+  .accordion-button {
+    background-color: $color-white-1;
+    border-radius: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid $color-grey-1;
+    color: $color-blue-1;
+    margin-top: 1rem;
+    min-height: 5rem;
+    @media #{$medium-device}, #{$large-device} {
+      min-height: 6rem;
+    }
+    max-height: unset;
+    padding: 0;
+    width: 100%;
+    .container-fluid-button {
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+      .col-euro-sign {
+        padding-left: 0;
+        padding-right: 0;
+        .euro-sign {
+          display: block;
+          height: 19px;
+          margin-left: auto;
+          margin-right: auto;
+          width: 19px;
+          @media #{$medium-device}, #{$large-device} {
+            width: 33px;
+            height: 33px;
+          }
+        }
+      }
+      .col-text-button {
+        padding: 3px;
+        text-align: left;
+        .text-button {
+          color: $color-blue-3;
+          font-weight: 700;
+          font-weight: bold;
+        }
+      }
+      .col-chevron {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+}

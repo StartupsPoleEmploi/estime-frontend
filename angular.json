@@ -75,10 +75,9 @@
           }
         },
         "serve": {
-          "builder": "ngx-build-plus:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "estime:build",
-            "extraWebpackConfig": "./cypress/coverage.webpack.js"
+            "browserTarget": "estime:build"
           },
           "configurations": {
             "production": {

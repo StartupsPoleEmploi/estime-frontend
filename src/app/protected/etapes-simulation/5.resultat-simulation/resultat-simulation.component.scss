@@ -1,0 +1,107 @@
+@import "../../../../assets/scss/variables";
+
+#div-h4-ressources-estimees {
+  margin-top: 2rem;
+}
+
+#card-revenus-actuels {
+  .card {
+    border: 0;
+    text-align: center;
+    width: fit-content;
+    padding: 0.4rem 1rem;
+    @media #{$small-device} {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h3 {
+      color: $color-blue-2;
+      font-weight: 600;
+      margin-bottom: -10px;
+      font-size: 0.9rem;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1rem;
+      }
+    }
+    span {
+      font-weight: 900;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+
+.alert-resultat-simulation {
+  border: 1px solid $color-black-2;
+  padding: 0.5rem;
+  img {
+    width: 1.2rem;
+  }
+  span {
+    color: $color-black-2;
+    font-style: italic;
+  }
+}
+
+.card-deck {
+  border:0;
+  border-radius: 8px;
+  margin-bottom: 0;
+  @media #{$medium-device}, #{$large-device} {
+    background-color: $color-white-1;
+    padding-bottom: 5px;
+    padding-top: 5px;
+  }
+}
+
+.first-card {
+  border:0;
+  border-radius: 8px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+  width: 100%;
+  @media #{$medium-device}, #{$large-device} {
+    margin-bottom: 0px;
+    &:not(.isLastCard) {
+      border-right: 2px solid $color-grey-1 !important;
+      border-radius: 0 !important;
+    }
+  }
+  .second-card {
+    border: 0;
+    margin-bottom: 0;
+    @media #{$medium-device}, #{$large-device} {
+      margin: 5px;
+    }
+    cursor: pointer;
+    .card-body {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      @media #{$medium-device}, #{$large-device} {
+        border-radius: 8px;
+      }
+      text-align: center;
+      &.active {
+        background-color: $color-grey-1;
+      }
+      #span-mois-annee {
+        font-size: 1rem;
+        color: $color-blue-2;
+        font-weight: bold;
+      }
+      span {
+        @media #{$medium-device}, #{$large-device} {
+          font-size: 1.3rem;
+        }
+        font-weight: 900;
+      }
+    }
+    .card-footer {
+      background-color: unset;
+      padding-bottom: 0;
+    }
+  }
+}
