@@ -43,7 +43,7 @@ export class SimulationPdfMakerService {
     this.addTitle(content);
     this.blockInformationsService.addBlockInformations(content);
     this.blockRessourcesActuellesService.addBlockRessourcesActuelles(content, simulationAidesSociales);
-    this.blockRessourcesEstimeesService.addBlockRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
+    this.blockRessourcesEstimeesService.addTableRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
     return content;
   }
 
