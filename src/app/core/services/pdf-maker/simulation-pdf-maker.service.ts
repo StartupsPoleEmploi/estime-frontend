@@ -43,6 +43,7 @@ export class SimulationPdfMakerService {
     this.addTitle(content);
     this.blockInformationsService.addBlockInformations(content);
     this.blockRessourcesActuellesService.addBlockRessourcesActuelles(content, simulationAidesSociales);
+    this.blockRessourcesEstimeesService.addBlockRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
     return content;
   }
 
@@ -53,6 +54,9 @@ export class SimulationPdfMakerService {
       },
       tableStyle2: {
         margin: [20, 20, 0, 15]
+      },
+      tableStyle3: {
+        margin: [0, 10, 0, 0]
       }
     };
   }

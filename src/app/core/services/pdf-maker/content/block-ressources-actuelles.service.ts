@@ -26,63 +26,10 @@ export class BlockRessourcesActuellesService {
   }
 
   private addTableRessourcesActuelles(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
-
-    const widthsColumns = [200, 'auto'];
-
     let body = new Array<Array<Cell>>();
-
     this.addRow1(body);
     this.addRow2(body, simulationAidesSociales);
-
-    const table = new Table(widthsColumns, body);
-    const tableElement = new TableElement(table, 'tableStyle2', 'headerLineOnly');
-
-    content.push(tableElement);
-  }
-
-  private addRow1(body: Array<Array<Cell>>): void {
-    const row = new Array<Cell>();
-
-    const cell1 = new Cell();
-    cell1.text = 'Mes ressources actuelles \n avant reprise d’emploi';
-    cell1.rowSpan = 2;
-    const styleTextCell1 = new Style();
-    styleTextCell1.bold = true;
-    styleTextCell1.color = '#23333C';
-    styleTextCell1.fontSize = 14;
-    cell1.style = styleTextCell1;
-    row.push(cell1);
-
-    const cell2 = new Cell();
-    cell2.text = 'Revenus et aides';
-    const styleTextCell2 = new Style();
-    styleTextCell2.alignment = 'center';
-    styleTextCell2.bold = true;
-    styleTextCell2.color = '#3853B9';
-    styleTextCell2.fontSize = 14;
-    cell2.style = styleTextCell2;
-    row.push(cell2);
-
-    body.push(row);
-  }
-
-  private addRow2(body: Array<Array<Cell>>, simulationAidesSociales: SimulationAidesSociales): void {
-    const row = new Array<Cell>();
-
-    const cell1 = new Cell();
-    row.push(cell1);
-
-    const cell2 = new Cell();
-    cell2.text = simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation + ' €';
-    const styleTextCell2 = new Style();
-    styleTextCell2.alignment = 'center';
-    styleTextCell2.bold = true;
-    styleTextCell2.color = '#23333C';
-    styleTextCell2.fontSize = 18;
-    cell2.style = styleTextCell2;
-    row.push(cell2);
-
-    body.push(row);
+    content.push(this.createTableElement(body));
   }
 
   private addRectangle(content: Array<any>): any {
@@ -112,4 +59,76 @@ export class BlockRessourcesActuellesService {
     figure.canvas.push(line);
     content.push(figure);
   }
+
+
+  /**************** méthode utiles création TableRessourcesActuelles ****************************/
+
+  private addRow1(body: Array<Array<Cell>>): void {
+    const row = new Array<Cell>();
+    row.push(this.createCell1Row1());
+    row.push(this.createCell2Row1());
+    body.push(row);
+  }
+
+  private createCell1Row1(): Cell {
+    const cell = new Cell();
+    cell.text = 'Mes ressources actuelles \n avant reprise d’emploi';
+    cell.rowSpan = 2;
+
+    const style = new Style();
+    style.bold = true;
+    style.color = '#23333C';
+    style.fontSize = 14;
+    cell.style = style;
+
+    return cell;
+  }
+
+  private createCell2Row1(): Cell {
+    const cell = new Cell();
+    cell.text = 'Revenus et aides';
+
+    const style = new Style();
+    style.alignment = 'center';
+    style.bold = true;
+    style.color = '#3853B9';
+    style.fontSize = 14;
+    cell.style = style;
+
+    return cell;
+  }
+
+  private addRow2(body: Array<Array<Cell>>, simulationAidesSociales: SimulationAidesSociales): void {
+    const row = new Array<Cell>();
+    const cell1 = new Cell();
+    row.push(cell1);
+    row.push(this.createCell2Row2(simulationAidesSociales));
+    body.push(row);
+  }
+
+  private createCell2Row2(simulationAidesSociales: SimulationAidesSociales): Cell {
+    const cell = new Cell();
+    cell.text = simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation + ' €';
+
+    const styleTextCell2 = new Style();
+    styleTextCell2.alignment = 'center';
+    styleTextCell2.bold = true;
+    styleTextCell2.color = '#23333C';
+    styleTextCell2.fontSize = 18;
+    cell.style = styleTextCell2;
+
+    return cell;
+  }
+
+  private createTableElement(body: Array<Array<Cell>>): TableElement {
+    const tableElement = new TableElement();
+    tableElement.layout = 'noBorders';
+    tableElement.style = 'tableStyle2';
+    const table = new Table();
+    table.body = body;
+    table.widths = [200, 'auto'];
+    tableElement.table = table;
+    return tableElement;
+  }
+
 }
