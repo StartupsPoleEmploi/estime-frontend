@@ -10,7 +10,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { SimulationPdfMakerService } from "@app/core/services/utile/simulation-pdf-maker.service";
+import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
 
 @Component({
   selector: 'app-resultat-simulation',
