@@ -5,18 +5,18 @@ import { DateDecomposee } from "@models/date-decomposee";
 export class DateUtileService {
 
   mois = [
-    { label: "Janvier", value: 1 },
-    { label: "Février", value: 2 },
-    { label: "Mars", value: 3 },
-    { label: "Avril", value: 4 },
-    { label: "Mai", value: 5 },
-    { label: "Juin", value: 6 },
-    { label: "Juillet", value: 7 },
-    { label: "Août", value: 8 },
-    { label: "Septembre", value: 9 },
-    { label: "Octobre", value: 10 },
-    { label: "Novembre", value: 11 },
-    { label: "Décembre", value: 12 },
+    { label: "Janvier", labelCourt: "Janv.", value: 1 },
+    { label: "Février", labelCourt: "Fév.", value: 2 },
+    { label: "Mars", labelCourt: "Mars", value: 3 },
+    { label: "Avril", labelCourt: "Avril", value: 4 },
+    { label: "Mai", labelCourt: "Mai", value: 5 },
+    { label: "Juin", labelCourt: "Juin", value: 6 },
+    { label: "Juillet", labelCourt: "Juil", value: 7 },
+    { label: "Août", labelCourt: "Août", value: 8 },
+    { label: "Septembre", labelCourt: "Sept", value: 9 },
+    { label: "Octobre", labelCourt: "Oct", value: 10 },
+    { label: "Novembre", labelCourt: "Nov", value: 11 },
+    { label: "Décembre", labelCourt: "Déc", value: 12 },
   ];
 
   isBissextile(annee: number): boolean {
@@ -45,6 +45,16 @@ export class DateUtileService {
   getDateStringFormat(dateSimulation: string): string {
     const dateSimulationSplit = dateSimulation.split('-');
     const moisLabel = this.getLibelleMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
+    return `${moisLabel} ${dateSimulationSplit[0]}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateSimulation
+   */
+  getDateStringFormatStyle2(dateSimulation: string): string {
+    const dateSimulationSplit = dateSimulation.split('-');
+    const moisLabel = this.getLibelleCourtMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
     return `${moisLabel} ${dateSimulationSplit[0]}`;
   }
 
@@ -149,6 +159,16 @@ export class DateUtileService {
 
   private isJourOuMoisValide(valueJourOuMois: string): boolean {
     return valueJourOuMois.length === 2 && valueJourOuMois !== "00"
+  }
+
+  private getLibelleCourtMoisByMoisNumber(moisNumber: number): string {
+    let moisLabel = '';
+    this.mois.forEach(mois => {
+      if(moisNumber === mois.value) {
+        moisLabel = mois.labelCourt;
+      }
+    });
+    return moisLabel;
   }
 
   private getLibelleMoisByMoisNumber(moisNumber: number): string {

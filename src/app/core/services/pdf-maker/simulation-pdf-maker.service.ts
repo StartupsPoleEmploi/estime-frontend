@@ -43,7 +43,7 @@ export class SimulationPdfMakerService {
     this.addTitle(content);
     this.blockInformationsService.addBlockInformations(content);
     this.blockRessourcesActuellesService.addBlockRessourcesActuelles(content, simulationAidesSociales);
-    this.blockRessourcesEstimeesService.addTableRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
+    this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
     return content;
   }
 
@@ -57,6 +57,9 @@ export class SimulationPdfMakerService {
       },
       tableStyle3: {
         margin: [0, 10, 0, 0]
+      },
+      tableStyle4: {
+        margin: [0, -5, 0, 0]
       }
     };
   }
@@ -70,12 +73,17 @@ export class SimulationPdfMakerService {
   }
 
   private addTitle(content: Array<any>): void {
+    const title = new Text();
+    title.text = 'Résultat de ma simulation';
+
     const style = new Style();
     style.bold = true;
     style.color = '#23333C';
     style.fontSize = 22;
+    title.style = style;
 
-    const title = new Text('Résultat de ma simulation', style, [0, 10, 0, 15]);
+    title.margin = [0, 10, 0, 15];
+
     content.push(title);
   }
 }

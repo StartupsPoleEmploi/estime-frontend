@@ -8,6 +8,6 @@ export class Cell {
   image: string;
   rowSpan: number;
   style: Style;
-  text: string;
+  text: any;
   width: number;
 }

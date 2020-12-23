@@ -1,7 +1,7 @@
 import { Table } from "./table";
 
 export class TableElement {
-  layout: string;
+  layout: any;
   style: string;
   table: Table;
 }
