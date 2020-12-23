@@ -4,19 +4,25 @@ import { Cell } from "../models/table/cell";
 import { Style } from "../models/style";
 import { Table } from "../models/table/table";
 import { TableElement } from "../models/table/table-element";
-
+import { Rectangle } from "../models/figure/elements/rectangle";
+import { Figure } from "../models/figure/figure";
 
 @Injectable({ providedIn: 'root' })
 export class BlockInformationsService {
 
   public addBlockInformations(content: Array<any>): any {
+    this.addTableInformations(content);
+    this.addRectangle(content);
+  }
+
+
+  private addTableInformations(content: Array<any>): any {
     let body = new Array<Array<Cell>>();
 
     const row = new Array<Cell>();
     row.push(this.createCell1());
     row.push(this.createCell2());
     body.push(row);
-
     content.push(this.createTableElement(body));
   }
 
@@ -51,5 +57,19 @@ export class BlockInformationsService {
     cell.style = style;
 
     return cell;
+  }
+
+  private addRectangle(content: Array<any>): any {
+    const figure = new Figure(new Array<any>());
+    const rectangle = new Rectangle(
+      0,
+      -50,
+      553,
+      50,
+      5,
+      '#D6D9E4'
+    );
+    figure.canvas.push(rectangle);
+    content.push(figure);
   }
 }

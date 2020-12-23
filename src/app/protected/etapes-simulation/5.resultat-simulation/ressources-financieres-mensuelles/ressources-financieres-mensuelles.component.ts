@@ -6,6 +6,7 @@ import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { AideSociale } from '@models/aide-sociale';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { AidesService } from "@app/core/services/utile/aides.service";
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -22,6 +23,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
 
   constructor(
+    public aidesService: AidesService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private screenService: ScreenService
@@ -33,36 +35,6 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
     return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
-  }
-
-  public getMontantASS(): number {
-    let montant = 0;
-    if(this.simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          montant = aide.montant;
-        }
-      }
-    }
-    return montant;
-  }
-
-  public hasAidesObtenir(): boolean {
-    let hasAidesObtenir = false;
-    if(this.simulationSelected) {
-      if(Object.entries(this.simulationSelected.mesAides).length > 1) {
-        hasAidesObtenir = true;
-      }
-      if(Object.entries(this.simulationSelected.mesAides).length === 1) {
-        for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-          if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-            hasAidesObtenir = true;
-          }
-        }
-      }
-    }
-
-    return hasAidesObtenir;
   }
 
   public isAideSocialSelected(aideSociale: AideSociale): boolean {
@@ -89,7 +61,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemSalaireIsNotLast(): boolean {
-    return this.getMontantASS() > 0
+    return this.aidesService.getMontantASS(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer > 0

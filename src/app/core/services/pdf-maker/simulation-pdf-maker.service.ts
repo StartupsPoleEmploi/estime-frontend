@@ -4,7 +4,6 @@ import { DemandeurEmploi } from "@models/demandeur-emploi";
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import pdfMakeModule from 'pdfmake/build/pdfmake';
 import pdfFontsModule from 'pdfmake/build/vfs_fonts';
-import { BlockRessourcesActuellesService } from "./content/block-ressources-actuelles.service";
 import { BlockRessourcesEstimeesService } from "./content/block-ressources-estimees.service";
 import { BlockInformationsService } from "./content/bloc-informations.service";
 import { Text } from "./models/text";
@@ -20,7 +19,6 @@ export class SimulationPdfMakerService {
 
   constructor(
     private blockInformationsService: BlockInformationsService,
-    private blockRessourcesActuellesService: BlockRessourcesActuellesService,
     private blockRessourcesEstimeesService: BlockRessourcesEstimeesService
   ) {
 
@@ -30,7 +28,8 @@ export class SimulationPdfMakerService {
 
     const def = {
       content: this.getContent(demandeurEmploi, simulationAidesSociales),
-      styles: this.getStyles()
+      styles: this.getStyles(),
+      pageMargins: [ 20, 40, 20, 40 ]
 
     };
 
@@ -42,24 +41,21 @@ export class SimulationPdfMakerService {
     this.addLogoEstime(content);
     this.addTitle(content);
     this.blockInformationsService.addBlockInformations(content);
-    this.blockRessourcesActuellesService.addBlockRessourcesActuelles(content, simulationAidesSociales);
     this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
+    this.addTextAvertissement(content);
     return content;
   }
 
   private getStyles(): any {
     return {
       tableStyle1: {
-        margin: [0, 0, 0, 10]
-      },
-      tableStyle2: {
-        margin: [20, 20, 0, 15]
+        margin: [10, 0, 0, 10]
       },
       tableStyle3: {
         margin: [0, 10, 0, 0]
       },
       tableStyle4: {
-        margin: [0, -5, 0, 0]
+        margin: [0, 0, 0, 0]
       }
     };
   }
@@ -77,13 +73,27 @@ export class SimulationPdfMakerService {
     title.text = 'Résultat de ma simulation';
 
     const style = new Style();
-    style.bold = true;
-    style.color = '#23333C';
-    style.fontSize = 22;
+    style.color = '#1B2B67';
+    style.fontSize = 24;
     title.style = style;
 
     title.margin = [0, 10, 0, 15];
 
     content.push(title);
   }
+
+  private addTextAvertissement(content: Array<any>): void {
+    const text = new Text();
+    text.text = 'Les montants n\'ont qu\'une valeur indicative. Ils dépendent des informations que vous avez renseignées, sous réserve d\'éventuels changements de votre situation personnelle ou de la règlementation des aides.';
+
+    const style = new Style();
+    style.color = '#23333C';
+    style.fontSize = 11;
+    text.style = style;
+    text.margin = [0, 15, 0, 0];
+
+    content.push(text);
+  }
+
+
 }

@@ -14,13 +14,13 @@
             </li>
             <li
                 class="list-group-item"
-                *ngIf="getMontantASS() > 0">
+                *ngIf="aidesService.getMontantASS(simulationSelected) > 0">
                 <app-item-ressource-actuelle
                     codeRessource="ASS"
                     data-testid="row-ass"
                     [isColPictoArrowDisplay]="false"
                     libelleRessource="Allocation de Solidarité Spécifique"
-                    [montantRessource]="this.getMontantASS()"
+                    [montantRessource]="aidesService.getMontantASS(simulationSelected)"
                     organismeRessource="Pôle emploi">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemAssIsNotLast()">
@@ -75,7 +75,7 @@
 </div>
 <h5
     class="row h5-style-2 mt-4"
-    *ngIf="hasAidesObtenir()">
+    *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
     <img
         id="img-hand-finger"
         src="./assets/images/hand-finger-right.svg"
@@ -84,7 +84,7 @@
 </h5>
 <div
     class="row mt-3"
-    *ngIf="hasAidesObtenir()">
+    *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
     <div class="card">
         <div
             class="btn-group-vertical"

@@ -11,6 +11,7 @@ import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
+import { AidesService } from '@app/core/services/utile/aides.service';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -30,6 +31,7 @@ export class ResultatSimulationComponent implements OnInit {
   @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
 
   constructor(
+    private aidesServices: AidesService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
@@ -89,21 +91,6 @@ export class ResultatSimulationComponent implements OnInit {
     this.retourEtapePrecedenteEventEmitter.emit();
   }
 
-  public hasAidesObtenir(): boolean {
-    let hasAidesObtenir = false;
-    if (Object.entries(this.simulationSelected.mesAides).length > 1) {
-      hasAidesObtenir = true;
-    }
-    if (Object.entries(this.simulationSelected.mesAides).length === 1) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if (aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          hasAidesObtenir = true;
-        }
-      }
-    }
-    return hasAidesObtenir;
-  }
-
   private gererResizeScreen(): void {
     this.resizeObservable = fromEvent(window, 'resize')
     this.resizeSubscription = this.resizeObservable.subscribe( evt => {
@@ -133,7 +120,7 @@ export class ResultatSimulationComponent implements OnInit {
 
 
   private selectFirstAideSociale(): void {
-    if (this.hasAidesObtenir()) {
+    if (this.aidesServices.hasAidesObtenir(this.simulationSelected)) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
         if (!this.aideSocialeSelected && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
           this.aideSocialeSelected = aide;
