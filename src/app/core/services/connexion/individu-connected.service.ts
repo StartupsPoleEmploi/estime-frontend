@@ -7,14 +7,14 @@ import { CookiesEstimeService } from '../storage/cookies-estime.service';
 export class IndividuConnectedService {
 
   individuConnected: Individu;
-  isStatutIndividuChangedChangedSubject: Subject<boolean>;
+  isStatutIndividuChangedSubject: Subject<boolean>;
   statutIndividuChanged: Observable<boolean>;
 
   constructor(
     private cookiesEstimeService: CookiesEstimeService
   ) {
-    this.isStatutIndividuChangedChangedSubject = new Subject<boolean>();
-    this.statutIndividuChanged = this.isStatutIndividuChangedChangedSubject.asObservable();
+    this.isStatutIndividuChangedSubject = new Subject<boolean>();
+    this.statutIndividuChanged = this.isStatutIndividuChangedSubject.asObservable();
   }
 
   public getIndividuConnected(): Individu {
@@ -27,11 +27,11 @@ export class IndividuConnectedService {
   public saveIndividuConnected(indidivu: Individu): void {
     this.individuConnected = indidivu;
     this.cookiesEstimeService.storeIndividuConnecte(indidivu);
-    this.isStatutIndividuChangedChangedSubject.next(true);
+    this.isStatutIndividuChangedSubject.next(true);
   }
 
   public emitIndividuConnectedLogoutEvent(): void {
-    this.isStatutIndividuChangedChangedSubject.next(false);
+    this.isStatutIndividuChangedSubject.next(false);
   }
 
   public isLoggedIn(): boolean {

@@ -31,7 +31,7 @@ export class ItemRessourceActuelleComponent implements OnInit {
     this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.resizeSubscription.unsubscribe();
   }
 

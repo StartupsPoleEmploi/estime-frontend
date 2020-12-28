@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 
 @Component({
   selector: 'app-cgu',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cgu.component.scss']
 })
 export class CguComponent implements OnInit {
+
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   constructor() { }
 

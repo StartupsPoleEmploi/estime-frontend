@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
@@ -28,6 +29,7 @@ export class MaSituationComponent implements OnInit {
   situationFamiliale: SituationFamiliale;
 
   nationalitesEnum: typeof NationalitesEnum = NationalitesEnum;
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 

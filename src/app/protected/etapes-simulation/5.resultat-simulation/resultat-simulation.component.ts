@@ -12,6 +12,7 @@ import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
 import { AidesService } from '@app/core/services/utile/aides.service';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -27,6 +28,7 @@ export class ResultatSimulationComponent implements OnInit {
   resizeSubscription: Subscription;
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
 

@@ -6,10 +6,12 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { Subscription } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SessionPeConnectExpiredService {
 
+  subscriptionStartWatchingObservable: Subscription;
 
   constructor(
     private bnNgIdleService: BnNgIdleService,
@@ -19,6 +21,10 @@ export class SessionPeConnectExpiredService {
     private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionStartWatchingObservable.unsubscribe();
   }
 
   config: ModalOptions = {
@@ -31,7 +37,7 @@ export class SessionPeConnectExpiredService {
 
   public startCheckUserInactivity(sessionExpireIn: number) {
     //appelé quand la session utilisateur PE Connect a expirée
-    this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
+    this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         this.openModal();
       }

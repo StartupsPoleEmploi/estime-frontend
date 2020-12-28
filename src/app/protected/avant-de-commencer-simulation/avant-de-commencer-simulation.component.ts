@@ -4,6 +4,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
+import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -14,6 +15,8 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
 
   isPageLoadingDisplay = false;
   messageErreur: string;
+
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   constructor(
     private deConnecteService: DeConnecteService,

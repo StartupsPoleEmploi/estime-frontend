@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +11,24 @@ import { PeConnectService } from '@app/core/services/connexion/pe-connect.servic
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
   isLoggedIn = false
+  subscriptionStatutIndividuChangedObservable: Subscription;
 
   constructor(
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
     private router: Router
   ) {
-    this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
-      this.isLoggedIn = loggedIn;
-    })
+    this.subscribeStatutIndividuChangedObservable();
   }
 
   ngOnInit(): void {
     this.isLoggedIn = this.individuConnectedService.isLoggedIn();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionStatutIndividuChangedObservable.unsubscribe();
   }
 
   public logout(): void {
@@ -32,5 +37,11 @@ export class HeaderComponent implements OnInit {
 
   public onClickLogoEstime(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
+  }
+
+  private subscribeStatutIndividuChangedObservable(): void {
+    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
+      this.isLoggedIn = loggedIn;
+    });
   }
 }

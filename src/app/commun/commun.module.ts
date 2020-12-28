@@ -12,6 +12,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalSessionExpiredComponent } from './components/modal-session-expired/modal-session-expired.component';
+import { FilArianeComponent } from './components/fil-ariane/fil-ariane.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ModalSessionExpiredComponent } from './components/modal-session-expired
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     ModalSessionExpiredComponent,
+    FilArianeComponent,
   ],
   imports: [
     AlertModule.forRoot(),
@@ -35,6 +37,7 @@ import { ModalSessionExpiredComponent } from './components/modal-session-expired
     AutofocusDirective,
     CallbackPipe,
     CommonModule,
+    FilArianeComponent,
     FooterComponent,
     HeaderComponent,
     PageLoadingComponent

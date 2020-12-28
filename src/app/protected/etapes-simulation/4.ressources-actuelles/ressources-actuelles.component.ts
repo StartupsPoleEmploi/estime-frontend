@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
@@ -49,6 +50,8 @@ export class RessourcesActuellesComponent implements OnInit {
   montantRevenusPersonnesCharge: number;
   montantRevenusRessourcesConjoint: number;
   montantRevenusVosRessources: number;
+
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },

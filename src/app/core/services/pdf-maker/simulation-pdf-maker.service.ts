@@ -1,5 +1,5 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable, Testability } from '@angular/core';
 import { DemandeurEmploi } from "@models/demandeur-emploi";
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import pdfMakeModule from 'pdfmake/build/pdfmake';
@@ -8,8 +8,11 @@ import { BlockRessourcesEstimeesService } from "./content/block-ressources-estim
 import { BlockInformationsService } from "./content/bloc-informations.service";
 import { Text } from "./models/text";
 import { Style } from './models/style';
+import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
+
+import htmlToPdfmake from 'html-to-pdfmake';
 
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +22,8 @@ export class SimulationPdfMakerService {
 
   constructor(
     private blockInformationsService: BlockInformationsService,
-    private blockRessourcesEstimeesService: BlockRessourcesEstimeesService
+    private blockRessourcesEstimeesService: BlockRessourcesEstimeesService,
+    private detailAidesEligiblesService:DetailAidesEligiblesService
   ) {
 
   }
@@ -43,6 +47,7 @@ export class SimulationPdfMakerService {
     this.blockInformationsService.addBlockInformations(content);
     this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
     this.addTextAvertissement(content);
+    this.detailAidesEligiblesService.addPagesDetailAides(content, simulationAidesSociales);
     return content;
   }
 
@@ -91,6 +96,7 @@ export class SimulationPdfMakerService {
     style.fontSize = 11;
     text.style = style;
     text.margin = [0, 15, 0, 0];
+    text.pageBreak = 'after';
 
     content.push(text);
   }

@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
       this.gererResizeScreen();
     }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
     this.loadEtapesSimulation();
     this.loadQuestions();
@@ -52,7 +52,7 @@ export class HomepageComponent implements OnInit {
     this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.resizeSubscription.unsubscribe();
   }
 
