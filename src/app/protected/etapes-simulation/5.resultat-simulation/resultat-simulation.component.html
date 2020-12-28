@@ -1,15 +1,20 @@
 <div class="container-fluid form-container-fluid">
     <h1 class="row h1-style-2">5. Résultat de ma simulation</h1>
-    <div class="d-flex flex-row mt-4">
-      <div class="alert alert-light alert-resultat-simulation col-9" role="alert">
-        <img src="./assets/images/info.svg">
-        <span class="ml-2">Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.</span>
+    <div class="row mt-4">
+      <div id="alert-resultat-simulation" class="col-12 col-md-9 mt-auto mb-auto pl-0">
+        <div class="alert alert-light alert-resultat-simulation mb-0" role="alert">
+          <img src="./assets/images/info.svg">
+          <span class="ml-2">Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.</span>
+        </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-3 mt-auto mb-auto">
         <button
-                class="btn btn-primary-style-3"
+                class="btn btn-primary-style-5"
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
+                <div>
+                  <img src="./assets/images/print.svg">
+                </div>
                 <div class="text-button">Imprimer ma simulation</div>
         </button>
       </div>

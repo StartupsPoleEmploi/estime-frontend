@@ -10,7 +10,7 @@
     box-shadow: none;
   }
   @media #{$medium-device}, #{$large-device} {
-    font-size: 1rem;
+    font-size: 14px;
   }
   div {
     margin-top: auto;
@@ -167,6 +167,26 @@
   &:hover, &:focus {
     background-color: $color-blue-1;
     color: $color-white-1;
+  }
+}
+
+.btn-primary-style-5 {
+  @extend .primary-button-base;
+  border-radius: 8px;
+  margin: auto;
+  max-width: 300px;
+  width: 222px;
+  &:hover, &:focus {
+    background-color: $color-blue-2;
+    color: $color-white-2;
+  }
+  .text-button {
+    width: 100%;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
   }
 }
 

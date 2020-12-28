@@ -32,6 +32,11 @@
   }
 }
 
+#alert-resultat-simulation {
+  @media #{$small-device} {
+    margin-bottom: 10px!important;
+  }
+}
 
 .alert-resultat-simulation {
   border: 1px solid $color-black-2;
