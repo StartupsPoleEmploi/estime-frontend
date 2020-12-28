@@ -12,8 +12,6 @@ import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 
-import htmlToPdfmake from 'html-to-pdfmake';
-
 
 @Injectable({ providedIn: 'root' })
 export class SimulationPdfMakerService {
@@ -33,8 +31,8 @@ export class SimulationPdfMakerService {
     const def = {
       content: this.getContent(demandeurEmploi, simulationAidesSociales),
       styles: this.getStyles(),
-      pageMargins: [ 20, 40, 20, 40 ]
-
+      pageMargins: [ 20, 40, 20, 40 ],
+      footer: function(currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }
     };
 
     pdfMakeModule.createPdf(def).open();
@@ -96,7 +94,6 @@ export class SimulationPdfMakerService {
     style.fontSize = 11;
     text.style = style;
     text.margin = [0, 15, 0, 0];
-    text.pageBreak = 'after';
 
     content.push(text);
   }

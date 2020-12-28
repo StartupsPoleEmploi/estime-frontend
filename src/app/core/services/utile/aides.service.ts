@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { AideSociale } from '@app/commun/models/aide-sociale';
 import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 
@@ -44,6 +45,20 @@ export class AidesService {
     }
     return hasAidesObtenir;
   }
+
+  public getAideByCode(simulationAidesSociales: SimulationAidesSociales, codeAideToFind: string): AideSociale {
+    let aideSocial = null;
+    simulationAidesSociales.simulationsMensuelles.forEach(simulationMensuelle => {
+      for (let [codeAide, aide] of Object.entries(simulationMensuelle.mesAides)) {
+        if(aide && codeAide === codeAideToFind) {
+          aideSocial = aide;
+        }
+      }
+    });
+    return aideSocial;
+  }
+
+
 
   public hasAide(simulationAidesSociales: SimulationAidesSociales, codeAide: string) {
     let hasAide = false;
