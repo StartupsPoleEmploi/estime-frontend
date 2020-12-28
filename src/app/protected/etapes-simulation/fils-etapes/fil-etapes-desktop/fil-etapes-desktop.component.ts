@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-fil-etapes-simulation',
-  templateUrl: './fil-etapes-simulation.component.html',
-  styleUrls: ['./fil-etapes-simulation.component.scss']
+  selector: 'app-fil-etapes-desktop',
+  templateUrl: './fil-etapes-desktop.component.html',
+  styleUrls: ['./fil-etapes-desktop.component.scss']
 })
-export class FilEtapesSimulationComponent implements OnInit {
+export class FilEtapesDesktopComponent implements OnInit {
 
   @Input()
   etapeActive: number;

@@ -26,8 +26,9 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { EtapesSimulationComponent } from './etapes-simulation/etapes-simulation.component';
-import { FilEtapesSimulationComponent } from "./etapes-simulation/fil-etapes-simulation/fil-etapes-simulation.component";
-
+import { FilEtapesDesktopComponent } from "./etapes-simulation/fils-etapes/fil-etapes-desktop/fil-etapes-desktop.component";
+import { FilEtapesMobileComponent } from './etapes-simulation/fils-etapes/fil-etapes-mobile/fil-etapes-mobile.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FilEtapesSimulationComponent } from "./etapes-simulation/fil-etapes-sim
     ContratTravailComponent,
     DetailAideSocialeComponent,
     EtapesSimulationComponent,
-    FilEtapesSimulationComponent,
+    FilEtapesDesktopComponent,
     FormPersonneAChargeComponent,
     FormPersonneAChargeSituationComponent,
     ItemRessourceActuelleComponent,
@@ -47,7 +48,8 @@ import { FilEtapesSimulationComponent } from "./etapes-simulation/fil-etapes-sim
     RessourcesFinancieresMensuellesComponent,
     RessourcesFinancieresPersonnesAChargeComponent,
     ResultatSimulationComponent,
-    VosRessourcesFinancieresComponent
+    VosRessourcesFinancieresComponent,
+    FilEtapesMobileComponent
   ],
   imports: [
     AccordionModule.forRoot(),
@@ -59,6 +61,7 @@ import { FilEtapesSimulationComponent } from "./etapes-simulation/fil-etapes-sim
     FormsModule,
     ReactiveFormsModule,
     PopoverModule.forRoot(),
+    ProgressbarModule.forRoot(),
     ProtectedRoutingModule,
     RouterModule
   ],

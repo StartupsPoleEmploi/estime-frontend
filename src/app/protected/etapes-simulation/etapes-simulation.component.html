@@ -1,4 +1,5 @@
-<app-fil-etapes-simulation *ngIf="!isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-simulation>
+<app-fil-etapes-desktop *ngIf="!isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf="isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-mobile>
 <app-contrat-travail
     *ngIf="etapeActive === 1"
     (validationEtapeEventEmitter)="traiterEtapeValidee()"

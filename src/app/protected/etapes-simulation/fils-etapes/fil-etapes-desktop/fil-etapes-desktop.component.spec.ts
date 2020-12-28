@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilEtapesSimulationComponent } from './fil-etapes-simulation.component';
+import { FilEtapesSimulationComponent } from './fil-etapes-desktop.component';
 
 describe('FilEtapesSimulationComponent', () => {
   let component: FilEtapesSimulationComponent;
