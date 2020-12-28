@@ -9,7 +9,6 @@
 
 footer {
   display: block;
-  width: 100vw;
   background-color: $color-white-1;
   bottom: 0;
   font-size: 0.8rem;
@@ -40,8 +39,12 @@ footer {
       text-align: left;
     }
     a {
+      cursor: pointer;
       text-decoration: underline;
       text-underline-position: under;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
     }
   }
   .container-fluid {

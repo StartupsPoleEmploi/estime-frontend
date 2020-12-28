@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Individu } from '@app/commun/models/individu';
 import { Environment } from '@models/environment';
 import { PeConnectPayload } from '@models/pe-connect-payload';
@@ -50,7 +51,7 @@ export class PeConnectService {
     if (individuConnected && individuConnected.peConnectAuthorization && individuConnected.peConnectAuthorization.idToken) {
       poleEmploiIdentityServerDeconnexionURI = `${this.environment.peconnectIdentityServerURL}/compte/deconnexion?` +
         `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
-        `&redirect_uri=${this.environment.peconnectRedirecturi}signout-callback`
+        `&redirect_uri=${this.environment.peconnectRedirecturi}${RoutesEnum.SIGNOUT_CALLBACK}`
     }
     return poleEmploiIdentityServerDeconnexionURI;
   }
@@ -67,7 +68,7 @@ export class PeConnectService {
     this.peConnectPayload = new PeConnectPayload();
     this.peConnectPayload.clientId = this.environment.peconnectClientid;
     this.peConnectPayload.nonce = this.generateRandomValue();
-    this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}signin-callback`;
+    this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}${RoutesEnum.SIGNIN_CALLBACK}`;
     this.peConnectPayload.state = this.generateRandomValue();
 
     this.sessionStorageService.store(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY, this.peConnectPayload);

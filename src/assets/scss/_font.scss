@@ -1,7 +1,7 @@
 body {
-  font-size: 0.9rem;
+  font-size: 12px;
   @media #{$medium-device}, #{$large-device}  {
-    font-size: 1rem;
+    font-size: 16px;
   }
 }
 
@@ -19,7 +19,6 @@ h1 {
   @extend .font-effect-title;
   font-size: 1.8rem;
   text-align: center;
-  font-weight: bold;
   @media #{$medium-device}, #{$large-device}  {
     font-size: 2.2rem;
   }
@@ -36,9 +35,9 @@ h1 {
   @extend .font-effect-title;
   @extend .h1-style-1;
   text-align: left;
-  font-size: 1.5rem;
+  font-size: 24px;
   @media #{$medium-device}, #{$large-device}  {
-    font-size: 1.7rem;
+    font-size: 36px;
   }
 }
 
@@ -71,12 +70,29 @@ h2 {
   font-size: 1.7rem;
 }
 
+.h2-style-4 {
+  @extend .font-effect-title;
+  text-align: left;
+  color: $color-blue-3;
+  font-size: 18px;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 24px;
+  }
+}
+
 h3 {
   @extend .font-effect-title;
   font-size: 1.3rem;
   text-align: center;
   font-weight: 400;
   line-height: 2rem;
+}
+
+.h3-style-1 {
+  @extend .font-effect-title;
+  text-align: left;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 h4 , h5, h6 {
@@ -115,12 +131,9 @@ h4 , h5, h6 {
   }
 }
 
-p, span {
+p, span, ul {
   @extend .font-effect;
-  font-size: 0.9rem;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 1rem;
-  }
+  font-size: 16px;
 }
 
 .text-important {
