@@ -1,0 +1,57 @@
+@import "../../../../assets/scss/variables";
+
+#section-etapes {
+  background-color: $color-blue-2;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  h1 {
+    color: $color-white-3;
+    font-size: 36px;
+    font-weight: bold;
+  }
+  .col-chevron {
+    padding-left: 0;
+    padding-right: 20px;
+    div {
+      height: 100%;
+      position: relative;
+      img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+  }
+  .card {
+    background-color: inherit;
+    border: none;
+    padding: 1rem;
+    .card-body {
+      padding-left: 0;
+      padding-right: 0;
+      .numero-etape {
+        color: $color-orange-1;
+        font-size: 2.3rem;
+        font-weight: 600;
+        padding-left: 0;
+        padding-right: 0;
+        @media #{$medium-device}, #{$large-device} {
+          font-size: 2.5rem;
+        }
+      }
+      .text-etape {
+        color: $color-white-3;
+        font-size: 22px;
+        padding-top: 12px;
+        @media #{$medium-device}, #{$large-device} {
+          padding-top: 16px;
+        }
+        padding-left: 0;
+        padding-right: 2rem;
+      }
+    }
+  }
+
+
+}

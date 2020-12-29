@@ -58,62 +58,7 @@
         </div>
     </div>
 </section>
-<section id="section-etapes">
-    <div class="container-fluid">
-        <h2 class="text-center">
-            Pour obtenir votre simulation financière
-        </h2>
-        <div class="row">
-            <div
-                class="col-sm-4"
-                *ngFor="let etape of etapesSimulation; let index = index;">
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="d-flex flex-row">
-                            <div class="col-auto ml-0 mr-0 pl-0 pr-0">
-                                <span class="numero-etape">{{index + 1}}.</span>
-                            </div>
-                            <div class="ml-1 col-auto text-etape">{{etape}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="section-questions">
-    <div class="container-fluid">
-        <h2 class="text-center">Questions les + fréquentes</h2>
-        <div class="row">
-            <div
-                class="col-sm-6 py-2"
-                *ngFor="let question of questions;">
-                <div class="card h-100">
-                    <div class="card-header">
-                        <h3>{{question.question}}</h3>
-                    </div>
-                    <div class="card-body">
-                        <p
-                            class="card-text"
-                            [innerHTML]="question.reponse"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="section-temoignages">
-    <div class="container-fluid">
-        <h2>Nos utilisateurs approuvent !</h2>
-        <div class="card-deck">
-            <div
-                class="card"
-                *ngFor="let temoignage of temoignages;">
-                <div class="card-text">
-                    <p>{{temoignage.temoignage}}</p>
-                    <p class="author-temoignage mt-3">{{temoignage.auteur}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<app-section-etapes-simulation></app-section-etapes-simulation>
+<app-section-questions></app-section-questions>
+<app-section-temoignages></app-section-temoignages>
+

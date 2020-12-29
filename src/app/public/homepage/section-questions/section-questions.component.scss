@@ -1,0 +1,39 @@
+@import "../../../../assets/scss/variables";
+
+#section-questions {
+  background-color: $color-blue-5;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  @media #{$medium-device} {
+    .container-fluid {
+      padding-left: 15rem;
+      padding-right: 15rem;
+    }
+  }
+  @media #{$large-device} {
+    .container-fluid {
+      padding-left: 25%;
+      padding-right: 25%;
+    }
+  }
+  h2 {
+    padding-bottom: 2rem;
+  }
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+    .card-body {
+      padding-top: 0;
+    }
+    .card-header {
+      border: none;
+      background-color: $color-white-1;
+      h3 {
+        color: $color-blue-2;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
