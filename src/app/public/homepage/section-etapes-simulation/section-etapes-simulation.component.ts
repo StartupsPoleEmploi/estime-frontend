@@ -8,18 +8,10 @@ import { EtapeSimulationService } from '@app/core/services/utile/etape-simulatio
 })
 export class SectionEtapesSimulationComponent implements OnInit {
 
-  etapesSimulation: Array<string>;
-
   constructor(
-    private etapeSimulationService: EtapeSimulationService
   ) { }
 
   ngOnInit(): void {
-    this.loadEtapesSimulation();
-  }
-
-  private loadEtapesSimulation(): void {
-    this.etapesSimulation = this.etapeSimulationService.getEtapesSimulation();
   }
 
 }
