@@ -1,0 +1,19 @@
+@import "../../../../../assets/scss/variables";
+
+.card {
+  background-color: $color-white-2;
+  border: 1px solid $color-blue-2;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 30px;
+  div {
+    position: relative;
+    height: 100%;
+    margin-top: 35px;
+    span {
+      bottom: 0;
+      font-weight: bold;
+      position: absolute;
+    }
+  }
+}

@@ -8,6 +8,8 @@ import { CguComponent } from './cgu/cgu.component';
 import { SectionEtapesSimulationComponent } from './homepage/section-etapes-simulation/section-etapes-simulation.component';
 import { SectionQuestionsComponent } from './homepage/section-questions/section-questions.component';
 import { SectionTemoignagesComponent } from './homepage/section-temoignages/section-temoignages.component';
+import { TemoignagesDesktopComponent } from './homepage/section-temoignages/temoignages-desktop/temoignages-desktop.component';
+import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoignages-mobile/temoignages-mobile.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { SectionTemoignagesComponent } from './homepage/section-temoignages/sect
     CguComponent,
     SectionEtapesSimulationComponent,
     SectionQuestionsComponent,
-    SectionTemoignagesComponent
+    SectionTemoignagesComponent,
+    TemoignagesDesktopComponent,
+    TemoignagesMobileComponent
   ],
   imports: [
     AlertModule.forRoot(),
