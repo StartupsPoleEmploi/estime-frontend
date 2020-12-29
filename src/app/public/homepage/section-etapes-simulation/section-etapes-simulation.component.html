@@ -4,7 +4,7 @@
             Pour obtenir votre simulation financière
         </h1>
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex flex-row">
@@ -16,12 +16,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-auto col-chevron">
+            <div *ngIf="!isSmallScreen" class="col-sm-auto col-chevron">
               <div>
                 <img src="../../../assets/images/left-chevron.svg">
               </div>
             </div>
-            <div class="col-4">
+            <div class="col-12 col-md-4">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex flex-row">
@@ -33,12 +33,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-auto col-chevron">
+            <div *ngIf="!isSmallScreen" class="col-sm-auto col-chevron">
               <div>
                 <img src="../../../assets/images/left-chevron.svg">
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex flex-row">

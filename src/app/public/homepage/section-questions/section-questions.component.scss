@@ -40,16 +40,21 @@
       padding-top: 0;
     }
     div {
-      height: 80px;
-      line-height: 80px;
       margin-bottom: 15px;
+      @media #{$medium-device}, #{$large-device} {
+        height: 80px;
+        line-height: 80px;
+      }
       span {
-        display: inline-block;
         color: $color-blue-2;
         font-weight: bold;
-        font-size: 22px;
-        vertical-align: middle;
-        line-height: normal;
+        font-size: 18px;
+        @media #{$medium-device}, #{$large-device} {
+          display: inline-block;
+          font-size: 22px;
+          vertical-align: middle;
+          line-height: normal;
+        }
       }
     }
 

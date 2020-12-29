@@ -7,7 +7,7 @@
                 {{messageErreur.message}}
             </alert>
         </div>
-        <div class="row">
+        <div class="row row-1">
             <div class="col-12 col-md-8">
                 <div class="div-span-title">
                     <span>
@@ -23,7 +23,7 @@
                     data-testid="btn-pe-connect"
                     (click)="login()">
                     <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
-                    <span class="text-button">Se connecter avec pôle emploi</span>
+                    <span class="text-button">Se connecter avec Pôle emploi</span>
                 </button>
             </div>
             <div
@@ -34,19 +34,21 @@
                     src="../../../assets/images/homepage-calculette.svg">
             </div>
         </div>
-        <div class="row" style="margin-top: 35px;">
+        <div class="row row-2">
             <div class="col-12 col-md-7">
-                <h2 class="mt-4">Vos ressources complètes</h2>
-                <p class="mt-3">
+                <h2>Vos ressources complètes</h2>
+                <span class="mt-3">
                     Grâce à Estime, vous pourrez visualiser
                     <b>
                         vos ressources personnalisées dans la limite des 6 mois à venir.
                     </b>
-                </p>
-                <p class="mt-2">
+                </span>
+                <br>
+                <br>
+                <span class="mt-2">
                     Nous nous basons sur les informations de
                     <b>Pôle emploi et de la CAF.</b>
-                </p>
+                </span>
             </div>
             <div class="col-12 col-md-5 order-md-first mt-3">
                 <div>
@@ -58,7 +60,6 @@
         </div>
     </div>
 </section>
-<app-section-etapes-simulation></app-section-etapes-simulation>
+<app-section-etapes-simulation [isSmallScreen]="isSmallScreen"></app-section-etapes-simulation>
 <app-section-questions></app-section-questions>
-<app-section-temoignages></app-section-temoignages>
-
+<app-section-temoignages [isSmallScreen]="isSmallScreen"></app-section-temoignages>

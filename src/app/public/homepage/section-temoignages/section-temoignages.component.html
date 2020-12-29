@@ -1,6 +1,7 @@
 <section id="section-temoignages">
   <div class="container-fluid">
       <h2>Nos utilisateurs approuvent !</h2>
-      <app-temoignages-desktop [temoignages]="temoignages"></app-temoignages-desktop>
+      <app-temoignages-desktop *ngIf="!isSmallScreen" [temoignages]="temoignages"></app-temoignages-desktop>
+      <app-temoignages-mobile *ngIf="isSmallScreen" [temoignages]="temoignages"></app-temoignages-mobile>
   </div>
 </section>

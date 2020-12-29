@@ -10,6 +10,7 @@ import { SectionQuestionsComponent } from './homepage/section-questions/section-
 import { SectionTemoignagesComponent } from './homepage/section-temoignages/section-temoignages.component';
 import { TemoignagesDesktopComponent } from './homepage/section-temoignages/temoignages-desktop/temoignages-desktop.component';
 import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoignages-mobile/temoignages-mobile.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoi
   ],
   imports: [
     AlertModule.forRoot(),
+    CarouselModule.forRoot(),
     CommunModule,
     PublicRoutingModule
   ]

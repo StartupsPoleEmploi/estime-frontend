@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Temoignage } from '@app/commun/models/temoignage';
 
 @Component({
   selector: 'app-temoignages-mobile',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./temoignages-mobile.component.scss']
 })
 export class TemoignagesMobileComponent implements OnInit {
+
+  @Input() temoignages: Array<Temoignage>;
+  @Input() isSmallScreen: boolean;
 
   constructor() { }
 

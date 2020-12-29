@@ -1,1 +1,29 @@
-<p>temoignages-mobile works!</p>
+<carousel [interval]="12000" class="testc">
+    <slide>
+        <div
+            class="card card-body">
+            <span>{{temoignages[0].temoignage}}</span>
+            <div>
+                <span class="author-temoignage">{{temoignages[0].auteur}}</span>
+            </div>
+        </div>
+    </slide>
+    <slide>
+        <div
+            class="card card-body">
+            <span>{{temoignages[1].temoignage}}</span>
+            <div>
+                <span class="author-temoignage">{{temoignages[1].auteur}}</span>
+            </div>
+        </div>
+    </slide>
+    <slide>
+        <div
+            class="card card-body">
+            <span>{{temoignages[2].temoignage}}</span>
+            <div>
+                <span class="author-temoignage">{{temoignages[2].auteur}}</span>
+            </div>
+        </div>
+    </slide>
+</carousel>

@@ -1,0 +1,12 @@
+.carousel-indicators {
+  bottom: -45px !important;
+  li {
+    background-color: $color-blue-2 !important;
+  }
+}
+
+.carousel {
+  &:focus {
+    outline: none !important;
+  }
+}

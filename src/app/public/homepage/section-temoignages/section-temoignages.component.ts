@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Temoignage } from '@app/commun/models/temoignage';
 import { TemoignageService } from '@app/core/services/utile/temoignage.service';
 
@@ -10,6 +10,8 @@ import { TemoignageService } from '@app/core/services/utile/temoignage.service';
 export class SectionTemoignagesComponent implements OnInit {
 
   temoignages: Array<Temoignage>;
+
+  @Input() isSmallScreen: boolean;
 
   constructor(
     private temoignageService: TemoignageService

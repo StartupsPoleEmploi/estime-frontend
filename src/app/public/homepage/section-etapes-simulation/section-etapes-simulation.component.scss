@@ -6,8 +6,11 @@
   padding-top: 2rem;
   h1 {
     color: $color-white-3;
-    font-size: 36px;
+    font-size: 28px;
     font-weight: bold;
+    @media #{$medium-device}, #{$large-device} {
+      font-size: 36px;
+    }
   }
   .col-chevron {
     padding-left: 0;
@@ -26,32 +29,31 @@
   .card {
     background-color: inherit;
     border: none;
-    padding: 1rem;
+    padding: 0;
+    @media #{$medium-device}, #{$large-device} {
+      padding: 1rem;
+    }
     .card-body {
       padding-left: 0;
       padding-right: 0;
+      padding: 0.5rem;
+      @media #{$medium-device}, #{$large-device} {
+        padding: 0;
+      }
       .numero-etape {
         color: $color-orange-1;
-        font-size: 2.3rem;
+        font-size: 40px;
         font-weight: 600;
         padding-left: 0;
         padding-right: 0;
-        @media #{$medium-device}, #{$large-device} {
-          font-size: 2.5rem;
-        }
       }
       .text-etape {
         color: $color-white-3;
         font-size: 22px;
-        padding-top: 12px;
-        @media #{$medium-device}, #{$large-device} {
-          padding-top: 16px;
-        }
+        padding-top: 20px;
         padding-left: 0;
         padding-right: 2rem;
       }
     }
   }
-
-
 }

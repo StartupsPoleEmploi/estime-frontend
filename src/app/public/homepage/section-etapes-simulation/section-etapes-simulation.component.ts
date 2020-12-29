@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EtapeSimulationService } from '@app/core/services/utile/etape-simulation.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { EtapeSimulationService } from '@app/core/services/utile/etape-simulatio
   styleUrls: ['./section-etapes-simulation.component.scss']
 })
 export class SectionEtapesSimulationComponent implements OnInit {
+
+  @Input() isSmallScreen: boolean;
 
   constructor(
   ) { }
