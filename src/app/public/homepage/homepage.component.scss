@@ -7,19 +7,80 @@
 #section-presentation {
   margin-bottom: unset;
   margin-top: 0.5rem;
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     padding-top: 2rem;
   }
   padding-bottom: unset;
+  #image-homepage-calculette {
+    width: 351px;
+    height: 269px;
+  }
+  #image-homepage-smartphone {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    @media #{$small-device} {
+      width: 100%;
+    }
+  }
+  h1 {
+    @media #{$medium-device}, #{$large-device} {
+      font-size: 36px;
+      font-weight: bold;
+    }
+  }
+  .div-span-title {
+    max-width: 540px;
+    span {
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 21px;
+      }
+    }
+  }
+  .pe-connect-button {
+    background-color: $color-blue-3;
+    border: none;
+    border-radius: 100px;
+    display: flex;
+    margin-top: 1rem;
+    max-height: 53px;
+    max-width: 350px;
+    min-height: 53px;
+    text-decoration: none;
+    width: 100%;
+    &:not(:disabled):not(.disabled):active,
+    &:hover,
+    &:focus {
+      background-color: $color-blue-2;
+      border: none;
+      box-shadow: none;
+    }
+    img {
+      height: 62px;
+      width: 62px;
+      margin-top: -11px;
+    }
+    span {
+      color: $color-white-3;
+      font-size: 18px;
+      margin-bottom: auto;
+      margin-left: 5px;
+      margin-top: auto;
+      text-align: left;
+    }
+  }
+
   .container-fluid {
     h1 {
       line-height: 3rem;
     }
-    h1, h2, h3 {
-        text-align: left;
+    h1,
+    h2,
+    h3 {
+      text-align: left;
     }
     p {
-        font-size: 1.3rem;
+      font-size: 1.3rem;
     }
   }
 }
@@ -42,25 +103,24 @@
     color: $color-white-1;
   }
   .numero-etape {
-    color : $color-orange-1;
+    color: $color-orange-1;
     font-size: 2.3rem;
     font-weight: 600;
     padding-left: 0;
     padding-right: 0;
-    @media #{$medium-device}, #{$large-device}  {
+    @media #{$medium-device}, #{$large-device} {
       font-size: 2.5rem;
     }
   }
   .text-etape {
     padding-top: 12px;
-    @media #{$medium-device}, #{$large-device}  {
+    @media #{$medium-device}, #{$large-device} {
       padding-top: 16px;
     }
     padding-left: 0;
     padding-right: 2rem;
     font-size: 1.5rem;
   }
-
 }
 
 #section-questions {
@@ -69,13 +129,13 @@
   padding-top: 2rem;
   @media #{$medium-device} {
     .container-fluid {
-      padding-left : 15rem;
+      padding-left: 15rem;
       padding-right: 15rem;
     }
   }
   @media #{$large-device} {
     .container-fluid {
-      padding-left : 25%;
+      padding-left: 25%;
       padding-right: 25%;
     }
   }
@@ -83,21 +143,21 @@
     padding-bottom: 2rem;
   }
   .card {
-      border:none;
-      border-radius: 8px;
-      box-shadow: none;
-      .card-body {
-        padding-top: 0;
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+    .card-body {
+      padding-top: 0;
+    }
+    .card-header {
+      border: none;
+      background-color: $color-white-1;
+      h3 {
+        color: $color-blue-2;
+        font-weight: 600;
+        font-size: 1.2rem;
       }
-      .card-header {
-        border:none;
-        background-color: $color-white-1;
-        h3 {
-          color: $color-blue-2;
-          font-weight: 600;
-          font-size: 1.2rem;
-        }
-      }
+    }
   }
 }
 
@@ -109,11 +169,11 @@
   }
   .card {
     background-color: $color-white-2;
-    border:none;
+    border: none;
     box-shadow: none;
     .card-text {
       p {
-        margin-bottom:0.5rem;
+        margin-bottom: 0.5rem;
       }
       .author-temoignage {
         font-weight: bold;
@@ -122,18 +182,3 @@
     }
   }
 }
-
-.image-homepage {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  @media #{$small-device} {
-    width: 100%;
-  }
-}
-
-
-
-
-
-

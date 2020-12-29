@@ -18,12 +18,6 @@
   }
 }
 
-.button-se-connecter-pe {
-  @media #{$medium-device}, #{$large-device} {
-    min-height: 3rem;
-  }
-  max-height: 3rem;
-}
 
 .btn-group-input-date {
   display: flex !important;

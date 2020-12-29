@@ -1,53 +1,57 @@
 <section id="section-presentation">
     <div class="container-fluid">
         <div id="div-message-erreur-homepage">
-          <alert
-            type="{{niveauMessageErreur}}"
-            *ngIf="messageErreur">
-            {{messageErreur.message}}
-        </alert>
+            <alert
+                type="{{niveauMessageErreur}}"
+                *ngIf="messageErreur">
+                {{messageErreur.message}}
+            </alert>
         </div>
-        <div id="div-presentation-estime" class="row">
+        <div class="row">
             <div class="col-12 col-md-8">
-                <h3>Vous êtes bénéficiaire de minima sociaux et avez besoin de connaître votre budget en cas de reprise d'emploi ?</h3>
-                <h1>
-                  Estime calcule le montant de vos allocations et des aides auxquelles vous pourriez prétendre.
-                </h1>
-                <div class="div-button">
-                    <button
-                        id="pe-connect-button"
-                        type="button"
-                        class="btn btn-primary-style-2 button-se-connecter-pe"
-                        data-testid="btn-pe-connect"
-                        (click)="login()">
-                        <div>
-                            <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
-                        </div>
-                        <div class="text-button">Se connecter avec pôle emploi</div>
-                    </button>
+                <div class="div-span-title">
+                    <span>
+                        Vous êtes bénéficiaire de minima sociaux et avez besoin de connaître votre budget en cas de reprise d'emploi ?
+                    </span>
                 </div>
+                <h1>
+                    Estime calcule le montant de vos allocations et aides auxquelles vous pourriez prétendre.
+                </h1>
+                <button
+                    type="button"
+                    class="btn pe-connect-button"
+                    data-testid="btn-pe-connect"
+                    (click)="login()">
+                    <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
+                    <span class="text-button">Se connecter avec pôle emploi</span>
+                </button>
             </div>
-            <div *ngIf="!isSmallScreen" class="col-md-4">
+            <div
+                *ngIf="!isSmallScreen"
+                class="col-md-4">
                 <img
-                    class="image-homepage"
+                    id="image-homepage-calculette"
                     src="../../../assets/images/homepage-calculette.svg">
             </div>
         </div>
-        <div
-            class="row mt-2">
-            <div class="col-12 col-md-6">
+        <div class="row" style="margin-top: 35px;">
+            <div class="col-12 col-md-7">
                 <h2 class="mt-4">Vos ressources complètes</h2>
                 <p class="mt-3">
-                  Grâce à Estime, vous pourrez visualiser <b>vos ressources personnalisées dans la limite des 6 mois à venir.</b>
+                    Grâce à Estime, vous pourrez visualiser
+                    <b>
+                        vos ressources personnalisées dans la limite des 6 mois à venir.
+                    </b>
                 </p>
                 <p class="mt-2">
-                  Nous nous basons sur les informations de <b>Pôle emploi et de la CAF.</b>
+                    Nous nous basons sur les informations de
+                    <b>Pôle emploi et de la CAF.</b>
                 </p>
             </div>
-            <div class="col-12 col-md-6 order-md-first mt-3">
+            <div class="col-12 col-md-5 order-md-first mt-3">
                 <div>
                     <img
-                        class="image-homepage"
+                        id="image-homepage-smartphone"
                         src="../../../assets/images/homepage-smartphone.svg">
                 </div>
             </div>
@@ -64,14 +68,14 @@
                 class="col-sm-4"
                 *ngFor="let etape of etapesSimulation; let index = index;">
                 <div class="card h-100">
-                  <div class="card-body">
-                    <div class="d-flex flex-row">
-                        <div class="col-auto ml-0 mr-0 pl-0 pr-0">
-                          <span class="numero-etape">{{index + 1}}.</span>
+                    <div class="card-body">
+                        <div class="d-flex flex-row">
+                            <div class="col-auto ml-0 mr-0 pl-0 pr-0">
+                                <span class="numero-etape">{{index + 1}}.</span>
+                            </div>
+                            <div class="ml-1 col-auto text-etape">{{etape}}</div>
                         </div>
-                        <div class="ml-1 col-auto text-etape">{{etape}}</div>
                     </div>
-                  </div>
                 </div>
             </div>
         </div>
@@ -81,13 +85,17 @@
     <div class="container-fluid">
         <h2 class="text-center">Questions les + fréquentes</h2>
         <div class="row">
-            <div class="col-sm-6 py-2" *ngFor="let question of questions;">
+            <div
+                class="col-sm-6 py-2"
+                *ngFor="let question of questions;">
                 <div class="card h-100">
                     <div class="card-header">
-                      <h3>{{question.question}}</h3>
+                        <h3>{{question.question}}</h3>
                     </div>
                     <div class="card-body">
-                      <p class="card-text" [innerHTML]="question.reponse"></p>
+                        <p
+                            class="card-text"
+                            [innerHTML]="question.reponse"></p>
                     </div>
                 </div>
             </div>
@@ -98,7 +106,9 @@
     <div class="container-fluid">
         <h2>Nos utilisateurs approuvent !</h2>
         <div class="card-deck">
-            <div class="card" *ngFor="let temoignage of temoignages;">
+            <div
+                class="card"
+                *ngFor="let temoignage of temoignages;">
                 <div class="card-text">
                     <p>{{temoignage.temoignage}}</p>
                     <p class="author-temoignage mt-3">{{temoignage.auteur}}</p>
