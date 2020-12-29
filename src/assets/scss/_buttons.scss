@@ -108,15 +108,6 @@
   }
 }
 
-.btn-primary-style-1 {
-  color: $color-blue-2;
-  border: 1px $color-blue-2 solid;
-  border-radius: 100px;
-  &:hover, &:focus {
-    background-color: $color-blue-1;
-    color: $color-white-1;
-  }
-}
 
 .btn-primary-style-2 {
   @extend .primary-button-base;

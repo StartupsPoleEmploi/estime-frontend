@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
@@ -12,8 +12,11 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+  pathImg:string;
   isLoggedIn = false
   subscriptionStatutIndividuChangedObservable: Subscription;
+
+  @ViewChild('btnSeDeconnecter') searchElement: ElementRef;
 
   constructor(
     private individuConnectedService: IndividuConnectedService,
@@ -24,11 +27,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.pathImg = './assets/images/signout.svg';
     this.isLoggedIn = this.individuConnectedService.isLoggedIn();
   }
 
   ngOnDestroy(): void {
     this.subscriptionStatutIndividuChangedObservable.unsubscribe();
+  }
+
+  public getTest(): string {
+    return this.pathImg;
+  }
+
+  public onFocusEvent(t: any): void {
+    this.pathImg = './assets/images/signout-white.jpg';
   }
 
   public logout(): void {

@@ -1,13 +1,32 @@
 <header>
-  <div class="container-fluid">
-    <div class="row flex-row">
-      <img id="logo-estime-header"  src="./assets/images/logo-estime.svg" (click)="onClickLogoEstime()"/>
-      <img id="logo-pole-emploi-header" src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg" />
-      <div id="div-beta" class="ml-2">
-        <span>BETA</span>
-      </div>
-      <button class="btn btn-primary-style-1 btn-signout d-none d-sm-block mr-0 ml-auto" *ngIf="this.isLoggedIn"  (click)="logout()" data-testid=btn-se-deconnecter>Se deconnecter</button>
-      <img id="signout-sm" class="d-block d-sm-none ml-auto mr-2" *ngIf="this.isLoggedIn" (click)="logout()" src="./assets/images/signout.svg"/>
+    <div class="container-fluid">
+        <div class="row flex-row">
+            <img
+                id="logo-estime-header"
+                src="./assets/images/logo-estime.svg"
+                (click)="onClickLogoEstime()">
+            <img
+                id="logo-pole-emploi-header"
+                src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg">
+            <div
+                id="div-beta"
+                class="ml-2">
+                <span>BETA</span>
+            </div>
+            <button
+                class="btn btn-se-deconnecter d-none d-sm-block mr-0 ml-auto"
+                *ngIf="this.isLoggedIn"
+                (click)="logout()"
+                data-testid=btn-se-deconnecter>
+                <img class="img-btn-se-deconnecter">
+                <span>Se deconnecter</span>
+            </button>
+            <img
+                id="signout-sm"
+                class="d-block d-sm-none ml-auto mr-2"
+                *ngIf="this.isLoggedIn"
+                (click)="logout()"
+                src="./assets/images/signout.svg">
+        </div>
     </div>
-  </div>
 </header>

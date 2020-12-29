@@ -1,13 +1,14 @@
 @import "../../../../assets/scss/variables";
 
-.flex-row{
+.flex-row {
   display: flex;
- display: -webkit-box;
- flex-wrap:wrap;
- -webkit-flex-wrap: wrap;
+  display: -webkit-box;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
 }
-.flex-row:before, .flex-row:after{
-display: none;
+.flex-row:before,
+.flex-row:after {
+  display: none;
 }
 
 header {
@@ -56,30 +57,37 @@ header {
       margin-right: 0;
     }
 
-    .btn-signout {
-      &:not(:disabled):not(.disabled):active, &:hover, &:focus {
-        background-color: none;
+    .btn-se-deconnecter {
+      border: 1px $color-blue-2 solid;
+      border-radius: 100px;
+      width: 175px;
+      &:not(:disabled):not(.disabled):active,
+      &:hover,
+      &:focus {
+        background-color: $color-blue-2;
         border: none;
         box-shadow: none;
         outline: none;
-      }
-
-      &.d-sm-none {
-        background-color: unset;
-        border: none;
-        display: flex;
-        font-size: 1.2rem;
-        color: $color-blue-1;
-        margin-top: auto;
-        margin-bottom: auto;
-        &:not(:disabled):not(.disabled):active,
-        &:hover,
-        &:focus {
-          background-color: unset;
-          border: none;
-          box-shadow: none;
+        span {
+          color: $color-white-3;
         }
+        img {
+          content:url("../../../../assets/images/signout-white.svg");
+        }
+      }
+      span {
+        color: $color-blue-2;
+        font-size: 18px;
+        margin-left: 7px;
+      }
+      img {
+        content:url("../../../../assets/images/signout.svg");
+        height: 20px;
+        margin-top: -4px;
+        width: 20px;
       }
     }
   }
 }
+
+
