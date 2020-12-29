@@ -1,7 +1,15 @@
 body {
-  font-size: 12px;
+  font-size: 16px;
   @media #{$medium-device}, #{$large-device}  {
-    font-size: 16px;
+    font-size: 18px;
+  }
+}
+
+p, span, ul {
+  @extend .font-effect;
+  font-size: 16px;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 18px;
   }
 }
 
@@ -131,10 +139,7 @@ h4 , h5, h6 {
   }
 }
 
-p, span, ul {
-  @extend .font-effect;
-  font-size: 16px;
-}
+
 
 .text-important {
   color: $color-blue-2;

@@ -1,14 +1,23 @@
 @import "../../../assets/scss/variables";
 
 .container-fluid {
+  @media #{$small-device} {
+    padding-left: 0;
+    padding-right: 0;
+  }
   margin-top: 2rem;
   h1 {
+    margin-bottom: 15px;
     text-align: center;
   }
   .card {
     border: none;
-    max-width: 650px;
+    max-width: 600px;
     margin: auto;
+    padding: 20px 15px 20px 15px;
+    @media #{$medium-device}, #{$large-device} {
+      padding: 30px 70px 30px 70px;
+    }
     #div-info-simulation {
       color: $color-blue-3;
       font-size: 0.8rem;
@@ -30,10 +39,7 @@
         padding-left: 0;
         line-height: 18px;
         span {
-          font-size: 0.7rem;
-          @media #{$medium-device}, #{$large-device} {
-            font-size: 12px;
-          }
+          font-size: 12px;
           color: $color-blue-3;
         }
       }
