@@ -6,8 +6,8 @@
   padding-top: 2rem;
   @media #{$medium-device} {
     .container-fluid {
-      padding-left: 15rem;
-      padding-right: 15rem;
+      padding-left: 12rem;
+      padding-right: 12rem;
     }
   }
   @media #{$large-device} {
@@ -16,9 +16,22 @@
       padding-right: 25%;
     }
   }
-  h2 {
+  h1 {
+    color: $color-blue-1;
+    font-size: 30px;
+    font-weight: bold;
     padding-bottom: 2rem;
+    text-align: center;
   }
+  @media #{$medium-device}, #{$large-device} {
+    .first-card {
+      padding-right: 30px;
+    }
+    .second-card {
+      padding-left: 30px;
+    }
+  }
+
   .card {
     border: none;
     border-radius: 8px;
@@ -26,13 +39,28 @@
     .card-body {
       padding-top: 0;
     }
+    div {
+      height: 80px;
+      line-height: 80px;
+      margin-bottom: 15px;
+      span {
+        display: inline-block;
+        color: $color-blue-2;
+        font-weight: bold;
+        font-size: 22px;
+        vertical-align: middle;
+        line-height: normal;
+      }
+    }
+
     .card-header {
       border: none;
+      border-radius: 8px !important;
       background-color: $color-white-1;
-      h3 {
+      span {
         color: $color-blue-2;
-        font-weight: 600;
-        font-size: 1.2rem;
+        font-weight: bold;
+        font-size: 22px;
       }
     }
   }
