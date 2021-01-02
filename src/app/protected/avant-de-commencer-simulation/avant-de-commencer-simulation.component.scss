@@ -1,5 +1,9 @@
 @import "../../../assets/scss/variables";
 
+.btn-primary-style-1 {
+
+}
+
 .container-fluid {
   @media #{$small-device} {
     padding-left: 0;
@@ -27,24 +31,26 @@
       @media #{$medium-device}, #{$large-device} {
         font-size: 1rem;
       }
+      #img-info-simulation {
+        height: 100%;
+        position: relative;
+        img {
+          width: 20px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          @media #{$small-device} {
+          }
+        }
+      }
       #text-info-simulation {
-        padding-left: 0;
+        padding-left: 7px;
         line-height: 18px;
         span {
           font-size: 0.8rem;
           color: $color-blue-3;
         }
-      }
-      #text-info-simulation2 {
-        padding-left: 0;
-        line-height: 18px;
-        span {
-          font-size: 12px;
-          color: $color-blue-3;
-        }
-      }
-      img {
-        width: 1.2rem;
       }
     }
     .text-document {

@@ -7,6 +7,11 @@
   }
 }
 
+.custom-control-label {
+  color: $color-blue-1;
+  font-size: 16px;
+}
+
 .form-container-fluid {
   margin-top: 2rem;
 }
@@ -31,7 +36,7 @@ form.submitted input.ng-invalid,
 form.submitted select.ng-invalid,
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
-  border: 1px solid $color-red-1;
+  border: 1px solid $color-red-5;
 }
 
 .radio-button-style-1.ng-invalid.ng-touched,
@@ -42,8 +47,8 @@ form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::befor
 }
 
 .error-input-message {
-  color: $color-red-1 !important;
-  font-size: 0.7rem;
+  color: $color-red-5 !important;
+  font-size: 12px !important;
   margin-top: 2px;
 }
 
@@ -57,9 +62,12 @@ form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::befor
   background-color: $color-blue-1;
 }
 
-.form-control:focus {
-  border-color: black;
-  box-shadow: none;
+.form-control {
+  border-color: $color-grey-1;
+  &:focus {
+    border-color: $color-blue-1;
+    box-shadow: none;
+  }
 }
 
 /***** hide arrow number display by default *****/
@@ -99,7 +107,9 @@ input:-webkit-autofill:focus {
 
 .card-form {
   border: 0;
-  margin-top: 2rem;
+  @media #{$medium-device}, #{$large-device} {
+    margin-top: 2rem;
+  }
   padding-left: 1.7rem;
   @media #{$medium-device}, #{$large-device} {
     padding-left: 4rem;
@@ -115,16 +125,17 @@ input:-webkit-autofill:focus {
       max-width: 150px;
     }
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-      font-size: 0.9rem;
-      opacity: 1; /* Firefox */
-      color: rgba(35,51,60,0.7)!important;
+      color: $color-blue-1!important;
+      font-size: 16px;
       font-weight: 400 !important;
+      opacity: 0.7; /* Firefox */
     }
 
     &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-      font-size: 0.9rem;
-      color: rgba(35,51,60,0.7)!important;
+      color: $color-blue-1!important;
+      font-size: 16px;
       font-weight: 400 !important;
+      opacity: 0.7;
     }
   }
   select {
@@ -146,15 +157,17 @@ input:-webkit-autofill:focus {
   }
   .label, span {
     color: $color-blue-2;
+    font-size: 16px;
     font-weight: 500;
     margin-bottom: 0;
   }
   .text-side-input {
+    color: $color-blue-1;
+    font-size: 16px;
+    font-weight: 300;
     margin-bottom: auto;
     margin-left: 0.5rem;
     margin-top: auto;
-    font-weight: 300;
-    color: black;
   }
   .text-2-side-input {
     @extend .text-side-input;

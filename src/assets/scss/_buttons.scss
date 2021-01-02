@@ -19,18 +19,18 @@
 .btn-group-input-date {
   display: flex !important;
   .jour-input {
-    min-width: 47px;
-    max-width: 47px;
+    min-width: 55px;
+    max-width: 55px;
   }
   .mois-input {
     margin-left: 4px;
-    min-width: 50px;
-    max-width: 50px;
+    min-width: 55px;
+    max-width: 55px;
   }
   .annee-input {
-    min-width: 65px;
+    min-width: 75px;
     margin-left: 4px;
-    max-width: 65px;
+    max-width: 75px;
   }
 
   select.default-value {
@@ -83,6 +83,30 @@
   }
 }
 
+.btn-primary-style-0 {
+  border: none;
+  color: $color-blue-2;
+  display: inline-flex;
+  margin: auto;
+  &:not(:disabled):not(.disabled):active,
+  &:hover,
+  &:focus {
+    background-color: none;
+    border: none;
+    box-shadow: none;
+    .text-button {
+      text-decoration: underline;
+    }
+  }
+  .text-button {
+    margin: auto;
+    margin-left: 0.4rem;
+    text-align: left !important;
+  }
+}
+
+
+
 .btn-primary-style-1 {
   background-color: $color-blue-3;
   border: none;
@@ -93,7 +117,6 @@
   margin: auto;
   text-decoration: none;
   padding: 0.3rem 0 0.3rem 0rem;
-  width: 200px;
   @media #{$medium-device}, #{$large-device} {
     padding: 0.2rem 0 0.2rem 0rem;
   }
@@ -118,6 +141,13 @@
     margin-left: 0.5rem;
     margin-right: 0.8rem;
   }
+}
+
+.btn-suivant {
+  @extend .btn-primary-style-1;
+  margin-right: auto;
+  margin-left: 25px;
+  width: 150px;
 }
 
 .btn-primary-style-2 {
@@ -158,66 +188,21 @@
   }
 }
 
-
-
 .btn-primary-style-4 {
   background-color: $color-blue-3;
-  color: $color-white-1;
   border: 0;
   border-radius: 100px;
-  &:hover, &:focus {
-    background-color: $color-blue-1;
+  color: $color-white-1;
+  min-width: 100px;
+  &:hover {
+    background-color: $color-blue-2;
     color: $color-white-1;
-  }
-}
-
-.btn-primary-style-5 {
-  @extend .primary-button-base;
-  border-radius: 8px;
-  margin: auto;
-  max-width: 300px;
-  width: 222px;
-  &:hover, &:focus {
-    background-color: $color-blue-2;
-    color: $color-white-2;
-  }
-  .text-button {
-    width: 100%;
-  }
-  img {
-    width: 30px;
-    height: 30px;
-    margin-left: 15px;
-  }
-}
-
-.btn-obtenir-ma-simulation {
-  @extend .primary-button-base;
-  margin: auto;
-  max-width: 130px;
-  @media #{$medium-device}, #{$large-device} {
-    margin-left: 1rem;
-    max-width: 300px;
-  }
-  width: fit-content;
-  &:hover, &:focus {
-    background-color: $color-blue-2;
-    color: $color-white-2;
-  }
-  .text-button {
-    width: 100%;
-    margin-left: 1rem;
-    line-height: 0.9rem;
-  }
-  img {
-    max-width: 25px;
-    margin-left: 0.5rem;
-    margin-right: 0.8rem;
   }
 }
 
 .radio-button-style-1 {
   border-color: $color-blue-1;
+  font-size: 16px;
   max-height: unset !important;
   max-width: fit-content;
   margin-right: 0.3rem;
@@ -230,7 +215,8 @@
 }
 
 .radio-button-style-1:not(:disabled):not(.disabled).active {
-  color: $color-white-1;
+  color: $color-white-3;
   background-color: $color-blue-1;
   border-color: $color-blue-1;
+  font-weight: 500;
 }

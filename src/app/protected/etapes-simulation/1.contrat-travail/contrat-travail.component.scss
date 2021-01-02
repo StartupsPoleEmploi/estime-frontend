@@ -1,5 +1,15 @@
 @import "../../../../assets/scss/variables";
 
+.card-form {
+  margin-bottom: 50px;
+  @media #{$medium-device}, #{$large-device} {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    width: 62%;
+  }
+}
+
 .form-group-nombre-mois {
   @media #{$small-device} {
     margin-right: -15px;

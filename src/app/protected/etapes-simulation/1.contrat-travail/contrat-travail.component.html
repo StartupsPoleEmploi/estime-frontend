@@ -5,10 +5,11 @@
     </div>
     <div class="card card-body card-form">
         <form
+            id="futurTravailForm"
             [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
             #futurTravailForm="ngForm">
             <div class="row">
-                <div class="col-12 col-md-2 form-group">
+                <div class="col-12 col-md-3 form-group">
                     <div class="row mb-1">
                         <label
                             class="label"
@@ -62,7 +63,7 @@
                     </span>
                 </div>
                 <div
-                    class="col-12 col-md-10 form-group form-group-nombre-mois"
+                    class="col-12 col-md form-group form-group-nombre-mois"
                     *ngIf="futurTravail.typeContrat == 'CDD'">
                     <label
                         class="label mb-2"
@@ -126,7 +127,7 @@
 
             </div>
             <div class="form-group">
-                <div class="row">
+                <div class="row mb-2">
                     <label
                         class="label"
                         for="salaire-mensuel-net">
@@ -248,7 +249,7 @@
               <div class="text-button">Retour</div>
           </button>
           <button
-              class="btn btn-primary-style-3"
+              class="btn btn-suivant"
               type="submit"
               data-testid="btn-futur-travail-suivant"
               (click)="onSubmitFuturTravailForm(futurTravailForm)">

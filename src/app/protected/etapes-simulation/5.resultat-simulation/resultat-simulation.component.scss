@@ -1,7 +1,28 @@
 @import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/buttons";
 
 #div-h4-ressources-estimees {
   margin-top: 2rem;
+}
+
+.btn-primary-style-5 {
+  @extend .primary-button-base;
+  border-radius: 8px;
+  margin: auto;
+  max-width: 300px;
+  width: 250px;
+  &:hover, &:focus {
+    background-color: $color-blue-2;
+    color: $color-white-2;
+  }
+  .text-button {
+    width: 100%;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+  }
 }
 
 #card-revenus-actuels {
