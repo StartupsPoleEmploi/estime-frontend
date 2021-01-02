@@ -11,7 +11,7 @@
   margin: auto;
   max-width: 300px;
   width: 250px;
-  &:hover, &:focus {
+  &:hover {
     background-color: $color-blue-2;
     color: $color-white-2;
   }

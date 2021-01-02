@@ -73,16 +73,11 @@ export class AidesService {
   public hasAideByCode(simulationSelected: SimulationMensuelle, codeAideToFind: string): boolean {
     let hasAidesObtenir = false;
     if(simulationSelected) {
-      if(Object.entries(simulationSelected.mesAides).length > 1) {
-        hasAidesObtenir = true;
-      }
-      if(Object.entries(simulationSelected.mesAides).length === 1) {
         for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
           if(aide && codeAide === codeAideToFind) {
             hasAidesObtenir = true;
           }
         }
-      }
     }
     return hasAidesObtenir;
   }
