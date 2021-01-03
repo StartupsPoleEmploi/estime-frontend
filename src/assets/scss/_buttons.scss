@@ -1,7 +1,6 @@
 .btn {
-  font-size: 16px;
+  font-size: 18px;
   @media #{$medium-device}, #{$large-device} {
-    font-size: 18px;
     min-height: 2.5rem;
   }
   max-height: 2.5rem;
@@ -89,7 +88,7 @@
   color: $color-blue-2;
   display: inline-flex;
   margin: auto;
-  &:hover {
+  &:hover, &:focus   {
     background-color: none;
     border: none;
     box-shadow: none;
@@ -146,7 +145,10 @@
 .btn-suivant {
   @extend .btn-primary-style-1;
   margin-right: auto;
-  margin-left: 25px;
+  margin-left: 15px;
+  @media #{$medium-device}, #{$large-device} {
+    margin-left: 25px;
+  }
   width: 150px;
 }
 

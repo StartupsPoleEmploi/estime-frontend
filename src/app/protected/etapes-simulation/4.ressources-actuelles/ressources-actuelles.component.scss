@@ -1,10 +1,17 @@
 @import "../../../../assets/scss/variables";
 @import "../../../../assets/scss/buttons";
 
+.container-fluid {
+  margin-top: 2rem;
+}
+
 .btn-obtenir-ma-simulation {
   @extend .btn-primary-style-1;
   margin: auto;
-  max-width: 130px;
+  max-width: 158px;
+  @media #{$small-device} {
+    max-height: 3.5rem;
+  }
   @media #{$medium-device}, #{$large-device} {
     margin-left: 1rem;
     max-width: 300px;
@@ -17,12 +24,14 @@
   .text-button {
     width: 100%;
     margin-left: 1rem;
-    line-height: 0.9rem;
+    line-height: 1.2rem;
   }
 }
 
 .block-ressources {
-  width: 62%;
+  @media #{$medium-device}, #{$large-device} {
+    width: 750px;
+  }
   margin-left: auto;
   margin-right: auto;
   .accordion-button {
@@ -77,10 +86,11 @@
 }
 
 .div-buttons-form {
+  background-color: unset;
+  margin-top: 50px !important;
   margin-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
-  width: 62%;
   .btn-primary-style-0 {
     margin-right: 1rem;
   }

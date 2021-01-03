@@ -1,14 +1,19 @@
 @import "../../../../assets/scss/variables";
 
-.card-form {
-  @media #{$medium-device}, #{$large-device} {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-    width: 62%;
+.container-fluid {
+  margin-top: 2rem;
+}
+
+.form-container-fluid {
+  @media #{$small-device} {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
+.div-buttons-form {
+  padding-top: 15px;
+}
 
 .card-personne-list {
   border: 1px solid black;

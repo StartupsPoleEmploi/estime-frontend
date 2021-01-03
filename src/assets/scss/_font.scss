@@ -109,16 +109,6 @@ h4 , h5, h6 {
   text-align: center;
 }
 
-.h4-style-3 {
-  @extend .font-effect-title;
-  text-align: left;
-  color: $color-blue-2;
-  font-size: 1.2rem;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 1.4rem;
-  }
-}
-
 .h5-style-1 {
   @extend .font-effect-title;
   text-align: left;

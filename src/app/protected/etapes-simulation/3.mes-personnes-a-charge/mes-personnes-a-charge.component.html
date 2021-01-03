@@ -1,9 +1,13 @@
-<div class="container-fluid form-container-fluid">
-    <h1 class="h1-style-2">3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}</h1>
+<div class="container-fluid">
+    <h1 class="h1-style-2">
+        3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
+    </h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
     </div>
-    <div class="card card-body card-form">
+</div>
+<div class="container-fluid form-container-fluid">
+    <div class="card card-body card-form  card-form-style-1">
         <div class="row mb-3">
             <label class="label">
                 Nombre d'enfant(s) ou de personne(s) à charge
@@ -56,8 +60,7 @@
                     <div
                         class="card card-add-personne"
                         (click)="onClickButtonAjouterPersonne()"
-                        data-testid="btn-ajouter-personne-charge"
-                       >
+                        data-testid="btn-ajouter-personne-charge">
                         <div class="card-body d-flex align-items-center">
                             <div
                                 id="row-card-body-add-personne"
@@ -84,27 +87,29 @@
             [numeroNouvellePersonne]="numeroNouvellePersonne"
             (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
         </app-form-personne-a-charge>
-        <div
-            class="div-buttons-form row"
-            *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-            <button
-                class="btn btn-primary-style-0"
-                (click)="onClickButtonRetour()">
-                <div>
-                    <img src="./assets/images/return-arrow.svg">
-                </div>
-                <div class="text-button">Retour</div>
-            </button>
-            <button
-                class="btn btn-suivant"
-                data-testid="btn-personnes-charge-suivant"
-                (click)="onClickButtonSuivant()">
-                <div class="text-button">Suivant</div>
-                <div>
-                    <img src="./assets/images/icon-bt-primaire.svg">
-                </div>
-            </button>
-        </div>
+    </div>
+</div>
+<div class="div-buttons-form container-fluid">
+    <div
+        class="row"
+        *ngIf="isNouvellePersonneAChargeFormDisplay === false">
+        <button
+            class="btn btn-primary-style-0"
+            (click)="onClickButtonRetour()">
+            <div>
+                <img src="./assets/images/return-arrow.svg">
+            </div>
+            <div class="text-button">Retour</div>
+        </button>
+        <button
+            class="btn btn-suivant"
+            data-testid="btn-personnes-charge-suivant"
+            (click)="onClickButtonSuivant()">
+            <div class="text-button">Suivant</div>
+            <div>
+                <img src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
     </div>
 </div>
 

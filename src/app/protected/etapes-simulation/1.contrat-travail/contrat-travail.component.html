@@ -1,9 +1,11 @@
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid">
     <h1 class="h1-style-2">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
     <div class="text-under-h1">
         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
     </div>
-    <div class="card card-body card-form">
+</div>
+<div class="container-fluid form-container-fluid">
+    <div class="card card-body card-form card-form-style-1">
         <form
             id="futurTravailForm"
             [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
@@ -238,27 +240,30 @@
                 </span>
             </div>
         </form>
-        <div class="div-buttons-form row">
-          <button
-              class="btn btn-primary-style-0"
-              (click)="onClickButtonRetour()"
-              data-testid="btn-futur-travail-retour">
-              <div>
-                  <img src="./assets/images/return-arrow.svg">
-              </div>
-              <div class="text-button">Retour</div>
-          </button>
-          <button
-              class="btn btn-suivant"
-              type="submit"
-              data-testid="btn-futur-travail-suivant"
-              (click)="onSubmitFuturTravailForm(futurTravailForm)">
-              <div class="text-button">Suivant</div>
-              <div>
-                  <img src="./assets/images/icon-bt-primaire.svg">
-              </div>
-          </button>
-      </div>
+
+    </div>
+</div>
+<div class="div-buttons-form container-fluid">
+    <div class="row">
+        <button
+            class="btn btn-primary-style-0"
+            (click)="onClickButtonRetour()"
+            data-testid="btn-futur-travail-retour">
+            <div>
+                <img src="./assets/images/return-arrow.svg">
+            </div>
+            <div class="text-button">Retour</div>
+        </button>
+        <button
+            class="btn btn-suivant"
+            type="submit"
+            data-testid="btn-futur-travail-suivant"
+            (click)="onSubmitFuturTravailForm(futurTravailForm)">
+            <div class="text-button">Suivant</div>
+            <div>
+                <img src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
     </div>
 </div>
 
@@ -290,21 +295,35 @@
 </ng-template>
 
 <ng-template #popoverNombreTrajetTemplate>
-  <div class="container">
-      <div class="close-popover row">
-          <i
-              class="fas fa-times-circle mb-2  ml-auto"
-              (click)="popoverNombreTrajet.hide()"></i>
-      </div>
-      <div class="row">
-          <p><b>Les informations sur vos trajets permettront de déterminer le montant de l'aide à la mobilité auquel vous pourrez prétendre.</b></p>
-          <p><b>Exemples de calculs :</b></p>
-          <p>
-            Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc indiquer  <b>20 trajets aller par mois (5 allers x 4 semaines)</b>.
-          </p>
-          <p>
-            Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le weekend le temps de sa période d'essai d'un mois. Il va indiquer <b>4 trajets aller par mois (4 weekends par mois)</b>.
-          </p>
-      </div>
-  </div>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverNombreTrajet.hide()"></i>
+        </div>
+        <div class="row">
+            <p>
+                <b>
+                    Les informations sur vos trajets permettront de déterminer le montant de l'aide à la mobilité auquel vous pourrez prétendre.
+                </b>
+            </p>
+            <p>
+                <b>Exemples de calculs :</b>
+            </p>
+            <p>
+                Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc indiquer
+                <b>
+                    20 trajets aller par mois (5 allers x 4 semaines)
+                </b>
+                .
+            </p>
+            <p>
+                Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le weekend le temps de sa période d'essai d'un mois. Il va indiquer
+                <b>
+                    4 trajets aller par mois (4 weekends par mois)
+                </b>
+                .
+            </p>
+        </div>
+    </div>
 </ng-template>

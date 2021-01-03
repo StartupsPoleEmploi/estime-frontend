@@ -1,8 +1,35 @@
 @import "../../../../assets/scss/variables";
 @import "../../../../assets/scss/buttons";
+@import "../../../../assets/scss/font";
 
-#div-h4-ressources-estimees {
+.container-fluid {
   margin-top: 2rem;
+}
+
+#row-montants-total {
+  margin-top: 0.5rem;
+  @media #{$medium-device}, #{$large-device} {
+    margin-top: 1.5rem;
+  }
+  .card {
+    height: 100%;
+    padding: 10px;
+    @media #{$small-device} {
+      background-color: unset;
+    }
+  }
+}
+
+.card {
+  border: 0;
+}
+
+.h4-style-1 {
+  @extend .font-effect-title;
+  color: $color-blue-1;
+  font-size: 21px;
+  font-weight: bold;
+  text-align: left;
 }
 
 .btn-primary-style-5 {
@@ -13,7 +40,7 @@
   width: 250px;
   &:hover {
     background-color: $color-blue-2;
-    color: $color-white-2;
+    color: $color-white-3;
   }
   .text-button {
     width: 100%;
@@ -26,28 +53,30 @@
 }
 
 #card-revenus-actuels {
+  padding-left: 0;
   .card {
+    background-color: $color-white-3;
     border: 0;
+    height: 100%;
+    margin-right: 0;
+    margin-left: 0;
     text-align: center;
-    width: fit-content;
     padding: 0.4rem 1rem;
+    width: 100%;
     @media #{$small-device} {
       margin-left: auto;
       margin-right: auto;
     }
     h3 {
-      color: $color-blue-2;
+      color: $color-blue-3;
       font-weight: 600;
       margin-bottom: -10px;
-      font-size: 0.9rem;
-      @media #{$medium-device}, #{$large-device} {
-        font-size: 1rem;
-      }
+      font-size: 16px;
     }
     span {
       font-weight: 900;
       @media #{$medium-device}, #{$large-device} {
-        font-size: 1.3rem;
+        font-size: 24px;
       }
     }
   }
@@ -55,7 +84,7 @@
 
 #alert-resultat-simulation {
   @media #{$small-device} {
-    margin-bottom: 10px!important;
+    margin-bottom: 25px!important;
   }
 }
 
@@ -76,9 +105,7 @@
   border-radius: 8px;
   margin-bottom: 0;
   @media #{$medium-device}, #{$large-device} {
-    background-color: $color-white-1;
     padding-bottom: 5px;
-    padding-top: 5px;
   }
 }
 
@@ -89,6 +116,9 @@
   margin-right: 0;
   margin-bottom: 10px;
   width: 100%;
+  @media #{$small-device} {
+    padding-right: 0;
+  }
   @media #{$medium-device}, #{$large-device} {
     margin-bottom: 0px;
     &:not(.isLastCard) {
@@ -101,12 +131,16 @@
     margin-bottom: 0;
     @media #{$medium-device}, #{$large-device} {
       margin: 5px;
+      margin-left: -7px;
+      margin-right: -7px;
     }
     cursor: pointer;
     .card-body {
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
+      padding: 1.25rem;
       @media #{$medium-device}, #{$large-device} {
+        padding: 0.25rem;
         border-radius: 8px;
       }
       text-align: center;
@@ -114,13 +148,13 @@
         background-color: $color-grey-1;
       }
       #span-mois-annee {
-        font-size: 1rem;
-        color: $color-blue-2;
+        font-size: 16px;
+        color: $color-blue-3;
         font-weight: bold;
       }
       span {
         @media #{$medium-device}, #{$large-device} {
-          font-size: 1.3rem;
+          font-size: 24px;
         }
         font-weight: 900;
       }

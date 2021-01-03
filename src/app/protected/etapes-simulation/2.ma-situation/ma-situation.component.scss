@@ -1,12 +1,12 @@
 @import "../../../../assets/scss/variables";
 
-.card-form {
-  margin-bottom: 50px;
-  @media #{$medium-device}, #{$large-device} {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-    width: 62%;
+.container-fluid {
+  margin-top: 2rem;
+}
 
+.form-container-fluid {
+  @media #{$small-device} {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
