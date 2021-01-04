@@ -21,9 +21,9 @@
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
-                    <img src="./assets/images/print.svg">
+                    <img [src]="getSrcImgButtonImprimerSimulation()">
                 </div>
-                <div class="text-button">Imprimer la simulation</div>
+                <div class="text-button">{{getTextButtonImprimerSimulation()}}</div>
             </button>
         </div>
     </div>
