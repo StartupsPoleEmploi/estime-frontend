@@ -64,7 +64,7 @@ export class BlockInformationsService {
     const rectangle = new Rectangle(
       0,
       -50,
-      553,
+      515,
       50,
       5,
       '#D6D9E4'

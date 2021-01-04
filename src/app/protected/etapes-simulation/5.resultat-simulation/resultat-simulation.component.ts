@@ -124,9 +124,9 @@ export class ResultatSimulationComponent implements OnInit {
   private selectFirstAideSociale(): void {
     if (this.aidesServices.hasAidesObtenir(this.simulationSelected)) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-        if (!this.aideSocialeSelected && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          this.aideSocialeSelected = aide;
-        }
+          if (codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+            this.aideSocialeSelected = aide;
+          }
       }
     } else {
       this.aideSocialeSelected = null;

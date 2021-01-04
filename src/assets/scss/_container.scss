@@ -1,6 +1,6 @@
 #block-detail-aide {
-  p, li, span {
-    font-size: 0.8rem !important;
+  p, ul, li, span {
+    font-size: 16px !important;
   }
   ol, ul {
     padding-inline-start: 15px;
@@ -8,10 +8,7 @@
   h6 {
     text-align: left;
     font-weight: bold;
-    font-size: 0.9rem;
-    @media #{$medium-device}, #{$large-device} {
-      font-size: 1.1rem;
-    }
+    font-size: 16px;
   }
 }
 

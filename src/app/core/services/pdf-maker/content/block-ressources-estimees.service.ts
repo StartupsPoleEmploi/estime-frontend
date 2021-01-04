@@ -324,7 +324,7 @@ export class BlockRessourcesEstimeesService {
 
 
   private getWithsColumns(nbrColumns: number): Array<number> {
-    const widthMaxTable = 390;
+    const widthMaxTable = 350;
     const widthColumn = widthMaxTable / nbrColumns;
     const widthsColumns = [100];
     for (let i = 0; i < nbrColumns; i++) {

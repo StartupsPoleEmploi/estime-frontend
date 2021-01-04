@@ -5,6 +5,7 @@ import { EstimeApiService } from '@app/core/services/estime-api/estime-api.servi
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -14,6 +15,7 @@ import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 export class AvantDeCommencerSimulationComponent implements OnInit {
 
   isPageLoadingDisplay = false;
+  isSmallScreen: boolean;
   messageErreur: string;
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
@@ -21,10 +23,20 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   constructor(
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
-    private router: Router
+    private router: Router,
+    private screenService: ScreenService
     ) { }
 
   ngOnInit(): void {
+    this.isSmallScreen = this.screenService.isSmallScreen();
+  }
+
+  public getTextPieceAttestationPE(): string {
+    let textPieceAttestationPE = "dernière notification ASS Pôle Emploi";
+    if(this.isSmallScreen) {
+      textPieceAttestationPE = "dernière notification \nASS Pôle Emploi";
+    }
+    return textPieceAttestationPE;
   }
 
   public onClickButtonJeContinue(): void {

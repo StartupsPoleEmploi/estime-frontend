@@ -8,6 +8,7 @@ import { Temoignage } from '@app/commun/models/temoignage';
 })
 export class TemoignagesMobileComponent implements OnInit {
 
+
   @Input() temoignages: Array<Temoignage>;
   @Input() isSmallScreen: boolean;
 

@@ -71,7 +71,7 @@ export class DetailAidesEligiblesService {
 
   private createTableElement(body: Array<Array<Cell>>): TableElement {
     const tableElement = new TableElement();
-    tableElement.style = 'tableStyle1';
+    tableElement.style = 'tableStyle2';
     tableElement.layout = 'noBorders';
 
     const table = new Table();
@@ -140,9 +140,9 @@ export class DetailAidesEligiblesService {
   private createLineTitle(content: Array<any>, colorLine: string): void {
     const figure = new Figure(new Array<any>());
     const line = new Line(
-      77,
+      62,
       -25,
-      550,
+      515,
       -25,
       5,
       colorLine

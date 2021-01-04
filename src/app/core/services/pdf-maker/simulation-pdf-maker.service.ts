@@ -31,7 +31,7 @@ export class SimulationPdfMakerService {
     const def = {
       content: this.getContent(demandeurEmploi, simulationAidesSociales),
       styles: this.getStyles(),
-      pageMargins: [ 20, 40, 20, 40 ],
+      pageMargins: [ 40, 40, 40, 40 ],
       footer: function(currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }
     };
 
@@ -53,6 +53,9 @@ export class SimulationPdfMakerService {
     return {
       tableStyle1: {
         margin: [10, 0, 0, 10]
+      },
+      tableStyle2: {
+        margin: [-5, 0, 0, 10]
       },
       tableStyle3: {
         margin: [0, 10, 0, 0]
