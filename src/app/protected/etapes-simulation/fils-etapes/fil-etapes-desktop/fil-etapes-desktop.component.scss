@@ -113,6 +113,9 @@
         opacity: unset;
         color: $color-blue-2;
       }
+      &:not(:first-child)::after {
+        background-color: $color-blue-2 !important;
+      }
     }
   }
 }
