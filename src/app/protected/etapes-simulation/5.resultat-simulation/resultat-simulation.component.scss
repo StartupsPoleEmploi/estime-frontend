@@ -122,7 +122,7 @@
   @media #{$medium-device}, #{$large-device} {
     margin-bottom: 0px;
     &:not(.isLastCard) {
-      border-right: 2px solid $color-grey-1 !important;
+      border-right: 1px solid $color-grey-2 !important;
       border-radius: 0 !important;
     }
   }

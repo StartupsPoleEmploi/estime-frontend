@@ -68,12 +68,13 @@
       }
       span {
         color: $color-white-3;
-        font-size: 16px;
+        font-size: 15px;
+        font-weight: bold;
         margin-bottom: auto;
         margin-top: auto;
         text-align: left;
         @media #{$medium-device}, #{$large-device} {
-          font-size: 18px;
+          font-size: 16px;
           margin-left: 5px;
         }
       }
