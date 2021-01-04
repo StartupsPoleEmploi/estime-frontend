@@ -18,6 +18,9 @@
 .card-personne-list {
   border: 1px solid black;
   min-height: 103px;
+  min-width: 205px;
+  max-width: 205px;
+  margin-top: 10px;
   img {
     margin-left: 10px;
   }
@@ -70,7 +73,9 @@
   border-radius: 0.25rem;
   background-color: unset;
   padding: 0;
-  max-height: 105px;
+  min-height: 115px;
+  max-height: 115px;
+  margin-top: 10px;
   @media #{$medium-device}, #{$large-device} {
     margin-left: 15px;
   }
@@ -79,7 +84,7 @@
     box-shadow: -1px 1px 6px 2px $color-black-3;
   }
   .card-add-personne {
-    min-height: 103px;
+    min-height: 113px;
     border: 0;
     margin-left: 0;
     margin-right: 0;
