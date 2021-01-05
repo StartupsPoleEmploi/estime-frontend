@@ -39,9 +39,9 @@ export class SimulationPdfMakerService {
     };
 
     if(this.isSmallScreen) {
-      pdfMakeModule.createPdf(def).open();
+      pdfMakeModule.createPdf(def).download('simulation-estime-pole-emploi');
     } else {
-      pdfMakeModule.createPdf(def).download();
+      pdfMakeModule.createPdf(def).open();
     }
   }
 

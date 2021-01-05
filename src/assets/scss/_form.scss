@@ -42,11 +42,7 @@
   }
 }
 
-.container-fluid-title {
-  @media #{$medium-device}, #{$large-device} {
-    padding-left: 257px !important;
-  }
-}
+
 
 .fit-content {
   min-width: fit-content;

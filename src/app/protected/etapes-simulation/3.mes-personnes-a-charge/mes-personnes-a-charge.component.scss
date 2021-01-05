@@ -4,6 +4,12 @@
   margin-top: 2rem;
 }
 
+.container-fluid-title {
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 257px !important;
+  }
+}
+
 .form-container-fluid {
   @media #{$small-device} {
     padding-left: 0;
