@@ -27,6 +27,18 @@
         margin-top: 0;
       }
     }
+    .col-style-1 {
+      @media #{$medium-device}, #{$large-device} {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
+    .col-style-2 {
+      @media #{$medium-device}, #{$large-device} {
+        padding-right: 5px;
+        padding-left: 25px;
+      }
+    }
     .div-span-title {
       max-width: 540px;
       span {
@@ -97,6 +109,8 @@
       max-width: 480px;
       margin-bottom: 22px;
     }
+
+
     h2 {
       font-size: 26px;
       text-align: left;

@@ -3,7 +3,7 @@
 footer {
   display: block;
   background-color: $color-white-1;
-  bottom: 1;
+  bottom: -50px;
   font-size: 16px;
   height: 12rem;
   @media #{$medium-device}, #{$large-device} {
