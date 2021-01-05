@@ -98,7 +98,7 @@ export class ResultatSimulationComponent implements OnInit {
   public getSrcImgButtonImprimerSimulation(): string {
     let text = './assets/images/print.svg';
     if(this.isSmallScreen) {
-      text = './assets/images/print.svg';
+      text = './assets/images/download.svg';
     }
     return text;
   }
@@ -108,7 +108,7 @@ export class ResultatSimulationComponent implements OnInit {
   public getTextButtonImprimerSimulation(): string {
     let text = 'Imprimer la simulation';
     if(this.isSmallScreen) {
-      text = 'Imprimer la simulation';
+      text = 'Télécharger la simulation';
     }
     return text;
   }

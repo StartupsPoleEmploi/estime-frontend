@@ -37,7 +37,10 @@
   border-radius: 8px;
   margin: auto;
   max-width: 300px;
-  width: 250px;
+  width: 265px;
+  @media #{$medium-device}, #{$large-device} {
+    width: 250px;
+  }
   &:hover, &:focus-visible {
     background-color: $color-blue-2;
     color: $color-white-3;
@@ -85,6 +88,7 @@
 #alert-resultat-simulation {
   @media #{$small-device} {
     margin-bottom: 25px!important;
+    padding-right: 0!important;
   }
 }
 

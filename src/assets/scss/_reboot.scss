@@ -8,3 +8,8 @@ a {
     outline: unset;
   }
 }
+
+a:not([href]) {
+  color: $color-blue-1;
+  text-decoration: underline;
+}

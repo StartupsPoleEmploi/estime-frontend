@@ -1,58 +1,106 @@
 @import "../../../../assets/scss/variables";
 
-#logo-pole-emploi-footer {
-  width: 2.7rem;
-  @media #{$medium-device}, #{$large-device}  {
-    width: 3.5rem;
-  }
-}
-
 footer {
   display: block;
   background-color: $color-white-1;
   bottom: 0;
-  font-size: 0.8rem;
+  font-size: 16px;
   height: 8rem;
-  @media #{$medium-device}, #{$large-device}  {
+  @media #{$medium-device}, #{$large-device} {
     height: 7rem;
   }
   left: 0;
   margin-top: 1rem;
   position: absolute;
   right: 0;
-  #div-copyright {
-    text-align: center;
-    margin-top: 1rem;
-    padding-bottom: 1rem;
-    span {
-      font-size: 0.6rem;
+  #div-1-footer {
+    @media #{$medium-device}, #{$large-device} {
+      margin-left: 0;
+      margin-right: auto;
+      padding-left: 0;
+      padding-right: 0;
     }
-    @media #{$medium-device}, #{$large-device}  {
-      padding-bottom: 0;
-      margin-top: auto;
-      text-align: right;
-    }
-  }
-  #div-cgu {
-    text-align: right;
-    @media #{$medium-device}, #{$large-device}  {
-      text-align: left;
+    img {
+      width: 69px;
+      @media #{$medium-device}, #{$large-device} {
+        width: 99px;
+      }
     }
     a {
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-position: under;
-      &:hover, &:focus {
-        text-decoration: none;
+      margin-left: 15px;
+      @media #{$small-device} {
+        font-size: 12px;
+      }
+    }
+  }
+  #div-2-footer {
+    line-height: 10px !important;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    @media #{$medium-device}, #{$large-device} {
+      line-height: 11px !important;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    #logo-fonds-social-europeen-footer {
+      width: 51px;
+      margin-top: 10px;
+      @media #{$medium-device}, #{$large-device} {
+        margin-top: 0;
+        width: 95px;
+      }
+    }
+    #logo-ue-footer {
+      margin-left: 12px;
+      margin-right: 12px;
+      margin-top: 10px;
+      @media #{$medium-device}, #{$large-device} {
+        margin-top: 2px;
+      }
+      width: 41px;
+      @media #{$medium-device}, #{$large-device} {
+        width: 70px;
+      }
+    }
+    #text-fse-footer {
+      width: 134px;
+      @media #{$medium-device}, #{$large-device} {
+        width: 176px;
+      }
+
+      span {
+        font-size: 8px !important;
+        @media #{$medium-device}, #{$large-device} {
+          font-size: 9px !important;
+        }
+      }
+    }
+  }
+  #div-3-footer {
+    border-top: 1px solid $color-grey-3;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    @media #{$medium-device}, #{$large-device} {
+      border: 0;
+      margin-left: auto;
+      margin-right: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: left;
+    }
+    span {
+      font-size: 10px;
+      @media #{$medium-device}, #{$large-device} {
+        font-size: 12px;
       }
     }
   }
   .container-fluid {
     .row {
-      margin-top: 2.5rem;
-      div {
-        margin-top:auto;
-      }
+      margin-top: 1.5rem;
     }
   }
 }
