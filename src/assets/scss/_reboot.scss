@@ -1,0 +1,10 @@
+a {
+  background-color: transparent;
+  color: $color-blue-1;
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover, &:focus {
+    text-decoration: none;
+    outline: unset;
+  }
+}

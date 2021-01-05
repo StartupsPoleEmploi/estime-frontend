@@ -1,26 +1,3 @@
-<app-fil-etapes-desktop *ngIf="!isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-desktop>
-<app-fil-etapes-mobile *ngIf="isSmallScreen" [etapeActive]="etapeActive"></app-fil-etapes-mobile>
-<app-contrat-travail
-    *ngIf="etapeActive === 1"
-    (validationEtapeEventEmitter)="traiterEtapeValidee()"
-    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
-</app-contrat-travail>
-<app-ma-situation
-    *ngIf="etapeActive === 2"
-    (validationEtapeEventEmitter)="traiterEtapeValidee()"
-    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
-</app-ma-situation>
-<app-mes-personnes-a-charge
-    *ngIf="etapeActive === 3"
-    (validationEtapeEventEmitter)="traiterEtapeValidee()"
-    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
-</app-mes-personnes-a-charge>
-<app-ressources-actuelles
-    *ngIf="etapeActive === 4"
-    (validationEtapeEventEmitter)="traiterEtapeValidee()"
-    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
-</app-ressources-actuelles>
-<app-resultat-simulation
-    *ngIf="etapeActive === 5"
-    (retourEtapePrecedenteEventEmitter)="traiterRetourEtapePrecedente()">
-</app-resultat-simulation>
+<app-fil-etapes-desktop *ngIf="!isSmallScreen"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf="isSmallScreen"></app-fil-etapes-mobile>
+<router-outlet></router-outlet>

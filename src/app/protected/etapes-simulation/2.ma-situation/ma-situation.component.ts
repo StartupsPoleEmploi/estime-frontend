@@ -1,6 +1,8 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
@@ -36,9 +38,6 @@ export class MaSituationComponent implements OnInit {
   @ViewChild('moisDateNaissance', { read: ElementRef }) moisDateNaissanceInput: ElementRef;
   @ViewChild('anneeDateNaissance', { read: ElementRef }) anneeDateNaissanceInput: ElementRef;
 
-  @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
-  @Output() validationEtapeEventEmitter = new EventEmitter<void>();
-
   nationaliteSelectOptions = [
     { label: NationalitesEnum.FRANCAISE },
     { label: NationalitesEnum.RESSORTISSANT_EUROPEEN_OU_SUISSE },
@@ -49,6 +48,7 @@ export class MaSituationComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
+    private router: Router,
     private situationFamilialeUtileService: SituationFamilialeUtileService
   ) { }
 
@@ -62,7 +62,7 @@ export class MaSituationComponent implements OnInit {
 
   public onClickButtonRetour(): void {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
-    this.retourEtapePrecedenteEventEmitter.emit();
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
     public onClickCheckBoxSituationFamiliale(): void {
@@ -93,7 +93,7 @@ export class MaSituationComponent implements OnInit {
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
-      this.validationEtapeEventEmitter.emit();
+      this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
     }
   }
 

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
-import { EtapeSimulationService } from "@app/core/services/utile/etape-simulation.service";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,24 +12,19 @@ import { Subscription } from 'rxjs';
 export class FilArianeComponent implements OnInit {
 
   libelleRouteActive: string;
-  subscriptionEtapeSimulationChangedObservable: Subscription;
   subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
-    private etapeSimulationService: EtapeSimulationService,
-    private router: Router,
-    private sessionStorageEstimeService:SessionStorageEstimeService
+    private router: Router
   ) {
-    this.subscribeEtapeSimulationChangedObservable();
     this.subscribeRouteNavigationEndObservable();
   }
 
   ngOnInit(): void {
-    this.setLibelleRouteActive(this.router.url);
+    this.setLibelleRouteActiveSafe(this.router.url);
   }
 
   ngOnDestroy(): void {
-    this.subscriptionEtapeSimulationChangedObservable.unsubscribe();
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
 
@@ -39,60 +32,49 @@ export class FilArianeComponent implements OnInit {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
-  private setLibelleRouteActive(url: string): void {
-    const activeRoute = url.substring(1, url.length);
+  private setLibelleRouteActive(pathRouteActivated: string): void {
 
-    switch(activeRoute) {
-
-      case RoutesEnum.AVANT_COMMENCER_SIMULATION : {
+    switch (pathRouteActivated) {
+      case RoutesEnum.AVANT_COMMENCER_SIMULATION:
         this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
         break;
-      }
-      case RoutesEnum.CGU : {
+      case RoutesEnum.CGU:
         this.libelleRouteActive = PageTitlesEnum.CGU;
         break;
-      }
-      case RoutesEnum.ETAPES_SIMULATION : {
-        const numeroEtapeActive = this.sessionStorageEstimeService.getNumeroEtapeSimulation();
-        this.setLibelleRouteActiveEtapeSimulation(parseInt(numeroEtapeActive));
-        break;
-      }
-    }
-  }
-
-  private setLibelleRouteActiveEtapeSimulation(numeroEtapeActive: number): void {
-    switch(numeroEtapeActive) {
-      case 1 :
+      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`:
         this.libelleRouteActive = PageTitlesEnum.CONTRAT_TRAVAIL;
-      break;
-      case 2 :
+        break;
+      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MA_SITUATION}`:
         this.libelleRouteActive = PageTitlesEnum.MA_SITUATION;
-      break;
-      case 3 :
+        break;
+      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MES_PERSONNES_A_CHARGE}`:
         this.libelleRouteActive = PageTitlesEnum.MES_PERSONNES_CHARGE;
-      break;
-      case 4 :
+        break;
+      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESSOURCES_ACTUELLES}`:
         this.libelleRouteActive = PageTitlesEnum.MES_RESSOURCES_ACTUELLES;
-      break;
-      case 5 :
+        break;
+      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`:
         this.libelleRouteActive = PageTitlesEnum.RESULTAT_MA_SIMULATION;
-      break;
+        break;
     }
-  }
-
-  private subscribeEtapeSimulationChangedObservable(): void {
-
-    this.subscriptionEtapeSimulationChangedObservable = this.etapeSimulationService.etapeSimulationChanged.subscribe(numeroEtape =>  {
-      this.setLibelleRouteActiveEtapeSimulation(numeroEtape);
-    })
   }
 
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
-      if(routerEvent instanceof NavigationEnd) {
-          this.setLibelleRouteActive(routerEvent.url);
+      if (routerEvent instanceof NavigationEnd) {
+        this.setLibelleRouteActiveSafe(routerEvent.url);
       }
     });
+  }
+
+  /**
+   * Méthode permettant d'enlever le '/'
+   * ex : /etapes-simulation/contrat-de-travail => etapes-simulation/contrat-de-travail
+   * @param url : url courante
+   */
+  private setLibelleRouteActiveSafe(url: string): void {
+    const pathRouteActivated = url.substring(1, url.length);
+    this.setLibelleRouteActive(pathRouteActivated);
   }
 
 }

@@ -13,25 +13,28 @@ import { HeaderComponent } from './components/header/header.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalSessionExpiredComponent } from './components/modal-session-expired/modal-session-expired.component';
 import { FilArianeComponent } from './components/fil-ariane/fil-ariane.component';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
 
 @NgModule({
   declarations: [
     AutofocusDirective,
     CallbackPipe,
+    FilArianeComponent,
     FooterComponent,
     HeaderComponent,
+    ModalSessionExpiredComponent,
     NotFoundComponent,
     PageLoadingComponent,
     SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent,
-    ModalSessionExpiredComponent,
-    FilArianeComponent,
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
     CommonModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
   ],
   exports: [
     AutofocusDirective,

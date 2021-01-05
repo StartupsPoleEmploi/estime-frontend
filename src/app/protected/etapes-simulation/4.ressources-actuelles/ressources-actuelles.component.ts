@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
@@ -65,9 +67,6 @@ export class RessourcesActuellesComponent implements OnInit {
   @ViewChild(RessourcesFinancieresPersonnesAChargeComponent) ressourcesFinancieresPersonnesAChargeComponent: RessourcesFinancieresPersonnesAChargeComponent;
   @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
 
-  @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
-  @Output() validationEtapeEventEmitter = new EventEmitter<void>();
-
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
@@ -76,7 +75,8 @@ export class RessourcesActuellesComponent implements OnInit {
     private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private estimeApiService: EstimeApiService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private router: Router
   ) {
 
   }
@@ -111,7 +111,7 @@ export class RessourcesActuellesComponent implements OnInit {
         (simulationAidesSociales) => {
           this.deConnecteSimulationAidesSocialesService.setSimulationAidesSociales(simulationAidesSociales);
           this.isPageLoadingDisplay = false;
-          this.validationEtapeEventEmitter.emit();
+          this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
         }, (erreur) => {
           console.log(erreur);
           this.isPageLoadingDisplay = false;
@@ -122,7 +122,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.retourEtapePrecedenteEventEmitter.emit();
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
   }
 
   public traiterValidationVosRessourcesEventEmitter(): void {

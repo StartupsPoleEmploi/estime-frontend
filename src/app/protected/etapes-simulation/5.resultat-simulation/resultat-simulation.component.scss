@@ -38,7 +38,7 @@
   margin: auto;
   max-width: 300px;
   width: 250px;
-  &:hover {
+  &:hover, &:focus-visible {
     background-color: $color-blue-2;
     color: $color-white-3;
   }

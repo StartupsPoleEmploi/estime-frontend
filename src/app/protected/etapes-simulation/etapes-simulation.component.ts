@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { EtapeSimulationService } from "@app/core/services/utile/etape-simulation.service";
 
 @Component({
   selector: 'app-etapes-simulation',
@@ -16,43 +14,19 @@ export class EtapesSimulationComponent implements OnInit {
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
 
+
   constructor(
-    private etapeSimulationService: EtapeSimulationService,
-    private sessionStorageEstimeService: SessionStorageEstimeService,
     private screenService: ScreenService
   ) {
     this.gererResizeScreen();
   }
 
   ngOnInit(): void {
-    this.initEtapeActive();
     this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
   ngOnDestroy(): void {
     this.resizeSubscription.unsubscribe();
-  }
-
-  public traiterEtapeValidee(): void {
-    this.etapeActive = this.etapeActive + 1;
-    this.etapeSimulationService.emitEtapeSimulationChangedEvent(this.etapeActive);
-    this.sessionStorageEstimeService.storeNumeroEtapeSimulation(this.etapeActive);
-  }
-
-  public traiterRetourEtapePrecedente(): void {
-    this.etapeActive = this.etapeActive - 1;
-    this.etapeSimulationService.emitEtapeSimulationChangedEvent(this.etapeActive);
-    this.sessionStorageEstimeService.storeNumeroEtapeSimulation(this.etapeActive);
-  }
-
-  private initEtapeActive(): void {
-    const numeroEtapeSimulation = this.sessionStorageEstimeService.getNumeroEtapeSimulation();
-    if(numeroEtapeSimulation)  {
-      this.etapeActive = parseInt(numeroEtapeSimulation);
-    } else {
-      this.etapeActive = 1;
-      this.sessionStorageEstimeService.storeNumeroEtapeSimulation(this.etapeActive);
-    }
   }
 
   private gererResizeScreen(): void {

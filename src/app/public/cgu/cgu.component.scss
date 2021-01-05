@@ -4,24 +4,5 @@
   margin-top: 2rem;
 }
 
-.button-tc-plateform {
-  border: 0;
-  background-color: unset;
-  color: #007bff;
-  padding: 0;
-  &:focus, &:hover {
-    border: 0;
-    box-shadow: none;
-    outline: none;
-  }
-}
 
-a {
-  background-color: transparent;
-  color: $color-blue-1;
-  cursor: pointer;
-  text-decoration: underline;
-  &:hover {
-    text-decoration: none;
-  }
-}
+

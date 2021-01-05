@@ -13,6 +13,8 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -30,7 +32,6 @@ export class ResultatSimulationComponent implements OnInit {
   simulationSelected: SimulationMensuelle;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
-  @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
 
   constructor(
     private aidesServices: AidesService,
@@ -38,6 +39,7 @@ export class ResultatSimulationComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
+    private router: Router,
     private screenService: ScreenService,
     private simulationPdfMakerService:SimulationPdfMakerService
   ) {
@@ -90,7 +92,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.retourEtapePrecedenteEventEmitter.emit();
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
   }
 
   public getSrcImgButtonImprimerSimulation(): string {

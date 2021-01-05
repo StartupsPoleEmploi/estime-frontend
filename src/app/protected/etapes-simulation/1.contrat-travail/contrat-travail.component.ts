@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -28,8 +28,6 @@ export class ContratTravailComponent implements OnInit {
     { label: "5 mois", value: 5 },
     { label: "6 mois et plus", value: 6 }
   ];
-
-  @Output() validationEtapeEventEmitter = new EventEmitter<void>();
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -61,7 +59,7 @@ export class ContratTravailComponent implements OnInit {
     this.isFuturTravailFormSubmitted = true;
     if(form.valid) {
       this.deConnecteService.setFuturTravail(this.futurTravail);
-      this.validationEtapeEventEmitter.emit();
+      this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     }
   }
 

@@ -30,9 +30,6 @@ export class MesPersonnesAChargeComponent implements OnInit {
   personnesACharge: Array<Personne>;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  @Output() retourEtapePrecedenteEventEmitter = new EventEmitter<void>();
-  @Output() validationEtapeEventEmitter = new EventEmitter<void>();
-
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
@@ -75,11 +72,11 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.retourEtapePrecedenteEventEmitter.emit();
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
   }
 
   public onClickButtonSuivant(): void {
-    this.validationEtapeEventEmitter.emit();
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
   }
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {
