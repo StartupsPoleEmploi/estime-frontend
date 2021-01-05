@@ -7,7 +7,7 @@
 
 .div-block-title {
   @media #{$medium-device}, #{$large-device} {
-    padding-left: 172px;
+    padding-left: 172px !important;
   }
 }
 

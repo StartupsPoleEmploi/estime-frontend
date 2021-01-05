@@ -11,12 +11,6 @@
   }
 }
 
-.container-fluid-title {
-  @media #{$medium-device}, #{$large-device} {
-    padding-left: 257px !important;
-  }
-}
-
 .form-group-nombre-mois {
   @media #{$small-device} {
     margin-right: -15px;

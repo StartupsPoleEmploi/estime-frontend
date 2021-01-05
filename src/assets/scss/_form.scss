@@ -42,7 +42,11 @@
   }
 }
 
-
+.div-title-formulaire {
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 172px !important;
+  }
+}
 
 .fit-content {
   min-width: fit-content;
