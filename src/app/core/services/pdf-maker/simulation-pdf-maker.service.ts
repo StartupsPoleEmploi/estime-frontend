@@ -9,6 +9,7 @@ import { BlockInformationsService } from "./content/bloc-informations.service";
 import { Text } from "./models/text";
 import { Style } from './models/style';
 import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
+import { ScreenService } from '../utile/screen.service';
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 
@@ -16,14 +17,16 @@ pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 @Injectable({ providedIn: 'root' })
 export class SimulationPdfMakerService {
 
+  isSmallScreen: boolean;
   imageBase64: any;
 
   constructor(
     private blockInformationsService: BlockInformationsService,
     private blockRessourcesEstimeesService: BlockRessourcesEstimeesService,
-    private detailAidesEligiblesService:DetailAidesEligiblesService
+    private detailAidesEligiblesService:DetailAidesEligiblesService,
+    private screenService: ScreenService
   ) {
-
+    this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
   public generatePdf(demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales) {
@@ -35,7 +38,11 @@ export class SimulationPdfMakerService {
       footer: function(currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }
     };
 
-    pdfMakeModule.createPdf(def).open();
+    if(this.isSmallScreen) {
+      pdfMakeModule.createPdf(def).open();
+    } else {
+      pdfMakeModule.createPdf(def).download();
+    }
   }
 
   private getContent(demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales): any {
