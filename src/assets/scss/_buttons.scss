@@ -204,11 +204,15 @@
   margin-right: 0.3rem;
   margin-top: 0.3rem;
   text-align: left;
-  &:hover, &:focus-visible {
+  &:hover {
     background-color: $color-blue-1;
-    border-color: $color-black-1;
+    border-color: $color-blue-1;
     color: $color-white-3;
     font-weight: 500;
+  }
+  &:focus-visible {
+    border-color: $color-black-1;
+    box-shadow: -1px 1px 6px 2px $color-black-3;
   }
 }
 
