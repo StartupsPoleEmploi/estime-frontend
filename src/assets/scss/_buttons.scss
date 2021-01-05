@@ -204,7 +204,7 @@
   margin-right: 0.3rem;
   margin-top: 0.3rem;
   text-align: left;
-  &:hover, &:focus {
+  &:hover, &:focus-visible {
     background-color: $color-blue-1;
     border-color: $color-black-1;
     color: $color-white-3;
