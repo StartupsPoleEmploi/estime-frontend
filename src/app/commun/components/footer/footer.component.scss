@@ -3,10 +3,11 @@
 footer {
   display: block;
   background-color: $color-white-1;
-  bottom: 0;
+  bottom: 1;
   font-size: 16px;
-  height: 8rem;
+  height: 12rem;
   @media #{$medium-device}, #{$large-device} {
+    bottom: 0;
     height: 7rem;
   }
   left: 0;
