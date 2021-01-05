@@ -6,7 +6,9 @@
 }
 
 .div-block-title {
-  padding-left: 172px;
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 172px;
+  }
 }
 
 .btn-obtenir-ma-simulation {

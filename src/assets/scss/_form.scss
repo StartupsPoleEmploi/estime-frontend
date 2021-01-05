@@ -43,7 +43,9 @@
 }
 
 .container-fluid-title {
-  padding-left: 257px;
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 257px;
+  }
 }
 
 .fit-content {
