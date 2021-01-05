@@ -5,12 +5,6 @@
   margin-top: 2rem;
 }
 
-.div-block-title {
-  @media #{$medium-device}, #{$large-device} {
-    padding-left: 172px !important;
-  }
-}
-
 .btn-obtenir-ma-simulation {
   @extend .btn-primary-style-1;
   margin: auto;
