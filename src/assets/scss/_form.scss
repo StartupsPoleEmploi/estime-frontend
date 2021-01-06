@@ -46,11 +46,10 @@
 .div-title-formulaire {
   padding-left: 15px !important;
   padding-right: 15px !important;
-  @media #{$medium-device} {
-    padding-left: 172px !important;
-  }
-  @media #{$large-device} {
-    padding-left: 277px!important;
+  @media #{$medium-device}, #{$large-device} {
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
