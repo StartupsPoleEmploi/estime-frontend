@@ -56,7 +56,15 @@ header {
       margin-left: 0;
       margin-right: 0;
     }
+    .btn-se-deconnecter-sm {
+      border: none;
+      img {
+        content:url("../../../../assets/images/signout.svg");
+        height: 18px;
+        width: 18px;
+      }
 
+    }
     .btn-se-deconnecter {
       border: 1px $color-blue-2 solid;
       border-radius: 100px;

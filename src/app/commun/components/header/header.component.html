@@ -1,6 +1,7 @@
 <header>
     <div class="container-fluid">
-        <div class="row flex-row">
+        <div class="row">
+          <div class="col-9 ml-0 d-flex my-auto">
             <img
                 id="logo-estime-header"
                 src="./assets/images/logo-estime.svg"
@@ -13,6 +14,8 @@
                 class="ml-2">
                 <span>BETA</span>
             </div>
+          </div>
+          <div class="col-3 mr-0 d-flex my-auto">
             <button
                 class="btn btn-se-deconnecter d-none d-sm-block mr-0 ml-auto"
                 *ngIf="this.isLoggedIn"
@@ -21,12 +24,16 @@
                 <img class="img-btn-se-deconnecter">
                 <span>Se deconnecter</span>
             </button>
-            <img
-                id="signout-sm"
-                class="d-block d-sm-none ml-auto mr-2"
+            <button
+                class="btn btn-se-deconnecter-sm d-sm-none mr-0 ml-auto"
                 *ngIf="this.isLoggedIn"
                 (click)="logout()"
-                src="./assets/images/signout.svg">
+                data-testid=btn-se-deconnecter>
+                <img class="img-btn-se-deconnecter">
+            </button>
+          </div>
+
+
         </div>
     </div>
 </header>
