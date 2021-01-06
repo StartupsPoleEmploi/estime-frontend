@@ -12,6 +12,11 @@
       font-size: 36px;
     }
   }
+  .col-style-0 {
+    @media #{$small-device} {
+      padding-right: 28px !important;
+    }
+  }
   .col-chevron {
     padding-left: 0;
     padding-right: 20px;
