@@ -15,9 +15,9 @@
 
 .div-buttons-form {
   background-color: #fff;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   margin-top: 0 !important;
-  padding-bottom: 40px;
+  padding-bottom: 30px;
   @media #{$medium-device}, #{$large-device} {
     width: 750px;
   }
@@ -33,7 +33,8 @@
 .card-form-style-1 {
   margin-top: 2rem;
   @media #{$small-device} {
-    padding-left: 40px !important;
+    padding-left: 33px !important;
+    padding-right: 15px !important;
   }
   @media #{$medium-device}, #{$large-device} {
     margin-left: auto;
@@ -43,8 +44,13 @@
 }
 
 .div-title-formulaire {
-  @media #{$medium-device}, #{$large-device} {
-    padding-left: 265px!important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  @media #{$medium-device} {
+    padding-left: 172px !important;
+  }
+  @media #{$large-device} {
+    padding-left: 277px!important;
   }
 }
 

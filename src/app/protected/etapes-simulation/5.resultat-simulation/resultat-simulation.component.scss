@@ -2,6 +2,10 @@
 @import "../../../../assets/scss/buttons";
 @import "../../../../assets/scss/font";
 
+.btn-primary-style-0 {
+  margin-right: auto;
+}
+
 .container-fluid {
   margin-top: 2rem;
 }
@@ -18,6 +22,11 @@
       background-color: unset;
     }
   }
+}
+
+.div-button {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -56,7 +65,12 @@
 }
 
 #card-revenus-actuels {
-  padding-left: 0;
+  padding-left: 9px;
+  padding-right: 9px;
+  @media #{$medium-device}, #{$large-device} {
+    padding-left: 0;
+    padding-right: 15px;
+  }
   .card {
     background-color: $color-white-3;
     border: 0;
@@ -88,7 +102,6 @@
 #alert-resultat-simulation {
   @media #{$small-device} {
     margin-bottom: 25px!important;
-    padding-right: 0!important;
   }
 }
 
@@ -101,6 +114,11 @@
   span {
     color: $color-black-2;
   }
+}
+
+.card-sm-simulations {
+  padding-left: 9px !important;
+  padding-right: 9px !important;
 }
 
 .card-deck {
@@ -120,6 +138,7 @@
   margin-bottom: 10px;
   width: 100%;
   @media #{$small-device} {
+    padding-left: 0;
     padding-right: 0;
   }
   @media #{$medium-device}, #{$large-device} {

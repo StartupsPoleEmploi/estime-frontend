@@ -1,11 +1,11 @@
 <div class="container-fluid form-container-fluid">
-    <h1 class="row h1-style-2">
+    <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
     </h1>
     <div class="row mt-4">
         <div
             id="alert-resultat-simulation"
-            class="col-12 col-md-9 mt-auto mb-auto pl-0">
+            class="col-12 col-md-9 mt-auto mb-auto">
             <div
                 class="alert alert-light alert-resultat-simulation mb-0"
                 role="alert">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div *ngIf="isSmallScreen" class="row mt-4">
-      <div class="col-12 col-md-6 pl-0 mt-auto mb-auto">
+      <div class="col-12 col-md-6 mt-auto mb-auto">
         <h4 class="h4-style-1">
             Avant reprise d'emploi
         </h4>
@@ -126,7 +126,7 @@
         </div>
     </div>
 
-    <div class="row mt-5">
+    <div class="div-button row">
         <button
             class="btn btn-primary-style-0"
             (click)="onClickButtonRetour()">

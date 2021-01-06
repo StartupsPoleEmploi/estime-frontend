@@ -32,14 +32,14 @@ body {
 }
 
 .container-fluid {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
   @media #{$medium-device} {
-    padding-left: 5.5rem;
-    padding-right: 5.5rem;
+    padding-left: 85px;
+    padding-right: 85px;
   }
   @media #{$large-device} {
-    padding-left : 15%;
-    padding-right: 15%;
+    padding-left: 265px;
+    padding-right: 265px;
   }
 }

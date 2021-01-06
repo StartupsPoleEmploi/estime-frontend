@@ -10,6 +10,12 @@
   }
 }
 
+.card-form-style-1 {
+  @media #{$small-device} {
+    padding-right: 33px !important;
+  }
+}
+
 .form-container-fluid {
   @media #{$small-device} {
     padding-left: 0;

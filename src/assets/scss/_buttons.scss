@@ -85,6 +85,9 @@
   color: $color-blue-2;
   display: inline-flex;
   margin: auto;
+  @media #{$medium-device} {
+    margin-right: 15px;
+  }
   &:hover, &:focus-visible   {
     background-color: none;
     border: none;
@@ -200,7 +203,10 @@
   border-color: $color-blue-1;
   font-size: 16px;
   max-height: unset !important;
-  max-width: fit-content;
+  max-width: 290px;
+  @media #{$medium-device}, #{$large-device} {
+    max-width: fit-content;
+  }
   margin-right: 0.3rem;
   margin-top: 0.3rem;
   text-align: left;

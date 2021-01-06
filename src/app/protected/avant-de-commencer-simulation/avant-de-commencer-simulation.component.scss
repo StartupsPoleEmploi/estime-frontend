@@ -1,10 +1,7 @@
 @import "../../../assets/scss/variables";
 
-.btn-primary-style-1 {
-
-}
-
 .container-fluid {
+  margin-bottom: 30px;
   @media #{$small-device} {
     padding-left: 0;
     padding-right: 0;
