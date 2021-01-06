@@ -62,6 +62,9 @@ header {
         content:url("../../../../assets/images/signout.svg");
         height: 18px;
         width: 18px;
+        @media #{$small-device} {
+          margin-bottom: 10px;
+        }
       }
 
     }

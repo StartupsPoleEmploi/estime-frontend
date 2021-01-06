@@ -1,7 +1,7 @@
 <header>
     <div class="container-fluid">
         <div class="row">
-          <div class="col-9 pl-0 ml-0 d-flex my-auto">
+          <div class="col-auto pl-0 ml-0">
             <img
                 id="logo-estime-header"
                 src="./assets/images/logo-estime.svg"
@@ -9,13 +9,16 @@
             <img
                 id="logo-pole-emploi-header"
                 src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg">
+
+          </div>
+          <div  class="col-auto pl-0 ml-0">
             <div
                 id="div-beta"
                 class="ml-2">
                 <span>BETA</span>
             </div>
           </div>
-          <div class="col-3 mr-0 d-flex my-auto">
+          <div class="col-2 mr-0 ml-auto">
             <button
                 class="btn btn-se-deconnecter d-none d-sm-block mr-0 ml-auto"
                 *ngIf="this.isLoggedIn"
