@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ScreenService } from "@app/core/services/utile/screen.service";
 
 @Component({
   selector: 'app-section-etapes-simulation',
@@ -7,9 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SectionEtapesSimulationComponent implements OnInit {
 
-  @Input() isSmallScreen: boolean;
-
   constructor(
+    public screenService: ScreenService
   ) { }
 
   ngOnInit(): void {

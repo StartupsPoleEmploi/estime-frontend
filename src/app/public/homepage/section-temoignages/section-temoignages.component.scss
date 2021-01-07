@@ -7,4 +7,23 @@
     padding-bottom: 2rem;
   }
 
+  @media screen and (min-width:1200px) {
+    .container-fluid {
+      padding-left: 5%;
+      padding-right: 5%;
+    }
+  }
+  @media screen and (min-width:1380px) {
+    .container-fluid {
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
+  @media screen and (min-width:1600px) {
+    .container-fluid {
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+  }
+
 }

@@ -35,14 +35,6 @@ export class HeaderComponent implements OnInit {
     this.subscriptionStatutIndividuChangedObservable.unsubscribe();
   }
 
-  public getTest(): string {
-    return this.pathImg;
-  }
-
-  public onFocusEvent(t: any): void {
-    this.pathImg = './assets/images/signout-white.jpg';
-  }
-
   public logout(): void {
     this.peConnectService.logout();
   }

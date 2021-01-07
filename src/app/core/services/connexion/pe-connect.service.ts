@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Individu } from '@app/commun/models/individu';
@@ -7,6 +8,7 @@ import { Environment } from '@models/environment';
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { SessionStorageService } from "ngx-webstorage";
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 
 @Injectable({ providedIn: 'root' })
 export class PeConnectService {
@@ -17,7 +19,10 @@ export class PeConnectService {
     private cookiesEstimeService: CookiesEstimeService,
     @Inject(DOCUMENT) private document: Document,
     private environment: Environment,
-    private sessionStorageService: SessionStorageService) {
+    private individuConnectedService: IndividuConnectedService,
+    private router: Router,
+    private sessionStorageService: SessionStorageService
+    ) {
   }
 
   public login(): void {
@@ -32,6 +37,9 @@ export class PeConnectService {
     const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
     if(poleEmploiIdentityServerDeconnexionURI !== null) {
       this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
+    } else {
+      this.router.navigate([RoutesEnum.HOMEPAGE]);
+      this.individuConnectedService.emitIndividuConnectedLogoutEvent();
     }
   }
 

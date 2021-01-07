@@ -27,6 +27,13 @@
         margin-top: 0;
       }
     }
+    .btn-je-commence {
+      margin-left: 0;
+      img {
+        margin-left: 45px;
+      }
+    }
+
     .col-style-1 {
       @media #{$medium-device}, #{$large-device} {
         padding-right: 0;
@@ -100,9 +107,12 @@
     #image-homepage-smartphone {
       display: block;
       margin-left: auto;
-      margin-right: 10px;
-      @media #{$small-device} {
+      margin-right: auto;
+      @media #{$extra-small-device} {
         width: 100%;
+      }
+      @media #{$medium-device}, #{$large-device} {
+        margin-right: 10px;
       }
     }
     #div-span-texte-ressources-completes {

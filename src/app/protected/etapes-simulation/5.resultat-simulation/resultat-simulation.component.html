@@ -27,7 +27,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="isSmallScreen" class="row mt-4">
+    <div *ngIf="screenService.isSmallScreen()" class="row mt-4">
       <div class="col-12 col-md-6 mt-auto mb-auto">
         <h4 class="h4-style-1">
             Avant reprise d'emploi
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div id="row-montants-total" class="row">
-        <div *ngIf="!isSmallScreen" class="col-12 col-md-3 pl-0">
+        <div *ngIf="!screenService.isSmallScreen()" class="col-12 col-md-3 pl-0">
           <div class="card">
             <h4 class="h4-style-1 text-center  mt-auto mb-auto">Avant reprise d'emploi</h4>
           </div>
@@ -56,8 +56,8 @@
     </div>
     <div
         class="row "
-        [ngClass]="{'card-deck': !isSmallScreen, 'card-sm-simulations': isSmallScreen}">
-        <div *ngIf="!isSmallScreen"
+        [ngClass]="{'card-deck': !screenService.isSmallScreen(), 'card-sm-simulations': screenService.isSmallScreen()}">
+        <div *ngIf="!screenService.isSmallScreen()"
             id="card-revenus-actuels"
             class="col-12 col-md-3">
             <div class="card">
@@ -89,7 +89,7 @@
                             </span>
                         </div>
                         <div
-                            *ngIf="isSmallScreen"
+                            *ngIf="screenService.isSmallScreen()"
                             class="col-1 p-0  ml-auto mr-1">
                             <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
                                 <i class="fas fa-chevron-down"></i>
@@ -102,7 +102,7 @@
                 </div>
                 <div
                     class="card-footer"
-                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && isSmallScreen">
+                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && screenService.isSmallScreen()">
                     <app-ressources-financieres-mensuelles
                         class="col-12"
                         [simulationSelected]="simulationSelected"
@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="simulationSelected && !isSmallScreen">
+    <div *ngIf="simulationSelected && !screenService.isSmallScreen()">
         <div class="row mt-3">
             <app-ressources-financieres-mensuelles
                 class="col-6"

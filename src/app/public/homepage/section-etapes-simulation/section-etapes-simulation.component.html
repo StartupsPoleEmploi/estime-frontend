@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="!isSmallScreen" class="col-sm-auto col-chevron">
+            <div *ngIf="!screenService.isSmallScreen()" class="col-sm-auto col-chevron">
               <div>
                 <img src="../../../assets/images/left-chevron.svg">
               </div>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="!isSmallScreen" class="col-sm-auto col-chevron">
+            <div *ngIf="!screenService.isSmallScreen()" class="col-sm-auto col-chevron">
               <div>
                 <img src="../../../assets/images/left-chevron.svg">
               </div>

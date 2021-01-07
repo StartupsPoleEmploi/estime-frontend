@@ -9,9 +9,6 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 })
 export class ItemRessourceActuelleComponent implements OnInit {
 
-  isSmallScreen: boolean;
-  resizeObservable: Observable<Event>;
-  resizeSubscription: Subscription;
 
   @Input() codeRessource: string;
   @Input() isAideSocialSelected: boolean;
@@ -22,24 +19,11 @@ export class ItemRessourceActuelleComponent implements OnInit {
   @Input() organismeRessource: string;
 
   constructor(
-    private screenService: ScreenService
+    public screenService: ScreenService
   ) {
-    this.gererResizeScreen();
   }
 
   ngOnInit(): void {
-    this.isSmallScreen = this.screenService.isSmallScreen();
-  }
-
-  ngOnDestroy(): void {
-    this.resizeSubscription.unsubscribe();
-  }
-
-  private gererResizeScreen(): void {
-    this.resizeObservable = fromEvent(window, 'resize')
-    this.resizeSubscription = this.resizeObservable.subscribe( evt => {
-      this.isSmallScreen = this.screenService.isSmallScreen();
-    })
   }
 
 }

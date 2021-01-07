@@ -8,7 +8,7 @@
             </alert>
         </div>
         <div class="row row-1">
-            <div class="col-style-1 col-12 col-md-8">
+            <div class="col-style-1 col-xl-8">
                 <div class="div-span-title">
                     <span>
                         Vous êtes bénéficiaire de minima sociaux et avez besoin de connaître votre budget en cas de reprise d'emploi ?
@@ -17,7 +17,7 @@
                 <h1>
                     Estime calcule le montant de vos allocations et des aides auxquelles vous pourriez prétendre.
                 </h1>
-                <button
+                <button *ngIf="!this.individuConnectedService.isLoggedIn()"
                     type="button"
                     class="btn pe-connect-button"
                     data-testid="btn-pe-connect"
@@ -25,13 +25,23 @@
                     <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
                     <span class="text-button">Se connecter avec pôle emploi</span>
                 </button>
+                <button *ngIf="this.individuConnectedService.isLoggedIn()"
+                    data-testid="btn-je-commence"
+                    type="button"
+                    class="btn btn-primary-style-1 btn-je-commence mt-4"
+                    (click)="onClickButtonJeCommence()">
+                    <div>
+                      <span class="text-button">Je commence</span>
+                      <img src="./assets/images/icon-bt-primaire.svg">
+                    </div>
+                </button>
             </div>
             <div
-                *ngIf="!isSmallScreen"
-                class="col-md-4 col-style-2">
+                *ngIf="!screenService.isScreenInferieur(1200)"
+                class="col-xl-4 col-style-2">
                 <img
                     id="image-homepage-calculette"
-                    src="../../../assets/images/homepage-calculette-v2.svg">
+                    src="../../../assets/images/homepage-calculette-v3.svg">
             </div>
         </div>
         <div class="row row-2">
@@ -60,6 +70,6 @@
         </div>
     </div>
 </section>
-<app-section-etapes-simulation [isSmallScreen]="isSmallScreen"></app-section-etapes-simulation>
+<app-section-etapes-simulation></app-section-etapes-simulation>
 <app-section-questions></app-section-questions>
-<app-section-temoignages [isSmallScreen]="isSmallScreen"></app-section-temoignages>
+<app-section-temoignages></app-section-temoignages>

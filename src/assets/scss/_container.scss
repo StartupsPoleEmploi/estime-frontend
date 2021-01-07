@@ -34,11 +34,15 @@ body {
 .container-fluid {
   padding-left: 15px;
   padding-right: 15px;
-  @media #{$medium-device} {
+  @media screen and (min-width:1024px) {
     padding-left: 85px;
     padding-right: 85px;
   }
-  @media #{$large-device} {
+  @media screen and (min-width:1480px) {
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+  @media screen and (min-width:1600px) {
     padding-left: 265px;
     padding-right: 265px;
   }

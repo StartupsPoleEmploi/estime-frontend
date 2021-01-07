@@ -25,9 +25,6 @@ export class ResultatSimulationComponent implements OnInit {
 
   aideSocialeSelected: AideSociale;
   demandeurEmploiConnecte: DemandeurEmploi;
-  isSmallScreen: boolean;
-  resizeObservable: Observable<Event>;
-  resizeSubscription: Subscription;
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
@@ -40,20 +37,14 @@ export class ResultatSimulationComponent implements OnInit {
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     private router: Router,
-    private screenService: ScreenService,
+    public screenService: ScreenService,
     private simulationPdfMakerService:SimulationPdfMakerService
   ) {
-    this.gererResizeScreen();
   }
 
   ngOnInit(): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.loadDataSimulationAidesSociales();
-    this.isSmallScreen = this.screenService.isSmallScreen();
-  }
-
-  ngOnDestroy() {
-    this.resizeSubscription.unsubscribe();
   }
 
   public onClickButtonImprimerMaSimulation(): void {
@@ -97,7 +88,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   public getSrcImgButtonImprimerSimulation(): string {
     let text = './assets/images/print.svg';
-    if(this.isSmallScreen) {
+    if(this.screenService.isSmallScreen()) {
       text = './assets/images/download.svg';
     }
     return text;
@@ -107,18 +98,13 @@ export class ResultatSimulationComponent implements OnInit {
 
   public getTextButtonImprimerSimulation(): string {
     let text = 'Imprimer la simulation';
-    if(this.isSmallScreen) {
+    if(this.screenService.isSmallScreen()) {
       text = 'Télécharger la simulation';
     }
     return text;
   }
 
-  private gererResizeScreen(): void {
-    this.resizeObservable = fromEvent(window, 'resize')
-    this.resizeSubscription = this.resizeObservable.subscribe( evt => {
-      this.isSmallScreen = this.screenService.isSmallScreen();
-    })
-  }
+
 
   private loadDataSimulationAidesSociales(): void {
     this.simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();

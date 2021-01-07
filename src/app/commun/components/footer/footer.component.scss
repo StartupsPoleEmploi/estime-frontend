@@ -5,10 +5,14 @@ footer {
   background-color: $color-white-1;
   bottom: -50px;
   font-size: 16px;
-  height: 12rem;
+  @media screen and (max-width:1200px) {
+    height: 12rem !important;
+  }
   @supports (-webkit-touch-callout: none) {
     /* CSS specific to iOS devices */
-    height: 15rem;
+    @media screen and (max-width:1200px) {
+      height: 15rem !important;
+    }
   }
 
   @media #{$medium-device}, #{$large-device} {
@@ -19,6 +23,12 @@ footer {
   position: absolute;
   right: 0;
   #div-1-footer {
+    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    justify-content: center;
+    align-items: center;
     @media #{$medium-device}, #{$large-device} {
       margin-left: 0;
       margin-right: auto;
@@ -39,9 +49,12 @@ footer {
     }
   }
   #div-2-footer {
+    align-items: center;
+    justify-content: center;
     line-height: 10px !important;
     padding-top: 15px;
     padding-bottom: 15px;
+
     @media #{$medium-device}, #{$large-device} {
       line-height: 11px !important;
       padding-top: 0;
@@ -85,7 +98,9 @@ footer {
     border-top: 1px solid $color-grey-3;
     padding-top: 15px;
     padding-bottom: 15px;
-    text-align: center;
+    @media screen and (max-width:1200px) {
+      text-align: center !important;
+    }
     @media #{$medium-device}, #{$large-device} {
       border: 0;
       margin-left: auto;

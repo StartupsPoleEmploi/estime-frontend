@@ -50,7 +50,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
     this.checkAndSaveDateDernierOuvertureDroitASS();
-    if(form.valid) {
+    if(this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit();
     }
@@ -74,6 +74,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
+  }
+
+  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    return form.valid
+      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS);
   }
 
   /*** gestion évènement dateDernierOuvertureDroitASS */

@@ -4,6 +4,7 @@ import { KeysStorageEnum } from '@enumerations/keys-storage.enum';
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { ActivatedRouteSnapshot } from '@angular/router';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
 @Injectable({ providedIn: 'root' })
 export class SessionStorageEstimeService {

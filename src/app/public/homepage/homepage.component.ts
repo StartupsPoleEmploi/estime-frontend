@@ -17,54 +17,46 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 })
 export class HomepageComponent implements OnInit {
 
-  isSmallScreen: boolean;
   messageErreur: MessageErreur;
   niveauMessageErreur = 'danger';
-  resizeObservable: Observable<Event>;
-  resizeSubscription: Subscription;
 
   constructor(
     private authorizationService: AuthorizationService,
-    private individuConnectedService: IndividuConnectedService,
+    public individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
     private router: Router,
-    private screenService: ScreenService
-    ) {
-      this.gererResizeScreen();
-    }
+    public screenService: ScreenService
+  ) {
+  }
 
   ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
-    this.isSmallScreen = this.screenService.isSmallScreen();
-  }
-
-  ngOnDestroy(): void {
-    this.resizeSubscription.unsubscribe();
   }
 
   public login(): void {
     this.peConnectService.login();
   }
 
-  private checkDemandeurEmploiConnecte():void {
-    if(this.individuConnectedService.isLoggedIn()) {
-      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
-    } else {
-      this.messageErreur = this.authorizationService.getMessageErreur();
-      if(this.messageErreur) {
-        if(this.messageErreur.code && this.messageErreur.code === CodesMessagesErreurEnum.INDIVIDU_NON_BENEFICIAIRE_MINIMA_SOCIAUX) {
-          this.niveauMessageErreur = NiveauMessagesErreurEnum.INFO;
-        } else {
-          this.niveauMessageErreur = NiveauMessagesErreurEnum.ERROR;
-        }
-      }
-    }
+  public onClickButtonJeCommence(): void {
+    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 
-  private gererResizeScreen(): void {
-    this.resizeObservable = fromEvent(window, 'resize')
-    this.resizeSubscription = this.resizeObservable.subscribe( evt => {
-      this.isSmallScreen = this.screenService.isSmallScreen();
-    })
+  public getLibelleBoutonPeConnect(): string {
+    let libelle = 'Se connecter avec pôle emploi';
+    if (this.individuConnectedService.isLoggedIn()) {
+      libelle = 'Commencer ma simulation';
+    }
+    return libelle;
+  }
+
+  private checkDemandeurEmploiConnecte(): void {
+    this.messageErreur = this.authorizationService.getMessageErreur();
+    if (this.messageErreur) {
+      if (this.messageErreur.code && this.messageErreur.code === CodesMessagesErreurEnum.INDIVIDU_NON_BENEFICIAIRE_MINIMA_SOCIAUX) {
+        this.niveauMessageErreur = NiveauMessagesErreurEnum.INFO;
+      } else {
+        this.niveauMessageErreur = NiveauMessagesErreurEnum.ERROR;
+      }
+    }
   }
 }

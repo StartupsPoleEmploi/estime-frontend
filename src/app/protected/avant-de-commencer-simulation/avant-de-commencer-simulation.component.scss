@@ -20,6 +20,11 @@
     @media #{$medium-device}, #{$large-device} {
       padding: 30px 70px 30px 70px;
     }
+    .btn-je-continue-avant-commencer {
+      img {
+        margin-left: 45px;
+      }
+    }
     #div-info-simulation {
       color: $color-blue-3;
       font-size: 0.8rem;

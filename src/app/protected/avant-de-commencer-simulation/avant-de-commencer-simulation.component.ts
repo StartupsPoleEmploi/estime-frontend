@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { RoutesEnum } from '@enumerations/routes.enum';
-import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
-import { ScreenService } from '@app/core/services/utile/screen.service';
+import { RoutesEnum } from '@enumerations/routes.enum';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -23,12 +22,12 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   constructor(
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
-    private router: Router,
-    private screenService: ScreenService
-    ) { }
+    private router: Router
+    ) {
+
+    }
 
   ngOnInit(): void {
-    this.isSmallScreen = this.screenService.isSmallScreen();
   }
 
   public getTextPieceAttestationPE(): string {
@@ -55,7 +54,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
         }
       );
     } else {
-      this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
+      this.router.navigate([`/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`]);
     }
   }
 

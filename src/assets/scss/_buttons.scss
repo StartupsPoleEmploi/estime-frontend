@@ -124,9 +124,8 @@
     box-shadow: none;
     color: $color-white-2;
   }
-
-
   .text-button {
+    color:$color-white-3;
     width: 100%;
     margin: auto;
     margin-left: 1rem;
@@ -211,15 +210,16 @@
   margin-top: 0.3rem;
   text-align: left;
   @media #{$medium-device}, #{$large-device} {
-    &:hover {
-      font-weight: 500;
+    &:not(.active):hover {
+      background-color:$color-blue-1-o5;
       border-color: $color-black-1;
-      box-shadow: -1px 1px 6px 2px $color-blue-1;
+      box-shadow: -1px 1px 4px 0px $color-blue-1;
     }
   }
-  &:focus-visible {
-    border-color: $color-black-1;
-    box-shadow: -1px 1px 6px 2px $color-black-3;
+  &:focus {
+    color: $color-white-3;
+    border-color: $color-grey-4;
+    background-color: $color-grey-4;
   }
 }
 
@@ -227,5 +227,4 @@
   color: $color-white-3;
   background-color: $color-blue-1;
   border-color: $color-blue-1;
-  font-weight: 500;
 }
