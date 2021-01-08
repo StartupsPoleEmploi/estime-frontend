@@ -4,87 +4,79 @@
   background-color: $color-blue-5;
   padding-bottom: 2rem;
   padding-top: 2rem;
-
-  @media screen and (min-width:1024px) {
-    .container-fluid {
-      padding-left: 10%;
-      padding-right: 10%;
+  .container-fluid {
+    @media #{$medium-device} {
+      padding-left: 65px;
+      padding-right: 65px;
     }
-  }
-  @media screen and (min-width:1200px) {
-    .container-fluid {
-      padding-left: 15%;
-      padding-right: 15%;
-    }
-  }
-  @media screen and (min-width:1400px) {
-    .container-fluid {
-      padding-left: 20%;
-      padding-right: 20%;
-    }
-  }
-  @media screen and (min-width:1650px) {
-    .container-fluid {
-      padding-left: 25%;
-      padding-right: 25%;
-    }
-  }
-
-  h1 {
-    color: $color-blue-1;
-    font-size: 30px;
-    font-weight: bold;
-    padding-bottom: 2rem;
-    text-align: center;
-  }
-  @media #{$medium-device}, #{$large-device} {
-    .first-card {
-      padding-right: 30px;
-    }
-    .second-card {
-      padding-left: 30px;
-    }
-  }
-
-  .card {
-    border: none;
-    border-radius: 8px;
-    box-shadow: none;
-    .card-body {
-      padding-top: 0;
-    }
-    div {
-      margin-bottom: 15px;
-      @media #{$medium-device}, #{$large-device} {
-        height: 95px;
-        line-height: 80px;
+    .row {
+      @media #{$medium-device}{
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 914px;
       }
-      span {
-        color: $color-blue-2;
-        font-weight: bold;
-        font-size: 18px;
+    }
+    h1 {
+      color: $color-blue-1;
+      font-size: 24px;
+      font-weight: bold;
+      padding-bottom: 2rem;
+      text-align: center;
+      @media #{$large-device} {
+        font-size: 30px;
+      }
+    }
+    @media #{$medium-device} {
+      .first-card {
+        padding-right: 30px;
+      }
+      .second-card {
+        padding-left: 30px;
+      }
+    }
+    .card {
+      border: none;
+      border-radius: 8px;
+      box-shadow: none;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 560px;
+      @media #{$small-device} {
+        max-width: 410px;
+      }
+      .card-body {
+        padding-top: 0;
+      }
+      div {
+        margin-bottom: 15px;
         @media #{$medium-device}, #{$large-device} {
-          display: inline-block;
-          font-size: 22px;
-          vertical-align: middle;
-          line-height: normal;
+          height: 95px;
+          line-height: 80px;
+        }
+        span {
+          color: $color-blue-2;
+          font-weight: bold;
+          font-size: 18px;
+          @media #{$medium-device}, #{$large-device} {
+            display: inline-block;
+            font-size: 22px;
+            vertical-align: middle;
+            line-height: normal;
+          }
         }
       }
-
-    }
-
-    .card-text {
-      font-size: 16px;
-    }
-
-    .card-header {
-      border: none;
-      border-radius: 8px !important;
-      background-color: $color-white-1;
-      span {
-        color: $color-blue-2;
-        font-weight: bold;
-        font-size: 22px;
+      .card-text {
+        font-size: 16px;
+      }
+      .card-header {
+        border: none;
+        border-radius: 8px !important;
+        background-color: $color-white-1;
+        span {
+          color: $color-blue-2;
+          font-weight: bold;
+          font-size: 22px;
+        }
       }
     }
   }

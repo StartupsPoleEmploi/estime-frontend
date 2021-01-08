@@ -1,49 +1,58 @@
 @import "../../../../assets/scss/variables";
 
 footer {
-  display: block;
   background-color: $color-white-1;
   bottom: -50px;
+  display: block;
   font-size: 16px;
-  @media screen and (max-width:1200px) {
-    height: 12rem !important;
-  }
+  height: 12rem;
+  //iOS
   @supports (-webkit-touch-callout: none) {
-    /* CSS specific to iOS devices */
-    @media screen and (max-width:1200px) {
-      height: 15rem !important;
-    }
-  }
-
-  @media #{$medium-device}, #{$large-device} {
-    height: 7rem;
+    height: 15rem;
   }
   left: 0;
   margin-top: 1rem;
   position: absolute;
   right: 0;
+  @media screen and (max-width: 767px) {
+    .container-fluid {
+      .row {
+        margin-top: 1.5rem;
+      }
+    }
+  }
+  @media #{$small-device} {
+    bottom: -10px;
+    height: 8rem;
+  }
+  @media #{$large-device} {
+    height: 5rem;
+  }
+
   #div-1-footer {
-    display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox;  /* TWEENER - IE 10 */
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
     display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex;         /* NEW, Spec - Firefox, Chrome, Opera */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
     justify-content: center;
     align-items: center;
-    @media #{$medium-device}, #{$large-device} {
+    @media screen and (min-width: 768px) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media #{$large-device} {
       margin-left: 0;
       margin-right: auto;
-      padding-left: 0;
-      padding-right: 0;
     }
     img {
       width: 69px;
-      @media #{$medium-device}, #{$large-device} {
+      @media screen and (min-width: 768px) {
         width: 99px;
       }
     }
     a {
       margin-left: 15px;
-      @media #{$small-device} {
+      @media screen and (max-width:1300px) {
         font-size: 12px;
       }
     }
@@ -54,41 +63,43 @@ footer {
     line-height: 10px !important;
     padding-top: 15px;
     padding-bottom: 15px;
-
-    @media #{$medium-device}, #{$large-device} {
-      line-height: 11px !important;
-      padding-top: 0;
-      padding-bottom: 0;
+    @media screen and (min-width: 768px) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media #{$large-device} {
+      margin-left: auto;
+      margin-right: auto;
     }
     #logo-fonds-social-europeen-footer {
       width: 51px;
       margin-top: 10px;
-      @media #{$medium-device}, #{$large-device} {
+      @media screen and (min-width: 768px) {
         margin-top: 0;
-        width: 95px;
+        width: 75px;
       }
     }
     #logo-ue-footer {
       margin-left: 12px;
       margin-right: 12px;
       margin-top: 10px;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$medium-device} {
         margin-top: 2px;
       }
       width: 41px;
-      @media #{$medium-device}, #{$large-device} {
-        width: 70px;
+      @media screen and (min-width: 768px) {
+        width: 65px;
       }
     }
     #text-fse-footer {
       width: 134px;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$medium-device} {
         width: 176px;
       }
 
       span {
         font-size: 8px !important;
-        @media #{$medium-device}, #{$large-device} {
+        @media #{$medium-device} {
           font-size: 9px !important;
         }
       }
@@ -98,29 +109,15 @@ footer {
     border-top: 1px solid $color-grey-3;
     padding-top: 15px;
     padding-bottom: 15px;
-    @media screen and (max-width:1200px) {
-      text-align: center !important;
-    }
-    @media #{$medium-device}, #{$large-device} {
+    text-align: center;
+    @media #{$large-device} {
       border: 0;
       margin-left: auto;
       margin-right: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-      padding-left: 0;
-      padding-right: 0;
-      text-align: left;
     }
     span {
       font-size: 10px;
-      @media #{$medium-device}, #{$large-device} {
-        font-size: 12px;
-      }
     }
   }
-  .container-fluid {
-    .row {
-      margin-top: 1.5rem;
-    }
-  }
+
 }

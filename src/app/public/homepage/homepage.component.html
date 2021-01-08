@@ -1,5 +1,5 @@
 <section id="section-presentation">
-   <div class="container-fluid">
+    <div class="container-fluid">
         <div id="div-message-erreur-homepage">
             <alert
                 type="{{niveauMessageErreur}}"
@@ -8,37 +8,43 @@
             </alert>
         </div>
         <div class="row row-1">
-            <div class="col-style-1 col-xl-8">
-                <div class="div-span-title">
-                    <span>
-                        Vous êtes bénéficiaire de minima sociaux et avez besoin de connaître votre budget en cas de reprise d'emploi ?
-                    </span>
-                </div>
-                <h1>
-                    Estime calcule le montant de vos allocations et des aides auxquelles vous pourriez prétendre.
-                </h1>
-                <button *ngIf="!this.individuConnectedService.isLoggedIn()"
-                    type="button"
-                    class="btn pe-connect-button"
-                    data-testid="btn-pe-connect"
-                    (click)="login()">
-                    <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
-                    <span class="text-button">Se connecter avec pôle emploi</span>
-                </button>
-                <button *ngIf="this.individuConnectedService.isLoggedIn()"
-                    data-testid="btn-je-commence"
-                    type="button"
-                    class="btn btn-primary-style-1 btn-je-commence mt-4"
-                    (click)="onClickButtonJeCommence()">
-                    <div>
-                      <span class="text-button">Je commence</span>
-                      <img src="./assets/images/icon-bt-primaire.svg">
+            <div class="col-style-1 col-md-auto">
+                <div id="first-div-inside-first-col">
+                    <div class="div-span-title">
+                        <span>
+                            Vous êtes bénéficiaire de minima sociaux et avez besoin de connaître votre budget en cas de reprise d'emploi ?
+                        </span>
                     </div>
-                </button>
+                    <div>
+                      <h1>
+                          Estime calcule le montant de vos allocations et des aides auxquelles vous pourriez prétendre.
+                      </h1>
+                    </div>
+                    <button
+                        *ngIf="!this.individuConnectedService.isLoggedIn()"
+                        type="button"
+                        class="pe-connect-button"
+                        data-testid="btn-pe-connect"
+                        (click)="login()">
+                        <div>
+                            <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
+                            <span class="text-button">Se connecter avec pôle emploi</span>
+                        </div>
+                    </button>
+                    <button
+                        *ngIf="this.individuConnectedService.isLoggedIn()"
+                        data-testid="btn-je-commence"
+                        type="button"
+                        class="btn btn-primary-style-1 btn-je-commence mt-4"
+                        (click)="onClickButtonJeCommence()">
+                        <div>
+                            <span class="text-button">Je commence</span>
+                            <img src="./assets/images/icon-bt-primaire.svg">
+                        </div>
+                    </button>
+                </div>
             </div>
-            <div
-                *ngIf="!screenService.isScreenInferieur(1200)"
-                class="col-xl-4 col-style-2">
+            <div class="d-none d-md-block d-lg-block d-xl-block col-md-auto col-style-2">
                 <img
                     id="image-homepage-calculette"
                     src="../../../assets/images/homepage-calculette-v3.svg">
@@ -60,11 +66,9 @@
                     <b>Pôle emploi et de la CAF.</b>
                 </span>
             </div>
-            <div class="col-12 col-md-5 order-md-first mt-3">
-                <div>
-                    <img
-                        id="image-homepage-smartphone"
-                        src="../../../assets/images/homepage-smartphone.svg">
+            <div class="col-12 col-md-5 order-md-first">
+                <div id="image-homepage-smartphone">
+                    <img src="../../../assets/images/homepage-smartphone.svg">
                 </div>
             </div>
         </div>

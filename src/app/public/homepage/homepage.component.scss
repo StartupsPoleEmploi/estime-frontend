@@ -6,23 +6,26 @@
 
 #section-presentation {
   margin-bottom: unset;
-  margin-top: 0.5rem;
-  @media #{$medium-device}, #{$large-device} {
-    padding-top: 2rem;
+  margin-top: 2rem;
+  @media #{$small-device} {
+    margin-top: 4rem;
   }
   padding-bottom: unset;
-  .row-1 {
-    #image-homepage-calculette {
-      width: 351px;
-      height: 269px;
+  .row {
+    @media #{$small-device} {
+      margin-left: auto;
+      margin-right: auto;
+      width: fit-content;
     }
+  }
+  .row-1 {
     h1 {
-      line-height: 3rem;
+      line-height: 42px;
       font-size: 28px;
       font-weight: bold;
       margin-top: 10px;
       text-align: left;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$large-device} {
         font-size: 36px;
         margin-top: 0;
       }
@@ -33,17 +36,14 @@
         margin-left: 45px;
       }
     }
-
     .col-style-1 {
-      @media #{$medium-device}, #{$large-device} {
-        padding-right: 0;
-        padding-left: 0;
+      @media #{$small-device} {
+        max-width: 70% !important;
       }
     }
     .col-style-2 {
-      @media #{$medium-device}, #{$large-device} {
-        padding-right: 5px;
-        padding-left: 25px;
+      @media #{$small-device} {
+        min-width: 30% !important;
       }
     }
     .div-span-title {
@@ -56,44 +56,31 @@
       background-color: $color-blue-3;
       border: none;
       border-radius: 100px;
-      display: flex;
-      margin-top: 1rem;
-      max-height: 53px;
+      margin-top: 10px;
       max-width: 350px;
-      min-height: 53px;
-      text-decoration: none;
-      width: 103%;
-      @media #{$medium-device}, #{$large-device} {
-        width: 100%;
+      padding: 6px 20px 6px 4px;
+      @media #{$small-device} {
+        padding: 6px 30px 6px 15px;
+
       }
+      text-decoration: none;
       &:not(:disabled):not(.disabled):active,
       &:hover,
       &:focus {
         background-color: $color-blue-2;
         border: none;
-        box-shadow: none;
       }
-      img {
-        height: 52px;
-        width: 52px;
-        margin-left: -8px;
-        margin-top: -6px;
-        @media #{$medium-device}, #{$large-device} {
-          height: 62px;
-          margin-left: 0;
-          margin-top: -11px;
-          width: 62px;
+      div {
+        img {
+          width: 52px;
+          @media #{$medium-device} {
+            width: 62px;
+          }
         }
-      }
-      span {
-        color: $color-white-3;
-        font-size: 15px;
-        font-weight: bold;
-        margin-bottom: auto;
-        margin-top: auto;
-        text-align: left;
-        @media #{$medium-device}, #{$large-device} {
+        span {
+          color: $color-white-3;
           font-size: 16px;
+          font-weight: bold;
           margin-left: 5px;
         }
       }
@@ -101,30 +88,39 @@
   }
   .row-2 {
     margin-top: 20px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$small-device} {
       margin-top: 35px;
     }
     #image-homepage-smartphone {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      @media #{$extra-small-device} {
-        width: 100%;
-      }
-      @media #{$medium-device}, #{$large-device} {
-        margin-right: 10px;
+      margin-top: 20px;
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        @media #{extra-small-device} {
+          width: 100%;
+        }
+        @media #{$small-device} {
+          width: 225px;
+        }
+        @media #{$medium-device} {
+          width: 285px;
+          margin-left: auto;
+          margin-right: 25px;
+        }
+        @media #{$large-device} {
+          width: 301px;
+        }
       }
     }
     #div-span-texte-ressources-completes {
       max-width: 480px;
       margin-bottom: 22px;
     }
-
-
     h2 {
       font-size: 26px;
       text-align: left;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$medium-device} {
         margin-top: 35px;
       }
     }

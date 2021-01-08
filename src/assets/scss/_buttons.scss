@@ -1,19 +1,18 @@
 .btn {
   font-size: 18px;
-  @media #{$medium-device}, #{$large-device} {
-    min-height: 2.5rem;
-  }
-  max-height: 2.5rem;
-  margin-top: auto;
+  height: 53px;
   &:focus {
     box-shadow: none;
   }
   div {
-    margin-top: auto;
-    margin-bottom: auto;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
   }
 }
-
 
 .btn-group-input-date {
   display: flex !important;
@@ -69,7 +68,8 @@
     padding: 0.2rem 0 0.2rem 0rem;
   }
   text-decoration: none;
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: $color-blue-3;
     border: none;
     box-shadow: none;
@@ -88,7 +88,8 @@
   @media #{$medium-device} {
     margin-right: 15px;
   }
-  &:hover, &:focus-visible   {
+  &:hover,
+  &:focus-visible {
     background-color: none;
     border: none;
     box-shadow: none;
@@ -103,8 +104,6 @@
   }
 }
 
-
-
 .btn-primary-style-1 {
   background-color: $color-blue-3;
   border: none;
@@ -118,14 +117,15 @@
   @media #{$medium-device}, #{$large-device} {
     padding: 0.2rem 0 0.2rem 0rem;
   }
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: $color-blue-2;
     border: none;
     box-shadow: none;
     color: $color-white-2;
   }
   .text-button {
-    color:$color-white-3;
+    color: $color-white-3;
     width: 100%;
     margin: auto;
     margin-left: 1rem;
@@ -155,7 +155,8 @@
   color: $color-blue-2;
   display: inline-flex;
   margin: auto;
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: none;
     border: none;
     box-shadow: none;
@@ -169,7 +170,6 @@
     text-align: left !important;
   }
 }
-
 
 .btn-primary-style-3 {
   @extend .primary-button-base;
@@ -192,7 +192,8 @@
   border-radius: 100px;
   color: $color-white-1;
   min-width: 100px;
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: $color-blue-2;
     color: $color-white-1;
   }
@@ -211,7 +212,7 @@
   text-align: left;
   @media #{$medium-device}, #{$large-device} {
     &:not(.active):hover {
-      background-color:$color-blue-1-o5;
+      background-color: $color-blue-1-o5;
       border-color: $color-black-1;
       box-shadow: -1px 1px 4px 0px $color-blue-1;
     }

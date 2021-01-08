@@ -3,27 +3,16 @@
 #section-temoignages {
   padding-bottom: 2rem;
   padding-top: 2rem;
-  h2 {
+  h1 {
     padding-bottom: 2rem;
-  }
-
-  @media screen and (min-width:1200px) {
-    .container-fluid {
-      padding-left: 5%;
-      padding-right: 5%;
+    font-size: 24px;
+    font-weight: bold;
+    @media #{$large-device} {
+      font-size: 30px;
     }
   }
-  @media screen and (min-width:1380px) {
-    .container-fluid {
-      padding-left: 10%;
-      padding-right: 10%;
-    }
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
   }
-  @media screen and (min-width:1600px) {
-    .container-fluid {
-      padding-left: 15%;
-      padding-right: 15%;
-    }
-  }
-
 }

@@ -21,7 +21,7 @@ header {
   }
   #logo-estime-header {
     width: 5rem;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$medium-device} {
       width: 7rem;
     }
     cursor: pointer;
@@ -29,7 +29,7 @@ header {
   #logo-pole-emploi-header {
     width: 2.7rem;
     margin-left: 8px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$medium-device} {
       width: 3.5rem;
     }
   }

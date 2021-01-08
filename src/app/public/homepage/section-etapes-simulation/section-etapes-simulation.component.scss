@@ -2,62 +2,122 @@
 
 #section-etapes {
   background-color: $color-blue-2;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
+  padding-bottom: 1.5rem;
   h1 {
     color: $color-white-3;
     font-size: 28px;
     font-weight: bold;
-    @media #{$medium-device}, #{$large-device} {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    @media #{$large-device} {
       font-size: 36px;
     }
   }
-  .col-style-0 {
+  .row {
     @media #{$small-device} {
-      padding-right: 28px !important;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
     }
-  }
-  .col-chevron {
-    padding-left: 0;
-    padding-right: 20px;
-    div {
-      height: 100%;
-      position: relative;
-      img {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        margin: auto;
+    .col-chevron {
+      padding-left: 25px;
+      padding-right: 25px;
+      @media #{$extra-large-device} {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+      div {
+        width: 28px;
+        height: 100%;
+        position: relative;
+        img {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+        }
       }
     }
-  }
-  .card {
-    background-color: inherit;
-    border: none;
-    padding: 0;
-    @media #{$medium-device}, #{$large-device} {
-      padding: 1rem;
-    }
-    .card-body {
-      padding-left: 0;
-      padding-right: 0;
-      padding: 0.5rem;
-      @media #{$medium-device}, #{$large-device} {
-        padding: 0;
-      }
-      .numero-etape {
-        color: $color-orange-1;
-        font-size: 40px;
-        font-weight: 600;
+    .col-style-0 {
+      @media #{$small-device} {
         padding-left: 0;
         padding-right: 0;
       }
-      .text-etape {
-        color: $color-white-3;
-        font-size: 22px;
-        padding-top: 20px;
+      @media #{$small-device} and (max-width:991px) {
+        .card-2 {
+          margin-left: 2.5rem !important;
+          margin-right: 0.5rem !important;
+        }
+      }
+      .card {
+        background-color: inherit;
+        border: none;
+        line-height: 27px;
+        margin-left: auto;
+        margin-right: auto;
         padding-left: 0;
-        padding-right: 2rem;
+        .card-body {
+          @media #{$small-device} {
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .numero-etape {
+            padding-right: 6px;
+            span {
+              color: $color-orange-1;
+              font-size: 40px;
+              font-weight: 600;
+            }
+            @media #{$small-device} {
+              padding-left: 0;
+            }
+          }
+          #text-etape-1-home {
+            @media #{$small-device} {
+              width: 158px !important;
+            }
+            @media #{$medium-device} {
+              width: 162px !important;
+            }
+            @media #{$large-device} {
+              width: 240px !important;
+            }
+          }
+          #text-etape-2-home {
+            @media #{$small-device} {
+              width: 240px !important;
+            }
+            @media #{$medium-device} {
+              width: 230px !important;
+            }
+            @media #{$large-device} {
+              width: 296px !important;
+            }
+          }
+          #text-etape-3-home {
+            @media #{$small-device} {
+              width: 146px !important;
+            }
+            @media #{$medium-device} {
+              width: 149px !important;
+            }
+            @media #{$large-device} {
+              width: 192px !important;
+            }
+          }
+
+          .text-etape {
+            color: $color-white-3;
+            font-size: 22px;
+            max-width: 80%;
+            padding-top: 7px;
+            padding-left: 0;
+            @media #{$small-device} {
+              max-width: 100%;
+              padding-right: 0;
+            }
+          }
+        }
       }
     }
   }

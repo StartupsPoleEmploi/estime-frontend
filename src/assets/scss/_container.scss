@@ -32,18 +32,22 @@ body {
 }
 
 .container-fluid {
-  padding-left: 15px;
-  padding-right: 15px;
-  @media screen and (min-width:1024px) {
+  padding-left: 20px;
+  padding-right: 20px;
+  @media #{$small-device} {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  @media #{$medium-device} {
     padding-left: 85px;
     padding-right: 85px;
   }
-  @media screen and (min-width:1480px) {
-    padding-left: 200px;
-    padding-right: 200px;
+  @media #{$large-device} {
+    padding-left: 100px;
+    padding-right: 100px;
   }
-  @media screen and (min-width:1600px) {
-    padding-left: 265px;
-    padding-right: 265px;
+  @media #{$extra-large-device} {
+    padding-left: 14%;
+    padding-right: 14%;
   }
 }
