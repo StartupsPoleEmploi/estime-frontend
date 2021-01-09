@@ -1,44 +1,43 @@
 <header>
     <div class="container-fluid">
         <div class="row">
-          <div class="col-auto pl-0 ml-0">
-            <img
-                id="logo-estime-header"
-                src="./assets/images/logo-estime.svg"
-                (click)="onClickLogoEstime()">
-            <img
-                id="logo-pole-emploi-header"
-                src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg">
+            <div class="col-auto pl-0 ml-0">
+                <img
+                    id="logo-estime-header"
+                    src="./assets/images/logo-estime.svg"
+                    (click)="onClickLogoEstime()">
+                <img
+                    id="logo-pole-emploi-header"
+                    src="./assets/images/logo-pole-emploi-mono-blue-text-under.svg">
 
-          </div>
-          <div  class="col-auto pl-0 ml-0">
-            <div
-                id="div-beta"
-                class="ml-2">
-                <span>BETA</span>
             </div>
-          </div>
-          <div class="col-2 mr-0 ml-auto">
-            <button
-                class="btn-se-deconnecter d-none d-sm-block mr-0 ml-auto"
-                *ngIf="this.isLoggedIn"
-                (click)="logout()"
-                data-testid=btn-se-deconnecter>
-                <div>
-                  <img class="img-btn-se-deconnecter">
-                  <span>Se deconnecter</span>
+            <div class="col-auto pl-0 ml-0">
+                <div
+                    id="div-beta"
+                    class="ml-2">
+                    <span>BETA</span>
                 </div>
-            </button>
-            <button
-                class="btn btn-se-deconnecter-sm d-sm-none mr-0 ml-auto"
-                *ngIf="this.isLoggedIn"
-                (click)="logout()"
-                data-testid=btn-se-deconnecter>
-                <img class="img-btn-se-deconnecter">
-            </button>
-          </div>
+            </div>
 
-
+            <div class="col pr-0">
+                <button
+                    class="btn-se-deconnecter d-none d-sm-block mr-0 ml-auto"
+                    *ngIf="this.isLoggedIn"
+                    (click)="logout()"
+                    data-testid=btn-se-deconnecter>
+                    <div>
+                        <div class="img-btn-se-deconnecter"></div>
+                        <span>Se deconnecter</span>
+                    </div>
+                </button>
+                <button
+                    class="btn-se-deconnecter-sm d-sm-none mr-0 ml-auto"
+                    *ngIf="this.isLoggedIn"
+                    (click)="logout()"
+                    data-testid=btn-se-deconnecter>
+                    <div class="img-btn-se-deconnecter"></div>
+                </button>
+            </div>
         </div>
     </div>
 </header>

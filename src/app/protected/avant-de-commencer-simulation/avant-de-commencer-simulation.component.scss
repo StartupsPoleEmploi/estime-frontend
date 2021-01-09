@@ -2,7 +2,7 @@
 
 .container-fluid {
   margin-bottom: 30px;
-  @media #{$small-device} {
+  @media #{$extra-small-device} {
     padding-left: 0;
     padding-right: 0;
   }
@@ -12,54 +12,58 @@
     text-align: center;
   }
   .card {
+    background-color: $color-white-3;
     border: none;
     line-height: 27px;
     max-width: 600px;
     margin: auto;
     padding: 20px 15px 20px 15px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$small-device} {
       padding: 30px 70px 30px 70px;
-    }
-    .btn-je-continue-avant-commencer {
-      img {
-        margin-left: 45px;
-      }
     }
     #div-info-simulation {
       color: $color-blue-3;
-      font-size: 0.8rem;
       border: 1px solid $color-blue-3;
       border-radius: 4px;
       padding: 8px;
-      @media #{$medium-device}, #{$large-device} {
-        font-size: 1rem;
-      }
-      #img-info-simulation {
-        height: 100%;
-        position: relative;
-        img {
-          width: 20px;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          margin: auto;
-          @media #{$small-device} {
+      .row {
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        #img-info-simulation {
+          max-width: fit-content !important;
+          padding-right: 5px;
+          padding-left: 5px;
+          div {
+            width: 20px;
+            height: 100%;
+            position: relative;
+            img {
+              bottom: 0;
+              margin: auto;
+              position: absolute;
+              top: 0;
+              width: 20px;
+            }
           }
         }
-      }
-      #text-info-simulation {
-        padding-left: 7px;
-        line-height: 18px;
-        span {
-          font-size: 12px;
-          color: $color-blue-3;
+        #text-info-simulation {
+          padding-right: 5px;
+          line-height: 18px;
+          span {
+            color: $color-blue-3;
+            font-size: 12px;
+          }
         }
       }
     }
     .text-document {
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$small-device} {
         margin-left: 2rem;
       }
+    }
+    .btn-style-perso-1 {
+      margin: auto;
     }
   }
 }

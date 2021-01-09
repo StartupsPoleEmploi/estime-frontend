@@ -23,22 +23,22 @@
                     <button
                         *ngIf="!this.individuConnectedService.isLoggedIn()"
                         type="button"
-                        class="pe-connect-button"
+                        class="btn-pe-connect"
                         data-testid="btn-pe-connect"
                         (click)="login()">
                         <div>
                             <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
-                            <span class="text-button">Se connecter avec pôle emploi</span>
+                            <span>Se connecter avec pôle emploi</span>
                         </div>
                     </button>
                     <button
                         *ngIf="this.individuConnectedService.isLoggedIn()"
                         data-testid="btn-je-commence"
                         type="button"
-                        class="btn btn-primary-style-1 btn-je-commence mt-4"
+                        class="btn-style-perso-1"
                         (click)="onClickButtonJeCommence()">
                         <div>
-                            <span class="text-button">Je commence</span>
+                            <span>Je commence</span>
                             <img src="./assets/images/icon-bt-primaire.svg">
                         </div>
                     </button>

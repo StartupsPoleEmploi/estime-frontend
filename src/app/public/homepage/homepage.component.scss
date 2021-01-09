@@ -6,7 +6,7 @@
 
 #section-presentation {
   margin-bottom: unset;
-  margin-top: 2rem;
+
   @media #{$small-device} {
     margin-top: 4rem;
   }
@@ -40,10 +40,20 @@
           margin-top: 0;
         }
       }
-      .btn-je-commence {
-        margin-left: 0;
-        img {
-          margin-left: 45px;
+      .btn-pe-connect {
+        margin-bottom: 25px;
+        margin-top: 10px;
+        @media #{$small-device} {
+          margin-bottom: 0;
+          margin-top: 15px;
+        }
+      }
+      .btn-style-perso-1 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+        @media #{$small-device} {
+          margin-bottom: 0;
+          margin-top: 20px;
         }
       }
     }
@@ -54,7 +64,6 @@
     }
   }
   .row-2 {
-    margin-top: 20px;
     @media #{$small-device} {
       margin-top: 35px;
     }
@@ -86,7 +95,10 @@
         text-align: center;
         @media #{$small-device} {
           margin-right: 20px;
-          img {
+        }
+        img {
+          width: 100%;
+          @media #{$small-device} {
             width: 104%;
           }
         }
@@ -94,8 +106,3 @@
     }
   }
 }
-
-
-
-
-

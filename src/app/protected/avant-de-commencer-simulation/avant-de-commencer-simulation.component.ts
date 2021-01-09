@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
 
@@ -14,7 +15,6 @@ import { RoutesEnum } from '@enumerations/routes.enum';
 export class AvantDeCommencerSimulationComponent implements OnInit {
 
   isPageLoadingDisplay = false;
-  isSmallScreen: boolean;
   messageErreur: string;
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
@@ -22,20 +22,13 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   constructor(
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
-    private router: Router
+    private router: Router,
+    public screenService: ScreenService
     ) {
 
     }
 
   ngOnInit(): void {
-  }
-
-  public getTextPieceAttestationPE(): string {
-    let textPieceAttestationPE = "dernière notification ASS Pôle Emploi";
-    if(this.isSmallScreen) {
-      textPieceAttestationPE = "dernière notification \nASS Pôle Emploi";
-    }
-    return textPieceAttestationPE;
   }
 
   public onClickButtonJeContinue(): void {

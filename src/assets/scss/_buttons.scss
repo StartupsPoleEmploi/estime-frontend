@@ -1,33 +1,49 @@
-.pe-connect-button {
-  align-items: center;
-  background-color: $color-blue-3;
+.btn-base {
   border: none;
-  border-radius: 26.5px;
-  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox; /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-  height: 53px;
-  justify-content: center;
-  margin-top: 10px;
-  padding: 6px 22px 6px 0px;
-  text-decoration: none;
-  width: 320px;
-  &:not(:disabled):not(.disabled):active,
+  border-radius: 22px;
+  height: 42px;
   &:hover,
   &:focus {
-    background-color: $color-blue-2;
     border: none;
     box-shadow: none;
     outline: none;
   }
   div {
+    align-items: center;
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    height: 100%;
+  }
+}
+
+.btn-primary-perso {
+  background-color: $color-blue-3;
+  &:hover,
+  &:focus {
+    background-color: $color-blue-2;
+  }
+  div {
+    span {
+      color: $color-white-3;
+      font-size: 16px;
+    }
+  }
+}
+
+.btn-pe-connect {
+  @extend .btn-base;
+  @extend .btn-primary-perso;
+  border-radius: 26.5px;
+  height: 53px;
+  padding: 6px 0px 6px 9px;
+  width: 318px;
+  div {
     img {
       width: 62px;
     }
     span {
-      color: $color-white-3;
-      font-size: 16px;
       font-weight: bold;
       margin-left: 1px;
     }
@@ -35,31 +51,23 @@
 }
 
 .btn-se-deconnecter {
+  @extend .btn-base;
   background-color: $color-white-3;
   border: 1px $color-blue-2 solid;
-  border-radius: 22px;
   height: 39px;
   width: 130px;
-  &:not(:disabled):not(.disabled):active,
   &:hover,
   &:focus {
     background-color: $color-blue-2;
     border: none;
-    box-shadow: none;
-    outline: none;
     span {
       color: $color-white-3;
     }
-    img {
+    .img-btn-se-deconnecter {
       content: url("../images/signout-white.svg");
     }
   }
   div {
-    align-items: center;
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
     justify-content: center;
   }
   span {
@@ -67,27 +75,45 @@
     font-size: 12px;
     margin-left: 7px;
   }
-  img {
+  .img-btn-se-deconnecter {
     content: url("../images/signout.svg");
     width: 18px;
   }
 }
 
-.btn {
-  font-size: 18px;
-  height: 53px;
-  &:focus {
-    box-shadow: none;
-  }
-  div {
-    justify-content: center;
-    align-items: center;
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+.btn-se-deconnecter-sm {
+  @extend .btn-base;
+  background-color: $color-white-3;
+  height: 18px;
+  .img-btn-se-deconnecter {
+    content: url("../images/signout.svg");
+    height: 18px;
+    width: 18px;
   }
 }
+
+.btn-style-perso-1 {
+  @extend .btn-base;
+  @extend .btn-primary-perso;
+  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+  display: -ms-flexbox; /* TWEENER - IE 10 */
+  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+  display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+  width: 216px;
+  div {
+    padding-left: 16px;
+    width: 100%;
+    span {
+      font-size: 18px;
+    }
+    img {
+      margin-left: auto;
+      margin-right: 6px;
+    }
+  }
+}
+
+/*************  old  ***********/
 
 .btn-group-input-date {
   display: flex !important;
@@ -139,7 +165,7 @@
   display: flex;
   font-family: "Lato", sans-serif !important;
   padding: 0.3rem 0 0.3rem 0rem;
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$medium-device} {
     padding: 0.2rem 0 0.2rem 0rem;
   }
   text-decoration: none;

@@ -1,76 +1,63 @@
 @import "../../../../assets/scss/variables";
 
-.flex-row {
-  display: flex;
-  display: -webkit-box;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-}
-.flex-row:before,
-.flex-row:after {
-  display: none;
-}
-
 header {
   background-color: $color-white-3;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
-  padding-bottom: 6px;
-  padding-top: 6px;
+  height: 64px;
   @media #{$small-device} {
-    padding-bottom: 21px;
-    padding-top: 21px;
-  }
-  #signout-sm:hover {
-    color: $color-blue-3 !important;
-  }
-  #logo-estime-header {
-    width: 5rem;
-    @media #{$medium-device} {
-      width: 7rem;
-    }
-    cursor: pointer;
-  }
-  #logo-pole-emploi-header {
-    width: 2.7rem;
-    margin-left: 8px;
-    @media #{$medium-device} {
-      width: 3.5rem;
-    }
-  }
-  #div-beta {
-    border-radius: 1rem;
-    background-color: $color-blue-5;
-    padding-left: 0.7rem;
-    padding-right: 0.7rem;
-    height: 1.8rem;
-    margin-bottom: auto;
-    margin-top: auto;
-    span {
-      color: $color-blue-2;
-      font-size: 0.8rem;
-      font-weight: bold;
-      margin-top: auto;
-      margin-bottom: auto;
-      line-height: 1.8rem;
-      vertical-align: middle;
-    }
+    height: 86px;
   }
   .container-fluid {
+    align-items: center;
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    height: 100%;
     .row {
+      align-items: center;
+      display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox; /* TWEENER - IE 10 */
+      display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
       margin-left: 0;
       margin-right: 0;
+      width: 100%;
     }
-    .btn-se-deconnecter-sm {
-      border: none;
-      img {
-        content: url("../../../../assets/images/signout.svg");
-        height: 18px;
-        width: 18px;
-        @media #{$small-device} {
-          margin-bottom: 10px;
-        }
+    #signout-sm:hover {
+      color: $color-blue-3 !important;
+    }
+    #logo-estime-header {
+      width: 5rem;
+      @media #{$medium-device} {
+        width: 7rem;
+      }
+      cursor: pointer;
+    }
+    #logo-pole-emploi-header {
+      width: 2.7rem;
+      margin-left: 8px;
+      @media #{$medium-device} {
+        width: 3.5rem;
       }
     }
-
+    #div-beta {
+      border-radius: 1rem;
+      background-color: $color-blue-5;
+      padding-left: 0.7rem;
+      padding-right: 0.7rem;
+      height: 1.8rem;
+      margin-bottom: auto;
+      margin-top: auto;
+      span {
+        color: $color-blue-2;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-top: auto;
+        margin-bottom: auto;
+        line-height: 1.8rem;
+        vertical-align: middle;
+      }
+    }
   }
 }

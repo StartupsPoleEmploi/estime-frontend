@@ -5,68 +5,84 @@
         *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
-    <h1 class="h1-style-2">{{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}</h1>
+    <h1 class="h1-style-2">
+        {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
+    </h1>
     <div class="card card-body">
         <div class="row">
             <div class="col-12">
                 <p>
-                  Pour faire l’estimation la plus juste, nous vous demandons les ressources de votre foyer, notamment les allocations que vous percevez.
+                    Pour faire l’estimation la plus juste, nous vous demandons les ressources de votre foyer, notamment les allocations que vous percevez.
                 </p>
                 <p>
-                  <img
-                  class="mr-2"
-                  src="./assets/images/hand-finger-right.svg">
-                  <span>Veuillez vous munir de :</span>
-                  <br>
-                  <span class="text-document">
-                    - Votre
-                    <span class="text-important">
-                        dernière notification <div *ngIf="isSmallScreen"></div>ASS Pôle Emploi
-                        <a target="_blank" href="./assets/documents/attestation-ass.pdf"><img
-                          class="interrogation-icon"
-                          src="./assets/images/question.svg"
-                          placement="right"></a>
+                    <img
+                        class="mr-2"
+                        src="./assets/images/hand-finger-right.svg">
+                    <span>Veuillez vous munir de :</span>
+                    <br>
+                    <span class="text-document">
+                        - Votre
+                        <span class="text-important">
+                            dernière notification
+                            <div *ngIf="screenService.isScreenInferieur(376)"></div>
+                            ASS Pôle Emploi
+                            <a
+                                target="_blank"
+                                href="./assets/documents/attestation-ass.pdf">
+                                <img
+                                    class="interrogation-icon"
+                                    src="./assets/images/question.svg"
+                                    placement="right">
+                            </a>
+                        </span>
                     </span>
-                  </span>
-                  <br>
-                  <span class="text-document">
-                    - Votre
-                    <span class="text-important ">notification de droits CAF
-                      <a target="_blank" href="./assets/documents/attestation-caf.pdf"><img
-                        class="interrogation-icon"
-                        src="./assets/images/question.svg"
-                        placement="right"></a>
+                    <br>
+                    <span class="text-document">
+                        - Votre
+                        <span class="text-important ">
+                            notification de droits CAF
+                            <a
+                                target="_blank"
+                                href="./assets/documents/attestation-caf.pdf">
+                                <img
+                                    class="interrogation-icon"
+                                    src="./assets/images/question.svg"
+                                    placement="right">
+                            </a>
+                        </span>
                     </span>
-                  </span>
                 </p>
                 <div
                     id="div-info-simulation"
                     class="card">
                     <div class="row">
-                      <div class="col-2 col-md-1">
-                        <div id="img-info-simulation">
-                          <img
-                          class="mr-2"
-                          src="./assets/images/info-blue.svg">
+                        <div
+                            id="img-info-simulation"
+                            class="col-auto">
+                            <div>
+                                <img src="./assets/images/info-blue.svg">
+                            </div>
                         </div>
-                      </div>
-                      <div id="text-info-simulation" class="col-10 col-md-11">
-                        <span>Le montant des aides dépend des informations que vous allez renseigner, sous réserve d'éventuels changements de votre situation personnelle ou de la règlementation des aides. Le montant final peut légèrement varier.</span>
-                      </div>
+                        <div
+                            id="text-info-simulation"
+                            class="col">
+                            <span>
+                                Le montant des aides dépend des informations que vous allez renseigner, sous réserve d'éventuels changements de votre situation personnelle ou de la règlementation des aides. Le montant final peut légèrement varier.
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <button
                     data-testid="btn-je-continue-avant-commencer"
                     type="button"
-                    class="btn btn-primary-style-1 btn-je-continue-avant-commencer mt-4"
+                    class="btn-style-perso-1 mt-4"
                     (click)="onClickButtonJeContinue()">
                     <div>
-                      <span class="text-button">Je continue</span>
-                      <img src="./assets/images/icon-bt-primaire.svg">
+                        <span>Je continue</span>
+                        <img src="./assets/images/icon-bt-primaire.svg">
                     </div>
                 </button>
             </div>
         </div>
-
     </div>
 </div>
