@@ -35,19 +35,12 @@ body {
   padding-left: 20px;
   padding-right: 20px;
   @media #{$small-device} {
-    padding-left: 30px;
-    padding-right: 30px;
+    max-width: 940px;
   }
   @media #{$medium-device} {
-    padding-left: 85px;
-    padding-right: 85px;
+    max-width: 1110px;
   }
   @media #{$large-device} {
-    padding-left: 100px;
-    padding-right: 100px;
-  }
-  @media #{$extra-large-device} {
-    padding-left: 14%;
-    padding-right: 14%;
+    max-width: 1160px;
   }
 }
