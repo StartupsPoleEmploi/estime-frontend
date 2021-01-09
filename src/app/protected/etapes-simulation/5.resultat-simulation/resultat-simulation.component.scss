@@ -2,188 +2,187 @@
 @import "../../../../assets/scss/buttons";
 @import "../../../../assets/scss/font";
 
-.btn-primary-style-0 {
-  margin-right: auto;
-}
-
 .container-fluid {
   margin-top: 2rem;
-}
-
-#row-montants-total {
-  margin-top: 0.5rem;
-  @media #{$medium-device}, #{$large-device} {
-    margin-top: 1.5rem;
-  }
-  .card {
-    height: 100%;
-    padding: 10px;
-    @media #{$small-device} {
-      background-color: unset;
+  padding-left: 15px;
+  #alert-resultat-simulation {
+    @media #{$extra-small-device} {
+      margin-bottom: 25px!important;
     }
-  }
-}
-
-.div-button {
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-
-.card {
-  border: 0;
-}
-
-.h4-style-1 {
-  @extend .font-effect-title;
-  color: $color-blue-1;
-  font-size: 21px;
-  font-weight: bold;
-  text-align: left;
-}
-
-.btn-primary-style-5 {
-  @extend .primary-button-base;
-  border-radius: 8px;
-  margin: auto;
-  max-width: 300px;
-  width: 265px;
-  @media #{$medium-device}, #{$large-device} {
-    width: 250px;
-  }
-  &:hover, &:focus-visible {
-    background-color: $color-blue-2;
-    color: $color-white-3;
-  }
-  .text-button {
-    width: 100%;
-  }
-  img {
-    width: 30px;
-    height: 30px;
-    margin-left: 15px;
-  }
-}
-
-#card-revenus-actuels {
-  padding-left: 9px;
-  padding-right: 9px;
-  @media #{$medium-device}, #{$large-device} {
-    padding-left: 0;
-    padding-right: 15px;
-  }
-  .card {
-    background-color: $color-white-3;
-    border: 0;
-    height: 100%;
-    margin-right: 0;
-    margin-left: 0;
-    text-align: center;
-    padding: 0.4rem 1rem;
-    width: 100%;
-    @media #{$small-device} {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h3 {
-      color: $color-blue-3;
-      font-weight: 600;
-      margin-bottom: -10px;
-      font-size: 16px;
-    }
-    span {
-      font-weight: 900;
-      @media #{$medium-device}, #{$large-device} {
-        font-size: 24px;
-      }
-    }
-  }
-}
-
-#alert-resultat-simulation {
-  @media #{$small-device} {
-    margin-bottom: 25px!important;
-  }
-}
-
-.alert-resultat-simulation {
-  border: 1px solid $color-black-2;
-  padding: 0.5rem;
-  img {
-    width: 1.2rem;
-  }
-  span {
-    color: $color-black-2;
-  }
-}
-
-.card-sm-simulations {
-  padding-left: 9px !important;
-  padding-right: 9px !important;
-}
-
-.card-deck {
-  border:0;
-  border-radius: 8px;
-  margin-bottom: 0;
-  @media #{$medium-device}, #{$large-device} {
-    padding-bottom: 5px;
-  }
-}
-
-.first-card {
-  border:0;
-  border-radius: 8px;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 10px;
-  width: 100%;
-  @media #{$small-device} {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  @media #{$medium-device}, #{$large-device} {
-    margin-bottom: 0px;
-    &:not(.isLastCard) {
-      border-right: 1px solid $color-grey-2 !important;
-      border-radius: 0 !important;
-    }
-  }
-  .second-card {
-    border: 0;
-    margin-bottom: 0;
-    @media #{$medium-device}, #{$large-device} {
-      margin: 5px;
-      margin-left: -7px;
-      margin-right: -7px;
-    }
-    cursor: pointer;
-    .card-body {
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      padding: 1.25rem;
-      @media #{$medium-device}, #{$large-device} {
-        padding: 0.25rem;
-        border-radius: 8px;
-      }
-      text-align: center;
-      &.active {
-        background-color: $color-grey-1;
-      }
-      #span-mois-annee {
-        font-size: 16px;
-        color: $color-blue-3;
-        font-weight: bold;
+    .alert-resultat-simulation {
+      border: 1px solid $color-black-2;
+      padding: 0.5rem;
+      img {
+        width: 1.2rem;
       }
       span {
-        @media #{$medium-device}, #{$large-device} {
-          font-size: 24px;
-        }
-        font-weight: 900;
+        color: $color-black-2;
       }
     }
-    .card-footer {
+
+  }
+  #card-revenus-actuels {
+    padding-left: 9px;
+    padding-right: 9px;
+    @media #{$small-device} {
+      padding-left: 0;
+      padding-right: 15px;
+    }
+    .card {
+
+      border: 0;
+      height: 100%;
+      margin-right: 0;
+      margin-left: 0;
+      text-align: center;
+      padding: 0.4rem 1rem;
+      width: 100%;
+      @media #{$extra-small-device} {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h3 {
+        color: $color-blue-3;
+        font-weight: 600;
+        margin-bottom: -10px;
+        font-size: 16px;
+      }
+      span {
+        font-weight: 900;
+        @media #{$small-device} {
+          font-size: 24px;
+        }
+      }
+      .card-body {
+        background-color: $color-white-3;
+      }
+    }
+  }
+  #row-montants-total {
+    margin-top: 0.5rem;
+    @media #{$small-device} {
+      margin-top: 1.5rem;
+    }
+    .card {
+      height: 100%;
+      padding: 10px;
+      @media #{$extra-small-device} {
+        background-color: unset;
+      }
+    }
+  }
+  .card {
+    border: 0;
+  }
+  .card-deck {
+    border:0;
+    border-radius: 8px;
+    margin-bottom: 0;
+    @media #{$small-device} {
+      padding-bottom: 5px;
+    }
+  }
+
+  .first-card {
+    border:0;
+    border-radius: 8px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    @media #{$extra-small-device} {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    @media #{$small-device} {
+      margin-bottom: 0px;
+      &:not(.isLastCard) {
+        border-right: 1px solid $color-grey-2 !important;
+        border-radius: 0 !important;
+      }
+    }
+    .second-card {
+      border: 0;
+      cursor: pointer;
+      margin-bottom: 0;
+      @media #{$small-device} {
+        margin: 5px;
+        margin-left: -7px;
+        margin-right: -7px;
+      }
+      .card-body {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 1.25rem;
+        text-align: center;
+        @media #{$small-device} {
+          padding: 0.25rem;
+          border-radius: 8px;
+        }
+        &.active {
+          background-color: $color-grey-1;
+        }
+        #span-mois-annee {
+          font-size: 16px;
+          color: $color-blue-3;
+          font-weight: bold;
+        }
+        span {
+          @media #{$small-device} {
+            font-size: 24px;
+          }
+          font-weight: 900;
+        }
+      }
+      .card-footer {
+        background-color: unset;
+        padding-bottom: 0;
+      }
+    }
+  }
+  .card-sm-simulations {
+    padding-left: 9px !important;
+    padding-right: 9px !important;
+  }
+  .h4-style-1 {
+    @extend .font-effect-title;
+    color: $color-blue-1;
+    font-size: 21px;
+    font-weight: bold;
+    text-align: left;
+  }
+  .div-button-retour {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    .btn-style-perso-2 {
       background-color: unset;
-      padding-bottom: 0;
+    }
+  }
+  .btn-imprimer-simulation {
+    @extend .btn-style-perso-4;
+    margin: auto;
+    width: 250px;
+    img {
+      width: 30px;
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

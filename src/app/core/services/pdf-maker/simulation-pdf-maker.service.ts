@@ -17,7 +17,7 @@ pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 @Injectable({ providedIn: 'root' })
 export class SimulationPdfMakerService {
 
-  isSmallScreen: boolean;
+  isExtraSmallScreen: boolean;
   imageBase64: any;
 
   constructor(
@@ -26,7 +26,7 @@ export class SimulationPdfMakerService {
     private detailAidesEligiblesService:DetailAidesEligiblesService,
     private screenService: ScreenService
   ) {
-    this.isSmallScreen = this.screenService.isSmallScreen();
+    this.isExtraSmallScreen = this.screenService.isExtraSmallScreen();
   }
 
   public generatePdf(demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales) {
@@ -38,7 +38,7 @@ export class SimulationPdfMakerService {
       footer: function(currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }
     };
 
-    if(this.isSmallScreen) {
+    if(this.isExtraSmallScreen) {
       pdfMakeModule.createPdf(def).download('simulation-estime-pole-emploi');
     } else {
       pdfMakeModule.createPdf(def).open();

@@ -4,13 +4,6 @@
   margin-top: 2rem;
 }
 
-.form-container-fluid {
-  @media #{$small-device} {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
 .form-group-nombre-mois {
   @media #{$small-device} {
     margin-right: -15px;

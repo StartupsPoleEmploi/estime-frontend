@@ -2,7 +2,7 @@
 
 .row {
   padding-left: 5px;
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     padding-left: 6px;
   }
   .card-code-ressource {
@@ -14,7 +14,7 @@
     padding: 2px;
     padding-bottom: 5px;
     padding-top: 3px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$small-device} {
       min-height: 40px;
       max-height: 40px;
       min-width: 43px;
@@ -23,7 +23,7 @@
     text-align: center;
     span {
       font-size: 0.6rem;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$small-device} {
         font-size: 0.7rem;
       }
       font-weight: bold;
@@ -66,14 +66,14 @@
     color: $color-blue-1;
     font-weight: bold;
     margin-left: 15px;
-    @media #{$small-device} {
+    @media #{$extra-small-device} {
       font-size: 0.9rem;
     }
   }
   .span-organisme {
     color: $color-blue-2;
     margin-left: 15px;
-    @media #{$small-device} {
+    @media #{$extra-small-device} {
       font-size: 0.9rem;
     }
   }
@@ -83,7 +83,7 @@
     span {
       font-weight: 800;
       font-size: 0.8rem;
-      @media #{$medium-device}, #{$large-device} {
+      @media #{$small-device} {
         font-size: 1.1rem;
       }
       color: $color-black-1;
@@ -95,7 +95,7 @@
     max-width: 30px;
   }
   .span-chevron {
-    @media #{$small-device} {
+    @media #{$extra-small-device} {
       font-size: 0.8rem;
     }
   }

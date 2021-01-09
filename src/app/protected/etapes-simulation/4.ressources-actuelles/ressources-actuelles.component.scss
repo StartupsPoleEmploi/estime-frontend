@@ -9,10 +9,10 @@
   @extend .btn-primary-style-1;
   margin: auto;
   max-width: 158px;
-  @media #{$small-device} {
+  @media #{$extra-small-device} {
     max-height: 3.5rem;
   }
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     margin-left: 1rem;
     max-width: 300px;
   }
@@ -29,11 +29,13 @@
 }
 
 .block-ressources {
-  @media #{$medium-device}, #{$large-device} {
-    width: 750px;
+  margin-left: 15px;
+  margin-right: 15px;
+  @media #{$small-device} {
+    width: $size-card-form-etape-simulation;
+    margin-left: auto;
+    margin-right: auto;
   }
-  margin-left: auto;
-  margin-right: auto;
   .accordion-button {
     background-color: $color-white-1;
     border-radius: 0;
@@ -44,12 +46,21 @@
     font-size: 16px;
     margin-top: 1rem;
     min-height: 5rem;
-    @media #{$medium-device}, #{$large-device} {
-      min-height: 6rem;
-    }
     max-height: unset;
     padding: 0;
     width: 100%;
+    @media #{$small-device} {
+      min-height: 6rem;
+    }
+    &:hover,
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+    div {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
     .container-fluid-button {
       padding-left: 0.8rem;
       padding-right: 0.8rem;
@@ -58,13 +69,11 @@
         padding-right: 0;
         .euro-sign {
           display: block;
-          height: 19px;
           margin-left: auto;
           margin-right: auto;
-          width: 19px;
-          @media #{$medium-device}, #{$large-device} {
+          width: 25px;
+          @media #{$small-device} {
             width: 33px;
-            height: 33px;
           }
         }
       }
@@ -91,11 +100,27 @@
   margin-bottom: 5px;
   margin-left: auto;
   margin-right: auto;
-  .btn-primary-style-0 {
-    @media #{$medium-device}, #{$large-device} {
-      margin-right: 1rem;
+  @media #{$extra-small-device} {
+    .first-btn {
+      background-color: unset;
+      margin-right: 7px;
+    }
+    .second-btn {
+      margin-left: 7px;
+    }
+  }
+  .btn-style-perso-2 {
+    background-color: unset;
+  }
+  .btn-style-perso-1 {
+    width: 250px;
+    @media #{$extra-small-device} {
+      height: 50px;
+      line-height: 1.2rem;
+      width: 160px!important;
+      div {
+        padding-left: 8px;
+      }
     }
   }
 }
-
-

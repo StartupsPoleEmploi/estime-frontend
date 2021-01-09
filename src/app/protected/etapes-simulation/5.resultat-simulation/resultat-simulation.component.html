@@ -15,19 +15,19 @@
                 </span>
             </div>
         </div>
-        <div class="col-12 col-md-3 mt-auto mb-auto">
+        <div class="col-12 col-md-3 mt-auto mb-auto d-flex justify-content-center">
             <button
-                class="btn btn-primary-style-5"
+                class="btn-imprimer-simulation"
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
                     <img [src]="getSrcImgButtonImprimerSimulation()">
+                    <span>{{getTextButtonImprimerSimulation()}}</span>
                 </div>
-                <div class="text-button">{{getTextButtonImprimerSimulation()}}</div>
             </button>
         </div>
     </div>
-    <div *ngIf="screenService.isSmallScreen()" class="row mt-4">
+    <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4">
       <div class="col-12 col-md-6 mt-auto mb-auto">
         <h4 class="h4-style-1">
             Avant reprise d'emploi
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div id="row-montants-total" class="row">
-        <div *ngIf="!screenService.isSmallScreen()" class="col-12 col-md-3 pl-0">
+        <div *ngIf="!screenService.isExtraSmallScreen()" class="col-12 col-md-3 pl-0">
           <div class="card">
             <h4 class="h4-style-1 text-center  mt-auto mb-auto">Avant reprise d'emploi</h4>
           </div>
@@ -56,8 +56,8 @@
     </div>
     <div
         class="row "
-        [ngClass]="{'card-deck': !screenService.isSmallScreen(), 'card-sm-simulations': screenService.isSmallScreen()}">
-        <div *ngIf="!screenService.isSmallScreen()"
+        [ngClass]="{'card-deck': !screenService.isExtraSmallScreen(), 'card-sm-simulations': screenService.isExtraSmallScreen()}">
+        <div *ngIf="!screenService.isExtraSmallScreen()"
             id="card-revenus-actuels"
             class="col-12 col-md-3">
             <div class="card">
@@ -89,7 +89,7 @@
                             </span>
                         </div>
                         <div
-                            *ngIf="screenService.isSmallScreen()"
+                            *ngIf="screenService.isExtraSmallScreen()"
                             class="col-1 p-0  ml-auto mr-1">
                             <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
                                 <i class="fas fa-chevron-down"></i>
@@ -102,7 +102,7 @@
                 </div>
                 <div
                     class="card-footer"
-                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && screenService.isSmallScreen()">
+                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && screenService.isExtraSmallScreen()">
                     <app-ressources-financieres-mensuelles
                         class="col-12"
                         [simulationSelected]="simulationSelected"
@@ -112,7 +112,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="simulationSelected && !screenService.isSmallScreen()">
+    <div *ngIf="simulationSelected && !screenService.isExtraSmallScreen()">
         <div class="row mt-3">
             <app-ressources-financieres-mensuelles
                 class="col-6"
@@ -126,14 +126,14 @@
         </div>
     </div>
 
-    <div class="div-button row">
+    <div class="div-button-retour row d-flex justify-content-center">
         <button
-            class="btn btn-primary-style-0"
+            class="btn-style-perso-2"
             (click)="onClickButtonRetour()">
             <div>
-                <img src="./assets/images/return-arrow.svg">
-            </div>
-            <div class="text-button">Retour</div>
+              <img src="./assets/images/return-arrow.svg">
+              <span>Retour</span>
+          </div>
         </button>
     </div>
 </div>

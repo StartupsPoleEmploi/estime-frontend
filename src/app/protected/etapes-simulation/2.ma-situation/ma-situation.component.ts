@@ -49,7 +49,8 @@ export class MaSituationComponent implements OnInit {
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     private router: Router,
-    private situationFamilialeUtileService: SituationFamilialeUtileService
+    private situationFamilialeUtileService: SituationFamilialeUtileService,
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -94,6 +95,8 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 
@@ -102,6 +105,7 @@ export class MaSituationComponent implements OnInit {
       this.informationsPersonnelles.titreSejourEnFranceValide = null;
     }
   }
+
 
   /************ gestion évènements press enter ************************/
 

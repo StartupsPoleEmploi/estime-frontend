@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Personne } from '@models/personne';
@@ -22,7 +22,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private deConnecteService: DeConnecteService,
-    private router: Router
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +36,8 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     if(form.valid) {
       this.deConnecteService.setConjointRessourcesFinancieres(this.conjoint);
       this.validationRessourcesConjointEventEmitter.emit();
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 }

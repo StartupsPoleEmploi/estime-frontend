@@ -16,7 +16,7 @@
   position: absolute;
   width: 2px;
   height: 17px;
-  background-color: #fff;
+  background-color: $color-white-3;
   left: 11px;
   top: -1px;
 }
@@ -26,7 +26,7 @@
   position: absolute;
   width: 7px;
   height: 2px;
-  background-color: #fff;
+  background-color: $color-white-3;
   left: 4px;
   top: 14px;
 }
@@ -56,7 +56,7 @@
       }
       .numero-etape {
         align-items: center;
-        background-color: white;
+        background-color: $color-white-3;
         border: 1px solid $color-grey-1;
         border-radius: 50%;
         color: $color-blue-2;

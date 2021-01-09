@@ -39,7 +39,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
-    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService
+    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    private elementRef: ElementRef
 
   ) { }
 
@@ -53,6 +54,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if(this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit();
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -23,7 +23,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
-    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private elementRef: ElementRef,
   ) {
 
   }
@@ -35,6 +36,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     if(form.valid) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationRessourcesFoyerEventEmitter.emit();
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 

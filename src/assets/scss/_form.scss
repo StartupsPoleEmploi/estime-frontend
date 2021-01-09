@@ -7,25 +7,37 @@
   }
 }
 
+.form-container-fluid {
+  @media #{$extra-small-device} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .custom-control-label {
   color: $color-blue-1;
   font-size: 16px;
 }
 
-
 .div-buttons-form {
-  background-color: #fff;
+  background-color: $color-white-3;
   margin-bottom: 30px;
   margin-top: 0 !important;
   padding-bottom: 30px;
-  @media #{$medium-device}, #{$large-device} {
-    width: 750px;
+  @media #{$small-device} {
+    width: $size-card-form-etape-simulation;
   }
-  .row {
-    .btn-primary-style-0 {
-      @media #{$medium-device}, #{$large-device} {
-        margin-right: 1rem;
-      }
+  .first-btn {
+    margin-right: 10px;
+    @media #{$small-device} {
+      margin-right: 20px;
+    }
+  }
+  .second-btn {
+    margin-left: 20px;
+    width: 135px;
+    @media #{$small-device} {
+      margin-left: 10px;
     }
   }
 }
@@ -36,18 +48,18 @@
     padding-left: 33px !important;
     padding-right: 15px !important;
   }
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     margin-left: auto;
     margin-right: auto;
-    width: 750px;
+    width: $size-card-form-etape-simulation;
   }
 }
 
 .div-title-formulaire {
   padding-left: 15px !important;
   padding-right: 15px !important;
-  @media #{$medium-device}, #{$large-device} {
-    width: 750px;
+  @media #{$small-device} {
+    width: $size-card-form-etape-simulation;
     margin-left: auto;
     margin-right: auto;
   }
@@ -58,19 +70,21 @@
   max-width: fit-content;
 }
 
-
 form.submitted input.ng-invalid,
 form.submitted select.ng-invalid,
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
+  background-color: $color-red-6;
   border: 1px solid $color-red-5;
+  option {
+    background-color: $color-white-3!important;
+  }
 }
 
 .radio-button-style-1.ng-invalid.ng-touched,
 form.submitted .radio-button-style-1.ng-invalid,
 form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::before {
-
-  border-color: $color-red-1;
+  border-color: $color-red-5;
 }
 
 .error-input-message {
@@ -124,21 +138,16 @@ input:-webkit-autofill:focus {
   -webkit-text-fill-color: #333;
 }
 
-
-
-
 /** end change style after autofill **/
-
-
 
 
 .card-form {
   border: 0;
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     margin-top: 2rem;
   }
   padding-left: 1.7rem;
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     padding-left: 4rem;
   }
   input {
@@ -148,17 +157,18 @@ input:-webkit-autofill:focus {
     margin-top: auto;
     margin-bottom: auto;
     max-width: 100px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$extra-small-device} {
       max-width: 150px;
     }
-    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    &::placeholder {
       color: $color-blue-1!important;
       font-size: 16px;
       font-weight: 400 !important;
       opacity: 0.7; /* Firefox */
     }
-
-    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    /* Internet Explorer 10-11 */
+    &:-ms-input-placeholder {
       color: $color-blue-1!important;
       font-size: 16px;
       font-weight: 400 !important;
@@ -171,14 +181,14 @@ input:-webkit-autofill:focus {
     margin-top: auto;
     margin-bottom: auto;
     width: auto;
-    @media #{$small-device} {
+    @media #{$extra-small-device} {
       max-width: 235px;
     }
+    &.option-selected {
+      font-weight: bold;
+    }
+  }
 
-  }
-  .option-selected {
-    font-weight: bold;
-  }
   .interrogation-icon {
     cursor: pointer;
   }

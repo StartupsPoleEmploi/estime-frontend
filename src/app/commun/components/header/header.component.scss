@@ -61,7 +61,7 @@ header {
       }
     }
     .btn-se-deconnecter {
-      @extend .btn-base;
+      @extend .action-btn-base;
       background-color: $color-white-3;
       border: 1px $color-blue-2 solid;
       float: right;
@@ -92,7 +92,7 @@ header {
       }
     }
     .btn-se-deconnecter-sm {
-      @extend .btn-base;
+      @extend .action-btn-base;
       background-color: $color-white-3;
       float: right;
       height: 18px;

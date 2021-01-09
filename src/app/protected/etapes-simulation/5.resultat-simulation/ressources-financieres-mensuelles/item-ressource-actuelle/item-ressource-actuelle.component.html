@@ -14,6 +14,6 @@
             {{montantRessource}} €
         </span>
     </div>
-    <div class="col-1 col-md-1 mt-auto mb-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && (!screenService.isSmallScreen() || (screenService.isSmallScreen() && !isAideSocialSelected))"><span class="span-chevron"><i class="fas fa-chevron-right"></i></span></div>
-    <div class="col-1 col-md-1 mt-auto mb-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && isAideSocialSelected && screenService.isSmallScreen()"><span class="span-chevron"><i class="fas fa-chevron-down"></i></span></div>
+    <div class="col-1 col-md-1 mt-auto mb-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && (!screenService.isExtraSmallScreen() || (screenService.isExtraSmallScreen() && !isAideSocialSelected))"><span class="span-chevron"><i class="fas fa-chevron-right"></i></span></div>
+    <div class="col-1 col-md-1 mt-auto mb-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && isAideSocialSelected && screenService.isExtraSmallScreen()"><span class="span-chevron"><i class="fas fa-chevron-down"></i></span></div>
 </div>

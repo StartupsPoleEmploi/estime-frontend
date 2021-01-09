@@ -9,7 +9,7 @@
     <div class="row">
         <label
             name="salarie"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.salarie"
             btnCheckbox
             tabindex="0"
@@ -17,11 +17,15 @@
             #salarie="ngModel"
             (click)="onClickCheckBoxIsSalarie()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SALARIE)">
-            {{situationPersonneEnum.SALARIE}}
+            <div>
+              <span>
+                {{situationPersonneEnum.SALARIE}}
+              </span>
+            </div>
         </label>
         <label
             name="beneficiaireARE"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE"
             btnCheckbox
             tabindex="0"
@@ -29,11 +33,15 @@
             #hasRessourceAideEmploi="ngModel"
             (click)="onClickCheckBoxHasARE()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.ARE)">
-            {{situationPersonneEnum.ARE}}
+            <div>
+              <span>
+                {{situationPersonneEnum.ARE}}
+              </span>
+            </div>
         </label>
         <label
             name="beneficiaireASS"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS"
             btnCheckbox
             tabindex="0"
@@ -41,11 +49,15 @@
             #hasRessourceAideEmploi="ngModel"
             (click)="onClickCheckBoxHasASS()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.ASS)">
-            {{situationPersonneEnum.ASS}}
+            <div>
+              <span>
+                {{situationPersonneEnum.ASS}}
+              </span>
+            </div>
         </label>
         <label
             name="beneficiaireRSA"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
             btnCheckbox
             tabindex="0"
@@ -53,11 +65,15 @@
             #hasRessourceAideEmploi="ngModel"
             (click)="onClickCheckBoxHasRSA()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.RSA)">
-            {{situationPersonneEnum.RSA}}
+            <div>
+              <span>
+                {{situationPersonneEnum.RSA}}
+              </span>
+            </div>
         </label>
         <label
             name="beneficiaireAAH"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH"
             btnCheckbox
             tabindex="0"
@@ -65,11 +81,15 @@
             (click)="onClickCheckBoxHasAAH()"
             #beneficiaireAAH="ngModel"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.AAH)">
-            {{situationPersonneEnum.AAH}}
+            <div>
+              <span>
+                {{situationPersonneEnum.AAH}}
+              </span>
+            </div>
         </label>
         <label
             name="sansRessource"
-            class="btn radio-button-style-1"
+            class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource"
             btnCheckbox
             tabindex="0"
@@ -77,7 +97,11 @@
             #isSansEmploi="ngModel"
             (click)="onClickCheckBoxIsSansRessource()"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SANS_RESSOURCE)">
-            {{situationPersonneEnum.SANS_RESSOURCE}}
+            <div>
+              <span>
+                {{situationPersonneEnum.SANS_RESSOURCE}}
+              </span>
+            </div>
         </label>
     </div>
     <div class="row">

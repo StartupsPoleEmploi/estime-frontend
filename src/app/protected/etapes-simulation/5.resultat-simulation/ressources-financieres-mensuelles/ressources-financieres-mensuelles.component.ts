@@ -52,7 +52,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    if(this.screenService.isSmallScreen() && this.isAideSocialSelected(aideSociale)) {
+    if(this.screenService.isExtraSmallScreen() && this.isAideSocialSelected(aideSociale)) {
       this.aideSocialeSelected = null;
     } else  {
       this.aideSocialeSelected = aideSociale;

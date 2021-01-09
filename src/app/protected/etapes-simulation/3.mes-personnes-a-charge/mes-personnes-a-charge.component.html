@@ -94,20 +94,20 @@
         class="d-flex justify-content-center"
         *ngIf="isNouvellePersonneAChargeFormDisplay === false">
         <button
-            class="btn btn-primary-style-0"
+            class="btn-style-perso-2 first-btn"
             (click)="onClickButtonRetour()">
             <div>
-                <img src="./assets/images/return-arrow.svg">
+              <img src="./assets/images/return-arrow.svg">
+              <span>Retour</span>
             </div>
-            <div class="text-button">Retour</div>
         </button>
         <button
-            class="btn btn-suivant"
+            class="btn-style-perso-1 second-btn"
             data-testid="btn-personnes-charge-suivant"
             (click)="onClickButtonSuivant()">
-            <div class="text-button">Suivant</div>
             <div>
-                <img src="./assets/images/icon-bt-primaire.svg">
+              <span>Suivant</span>
+              <img src="./assets/images/icon-bt-primaire.svg">
             </div>
         </button>
     </div>

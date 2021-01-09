@@ -5,21 +5,14 @@
 }
 
 .container-fluid-title {
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     padding-left: 257px !important;
   }
 }
 
 .card-form-style-1 {
-  @media #{$small-device} {
+  @media #{$extra-small-device} {
     padding-right: 33px !important;
-  }
-}
-
-.form-container-fluid {
-  @media #{$small-device} {
-    padding-left: 0;
-    padding-right: 0;
   }
 }
 
@@ -88,7 +81,7 @@
   min-height: 115px;
   max-height: 115px;
   margin-top: 10px;
-  @media #{$medium-device}, #{$large-device} {
+  @media #{$small-device} {
     margin-left: 15px;
   }
   &:hover, &:focus {

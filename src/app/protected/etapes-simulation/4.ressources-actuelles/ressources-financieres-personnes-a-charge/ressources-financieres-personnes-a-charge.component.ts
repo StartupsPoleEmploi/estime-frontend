@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -27,6 +27,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService : DeConnecteService,
+    private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }
 
@@ -39,6 +40,8 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     if(form.valid) {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 

@@ -1,13 +1,30 @@
-.btn-base {
+.btn-base, .btn {
+  &:hover,
+  &:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+}
+
+.radio-btn-base {
+  @extend .btn-base;
+  border: 1px $color-blue-1 solid;
+  border-radius: 0.25rem;
+  div {
+    align-items: center;
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    height: 100%;
+  }
+}
+
+.action-btn-base {
+  @extend .btn-base;
   border: none;
   border-radius: 22px;
   height: 42px;
-  &:hover,
-  &:focus {
-    border: none;
-    box-shadow: none;
-    outline: none;
-  }
   div {
     align-items: center;
     display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
@@ -33,7 +50,7 @@
 }
 
 .btn-pe-connect {
-  @extend .btn-base;
+  @extend .action-btn-base;
   @extend .btn-primary-perso;
   border-radius: 26.5px;
   height: 53px;
@@ -50,17 +67,9 @@
   }
 }
 
-
-
-
 .btn-style-perso-1 {
-  @extend .btn-base;
+  @extend .action-btn-base;
   @extend .btn-primary-perso;
-  display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-  display: -ms-flexbox; /* TWEENER - IE 10 */
-  display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-  display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-  width: 216px;
   div {
     padding-left: 16px;
     width: 100%;
@@ -74,7 +83,56 @@
   }
 }
 
-/*************  old  ***********/
+.btn-style-perso-2 {
+  @extend .action-btn-base;
+  background-color: $color-white-3;
+  color: $color-blue-2;
+  display: inline-flex;
+  &:hover,
+  &:focus-visible {
+    .text-button {
+      text-decoration: underline;
+    }
+  }
+  div {
+    span {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  }
+}
+
+.btn-style-perso-3 {
+  @extend .action-btn-base;
+  @extend .btn-primary-perso;
+  div {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    span {
+      font-size: 18px;
+    }
+  }
+}
+
+.btn-style-perso-4 {
+  @extend .action-btn-base;
+  @extend .btn-primary-perso;
+  border-radius: 8px;
+  div {
+    padding-left: 16px;
+    padding-right: 16px;
+    width: 100%;
+    span {
+      font-size: 14px;
+      margin: auto;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
 
 .btn-group-input-date {
   display: flex !important;
@@ -92,7 +150,6 @@
     margin-left: 4px;
     max-width: 75px;
   }
-
   select.default-value {
     color: #808080;
   }
@@ -118,6 +175,51 @@
   }
 }
 
+.radio-button-style-1 {
+  @extend .radio-btn-base;
+  font-size: 16px;
+  padding: 0.375rem 0.75rem;
+  max-width: 290px;
+  margin-right: 0.3rem;
+  margin-top: 0.3rem;
+  @media #{$small-device} {
+    max-width: fit-content;
+    &:not(.active):hover {
+      background-color: $color-blue-1-o5;
+      border: 1px $color-black-1 solid;
+      box-shadow: -1px 1px 4px 0px $color-blue-1;
+    }
+  }
+  &:focus-visible {
+    border-color: $color-grey-4;
+    background-color: $color-grey-4;
+    div {
+      span {
+        color: $color-white-3;
+      }
+    }
+  }
+  &:not(:disabled):not(.disabled).active {
+    background-color: $color-blue-1;
+    border-color: $color-blue-1;
+    div {
+      span {
+        color: $color-white-3;
+      }
+    }
+  }
+  div {
+    span {
+      color: $color-blue-1;
+    }
+  }
+}
+
+/*************  old  ***********/
+
+
+
+
 .primary-button-base {
   background-color: $color-blue-3;
   border: none;
@@ -142,29 +244,7 @@
   }
 }
 
-.btn-primary-style-0 {
-  border: none;
-  color: $color-blue-2;
-  display: inline-flex;
-  margin: auto;
-  @media #{$medium-device} {
-    margin-right: 15px;
-  }
-  &:hover,
-  &:focus-visible {
-    background-color: none;
-    border: none;
-    box-shadow: none;
-    .text-button {
-      text-decoration: underline;
-    }
-  }
-  .text-button {
-    margin: auto;
-    margin-left: 0.4rem;
-    text-align: left !important;
-  }
-}
+
 
 .btn-primary-style-1 {
   background-color: $color-blue-3;
@@ -261,33 +341,4 @@
   }
 }
 
-.radio-button-style-1 {
-  border-color: $color-blue-1;
-  font-size: 16px;
-  max-height: unset !important;
-  max-width: 290px;
-  @media #{$medium-device}, #{$large-device} {
-    max-width: fit-content;
-  }
-  margin-right: 0.3rem;
-  margin-top: 0.3rem;
-  text-align: left;
-  @media #{$medium-device}, #{$large-device} {
-    &:not(.active):hover {
-      background-color: $color-blue-1-o5;
-      border-color: $color-black-1;
-      box-shadow: -1px 1px 4px 0px $color-blue-1;
-    }
-  }
-  &:focus {
-    color: $color-white-3;
-    border-color: $color-grey-4;
-    background-color: $color-grey-4;
-  }
-}
 
-.radio-button-style-1:not(:disabled):not(.disabled).active {
-  color: $color-white-3;
-  background-color: $color-blue-1;
-  border-color: $color-blue-1;
-}

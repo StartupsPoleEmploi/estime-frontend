@@ -8,10 +8,12 @@
         {{messageErreur}}
     </alert>
     <div class="div-title-formulaire">
-      <h1 class="h1-style-2">4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}</h1>
-      <div class="text-under-h1">
-        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
-      </div>
+        <h1 class="h1-style-2">
+            4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}
+        </h1>
+        <div class="text-under-h1">
+            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+        </div>
     </div>
     <div class="block-ressources">
         <div id="block-vos-ressources">
@@ -107,33 +109,33 @@
                 class="btn accordion-button"
                 (click)="onClickButtonRessourcesPersonnesCharge()">
                 <div class="container-fluid container-fluid-button">
-                  <div class="row">
-                      <div class="col-2 col-md-1 col-euro-sign">
-                          <img
-                              class="euro-sign"
-                              src="./assets/images/euro.svg">
-                      </div>
-                      <div class="col-9 col-md-10 col-text-button">
-                          <div class="text-button">Ressources personne(s) à charge</div>
-                          <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                              Total revenus : {{montantRevenusPersonnesCharge}} €
-                          </div>
-                          <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                              Total des aides : {{montantAidesPersonnesCharge}} €
-                          </div>
-                      </div>
-                      <div class="col-1 col-md-1 col-chevron">
-                          <div>
-                              <i
-                                  *ngIf="isRessourcesPersonnesChargeDisplay"
-                                  class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                              <i
-                                  *ngIf="!isRessourcesPersonnesChargeDisplay"
-                                  class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img
+                                class="euro-sign"
+                                src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div class="text-button">Ressources personne(s) à charge</div>
+                            <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                                Total revenus : {{montantRevenusPersonnesCharge}} €
+                            </div>
+                            <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                                Total des aides : {{montantAidesPersonnesCharge}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i
+                                    *ngIf="isRessourcesPersonnesChargeDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i
+                                    *ngIf="!isRessourcesPersonnesChargeDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </button>
             <app-ressources-financieres-personnes-a-charge
                 [hidden]="!isRessourcesPersonnesChargeDisplay"
@@ -148,30 +150,30 @@
                 class="btn accordion-button"
                 (click)="onClickButtonRessourcesFoyer()">
                 <div class="container-fluid container-fluid-button">
-                  <div class="row">
-                      <div class="col-2 col-md-1 col-euro-sign">
-                          <img
-                              class="euro-sign"
-                              src="./assets/images/euro.svg">
-                      </div>
-                      <div class="col-9 col-md-10 col-text-button">
-                          <div class="text-button">Ressources du foyer</div>
-                          <div *ngIf="!isRessourcesFoyerDisplay">
-                              Total des aides : {{montantAidesFoyer}} €
-                          </div>
-                      </div>
-                      <div class="col-1 col-md-1 col-chevron">
-                          <div>
-                              <i
-                                  *ngIf="isRessourcesFoyerDisplay"
-                                  class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                              <i
-                                  *ngIf="!isRessourcesFoyerDisplay"
-                                  class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img
+                                class="euro-sign"
+                                src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div class="text-button">Ressources du foyer</div>
+                            <div *ngIf="!isRessourcesFoyerDisplay">
+                                Total des aides : {{montantAidesFoyer}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i
+                                    *ngIf="isRessourcesFoyerDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i
+                                    *ngIf="!isRessourcesFoyerDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </button>
             <app-ressources-financieres-foyer
                 [hidden]="!isRessourcesFoyerDisplay"
@@ -179,22 +181,22 @@
                 (validationRessourcesFoyerEventEmitter)="traiterValidationRessourcesFinancieresFoyerEventEmitter()"></app-ressources-financieres-foyer>
         </div>
     </div>
-    <div class="div-buttons-form row">
+    <div class="div-buttons-form row d-flex justify-content-center">
         <button
-            class="btn btn-primary-style-0"
+            class="btn-style-perso-2 first-btn"
             (click)="onClickButtonRetour()">
             <div>
                 <img src="./assets/images/return-arrow.svg">
+                <span>Retour</span>
             </div>
-            <div class="text-button">Retour</div>
         </button>
         <button
-            class="btn btn-obtenir-ma-simulation"
+            class="btn-style-perso-1 second-btn"
             type="button"
             data-testid="btn-obtenir-simulation"
             (click)="onClickButtonObtenirSimulation()">
-            <div class="text-button">Obtenir ma simulation</div>
             <div>
+                <span>Obtenir ma simulation</span>
                 <img src="./assets/images/icon-bt-primaire.svg">
             </div>
         </button>

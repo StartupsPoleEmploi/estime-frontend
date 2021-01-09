@@ -4,12 +4,12 @@ import { fromEvent, Observable, Subscription } from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class ScreenService {
 
-  sizeScreenSmallScreen = 1023;
-  sizeExtraSmallScreen = 576;
+  isExtraSmallScreenDevice: boolean;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
 
   constructor() {
+    this.checkIsExtraSmallScreen();
     this.gererResizeScreen();
   }
 
@@ -22,19 +22,20 @@ export class ScreenService {
     return widthScreen < size;
   }
 
-  public isSmallScreen(): boolean {
-    const widthScreen = window.innerWidth;
-    return widthScreen < this.sizeScreenSmallScreen;
-  }
-
   public isExtraSmallScreen(): boolean {
-    const widthScreen = window.innerWidth;
-    return widthScreen < this.sizeExtraSmallScreen;
+    return this.isExtraSmallScreenDevice;
   }
 
 
   private gererResizeScreen(): void {
     this.resizeObservable = fromEvent(window, 'resize');
-    this.resizeSubscription = this.resizeObservable.subscribe(evt => {})
+    this.resizeSubscription = this.resizeObservable.subscribe(evt => {
+      this.isExtraSmallScreenDevice = this.checkIsExtraSmallScreen();
+    })
+  }
+
+  private checkIsExtraSmallScreen(): boolean {
+    const widthScreen = Number(window.innerWidth);
+    return widthScreen < 768;
   }
 }

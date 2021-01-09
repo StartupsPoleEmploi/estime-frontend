@@ -34,6 +34,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
+    private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }
 
@@ -47,6 +48,8 @@ export class FormPersonneAChargeComponent implements OnInit {
     if (this.isDonneesFormulaireNouvellePersonneValides(form)) {
       this.resetNouvellePersonneAChargeForm();
       this.ajoutNouvellePersonneEventEmitter.emit(true);
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 

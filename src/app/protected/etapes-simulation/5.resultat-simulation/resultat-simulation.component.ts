@@ -52,7 +52,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
-    if (this.screenService.isSmallScreen()) {
+    if (this.screenService.isExtraSmallScreen()) {
       this.traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel);
     } else {
       this.simulationSelected = simulationMensuel;
@@ -88,7 +88,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   public getSrcImgButtonImprimerSimulation(): string {
     let text = './assets/images/print.svg';
-    if(this.screenService.isSmallScreen()) {
+    if(this.screenService.isExtraSmallScreen()) {
       text = './assets/images/download.svg';
     }
     return text;
@@ -98,7 +98,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   public getTextButtonImprimerSimulation(): string {
     let text = 'Imprimer la simulation';
-    if(this.screenService.isSmallScreen()) {
+    if(this.screenService.isExtraSmallScreen()) {
       text = 'Télécharger la simulation';
     }
     return text;
@@ -109,7 +109,7 @@ export class ResultatSimulationComponent implements OnInit {
   private loadDataSimulationAidesSociales(): void {
     this.simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();
     //si l'utilisateur est sur smartphone, aucune préselection
-    if (!this.screenService.isSmallScreen()) {
+    if (!this.screenService.isExtraSmallScreen()) {
       this.simulationSelected = this.simulationAidesSociales.simulationsMensuelles[0];
       this.selectFirstAideSociale();
     }

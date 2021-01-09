@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -74,6 +74,7 @@ export class RessourcesActuellesComponent implements OnInit {
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private elementRef: ElementRef,
     private estimeApiService: EstimeApiService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     private router: Router
@@ -118,6 +119,8 @@ export class RessourcesActuellesComponent implements OnInit {
           this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
         }
       );
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 

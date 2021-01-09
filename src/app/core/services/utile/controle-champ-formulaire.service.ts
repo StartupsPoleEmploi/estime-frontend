@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class ControleChampFormulaireService {
@@ -12,16 +12,22 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
   MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
 
-  isKeyAuthorizeForDecimal(event): boolean {
+  public isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;
     return pattSeparator.test(event.key) || this.isKeyAuthorizeForNumberOnly(event);
   }
 
-  isKeyAuthorizeForNumberOnly(event): boolean {
+  public isKeyAuthorizeForNumberOnly(event): boolean {
     let patt = /^([0-9])$/;
     let result = patt.test(event.key);
     return result;
   }
+
+  public focusOnFirstInvalidElement(elementRef: ElementRef): void {
+    const invalidElements = elementRef.nativeElement.querySelectorAll('.ng-invalid');
+    invalidElements[1].focus();
+  }
+
 
 
 }

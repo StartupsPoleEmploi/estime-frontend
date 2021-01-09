@@ -1,7 +1,7 @@
 @import "../../../../../assets/scss/variables";
 
 #img-hand-finger {
-  @media #{$small-device} {
+  @media #{$extra-small-device} {
     width: 1.1rem;
 
   }
@@ -27,7 +27,7 @@
     padding-bottom: 0.5rem;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$small-device} {
       padding: 0.4rem 1rem;
     }
     margin-top: 5px;
@@ -48,7 +48,7 @@
   }
   .list-group {
     padding-top: 10px;
-    @media #{$medium-device}, #{$large-device} {
+    @media #{$small-device} {
       padding: 10px;
     }
     .list-group-item {
@@ -58,4 +58,8 @@
       padding-bottom: 0;
     }
   }
+}
+
+#card-aides-obtenir {
+  height: 100%;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -30,8 +30,9 @@ export class ContratTravailComponent implements OnInit {
   ];
 
   constructor(
-    private deConnecteService: DeConnecteService,
     public controleChampFormulaireService: ControleChampFormulaireService,
+    private deConnecteService: DeConnecteService,
+    private elementRef: ElementRef,
     private router: Router
     ) {
 
@@ -60,6 +61,8 @@ export class ContratTravailComponent implements OnInit {
     if(form.valid) {
       this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
+    } else {
+      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
 
