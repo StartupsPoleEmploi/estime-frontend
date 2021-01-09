@@ -40,39 +40,6 @@
           margin-top: 0;
         }
       }
-      .pe-connect-button {
-        background-color: $color-blue-3;
-        border: none;
-        border-radius: 100px;
-        margin-top: 10px;
-        max-width: 350px;
-        padding: 6px 20px 6px 4px;
-        @media #{$small-device} {
-          padding: 6px 30px 6px 15px;
-
-        }
-        text-decoration: none;
-        &:not(:disabled):not(.disabled):active,
-        &:hover,
-        &:focus {
-          background-color: $color-blue-2;
-          border: none;
-        }
-        div {
-          img {
-            width: 52px;
-            @media #{$medium-device} {
-              width: 62px;
-            }
-          }
-          span {
-            color: $color-white-3;
-            font-size: 16px;
-            font-weight: bold;
-            margin-left: 5px;
-          }
-        }
-      }
       .btn-je-commence {
         margin-left: 0;
         img {
