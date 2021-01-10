@@ -25,9 +25,12 @@ body {
   display : table;
   width :100% ;
   background-color: $color-white-2;
-  padding-bottom: 9rem;
-  @media #{$medium-device}, #{$large-device} {
+  padding-bottom: 14rem;
+  @media #{$small-device} {
     padding-bottom: 8rem;
+  }
+  @media #{$large-device} {
+    padding-bottom: 5rem;
   }
 }
 
