@@ -3,3 +3,9 @@
 .container-fluid {
   margin-top: 2rem;
 }
+
+.ul-liens-aide-navigateur li span {
+  display: inline-block;
+  word-break:break-word;
+  vertical-align:top;
+}
