@@ -58,7 +58,6 @@ export class AuthorizationService {
   }
 
   private traiterErrorAuthentifierIndividu(httpErrorResponse) {
-    console.log(httpErrorResponse.error);
     this.messageErreur = new MessageErreur();
     if (httpErrorResponse.error && httpErrorResponse.error.code) {
       this.messageErreur.code = httpErrorResponse.error.code;

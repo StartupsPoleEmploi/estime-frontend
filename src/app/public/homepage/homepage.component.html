@@ -1,6 +1,7 @@
 <section id="section-presentation">
     <div class="container-fluid">
         <div id="div-message-erreur-homepage">
+            <input type="hidden" ngModel #messageErreurElement>
             <alert
                 type="{{niveauMessageErreur}}"
                 *ngIf="messageErreur">
@@ -26,6 +27,7 @@
                         class="btn-pe-connect"
                         data-testid="btn-pe-connect"
                         (click)="login()">
+
                         <div>
                             <img src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
                             <span>Se connecter avec pôle emploi</span>

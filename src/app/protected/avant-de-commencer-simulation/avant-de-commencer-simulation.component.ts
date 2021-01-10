@@ -42,7 +42,6 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
           this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
         }, (erreur) => {
           this.isPageLoadingDisplay = false;
-          console.log(erreur);
           this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
         }
       );

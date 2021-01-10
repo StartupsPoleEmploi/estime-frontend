@@ -16,8 +16,6 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false
   subscriptionStatutIndividuChangedObservable: Subscription;
 
-  @ViewChild('btnSeDeconnecter') searchElement: ElementRef;
-
   constructor(
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,

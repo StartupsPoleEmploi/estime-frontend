@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
@@ -19,6 +19,9 @@ export class HomepageComponent implements OnInit {
 
   messageErreur: MessageErreur;
   niveauMessageErreur = 'danger';
+  toto: string;
+
+  @ViewChild('messageErreurElement', {static: true}) messageErreurElement;
 
   constructor(
     private authorizationService: AuthorizationService,
@@ -57,6 +60,7 @@ export class HomepageComponent implements OnInit {
       } else {
         this.niveauMessageErreur = NiveauMessagesErreurEnum.ERROR;
       }
+      this.messageErreurElement.nativeElement.focus();
     }
   }
 }

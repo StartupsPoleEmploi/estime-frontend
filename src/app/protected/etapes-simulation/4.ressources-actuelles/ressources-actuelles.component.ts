@@ -114,7 +114,6 @@ export class RessourcesActuellesComponent implements OnInit {
           this.isPageLoadingDisplay = false;
           this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
         }, (erreur) => {
-          console.log(erreur);
           this.isPageLoadingDisplay = false;
           this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
         }
