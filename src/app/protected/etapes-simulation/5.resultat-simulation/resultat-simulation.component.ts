@@ -66,8 +66,15 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {
+    let dateStringFormat = null;
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
-    return this.dateUtileService.getDateStringFormat(dateSimulation);
+    if(this.screenService.isTabletScreen()) {
+      dateStringFormat = this.dateUtileService.getLibelleDateStringFormatCourt(dateSimulation);
+    } else {
+      dateStringFormat = this.dateUtileService.getLibelleDateStringFormat(dateSimulation);
+
+    }
+    return dateStringFormat;
   }
 
   public isLastCardSimulation(index: number): boolean {

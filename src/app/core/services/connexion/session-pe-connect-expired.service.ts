@@ -62,9 +62,13 @@ export class SessionPeConnectExpiredService {
   }
 
   private isMemeIndividuReconnecteAfterSessionPeConnectExpired(): boolean {
+    let isMemeIndividu = false;
     const deConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
     const individuConnecte = this.cookiesEstimeService.getIndividuConnected();
-    return deConnecte.idPoleEmploi === individuConnecte.idPoleEmploi;
+    if(deConnecte && individuConnecte) {
+      isMemeIndividu = deConnecte.idPoleEmploi === individuConnecte.idPoleEmploi;
+    }
+    return isMemeIndividu;
   }
 
   private traiterReconnexionMemeIndividu(): void {

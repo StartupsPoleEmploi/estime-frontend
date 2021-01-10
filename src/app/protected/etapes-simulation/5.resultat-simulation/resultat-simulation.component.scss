@@ -5,9 +5,10 @@
 .container-fluid {
   margin-top: 2rem;
   padding-left: 15px;
+
   #alert-resultat-simulation {
     @media #{$extra-small-device} {
-      margin-bottom: 25px!important;
+      margin-bottom: 25px !important;
     }
     .alert-resultat-simulation {
       border: 1px solid $color-black-2;
@@ -19,7 +20,6 @@
         color: $color-black-2;
       }
     }
-
   }
   #card-revenus-actuels {
     padding-left: 9px;
@@ -29,7 +29,6 @@
       padding-right: 15px;
     }
     .card {
-
       border: 0;
       height: 100%;
       margin-right: 0;
@@ -41,15 +40,40 @@
         margin-left: auto;
         margin-right: auto;
       }
-      h3 {
-        color: $color-blue-3;
-        font-weight: 600;
-        margin-bottom: -10px;
-        font-size: 16px;
+      .div-title-card {
+        @media #{$tablet-device} {
+          min-height: 50px;
+        }
+        align-items: center;
+        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+        display: -ms-flexbox; /* TWEENER - IE 10 */
+        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+        display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+        height: 100%;
+        justify-content: center;
+        h3 {
+          color: $color-blue-3;
+          font-weight: 600;
+          margin-bottom: 0;
+          font-size: 16px;
+        }
       }
+      .div-span-card {
+        align-items: center;
+        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+        display: -ms-flexbox; /* TWEENER - IE 10 */
+        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+        display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+        height: 100%;
+        justify-content: center;
+      }
+
       span {
         font-weight: 900;
         @media #{$small-device} {
+          font-size: 17px;
+        }
+        @media #{$medium-device} {
           font-size: 24px;
         }
       }
@@ -75,16 +99,17 @@
     border: 0;
   }
   .card-deck {
-    border:0;
+    border: 0;
     border-radius: 8px;
     margin-bottom: 0;
     @media #{$small-device} {
       padding-bottom: 5px;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
-
   .first-card {
-    border:0;
+    border: 0;
     border-radius: 8px;
     margin-left: 0;
     margin-right: 0;
@@ -123,12 +148,26 @@
           background-color: $color-grey-1;
         }
         #span-mois-annee {
-          font-size: 16px;
-          color: $color-blue-3;
-          font-weight: bold;
+          @media #{$tablet-device} {
+            min-height: 50px;
+            align-items: center;
+            display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+            display: -ms-flexbox; /* TWEENER - IE 10 */
+            display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+            display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+            height: 100%;
+          }
+          span {
+            font-size: 16px;
+            color: $color-blue-3;
+            font-weight: bold;
+          }
         }
         span {
           @media #{$small-device} {
+            font-size: 17px;
+          }
+          @media #{$medium-device} {
             font-size: 24px;
           }
           font-weight: 900;
@@ -166,23 +205,10 @@
       width: 30px;
     }
   }
+  .row {
+    @media #{$small-device} {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,10 +2,13 @@
 $extra-small-device:  "screen and (max-width:767px)";
 //tablets
 $small-device:  "screen and (min-width:768px)";
+$tablet-device : "screen and (min-width:768px) and (max-width:991px)";
 //desktops
 $medium-device: "screen and (min-width:992px)";
 $large-device:  "screen and (min-width:1200px)";
 $extra-large-device:  "screen and (min-width:1400px)";
+
+
 
 $color-black-1: black;
 $color-black-2:#3E3E3E;

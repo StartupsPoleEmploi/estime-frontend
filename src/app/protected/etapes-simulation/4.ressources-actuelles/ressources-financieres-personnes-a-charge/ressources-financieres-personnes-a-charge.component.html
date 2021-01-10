@@ -7,7 +7,7 @@
             class="form-group"
             *ngFor="let personneDTO of personnesDTO">
             <span class="libelle-personne row">
-                Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat2(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
+                Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
             </span>
             <div
                 class="form-group"

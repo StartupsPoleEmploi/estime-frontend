@@ -61,10 +61,14 @@
             id="card-revenus-actuels"
             class="col-12 col-md-3">
             <div class="card">
-                  <h3>Revenus et aides</h3>
-                  <span data-testid="span-revenus-aides-actuelles">
-                      {{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €
-                  </span>
+              <div class="div-title-card">
+                <h3>Revenus et aides</h3>
+              </div>
+              <div class="div-span-card">
+                <span data-testid="span-revenus-aides-actuelles">
+                    {{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €
+                </span>
+              </div>
             </div>
         </div>
         <div
@@ -78,8 +82,8 @@
                     data-testid="card-simulation-mensuel"
                     (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
                     <div class="row">
-                        <div class="col-6 mt-auto mb-auto p-0 col-md-12">
-                            <span id="span-mois-annee">
+                        <div id="span-mois-annee" class="col-6 mt-auto mb-auto p-0 col-md-12">
+                            <span >
                                 {{getDateStringFormat(simulationMensuel)}}
                             </span>
                         </div>

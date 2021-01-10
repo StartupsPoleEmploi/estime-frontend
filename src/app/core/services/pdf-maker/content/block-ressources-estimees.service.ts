@@ -203,7 +203,7 @@ export class BlockRessourcesEstimeesService {
     //add des cellules pour chaque simulation mensuelle
     const nbrMoisSimule = simulationAidesSociales.simulationsMensuelles.length;
     simulationAidesSociales.simulationsMensuelles.forEach(simulationMensuelle => {
-      const libelleDate = this.dateUtileService.getDateStringFormatStyle2(simulationMensuelle.datePremierJourMoisSimule);
+      const libelleDate = this.dateUtileService.getLibelleDateStringFormatCourt(simulationMensuelle.datePremierJourMoisSimule);
       const montantTotal = this.deConnecteSimulationAidesSocialesService.calculerMontantTotalRessourcesMois(simulationMensuelle);
       row.push(this.createCellMontantTotalSimulationMensuelle(libelleDate, montantTotal));
     });

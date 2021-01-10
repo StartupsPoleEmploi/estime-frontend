@@ -19,22 +19,22 @@ export class DateUtileService {
     { label: "Décembre", labelCourt: "Déc", value: 12 },
   ];
 
-  isBissextile(annee: number): boolean {
+  public isBissextile(annee: number): boolean {
     return (annee % 100 === 0) ? (annee % 400 === 0) : (annee % 4 === 0);
   }
 
-  getNombreJoursMois(mois:number, annee:number): number {
+  public getNombreJoursMois(mois:number, annee:number): number {
     return new Date(annee, mois, 0).getDate();
   }
 
-  getNombreJoursMoisPrecedent(): number {
+  public getNombreJoursMoisPrecedent(): number {
     const dateJour = new Date();
     const month = dateJour.getMonth();
     const year =  dateJour.getFullYear();
     return this.getNombreJoursMois(month, year);
   }
 
-  isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
+  public isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
     return this.checkFormat(dateDecomposee) === undefined;
   }
 
@@ -42,17 +42,17 @@ export class DateUtileService {
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateSimulation
    */
-  getDateStringFormat(dateSimulation: string): string {
+  public getLibelleDateStringFormat(dateSimulation: string): string {
     const dateSimulationSplit = dateSimulation.split('-');
     const moisLabel = this.getLibelleMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
     return `${moisLabel} ${dateSimulationSplit[0]}`;
   }
 
   /**
-   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * Retourne un string au format "mois en lettre courte + année (ex : jan. 2020)"
    * @param dateSimulation
    */
-  getDateStringFormatStyle2(dateSimulation: string): string {
+  public getLibelleDateStringFormatCourt(dateSimulation: string): string {
     const dateSimulationSplit = dateSimulation.split('-');
     const moisLabel = this.getLibelleCourtMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
     return `${moisLabel} ${dateSimulationSplit[0]}`;
@@ -62,12 +62,12 @@ export class DateUtileService {
    * transforme YYYY-MM-DD en JJ/MM/YYYY
    * @param date
    */
-  getDateStringFormat2(date: string): string {
+  public getDateStringFormat(date: string): string {
     const dateSimulationSplit = date.split('-');
     return dateSimulationSplit[2] + '/' + dateSimulationSplit[1] + '/' + dateSimulationSplit[0];
   }
 
-  checkFormat(dateDecomposee: DateDecomposee): string {
+  public checkFormat(dateDecomposee: DateDecomposee): string {
     let errorFormatMessage = undefined;
     const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
     if(dateDecomposee.jour) {
@@ -99,7 +99,7 @@ export class DateUtileService {
     return errorFormatMessage;
   }
 
-  isDateDecomposeeSaisieValide(dateDecomposee: DateDecomposee): boolean {
+  public isDateDecomposeeSaisieValide(dateDecomposee: DateDecomposee): boolean {
     let isDateDecomposeeSaisieValide = false;
     if(!dateDecomposee.messageErreurFormat
       && dateDecomposee.jour
@@ -110,7 +110,7 @@ export class DateUtileService {
     return isDateDecomposeeSaisieValide;
   }
 
-  getDateDecomposeeFromDate(dateADecompose: Date): DateDecomposee {
+  public getDateDecomposeeFromDate(dateADecompose: Date): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
     if(dateADecompose) {
       let dateADecomposeDate = new Date(dateADecompose);
@@ -125,7 +125,7 @@ export class DateUtileService {
     return dateDecomposee;
   }
 
-  getDateDecomposeeFromStringDate(dateADecompose: string) {
+  public getDateDecomposeeFromStringDate(dateADecompose: string): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
     if(dateADecompose) {
       const dateADecomposeTab = dateADecompose.split("-");
@@ -138,11 +138,11 @@ export class DateUtileService {
     return dateDecomposee;
   }
 
-  getStringDateFromDateDecomposee(dateADecompose: DateDecomposee): string {
+  public getStringDateFromDateDecomposee(dateADecompose: DateDecomposee): string {
     return `${dateADecompose.annee}-${dateADecompose.mois}-${dateADecompose.jour}`;
   }
 
-  getDateFromDateDecomposee(dateADecompose: DateDecomposee): Date {
+  public getDateFromDateDecomposee(dateADecompose: DateDecomposee): Date {
     const dateFormat = new Date(
       parseInt(dateADecompose.annee),
       parseInt(dateADecompose.mois) - 1,
