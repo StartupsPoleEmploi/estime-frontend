@@ -82,7 +82,11 @@
                         required
                         [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
                         #nombreMoisCDD="ngModel">
-                        <option [value]="null">Sélectionner</option>
+                        <option
+                            [value]="null"
+                            disabled>
+                            Sélectionner
+                        </option>
                         <option
                             *ngFor="let nombreMois of nombreMoisCDDSelectOptions"
                             [value]="nombreMois.value">

@@ -5,6 +5,9 @@
 }
 
 .form-group-nombre-mois {
+  @media #{$extra-small-device} {
+    padding-left: 0;
+  }
   @media #{$small-device} {
     margin-right: -15px;
     margin-left: -15px;
