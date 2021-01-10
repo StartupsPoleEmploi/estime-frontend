@@ -38,7 +38,7 @@
 .btn-primary-perso {
   background-color: $color-blue-3;
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: $color-blue-2;
   }
   div {
@@ -46,15 +46,6 @@
       color: $color-white-3;
       font-size: 16px;
     }
-  }
-}
-
-.btn-imprimer-simulation {
-  @extend .btn-style-perso-4;
-  margin: auto;
-  width: 250px;
-  img {
-    width: 30px;
   }
 }
 
@@ -84,7 +75,7 @@
   height: 39px;
   width: 130px;
   &:hover,
-  &:focus {
+  &:focus-visible {
     background-color: $color-blue-2;
     border: none;
     span {
@@ -142,8 +133,10 @@
   display: inline-flex;
   &:hover,
   &:focus-visible {
-    .text-button {
-      text-decoration: underline;
+    div {
+      span {
+        text-decoration: underline;
+      }
     }
   }
   div {
@@ -188,6 +181,16 @@
   }
 }
 
+.btn-imprimer-simulation {
+  @extend .btn-style-perso-4;
+  margin: auto;
+  width: 250px;
+  img {
+    width: 30px;
+  }
+}
+
+
 .btn-group-input-date {
   display: flex !important;
   .jour-input {
@@ -220,7 +223,7 @@
     &:disabled {
       opacity: 0.35 !important;
     }
-    &:focus {
+    &:focus-visible {
       box-shadow: none;
     }
   }

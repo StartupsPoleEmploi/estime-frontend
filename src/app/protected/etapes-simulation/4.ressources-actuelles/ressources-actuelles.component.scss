@@ -77,6 +77,12 @@
   margin-left: auto;
   margin-right: auto;
   @media #{$extra-small-device} {
+    align-items: center;
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    height: 100%;
     .first-btn {
       background-color: unset;
       margin-right: 7px;
@@ -91,7 +97,7 @@
   .btn-style-perso-1 {
     width: 250px;
     @media #{$extra-small-device} {
-      height: 50px;
+      height: 55px;
       line-height: 1.2rem;
       width: 160px!important;
       div {

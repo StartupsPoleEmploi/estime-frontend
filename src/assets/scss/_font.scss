@@ -1,17 +1,11 @@
 body {
   color: $color-blue-1;
   font-size: 16px;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 18px;
-  }
 }
 
 p, span, ul {
   @extend .font-effect;
   font-size: 16px;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 18px;
-  }
 }
 
 .font-effect {

@@ -61,20 +61,28 @@
   }
   .col-libelle {
     padding-right: 0;
-    width: 55% !important;
+    width: 50% !important;
+    @media #{$small-device} {
+      width: 60% !important;
+    }
+    @media #{$medium-device} {
+      width: 64% !important;
+    }
     .span-libelle-aide {
       color: $color-blue-1;
       font-weight: bold;
       margin-left: 15px;
-      @media #{$extra-small-device} {
-        font-size: 0.9rem;
+      font-size: 13px;
+      @media #{$small-device} {
+        font-size: 16px;
       }
     }
     .span-organisme {
       color: $color-blue-2;
       margin-left: 15px;
-      @media #{$extra-small-device} {
-        font-size: 0.9rem;
+      font-size: 13px;
+      @media #{$small-device} {
+        font-size: 16px;
       }
     }
   }

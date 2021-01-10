@@ -7,6 +7,13 @@
   }
 }
 
+.form-container-fluid {
+  @media #{$extra-small-device} {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 .custom-control-label {
   color: $color-blue-1;
   font-size: 16px;
@@ -21,14 +28,14 @@
     width: $size-card-form-etape-simulation;
   }
   .first-btn {
-    margin-right: 10px;
+    margin-right: 5px;
     @media #{$small-device} {
       margin-right: 20px;
     }
   }
   .second-btn {
-    margin-left: 20px;
-    width: 135px;
+    margin-left: 15px;
+    width: 140px;
     @media #{$small-device} {
       margin-left: 10px;
     }
