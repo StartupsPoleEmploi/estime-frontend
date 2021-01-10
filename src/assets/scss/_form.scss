@@ -143,11 +143,13 @@ input:-webkit-autofill:focus {
 
 .card-form {
   border: 0;
+  @media #{$extra-small-device} {
+    padding-left: 33px;
+    padding-right: 33px;
+  }
+
   @media #{$small-device} {
     margin-top: 2rem;
-  }
-  padding-left: 1.7rem;
-  @media #{$small-device} {
     padding-left: 4rem;
   }
   input {

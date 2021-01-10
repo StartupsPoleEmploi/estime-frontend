@@ -23,7 +23,10 @@
 .action-btn-base {
   @extend .btn-base;
   border: none;
-  border-radius: 22px;
+  border-radius: 30px;
+  @media #{$small-device} {
+    border-radius: 22px;
+  }
   height: 42px;
   div {
     align-items: center;
