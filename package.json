@@ -16,6 +16,7 @@
     "ng": "ng",
     "start": "ng serve --open --host localhost.estime --port 9001",
     "start:ci": "ng serve --host localhost.estime --port 9001",
+    "stats": "webpack-bundle-analyzer dist/estime/stats.json",
     "test": "ng test",
     "sonar": "sonar-scanner"
   },
@@ -74,7 +75,8 @@
     "ts-loader": "8.0.12",
     "ts-node": "8.3.0",
     "tslint": "6.1.0",
-    "typescript": "3.9.5"
+    "typescript": "3.9.5",
+    "webpack-bundle-analyzer": "^4.3.0"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",

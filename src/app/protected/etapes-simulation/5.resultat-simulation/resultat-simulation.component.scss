@@ -1,6 +1,4 @@
 @import "../../../../assets/scss/variables";
-@import "../../../../assets/scss/buttons";
-@import "../../../../assets/scss/font";
 
 .container-fluid {
   margin-top: 2rem;
@@ -183,26 +181,12 @@
     padding-left: 9px !important;
     padding-right: 9px !important;
   }
-  .h4-style-1 {
-    @extend .font-effect-title;
-    color: $color-blue-1;
-    font-size: 21px;
-    font-weight: bold;
-    text-align: left;
-  }
+
   .div-button-retour {
     margin-top: 20px;
     margin-bottom: 30px;
     .btn-style-perso-2 {
       background-color: unset;
-    }
-  }
-  .btn-imprimer-simulation {
-    @extend .btn-style-perso-4;
-    margin: auto;
-    width: 250px;
-    img {
-      width: 30px;
     }
   }
   .row {

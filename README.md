@@ -32,3 +32,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Cypress localhost cors 
 "chromeWebSecurity": false
+
+## Stats
+
+npm runs stats
+https://www.npmjs.com/package/webpack-bundle-analyzer
