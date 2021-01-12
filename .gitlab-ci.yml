@@ -35,8 +35,8 @@ cypress-e2e:
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
-    - cp hosts /etc/hosts
     - cd cypress/ci
+    - cp hosts /etc/hosts
     - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
     - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
     - cd ../..
