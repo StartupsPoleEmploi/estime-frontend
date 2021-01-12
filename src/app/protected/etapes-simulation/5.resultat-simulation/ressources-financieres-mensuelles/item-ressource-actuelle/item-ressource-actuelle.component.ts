@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { fromEvent, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-item-ressource-actuelle',
