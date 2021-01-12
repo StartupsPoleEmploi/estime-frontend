@@ -194,3 +194,4 @@ dast:
     paths:
       - report.md
     expire_in: 1 day
+  when: manual
