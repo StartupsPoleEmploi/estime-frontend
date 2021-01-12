@@ -85,6 +85,18 @@
             }
           }
         },
+        "serve-ngx": {
+          "builder": "ngx-build-plus:dev-server",
+          "options": {
+            "browserTarget": "estime:build",
+            "extraWebpackConfig": "./cypress/coverage.webpack.js"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "estime:build:production"
+            }
+          }
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {

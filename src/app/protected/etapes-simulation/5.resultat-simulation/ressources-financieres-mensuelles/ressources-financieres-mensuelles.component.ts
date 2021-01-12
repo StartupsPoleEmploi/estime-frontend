@@ -7,6 +7,8 @@ import { AideSociale } from '@models/aide-sociale';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { AidesService } from "@app/core/services/utile/aides.service";
+import { CodesRessourcesFinancieresEnum } from "@app/commun/enumerations/codes-ressources-financieres.enum";
+
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -21,6 +23,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   @Input() aideSocialeSelected: AideSociale;
 
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
+
+
+  codesRessourcesFinancieresEnum: typeof CodesRessourcesFinancieresEnum = CodesRessourcesFinancieresEnum;
 
   constructor(
     public aidesService: AidesService,

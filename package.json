@@ -15,7 +15,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "start": "ng serve --open --host localhost.estime --port 9001",
-    "start:ci": "ng serve --host localhost.estime --port 9001",
+    "start:ngx": "ng run estime:serve-ngx --host localhost.estime --port 9001",
     "stats": "webpack-bundle-analyzer dist/estime/stats.json",
     "test": "ng test",
     "sonar": "sonar-scanner"

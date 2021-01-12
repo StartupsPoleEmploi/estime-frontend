@@ -10,6 +10,8 @@ import AvantDeCommencerPage from '../../../integration-commun/page-objects/avant
 import HeaderSection from '../../../integration-commun/section-objects/header.section'
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service'
 import { environment } from '../../../environment'
+import { CodesAidesEnum } from "../../../../src/app/commun/enumerations/codes-aides.enum";
+import { CodesRessourcesFinancieresEnum } from "../../../../src/app/commun/enumerations/codes-ressources-financieres.enum";
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS'), () => {
 
@@ -63,28 +65,28 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
     //premier mois
     resultatMaSimulationPage.clickOnMois(0);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
-    resultatMaSimulationPage.checkMontantAideMobilite("346");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_MOBILITE, "346");
     //deuxième mois
     resultatMaSimulationPage.clickOnMois(1);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //troisième mois
     resultatMaSimulationPage.clickOnMois(2);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //quatrième mois
     resultatMaSimulationPage.clickOnMois(3);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
     //cinquième mois
     resultatMaSimulationPage.clickOnMois(4);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
     //sixième mois
     resultatMaSimulationPage.clickOnMois(5);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
@@ -132,28 +134,28 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
     //premier mois
     resultatMaSimulationPage.clickOnMois(0);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
-    resultatMaSimulationPage.checkMontantAideMobilite("346");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_MOBILITE,"346");
     //deuxième mois
     resultatMaSimulationPage.clickOnMois(1);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //troisième mois
     resultatMaSimulationPage.clickOnMois(2);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //quatrième mois
     resultatMaSimulationPage.clickOnMois(3);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
     //cinquième mois
     resultatMaSimulationPage.clickOnMois(4);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
     //sixième mois
     resultatMaSimulationPage.clickOnMois(5);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
@@ -204,29 +206,29 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
     //premier mois
     resultatMaSimulationPage.clickOnMois(0);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
-    resultatMaSimulationPage.checkMontantAideMobilite("346");
-    resultatMaSimulationPage.checkMontantAGEPI("400");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_MOBILITE,"346");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AGEPI,"400");
     //deuxième mois
     resultatMaSimulationPage.clickOnMois(1);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //troisième mois
     resultatMaSimulationPage.clickOnMois(2);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //quatrième mois
     resultatMaSimulationPage.clickOnMois(3);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
     //cinquième mois
     resultatMaSimulationPage.clickOnMois(4);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
     //sixième mois
     resultatMaSimulationPage.clickOnMois(5);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
@@ -281,29 +283,29 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
     //premier mois
     resultatMaSimulationPage.clickOnMois(0);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
-    resultatMaSimulationPage.checkMontantAideMobilite("346");
-    resultatMaSimulationPage.checkMontantAGEPI("460");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_MOBILITE,"346");
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AGEPI,"460");
     //deuxième mois
     resultatMaSimulationPage.clickOnMois(1);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //troisième mois
     resultatMaSimulationPage.clickOnMois(2);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantASS();
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciereNotEmpty(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     //quatrième mois
     resultatMaSimulationPage.clickOnMois(3);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
     //cinquième mois
     resultatMaSimulationPage.clickOnMois(4);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
     //sixième mois
     resultatMaSimulationPage.clickOnMois(5);
-    resultatMaSimulationPage.checkMontantSalaire(salaire);
-    resultatMaSimulationPage.checkMontantPrimeActivite(primeActivite);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, primeActivite);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
