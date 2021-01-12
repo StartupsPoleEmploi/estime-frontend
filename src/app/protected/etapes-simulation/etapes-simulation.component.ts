@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { fromEvent, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-etapes-simulation',

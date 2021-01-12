@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
-import { RoutesEnum } from '@enumerations/routes.enum';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
+import { RoutesEnum } from '@enumerations/routes.enum';
 import { Subscription } from 'rxjs';
 
 @Component({

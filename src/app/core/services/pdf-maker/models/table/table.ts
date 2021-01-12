@@ -1,5 +1,3 @@
-import { Cell } from "./cell";
-
 export class Table {
 
   body: Array<Array<any>>;

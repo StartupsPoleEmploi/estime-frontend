@@ -1,15 +1,15 @@
 
-import { Injectable, Testability } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from "@models/demandeur-emploi";
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import pdfMakeModule from 'pdfmake/build/pdfmake';
 import pdfFontsModule from 'pdfmake/build/vfs_fonts';
-import { BlockRessourcesEstimeesService } from "./content/block-ressources-estimees.service";
-import { BlockInformationsService } from "./content/bloc-informations.service";
-import { Text } from "./models/text";
-import { Style } from './models/style';
-import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 import { ScreenService } from '../utile/screen.service';
+import { BlockInformationsService } from "./content/bloc-informations.service";
+import { BlockRessourcesEstimeesService } from "./content/block-ressources-estimees.service";
+import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
+import { Style } from './models/style';
+import { Text } from "./models/text";
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 

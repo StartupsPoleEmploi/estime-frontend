@@ -1,4 +1,3 @@
-import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { Style } from "../style";
 
 export class Cell {

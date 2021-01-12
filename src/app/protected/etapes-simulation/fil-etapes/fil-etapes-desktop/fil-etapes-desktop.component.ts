@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { EtapeSimulation } from '@app/commun/models/etape-simulation';
 import { EtapeSimulationService } from "@app/core/services/utile/etape-simulation.service";

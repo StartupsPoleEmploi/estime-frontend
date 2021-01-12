@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { Observable, Subject } from 'rxjs';
 import { EtapeSimulation } from "@models/etape-simulation";
 
 @Injectable({providedIn: 'root'})

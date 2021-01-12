@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
@@ -8,7 +8,6 @@ import { CodesMessagesErreurEnum } from "@enumerations/codes-messages-erreur.enu
 import { NiveauMessagesErreurEnum } from "@enumerations/niveaux-message-erreur";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { MessageErreur } from '@models/message-erreur';
-import { fromEvent, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',

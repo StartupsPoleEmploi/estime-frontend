@@ -1,7 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
+import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
@@ -9,12 +14,6 @@ import { AideSociale } from '@models/aide-sociale';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
-import { AidesService } from '@app/core/services/utile/aides.service';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultat-simulation',
