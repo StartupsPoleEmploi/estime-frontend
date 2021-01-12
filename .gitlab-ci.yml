@@ -42,7 +42,7 @@ cypress-e2e:
     - cd ../..
     - npm ci
     - npm install -g wait-on
-    - npm run start:ci &
+    - npm run start:ngx &
     - wait-on http://localhost.estime:9001/
     - npm run cy:run
     rules:
