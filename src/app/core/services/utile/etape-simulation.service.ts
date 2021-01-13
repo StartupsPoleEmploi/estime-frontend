@@ -26,4 +26,16 @@ export class EtapeSimulationService {
     });
     return numero;
   }
+
+  public isPathRouteEtapesSimulation(pathRouteActivated: string): boolean {
+    let isPathRouteEtapesSimulation = false;
+    if(pathRouteActivated === RoutesEnum.CONTRAT_TRAVAIL ||
+       pathRouteActivated === RoutesEnum.MA_SITUATION ||
+       pathRouteActivated === RoutesEnum.MES_PERSONNES_A_CHARGE  ||
+       pathRouteActivated === RoutesEnum.RESSOURCES_ACTUELLES ||
+       pathRouteActivated === RoutesEnum.RESULTAT_SIMULATION ) {
+        isPathRouteEtapesSimulation = true;
+    }
+    return isPathRouteEtapesSimulation;
+  }
 }

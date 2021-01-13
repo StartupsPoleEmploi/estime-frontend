@@ -7,6 +7,7 @@ import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { Subscription } from 'rxjs';
+import { EtapeSimulationService } from '../utile/etape-simulation.service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionPeConnectExpiredService {
@@ -17,6 +18,7 @@ export class SessionPeConnectExpiredService {
     private bnNgIdleService: BnNgIdleService,
     private bsModalService: BsModalService,
     private cookiesEstimeService: CookiesEstimeService,
+    private etapeSimulationService: EtapeSimulationService,
     private router: Router,
     private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
@@ -74,7 +76,11 @@ export class SessionPeConnectExpiredService {
   private traiterReconnexionMemeIndividu(): void {
     const pathRouteActivated = this.sessionStorageEstimeService.getPathRouteActivatedByUser();
     if(pathRouteActivated !== RoutesEnum.ETAPES_SIMULATION) {
-      this.router.navigate([pathRouteActivated]);
+      if(this.etapeSimulationService.isPathRouteEtapesSimulation(pathRouteActivated)) {
+        this.router.navigate([RoutesEnum.ETAPES_SIMULATION, pathRouteActivated]);
+      } else {
+        this.router.navigate([pathRouteActivated]);
+      }
     } else {
       this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
     }
