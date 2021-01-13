@@ -1,6 +1,14 @@
 ![alt text](.gitlab/images/logo_estime_v2.png)
 
-# Estime
+# [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
+
+La startup Estime est issue du challenge intraprenarial 2020 de Pôle emploi. 
+
+**L’idée :**
+
+Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur une période de 6 mois, toutes leurs futures ressources en cas de reprise d’emploi, de formation ou de création d’entreprise. 
+
+[Fiche startup sur beta.gouv - Incubateur de services publics numériques](https://beta.gouv.fr/startups/estime.html)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
 
