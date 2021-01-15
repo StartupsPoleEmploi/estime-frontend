@@ -20,7 +20,7 @@ L'application est composée de 3 composants applicatifs :
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
-:closed_lock_with_key: L'accès au service Estime se fait par une authentification avec [PE Connect](https://peconnect.pole-emploi.fr/)
+:closed_lock_with_key: L'accès au service Estime se fait par une **authentification avec [PE Connect](https://peconnect.pole-emploi.fr/).**
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
