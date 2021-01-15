@@ -23,9 +23,11 @@ L'application est composée de 3 composants applicatifs :
 
 # Lancement de l'application Web Angular en local
 
+Ce projet a été généré avec [Angular CLI](https://cli.angular.io/).
+
+## Prérequis
 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
