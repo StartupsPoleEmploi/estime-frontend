@@ -1,3 +1,5 @@
+{::options parse_block_html="true" /}
+
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
 # [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
