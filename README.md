@@ -25,6 +25,9 @@ L'application est composée de 3 composants applicatifs :
 ### <i class="fab fa-gitlab fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i> Orange GitLab Tanuki
 {: #tanuki-orange}
 
+### <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Puzzle Icon
+{: #puzzle}
+
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
