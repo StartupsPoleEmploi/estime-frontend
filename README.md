@@ -97,7 +97,7 @@ Plusieurs possibilités :
      export const environment = {
      production: false,
      /******** url de l'api coeur métier Estime ************/
-     apiEstimeURL: 'https://estime.beta.pole-emploi.fr/',
+     apiEstimeURL: 'http://localhost:8081/estime/v1/',
      [...]
      };
      ```
@@ -109,7 +109,7 @@ Plusieurs possibilités :
    export const environment = {
       production: false,
       /******** url de l'api coeur métier Estime ************/
-      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/',
+      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/estime/v1/',
       [...]
    };
    ```
