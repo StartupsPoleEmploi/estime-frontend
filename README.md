@@ -63,7 +63,7 @@ foo@bar:~$ npm -v
 
    Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
-   ```Typescript
+   ```typescript
    export const environment = {
       production: false,
       apiEstimeURL: 'http://localhost:8081/estime/v1/',
