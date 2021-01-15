@@ -88,6 +88,7 @@ foo@bar:~$ npm -v
 
    - Sous Windows, C:\windows\system32\drivers\etc\hosts
    - Sous Linux, /etc/hosts
+   
 
    ```
    127.0.1.1	localhost.estime
