@@ -28,6 +28,9 @@ L'application est composée de 3 composants applicatifs :
 ### <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Puzzle Icon
 {: #puzzle}
 
+My important paragraph.
+{: .alert .alert-info}
+
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
