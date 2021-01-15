@@ -17,7 +17,9 @@ L'application est composée de 3 composants applicatifs :
 
 - frontend : application Web développée en Angular (Typescript) - ce projet Gitlab contient les sources de l'application Web
 - backend coeur métier : api REST développée en Springboot (Java) - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend).
-- backend moteur de calcul : api REST Openfisca développée en Python - [<i class="fab fa-gitlab fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i> lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
+- backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
+
+<i class="fab fa-gitlab fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i> 
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
