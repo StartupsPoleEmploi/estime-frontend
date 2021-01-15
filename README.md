@@ -37,9 +37,6 @@ foo@bar:~$ node -v
 foo@bar:~$ npm -v
 ```
 
-
-
-
 ## Les étapes à suivre
 
 1. Installer Angular CLI 
@@ -53,7 +50,9 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~$ git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
    ```
+1. Ouvrir le projet **estime-frontend** via votre IDE préféré
 
+   :thumbsup: Utiliser VS Code comme IDE
 
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
