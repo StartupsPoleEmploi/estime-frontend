@@ -87,7 +87,7 @@ foo@bar:~$ npm -v
 1. Ajout du domaine **localhost.estime** dans le fichier **hosts**
 
    - Sous Windows, C:\windows\system32\drivers\etc\hosts
-   - Sous Linux, /etc/hosts \
+   - Sous Linux, /etc/hosts 
    
    ```
    127.0.1.1	localhost.estime
