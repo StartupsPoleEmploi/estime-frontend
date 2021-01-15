@@ -32,7 +32,7 @@ Installation de NodeJS avec une **version 12.11.x minimum**.
 
 **Vérifier votre installation** :
 
-```
+```shell
 node -v
 npm -v
 ```
@@ -44,13 +44,13 @@ npm -v
 
 1. Installer Angular CLI 
 
-   ```sh
+   ```shell
    npm install -g @angular/cli
    ```
 
 1. Cloner le projet Gitlab **estime-frontend**
 
-   ```
+   ```shell
    git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
    ```
 
