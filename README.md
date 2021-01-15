@@ -50,7 +50,7 @@ npm -v
 
 1. Cloner le projet Gitlab **estime-frontend**
 
-   ```shell
+   ```git
    git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
    ```
 
