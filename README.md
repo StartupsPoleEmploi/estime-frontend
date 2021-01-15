@@ -48,7 +48,12 @@ npm -v
    npm install -g @angular/cli
    ```
 
-1. Another item
+1. Cloner le projet Gitlab **estime-frontend**
+
+   ```
+   git clone 
+   ```
+
 
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
