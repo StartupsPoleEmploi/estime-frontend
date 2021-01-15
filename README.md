@@ -90,16 +90,17 @@ Plusieurs possibilités :
 
 - installer en local l'api
 
-  - suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
-  - renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
+  1. suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
+  1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
 
-   ```typescript
-   export const environment = {
-      production: false,
-      /******** url de l'api coeur métier Estime ************/
-      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/',
-      [...]
-   };
+     ```typescript
+     export const environment = {
+     production: false,
+     /******** url de l'api coeur métier Estime ************/
+     apiEstimeURL: 'https://estime.beta.pole-emploi.fr/',
+     [...]
+     };
+     ```
 - se brancher sur l'api déployée sur l'environnement de recette
 
    Renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
