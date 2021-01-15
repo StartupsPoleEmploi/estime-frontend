@@ -37,6 +37,12 @@ node -v
 npm -v
 ```
 
+1. First ordered list item
+
+   Second paragraph of first item.
+
+1. Another item
+
 
 ## Les étapes à suivre
 
