@@ -12,10 +12,18 @@ Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur u
 
 
 
-# Architecture l'application Estime
+# Architecture de l'application Estime
 
 ![schéma architecure Estime](.gitlab/images/schema_architecure_v1.png)
 
+
+L'application est composée de 3 composants applicatifs :
+
+- frontend : application Web développé en Angular (Typescript)
+- backend : api REST Springboot => coeur métier Estime développé en Java
+            [Projet sous Gitlab](https://git.beta.pole-emploi.fr/estime/estime-backend)
+- backend : api REST Openfisca => moteur de calcul développé en Python
+            [Projet sous Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france)
 
 
 # Lancement de l'application Angular en local
