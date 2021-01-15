@@ -37,22 +37,19 @@ node -v
 npm -v
 ```
 
-1. First ordered list item
 
-   Second paragraph of first item.
-
-1. Another item
 
 
 ## Les étapes à suivre
 
 1. Installer Angular CLI 
 
-```
-npm install -g @angular/cli
-```
+   ```
+   npm install -g @angular/cli
+   ```
 
-1. 
+1. Another item
+
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
