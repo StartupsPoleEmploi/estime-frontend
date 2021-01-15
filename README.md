@@ -66,6 +66,7 @@ foo@bar:~$ npm -v
    ```typescript
    export const environment = {
       production: false,
+      /******** url de l'api coeur métier Estime ************/
       apiEstimeURL: '%% à renseigner %%',
       /******** OpenID Connect PE properties ************/
       peconnectClientid: '%% à renseigner %%',
@@ -76,9 +77,18 @@ foo@bar:~$ npm -v
       tagCommanderScriptUrl: ''
    };
    ```
-
+   - **apiEstimeURL** : voir la section Appeler l'api coeur metier Estime
    - **OpenID Connect PE properties** : ces informations peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
-   - **tagCommanderScriptUrl**
+   - **tagCommanderScriptUrl** : non renseigner car le taggage et le consentement Cookies n'est pas activé en localhost
+
+
+### Appeler l'api coeur metier Estime
+
+Plusieurs possibilités :
+
+- 
+- 
+
 ## [Tests e2e] Cypress
 
 ## [IDE] VS Code
