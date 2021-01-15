@@ -61,7 +61,7 @@ foo@bar:~$ npm -v
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
 
-:wrench: Quelques extensions utiles à installer dans l'IDE :
+:wrench:  Quelques extensions utiles que vous pourver installer dans votre IDE :
 
 - Angular Language Service
 - Angular Schematics
