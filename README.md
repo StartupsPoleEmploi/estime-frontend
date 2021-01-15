@@ -63,6 +63,19 @@ VS Code est disponible en téléchargement sur le [site officiel](https://code.v
 
 :wrench: Quelques extensions utiles à installer dans l'IDE :
 
+- Angular Language Service
+- Angular Schematics
+- Angular Snippets (Version 11)
+- Angular template formatter
+- HTMLHint
+- HTML class snippets with Bootstrap4
+- Bootstrap v4 Snippets
+- SCSS Formatter
+- TypeScript Hero
+- vsc-organize-imports
+- ESLint
+
+
 
 
 
