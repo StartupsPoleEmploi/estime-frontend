@@ -85,13 +85,13 @@ foo@bar:~$ npm -v
    - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost
 
 1. Ajout du domaine **localhost.estime** dans le fichier **hosts**
-
-   - Sous Windows, C:\windows\system32\drivers\etc\hosts
-   - Sous Linux, /etc/hosts 
    
    ```
    127.0.1.1	localhost.estime
    ```
+
+   - Sous Windows, C:\windows\system32\drivers\etc\hosts
+   - Sous Linux, /etc/hosts 
 
 ### Appeler l'api coeur metier Estime
 
