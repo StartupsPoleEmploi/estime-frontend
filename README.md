@@ -85,6 +85,8 @@ foo@bar:~$ npm -v
    - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost
 
 1. Ajout du domaine **localhost.estime** dans le fichier **hosts**
+
+   Cette contrainte provient de Pôle emploi Connect et du paramètre redirect_uri pour lequel il n'a pas été possible de mettre localhost
    
    ```
    127.0.1.1	localhost.estime
@@ -92,6 +94,7 @@ foo@bar:~$ npm -v
 
    - Sous Windows, C:\windows\system32\drivers\etc\hosts
    - Sous Linux, /etc/hosts 
+
 
 ### Appeler l'api coeur metier Estime
 
