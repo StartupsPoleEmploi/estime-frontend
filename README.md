@@ -21,7 +21,7 @@ L'application est composée de 3 composants applicatifs :
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
-# [Développement en loca] Lancement de l'application Web Angular sur localhost
+# [Développement en local] Lancement de l'application Web Angular sur localhost
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/).
 
