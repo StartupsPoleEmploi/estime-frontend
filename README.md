@@ -62,7 +62,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## [IDE] VS Code
 
-V
+VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
 
 
 
