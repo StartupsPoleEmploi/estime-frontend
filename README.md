@@ -16,9 +16,9 @@ Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur u
 
 L'application est composée de 3 composants applicatifs :
 
-- frontend : application Web développé en Angular (Typescript)
-- backend : api REST Springboot => coeur métier Estime développé en Java ([lien projet Gitlab](https://git.beta.pole-emploi.fr/estime/estime-backend)).
-- backend : api REST Openfisca => moteur de calcul développé en Python ([lien projet Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france)).
+- frontend : application Web développée en Angular (Typescript)
+- backend coeur métier : api REST développée en Springboot (Java) ([lien projet Gitlab](https://git.beta.pole-emploi.fr/estime/estime-backend)).
+- backend moteur de calcul : api REST Openfisca développée en Python ([lien projet Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france)).
 
 
 # Lancement de l'application Angular en local
