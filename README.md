@@ -66,7 +66,7 @@ foo@bar:~$ npm -v
    ```typescript
    export const environment = {
       production: false,
-      apiEstimeURL: 'http://localhost:8081/estime/v1/',
+      apiEstimeURL: '%% à renseigner %%',
       /** OpenID Connect PE properties ***/
       peconnectClientid: '%% à renseigner %%',
       peconnectRedirecturi: 'http://localhost.estime:9001/',
