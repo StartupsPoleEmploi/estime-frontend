@@ -88,7 +88,7 @@ foo@bar:~$ npm -v
 
    Exécuter la commande suivante :
 
-   ```
+   ```console
    foo@bar:~estime-frontend$ npm start
    ```
 
