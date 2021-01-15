@@ -32,9 +32,9 @@ Installation de NodeJS avec une **version 12.11.x minimum**.
 
 **Vérifier votre installation** :
 
-```shell
-node -v
-npm -v
+```console
+foo@bar:~$ node -v
+foo@bar:~$ npm -v
 ```
 
 
