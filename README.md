@@ -52,7 +52,7 @@ foo@bar:~$ npm -v
    ```
 1. Ouvrir le projet **estime-frontend** via votre IDE préféré
 
-   :thumbsup: Utiliser VS Code comme IDE
+   :thumbsup: VS Code est un IDE gratuit, léger et qui permet d'avoir un excellent confort de développement avec Angular
 
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
