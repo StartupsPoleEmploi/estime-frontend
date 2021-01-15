@@ -59,6 +59,9 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm install
    ```
+1. Créer le fichier d'environnement local
+
+   Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
 ## [Tests e2e] Cypress
 
