@@ -67,11 +67,12 @@ foo@bar:~$ npm -v
    export const environment = {
       production: false,
       apiEstimeURL: '%% à renseigner %%',
-      /** OpenID Connect PE properties ***/
+      /******** OpenID Connect PE properties ************/
       peconnectClientid: '%% à renseigner %%',
       peconnectRedirecturi: 'http://localhost.estime:9001/',
       peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
+      /******** url du script TagCommander (activation du taggage et du consentement Cookies)  ************/
       tagCommanderScriptUrl: ''
    };
    ```
