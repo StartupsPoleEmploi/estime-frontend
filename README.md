@@ -9,7 +9,7 @@ La startup d'Etat _Estime_ est issue du challenge intraprenarial 2020 de Pôle e
 Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur une période de n mois, toutes leurs futures ressources financières en cas de reprise d’emploi (aides Pôle emploi, aides CNAF). Plus d'informations sur la [fiche startup de beta.gouv (Incubateur de services publics numériques)](https://beta.gouv.fr/startups/estime.html)
 
 
-# Architecture de l'application Estime
+# [Architecture] Schéma simplifié de l'application Estime
 
 ![schéma architecure Estime](.gitlab/images/schema_architecure_v1.png)
 
@@ -21,7 +21,7 @@ L'application est composée de 3 composants applicatifs :
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
-# Lancement de l'application Web Angular en local
+# [Développement en loca] Lancement de l'application Web Angular sur localhost
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/).
 
