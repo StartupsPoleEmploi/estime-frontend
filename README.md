@@ -55,14 +55,11 @@ foo@bar:~$ npm -v
    :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement avec Angular
 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-
 ## [Tests e2e] Cypress
 
 ## [IDE] VS Code
 
-VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
+:wrench: VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
 
 
 
