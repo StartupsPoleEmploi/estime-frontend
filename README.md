@@ -44,7 +44,7 @@ npm -v
 
 1. Installer Angular CLI 
 
-   ```
+   ```sh
    npm install -g @angular/cli
    ```
 
