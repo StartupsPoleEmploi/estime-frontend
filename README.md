@@ -30,7 +30,7 @@ Installation de NodeJS avec une **version 12.11.x minimum**.
 
 :thumbsup: Installer [NodeJS](https://nodejs.org/en/) avec un outil permettant de gérer plusieurs versions de Node (exemple : nvm). Plus d'informations, par [ici](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
-**Vérifier votre installation** :
+Vérifier votre installation :
 
 ```console
 foo@bar:~$ node -v
