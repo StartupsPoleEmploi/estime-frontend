@@ -52,7 +52,7 @@ foo@bar:~$ npm -v
    ```
 1. Ouvrir le projet **estime-frontend** via votre IDE préféré
 
-   :thumbsup: [VS Code](https://git.beta.pole-emploi.fr/estime/estime-frontend/-/blob/master/README.md#ide-vs-code) est un IDE gratuit, léger et qui permet d'avoir un excellent confort de développement avec Angular
+   :thumbsup: [VS Code](#header-ids-and-links) est un IDE gratuit, léger et qui permet d'avoir un excellent confort de développement avec Angular
 
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
