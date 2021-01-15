@@ -1,4 +1,4 @@
-![alt text](.gitlab/images/logo_estime_v2.png)
+![logo Estime](.gitlab/images/logo_estime_v2.png)
 
 # [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
 
@@ -10,12 +10,18 @@ Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur u
 
 [Fiche startup sur beta.gouv - Incubateur de services publics numériques](https://beta.gouv.fr/startups/estime.html)
 
+
+
+# Architecture l'application Estime
+
+![schéma architecure Estime](.gitlab/images/schema_architecure_v1.png)
+
+
+
+# Lancement de l'application Angular en local
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.3.
-
-# [Architecture] 
-
-
-# Lancelement de l'application Angular en local
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
