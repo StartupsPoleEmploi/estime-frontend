@@ -44,14 +44,14 @@ foo@bar:~$ npm -v
 
 1. Installer Angular CLI 
 
-   ```shell
-   npm install -g @angular/cli
+   ```console
+   foo@bar:~$ npm install -g @angular/cli
    ```
 
 1. Cloner le projet Gitlab **estime-frontend**
 
-   ```git
-   git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
+   ```console
+   foo@bar:~$ git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
    ```
 
 
