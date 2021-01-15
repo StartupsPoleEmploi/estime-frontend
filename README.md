@@ -54,6 +54,11 @@ foo@bar:~$ npm -v
 
    :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement avec Angular
 
+1. Installer les dépendances du projet
+
+   ```console
+   foo@bar:~estime-frontend$ npm install
+   ```
 
 ## [Tests e2e] Cypress
 
