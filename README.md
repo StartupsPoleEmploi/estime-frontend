@@ -84,6 +84,14 @@ foo@bar:~$ npm -v
      Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
    - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost
 
+1. Ajout du domaine **localhost.estime** dans le fichier **hosts**
+
+   - Sous Windows, C:\windows\system32\drivers\etc\hosts
+   - Sous Linux, /etc/hosts
+
+   ```
+   127.0.1.1	localhost.estime
+   ```
 
 ### Appeler l'api coeur metier Estime
 
