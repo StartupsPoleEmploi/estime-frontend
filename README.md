@@ -1,18 +1,3 @@
-## Mix HTML + Markdown Markup
-
-{::options parse_block_html="true" /}
-<div class="panel panel-success">
-**Do's**
-{: .panel-heading}
-<div class="panel-body">
-
-Hello World!
-
-</div>
-</div>
-{::options parse_block_html="false" /}
-
-
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
 # [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
@@ -34,17 +19,6 @@ L'application est composée de 3 composants applicatifs :
 - backend coeur métier : api REST développée en Springboot (Java) - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend).
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
-### <i class="fab fa-gitlab fa-fw" style="color:rgb(107,79,187); font-size:.85em" aria-hidden="true"></i> Purple GitLab Tanuki
-{: #tanuki-purple}
-
-### <i class="fab fa-gitlab fa-fw" style="color:rgb(252,109,38); font-size:.85em" aria-hidden="true"></i> Orange GitLab Tanuki
-{: #tanuki-orange}
-
-### <i class="fas fa-puzzle-piece" aria-hidden="true"></i> Puzzle Icon
-{: #puzzle}
-
-My important paragraph.
-{: .alert .alert-info}
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
