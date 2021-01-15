@@ -23,10 +23,13 @@ L'application est composée de 3 composants applicatifs :
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
 
-Ce projet a été généré avec [Angular CLI](https://cli.angular.io/).
+Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
 
 ## Prérequis
 
+Installation de NodeJS avec une version 12.x minimum. 
+
+Conseil : installer NodeJS avec un outil permettant de gérer plusieurs versions de Node (exemple : nvm). Plus d'informations, par [ici](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
 
 ## Code scaffolding
