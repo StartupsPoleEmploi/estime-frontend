@@ -77,6 +77,8 @@ foo@bar:~$ npm -v
    };
    ```
 
+   **OpenID Connect PE properties** : ces informations peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
+
 ## [Tests e2e] Cypress
 
 ## [IDE] VS Code
