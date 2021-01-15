@@ -89,7 +89,7 @@ foo@bar:~$ npm -v
 Plusieurs possibilités :
 
 - installer en local l'api, suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
-- se brancher sur l'api déployée sur l'environnement de recette
+- se brancher sur l'api déployée sur l'environnement de recette, pour cela renseigner ***https://estime.beta.pole-emploi.fr/*** pour le paramètre apiEstimeURL du fichier environment.local.ts
 
 ## [Tests e2e] Cypress
 
