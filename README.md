@@ -63,6 +63,19 @@ foo@bar:~$ npm -v
 
    Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
+   ```Typescript
+   export const environment = {
+  production: false,
+  apiEstimeURL: 'http://localhost:8081/estime/v1/',
+  /** OpenID Connect PE properties ***/
+  peconnectClientid: 'PAR_estime_92ac2bd6cc903ee96ac415bab999d13d29a0c1d71de408dc9246162ba99b002d',
+  peconnectRedirecturi: 'http://localhost.estime:9001/',
+  peconnectScope: 'application_PAR_estime_92ac2bd6cc903ee96ac415bab999d13d29a0c1d71de408dc9246162ba99b002d api_peconnect-individuv1 openid profile email api_peconnect-detailindemnisationsv1 detailindemnisation api_peconnect-coordonneesv1 coordonnees api_peconnect-datenaissancev1 datenaissance',
+  peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
+  tagCommanderScriptUrl: ''
+};
+   ```
+
 ## [Tests e2e] Cypress
 
 ## [IDE] VS Code
