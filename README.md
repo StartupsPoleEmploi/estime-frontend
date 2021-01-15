@@ -1,4 +1,17 @@
+## Mix HTML + Markdown Markup
+
 {::options parse_block_html="true" /}
+<div class="panel panel-success">
+**Do's**
+{: .panel-heading}
+<div class="panel-body">
+
+Hello World!
+
+</div>
+</div>
+{::options parse_block_html="false" /}
+
 
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
