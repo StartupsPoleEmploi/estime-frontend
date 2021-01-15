@@ -68,9 +68,9 @@ foo@bar:~$ npm -v
       production: false,
       apiEstimeURL: 'http://localhost:8081/estime/v1/',
       /** OpenID Connect PE properties ***/
-      peconnectClientid: '%à renseigner%',
+      peconnectClientid: '%% à renseigner %%',
       peconnectRedirecturi: 'http://localhost.estime:9001/',
-      peconnectScope: '%à renseigner%',
+      peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
       tagCommanderScriptUrl: ''
    };
