@@ -59,7 +59,11 @@ foo@bar:~$ npm -v
 
 ## [IDE] VS Code
 
-:wrench: VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
+VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
+
+:wrench: Quelques extensions utiles à installer dans l'IDE :
+
+
 
 
 
