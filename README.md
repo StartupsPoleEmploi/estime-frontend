@@ -199,7 +199,7 @@ foo@bar:~$ npm -v
    ```
    npm run build:dev
    ```
-1. Se positionner dans le répertoire ./docker/local/docker-image et lancer le build de l'image Docker en exécutant la commande suivante :
+1. Se positionner dans le répertoire **./docker/local/docker-image** et lancer le build de l'image Docker en exécutant la commande suivante :
 
    ```
    docker build . -t estime-frontend
