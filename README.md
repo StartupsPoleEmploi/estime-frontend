@@ -197,12 +197,12 @@ foo@bar:~$ npm -v
 1. Lancer le build de l'application en exécutant la commande suivante :
 
    ```
-   npm run build:dev
+   foo@bar:~estime-frontend$ npm run build:dev
    ```
-1. Se positionner dans le répertoire **./docker/local/docker-image** et lancer le build de l'image Docker en exécutant la commande suivante :
+1. Lancer le build de l'image Docker en exécutant la commande suivante :
 
    ```
-   docker build . -t estime-frontend
+   foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
 ## Déploiement sous Docker Swarm
