@@ -188,7 +188,24 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ npm cy:open
    ```
 
-# [Développement en local] Lancer l'application avec Docker composée
+# [Conteneurisation] Utilisation de Docker
+
+## Lancer l'application en local avec Docker Compose
+
+- **Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
+
+1. Lancer le build de l'application en exécutant la commande suivante :
+
+   ```
+   npm run build:dev
+   ```
+1. Se positionner dans le répertoire ./docker/local/docker-image et lancer le build de l'image Docker en exécutant la commande suivante :
+
+   ```
+   docker build . -t estime-frontend
+   ```
+
+## Déploiement sous Docker Swarm
 
 
 
