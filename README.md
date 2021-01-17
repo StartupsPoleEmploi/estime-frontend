@@ -28,7 +28,10 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 ## Structuration du code sources
 
-
+- **./src/app/public :** : contient les components de type application qui sont publics, accessibles en non authentifié (homepage, cgu, etc...).
+- **./src/app/protected :** : contient les components de type application qui sont privés, accessibles en authentifié (étapes de la simulation, etc...).
+- **./src/app/commun :** répertoire contenant les components "communs" et partagés avec tous les components App (ex : component loading, component header, component footer, directives, guards, pipes, models, etc...
+- **./src/app/core :** répertoire contenant les services communs qui sont de type Singleton (une seul instance).
 
 ## Design du site
 
