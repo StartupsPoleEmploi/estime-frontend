@@ -108,12 +108,14 @@ foo@bar:~$ npm -v
       peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
       /******** url du script TagCommander (activation du taggage et du consentement Cookies)  ************/
+      /** non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost          **/
       tagCommanderScriptUrl: ''
    };
    ```
-         - **apiEstimeURL** : consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime)
-         - **OpenID Connect PE properties** : ces informations peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
-         - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost 
+   
+   Consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**.
+
+   Les paramètres liés à PE Connect peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
    <br />
 1. Lancer l'application en exécutant la commande suivante :
 
