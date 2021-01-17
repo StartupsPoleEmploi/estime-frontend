@@ -167,7 +167,7 @@ Utilisation du pattern "Page Object (une page est représentée par une classe)"
 
    :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
-   Contenu du fichier :
+   Copier le contenu suivant et valoriser les paramètres  :
 
    ```
    export const environment = {
@@ -177,7 +177,7 @@ Utilisation du pattern "Page Object (une page est représentée par une classe)"
    };
    ```
 
-1. Lancer la commande suivante :
+1. Lancer la commande suivante pour démarrer Cypress et lancer les tests :
 
    ```console
    foo@bar:~estime-frontend$ npm cy:open
