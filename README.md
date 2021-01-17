@@ -244,6 +244,8 @@ foo@bar:~$ npm -v
 
 # [Qualimétrie] Suivi de la qualité du code source
 
+# [Suivi opérationnel] Comment dépanner l'application sur les environnements distants (recette et production) ?
+
 # [IDE] VS Code
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
