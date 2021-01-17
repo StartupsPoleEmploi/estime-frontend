@@ -188,6 +188,10 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ npm cy:open
    ```
 
+# [Développement en local] Lancer l'application avec Docker composée
+
+
+
 # [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
 
 # [Qualimétrie] Suivi de la qualité du code source
