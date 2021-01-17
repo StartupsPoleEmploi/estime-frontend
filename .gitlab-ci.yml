@@ -44,7 +44,7 @@ cypress-e2e:
     - npm ci
     - npm install -g wait-on
     - npm run start:ngx &
-    - wait-on http://localhost.estime:9001/
+    - wait-on http://localhost:9001/
     - npm run cy:run
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
