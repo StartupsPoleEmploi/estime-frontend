@@ -22,9 +22,21 @@ L'application est composée de 3 composants applicatifs :
 
 :closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [PE Connect](https://peconnect.pole-emploi.fr/).**
 
-# [Développement en local] Lancement de l'application Web Angular sur localhost
+# [Code Source] Quelques explications
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
+
+## Structuration du code sources
+
+
+
+## Design du site
+
+- Utilisation de la librairie [Bootstrap4](https://getbootstrap.com/docs/4.1/components/alerts/) et de la la librairie [bgx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
+- Utilisation de [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
+
+
+# [Développement en local] Lancement de l'application Web Angular sur localhost
 
 ## Prérequis
 
