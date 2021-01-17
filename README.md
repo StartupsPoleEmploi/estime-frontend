@@ -177,7 +177,7 @@ Utilisation du pattern "Page Object (une page est représentée par une classe)"
    };
    ```
 
-1. Lancer la commande suivante pour démarrer Cypress et lancer les tests :
+1. Exécuter la commande suivante pour démarrer Cypress et lancer les tests :
 
    ```console
    foo@bar:~estime-frontend$ npm cy:open
