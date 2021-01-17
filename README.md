@@ -252,7 +252,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 Il faut au préablable se connecter sur une des machines distantes avec un **utilisateur ayant les droits Docker**.
 
-Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend** configuration.
+Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
 
 - Vérifier que le service est bien en exécutant la commande suivante :
 
