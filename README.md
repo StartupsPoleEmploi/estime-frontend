@@ -190,6 +190,13 @@ foo@bar:~$ npm -v
 
 # [Conteneurisation] Utilisation de Docker
 
+Le répertoire **docker" contient les fichiers de configurations pour conteneuriser l'application.
+
+- ./docker/local : contient les fichiers de configuration pour lancer l'application en local avec Docker Compose
+- ./docker/recette : contient les fichiers de configuration pour l'environnement de recette. Le conteneur est déployé sur un serveur Docker Swarm
+- ./docker/production : contient les fichiers de configuration pour l'environnement de production. Le conteneur est déployé sur un serveur Docker Swarm
+- ./docker/commun : contient les fichiers de configuration communs (configuration nginx, fail2ban, scripts utiles)
+
 ## Lancer l'application en local avec Docker Compose
 
 **Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
@@ -232,14 +239,6 @@ foo@bar:~$ npm -v
    ```shell
    foo@bar:~docker-compose-directory$ docker-compose up -d
    ```
-
-
-
-
-
-## Déploiement sous Docker Swarm
-
-
 
 # [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
 
