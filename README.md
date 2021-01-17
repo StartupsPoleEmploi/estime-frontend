@@ -165,17 +165,24 @@ Utilisation du pattern "Page Object (une page est représentée par une classe)"
 
 1. Créer un fichier environment.ts à la racine du répertoire cypress. 
 
-:exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository Gitlab. Il a donc été ajouté au fichier .gitignore
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository Gitlab. Il a  
+   donc été ajouté au fichier .gitignore
 
-Contenu du fichier :
+   Contenu du fichier :
 
-```
-export const environment = {
-  urlApplication: 'http://localhost.estime:9001/',
-  peConnectUserIdentifiant: '%% à renseigner %%',
-  peConnectUserMotDePasse: '%% à renseigner %%''
-};
-```
+   ```
+   export const environment = {
+      urlApplication: '%% à renseigner %%',
+      peConnectUserIdentifiant: '%% à renseigner %%',
+      peConnectUserMotDePasse: '%% à renseigner %%''
+   };
+   ```
+
+1. Lancer la commande suivante :
+
+   ```console
+   foo@bar:~estime-frontend$ npm cy:open
+   ```
 
 # [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
 
