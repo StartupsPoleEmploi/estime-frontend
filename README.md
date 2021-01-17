@@ -35,8 +35,19 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 - Utilisation de la librairie [Bootstrap4](https://getbootstrap.com/docs/4.1/components/alerts/) et de la la librairie [bgx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
 - Utilisation de [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
 
+## Gestion des dépendances
+
+Pas de mise à jour automatique des versions des librairies (~version ou ^version), il faut mettre à jour les versions manuellement. 
+
+Outils pour aider à la mise à jour des librairies :
+
+- [npm-check ](https://www.npmjs.com/package/npm-check)
+- [npm-audi](https://docs.npmjs.com/cli/v6/commands/npm-audit)
+
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
+
+
 
 ## Prérequis
 
