@@ -165,8 +165,8 @@ Utilisation du pattern "Page Object (une page est représentée par une classe)"
 
 1. Créer un fichier environment.ts à la racine du répertoire cypress. 
 
-   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository Gitlab. Il a  
-   donc été ajouté au fichier .gitignore
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant(fichier     
+   présent dans .gitignore).
 
    Contenu du fichier :
 
