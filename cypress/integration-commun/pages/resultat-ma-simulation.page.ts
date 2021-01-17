@@ -1,6 +1,3 @@
-import MirePeConnectPage from './mire-pe-connect.page'
-
-
 class ResultatMaSimulationPage {
 
   //TODO JLA : somme variable à voir comment faire oour tester le montant réel

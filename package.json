@@ -2,7 +2,7 @@
   "name": "estime",
   "version": "1.0.0-RC",
   "scripts": {
-    "build:dev": "ng build",
+    "build:dev": "npm install && ng build",
     "build:prod": "npm ci && ng build --prod ",
     "cy:verify": "cypress verify",
     "cy:info": "cypress info",
@@ -14,8 +14,8 @@
     "e2e:record": "cypress run --record",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --open --host localhost.estime --port 9001",
-    "start:ngx": "ng run estime:serve-ngx --host localhost.estime --port 9001",
+    "start": "ng serve --open --port 9001",
+    "start:ngx": "ng run estime:serve-ngx --port 9001",
     "stats": "webpack-bundle-analyzer dist/estime/stats.json",
     "test": "ng test",
     "sonar": "sonar-scanner"

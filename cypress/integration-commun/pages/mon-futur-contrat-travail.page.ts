@@ -1,5 +1,3 @@
-import MirePeConnectPage from './mire-pe-connect.page'
-
 class MonFuturContratTravailPage {
 
   public clickOnTypeContratCDI(): void {

@@ -1,6 +1,5 @@
 import MirePeConnectPage from './mire-pe-connect.page'
 
-
 class HomePage {
 
   clickOnSeConnecterAvecPoleEmploi(nomUtilisateur: string, motDePasse: string) {

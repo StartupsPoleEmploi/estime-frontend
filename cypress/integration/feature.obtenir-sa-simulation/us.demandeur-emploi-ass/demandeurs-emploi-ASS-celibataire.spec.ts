@@ -1,13 +1,13 @@
 const specTitleSimulationDeASS = require("cypress-sonarqube-reporter/specTitle");
-import HomePage from '../../../integration-commun/page-objects/home.page';
-import MonFuturContratTravailPage from '../../../integration-commun/page-objects/mon-futur-contrat-travail.page';
-import MaSituationPage from '../../../integration-commun/page-objects/ma-situation.page'
+import HomePage from '../../../integration-commun/pages/home.page';
+import MonFuturContratTravailPage from '../../../integration-commun/pages/mon-futur-contrat-travail.page';
+import MaSituationPage from '../../../integration-commun/pages/ma-situation.page'
 import { NationalitesEnum } from '../../../../src/app/commun/enumerations/nationalites.enum'
-import PersonnesAChargePage from '../../../integration-commun/page-objects/personnes-a-charge.page';
-import RessourcesActuellesPage from '../../../integration-commun/page-objects/ressources-actuelles.page'
-import ResultatMaSimulationPage from '../../../integration-commun/page-objects/resultat-ma-simulation.page'
-import AvantDeCommencerPage from '../../../integration-commun/page-objects/avant-de-commencer.page'
-import HeaderSection from '../../../integration-commun/section-objects/header.section'
+import PersonnesAChargePage from '../../../integration-commun/pages/personnes-a-charge.page';
+import RessourcesActuellesPage from '../../../integration-commun/pages/ressources-actuelles.page'
+import ResultatMaSimulationPage from '../../../integration-commun/pages/resultat-ma-simulation.page'
+import AvantDeCommencerPage from '../../../integration-commun/pages/avant-de-commencer.page'
+import HeaderSection from '../../../integration-commun/sections/header.section'
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service'
 import { environment } from '../../../environment'
 import { CodesAidesEnum } from "../../../../src/app/commun/enumerations/codes-aides.enum";

@@ -1,4 +1,3 @@
-
 class MaSituationPage {
 
   public selectNationalite(nationalite: string) {
