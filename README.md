@@ -42,7 +42,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 Pas de mise à jour automatique des versions des librairies (~version ou ^version), il faut mettre à jour les versions manuellement. 
 
-Outils pour aider à la mise à jour des librairies :
+:wrench:  Outils pour aider à la mise à jour des librairies :
 
 - [npm-check ](https://www.npmjs.com/package/npm-check)
 - [npm-audi](https://docs.npmjs.com/cli/v6/commands/npm-audit)
