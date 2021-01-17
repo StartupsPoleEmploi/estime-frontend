@@ -242,7 +242,11 @@ foo@bar:~$ npm -v
 
 # [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
 
+Voir le fichier **./.gitlab-ci.yml**
+
 # [Qualimétrie] Suivi de la qualité du code source
+
+Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend](https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend)
 
 # [Suivi opérationnel] Comment dépanner l'application sur les environnements distants (recette et production) ?
 
