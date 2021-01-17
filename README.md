@@ -205,6 +205,38 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
+1. Créer un fichier docker-compose.yml sur votre poste
+
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
+
+   Copier le contenu suivant et valoriser les variables d'environnement :
+   
+   ```json
+   version: '3.8'
+
+   services:
+      estime-frontend:
+         image: estime-frontend
+         ports:
+            - 3000:8888
+         environment:
+            PE_CONNECT_CLIENT_ID: "%% à renseigner %%"
+            PE_CONNECT_REDIRECT_URI: "%% à renseigner %%"
+            PE_CONNECT_SCOPE: "%% à renseigner %%"
+            PE_CONNECT_IDENTITY_SERVER_URL: "%% à renseigner %%"
+            TAG_COMMANDER_SCRIPT_URL: ""
+            TZ: "Europe/Paris"
+   ```
+1. Lancer le conteneur en exécutant la commande suivante dans le répertoire contenant le fichier docker-compose.yml
+
+```shell
+foo@bar:~docker-compose-directory$ docker-compose up -d
+```
+
+
+
+
+
 ## Déploiement sous Docker Swarm
 
 
