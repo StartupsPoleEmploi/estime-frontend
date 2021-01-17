@@ -91,11 +91,11 @@ foo@bar:~$ npm -v
    ```
 1. Créer le fichier d'environnement local
 
-   Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
+   - Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
    :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
-   Copier le contenu suivant et valoriser les paramètres  :
+   - Copier le contenu suivant et valoriser les paramètres  :
    
    ```typescript
    export const environment = {
