@@ -29,7 +29,7 @@ services:
       update_config:
         order: start-first
         failure_action: rollback
-        delay: 30s
+        delay: 5s
       restart_policy:
         condition: on-failure
     volumes:
