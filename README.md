@@ -24,6 +24,8 @@ L'application est composée de 3 composants applicatifs :
 
 # [Code Source] Quelques explications
 
+Ce projet est développé en utilisant le langage [Typescript](https://www.typescriptlang.org/docs) et le framework [Angular](https://angular.io/docs).
+
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
 
 ## Structuration du code source
