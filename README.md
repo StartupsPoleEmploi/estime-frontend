@@ -35,7 +35,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 ## Design du site
 
-- Utilisation de la librairie [Bootstrap4](https://getbootstrap.com/docs/4.1/components/alerts/) et de la la librairie [bgx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
+- Utilisation de la librairie [Bootstrap4](https://getbootstrap.com/docs/4.1/components/alerts/) et de la la librairie [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
 - Utilisation de [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
 
 ## Gestion des dépendances
