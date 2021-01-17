@@ -155,11 +155,11 @@ Plusieurs possibilités :
 
 Utilisation du pattern "Page Object (une page est représentée par une classe)"  et "Section Object (une section commune d'une page est représentée par une classe. Exemple : le header, le footer)"
 
-- ./cypress/integration/integration : contient les classes implémentant la logique des tests. Organisation par features et user stories
-- ./cypress/integration-commun/pages : contient les classes représentant les pages
-- ./cypress/integration-commun/sections  : contient les classes représentant des sections communes à plusieurs pages
-- ./ci : fichiers de configuration nécessaires à l'exécution des tests dans le pipeline de CI/CD
-- coverage.webpack.js : utilisation de la librairie [istanbul-lib-instrument ](https://github.com/webpack-contrib/istanbul-instrumenter-loader) pour remonter une couverture de code par les tests e2e
+- **./cypress/integration/integration :** contient les classes implémentant la logique des tests. Organisation par features et user stories
+- **./cypress/integration-commun/pages :** contient les classes représentant les pages
+- **./cypress/integration-commun/sections  :** contient les classes représentant des sections communes à plusieurs pages
+- **./ci :** fichiers de configuration nécessaires à l'exécution des tests dans le pipeline de CI/CD
+- **coverage.webpack.js :** utilisation de la librairie [istanbul-lib-instrument ](https://github.com/webpack-contrib/istanbul-instrumenter-loader) pour remonter une couverture de code par les tests e2e
 
 ## Executer les tests e2e en local
 
