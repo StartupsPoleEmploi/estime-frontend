@@ -93,6 +93,10 @@ foo@bar:~$ npm -v
 
    Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
+
+   Copier le contenu suivant et valoriser les paramètres  :
+   
    ```typescript
    export const environment = {
       production: false,
