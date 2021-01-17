@@ -26,7 +26,7 @@ services:
           cpus: '0.10'
           memory: 256Mi
       update_config:
-        order: start-first
+        parallelism: 1
         failure_action: rollback
         delay: 5s
       restart_policy:
