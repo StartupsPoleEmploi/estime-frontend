@@ -192,7 +192,7 @@ foo@bar:~$ npm -v
 
 ## Lancer l'application en local avec Docker Compose
 
-- **Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
+**Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
 
 1. Lancer le build de l'application en exécutant la commande suivante :
 
