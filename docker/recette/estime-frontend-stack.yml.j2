@@ -12,6 +12,8 @@ services:
       TZ: "Europe/Paris"
     networks:
      - estime
+    healthcheck:
+      test: [“CMD”, “curl”, “-i”, "http://estime-frontend:8888"]
     ports:
       - 80:8888
     deploy:
@@ -24,7 +26,8 @@ services:
           cpus: '0.10'
           memory: 256Mi
       update_config:
-        parallelism: 1
+        order: start-first
+        failure_action: rollback
         delay: 10s
       restart_policy:
         condition: on-failure
