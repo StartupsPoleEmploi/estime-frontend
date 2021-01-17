@@ -229,9 +229,9 @@ foo@bar:~$ npm -v
    ```
 1. Lancer le conteneur en exécutant la commande suivante dans le répertoire contenant le fichier docker-compose.yml
 
-```shell
-foo@bar:~docker-compose-directory$ docker-compose up -d
-```
+   ```shell
+   foo@bar:~docker-compose-directory$ docker-compose up -d
+   ```
 
 
 
