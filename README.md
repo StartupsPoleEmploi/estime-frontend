@@ -250,7 +250,45 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 # [Suivi opérationnel] Comment dépanner l'application sur les environnements distants (recette et production) ?
 
-Il faut au préablable se connecter sur une des machines distantes.
+Il faut au préablable se connecter sur une des machines distantes avec un **utilisateur ayant les droits Docker**.
+
+Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend** configuration.
+
+- Vérifier que le service est bien en exécutant la commande suivante :
+
+   ```
+   docker stack ps estime-frontend
+   ```
+   2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
+
+- Voir les logs du service en exécutant la commande suivante :
+
+   ```
+   docker service logs estime-backend_estime-backend 
+   ```
+
+- Démarrer ou relancer les services
+
+   - Se positionner dans le répertoire **/home/docker/estime-frontend**
+   - Se connecter au registry privé du Gitlab de l'incubateur en executant la commande suivante :
+
+      Vous devez au préalable avoir récupéré un token depuis votre compte Gitlab. Ce token vous servira de mot de passe.
+
+      ```
+      docker login registry.beta.pole-emploi.fr
+      ```
+   - Une fois connecté au registry, vous devez exécuter la commande suivante pour démarrer ou relancer les services :
+
+      ```
+      docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
+      ```
+
+- Stopper les services en exécutant la commande suivante :
+
+   ```
+   docker stack rm estime-frontend
+   ```
+
 
 # [IDE] VS Code
 
