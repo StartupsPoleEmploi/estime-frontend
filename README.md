@@ -111,9 +111,9 @@ foo@bar:~$ npm -v
       tagCommanderScriptUrl: ''
    };
    ```
-      - **apiEstimeURL** : consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime)
-      - **OpenID Connect PE properties** : ces informations peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
-      - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost 
+         - **apiEstimeURL** : consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime)
+         - **OpenID Connect PE properties** : ces informations peuvent être récupérées en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
+         - **tagCommanderScriptUrl** : non renseigné car le taggage et le consentement Cookies n'est pas activé en localhost 
    <br />
 1. Lancer l'application en exécutant la commande suivante :
 
