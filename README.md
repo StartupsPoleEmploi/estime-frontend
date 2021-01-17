@@ -149,13 +149,39 @@ Plusieurs possibilités :
    };
    ```
 
-## [Tests e2e] Cypress
+# [Tests e2e] Cypress
 
-## [CI & CD] build et déploiement automatisés avec Gitlab CI/CD
+## Structuration des tests
 
-## [Qualimétrie] Suivi de la qualité du code source
+Utilisation du pattern "Page Object (une page est représentée par une classe)"  et "Section Object (une section commune d'une page est représentée par une classe. Exemple : le header, le footer)"
 
-## [IDE] VS Code
+- ./cypress/integration/integration : contient les classes implémentant la logique des tests. Organisation par features et user stories
+- ./cypress/integration-commun/pages : contient les classes représentant les pages
+- ./cypress/integration-commun/sections  : contient les classes représentant des sections communes à plusieurs pages
+- ./ci : fichiers de configuration nécessaires à l'exécution des tests dans le pipeline de CI/CD
+- coverage.webpack.js : utilisation de la librairie [istanbul-lib-instrument ](https://github.com/webpack-contrib/istanbul-instrumenter-loader) pour remonter une couverture de code par les tests e2e
+
+## Executer les tests e2e en local
+
+1. Créer un fichier environment.ts à la racine du répertoire cypress. 
+
+:exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository Gitlab. Il a donc été ajouté au fichier .gitignore
+
+Contenu du fichier :
+
+```
+export const environment = {
+  urlApplication: 'http://localhost.estime:9001/',
+  peConnectUserIdentifiant: '%% à renseigner %%',
+  peConnectUserMotDePasse: '%% à renseigner %%''
+};
+```
+
+# [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
+
+# [Qualimétrie] Suivi de la qualité du code source
+
+# [IDE] VS Code
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
 
