@@ -250,6 +250,8 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 # [Suivi opérationnel] Comment dépanner l'application sur les environnements distants (recette et production) ?
 
+Il faut au préablable se connecter sur une des machines distantes.
+
 # [IDE] VS Code
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
