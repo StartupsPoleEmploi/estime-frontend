@@ -18,6 +18,8 @@ L'application est composée de 3 composants applicatifs :
 - frontend : application Web développée en Angular (Typescript) - ce projet Gitlab contient les sources de l'application Web
 - backend coeur métier : api REST développée en Springboot (Java) - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend).
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
+- docker : contient les configurations Docker utilisées pour le déploiement sur les serveurs distants, voir section [Déploiement de l'application](#ide-vs-code)
+- cypress : contient les tests e2e, voir section [Tests e2e](#ide-vs-code)
 
 
 :closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [PE Connect](https://peconnect.pole-emploi.fr/).**
@@ -49,8 +51,6 @@ Pas de mise à jour automatique des versions des librairies (~version ou ^versio
 
 
 # [Développement en local] Lancement de l'application Web Angular sur localhost
-
-
 
 ## Prérequis
 
@@ -148,6 +148,10 @@ Plusieurs possibilités :
    ```
 
 ## [Tests e2e] Cypress
+
+## [CI & CD] build et déploiement automatisés avec Gitlab CI/CD
+
+## [Qualimétrie] Suivi de la qualité du code source
 
 ## [IDE] VS Code
 
