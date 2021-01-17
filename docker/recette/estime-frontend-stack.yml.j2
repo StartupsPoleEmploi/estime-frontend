@@ -13,7 +13,10 @@ services:
     networks:
      - estime
     healthcheck:
-      test: [“CMD”, “curl”, “-i”, "http://estime-frontend:8888"]
+      test: ["CMD", "curl -f http://estime-frontend:8888  || exit 1"]
+      timeout: 30s
+      interval: 1m
+      retries: 3
     ports:
       - 80:8888
     deploy:
