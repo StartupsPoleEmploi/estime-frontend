@@ -26,7 +26,7 @@ L'application est composée de 3 composants applicatifs :
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
 
-## Structuration du code sources
+## Structuration du code source
 
 - **./src/app/public :** : contient les components de type application qui sont publics, accessibles en non authentifié (homepage, cgu, etc...).
 - **./src/app/protected :** : contient les components de type application qui sont privés, accessibles en authentifié (étapes de la simulation, etc...).
