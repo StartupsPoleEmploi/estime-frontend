@@ -12,11 +12,6 @@ services:
       TZ: "Europe/Paris"
     networks:
      - estime
-    healthcheck:
-      test: ["CMD", "curl -f http://estime-frontend:8888  || exit 1"]
-      timeout: 30s
-      interval: 1m
-      retries: 3
     ports:
       - 80:8888
       - 443:8443
@@ -31,8 +26,7 @@ services:
           memory: 256Mi
       update_config:
         parallelism: 1
-        failure_action: rollback
-        delay: 5s
+        delay: 10s
       restart_policy:
         condition: on-failure
     volumes:
