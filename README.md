@@ -97,7 +97,10 @@ foo@bar:~$ npm -v
       
       :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
-   - Copier le contenu suivant et valoriser les paramètres  :
+   - Copier le contenu suivant et valoriser les variables d'environnement (%% à renseigner %%)
+
+     Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**. <br >
+     Consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
    
    ```typescript
    export const environment = {
@@ -114,9 +117,7 @@ foo@bar:~$ npm -v
       tagCommanderScriptUrl: ''
    };
    ```
-   
-   Consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. <br />**Les paramètres liés à PE Connect** peuvent être récupérés en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
-   <br />
+
 1. Lancer l'application en exécutant la commande suivante :
 
    ```console
