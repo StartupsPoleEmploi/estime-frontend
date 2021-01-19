@@ -236,7 +236,7 @@ foo@bar:~$ npm -v
    foo@bar:~docker-compose-directory$ docker-compose up -d
    ```
 
-1. L'application devrait être accessible sur http://localhost:3000
+1. L'application devrait être accessible sur http://localhost:3000. Elle est configurée pour appeler l'api Estime (estime-backend) de l'environnement de recette, voir la configuration nginx **default.conf** présente dans **./docker/local/docker-image/nginx-conf**
 
 # [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
 
