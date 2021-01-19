@@ -208,7 +208,7 @@ foo@bar:~$ npm -v
 1. Lancer le build de l'image Docker en exécutant la commande suivante :
 
    ```
-   foo@bar:~estime-frontend/docker/local/docker-image$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
+   foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
 1. Créer un fichier docker-compose.yml sur votre poste
