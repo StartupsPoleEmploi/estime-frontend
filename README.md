@@ -95,8 +95,7 @@ foo@bar:~$ npm -v
       
       :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
-   - Copier le contenu suivant et valoriser les variables d'environnement (%% à renseigner %%)
-   - Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
+   - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
    - Consulter la section [Appeler l'api coeur metier Estime](#api-estime-backend-appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
    <br />
    
@@ -213,7 +212,7 @@ foo@bar:~$ npm -v
 
    :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant.
 
-   Copier le contenu suivant et valoriser les variables d'environnement :
+   - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
    
    ```json
    version: '3.8'
