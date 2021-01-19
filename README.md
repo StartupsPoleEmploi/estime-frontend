@@ -106,7 +106,7 @@ foo@bar:~$ npm -v
       apiEstimeURL: '%% à renseigner %%',
       /******** OpenID Connect PE properties ************/
       peconnectClientid: '%% à renseigner %%',
-      peconnectRedirecturi: 'http://localhost:4200/',
+      peconnectRedirecturi: 'http://localhost:9001/',
       peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
       /******** url du script TagCommander (activation du taggage et du consentement Cookies)  ************/
