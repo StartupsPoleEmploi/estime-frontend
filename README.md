@@ -211,7 +211,7 @@ foo@bar:~$ npm -v
 
 1. Créer un fichier docker-compose.yml sur votre poste
 
-   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant.
 
    Copier le contenu suivant et valoriser les variables d'environnement :
    
