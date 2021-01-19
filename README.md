@@ -22,7 +22,7 @@ L'application est composée de 3 composants applicatifs :
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
-:closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [PE Connect](https://peconnect.pole-emploi.fr/).**
+:closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [Pôle emploi Connect](https://peconnect.pole-emploi.fr/).**
 
 # [Code Source] Quelques explications
 
@@ -32,11 +32,11 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 ## Structuration du code source
 
-- **./src/app/public :** : contient les components de type application qui sont publics, accessibles en non authentifié (homepage, cgu, etc...).
-- **./src/app/protected :** : contient les components de type application qui sont privés, accessibles en authentifié (étapes de la simulation, etc...).
+- **./src/app/public :** contient les components de type application qui sont publics, accessibles en non authentifié (homepage, cgu, etc...).
+- **./src/app/protected :** contient les components de type application qui sont privés, accessibles en authentifié (étapes de la simulation, etc...).
 - **./src/app/commun :** répertoire contenant les components "communs" et partagés avec tous les components App (ex : component loading, component header, component footer, directives, guards, pipes, models, etc...
 - **./src/app/core :** répertoire contenant les services communs qui sont de type Singleton (une seul instance).
-- **./docker :** contient les configurations Docker utilisées pour le déploiement sur les serveurs distants, voir section [Déploiement de l'application](#ci-cd-build-et-déploiement-automatisés-avec-gitlab-cicd)
+- **./docker :** contient les configurations Docker pour la conteneurisation de l'application
 - **./cypress :** contient les tests e2e, voir section [Tests e2e](##tests-e2e-cypress)
 
 ## Design du site
@@ -91,13 +91,13 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm install
    ```
-1. Créer le fichier d'environnement local
-
-   - Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
+1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
       
       :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
-   - Copier le contenu suivant et valoriser les paramètres  :
+   - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
+   - Consulter la section [Appeler l'api coeur metier Estime](#api-estime-backend-appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
+   <br />
    
    ```typescript
    export const environment = {
@@ -114,17 +114,14 @@ foo@bar:~$ npm -v
       tagCommanderScriptUrl: ''
    };
    ```
-   
-   Consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. <br />**Les paramètres liés à PE Connect** peuvent être récupérés en se connectant au compte Estime de l'[Emploi Store Dev de Pôle emploi](https://www.emploi-store-dev.fr/portail-developpeur-cms/home.html;JSESSIONID_JAHIA=FE12476DF0564E5EE4269FD4FB9016E0).
-   <br />
+
 1. Lancer l'application en exécutant la commande suivante :
 
    ```console
    foo@bar:~estime-frontend$ npm start
    ```
 
-
-### Appeler l'api coeur metier Estime
+# [API estime-backend] Appeler l'api coeur metier Estime en local
 
 2 possibilités :
 
@@ -154,7 +151,6 @@ foo@bar:~$ npm -v
      [...]
      };
      ```
-
 
 # [Tests e2e] Cypress
 
@@ -209,14 +205,14 @@ foo@bar:~$ npm -v
 1. Lancer le build de l'image Docker en exécutant la commande suivante :
 
    ```
-   foo@bar:~estime-frontend/docker/local/docker-image$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
+   foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
 1. Créer un fichier docker-compose.yml sur votre poste
 
-   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
+   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant.
 
-   Copier le contenu suivant et valoriser les variables d'environnement :
+   - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
    
    ```json
    version: '3.8'
@@ -256,17 +252,17 @@ Il faut au préablable se connecter sur une des machines distantes avec un **uti
 
 Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
 
-- Vérifier que le service est bien en exécutant la commande suivante :
+- Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
 
    ```
-   docker stack ps estime-frontend
+   foo@bar:~$ docker stack ps estime-frontend
    ```
    2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
 
 - Voir les logs du service en exécutant la commande suivante :
 
    ```
-   docker service logs estime-backend_estime-backend 
+   foo@bar:~$ docker service logs estime-frontend_estime-frontend
    ```
 
 - Démarrer ou relancer les services
@@ -277,20 +273,19 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
       Vous devez au préalable avoir récupéré un token depuis votre compte Gitlab. Ce token vous servira de mot de passe.
 
       ```
-      docker login registry.beta.pole-emploi.fr
+      foo@bar:~$ docker login registry.beta.pole-emploi.fr
       ```
    - Une fois connecté au registry, vous devez exécuter la commande suivante pour démarrer ou relancer les services :
 
       ```
-      docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
+      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
       ```
 
 - Stopper les services en exécutant la commande suivante :
 
    ```
-   docker stack rm estime-frontend
+   foo@bar:~$ docker stack rm estime-frontend
    ```
-
 
 # [IDE] VS Code
 
