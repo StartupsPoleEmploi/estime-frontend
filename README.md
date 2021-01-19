@@ -258,14 +258,14 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
 - Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
 
    ```
-   docker stack ps estime-frontend
+   foo@bar:~estime-frontend$ docker stack ps estime-frontend
    ```
    2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
 
 - Voir les logs du service en exécutant la commande suivante :
 
    ```
-   docker service logs estime-backend_estime-backend 
+   foo@bar:~estime-frontend$ docker service logs estime-frontend_estime-frontend
    ```
 
 - Démarrer ou relancer les services
@@ -276,18 +276,18 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
       Vous devez au préalable avoir récupéré un token depuis votre compte Gitlab. Ce token vous servira de mot de passe.
 
       ```
-      docker login registry.beta.pole-emploi.fr
+      foo@bar:~$ docker login registry.beta.pole-emploi.fr
       ```
    - Une fois connecté au registry, vous devez exécuter la commande suivante pour démarrer ou relancer les services :
 
       ```
-      docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
+      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
       ```
 
 - Stopper les services en exécutant la commande suivante :
 
    ```
-   docker stack rm estime-frontend
+   foo@bar:~$ docker stack rm estime-frontend
    ```
 
 
