@@ -97,7 +97,7 @@ foo@bar:~$ npm -v
 
    - Copier le contenu suivant et valoriser les variables d'environnement (%% à renseigner %%)
    - Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
-   - Consulter la section [Appeler l'api coeur metier Estime](#appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
+   - Consulter la section [Appeler l'api coeur metier Estime](#api-estime-backend-appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
    <br />
    
    ```typescript
@@ -121,6 +121,37 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm start
    ```
+
+# [API estime-backend] Appeler l'api coeur metier Estime en local
+
+2 possibilités :
+
+- se brancher sur l'api déployée sur l'environnement de recette
+
+   Renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
+
+   ```typescript
+   export const environment = {
+      production: false,
+      /******** url de l'api coeur métier Estime ************/
+      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/estime/v1/',
+      [...]
+   };
+   ```
+
+- installer en local l'api
+
+  1. suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
+  1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
+
+     ```typescript
+     export const environment = {
+     production: false,
+     /******** url de l'api coeur métier Estime ************/
+     apiEstimeURL: 'http://localhost:8081/estime/v1/',
+     [...]
+     };
+     ```
 
 # [Tests e2e] Cypress
 
@@ -256,37 +287,6 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
    ```
    foo@bar:~$ docker stack rm estime-frontend
    ```
-
-# [API estime-backend] Appeler l'api coeur metier Estime
-
-2 possibilités :
-
-- se brancher sur l'api déployée sur l'environnement de recette
-
-   Renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
-
-   ```typescript
-   export const environment = {
-      production: false,
-      /******** url de l'api coeur métier Estime ************/
-      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/estime/v1/',
-      [...]
-   };
-   ```
-
-- installer en local l'api
-
-  1. suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
-  1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
-
-     ```typescript
-     export const environment = {
-     production: false,
-     /******** url de l'api coeur métier Estime ************/
-     apiEstimeURL: 'http://localhost:8081/estime/v1/',
-     [...]
-     };
-     ```
 
 # [IDE] VS Code
 
