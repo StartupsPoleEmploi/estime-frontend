@@ -91,9 +91,7 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm install
    ```
-1. Créer le fichier d'environnement local
-
-   - Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
+1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
       
       :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
