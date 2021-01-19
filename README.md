@@ -255,7 +255,7 @@ Il faut au préablable se connecter sur une des machines distantes avec un **uti
 
 Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
 
-- Vérifier que le service est bien en exécutant la commande suivante :
+- Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
 
    ```
    docker stack ps estime-frontend
