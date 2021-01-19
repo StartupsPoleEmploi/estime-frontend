@@ -258,14 +258,14 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
 - Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
 
    ```
-   foo@bar:~estime-frontend$ docker stack ps estime-frontend
+   foo@bar:~$ docker stack ps estime-frontend
    ```
    2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
 
 - Voir les logs du service en exécutant la commande suivante :
 
    ```
-   foo@bar:~estime-frontend$ docker service logs estime-frontend_estime-frontend
+   foo@bar:~$ docker service logs estime-frontend_estime-frontend
    ```
 
 - Démarrer ou relancer les services
