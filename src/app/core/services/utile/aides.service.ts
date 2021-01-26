@@ -37,7 +37,7 @@ export class AidesService {
       }
       if(Object.entries(simulationSelected.mesAides).length === 1) {
         for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-          if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          if(aide && codeAide !== (CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE || CodesAidesEnum.PENSION_INVALIDITE)) {
             hasAidesObtenir = true;
           }
         }

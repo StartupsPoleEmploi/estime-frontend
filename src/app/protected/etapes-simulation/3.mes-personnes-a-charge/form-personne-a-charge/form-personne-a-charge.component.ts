@@ -8,6 +8,7 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { AllocationsCAF } from '@models/allocations-caf';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
+import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 
 @Component({
   selector: 'app-form-personne-a-charge',
@@ -99,7 +100,8 @@ export class FormPersonneAChargeComponent implements OnInit {
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE
     || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA;
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA
+    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite;
   }
 
   private unsetRessourcesFinancieres(): void {
@@ -114,6 +116,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieres = new RessourcesFinancieres();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
   }
 
   private resetInformationsPersonnelles(): void {
@@ -131,6 +134,7 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE = false;
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
     }
   }
 

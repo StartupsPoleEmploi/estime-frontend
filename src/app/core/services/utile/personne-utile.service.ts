@@ -4,6 +4,7 @@ import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { DateDecomposee } from '@models/date-decomposee';
 import { AllocationsCAF } from "@models/allocations-caf";
 import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
+import { AllocationsCPAM } from "@models/allocations-cpam";
 import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { Personne } from "@models/personne";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
@@ -22,7 +23,7 @@ export class PersonneUtileService {
 
   public creerPersonne(isAvecRessourcesFinancieres: boolean): Personne {
     const personne = new Personne();
-    personne.beneficiaireAidesSociales = new BeneficiaireAidesSociales(false, false, false, false);
+    personne.beneficiaireAidesSociales = new BeneficiaireAidesSociales(false, false, false, false, false);
     personne.informationsPersonnelles = new InformationsPersonnelles();
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
@@ -30,6 +31,7 @@ export class PersonneUtileService {
       personne.ressourcesFinancieres = new RessourcesFinancieres();
       personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
       personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
+      personne.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
     }
     return personne;
   }
@@ -61,6 +63,7 @@ export class PersonneUtileService {
         || personne.beneficiaireAidesSociales.beneficiaireARE
         || personne.beneficiaireAidesSociales.beneficiaireASS
         || personne.beneficiaireAidesSociales.beneficiaireRSA
+        || personne.beneficiaireAidesSociales.beneficiairePensionInvalidite
       );
   }
 }

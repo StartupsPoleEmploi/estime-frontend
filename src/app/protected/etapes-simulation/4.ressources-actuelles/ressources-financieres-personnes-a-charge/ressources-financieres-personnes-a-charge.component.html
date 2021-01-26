@@ -197,6 +197,46 @@
                     </span>
                 </div>
             </div>
+            <div
+                class="form-group mt-2"
+                *ngIf="personneDTO.personne.beneficiaireAidesSociales.beneficiairePensionInvalidite">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="pensionInvalidite">
+                        * Pension invalidité
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="pensionInvalidite"
+                        type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="6"
+                        class="form-control"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        required
+                        #pensionInvalidite="ngModel">
+                    <span class="text-side-input">€</span>
+                    <span class="text-2-side-input">du mois dernier</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="row row-button-valider">
             <button

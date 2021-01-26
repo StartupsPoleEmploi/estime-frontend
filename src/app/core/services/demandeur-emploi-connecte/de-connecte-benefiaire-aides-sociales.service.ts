@@ -15,4 +15,9 @@ export class DeConnecteBenefiaireAidesSocialesService {
     return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireAAH;
   }
 
+  public isBeneficiairePensionInvalidite(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiairePensionInvalidite;
+  }
+
 }

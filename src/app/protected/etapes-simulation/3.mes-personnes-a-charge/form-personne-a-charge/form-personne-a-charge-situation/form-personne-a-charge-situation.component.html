@@ -88,6 +88,22 @@
             </div>
         </label>
         <label
+            name="beneficiairePensionInvalidite"
+            class="radio-button-style-1"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite"
+            btnCheckbox
+            tabindex="0"
+            role="button"
+            (click)="onClickCheckBoxHasPensionInvalidite()"
+            #beneficiairePensionInvalidite="ngModel"
+            (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.PENSION_INVALIDITE)">
+            <div>
+              <span>
+                {{situationPersonneEnum.PENSION_INVALIDITE}}
+              </span>
+            </div>
+        </label>
+        <label
             name="sansRessource"
             class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource"

@@ -61,6 +61,14 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxHasPensionInvalidite(): void {
+    if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = 0;
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+    }
+  }
+
   public onClickCheckBoxIsSalarie(): void {
     if(!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
       this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
@@ -96,6 +104,10 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
         this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS;
         this.onClickCheckBoxHasASS();
       }
+      if(situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
+        this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite;
+        this.onClickCheckBoxHasPensionInvalidite();
+      }
       if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
         this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = !this.nouvellePersonneACharge.informationsPersonnelles.sansRessource;
         this.onClickCheckBoxIsSansRessource();
@@ -108,6 +120,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     this.unsetASS();
     this.unsetAAH();
     this.unsetRSA();
+    this.unsetPensionInvalidite();
   }
 
   private unsetSalaire(): void {
@@ -140,6 +153,13 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    }
+  }
+
+  private unsetPensionInvalidite(): void {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM) {
+      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
     }
   }
 }

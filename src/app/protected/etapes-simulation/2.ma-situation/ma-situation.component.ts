@@ -88,6 +88,12 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxHasPensionInvalidite(): void {
+    if (!this.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+      this.deConnecteService.unsetPensionInvalidite();
+    }
+  }
+
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
@@ -136,6 +142,10 @@ export class MaSituationComponent implements OnInit {
         this.informationsPersonnelles.createurEntreprise = !this.informationsPersonnelles.createurEntreprise;
         this.onClickCheckBoxIsCreateurEntreprise();
       }
+      if(situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
+        this.beneficiaireAidesSociales.beneficiairePensionInvalidite = !this.beneficiaireAidesSociales.beneficiairePensionInvalidite;
+        this.onClickCheckBoxHasPensionInvalidite();
+      }
     }
   }
 
@@ -178,7 +188,8 @@ export class MaSituationComponent implements OnInit {
         || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH
         || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE
         || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA);
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA
+        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite);
   }
 
   public onClickCheckBoxConjointHasAAH(): void {
@@ -222,6 +233,14 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxConjointIsSalarie(): void {
     if (!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
       this.deConnecteService.unsetConjointSalaire();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
+  public onClickCheckBoxConjointHasPensionInvalidite(): void {
+    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+      this.deConnecteService.unsetConjointPensionInvalidite();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
     }

@@ -39,6 +39,18 @@
             </li>
             <li
                 class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="PI"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Pension d'invalidité"
+                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
+                    organismeRessource="CPAM">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemPensionInvaliditeIsNotLast()">
+            </li>
+            <li
+                class="list-group-item"
                 *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0">
                 <app-item-ressource-actuelle
                     codeRessource="RSA"
