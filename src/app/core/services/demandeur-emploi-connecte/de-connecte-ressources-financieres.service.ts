@@ -58,6 +58,9 @@ export class DeConnecteRessourcesFinancieresService {
       if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       }
+      if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
+      }
       if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
         const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
         montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS));
@@ -125,6 +128,7 @@ export class DeConnecteRessourcesFinancieresService {
     if (ressourcesFinancieres) {
       montant += this.getMontantAidesRessourcesCAF(ressourcesFinancieres);
       montant += this.getMontantAidesRessourcesPoleEmploi(ressourcesFinancieres);
+      montant += this.getMontantAidesRessourcesCPAM(ressourcesFinancieres);
     }
     return montant;
   }
@@ -145,6 +149,15 @@ export class DeConnecteRessourcesFinancieresService {
       const allocationsPoleEmploi = ressourcesFinancieres.allocationsPoleEmploi;
       montant += this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetARE)
         + this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetASS);
+    }
+    return montant;
+  }
+
+  private getMontantAidesRessourcesCPAM(ressourcesFinancieres: RessourcesFinancieres): number {
+    let montant = 0;
+    if (ressourcesFinancieres.allocationsPoleEmploi) {
+      const allocationsCPAM = ressourcesFinancieres.allocationsCPAM;
+      montant += this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite)
     }
     return montant;
   }

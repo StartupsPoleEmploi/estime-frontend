@@ -105,6 +105,13 @@ export class DeConnecteService {
     }
   }
 
+  public unsetPensionInvalidite(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetConjoint(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
@@ -117,6 +124,7 @@ export class DeConnecteService {
     this.unsetConjointAllocationARE();
     this.unsetConjointAllocationASS();
     this.unsetConjointAllocationRSA();
+    this.unsetConjointPensionInvalidite();
   }
 
   public unsetConjointAllocationAAH(): void {
@@ -158,6 +166,17 @@ export class DeConnecteService {
       if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
       && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+      }
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetConjointPensionInvalidite(): void {
+    if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
+      if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+        && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }

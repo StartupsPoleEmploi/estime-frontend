@@ -6,6 +6,7 @@ import { DeConnecteService } from './de-connecte.service';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
 import { AllocationsCAF } from '@models/allocations-caf';
+import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSimulationAidesSocialesService {
@@ -38,9 +39,10 @@ export class DeConnecteSimulationAidesSocialesService {
 
     const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
     const montantAllocationsCAF = this.calculerMontantAllocationsCAF(ressourcesFinancieres.allocationsCAF);
+    const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return salaireFuturTravail + montantAllocationsCAF + montantTotalAidesMoisSimule;
+    return salaireFuturTravail + montantAllocationsCAF + montantAllocationsCPAM + montantTotalAidesMoisSimule;
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
@@ -57,6 +59,11 @@ export class DeConnecteSimulationAidesSocialesService {
 
   private calculerMontantAllocationsCAF(allocationsCAF: AllocationsCAF) {
     const montant = this.numberUtileService.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH);
+    return montant
+  }
+
+  private calculerMontantAllocationsCPAM(allocationsCPAM: AllocationsCPAM) {
+    const montant = this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite);
     return montant
   }
 

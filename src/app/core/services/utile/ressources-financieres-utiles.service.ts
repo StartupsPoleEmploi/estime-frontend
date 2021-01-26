@@ -3,6 +3,7 @@ import { AllocationsCAF } from "@models/allocations-caf";
 import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
+import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -23,6 +24,9 @@ export class RessourcesFinancieresUtileService {
     allocationsCAF.allocationsLogementMensuellesNetFoyer = 0;
     allocationsCAF.pensionsAlimentairesFoyer = 0;
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
+    const allocationsCPAM = new AllocationsCPAM();
+    allocationsCPAM.pensionInvalidite = 0;
+    ressourcesFinancieres.allocationsCPAM = allocationsCPAM;
     return ressourcesFinancieres;
   }
 
@@ -48,6 +52,9 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
       ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer);
+    }
+    if (ressourcesFinancieres.allocationsCPAM) {
+      ressourcesFinancieres.allocationsCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
     }
     ressourcesFinancieres.salaireNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaireNet);
     ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);

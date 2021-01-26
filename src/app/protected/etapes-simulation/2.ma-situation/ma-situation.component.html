@@ -286,6 +286,20 @@
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>
                     </label>
+                    <label
+                        name="beneficiairePensionInvalidite"
+                        class="radio-button-style-1"
+                        [(ngModel)]="beneficiaireAidesSociales.beneficiairePensionInvalidite"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        #beneficiairePensionInvalidite="ngModel"
+                        (click)="onClickCheckBoxHasPensionInvalidite()"
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
+                        <div>
+                            <span>{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
+                        </div>
+                    </label>
                 </div>
             </div>
             <div class="form-group">
@@ -414,6 +428,21 @@
                         (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
                         <div>
                             <span>{{situationPersonneEnum.AAH}}</span>
+                        </div>
+                    </label>
+
+                    <label
+                        #conjointHasPensionInvalidite="ngModel"
+                        name="conjointHasInvalidite"
+                        class="radio-button-style-1"
+                        btnCheckbox
+                        tabindex="0"
+                        role="button"
+                        [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite"
+                        (click)="onClickCheckBoxConjointHasPensionInvalidite()"
+                        (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
+                        <div>
+                            <span>{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                         </div>
                     </label>
                     <label
