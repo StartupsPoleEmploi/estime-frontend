@@ -31,35 +31,6 @@ build_frontend_application :
     cache:
       <<: *global_cache
 
-cypress-e2e:
-    stage: build-phase-1
-    image:
-      name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
-    script:
-    - cd cypress/ci
-    - cp hosts /etc/hosts
-    - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
-    - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
-    - cd ../..
-    - npm ci
-    - npm install -g wait-on
-    - npm run start:ngx &
-    - wait-on http://localhost:9001/
-    - npm run cy:run
-    rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-      changes:
-        - src/**/*
-    allow_failure: true
-    artifacts:
-      when: always
-      paths:
-        - coverage
-        - cypress/screenshots
-        - dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
-      expire_in: 1 day
-    cache:
-      <<: *global_cache
 
 build-docker-image-recette:
     stage: build-phase-2
@@ -93,24 +64,33 @@ generate-docker-stack-recette:
       changes:
         - src/**/*
 
-sonar_quality_analyse :
+cypress-e2e:
     stage: build-phase-2
     image:
-      name: sonarsource/sonar-scanner-cli:latest
-    variables:
-      SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
-      SONAR_HOST_URL: "${SONAR_BETA_PE_HOST_URL}"
-      SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
-      GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
+      name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
-    - sonar-scanner -Dsonar.qualitygate.wait=true
+    - cd cypress/ci
+    - cp hosts /etc/hosts
+    - p2 -t environment.cypress.local.ts.j2 -o ../environment.ts
+    - p2 -t environment.local.ts.j2 -o ../../src/environments/environment.local.ts
+    - cd ../..
+    - npm ci
+    - npm install -g wait-on
+    - npm run start:ngx &
+    - wait-on http://localhost:9001/
+    - npm run cy:run
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
-    dependencies:
-    - cypress-e2e
     allow_failure: true
+    artifacts:
+      when: always
+      paths:
+        - coverage
+        - cypress/screenshots
+        - dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
+      expire_in: 1 day
     cache:
       <<: *global_cache
 
@@ -133,6 +113,27 @@ deploy_application_recette:
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
+
+sonar_quality_analyse :
+    stage: deploy-application-recette
+    image:
+      name: sonarsource/sonar-scanner-cli:latest
+    variables:
+      SONAR_TOKEN: "${SONAR_BETA_TOKEN}"
+      SONAR_HOST_URL: "${SONAR_BETA_PE_HOST_URL}"
+      SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
+      GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
+    script:
+    - sonar-scanner -Dsonar.qualitygate.wait=true
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
+    dependencies:
+    - cypress-e2e
+    allow_failure: true
+    cache:
+      <<: *global_cache
 
 build-docker-image-production:
     stage: build-docker-configuration-production
