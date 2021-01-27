@@ -1,4 +1,5 @@
 import { Individu } from '../../../src/app/commun/models/individu'
+import { environment } from '../../environment'
 
 class EstimeSessionService {
 
@@ -38,7 +39,7 @@ class EstimeSessionService {
   private getPoleEmploiIdentityServerDeconnexionURI(individuConnected: Individu): string {
     return `https://authentification-candidat.pole-emploi.fr/compte/deconnexion?` +
         `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
-        `&redirect_uri=http://localhost.estime:9001/signout-callback`
+        `&redirect_uri=${environment.urlApplication}/signout-callback`
   }
 }
 export default EstimeSessionService
