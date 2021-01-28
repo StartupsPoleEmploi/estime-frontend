@@ -137,7 +137,7 @@
                     <label
                         class="label"
                         for="salaire-mensuel-net">
-                        * Salaire mensuel net
+                        * Indiquez le salaire mensuel net ou brut
                         <img
                             class="interrogation-icon"
                             src="./assets/images/question.svg"
@@ -147,31 +147,60 @@
                     </label>
                 </div>
                 <div class="row">
-                    <input
-                        id="salaireMensuelNet"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                        name="salaireMensuelNet"
-                        data-testid="input-salaire-mensuel-net"
-                        type="text"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        min="0"
-                        maxlength="6"
-                        class="form-control"
-                        placeholder="Montant"
-                        [(ngModel)]="futurTravail.salaireMensuelNet"
-                        required
-                        inputmode="decimal"
-                        #salaireMensuelNet="ngModel">
-                    <span class="text-side-input">€</span>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="row">
+                            <input
+                                id="salaireMensuelBrut"
+                                pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                                name="salaireMensuelBrut"
+                                data-testid="input-salaire-mensuel-brut"
+                                type="text"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event);"
+                                (focusout)="calculSalaireMensuelNet();"
+                                min="0"
+                                maxlength="6"
+                                class="form-control"
+                                placeholder="Montant"
+                                [(ngModel)]="futurTravail.salaireMensuelBrut"
+                                required
+                                inputmode="decimal"
+                                #salaireMensuelBrut="ngModel">
+                            <span class="text-side-input">€ mensuel brut</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-2">
+                        <span class="net-ou-brut">ou</span>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="row">
+                            <input
+                                id="salaireMensuelNet"
+                                pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                                name="salaireMensuelNet"
+                                data-testid="input-salaire-mensuel-net"
+                                type="text"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                (focusout)="calculSalaireMensuelBrut();"
+                                min="0"
+                                maxlength="6"
+                                class="form-control"
+                                placeholder="Montant"
+                                [(ngModel)]="futurTravail.salaireMensuelNet"
+                                required
+                                inputmode="decimal"
+                                #salaireMensuelNet="ngModel">
+                            <span class="text-side-input">€ mensuel net</span>
+                        </div>
+                    </div>
                 </div>
                 <span
                     class="row error-input-message"
-                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched)  && salaireMensuelNet.errors?.required">
+                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched || salaireMensuelBrut.touched)  && salaireMensuelNet.errors?.required  && salaireMensuelBrut.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="row error-input-message"
-                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched)  && salaireMensuelNet.errors?.pattern">
+                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched || salaireMensuelBrut.touched)  && salaireMensuelNet.errors?.pattern && salaireMensuelBrut.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
@@ -282,14 +311,6 @@
             </p>
             <p>
                 En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes perçues avant déduction des cotisations sociales.
-            </p>
-            <p>
-                Pour connaître votre future salaire net :
-                <a
-                    href="https://code.travail.gouv.fr/outils/simulateur-embauche"
-                    target="_blank">
-                    https://code.travail.gouv.fr/outils/simulateur-embauche
-                </a>
             </p>
         </div>
     </div>
