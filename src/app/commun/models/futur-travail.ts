@@ -4,5 +4,6 @@ export class FuturTravail {
   nombreMoisContratCDD: number;
   nombreTrajetsDomicileTravail: number;
   salaireMensuelNet: number;
+  salaireMensuelBrut: number;
   typeContrat: string;
 }

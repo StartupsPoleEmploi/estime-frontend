@@ -42,7 +42,7 @@ export class DeConnecteSimulationAidesSocialesService {
     const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return salaireFuturTravail + montantAllocationsCAF + montantAllocationsCPAM + montantTotalAidesMoisSimule;
+    return this.numberUtileService.roundTwoDecimals(salaireFuturTravail + montantAllocationsCAF + montantAllocationsCPAM + montantTotalAidesMoisSimule);
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {

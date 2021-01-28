@@ -178,5 +178,8 @@
       }
     }
   },
-  "defaultProject": "estime"
+  "defaultProject": "estime",
+  "cli": {
+    "analytics": false
+  }
 }

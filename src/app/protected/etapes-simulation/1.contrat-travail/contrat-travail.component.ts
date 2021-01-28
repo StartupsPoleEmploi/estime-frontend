@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
@@ -33,6 +34,7 @@ export class ContratTravailComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
+    private brutNetService: BrutNetService,
     private router: Router
     ) {
 
@@ -70,6 +72,14 @@ export class ContratTravailComponent implements OnInit {
     if(typeContrat === this.typesContratTavailEnum.CDI) {
       this.futurTravail.nombreMoisContratCDD = null;
     }
+  }
+
+  public calculSalaireMensuelNet() {
+    this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
+  }
+
+  public calculSalaireMensuelBrut() {
+    this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
   }
 
 

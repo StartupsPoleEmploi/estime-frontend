@@ -21,4 +21,8 @@ export class NumberUtileService {
     }
     return 0;
   }
+
+  public roundTwoDecimals(montant: number) {
+    return Math.floor(montant * 100) / 100;
+  }
 }
