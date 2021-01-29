@@ -1,0 +1,80 @@
+{
+  "_args": [
+    [
+      "publicodes@1.0.0-beta.10",
+      "/home/ijla5100/DSI_Pole_Emploi/Developpement/git/incubateur-pe/estime/estime-frontend"
+    ]
+  ],
+  "_from": "publicodes@1.0.0-beta.10",
+  "_id": "publicodes@1.0.0-beta.10",
+  "_inBundle": false,
+  "_integrity": "sha512-tY4C67B/OIMYP0Mo0Xcjlmtls6LyLQXCUGXHZaPQ+MoH3oxuBv4CDm3ivmzz8Ee1oVgxBVnqip3FenEA3lHejg==",
+  "_location": "/publicodes",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "publicodes@1.0.0-beta.10",
+    "name": "publicodes",
+    "escapedName": "publicodes",
+    "rawSpec": "1.0.0-beta.10",
+    "saveSpec": null,
+    "fetchSpec": "1.0.0-beta.10"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/publicodes/-/publicodes-1.0.0-beta.10.tgz",
+  "_spec": "1.0.0-beta.10",
+  "_where": "/home/ijla5100/DSI_Pole_Emploi/Developpement/git/incubateur-pe/estime/estime-frontend",
+  "bugs": {
+    "url": "https://github.com/betagouv/mon-entreprise/issues?q=is%3Aopen+is%3Aissue+label%3A\"%3Agear%3A+moteur\""
+  },
+  "dependencies": {
+    "moo": "^0.5.1",
+    "nearley": "^2.19.2",
+    "yaml": "^1.9.2"
+  },
+  "description": "A declarative language for encoding public algorithm",
+  "devDependencies": {
+    "@dagrejs/graphlib": "^2.1.4",
+    "chai": "^4.2.0",
+    "dedent-js": "1.0.1",
+    "intl": "^1.2.5",
+    "typescript": "3.4.3"
+  },
+  "engines": {
+    "node": ">=12.16.1"
+  },
+  "exports": {
+    "require": "./dist/index.js",
+    "import": "./esm/index.js"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/types",
+    "dist/images",
+    "dist/publicodes.min.js",
+    "esm"
+  ],
+  "homepage": "https://publi.codes/",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "publicodes",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betagouv/mon-entreprise.git",
+    "directory": "publicodes"
+  },
+  "scripts": {
+    "build": "yarn run webpack --config webpack.config.js && yarn run tsc",
+    "clean": "rimraf dist node_modules",
+    "prepare": "yarn run rimraf dist && yarn run build",
+    "prepublishOnly": "yarn test && NODE_ENV=production yarn run build",
+    "test": "yarn test:file \"./{,!(node_modules)/**/}!(webpack).test.js\"",
+    "test:file": "yarn mocha-webpack --include test/setupIntl.js --webpack-config ./webpack.test.js "
+  },
+  "types": "dist/types/index.d.ts",
+  "version": "1.0.0-beta.10"
+}

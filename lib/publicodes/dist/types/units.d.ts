@@ -1,0 +1,13 @@
+import { Evaluation, Unit } from './AST/types';
+export declare type getUnitKey = (writtenUnit: string) => string;
+export declare type formatUnit = (unit: string, count: number) => string;
+export declare const parseUnit: (string: string, getUnitKey?: getUnitKey) => Unit;
+export declare const serializeUnit: (rawUnit: Unit | undefined | string, count?: number, formatUnit?: formatUnit) => string | undefined;
+declare type SupportedOperators = '*' | '/' | '+' | '-';
+export declare const inferUnit: (operator: SupportedOperators, rawUnits: Array<Unit | undefined>) => Unit | undefined;
+export declare const removeOnce: <T>(element: T, eqFn?: (a: T, b: T) => boolean) => (list: T[]) => T[];
+export declare function convertUnit(from: Unit | undefined, to: Unit | undefined, value: number): number;
+export declare function convertUnit(from: Unit | undefined, to: Unit | undefined, value: Evaluation<number>): Evaluation<number>;
+export declare function simplifyUnit(unit: Unit): Unit;
+export declare function areUnitConvertible(a: Unit | undefined, b: Unit | undefined): boolean;
+export {};
