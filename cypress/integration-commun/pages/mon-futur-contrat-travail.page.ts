@@ -16,6 +16,10 @@ class MonFuturContratTravailPage {
     cy.get('[data-testid=input-salaire-mensuel-net]').type(salaire);
   }
 
+  public saisirSalaireMensuelBrut(salaire: string): void {
+    cy.get('[data-testid=input-salaire-mensuel-brut]').type(salaire);
+  }
+
   public saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail: string): void {
     cy.get('[data-testid=input-distance-domicile-lieu-travail]').type(distanceDomicileLieuTravail);
   }

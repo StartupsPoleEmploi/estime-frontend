@@ -8,33 +8,89 @@
                 <label
                     class="label"
                     for="montantAllocationsLogement">
-                    Allocations logement du foyer
+                    Allocations logement pour les 3 derniers mois
                 </label>
             </div>
-            <div class="row">
-                <input
-                    name="allocationsLogementMensuellesNetFoyer"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                    data-testid="input-apl"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    min="0"
-                    maxlength="6"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer"
-                    inputmode="decimal"
-                    ngAutofocus
-                    (click)="$event.target.select()"
-                    #allocationsLogementMensuellesNetFoyer="ngModel">
-                <span class="text-side-input">€ net perçu le mois dernier</span>
+            <div class="mb-2">
+                <div class="row">
+                    <input
+                        name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        data-testid="input-apl-mois-moins-1"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        type="text"
+                        min="0"
+                        maxlength="6"
+                        class="max-with-input-type-montant form-control"
+                        placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1"
+                        inputmode="decimal"
+                        ngAutofocus
+                        (click)="$event.target.select()"
+                        #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
+                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins1 }}</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins1.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins1.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
             </div>
-            <div class="row">
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyer.touched)  && allocationsLogementMensuellesNetFoyer.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+            <div class="mb-2">
+                <div class="row">
+                    <input
+                        name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        data-testid="input-apl-mois-moins-2"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        type="text"
+                        min="0"
+                        maxlength="6"
+                        class="max-with-input-type-montant form-control"
+                        placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2"
+                        inputmode="decimal"
+                        ngAutofocus
+                        (click)="$event.target.select()"
+                        #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
+                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins2 }}</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins2.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins2.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="row">
+                    <input
+                        name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
+                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        data-testid="input-apl-mois-moins-2"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        type="text"
+                        min="0"
+                        maxlength="6"
+                        class="max-with-input-type-montant form-control"
+                        placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3"
+                        inputmode="decimal"
+                        ngAutofocus
+                        (click)="$event.target.select()"
+                        #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
+                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins3 }}</span>
+                </div>
+                <div class="row">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins3.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins3.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
             </div>
         </div>
         <div
@@ -62,7 +118,7 @@
                     inputmode="decimal"
                     (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                <span class="text-side-input">€ net perçu le mois dernier</span>
+                <span class="text-side-input">€ perçu le mois dernier</span>
             </div>
             <div class="row">
                 <span
@@ -96,7 +152,7 @@
                     inputmode="decimal"
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
-                <span class="text-side-input">€ net perçu le mois dernier</span>
+                <span class="text-side-input">€ perçu le mois dernier</span>
             </div>
             <div class="row">
                 <span

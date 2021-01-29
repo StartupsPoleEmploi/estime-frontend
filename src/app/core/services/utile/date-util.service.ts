@@ -180,4 +180,21 @@ export class DateUtileService {
     });
     return moisLabel;
   }
+
+  private getStringDateFromDate(date: Date) {
+    return date.toString();
+  }
+
+  private getDateMoisPrecedent(moisVoulu : number) {
+    const date : Date = new Date();
+    date.setDate(1);
+    date.setMonth(date.getMonth()- moisVoulu)
+    return this.getStringDateFromDateDecomposee(this.getDateDecomposeeFromDate(date));
+
+  }
+
+  // Fonction qui permet de retourner le libellé d'un mois précédent en particulier : getLibelleMoisPrecedent(1) pour le mois n-1, getLibelleMoisPrecedent(2) pour n moins 2... etc
+  public getLibelleMoisPrecedent(moisVoulu : number = 0) {
+    return this.getLibelleDateStringFormat(this.getDateMoisPrecedent(moisVoulu));
+  }
 }

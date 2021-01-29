@@ -24,7 +24,6 @@ export class BrutNetService {
     }
 
     public getBrutFromNet(montantNet: number): number {
-        console.log(montantNet)
         const montantBrut =
             this.engine
                 .setSituation({
