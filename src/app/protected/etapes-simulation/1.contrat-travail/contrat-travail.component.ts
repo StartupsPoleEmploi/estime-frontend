@@ -75,13 +75,16 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public calculSalaireMensuelNet() {
-    this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
+    if(this.futurTravail.salaireMensuelBrut != 0 && this.futurTravail.salaireMensuelBrut != null) {
+      this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
+    }
   }
 
   public calculSalaireMensuelBrut() {
-    this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
+    if(this.futurTravail.salaireMensuelNet != 0 && this.futurTravail.salaireMensuelNet != null) {
+      this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
+    }
   }
-
 
   /************ gestion évènements press enter ************************/
 

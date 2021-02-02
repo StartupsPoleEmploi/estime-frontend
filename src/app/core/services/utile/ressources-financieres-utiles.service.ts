@@ -4,6 +4,7 @@ import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
+import { AllocationsLogementMensuellesNetFoyer } from '@app/commun/models/allocations-logement-mensuelles-net-foyer';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -21,7 +22,11 @@ export class RessourcesFinancieresUtileService {
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
     const allocationsCAF = new AllocationsCAF();
     allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
-    allocationsCAF.allocationsLogementMensuellesNetFoyer = 0;
+    const allocationsLogementMensuellesNetFoyer = new AllocationsLogementMensuellesNetFoyer();
+    allocationsLogementMensuellesNetFoyer.moisNMoins1 = 0;
+    allocationsLogementMensuellesNetFoyer.moisNMoins2 = 0;
+    allocationsLogementMensuellesNetFoyer.moisNMoins3 = 0;
+    allocationsCAF.allocationsLogementMensuellesNetFoyer = allocationsLogementMensuellesNetFoyer;
     allocationsCAF.pensionsAlimentairesFoyer = 0;
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
     const allocationsCPAM = new AllocationsCPAM();
@@ -47,8 +52,11 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS);
     }
     if (ressourcesFinancieres.allocationsCAF) {
-      ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer);
-      ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer);
+      if (ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer) {
+        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1);
+        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2);
+        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3);
+      }
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
       ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer);

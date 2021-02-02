@@ -117,7 +117,7 @@ export class DeConnecteRessourcesFinancieresService {
     const ressourcesFinancieresFoyer = demandeurEmploiConnecte.ressourcesFinancieres;
     if (ressourcesFinancieresFoyer && ressourcesFinancieresFoyer.allocationsCAF) {
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsFamilialesMensuellesNetFoyer);
-      montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer);
+      montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1);
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer);
     }
     return montant;

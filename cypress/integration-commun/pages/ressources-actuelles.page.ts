@@ -4,8 +4,30 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-journaliere-net-ass]').type(montant);
   }
 
+  public saisirAAH(montant : string): void {
+    cy.get('[data-testid=input-aah').type(montant);
+  }
+
+  public saisirPensionInvalidite(montant : string): void {
+    cy.get('[data-testid=input-pension-invalidite').type(montant);
+  }
+
   public saisirAllocationLogementFoyer(montant: string): void {
-    cy.get('[data-testid=input-apl]').type(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins1(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-1]').type(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins2(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-2]').type(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins3(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-3]').type(montant);
   }
 
   public saisirAllocationFamilialeFoyer(montant: string): void {

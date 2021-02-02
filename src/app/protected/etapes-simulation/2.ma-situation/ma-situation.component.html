@@ -228,6 +228,7 @@
                     <label
                         name="beneficiaireASS"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-ass"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
                         btnCheckbox
                         tabindex="0"
@@ -242,6 +243,7 @@
                         id="btn-is-createur-entreprise"
                         name="createurEntreprise"
                         class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                        data-testid="btn-situation-createur-entreprise"
                         [(ngModel)]="informationsPersonnelles.createurEntreprise"
                         btnCheckbox
                         tabindex="0"
@@ -258,6 +260,7 @@
                     <label
                         id="btn-has-revenus-immobilier"
                         name="hasRevenusImmobilier"
+                        data-testid="btn-situation-revenu-immobilier"
                         class="radio-button-style-1 mt-perso-sm ml-perso-lm"
                         [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
                         btnCheckbox
@@ -275,6 +278,7 @@
                     <label
                         name="beneficiaireAAH"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-aah"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
                         btnCheckbox
                         tabindex="0"
@@ -289,6 +293,7 @@
                     <label
                         name="beneficiairePensionInvalidite"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-pension-invalidite"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiairePensionInvalidite"
                         btnCheckbox
                         tabindex="0"
@@ -332,6 +337,7 @@
                         (click)="onClickCheckBoxSituationFamiliale()"
                         name="situationFamilialeDemandeur"
                         class="radio-button-style-1 ml-1"
+                        data-testid="btn-situation-familiale-couple"
                         [btnRadio]="true"
                         tabindex="0"
                         role="button"
@@ -364,6 +370,7 @@
                         #conjointIsSalarie="ngModel"
                         name="conjointIsSalarie"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-salarie"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -378,6 +385,7 @@
                         #conjointHasARE="ngModel"
                         name="conjointHasARE"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-are"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -392,6 +400,7 @@
                         #conjointHasASS="ngModel"
                         name="conjointHasASS"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-ass"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -406,6 +415,7 @@
                         #conjointHasRSA="ngModel"
                         name="conjointHasRSA"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-rsa"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -420,6 +430,7 @@
                         #conjointHasAAH="ngModel"
                         name="conjointHasAAH"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-aah"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -435,6 +446,7 @@
                         #conjointHasPensionInvalidite="ngModel"
                         name="conjointHasInvalidite"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-pension-invalidite"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -449,6 +461,7 @@
                         #conjointIsSansRessource="ngModel"
                         name="conjointIsSansRessource"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-sans-ressource"
                         btnCheckbox
                         tabindex="0"
                         role="button"
