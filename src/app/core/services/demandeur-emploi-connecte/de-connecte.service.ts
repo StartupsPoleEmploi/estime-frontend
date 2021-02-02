@@ -112,6 +112,13 @@ export class DeConnecteService {
     }
   }
 
+  public unsetSalairesAvantPeriodeSimulation(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetConjoint(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;

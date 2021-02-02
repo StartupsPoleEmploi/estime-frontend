@@ -8,6 +8,7 @@ import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service";
+import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
 
 
 @Component({
@@ -69,6 +70,27 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (event.keyCode === 13) {
       this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire = value;
       this.onClickButtonRadioHasCumuleAssEtSalaire(value);
+    }
+  }
+
+  public onClickButtonRadioNombreMoisCumulAssSalaire(): void {
+    if(this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire >= 2) {
+      this.ressourcesFinancieres.salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
+      this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
+      this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+    } else {
+      this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
+      this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
+    }
+  }
+
+  public getDateFormateeSalaireAvantPeriodeSimulee(nMoisAvantSimulation: number): string {
+    const dateJour = new Date();
+    if (nMoisAvantSimulation == 0) {
+        return this.dateUtileService.getLibelleDateFromDate(dateJour).toLowerCase();
+    } else {
+        const dateAvantSimulation = this.dateUtileService.enleverMoisToDate(dateJour, nMoisAvantSimulation);
+        return this.dateUtileService.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
     }
   }
 
