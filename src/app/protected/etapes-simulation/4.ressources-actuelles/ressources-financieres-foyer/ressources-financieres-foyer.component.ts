@@ -21,24 +21,18 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   @Output() validationRessourcesFoyerEventEmitter = new EventEmitter<void>();
 
-  libelleMoisNMoins1: String;
-  libelleMoisNMoins2: String;
-  libelleMoisNMoins3: String;
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    private dateUtileService: DateUtileService,
+    public dateUtileService: DateUtileService,
     private elementRef: ElementRef,
   ) {
 
   }
 
   ngOnInit(): void {
-    this.libelleMoisNMoins1 = this.dateUtileService.getLibelleMoisPrecedent(1);
-    this.libelleMoisNMoins2 = this.dateUtileService.getLibelleMoisPrecedent(2);
-    this.libelleMoisNMoins3 = this.dateUtileService.getLibelleMoisPrecedent(3);
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {

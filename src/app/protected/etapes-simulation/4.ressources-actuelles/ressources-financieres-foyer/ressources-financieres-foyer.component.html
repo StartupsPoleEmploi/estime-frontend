@@ -28,7 +28,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins1 }}</span>
+                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(1) }}</span>
                 </div>
                 <div class="row">
                     <span
@@ -55,7 +55,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins2 }}</span>
+                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(2) }}</span>
                 </div>
                 <div class="row">
                     <span
@@ -82,7 +82,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ libelleMoisNMoins3 }}</span>
+                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(3) }}</span>
                 </div>
                 <div class="row">
                     <span

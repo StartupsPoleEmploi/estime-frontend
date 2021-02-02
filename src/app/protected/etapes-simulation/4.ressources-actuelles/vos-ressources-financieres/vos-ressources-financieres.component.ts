@@ -37,7 +37,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    private dateUtileService: DateUtileService,
+    public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
@@ -81,16 +81,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     } else {
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
-    }
-  }
-
-  public getDateFormateeSalaireAvantPeriodeSimulee(nMoisAvantSimulation: number): string {
-    const dateJour = new Date();
-    if (nMoisAvantSimulation == 0) {
-        return this.dateUtileService.getLibelleDateFromDate(dateJour).toLowerCase();
-    } else {
-        const dateAvantSimulation = this.dateUtileService.enleverMoisToDate(dateJour, nMoisAvantSimulation);
-        return this.dateUtileService.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
     }
   }
 

@@ -176,10 +176,6 @@ export class DateUtileService {
     return numberToAddZero.toString();
   }
 
-  private isJourOuMoisValide(valueJourOuMois: string): boolean {
-    return valueJourOuMois.length === 2 && valueJourOuMois !== "00"
-  }
-
   private getLibelleCourtMoisByMoisNumber(moisNumber: number): string {
     let moisLabel = '';
     this.mois.forEach(mois => {
@@ -200,9 +196,6 @@ export class DateUtileService {
     return moisLabel;
   }
 
-  private getStringDateFromDate(date: Date) {
-    return date.toString();
-  }
 
   private getDateMoisPrecedent(moisVoulu : number) {
     const date : Date = new Date();
@@ -212,8 +205,20 @@ export class DateUtileService {
 
   }
 
-  // Fonction qui permet de retourner le libellé d'un mois précédent en particulier : getLibelleMoisPrecedent(1) pour le mois n-1, getLibelleMoisPrecedent(2) pour n moins 2... etc
-  public getLibelleMoisPrecedent(moisVoulu : number = 0) {
-    return this.getLibelleDateStringFormat(this.getDateMoisPrecedent(moisVoulu));
+  /**
+   * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
+   * exemple :
+   * date du jour = 01/03/2021, si nMoisAvantDateJour = 2 alors dateFormatee = "janvier 2021"
+   *
+   * @param nMoisAvantSimulation
+   */
+  public getDateFormateeAvantDateJour(nMoisAvantDateJour: number): string {
+    const dateJour = new Date();
+    if (nMoisAvantDateJour == 0) {
+        return this.getLibelleDateFromDate(dateJour).toLowerCase();
+    } else {
+        const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
+        return this.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
+    }
   }
 }
