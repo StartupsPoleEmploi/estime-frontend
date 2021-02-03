@@ -285,7 +285,8 @@
                         role="button"
                         #beneficiaireAAH="ngModel"
                         (click)="onClickCheckBoxHasAAH()"
-                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)"
+                        disabled>
                         <div>
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>

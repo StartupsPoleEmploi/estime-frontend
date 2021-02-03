@@ -1,4 +1,4 @@
-import Engine, { formatValue } from "@internal/publicodes";
+import Engine, { formatValue } from "publicodes";
 import rules from "modele-social";
 import { Injectable } from '@angular/core';
 

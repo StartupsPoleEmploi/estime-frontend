@@ -7,6 +7,8 @@ export class RessourcesFinancieres {
   allocationsCAF: AllocationsCAF;
   allocationsPoleEmploi: AllocationsPoleEmploi;
   allocationsCPAM : AllocationsCPAM;
+  hasTravailleAuCours6DerniersMois: boolean;
+  nombreMoisTravailles6DerniersMois: number;
   salaireNet: number;
   revenusCreateurEntreprise3DerniersMois: number;
   revenusImmobilier3DerniersMois: number;

@@ -24,8 +24,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
 
-
   codesRessourcesFinancieresEnum: typeof CodesRessourcesFinancieresEnum = CodesRessourcesFinancieresEnum;
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+
 
   constructor(
     public aidesService: AidesService,
@@ -39,7 +40,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
-    return aideKeyValue.value.code !== (CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE || CodesAidesEnum.PENSION_INVALIDITE);
+    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE &&
+    aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
   }
 
   public isAideSocialSelected(aideSociale: AideSociale): boolean {
@@ -49,11 +51,15 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
     for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-      if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+      if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE && codeAide !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
         size += 1;
       }
     }
     return index === size - 1;
+  }
+
+  public onClickButtonAideSocialAAH(): void {
+    this.onClickButtonAideSocialObtenir(this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES));
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
@@ -67,7 +73,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   public isItemSalaireIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0
+    || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins1 > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins2 > 0
@@ -80,7 +86,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemAssIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0
+    return this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins1 > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins2 > 0

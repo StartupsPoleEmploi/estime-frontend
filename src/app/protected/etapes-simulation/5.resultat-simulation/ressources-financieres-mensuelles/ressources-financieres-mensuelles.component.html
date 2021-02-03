@@ -27,12 +27,14 @@
             </li>
             <li
                 class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0">
+                style="cursor: pointer;"
+                *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
+                (click)="onClickButtonAideSocialAAH()">
                 <app-item-ressource-actuelle
                     codeRessource="AAH"
-                    [isColPictoArrowDisplay]="false"
+                    [isColPictoArrowDisplay]="true"
                     libelleRessource="Allocation aux Adultes Handicapés"
-                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
+                    [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
                     organismeRessource="CAF">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemAahIsNotLast()">

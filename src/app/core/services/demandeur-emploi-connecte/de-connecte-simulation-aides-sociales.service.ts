@@ -38,11 +38,10 @@ export class DeConnecteSimulationAidesSocialesService {
     const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
 
     const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
-    const montantAllocationsCAF = this.calculerMontantAllocationsCAF(ressourcesFinancieres.allocationsCAF);
     const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return this.numberUtileService.roundTwoDecimals(salaireFuturTravail + montantAllocationsCAF + montantAllocationsCPAM + montantTotalAidesMoisSimule);
+    return this.numberUtileService.roundTwoDecimals(salaireFuturTravail + montantAllocationsCPAM + montantTotalAidesMoisSimule);
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
@@ -55,11 +54,6 @@ export class DeConnecteSimulationAidesSocialesService {
       }
     }
     return montant;
-  }
-
-  private calculerMontantAllocationsCAF(allocationsCAF: AllocationsCAF) {
-    const montant = this.numberUtileService.getMontantSafe(allocationsCAF.allocationMensuelleNetAAH);
-    return montant
   }
 
   private calculerMontantAllocationsCPAM(allocationsCPAM: AllocationsCPAM) {

@@ -10,6 +10,11 @@ export class DeConnecteBenefiaireAidesSocialesService {
 
   }
 
+  public isBeneficiaireASS(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireASS;
+  }
+
   public isBeneficiaireAAH(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireAAH;

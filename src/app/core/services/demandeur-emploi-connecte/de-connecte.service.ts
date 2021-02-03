@@ -113,7 +113,8 @@ export class DeConnecteService {
   }
 
   public unsetSalairesAvantPeriodeSimulation(): void {
-    if (this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
+      this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }

@@ -17,6 +17,7 @@ export class RessourcesFinancieresUtileService {
 
   public creerRessourcesFinancieres(): RessourcesFinancieres {
     const ressourcesFinancieres = new RessourcesFinancieres();
+    ressourcesFinancieres.nombreMoisTravailles6DerniersMois = 0;
     const allocationsPE = new AllocationsPoleEmploi();
     allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
