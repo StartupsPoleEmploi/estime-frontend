@@ -14,7 +14,9 @@ export class ControleChampFormulaireService {
   MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
   MESSAGE_MONTANT_0 = "Ce montant ne peut être égal à 0";
   MESSAGE_MONTANT_JOURNALIER_ASS = "Ce montant doit être compris en 1 et 50";
+  MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
+  MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 
   public isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;

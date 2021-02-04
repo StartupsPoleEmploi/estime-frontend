@@ -96,7 +96,14 @@ export class ContratTravailComponent implements OnInit {
   }
 
   private isDonneesSaisiesValides(form: FormGroup): boolean {
-    return form.valid && this.futurTravail.salaireMensuelBrut > 0 && this.futurTravail.salaireMensuelNet > 0
+    return form.valid
+           && this.futurTravail.salaireMensuelBrut > 0
+           && this.futurTravail.salaireMensuelNet > 0
+           && !this.isNombreHeuresTravailleesSemaineInvalide()
+  }
+
+  private isNombreHeuresTravailleesSemaineInvalide(): boolean {
+    return this.futurTravail.nombreHeuresTravailleesSemaine && this.futurTravail.nombreHeuresTravailleesSemaine == 0 || this.futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX;
   }
 
 
