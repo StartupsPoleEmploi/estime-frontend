@@ -18,8 +18,10 @@ export class ContratTravailComponent implements OnInit {
 
   futurTravail: FuturTravail;
   isFuturTravailFormSubmitted = false;
+  isFuturTravailSalaireFormSubmitted = false;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
+  messageErreurSalaire: string;
 
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
@@ -60,7 +62,8 @@ export class ContratTravailComponent implements OnInit {
 
   public onSubmitFuturTravailForm(form: FormGroup): void {
     this.isFuturTravailFormSubmitted = true;
-    if(form.valid) {
+    this.isFuturTravailSalaireFormSubmitted = true;
+    if(this.isDonneesSaisiesValides(form)) {
       this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     } else {
@@ -75,16 +78,28 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public calculSalaireMensuelNet() {
-    if(this.futurTravail.salaireMensuelBrut != 0 && this.futurTravail.salaireMensuelBrut != null) {
+    this.isFuturTravailSalaireFormSubmitted = false;
+    if(this.futurTravail.salaireMensuelBrut >= 100 && this.futurTravail.salaireMensuelBrut != null) {
       this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
+    } else {
+      this.futurTravail.salaireMensuelNet = undefined;
     }
   }
 
   public calculSalaireMensuelBrut() {
-    if(this.futurTravail.salaireMensuelNet != 0 && this.futurTravail.salaireMensuelNet != null) {
+    this.isFuturTravailSalaireFormSubmitted = false;
+    if(this.futurTravail.salaireMensuelNet >= 57 && this.futurTravail.salaireMensuelNet != null) {
       this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
+    } else {
+      this.futurTravail.salaireMensuelBrut = undefined;
     }
   }
+
+  private isDonneesSaisiesValides(form: FormGroup): boolean {
+    return form.valid && this.futurTravail.salaireMensuelBrut > 0 && this.futurTravail.salaireMensuelNet > 0
+  }
+
+
 
   /************ gestion évènements press enter ************************/
 
