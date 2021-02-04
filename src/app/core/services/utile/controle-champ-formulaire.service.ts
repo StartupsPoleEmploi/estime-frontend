@@ -3,6 +3,7 @@ import { ElementRef, Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class ControleChampFormulaireService {
 
+
   REGEX_MONTANT = "^[0-9]{1,5}((\.|\,)[0-9]{1,2})?$";
   MESSAGE_CHAMP_OBLIGATOIRE = "Ce champ est obligatoire"
   MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX = "Tous les champs marqués d'un astérisque (*) sont obligatoires";
@@ -11,13 +12,14 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_JOUR_OBLIGATOIRE = "Le jour est obligatoire";
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
   MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
-  MESSAGE_ERREUR_MONTANT_0 = "Ce montant ne peut être égal à 0";
+  MESSAGE_MONTANT_0 = "Ce montant ne peut être égal à 0";
+  MESSAGE_MONTANT_JOURNALIER_ASS = "Ce montant doit être compris en 1 et 50";
+  MONTANT_ASS_JOURNALIER_MAX = 50;
 
   public isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;
     return pattSeparator.test(event.key) || this.isKeyAuthorizeForNumberOnly(event);
   }
-
 
   public isKeyAuthorizeForNumberOnly(event): boolean {
     let patt = /^([0-9])$/;

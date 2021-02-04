@@ -25,9 +25,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @Input() ressourcesFinancieres: RessourcesFinancieres;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<DateDecomposee>();
 
-  @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput:ElementRef;
-  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput:ElementRef;
-  @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm:FormGroup;
+  @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
+  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
+  @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
 
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
@@ -61,10 +61,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
-    if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
       this.checkAndSaveDateDernierOuvertureDroitASS();
     }
-    if(this.isDonneesSaisiesFormulaireValides(form)) {
+    if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit(this.dateDernierOuvertureDroitASS);
     } else {
@@ -73,7 +73,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickButtonRadioHasCumuleAssEtSalaire(hasCumuleAssEtSalaire: boolean): void {
-    if(hasCumuleAssEtSalaire === false) {
+    if (hasCumuleAssEtSalaire === false) {
       this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire = 0;
     }
   }
@@ -86,7 +86,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickButtonRadioNombreMoisCumulAssSalaire(): void {
-    if(this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire >= 2) {
+    if (this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire >= 2) {
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
@@ -98,12 +98,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   public onClickButtonRadioHasTravailleAuCours6DerniersMois(hasTravailleAuCours6DerniersMois: boolean): void {
-    if(hasTravailleAuCours6DerniersMois === false) {
+    if (hasTravailleAuCours6DerniersMois === false) {
       this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois = 0;
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
     } else {
-      if(this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
+      if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
@@ -123,7 +123,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
     this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormat(this.dateDernierOuvertureDroitASS);
-    if(this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
+    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
@@ -132,21 +132,25 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return form.valid
       && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)))
       && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.isNombreMoisCumulAssSalaireSelectedValide()))
-      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide()));
+      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide()))
+      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.isMontantJournalierAssInvalide()));
   }
 
   public isNombreMoisCumulAssSalaireSelectedValide(): boolean {
     return !this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire ||
-    (this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire
-      && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire != 0)
+      (this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire
+        && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire != 0)
   }
 
   public isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(): boolean {
     return !this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois ||
-    (this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
-      && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois != 0)
+      (this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
+        && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois != 0)
   }
 
+  public isMontantJournalierAssInvalide(): boolean {
+    return this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+  }
 
 
   /*** gestion évènement dateDernierOuvertureDroitASS */
@@ -154,7 +158,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSJour(event): void {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.jour;
-    if(value && value.length === 2) {
+    if (value && value.length === 2) {
       this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
   }
@@ -162,7 +166,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event): void {
     event.stopPropagation();
     const value = this.dateDernierOuvertureDroitASS.mois;
-    if(value && value.length === 2) {
+    if (value && value.length === 2) {
       this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
   }
