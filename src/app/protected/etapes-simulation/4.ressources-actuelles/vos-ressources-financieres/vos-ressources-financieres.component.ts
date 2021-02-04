@@ -152,6 +152,58 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
   }
 
+  public afficherSalaireM0(): boolean {
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
+      && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+      return this.isSalaireM0DisplayPourASS() || this.isSalaireM0DisplayPourAAH();
+    } else {
+      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+        return this.isSalaireM0DisplayPourASS();
+      }
+      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+        return this.isSalaireM0DisplayPourAAH();
+      }
+    }
+
+  }
+
+  public afficherSalaireM1(): boolean {
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
+      && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+        return this.isSalaireM1DisplayPourASS() || this.isSalaireM1DisplayPourAAH();
+    } else {
+      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+        return this.isSalaireM1DisplayPourASS();
+      }
+      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+        return this.isSalaireM1DisplayPourAAH();
+      }
+    }
+
+  }
+
+  private isSalaireM0DisplayPourASS(): boolean {
+    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
+      && (this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
+        || this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 2);
+  }
+
+  private isSalaireM0DisplayPourAAH(): boolean {
+    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
+      && this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
+      && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0
+  }
+
+  private isSalaireM1DisplayPourAAH(): boolean {
+    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
+      && this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
+      && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0
+  }
+
+  private isSalaireM1DisplayPourASS(): boolean {
+    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
+      && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
+  }
 
   /*** gestion évènement dateDernierOuvertureDroitASS */
 

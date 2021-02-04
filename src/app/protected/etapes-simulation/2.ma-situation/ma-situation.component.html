@@ -228,13 +228,14 @@
                     <label
                         name="beneficiaireASS"
                         class="radio-button-style-1"
+                        [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi}"
                         data-testid="btn-situation-ass"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
                         btnCheckbox
                         tabindex="0"
                         role="button"
-                        #beneficiaireAAH="ngModel"
-                        disabled>
+                        [disabled]="beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi"
+                        #beneficiaireAAH="ngModel">
                         <div>
                             <span>{{situationPersonneEnum.ASS}}</span>
                         </div>
@@ -278,6 +279,7 @@
                     <label
                         name="beneficiaireAAH"
                         class="radio-button-style-1"
+                        [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi}"
                         data-testid="btn-situation-aah"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
                         btnCheckbox
@@ -286,7 +288,7 @@
                         #beneficiaireAAH="ngModel"
                         (click)="onClickCheckBoxHasAAH()"
                         (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)"
-                        disabled>
+                        (disabled)="beneficiaireAidesSociales.beneficiaireAAH && beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi">
                         <div>
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>

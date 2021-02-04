@@ -21,7 +21,7 @@
                     pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     min="0"
-                    maxlength="2"
+                    maxlength="5"
                     class="form-control"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                     [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
@@ -221,86 +221,6 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="ressourcesFinancieres.salairesAvantPeriodeSimulation && (ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3 || ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 2)">
-            <div class="row mb-2">
-                <label
-                    class="label"
-                    for="salaireMoisM0AvantPeriodeSimulee">
-                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(0)}}
-                </label>
-            </div>
-            <div class="row">
-                <input
-                    name="salaireMoisM0AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    maxlength="6"
-                    min="0"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation"
-                    required
-                    inputmode="decimal"
-                    (click)="$event.target.select()"
-                    #salaireMoisM0AvantPeriodeSimulee="ngModel">
-                <span class="text-side-input">€ net</span>
-            </div>
-            <div class="row">
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
-        </div>
-        <div
-            class="form-group"
-            *ngIf="ressourcesFinancieres.salairesAvantPeriodeSimulation && ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3">
-            <div class="row mb-2">
-                <label
-                    class="label"
-                    for="salaireMoisMMois1AvantPeriodeSimulee">
-                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
-                </label>
-            </div>
-            <div class="row">
-                <input
-                    name="salaireMoisMMois1AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    maxlength="6"
-                    min="0"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation"
-                    required
-                    inputmode="decimal"
-                    (click)="$event.target.select()"
-                    #salaireMoisMMois1AvantPeriodeSimulee="ngModel">
-                <span class="text-side-input">€ net</span>
-            </div>
-            <div class="row">
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMois1AvantPeriodeSimulee?.touched)  && salaireMoisMMois1AvantPeriodeSimulee?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMois1AvantPeriodeSimulee?.touched)  && salaireMoisMMois1AvantPeriodeSimulee?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
-        </div>
         <!-- ************** FIN section concernant l'ASS *************** -->
         <!-- ************** section concernant l'AAH  - prévoir de déporter dans un composant fils *************** -->
         <div
@@ -400,7 +320,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="ressourcesFinancieres.hasTravailleAuCours6DerniersMois === true">
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && ressourcesFinancieres.hasTravailleAuCours6DerniersMois === true">
             <div class="row flex-column">
                 <label
                     class="label mb-2"
@@ -435,7 +355,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="ressourcesFinancieres.salairesAvantPeriodeSimulation && ressourcesFinancieres.hasTravailleAuCours6DerniersMois && ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0">
+            *ngIf="afficherSalaireM0()">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -475,7 +395,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="ressourcesFinancieres.salairesAvantPeriodeSimulation && ressourcesFinancieres.hasTravailleAuCours6DerniersMois && ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0">
+            *ngIf="afficherSalaireM1()">
             <div class="row mb-2">
                 <label
                     class="label"

@@ -23,7 +23,7 @@ export class PersonneUtileService {
 
   public creerPersonne(isAvecRessourcesFinancieres: boolean): Personne {
     const personne = new Personne();
-    personne.beneficiaireAidesSociales = new BeneficiaireAidesSociales(false, false, false, false, false);
+  personne.beneficiaireAidesSociales = this.initBeneficiaireAidesSociales();
     personne.informationsPersonnelles = new InformationsPersonnelles();
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
@@ -65,6 +65,20 @@ export class PersonneUtileService {
         || personne.beneficiaireAidesSociales.beneficiaireRSA
         || personne.beneficiaireAidesSociales.beneficiairePensionInvalidite
       );
+  }
+
+  private initBeneficiaireAidesSociales(): BeneficiaireAidesSociales {
+    const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
+    beneficiaireAidesSociales.beneficiaireAAH = false;
+    beneficiaireAidesSociales.beneficiaireARE = false;
+    beneficiaireAidesSociales.beneficiaireASS = false;
+    beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
+    beneficiaireAidesSociales.beneficiaireRSA = false;
+    beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi = false;
+    beneficiaireAidesSociales.topARERecupererViaApiPoleEmploi = false;
+    beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi = false;
+    beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi = false
+    return beneficiaireAidesSociales
   }
 }
 

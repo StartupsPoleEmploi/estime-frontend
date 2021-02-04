@@ -23,6 +23,10 @@ export class DeConnecteRessourcesFinancieresService {
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
+      if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation);
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation);
+      }
     }
     return montant;
   }
