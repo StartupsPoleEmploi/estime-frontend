@@ -44,8 +44,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
   }
 
-  public isAideSocialSelected(aideSociale: AideSociale): boolean {
-    return this.aideSocialeSelected && aideSociale.code === this.aideSocialeSelected.code;
+  public isAideSocialSelected(codeAideSociale: string): boolean {
+    return this.aideSocialeSelected && codeAideSociale === this.aideSocialeSelected.code;
   }
 
   public isLastAideKeyValue(index: number): boolean {
@@ -58,12 +58,14 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return index === size - 1;
   }
 
+
+
   public onClickButtonAideSocialAAH(): void {
     this.onClickButtonAideSocialObtenir(this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES));
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
-    if(this.screenService.isExtraSmallScreen() && this.isAideSocialSelected(aideSociale)) {
+    if(this.screenService.isExtraSmallScreen() && this.isAideSocialSelected(aideSociale.code)) {
       this.aideSocialeSelected = null;
     } else  {
       this.aideSocialeSelected = aideSociale;

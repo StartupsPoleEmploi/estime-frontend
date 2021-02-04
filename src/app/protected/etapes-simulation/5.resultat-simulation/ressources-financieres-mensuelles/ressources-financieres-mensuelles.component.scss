@@ -6,6 +6,21 @@
 
   }
 }
+.li-aide-sociale-selectable {
+  padding-right: 8px !important;
+  padding-left: 4px !important;
+  button {
+    text-align: left;
+    max-height: unset;
+    .row {
+      padding-left: 6px;
+    }
+    &.active {
+      background-color: $color-grey-1;
+    }
+  }
+}
+
 .card {
   border: 0;
   width: 100%;
