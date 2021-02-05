@@ -35,6 +35,7 @@
                             placeholder="JJ"
                             [(ngModel)]="dateNaissanceNouvellePersonne.jour"
                             required
+                            (click)="$event.target.select()"
                             #jourDateNaissanceNouvellePersonne="ngModel"
                             inputmode="numeric"
                             ngAutofocus>
@@ -52,6 +53,7 @@
                             placeholder="MM"
                             [(ngModel)]="dateNaissanceNouvellePersonne.mois"
                             required
+                            (click)="$event.target.select()"
                             inputmode="numeric"
                             #moisDateNaissanceNouvellePersonne="ngModel">
                         <input
@@ -67,6 +69,7 @@
                             [(ngModel)]="dateNaissanceNouvellePersonne.annee"
                             (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeAnnee()"
                             required
+                            (click)="$event.target.select()"
                             inputmode="numeric"
                             #anneeDateNaissanceNouvellePersonne="ngModel">
                     </div>
@@ -87,7 +90,7 @@
                     </span>
                     <span
                         class="row error-input-message"
-                        *ngIf="isNouvellePersonnesAChargeFormSubmitted  && dateNaissanceNouvellePersonne.messageErreurFormat">
+                        *ngIf="dateNaissanceNouvellePersonne.messageErreurFormat">
                         {{dateNaissanceNouvellePersonne.messageErreurFormat}}
                     </span>
                 </div>

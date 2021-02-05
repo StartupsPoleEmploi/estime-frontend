@@ -5,11 +5,13 @@ import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 import { AllocationsLogementMensuellesNetFoyer } from '@app/commun/models/allocations-logement-mensuelles-net-foyer';
+import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
 
   constructor(
+    private controleChampFormulaireService: ControleChampFormulaireService,
     private numberUtileService: NumberUtileService
   ) {
 
@@ -70,5 +72,22 @@ export class RessourcesFinancieresUtileService {
     ressourcesFinancieres.revenusImmobilier3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier3DerniersMois);
     return ressourcesFinancieres;
   }
+
+  public isNombreMoisCumulAssSalaireSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return !ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire ||
+      (ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire
+        && ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire != 0)
+  }
+
+  public isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return !ressourcesFinancieres.hasTravailleAuCours6DerniersMois ||
+      (ressourcesFinancieres.hasTravailleAuCours6DerniersMois
+        && ressourcesFinancieres.nombreMoisTravailles6DerniersMois != 0)
+  }
+
+  public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+  }
+
 
 }

@@ -1,5 +1,23 @@
 @import "../../../../assets/scss/variables";
 
+#contrat-travail-div-infos-lieu-travail {
+  margin-bottom: 1rem !important;
+  img {
+    width: 23px;
+    height: 23px;
+  }
+  span {
+    font-style: italic;
+  }
+  .col-auto {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .col {
+    padding-left: 10px;
+  }
+
+}
 .container-fluid {
   margin-top: 2rem;
 }

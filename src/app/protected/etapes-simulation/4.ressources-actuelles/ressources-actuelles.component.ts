@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { DeConnecteBenefiaireAidesSocialesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
@@ -71,6 +72,7 @@ export class RessourcesActuellesComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
+    private deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
@@ -176,7 +178,11 @@ export class RessourcesActuellesComponent implements OnInit {
 
   private isSaisieFormulairesValide(): boolean {
     let isSaisieFormulairesValide = true;
-    if (!this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid) {
+    if (!this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid
+      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.dateUtileService.isDateDecomposeeSaisieValide(this.vosRessourcesFinancieresComponent.dateDernierOuvertureDroitASS))
+      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres))
+      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres))
+      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres))) {
       this.isVosRessourcesDisplay = true;
       isSaisieFormulairesValide = false;
     }

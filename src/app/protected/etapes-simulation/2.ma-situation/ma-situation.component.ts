@@ -254,7 +254,7 @@ export class MaSituationComponent implements OnInit {
   /************ private methods ************************/
 
   private checkAndSaveDateNaissanceDemandeurEmploiConnecte(): void {
-    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissance);
+    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissance);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)) {
       this.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissance);
     }
@@ -293,6 +293,7 @@ export class MaSituationComponent implements OnInit {
     if (value && value.length === 2) {
       this.moisDateNaissanceInput.nativeElement.focus();
     }
+    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissance);
   }
 
   public onChangeOrKeyUpDateNaissanceMois(event): void {
@@ -301,6 +302,11 @@ export class MaSituationComponent implements OnInit {
     if (value && value.length === 2) {
       this.anneeDateNaissanceInput.nativeElement.focus();
     }
+    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissance);
+  }
+
+  public onChangeOrKeyUpDateNaissanceAnnee(): void {
+    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissance);
   }
 
   public onFocusDateNaissance(): void {

@@ -9,6 +9,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service";
 import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
 
   ) { }
 
@@ -122,7 +124,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormat(this.dateDernierOuvertureDroitASS);
+    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
@@ -130,27 +132,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     return form.valid
-      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)))
-      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.isNombreMoisCumulAssSalaireSelectedValide()))
-      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide()))
-      && (!this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.isMontantJournalierAssInvalide()));
+      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS))
+      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres))
+      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres))
+      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres));
   }
 
-  public isNombreMoisCumulAssSalaireSelectedValide(): boolean {
-    return !this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire ||
-      (this.ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire
-        && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire != 0)
-  }
-
-  public isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(): boolean {
-    return !this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois ||
-      (this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
-        && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois != 0)
-  }
-
-  public isMontantJournalierAssInvalide(): boolean {
-    return this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
-  }
 
   public afficherSalaireM0(): boolean {
     if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
@@ -213,6 +200,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (value && value.length === 2) {
       this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
+    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
   }
 
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event): void {
@@ -221,6 +209,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (value && value.length === 2) {
       this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
+    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
+  }
+
+  public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(): void {
+    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
   }
 
   public onFocusDateDerniereOuvertureDroitASS(): void {

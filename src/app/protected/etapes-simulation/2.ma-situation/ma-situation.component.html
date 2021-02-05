@@ -67,6 +67,7 @@
                             placeholder="JJ"
                             [(ngModel)]="dateNaissance.jour"
                             required
+                            (click)="$event.target.select()"
                             inputmode="numeric"
                             #jourDateNaissance="ngModel">
                         <input
@@ -83,6 +84,7 @@
                             [(ngModel)]="dateNaissance.mois"
                             required
                             inputmode="numeric"
+                            (click)="$event.target.select()"
                             #moisDateNaissance="ngModel">
                         <input
                             name="anneeDateNaissance"
@@ -91,8 +93,10 @@
                             maxlength="4"
                             type="text"
                             min="1900"
+                            (keyup)="onChangeOrKeyUpDateNaissanceAnnee()"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                             placeholder="AAAA"
+                            (click)="$event.target.select()"
                             [(ngModel)]="dateNaissance.annee"
                             required
                             inputmode="numeric"
@@ -115,7 +119,7 @@
                     </span>
                     <span
                         class="row error-input-message"
-                        *ngIf="isInformationsPersonnellesFormSubmitted  && dateNaissance.messageErreurFormat">
+                        *ngIf="dateNaissance.messageErreurFormat">
                         {{dateNaissance.messageErreurFormat}}
                     </span>
                 </div>

@@ -80,7 +80,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private checkAndSaveDateNaissanceNouvellePersonneConnecte(): void {
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissanceNouvellePersonne);
+    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
       this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
     }
@@ -147,6 +147,7 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
       this.moisDateNaissanceNouvellePersonneInput.nativeElement.focus();
     }
+    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
   }
 
   public onChangeOrKeyUpDateNaissancePersonneAChargeMois(event): void {
@@ -156,10 +157,12 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
       this.anneeDateNaissanceNouvellePersonneInput.nativeElement.focus();
     }
+    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
   }
 
   public onChangeOrKeyUpDateNaissancePersonneAChargeAnnee(): void {
     this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
+    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
   }
 
   public onFocusDateNaissanceNouvellePersonne(): void {

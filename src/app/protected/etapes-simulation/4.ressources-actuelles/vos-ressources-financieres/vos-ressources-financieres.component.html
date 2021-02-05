@@ -100,6 +100,7 @@
                         maxlength="4"
                         type="text"
                         min="1900"
+                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee()"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                         placeholder="AAAA"
                         [(ngModel)]="dateDernierOuvertureDroitASS.annee"
@@ -124,7 +125,7 @@
                 </span>
                 <span
                     class="row error-input-message"
-                    *ngIf="isRessourcesFinancieresFormSubmitted  && dateDernierOuvertureDroitASS.messageErreurFormat">
+                    *ngIf="dateDernierOuvertureDroitASS.messageErreurFormat">
                     {{dateDernierOuvertureDroitASS.messageErreurFormat}}
                 </span>
             </div>

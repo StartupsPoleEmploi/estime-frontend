@@ -81,8 +81,18 @@ export class DateUtileService {
     return dateSimulationSplit[2] + '/' + dateSimulationSplit[1] + '/' + dateSimulationSplit[0];
   }
 
+  public checkFormatAvecNotAfterDateJour(dateDecomposee: DateDecomposee): string {
+    let errorFormatMessage = this.checkFormat(dateDecomposee);
+    if(errorFormatMessage == null) {
+      const retourCheckDateNaissance = this.isAfterDateJour(dateDecomposee);
+      if(retourCheckDateNaissance) {
+        errorFormatMessage = "La date ne peut pas être supérieure à la date du jour";
+      }
+    }
+    return errorFormatMessage;
+  }
   public checkFormat(dateDecomposee: DateDecomposee): string {
-    let errorFormatMessage = undefined;
+    let errorFormatMessage = null;
     const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
     if (dateDecomposee.jour) {
       if (parseInt(dateDecomposee.jour) > nbJourMois) {
@@ -167,6 +177,13 @@ export class DateUtileService {
   public enleverMoisToDate(dateOrigine: Date, nbrMois: number): Date {
     const m = moment(dateOrigine);
     return m.subtract(nbrMois, 'M').toDate();
+  }
+
+  public isAfterDateJour(dateToCompare: DateDecomposee): boolean {
+    const dateToCompareFormat = this.getStringDateFromDateDecomposee(dateToCompare);
+    const dateDecomposeeDateJour = this.getDateDecomposeeFromDate(new Date());
+    const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateDecomposeeDateJour);
+    return moment(dateToCompareFormat).isAfter(dateDecomposeeDateJourFormat);
   }
 
   private addZeroToNumber(numberToAddZero: number): string {
