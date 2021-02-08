@@ -36,11 +36,16 @@ cypress-e2e:
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
     script:
+    #valoriser les propriétés des fichiers d'nvironnement par les variables d'environnement définies dans Gitlab CI
     - p2 -t cypress/ci/environment.cypress.local.ts.j2 -o cypress/environment.ts
     - p2 -t cypress/ci/environment.local.ts.j2 -o src/environments/environment.local.ts
+    #installation des dépendances du projet
     - npm ci
+    #lancement de l'application via le serveur local
     - npm run start:ngx &
+    #attente du lancemenet de l'application
     - wait-on http://localhost:9001/
+    #lancement des tests cypress
     - npm run cy:run
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
