@@ -38,8 +38,9 @@ cypress-e2e:
     script:
     - p2 -t cypress/ci/environment.cypress.local.ts.j2 -o cypress/environment.ts
     - p2 -t cypress/ci/environment.local.ts.j2 -o src/environments/environment.local.ts
-    - npm ci
-    - npm install -g wait-on
+    - cat cypress/environment.ts
+    - cat src/environments/environment.local.ts
+    - npm ci -g wait-on
     - npm run start:ngx &
     - wait-on http://localhost:9001/
     - npm run cy:run
