@@ -32,7 +32,7 @@ build_frontend_application :
       <<: *global_cache
 
 cypress-e2e:
-    stage: tests
+    stage: build-phase-1
     #image basée sur l'image officielle cypress/base:10
     image:
       name: registry.beta.pole-emploi.fr/customize-docker-images/cypress
