@@ -42,8 +42,6 @@ cypress-e2e:
     - p2 -t cypress/ci/environment.local.ts.j2 -o src/environments/environment.local.ts
     #installation des dépendances du projet
     - npm ci
-    #installation de l'utilitaire wait-on
-    - npm i -g wait-on
     #lancement de l'application via le serveur local
     - npm run start:ngx &
     #attente du lancement de l'application
