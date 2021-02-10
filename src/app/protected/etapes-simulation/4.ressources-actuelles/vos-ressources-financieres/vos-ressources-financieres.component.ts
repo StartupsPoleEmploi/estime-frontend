@@ -53,7 +53,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     private elementRef: ElementRef,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
 
   ) { }
 
@@ -124,18 +124,22 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
-    return form.valid
-      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS))
-      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres))
-      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres))
-      && (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres));
+    let isValide = form.valid;
+    if(isValide) {
+      if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() ) {
+        isValide = this.isDonneesASSSaisiesValide();
+      }
+      if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() ) {
+        isValide = this.isDonneesAAHSaisiesValides();
+      }
+    }
+    return isValide;
   }
 
 
@@ -192,6 +196,16 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
   }
 
+  private isDonneesASSSaisiesValide(): boolean {
+    return this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)
+    && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres)
+    && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres);
+  }
+
+  private isDonneesAAHSaisiesValides(): boolean {
+    return this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres);
+  }
+
   /*** gestion évènement dateDernierOuvertureDroitASS */
 
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSJour(event): void {
@@ -200,7 +214,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (value && value.length === 2) {
       this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
+    this.dateUtileService.checkFormatJour(this.dateDernierOuvertureDroitASS);
   }
 
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event): void {
@@ -209,14 +223,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (value && value.length === 2) {
       this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
     }
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
+    this.dateUtileService.checkFormatMois(this.dateDernierOuvertureDroitASS);
   }
 
-  public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(): void {
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateDernierOuvertureDroitASS);
-  }
-
-  public onFocusDateDerniereOuvertureDroitASS(): void {
-    this.dateDernierOuvertureDroitASS.messageErreurFormat = undefined;
+  public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(event): void {
+    event.stopPropagation();
+    this.dateUtileService.checkFormatAnnee(this.dateDernierOuvertureDroitASS);
   }
 }

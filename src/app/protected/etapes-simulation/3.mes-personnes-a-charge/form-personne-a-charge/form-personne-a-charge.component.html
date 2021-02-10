@@ -20,79 +20,11 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <div class="btn-group-input-date">
-                        <input
-                            name="jourDateNaissanceNouvellePersonne"
-                            data-testid="input-jour-date-naissance"
-                            (focus)="onFocusDateNaissanceNouvellePersonne()"
-                            class="form-control jour-input"
-                            (change)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
-                            maxlength="2"
-                            type="text"
-                            min="0"
-                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeJour($event)"
-                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="JJ"
-                            [(ngModel)]="dateNaissanceNouvellePersonne.jour"
-                            required
-                            (click)="$event.target.select()"
-                            #jourDateNaissanceNouvellePersonne="ngModel"
-                            inputmode="numeric"
-                            ngAutofocus>
-                        <input
-                            name="moisDateNaissanceNouvellePersonne"
-                            data-testid="input-mois-date-naissance"
-                            (focus)="onFocusDateNaissanceNouvellePersonne()"
-                            class="form-control mois-input"
-                            (change)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
-                            maxlength="2"
-                            type="text"
-                            min="0"
-                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeMois($event)"
-                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="MM"
-                            [(ngModel)]="dateNaissanceNouvellePersonne.mois"
-                            required
-                            (click)="$event.target.select()"
-                            inputmode="numeric"
-                            #moisDateNaissanceNouvellePersonne="ngModel">
-                        <input
-                            name="anneeDateNaissanceNouvellePersonne"
-                            data-testid="input-annee-date-naissance"
-                            (focus)="onFocusDateNaissanceNouvellePersonne()"
-                            class="form-control annee-input"
-                            maxlength="4"
-                            type="text"
-                            min="1900"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="AAAA"
-                            [(ngModel)]="dateNaissanceNouvellePersonne.annee"
-                            (keyup)="onChangeOrKeyUpDateNaissancePersonneAChargeAnnee()"
-                            required
-                            (click)="$event.target.select()"
-                            inputmode="numeric"
-                            #anneeDateNaissanceNouvellePersonne="ngModel">
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || jourDateNaissanceNouvellePersonne.touched)  && jourDateNaissanceNouvellePersonne.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || moisDateNaissanceNouvellePersonne.touched)  && moisDateNaissanceNouvellePersonne.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isNouvellePersonnesAChargeFormSubmitted || anneeDateNaissanceNouvellePersonne.touched) && anneeDateNaissanceNouvellePersonne.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="dateNaissanceNouvellePersonne.messageErreurFormat">
-                        {{dateNaissanceNouvellePersonne.messageErreurFormat}}
-                    </span>
+                    <app-date-inputs
+                        [dateSaisie]="dateNaissanceNouvellePersonne"
+                        [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
+                        (dateChanged)="gererAffichageNouvellePersonneSituationForm()">
+                    </app-date-inputs>
                 </div>
             </div>
             <app-form-personne-a-charge-situation
@@ -105,10 +37,9 @@
                 <button
                     class="btn-style-perso-3"
                     type="submit"
-                    data-testid="btn-valider-personne-charge"
-                    >
+                    data-testid="btn-valider-personne-charge">
                     <div>
-                      <span>Valider</span>
+                        <span>Valider</span>
                     </div>
                 </button>
             </div>

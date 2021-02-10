@@ -34,6 +34,10 @@ export class DeConnecteService {
     return this.demandeurEmploiConnecte;
   }
 
+  public hasRessourcesFinancieres(): boolean {
+    return this.demandeurEmploiConnecte.ressourcesFinancieres !== null;
+  }
+
   public setBeneficiaireAidesSociales(beneficiaireAidesSociales: BeneficiaireAidesSociales): void {
     this.demandeurEmploiConnecte.beneficiaireAidesSociales = beneficiaireAidesSociales;
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);

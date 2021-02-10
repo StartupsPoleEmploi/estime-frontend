@@ -34,13 +34,13 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    private dateUtileService: DateUtileService,
+    public dateUtileService: DateUtileService,
     private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }
 
   ngOnInit(): void {
-    this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
+    this.gererAffichageNouvellePersonneSituationForm();
   }
 
   public onSubmitNouvellePersonneAChargeForm(form: FormGroup): void {
@@ -59,11 +59,11 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.ajoutNouvellePersonneEventEmitter.emit(false);
   }
 
-  public isNouvellePersonneSituationFormDisplay(): boolean {
-    let isNouvellePersonneSituationFormDisplay = false;
-    if (this.dateUtileService.isFormatDateValide(this.dateNaissanceNouvellePersonne)) {
+  public gererAffichageNouvellePersonneSituationForm(): void {
+    this.isNouvellePersonneAChargeSituationFormGroupDisplay  = false;
+    if (this.dateUtileService.isDateValide(this.dateNaissanceNouvellePersonne)) {
       if(this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
-        isNouvellePersonneSituationFormDisplay = true;
+        this.isNouvellePersonneAChargeSituationFormGroupDisplay  = true;
         if(!this.nouvellePersonneACharge.ressourcesFinancieres) {
           this.creerRessourcesFinancieres();
         }
@@ -71,7 +71,6 @@ export class FormPersonneAChargeComponent implements OnInit {
         this.unsetRessourcesFinancieres();
       }
     }
-    return isNouvellePersonneSituationFormDisplay;
   }
 
   private resetNouvellePersonneAChargeForm(): void {
@@ -80,7 +79,6 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private checkAndSaveDateNaissanceNouvellePersonneConnecte(): void {
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
     if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
       this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
     }
@@ -89,7 +87,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
     this.isSituationNotValide = !this.isSituationValide();
     return form.valid
-    && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)
+    && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)
     && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
       || (this.isNouvellePersonneAChargeSituationFormGroupDisplay && !this.isSituationNotValide))
   }
@@ -137,36 +135,4 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
     }
   }
-
-  /** gestion évènements champ date naissance personne à charge **/
-
-  public onChangeOrKeyUpDateNaissancePersonneAChargeJour(event): void {
-    event.stopPropagation();
-    const value = this.dateNaissanceNouvellePersonne.jour;
-    if (value && value.length === 2) {
-      this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
-      this.moisDateNaissanceNouvellePersonneInput.nativeElement.focus();
-    }
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
-  }
-
-  public onChangeOrKeyUpDateNaissancePersonneAChargeMois(event): void {
-    event.stopPropagation();
-    const value = this.dateNaissanceNouvellePersonne.mois;
-    if (value && value.length === 2) {
-      this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
-      this.anneeDateNaissanceNouvellePersonneInput.nativeElement.focus();
-    }
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
-  }
-
-  public onChangeOrKeyUpDateNaissancePersonneAChargeAnnee(): void {
-    this.isNouvellePersonneAChargeSituationFormGroupDisplay = this.isNouvellePersonneSituationFormDisplay();
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = this.dateUtileService.checkFormatAvecNotAfterDateJour(this.dateNaissanceNouvellePersonne);
-  }
-
-  public onFocusDateNaissanceNouvellePersonne(): void {
-    this.dateNaissanceNouvellePersonne.messageErreurFormat = undefined;
-  }
-
 }

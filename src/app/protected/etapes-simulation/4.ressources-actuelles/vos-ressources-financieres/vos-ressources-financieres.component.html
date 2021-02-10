@@ -60,74 +60,10 @@
                 </label>
             </div>
             <div class="form-group">
-                <div class="row btn-group-input-date">
-                    <input
-                        name="jourDateDerniereOuvertureDroitASS"
-                        data-testid="input-jour-date-derniere-ouverture-droit-ass"
-                        (focus)="onFocusDateDerniereOuvertureDroitASS()"
-                        class="form-control jour-input"
-                        (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
-                        maxlength="2"
-                        type="text"
-                        min="0"
-                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSJour($event)"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                        placeholder="JJ"
-                        [(ngModel)]="dateDernierOuvertureDroitASS.jour"
-                        required
-                        inputmode="numeric"
-                        #jourDateDerniereOuvertureDroitASS="ngModel">
-                    <input
-                        name="moisDateDerniereOuvertureDroitASS"
-                        data-testid="input-mois-date-derniere-ouverture-droit-ass"
-                        (focus)="onFocusDateDerniereOuvertureDroitASS()"
-                        class="form-control mois-input"
-                        (change)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
-                        maxlength="2"
-                        type="text"
-                        min="0"
-                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSMois($event)"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                        placeholder="MM"
-                        [(ngModel)]="dateDernierOuvertureDroitASS.mois"
-                        required
-                        inputmode="numeric"
-                        #moisDateDerniereOuvertureDroitASS="ngModel">
-                    <input
-                        name="anneeDateDerniereOuvertureDroitASS"
-                        data-testid="input-annee-date-derniere-ouverture-droit-ass"
-                        class="form-control annee-input"
-                        maxlength="4"
-                        type="text"
-                        min="1900"
-                        (keyup)="onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee()"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                        placeholder="AAAA"
-                        [(ngModel)]="dateDernierOuvertureDroitASS.annee"
-                        required
-                        inputmode="numeric"
-                        #anneeDateDerniereOuvertureDroitASS="ngModel">
-                </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || jourDateDerniereOuvertureDroitASS.touched)  && jourDateDerniereOuvertureDroitASS.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || moisDateDerniereOuvertureDroitASS.touched)  && moisDateDerniereOuvertureDroitASS.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || anneeDateDerniereOuvertureDroitASS.touched) && anneeDateDerniereOuvertureDroitASS.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="row error-input-message"
-                    *ngIf="dateDernierOuvertureDroitASS.messageErreurFormat">
-                    {{dateDernierOuvertureDroitASS.messageErreurFormat}}
-                </span>
+                <app-date-inputs
+                    [dateSaisie]="dateDernierOuvertureDroitASS"
+                    [isFormSubmitted]="isRessourcesFinancieresFormSubmitted">
+                </app-date-inputs>
             </div>
         </div>
         <div
@@ -202,7 +138,7 @@
                     (click)="onClickButtonRadioNombreMoisCumulAssSalaire()"
                     data-width="auto"
                     required
-                    [ngClass]="{'option-selected': ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && !isNombreMoisCumulAssSalaireSelectedValide()}"
+                    [ngClass]="{'option-selected': ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres)}"
                     #nombreMoisCumulAssSalaire="ngModel">
                     <option
                         [value]="0"
@@ -334,7 +270,7 @@
                     class="fit-content form-control"
                     data-width="auto"
                     required
-                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravailles6DerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && !isNombreMoisTravailleAuCours6DerniersMoisSelectedValide()}"
+                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravailles6DerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres)}"
                     #nombreMoisTravailleAuCours6DerniersMois="ngModel">
                     <option
                         [value]="0"

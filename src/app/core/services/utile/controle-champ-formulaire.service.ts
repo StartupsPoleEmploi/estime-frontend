@@ -31,7 +31,9 @@ export class ControleChampFormulaireService {
 
   public focusOnFirstInvalidElement(elementRef: ElementRef): void {
     const invalidElements = elementRef.nativeElement.querySelectorAll('.ng-invalid');
-    invalidElements[1].focus();
+    if(invalidElements[1]) {
+      invalidElements[1].focus();
+    }
   }
 
 
