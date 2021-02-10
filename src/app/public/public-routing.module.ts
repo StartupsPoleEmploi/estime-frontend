@@ -4,6 +4,7 @@ import { NotFoundComponent } from "@app/commun/components/not-found/not-found.co
 import { SigninRedirectCallbackComponent } from '@app/commun/components/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from '@app/commun/components/signout-redirect-callback.component';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { AccessibiliteComponent } from './accessibilite/accessibilite.component';
 import { CguComponent } from './cgu/cgu.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
@@ -11,6 +12,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 const routes: Routes = [
   {path: '', component: HomepageComponent, pathMatch: 'full' },
   {path: RoutesEnum.CGU, component: CguComponent },
+  {path: RoutesEnum.ACCESSIBILITE, component: AccessibiliteComponent },
   {path: RoutesEnum.SIGNIN_CALLBACK, component: SigninRedirectCallbackComponent },
   {path: RoutesEnum.SIGNOUT_CALLBACK, component: SignoutRedirectCallbackComponent },
   {path: '404', component: NotFoundComponent},

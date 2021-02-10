@@ -1,42 +1,59 @@
 <footer>
     <div class="container-fluid">
-        <div class="row  h-100">
-            <div
-                id="div-1-footer"
-                class="col-sm-12 col-md-auto my-auto">
-                <div>
-                  <img src="./assets/images/logo-estime.svg">
-                  <a (click)="onClickLinkCGU()">Conditions Générales d'Utilisation</a>
+        <div class="row h-100 row-1-footer">
+            <div class="col-sm-12 col-md-auto my-auto row-1-footer-div-1">
+                <div class="row">
+                    <div class="col-12">
+                        <img src="./assets/images/logo-estime.svg">
+                    </div>
+                    <div class="col-12 col-texte-service-estime">
+                        <span>
+                            Estime est un service de Pôle emploi
+                            qui vous donne vos futures ressources en cas de reprise d’emploi sur les 6 mois à venir.
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div
-                id="div-2-footer"
-                class="col-sm-12 col-md-auto d-flex my-auto">
+            <div class="col-sm-12 col-md-auto my-auto row-1-footer-div-2">
                 <div>
-                    <img
-                        id="logo-fonds-social-europeen-footer"
-                        src="./assets/images/logo-fonds-social-europeen.png">
+                    <a href="mailto:estime@pole-emploi.fr" target="_blank">Nous contacter</a>
                 </div>
                 <div>
-                    <img
-                        id="logo-ue-footer"
-                        src="./assets/images/logo-ue.svg">
+                    <a (click)="onClickLinkAccessibilite()">Accessibilité</a>
                 </div>
-                <div id="text-fse-footer">
-                    <span>
-                        Ce dispositif est cofinancé par le Fonds Social Européen dans le cadre du Programme opérationnel national "Emploi et inclusion" 2014-2020
-                    </span>
+                <div>
+                    <a (click)="onClickLinkCGU()">Conditions Générales d'Utilisation</a>
                 </div>
             </div>
-            <div
-                id="div-3-footer"
-                class="col-lg-12 col-xl-auto my-auto">
-                <div>
-                  <span>
-                      Copyright 2020 ©ESTIME propulsé par POLE EMPLOI
-                  </span>
+            <div class="col-sm-12 col-md-auto my-auto row-1-footer-div-3">
+                <div class="row">
+                    <div class="col-sm-auto col-md-12 row-col-1">
+                        <img
+                            id="logo-fonds-social-europeen-footer"
+                            src="./assets/images/logo-fonds-social-europeen.png">
+                        <img
+                            id="logo-pole-emploi-colored"
+                            src="./assets/images/logo-pole-emploi.png">
+                    </div>
+                    <div class="col-sm-auto col-md-12 d-flex row-col-2">
+                        <div>
+                            <img
+                                id="logo-ue-footer"
+                                src="./assets/images/logo-ue.svg">
+                        </div>
+                        <div id="text-fse-footer">
+                            <span>
+                                Ce dispositif est cofinancé par le Fonds Social Européen dans le cadre du Programme opérationnel national "Emploi et inclusion" 2014-2020
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="row row-2-footer">
+            <span>
+                Copyright 2020 ©ESTIME propulsé par POLE EMPLOI
+            </span>
         </div>
     </div>
 </footer>

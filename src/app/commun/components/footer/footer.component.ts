@@ -20,4 +20,8 @@ export class FooterComponent implements OnInit {
     this.router.navigate([RoutesEnum.CGU]);
   }
 
+  public onClickLinkAccessibilite(): void {
+    this.router.navigate([RoutesEnum.ACCESSIBILITE]);
+  }
+
 }

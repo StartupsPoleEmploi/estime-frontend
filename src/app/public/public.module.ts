@@ -11,6 +11,7 @@ import { SectionTemoignagesComponent } from './homepage/section-temoignages/sect
 import { TemoignagesDesktopComponent } from './homepage/section-temoignages/temoignages-desktop/temoignages-desktop.component';
 import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoignages-mobile/temoignages-mobile.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { AccessibiliteComponent } from './accessibilite/accessibilite.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     SectionQuestionsComponent,
     SectionTemoignagesComponent,
     TemoignagesDesktopComponent,
-    TemoignagesMobileComponent
+    TemoignagesMobileComponent,
+    AccessibiliteComponent
   ],
   imports: [
     AlertModule.forRoot(),

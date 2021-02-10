@@ -35,6 +35,9 @@ export class FilArianeComponent implements OnInit {
   private setLibelleRouteActive(pathRouteActivated: string): void {
 
     switch (pathRouteActivated) {
+      case RoutesEnum.ACCESSIBILITE:
+        this.libelleRouteActive = PageTitlesEnum.ACCESSIBILITE;
+        break;
       case RoutesEnum.AVANT_COMMENCER_SIMULATION:
         this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
         break;
