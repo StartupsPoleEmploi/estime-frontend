@@ -1,31 +1,27 @@
 @import "../../../../assets/scss/variables";
 
 footer {
-
+  padding-left: 10px;
   background-color: $color-white-1;
   bottom: 0;
   display: block;
-  font-size: 16px;
-  height: 12rem;
+  height: 15rem;
   left: 0;
   position: absolute;
   right: 0;
-  @media screen and (max-width: 767px) {
-    .container-fluid {
-      .row {
-        margin-top: 1.5rem;
-      }
-    }
+  @media #{$tablet-device} {
+    height: 11rem;
   }
-  @media #{$small-device} {
-    height: 8rem;
-  }
-  @media #{$large-device} {
+  @media #{$medium-device} {
     height: 17rem;
   }
   .row-1-footer {
-    padding-bottom: 15px;
-    padding-top: 45px;
+    padding-top: 20px;
+    @media #{$medium-device} {
+      padding-bottom: 15px;
+      padding-right: 15px;
+      padding-top: 45px;
+    }
     .row-1-footer-div-1 {
       display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
       display: -ms-flexbox; /* TWEENER - IE 10 */
@@ -34,74 +30,75 @@ footer {
       justify-content: center;
       align-items: center;
       line-height: 26px !important;
-      @media screen and (min-width: 768px) {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      @media #{$large-device} {
+      @media #{$medium-device} {
         margin-left: 0;
         margin-right: auto;
       }
       .row {
         max-width: 260px;
-      }
-      img {
-        width: 69px;
-        @media screen and (min-width: 768px) {
-          width: 157px;
+        img {
+          width: 69px;
+          @media #{$medium-device} {
+            width: 157px;
+          }
         }
-      }
-      a {
-        margin-left: 15px;
-        @media screen and (max-width:1300px) {
-          font-size: 12px;
-        }
-      }
-      .col-texte-service-estime {
-        max-width: 265px;
-        span {
-          font-size: 12px;
+        .col-texte-service-estime {
+          max-width: 265px;
+          span {
+            font-size: 12px;
+          }
         }
       }
     }
     .row-1-footer-div-2 {
+      font-size: 12px;
       margin-left: 0;
       margin-right: auto;
-      min-width: 380px;
+      @media #{$medium-device} {
+        font-size: 16px;
+        min-width: 380px;
+      }
       div {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        @media #{$medium-device} {
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
       }
     }
     .row-1-footer-div-3 {
-      line-height: 10px !important;
+      line-height: 4px !important;
       padding-top: 15px;
       padding-bottom: 15px;
-      @media screen and (min-width: 768px) {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      @media #{$large-device} {
+      @media #{$medium-device} {
+        line-height: 10px !important;
         margin-left: auto;
         margin-right: 0;
         max-width: 285px;;
       }
       .row-col-1 {
+        padding-right: 0;
         @media #{$medium-device} {
           margin-bottom: 12px;
+          padding-right: 15px;
         }
         #logo-pole-emploi-colored {
           width: 45px;
-          @media #{$large-device} {
+          margin-right: 10px;
+          @media #{$medium-device} {
             margin-left: 45px;
+            margin-right: 0;
             width: 78px;
           }
         }
         #logo-fonds-social-europeen-footer {
           width: 51px;
-          margin-top: 10px;
-          @media screen and (min-width: 768px) {
-            margin-top: 0;
+          margin-left: 10px;
+          margin-right: 10px;
+          @media #{$medium-device} {
+            margin-left: 0;
+            margin-right: 0;
             width: 98px;
           }
         }
@@ -111,9 +108,8 @@ footer {
           margin-top: 12px;
         }
         #logo-ue-footer {
-          margin-left: 12px;
-          margin-right: 12px;
-          margin-top: 10px;
+          margin-left: 10px;
+          margin-right: 10px;
           @media #{$medium-device} {
             margin-top: 2px;
           }
@@ -123,13 +119,12 @@ footer {
           }
         }
         #text-fse-footer {
-          width: 134px;
+          width: 84px;
           @media #{$medium-device} {
             width: 176px;
           }
-
           span {
-            font-size: 8px !important;
+            font-size: 6px !important;
             @media #{$medium-device} {
               font-size: 9px !important;
             }

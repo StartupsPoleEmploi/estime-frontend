@@ -29,11 +29,11 @@ body {
   display : table;
   width :100% ;
   background-color: $color-white-2;
-  padding-bottom: 14rem;
-  @media #{$small-device} {
-    padding-bottom: 8rem;
+  padding-bottom: 16rem;
+  @media #{$tablet-device} {
+    padding-bottom: 12rem;
   }
-  @media #{$large-device} {
+  @media #{$medium-device} {
     padding-bottom: 18rem;
   }
 }
