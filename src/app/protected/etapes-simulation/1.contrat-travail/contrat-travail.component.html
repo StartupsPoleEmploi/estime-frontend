@@ -165,7 +165,7 @@
                                 name="salaireMensuelBrut"
                                 data-testid="input-salaire-mensuel-brut"
                                 type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event);"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
                                 (keyup)="calculSalaireMensuelNet();"
                                 maxlength="6"
                                 class="form-control"
@@ -203,7 +203,7 @@
                                 name="salaireMensuelNet"
                                 data-testid="input-salaire-mensuel-net"
                                 type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 (keyup)="calculSalaireMensuelBrut();"
                                 maxlength="6"
                                 class="form-control"
@@ -242,7 +242,7 @@
                 <div
                     class="col">
                     <span>
-                      Ces informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
+                      Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
                     </span>
                 </div>
             </div>

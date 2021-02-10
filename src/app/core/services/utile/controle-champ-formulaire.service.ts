@@ -11,7 +11,8 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_ANNEE_OBLIGATOIRE = "L'année est obligatoire";
   MESSAGE_DATE_JOUR_OBLIGATOIRE = "Le jour est obligatoire";
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
-  MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
+  MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 900,49)"
+  MESSAGE_MONTANT_ERREUR_2 = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 16,89)"
   MESSAGE_MONTANT_0 = "Ce montant ne peut être égal à 0";
   MESSAGE_MONTANT_JOURNALIER_ASS = "Ce montant doit être compris en 1 et 50";
   MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
