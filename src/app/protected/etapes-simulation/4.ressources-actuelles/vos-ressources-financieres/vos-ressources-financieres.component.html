@@ -167,7 +167,7 @@
                 <label
                     class="label"
                     for="allocationMensuelleNetAAH">
-                    * Allocation Adulte Handicapé (AAH)
+                    * Allocation Adulte Handicapé (AAH) perçue
                 </label>
             </div>
             <div class="row">
@@ -184,7 +184,7 @@
                     required
                     inputmode="decimal"
                     #allocationMensuelleNetAAH="ngModel">
-                <span class="text-side-input">€ perçu le mois dernier</span>
+                <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
                 <span
@@ -378,7 +378,7 @@
                 <label
                     class="label"
                     for="pensionInvalidite">
-                    * Pension d'invalidité
+                    * Pension d'invalidité perçue
                 </label>
             </div>
             <div class="row">
@@ -388,14 +388,13 @@
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
-                    min="0"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
                     required
                     inputmode="decimal"
                     #pensionInvalidite="ngModel">
-                <span class="text-side-input">€ perçu le mois dernier</span>
+                <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
                 <span

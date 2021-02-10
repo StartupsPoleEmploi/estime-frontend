@@ -227,7 +227,7 @@
                         #beneficiaireAAH="ngModel"
                         (click)="onClickCheckBoxHasAAH()"
                         (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)"
-                        (disabled)="beneficiaireAidesSociales.beneficiaireAAH && beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi">
+                        [disabled]="beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi">
                         <div>
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>

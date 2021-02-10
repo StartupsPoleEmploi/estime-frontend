@@ -124,7 +124,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
-    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateDernierOuvertureDroitASS)) {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }

@@ -254,7 +254,7 @@ export class MaSituationComponent implements OnInit {
   /************ private methods ************************/
 
   private checkAndSaveDateNaissanceDemandeurEmploiConnecte(): void {
-    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)) {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)) {
       this.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissance);
     }
   }

@@ -63,7 +63,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasPensionInvalidite(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
     }

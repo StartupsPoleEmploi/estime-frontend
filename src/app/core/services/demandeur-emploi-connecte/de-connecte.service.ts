@@ -116,7 +116,7 @@ export class DeConnecteService {
   public unsetPensionInvalidite(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }

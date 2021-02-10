@@ -22,9 +22,12 @@ export class DateUtileService {
 
   public checkDateAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
-    if(this.isAnneeValide(dateDecomposee) && this.isDateAfterDateJour(dateDecomposee)) {
-      dateDecomposee.isDateSuperieurDateJour = true;
+    if(this.isDateValide(dateDecomposee)) {
+      if(this.isDateAfterDateJour(dateDecomposee)) {
+        dateDecomposee.isDateSuperieurDateJour = true;
+      }
     }
+
   }
 
   public checkFormatDateAvecInferieurDateJour(dateDecomposee: DateDecomposee): void {
@@ -51,7 +54,7 @@ export class DateUtileService {
         dateDecomposee.messageErreurFormatJour =  "Le jour doit être au format JJ";
         dateDecomposee.isJourInvalide = true;
       }
-      if (dateDecomposee.jour === "00") {
+      if (dateDecomposee.jour === "00" || parseInt(dateDecomposee.jour) > 31) {
         dateDecomposee.messageErreurFormatJour =  "Le jour est incorrect";
         dateDecomposee.isJourInvalide = true;
       }
@@ -206,6 +209,18 @@ export class DateUtileService {
     return moment(dateToCompareFormat).isAfter(dateDecomposeeDateJourFormat);
   }
 
+  public isDateDecomposeeSaisieAvecInferieurDateJourValide(dateDecomposee: DateDecomposee): boolean {
+    let isValid = true;
+    if(this.isDateValide(dateDecomposee)) {
+      if(this.isDateAfterDateJour(dateDecomposee)) {
+        isValid = false;
+      }
+    } else {
+      isValid = false;
+    }
+    return isValid;
+  }
+
   public isDateValide(dateDecomposee: DateDecomposee): boolean {
     return this.isJourValide(dateDecomposee)
     && this.isMoisValide(dateDecomposee)
@@ -219,6 +234,8 @@ export class DateUtileService {
       if (parseInt(dateDecomposee.jour) > nbJourMois || dateDecomposee.jour.length != 2 || dateDecomposee.jour === "00") {
         isValid = false;
       }
+    } else {
+      isValid = false;
     }
     return isValid;
   }
@@ -229,33 +246,18 @@ export class DateUtileService {
       if (dateDecomposee.mois.length != 2 || parseInt(dateDecomposee.mois) > 12 || dateDecomposee.mois === "00") {
         isValid = false;
       }
+    } else {
+      isValid = false;
     }
     return isValid;
   }
 
   public isAnneeValide(dateDecomposee: DateDecomposee): boolean {
     let isValid = true;
-    if (dateDecomposee.annee && dateDecomposee.annee.length != 4) {
+    if (!dateDecomposee.annee || (dateDecomposee.annee && dateDecomposee.annee.length != 4)) {
       isValid = false;
     }
     return isValid;
-  }
-
-  public isDateDecomposeeSaisieAvecInferieurDateJourValide(dateDecomposee: DateDecomposee): boolean {
-    return !this.isDateAfterDateJour(dateDecomposee) && this.isDateDecomposeeSaisieValide(dateDecomposee);
-  }
-
-  public isDateDecomposeeSaisieValide(dateDecomposee: DateDecomposee): boolean {
-    let isDateDecomposeeSaisieValide = false;
-    if (!dateDecomposee.messageErreurFormatJour
-      && !dateDecomposee.messageErreurFormatMois
-      && !dateDecomposee.messageErreurFormatAnnee
-      && dateDecomposee.jour
-      && dateDecomposee.mois
-      && dateDecomposee.annee) {
-      isDateDecomposeeSaisieValide = true;
-    }
-    return isDateDecomposeeSaisieValide;
   }
 
   /************ private methods ***********************/

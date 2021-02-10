@@ -8,7 +8,7 @@
                 <label
                     class="label"
                     for="montantAllocationsLogement">
-                    Allocations logement pour les 3 derniers mois
+                    Allocations logement perçues pour les 3 derniers mois
                 </label>
             </div>
             <div class="mb-2">
@@ -28,7 +28,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(1) }}</span>
+                    <span class="text-side-input">€ au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(1) }}</span>
                 </div>
                 <div class="row">
                     <span
@@ -55,7 +55,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(2) }}</span>
+                    <span class="text-side-input">€ au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(2) }}</span>
                 </div>
                 <div class="row">
                     <span
@@ -82,7 +82,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
-                    <span class="text-side-input">€ perçu au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(3) }}</span>
+                    <span class="text-side-input">€ au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(3) }}</span>
                 </div>
                 <div class="row">
                     <span
@@ -100,7 +100,7 @@
                 <label
                     class="label"
                     for="allocationsFamilialesMensuellesNetFoyer">
-                    Allocations familiales du foyer
+                    Allocations familiales du foyer perçues
                 </label>
             </div>
             <div class="row">
@@ -118,7 +118,7 @@
                     inputmode="decimal"
                     (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                <span class="text-side-input">€ perçu le mois dernier</span>
+                <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
                 <span
@@ -135,7 +135,7 @@
                 <label
                     class="label"
                     for="montantPersionsAlimentairesFoyer">
-                    Pensions alimentaires du foyer
+                    Pensions alimentaires du foyer perçues
                 </label>
             </div>
             <div class="row">
@@ -152,7 +152,7 @@
                     inputmode="decimal"
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
-                <span class="text-side-input">€ perçu le mois dernier</span>
+                <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
                 <span

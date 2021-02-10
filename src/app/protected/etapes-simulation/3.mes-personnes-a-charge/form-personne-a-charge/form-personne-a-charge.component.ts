@@ -28,9 +28,6 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   @Output() ajoutNouvellePersonneEventEmitter = new EventEmitter<boolean>();
 
-  //récupération d'éléments HTML
-  @ViewChild('moisDateNaissanceNouvellePersonne', { read: ElementRef }) moisDateNaissanceNouvellePersonneInput: ElementRef;
-  @ViewChild('anneeDateNaissanceNouvellePersonne', { read: ElementRef }) anneeDateNaissanceNouvellePersonneInput: ElementRef;
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
@@ -79,7 +76,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private checkAndSaveDateNaissanceNouvellePersonneConnecte(): void {
-    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissanceNouvellePersonne)) {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)) {
       this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissanceNouvellePersonne);
     }
   }

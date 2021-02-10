@@ -33,7 +33,6 @@ export class RessourcesFinancieresUtileService {
     allocationsCAF.pensionsAlimentairesFoyer = 0;
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
     const allocationsCPAM = new AllocationsCPAM();
-    allocationsCPAM.pensionInvalidite = 0;
     ressourcesFinancieres.allocationsCPAM = allocationsCPAM;
     return ressourcesFinancieres;
   }
