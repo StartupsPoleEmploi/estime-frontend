@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 
 @Component({
   selector: 'app-accessibilite',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accessibilite.component.scss']
 })
 export class AccessibiliteComponent implements OnInit {
+
+  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   constructor() { }
 

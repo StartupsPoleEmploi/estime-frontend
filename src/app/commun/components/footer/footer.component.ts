@@ -26,4 +26,8 @@ export class FooterComponent implements OnInit {
     this.router.navigate([RoutesEnum.ACCESSIBILITE]);
   }
 
+  public onClickLogoEstime(): void {
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
+  }
+
 }

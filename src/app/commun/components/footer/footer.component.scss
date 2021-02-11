@@ -15,6 +15,14 @@ footer {
   @media #{$medium-device} {
     height: 17rem;
   }
+  a {
+    color: $color-blue-1;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      outline: none;
+    }
+  }
   .row-1-footer {
     padding-top: 20px;
     @media #{$medium-device} {
@@ -37,6 +45,7 @@ footer {
       .row {
         max-width: 260px;
         img {
+          cursor: pointer;
           width: 69px;
           @media #{$medium-device} {
             width: 157px;
