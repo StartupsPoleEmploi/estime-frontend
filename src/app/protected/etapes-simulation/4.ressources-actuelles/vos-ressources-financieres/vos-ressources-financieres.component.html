@@ -23,8 +23,8 @@
                     min="0"
                     maxlength="5"
                     class="form-control"
-                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
-                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
+                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet"
                     required
                     placeholder="Montant"
                     inputmode="decimal"
@@ -34,7 +34,7 @@
                 <span class="text-2-side-input">net/jour</span>
             </div>
             <span
-                *ngIf="this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)"
+                *ngIf="this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ASS}}
             </span>

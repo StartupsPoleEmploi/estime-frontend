@@ -33,7 +33,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasARE(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = 0;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
       this.unsetASS();
@@ -43,7 +43,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasASS(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = 0;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = 0;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
       this.unsetARE();
@@ -138,14 +138,14 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   private unsetASS(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = null;
     }
   }
 
   private unsetARE(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE= false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = null;
     }
   }
 

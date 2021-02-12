@@ -160,7 +160,7 @@ export class DeConnecteService {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE = false;
       if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = null;
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
@@ -171,7 +171,7 @@ export class DeConnecteService {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS = false;
       if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = null;
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }

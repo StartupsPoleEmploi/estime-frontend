@@ -48,10 +48,8 @@ export class RessourcesFinancieresUtileService {
    */
   public replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
     if (ressourcesFinancieres.allocationsPoleEmploi) {
-      ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetARE = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetARE);
-      ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS);
-      ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetARE);
-      ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNetASS);
+      ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet);
+      ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet);
     }
     if (ressourcesFinancieres.allocationsCAF) {
       if (ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer) {
@@ -85,7 +83,7 @@ export class RessourcesFinancieresUtileService {
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+    return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
   }
 
 

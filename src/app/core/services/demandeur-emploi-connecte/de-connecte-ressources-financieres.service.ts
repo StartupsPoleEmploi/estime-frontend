@@ -67,7 +67,7 @@ export class DeConnecteRessourcesFinancieresService {
       }
       if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
         const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
-        montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNetASS));
+        montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet));
       }
     }
     return montant;
@@ -153,8 +153,7 @@ export class DeConnecteRessourcesFinancieresService {
     let montant = 0;
     if (ressourcesFinancieres.allocationsPoleEmploi) {
       const allocationsPoleEmploi = ressourcesFinancieres.allocationsPoleEmploi;
-      montant += this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetARE)
-        + this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNetASS);
+      montant += this.numberUtileService.getMontantSafe(allocationsPoleEmploi.allocationMensuelleNet);
     }
     return montant;
   }
