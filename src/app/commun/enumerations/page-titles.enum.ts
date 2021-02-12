@@ -1,5 +1,5 @@
 export enum PageTitlesEnum {
-  ACCESSIBILITE = 'Accéssibilité',
+  ACCESSIBILITE = 'Accessibilité',
   AVANT_COMMENCER_SIMULATION = 'Avant de commencer',
   CGU = 'Conditions générales d\'utilisation',
   CONTRAT_TRAVAIL = 'Contrat de travail envisagé',
