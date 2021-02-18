@@ -35,9 +35,9 @@ class RessourcesActuellesPage {
   }
 
   public saisirDateDerniereOuvertureDroitASS(jour: string, mois: string, annee: string): void {
-    cy.get('[data-testid=input-jour-date-derniere-ouverture-droit-ass]').type(jour);
-    cy.get('[data-testid=input-mois-date-derniere-ouverture-droit-ass]').type(mois);
-    cy.get('[data-testid=input-annee-date-derniere-ouverture-droit-ass]').type(annee);
+    cy.get('[data-testid=input-jour-date]').type(jour);
+    cy.get('[data-testid=input-mois-date]').type(mois);
+    cy.get('[data-testid=input-annee-date]').type(annee);
   }
 
   public clickOnCumuleAssEtSalaireNon(): void {
