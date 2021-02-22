@@ -4,8 +4,30 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-journaliere-net-ass]').type(montant);
   }
 
+  public saisirAAH(montant : string): void {
+    cy.get('[data-testid=input-aah').type(montant);
+  }
+
+  public saisirPensionInvalidite(montant : string): void {
+    cy.get('[data-testid=input-pension-invalidite').type(montant);
+  }
+
   public saisirAllocationLogementFoyer(montant: string): void {
-    cy.get('[data-testid=input-apl]').type(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins1(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-1]').type(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins2(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-2]').type(montant);
+  }
+
+  public saisirAllocationsLogementFoyerMoisMoins3(montant : string): void {
+    cy.get('[data-testid=input-apl-mois-moins-3]').type(montant);
   }
 
   public saisirAllocationFamilialeFoyer(montant: string): void {
@@ -13,9 +35,9 @@ class RessourcesActuellesPage {
   }
 
   public saisirDateDerniereOuvertureDroitASS(jour: string, mois: string, annee: string): void {
-    cy.get('[data-testid=input-jour-date-derniere-ouverture-droit-ass]').type(jour);
-    cy.get('[data-testid=input-mois-date-derniere-ouverture-droit-ass]').type(mois);
-    cy.get('[data-testid=input-annee-date-derniere-ouverture-droit-ass]').type(annee);
+    cy.get('[data-testid=input-jour-date]').type(jour);
+    cy.get('[data-testid=input-mois-date]').type(mois);
+    cy.get('[data-testid=input-annee-date]').type(annee);
   }
 
   public clickOnCumuleAssEtSalaireNon(): void {

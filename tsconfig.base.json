@@ -13,7 +13,6 @@
       "@app/*": ["app/*"],
       "@enumerations/*": ["app/commun/enumerations/*"],
       "@environments/*": ["environments/*"],
-      "@internal/publicodes": ["../lib/publicodes"],
       "@models/*": ["app/commun/models/*"],
       "@services/*": ["app/core/services/*"],
       "@services-utiles/*": ["app/core/services/utile/*"]

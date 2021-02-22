@@ -46,7 +46,7 @@ export class MaSituationComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    private dateUtileService: DateUtileService,
+    public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     private router: Router,
     private situationFamilialeUtileService: SituationFamilialeUtileService,
@@ -254,8 +254,7 @@ export class MaSituationComponent implements OnInit {
   /************ private methods ************************/
 
   private checkAndSaveDateNaissanceDemandeurEmploiConnecte(): void {
-    this.dateNaissance.messageErreurFormat = this.dateUtileService.checkFormat(this.dateNaissance);
-    if (this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)) {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)) {
       this.informationsPersonnelles.dateNaissance = this.dateUtileService.getStringDateFromDateDecomposee(this.dateNaissance);
     }
   }
@@ -263,7 +262,7 @@ export class MaSituationComponent implements OnInit {
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
-      && this.dateUtileService.isDateDecomposeeSaisieValide(this.dateNaissance)
+      && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
   }
@@ -283,27 +282,5 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
     }
-  }
-
-  /** gestion évènements champ date naissance  **/
-
-  public onChangeOrKeyUpDateNaissanceJour(event): void {
-    event.stopPropagation();
-    const value = this.dateNaissance.jour;
-    if (value && value.length === 2) {
-      this.moisDateNaissanceInput.nativeElement.focus();
-    }
-  }
-
-  public onChangeOrKeyUpDateNaissanceMois(event): void {
-    event.stopPropagation();
-    const value = this.dateNaissance.mois;
-    if (value && value.length === 2) {
-      this.anneeDateNaissanceInput.nativeElement.focus();
-    }
-  }
-
-  public onFocusDateNaissance(): void {
-    this.dateNaissance.messageErreurFormat = undefined;
   }
 }

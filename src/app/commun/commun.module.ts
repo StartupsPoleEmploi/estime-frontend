@@ -14,6 +14,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalSessionExpiredComponent } from './components/modal-session-expired/modal-session-expired.component';
 import { FilArianeComponent } from './components/fil-ariane/fil-ariane.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { DateInputsComponent } from './components/date-inputs/date-inputs.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,12 +29,15 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     NotFoundComponent,
     PageLoadingComponent,
     SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent
+    SignoutRedirectCallbackComponent,
+    DateInputsComponent
   ],
   imports: [
     AlertModule.forRoot(),
     BrowserModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
   ],
@@ -43,7 +48,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     FilArianeComponent,
     FooterComponent,
     HeaderComponent,
-    PageLoadingComponent
+    PageLoadingComponent,
+    DateInputsComponent
   ]
 })
 export class CommunModule { }

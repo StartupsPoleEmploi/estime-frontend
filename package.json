@@ -37,16 +37,15 @@
     "image-to-base64": "2.1.1",
     "jquery": "3.5.1",
     "modele-social": "0.2.0",
+    "moment": "^2.29.1",
     "ngx-bootstrap": "5.6.1",
     "ngx-cookie-service": "10.1.1",
     "ngx-webstorage": "6.0.0",
     "pdfmake": "0.1.68",
+    "publicodes": "1.0.0-beta.12",
     "rxjs": "6.5.5",
     "tslib": "2.0.0",
-    "zone.js": "0.10.3",
-    "moo": "0.5.1",
-    "nearley": "2.20.1",
-    "yaml": "1.10.0"
+    "zone.js": "0.10.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1002.0",

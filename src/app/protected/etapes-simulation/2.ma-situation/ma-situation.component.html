@@ -53,71 +53,10 @@
                     </label>
                 </div>
                 <div class="form-group">
-                    <div class="row btn-group-input-date">
-                        <input
-                            name="jourDateNaissance"
-                            (focus)="onFocusDateNaissance()"
-                            class="form-control jour-input"
-                            (change)="onChangeOrKeyUpDateNaissanceJour($event)"
-                            maxlength="2"
-                            type="text"
-                            min="0"
-                            (keyup)="onChangeOrKeyUpDateNaissanceJour($event)"
-                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="JJ"
-                            [(ngModel)]="dateNaissance.jour"
-                            required
-                            inputmode="numeric"
-                            #jourDateNaissance="ngModel">
-                        <input
-                            name="moisDateNaissance"
-                            (focus)="onFocusDateNaissance()"
-                            class="form-control mois-input"
-                            (change)="onChangeOrKeyUpDateNaissanceMois($event)"
-                            maxlength="2"
-                            type="text"
-                            min="0"
-                            (keyup)="onChangeOrKeyUpDateNaissanceMois($event)"
-                            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="MM"
-                            [(ngModel)]="dateNaissance.mois"
-                            required
-                            inputmode="numeric"
-                            #moisDateNaissance="ngModel">
-                        <input
-                            name="anneeDateNaissance"
-                            (focus)="onFocusDateNaissance()"
-                            class="form-control annee-input"
-                            maxlength="4"
-                            type="text"
-                            min="1900"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                            placeholder="AAAA"
-                            [(ngModel)]="dateNaissance.annee"
-                            required
-                            inputmode="numeric"
-                            #anneeDateNaissance="ngModel">
-                    </div>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isInformationsPersonnellesFormSubmitted || jourDateNaissance.touched)  && jourDateNaissance.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isInformationsPersonnellesFormSubmitted || moisDateNaissance.touched)  && moisDateNaissance.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="(isInformationsPersonnellesFormSubmitted || anneeDateNaissance.touched) && anneeDateNaissance.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="row error-input-message"
-                        *ngIf="isInformationsPersonnellesFormSubmitted  && dateNaissance.messageErreurFormat">
-                        {{dateNaissance.messageErreurFormat}}
-                    </span>
+                    <app-date-inputs
+                        [dateSaisie]="dateNaissance"
+                        [isFormSubmitted]="isInformationsPersonnellesFormSubmitted">
+                    </app-date-inputs>
                 </div>
             </div>
             <div class="form-group">
@@ -228,12 +167,14 @@
                     <label
                         name="beneficiaireASS"
                         class="radio-button-style-1"
+                        [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi}"
+                        data-testid="btn-situation-ass"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
                         btnCheckbox
                         tabindex="0"
                         role="button"
-                        #beneficiaireAAH="ngModel"
-                        disabled>
+                        [disabled]="beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi"
+                        #beneficiaireAAH="ngModel">
                         <div>
                             <span>{{situationPersonneEnum.ASS}}</span>
                         </div>
@@ -242,6 +183,7 @@
                         id="btn-is-createur-entreprise"
                         name="createurEntreprise"
                         class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                        data-testid="btn-situation-createur-entreprise"
                         [(ngModel)]="informationsPersonnelles.createurEntreprise"
                         btnCheckbox
                         tabindex="0"
@@ -258,6 +200,7 @@
                     <label
                         id="btn-has-revenus-immobilier"
                         name="hasRevenusImmobilier"
+                        data-testid="btn-situation-revenu-immobilier"
                         class="radio-button-style-1 mt-perso-sm ml-perso-lm"
                         [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
                         btnCheckbox
@@ -275,13 +218,16 @@
                     <label
                         name="beneficiaireAAH"
                         class="radio-button-style-1"
+                        [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi}"
+                        data-testid="btn-situation-aah"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
                         btnCheckbox
                         tabindex="0"
                         role="button"
                         #beneficiaireAAH="ngModel"
                         (click)="onClickCheckBoxHasAAH()"
-                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
+                        (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)"
+                        [disabled]="beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi">
                         <div>
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>
@@ -289,6 +235,7 @@
                     <label
                         name="beneficiairePensionInvalidite"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-pension-invalidite"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiairePensionInvalidite"
                         btnCheckbox
                         tabindex="0"
@@ -297,7 +244,9 @@
                         (click)="onClickCheckBoxHasPensionInvalidite()"
                         (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
                         <div>
-                            <span>{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
+                            <span>
+                                {{situationPersonneEnum.PENSION_INVALIDITE}}
+                            </span>
                         </div>
                     </label>
                 </div>
@@ -332,6 +281,7 @@
                         (click)="onClickCheckBoxSituationFamiliale()"
                         name="situationFamilialeDemandeur"
                         class="radio-button-style-1 ml-1"
+                        data-testid="btn-situation-familiale-couple"
                         [btnRadio]="true"
                         tabindex="0"
                         role="button"
@@ -364,6 +314,7 @@
                         #conjointIsSalarie="ngModel"
                         name="conjointIsSalarie"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-salarie"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -378,6 +329,7 @@
                         #conjointHasARE="ngModel"
                         name="conjointHasARE"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-are"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -392,6 +344,7 @@
                         #conjointHasASS="ngModel"
                         name="conjointHasASS"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-ass"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -406,6 +359,7 @@
                         #conjointHasRSA="ngModel"
                         name="conjointHasRSA"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-rsa"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -420,6 +374,7 @@
                         #conjointHasAAH="ngModel"
                         name="conjointHasAAH"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-aah"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -435,6 +390,7 @@
                         #conjointHasPensionInvalidite="ngModel"
                         name="conjointHasInvalidite"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-pension-invalidite"
                         btnCheckbox
                         tabindex="0"
                         role="button"
@@ -442,13 +398,16 @@
                         (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                         (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
                         <div>
-                            <span>{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
+                            <span>
+                                {{situationPersonneEnum.PENSION_INVALIDITE}}
+                            </span>
                         </div>
                     </label>
                     <label
                         #conjointIsSansRessource="ngModel"
                         name="conjointIsSansRessource"
                         class="radio-button-style-1"
+                        data-testid="btn-situation-conjoint-sans-ressource"
                         btnCheckbox
                         tabindex="0"
                         role="button"

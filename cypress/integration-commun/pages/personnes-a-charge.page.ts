@@ -13,9 +13,9 @@ class PersonnesAChargePage {
   }
 
   public saisirDateNaissance(jour: string, mois: string, annee: string): void {
-    cy.get('[data-testid=input-jour-date-naissance]').type(jour);
-    cy.get('[data-testid=input-mois-date-naissance]').type(mois);
-    cy.get('[data-testid=input-annee-date-naissance]').type(annee);
+    cy.get('[data-testid=input-jour-date]').type(jour);
+    cy.get('[data-testid=input-mois-date]').type(mois);
+    cy.get('[data-testid=input-annee-date]').type(annee);
   }
 }
 export default PersonnesAChargePage

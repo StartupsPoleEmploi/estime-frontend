@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { FormGroup, NgForm } from '@angular/forms';
@@ -20,10 +21,12 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   @Output() validationRessourcesFoyerEventEmitter = new EventEmitter<void>();
 
+
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    public dateUtileService: DateUtileService,
     private elementRef: ElementRef,
   ) {
 

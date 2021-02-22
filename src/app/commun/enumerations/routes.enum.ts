@@ -1,5 +1,6 @@
 export enum RoutesEnum {
   HOMEPAGE = '/',
+  ACCESSIBILITE = 'accessibilite',
   AVANT_COMMENCER_SIMULATION = 'avant-de-commencer',
   CGU = 'conditions-generales-utilisation',
   CONTACT = 'contact',

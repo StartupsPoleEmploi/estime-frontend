@@ -10,6 +10,10 @@
     font-weight: bold;
     font-size: 16px;
   }
+  .texte-style-1 {
+    color:#3853B9;
+    font-weight: bold;
+  }
 }
 
 html, body {
@@ -25,12 +29,12 @@ body {
   display : table;
   width :100% ;
   background-color: $color-white-2;
-  padding-bottom: 14rem;
-  @media #{$small-device} {
-    padding-bottom: 8rem;
+  padding-bottom: 16rem;
+  @media #{$tablet-device} {
+    padding-bottom: 12rem;
   }
-  @media #{$large-device} {
-    padding-bottom: 5rem;
+  @media #{$medium-device} {
+    padding-bottom: 18rem;
   }
 }
 

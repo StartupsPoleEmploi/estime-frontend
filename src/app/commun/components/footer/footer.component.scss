@@ -1,115 +1,158 @@
 @import "../../../../assets/scss/variables";
 
 footer {
+  padding-left: 10px;
   background-color: $color-white-1;
   bottom: 0;
   display: block;
-  font-size: 16px;
-  height: 12rem;
+  height: 15rem;
   left: 0;
   position: absolute;
   right: 0;
-  @media screen and (max-width: 767px) {
-    .container-fluid {
+  @media #{$tablet-device} {
+    height: 11rem;
+  }
+  @media #{$medium-device} {
+    height: 17rem;
+  }
+  a {
+    color: $color-blue-1;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      outline: none;
+    }
+  }
+  .row-1-footer {
+    padding-top: 20px;
+    @media #{$medium-device} {
+      padding-bottom: 15px;
+      padding-right: 15px;
+      padding-top: 45px;
+    }
+    .row-1-footer-div-1 {
+      display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox; /* TWEENER - IE 10 */
+      display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+      justify-content: center;
+      align-items: center;
+      line-height: 26px !important;
+      @media #{$medium-device} {
+        margin-left: 0;
+        margin-right: auto;
+      }
       .row {
-        margin-top: 1.5rem;
+        max-width: 260px;
+        img {
+          cursor: pointer;
+          width: 69px;
+          @media #{$medium-device} {
+            width: 157px;
+          }
+        }
+        .col-texte-service-estime {
+          max-width: 265px;
+          span {
+            font-size: 12px;
+          }
+        }
       }
     }
-  }
-  @media #{$small-device} {
-    height: 8rem;
-  }
-  @media #{$large-device} {
-    height: 5rem;
-  }
-  #div-1-footer {
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-    justify-content: center;
-    align-items: center;
-    @media screen and (min-width: 768px) {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    @media #{$large-device} {
+    .row-1-footer-div-2 {
+      font-size: 12px;
       margin-left: 0;
       margin-right: auto;
-    }
-    img {
-      width: 69px;
-      @media screen and (min-width: 768px) {
-        width: 99px;
-      }
-    }
-    a {
-      margin-left: 15px;
-      @media screen and (max-width:1300px) {
-        font-size: 12px;
-      }
-    }
-  }
-  #div-2-footer {
-    align-items: center;
-    justify-content: center;
-    line-height: 10px !important;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    @media screen and (min-width: 768px) {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    @media #{$large-device} {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #logo-fonds-social-europeen-footer {
-      width: 51px;
-      margin-top: 10px;
-      @media screen and (min-width: 768px) {
-        margin-top: 0;
-        width: 75px;
-      }
-    }
-    #logo-ue-footer {
-      margin-left: 12px;
-      margin-right: 12px;
-      margin-top: 10px;
       @media #{$medium-device} {
-        margin-top: 2px;
+        font-size: 16px;
+        min-width: 380px;
       }
-      width: 41px;
-      @media screen and (min-width: 768px) {
-        width: 65px;
-      }
-    }
-    #text-fse-footer {
-      width: 134px;
-      @media #{$medium-device} {
-        width: 176px;
-      }
-
-      span {
-        font-size: 8px !important;
+      div {
+        padding-top: 9px;
+        padding-bottom: 9px;
         @media #{$medium-device} {
-          font-size: 9px !important;
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+      }
+    }
+    .row-1-footer-div-3 {
+      line-height: 4px !important;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      @media #{$medium-device} {
+        line-height: 10px !important;
+        margin-left: auto;
+        margin-right: 0;
+        max-width: 285px;;
+      }
+      .row-col-1 {
+        padding-right: 0;
+        @media #{$medium-device} {
+          margin-bottom: 12px;
+          padding-right: 15px;
+        }
+        #logo-pole-emploi-colored {
+          width: 45px;
+          margin-right: 10px;
+          @media #{$medium-device} {
+            margin-left: 45px;
+            margin-right: 0;
+            width: 78px;
+          }
+        }
+        #logo-fonds-social-europeen-footer {
+          width: 51px;
+          margin-left: 10px;
+          margin-right: 10px;
+          @media #{$medium-device} {
+            margin-left: 0;
+            margin-right: 0;
+            width: 98px;
+          }
+        }
+      }
+      .row-col-2 {
+        @media #{$medium-device} {
+          margin-top: 12px;
+        }
+        #logo-ue-footer {
+          margin-left: 10px;
+          margin-right: 10px;
+          @media #{$medium-device} {
+            margin-top: 2px;
+          }
+          width: 41px;
+          @media screen and (min-width: 768px) {
+            width: 65px;
+          }
+        }
+        #text-fse-footer {
+          width: 84px;
+          @media #{$medium-device} {
+            width: 176px;
+          }
+          span {
+            font-size: 6px !important;
+            @media #{$medium-device} {
+              font-size: 9px !important;
+            }
+          }
         }
       }
     }
   }
-  #div-3-footer {
-    border-top: 1px solid $color-grey-3;
-    padding-top: 15px;
+  .row-2-footer {
+    border-top: 1px solid $color-grey-1;
     padding-bottom: 15px;
+    padding-top: 15px;
     text-align: center;
-    @media #{$large-device} {
-      border: 0;
-      margin-left: auto;
-      margin-right: 0;
-    }
     span {
-      font-size: 10px;
+      font-size: 8px;
+      width: 100%;
+      @media #{$medium-device} {
+        font-size: 12px;
+      }
     }
   }
 

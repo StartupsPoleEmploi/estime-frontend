@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DateDecomposee } from "@models/date-decomposee";
+import * as moment from 'moment';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DateUtileService {
 
   mois = [
@@ -19,23 +20,91 @@ export class DateUtileService {
     { label: "Décembre", labelCourt: "Déc", value: 12 },
   ];
 
-  public isBissextile(annee: number): boolean {
-    return (annee % 100 === 0) ? (annee % 400 === 0) : (annee % 4 === 0);
+  public checkDateAfterDateJour(dateDecomposee: DateDecomposee): void {
+    dateDecomposee.isDateSuperieurDateJour = false;
+    if(this.isDateValide(dateDecomposee)) {
+      if(this.isDateAfterDateJour(dateDecomposee)) {
+        dateDecomposee.isDateSuperieurDateJour = true;
+      }
+    }
+
   }
 
-  public getNombreJoursMois(mois:number, annee:number): number {
+  public checkFormatDateAvecInferieurDateJour(dateDecomposee: DateDecomposee): void {
+    this.checkFormatDate(dateDecomposee);
+    this.checkDateAfterDateJour(dateDecomposee);
+  }
+
+  public checkFormatDate(dateDecomposee: DateDecomposee): void {
+    this.checkFormatJour(dateDecomposee);
+    this.checkFormatMois(dateDecomposee);
+    this.checkFormatAnnee(dateDecomposee);
+  }
+
+  public  checkFormatJour(dateDecomposee: DateDecomposee): void {
+    dateDecomposee.isJourInvalide = false;
+    dateDecomposee.messageErreurFormatJour = undefined;
+    if (dateDecomposee && dateDecomposee.jour) {
+      const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
+      if (parseInt(dateDecomposee.jour) > nbJourMois) {
+        dateDecomposee.messageErreurFormatJour = "Le jour doit être inférieur ou égal à " + nbJourMois;
+        dateDecomposee.isJourInvalide = true;
+      }
+      if (dateDecomposee.jour.length != 2) {
+        dateDecomposee.messageErreurFormatJour =  "Le jour doit être au format JJ";
+        dateDecomposee.isJourInvalide = true;
+      }
+      if (dateDecomposee.jour === "00" || parseInt(dateDecomposee.jour) > 31) {
+        dateDecomposee.messageErreurFormatJour =  "Le jour est incorrect";
+        dateDecomposee.isJourInvalide = true;
+      }
+    }
+  }
+
+  public checkFormatMois(dateDecomposee: DateDecomposee): void {
+    dateDecomposee.isMoisInvalide = false;
+    dateDecomposee.messageErreurFormatMois = undefined;
+    if (dateDecomposee && dateDecomposee.mois) {
+      if (dateDecomposee.mois.length != 2) {
+        dateDecomposee.messageErreurFormatMois = "Le mois doit être au format MM";
+        dateDecomposee.isMoisInvalide = true;
+      }
+      if (parseInt(dateDecomposee.mois) > 12 || dateDecomposee.mois === "00") {
+        dateDecomposee.messageErreurFormatMois = "Le mois est incorrect";
+        dateDecomposee.isMoisInvalide = true;
+      }
+    }
+  }
+
+  public checkFormatAnnee(dateDecomposee: DateDecomposee): void {
+    dateDecomposee.isAnneeInvalide = false;
+    dateDecomposee.messageErreurFormatAnnee = undefined;
+    if (dateDecomposee && dateDecomposee.annee && dateDecomposee.annee.length != 4) {
+      dateDecomposee.messageErreurFormatAnnee = "L'année doit être au format AAAA";
+      dateDecomposee.isAnneeInvalide = true;
+    }
+  }
+
+  public getNombreJoursMois(mois: number, annee: number): number {
     return new Date(annee, mois, 0).getDate();
   }
 
   public getNombreJoursMoisPrecedent(): number {
     const dateJour = new Date();
     const month = dateJour.getMonth();
-    const year =  dateJour.getFullYear();
+    const year = dateJour.getFullYear();
     return this.getNombreJoursMois(month, year);
   }
 
-  public isFormatDateValide(dateDecomposee: DateDecomposee): boolean {
-    return this.checkFormat(dateDecomposee) === undefined;
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateToFormat
+   */
+  public getLibelleDateFromDate(dateToFormat: Date): string {
+    const month = dateToFormat.getMonth() + 1;
+    const year = dateToFormat.getFullYear();
+    const moisLabel = this.getLibelleMoisByMoisNumber(month);
+    return `${moisLabel} ${year}`;
   }
 
   /**
@@ -67,52 +136,9 @@ export class DateUtileService {
     return dateSimulationSplit[2] + '/' + dateSimulationSplit[1] + '/' + dateSimulationSplit[0];
   }
 
-  public checkFormat(dateDecomposee: DateDecomposee): string {
-    let errorFormatMessage = undefined;
-    const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
-    if(dateDecomposee.jour) {
-      if(parseInt(dateDecomposee.jour) > nbJourMois) {
-        errorFormatMessage = "Le jour doit être inférieur ou égal à " + nbJourMois;
-      }
-      if(dateDecomposee.jour.length != 2) {
-        errorFormatMessage = "Le jour doit être au format JJ";
-      }
-      if(dateDecomposee.jour === "00") {
-        errorFormatMessage = "Le jour est incorrect";
-      }
-    }
-    if(dateDecomposee.mois) {
-      if(dateDecomposee.mois.length != 2) {
-        errorFormatMessage = "Le mois doit être au format MM";
-      }
-      if(parseInt(dateDecomposee.mois) > 12 || dateDecomposee.mois === "00") {
-        errorFormatMessage = "Le mois est incorrect";
-      }
-    }
-    if(dateDecomposee.annee && dateDecomposee.annee.length != 4) {
-      errorFormatMessage = "L'année doit être au format AAAA";
-    }
-    const annee = new Date().getFullYear();
-    if(parseInt(dateDecomposee.annee) > annee) {
-      errorFormatMessage = "L'année ne peut pas être supérieure à l'année en cours";
-    }
-    return errorFormatMessage;
-  }
-
-  public isDateDecomposeeSaisieValide(dateDecomposee: DateDecomposee): boolean {
-    let isDateDecomposeeSaisieValide = false;
-    if(!dateDecomposee.messageErreurFormat
-      && dateDecomposee.jour
-      && dateDecomposee.mois
-      && dateDecomposee.annee) {
-        isDateDecomposeeSaisieValide = true;
-    }
-    return isDateDecomposeeSaisieValide;
-  }
-
   public getDateDecomposeeFromDate(dateADecompose: Date): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
-    if(dateADecompose) {
+    if (dateADecompose) {
       let dateADecomposeDate = new Date(dateADecompose);
       const jour = dateADecomposeDate.getDate();
       const mois = dateADecomposeDate.getMonth() + 1;
@@ -127,7 +153,7 @@ export class DateUtileService {
 
   public getDateDecomposeeFromStringDate(dateADecompose: string): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
-    if(dateADecompose) {
+    if (dateADecompose) {
       const dateADecomposeTab = dateADecompose.split("-");
       dateDecomposee.jour = dateADecomposeTab[2];
       dateDecomposee.mois = dateADecomposeTab[1];
@@ -150,21 +176,103 @@ export class DateUtileService {
     return dateFormat;
   }
 
+   /**
+   * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
+   * exemple :
+   * date du jour = 01/03/2021, si nMoisAvantDateJour = 2 alors dateFormatee = "janvier 2021"
+   *
+   * @param nMoisAvantSimulation
+   */
+  public getDateFormateeAvantDateJour(nMoisAvantDateJour: number): string {
+    const dateJour = new Date();
+    if (nMoisAvantDateJour == 0) {
+        return this.getLibelleDateFromDate(dateJour).toLowerCase();
+    } else {
+        const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
+        return this.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
+    }
+  }
+
+  public enleverMoisToDate(dateOrigine: Date, nbrMois: number): Date {
+    const m = moment(dateOrigine);
+    return m.subtract(nbrMois, 'M').toDate();
+  }
+
+  public isBissextile(annee: number): boolean {
+    return (annee % 100 === 0) ? (annee % 400 === 0) : (annee % 4 === 0);
+  }
+
+  public isDateAfterDateJour(dateDecomposee: DateDecomposee): boolean {
+    const dateToCompareFormat = this.getStringDateFromDateDecomposee(dateDecomposee);
+    const dateDecomposeeDateJour = this.getDateDecomposeeFromDate(new Date());
+    const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateDecomposeeDateJour);
+    return moment(dateToCompareFormat).isAfter(dateDecomposeeDateJourFormat);
+  }
+
+  public isDateDecomposeeSaisieAvecInferieurDateJourValide(dateDecomposee: DateDecomposee): boolean {
+    let isValid = true;
+    if(this.isDateValide(dateDecomposee)) {
+      if(this.isDateAfterDateJour(dateDecomposee)) {
+        isValid = false;
+      }
+    } else {
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  public isDateValide(dateDecomposee: DateDecomposee): boolean {
+    return this.isJourValide(dateDecomposee)
+    && this.isMoisValide(dateDecomposee)
+    && this.isAnneeValide(dateDecomposee)
+  }
+
+  public isJourValide(dateDecomposee: DateDecomposee): boolean {
+    let isValid = true;
+    const nbJourMois = this.getNombreJoursMois(parseInt(dateDecomposee.mois), parseInt(dateDecomposee.annee));
+    if (dateDecomposee.jour) {
+      if (parseInt(dateDecomposee.jour) > nbJourMois || dateDecomposee.jour.length != 2 || dateDecomposee.jour === "00") {
+        isValid = false;
+      }
+    } else {
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  public isMoisValide(dateDecomposee: DateDecomposee): boolean {
+    let isValid = true;
+    if (dateDecomposee.mois) {
+      if (dateDecomposee.mois.length != 2 || parseInt(dateDecomposee.mois) > 12 || dateDecomposee.mois === "00") {
+        isValid = false;
+      }
+    } else {
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  public isAnneeValide(dateDecomposee: DateDecomposee): boolean {
+    let isValid = true;
+    if (!dateDecomposee.annee || (dateDecomposee.annee && dateDecomposee.annee.length != 4)) {
+      isValid = false;
+    }
+    return isValid;
+  }
+
+  /************ private methods ***********************/
+
   private addZeroToNumber(numberToAddZero: number): string {
-    if(numberToAddZero < 10) {
+    if (numberToAddZero < 10) {
       return '0' + numberToAddZero.toString();
     }
     return numberToAddZero.toString();
   }
 
-  private isJourOuMoisValide(valueJourOuMois: string): boolean {
-    return valueJourOuMois.length === 2 && valueJourOuMois !== "00"
-  }
-
   private getLibelleCourtMoisByMoisNumber(moisNumber: number): string {
     let moisLabel = '';
     this.mois.forEach(mois => {
-      if(moisNumber === mois.value) {
+      if (moisNumber === mois.value) {
         moisLabel = mois.labelCourt;
       }
     });
@@ -174,7 +282,7 @@ export class DateUtileService {
   private getLibelleMoisByMoisNumber(moisNumber: number): string {
     let moisLabel = '';
     this.mois.forEach(mois => {
-      if(moisNumber === mois.value) {
+      if (moisNumber === mois.value) {
         moisLabel = mois.label;
       }
     });

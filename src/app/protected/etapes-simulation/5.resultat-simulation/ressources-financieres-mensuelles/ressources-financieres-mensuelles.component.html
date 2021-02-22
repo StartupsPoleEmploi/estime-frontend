@@ -26,15 +26,26 @@
                 <hr *ngIf="isItemAssIsNotLast()">
             </li>
             <li
-                class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetAAH > 0">
-                <app-item-ressource-actuelle
-                    codeRessource="AAH"
-                    [isColPictoArrowDisplay]="false"
-                    libelleRessource="Allocation aux Adultes Handicapés"
-                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
-                    organismeRessource="CAF">
-                </app-item-ressource-actuelle>
+                class="list-group-item li-aide-sociale-selectable"
+                *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
+                >
+                <button
+                type="button"
+                    role="button"
+                    class="btn"
+                    tabindex="0"
+                style="cursor: pointer;"
+                [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
+                (click)="onClickButtonAideSocialAAH()">
+                  <app-item-ressource-actuelle
+                  codeRessource="AAH"
+                  [isColPictoArrowDisplay]="true"
+                  libelleRessource="Allocation aux Adultes Handicapés"
+                  [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
+                  organismeRessource="CAF">
+              </app-item-ressource-actuelle>
+                </button>
+
                 <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
@@ -109,7 +120,7 @@
                     role="button"
                     class="btn"
                     tabindex="0"
-                    [ngClass]="{'active': isAideSocialSelected(aideKeyValue.value)}"
+                    [ngClass]="{'active': isAideSocialSelected(aideKeyValue.value.code)}"
                     (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
                     <app-item-ressource-actuelle
                         [codeRessource]="aideKeyValue.value.code"

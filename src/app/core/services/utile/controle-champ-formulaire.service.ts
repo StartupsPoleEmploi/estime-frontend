@@ -3,6 +3,7 @@ import { ElementRef, Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class ControleChampFormulaireService {
 
+
   REGEX_MONTANT = "^[0-9]{1,5}((\.|\,)[0-9]{1,2})?$";
   MESSAGE_CHAMP_OBLIGATOIRE = "Ce champ est obligatoire"
   MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX = "Tous les champs marqués d'un astérisque (*) sont obligatoires";
@@ -10,7 +11,13 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_ANNEE_OBLIGATOIRE = "L'année est obligatoire";
   MESSAGE_DATE_JOUR_OBLIGATOIRE = "Le jour est obligatoire";
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
-  MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 1250,49)"
+  MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 900,49)"
+  MESSAGE_MONTANT_ERREUR_2 = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 16,89)"
+  MESSAGE_MONTANT_0 = "Ce montant ne peut être égal à 0";
+  MESSAGE_MONTANT_JOURNALIER_ASS = "Ce montant doit être compris en 1 et 50";
+  MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
+  MONTANT_ASS_JOURNALIER_MAX = 50;
+  MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 
   public isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;
@@ -25,7 +32,19 @@ export class ControleChampFormulaireService {
 
   public focusOnFirstInvalidElement(elementRef: ElementRef): void {
     const invalidElements = elementRef.nativeElement.querySelectorAll('.ng-invalid');
-    invalidElements[1].focus();
+    if(invalidElements) {
+      let invalidElementsToFocus = null;
+      invalidElements.forEach(invalidElement => {
+        if(!invalidElementsToFocus && invalidElement.localName !== 'form') {
+          invalidElementsToFocus = invalidElement;
+        }
+      });
+      if(invalidElementsToFocus) {
+        invalidElementsToFocus.focus();
+      }
+    }
+
+
   }
 
 

@@ -115,8 +115,8 @@
                         name="dureeHebdomadaire"
                         data-testid="input-duree-hebdomadaire"
                         type="text"
-                        min="0"
-                        maxlength="4"
+                        maxlength="2"
+                        [ngClass]="{'ng-invalid': (futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0) || futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX}"
                         class="form-control"
                         placeholder="Nombre"
                         [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
@@ -125,6 +125,16 @@
                         #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">heures par semaine</span>
                 </div>
+                <span
+                    *ngIf="this.futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX"
+                    class="row error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
+                </span>
+                <span
+                    *ngIf="futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0"
+                    class="row error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
                 <span
                     class="row error-input-message"
                     *ngIf="(isFuturTravailFormSubmitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.required">
@@ -137,7 +147,7 @@
                     <label
                         class="label"
                         for="salaire-mensuel-net">
-                        * Indiquez le salaire mensuel net ou brut
+                        * Indiquez le salaire mensuel brut ou net
                         <img
                             class="interrogation-icon"
                             src="./assets/images/question.svg"
@@ -155,18 +165,32 @@
                                 name="salaireMensuelBrut"
                                 data-testid="input-salaire-mensuel-brut"
                                 type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event);"
-                                (focusout)="calculSalaireMensuelNet();"
-                                min="0"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
+                                (keyup)="calculSalaireMensuelNet();"
                                 maxlength="6"
                                 class="form-control"
+                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut)}"
                                 placeholder="Montant"
                                 [(ngModel)]="futurTravail.salaireMensuelBrut"
-                                required
                                 inputmode="decimal"
                                 #salaireMensuelBrut="ngModel">
                             <span class="text-side-input">€ mensuel brut</span>
                         </div>
+                        <span
+                            *ngIf="futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0"
+                            class="row error-input-message">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                        <span
+                            class="row error-input-message"
+                            *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                        <span
+                            class="row error-input-message"
+                            *ngIf="(isFuturTravailSalaireFormSubmitted || salaireMensuelBrut.touched)  && salaireMensuelBrut.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                        </span>
                     </div>
                     <div class="col-sm-12 col-md-2">
                         <span class="net-ou-brut">ou</span>
@@ -179,30 +203,48 @@
                                 name="salaireMensuelNet"
                                 data-testid="input-salaire-mensuel-net"
                                 type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                                (focusout)="calculSalaireMensuelBrut();"
-                                min="0"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                (keyup)="calculSalaireMensuelBrut();"
                                 maxlength="6"
                                 class="form-control"
                                 placeholder="Montant"
                                 [(ngModel)]="futurTravail.salaireMensuelNet"
-                                required
+                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelNet)}"
                                 inputmode="decimal"
                                 #salaireMensuelNet="ngModel">
                             <span class="text-side-input">€ mensuel net</span>
                         </div>
+                        <span
+                            *ngIf="futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0"
+                            class="row error-input-message">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                        <span
+                            class="row error-input-message"
+                            *ngIf="(isFuturTravailSalaireFormSubmitted || salaireMensuelNet.touched)  && salaireMensuelNet.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                        </span>
+                        <span
+                            class="row error-input-message"
+                            *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaireMensuelNet">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
                 </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched || salaireMensuelBrut.touched)  && salaireMensuelNet.errors?.required  && salaireMensuelBrut.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isFuturTravailFormSubmitted || salaireMensuelNet.touched || salaireMensuelBrut.touched)  && salaireMensuelNet.errors?.pattern && salaireMensuelBrut.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+            </div>
+            <div id="contrat-travail-div-infos-lieu-travail" class="row  mb-2">
+                <div
+                    class="col-auto">
+                    <div>
+                        <img src="./assets/images/info-grey.svg">
+                    </div>
+                </div>
+                <div
+                    class="col">
+                    <span>
+                      Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
+                    </span>
+                </div>
             </div>
             <div class="form-group">
                 <div class="row flex-column mb-2">
@@ -240,7 +282,7 @@
                     <label
                         class="label"
                         for="nombreTrajetsDomicileTravail">
-                        * Nombre de trajets aller
+                        * Nombre de trajets aller depuis votre domicile vers votre futur lieu de travail
                         <img
                             class="interrogation-icon"
                             src="./assets/images/question.svg"

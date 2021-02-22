@@ -7,6 +7,18 @@ import { SimulationMensuelle } from "@models/simulation-mensuelle";
 @Injectable({providedIn: 'root'})
 export class AidesService {
 
+  public getMontantAAH(simulationSelected: SimulationMensuelle): number {
+    let montant = 0;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
+          montant = aide.montant;
+        }
+      }
+    }
+    return montant;
+  }
+
   public getMontantASS(simulationSelected: SimulationMensuelle): number {
     let montant = 0;
     if(simulationSelected.mesAides) {
@@ -32,18 +44,28 @@ export class AidesService {
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {
     let hasAidesObtenir = false;
     if(simulationSelected) {
-      if(Object.entries(simulationSelected.mesAides).length > 1) {
-        hasAidesObtenir = true;
-      }
-      if(Object.entries(simulationSelected.mesAides).length === 1) {
+
         for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-          if(aide && codeAide !== (CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE || CodesAidesEnum.PENSION_INVALIDITE)) {
+          if(aide
+            && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
+            && codeAide !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
             hasAidesObtenir = true;
           }
         }
-      }
+
     }
     return hasAidesObtenir;
+  }
+
+  public getAideByCodeFromSimulationMensuelle(simulationMensuelle: SimulationMensuelle, codeAideToFind: string): AideSociale {
+    let aideSocial = null;
+
+    for (let [codeAide, aide] of Object.entries(simulationMensuelle.mesAides)) {
+        if(aide && codeAide === codeAideToFind) {
+          aideSocial = aide;
+        }
+    }
+    return aideSocial;
   }
 
   public getAideByCode(simulationAidesSociales: SimulationAidesSociales, codeAideToFind: string): AideSociale {
