@@ -1,5 +1,6 @@
-select, input[type=radio] {
+select {
   cursor: pointer !important;
+  width: fit-content !important;
 }
 
 .fa-info-circle {
