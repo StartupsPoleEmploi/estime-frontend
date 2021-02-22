@@ -41,6 +41,9 @@ export class FilArianeComponent implements OnInit {
       case RoutesEnum.CGU:
         this.libelleRouteActive = PageTitlesEnum.CGU;
         break;
+      case RoutesEnum.CONTACT:
+        this.libelleRouteActive = PageTitlesEnum.CONTACT;
+        break;
       case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`:
         this.libelleRouteActive = PageTitlesEnum.CONTRAT_TRAVAIL;
         break;

@@ -2,6 +2,7 @@ export enum RoutesEnum {
   HOMEPAGE = '/',
   AVANT_COMMENCER_SIMULATION = 'avant-de-commencer',
   CGU = 'conditions-generales-utilisation',
+  CONTACT = 'contact',
   CONTRAT_TRAVAIL = 'contrat-de-travail',
   ETAPES_SIMULATION = 'etapes-simulation',
   MA_SITUATION = 'ma-situation',
