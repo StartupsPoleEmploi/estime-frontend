@@ -135,7 +135,7 @@
                     name="nombreMoisCumulAssSalaire"
                     [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
                     class="fit-content form-control"
-                    (click)="onClickButtonRadioNombreMoisCumulAssSalaire()"
+                    (change)="onClickButtonRadioNombreMoisCumulAssSalaire()"
                     data-width="auto"
                     required
                     [ngClass]="{'option-selected': ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres)}"
