@@ -20,10 +20,10 @@ export class DateUtileService {
     { label: "Décembre", labelCourt: "Déc", value: 12 },
   ];
 
-  public checkDateAfterDateJour(dateDecomposee: DateDecomposee): void {
+  public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
     if(this.isDateValide(dateDecomposee)) {
-      if(this.isDateAfterDateJour(dateDecomposee)) {
+      if(this.isDateDecomposeAfterDateJour(dateDecomposee)) {
         dateDecomposee.isDateSuperieurDateJour = true;
       }
     }
@@ -32,7 +32,7 @@ export class DateUtileService {
 
   public checkFormatDateAvecInferieurDateJour(dateDecomposee: DateDecomposee): void {
     this.checkFormatDate(dateDecomposee);
-    this.checkDateAfterDateJour(dateDecomposee);
+    this.checkDateDecomposeAfterDateJour(dateDecomposee);
   }
 
   public checkFormatDate(dateDecomposee: DateDecomposee): void {
@@ -202,7 +202,13 @@ export class DateUtileService {
     return (annee % 100 === 0) ? (annee % 400 === 0) : (annee % 4 === 0);
   }
 
-  public isDateAfterDateJour(dateDecomposee: DateDecomposee): boolean {
+  public isDateAfterDateJour(dateToCheck: string): boolean {
+    const dateDecomposeeDateJour = this.getDateDecomposeeFromDate(new Date());
+    const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateDecomposeeDateJour);
+    return moment(dateToCheck).isAfter(dateDecomposeeDateJourFormat);
+  }
+
+  public isDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): boolean {
     const dateToCompareFormat = this.getStringDateFromDateDecomposee(dateDecomposee);
     const dateDecomposeeDateJour = this.getDateDecomposeeFromDate(new Date());
     const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateDecomposeeDateJour);
@@ -212,7 +218,7 @@ export class DateUtileService {
   public isDateDecomposeeSaisieAvecInferieurDateJourValide(dateDecomposee: DateDecomposee): boolean {
     let isValid = true;
     if(this.isDateValide(dateDecomposee)) {
-      if(this.isDateAfterDateJour(dateDecomposee)) {
+      if(this.isDateDecomposeAfterDateJour(dateDecomposee)) {
         isValid = false;
       }
     } else {

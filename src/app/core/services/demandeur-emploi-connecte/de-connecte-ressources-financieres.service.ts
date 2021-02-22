@@ -4,6 +4,10 @@ import { NumberUtileService } from "@app/core/services/utile/number-util.service
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { DateUtileService } from '../utile/date-util.service';
+import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
+import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { DeConnecteBenefiaireAidesSocialesService } from './de-connecte-benefiaire-aides-sociales.service';
+import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {
@@ -11,8 +15,11 @@ export class DeConnecteRessourcesFinancieresService {
   constructor(
     private dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
+    private deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
+    private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     private numberUtileService: NumberUtileService,
-    private personneUtileService: PersonneUtileService
+    private personneUtileService: PersonneUtileService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
   ) {
 
   }
@@ -127,6 +134,39 @@ export class DeConnecteRessourcesFinancieresService {
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer);
     }
     return montant;
+  }
+
+  public isDonneesRessourcesFinancieresValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isValide = true;
+
+    if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+      isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
+    }
+    if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+      isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
+    }
+    if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()) {
+      isValide = ressourcesFinancieres.allocationsCPAM.pensionInvalidite > 0;
+    }
+    if(isValide && this.deConnecteInfosPersonnellesService.createurEntreprise()) {
+      isValide = ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0;
+    }
+    if(isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
+      isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
+    }
+    return isValide;
+  }
+
+
+  private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS)
+    && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(ressourcesFinancieres)
+    && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
+  }
+
+  private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH > 0
+    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(ressourcesFinancieres);
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {

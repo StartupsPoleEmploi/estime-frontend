@@ -18,7 +18,7 @@
                     name="allocationJournaliereNetASS"
                     type="text"
                     data-testid="input-allocation-journaliere-net-ass"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     min="0"
                     maxlength="5"
@@ -44,7 +44,7 @@
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
             <span
-                class="row error-input-message"
+                class="error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetASS.touched)  && allocationJournaliereNetASS.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span>
@@ -173,11 +173,12 @@
             <div class="row">
                 <input
                     name="allocationMensuelleNetAAH"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
                     min="0"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH && (this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH == 0)}"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH "
@@ -196,6 +197,11 @@
                     class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+                <span
+                    *ngIf="this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH && (this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
             </div>
         </div>
@@ -303,7 +309,7 @@
             <div class="row">
                 <input
                     name="salaireMoisM0AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
@@ -343,7 +349,7 @@
             <div class="row">
                 <input
                     name="salaireMoisMMois1AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
@@ -384,13 +390,14 @@
             <div class="row">
                 <input
                     name="pensionInvalidite"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)}"
                     required
                     inputmode="decimal"
                     #pensionInvalidite="ngModel">
@@ -407,6 +414,11 @@
                     *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
+                <span
+                    *ngIf="this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
             </div>
         </div>
         <div
@@ -422,7 +434,7 @@
             <div class="row">
                 <input
                     name="revenusCreateurEntreprise"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
@@ -430,6 +442,7 @@
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois == 0)}"
                     required
                     inputmode="decimal"
                     #revenusCreateurEntreprise="ngModel">
@@ -446,6 +459,11 @@
                     *ngIf="(isRessourcesFinancieresFormSubmitted || revenusCreateurEntreprise?.touched)  && revenusCreateurEntreprise?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
+                <span
+                    *ngIf="this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
             </div>
         </div>
         <div
@@ -461,7 +479,7 @@
             <div class="row">
                 <input
                     name="revenusImmobilier"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     maxlength="6"
@@ -469,6 +487,7 @@
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)}"
                     required
                     inputmode="decimal"
                     #revenusImmobilier="ngModel">
@@ -484,6 +503,11 @@
                     class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+                <span
+                    *ngIf="this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
             </div>
         </div>

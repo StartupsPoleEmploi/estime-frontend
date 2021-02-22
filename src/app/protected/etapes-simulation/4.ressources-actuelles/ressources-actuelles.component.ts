@@ -11,6 +11,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { RessourcesFinancieresUtileService } from "@app/core/services/utile/ressources-financieres-utiles.service";
 import { RessourcesFinancieresConjointComponent } from '@app/protected/etapes-simulation/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
@@ -28,7 +29,6 @@ import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/
 export class RessourcesActuellesComponent implements OnInit {
 
   beneficiaireAidesSociales: BeneficiaireAidesSociales;
-  dateDernierOuvertureDroitASS: DateDecomposee;
 
   //gestion affichage accordions
   isVosRessourcesDisplay = true;
@@ -70,9 +70,7 @@ export class RessourcesActuellesComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
-    private deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
@@ -86,7 +84,6 @@ export class RessourcesActuellesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDataRessourcesFinancieres();
-    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
     this.calculerMontantsRessourcesFinancieres();
   }
 
@@ -131,16 +128,14 @@ export class RessourcesActuellesComponent implements OnInit {
 
   public traiterValidationVosRessourcesEventEmitter(): void {
     this.isVosRessourcesDisplay = false;
-    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
-    && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
+    if (this.hasConjointAvecRessourcesFinancieresInvalide()) {
       this.isRessourcesConjointDisplay = true;
-    } else if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
-    && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
+    } else if (this.hasPersonneAChargeAvecRessourcesFinancieresInvalide()) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantRevenusVosRessources= this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
+    this.montantRevenusVosRessources = this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
     this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
   }
 
@@ -177,15 +172,15 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   private isSaisieFormulairesValide(): boolean {
-    return  this.isSaisieVosRessourcesFinancieresValide()
-            && this.isSaisieRessourcesFinancieresConjointValide()
-            && this.isSaisieRessourcesFinancieresPersonnesAChargeValide()
-            && this.isSaisieRessourcesFinancieresFoyerValide()
-            && this.deConnecteService.hasRessourcesFinancieres();
+    return this.isSaisieVosRessourcesFinancieresValide()
+      && this.isSaisieRessourcesFinancieresConjointValide()
+      && this.isSaisieRessourcesFinancieresPersonnesAChargeValide()
+      && this.isSaisieRessourcesFinancieresFoyerValide()
+      && this.deConnecteService.hasRessourcesFinancieres();
   }
 
   private calculerMontantsRessourcesFinancieres(): void {
-    this.montantRevenusVosRessources= this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
+    this.montantRevenusVosRessources = this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
     this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
     this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
     this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
@@ -195,34 +190,31 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   private isSaisieVosRessourcesFinancieresValide(): boolean {
-    let isSaisieFormulairesValide = true;
-    if (!this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid
-      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.vosRessourcesFinancieresComponent.dateDernierOuvertureDroitASS))
-      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && !this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres))
-      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres))
-      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() && this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres))) {
-      this.isVosRessourcesDisplay = true;
-      isSaisieFormulairesValide = false;
+    let isValide = this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid;
+    if (isValide) {
+      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
     }
-    return isSaisieFormulairesValide;
+    if (!isValide) {
+      this.isVosRessourcesDisplay = true;
+    }
+
+    return isValide;
   }
 
   private isSaisieRessourcesFinancieresConjointValide(): boolean {
     let isSaisieFormulairesValide = true;
-    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
-    && !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid) {
-      this.isRessourcesConjointDisplay = true;
-      isSaisieFormulairesValide = false;
+    if (this.hasConjointAvecRessourcesFinancieresInvalide()) {
+        this.isRessourcesConjointDisplay = true;
+        isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
   }
 
   private isSaisieRessourcesFinancieresPersonnesAChargeValide(): boolean {
     let isSaisieFormulairesValide = true;
-    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
-    && !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid) {
-      this.isRessourcesPersonnesChargeDisplay = true;
-      isSaisieFormulairesValide = false;
+    if (this.hasPersonneAChargeAvecRessourcesFinancieresInvalide()) {
+        this.isRessourcesPersonnesChargeDisplay = true;
+        isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
   }
@@ -234,5 +226,27 @@ export class RessourcesActuellesComponent implements OnInit {
       isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
+  }
+
+  private hasPersonneAChargeAvecRessourcesFinancieresInvalide(): boolean {
+    let hasPersonneAChargeAvecRessourcesFinancieresInvalide = false;
+    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+      if (!this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid
+        || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresPersonnesAChargeValides()) {
+          hasPersonneAChargeAvecRessourcesFinancieresInvalide = true;
+        }
+    }
+    return hasPersonneAChargeAvecRessourcesFinancieresInvalide;
+  }
+
+  private hasConjointAvecRessourcesFinancieresInvalide(): boolean {
+    let hasConjointAvecRessourcesFinancieresInvalide = false;
+    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()) {
+      if(!this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid
+        || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresConjointValides()) {
+          hasConjointAvecRessourcesFinancieresInvalide = true;
+      }
+    }
+    return hasConjointAvecRessourcesFinancieresInvalide;
   }
 }

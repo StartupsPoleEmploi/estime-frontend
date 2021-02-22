@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Personne } from '@models/personne';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 
 @Component({
   selector: 'app-ressources-financieres-conjoint',
@@ -22,7 +23,8 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private deConnecteService: DeConnecteService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private personneUtileService: PersonneUtileService
   ) { }
 
   ngOnInit(): void {
@@ -30,14 +32,21 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     this.conjoint = demandeurEmploiConnecte.situationFamiliale.conjoint;
   }
 
-
-  onSubmitRessourcesFinancieresConjointForm(form: FormGroup) {
+  public onSubmitRessourcesFinancieresConjointForm(form: FormGroup): void {
     this.isRessourcesFinancieresConjointFormSubmitted = true;
-    if(form.valid) {
+    if(this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setConjointRessourcesFinancieres(this.conjoint);
       this.validationRessourcesConjointEventEmitter.emit();
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
+  }
+
+  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    let isValide = form.valid;
+    if(isValide) {
+      isValide = this.personneUtileService.isRessourcesFinancieresValides(this.conjoint);
+    }
+    return isValide;
   }
 }

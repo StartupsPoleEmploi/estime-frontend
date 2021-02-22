@@ -37,7 +37,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
     this.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
-    if(form.valid) {
+    if(this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
     } else {
@@ -45,9 +45,17 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     }
   }
 
-  public filtrerPersonnesACharge(personne: Personne): boolean {
-    const test = this.personneUtileService;
-    return test.hasRessourcesFinancieres(personne);
+  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    let isValide = form.valid;
+    if(isValide) {
+      this.personnesDTO.forEach((personneDTO) => {
+        const personneDTOValide = this.personneUtileService.isRessourcesFinancieresValides(personneDTO.personne);
+        if(!personneDTOValide) {
+          isValide = false;
+        }
+      });
+    }
+    return isValide;
   }
 
   private loadData(): void {

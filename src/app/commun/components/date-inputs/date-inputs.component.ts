@@ -32,7 +32,7 @@ export class DateInputsComponent implements OnInit {
   public onChangeOrKeyUpDateJour(): void {
     if (this.dateSaisie.jour && this.dateSaisie.jour.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
-      this.dateUtileService.checkDateAfterDateJour(this.dateSaisie);
+      this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
       if(!this.dateSaisie.isJourInvalide) {
         this.moisDateInput.nativeElement.focus();
       }
@@ -43,7 +43,7 @@ export class DateInputsComponent implements OnInit {
   public onChangeOrKeyUpDateMois(): void {
     if (this.dateSaisie.mois && this.dateSaisie.mois.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
-      this.dateUtileService.checkDateAfterDateJour(this.dateSaisie);
+      this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
       if(!this.dateSaisie.isMoisInvalide) {
         this.anneeDateInput.nativeElement.focus();
       }
@@ -54,7 +54,7 @@ export class DateInputsComponent implements OnInit {
   public onChangeOrKeyUpDateAnnee(): void {
     if(this.dateSaisie.annee  && this.dateSaisie.annee.length === 4) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
-      this.dateUtileService.checkDateAfterDateJour(this.dateSaisie);
+      this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
     }
     this.dateChanged.emit();
   }

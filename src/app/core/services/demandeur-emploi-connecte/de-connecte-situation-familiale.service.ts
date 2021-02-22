@@ -13,9 +13,15 @@ export class DeConnecteSituationFamilialeService {
   }
 
   public hasConjointSituationAvecRessource(): boolean {
+    let hasConjointSituationAvecRessource = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.situationFamiliale.isEnCouple
-    && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint);
+    if(demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
+      if(demandeurEmploiConnecte.situationFamiliale.conjoint
+        && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
+          hasConjointSituationAvecRessource = true;
+      }
+    }
+    return hasConjointSituationAvecRessource;
   }
 
   public hasPersonneACharge(): boolean {
@@ -36,6 +42,27 @@ export class DeConnecteSituationFamilialeService {
     }
     return hasPersonneAChargeAvecRessourcesFinancieres;
   }
+
+  public isRessourcesFinancieresConjointValides(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return this.personneUtileService.isRessourcesFinancieresValides(demandeurEmploiConnecte.situationFamiliale.conjoint);
+  }
+
+  public isRessourcesFinancieresPersonnesAChargeValides(): boolean {
+    let isRessourcesFinancieresPersonnesAChargeValides = true;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
+      if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+        const isRessourcesFinancieresPersonneValides = this.personneUtileService.isRessourcesFinancieresValides(personne);
+        if(!isRessourcesFinancieresPersonneValides) {
+          isRessourcesFinancieresPersonnesAChargeValides = false;
+        }
+      }
+    });
+    return isRessourcesFinancieresPersonnesAChargeValides;
+  }
+
+
 
   public isEnCouple(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();

@@ -10,6 +10,7 @@ import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur
 import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service";
 import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   isRessourcesFinancieresFormSubmitted = false;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
-  @Output() validationVosRessourcesEventEmitter = new EventEmitter<DateDecomposee>();
+  @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
   @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
@@ -52,6 +53,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private elementRef: ElementRef,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
 
@@ -68,7 +70,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
-      this.validationVosRessourcesEventEmitter.emit(this.dateDernierOuvertureDroitASS);
+      this.validationVosRessourcesEventEmitter.emit();
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
@@ -98,7 +100,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-
   public onClickButtonRadioHasTravailleAuCours6DerniersMois(hasTravailleAuCours6DerniersMois: boolean): void {
     if (hasTravailleAuCours6DerniersMois === false) {
       this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois = 0;
@@ -113,35 +114,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-
   public handleKeyUpOnButtonRadioHasTravailleAuCours6DerniersMois(event: any, value: boolean) {
     if (event.keyCode === 13) {
       this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois = value;
       this.onClickButtonRadioHasTravailleAuCours6DerniersMois(value);
     }
   }
-
-
-
-  private checkAndSaveDateDernierOuvertureDroitASS(): void {
-    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
-      this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
-    }
-  }
-
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
-    let isValide = form.valid;
-    if(isValide) {
-      if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() ) {
-        isValide = this.isDonneesASSSaisiesValide();
-      }
-      if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() ) {
-        isValide = this.isDonneesAAHSaisiesValides();
-      }
-    }
-    return isValide;
-  }
-
 
   public afficherSalaireM0(): boolean {
     if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
@@ -155,7 +133,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         return this.isSalaireM0DisplayPourAAH();
       }
     }
-
   }
 
   public afficherSalaireM1(): boolean {
@@ -170,7 +147,20 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         return this.isSalaireM1DisplayPourAAH();
       }
     }
+  }
 
+  private checkAndSaveDateDernierOuvertureDroitASS(): void {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
+      this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
+    }
+  }
+
+  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    let isValide = form.valid;
+    if(isValide) {
+      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
+    }
+    return isValide;
   }
 
   private isSalaireM0DisplayPourASS(): boolean {
@@ -194,16 +184,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   private isSalaireM1DisplayPourASS(): boolean {
     return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
       && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
-  }
-
-  private isDonneesASSSaisiesValide(): boolean {
-    return this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)
-    && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres)
-    && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(this.ressourcesFinancieres);
-  }
-
-  private isDonneesAAHSaisiesValides(): boolean {
-    return this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres);
   }
 
   /*** gestion évènement dateDernierOuvertureDroitASS */

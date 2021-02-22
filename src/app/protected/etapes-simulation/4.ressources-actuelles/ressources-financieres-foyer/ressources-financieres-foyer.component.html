@@ -15,7 +15,7 @@
                 <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-1"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         type="text"
@@ -42,7 +42,7 @@
                 <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-2"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         type="text"
@@ -69,7 +69,7 @@
                 <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
-                        pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-2"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         type="text"
@@ -107,7 +107,7 @@
                 <input
                     name="allocationsFamilialesMensuellesNetFoyer"
                     data-testid="input-af"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     min="0"
@@ -141,7 +141,7 @@
             <div class="row">
                 <input
                     name="montantPersionsAlimentairesFoyer"
-                    pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
                     min="0"

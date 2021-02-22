@@ -110,18 +110,19 @@
                 </div>
                 <div class="row">
                     <input
-                        id="dureeHebdomadaire"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        name="dureeHebdomadaire"
-                        data-testid="input-duree-hebdomadaire"
-                        type="text"
-                        maxlength="2"
-                        [ngClass]="{'ng-invalid': (futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0) || futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX}"
                         class="form-control"
-                        placeholder="Nombre"
-                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
-                        required
+                        data-testid="input-duree-hebdomadaire"
+                        id="dureeHebdomadaire"
                         inputmode="decimal"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        maxlength="4"
+                        name="dureeHebdomadaire"
+                        [ngClass]="{'ng-invalid': (futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0) || futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX}"
+                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        placeholder="Nombre"
+                        required
+                        type="text"
                         #dureeHebdomadaire="ngModel">
                     <span class="text-side-input">heures par semaine</span>
                 </div>
@@ -140,7 +141,11 @@
                     *ngIf="(isFuturTravailFormSubmitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isFuturTravailFormSubmitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_DUREE_HEBDO_INCORRECTE}}
+                </span>
             </div>
             <div class="form-group">
                 <div class="row mb-2">
@@ -161,7 +166,7 @@
                         <div class="row">
                             <input
                                 id="salaireMensuelBrut"
-                                pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                 name="salaireMensuelBrut"
                                 data-testid="input-salaire-mensuel-brut"
                                 type="text"
@@ -199,7 +204,7 @@
                         <div class="row">
                             <input
                                 id="salaireMensuelNet"
-                                pattern="{{controleChampFormulaireService.REGEX_MONTANT}}"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                 name="salaireMensuelNet"
                                 data-testid="input-salaire-mensuel-net"
                                 type="text"
@@ -232,17 +237,17 @@
                     </div>
                 </div>
             </div>
-            <div id="contrat-travail-div-infos-lieu-travail" class="row  mb-2">
-                <div
-                    class="col-auto">
+            <div
+                id="contrat-travail-div-infos-lieu-travail"
+                class="row  mb-2">
+                <div class="col-auto">
                     <div>
                         <img src="./assets/images/info-grey.svg">
                     </div>
                 </div>
-                <div
-                    class="col">
+                <div class="col">
                     <span>
-                      Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
+                        Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
                     </span>
                 </div>
             </div>

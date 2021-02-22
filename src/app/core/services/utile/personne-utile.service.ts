@@ -56,6 +56,26 @@ export class PersonneUtileService {
     return ageEnAnnee >= this.AGE_LEGAL_POUR_TRAVAILLE ? true : false;
   }
 
+  public isRessourcesFinancieresValides(personne: Personne): boolean {
+    let isValide = true;
+    if(personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
+      isValide = personne.ressourcesFinancieres.salaireNet > 0;
+    }
+    if(personne.beneficiaireAidesSociales.beneficiaireARE || personne.beneficiaireAidesSociales.beneficiaireASS) {
+      isValide = personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet > 0;
+    }
+    if(personne.beneficiaireAidesSociales.beneficiaireRSA) {
+      isValide = personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA > 0;
+    }
+    if(personne.beneficiaireAidesSociales.beneficiaireAAH) {
+      isValide = personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH > 0;
+    }
+    if(personne.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+      isValide = personne.ressourcesFinancieres.allocationsCPAM.pensionInvalidite > 0;
+    }
+    return isValide;
+  }
+
   private hasRessourcesAidesSociales(personne: Personne): boolean {
     return personne.beneficiaireAidesSociales
       && (
