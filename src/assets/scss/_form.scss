@@ -1,3 +1,7 @@
+select, input[type=radio] {
+  cursor: pointer !important;
+}
+
 .fa-info-circle {
   span {
     font-size: 0.9rem!important;
@@ -65,7 +69,9 @@
   }
 }
 
-.fit-content {
+.fit-coselect {
+  cursor: pointer;
+}ntent {
   min-width: fit-content;
   max-width: fit-content;
 }
