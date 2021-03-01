@@ -171,12 +171,29 @@
                         data-testid="btn-situation-ass"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
                         btnCheckbox
+                        *ngIf="beneficiaireAidesSociales.beneficiaireRSA === false"
                         tabindex="0"
                         role="button"
                         [disabled]="beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi"
                         #beneficiaireAAH="ngModel">
                         <div>
                             <span>{{situationPersonneEnum.ASS}}</span>
+                        </div>
+                    </label>
+                    <label
+                        name="beneficiaireRSA"
+                        class="radio-button-style-1"
+                        [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi}"
+                        data-testid="btn-situation-ass"
+                        [(ngModel)]="beneficiaireAidesSociales.beneficiaireRSA"
+                        btnCheckbox
+                        *ngIf="beneficiaireAidesSociales.beneficiaireASS === false"
+                        tabindex="0"
+                        role="button"
+                        [disabled]="beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi"
+                        #beneficiaireRSA="ngModel">
+                        <div>
+                            <span>{{situationPersonneEnum.RSA}}</span>
                         </div>
                     </label>
                     <label
@@ -296,6 +313,59 @@
                 <span
                     class="row error-input-message"
                     *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="form-group"
+            *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAidesSociales.beneficiaireRSA === true">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="isSeulPlusDe18Mois">
+                        * Vous vivez seul.e depuis plus de 18 mois ?
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="custom-control custom-radio">
+                        <input
+                            id="isSeulPlusDe18MoisOui"
+                            name="isSeulPlusDe18MoisOui"
+                            data-testid="btn-is-seul-plus-de-18-mois-oui"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, true)"
+                            [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois"
+                            required
+                            [value]="true"
+                            #isSeulPlusDe18Mois="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isSeulPlusDe18MoisOui">
+                            oui
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio ml-2">
+                        <input
+                            id="isSeulPlusDe18MoisNon"
+                            name="isSeulPlusDe18MoisNon"
+                            data-testid="btn-is-seul-plus-de-18-mois-non"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, false)"
+                            [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois"
+                            required
+                            [value]="false"
+                            #isSeulPlusDe18Mois="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isSeulPlusDe18MoisNon">
+                            non
+                        </label>
+                    </div>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || isSeulPlusDe18Mois.touched) && isSeulPlusDe18Mois.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>

@@ -128,6 +128,12 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public handleKeyUpOnButtonSeulPlusDe18Mois(event: any, value: boolean): void {
+    if (event.keyCode === 13) {
+      this.situationFamiliale.isSeulPlusDe18Mois = value;
+    }
+  }
+
   public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void  {
     if (event.keyCode === 13) {
       if(situationPersonne === this.situationPersonneEnum.AAH) {
