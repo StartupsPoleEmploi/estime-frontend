@@ -4,6 +4,7 @@ export class InformationsPersonnelles {
   email: string;
   hasRevenusImmobilier: boolean;
   createurEntreprise: boolean;
+  isProprietaireSansPretOuLogeGratuit: boolean;
   salarie: boolean;
   sansRessource: boolean;
   nationalite: string;

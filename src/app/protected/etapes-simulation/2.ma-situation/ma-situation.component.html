@@ -316,8 +316,9 @@
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
-            <div class="form-group"
-            *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAidesSociales.beneficiaireRSA === true">
+            <div
+                class="form-group"
+                *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAidesSociales.beneficiaireRSA === true">
                 <div class="row mb-2">
                     <label
                         class="label"
@@ -366,6 +367,66 @@
                 <span
                     class="row error-input-message"
                     *ngIf="(isInformationsPersonnellesFormSubmitted || isSeulPlusDe18Mois.touched) && isSeulPlusDe18Mois.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="beneficiaireAidesSociales.beneficiaireRSA === true">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="isProprietaireSansPretOuLogeGratuit">
+                        * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
+                        <img
+                            class="interrogation-icon"
+                            src="./assets/images/question.svg"
+                            [popover]="popoverSituationLogementTemplate"
+                            #popoverSituationLogement="bs-popover"
+                            placement="right">
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="custom-control custom-radio">
+                        <input
+                            id="isProprietaireSansPretOuLogeGratuitOui"
+                            name="isProprietaireSansPretOuLogeGratuitOui"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, true)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                            required
+                            [value]="true"
+                            #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isProprietaireSansPretOuLogeGratuitOui">
+                            oui
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio ml-2">
+                        <input
+                            id="isProprietaireSansPretOuLogeGratuitNon"
+                            name="isProprietaireSansPretOuLogeGratuitNon"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-non"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, false)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                            required
+                            [value]="false"
+                            #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isProprietaireSansPretOuLogeGratuitNon">
+                            non
+                        </label>
+                    </div>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || isProprietaireSansPretOuLogeGratuit.touched) && isProprietaireSansPretOuLogeGratuit.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
@@ -544,6 +605,21 @@
             </p>
             <p>
                 C’est pourquoi, il est important de les déclarer.
+            </p>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template  #popoverSituationLogementTemplate>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2 ml-auto"
+                (click)="onClickClosePopoverSituationLogement()"></i>
+        </div>
+        <div class="row">
+            <p>
+                Répondez par non si vous payez un loyer, vous êtes hébergé et vous payez une participation pour ce logement ou vous êtes propriétaire et remboursez un prêt.
             </p>
         </div>
     </div>

@@ -15,6 +15,7 @@ import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-ma-situation',
@@ -35,8 +36,7 @@ export class MaSituationComponent implements OnInit {
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  @ViewChild('moisDateNaissance', { read: ElementRef }) moisDateNaissanceInput: ElementRef;
-  @ViewChild('anneeDateNaissance', { read: ElementRef }) anneeDateNaissanceInput: ElementRef;
+  @ViewChild('popoverSituationLogement', { read: PopoverDirective }) popoverSituationLogement: PopoverDirective;
 
   nationaliteSelectOptions = [
     { label: NationalitesEnum.FRANCAISE },
@@ -94,6 +94,10 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public onClickClosePopoverSituationLogement(): void {
+    this.popoverSituationLogement.hide();
+  }
+
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
@@ -131,6 +135,12 @@ export class MaSituationComponent implements OnInit {
   public handleKeyUpOnButtonSeulPlusDe18Mois(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.situationFamiliale.isSeulPlusDe18Mois = value;
+    }
+  }
+
+  public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
+    if (event.keyCode === 13) {
+      this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
     }
   }
 
@@ -256,6 +266,7 @@ export class MaSituationComponent implements OnInit {
     this.deConnecteService.unsetConjointSalaire();
     this.deConnecteService.unsetConjointtAllocationsAidesSociales();
   }
+
 
   /************ private methods ************************/
 
