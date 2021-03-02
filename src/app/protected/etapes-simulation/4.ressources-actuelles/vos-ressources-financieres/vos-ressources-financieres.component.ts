@@ -100,9 +100,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public onClickButtonRadioHasTravailleAuCours6DerniersMois(hasTravailleAuCours6DerniersMois: boolean): void {
-    if (hasTravailleAuCours6DerniersMois === false) {
-      this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois = 0;
+  public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
+    if (hasTravailleAuCoursDerniersMois === false) {
+      this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
       this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
     } else {
@@ -110,43 +110,42 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+        this.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation = 0;
       }
     }
   }
 
-  public handleKeyUpOnButtonRadioHasTravailleAuCours6DerniersMois(event: any, value: boolean) {
+  public handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois(event: any, value: boolean) {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois = value;
-      this.onClickButtonRadioHasTravailleAuCours6DerniersMois(value);
+      this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = value;
+      this.onClickButtonRadioHasTravailleAuCoursDerniersMois(value);
     }
   }
 
-  public afficherSalaireM0(): boolean {
+  public isAfficherSalaireMoisMoinsNAvantSimulation(nMoisAvantSimulation: number): boolean {
     if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
       && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
-      return this.isSalaireM0DisplayPourASS() || this.isSalaireM0DisplayPourAAH();
-    } else {
-      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
-        return this.isSalaireM0DisplayPourASS();
-      }
-      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
-        return this.isSalaireM0DisplayPourAAH();
-      }
+      return this.isAfficherSalaireMoisMoinsNAvantSimulationPourASS(nMoisAvantSimulation) || this.isAfficherSalaireMoisMoinsNAvantSimulationPourAAH(nMoisAvantSimulation);
+    }
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+      return this.isAfficherSalaireMoisMoinsNAvantSimulationPourASS(nMoisAvantSimulation);
+    }
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()
+      || (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA())) {
+      return this.isAfficherSalaireMoisMoinsNAvantSimulationPourAAH(nMoisAvantSimulation);
+    }
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
+      return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
+        && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
     }
   }
 
-  public afficherSalaireM1(): boolean {
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()
-      && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
-        return this.isSalaireM1DisplayPourASS() || this.isSalaireM1DisplayPourAAH();
-    } else {
-      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
-        return this.isSalaireM1DisplayPourASS();
-      }
-      if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
-        return this.isSalaireM1DisplayPourAAH();
-      }
+  public getNombreMoisTravailleAuCoursDerniersMois(): number {
+    let nombreMoisTravailleAuCoursDerniersMois = 3;
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+      nombreMoisTravailleAuCoursDerniersMois = 6;
     }
+    return nombreMoisTravailleAuCoursDerniersMois;
   }
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
@@ -157,33 +156,32 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
-    if(isValide) {
+    if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
     }
     return isValide;
   }
 
-  private isSalaireM0DisplayPourASS(): boolean {
-    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
-      && (this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
-        || this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 2);
+  private isAfficherSalaireMoisMoinsNAvantSimulationPourAAH(nMoisAvantSimulation: number): boolean {
+    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation && nMoisAvantSimulation <= 1
+      && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois
+      && this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois > 0;
   }
 
-  private isSalaireM0DisplayPourAAH(): boolean {
-    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
-      && this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
-      && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0
-  }
-
-  private isSalaireM1DisplayPourAAH(): boolean {
-    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
-      && this.ressourcesFinancieres.hasTravailleAuCours6DerniersMois
-      && this.ressourcesFinancieres.nombreMoisTravailles6DerniersMois > 0
-  }
-
-  private isSalaireM1DisplayPourASS(): boolean {
-    return this.ressourcesFinancieres.salairesAvantPeriodeSimulation
-      && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
+  private isAfficherSalaireMoisMoinsNAvantSimulationPourASS(nMoisAvantSimulation: number): boolean {
+    let isSalaireMoisMoinsNAvantSimulationDisplayPourASS = false;
+    if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+      if (nMoisAvantSimulation == 0
+        && (this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3
+          || this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 2)) {
+        isSalaireMoisMoinsNAvantSimulationDisplayPourASS = true;
+      }
+      if (nMoisAvantSimulation == 1
+        && this.ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 3) {
+        isSalaireMoisMoinsNAvantSimulationDisplayPourASS = true;
+      }
+    }
+    return isSalaireMoisMoinsNAvantSimulationDisplayPourASS;
   }
 
   /*** gestion évènement dateDernierOuvertureDroitASS */

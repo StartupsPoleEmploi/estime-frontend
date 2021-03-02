@@ -2,7 +2,6 @@
     <form
         [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}"
         #vosRessourcesFinancieresForm="ngForm">
-        <!-- ************** section concernant l'ASS  - prévoir de déporter dans un composant fils *************** -->
         <div
             class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()">
@@ -158,8 +157,52 @@
                 </span>
             </div>
         </div>
-        <!-- ************** FIN section concernant l'ASS *************** -->
-        <!-- ************** section concernant l'AAH  - prévoir de déporter dans un composant fils *************** -->
+        <div
+            class="form-group"
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="allocationMensuelleNetRSA">
+                    * RSA (Revenu de Solidarité Active) perçu
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="allocationMensuelleNetRSA"
+                    type="text"
+                    data-testid="input-allocation-mensuelle-net-rsa"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    min="0"
+                    maxlength="5"
+                    class="form-control"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0}"
+                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
+                    required
+                    placeholder="Montant"
+                    inputmode="decimal"
+                    #allocationMensuelleNetRSA="ngModel"
+                    ngAutofocus>
+                <span class="text-side-input">€</span>
+                <span class="text-side-input">le mois dernier</span>
+            </div>
+            <span
+                *ngIf="this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && (this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0)"
+                class="error-input-message">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+            </span>
+            <span
+                class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetRSA.touched)  && allocationMensuelleNetRSA.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+            <span
+                class="error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationMensuelleNetRSA.touched)  && allocationMensuelleNetRSA.errors?.pattern">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+            </span>
+        </div>
         <div
             class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()">
@@ -207,63 +250,63 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()">
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()">
             <div class="row mb-2">
                 <label
                     class="label"
-                    for="hasTravailleAuCours6DerniersMois">
-                    * Avez-vous travaillé au cours des 6 derniers mois ?
+                    for="hasTravailleAuCoursDerniersMois">
+                    * Avez-vous travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois ?
                 </label>
             </div>
             <div class="row">
                 <div class="custom-control custom-radio">
                     <input
-                        id="hasTravailleAuCours6DerniersMoisOui"
-                        name="hasTravailleAuCours6DerniersMoisOui"
-                        data-testid="btn-has-travaille-au-cours-6-derniers-mois-oui"
+                        id="hasTravailleAuCoursDerniersMoisOui"
+                        name="hasTravailleAuCoursDerniersMoisOui"
+                        data-testid="btn-has-travaille-au-cours-derniers-mois-oui"
                         type="radio"
                         class="custom-control-input"
-                        [(ngModel)]="ressourcesFinancieres.hasTravailleAuCours6DerniersMois"
-                        (click)="onClickButtonRadioHasTravailleAuCours6DerniersMois(true)"
+                        [(ngModel)]="ressourcesFinancieres.hasTravailleAuCoursDerniersMois"
+                        (click)="onClickButtonRadioHasTravailleAuCoursDerniersMois(true)"
                         required
                         [value]="true"
-                        #hasTravailleAuCours6DerniersMois="ngModel"
-                        (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCours6DerniersMois($event, true)">
+                        #hasTravailleAuCoursDerniersMois="ngModel"
+                        (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, true)">
                     <label
                         class="custom-control-label"
-                        for="hasTravailleAuCours6DerniersMoisOui">
+                        for="hasTravailleAuCoursDerniersMoisOui">
                         oui
                     </label>
                 </div>
                 <div class="custom-control custom-radio ml-2">
                     <input
-                        id="hasTravailleAuCours6DerniersMoisNon"
-                        name="hasTravailleAuCours6DerniersMoisNon"
-                        data-testid="btn-has-travaille-au-cours-6-derniers-mois-non"
+                        id="hasTravailleAuCoursDerniersMoisNon"
+                        name="hasTravailleAuCoursDerniersMoisNon"
+                        data-testid="btn-has-travaille-au-cours-derniers-mois-non"
                         type="radio"
                         class="custom-control-input"
-                        [(ngModel)]="ressourcesFinancieres.hasTravailleAuCours6DerniersMois"
+                        [(ngModel)]="ressourcesFinancieres.hasTravailleAuCoursDerniersMois"
                         [value]="false"
-                        (click)="onClickButtonRadioHasTravailleAuCours6DerniersMois(false)"
+                        (click)="onClickButtonRadioHasTravailleAuCoursDerniersMois(false)"
                         required
-                        #hasTravailleAuCours6DerniersMois="ngModel"
-                        (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCours6DerniersMois($event, false)">
+                        #hasTravailleAuCoursDerniersMois="ngModel"
+                        (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, false)">
                     <label
                         class="custom-control-label"
-                        for="hasTravailleAuCours6DerniersMoisNon">
+                        for="hasTravailleAuCoursDerniersMoisNon">
                         non
                     </label>
                 </div>
             </div>
             <span
                 class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || hasTravailleAuCours6DerniersMois.touched)  && hasTravailleAuCours6DerniersMois.errors?.required">
+                *ngIf="(isRessourcesFinancieresFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && ressourcesFinancieres.hasTravailleAuCours6DerniersMois === true">
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true">
             <div class="row flex-column">
                 <label
                     class="label mb-2"
@@ -272,11 +315,11 @@
                 </label>
                 <select
                     name="nombreMoisTravailleAuCours6DerniersMois"
-                    [(ngModel)]="ressourcesFinancieres.nombreMoisTravailles6DerniersMois"
+                    [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                     class="fit-content form-control"
                     data-width="auto"
                     required
-                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravailles6DerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres)}"
+                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravaillesDerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres)}"
                     #nombreMoisTravailleAuCours6DerniersMois="ngModel">
                     <option
                         [value]="0"
@@ -291,14 +334,14 @@
                 </select>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && ressourcesFinancieres.nombreMoisTravailles6DerniersMois == 0">
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 0">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
         </div>
         <div
             class="form-group"
-            *ngIf="afficherSalaireM0()">
+            *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(0)">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -338,17 +381,17 @@
         </div>
         <div
             class="form-group"
-            *ngIf="afficherSalaireM1()">
+            *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(1)">
             <div class="row mb-2">
                 <label
                     class="label"
-                    for="salaireMoisMMois1AvantPeriodeSimulee">
+                    for="salaireMoisMMoins1AvantPeriodeSimulee">
                     * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                 </label>
             </div>
             <div class="row">
                 <input
-                    name="salaireMoisMMois1AvantPeriodeSimulee"
+                    name="salaireMoisMMoins1AvantPeriodeSimulee"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     type="text"
@@ -360,23 +403,62 @@
                     required
                     inputmode="decimal"
                     (click)="$event.target.select()"
-                    #salaireMoisMMois1AvantPeriodeSimulee="ngModel">
+                    #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
                 <span class="text-side-input">€ net</span>
             </div>
             <div class="row">
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMois1AvantPeriodeSimulee?.touched)  && salaireMoisMMois1AvantPeriodeSimulee?.errors?.required">
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMois1AvantPeriodeSimulee?.touched)  && salaireMoisMMois1AvantPeriodeSimulee?.errors?.pattern">
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
         </div>
-        <!-- ************** FIN section concernant l'AAH *************** -->
+        <div
+            class="form-group"
+            *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(2)">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="salaireMoisMMoins2AvantPeriodeSimulee">
+                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="salaireMoisMMoins2AvantPeriodeSimulee"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    maxlength="6"
+                    min="0"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation"
+                    required
+                    inputmode="decimal"
+                    (click)="$event.target.select()"
+                    #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
+                <span class="text-side-input">€ net</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
         <div
             class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()">

@@ -372,66 +372,6 @@
             </div>
             <div
                 class="form-group"
-                *ngIf="beneficiaireAidesSociales.beneficiaireRSA === true">
-                <div class="row mb-2">
-                    <label
-                        class="label"
-                        for="isProprietaireSansPretOuLogeGratuit">
-                        * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
-                        <img
-                            class="interrogation-icon"
-                            src="./assets/images/question.svg"
-                            [popover]="popoverSituationLogementTemplate"
-                            #popoverSituationLogement="bs-popover"
-                            placement="right">
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="custom-control custom-radio">
-                        <input
-                            id="isProprietaireSansPretOuLogeGratuitOui"
-                            name="isProprietaireSansPretOuLogeGratuitOui"
-                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui"
-                            type="radio"
-                            class="custom-control-input"
-                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, true)"
-                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
-                            required
-                            [value]="true"
-                            #isProprietaireSansPretOuLogeGratuit="ngModel">
-                        <label
-                            class="custom-control-label"
-                            for="isProprietaireSansPretOuLogeGratuitOui">
-                            oui
-                        </label>
-                    </div>
-                    <div class="custom-control custom-radio ml-2">
-                        <input
-                            id="isProprietaireSansPretOuLogeGratuitNon"
-                            name="isProprietaireSansPretOuLogeGratuitNon"
-                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-non"
-                            type="radio"
-                            class="custom-control-input"
-                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, false)"
-                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
-                            required
-                            [value]="false"
-                            #isProprietaireSansPretOuLogeGratuit="ngModel">
-                        <label
-                            class="custom-control-label"
-                            for="isProprietaireSansPretOuLogeGratuitNon">
-                            non
-                        </label>
-                    </div>
-                </div>
-                <span
-                    class="row error-input-message"
-                    *ngIf="(isInformationsPersonnellesFormSubmitted || isProprietaireSansPretOuLogeGratuit.touched) && isProprietaireSansPretOuLogeGratuit.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-            </div>
-            <div
-                class="form-group"
                 *ngIf="situationFamiliale.isEnCouple === true">
                 <div class="row mb-2">
                     <label
@@ -516,7 +456,6 @@
                             <span>{{situationPersonneEnum.AAH}}</span>
                         </div>
                     </label>
-
                     <label
                         #conjointHasPensionInvalidite="ngModel"
                         name="conjointHasInvalidite"
@@ -555,6 +494,66 @@
                 <span
                     class="row error-input-message"
                     *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="beneficiaireAidesSociales.beneficiaireRSA === true">
+                <div class="row mb-2">
+                    <label
+                        class="label"
+                        for="isProprietaireSansPretOuLogeGratuit">
+                        * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
+                        <img
+                            class="interrogation-icon"
+                            src="./assets/images/question.svg"
+                            [popover]="popoverSituationLogementTemplate"
+                            #popoverSituationLogement="bs-popover"
+                            placement="right">
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="custom-control custom-radio">
+                        <input
+                            id="isProprietaireSansPretOuLogeGratuitOui"
+                            name="isProprietaireSansPretOuLogeGratuitOui"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, true)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                            required
+                            [value]="true"
+                            #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isProprietaireSansPretOuLogeGratuitOui">
+                            oui
+                        </label>
+                    </div>
+                    <div class="custom-control custom-radio ml-2">
+                        <input
+                            id="isProprietaireSansPretOuLogeGratuitNon"
+                            name="isProprietaireSansPretOuLogeGratuitNon"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-non"
+                            type="radio"
+                            class="custom-control-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, false)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                            required
+                            [value]="false"
+                            #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label
+                            class="custom-control-label"
+                            for="isProprietaireSansPretOuLogeGratuitNon">
+                            non
+                        </label>
+                    </div>
+                </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || isProprietaireSansPretOuLogeGratuit.touched) && isProprietaireSansPretOuLogeGratuit.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>

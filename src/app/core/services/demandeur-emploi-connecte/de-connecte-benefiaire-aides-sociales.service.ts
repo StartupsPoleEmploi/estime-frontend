@@ -25,4 +25,9 @@ export class DeConnecteBenefiaireAidesSocialesService {
     return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiairePensionInvalidite;
   }
 
+  public isBeneficiaireRSA(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireRSA;
+  }
+
 }

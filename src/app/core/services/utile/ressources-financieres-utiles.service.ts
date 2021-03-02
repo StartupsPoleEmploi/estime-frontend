@@ -19,7 +19,7 @@ export class RessourcesFinancieresUtileService {
 
   public creerRessourcesFinancieres(): RessourcesFinancieres {
     const ressourcesFinancieres = new RessourcesFinancieres();
-    ressourcesFinancieres.nombreMoisTravailles6DerniersMois = 0;
+    ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
     const allocationsPE = new AllocationsPoleEmploi();
     allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
@@ -77,9 +77,9 @@ export class RessourcesFinancieresUtileService {
   }
 
   public isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return !ressourcesFinancieres.hasTravailleAuCours6DerniersMois ||
-      (ressourcesFinancieres.hasTravailleAuCours6DerniersMois
-        && ressourcesFinancieres.nombreMoisTravailles6DerniersMois != 0)
+    return !ressourcesFinancieres.hasTravailleAuCoursDerniersMois ||
+      (ressourcesFinancieres.hasTravailleAuCoursDerniersMois
+        && ressourcesFinancieres.nombreMoisTravaillesDerniersMois != 0)
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
