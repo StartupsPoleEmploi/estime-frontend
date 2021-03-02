@@ -82,6 +82,24 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxHasASS(): void {
+    if (!this.beneficiaireAidesSociales.beneficiaireASS) {
+      this.deConnecteService.unsetAllocationMensuelleNetASS();
+    } else {
+      this.deConnecteService.unsetInfosRSA();
+      this.beneficiaireAidesSociales.beneficiaireRSA = false;
+    }
+  }
+
+  public onClickCheckBoxHasRSA(): void {
+    if (!this.beneficiaireAidesSociales.beneficiaireRSA) {
+      this.deConnecteService.unsetInfosRSA();
+    } else {
+      this.deConnecteService.unsetAllocationMensuelleNetASS();
+      this.beneficiaireAidesSociales.beneficiaireASS = false;
+    }
+  }
+
   public onClickCheckBoxHasRevenusImmobilier(): void {
     if (!this.informationsPersonnelles.hasRevenusImmobilier) {
       this.deConnecteService.unsetRevenusImmobilier();

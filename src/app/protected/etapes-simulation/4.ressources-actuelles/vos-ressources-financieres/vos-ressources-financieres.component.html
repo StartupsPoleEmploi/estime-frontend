@@ -67,98 +67,6 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()">
-            <div class="row mb-2">
-                <label
-                    class="label"
-                    for="hasCumuleAssEtSalaire">
-                    * J'ai déjà cumulé l'ASS + un salaire au cours des 3 derniers mois
-                </label>
-            </div>
-            <div class="row">
-                <div class="custom-control custom-radio">
-                    <input
-                        id="hasCumuleAssEtSalaireOui"
-                        name="hasCumuleAssEtSalaireOui"
-                        data-testid="btn-has-cumule-ass-et-salaire-oui"
-                        type="radio"
-                        class="custom-control-input"
-                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                        (click)="onClickButtonRadioHasCumuleAssEtSalaire(true)"
-                        required
-                        [value]="true"
-                        #hasCumuleAssEtSalaire="ngModel"
-                        (keyup)="handleKeyUpOnButtonHasCumuleAssEtSalaire($event, true)">
-                    <label
-                        class="custom-control-label"
-                        for="hasCumuleAssEtSalaireOui">
-                        oui
-                    </label>
-                </div>
-                <div class="custom-control custom-radio ml-2">
-                    <input
-                        id="hasCumuleAssEtSalaireNon"
-                        name="hasCumuleAssEtSalaireNon"
-                        data-testid="btn-has-cumule-ass-et-salaire-non"
-                        type="radio"
-                        class="custom-control-input"
-                        [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire"
-                        [value]="false"
-                        (click)="onClickButtonRadioHasCumuleAssEtSalaire(false)"
-                        required
-                        #hasCumuleAssEtSalaire="ngModel"
-                        (keyup)="handleKeyUpOnButtonHasCumuleAssEtSalaire($event, false)">
-                    <label
-                        class="custom-control-label"
-                        for="hasCumuleAssEtSalaireNon">
-                        non
-                    </label>
-                </div>
-            </div>
-            <span
-                class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || hasCumuleAssEtSalaire.touched)  && hasCumuleAssEtSalaire.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-        </div>
-        <div
-            class="form-group"
-            *ngIf="ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire === true">
-            <div class="row flex-column">
-                <label
-                    class="label mb-2"
-                    for="nombreMoisCumulAssSalaire">
-                    * Nombre de mois ASS + salaire cumulés
-                </label>
-                <select
-                    name="nombreMoisCumulAssSalaire"
-                    [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire"
-                    class="fit-content form-control"
-                    (change)="onClickButtonRadioNombreMoisCumulAssSalaire()"
-                    data-width="auto"
-                    required
-                    [ngClass]="{'option-selected': ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(this.ressourcesFinancieres)}"
-                    #nombreMoisCumulAssSalaire="ngModel">
-                    <option
-                        [value]="0"
-                        disabled>
-                        Sélectionner
-                    </option>
-                    <option
-                        *ngFor="let nombreMois of nombreMoisCumulAssSalaireSelectOptions"
-                        [value]="nombreMois.value">
-                        {{ nombreMois.label }}
-                    </option>
-                </select>
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisCumulAssSalaire.touched)  && ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire == 0">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-            </div>
-        </div>
-        <div
-            class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()">
             <div class="row mb-2">
                 <label
@@ -250,7 +158,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()">
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -306,35 +214,36 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true">
+            *ngIf="(deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS())  && ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true">
             <div class="row flex-column">
                 <label
                     class="label mb-2"
-                    for="nombreMoisTravailleAuCours6DerniersMois">
+                    for="nombreMoisTravailleAuCoursDerniersMois">
                     * J'ai travaillé
                 </label>
                 <select
-                    name="nombreMoisTravailleAuCours6DerniersMois"
+                    name="nombreMoisTravailleAuCoursDerniersMois"
                     [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                     class="fit-content form-control"
                     data-width="auto"
                     required
-                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravaillesDerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(this.ressourcesFinancieres)}"
-                    #nombreMoisTravailleAuCours6DerniersMois="ngModel">
+                    (click)="onClickBoutonNombreMoisTravailleAuCoursDerniersMois()"
+                    [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravaillesDerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCoursDerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(this.ressourcesFinancieres)}"
+                    #nombreMoisTravailleAuCoursDerniersMois="ngModel">
                     <option
                         [value]="0"
                         disabled>
                         Sélectionner
                     </option>
                     <option
-                        *ngFor="let nombreMois of nombreMoisTravailleAuCours6DerniersMoisSelectOptions"
+                        *ngFor="let nombreMois of getOptionsNombreMoisTravailles()"
                         [value]="nombreMois.value">
                         {{ nombreMois.label }}
                     </option>
                 </select>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCours6DerniersMois.touched)  && ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 0">
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCoursDerniersMois.touched)  && ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 0">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>

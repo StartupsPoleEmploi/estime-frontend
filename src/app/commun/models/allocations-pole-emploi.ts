@@ -4,6 +4,4 @@ export class AllocationsPoleEmploi {
   dateDerniereOuvertureDroitASS: string;
   dateReliquat: string;
   dureeReliquat: number;
-  hasCumuleAssEtSalaire: boolean;
-  nombreMoisCumulesAssEtSalaire: number;
 }

@@ -21,7 +21,6 @@ export class RessourcesFinancieresUtileService {
     const ressourcesFinancieres = new RessourcesFinancieres();
     ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
     const allocationsPE = new AllocationsPoleEmploi();
-    allocationsPE.nombreMoisCumulesAssEtSalaire = 0;
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
     const allocationsCAF = new AllocationsCAF();
     allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
@@ -70,13 +69,7 @@ export class RessourcesFinancieresUtileService {
     return ressourcesFinancieres;
   }
 
-  public isNombreMoisCumulAssSalaireSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return !ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire ||
-      (ressourcesFinancieres.allocationsPoleEmploi.hasCumuleAssEtSalaire
-        && ressourcesFinancieres.allocationsPoleEmploi.nombreMoisCumulesAssEtSalaire != 0)
-  }
-
-  public isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  public isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return !ressourcesFinancieres.hasTravailleAuCoursDerniersMois ||
       (ressourcesFinancieres.hasTravailleAuCoursDerniersMois
         && ressourcesFinancieres.nombreMoisTravaillesDerniersMois != 0)
@@ -85,6 +78,4 @@ export class RessourcesFinancieresUtileService {
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
   }
-
-
 }

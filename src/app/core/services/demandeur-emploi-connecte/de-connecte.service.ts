@@ -106,10 +106,42 @@ export class DeConnecteService {
   public unsetAllocationMensuelleNetAAH(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = null;
-      this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+      if(this.demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireASS) {
+        if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+        }
+        if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 2) {
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+        }
+      }
+    }
+  }
+
+  public unsetAllocationMensuelleNetASS(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetInfosRSA(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+    if(this.demandeurEmploiConnecte.situationFamiliale) {
+      this.demandeurEmploiConnecte.situationFamiliale.isSeulPlusDe18Mois = null;
+    }
+    if(this.demandeurEmploiConnecte.informationsPersonnelles) {
+      this.demandeurEmploiConnecte.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = null;
     }
   }
 

@@ -68,6 +68,7 @@ export class DeConnecteRessourcesFinancieresService {
     if(demandeurEmploiConnecte.ressourcesFinancieres) {
       if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
       }
       if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
@@ -160,13 +161,13 @@ export class DeConnecteRessourcesFinancieresService {
 
   private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS)
-    && this.ressourcesFinancieresUtileService.isNombreMoisCumulAssSalaireSelectedValide(ressourcesFinancieres)
+    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres)
     && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
   }
 
   private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH > 0
-    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCours6DerniersMoisSelectedValide(ressourcesFinancieres);
+    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres);
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {

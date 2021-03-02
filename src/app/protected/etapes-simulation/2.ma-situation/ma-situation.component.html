@@ -168,10 +168,11 @@
                         name="beneficiaireASS"
                         class="radio-button-style-1"
                         [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi}"
+                        (click)="onClickCheckBoxHasASS()"
                         data-testid="btn-situation-ass"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
                         btnCheckbox
-                        *ngIf="beneficiaireAidesSociales.beneficiaireRSA === false"
+                        *ngIf="!beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi"
                         tabindex="0"
                         role="button"
                         [disabled]="beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi"
@@ -183,11 +184,12 @@
                     <label
                         name="beneficiaireRSA"
                         class="radio-button-style-1"
+                        (click)="onClickCheckBoxHasRSA()"
                         [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi}"
-                        data-testid="btn-situation-ass"
+                        data-testid="btn-situation-rsa"
                         [(ngModel)]="beneficiaireAidesSociales.beneficiaireRSA"
                         btnCheckbox
-                        *ngIf="beneficiaireAidesSociales.beneficiaireASS === false"
+                        *ngIf="!beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi"
                         tabindex="0"
                         role="button"
                         [disabled]="beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi"
