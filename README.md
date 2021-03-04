@@ -252,12 +252,13 @@ Il faut au préablable se connecter sur une des machines distantes avec un **uti
 
 Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
 
-- Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
+- Vérifier que les conteneurs sont biens au statut UP et healthy en exécutant la commande suivante :
 
    ```
-   foo@bar:~$ docker stack ps estime-frontend
+   foo@bar:~$ docker container ls | grep estime-frontend
    ```
-   2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
+
+   2 replicas ont été déclarés, vous devriez donc voir 2 conteneurs.
 
 - Voir les logs du service en exécutant la commande suivante :
 
