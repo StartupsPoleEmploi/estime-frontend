@@ -3,7 +3,6 @@ import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
@@ -11,7 +10,8 @@ import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/dem
 import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-
+import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
+import { NumeroProchainMoisDeclarationRSA } from "@models/numero-prochain-mois-declaration-rsa";
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -20,9 +20,10 @@ import { DeConnecteRessourcesFinancieresService } from '@app/core/services/deman
 })
 export class VosRessourcesFinancieresComponent implements OnInit {
 
-  beneficiaireAidesSociales: BeneficiaireAidesSociales;
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
+  optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
+  optionsProchaineDeclarationRSA: Array<NumeroProchainMoisDeclarationRSA>;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
@@ -38,15 +39,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     { label: "3 mois", value: 3, default: false }
   ];
 
-  nombreMoisTravailleAuCours6DerniersMoisSelectOptions = [
-    { label: "1 mois", value: 1, default: true },
-    { label: "2 mois", value: 2, default: false },
-    { label: "3 mois", value: 3, default: false },
-    { label: "4 mois", value: 4, default: false },
-    { label: "5 mois", value: 5, default: false },
-    { label: "6 mois", value: 6, default: false }
-  ];
-
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
@@ -57,11 +49,15 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private elementRef: ElementRef,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+  ) {
 
-  ) { }
+  }
 
   ngOnInit(): void {
     this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
+      this.initOptionsProchaineDeclarationRSA();
+    }
   }
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
@@ -86,17 +82,22 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation = this.creerSalairesAvantPeriodeSimulation();
       }
+      if (this.optionsNombreMoisTravailles == null &&
+        (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()
+          || this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS())) {
+        this.initOptionsNombreMoisTravailles();
+      }
     }
   }
 
   public onClickBoutonNombreMoisTravailleAuCoursDerniersMois(): void {
-    if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
-      if(this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
-        if(this.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+      if (this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
+        if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
           this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
         }
       } else {
-        if(this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
+        if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
           this.ressourcesFinancieres.salairesAvantPeriodeSimulation = this.creerSalairesAvantPeriodeSimulation();
         }
       }
@@ -136,11 +137,24 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return nombreMoisTravailleAuCoursDerniersMois;
   }
 
-  public getOptionsNombreMoisTravailles() : any {
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
-      return this.nombreMoisTravailleAuCours6DerniersMoisSelectOptions;
-    } else {
-      return this.nombreMoisTravailleAuCours3DerniersMoisSelectOptions;
+  private initOptionsProchaineDeclarationRSA() {
+    this.optionsProchaineDeclarationRSA = new Array<NumeroProchainMoisDeclarationRSA>();
+    for (let i = 0; i < 4; i++) {
+      const numeroProchainMoisDeclarationRSA = new NumeroProchainMoisDeclarationRSA();
+      numeroProchainMoisDeclarationRSA.value = i;
+      numeroProchainMoisDeclarationRSA.label = this.dateUtileService.getLibelleMoisApresDateJour(i + 1);
+      this.optionsProchaineDeclarationRSA.push(numeroProchainMoisDeclarationRSA);
+    }
+  }
+
+  private initOptionsNombreMoisTravailles(): void {
+    this.optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
+    const nbrMoisTravaille = this.getNombreMoisTravailleAuCoursDerniersMois();
+    for (let i = 1; i <= nbrMoisTravaille; i++) {
+      const nombreMoisTravaille = new NombreMoisTravailles();
+      nombreMoisTravaille.value = i;
+      nombreMoisTravaille.label = `${i} mois`;
+      this.optionsNombreMoisTravailles.push(nombreMoisTravaille);
     }
   }
 
@@ -180,7 +194,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return isSalaireMoisMoinsNAvantSimulationDisplayPourASS;
   }
 
-  private creerSalairesAvantPeriodeSimulation():SalairesAvantPeriodeSimulation {
+  private creerSalairesAvantPeriodeSimulation(): SalairesAvantPeriodeSimulation {
     const salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
     salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
     salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;

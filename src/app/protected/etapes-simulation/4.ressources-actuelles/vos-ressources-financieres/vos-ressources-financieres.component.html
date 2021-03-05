@@ -113,6 +113,41 @@
         </div>
         <div
             class="form-group"
+            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()">
+            <div class="row flex-column">
+                <label
+                    class="label mb-2"
+                    for="prochaineDeclarationRSA">
+                    * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle RSA ?
+                </label>
+                <select
+                    name="prochaineDeclarationRSA"
+                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.prochaineDeclarationRSA"
+                    class="fit-content form-control"
+                    [ngClass]="{'option-selected':ressourcesFinancieres.allocationsCAF.prochaineDeclarationRSA !== null}"
+                    data-width="auto"
+                    required
+                    #prochaineDeclarationRSA="ngModel">
+                    <option
+                        [value]="null"
+                        disabled>
+                        Sélectionner
+                    </option>
+                    <option
+                        *ngFor="let moisProchaineDeclarationRSA of optionsProchaineDeclarationRSA"
+                        [value]="moisProchaineDeclarationRSA.value">
+                        {{ moisProchaineDeclarationRSA.label }}
+                    </option>
+                </select>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || prochaineDeclarationRSA.touched)  && prochaineDeclarationRSA.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
             *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()">
             <div class="row mb-2">
                 <label
@@ -156,9 +191,7 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()">
+        <div class="form-group">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -236,7 +269,7 @@
                         Sélectionner
                     </option>
                     <option
-                        *ngFor="let nombreMois of getOptionsNombreMoisTravailles()"
+                        *ngFor="let nombreMois of nombreMoisTravailleAuCours3DerniersMoisSelectOptions"
                         [value]="nombreMois.value">
                         {{ nombreMois.label }}
                     </option>

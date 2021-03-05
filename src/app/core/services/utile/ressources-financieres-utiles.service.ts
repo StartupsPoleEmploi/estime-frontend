@@ -23,6 +23,7 @@ export class RessourcesFinancieresUtileService {
     const allocationsPE = new AllocationsPoleEmploi();
     ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
     const allocationsCAF = new AllocationsCAF();
+    allocationsCAF.prochaineDeclarationRSA = null;
     allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
     const allocationsLogementMensuellesNetFoyer = new AllocationsLogementMensuellesNetFoyer();
     allocationsLogementMensuellesNetFoyer.moisNMoins1 = 0;

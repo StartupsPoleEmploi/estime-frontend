@@ -9,8 +9,8 @@ export class RessourcesFinancieres {
   allocationsCPAM : AllocationsCPAM;
   hasTravailleAuCoursDerniersMois: boolean;
   nombreMoisTravaillesDerniersMois: number;
-  salaireNet: number;
   revenusCreateurEntreprise3DerniersMois: number;
   revenusImmobilier3DerniersMois: number;
   salairesAvantPeriodeSimulation: SalairesAvantPeriodeSimulation;
+  salaireNet: number;
 }
