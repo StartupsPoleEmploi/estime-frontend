@@ -33,13 +33,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
 
 
-  nombreMoisTravailleAuCours3DerniersMoisSelectOptions = [
-    { label: "1 mois", value: 1, default: true },
-    { label: "2 mois", value: 2, default: false },
-    { label: "3 mois", value: 3, default: false }
-  ];
-
-
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
@@ -142,7 +135,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     for (let i = 0; i < 4; i++) {
       const numeroProchainMoisDeclarationRSA = new NumeroProchainMoisDeclarationRSA();
       numeroProchainMoisDeclarationRSA.value = i;
-      numeroProchainMoisDeclarationRSA.label = this.dateUtileService.getLibelleMoisApresDateJour(i + 1);
+      numeroProchainMoisDeclarationRSA.label = this.dateUtileService.getLibelleMoisApresDateJour(i);
       this.optionsProchaineDeclarationRSA.push(numeroProchainMoisDeclarationRSA);
     }
   }
