@@ -18,7 +18,9 @@ Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-em
 L'application est composée de 3 composants applicatifs :
 
 - frontend : application Web développée en Angular (Typescript) - ce projet Gitlab contient les sources de l'application Web
-- backend coeur métier : api REST développée en Springboot (Java) - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend).
+- backend coeur métier : api REST développée en Springboot (Java)  
+  [lien projet public Github de l'api](https://github.com/StartupsPoleEmploi/estime-backend)  
+  [lien projet privé Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend)
 - backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
@@ -252,12 +254,13 @@ Il faut au préablable se connecter sur une des machines distantes avec un **uti
 
 Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
 
-- Vérifier que le service est bien au statut **running** en exécutant la commande suivante :
+- Vérifier que les conteneurs sont biens au statut **UP** et **healthy** en exécutant la commande suivante :
 
    ```
-   foo@bar:~$ docker stack ps estime-frontend
+   foo@bar:~$ docker container ls | grep estime-frontend
    ```
-   2 replicas ont été déclarés, vous devriez donc voir 2 services à l'état "running"
+
+   2 replicas ont été déclarés, vous devriez donc voir 2 conteneurs.
 
 - Voir les logs du service en exécutant la commande suivante :
 
@@ -268,14 +271,7 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
 - Démarrer ou relancer les services
 
    - Se positionner dans le répertoire **/home/docker/estime-frontend**
-   - Se connecter au registry privé du Gitlab de l'incubateur en executant la commande suivante :
-
-      Vous devez au préalable avoir récupéré un token depuis votre compte Gitlab. Ce token vous servira de mot de passe.
-
-      ```
-      foo@bar:~$ docker login registry.beta.pole-emploi.fr
-      ```
-   - Une fois connecté au registry, vous devez exécuter la commande suivante pour démarrer ou relancer les services :
+   - Exécuter la commande suivante pour démarrer ou relancer les services :
 
       ```
       foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
@@ -286,6 +282,26 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
    ```
    foo@bar:~$ docker stack rm estime-frontend
    ```
+
+## Zero Downtime Deployment
+
+Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. Pour cela, nous avons mise en place un healthcheck dans la stack Docker de l'application :
+
+```
+healthcheck:
+      test: curl --fail http://localhost:8888/ || exit 1
+```
+
+Lors d'un redémarrage, le service Docker sera considéré opérationnel que si le test du healthcheck a réussi. Dans notre cas, Docker va s'asssurer que l'application réponde bien avant de déclarer le conteneur opérationnel (healthy). Si ce n'est pas le cas, le second service ne sera pas redémarré et l'application restera opérationnelle.
+
+## Limitation des ressources CPU et RAM
+
+Afin de gérer au mieux les ressources de la machine, la quantité de ressources CPU et de mémoire que peut prendre un conteneur a été limitée en jouant, dans le fichier stack Docker de l'application, sur les paramètres "resources -> reservations" et "resources -> limits".
+
+Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, exécuter la commande suivante :
+```
+foo@bar:~$ docker stats
+```
 
 # [IDE] VS Code
 
