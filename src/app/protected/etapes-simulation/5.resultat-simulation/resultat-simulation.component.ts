@@ -23,6 +23,7 @@ import { SimulationMensuelle } from '@models/simulation-mensuelle';
 export class ResultatSimulationComponent implements OnInit {
 
   aideSocialeSelected: AideSociale;
+  aidesDemandeurPourraObtenir: Array<AideSociale>;
   demandeurEmploiConnecte: DemandeurEmploi;
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
@@ -30,7 +31,7 @@ export class ResultatSimulationComponent implements OnInit {
 
 
   constructor(
-    private aidesServices: AidesService,
+    private aidesService: AidesService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
@@ -58,6 +59,7 @@ export class ResultatSimulationComponent implements OnInit {
       this.aideSocialeSelected = null;
       this.selectFirstAideSociale();
     }
+    this.initAidesDemandeurPourraObtenir();
   }
 
   public changeAideSocialeSelected(aideSocialeSelected: AideSociale) {
@@ -100,8 +102,6 @@ export class ResultatSimulationComponent implements OnInit {
     return text;
   }
 
-
-
   public getTextButtonImprimerSimulation(): string {
     let text = 'Imprimer la simulation';
     if(this.screenService.isExtraSmallScreen()) {
@@ -110,14 +110,31 @@ export class ResultatSimulationComponent implements OnInit {
     return text;
   }
 
-
-
   private loadDataSimulationAidesSociales(): void {
     this.simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();
     //si l'utilisateur est sur smartphone, aucune préselection
     if (!this.screenService.isExtraSmallScreen()) {
       this.simulationSelected = this.simulationAidesSociales.simulationsMensuelles[0];
       this.selectFirstAideSociale();
+    }
+    this.initAidesDemandeurPourraObtenir();
+  }
+
+  private initAidesDemandeurPourraObtenir(): void {
+    this.initArrayAidesDemandeurPourraObtenir();
+    for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+      if(this.aidesService.isAideDemandeurPourraObtenir(aide)) {
+        this.aidesDemandeurPourraObtenir.push(aide);
+      }
+    }
+  }
+
+  private initArrayAidesDemandeurPourraObtenir(): void {
+    if(this.aidesDemandeurPourraObtenir) {
+      //vide la liste
+      this.aidesDemandeurPourraObtenir.length = 0;
+    } else {
+      this.aidesDemandeurPourraObtenir = new Array<AideSociale>();
     }
   }
 
@@ -132,11 +149,10 @@ export class ResultatSimulationComponent implements OnInit {
     }
   }
 
-
   private selectFirstAideSociale(): void {
-    if (this.aidesServices.hasAidesObtenir(this.simulationSelected)) {
+    if (this.aidesService.hasAidesObtenir(this.simulationSelected)) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-          if (codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          if (this.aidesService.isAideDemandeurPourraObtenir(aide)) {
             this.aideSocialeSelected = aide;
           }
       }

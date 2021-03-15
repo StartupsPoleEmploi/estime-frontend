@@ -19,8 +19,10 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
 
+
   @Input() simulationSelected: SimulationMensuelle;
   @Input() aideSocialeSelected: AideSociale;
+  @Input() aidesDemandeurPourraObtenir: Array<AideSociale>;
 
   @Output() newAideSocialeSelected = new EventEmitter<AideSociale>();
 
@@ -39,11 +41,6 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     this.demandeurEmploiConnecte  = this.deConnecteService.getDemandeurEmploiConnecte();
   }
 
-  public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
-    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE &&
-    aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
-  }
-
   public isAideSocialSelected(codeAideSociale: string): boolean {
     return this.aideSocialeSelected && codeAideSociale === this.aideSocialeSelected.code;
   }
@@ -51,14 +48,12 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
     for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-      if(aide && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE && codeAide !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
+      if(this.aidesService.isAideDemandeurPourraObtenir(aide)) {
         size += 1;
       }
     }
     return index === size - 1;
   }
-
-
 
   public onClickButtonAideSocialAAH(): void {
     this.onClickButtonAideSocialObtenir(this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES));
@@ -75,48 +70,35 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   public isItemSalaireIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
+    || this.aidesService.getMontantRSA(this.simulationSelected) > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins1 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins2 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins3 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
-
   }
 
   public isItemAssIsNotLast(): boolean {
+    return this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAAH(this.simulationSelected) > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
+  }
+
+  public isItemRsaIsNotLast(): boolean {
     return this.aidesService.getMontantAAH(this.simulationSelected) > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins1 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins2 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins3 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 
   public isItemAahIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins1 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins2 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsLogementMensuellesNetFoyer.moisNMoins3 > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationsFamilialesMensuellesNetFoyer > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }
 
   public isItemPensionInvaliditeIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
-  }
-
-  public isItemRsaIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
   }

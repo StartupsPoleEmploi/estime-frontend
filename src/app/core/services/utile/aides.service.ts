@@ -31,6 +31,18 @@ export class AidesService {
     return montant;
   }
 
+  public getMontantRSA(simulationSelected: SimulationMensuelle): number {
+    let montant = 0;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.RSA) {
+          montant = aide.montant;
+        }
+      }
+    }
+    return montant;
+  }
+
   public hasAidesObtenirSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): boolean  {
     let hasAidesObtenirSimulationAidesSociales = false;
     simulationAidesSociales.simulationsMensuelles.forEach(simulationMensuelle => {
@@ -46,9 +58,7 @@ export class AidesService {
     if(simulationSelected) {
 
         for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-          if(aide
-            && codeAide !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
-            && codeAide !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
+          if(this.isAideDemandeurPourraObtenir(aide)) {
             hasAidesObtenir = true;
           }
         }
@@ -80,8 +90,6 @@ export class AidesService {
     return aideSocial;
   }
 
-
-
   public hasAide(simulationAidesSociales: SimulationAidesSociales, codeAide: string) {
     let hasAide = false;
     simulationAidesSociales.simulationsMensuelles.forEach(simulationMensuelle => {
@@ -102,6 +110,12 @@ export class AidesService {
         }
     }
     return hasAidesObtenir;
+  }
+
+  public isAideDemandeurPourraObtenir(aide: AideSociale): boolean {
+    return aide && aide.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
+        && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
+        && aide.code !== CodesAidesEnum.RSA
   }
 
 }

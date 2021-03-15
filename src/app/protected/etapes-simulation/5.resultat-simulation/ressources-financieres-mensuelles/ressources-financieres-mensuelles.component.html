@@ -26,6 +26,19 @@
                 <hr *ngIf="isItemAssIsNotLast()">
             </li>
             <li
+                class="list-group-item"
+                *ngIf="aidesService.getMontantRSA(simulationSelected) > 0">
+                <app-item-ressource-actuelle
+                    codeRessource="RSA"
+                    data-testid="row-rsa"
+                    [isColPictoArrowDisplay]="false"
+                    libelleRessource="Revenu de Solidarité Active"
+                    [montantRessource]="aidesService.getMontantRSA(simulationSelected)"
+                    organismeRessource="CAF">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemRsaIsNotLast()">
+            </li>
+            <li
                 class="list-group-item li-aide-sociale-selectable"
                 *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
                 >
@@ -45,7 +58,6 @@
                   organismeRessource="CAF">
               </app-item-ressource-actuelle>
                 </button>
-
                 <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
@@ -59,18 +71,6 @@
                     organismeRessource="CPAM">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemPensionInvaliditeIsNotLast()">
-            </li>
-            <li
-                class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF?.allocationMensuelleNetRSA > 0">
-                <app-item-ressource-actuelle
-                    codeRessource="RSA"
-                    [isColPictoArrowDisplay]="false"
-                    libelleRessource="Revenu de Solidarité Active"
-                    [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
-                    organismeRessource="CAF">
-                </app-item-ressource-actuelle>
-                <hr *ngIf="isItemRsaIsNotLast()">
             </li>
             <li
             class="list-group-item"
@@ -114,26 +114,26 @@
             role="group">
             <div
                 class="w-100"
-                *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
+                *ngFor="let aideSociale of aidesDemandeurPourraObtenir; let index = index;">
                 <button
                     type="button"
                     role="button"
                     class="btn"
                     tabindex="0"
-                    [ngClass]="{'active': isAideSocialSelected(aideKeyValue.value.code)}"
-                    (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
+                    [ngClass]="{'active': isAideSocialSelected(aideSociale.code)}"
+                    (click)="onClickButtonAideSocialObtenir(aideSociale)">
                     <app-item-ressource-actuelle
-                        [codeRessource]="aideKeyValue.value.code"
-                        [isAideSocialSelected]="isAideSocialSelected(aideKeyValue.value)"
+                        [codeRessource]="aideSociale.code"
+                        [isAideSocialSelected]="isAideSocialSelected(aideSociale)"
                         [isColPictoArrowDisplay]="true"
-                        [libelleRessource]="aideKeyValue.value.nom"
-                        [montantRessource]="aideKeyValue.value.montant"
-                        [organismeRessource]="aideKeyValue.value.organisme">
+                        [libelleRessource]="aideSociale.nom"
+                        [montantRessource]="aideSociale.montant"
+                        [organismeRessource]="aideSociale.organisme">
                     </app-item-ressource-actuelle>
                 </button>
                 <app-detail-aide-sociale
                 class="d-sm-none"
-                *ngIf="isAideSocialSelected(aideKeyValue.value)"
+                *ngIf="isAideSocialSelected(aideSociale)"
                 [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
                 <hr *ngIf="!isLastAideKeyValue(index)">
             </div>
