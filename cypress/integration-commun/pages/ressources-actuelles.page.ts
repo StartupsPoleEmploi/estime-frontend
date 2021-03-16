@@ -40,8 +40,8 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-annee-date]').type(annee);
   }
 
-  public clickOnCumuleAssEtSalaireNon(): void {
-    cy.get('[data-testid=btn-has-cumule-ass-et-salaire-non]').click({force: true});
+  public clickOnAvezTavailleAuCoursDesDerniersMoisNon(): void {
+    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-non]').click({force: true});
   }
 
   public clickOnValiderRessourcesFoyer(): void {
