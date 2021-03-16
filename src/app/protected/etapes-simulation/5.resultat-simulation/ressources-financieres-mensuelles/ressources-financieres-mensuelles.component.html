@@ -7,34 +7,44 @@
                     [codeRessource]="codesRessourcesFinancieresEnum.PAIE"
                     data-testid="row-paie"
                     [isColPictoArrowDisplay]="false"
-                    libelleRessource="Salaire net"
+                    [libelleRessource]="libellesRessourcesFinancieresEnum.SALAIRE"
                     [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaireMensuelNet">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemSalaireIsNotLast()">
             </li>
             <li
-                class="list-group-item"
-                *ngIf="aidesService.getMontantASS(simulationSelected) > 0">
-                <app-item-ressource-actuelle
-                    codeRessource="ASS"
-                    data-testid="row-ass"
-                    [isColPictoArrowDisplay]="false"
-                    libelleRessource="Allocation de Solidarité Spécifique"
-                    [montantRessource]="aidesService.getMontantASS(simulationSelected)"
-                    organismeRessource="Pôle emploi">
-                </app-item-ressource-actuelle>
-                <hr *ngIf="isItemAssIsNotLast()">
+                class="list-group-item li-aide-sociale-selectable"
+                *ngIf="aidesService.getMontantASS(simulationSelected) > 0"
+                >
+                <button
+                type="button"
+                    role="button"
+                    class="btn"
+                    tabindex="0"
+                style="cursor: pointer;"
+                [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
+                (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
+                  <app-item-ressource-actuelle
+                  [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                  data-testid="row-ass"
+                  [isColPictoArrowDisplay]="true"
+                  [libelleRessource]="libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                  [montantRessource]="aidesService.getMontantASS(simulationSelected)"
+                  [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
+              </app-item-ressource-actuelle>
+                </button>
+                <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
                 class="list-group-item"
                 *ngIf="aidesService.getMontantRSA(simulationSelected) > 0">
                 <app-item-ressource-actuelle
-                    codeRessource="RSA"
+                    [codeRessource]="codesAidesEnum.RSA"
                     data-testid="row-rsa"
                     [isColPictoArrowDisplay]="false"
-                    libelleRessource="Revenu de Solidarité Active"
+                    [libelleRessource]="libellesAidesEnum.RSA"
                     [montantRessource]="aidesService.getMontantRSA(simulationSelected)"
-                    organismeRessource="CAF">
+                    [organismeRessource]="organismeAidesEnum.CAF">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemRsaIsNotLast()">
             </li>
@@ -49,13 +59,13 @@
                     tabindex="0"
                 style="cursor: pointer;"
                 [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
-                (click)="onClickButtonAideSocialAAH()">
+                (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                   <app-item-ressource-actuelle
-                  codeRessource="AAH"
+                  [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                   [isColPictoArrowDisplay]="true"
-                  libelleRessource="Allocation aux Adultes Handicapés"
+                  [libelleRessource]="libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                   [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
-                  organismeRessource="CAF">
+                  [organismeRessource]="organismeAidesEnum.CAF">
               </app-item-ressource-actuelle>
                 </button>
                 <hr *ngIf="isItemAahIsNotLast()">
@@ -64,11 +74,11 @@
                 class="list-group-item"
                 *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0">
                 <app-item-ressource-actuelle
-                    codeRessource="PI"
+                    [codeRessource]="codesAidesEnum.PENSION_INVALIDITE"
                     [isColPictoArrowDisplay]="false"
-                    libelleRessource="Pension d'invalidité"
+                    [libelleRessource]="libellesAidesEnum.PENSION_INVALIDITE"
                     [montantRessource]="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
-                    organismeRessource="CPAM">
+                    [organismeRessource]="organismeAidesEnum.CPAM">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemPensionInvaliditeIsNotLast()">
             </li>
@@ -76,9 +86,9 @@
             class="list-group-item"
             *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0">
             <app-item-ressource-actuelle
-                codeRessource="IMMO"
+                [codeRessource]="codesRessourcesFinancieresEnum.IMMOBILIER"
                 [isColPictoArrowDisplay]="false"
-                libelleRessource="Revenus immobilier"
+                [libelleRessource]="libellesRessourcesFinancieresEnum.IMMOBILIER"
                 [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
             </app-item-ressource-actuelle>
             <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
@@ -87,9 +97,9 @@
             class="list-group-item"
             *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
             <app-item-ressource-actuelle
-                codeRessource="INDP"
+                [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                 [isColPictoArrowDisplay]="false"
-                libelleRessource="Revenus travailleur indépendant"
+                [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                 [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
             </app-item-ressource-actuelle>
            </li>

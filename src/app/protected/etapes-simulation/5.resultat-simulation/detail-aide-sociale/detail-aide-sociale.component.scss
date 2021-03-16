@@ -26,17 +26,21 @@
   hr {
     border-bottom-right-radius: 10px;
     margin: 0;
+    &.aah {
+      border-top: 7px solid $color-green-4;
+    }
     &.agepi {
       border-top: 7px solid $color-violet-2;
     }
     &.am {
       border-top: 7px solid $color-orange-2;
     }
+    &.ass {
+      border-top: 7px solid $color-orange-3;
+    }
     &.pa {
       border-top: 7px solid $color-violet-1;
     }
-    &.aah {
-      border-top: 7px solid $color-green-4;
-    }
+
   }
 }

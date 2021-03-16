@@ -1,3 +1,5 @@
 export enum CodesRessourcesFinancieresEnum {
-  PAIE = 'PAIE'
+  IMMOBILIER = 'IMMO',
+  PAIE = 'PAIE',
+  TRAVAILLEUR_INDEPENDANT = 'INDP'
 }

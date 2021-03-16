@@ -8,7 +8,9 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { AidesService } from "@app/core/services/utile/aides.service";
 import { CodesRessourcesFinancieresEnum } from "@app/commun/enumerations/codes-ressources-financieres.enum";
-
+import { LibellesAidesEnum } from "@enumerations/libelles-aides.enum";
+import { OrganismeAidesEnum } from "@enumerations/organismes-aides.enum";
+import { LibellesRessourcesFinancieresEnum } from "@enumerations/libelles-ressources-financieres.enum";
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -28,7 +30,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   codesRessourcesFinancieresEnum: typeof CodesRessourcesFinancieresEnum = CodesRessourcesFinancieresEnum;
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
-
+  libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
+  libellesRessourcesFinancieresEnum: typeof LibellesRessourcesFinancieresEnum = LibellesRessourcesFinancieresEnum;
+  organismeAidesEnum: typeof OrganismeAidesEnum = OrganismeAidesEnum;
 
   constructor(
     public aidesService: AidesService,
@@ -55,8 +59,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return index === size - 1;
   }
 
-  public onClickButtonAideSocialAAH(): void {
-    this.onClickButtonAideSocialObtenir(this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES));
+  public onClickButtonAideActuelle(codeAide: string): void {
+    this.onClickButtonAideSocialObtenir(this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, codeAide));
   }
 
   public onClickButtonAideSocialObtenir(aideSociale: AideSociale) {
