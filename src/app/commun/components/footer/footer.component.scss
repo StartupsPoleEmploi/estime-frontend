@@ -113,6 +113,8 @@ footer {
         }
       }
       .row-col-2 {
+        padding-right: 7px;
+        padding-left: 7px;
         @media #{$medium-device} {
           margin-top: 12px;
         }

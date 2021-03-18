@@ -14,6 +14,17 @@
             </li>
             <li
                 class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
+                <app-item-ressource-actuelle
+                    [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
+                    [isColPictoArrowDisplay]="false"
+                    [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
+                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemRevenusCreateurEntrepriseIsNotLast()">
+            </li>
+            <li
+                class="list-group-item"
                 *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0">
                 <app-item-ressource-actuelle
                     [codeRessource]="codesRessourcesFinancieresEnum.IMMOBILIER"
@@ -22,16 +33,6 @@
                     [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
                 </app-item-ressource-actuelle>
                 <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
-            </li>
-            <li
-                class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
-                <app-item-ressource-actuelle
-                    [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                    [isColPictoArrowDisplay]="false"
-                    [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
-                </app-item-ressource-actuelle>
             </li>
             <li
                 class="list-group-item li-aide-sociale-selectable"
@@ -107,7 +108,6 @@
                     class="d-sm-none"
                     *ngIf="aideSocialeSelected && aideSocialeSelected.code === codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
                     [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
-                <hr *ngIf="isItemAahIsNotLast()">
             </li>
         </ul>
     </div>
