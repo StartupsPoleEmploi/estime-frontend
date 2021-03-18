@@ -52,6 +52,10 @@
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
                 </button>
+                <app-detail-aide-sociale
+                    class="d-sm-none"
+                    *ngIf="aideSocialeSelected && aideSocialeSelected.code === codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
+                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
                 <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
