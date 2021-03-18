@@ -31,6 +31,18 @@ export class AidesService {
     return montant;
   }
 
+  public getMessageAlerteASS(simulationSelected: SimulationMensuelle): string {
+    let message = null;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
+          message = aide.messageAlerte;
+        }
+      }
+    }
+    return message;
+  }
+
   public getMontantRSA(simulationSelected: SimulationMensuelle): number {
     let montant = 0;
     if(simulationSelected.mesAides) {
@@ -56,13 +68,11 @@ export class AidesService {
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {
     let hasAidesObtenir = false;
     if(simulationSelected) {
-
         for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
           if(this.isAideDemandeurPourraObtenir(aide)) {
             hasAidesObtenir = true;
           }
         }
-
     }
     return hasAidesObtenir;
   }

@@ -49,6 +49,13 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return this.aideSocialeSelected && codeAideSociale === this.aideSocialeSelected.code;
   }
 
+  public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
+    return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
+    && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
+    && aideKeyValue.value.code !== CodesAidesEnum.RSA;
+  }
+
+
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
     for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {

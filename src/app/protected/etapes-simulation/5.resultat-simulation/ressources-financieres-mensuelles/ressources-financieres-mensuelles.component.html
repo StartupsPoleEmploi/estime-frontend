@@ -13,60 +13,44 @@
                 <hr *ngIf="isItemSalaireIsNotLast()">
             </li>
             <li
-                class="list-group-item li-aide-sociale-selectable"
-                *ngIf="aidesService.getMontantASS(simulationSelected) > 0"
-                >
-                <button
-                type="button"
-                    role="button"
-                    class="btn"
-                    tabindex="0"
-                style="cursor: pointer;"
-                [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
-                (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
-                  <app-item-ressource-actuelle
-                  [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
-                  data-testid="row-ass"
-                  [isColPictoArrowDisplay]="true"
-                  [libelleRessource]="libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
-                  [montantRessource]="aidesService.getMontantASS(simulationSelected)"
-                  [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
-              </app-item-ressource-actuelle>
-                </button>
-                <hr *ngIf="isItemAahIsNotLast()">
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0">
+                <app-item-ressource-actuelle
+                    [codeRessource]="codesRessourcesFinancieresEnum.IMMOBILIER"
+                    [isColPictoArrowDisplay]="false"
+                    [libelleRessource]="libellesRessourcesFinancieresEnum.IMMOBILIER"
+                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
             </li>
             <li
                 class="list-group-item"
-                *ngIf="aidesService.getMontantRSA(simulationSelected) > 0">
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
                 <app-item-ressource-actuelle
-                    [codeRessource]="codesAidesEnum.RSA"
-                    data-testid="row-rsa"
+                    [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                     [isColPictoArrowDisplay]="false"
-                    [libelleRessource]="libellesAidesEnum.RSA"
-                    [montantRessource]="aidesService.getMontantRSA(simulationSelected)"
-                    [organismeRessource]="organismeAidesEnum.CAF">
+                    [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
+                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="isItemRsaIsNotLast()">
             </li>
             <li
                 class="list-group-item li-aide-sociale-selectable"
-                *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
-                >
+                *ngIf="aidesService.getMontantAAH(simulationSelected) > 0">
                 <button
-                type="button"
+                    type="button"
                     role="button"
                     class="btn"
                     tabindex="0"
-                style="cursor: pointer;"
-                [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
-                (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
-                  <app-item-ressource-actuelle
-                  [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
-                  [isColPictoArrowDisplay]="true"
-                  [libelleRessource]="libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
-                  [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
-                  [organismeRessource]="organismeAidesEnum.CAF">
-              </app-item-ressource-actuelle>
+                    style="cursor: pointer;"
+                    [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
+                    (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
+                        [isColPictoArrowDisplay]="true"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
+                        [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
                 </button>
                 <hr *ngIf="isItemAahIsNotLast()">
             </li>
@@ -83,27 +67,61 @@
                 <hr *ngIf="isItemPensionInvaliditeIsNotLast()">
             </li>
             <li
-            class="list-group-item"
-            *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0">
-            <app-item-ressource-actuelle
-                [codeRessource]="codesRessourcesFinancieresEnum.IMMOBILIER"
-                [isColPictoArrowDisplay]="false"
-                [libelleRessource]="libellesRessourcesFinancieresEnum.IMMOBILIER"
-                [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
-            </app-item-ressource-actuelle>
-            <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
-           </li>
-           <li
-            class="list-group-item"
-            *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
-            <app-item-ressource-actuelle
-                [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                [isColPictoArrowDisplay]="false"
-                [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
-            </app-item-ressource-actuelle>
-           </li>
+                class="list-group-item"
+                *ngIf="aidesService.getMontantRSA(simulationSelected) > 0">
+                <app-item-ressource-actuelle
+                    [codeRessource]="codesAidesEnum.RSA"
+                    data-testid="row-rsa"
+                    [isColPictoArrowDisplay]="false"
+                    [libelleRessource]="libellesAidesEnum.RSA"
+                    [montantRessource]="aidesService.getMontantRSA(simulationSelected)"
+                    [organismeRessource]="organismeAidesEnum.CAF">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemRsaIsNotLast()">
+            </li>
+            <li
+                class="list-group-item li-aide-sociale-selectable"
+                *ngIf="aidesService.getMontantASS(simulationSelected) > 0">
+                <button
+                    type="button"
+                    role="button"
+                    class="btn"
+                    tabindex="0"
+                    style="cursor: pointer;"
+                    [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
+                    (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                        data-testid="row-ass"
+                        [isColPictoArrowDisplay]="true"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                        [montantRessource]="aidesService.getMontantASS(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
+                    </app-item-ressource-actuelle>
+                </button>
+                <app-detail-aide-sociale
+                    class="d-sm-none"
+                    *ngIf="aideSocialeSelected && aideSocialeSelected.code === codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                <hr *ngIf="isItemAahIsNotLast()">
+            </li>
         </ul>
+    </div>
+    <div
+        *ngIf="aidesService.getMessageAlerteASS(simulationSelected)"
+        class="card card-body card-message-alerte-aide">
+        <div class="row">
+            <div class="img-card-message-alerte-aide col-auto">
+                <div>
+                    <img src="./assets/images/info.svg">
+                </div>
+            </div>
+            <div class="col">
+                <span>
+                    {{aidesService.getMessageAlerteASS(simulationSelected)}}
+                </span>
+            </div>
+        </div>
     </div>
 </div>
 <h5
@@ -118,33 +136,35 @@
 <div
     class="row mt-3"
     *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
-    <div id="card-aides-obtenir" class="card">
+    <div
+        id="card-aides-obtenir"
+        class="card">
         <div
             class="btn-group-vertical"
             role="group">
             <div
                 class="w-100"
-                *ngFor="let aideSociale of aidesDemandeurPourraObtenir; let index = index;">
+                *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
                 <button
                     type="button"
                     role="button"
                     class="btn"
                     tabindex="0"
-                    [ngClass]="{'active': isAideSocialSelected(aideSociale.code)}"
-                    (click)="onClickButtonAideSocialObtenir(aideSociale)">
+                    [ngClass]="{'active': isAideSocialSelected(aideKeyValue.value.code)}"
+                    (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
                     <app-item-ressource-actuelle
-                        [codeRessource]="aideSociale.code"
-                        [isAideSocialSelected]="isAideSocialSelected(aideSociale)"
+                        [codeRessource]="aideKeyValue.value.code"
+                        [isAideSocialSelected]="isAideSocialSelected(aideKeyValue.value)"
                         [isColPictoArrowDisplay]="true"
-                        [libelleRessource]="aideSociale.nom"
-                        [montantRessource]="aideSociale.montant"
-                        [organismeRessource]="aideSociale.organisme">
+                        [libelleRessource]="aideKeyValue.value.nom"
+                        [montantRessource]="aideKeyValue.value.montant"
+                        [organismeRessource]="aideKeyValue.value.organisme">
                     </app-item-ressource-actuelle>
                 </button>
                 <app-detail-aide-sociale
-                class="d-sm-none"
-                *ngIf="isAideSocialSelected(aideSociale)"
-                [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                    class="d-sm-none"
+                    *ngIf="aideSocialeSelected && aidesService.isAideDemandeurPourraObtenir(aideSocialeSelected)"
+                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
                 <hr *ngIf="!isLastAideKeyValue(index)">
             </div>
         </div>

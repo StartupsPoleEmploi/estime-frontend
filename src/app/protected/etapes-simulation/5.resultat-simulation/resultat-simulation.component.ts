@@ -23,7 +23,6 @@ import { SimulationMensuelle } from '@models/simulation-mensuelle';
 export class ResultatSimulationComponent implements OnInit {
 
   aideSocialeSelected: AideSociale;
-  aidesDemandeurPourraObtenir: Array<AideSociale>;
   demandeurEmploiConnecte: DemandeurEmploi;
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
@@ -59,7 +58,6 @@ export class ResultatSimulationComponent implements OnInit {
       this.aideSocialeSelected = null;
       this.selectFirstAideSociale();
     }
-    this.initAidesDemandeurPourraObtenir();
   }
 
   public changeAideSocialeSelected(aideSocialeSelected: AideSociale) {
@@ -117,26 +115,8 @@ export class ResultatSimulationComponent implements OnInit {
       this.simulationSelected = this.simulationAidesSociales.simulationsMensuelles[0];
       this.selectFirstAideSociale();
     }
-    this.initAidesDemandeurPourraObtenir();
   }
 
-  private initAidesDemandeurPourraObtenir(): void {
-    this.initArrayAidesDemandeurPourraObtenir();
-    for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-      if(this.aidesService.isAideDemandeurPourraObtenir(aide)) {
-        this.aidesDemandeurPourraObtenir.push(aide);
-      }
-    }
-  }
-
-  private initArrayAidesDemandeurPourraObtenir(): void {
-    if(this.aidesDemandeurPourraObtenir) {
-      //vide la liste
-      this.aidesDemandeurPourraObtenir.length = 0;
-    } else {
-      this.aidesDemandeurPourraObtenir = new Array<AideSociale>();
-    }
-  }
 
   private traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel: SimulationMensuelle): void {
     //si click sur la même simulation, on unset l'attribut simulationSelected pour ne plus afficher le détail
