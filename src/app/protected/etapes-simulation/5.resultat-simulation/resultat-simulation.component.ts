@@ -56,7 +56,7 @@ export class ResultatSimulationComponent implements OnInit {
     } else {
       this.simulationSelected = simulationMensuel;
       this.aideSocialeSelected = null;
-      this.selectFirstAideSociale();
+      this.selectAideAfficherDetail();
     }
   }
 
@@ -113,7 +113,7 @@ export class ResultatSimulationComponent implements OnInit {
     //si l'utilisateur est sur smartphone, aucune préselection
     if (!this.screenService.isExtraSmallScreen()) {
       this.simulationSelected = this.simulationAidesSociales.simulationsMensuelles[0];
-      this.selectFirstAideSociale();
+      this.selectAideAfficherDetail();
     }
   }
 
@@ -129,7 +129,30 @@ export class ResultatSimulationComponent implements OnInit {
     }
   }
 
-  private selectFirstAideSociale(): void {
+  private selectAideAfficherDetail(): void {
+    const isAideActuelleSelected = this.selectAideActuelle();
+    if(!isAideActuelleSelected) {
+      this.selectFirstAidePourraObtenir();
+    }
+  }
+
+  private selectAideActuelle(): boolean {
+    let isAideActuelleSelected = false;
+    const aideSocialeAAH = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
+    if(aideSocialeAAH) {
+      this.aideSocialeSelected = aideSocialeAAH;
+      isAideActuelleSelected = true;
+    } else {
+      const aideSocialeASS = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+      if(aideSocialeASS) {
+        this.aideSocialeSelected = aideSocialeASS;
+        isAideActuelleSelected = true;
+      }
+    }
+    return isAideActuelleSelected;
+  }
+
+  private selectFirstAidePourraObtenir(): void {
     if (this.aidesService.hasAidesObtenir(this.simulationSelected)) {
       for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
           if (this.aidesService.isAideDemandeurPourraObtenir(aide)) {
