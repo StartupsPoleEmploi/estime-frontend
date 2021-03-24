@@ -24,12 +24,14 @@ export class SigninRedirectCallbackComponent implements OnInit {
   ngOnInit() {
     this.isPageLoadingDisplay = true;
     this.authorizationService.completeLogin().then(
-      (demandeur) => {
+      (individu) => {
         this.isPageLoadingDisplay = false;
-        if(this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
-          this.sessionPeConnectExpiredService.navigateToRouteActivated();
-        } else {
-          this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+        if(individu.populationAutorisee) {
+          if(this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
+            this.sessionPeConnectExpiredService.navigateToRouteActivated();
+          } else {
+            this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+          }
         }
       }, (erreur) => {
         this.isPageLoadingDisplay = false;

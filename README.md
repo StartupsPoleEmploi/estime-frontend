@@ -303,6 +303,10 @@ Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, e
 foo@bar:~$ docker stats
 ```
 
+## Connaître la version du composant applicatif déployé
+
+Accéder à la version via [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
+
 # [IDE] VS Code
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 

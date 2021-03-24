@@ -5,7 +5,6 @@ import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 import { DeConnecteService } from './de-connecte.service';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
-import { AllocationsCAF } from '@models/allocations-caf';
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 
 @Injectable({ providedIn: 'root' })

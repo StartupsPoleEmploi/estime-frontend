@@ -5,7 +5,6 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { DateUtileService } from '../utile/date-util.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
-import { DateDecomposee } from '@app/commun/models/date-decomposee';
 import { DeConnecteBenefiaireAidesSocialesService } from './de-connecte-benefiaire-aides-sociales.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 

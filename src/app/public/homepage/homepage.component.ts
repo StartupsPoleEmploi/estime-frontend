@@ -56,6 +56,7 @@ export class HomepageComponent implements OnInit {
     if (this.messageErreur) {
       if (this.messageErreur.code && this.messageErreur.code === CodesMessagesErreurEnum.INDIVIDU_NON_BENEFICIAIRE_MINIMA_SOCIAUX) {
         this.niveauMessageErreur = NiveauMessagesErreurEnum.INFO;
+        this.peConnectService.logout();
       } else {
         this.niveauMessageErreur = NiveauMessagesErreurEnum.ERROR;
       }

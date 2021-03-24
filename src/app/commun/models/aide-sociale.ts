@@ -6,4 +6,5 @@ export class AideSociale {
   montant: number;
   nom: string;
   organisme: string;
+  reportee: boolean;
 }

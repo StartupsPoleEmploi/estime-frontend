@@ -31,13 +31,13 @@ export class PeConnectService {
   }
 
   public logout(): void  {
-    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
     this.sessionStorageService.clear();
-    this.cookiesEstimeService.clear();
+    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
     const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
     if(poleEmploiIdentityServerDeconnexionURI !== null) {
       this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
     } else {
+      this.cookiesEstimeService.clear();
       this.router.navigate([RoutesEnum.HOMEPAGE]);
       this.individuConnectedService.emitIndividuConnectedLogoutEvent();
     }

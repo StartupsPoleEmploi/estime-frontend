@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '
 import { SituationPersonneEnum } from '@app/commun/enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { Personne } from '@models/personne';
 import { PersonneDTO } from '@models/dto/personne-dto';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
