@@ -31,9 +31,17 @@ services:
           memory: 256Mi
       update_config:
         parallelism: 1
+        order: start-first
+        failure_action: rollback
         delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
       restart_policy:
-        condition: on-failure
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 180s
 
 networks:
   estime:
