@@ -1,6 +1,6 @@
 {
   "name": "estime",
-  "version": "1.2.0-RC",
+  "version": "1.2.0",
   "scripts": {
     "build:dev": "npm install && ng build",
     "build:prod": "npm ci && ng build --prod ",
