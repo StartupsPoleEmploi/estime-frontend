@@ -17,7 +17,7 @@ services:
     healthcheck:
       test: curl --fail http://localhost:8888/ || exit 1
       timeout: 10s
-      interval: 5s
+      interval: 1m
       retries: 10
       start_period: 15s
     deploy:
