@@ -93,7 +93,7 @@ generate-docker-stack-recette:
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
-        - src/**/*
+        - docker/recette/estime-frontend-stack.yml.j2
 
 sonar_quality_analyse :
     stage: build-phase-2
