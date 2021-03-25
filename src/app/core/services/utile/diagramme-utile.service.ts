@@ -5,8 +5,6 @@ import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-conn
 import { DeConnecteSimulationAidesSocialesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service';
 import { AidesService } from "@app/core/services/utile/aides.service";
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
-import { DonneesDiagramme } from '@models/donnees-diagramme';
-import { DatasetDiagramme } from '@models/dataset-diagramme';
 import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { CodesRessourcesFinancieresEnum } from '@enumerations/codes-ressources-financieres.enum';
@@ -169,7 +167,7 @@ public formatter = (value, ctx) => {
    * @param demandeurEmploiConnecte
    * @returns
    */
-  private getDatasets(simulationAidesSociales, demandeurEmploiConnecte): Array<DatasetDiagramme> {
+  private getDatasets(simulationAidesSociales, demandeurEmploiConnecte): Array<Object> {
     simulationAidesSociales.simulationsMensuelles.forEach((simulationMensuelle, index) => {
       for(var key in simulationMensuelle.mesAides) {
         switch(key) {
