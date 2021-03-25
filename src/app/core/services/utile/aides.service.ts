@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { AideSociale } from '@app/commun/models/aide-sociale';
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 
@@ -53,6 +54,13 @@ export class AidesService {
       }
     }
     return montant;
+  }
+
+  public getMontantPensionInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
+    if(demandeurEmploiConnecte.ressourcesFinancieres &&
+        demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM &&
+          demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite
+    ) return demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite;
   }
 
   public hasAidesObtenirSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): boolean  {
