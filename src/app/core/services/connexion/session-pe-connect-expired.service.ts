@@ -42,6 +42,7 @@ export class SessionPeConnectExpiredService {
     this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         this.openModal();
+        this.bnNgIdleService.stopTimer();
       }
     });
   }

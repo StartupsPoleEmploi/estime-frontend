@@ -22,7 +22,6 @@ export class ModalSessionExpiredComponent implements OnInit {
     private cookiesEstimeService: CookiesEstimeService,
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
-    private bnNgIdleService: BnNgIdleService,
     private sessionStorageEstimeService: SessionStorageEstimeService,
     private router: Router
   ) {
@@ -33,8 +32,6 @@ export class ModalSessionExpiredComponent implements OnInit {
   }
 
   public onClickButtonClosePopup(): void {
-
-    this.bnNgIdleService.stopTimer();
 
     this.bsModalRef.hide();
     this.individuConnectedService.emitIndividuConnectedLogoutEvent();
