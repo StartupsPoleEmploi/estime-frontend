@@ -20,8 +20,7 @@ COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
 COPY ./docker/recette/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 
 #copy application sources
-RUN mkdir -p /var/www/estime
-COPY ./dist/estime /var/www/estime
+COPY ./dist/estime /usr/share/nginx/html
 
 #add useful scripts
 COPY ./docker/commun/scripts/startup.sh .
@@ -36,8 +35,7 @@ RUN chown nginx:nginx startup.sh \
  && mkdir -p /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp \
  && touch  /tmp/nginx.pid \
  && chown -R nginx:nginx /tmp  \
- && chown -R nginx:nginx /etc/fail2ban/run \
- && chown -R nginx:nginx /var/www/estime
+ && chown -R nginx:nginx /etc/fail2ban/run
 
 USER nginx
 
