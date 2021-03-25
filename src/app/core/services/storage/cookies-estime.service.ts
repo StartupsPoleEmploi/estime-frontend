@@ -14,7 +14,7 @@ export class CookiesEstimeService {
 
   public storeIndividuConnecte(individu: Individu): void {
     const dateTokenExpired = this.getDateCookieExpire(individu);
-    this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired});
+    this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired,path: '/', secure: true});
   }
 
   public getIndividuConnected(): Individu  {
