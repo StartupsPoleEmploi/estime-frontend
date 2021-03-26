@@ -36,7 +36,8 @@ export class SigninRedirectCallbackComponent implements OnInit {
       }, (erreur) => {
         this.isPageLoadingDisplay = false;
         this.router.navigate([RoutesEnum.HOMEPAGE]);
-      });
+      }
+    );
   }
 
 

@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  pathImg:string;
   isLoggedIn = false
   subscriptionStatutIndividuChangedObservable: Subscription;
 
@@ -25,8 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pathImg = './assets/images/signout.svg';
-    this.isLoggedIn = this.individuConnectedService.isLoggedIn() || this.peConnectService.isDemandeurPEConnecte();
+    this.isLoggedIn = this.individuConnectedService.isLoggedIn();
   }
 
   ngOnDestroy(): void {

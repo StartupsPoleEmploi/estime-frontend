@@ -42,7 +42,7 @@ export class HomepageComponent implements OnInit {
 
   public getLibelleBoutonPeConnect(): string {
     let libelle = 'Se connecter avec pôle emploi';
-    if (this.individuConnectedService.isLoggedIn() || this.peConnectService.isDemandeurPEConnecte()) {
+    if (this.individuConnectedService.isLoggedIn()) {
       libelle = 'Commencer ma simulation';
     }
     return libelle;

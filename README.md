@@ -125,21 +125,6 @@ foo@bar:~$ npm -v
 
 # [API estime-backend] Appeler l'api coeur metier Estime en local
 
-2 possibilités :
-
-- se brancher sur l'api déployée sur l'environnement de recette
-
-   Renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
-
-   ```typescript
-   export const environment = {
-      production: false,
-      /******** url de l'api coeur métier Estime ************/
-      apiEstimeURL: 'https://estime.beta.pole-emploi.fr/estime/v1/',
-      [...]
-   };
-   ```
-
 - installer en local l'api
 
   1. suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
