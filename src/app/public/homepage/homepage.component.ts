@@ -25,7 +25,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private authorizationService: AuthorizationService,
     public individuConnectedService: IndividuConnectedService,
-    private peConnectService: PeConnectService,
+    public peConnectService: PeConnectService,
     private router: Router,
     public screenService: ScreenService
   ) {
@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
 
   public getLibelleBoutonPeConnect(): string {
     let libelle = 'Se connecter avec pôle emploi';
-    if (this.individuConnectedService.isLoggedIn()) {
+    if (this.individuConnectedService.isLoggedIn() || this.peConnectService.isDemandeurPEConnecte()) {
       libelle = 'Commencer ma simulation';
     }
     return libelle;

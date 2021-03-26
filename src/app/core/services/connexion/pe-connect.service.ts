@@ -24,11 +24,12 @@ export class PeConnectService {
     private individuConnectedService: IndividuConnectedService,
     private router: Router,
     private sessionStorageService: SessionStorageService
-    ) {
+  ) {
   }
 
-  public createCookieUserBadgePourLocalhost(): void {
-    this.cookieService.set(KeysStorageEnum.PE_CONNECT_USER_BADGE, "user_localhost");
+  public isDemandeurPEConnecte(): boolean {
+    const userBadge = this.cookieService.get(KeysStorageEnum.PE_CONNECT_USER_BADGE);
+    return userBadge && userBadge !== "0";
   }
 
   public login(): void {
@@ -36,11 +37,11 @@ export class PeConnectService {
     this.document.location.href = this.getPoleEmploiIdentityServerConnexionURI();
   }
 
-  public logout(): void  {
+  public logout(): void {
     this.sessionStorageService.clear();
     const individuConnected = this.cookiesEstimeService.getIndividuConnected();
     const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
-    if(poleEmploiIdentityServerDeconnexionURI !== null) {
+    if (poleEmploiIdentityServerDeconnexionURI !== null) {
       this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
     } else {
       this.cookiesEstimeService.clear();

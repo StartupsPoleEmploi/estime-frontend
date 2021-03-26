@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.pathImg = './assets/images/signout.svg';
-    this.isLoggedIn = this.individuConnectedService.isLoggedIn();
+    this.isLoggedIn = this.individuConnectedService.isLoggedIn() || this.peConnectService.isDemandeurPEConnecte();
   }
 
   ngOnDestroy(): void {

@@ -22,7 +22,7 @@
                       </h1>
                     </div>
                     <button
-                        *ngIf="!this.individuConnectedService.isLoggedIn()"
+                        *ngIf="!this.individuConnectedService.isLoggedIn() && !this.peConnectService.isDemandeurPEConnecte()"
                         type="button"
                         class="btn-pe-connect"
                         data-testid="btn-pe-connect"
@@ -34,7 +34,7 @@
                         </div>
                     </button>
                     <button
-                        *ngIf="this.individuConnectedService.isLoggedIn()"
+                        *ngIf="this.individuConnectedService.isLoggedIn() || this.peConnectService.isDemandeurPEConnecte()"
                         data-testid="btn-je-commence"
                         type="button"
                         class="btn-style-perso-1"

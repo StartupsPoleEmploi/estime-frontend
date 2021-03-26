@@ -13,7 +13,6 @@ export class CookiesEstimeService {
   }
 
   public storeIndividuConnecte(individu: Individu): void {
-    individu.userBadge = this.cookieService.get(KeysStorageEnum.PE_CONNECT_USER_BADGE);
     const dateTokenExpired = this.getDateCookieExpire(individu.peConnectAuthorization.expireIn);
     this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired,path: '/', secure: true});
   }
@@ -26,8 +25,6 @@ export class CookiesEstimeService {
     }
     return individu;
   }
-
-
 
   public clear(): void {
     this.cookieService.delete(KeysStorageEnum.PE_CONNECT_INDIVIDU);

@@ -15,7 +15,7 @@ class MirePeConnectPage {
 
   clickOnSeConnecter() {
     cy.get('[type=submit]').click();
-    cy.wait(3000);
+    cy.wait(5000);
   }
 }
 export default MirePeConnectPage

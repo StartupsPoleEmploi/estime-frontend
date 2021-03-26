@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { RoutesEnum } from './commun/enumerations/routes.enum';
-import { Environment } from './commun/models/environment';
-import { PeConnectService } from './core/services/connexion/pe-connect.service';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +14,7 @@ export class AppComponent implements OnInit {
   subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
-    private environment: Environment,
-    private router: Router,
-    private peConnectService: PeConnectService
+    private router: Router
   ) {
     this.subscribeRouteNavigationEndObservable();
   }
