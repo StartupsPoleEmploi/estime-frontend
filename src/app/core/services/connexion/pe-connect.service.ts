@@ -10,6 +10,7 @@ import { SessionStorageService } from "ngx-webstorage";
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { CookieService } from 'ngx-cookie-service';
+import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 
 @Injectable({ providedIn: 'root' })
 export class PeConnectService {
@@ -23,7 +24,7 @@ export class PeConnectService {
     private environment: Environment,
     private individuConnectedService: IndividuConnectedService,
     private router: Router,
-    private sessionStorageService: SessionStorageService
+    private sessionStorageEstimeService: SessionStorageEstimeService,
   ) {
   }
 
@@ -38,13 +39,13 @@ export class PeConnectService {
   }
 
   public logout(): void {
-    this.sessionStorageService.clear();
+    this.sessionStorageEstimeService.clear();
     const individuConnected = this.cookiesEstimeService.getIndividuConnected();
     const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
+    this.cookiesEstimeService.clear();
     if (poleEmploiIdentityServerDeconnexionURI !== null) {
       this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
     } else {
-      this.cookiesEstimeService.clear();
       this.router.navigate([RoutesEnum.HOMEPAGE]);
       this.individuConnectedService.emitIndividuConnectedLogoutEvent();
     }
@@ -66,7 +67,7 @@ export class PeConnectService {
     if (individuConnected && individuConnected.peConnectAuthorization && individuConnected.peConnectAuthorization.idToken) {
       poleEmploiIdentityServerDeconnexionURI = `${this.environment.peconnectIdentityServerURL}/compte/deconnexion?` +
         `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
-        `&redirect_uri=${this.environment.peconnectRedirecturi}${RoutesEnum.SIGNOUT_CALLBACK}`
+        `&redirect_uri=${this.environment.peconnectRedirecturi}${RoutesEnum.HOMEPAGE}`
     }
     return poleEmploiIdentityServerDeconnexionURI;
   }
@@ -86,6 +87,6 @@ export class PeConnectService {
     this.peConnectPayload.redirectURI = `${this.environment.peconnectRedirecturi}${RoutesEnum.SIGNIN_CALLBACK}`;
     this.peConnectPayload.state = this.generateRandomValue();
 
-    this.sessionStorageService.store(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY, this.peConnectPayload);
+    this.sessionStorageEstimeService.storePeConnectPayload(this.peConnectPayload);
   }
 }

@@ -1,4 +1,5 @@
 export class MessageErreur {
   code: string;
-  message: string
+  texte: string;
+  niveau: string;
 }

@@ -10,6 +10,5 @@ export enum RoutesEnum {
   MES_PERSONNES_A_CHARGE = 'mes-personnes-a-charge',
   RESSOURCES_ACTUELLES = 'ressources-actuelles',
   RESULTAT_SIMULATION = 'resultat-simulation',
-  SIGNIN_CALLBACK = 'signin-callback',
-  SIGNOUT_CALLBACK = 'signout-callback'
+  SIGNIN_CALLBACK = 'signin-callback'
 }

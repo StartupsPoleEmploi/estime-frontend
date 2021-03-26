@@ -3,9 +3,9 @@
         <div id="div-message-erreur-homepage">
             <input type="hidden" ngModel #messageErreurElement>
             <alert
-                type="{{niveauMessageErreur}}"
+                type="{{messageErreur.niveau}}"
                 *ngIf="messageErreur">
-                {{messageErreur.message}}
+                {{messageErreur.texte}}
             </alert>
         </div>
         <div class="row row-1">

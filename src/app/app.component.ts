@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { RoutesEnum } from './commun/enumerations/routes.enum';
+import { RoutesEnum } from "@enumerations/routes.enum";
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
+    private route: ActivatedRoute,
     private router: Router
   ) {
     this.subscribeRouteNavigationEndObservable();
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if(routerEvent instanceof NavigationEnd) {
-        this.isDisplayFilAriane = routerEvent.url !== RoutesEnum.HOMEPAGE;
+        this.isDisplayFilAriane =  routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE;
       }
     });
   }
