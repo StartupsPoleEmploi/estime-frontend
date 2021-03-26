@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
+import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
+import { Environment } from '@app/commun/models/environment';
 import { EstimeApiService } from "@app/core/services/estime-api/estime-api.service";
 import { SessionStorageEstimeService } from "@app/core/services/storage/session-storage-estime.service";
 import { MessagesErreurEnum } from "@enumerations/messages-erreur.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { Individu } from '@models/individu';
 import { MessageErreur } from "@models/message-erreur";
+import { CookieService } from 'ngx-cookie-service';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { IndividuConnectedService } from './individu-connected.service';
 import { PeConnectService } from './pe-connect.service';
@@ -19,7 +22,9 @@ export class AuthorizationService {
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private cookieService: CookieService,
     private cookiesEstimeService: CookiesEstimeService,
+    private environment: Environment,
     private estimeApiService: EstimeApiService,
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
@@ -31,6 +36,9 @@ export class AuthorizationService {
   public completeLogin(): Promise<Individu> {
     return this.authentifierIndividu().then(
       (individu) => {
+        if(!this.environment.production) {
+          this.creerCookieUserAgentLocalhost();
+        }
         this.individuConnectedService.saveIndividuConnected(individu);
         if(individu.populationAutorisee) {
           this.sessionPeConnectExpiredService.startCheckUserInactivity(individu.peConnectAuthorization.expireIn);
@@ -55,6 +63,9 @@ export class AuthorizationService {
     }
     this.individuConnectedService.emitIndividuConnectedLogoutEvent();
     this.cookiesEstimeService.clear();
+    if(!this.environment.production) {
+      this.deleteCookieUserAgentLocalhost();
+    }
   }
 
   public getMessageErreur(): MessageErreur {
@@ -72,6 +83,14 @@ export class AuthorizationService {
     } else {
       this.router.navigate([RoutesEnum.HOMEPAGE]);
     }
+  }
+
+  private creerCookieUserAgentLocalhost(): void {
+    this.cookieService.set(KeysStorageEnum.PE_CONNECT_USER_BADGE, "user_localhost");
+  }
+
+  private deleteCookieUserAgentLocalhost(): void {
+    this.cookieService.delete(KeysStorageEnum.PE_CONNECT_USER_BADGE);
   }
 
   private traiterErrorAuthentifierIndividu(httpErrorResponse) {

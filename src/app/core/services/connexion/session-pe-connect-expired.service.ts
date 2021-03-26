@@ -8,6 +8,8 @@ import { SessionStorageEstimeService } from '../storage/session-storage-estime.s
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { Subscription } from 'rxjs';
 import { EtapeSimulationService } from '../utile/etape-simulation.service';
+import { CookieService } from 'ngx-cookie-service';
+import { KeysStorageEnum } from "@enumerations/keys-storage.enum";
 
 @Injectable({ providedIn: 'root' })
 export class SessionPeConnectExpiredService {
@@ -18,6 +20,7 @@ export class SessionPeConnectExpiredService {
     private bnNgIdleService: BnNgIdleService,
     private bsModalService: BsModalService,
     private cookiesEstimeService: CookiesEstimeService,
+    private cookieService: CookieService,
     private etapeSimulationService: EtapeSimulationService,
     private router: Router,
     private sessionStorageEstimeService: SessionStorageEstimeService
@@ -66,10 +69,10 @@ export class SessionPeConnectExpiredService {
 
   private isMemeIndividuReconnecteAfterSessionPeConnectExpired(): boolean {
     let isMemeIndividu = false;
-    const deConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
     const individuConnecte = this.cookiesEstimeService.getIndividuConnected();
-    if(deConnecte && individuConnecte) {
-      isMemeIndividu = deConnecte.idPoleEmploi === individuConnecte.idPoleEmploi;
+    if(individuConnecte) {
+      const userBadge = this.cookieService.get(KeysStorageEnum.PE_CONNECT_USER_BADGE);
+      isMemeIndividu = userBadge === individuConnecte.userBadge;
     }
     return isMemeIndividu;
   }

@@ -9,6 +9,7 @@ import { PeConnectPayload } from '@models/pe-connect-payload';
 import { SessionStorageService } from "ngx-webstorage";
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class PeConnectService {
@@ -16,6 +17,7 @@ export class PeConnectService {
   private peConnectPayload: PeConnectPayload;
 
   constructor(
+    private cookieService: CookieService,
     private cookiesEstimeService: CookiesEstimeService,
     @Inject(DOCUMENT) private document: Document,
     private environment: Environment,
@@ -23,6 +25,10 @@ export class PeConnectService {
     private router: Router,
     private sessionStorageService: SessionStorageService
     ) {
+  }
+
+  public createCookieUserBadgePourLocalhost(): void {
+    this.cookieService.set(KeysStorageEnum.PE_CONNECT_USER_BADGE, "user_localhost");
   }
 
   public login(): void {

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { Individu } from '@models/individu';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, Subject } from 'rxjs';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 
@@ -11,7 +13,9 @@ export class IndividuConnectedService {
   statutIndividuChanged: Observable<boolean>;
 
   constructor(
-    private cookiesEstimeService: CookiesEstimeService
+    private cookiesEstimeService: CookiesEstimeService,
+    private cookieService: CookieService
+
   ) {
     this.isStatutIndividuChangedSubject = new Subject<boolean>();
     this.statutIndividuChanged = this.isStatutIndividuChangedSubject.asObservable();
@@ -35,7 +39,7 @@ export class IndividuConnectedService {
   }
 
   public isLoggedIn(): boolean {
-    const isLoggedIn = this.cookiesEstimeService.getIndividuConnected() !== null;
-    return isLoggedIn;
+    const userBadge = this.cookieService.get(KeysStorageEnum.PE_CONNECT_USER_BADGE);
+    return userBadge && userBadge !== "0";
   }
 }
