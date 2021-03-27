@@ -35,7 +35,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 - **./docker :** fichier de configuration Docker
 - **./cypress :** tests e2e
 
-## Design du site - librairies utilisées
+## librairies HTML et CSS
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
 - [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
