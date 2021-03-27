@@ -18,7 +18,7 @@ Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-em
 - une application REST développée en Springboot (Java)  
   [projet public Github](https://github.com/StartupsPoleEmploi/estime-backend)  
   [projet privé Gitlab](https://git.beta.pole-emploi.fr/estime/estime-backend)
-- une application Python : moteur de calcul Openfisca France - [projet Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france).
+- un moteur de calcul développé en Python - Openfisca France - [projet Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
 :closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [Pôle emploi Connect](https://peconnect.pole-emploi.fr/).**
