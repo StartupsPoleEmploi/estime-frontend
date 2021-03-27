@@ -293,7 +293,7 @@ resources:
       memory: 1536Mi
 ```
 
-To see CPU and memory used by Docker container, execute this command :
+To see CPU and memory used by Docker containers, execute this command :
 ```
 foo@bar:~$ docker stats
 ```
