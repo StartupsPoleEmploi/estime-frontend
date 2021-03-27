@@ -29,7 +29,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 ## Structuration du code source
 
 - **./src/app/public :** composants publics, accessibles en non authentifié (homepage, cgu, etc...).
-- **./src/app/protected :** composants privés, accessibles en authentifié (étapes de la simulation, etc...).
+- **./src/app/protected :** composants protégés, accessibles seulement authentifié (étapes de la simulation, etc...).
 - **./src/app/commun :** composants communs, directives, guards, pipes, models
 - **./src/app/core :** services Singleton
 - **./docker :** fichier de configuration Docker
