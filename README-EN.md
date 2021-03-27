@@ -40,7 +40,7 @@ This project has been generated with [the Angular CLI](https://cli.angular.io/) 
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
 - [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
-- [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
+- [Saas](https://sass-lang.com/guide), Syntactically Awesome Style Sheets.
 
 ## Manage dependencies with npm
 
