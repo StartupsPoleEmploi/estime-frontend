@@ -6,7 +6,7 @@ La startup d'Etat _Estime_ est issue du challenge intraprenarial 2020 de Pôle e
 
 ### **L’idée :**
 
-Proposer un simulateur qui permet aux demandeurs d’emploi de visualiser, sur une période de n mois, toutes leurs futures ressources financières en cas de reprise d’emploi (aides Pôle emploi, aides CNAF). Plus d'informations sur la [fiche startup de beta.gouv (Incubateur de services publics numériques)](https://beta.gouv.fr/startups/estime.html)
+Proposer un simulateur qui encourage l'acte de reprise à l'emploi d'un demandeur d’emploi en lui offrant la possibilié de visualiser, sur une période de 6 mois, toutes ses futures ressources financières en cas de reprise d’emploi (aides Pôle emploi, aides CNAF). Plus d'informations sur notre démarche sur [notre fiche startup de beta.gouv (Incubateur de services publics numériques)](https://beta.gouv.fr/startups/estime.html)
 
 Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-emploi.fr/)
 
@@ -14,14 +14,11 @@ Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-em
 
 ![schéma architecure Estime](.gitlab/images/schema_architecure_v1.png)
 
-
-L'application est composée de 3 composants applicatifs :
-
-- frontend : application Web développée en Angular (Typescript) - ce projet Gitlab contient les sources de l'application Web
-- backend coeur métier : api REST développée en Springboot (Java)  
-  [lien projet public Github de l'api](https://github.com/StartupsPoleEmploi/estime-backend)  
-  [lien projet privé Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/estime-backend)
-- backend moteur de calcul : api REST Openfisca développée en Python - [lien projet Gitlab de l'api](https://git.beta.pole-emploi.fr/estime/openfisca-france).
+- une application Web développée en Angular (Typescript) - ce projet Gitlab contient les sources de l'application Web
+- une application REST développée en Springboot (Java)  
+  [projet public Github](https://github.com/StartupsPoleEmploi/estime-backend)  
+  [projet privé Gitlab](https://git.beta.pole-emploi.fr/estime/estime-backend)
+- une application Python : moteur de calcul Openfisca France - [projet Gitlab](https://git.beta.pole-emploi.fr/estime/openfisca-france).
 
 
 :closed_lock_with_key: L'accès au service Estime est **sécurisé par une authentification avec [Pôle emploi Connect](https://peconnect.pole-emploi.fr/).**
