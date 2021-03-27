@@ -92,7 +92,7 @@ foo@bar:~$ npm -v
    - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#api-estime-backend-appeler-lapi-coeur-metier-estime) 
    <br />
    
-   ```typescript
+   ```json
    export const environment = {
       production: false,
       /******** url de l'api coeur métier Estime ************/
@@ -119,7 +119,7 @@ foo@bar:~$ npm -v
   1. suivre les instructions du **[README du projet](https://github.com/StartupsPoleEmploi/estime-backend)**
   1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
 
-     ```typescript
+     ```json
      export const environment = {
      production: false,
      /******** url de l'api coeur métier Estime ************/
@@ -145,7 +145,7 @@ foo@bar:~$ npm -v
 
    Copier le contenu suivant en valorisant les paramètres  :
 
-   ```
+   ```json
    export const environment = {
       urlApplication: '%% à renseigner %%',
       peConnectUserIdentifiant: '%% à renseigner %%',
@@ -183,7 +183,7 @@ foo@bar:~$ npm -v
 
 1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%** 
    
-   ```json
+   ```
    version: '3.8'
 
    services:
