@@ -114,11 +114,9 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ npm start
    ```
 
-# [API estime-backend] Appeler l'api coeur metier Estime en local
+# [Application REST Springboot] Installer l'application en local
 
-- installer en local l'api
-
-  1. suivre les instructions du **[README du projet Gitlab estime-backend](https://git.beta.pole-emploi.fr/estime/estime-backend)**
+  1. suivre les instructions du **[README du projet](https://github.com/StartupsPoleEmploi/estime-backend)**
   1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
 
      ```typescript
@@ -134,21 +132,18 @@ foo@bar:~$ npm -v
 
 ## Structuration des tests
 
-**Utilisation du pattern "Page Object"** avec une page représentée par une classe.
+**Utilisation du pattern "Page Object"**.
 
-- **./cypress/integration/integration :** contient les classes implémentant la logique des tests. Organisation par features et user stories
-- **./cypress/integration-commun/pages :** contient les classes représentant les pages
-- **./cypress/integration-commun/sections  :** contient les classes représentant des sections communes à plusieurs pages. Exemple : le header, le footer)
-- **./ci :** fichiers de configuration nécessaires à l'exécution des tests dans le pipeline de CI/CD
-- **coverage.webpack.js :** utilisation de la librairie [istanbul-lib-instrument ](https://github.com/webpack-contrib/istanbul-instrumenter-loader) pour remonter une couverture de code par les tests e2e
+- **./cypress/integration/integration :** classes implémentant la logique des tests. Organisation par features et user stories
+- **./cypress/integration-commun :** classes Page Object
+- **./ci :** fichiers de configuration pour l'exécution des tests dans le pipeline de GitLab CI
+- **coverage.webpack.js :**  rapport de couverture du code avec [istanbul-lib-instrument ](https://github.com/webpack-contrib/istanbul-instrumenter-loader)
 
 ## Executer les tests e2e en local
 
-1. Créer un fichier environment.ts à la racine du répertoire cypress. 
+1. Créer un fichier environment.ts à la racine du répertoire cypress
 
-   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
-
-   Copier le contenu suivant et valoriser les paramètres  :
+   Copier le contenu suivant en valorisant les paramètres  :
 
    ```
    export const environment = {
@@ -158,7 +153,7 @@ foo@bar:~$ npm -v
    };
    ```
 
-1. Exécuter la commande suivante pour démarrer Cypress et lancer les tests :
+1. Lancer Cypress :
 
    ```console
    foo@bar:~estime-frontend$ npm cy:open
@@ -166,31 +161,27 @@ foo@bar:~$ npm -v
 
 # [Conteneurisation] Utilisation de Docker
 
-- **./docker/local** : contient les fichiers de configuration pour lancer l'application en local avec Docker Compose
-- **./docker/recette** : contient les fichiers de configuration pour l'environnement de recette. Le conteneur est déployé sur un serveur Docker Swarm
-- **./docker/production** : contient les fichiers de configuration pour l'environnement de production. Le conteneur est déployé sur un serveur Docker Swarm
-- **./docker/commun** : contient les fichiers de configuration communs (configuration nginx, fail2ban, scripts utiles)
+- **./docker/local** : fichiers de configuration pour lancer l'application en local avec Docker Compose
+- **./docker/recette** : fichiers de configuration pour l'environnement de recette et un déploiement sur un serveur Docker Swarm
+- **./docker/production** : fichiers de configuration pour l'environnement de production et un déploiement sur un serveur Docker Swarm
+- **./docker/commun** : fichiers de configuration communs (nginx, fail2ban, scripts shell)
 
 ## Lancer l'application en local avec Docker Compose
 
 **Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
 
-1. Lancer le build de l'application en exécutant la commande suivante :
+1. Lancer le build de l'application :
 
    ```
    foo@bar:~estime-frontend$ npm run build:dev
    ```
-1. Lancer le build de l'image Docker en exécutant la commande suivante :
+1. Lancer le build de l'image Docker :
 
    ```
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
-1. Créer un fichier docker-compose.yml sur votre poste
-
-   :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant.
-
-   - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
+1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%** 
    
    ```json
    version: '3.8'
@@ -208,15 +199,15 @@ foo@bar:~$ npm -v
             TAG_COMMANDER_SCRIPT_URL: ""
             TZ: "Europe/Paris"
    ```
-1. Lancer le conteneur en exécutant la commande suivante dans le répertoire contenant le fichier docker-compose.yml
+1. Se positionner dans le répertoire de votre fichier docker-compose.yml et démarrer le conteneur : 
 
    ```shell
    foo@bar:~docker-compose-directory$ docker-compose up -d
    ```
 
-1. L'application devrait être accessible sur http://localhost:3000. Elle est configurée pour appeler l'api Estime (estime-backend) de l'environnement de recette, voir la configuration nginx **default.conf** présente dans **./docker/local/docker-image/nginx-conf**
+1. L'application devrait être accessible sur http://localhost:3000
 
-# [CI/CD] build et déploiement automatisés avec Gitlab CI/CD
+# [CI/CD] build et déploiement automatisés avec Gitlab CI
 
 Voir le fichier **./.gitlab-ci.yml**
 
@@ -224,36 +215,32 @@ Voir le fichier **./.gitlab-ci.yml**
 
 Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend](https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend)
 
-# [Suivi opérationnel] Comment dépanner l'application sur les environnements distants (recette et production) ?
+# [Suivi opérationnel] Comment dépanner l'application sur un serveur Docker Swarm ?
 
-Il faut au préablable se connecter sur une des machines distantes avec un **utilisateur ayant les droits Docker**.
-
-Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans le répertoire **/home/docker/estime-frontend**.
-
-- Vérifier que les conteneurs sont biens au statut **UP** et **healthy** en exécutant la commande suivante :
+- Vérifier que l'application fonctionne correctement :
 
    ```
    foo@bar:~$ docker container ls | grep estime-frontend
    ```
+   
+   Les conteneurs doivent être au statut **UP** et **healthy**.
 
-   2 replicas ont été déclarés, vous devriez donc voir 2 conteneurs.
-
-- Voir les logs du service en exécutant la commande suivante :
+- Consulter les logs :
 
    ```
    foo@bar:~$ docker service logs estime-frontend_estime-frontend
    ```
 
-- Démarrer ou relancer les services
+- Démarrer ou relancer le service
 
    - Se positionner dans le répertoire **/home/docker/estime-frontend**
-   - Exécuter la commande suivante pour démarrer ou relancer les services :
+   - Exécuter la commande suivante :
 
       ```
       foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
       ```
 
-- Stopper les services en exécutant la commande suivante :
+- Stopper le service :
 
    ```
    foo@bar:~$ docker stack rm estime-frontend
@@ -261,18 +248,47 @@ Le fichier de la stack Docker Swarm **estime-frontend-stack.yml** se trouve dans
 
 ## Zero Downtime Deployment
 
-Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. Pour cela, nous avons mise en place un healthcheck dans la stack Docker de l'application :
+Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. 
 
-```
-healthcheck:
-      test: curl --fail http://localhost:8888/ || exit 1
+```json
+   healthcheck:
+      test: curl -v --silent http://localhost:8080/estime/v1/actuator/health 2>&1 | grep UP || exit 1
+      timeout: 30s
+      interval: 1m
+      retries: 10
+      start_period: 180s
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 180s
 ```
 
-Lors d'un redémarrage, le service Docker sera considéré opérationnel que si le test du healthcheck a réussi. Dans notre cas, Docker va s'asssurer que l'application réponde bien avant de déclarer le conteneur opérationnel (healthy). Si ce n'est pas le cas, le second service ne sera pas redémarré et l'application restera opérationnelle.
+Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Dans notre cas, Docker va mettre à jour un premier service et s'asssurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
 
 ## Limitation des ressources CPU et RAM
 
-Afin de gérer au mieux les ressources de la machine, la quantité de ressources CPU et de mémoire que peut prendre un conteneur a été limitée en jouant, dans le fichier stack Docker de l'application, sur les paramètres "resources -> reservations" et "resources -> limits".
+Afin de gérer au mieux les ressources de la machine, la quantité de ressources CPU et de mémoire que peut prendre un conteneur a été limitée :
+
+```json
+resources:
+   reservations:
+      cpus: '0.20'
+      memory: 512Mi
+   limits:
+      cpus: '0.40'
+      memory: 1536Mi
+```
 
 Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, exécuter la commande suivante :
 ```
