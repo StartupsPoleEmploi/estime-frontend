@@ -304,7 +304,7 @@ You just have to access to [https://estime.pole-emploi.fr/version.json](https://
 
 # [IDE] VS Code
 
-VS Code is available on [the official site](https://code.visualstudio.com/) 
+VS Code is available on [the official website](https://code.visualstudio.com/) 
 
 :wrench:  Some useful plugins :
 
