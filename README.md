@@ -45,7 +45,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^ dans le package.json, les versions sont mise à jour manuellement. 
 
-:wrench:  Outils pour aider à la mise à jour des librairies :
+:wrench:  Outils utiles :
 
 - [npm-check ](https://www.npmjs.com/package/npm-check)
 - [npm-audi](https://docs.npmjs.com/cli/v6/commands/npm-audit)
