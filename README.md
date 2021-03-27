@@ -2,7 +2,7 @@
 
 🇬🇧 [English version](https://git.beta.pole-emploi.fr/estime/estime-frontend/-/blob/688729ecee8df2efa5e1a6ac1788b2a5739a8228/README-EN.md)
 
-# [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
+# [Startup Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
 
 ### **L’idée :**
 
