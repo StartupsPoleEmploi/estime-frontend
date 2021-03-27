@@ -43,7 +43,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 ## Gestion des dépendances avec npm
 
-Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^, il faut mettre à jour les versions manuellement. 
+Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^ dans le package.json, les versions sont mise à jour manuellement. 
 
 :wrench:  Outils pour aider à la mise à jour des librairies :
 
