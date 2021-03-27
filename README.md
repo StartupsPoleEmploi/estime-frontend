@@ -6,7 +6,7 @@
 
 Proposer un simulateur qui encourage l'acte de reprise à l'emploi d'un demandeur d’emploi en lui offrant la possibilié de visualiser, sur une période de 6 mois, toutes ses futures ressources financières en cas de reprise d’emploi (aides Pôle emploi, aides CNAF). Plus d'informations sur notre démarche [https://beta.gouv.fr/startups/estime.html](https://beta.gouv.fr/startups/estime.html)
 
-Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-emploi.fr/)
+Accéder à l'application : [https://estime.pole-emploi.fr/](https://estime.pole-emploi.fr/)
 
 # [Architecture] Schéma simplifié de l'application Estime
 
