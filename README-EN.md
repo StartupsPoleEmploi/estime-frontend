@@ -142,11 +142,11 @@ foo@bar:~$ npm -v
 - **./ci :** configuration files to execute tests in GitLab CI pipeline
 - **coverage.webpack.js :**  coverage report with [istanbul-lib-instrument] (https://github.com/webpack-contrib/istanbul-instrumenter-loader) library
 
-## Execut e2e tests in local environment
+## Execute e2e tests in local environment
 
-1. Créer un fichier environment.ts à la racine du répertoire cypress
+1. Create an environment.ts file to in cypress root directory
 
-   Copier le contenu suivant en valorisant les paramètres  :
+   Copy the next lines with replacing variables %% à renseigner %% :
 
    ```
    export const environment = {
@@ -156,35 +156,35 @@ foo@bar:~$ npm -v
    };
    ```
 
-1. Lancer Cypress :
+1. Launch Cypress :
 
    ```console
    foo@bar:~estime-frontend$ npm cy:open
    ```
 
-# [Conteneurisation] Utilisation de Docker
+# [Containerization] use Docker
 
-- **./docker/local** : fichiers de configuration pour lancer l'application en local avec Docker Compose
-- **./docker/recette** : fichiers de configuration pour l'environnement de recette et un déploiement sur un serveur Docker Swarm
-- **./docker/production** : fichiers de configuration pour l'environnement de production et un déploiement sur un serveur Docker Swarm
-- **./docker/commun** : fichiers de configuration communs (nginx, fail2ban, scripts shell)
+- **./docker/local** : configuration files to launch the application in local environment with Docker Compose
+- **./docker/recette** : configuration files for staging environment and a deployment on a Docker Swarm server
+- **./docker/production** : configuration files for production environment and a deployment on a Docker Swarm server
+- **./docker/commun** : common configuration files (nginx, fail2ban, scripts shell)
 
-## Lancer l'application en local avec Docker Compose
+## Launch the application in local environment with Docker Compose
 
-**Prérequis :** installer [Docker](https://docs.docker.com/engine/install/) et [Docker Compose](https://docs.docker.com/compose/install/).
+**Prerequisites :** install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/).
 
-1. Lancer le build de l'application :
+1. Launch application build :
 
    ```
    foo@bar:~estime-frontend$ npm run build:dev
    ```
-1. Lancer le build de l'image Docker :
+1. Launch Docker image build :
 
    ```
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
-1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%** 
+1. Create a docker-compose.yml file, don't forget to replace variables **%% à renseigner %%** 
    
    ```
    version: '3.8'
@@ -202,48 +202,48 @@ foo@bar:~$ npm -v
             TAG_COMMANDER_SCRIPT_URL: ""
             TZ: "Europe/Paris"
    ```
-1. Se positionner dans le répertoire de votre fichier docker-compose.yml et démarrer le conteneur : 
+1. Go to your docker-compose file directory and run the container : 
 
    ```shell
    foo@bar:~docker-compose-directory$ docker-compose up -d
    ```
 
-1. L'application devrait être accessible sur http://localhost:3000
+1. The application should be accessible on http://localhost:3000
 
-# [CI/CD] build et déploiement automatisés avec Gitlab CI
+# [CI/CD] build and automated deployment with Gitlab CI
 
-Voir le fichier **./.gitlab-ci.yml**
+See **gitlab-ci.yml** file.
 
-# [Qualimétrie] Suivi de la qualité du code source
+# [Code Quality] Follow the quality of the source code
 
-Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend](https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend)
+Dashboard with Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend](https://sonarqube.beta.pole-emploi.fr/dashboard?id=estime-frontend)
 
-# [Suivi opérationnel] Comment dépanner l'application sur un serveur Docker Swarm ?
+# [Server Environment] How to manage the application on a Docker Swarm server ?
 
-- Vérifier que l'application fonctionne correctement :
+- Check application status :
 
    ```
    foo@bar:~$ docker container ls | grep estime-frontend
    ```
    
-   Les conteneurs doivent être au statut **UP** et **healthy**.
+   Containers must be in status **UP** and **healthy**.
 
-- Consulter les logs :
+- Watch logs :
 
    ```
    foo@bar:~$ docker service logs estime-frontend_estime-frontend
    ```
 
-- Démarrer ou relancer le service
+- Start or restart the service
 
-   - Se positionner dans le répertoire **/home/docker/estime-frontend**
-   - Exécuter la commande suivante :
+   - Go to **/home/docker/estime-frontend** directory
+   - Execute the next command :
 
       ```
       foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
       ```
 
-- Stopper le service :
+- Stop the service :
 
    ```
    foo@bar:~$ docker stack rm estime-frontend
@@ -251,7 +251,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 ## Zero Downtime Deployment
 
-Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. 
+The Docker service is configured to get zero downtime during deployment. 
 
 ```
 healthcheck:
@@ -277,11 +277,11 @@ deploy:
       window: 180s
 ```
 
-Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Si un redémarrage est lancé, Docker va mettre à jour un premier service et s'assurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
+This configuration allows to replicate the service with 2 replicas. When a restart coming, a service will be considered operationnal if healthcheck test succeeded. If a restart comming, Docker restart one service and when this first service is operationnal (healthy status), Docker updates the second service.
 
-## Limitation des ressources CPU et RAM
+## CPU and memory reservations
 
-Afin de gérer au mieux les ressources du serveur, la quantité de ressources CPU et de mémoire que peut utliser un conteneur a été limitée :
+To control server resources, limitations on CPU and memory usage have been configured :
 
 ```
 resources:
@@ -293,20 +293,20 @@ resources:
       memory: 1536Mi
 ```
 
-Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, exécuter la commande suivante :
+To see CPU and memory used by Docker container, execute this command :
 ```
 foo@bar:~$ docker stats
 ```
 
-## Connaître la version de l'application déployée
+## How to know the version of the deployed application ?
 
-Accéder à la version via [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
+You just have to access to [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
 
 # [IDE] VS Code
 
-VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
+VS Code is available on [the official site](https://code.visualstudio.com/) 
 
-:wrench:  Quelques plugins utiles  :
+:wrench:  Some useful plugins :
 
 - Angular Language Service
 - Angular Schematics
