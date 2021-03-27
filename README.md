@@ -8,7 +8,7 @@ Proposer un simulateur qui encourage l'acte de reprise à l'emploi d'un demandeu
 
 Accéder à l'application : [https://estime.pole-emploi.fr/](https://estime.pole-emploi.fr/)
 
-# [Architecture] Schéma simplifié de l'application Estime
+# [Architecture] Schéma simplifié
 
 ![schéma architecure Estime](.gitlab/images/schema_architecure_v3.png)
 
