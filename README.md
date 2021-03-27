@@ -31,7 +31,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 - **./src/app/public :** composants publics, accessibles en non authentifié (homepage, cgu, etc...).
 - **./src/app/protected :** composants protégés, accessibles seulement authentifié (étapes de la simulation, etc...).
 - **./src/app/commun :** composants communs, directives, guards, pipes, models
-- **./src/app/core :** services Singleton
+- **./src/app/core :** services singleton
 - **./docker :** fichier de configuration Docker
 - **./cypress :** tests e2e
 
