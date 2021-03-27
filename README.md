@@ -12,7 +12,7 @@ Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-em
 
 # [Architecture] Schéma simplifié de l'application Estime
 
-![schéma architecure Estime](.gitlab/images/schema_architecure_v1.png)
+![schéma architecure Estime](.gitlab/images/schema_architecure_v3.png)
 
 - [Github application REST Springboot](https://github.com/StartupsPoleEmploi/estime-backend)  
 - [Github Openfisca France](https://github.com/StartupsPoleEmploi/openfisca-france).
@@ -22,27 +22,28 @@ Accéder au simulateur : [https://estime.pole-emploi.fr/](https://estime.pole-em
 
 # [Code Source] Quelques explications
 
-Ce projet est développé en utilisant le langage [Typescript](https://www.typescriptlang.org/docs) et le framework [Angular](https://angular.io/docs).
+Ce projet est développé en [Typescript](https://www.typescriptlang.org/docs) avec le framework [Angular](https://angular.io/docs).
 
 Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utilise [npm](https://www.npmjs.com/) pour gérer les dépendances externes.
 
 ## Structuration du code source
 
-- **./src/app/public :** contient les components de type application qui sont publics, accessibles en non authentifié (homepage, cgu, etc...).
-- **./src/app/protected :** contient les components de type application qui sont privés, accessibles en authentifié (étapes de la simulation, etc...).
-- **./src/app/commun :** répertoire contenant les components "communs" et partagés avec tous les components App (ex : component loading, component header, component footer, directives, guards, pipes, models, etc...
-- **./src/app/core :** répertoire contenant les services communs qui sont de type Singleton (une seul instance).
-- **./docker :** contient les configurations Docker pour la conteneurisation de l'application
-- **./cypress :** contient les tests e2e, voir section [Tests e2e](##tests-e2e-cypress)
+- **./src/app/public :** composants publics, accessibles en non authentifié (homepage, cgu, etc...).
+- **./src/app/protected :** composants privés, accessibles en authentifié (étapes de la simulation, etc...).
+- **./src/app/commun :** composants communs, directives, guards, pipes, models
+- **./src/app/core :** services Singleton
+- **./docker :** fichier de configuration Docker
+- **./cypress :** tests e2e
 
-## Design du site
+## Design du site - librairies utilisées
 
-- Utilisation de la librairie [Bootstrap4](https://getbootstrap.com/docs/4.1/components/alerts/) et de la la librairie [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
-- Utilisation de [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
+- [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
+- [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
+- [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
 
-## Gestion des dépendances
+## Gestion des dépendances avec npm
 
-Pas de mise à jour automatique des versions des librairies (~version ou ^version), il faut mettre à jour les versions manuellement. 
+Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^, il faut mettre à jour les versions manuellement. 
 
 :wrench:  Outils pour aider à la mise à jour des librairies :
 
@@ -50,7 +51,7 @@ Pas de mise à jour automatique des versions des librairies (~version ou ^versio
 - [npm-audi](https://docs.npmjs.com/cli/v6/commands/npm-audit)
 
 
-# [Développement en local] Lancement de l'application Web Angular sur localhost
+# [Développement en local] Lancer l'application sur localhost
 
 ## Prérequis
 
@@ -73,14 +74,14 @@ foo@bar:~$ npm -v
    foo@bar:~$ npm install -g @angular/cli
    ```
 
-1. Cloner le projet Gitlab **estime-frontend**
+1. Cloner le projet
 
    ```console
    foo@bar:~$ git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
    ```
-1. Ouvrir le projet **estime-frontend** via votre IDE préféré
+1. Ouvrir le projet via votre IDE préféré
 
-   :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement avec Angular
+   :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement sur Angular
 
 1. Installer les dépendances du projet
 
@@ -88,8 +89,6 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ npm install
    ```
 1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
-      
-      :exclamation: Ce fichier pouvant contenir des informations sensibles ne doit pas être poussé dans le repository distant (fichier  présent dans .gitignore).
 
    - Copier le contenu suivant et valoriser les variables d'environnement en remplaçant **%% à renseigner %%** par les valeurs correspondantes. Récupérer les valeurs des variables d'environnement dans le projet Gitlab via le menu **Settings -> CI/CD -> Variables**
    - Consulter la section [Appeler l'api coeur metier Estime](#api-estime-backend-appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
