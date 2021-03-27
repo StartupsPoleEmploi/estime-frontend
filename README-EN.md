@@ -2,7 +2,7 @@
 
 :fr: [French version](https://github.com/StartupsPoleEmploi/estime-frontend/blob/2580116d55c2b9dfbb1ba380a769a186293b1d02/README.md)
 
-# [Pôle emploi Startup] Estime - french state benefits simulator
+# [Pôle emploi Startup] Estime
 
 ### **The idea :**
 
