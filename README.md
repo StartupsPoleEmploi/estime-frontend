@@ -1,6 +1,6 @@
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
-:gb: [English version](https://github.com/StartupsPoleEmploi/estime-frontend/blob/2580116d55c2b9dfbb1ba380a769a186293b1d02/README-EN.md)
+:gb: [English version](https://github.com/StartupsPoleEmploi/estime-frontend/blob/cf573e1dade0b00522393374214e4be5bf36bc55/README_EN.md)
 
 # [Startup Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
 
