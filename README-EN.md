@@ -18,7 +18,7 @@ Access to the application : [https://estime.pole-emploi.fr/](https://estime.pole
 - [Github - Openfisca REST application](https://github.com/StartupsPoleEmploi/openfisca-france).
 
 
-:closed_lock_with_key: The access to the Estime service is secured by an authentification with [Pôle emploi Connect](https://www.emploi-store-dev.fr/portail-developpeur/detailapicatalogue/-se-connecter-avec-p-le-emploi-v1?id=58d00957243a5f7809e17698).**
+:closed_lock_with_key: The access to the Estime service is secured by an authentification with [Pôle emploi Connect](https://www.emploi-store-dev.fr/portail-developpeur/detailapicatalogue/-se-connecter-avec-p-le-emploi-v1?id=58d00957243a5f7809e17698).
 
 # [Source Code] Some explanations
 
