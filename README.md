@@ -2,7 +2,7 @@
 
 # [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
 
-La startup d'Etat _Estime_ est issue du challenge intraprenarial 2020 de Pôle emploi. 
+La startup _Estime_ est issue du challenge intraprenarial 2020 de Pôle emploi. 
 
 ### **L’idée :**
 
