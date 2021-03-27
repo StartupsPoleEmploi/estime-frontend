@@ -89,7 +89,7 @@ foo@bar:~$ npm -v
 1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
 
    - Copier le contenu suivant et valoriser les variables **%% à renseigner %%** 
-   - Consulter la section [Appeler l'api coeur metier Estime](#api-estime-backend-appeler-lapi-coeur-metier-estime), pour valoriser le paramètre **apiEstimeURL**. 
+   - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#api-estime-backend-appeler-lapi-coeur-metier-estime), . 
    <br />
    
    ```typescript
