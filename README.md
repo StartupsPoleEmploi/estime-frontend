@@ -274,11 +274,11 @@ deploy:
       window: 180s
 ```
 
-Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Si un redémarrage est lancé, Docker va mettre à jour un premier service et s'asssurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
+Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Si un redémarrage est lancé, Docker va mettre à jour un premier service et s'assurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
 
 ## Limitation des ressources CPU et RAM
 
-Afin de gérer au mieux les ressources de la machine, la quantité de ressources CPU et de mémoire que peut prendre un conteneur a été limitée :
+Afin de gérer au mieux les ressources du serveur, la quantité de ressources CPU et de mémoire que peut utliser un conteneur a été limitée :
 
 ```
 resources:
@@ -295,7 +295,7 @@ Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, e
 foo@bar:~$ docker stats
 ```
 
-## Connaître la version du composant applicatif déployé
+## Connaître la version de l'application déployée
 
 Accéder à la version via [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
 
