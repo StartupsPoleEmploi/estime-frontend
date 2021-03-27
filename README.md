@@ -250,28 +250,28 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. 
 
-```json
-   healthcheck:
-      test: curl -v --silent http://localhost:8080/estime/v1/actuator/health 2>&1 | grep UP || exit 1
-      timeout: 30s
-      interval: 1m
-      retries: 10
-      start_period: 180s
-    deploy:
-      replicas: 2
-      update_config:
-        parallelism: 1
-        order: start-first
-        failure_action: rollback
-        delay: 10s
-      rollback_config:
-        parallelism: 0
-        order: stop-first
-      restart_policy:
-        condition: any
-        delay: 5s
-        max_attempts: 3
-        window: 180s
+```
+healthcheck:
+   test: curl -v --silent http://localhost:8080/estime/v1/actuator/health 2>&1 | grep UP || exit 1
+   timeout: 30s
+   interval: 1m
+   retries: 10
+   start_period: 180s
+deploy:
+   replicas: 2
+   update_config:
+      parallelism: 1
+      order: start-first
+      failure_action: rollback
+      delay: 10s
+   rollback_config:
+      parallelism: 0
+      order: stop-first
+   restart_policy:
+      condition: any
+      delay: 5s
+      max_attempts: 3
+      window: 180s
 ```
 
 Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Dans notre cas, Docker va mettre à jour un premier service et s'asssurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
@@ -280,7 +280,7 @@ Cette configuration permet une réplication du service avec 2 replicas. Lors d'u
 
 Afin de gérer au mieux les ressources de la machine, la quantité de ressources CPU et de mémoire que peut prendre un conteneur a été limitée :
 
-```json
+```
 resources:
    reservations:
       cpus: '0.20'
