@@ -1,6 +1,6 @@
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
-:fr: [French version](https://git.beta.pole-emploi.fr/estime/estime-frontend/-/blob/688729ecee8df2efa5e1a6ac1788b2a5739a8228/README-EN.md)
+:fr: [French version](https://github.com/StartupsPoleEmploi/estime-frontend/blob/2580116d55c2b9dfbb1ba380a769a186293b1d02/README.md)
 
 # [Pôle emploi Startup] Estime - french state benefits simulator
 
