@@ -56,7 +56,7 @@ NPM is used to manage the dependencies of this project. To control the updating,
 
 ## Prerequisites
 
-Install NodeJS with ** minimal version 12.11.x**. 
+Install NodeJS with **minimal version 12.11.x**. 
 
 :thumbsup: Install [NodeJS](https://nodejs.org/en/) with a tool like nvm to manage several versions easily. More informations by [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
