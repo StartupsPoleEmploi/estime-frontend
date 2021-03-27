@@ -2,8 +2,6 @@
 
 # [Startups d'Etat Pôle emploi] Estime - simulateur d'aides à la reprise d'emploi
 
-La startup _Estime_ est issue du challenge intraprenarial 2020 de Pôle emploi. 
-
 ### **L’idée :**
 
 Proposer un simulateur qui encourage l'acte de reprise à l'emploi d'un demandeur d’emploi en lui offrant la possibilié de visualiser, sur une période de 6 mois, toutes ses futures ressources financières en cas de reprise d’emploi (aides Pôle emploi, aides CNAF). Plus d'informations sur notre démarche [https://beta.gouv.fr/startups/estime.html](https://beta.gouv.fr/startups/estime.html)
