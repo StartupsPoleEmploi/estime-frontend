@@ -44,7 +44,7 @@ This project has been generated with [the Angular CLI](https://cli.angular.io/) 
 
 ## Manage dependencies with npm
 
-NPM is used to manage the dependencies of this project. To control the updating, this project don't use ~ or ^ in package.json. Dependancy version are updated manually. 
+NPM is used to manage the dependencies of this project. To control the updating, this project doesn't use ~ or ^ in package.json. Dependancy versions are updated manually. 
 
 :wrench: Tools to help :
 
@@ -58,7 +58,7 @@ NPM is used to manage the dependencies of this project. To control the updating,
 
 Install NodeJS with ** minimal version 12.11.x**. 
 
-:thumbsup: Install [NodeJS](https://nodejs.org/en/) with a tool like nvm to manage easily several versions. More informations by [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
+:thumbsup: Install [NodeJS](https://nodejs.org/en/) with a tool like nvm to manage several versions easily. More informations by [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
 Check your installation :
 
@@ -67,7 +67,7 @@ foo@bar:~$ node -v
 foo@bar:~$ npm -v
 ```
 
-## Les étapes à suivre
+## Steps to follow
 
 1. Install Angular CLI 
 
