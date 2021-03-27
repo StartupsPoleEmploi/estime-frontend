@@ -110,7 +110,7 @@ foo@bar:~$ npm -v
    };
    ```
 
-1. Lancer l'application en exécutant la commande suivante :
+1. Démarrer l'application :
 
    ```console
    foo@bar:~estime-frontend$ npm start
