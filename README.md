@@ -274,7 +274,7 @@ deploy:
       window: 180s
 ```
 
-Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Dans notre cas, Docker va mettre à jour un premier service et s'asssurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
+Cette configuration permet une réplication du service avec 2 replicas. Lors d'un redémarrage, un service sera considéré opérationnel que si le test du healthcheck a réussi. Si un redémarrage est lancé, Docker va mettre à jour un premier service et s'asssurer que le conteneur soit au statut healthy avant de mettre à jour le second service.
 
 ## Limitation des ressources CPU et RAM
 
