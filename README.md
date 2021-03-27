@@ -303,7 +303,7 @@ Accéder à la version via [https://estime.pole-emploi.fr/version.json](https://
 
 VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
 
-:wrench:  Quelques extensions utiles que vous pourver installer dans votre IDE :
+:wrench:  Quelques plugins utiles  :
 
 - Angular Language Service
 - Angular Schematics
