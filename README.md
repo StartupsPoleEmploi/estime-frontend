@@ -281,12 +281,12 @@ Afin de gérer au mieux les ressources du serveur, la quantité de ressources CP
 
 ```
 resources:
-   reservations:
-      cpus: '0.20'
-      memory: 512Mi
+   reser vations:
+      cpus: '0.15'
+      memory: 128Mi
    limits:
-      cpus: '0.40'
-      memory: 1536Mi
+      cpus: '0.30'
+      memory: 256Mi
 ```
 
 Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, exécuter la commande suivante :
