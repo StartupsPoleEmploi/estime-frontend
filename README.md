@@ -74,11 +74,8 @@ foo@bar:~$ npm -v
    foo@bar:~$ npm install -g @angular/cli
    ```
 
-1. Cloner le projet
+1. Cloner le projet avec git
 
-   ```console
-   foo@bar:~$ git clone https://git.beta.pole-emploi.fr/estime/estime-frontend.git
-   ```
 1. Ouvrir le projet via votre IDE préféré
 
    :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement sur Angular
@@ -90,7 +87,7 @@ foo@bar:~$ npm -v
    ```
 1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
 
-   - Copier le contenu suivant et valoriser les variables **%% à renseigner %%** 
+   - Copier le contenu suivant et remplacer les variables **%% à renseigner %%** 
    - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#api-estime-backend-appeler-lapi-coeur-metier-estime) 
    <br />
    
