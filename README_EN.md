@@ -285,12 +285,12 @@ To control server resources, limitations on CPU and memory usage have been confi
 
 ```
 resources:
-   reservations:
-      cpus: '0.20'
-      memory: 512Mi
+   reser vations:
+      cpus: '0.15'
+      memory: 128Mi
    limits:
-      cpus: '0.40'
-      memory: 1536Mi
+      cpus: '0.30'
+      memory: 256Mi
 ```
 
 To see CPU and memory used by Docker containers, execute this command :
