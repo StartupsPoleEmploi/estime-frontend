@@ -298,7 +298,7 @@ To see CPU and memory used by Docker containers, execute this command :
 foo@bar:~$ docker stats
 ```
 
-## How to know the version of the deployed application ?
+## How to know the deployed application version ?
 
 You just have to access to [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
 
