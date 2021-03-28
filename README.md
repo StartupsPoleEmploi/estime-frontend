@@ -289,7 +289,7 @@ resources:
       memory: 256Mi
 ```
 
-Pour voir le détail de la consommation CPU et mémoire des conteneurs Docker, exécuter la commande suivante :
+Voir la consommation CPU et mémoire des conteneurs Docker :
 ```
 foo@bar:~$ docker stats
 ```
