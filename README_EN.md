@@ -1,6 +1,6 @@
 ![logo Estime](.gitlab/images/logo_estime_v2.png)
 
-:fr: [French version](https://github.com/StartupsPoleEmploi/estime-frontend/blob/2580116d55c2b9dfbb1ba380a769a186293b1d02/README.md)
+:fr: [French version](https://github.com/StartupsPoleEmploi/estime-frontend)
 
 # [Pôle emploi Startup] Estime
 
