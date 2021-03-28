@@ -251,7 +251,7 @@ Le service Docker a été configuré afin d'éviter un temps de coupure du servi
 
 ```
 healthcheck:
-   test: curl -v --silent http://localhost:8080/estime/v1/actuator/health 2>&1 | grep UP || exit 1
+   test: curl --fail http://localhost:8888/ || exit 1
    timeout: 30s
    interval: 1m
    retries: 10
