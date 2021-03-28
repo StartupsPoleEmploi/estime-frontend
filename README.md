@@ -88,7 +88,7 @@ foo@bar:~$ npm -v
 1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
 
    - Copier le contenu suivant et remplacer les variables **%% à renseigner %%** 
-   - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#api-estime-backend-appeler-lapi-coeur-metier-estime) 
+   - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#application-rest-springboot-installer-lapplication-en-local) 
    <br />
    
    ```
