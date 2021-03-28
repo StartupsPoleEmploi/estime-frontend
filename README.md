@@ -78,7 +78,7 @@ foo@bar:~$ npm -v
 
 1. Ouvrir le projet via votre IDE préféré
 
-   :thumbsup: [VS Code](#ide-vs-code) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement sur Angular
+   :thumbsup: [VS Code](https://code.visualstudio.com/) est un IDE gratuit, légé et qui permet d'avoir un excellent confort de développement sur Angular
 
 1. Installer les dépendances du projet
 
@@ -298,11 +298,7 @@ foo@bar:~$ docker stats
 
 Accéder à la version via [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json)
 
-# [IDE] VS Code
-
-VS Code est disponible en téléchargement sur le [site officiel](https://code.visualstudio.com/) 
-
-:wrench:  Quelques plugins utiles  :
+# [VS Code] Quelques plugins utiles
 
 - Angular Language Service
 - Angular Schematics
