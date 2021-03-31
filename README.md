@@ -312,27 +312,9 @@ foo@bar:~estime-frontend$ npm run **nom_script**
 | cy:run                | lance les tests Cypress                                   |
 | start                 | lance l'application dans le navigateur sur localhost:9001 |
 | start:ngx             | lance l'application sur localhost:9001 avec ngx-build-plus, utile pour remonter une couverture de code par les tests Cypress |
-| stats:size            | gégération d'un rapport sur la taille du bundle ([webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)) |
+| stats:size            | génération d'un rapport sur la taille du bundle ([webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)) |
 
 
-
-"": "npm install && ng build",
-    "build:prod": "npm ci && ng build --prod ",
-    "cy:verify": "cypress verify",
-    "cy:info": "cypress info",
-    "cy:version": "cypress version",
-    "cy:cache:list": "cypress cache list",
-    "cy:run": "cypress run --config chromeWebSecurity=false",
-    "cy:open": "cypress open --config chromeWebSecurity=false",
-    "e2e": "cypress run",
-    "e2e:record": "cypress run --record",
-    "lint": "ng lint",
-    "ng": "ng",
-    "start": "ng serve --open --port 9001",
-    "start:ngx": "ng run estime:serve-ngx --port 9001",
-    "stats:size": "webpack-bundle-analyzer dist/estime/stats.json",
-    "test": "ng test",
-    "sonar": "sonar-scanner"
 # [VS Code] Quelques plugins utiles
 
 - Angular Language Service
