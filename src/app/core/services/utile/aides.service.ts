@@ -57,10 +57,12 @@ export class AidesService {
   }
 
   public getMontantPensionInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
+    let montant = 0;
     if(demandeurEmploiConnecte.ressourcesFinancieres &&
         demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM &&
           demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite
-    ) return demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite;
+    ) montant = demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite;
+    return montant;
   }
 
   public hasAidesObtenirSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): boolean  {

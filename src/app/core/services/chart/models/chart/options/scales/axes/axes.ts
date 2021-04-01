@@ -5,7 +5,6 @@ import { Ticks } from "./ticks/ticks";
 
 export class Axes {
     stacked: Boolean;
-    barPercentage: Number;
     gridLines: GridLines;
     scaleLabel: ScaleLabel;
     ticks: Ticks;

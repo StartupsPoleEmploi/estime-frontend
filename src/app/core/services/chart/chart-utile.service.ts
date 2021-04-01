@@ -29,6 +29,8 @@ import { Axes } from './models/chart/options/scales/axes/axes';
 import { GridLines } from './models/chart/options/scales/axes/gridLines/gridLines';
 import { ScaleLabel } from './models/chart/options/scales/axes/scaleLabel/scaleLabel';
 import { Ticks } from './models/chart/options/scales/axes/ticks/ticks';
+import { Layout } from './models/chart/options/layout/layout';
+import { Padding } from './models/chart/options/layout/padding/padding';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
 
@@ -107,7 +109,6 @@ export class ChartUtileService {
 
     simulationAidesSociales.simulationsMensuelles.forEach((simulationMensuelle, index) => {
         for (let key in simulationMensuelle.mesAides) {
-          console.log(simulationMensuelle);
           switch (key) {
             case CodesAidesEnum.AGEPI: {
               dataObject.datasets.get(CodesAidesEnum.AGEPI).data[index + 1] = simulationMensuelle.mesAides[key].montant;
@@ -125,10 +126,6 @@ export class ChartUtileService {
               dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
             }
-            case CodesAidesEnum.PENSION_INVALIDITE: {
-              dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
             case CodesAidesEnum.PRIME_ACTIVITE: {
               dataObject.datasets.get(CodesAidesEnum.PRIME_ACTIVITE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
@@ -137,20 +134,13 @@ export class ChartUtileService {
               dataObject.datasets.get(CodesAidesEnum.RSA).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
             }
-            case CodesRessourcesFinancieresEnum.PAIE: {
-              dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesRessourcesFinancieresEnum.IMMOBILIER: {
-              dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
             default:
           }
         }
       }
     );
     for (let index = 0; index < 6; index++) {
+      dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaireMensuelNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois();
@@ -281,6 +271,7 @@ export class ChartUtileService {
     options.legend = this.getLegend(data);
     options.plugins = this.getPlugins(data);
     options.scales = this.getScales();
+    options.layout = this.getLayout();
 
     return options;
   }
@@ -329,6 +320,7 @@ export class ChartUtileService {
     datalabels.anchor = 'end';
     datalabels.font = this.getFont();
     datalabels.display = function (ctx) {
+      console.log(ctx);
       return (
         ctx.chart.options.legend.position == 'right' &&
         ctx.datasetIndex == datasetsSize - 1
@@ -418,13 +410,32 @@ export class ChartUtileService {
   private getTicks(): Ticks {
     const ticks = new Ticks();
 
-    ticks.maxTicksLimit = 5;
+    ticks.maxTicksLimit = 6;
     // On inclut un signe Euros après les valeurs de ticks de l'échelle
     ticks.callback = function (value, index, values) {
       return `${value} ${DevisesEnum.EURO.symbole}`;
     };
 
     return ticks;
+  }
+
+  private getLayout(): Layout {
+    const layout = new Layout();
+
+    layout.padding = this.getPadding();
+
+    return layout;
+  }
+
+  private getPadding(): Padding {
+    const padding = new Padding();
+
+    padding.right = 0;
+    padding.left = 0;
+    padding.top = this.screenService.isExtraSmallScreen() ? 0 : 50;
+    padding.bottom = 0;
+
+    return padding;
   }
 
   private getType(): String {
