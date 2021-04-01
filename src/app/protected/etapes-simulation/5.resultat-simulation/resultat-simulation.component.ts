@@ -92,6 +92,10 @@ export class ResultatSimulationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
   }
 
+  public onClickButtonRefaireSimulation(): void {
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
+  }
+
   public getSrcImgButtonImprimerSimulation(): string {
     let text = './assets/images/print.svg';
     if(this.screenService.isExtraSmallScreen()) {

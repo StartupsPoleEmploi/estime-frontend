@@ -29,7 +29,9 @@ import { RessourcesFinancieresMensuellesComponent } from './etapes-simulation/5.
 import { EtapesSimulationComponent } from './etapes-simulation/etapes-simulation.component';
 import { FilEtapesDesktopComponent } from './etapes-simulation/fil-etapes/fil-etapes-desktop/fil-etapes-desktop.component';
 import { FilEtapesMobileComponent } from './etapes-simulation/fil-etapes/fil-etapes-mobile/fil-etapes-mobile.component';
-
+import { RessourcesFinancieresDiagrammeComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-diagramme/ressources-financieres-diagramme.component';
+import { DiagrammeCanvasComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-diagramme/diagramme-canvas/diagramme-canvas.component';
+import { ChartModule } from 'angular2-chartjs';
 @NgModule({
   declarations: [
     AvantDeCommencerSimulationComponent,
@@ -49,7 +51,9 @@ import { FilEtapesMobileComponent } from './etapes-simulation/fil-etapes/fil-eta
     ResultatSimulationComponent,
     VosRessourcesFinancieresComponent,
     FilEtapesDesktopComponent,
-    FilEtapesMobileComponent
+    FilEtapesMobileComponent,
+    RessourcesFinancieresDiagrammeComponent,
+    DiagrammeCanvasComponent
   ],
   imports: [
     AccordionModule.forRoot(),
@@ -63,7 +67,8 @@ import { FilEtapesMobileComponent } from './etapes-simulation/fil-etapes/fil-eta
     PopoverModule.forRoot(),
     ProgressbarModule.forRoot(),
     ProtectedRoutingModule,
-    RouterModule
+    RouterModule,
+    ChartModule
   ],
   providers: [BnNgIdleService]
 })

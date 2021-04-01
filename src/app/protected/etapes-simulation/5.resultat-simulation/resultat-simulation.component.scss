@@ -195,4 +195,19 @@
       margin-right: 0;
     }
   }
+
+  #resultat_simulation_div_boutons {
+
+    margin:auto!important;
+    margin-top:45px!important;
+    background-color: unset;
+
+    #resultat_simulation_bouton_retour {
+      background-color:unset;
+      // width:auto;
+    }
+    #resultat_simulation_bouton_refaire_simulation {
+      width: 250px!important;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid form-container-fluid">
     <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
     </h1>
@@ -27,6 +27,7 @@
             </button>
         </div>
     </div>
+    <app-ressources-financieres-diagramme [simulationAidesSociales]="simulationAidesSociales"></app-ressources-financieres-diagramme>
     <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4">
       <div class="col-12 col-md-6 mt-auto mb-auto">
         <h4 class="h4-style-1">
@@ -129,14 +130,26 @@
         </div>
     </div>
 
-    <div class="div-button-retour row d-flex justify-content-center">
+    <div id="resultat_simulation_div_boutons" class="div-buttons-form row d-flex justify-content-center">
         <button
-            class="btn-style-perso-2"
+            id="resultat_simulation_bouton_retour"
+            class="btn-style-perso-2 first-btn float-right"
             (click)="onClickButtonRetour()">
             <div>
-              <img src="./assets/images/return-arrow-v2.svg">
-              <span>Retour</span>
-          </div>
+                <img src="./assets/images/return-arrow-v2.svg" alt="flèche retour">
+                <span>Retour</span>
+            </div>
+        </button>
+        <div [ngStyle]="{'margin-bottom': (this.screenService.isExtraSmallScreen())?'10vh':'0'}"></div>
+        <button
+            id="resultat_simulation_bouton_refaire_simulation"
+            class="btn-style-perso-1 second-btn"
+            type="button"
+            data-testid="btn-obtenir-simulation"
+            (click)="onClickButtonRefaireSimulation()">
+            <div class="px-0 justify-content-center">
+                <span>Refaire une simulation</span>
+            </div>
         </button>
     </div>
 </div>

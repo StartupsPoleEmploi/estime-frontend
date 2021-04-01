@@ -3,6 +3,7 @@ import { SimulationAidesSociales } from "@models/simulation-aides-sociales";
 import { SessionStorageService } from "ngx-webstorage";
 import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 import { DeConnecteService } from './de-connecte.service';
+import { DeConnecteRessourcesFinancieresService } from './de-connecte-ressources-financieres.service';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
@@ -14,6 +15,7 @@ export class DeConnecteSimulationAidesSocialesService {
 
   constructor(
     private deConnecteService: DeConnecteService,
+    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private numberUtileService: NumberUtileService,
     private sessionStorageService: SessionStorageService
   ) {
@@ -37,10 +39,12 @@ export class DeConnecteSimulationAidesSocialesService {
     const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
 
     const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
+    const revenusIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois());
+    const revenusImmobilier = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois());
     const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return Math.floor(salaireFuturTravail + montantAllocationsCPAM + montantTotalAidesMoisSimule);
+    return Math.floor(salaireFuturTravail + revenusIndependant + revenusImmobilier + montantAllocationsCPAM + montantTotalAidesMoisSimule);
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
