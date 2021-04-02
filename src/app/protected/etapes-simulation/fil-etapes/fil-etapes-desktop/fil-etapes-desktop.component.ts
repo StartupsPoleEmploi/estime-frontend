@@ -15,6 +15,8 @@ export class FilEtapesDesktopComponent implements OnInit {
   etapeActive: number;
   etapesSimulation: Array<EtapeSimulation>;
   subscriptionRouteNavigationEndObservable: Subscription;
+  hoveredEtape: Number;
+
 
   constructor(
     private etapeSimulationService: EtapeSimulationService,
@@ -30,6 +32,14 @@ export class FilEtapesDesktopComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
+  }
+
+  public onMouseOverEtape(etapeActive, numeroEtape): void {
+    if(etapeActive >= numeroEtape) this.hoveredEtape = numeroEtape;
+  }
+
+  public onMouseLeaveEtape(): void {
+    this.hoveredEtape = 0;
   }
 
   private subscribeRouteNavigationEndObservable(): void {

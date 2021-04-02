@@ -15,3 +15,20 @@
 @import "assets/scss/position";
 @import "assets/scss/progress";
 @import "assets/scss/reboot";
+
+button {
+    &:hover {
+        background-color: #8089AA!important;
+    }
+}
+.btn-style-perso-2 {
+    &:hover {
+        background-color: unset!important;
+    }
+}
+
+.accordion-button {
+    &:hover {
+        background-color: unset!important;
+    }
+}

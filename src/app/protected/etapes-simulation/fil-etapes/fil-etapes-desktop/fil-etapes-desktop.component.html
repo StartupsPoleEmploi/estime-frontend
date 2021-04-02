@@ -5,7 +5,12 @@
           [ngClass]="{'etape-active': etapeActive === etapeSimulation.numero, 'etape-completee': etapeActive > etapeSimulation.numero, 'etape-a-completee': etapeActive < etapeSimulation.numero}"
           class="etape"
           (click)="onClickButtonEtape(etapeActive,etapeSimulation.numero)">
-          <div [ngStyle]="{'cursor':(etapeActive >= etapeSimulation.numero)?'pointer':'not-allowed'}">
+          <div
+            (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)"
+            (mouseleave)="onMouseLeaveEtape()"
+            [ngStyle]="{'cursor':(etapeActive >= etapeSimulation.numero)?'pointer':'not-allowed'}"
+            [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}"
+            >
             <div class="numero-etape">
               <span *ngIf="etapeActive <= etapeSimulation.numero">{{etapeSimulation.numero}}</span>
               <span *ngIf="etapeActive > etapeSimulation.numero" id="checkmark"></span>

@@ -6,4 +6,5 @@ export class Datalabels {
     font: Font;
     display: Function;
     formatter: Function;
+    color: String;
 }
