@@ -19,6 +19,9 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
+  question_icon_1: String = '';
+  question_icon_2: String = '';
+
   constructor(
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
@@ -48,6 +51,20 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     } else {
       this.router.navigate([`/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`]);
     }
+  }
+
+  public onMouseOverInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '_hover';
+    if(numero_infobulle == 2) this.question_icon_2 = '_hover';
+  }
+
+  public onMouseLeaveInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '';
+    if(numero_infobulle == 2) this.question_icon_2 = '';
+  }
+  public onClickInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '_click';
+    if(numero_infobulle == 2) this.question_icon_2 = '_click';
   }
 
 

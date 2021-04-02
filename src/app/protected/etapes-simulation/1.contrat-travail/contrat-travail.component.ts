@@ -23,6 +23,9 @@ export class ContratTravailComponent implements OnInit {
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
   messageErreurSalaire: string;
 
+  question_icon_1: String = '';
+  question_icon_2: String = '';
+
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
     { label: "2 mois", value: 2 },
@@ -114,5 +117,19 @@ export class ContratTravailComponent implements OnInit {
     if (event.keyCode === 13) {
       this.futurTravail.typeContrat = typeContrat;
     }
+  }
+
+  public onMouseOverInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '_hover';
+    if(numero_infobulle == 2) this.question_icon_2 = '_hover';
+  }
+
+  public onMouseLeaveInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '';
+    if(numero_infobulle == 2) this.question_icon_2 = '';
+  }
+  public onClickInfobulle(numero_infobulle) {
+    if(numero_infobulle == 1) this.question_icon_1 = '_click';
+    if(numero_infobulle == 2) this.question_icon_2 = '_click';
   }
 }

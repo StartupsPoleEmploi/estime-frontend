@@ -13,10 +13,13 @@
                 Nombre d'enfant(s) ou de personne(s) à charge
                 <img
                     class="interrogation-icon"
-                    src="./assets/images/question.svg"
+                    src='{{"./assets/images/question"+question_icon+".svg"}}'
+                    placement="right"
+                    (mouseover)="onMouseOverInfobulle()"
+                    (mouseleave)="onMouseLeaveInfobulle()"
+                    (click)="onClickInfobulle()"
                     [popover]="popoverPersonnesAChargeTemplate"
-                    #popoverPersonnesACharge="bs-popover"
-                    placement="right">
+                    #popoverPersonnesACharge="bs-popover">
             </label>
         </div>
         <div class="row mb-2">
