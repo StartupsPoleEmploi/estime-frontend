@@ -41,6 +41,16 @@
     margin: 0 auto;
     padding-left: 0;
     cursor: pointer;
+    .hoveredEtape {
+      .numero-etape {
+        background-color: #8089AA!important;
+        color: #8089AA!important;
+        border-color: #8089AA!important;
+      }
+      .titre-etape {
+        color: #8089AA!important;
+      }
+    }
     .etape {
       font-size: 13px;
       position: relative;

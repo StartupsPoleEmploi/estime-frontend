@@ -33,6 +33,7 @@ import { Layout } from './models/chart/options/layout/layout';
 import { Padding } from './models/chart/options/layout/padding/padding';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { reduceAST } from 'publicodes';
 
 @Injectable({ providedIn: 'root' })
 export class ChartUtileService {
@@ -159,85 +160,102 @@ export class ChartUtileService {
     const dataObject = new DataObject();
     dataObject.datasets = new Map();
 
-    dataObject.datasets.set(CodesAidesEnum.AGEPI, {
-      label: LibellesAidesEnum.AGEPI,
-      backgroundColor: CouleursAidesDiagrammeEnum.AGEPI,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.AIDE_MOBILITE, {
-      label: LibellesAidesEnum.AIDE_MOBILITE,
-      backgroundColor: CouleursAidesDiagrammeEnum.AIDE_MOBILITE,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, {
-      label: LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES,
-      backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_ADULTES_HANDICAPES,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE, {
-      label: LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
-      backgroundColor:
-        CouleursAidesDiagrammeEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.PENSION_INVALIDITE, {
-      label: LibellesAidesEnum.PENSION_INVALIDITE,
-      backgroundColor: CouleursAidesDiagrammeEnum.PENSION_INVALIDITE,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.PRIME_ACTIVITE, {
-      label: LibellesAidesEnum.PRIME_ACTIVITE,
-      backgroundColor: CouleursAidesDiagrammeEnum.PRIME_ACTIVITE,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesAidesEnum.RSA, {
-      label: LibellesAidesEnum.RSA,
-      backgroundColor: CouleursAidesDiagrammeEnum.RSA,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.PAIE, {
-      label: LibellesRessourcesFinancieresEnum.SALAIRE,
-      backgroundColor: CouleursAidesDiagrammeEnum.PAIE,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.IMMOBILIER, {
-      label: LibellesRessourcesFinancieresEnum.IMMOBILIER,
-      backgroundColor: CouleursAidesDiagrammeEnum.IMMOBILIER,
-      data: [0, 0, 0, 0, 0, 0, 0],
-      barPercentage: ChartUtileService.BAR_PERCENTAGE,
-    });
-
-    dataObject.datasets.set(
-      CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT, {
-        label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT,
-        backgroundColor: CouleursAidesDiagrammeEnum.TRAVAILLEUR_INDEPENDANT,
+    dataObject.datasets.set(CodesAidesEnum.AGEPI,
+      {
+        label: LibellesAidesEnum.AGEPI.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.AGEPI,
         data: [0, 0, 0, 0, 0, 0, 0],
-        barPercentage: ChartUtileService.BAR_PERCENTAGE,
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
     );
 
-    dataObject.datasets.set(
-      ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI, {
-        label: ChartUtileService.LIBELLE_RESSOURCES_AVANT_REPRISE_EMPLOI,
+    dataObject.datasets.set(CodesAidesEnum.AIDE_MOBILITE,
+      {
+        label: LibellesAidesEnum.AIDE_MOBILITE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.AIDE_MOBILITE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES,
+      {
+        label: LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_ADULTES_HANDICAPES,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
+      {
+        label: LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.PENSION_INVALIDITE,
+      {
+        label: LibellesAidesEnum.PENSION_INVALIDITE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.PENSION_INVALIDITE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.PRIME_ACTIVITE,
+      {
+        label: LibellesAidesEnum.PRIME_ACTIVITE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.PRIME_ACTIVITE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.RSA,
+      {
+        label: LibellesAidesEnum.RSA.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.RSA,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesRessourcesFinancieresEnum.PAIE,
+      {
+        label: LibellesRessourcesFinancieresEnum.SALAIRE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.PAIE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesRessourcesFinancieresEnum.IMMOBILIER,
+      {
+        label: LibellesRessourcesFinancieresEnum.IMMOBILIER.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.IMMOBILIER,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT,
+      {
+        label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.TRAVAILLEUR_INDEPENDANT,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI,
+      {
+        label: ChartUtileService.LIBELLE_RESSOURCES_AVANT_REPRISE_EMPLOI.padEnd(20,' '),
         backgroundColor: CouleursAidesDiagrammeEnum.RESSOURCES_AVANT_REPRISE_EMPLOI,
         data: [0, 0, 0, 0, 0, 0, 0],
-        barPercentage: ChartUtileService.BAR_PERCENTAGE,
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
     );
 
@@ -295,7 +313,7 @@ export class ChartUtileService {
     labels.boxWidth = 13;
     labels.fontSize = 13;
     labels.fontFamily = 'Lato';
-    labels.fontColor = '#23333C';
+    labels.fontColor = 'black';
     labels.padding = 20;
     labels.filter = function (legendItem, data) {
       return aidesDisponibles.includes(legendItem.text);
@@ -319,8 +337,8 @@ export class ChartUtileService {
     datalabels.align = 'end';
     datalabels.anchor = 'end';
     datalabels.font = this.getFont();
+    datalabels.color = 'black';
     datalabels.display = function (ctx) {
-      console.log(ctx);
       return (
         ctx.chart.options.legend.position == 'right' &&
         ctx.datasetIndex == datasetsSize - 1
@@ -351,7 +369,6 @@ export class ChartUtileService {
 
     font.weight = 'bold';
     font.size = 18;
-    font.color = '#23333C';
     font.family = 'Lato';
 
     return font;

@@ -17,6 +17,9 @@
     &.active {
       background-color: $color-grey-1;
     }
+    &:hover {
+      background-color: $color-grey-1!important;
+    }
   }
 }
 
