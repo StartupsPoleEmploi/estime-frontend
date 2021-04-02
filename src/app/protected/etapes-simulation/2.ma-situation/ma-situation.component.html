@@ -157,10 +157,13 @@
                         Vous percevez
                         <img
                             class="interrogation-icon"
-                            src="./assets/images/question.svg"
+                            src='{{"./assets/images/question"+question_icon_1+".svg"}}'
+                            placement="right"
+                            (mouseover)="onMouseOverInfobulle(1)"
+                            (mouseleave)="onMouseLeaveInfobulle(1)"
+                            (click)="onClickInfobulle(1)"
                             [popover]="popoverSituationDemandeurTemplate"
-                            #popoverSituationDemandeur="bs-popover"
-                            placement="right">
+                            #popoverSituationDemandeur="bs-popover">
                     </label>
                 </div>
                 <div class="row">
@@ -509,10 +512,13 @@
                         * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
                         <img
                             class="interrogation-icon"
-                            src="./assets/images/question.svg"
+                            src='{{"./assets/images/question"+question_icon_2+".svg"}}'
+                            placement="right"
+                            (mouseover)="onMouseOverInfobulle(2)"
+                            (mouseleave)="onMouseLeaveInfobulle(2)"
+                            (click)="onClickInfobulle(2)"
                             [popover]="popoverSituationLogementTemplate"
-                            #popoverSituationLogement="bs-popover"
-                            placement="right">
+                            #popoverSituationLogement="bs-popover">
                     </label>
                 </div>
                 <div class="row">

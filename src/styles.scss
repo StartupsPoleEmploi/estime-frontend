@@ -20,15 +20,24 @@ button {
     &:hover {
         background-color: #8089AA!important;
     }
+    &:focus {
+        background-color: #1B2B67 !important;
+    }
 }
 .btn-style-perso-2 {
     &:hover {
         background-color: unset!important;
+    }
+    &:focus {
+        background-color: unset !important;
     }
 }
 
 .accordion-button {
     &:hover {
         background-color: unset!important;
+    }
+    &:focus {
+        background-color: unset !important;
     }
 }

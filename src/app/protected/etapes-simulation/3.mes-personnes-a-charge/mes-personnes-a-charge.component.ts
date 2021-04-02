@@ -30,6 +30,8 @@ export class MesPersonnesAChargeComponent implements OnInit {
   personnesACharge: Array<Personne>;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
+  question_icon: String = '';
+
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
@@ -113,6 +115,14 @@ export class MesPersonnesAChargeComponent implements OnInit {
     }
   }
 
+  public onMouseOverInfobulle() {
+    this.question_icon = '_hover';
+  }
 
-
+  public onMouseLeaveInfobulle() {
+    this.question_icon = '';
+  }
+  public onClickInfobulle() {
+    this.question_icon = '_click';
+  }
 }
