@@ -31,8 +31,11 @@
                                 href="./assets/documents/attestation-ass.pdf">
                                 <img
                                     class="interrogation-icon"
-                                    src="./assets/images/question.svg"
-                                    placement="right">
+                                    src='{{"./assets/images/question"+question_icon_1+".svg"}}'
+                                    placement="right"
+                                    (mouseover)="onMouseOverInfobulle(1)"
+                                    (mouseleave)="onMouseLeaveInfobulle(1)"
+                                    (click)="onClickInfobulle(1)">
                             </a>
                         </span>
                     </span>
@@ -46,8 +49,11 @@
                                 href="./assets/documents/attestation-caf.pdf">
                                 <img
                                     class="interrogation-icon"
-                                    src="./assets/images/question.svg"
-                                    placement="right">
+                                    src='{{"./assets/images/question"+question_icon_2+".svg"}}'
+                                    placement="right"
+                                    (mouseover)="onMouseOverInfobulle(2)"
+                                    (mouseleave)="onMouseLeaveInfobulle(2)"
+                                    (click)="onClickInfobulle(2)">
                             </a>
                         </span>
                     </span>

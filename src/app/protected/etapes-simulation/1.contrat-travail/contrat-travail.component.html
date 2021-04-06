@@ -155,10 +155,13 @@
                         * Indiquez le salaire mensuel brut ou net
                         <img
                             class="interrogation-icon"
-                            src="./assets/images/question.svg"
+                            src='{{"./assets/images/question"+question_icon_1+".svg"}}'
+                            placement="right"
+                            (mouseover)="onMouseOverInfobulle(1)"
+                            (mouseleave)="onMouseLeaveInfobulle(1)"
+                            (click)="onClickInfobulle(1)"
                             [popover]="popoverSalaireNetTemplate"
-                            #popoverSalaireNet="bs-popover"
-                            placement="right">
+                            #popoverSalaireNet="bs-popover">
                     </label>
                 </div>
                 <div class="row">
@@ -290,10 +293,13 @@
                         * Nombre de trajets aller depuis votre domicile vers votre futur lieu de travail
                         <img
                             class="interrogation-icon"
-                            src="./assets/images/question.svg"
+                            src='{{"./assets/images/question"+question_icon_2+".svg"}}'
+                            placement="right"
+                            (mouseover)="onMouseOverInfobulle(2)"
+                            (mouseleave)="onMouseLeaveInfobulle(2)"
+                            (click)="onClickInfobulle(2)"
                             [popover]="popoverNombreTrajetTemplate"
-                            #popoverNombreTrajet="bs-popover"
-                            placement="right">
+                            #popoverNombreTrajet="bs-popover">
                     </label>
                 </div>
                 <div class="row">
