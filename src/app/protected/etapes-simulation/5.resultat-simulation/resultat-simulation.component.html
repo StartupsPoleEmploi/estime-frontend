@@ -2,7 +2,7 @@
     <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
     </h1>
-    <div class="row mt-4">
+    <div class="row mt-4 row-style-2">
         <div
             id="alert-resultat-simulation"
             class="col-12 col-md-9 mt-auto mb-auto">
@@ -27,12 +27,12 @@
             </button>
         </div>
     </div>
-   <!-- <div class="row mt-4">
+    <div class="row mt-4 row-style-2">
         <div class="col-12 mt-auto mb-auto">
             <app-ressources-financieres-diagramme [simulationAidesSociales]="simulationAidesSociales"></app-ressources-financieres-diagramme>
         </div>
-    </div> -->
-    <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4">
+    </div>
+    <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4 row-style-2">
       <div class="col-12 col-md-6 mt-auto mb-auto">
         <h4 class="h4-style-1">
             Avant reprise d'emploi
@@ -45,7 +45,7 @@
         </div>
       </div>
     </div>
-    <div id="row-montants-total" class="row">
+    <div id="row-montants-total" class="row row-style-2">
         <div *ngIf="!screenService.isExtraSmallScreen()" class="col-12 col-md-3 pl-0">
           <div class="card">
             <h4 class="h4-style-1 text-center  mt-auto mb-auto">Avant reprise d'emploi</h4>

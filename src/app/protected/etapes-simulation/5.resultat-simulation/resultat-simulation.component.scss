@@ -1,5 +1,12 @@
 @import "../../../../assets/scss/variables";
 
+.row-style-2 {
+  margin-right: 0;
+  @media #{$small-device} {
+    margin-right: 15px;
+  }
+}
+
 .container-fluid {
   margin-top: 2rem;
   padding-left: 15px;
@@ -178,6 +185,7 @@
     }
   }
   .card-sm-simulations {
+    margin-right: 0 !important;
     padding-left: 9px !important;
     padding-right: 9px !important;
   }
