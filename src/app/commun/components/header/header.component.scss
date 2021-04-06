@@ -7,6 +7,14 @@ header {
   @media #{$small-device} {
     height: 86px;
   }
+  button {
+    &:hover {
+        background-color: #8089AA!important;
+    }
+    &:focus {
+        background-color: #1B2B67 !important;
+    }
+  }
   .container-fluid {
     align-items: center;
     display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
