@@ -7,7 +7,6 @@ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-fro
 #clean docker environment
 docker image prune --force
 docker container prune --force
-docker volume prune --force
 
 #logout docker registry
 docker logout $1
