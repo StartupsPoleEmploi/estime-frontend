@@ -51,6 +51,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
       this.initOptionsProchaineDeclarationRSA();
     }
+    if (this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
+      this.initOptionsNombreMoisTravailles();
+    }
   }
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
