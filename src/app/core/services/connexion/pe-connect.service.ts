@@ -35,7 +35,7 @@ export class PeConnectService {
 
   public login(): void {
     this.createPeConnectPayload();
-    this.document.location.href = this.getPoleEmploiIdentityServerConnexionURI();
+    this.document.location.assign(this.getPoleEmploiIdentityServerConnexionURI());
   }
 
   public logout(): void {
@@ -44,7 +44,7 @@ export class PeConnectService {
     const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
     this.cookiesEstimeService.clear();
     if (poleEmploiIdentityServerDeconnexionURI !== null) {
-      this.document.location.href = poleEmploiIdentityServerDeconnexionURI;
+      this.document.location.assign(poleEmploiIdentityServerDeconnexionURI);
     } else {
       this.router.navigate([RoutesEnum.HOMEPAGE]);
       this.individuConnectedService.emitIndividuConnectedLogoutEvent();
