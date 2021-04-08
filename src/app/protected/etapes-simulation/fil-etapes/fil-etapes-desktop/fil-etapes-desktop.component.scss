@@ -43,12 +43,12 @@
     cursor: pointer;
     .hoveredEtape {
       .numero-etape {
-        background-color: #8089AA!important;
-        color: #8089AA!important;
-        border-color: #8089AA!important;
+        background-color: $color-blue-6!important;
+        color: $color-blue-6!important;
+        border-color: $color-blue-6!important;
       }
       .titre-etape {
-        color: #8089AA!important;
+        color: $color-blue-6!important;
       }
     }
     .etape {
