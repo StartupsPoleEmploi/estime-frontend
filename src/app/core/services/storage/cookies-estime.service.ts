@@ -2,19 +2,26 @@ import { Injectable } from '@angular/core';
 import { Individu } from '@models/individu';
 import { KeysStorageEnum } from "@enumerations/keys-storage.enum";
 import { CookieService } from 'ngx-cookie-service';
+import { Environment } from '@app/commun/models/environment';
 
 @Injectable({providedIn: 'root'})
 export class CookiesEstimeService {
 
   constructor(
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private environment: Environment
   ) {
 
   }
 
   public storeIndividuConnecte(individu: Individu): void {
     const dateTokenExpired = this.getDateCookieExpire(individu.peConnectAuthorization.expireIn);
-    this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired,path: '/', secure: true});
+    if(this.environment.production) {
+      //sécurité : store un cookie avec secure à true
+      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired,path: '/', secure: true});
+    } else {
+      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired});
+    }
   }
 
   public getIndividuConnected(): Individu  {

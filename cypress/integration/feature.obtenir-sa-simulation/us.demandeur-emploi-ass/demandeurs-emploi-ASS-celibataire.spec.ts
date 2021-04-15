@@ -15,6 +15,7 @@ import { CodesRessourcesFinancieresEnum } from "../../../../src/app/commun/enume
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS'), () => {
 
+
   beforeEach(() => {
     cy.visit(environment.urlApplication);
   });
@@ -23,6 +24,12 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const estimeSessionService = new EstimeSessionService();
     estimeSessionService.clearEstimeSession();
   });
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+  })
 
   it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, je souhaite obtenir ma simulation', () => {
 
