@@ -15,7 +15,7 @@ export class FilEtapesDesktopComponent implements OnInit {
   etapeActive: number;
   etapesSimulation: Array<EtapeSimulation>;
   subscriptionRouteNavigationEndObservable: Subscription;
-  hoveredEtape: Number;
+  hoveredEtape: number;
 
 
   constructor(
@@ -50,9 +50,9 @@ export class FilEtapesDesktopComponent implements OnInit {
     });
   }
 
-  public onClickButtonEtape(etape_active, numero_etape: Number): void {
-    if(etape_active >= numero_etape) {
-      switch(numero_etape) {
+  public onClickButtonEtape(etapeActive: number, numeroEtape: number): void {
+    if(etapeActive >= numeroEtape) {
+      switch(numeroEtape) {
         case 1: {
           this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
           break;

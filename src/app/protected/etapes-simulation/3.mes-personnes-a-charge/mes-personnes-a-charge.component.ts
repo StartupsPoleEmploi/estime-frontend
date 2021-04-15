@@ -30,8 +30,6 @@ export class MesPersonnesAChargeComponent implements OnInit {
   personnesACharge: Array<Personne>;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  question_icon: String = '';
-
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,

@@ -4,7 +4,7 @@
           *ngFor="let etapeSimulation of etapesSimulation; let index = index;"
           [ngClass]="{'etape-active': etapeActive === etapeSimulation.numero, 'etape-completee': etapeActive > etapeSimulation.numero, 'etape-a-completee': etapeActive < etapeSimulation.numero}"
           class="etape"
-          (click)="onClickButtonEtape(etapeActive,etapeSimulation.numero)">
+          (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)">
           <div
             (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)"
             (mouseleave)="onMouseLeaveEtape()"
