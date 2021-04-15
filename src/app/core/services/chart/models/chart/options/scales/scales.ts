@@ -1,7 +1,7 @@
 import { Axes } from "./axes/axes";
 
 export class Scales {
-    display: Boolean;
+    display: boolean;
     xAxes: Array<Axes>;
     yAxes: Array<Axes>;
 }

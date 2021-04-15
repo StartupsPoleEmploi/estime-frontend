@@ -4,12 +4,11 @@ import { Router } from '@angular/router';
 import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Individu } from '@app/commun/models/individu';
+import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { Environment } from '@models/environment';
 import { PeConnectPayload } from '@models/pe-connect-payload';
-import { SessionStorageService } from "ngx-webstorage";
-import { CookiesEstimeService } from '../storage/cookies-estime.service';
-import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { CookieService } from 'ngx-cookie-service';
+import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 
 @Injectable({ providedIn: 'root' })

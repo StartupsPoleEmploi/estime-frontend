@@ -1,9 +1,9 @@
 export class Labels {
     filter: Function;
-    boxWidth: Number;
-    fontSize: Number;
+    boxWidth: number;
+    fontSize: number;
     fontStyle: string;
     fontFamily: string;
     fontColor: string;
-    padding: Number;
+    padding: number;
 }

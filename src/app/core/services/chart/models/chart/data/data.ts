@@ -1,6 +1,6 @@
 import { Dataset } from './dataset/dataset';
 
 export class Data {
-    labels: Array<String>;
+    labels: Array<string>;
     datasets: Array<Dataset>;
 }

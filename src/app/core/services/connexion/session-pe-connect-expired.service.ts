@@ -4,11 +4,10 @@ import { ModalSessionExpiredComponent } from '@app/commun/components/modal-sessi
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
-import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { Subscription } from 'rxjs';
+import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { EtapeSimulationService } from '../utile/etape-simulation.service';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class SessionPeConnectExpiredService {

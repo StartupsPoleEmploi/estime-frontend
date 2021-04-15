@@ -8,7 +8,7 @@ export class Options {
     plugins: Plugins;
     scales: Scales;
     layout: Layout;
-    responsive: Boolean;
-    maintainAspectRation: Boolean;
-    aspectRatio: Number;
+    responsive: boolean;
+    maintainAspectRation: boolean;
+    aspectRatio: number;
 }

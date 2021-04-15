@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { Individu } from '@models/individu';
-import { CookieService } from 'ngx-cookie-service';
 import { Observable, Subject } from 'rxjs';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
-import { PeConnectService } from './pe-connect.service';
 
 @Injectable({ providedIn: 'root' })
 export class IndividuConnectedService {

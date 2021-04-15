@@ -1,4 +1,4 @@
 export class GridLines {
-    display: Boolean;
-    borderDash: Array<Number>;
+    display: boolean;
+    borderDash: Array<number>;
 }

@@ -1,4 +1,4 @@
 export class ScaleLabel {
-    display: Boolean;
+    display: boolean;
     labelString: string;
 }

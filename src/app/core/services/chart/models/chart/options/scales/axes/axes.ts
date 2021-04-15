@@ -4,7 +4,7 @@ import { ScaleLabel } from "./scaleLabel/scaleLabel";
 import { Ticks } from "./ticks/ticks";
 
 export class Axes {
-    stacked: Boolean;
+    stacked: boolean;
     gridLines: GridLines;
     scaleLabel: ScaleLabel;
     ticks: Ticks;

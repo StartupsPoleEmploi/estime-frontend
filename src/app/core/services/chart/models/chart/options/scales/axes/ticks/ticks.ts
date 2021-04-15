@@ -1,4 +1,4 @@
 export class Ticks {
-    maxTicksLimit: Number;
+    maxTicksLimit: number;
     callback: Function;
 }
