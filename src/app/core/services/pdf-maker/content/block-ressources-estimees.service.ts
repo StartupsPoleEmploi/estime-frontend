@@ -31,14 +31,14 @@ export class BlockRessourcesEstimeesService {
     this.addTableMesRessourcesEstimees(content, simulationAidesSociales);
     this.addTableMesRessourcesEtAidesActuelles(content, demandeurEmploi, simulationAidesSociales);
     if(this.aidesService.hasAidesObtenirSimulationAidesSociales(simulationAidesSociales)) {
-      this.addTablAidesObtenir(content, simulationAidesSociales);
+      this.addTableAidesObtenir(content, simulationAidesSociales);
     }
   }
 
 
   /******* méthode création table "Les aides que vous pourriez obtenir" */
 
-  public addTablAidesObtenir(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  public addTableAidesObtenir(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
     let body = new Array<Array<Cell>>();
 
     this.addHeaderTable(body, simulationAidesSociales.simulationsMensuelles.length, 'Les aides que vous pourriez obtenir');

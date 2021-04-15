@@ -58,11 +58,12 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
-    for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
+    const aides = Object.values(this.simulationSelected.mesAides);
+    aides.forEach((aide) => {
       if(this.aidesService.isAideDemandeurPourraObtenir(aide)) {
         size += 1;
       }
-    }
+    });
     return index === size - 1;
   }
 

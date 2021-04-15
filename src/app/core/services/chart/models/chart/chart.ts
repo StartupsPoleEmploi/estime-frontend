@@ -3,7 +3,7 @@ import { Options } from './options/options';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export class Chart {
-    type: String;
+    type: string;
     data: Data;
     options: Options;
     plugins: Array<typeof ChartDataLabels>;

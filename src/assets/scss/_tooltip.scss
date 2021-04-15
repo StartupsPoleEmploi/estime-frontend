@@ -1,0 +1,14 @@
+.img-interrogation-icon {
+  display: inline-block;
+  vertical-align: sub;
+  margin-left: 5px;
+  width: 23px;
+  cursor: pointer;
+  content: url("../images/question.svg");
+  &:hover {
+    content: url("../images/question_hover.svg");
+  }
+  &.popover-open {
+    content: url("../images/question_click.svg");
+  }
+}

@@ -1,5 +1,5 @@
 export class Font {
-    weight: String;
+    weight: string;
     size: Number;
-    family: String;
+    family: string;
 }

@@ -1,39 +1,38 @@
 import { Injectable } from '@angular/core';
-import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
+import { CodesRessourcesFinancieresEnum } from '@enumerations/codes-ressources-financieres.enum';
+import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
+import { DevisesEnum } from '@enumerations/devises.enum';
+import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
+import { LibellesRessourcesFinancieresEnum } from '@enumerations/libelles-ressources-financieres.enum';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationAidesSocialesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service';
+import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '../utile/aides.service';
 import { DateUtileService } from '../utile/date-util.service';
 import { ScreenService } from '../utile/screen.service';
-import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
-import { DevisesEnum } from '@enumerations/devises.enum';
-import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
-import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
-import { CodesRessourcesFinancieresEnum } from '@enumerations/codes-ressources-financieres.enum';
-import { LibellesRessourcesFinancieresEnum } from '@enumerations/libelles-ressources-financieres.enum';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-import { DataObject } from './models/dto/dataObject';
-
 import { Chart } from './models/chart/chart';
 import { Data } from './models/chart/data/data';
 import { Dataset } from './models/chart/data/dataset/dataset';
-import { Options } from './models/chart/options/options';
-import { Legend } from './models/chart/options/legend/legend';
+import { Layout } from './models/chart/options/layout/layout';
+import { Padding } from './models/chart/options/layout/padding/padding';
 import { Labels } from './models/chart/options/legend/labels/labels';
-import { Plugins } from './models/chart/options/plugins/plugins';
+import { Legend } from './models/chart/options/legend/legend';
+import { Options } from './models/chart/options/options';
 import { Datalabels } from './models/chart/options/plugins/datalabels/datalabels';
 import { Font } from './models/chart/options/plugins/datalabels/font/font';
-import { Scales } from './models/chart/options/scales/scales';
+import { Plugins } from './models/chart/options/plugins/plugins';
 import { Axes } from './models/chart/options/scales/axes/axes';
 import { GridLines } from './models/chart/options/scales/axes/gridLines/gridLines';
 import { ScaleLabel } from './models/chart/options/scales/axes/scaleLabel/scaleLabel';
 import { Ticks } from './models/chart/options/scales/axes/ticks/ticks';
-import { Layout } from './models/chart/options/layout/layout';
-import { Padding } from './models/chart/options/layout/padding/padding';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
-import { reduceAST } from 'publicodes';
+import { Scales } from './models/chart/options/scales/scales';
+import { DataObject } from './models/dto/dataObject';
+
+
 
 @Injectable({ providedIn: 'root' })
 export class ChartUtileService {
@@ -80,7 +79,7 @@ export class ChartUtileService {
    * @param simulationAidesSociales
    * @returns labelsMois
    */
-  private getLabels(simulationAidesSociales): Array<String> {
+  private getLabels(simulationAidesSociales): Array<string> {
     const labelsMois = Array();
     labelsMois.push('');
     simulationAidesSociales.simulationsMensuelles.forEach(
@@ -315,7 +314,7 @@ export class ChartUtileService {
     labels.fontFamily = 'Lato';
     labels.fontColor = 'black';
     labels.padding = 20;
-    labels.filter = function (legendItem, data) {
+    labels.filter = function (legendItem: any) {
       return aidesDisponibles.includes(legendItem.text);
     };
 
@@ -455,7 +454,7 @@ export class ChartUtileService {
     return padding;
   }
 
-  private getType(): String {
+  private getType(): string {
     return 'bar';
   }
 
@@ -466,7 +465,7 @@ export class ChartUtileService {
    * @param datasets les datasets du diagramme
    * @returns aidesDisponibles : les libellés des aides disponibles
    */
-  public getAidesDisponibles(data: Data): Array<String> {
+  public getAidesDisponibles(data: Data): Array<string> {
     const aidesDisponibles = Array();
     data.datasets.forEach((dataset) => {
       if (!dataset['data'].every((item) => item === 0))

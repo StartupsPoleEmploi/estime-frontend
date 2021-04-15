@@ -158,11 +158,12 @@ export class ResultatSimulationComponent implements OnInit {
 
   private selectFirstAidePourraObtenir(): void {
     if (this.aidesService.hasAidesObtenir(this.simulationSelected)) {
-      for (let [codeAide, aide] of Object.entries(this.simulationSelected.mesAides)) {
-          if (this.aidesService.isAideDemandeurPourraObtenir(aide)) {
-            this.aideSocialeSelected = aide;
-          }
-      }
+      const aides = Object.values(this.simulationSelected.mesAides);
+      aides.forEach((aide) => {
+        if (this.aidesService.isAideDemandeurPourraObtenir(aide)) {
+          this.aideSocialeSelected = aide;
+        }
+      });
     } else {
       this.aideSocialeSelected = null;
     }

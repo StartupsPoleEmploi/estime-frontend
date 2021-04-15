@@ -155,15 +155,12 @@
                         class="label"
                         for="situationsExceptionnelles">
                         Vous percevez
-                        <img
-                            class="interrogation-icon"
-                            src='{{"./assets/images/question"+question_icon_1+".svg"}}'
+                        <div
+                            class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': popoverSituationDemandeur.isOpen}"
                             placement="right"
-                            (mouseover)="onMouseOverInfobulle(1)"
-                            (mouseleave)="onMouseLeaveInfobulle(1)"
-                            (click)="onClickInfobulle(1)"
                             [popover]="popoverSituationDemandeurTemplate"
-                            #popoverSituationDemandeur="bs-popover">
+                            #popoverSituationDemandeur="bs-popover"></div>
                     </label>
                 </div>
                 <div class="row">

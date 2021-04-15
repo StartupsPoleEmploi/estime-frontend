@@ -5,7 +5,6 @@ import { IndividuConnectedService } from '@app/core/services/connexion/individu-
 import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
 import { CookiesEstimeService } from "@app/core/services/storage/cookies-estime.service";
 import { SessionStorageEstimeService } from "@app/core/services/storage/session-storage-estime.service";
-import { BnNgIdleService } from 'bn-ng-idle';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({

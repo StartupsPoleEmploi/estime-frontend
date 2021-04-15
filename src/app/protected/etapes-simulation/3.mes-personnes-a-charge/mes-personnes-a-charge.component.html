@@ -11,15 +11,12 @@
         <div class="row mb-3">
             <label class="label">
                 Nombre d'enfant(s) ou de personne(s) à charge
-                <img
-                    class="interrogation-icon"
-                    src='{{"./assets/images/question"+question_icon+".svg"}}'
-                    placement="right"
-                    (mouseover)="onMouseOverInfobulle()"
-                    (mouseleave)="onMouseLeaveInfobulle()"
-                    (click)="onClickInfobulle()"
-                    [popover]="popoverPersonnesAChargeTemplate"
-                    #popoverPersonnesACharge="bs-popover">
+                <div
+                            class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': popoverPersonnesACharge.isOpen}"
+                            placement="right"
+                            [popover]="popoverPersonnesAChargeTemplate"
+                            #popoverPersonnesACharge="bs-popover"></div>
             </label>
         </div>
         <div class="row mb-2">

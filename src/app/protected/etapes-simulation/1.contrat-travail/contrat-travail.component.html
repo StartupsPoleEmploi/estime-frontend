@@ -153,15 +153,12 @@
                         class="label"
                         for="salaire-mensuel-net">
                         * Indiquez le salaire mensuel brut ou net
-                        <img
-                            class="interrogation-icon"
-                            src='{{"./assets/images/question"+question_icon_1+".svg"}}'
+                        <div
+                            class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': popoverSalaireNet.isOpen}"
                             placement="right"
-                            (mouseover)="onMouseOverInfobulle(1)"
-                            (mouseleave)="onMouseLeaveInfobulle(1)"
-                            (click)="onClickInfobulle(1)"
                             [popover]="popoverSalaireNetTemplate"
-                            #popoverSalaireNet="bs-popover">
+                            #popoverSalaireNet="bs-popover"></div>
                     </label>
                 </div>
                 <div class="row">
@@ -291,15 +288,12 @@
                         class="label"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de trajets aller depuis votre domicile vers votre futur lieu de travail
-                        <img
-                            class="interrogation-icon"
-                            src='{{"./assets/images/question"+question_icon_2+".svg"}}'
+                        <div
+                            class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
                             placement="right"
-                            (mouseover)="onMouseOverInfobulle(2)"
-                            (mouseleave)="onMouseLeaveInfobulle(2)"
-                            (click)="onClickInfobulle(2)"
                             [popover]="popoverNombreTrajetTemplate"
-                            #popoverNombreTrajet="bs-popover">
+                            #popoverNombreTrajet="bs-popover"></div>
                     </label>
                 </div>
                 <div class="row">

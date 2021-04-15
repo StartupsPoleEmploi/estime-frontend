@@ -1,7 +1,7 @@
 import { Labels } from './labels/labels';
 
 export class Legend {
-    position: String;
-    align: String;
+    position: string;
+    align: string;
     labels: Labels;
 }

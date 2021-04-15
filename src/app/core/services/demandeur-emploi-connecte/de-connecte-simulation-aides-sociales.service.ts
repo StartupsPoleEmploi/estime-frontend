@@ -50,11 +50,12 @@ export class DeConnecteSimulationAidesSocialesService {
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
     let montant = 0;
     if (simulation.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulation.mesAides)) {
-        if (codeAide && aide) {
+      const aides = Object.values(simulation.mesAides);
+      aides.forEach((aide) => {
+        if (aide) {
           montant += this.numberUtileService.getMontantSafe(aide.montant);
         }
-      }
+      });
     }
     return montant;
   }

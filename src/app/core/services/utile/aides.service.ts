@@ -78,11 +78,12 @@ export class AidesService {
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {
     let hasAidesObtenir = false;
     if(simulationSelected) {
-        for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        const aides = Object.values(simulationSelected.mesAides);
+        aides.forEach((aide) => {
           if(this.isAideDemandeurPourraObtenir(aide)) {
             hasAidesObtenir = true;
-          }
-        }
+            }
+        });
     }
     return hasAidesObtenir;
   }

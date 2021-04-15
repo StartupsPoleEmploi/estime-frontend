@@ -114,15 +114,4 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.onClickButtonAjouterPersonne();
     }
   }
-
-  public onMouseOverInfobulle() {
-    this.question_icon = '_hover';
-  }
-
-  public onMouseLeaveInfobulle() {
-    this.question_icon = '';
-  }
-  public onClickInfobulle() {
-    this.question_icon = '_click';
-  }
 }
