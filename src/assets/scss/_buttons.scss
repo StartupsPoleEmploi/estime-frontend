@@ -184,6 +184,16 @@
   }
 }
 
+.btn-style-perso-5 {
+  @extend .btn-style-perso-3;
+  box-shadow: 0 10px 20px 0 rgba(27,43,103,0.3);
+  min-height: 60px;
+  @media #{$small-device} {
+    min-height: 42px;
+  }
+  max-height: fit-content;
+}
+
 .btn-imprimer-simulation {
   @extend .btn-style-perso-4;
   margin: auto;

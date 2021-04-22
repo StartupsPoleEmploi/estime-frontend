@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
@@ -6,6 +6,8 @@ import { Individu } from '@models/individu';
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
 import { IndividuConnectedService } from '../connexion/individu-connected.service';
+import { QueryParamEnum } from "@enumerations/query-param.enum";
+import { OptionsHTTP } from "@models/options-http";
 
 @Injectable({ providedIn: 'root' })
 export class EstimeApiService {
@@ -36,14 +38,23 @@ export class EstimeApiService {
     return this.http.post<SimulationAidesSociales>(`${this.pathDemandeurEmploiService}demandeur_emploi/simulation_aides_sociales`, demandeurEmploi, options).toPromise();
   }
 
+  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
+    const options = this.getHttpHeaders();
+    options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
+
+    return this.http.delete(`${this.pathDemandeurEmploiService}demandeur_emploi/suivi_parcours`, options).toPromise();
+  }
+
   private getHttpHeaders() {
     const individuConnected = this.individuConnectedService.getIndividuConnected();
 
-    const optionRequete = {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`
-      })
-    };
+    const optionRequete = new OptionsHTTP();
+    optionRequete.headers = new HttpHeaders({
+        'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`,
+        'Content-Type': 'application/json'
+    });
+
+
     return optionRequete;
   }
 }
