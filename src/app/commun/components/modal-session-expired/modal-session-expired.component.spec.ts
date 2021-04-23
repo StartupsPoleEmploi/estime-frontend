@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ModalSessionExpiredComponent } from './modal-session-expired.component';
 
@@ -6,7 +6,7 @@ describe('ModalSessionExpiredComponent', () => {
   let component: ModalSessionExpiredComponent;
   let fixture: ComponentFixture<ModalSessionExpiredComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ModalSessionExpiredComponent ]
     })
