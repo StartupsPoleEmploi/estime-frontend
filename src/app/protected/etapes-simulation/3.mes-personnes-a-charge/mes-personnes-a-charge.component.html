@@ -1,131 +1,139 @@
-<div class="container-fluid form-container-fluid">
-    <div class="div-title-formulaire">
-        <h1 class="h1-style-2">
-            3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
-        </h1>
-        <div class="text-under-h1">
-            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
-        </div>
-    </div>
-    <div class="card card-body card-form  card-form-style-1">
-        <div class="row mb-3">
-            <label class="label">
-                Nombre d'enfant(s) ou de personne(s) à charge
-                <div
-                            class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': popoverPersonnesACharge.isOpen}"
-                            placement="right"
-                            tag-action="ouverture-infobulle-personnes-charge-nbr-enfant"
-                            [popover]="popoverPersonnesAChargeTemplate"
-                            #popoverPersonnesACharge="bs-popover"></div>
-            </label>
-        </div>
-        <div class="row mb-2">
-            <div class="card-deck">
-                <div
-                    class="card card-personne card-personne-list"
-                    *ngFor="let personne of personnesACharge;let indexOfelement=index;">
-                    <div class="card-header">
-                        <i
-                            class="fas fa-times-circle float-right"
-                            (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
-                        </i>
-                    </div>
-                    <div class="card-body d-flex align-items-center">
-                        <div class="row">
-                            <div class="col-3 col-card-body">
-                                <img
-                                    class
-                                    src="./assets/images/personne.svg">
-                            </div>
-                            <div class="col-9 col-card-body">
-                                <span class="span-personne">Personne {{indexOfelement + 1}}</span>
-                                <span>
-                                    {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a
-                            class="float-right"
-                            (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
-                            Modifier
-                        </a>
-                    </div>
-                </div>
-                <button
-                    name="button-card-add-personne"
-                    class="button-card-add-personne"
-                    (keyup)="handleKeyUpOnButtonAjouterPersonne($event)">
-                    <div
-                        class="card card-add-personne"
-                        (click)="onClickButtonAjouterPersonne()"
-                        data-testid="btn-ajouter-personne-charge">
-                        <div class="card-body d-flex align-items-center">
-                            <div
-                                id="row-card-body-add-personne"
-                                class="row">
-                                <div class="col-3 col-card-body">
-                                    <img src="./assets/images/ajouter-personne.svg">
-                                </div>
-                                <div class="col-9 col-card-body">
-                                    <span>
-                                        Ajouter un enfant ou une personne à charge
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
-        <app-form-personne-a-charge
-            *ngIf="isNouvellePersonneAChargeFormDisplay === true"
-            [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
-            [isModeModification]="isModeModification"
-            [nouvellePersonneACharge]="nouvellePersonneACharge"
-            [numeroNouvellePersonne]="numeroNouvellePersonne"
-            (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
-        </app-form-personne-a-charge>
-    </div>
-</div>
-<div class="div-buttons-form container-fluid">
-    <div
-        class="d-flex justify-content-center"
-        *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-        <button
-            class="btn-style-perso-2 first-btn"
-            (click)="onClickButtonRetour()">
-            <div>
-              <img src="./assets/images/return-arrow-v2.svg">
-              <span>Retour</span>
-            </div>
-        </button>
-        <button
-            class="btn-style-perso-1 second-btn"
-            data-testid="btn-personnes-charge-suivant"
-            (click)="onClickButtonSuivant()">
-            <div>
-              <span>Suivant</span>
-              <img src="./assets/images/icon-bt-primaire.svg">
-            </div>
-        </button>
-    </div>
-</div>
+  <div class="container-fluid form-container-fluid">
+      <div class="div-title-formulaire">
+          <h1 class="h1-style-2">
+              3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
+          </h1>
+          <div class="text-under-h1">
+              {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+          </div>
+      </div>
+      <div class="card card-body card-form  card-form-style-1">
+          <div class="row mb-3">
+              <label class="label" aria-describedby="infobulle-personnes-charge-nbr-enfant">
+                  Nombre d'enfant(s) ou de personne(s) à charge
+                  <div
+                    id="infobulle-personnes-charge-nbr-enfant"
+                    role="tooltip"
+                    title="En savoir plus"
+                    class="img-interrogation-icon"
+                    [ngClass]="{'popover-open': popoverPersonnesACharge.isOpen}"
+                    placement="right"
+                    tag-action="ouverture-infobulle-personnes-charge-nbr-enfant"
+                    [popover]="popoverPersonnesAChargeTemplate"
+                    #popoverPersonnesACharge="bs-popover">
+                  </div>
+              </label>
+          </div>
+          <div class="row mb-2">
+              <div class="card-deck">
+                  <div
+                      class="card card-personne card-personne-list"
+                      *ngFor="let personne of personnesACharge;let indexOfelement=index;">
+                      <div class="card-header">
+                          <i
+                              role="button"
+                              title="Supprimer la personne à charge"
+                              class="fas fa-times-circle float-right"
+                              (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
+                          </i>
+                      </div>
+                      <div class="card-body d-flex align-items-center">
+                          <div class="row">
+                              <div class="col-3 col-card-body">
+                                  <img
+                                  alt=""
+                                      class
+                                      src="./assets/images/personne.svg">
+                              </div>
+                              <div class="col-9 col-card-body">
+                                  <span class="span-personne">Personne {{indexOfelement + 1}}</span>
+                                  <span>
+                                      {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card-footer">
+                          <a
+                              class="float-right"
+                              title="Modifier la personne à charge"
+                              (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
+                              Modifier
+                          </a>
+                      </div>
+                  </div>
+                  <button
+                      name="button-card-add-personne"
+                      class="button-card-add-personne"
+                      (keyup)="handleKeyUpOnButtonAjouterPersonne($event)">
+                      <div
+                          class="card card-add-personne"
+                          (click)="onClickButtonAjouterPersonne()"
+                          data-testid="btn-ajouter-personne-charge">
+                          <div class="card-body d-flex align-items-center">
+                              <div
+                                  id="row-card-body-add-personne"
+                                  class="row">
+                                  <div class="col-3 col-card-body">
+                                      <img alt="" src="./assets/images/ajouter-personne.svg">
+                                  </div>
+                                  <div class="col-9 col-card-body">
+                                      <span>
+                                          Ajouter un enfant ou une personne à charge
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </button>
+              </div>
+          </div>
+          <app-form-personne-a-charge
+              *ngIf="isNouvellePersonneAChargeFormDisplay === true"
+              [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
+              [isModeModification]="isModeModification"
+              [nouvellePersonneACharge]="nouvellePersonneACharge"
+              [numeroNouvellePersonne]="numeroNouvellePersonne"
+              (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
+          </app-form-personne-a-charge>
+      </div>
+  </div>
+  <div class="div-buttons-form container-fluid">
+      <div
+          class="d-flex justify-content-center"
+          *ngIf="isNouvellePersonneAChargeFormDisplay === false">
+          <button
+              class="btn-style-perso-2 first-btn"
+              (click)="onClickButtonRetour()">
+              <div>
+                <img alt="" src="./assets/images/return-arrow-v2.svg">
+                <span>Retour</span>
+              </div>
+          </button>
+          <button
+              class="btn-style-perso-1 second-btn"
+              data-testid="btn-personnes-charge-suivant"
+              (click)="onClickButtonSuivant()">
+              <div>
+                <span>Suivant</span>
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+              </div>
+          </button>
+      </div>
+  </div>
 
-<ng-template #popoverPersonnesAChargeTemplate>
-    <div class="container">
-        <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2 ml-auto"
-                (click)="popoverPersonnesACharge.hide()"></i>
-        </div>
-        <div class="row">
-            <b>Qui sont les « personnes à charge » ?</b>
-            <p>
-                Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
-            </p>
-        </div>
-    </div>
-</ng-template>
+  <ng-template #popoverPersonnesAChargeTemplate>
+      <div class="container">
+          <div class="close-popover row">
+              <i
+                  class="fas fa-times-circle mb-2 ml-auto"
+                  (click)="popoverPersonnesACharge.hide()"></i>
+          </div>
+          <div class="row">
+              <b>Qui sont les « personnes à charge » ?</b>
+              <p>
+                  Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
+              </p>
+          </div>
+      </div>
+  </ng-template>

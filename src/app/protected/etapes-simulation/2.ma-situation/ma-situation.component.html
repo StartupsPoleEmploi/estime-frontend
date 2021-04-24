@@ -153,9 +153,13 @@
               <div class="row mb-2">
                   <label
                       class="label"
-                      for="situationsExceptionnelles">
+                      for="situationsExceptionnelles"
+                      aria-describedby="infobulle-ma-situation-vous-percevez">
                       Vous percevez
                       <div
+                          id="infobulle-ma-situation-vous-percevez"
+                          role="tooltip"
+                          title="Pourquoi nous vous demandons ce que vous percevez ?"
                           class="img-interrogation-icon"
                           [ngClass]="{'popover-open': popoverSituationDemandeur.isOpen}"
                           placement="right"
@@ -506,17 +510,19 @@
               <div class="row mb-2">
                   <label
                       class="label"
-                      for="isProprietaireSansPretOuLogeGratuit">
+                      for="isProprietaireSansPretOuLogeGratuit"
+                      aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
                       * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
-                      <img
-                          class="interrogation-icon"
-                          src='{{"./assets/images/question"+question_icon_2+".svg"}}'
-                          placement="right"
-                          (mouseover)="onMouseOverInfobulle(2)"
-                          (mouseleave)="onMouseLeaveInfobulle(2)"
-                          (click)="onClickInfobulle(2)"
-                          [popover]="popoverSituationLogementTemplate"
-                          #popoverSituationLogement="bs-popover">
+                      <div
+                      id="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                      role="tooltip"
+                      title="En savoir plus"
+                      class="img-interrogation-icon"
+                      [ngClass]="{'popover-open': popoverSituationLogement.isOpen}"
+                      placement="right"
+                      tag-action="ouverture-infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                      [popover]="popoverSituationLogementTemplate"
+                      #popoverSituationLogement="bs-popover"></div>
                   </label>
               </div>
               <div class="row">
@@ -574,7 +580,7 @@
           (click)="onClickButtonRetour()"
           type="button">
           <div>
-              <img src="./assets/images/return-arrow-v2.svg">
+              <img alt="" src="./assets/images/return-arrow-v2.svg">
               <span>Retour</span>
           </div>
       </button>
@@ -586,7 +592,7 @@
           (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">
           <div>
               <span>Suivant</span>
-              <img src="./assets/images/icon-bt-primaire.svg">
+              <img alt="" src="./assets/images/icon-bt-primaire.svg">
           </div>
       </button>
   </div>

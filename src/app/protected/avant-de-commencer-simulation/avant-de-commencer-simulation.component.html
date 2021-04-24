@@ -17,6 +17,7 @@
                 <p>
                     <img
                         class="mr-2"
+                        alt=""
                         src="./assets/images/hand-finger-right.svg">
                     <span>Veuillez vous munir de :</span>
                     <br>
@@ -27,9 +28,11 @@
                             <div *ngIf="screenService.isScreenInferieur(376)"></div>
                             ASS Pôle Emploi
                             <a
+                                aria-describedby="infobulle-derniere-notification-pole-emploi"
                                 target="_blank"
+                                title="Modèle document derniere notification Pôle emploi"
                                 href="./assets/documents/attestation-ass.pdf">
-                                <div class="img-interrogation-icon" tag-action="ouverture-infobulle-derniere-notification-pe"></div>
+                                <div id="infobulle-derniere-notification-pole-emploi" role="tooltip" class="img-interrogation-icon" tag-action="ouverture-infobulle-derniere-notification-pe"></div>
                             </a>
                         </span>
                     </span>
@@ -40,8 +43,10 @@
                             notification de droits CAF
                             <a
                                 target="_blank"
+                                aria-describedby="infobulle-derniere-notification-pole-emploi"
+                                title="Modèle document notification droits CAF"
                                 href="./assets/documents/attestation-caf.pdf">
-                                <div class="img-interrogation-icon" tag-action="ouverture-infobulle-notification-droits-caf"></div>
+                                <div id="infobulle-derniere-notification-pole-emploi" role="infobulle-notification-droits-caf" class="img-interrogation-icon" tag-action="ouverture-infobulle-notification-droits-caf"></div>
                             </a>
                         </span>
                     </span>
@@ -54,7 +59,7 @@
                             id="img-info-simulation"
                             class="col-auto">
                             <div>
-                                <img src="./assets/images/info-blue-1.svg">
+                                <img alt="" src="./assets/images/info-blue-1.svg">
                             </div>
                         </div>
                         <div
@@ -73,7 +78,7 @@
                     (click)="onClickButtonJeContinue()">
                     <div>
                         <span>Je continue</span>
-                        <img src="./assets/images/icon-bt-primaire.svg">
+                        <img alt="" src="./assets/images/icon-bt-primaire.svg">
                     </div>
                 </button>
             </div>

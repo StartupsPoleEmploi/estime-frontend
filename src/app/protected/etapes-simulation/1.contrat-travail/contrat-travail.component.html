@@ -151,9 +151,13 @@
                 <div class="row mb-2">
                     <label
                         class="label"
+                        aria-describedby="infobulle-contrat-travail-salaire"
                         for="salaire-mensuel-net">
                         * Indiquez le salaire mensuel brut ou net
                         <div
+                            id="infobulle-contrat-travail-salaire"
+                            role="tooltip"
+                            title="Plus d'information sur le salaire mensuel brut ou net"
                             class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverSalaireNet.isOpen}"
                             placement="right"
@@ -243,7 +247,7 @@
                 class="row  mb-2">
                 <div class="col-auto">
                     <div>
-                        <img src="./assets/images/info-grey.svg">
+                        <img alt="" src="./assets/images/info-grey.svg">
                     </div>
                 </div>
                 <div class="col">
@@ -287,9 +291,13 @@
                 <div class="row flex-column mb-2">
                     <label
                         class="label"
+                        aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de trajets aller depuis votre domicile vers votre futur lieu de travail
                         <div
+                            id="infobulle-contrat-travail-nombre-trajets"
+                            role="tooltip"
+                            title="Plus d'information sur nombre de trajets aller depuis votre domicile vers votre futur lieu de travail"
                             class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
                             placement="right"
@@ -330,7 +338,7 @@
         (click)="onClickButtonRetour()"
         data-testid="btn-futur-travail-retour">
         <div>
-            <img src="./assets/images/return-arrow-v2.svg">
+            <img alt="" src="./assets/images/return-arrow-v2.svg">
             <span>Retour</span>
         </div>
     </button>
@@ -341,7 +349,7 @@
         (click)="onSubmitFuturTravailForm(futurTravailForm)">
         <div>
             <span>Suivant</span>
-            <img src="./assets/images/icon-bt-primaire.svg">
+            <img alt="" src="./assets/images/icon-bt-primaire.svg">
         </div>
     </button>
 </div>

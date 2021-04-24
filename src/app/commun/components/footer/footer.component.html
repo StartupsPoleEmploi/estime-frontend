@@ -4,7 +4,9 @@
             <div class="d-none d-md-block d-lg-block d-xl-block col-md-auto my-auto row-1-footer-div-1">
                 <div class="row">
                     <div class="col-12">
-                        <img src="./assets/images/logo-estime.svg"
+                        <img
+                        alt="Logo du service Estime"
+                        src="./assets/images/logo-estime.svg"
                         (click)="onClickLogoEstime()">
                     </div>
                     <div class="col-12 col-texte-service-estime">
@@ -31,13 +33,16 @@
                     <div class="col-auto col-md-12 my-auto row-col-1">
                       <img
                             id="logo-pole-emploi-colored"
+                            alt="Logo de Pôle emploi"
                             *ngIf="screenService.isExtraSmallScreen()"
                             src="./assets/images/logo-pole-emploi.png">
                         <img
                             id="logo-fonds-social-europeen-footer"
+                            alt="Logo du Fond Social Européen"
                             src="./assets/images/logo-fonds-social-europeen.png">
                         <img
                             id="logo-pole-emploi-colored"
+                            alt="Logo de Pôle emploi"
                             *ngIf="!screenService.isExtraSmallScreen()"
                             src="./assets/images/logo-pole-emploi.png">
                     </div>
@@ -45,6 +50,7 @@
                         <div>
                             <img
                                 id="logo-ue-footer"
+                                alt="Logo Union Européenne"
                                 src="./assets/images/logo-ue.svg">
                         </div>
                         <div id="text-fse-footer">

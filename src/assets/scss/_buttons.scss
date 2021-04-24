@@ -10,6 +10,7 @@
   @extend .btn-base;
   border: 1px $color-blue-1 solid;
   border-radius: 0.25rem;
+  cursor: pointer;
   div {
     align-items: center;
     display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */

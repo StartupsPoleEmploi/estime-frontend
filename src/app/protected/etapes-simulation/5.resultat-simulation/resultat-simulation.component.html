@@ -8,9 +8,10 @@
             class="col-12 col-md-9 mt-auto mb-auto">
             <div
                 class="alert alert-light alert-resultat-simulation mb-0"
-                role="alert">
-                <img src="./assets/images/info.svg">
-                <span class="ml-2">
+                role="alert"
+                aria-describedby="label-alerte-montants-resultat-simulation">
+                <img alt="" src="./assets/images/info.svg">
+                <span id="label-alerte-montants-resultat-simulation" class="ml-2">
                     Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.
                 </span>
             </div>
@@ -21,7 +22,7 @@
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
-                    <img [src]="getSrcImgButtonImprimerSimulation()">
+                    <img alt="" [src]="getSrcImgButtonImprimerSimulation()">
                     <span>{{getTextButtonImprimerSimulation()}}</span>
                 </div>
             </button>
@@ -80,7 +81,7 @@
             class="col-12 col-md-9 card first-card"
             *ngFor="let simulationMensuel of simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
-            <div class="card second-card">
+            <div class="card second-card" role="button" title="Simulation mois {{ getDateStringFormat(simulationMensuel) }} - Montant ressources estimées : {{deConnecteSimulationAidesSocialesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €">
                 <div
                     [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel)}"
                     class="card-body"
@@ -101,10 +102,10 @@
                             *ngIf="screenService.isExtraSmallScreen()"
                             class="col-1 p-0  ml-auto mr-1">
                             <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                <i class="fas fa-chevron-down"></i>
+                                <i alt="" class="fas fa-chevron-down"></i>
                             </span>
                             <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                <i class="fas fa-chevron-right"></i>
+                                <i alt=""  class="fas fa-chevron-right"></i>
                             </span>
                         </div>
                     </div>
@@ -140,7 +141,7 @@
             class="btn-style-perso-2 first-btn float-right"
             (click)="onClickButtonRetour()">
             <div>
-                <img src="./assets/images/return-arrow-v2.svg" alt="flèche retour">
+                <img src="./assets/images/return-arrow-v2.svg" alt="">
                 <span>Retour</span>
             </div>
         </button>
