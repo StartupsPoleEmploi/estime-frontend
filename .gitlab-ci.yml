@@ -20,6 +20,9 @@ build_frontend_application :
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
       entrypoint: [""]
     script:
+      #copie du fichier whitelist Pôle emplo
+      - echo "$NGINX_WHITELIST_POLE_EMPLOI" > "./whitelist_pole_emploi"
+      #lancement du build de l'application
       - npm run build:prod
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
@@ -28,6 +31,7 @@ build_frontend_application :
     artifacts:
       paths:
         - ./dist
+        - ./whitelist_pole_emploi
     cache:
       <<: *global_cache
 
@@ -70,6 +74,7 @@ build-docker-image-recette:
       entrypoint: [""]
     script:
       # build estime-frontend docker image and push it in containers registry
+      - cat ./whitelist_pole_emploi
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
