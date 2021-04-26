@@ -43,7 +43,7 @@ export class CguComponent implements OnInit {
         this.isErreurMessageInfoSuppression = true;
         this.messageInfoSuppressionDonneesPerso = MessagesErreurEnum.SUPPRESSION_DONNEES_PERSO_IMPOSSIBLE;
       }
-    );;
+    );
   }
 
   private subscribeStatutIndividuChangedObservable(): void {
