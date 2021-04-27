@@ -92,6 +92,7 @@ build-docker-image-recette:
         - src/**/*
     dependencies:
     - build_frontend_application
+    - generate_whitelist_pe
 
 generate-docker-stack-recette:
   stage: build-phase-2
