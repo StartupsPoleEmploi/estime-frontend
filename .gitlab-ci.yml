@@ -20,8 +20,6 @@ build_frontend_application :
       name: registry.beta.pole-emploi.fr/customize-docker-images/angular-ng
       entrypoint: [""]
     script:
-      #copie du fichier whitelist Pôle emplo
-      - echo "$NGINX_WHITELIST_POLE_EMPLOI" > "./whitelist_pole_emploi"
       #lancement du build de l'application
       - npm run build:prod
     rules:
@@ -31,9 +29,21 @@ build_frontend_application :
     artifacts:
       paths:
         - ./dist
-        - ./whitelist_pole_emploi
     cache:
       <<: *global_cache
+
+generate_whitelist_pe :
+    stage: build-phase-1
+    script:
+      #création du fichier whitelist Pôle emploi qui contient les IP autorisées pour accéder notamment à adminer
+      - echo "$NGINX_WHITELIST_POLE_EMPLOI" > "./whitelist_pole_emploi"
+    rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      changes:
+        - src/**/*
+    artifacts:
+      paths:
+        - ./whitelist_pole_emploi
 
 cypress-e2e:
     stage: build-phase-1
