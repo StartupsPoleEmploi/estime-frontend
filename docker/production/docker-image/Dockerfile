@@ -18,6 +18,7 @@ COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
 #copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
 COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
+COPY ./whitelist_pole_emploi /etc/nginx/includes/
 
 #copy application sources
 RUN mkdir -p /var/www/estime
@@ -33,6 +34,7 @@ RUN chown nginx:nginx startup.sh \
  && chown -R nginx:nginx /var/cache/nginx \
  && chown -R nginx:nginx /var/log/nginx \
  && chown -R nginx:nginx /etc/nginx/conf.d \
+ && chown -R nginx:nginx /etc/nginx/includes \
  && mkdir -p /tmp/client_temp /tmp/proxy_temp_path /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp \
  && touch  /tmp/nginx.pid \
  && chown -R nginx:nginx /tmp  \
