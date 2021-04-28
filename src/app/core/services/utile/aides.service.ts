@@ -65,6 +65,15 @@ export class AidesService {
     return montant;
   }
 
+  public getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
+    let montant = 0;
+    if(demandeurEmploiConnecte.ressourcesFinancieres &&
+        demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM &&
+          demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite
+    ) montant = demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite;
+    return montant;
+  }
+
   public hasAidesObtenirSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): boolean  {
     let hasAidesObtenirSimulationAidesSociales = false;
     simulationAidesSociales.simulationsMensuelles.forEach(simulationMensuelle => {

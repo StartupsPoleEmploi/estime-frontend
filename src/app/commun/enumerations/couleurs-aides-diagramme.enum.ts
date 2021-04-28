@@ -4,6 +4,7 @@ export enum CouleursAidesDiagrammeEnum {
     ARE = 'rgb(248, 207, 141)',
     ALLOCATION_ADULTES_HANDICAPES = 'rgb(199, 240, 189)',
     ALLOCATION_SOLIDARITE_SPECIFIQUE = 'rgb(248, 207, 141)',
+    ALLOCATION_SUPPLEMENTAIRE_INVALIDITE = 'rgb(255, 255, 185)',
     IMMOBILIER = 'rgb(96, 150, 186)',
     PAIE = 'rgb(131, 197, 190)',
     PENSION_INVALIDITE = 'rgb(244, 173, 173)',

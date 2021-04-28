@@ -111,6 +111,13 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemPensionInvaliditeIsNotLast(): boolean {
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.allocationSupplementaireInvalidite > 0
+    || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+
+  public isItemAllocationSupplementaireInvaliditeIsNotLast(): boolean {
     return this.aidesService.getMontantRSA(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }

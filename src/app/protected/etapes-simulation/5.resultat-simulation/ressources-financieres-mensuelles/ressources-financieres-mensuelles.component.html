@@ -73,6 +73,18 @@
             </li>
             <li
                 class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.allocationSupplementaireInvalidite > 0">
+                <app-item-ressource-actuelle
+                    [codeRessource]="codesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE"
+                    [isColPictoArrowDisplay]="false"
+                    [libelleRessource]="libellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE"
+                    [montantRessource]="aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte)"
+                    [organismeRessource]="organismeAidesEnum.CPAM">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemAllocationSupplementaireInvaliditeIsNotLast()">
+            </li>
+            <li
+                class="list-group-item"
                 *ngIf="aidesService.getMontantRSA(simulationSelected) > 0">
                 <app-item-ressource-actuelle
                     [codeRessource]="codesAidesEnum.RSA"

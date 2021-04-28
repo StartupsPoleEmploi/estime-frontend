@@ -149,6 +149,7 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
@@ -226,6 +227,7 @@ export class DeConnecteService {
       if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsPoleEmploi) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
