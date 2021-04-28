@@ -71,6 +71,7 @@ export class DeConnecteRessourcesFinancieresService {
       }
       if (demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite);
       }
       if(demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
         const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
@@ -200,9 +201,10 @@ export class DeConnecteRessourcesFinancieresService {
 
   private getMontantAidesRessourcesCPAM(ressourcesFinancieres: RessourcesFinancieres): number {
     let montant = 0;
-    if (ressourcesFinancieres.allocationsPoleEmploi) {
+    if (ressourcesFinancieres.allocationsCPAM) {
       const allocationsCPAM = ressourcesFinancieres.allocationsCPAM;
       montant += this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite)
+        + this.numberUtileService.getMontantSafe(allocationsCPAM.allocationSupplementaireInvalidite);
     }
     return montant;
   }

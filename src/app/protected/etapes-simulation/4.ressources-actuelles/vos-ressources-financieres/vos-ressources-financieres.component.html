@@ -444,6 +444,41 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
             </div>
+            <div class="row mt-3 mb-2">
+                <label
+                    class="label"
+                    for="allocationSupplementaireInvalidite">
+                    * Allocation supplémentaire d'invalidité perçue
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="allocationSupplementaireInvalidite"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    maxlength="6"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite"
+                    [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)}"
+                    required
+                    inputmode="decimal"
+                    #allocationSupplementaireInvalidite="ngModel">
+                <span class="text-side-input">€ le mois dernier</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
         </div>
         <div
             class="form-group"
