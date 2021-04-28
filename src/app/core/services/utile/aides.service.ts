@@ -13,7 +13,7 @@ export class AidesService {
     if(simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
         if(codeAide === CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
-          montant = aide.montant;
+          montant = Number(aide.montant);
         }
       }
     }
@@ -25,7 +25,7 @@ export class AidesService {
     if(simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
         if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          montant = aide.montant;
+          montant = Number(aide.montant);
         }
       }
     }
@@ -49,7 +49,7 @@ export class AidesService {
     if(simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
         if(codeAide === CodesAidesEnum.RSA) {
-          montant = aide.montant;
+          montant = Number(aide.montant);
         }
       }
     }
@@ -61,7 +61,7 @@ export class AidesService {
     if(demandeurEmploiConnecte.ressourcesFinancieres &&
         demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM &&
           demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite
-    ) montant = demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite;
+    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
     return montant;
   }
 
@@ -70,7 +70,7 @@ export class AidesService {
     if(demandeurEmploiConnecte.ressourcesFinancieres &&
         demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM &&
           demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite
-    ) montant = demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite;
+    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite);
     return montant;
   }
 
