@@ -13,7 +13,9 @@ services:
     networks:
      - estime
     ports:
-      - 80:8888
+     - target: 8888
+       published: 80
+       mode: host
     healthcheck:
       test: curl --fail http://localhost:8888/ || exit 1
       timeout: 10s
