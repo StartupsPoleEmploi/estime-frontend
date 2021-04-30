@@ -251,7 +251,7 @@
                     maxlength="6"
                     class="form-control"
                     [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)}"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -271,6 +271,47 @@
                 </span>
                 <span
                     *ngIf="conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
+            </div>
+            <div class="row mt-3 mb-2">
+                <label
+                    class="label"
+                    for="allocationSupplementaireInvalidite">
+                    * Allocation supplémentaire d'invalidité perçue
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="allocationSupplementaireInvalidite"
+                    type="text"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    min="0"
+                    maxlength="6"
+                    class="form-control"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)}"
+                    placeholder="Montant"
+                    inputmode="decimal"
+                    required
+                    #allocationSupplementaireInvalidite="ngModel">
+                <span class="text-side-input">€ le mois dernier</span>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+                <span
+                    *ngIf="conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>

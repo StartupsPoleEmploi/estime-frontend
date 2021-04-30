@@ -63,7 +63,8 @@ export class DeConnecteSimulationAidesSocialesService {
   private calculerMontantAllocationsCPAM(allocationsCPAM: AllocationsCPAM) {
     let montant = 0;
     if(allocationsCPAM) {
-      montant +=  this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite);
+      montant +=  this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite)
+        + this.numberUtileService.getMontantSafe(allocationsCPAM.allocationSupplementaireInvalidite);
     }
     return montant
   }

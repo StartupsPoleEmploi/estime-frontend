@@ -141,6 +141,7 @@ export class ChartUtileService {
     );
     for (let index = 0; index < 6; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
+      dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaireMensuelNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois();
@@ -199,6 +200,15 @@ export class ChartUtileService {
       {
         label: LibellesAidesEnum.PENSION_INVALIDITE.padEnd(30,' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PENSION_INVALIDITE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE,
+      {
+        label: LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
