@@ -1,4 +1,4 @@
-<header>
+<header [ngClass]="{'header-logged-in': this.isLoggedIn}">
     <div class="container-fluid">
         <div class="row">
             <div class="col-auto pl-0 ml-0">
@@ -39,6 +39,17 @@
                     data-testid="btn-se-deconnecter-sm">
                     <div class="img-btn-se-deconnecter"></div>
                 </button>
+
+                <div
+                    class="btn-se-connecter d-none d-sm-block"
+                    *ngIf="!this.isLoggedIn"
+                    data-testid="btn-pe-connect"
+                    (click)="login()">
+                    <div class="float-right" style="display:inline-flex; margin-top: 7px">
+                        <div class="img-btn-se-connecter"></div>
+                        <div class="label-btn-se-connecter">Se connecter avec mes identifiants Pôle emploi</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

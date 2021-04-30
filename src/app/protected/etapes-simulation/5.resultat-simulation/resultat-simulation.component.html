@@ -1,6 +1,16 @@
 <div class="container-fluid form-container-fluid">
     <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
+        <div
+        id="infobulle-resultat-simulation"
+        role="tooltip"
+        class="img-interrogation-icon"
+        style="vertical-align: baseline;"
+        [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
+        placement="right top"
+        tag-action="ouverture-infobulle-resultat-simulation"
+        [popover]="popoverResultatSimulationTemplate"
+        #popoverResultatSimulation="bs-popover"></div>
     </h1>
     <div class="row mt-4 row-style-2">
         <div
@@ -158,3 +168,18 @@
         </button>
     </div>
 </div>
+
+<ng-template #popoverResultatSimulationTemplate>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverResultatSimulation.hide()"></i>
+        </div>
+        <div class="row">
+            <p>
+                Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont susceptibles d'évoluer.
+            </p>
+        </div>
+    </div>
+</ng-template>

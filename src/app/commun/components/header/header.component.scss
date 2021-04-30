@@ -1,11 +1,18 @@
 @import "../../../../assets/scss/variables";
 
+.header-logged-in {
+}
+
 header {
   background-color: $color-white-3;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
-  height: 64px;
+  // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
+  height: $header-height;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
   @media #{$small-device} {
-    height: 86px;
+    height: $header-height-small-device;
   }
 
   .container-fluid {

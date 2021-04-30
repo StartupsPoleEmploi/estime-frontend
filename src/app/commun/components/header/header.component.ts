@@ -35,6 +35,10 @@ export class HeaderComponent implements OnInit {
     this.peConnectService.logout();
   }
 
+  public login(): void {
+    this.peConnectService.login();
+  }
+
   public onClickLogoEstime(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }

@@ -8,7 +8,8 @@ $medium-device: "screen and (min-width:992px)";
 $large-device:  "screen and (min-width:1200px)";
 $extra-large-device:  "screen and (min-width:1400px)";
 
-
+$header-height : 64px;
+$header-height-small-device : 86px;
 
 $color-black-1: black;
 $color-black-2:#3E3E3E;
@@ -55,3 +56,11 @@ $color-yellow-1: #ECF4AD;
 $color-yellow-2: #FFFFB9;
 
 $size-card-form-etape-simulation: 750px;
+
+// variables pour les icones des étapes de la home page
+
+$left-icon-tache-homepage: 60px;
+$margin-top-numero-etape: 30px;
+$margin-left-numero-etape: calc(#{$left-icon-tache-homepage} + 15px);
+$margin-top-icons-etape: calc(0px - #{$margin-top-numero-etape});
+$margin-left-icons-etape: calc(#{$left-icon-tache-homepage} + 60px);

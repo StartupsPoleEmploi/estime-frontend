@@ -71,6 +71,38 @@
   }
 }
 
+.btn-se-connecter {
+  position: fixed;
+  top: 0;
+  right: 0;
+  border: 1px solid;
+  border-radius: 0 0 0 100px;
+  border-color: #DEEEFF;
+  height: calc(#{$header-height} - 10px);
+  width: 300px;
+  background-color: #DEEEFF;
+  cursor: pointer;
+  text-align:center;
+  display: flex;
+
+  @media #{$small-device} {
+    height: calc(#{$header-height-small-device} - 10px);
+  }
+
+  .img-btn-se-connecter {
+    content: url("../images/personne.svg");
+    color: #1B2B67;
+  }
+  .label-btn-se-connecter {
+    width: 228px;
+    color: #1B2B67;
+    font-family: Lato;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+}
+
 .btn-se-deconnecter {
   @extend .action-btn-base;
   background-color: $color-white-3;
