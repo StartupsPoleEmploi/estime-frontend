@@ -39,7 +39,7 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
 - [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
-- [Saas](https://sass-lang.com/guide), préprocesseur de CSS.
+- [Scss](https://sass-lang.com/guide), préprocesseur de CSS.
 
 ## Gestion des dépendances avec npm
 
