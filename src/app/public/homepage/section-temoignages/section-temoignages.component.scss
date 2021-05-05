@@ -17,3 +17,9 @@
     padding-right: 15px;
   }
 }
+
+.section-temoignage-avec-sticky-button {
+  @media #{$extra-small-device} {
+    margin-bottom: calc(#{$espace-se-connecter-sticky-height});
+  }
+}

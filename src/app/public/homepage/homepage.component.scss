@@ -1,19 +1,8 @@
 @import "../../../assets/scss/variables";
 
-#div-message-erreur-homepage {
-  margin-top : 2rem;
-  margin-bottom: 2.5rem;
-  max-width: 100%;
-}
-
 #section-presentation {
   background-color: white;
-  margin-top: $header-height;
   padding-bottom:  7rem !important;
-
-  @media #{$small-device} {
-    margin-top: $header-height-small-device;
-  }
 
   @media #{$extra-small-device} {
     padding-bottom: 3rem !important;
@@ -74,6 +63,11 @@
         width: 256px;
         -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
         box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
+        @media #{$extra-small-device} {
+          margin-right: auto;
+          margin-left: auto;
+        }
+
         span {
           height: 29px;
           width: 168.49px;
@@ -85,10 +79,41 @@
           vertical-align:top;
         }
       }
+      .btn-sticks {
+        @media #{$extra-small-device} {
+          position: fixed !important;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index:20;
+          margin-right: auto;
+          margin-left: auto;
+          padding-bottom: 9rem;
+          height: $espace-se-connecter-sticky-height;
+          width: 100%;
+          background-color: $color-blue-5;
+
+          h1 {
+            height: 46px;
+            width: 265px;
+            color: $color-blue-1;
+            font-family: Poppins;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 0;
+            line-height: 25px;
+            margin-right: auto;
+            margin-left: auto;
+          }
+        }
+      }
     }
     .row-1-second-col {
       @media #{$small-device} {
         min-width: 29% !important;
+      }
+      @media #{$extra-small-device} {
+        margin-top: 2rem;
       }
     }
   }

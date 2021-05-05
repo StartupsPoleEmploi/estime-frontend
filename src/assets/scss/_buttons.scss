@@ -84,6 +84,7 @@
   cursor: pointer;
   text-align:center;
   display: flex;
+  z-index:100;
 
   @media #{$small-device} {
     height: calc(#{$header-height-small-device} - 10px);

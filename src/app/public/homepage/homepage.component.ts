@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
@@ -16,6 +16,8 @@ export class HomepageComponent implements OnInit {
 
   messageErreur: MessageErreur;
   toto: string;
+  stickyButton = false;
+  scrollPositionOffset: number;
 
   @ViewChild('messageErreurElement', {static: true}) messageErreurElement;
 
@@ -30,6 +32,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
+    this.scrollPositionOffset = document.getElementById('section-etapes').offsetTop;
   }
 
   public login(): void {
@@ -37,7 +40,8 @@ export class HomepageComponent implements OnInit {
   }
 
   public onClickButtonJeCommence(): void {
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    if(this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    else this.login();
   }
 
   public getLibelleBoutonPeConnect(): string {
@@ -53,5 +57,11 @@ export class HomepageComponent implements OnInit {
     if (this.messageErreur) {
       this.messageErreurElement.nativeElement.focus();
     }
+  }
+
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.stickyButton = this.screenService.isButtonSticky(scrollPosition, this.scrollPositionOffset);
   }
 }

@@ -15,6 +15,9 @@ footer {
   @media #{$medium-device} {
     height: 17rem;
   }
+  @media #{$extra-small-device} {
+    // bottom: calc(#{$espace-se-connecter-sticky-height} + 1rem);
+  }
   a {
     color: $color-blue-1;
     text-decoration: none;
@@ -157,5 +160,10 @@ footer {
       }
     }
   }
+}
 
+.footer-avec-sticky-button {
+  @media #{$extra-small-device} {
+    bottom: calc(#{$espace-se-connecter-sticky-height} + 1rem);
+  }
 }

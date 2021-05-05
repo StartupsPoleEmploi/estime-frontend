@@ -1,4 +1,4 @@
-<section id="section-temoignages">
+<section id="section-temoignages" [ngClass]="{'section-temoignage-avec-sticky-button':this.stickyButton}">
   <div class="container-fluid">
       <h1>Nos utilisateurs approuvent !</h1>
       <app-temoignages-desktop *ngIf="!this.screenService.isScreenInferieur(720)" [temoignages]="temoignages"></app-temoignages-desktop>

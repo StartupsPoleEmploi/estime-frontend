@@ -201,7 +201,6 @@
             max-width: 80%;
             margin-top: 9rem;
             padding-top: 7px;
-            padding-left: 0;
             @media #{$small-device} {
               max-width: 100%;
               padding-right: 0;
@@ -213,7 +212,8 @@
             }
 
             .text-etape-main {
-              @extend .text-etape;
+              color: $color-white-3;
+              font-size: 20px;
               font-weight: bold;
             }
           }

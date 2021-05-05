@@ -35,6 +35,10 @@ export class ScreenService {
     return this.isTabletScreenDevice;
   }
 
+  public isButtonSticky(scrollPosition: number, screenPositionOffset): boolean {
+    return (scrollPosition > screenPositionOffset)
+  }
+
 
   private gererResizeScreen(): void {
     this.resizeObservable = fromEvent(window, 'resize');
