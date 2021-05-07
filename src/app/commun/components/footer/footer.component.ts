@@ -18,7 +18,8 @@ export class FooterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.stickyFooter = (this.router.url.substr(0, this.router.url.indexOf('?')) === RoutesEnum.HOMEPAGE);
+    const route = this.router.url.substr(0, this.router.url.indexOf('?'));
+    this.stickyFooter = (route === RoutesEnum.HOMEPAGE || route === "");
   }
 
 
