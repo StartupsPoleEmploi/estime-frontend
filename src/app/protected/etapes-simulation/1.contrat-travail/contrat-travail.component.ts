@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
@@ -19,6 +20,7 @@ export class ContratTravailComponent implements OnInit {
   futurTravail: FuturTravail;
   isFuturTravailFormSubmitted = false;
   isFuturTravailSalaireFormSubmitted = false;
+  isDistanceSuperieureAuSeuil = false;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
   messageErreurSalaire: string;
@@ -35,6 +37,7 @@ export class ContratTravailComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     private deConnecteService: DeConnecteService,
+    private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     private elementRef: ElementRef,
     private brutNetService: BrutNetService,
     private router: Router
@@ -113,6 +116,27 @@ export class ContratTravailComponent implements OnInit {
   public handleKeyUpOnButtonTypeContrat(event: any, typeContrat: string) {
     if (event.keyCode === 13) {
       this.futurTravail.typeContrat = typeContrat;
+    }
+  }
+
+  /************ gestion distance domicile - travail ****************/
+
+  public handleDistanceDomicileTravail() {
+    if(this.deConnecteInfosPersonnellesService.isDesDom()) {
+      if(this.futurTravail.distanceKmDomicileTravail >= 10) {
+        this.isDistanceSuperieureAuSeuil = true;
+      } else {
+        this.isDistanceSuperieureAuSeuil = false;
+        this.futurTravail.nombreTrajetsDomicileTravail = null;
+      }
+
+    } else {
+      if(this.futurTravail.distanceKmDomicileTravail >= 30) {
+        this.isDistanceSuperieureAuSeuil = true;
+      } else {
+        this.isDistanceSuperieureAuSeuil = false;
+        this.futurTravail.nombreTrajetsDomicileTravail = null;
+      }
     }
   }
 }
