@@ -139,7 +139,7 @@ export class ChartUtileService {
         }
       }
     );
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < simulationAidesSociales.simulationsMensuelles.length; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaireMensuelNet;
@@ -364,10 +364,9 @@ export class ChartUtileService {
         datasets.map((dataset) => {
           sum += dataset.data[ctx.dataIndex];
         });
-        return `${sum.toString()} ${DevisesEnum.EURO.symbole}`;
-      } else {
-        return '';
+        if(sum != 0) return `${sum.toString()} ${DevisesEnum.EURO.symbole}`;
       }
+      return '';
     };
 
     return datalabels;
