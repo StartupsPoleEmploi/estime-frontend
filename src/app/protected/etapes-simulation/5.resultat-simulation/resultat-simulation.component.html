@@ -1,20 +1,23 @@
 <div class="container-fluid form-container-fluid">
     <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
+        <div
+        id="infobulle-resultat-simulation"
+        role="tooltip"
+        class="img-interrogation-icon"
+        style="vertical-align: baseline;"
+        [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
+        placement="right top"
+        tag-action="ouverture-infobulle-resultat-simulation"
+        [popover]="popoverResultatSimulationTemplate"
+        #popoverResultatSimulation="bs-popover"></div>
     </h1>
-    <div class="row mt-4 row-style-2">
+    <div class="row row-style-2">
         <div
             id="alert-resultat-simulation"
             class="col-12 col-md-9 mt-auto mb-auto">
-            <div
-                class="alert alert-light alert-resultat-simulation mb-0"
-                role="alert"
-                aria-describedby="label-alerte-montants-resultat-simulation">
-                <img alt="" src="./assets/images/info.svg">
-                <span id="label-alerte-montants-resultat-simulation" class="ml-2">
-                    Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.
-                </span>
-            </div>
+            <div id="label-alerte-montants-resultat-simulation" class="ml-2">
+                Les futures allocations logement, familiales et autres ressources du foyer, ainsi que le prélèvement à la source sont à ajouter aux résultats de la simulation.            </div>
         </div>
         <div class="col-12 col-md-3 mt-auto mb-auto d-flex justify-content-center">
             <button
@@ -158,3 +161,18 @@
         </button>
     </div>
 </div>
+
+<ng-template #popoverResultatSimulationTemplate>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverResultatSimulation.hide()"></i>
+        </div>
+        <div class="row">
+            <p>
+                Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont susceptibles d'évoluer.
+            </p>
+        </div>
+    </div>
+</ng-template>

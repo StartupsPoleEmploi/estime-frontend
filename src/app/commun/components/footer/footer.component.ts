@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -10,12 +10,16 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class FooterComponent implements OnInit {
 
+  stickyFooter: boolean = false;
+
   constructor(
     private router: Router,
     public screenService: ScreenService
   ) { }
 
   ngOnInit(): void {
+    const route = this.router.url.substr(0, this.router.url.indexOf('?'));
+    this.stickyFooter = (route === RoutesEnum.HOMEPAGE || route === "");
   }
 
 

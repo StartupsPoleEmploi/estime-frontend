@@ -7,6 +7,8 @@
     padding-bottom: 2rem;
     font-size: 24px;
     font-weight: bold;
+    font-family: Poppins;
+    color: $color-blue-2;
     @media #{$large-device} {
       font-size: 30px;
     }
@@ -14,5 +16,11 @@
   .container-fluid {
     padding-left: 15px;
     padding-right: 15px;
+  }
+}
+
+.section-temoignage-avec-sticky-button {
+  @media #{$extra-small-device} {
+    margin-bottom: calc(#{$espace-se-connecter-sticky-height});
   }
 }

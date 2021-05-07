@@ -164,7 +164,18 @@
                                   src="./assets/images/euro.svg">
                           </div>
                           <div class="col-9 col-md-10 col-text-button">
-                              <div id="label-ressources-foyer" class="text-button">Ressources du foyer</div>
+                              <div id="label-ressources-foyer" class="text-button">
+                                  Ressources du foyer
+                                  <div
+                                    id="infobulle-ressource-foyer"
+                                    role="tooltip"
+                                    class="img-interrogation-icon"
+                                    [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}"
+                                    placement="right"
+                                    tag-action="ouverture-infobulle-ressource-foyer"
+                                    [popover]="popoverRessourceFoyerTemplate"
+                                    #popoverRessourceFoyer="bs-popover"></div>
+                              </div>
                               <div *ngIf="!isRessourcesFoyerDisplay">
                                   Total des aides des mois précédents : {{montantAidesFoyer}} €
                               </div>
@@ -209,3 +220,22 @@
           </button>
       </div>
   </div>
+
+  <ng-template #popoverRessourceFoyerTemplate>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverRessourceFoyer.hide()"></i>
+        </div>
+        <div class="row">
+
+            <p>
+                Ces différents montants permettent de savoir si vous pourriez
+                <b>
+                    percevoir la prime d'activité et d'estimer son montant.
+                </b>
+            </p>
+        </div>
+    </div>
+</ng-template>

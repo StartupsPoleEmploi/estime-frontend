@@ -5,8 +5,9 @@
   padding-bottom: 1.5rem;
   h1 {
     color: $color-white-3;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: bold;
+    font-family: Poppins;
     padding-bottom: 2rem;
     padding-top: 2rem;
     @media #{$large-device} {
@@ -61,12 +62,100 @@
             padding-left: 0;
             padding-right: 0;
           }
+          .icon-tache-homepage {
+            position: absolute;
+            left: $left-icon-tache-homepage;
+            z-index: 1;
+
+            @media #{$small-device} {
+              content: url("../../../../assets/images/icon-tache-homepage.svg");
+            }
+            @media #{$medium-device} {
+              content: url("../../../../assets/images/icon-tache-homepage.svg");
+            }
+            @media #{$tablet-device} {
+              content: url("../../../../assets/images/icon-tache-homepage.svg");
+            }
+            @media #{$large-device} {
+              content: url("../../../../assets/images/icon-tache-homepage.svg");
+            }
+            @media #{$extra-large-device} {
+              content: url("../../../../assets/images/icon-tache-homepage.svg");
+            }
+          }
+          .icons-and-number-etape {
+            position: absolute;
+            z-index: 2;
+            .icons-etape {
+              margin-top : $margin-top-icons-etape;
+              margin-left: $margin-left-icons-etape;
+            }
+            .icon-job {
+              @media #{$small-device} {
+                content: url("../../../../assets/images/job.svg");
+              }
+              @media #{$medium-device} {
+                content: url("../../../../assets/images/job.svg");
+              }
+              @media #{$tablet-device} {
+                content: url("../../../../assets/images/job.svg");
+              }
+              @media #{$large-device} {
+                content: url("../../../../assets/images/job.svg");
+              }
+              @media #{$extra-large-device} {
+                content: url("../../../../assets/images/job.svg");
+              }
+            }
+            .icon-simulation {
+              @media #{$small-device} {
+                content: url("../../../../assets/images/simulation.svg");
+              }
+              @media #{$medium-device} {
+                content: url("../../../../assets/images/simulation.svg");
+              }
+              @media #{$tablet-device} {
+                content: url("../../../../assets/images/simulation.svg");
+              }
+              @media #{$large-device} {
+                content: url("../../../../assets/images/simulation.svg");
+              }
+              @media #{$extra-large-device} {
+                content: url("../../../../assets/images/simulation.svg");
+              }
+            }
+            .icon-money {
+              @media #{$small-device} {
+                content: url("../../../../assets/images/money.svg");
+              }
+              @media #{$medium-device} {
+                content: url("../../../../assets/images/money.svg");
+              }
+              @media #{$tablet-device} {
+                content: url("../../../../assets/images/money.svg");
+              }
+              @media #{$large-device} {
+                content: url("../../../../assets/images/money.svg");
+              }
+              @media #{$extra-large-device} {
+                content: url("../../../../assets/images/money.svg");
+              }
+            }
+          }
           .numero-etape {
             padding-right: 6px;
+            margin-top: $margin-top-numero-etape;
+            margin-left: $margin-left-numero-etape;
+
+            @media #{$extra-small-device} {
+              margin-top: unset;
+              margin-left: unset;
+            }
             span {
               color: $color-orange-1;
               font-size: 40px;
               font-weight: 600;
+              font-family: Poppins;
             }
             @media #{$small-device} {
               padding-left: 0;
@@ -74,13 +163,13 @@
           }
           #text-etape-1-home {
             @media #{$small-device} {
-              width: 158px !important;
+              width: 240px !important;
             }
             @media #{$medium-device} {
-              width: 162px !important;
+              width: 230px !important;
             }
             @media #{$large-device} {
-              width: 240px !important;
+              width: 296px !important;
             }
           }
           #text-etape-2-home {
@@ -96,25 +185,36 @@
           }
           #text-etape-3-home {
             @media #{$small-device} {
-              width: 146px !important;
+              width: 240px !important;
             }
             @media #{$medium-device} {
-              width: 149px !important;
+              width: 230px !important;
             }
             @media #{$large-device} {
-              width: 256px !important;
+              width: 296px !important;
             }
           }
 
           .text-etape {
             color: $color-white-3;
-            font-size: 22px;
+            font-size: 20px;
             max-width: 80%;
+            margin-top: 9rem;
             padding-top: 7px;
-            padding-left: 0;
             @media #{$small-device} {
               max-width: 100%;
               padding-right: 0;
+            }
+            @media #{$extra-small-device} {
+              margin-top: 0.2rem;
+              margin-left: 3.5rem;
+              font-size: 22px;
+            }
+
+            .text-etape-main {
+              color: $color-white-3;
+              font-size: 20px;
+              font-weight: bold;
             }
           }
         }

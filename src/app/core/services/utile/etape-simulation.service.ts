@@ -6,7 +6,7 @@ import { EtapeSimulation } from "@models/etape-simulation";
 export class EtapeSimulationService {
 
   etapesSimulation = [
-    { numero: 1, titre: "Contrat<br>de travail", pathRoute: `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}` },
+    { numero: 1, titre: "Offre d'emploi", pathRoute: `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}` },
     { numero: 2, titre: "Ma situation", pathRoute: `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MA_SITUATION}` },
     { numero: 3, titre: "Mes personnes<br>à charge", pathRoute: `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MES_PERSONNES_A_CHARGE}` },
     { numero: 4, titre: "Les ressources<br>actuelles", pathRoute: `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESSOURCES_ACTUELLES}` },

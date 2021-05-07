@@ -2,10 +2,12 @@
 
 header {
   background-color: $color-white-3;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
-  height: 64px;
+  // box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.25) !important;
+  height: $header-height;
+  width: 100%;
+  z-index: 100;
   @media #{$small-device} {
-    height: 86px;
+    height: $header-height-small-device;
   }
 
   .container-fluid {
@@ -29,9 +31,9 @@ header {
       color: $color-blue-3 !important;
     }
     #logo-estime-header {
-      width: 5rem;
+      width: 7rem;
       @media #{$medium-device} {
-        width: 7rem;
+        width: 9rem;
       }
       cursor: pointer;
     }

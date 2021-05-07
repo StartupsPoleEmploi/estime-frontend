@@ -100,7 +100,16 @@
                 <label
                     class="label"
                     for="allocationsFamilialesMensuellesNetFoyer">
-                    Allocations familiales du foyer perçues
+                    Allocations familiales
+                    <div
+                    id="infobulle-allocation-familiale"
+                    role="tooltip"
+                    class="img-interrogation-icon"
+                    [ngClass]="{'popover-open': popoverAllocationFamiliale.isOpen}"
+                    placement="right"
+                    tag-action="ouverture-infobulle-allocation-familiale"
+                    [popover]="popoverAllocationFamilialeTemplate"
+                    #popoverAllocationFamiliale="bs-popover"></div>
                 </label>
             </div>
             <div class="row">
@@ -174,3 +183,25 @@
         </div>
     </form>
 </div>
+
+<ng-template #popoverAllocationFamilialeTemplate>
+    <div class="container">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2  ml-auto"
+                (click)="popoverAllocationFamiliale.hide()"></i>
+        </div>
+        <div class="row">
+            <p>
+                Vous devez déclarer ici la somme de vos
+                <b>
+                    allocations familiales, allocation de soutien familial
+                </b>
+                et
+                <b>
+                    complément de soutien familial.
+                </b>
+            </p>
+        </div>
+    </div>
+</ng-template>
