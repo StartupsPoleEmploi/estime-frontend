@@ -14,6 +14,7 @@ services:
      - estime
     ports:
       - 80:8888
+      - 443:8443
     healthcheck:
       test: curl --fail http://localhost:8888/ || exit 1
       timeout: 10s
@@ -25,10 +26,10 @@ services:
       resources:
         reservations:
           cpus: '0.30'
-          memory: 256Mi
+          memory: 128Mi
         limits:
           cpus: '0.60'
-          memory: 512Mi
+          memory: 256Mi
       update_config:
         parallelism: 1
         order: start-first
