@@ -7,6 +7,12 @@
   }
 }
 
+.h1-style-2 {
+  @media #{$extra-small-device} {
+    max-width: 220px;
+  }
+}
+
 .container-fluid {
   margin-top: 2rem;
   padding-left: 15px;
