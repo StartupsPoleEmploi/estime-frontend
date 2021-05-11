@@ -112,6 +112,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
     this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
+    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = 0;
   }
 
   private resetInformationsPersonnelles(): void {

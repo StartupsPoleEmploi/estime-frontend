@@ -29,9 +29,9 @@ export class AuthorizationService {
   public completeLogin(): Promise<Individu> {
     return this.authentifierIndividu().then(
       (individu) => {
-        this.individuConnectedService.saveIndividuConnected(individu);
         if(individu.populationAutorisee) {
           this.sessionPeConnectExpiredService.startCheckUserInactivity(individu.peConnectAuthorization.expireIn);
+          this.individuConnectedService.saveIndividuConnected(individu);
         } else {
           this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();
           this.peConnectService.logout();

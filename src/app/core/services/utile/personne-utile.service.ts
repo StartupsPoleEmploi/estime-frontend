@@ -32,6 +32,7 @@ export class PersonneUtileService {
       personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
       personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
       personne.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
+      personne.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = 0;
     }
     return personne;
   }

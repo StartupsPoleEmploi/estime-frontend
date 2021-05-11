@@ -25,4 +25,8 @@ export class NumberUtileService {
   public roundTwoDecimals(montant: number) {
     return Math.floor(montant * 100) / 100;
   }
+
+  public isNumeric(valeur: any): boolean {
+    return !isNaN(valeur);
+  }
 }

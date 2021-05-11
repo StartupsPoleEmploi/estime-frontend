@@ -3,6 +3,7 @@ import { Individu } from '@models/individu';
 import { KeysStorageEnum } from "@enumerations/keys-storage.enum";
 import { CookieService } from 'ngx-cookie-service';
 import { Environment } from '@app/commun/models/environment';
+import { IndividuConnectePeConnectAuthorization } from "@models/individu-connecte-pe-connect-authorization";
 
 @Injectable({providedIn: 'root'})
 export class CookiesEstimeService {
@@ -14,17 +15,17 @@ export class CookiesEstimeService {
 
   }
 
-  public storeIndividuConnecte(individu: Individu): void {
-    const dateTokenExpired = this.getDateCookieExpire(individu.peConnectAuthorization.expireIn);
+  public storeIndividuConnectePeConnectAuthorization(individuConnectePeConnectAuthorization: IndividuConnectePeConnectAuthorization): void {
+    const dateTokenExpired = this.getDateCookieExpire(individuConnectePeConnectAuthorization.peConnectAuthorization.expireIn);
     if(this.environment.production) {
       //sécurité : store un cookie avec secure à true
-      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired,path: '/', secure: true});
+      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individuConnectePeConnectAuthorization), {expires: dateTokenExpired,path: '/', secure: true});
     } else {
-      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individu), {expires: dateTokenExpired});
+      this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individuConnectePeConnectAuthorization), {expires: dateTokenExpired});
     }
   }
 
-  public getIndividuConnected(): Individu  {
+  public getIndividuConnectePeConnectAuthorization(): IndividuConnectePeConnectAuthorization  {
     let individu = null;
     const peConnectAuthorisationString = this.cookieService.get(KeysStorageEnum.PE_CONNECT_INDIVIDU);
     if(peConnectAuthorisationString) {

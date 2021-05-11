@@ -2,16 +2,20 @@ import { Injectable } from '@angular/core';
 import { Individu } from '@models/individu';
 import { Observable, Subject } from 'rxjs';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
+import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
+import { IndividuConnectePeConnectAuthorization } from "@models/individu-connecte-pe-connect-authorization";
 
 @Injectable({ providedIn: 'root' })
 export class IndividuConnectedService {
 
-  individuConnected: Individu;
+  individuConnecte: Individu;
+  individuConnectePeConnectAuthorization: IndividuConnectePeConnectAuthorization;
   isStatutIndividuChangedSubject: Subject<boolean>;
   statutIndividuChanged: Observable<boolean>;
 
   constructor(
-    private cookiesEstimeService: CookiesEstimeService
+    private cookiesEstimeService: CookiesEstimeService,
+    private sessionStorageEstimeService: SessionStorageEstimeService
 
   ) {
     this.isStatutIndividuChangedSubject = new Subject<boolean>();
@@ -19,15 +23,24 @@ export class IndividuConnectedService {
   }
 
   public getIndividuConnected(): Individu {
-    if(!this.individuConnected) {
-      this.individuConnected = this.cookiesEstimeService.getIndividuConnected();
+    if(!this.individuConnecte) {
+      const individuConnected = this.sessionStorageEstimeService.getIndividuConnected();
+      if(!this.individuConnectePeConnectAuthorization) {
+        this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+      }
+      individuConnected.peConnectAuthorization = this.individuConnectePeConnectAuthorization.peConnectAuthorization;
+      this.individuConnecte = individuConnected;
     }
-    return this.individuConnected;
+    return this.individuConnecte;
   }
 
-  public saveIndividuConnected(indidivu: Individu): void {
-    this.individuConnected = indidivu;
-    this.cookiesEstimeService.storeIndividuConnecte(indidivu);
+  public saveIndividuConnected(individu: Individu): void {
+    const individuConnectePeConnectAuthorization = this.createIndividuConnectePeConnectAuthorization(individu);
+    this.individuConnectePeConnectAuthorization = individuConnectePeConnectAuthorization;
+    //pour des raison de sécurité, on stocke les données authorization dans un cookie et non dans session storage
+    this.cookiesEstimeService.storeIndividuConnectePeConnectAuthorization(individuConnectePeConnectAuthorization);
+    individu.peConnectAuthorization = null;
+    this.sessionStorageEstimeService.storeIndividuConnecte(individu);
     this.isStatutIndividuChangedSubject.next(true);
   }
 
@@ -36,6 +49,13 @@ export class IndividuConnectedService {
   }
 
   public isLoggedIn(): boolean {
-    return this.cookiesEstimeService.getIndividuConnected() !== null;
+    return this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization() !== null;
+  }
+
+  private createIndividuConnectePeConnectAuthorization(individuConnecte: Individu): IndividuConnectePeConnectAuthorization {
+    const individuConnectePeConnectAuthorization = new IndividuConnectePeConnectAuthorization();
+    individuConnectePeConnectAuthorization.idPoleEmploi = individuConnecte.idPoleEmploi
+    individuConnectePeConnectAuthorization.peConnectAuthorization = individuConnecte.peConnectAuthorization;
+    return individuConnectePeConnectAuthorization;
   }
 }

@@ -8,6 +8,9 @@ import { SimulationMensuelle } from "@models/simulation-mensuelle";
 @Injectable({providedIn: 'root'})
 export class AidesService {
 
+  private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM = 30;
+  private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM = 10;
+
   public getMontantAAH(simulationSelected: SimulationMensuelle): number {
     let montant = 0;
     if(simulationSelected.mesAides) {
@@ -146,6 +149,22 @@ export class AidesService {
     return aide && aide.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
         && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
         && aide.code !== CodesAidesEnum.RSA
+  }
+
+  /**
+   * Méthode permettant de déterminée si le demandeur pourra prétendre à l'aide à la mobilité.
+   * Est éligible :
+   *  - si des DOM et trajet supérieur ou égale au seuil minimum d'éligibilité pour les DOM
+   *  - si métropolitain et trajet supérieur ou égale au seuil minimum d'éligibilité pour les métropolitains
+   * @param demandeurEmploiConnecte
+   * @param distanceKmDomicileTravail
+   * @returns true si isEligibleAideMobilite
+   */
+  public isEligibleAideMobilite(demandeurEmploiConnecte: DemandeurEmploi, distanceKmDomicileTravail: number): boolean {
+    return (demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
+      && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM)
+      || (!demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
+      && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM) ;
   }
 
 }

@@ -3,13 +3,13 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { Individu } from '@app/commun/models/individu';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { Environment } from '@models/environment';
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
+import { IndividuConnectePeConnectAuthorization } from "@models/individu-connecte-pe-connect-authorization";
 
 @Injectable({ providedIn: 'root' })
 export class PeConnectService {
@@ -39,8 +39,8 @@ export class PeConnectService {
 
   public logout(): void {
     this.sessionStorageEstimeService.clear();
-    const individuConnected = this.cookiesEstimeService.getIndividuConnected();
-    const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnected);
+    const individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+    const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individuConnectePeConnectAuthorization);
     this.cookiesEstimeService.clear();
     if (poleEmploiIdentityServerDeconnexionURI !== null) {
       this.document.location.assign(poleEmploiIdentityServerDeconnexionURI);
@@ -61,11 +61,11 @@ export class PeConnectService {
       ;
   }
 
-  private getPoleEmploiIdentityServerDeconnexionURI(individuConnected: Individu): string {
+  private getPoleEmploiIdentityServerDeconnexionURI(individuConnectePeConnectAuthorization: IndividuConnectePeConnectAuthorization): string {
     let poleEmploiIdentityServerDeconnexionURI = null;
-    if (individuConnected && individuConnected.peConnectAuthorization && individuConnected.peConnectAuthorization.idToken) {
+    if (individuConnectePeConnectAuthorization && individuConnectePeConnectAuthorization.peConnectAuthorization && individuConnectePeConnectAuthorization.peConnectAuthorization.idToken) {
       poleEmploiIdentityServerDeconnexionURI = `${this.environment.peconnectIdentityServerURL}/compte/deconnexion?` +
-        `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
+        `&id_token_hint=${individuConnectePeConnectAuthorization.peConnectAuthorization.idToken}` +
         `&redirect_uri=${this.environment.peconnectRedirecturi}${RoutesEnum.HOMEPAGE}`
     }
     return poleEmploiIdentityServerDeconnexionURI;

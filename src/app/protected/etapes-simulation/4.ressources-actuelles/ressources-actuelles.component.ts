@@ -83,6 +83,15 @@ export class RessourcesActuellesComponent implements OnInit {
     this.calculerMontantsRessourcesFinancieres();
   }
 
+  public onClickPopoverRessourceFoyer(event) {
+    event.stopPropagation();
+  }
+
+  public onClickClosePopoverRessourceFoyerTemplate(event, popoverRessourceFoyer) {
+    event.stopPropagation();
+    popoverRessourceFoyer.hide();
+  }
+
   public onClickButtonVosRessources(): void {
     this.isVosRessourcesDisplay = !this.isVosRessourcesDisplay;
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router
   ) {
     this.subscribeRouteNavigationEndObservable();

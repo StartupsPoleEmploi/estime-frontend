@@ -107,6 +107,7 @@
                     class="img-interrogation-icon"
                     [ngClass]="{'popover-open': popoverAllocationFamiliale.isOpen}"
                     placement="right"
+                    (click)="onClickPopoverAllocationFamiliale($event)"
                     tag-action="ouverture-infobulle-allocation-familiale"
                     [popover]="popoverAllocationFamilialeTemplate"
                     #popoverAllocationFamiliale="bs-popover"></div>
@@ -185,11 +186,11 @@
 </div>
 
 <ng-template #popoverAllocationFamilialeTemplate>
-    <div class="container">
+    <div class="container" (click)="onClickPopoverAllocationFamiliale($event)">
         <div class="close-popover row">
             <i
                 class="fas fa-times-circle mb-2  ml-auto"
-                (click)="popoverAllocationFamiliale.hide()"></i>
+                (click)="onClickClosePopoverAllocationFamiliale($event)"></i>
         </div>
         <div class="row">
             <p>

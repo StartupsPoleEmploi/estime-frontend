@@ -5,6 +5,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -16,6 +17,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   isRessourcesFinancieresFoyerFormSubmitted = false;
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm:FormGroup;
+  @ViewChild('popoverAllocationFamiliale') popoverAllocationFamiliale: PopoverDirective;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 
@@ -43,5 +45,17 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
   }
+
+  public onClickPopoverAllocationFamiliale(event) {
+    event.stopPropagation();
+  }
+
+  public onClickClosePopoverAllocationFamiliale(event) {
+    event.stopPropagation();
+    this.popoverAllocationFamiliale.hide();
+  }
+
+
+
 
 }
