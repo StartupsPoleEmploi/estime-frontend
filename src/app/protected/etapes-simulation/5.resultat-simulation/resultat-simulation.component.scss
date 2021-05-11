@@ -16,8 +16,10 @@
       margin-bottom: 25px !important;
     }
     div {
-      height: 48px;
-      width: 565px;
+      height: 100%;
+      @media #{$small-device} {
+        max-width: 565px;
+      }
       font-size: 16px;
       color: $color-blue-2;
       letter-spacing: 0;
