@@ -36,9 +36,10 @@ export class SessionPeConnectExpiredService {
     ignoreBackdropClick: true,
   };
 
-  public startCheckUserInactivity(sessionExpireIn: number) {
+  public startCheckUserInactivity() {
+    const individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
     //appelé quand la session utilisateur PE Connect a expirée
-    this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
+    this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(individuConnectePeConnectAuthorization.peConnectAuthorization.expireIn).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         this.openModal();
         this.bnNgIdleService.stopTimer();
