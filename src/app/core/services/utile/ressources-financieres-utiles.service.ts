@@ -28,13 +28,13 @@ export class RessourcesFinancieresUtileService {
     const allocationsLogementMensuellesNetFoyer = new AllocationsLogementMensuellesNetFoyer();
     allocationsLogementMensuellesNetFoyer.moisNMoins1 = 0;
     allocationsLogementMensuellesNetFoyer.moisNMoins2 = 0;
-    allocationsLogementMensuellesNetFoyer.moisNMoins3 = 12;
+    allocationsLogementMensuellesNetFoyer.moisNMoins3 = 0;
     allocationsCAF.allocationsLogementMensuellesNetFoyer = allocationsLogementMensuellesNetFoyer;
     allocationsCAF.pensionsAlimentairesFoyer = 0;
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
     const allocationsCPAM = new AllocationsCPAM();
-    allocationsCPAM.allocationSupplementaireInvalidite = 100;
-    allocationsCPAM.pensionInvalidite = 100;
+    allocationsCPAM.allocationSupplementaireInvalidite = 0;
+    allocationsCPAM.pensionInvalidite = 0;
     ressourcesFinancieres.allocationsCPAM = allocationsCPAM;
     return ressourcesFinancieres;
   }
