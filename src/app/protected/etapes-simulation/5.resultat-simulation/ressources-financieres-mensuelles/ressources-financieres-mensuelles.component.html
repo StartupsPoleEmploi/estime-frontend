@@ -48,6 +48,7 @@
                     <app-item-ressource-actuelle
                         [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                         [isColPictoArrowDisplay]="true"
+                        [isAideSocialSelected]="isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)"
                         [libelleRessource]="libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                         [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
                         [organismeRessource]="organismeAidesEnum.CAF">
@@ -111,6 +112,7 @@
                         [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
                         data-testid="row-ass"
                         [isColPictoArrowDisplay]="true"
+                        [isAideSocialSelected]="isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)"
                         [libelleRessource]="libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
                         [montantRessource]="aidesService.getMontantASS(simulationSelected)"
                         [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
@@ -171,7 +173,7 @@
                     (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
                     <app-item-ressource-actuelle
                         [codeRessource]="aideKeyValue.value.code"
-                        [isAideSocialSelected]="isAideSocialSelected(aideKeyValue.value)"
+                        [isAideSocialSelected]="isAideSocialSelected(aideKeyValue.value.code)"
                         [isColPictoArrowDisplay]="true"
                         [libelleRessource]="aideKeyValue.value.nom"
                         [montantRessource]="aideKeyValue.value.montant"

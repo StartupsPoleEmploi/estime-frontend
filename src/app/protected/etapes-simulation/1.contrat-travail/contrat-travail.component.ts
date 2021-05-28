@@ -2,12 +2,12 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
-import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
+import { AidesService } from '@app/core/services/utile/aides.service';
+import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
-import { TypesContratTavailEnum } from "@enumerations/types-contrat-travail.enum";
+import { TypesContratTavailEnum } from '@enumerations/types-contrat-travail.enum';
 import { FuturTravail } from '@models/futur-travail';
 
 @Component({
@@ -20,7 +20,7 @@ export class ContratTravailComponent implements OnInit {
   futurTravail: FuturTravail;
   isFuturTravailFormSubmitted = false;
   isFuturTravailSalaireFormSubmitted = false;
-  isDistanceSuperieureAuSeuil = false;
+  isNombreTrajetsDomicileTravailDisplay = false;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
   messageErreurSalaire: string;
@@ -35,13 +35,13 @@ export class ContratTravailComponent implements OnInit {
   ];
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    private deConnecteService: DeConnecteService,
-    private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    private elementRef: ElementRef,
+    private aidesService: AidesService,
     private brutNetService: BrutNetService,
-    private router: Router
-    ) {
+    private deConnecteService: DeConnecteService,
+    private elementRef: ElementRef,
+    private router: Router,
+    public controleChampFormulaireService: ControleChampFormulaireService
+  ) {
 
   }
 
@@ -51,10 +51,13 @@ export class ContratTravailComponent implements OnInit {
 
   private loadDataFuturTravail(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.futurTravail) {
+    if (demandeurEmploiConnecte.futurTravail) {
       this.futurTravail = demandeurEmploiConnecte.futurTravail;
+      if(this.futurTravail.nombreTrajetsDomicileTravail) {
+        this.isNombreTrajetsDomicileTravailDisplay = true;
+      }
     } else {
-      this.futurTravail =  new FuturTravail();
+      this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
     }
   }
@@ -66,7 +69,7 @@ export class ContratTravailComponent implements OnInit {
   public onSubmitFuturTravailForm(form: FormGroup): void {
     this.isFuturTravailFormSubmitted = true;
     this.isFuturTravailSalaireFormSubmitted = true;
-    if(this.isDonneesSaisiesValides(form)) {
+    if (this.isDonneesSaisiesValides(form)) {
       this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     } else {
@@ -75,14 +78,14 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public unsetNombreMoisContrat(typeContrat: string): void {
-    if(typeContrat === this.typesContratTavailEnum.CDI) {
+    if (typeContrat === this.typesContratTavailEnum.CDI) {
       this.futurTravail.nombreMoisContratCDD = null;
     }
   }
 
   public calculSalaireMensuelNet() {
     this.isFuturTravailSalaireFormSubmitted = false;
-    if(this.futurTravail.salaireMensuelBrut >= 100 && this.futurTravail.salaireMensuelBrut != null) {
+    if (this.futurTravail.salaireMensuelBrut >= 100 && this.futurTravail.salaireMensuelBrut != null) {
       this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
     } else {
       this.futurTravail.salaireMensuelNet = undefined;
@@ -91,7 +94,7 @@ export class ContratTravailComponent implements OnInit {
 
   public calculSalaireMensuelBrut() {
     this.isFuturTravailSalaireFormSubmitted = false;
-    if(this.futurTravail.salaireMensuelNet >= 57 && this.futurTravail.salaireMensuelNet != null) {
+    if (this.futurTravail.salaireMensuelNet >= 57 && this.futurTravail.salaireMensuelNet != null) {
       this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
     } else {
       this.futurTravail.salaireMensuelBrut = undefined;
@@ -100,18 +103,14 @@ export class ContratTravailComponent implements OnInit {
 
   private isDonneesSaisiesValides(form: FormGroup): boolean {
     return form.valid
-           && this.futurTravail.salaireMensuelBrut > 0
-           && this.futurTravail.salaireMensuelNet > 0
-           && !this.isNombreHeuresTravailleesSemaineInvalide()
+      && this.futurTravail.salaireMensuelBrut > 0
+      && this.futurTravail.salaireMensuelNet > 0
+      && !this.isNombreHeuresTravailleesSemaineInvalide()
   }
 
   private isNombreHeuresTravailleesSemaineInvalide(): boolean {
     return this.futurTravail.nombreHeuresTravailleesSemaine && this.futurTravail.nombreHeuresTravailleesSemaine == 0 || this.futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX;
   }
-
-
-
-  /************ gestion évènements press enter ************************/
 
   public handleKeyUpOnButtonTypeContrat(event: any, typeContrat: string) {
     if (event.keyCode === 13) {
@@ -119,24 +118,13 @@ export class ContratTravailComponent implements OnInit {
     }
   }
 
-  /************ gestion distance domicile - travail ****************/
+  public handleAffichageNombreTrajetsDomicileTravail() {
+    this.isNombreTrajetsDomicileTravailDisplay = this.aidesService.isEligibleAideMobilite(
+      this.deConnecteService.getDemandeurEmploiConnecte(),
+      this.futurTravail.distanceKmDomicileTravail);
 
-  public handleDistanceDomicileTravail() {
-    if(this.deConnecteInfosPersonnellesService.isDesDom()) {
-      if(this.futurTravail.distanceKmDomicileTravail >= 10) {
-        this.isDistanceSuperieureAuSeuil = true;
-      } else {
-        this.isDistanceSuperieureAuSeuil = false;
-        this.futurTravail.nombreTrajetsDomicileTravail = null;
-      }
-
-    } else {
-      if(this.futurTravail.distanceKmDomicileTravail >= 30) {
-        this.isDistanceSuperieureAuSeuil = true;
-      } else {
-        this.isDistanceSuperieureAuSeuil = false;
-        this.futurTravail.nombreTrajetsDomicileTravail = null;
-      }
+    if (!this.isNombreTrajetsDomicileTravailDisplay) {
+      this.futurTravail.nombreTrajetsDomicileTravail = null;
     }
   }
 }

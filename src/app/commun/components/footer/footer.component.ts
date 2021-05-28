@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
@@ -11,15 +12,21 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 export class FooterComponent implements OnInit {
 
   stickyFooter: boolean = false;
+  subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
     private router: Router,
     public screenService: ScreenService
-  ) { }
+  ) {
+    this.subscribeRouteNavigationEndObservable();
+  }
 
   ngOnInit(): void {
-    const route = this.router.url.substr(0, this.router.url.indexOf('?'));
-    this.stickyFooter = (route === RoutesEnum.HOMEPAGE || route === "");
+
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
 
 
@@ -37,6 +44,14 @@ export class FooterComponent implements OnInit {
 
   public onClickLogoEstime(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
+  }
+
+  private subscribeRouteNavigationEndObservable(): void {
+    this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
+      if(routerEvent instanceof NavigationEnd) {
+        this.stickyFooter =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      }
+    });
   }
 
 }

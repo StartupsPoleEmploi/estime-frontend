@@ -7,6 +7,7 @@ import { SessionStorageService } from "ngx-webstorage";
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { NiveauMessagesErreurEnum } from '@app/commun/enumerations/niveaux-message-erreur';
 import { MessageErreur } from '@app/commun/models/message-erreur';
+import { Individu } from "@models/individu";
 
 @Injectable({ providedIn: 'root' })
 export class SessionStorageEstimeService {
@@ -23,6 +24,7 @@ export class SessionStorageEstimeService {
     this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
     this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
     this.sessionStorageService.clear(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(KeysStorageEnum.INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
   }
 
   public clearMessageDemandeurEmploi(): void {
@@ -35,6 +37,10 @@ export class SessionStorageEstimeService {
 
   public getDemandeurEmploiConnected(): DemandeurEmploi {
     return this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+  }
+
+  public getIndividuConnected(): Individu {
+    return this.sessionStorageService.retrieve(KeysStorageEnum.INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
   }
 
   public getPathRouteActivatedByUser(): string {
@@ -51,6 +57,10 @@ export class SessionStorageEstimeService {
 
   public storeDemandeurEmploiConnecte(demandeurEmploiConnecte: DemandeurEmploi): void {
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, demandeurEmploiConnecte);
+  }
+
+  public storeIndividuConnecte(storeIndividuConnecte: Individu): void {
+    this.sessionStorageService.store(KeysStorageEnum.INDIVIDU_CONNECTE_STORAGE_SESSION_KEY, storeIndividuConnecte);
   }
 
   public storeRouteActivatedByUser(route: ActivatedRouteSnapshot): void {

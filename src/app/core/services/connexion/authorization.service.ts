@@ -31,7 +31,7 @@ export class AuthorizationService {
       (individu) => {
         this.individuConnectedService.saveIndividuConnected(individu);
         if(individu.populationAutorisee) {
-          this.sessionPeConnectExpiredService.startCheckUserInactivity(individu.peConnectAuthorization.expireIn);
+          this.sessionPeConnectExpiredService.startCheckUserInactivity();
         } else {
           this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();
           this.peConnectService.logout();

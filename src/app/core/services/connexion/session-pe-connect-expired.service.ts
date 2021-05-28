@@ -36,9 +36,10 @@ export class SessionPeConnectExpiredService {
     ignoreBackdropClick: true,
   };
 
-  public startCheckUserInactivity(sessionExpireIn: number) {
+  public startCheckUserInactivity() {
+    const individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
     //appelé quand la session utilisateur PE Connect a expirée
-    this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(sessionExpireIn).subscribe((isTimedOut: boolean) => {
+    this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(individuConnectePeConnectAuthorization.peConnectAuthorization.expireIn).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
         this.openModal();
         this.bnNgIdleService.stopTimer();
@@ -66,9 +67,9 @@ export class SessionPeConnectExpiredService {
   private isMemeIndividuReconnecteAfterSessionPeConnectExpired(): boolean {
     let isMemeIndividu = false;
     const deConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
-    const individuConnecte = this.cookiesEstimeService.getIndividuConnected();
-    if(deConnecte && individuConnecte) {
-      isMemeIndividu = deConnecte.idPoleEmploi === individuConnecte.idPoleEmploi;
+    const individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+    if(deConnecte && individuConnectePeConnectAuthorization) {
+      isMemeIndividu = deConnecte.idPoleEmploi === individuConnectePeConnectAuthorization.idPoleEmploi;
     }
     return isMemeIndividu;
   }

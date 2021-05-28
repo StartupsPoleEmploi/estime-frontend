@@ -167,14 +167,16 @@
                               <div id="label-ressources-foyer" class="text-button">
                                   Ressources du foyer
                                   <div
-                                    id="infobulle-ressource-foyer"
-                                    role="tooltip"
-                                    class="img-interrogation-icon"
-                                    [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}"
-                                    placement="right"
-                                    tag-action="ouverture-infobulle-ressource-foyer"
-                                    [popover]="popoverRessourceFoyerTemplate"
-                                    #popoverRessourceFoyer="bs-popover"></div>
+                                  id="infobulle-ressource-foyer"
+                                  role="tooltip"
+                                  class="img-interrogation-icon"
+                                  [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}"
+                                  placement="right"
+                                  tag-action="ouverture-infobulle-ressource-foyer"
+                                  [popover]="popoverRessourceFoyerTemplate"
+                                  (click)="onClickPopoverRessourceFoyer($event)"
+                                  #popoverRessourceFoyer="bs-popover">
+                              </div>
                               </div>
                               <div *ngIf="!isRessourcesFoyerDisplay">
                                   Total des aides des mois précédents : {{montantAidesFoyer}} €
@@ -221,12 +223,15 @@
       </div>
   </div>
 
+
   <ng-template #popoverRessourceFoyerTemplate>
-    <div class="container">
+    <div
+        class="container"
+        (click)="onClickPopoverRessourceFoyer($event)">
         <div class="close-popover row">
             <i
                 class="fas fa-times-circle mb-2  ml-auto"
-                (click)="popoverRessourceFoyer.hide()"></i>
+                (click)="onClickClosePopoverRessourceFoyerTemplate($event, popoverRessourceFoyer)"></i>
         </div>
         <div class="row">
 
@@ -238,4 +243,6 @@
             </p>
         </div>
     </div>
-</ng-template>
+  </ng-template>
+
+
