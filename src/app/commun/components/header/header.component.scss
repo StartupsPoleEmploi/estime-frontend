@@ -31,9 +31,10 @@ header {
       color: $color-blue-3 !important;
     }
     #logo-estime-header {
-      width: 7rem;
+      padding-top:2rem;
+      width: 11rem;
       @media #{$medium-device} {
-        width: 9rem;
+        width: 12.5rem;
       }
       cursor: pointer;
     }
@@ -52,6 +53,7 @@ header {
       height: 1.8rem;
       margin-bottom: auto;
       margin-top: auto;
+      margin-top: 2rem;
       span {
         color: $color-blue-2;
         font-size: 0.8rem;

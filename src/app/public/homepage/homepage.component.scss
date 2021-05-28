@@ -30,15 +30,19 @@
         }
       }
       h1 {
-        line-height: 42px;
         font-size: 38px;
-        font-weight: bold;
         margin-top: 10px;
         text-align: left;
-        font-family: Poppins;
+        font-family: Poppins-Black;
+        font-style: normal;
+        margin-bottom: 2rem;
+        line-height: 48px;
+        width: 90%;
         @media #{$large-device} {
-          font-size: 36px;
+          font-size: 38px;
           margin-top: 0;
+          line-height: 57px;
+          width: 85%;
         }
       }
       .btn-pe-connect {
