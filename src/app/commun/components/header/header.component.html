@@ -6,6 +6,7 @@
                     id="logo-estime-header"
                     alt="Logo du service Estime"
                     src="./assets/images/logo-estime.svg"
+                    [ngClass]="{'logo-estime-header-not-homepage':this.isLoggedIn}"
                     (click)="onClickLogoEstime()">
 
             </div>
