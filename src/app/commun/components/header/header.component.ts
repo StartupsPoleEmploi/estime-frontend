@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
@@ -12,8 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  isLoggedIn = false
+  isLoggedIn = false;
+  bigEstimeLogo = false;
   subscriptionStatutIndividuChangedObservable: Subscription;
+  subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
     private individuConnectedService: IndividuConnectedService,
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) {
     this.subscribeStatutIndividuChangedObservable();
+    this.subscribeRouteNavigationEndObservable();
   }
 
   ngOnInit(): void {
@@ -46,6 +49,14 @@ export class HeaderComponent implements OnInit {
   private subscribeStatutIndividuChangedObservable(): void {
     this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
       this.isLoggedIn = loggedIn;
+    });
+  }
+
+  private subscribeRouteNavigationEndObservable(): void {
+    this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
+      if(routerEvent instanceof NavigationEnd) {
+        this.bigEstimeLogo =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      }
     });
   }
 }

@@ -15,7 +15,7 @@
     }
   }
   .row-1 {
-    padding-top: 5rem;
+    padding-top: 4rem;
     .row-1-first-col {
       @media #{$small-device} {
         max-width: 71% !important;
@@ -26,6 +26,9 @@
         span {
           font-size: 24px;
           font-family: Poppins;
+          font-weight: normal;
+          letter-spacing: 0;
+          line-height: 31px;
           color: $color-blue-1;
         }
       }

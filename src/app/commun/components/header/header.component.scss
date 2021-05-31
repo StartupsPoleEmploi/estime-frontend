@@ -31,18 +31,17 @@ header {
       color: $color-blue-3 !important;
     }
     #logo-estime-header {
-      padding-top:2rem;
-      width: 11rem;
+      width: 7rem;
       @media #{$medium-device} {
-        width: 12.5rem;
+        width: 9rem;
       }
       cursor: pointer;
     }
-    .logo-estime-header-not-homepage {
-      width: 7rem!important;
-      padding-top: unset!important;
+    .logo-estime-header-homepage {
+      width: 11rem!important;
+      padding-top: 2rem!important;
       @media #{$medium-device} {
-        width: 9rem!important;
+        width: 12.5rem!important;
       }
     }
     #logo-pole-emploi-header {
