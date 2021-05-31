@@ -6,6 +6,7 @@
                     id="logo-estime-header"
                     alt="Logo du service Estime"
                     src="./assets/images/logo-estime.svg"
+                    [ngClass]="{'logo-estime-header-homepage':this.bigEstimeLogo}"
                     (click)="onClickLogoEstime()">
 
             </div>
@@ -41,7 +42,7 @@
                     *ngIf="!this.isLoggedIn"
                     data-testid="btn-pe-connect"
                     (click)="login()">
-                    <div class="float-right" style="display:inline-flex; margin-top: 7px">
+                    <div class="float-right" style="display:inline-flex; margin-top: 7px;">
                         <div class="img-btn-se-connecter"></div>
                         <div class="label-btn-se-connecter">Se connecter avec mes identifiants Pôle emploi</div>
                     </div>

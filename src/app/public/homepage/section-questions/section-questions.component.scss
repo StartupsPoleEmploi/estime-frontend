@@ -49,10 +49,10 @@
         padding-top: 0;
       }
       div {
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         @media #{$medium-device}, #{$large-device} {
-          height: 95px;
-          line-height: 80px;
+          max-height: 95px;
+          line-height: 30px;
         }
         span {
           color: $color-blue-2;

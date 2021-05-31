@@ -15,7 +15,7 @@
     }
   }
   .row-1 {
-    padding-top: 5rem;
+    padding-top: 4rem;
     .row-1-first-col {
       @media #{$small-device} {
         max-width: 71% !important;
@@ -26,19 +26,26 @@
         span {
           font-size: 24px;
           font-family: Poppins;
+          font-weight: normal;
+          letter-spacing: 0;
+          line-height: 31px;
           color: $color-blue-1;
         }
       }
       h1 {
-        line-height: 42px;
         font-size: 38px;
-        font-weight: bold;
         margin-top: 10px;
         text-align: left;
-        font-family: Poppins;
+        font-family: Poppins-Black;
+        font-style: normal;
+        margin-bottom: 2rem;
+        line-height: 48px;
+        width: 90%;
         @media #{$large-device} {
-          font-size: 36px;
+          font-size: 38px;
           margin-top: 0;
+          line-height: 57px;
+          width: 85%;
         }
       }
       .btn-pe-connect {
@@ -60,7 +67,7 @@
       }
       .btn-je-commence {
         height: 46px;
-        width: 256px;
+        width: 220px;
         -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
         box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
         @media #{$extra-small-device} {

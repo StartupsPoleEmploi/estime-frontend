@@ -37,6 +37,13 @@ header {
       }
       cursor: pointer;
     }
+    .logo-estime-header-homepage {
+      width: 11rem!important;
+      padding-top: 2rem!important;
+      @media #{$medium-device} {
+        width: 12.5rem!important;
+      }
+    }
     #logo-pole-emploi-header {
       width: 2.7rem;
       margin-left: 8px;
@@ -52,6 +59,7 @@ header {
       height: 1.8rem;
       margin-bottom: auto;
       margin-top: auto;
+      margin-top: 2rem;
       span {
         color: $color-blue-2;
         font-size: 0.8rem;

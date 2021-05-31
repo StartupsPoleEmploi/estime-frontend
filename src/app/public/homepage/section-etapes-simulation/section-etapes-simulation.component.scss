@@ -3,13 +3,14 @@
 #section-etapes {
   background-color: $color-blue-2;
   padding-bottom: 1.5rem;
-  h1 {
+  #titre-section-etapes {
     color: $color-white-3;
     font-size: 30px;
     font-weight: bold;
     font-family: Poppins;
     padding-bottom: 2rem;
     padding-top: 2rem;
+    line-height: 46px;
     @media #{$large-device} {
       font-size: 36px;
     }
