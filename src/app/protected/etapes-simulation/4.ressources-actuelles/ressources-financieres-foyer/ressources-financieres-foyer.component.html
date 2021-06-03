@@ -253,7 +253,7 @@
     <div class="container" (click)="onClickPopoverAllocationFamiliale($event)">
         <div class="close-popover row">
             <i
-                class="fas fa-times-circle mb-2  ml-auto"
+                class="fas fa-times-circle mb-2 ml-auto"
                 (click)="onClickClosePopoverAllocationFamiliale($event)"></i>
         </div>
         <div class="row">
@@ -270,11 +270,11 @@
 </ng-template>
 
 <ng-template #popoverRevenusImmobiliersTemplate>
-    <div class="container">
+    <div class="container" (click)="onClickPopoverRevenusImmobiliers($event)">
         <div class="close-popover row">
             <i
-                class="fas fa-times-circle mb-2  ml-auto"
-                (click)="popoverRevenusImmobiliers.hide()"></i>
+                class="fas fa-times-circle mb-2 ml-auto"
+                (click)="onClickClosePopoverRevenusImmobiliers($event)"></i>
         </div>
         <div class="row">
             <p>

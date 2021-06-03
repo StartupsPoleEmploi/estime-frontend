@@ -50,6 +50,11 @@ export class RessourcesActuellesComponent implements OnInit {
   montantRevenusRessourcesConjoint: number;
   montantRevenusVosRessources: number;
 
+  montantVosRessources: number;
+  montantRessourcesConjoint: number;
+  montantRessourcesPersonnesCharge: number;
+  montantRessourcesFoyer: number;
+
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   nombreMoisCumulAssSalaireSelectOptions = [
@@ -142,6 +147,7 @@ export class RessourcesActuellesComponent implements OnInit {
     }
     this.montantRevenusVosRessources = this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
     this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
+    this.montantVosRessources = this.deConnecteRessourcesFinancieresService.getMontantVosRessources();
   }
 
   public traiterValidationRessourcesFinancieresConjointEventEmitter(): void {
@@ -153,6 +159,7 @@ export class RessourcesActuellesComponent implements OnInit {
     }
     this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
     this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
+    this.montantRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRessourcesConjoint();
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
@@ -160,10 +167,12 @@ export class RessourcesActuellesComponent implements OnInit {
     this.isRessourcesFoyerDisplay = true;
     this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
     this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
+    this.montantRessourcesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRessourcesPersonnesCharge();
   }
 
   public traiterValidationRessourcesFinancieresFoyerEventEmitter(): void {
     this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
+    this.montantRessourcesFoyer= this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer();
     this.isRessourcesFoyerDisplay = false;
   }
 
@@ -192,12 +201,20 @@ export class RessourcesActuellesComponent implements OnInit {
     this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
     this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
     this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
+
+    this.montantVosRessources = this.deConnecteRessourcesFinancieresService.getMontantVosRessources();
+    this.montantRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRessourcesConjoint();
+    this.montantRessourcesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRessourcesPersonnesCharge();
+    this.montantRessourcesFoyer = this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer()
   }
 
   private isSaisieVosRessourcesFinancieresValide(): boolean {
     let isValide = this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid;
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
+    }
+    if(isValide) {
+      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres);
     }
     if (!isValide) {
       this.isVosRessourcesDisplay = true;

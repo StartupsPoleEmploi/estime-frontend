@@ -23,11 +23,35 @@ export class DeConnecteRessourcesFinancieresService {
 
   }
 
+
+  public getMontantVosRessources(): number {
+    let montant = 0;
+    montant = this.getMontantAidesVosRessources() + this.getMontantRevenusVosRessources();
+    return montant;
+  }
+
+  public getMontantRessourcesConjoint(): number {
+    let montant = 0;
+    montant = this.getMontantAidesRessourcesConjoint() + this.getMontantRevenusRessourcesConjoint();
+    return montant;
+  }
+
+  public getMontantRessourcesPersonnesCharge(): number {
+    let montant = 0;
+    montant = this.getMontantAidesRessourcesPersonnesCharge() + this.getMontantRevenusRessourcesPersonnesCharge();
+    return montant;
+  }
+
+  public getMontantRessourcesFoyer(): number {
+    let montant = 0;
+    montant = this.getMontantAidesRessourcesFoyer() + this.getMontantRevenusRessourcesFoyer();
+    return montant;
+  }
+
   public getMontantRevenusVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
       if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation);
@@ -57,6 +81,15 @@ export class DeConnecteRessourcesFinancieresService {
           montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaireNet);
         }
       });
+    }
+    return montant;
+  }
+
+  public getMontantRevenusRessourcesFoyer(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.ressourcesFinancieres) {
+      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
     }
     return montant;
   }
@@ -152,6 +185,11 @@ export class DeConnecteRessourcesFinancieresService {
     if(isValide && this.deConnecteInfosPersonnellesService.createurEntreprise()) {
       isValide = ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0;
     }
+    return isValide;
+  }
+
+  public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isValide = true;
     if(isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
