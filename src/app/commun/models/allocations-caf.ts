@@ -4,6 +4,7 @@ export class AllocationsCAF {
   allocationMensuelleNetRSA: number;
   allocationsFamilialesMensuellesNetFoyer: number;
   allocationsLogementMensuellesNetFoyer: AllocationsLogementMensuellesNetFoyer;
+  prestationAccueilJeuneEnfant: number;
   pensionsAlimentairesFoyer: number;
   prochaineDeclarationRSA: number;
 }

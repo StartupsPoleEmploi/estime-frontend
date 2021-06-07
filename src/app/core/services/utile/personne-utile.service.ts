@@ -9,6 +9,7 @@ import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { Personne } from "@models/personne";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { DateUtileService } from './date-util.service';
+import * as moment from 'moment';
 
 @Injectable({ providedIn: 'root' })
 export class PersonneUtileService {
@@ -55,6 +56,11 @@ export class PersonneUtileService {
     const dateAge = new Date(diffEnMilliseconds);
     const ageEnAnnee = Math.abs(dateAge.getUTCFullYear() - 1970);
     return ageEnAnnee >= this.AGE_LEGAL_POUR_TRAVAILLE ? true : false;
+  }
+
+  public isAgeInferieurA3Ans(dateNaissanceString: string): boolean {
+    let dateNaissance = moment(dateNaissanceString,'YYYY-MM-DD').toDate();
+    return this.dateUtileService.isDatePlusDe3AnsEt1Mois(dateNaissance);
   }
 
   public isRessourcesFinancieresValides(personne: Personne): boolean {

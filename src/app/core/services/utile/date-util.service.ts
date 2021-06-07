@@ -20,6 +20,8 @@ export class DateUtileService {
     { label: "Décembre", labelCourt: "Déc", value: 12 },
   ];
 
+  MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE = 37; // 3 ans et 1 mois
+
   public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
     if(this.isDateValide(dateDecomposee)) {
@@ -276,6 +278,12 @@ export class DateUtileService {
       isValid = false;
     }
     return isValid;
+  }
+
+  public isDatePlusDe3AnsEt1Mois(date: Date): boolean {
+    let isDatePlusDe3AnsEt1Mois = false;
+    let datePlus3AnsEt1Mois = this.ajouterMoisToDate(date, this.MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE);
+    return moment(datePlus3AnsEt1Mois).isSameOrAfter(Date.now());
   }
 
   /************ private methods ***********************/

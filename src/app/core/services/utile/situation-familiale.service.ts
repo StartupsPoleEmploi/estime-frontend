@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { SituationFamiliale } from "@models/situation-familiale";
-import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service.ts";
+import { PersonneUtileService } from "@app/core/services/utile/personne-utile.service";
 
 @Injectable({ providedIn: 'root' })
 export class SituationFamilialeUtileService {

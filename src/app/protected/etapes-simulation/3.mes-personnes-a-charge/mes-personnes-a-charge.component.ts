@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
@@ -34,6 +35,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
+    private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     private router: Router
@@ -76,6 +78,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonSuivant(): void {
+    this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans();
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
   }
 

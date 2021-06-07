@@ -34,6 +34,10 @@
                     </span>
                 </div>
                 <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins1?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins1?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
                     <span
                         class="error-input-message"
                         *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins1.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins1.errors?.pattern">
@@ -55,7 +59,7 @@
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2"
                         inputmode="decimal"
-                        ngAutofocus
+                        required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
                     <span class="text-side-input">
@@ -64,6 +68,10 @@
                     </span>
                 </div>
                 <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins2?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins2?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
                     <span
                         class="error-input-message"
                         *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins2.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins2.errors?.pattern">
@@ -85,7 +93,7 @@
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3"
                         inputmode="decimal"
-                        ngAutofocus
+                        required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
                     <span class="text-side-input">
@@ -94,6 +102,10 @@
                     </span>
                 </div>
                 <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins3?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins3?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
                     <span
                         class="error-input-message"
                         *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins3.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins3.errors?.pattern">
@@ -135,14 +147,58 @@
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
                     inputmode="decimal"
+                    required
                     (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
                 <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer?.touched)  && allocationsFamilialesMensuellesNetFoyer?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
                 <span
                     class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer.touched)  && allocationsFamilialesMensuellesNetFoyer.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans();">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="montantPAJEFoyer">
+                    * PAJE (prestation d'accueil du jeune enfant)
+                </label>
+            </div>
+            <div class="row">
+                <input
+                    name="montantPAJEFoyer"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    maxlength="6"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant"
+                    inputmode="decimal"
+                    required
+                    (click)="$event.target.select()"
+                    #prestationAccueilJeuneEnfantFoyer="ngModel">
+                <span class="text-side-input">€ le mois dernier</span>
+            </div>
+            <div class="row">
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || prestationAccueilJeuneEnfantFoyer?.touched)  && prestationAccueilJeuneEnfantFoyer?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || prestationAccueilJeuneEnfantFoyer.touched)  && prestationAccueilJeuneEnfantFoyer.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
@@ -154,7 +210,7 @@
                 <label
                     class="label"
                     for="montantPersionsAlimentairesFoyer">
-                    Pensions alimentaires du foyer perçues
+                    * Pensions alimentaires du foyer perçues
                 </label>
             </div>
             <div class="row">
@@ -169,11 +225,16 @@
                     placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer"
                     inputmode="decimal"
+                    required
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
                 <span class="text-side-input">€ le mois dernier</span>
             </div>
             <div class="row">
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer?.touched)  && pensionsAlimentairesFoyer?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
                 <span
                     class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.pattern">
@@ -221,12 +282,12 @@
             <div class="row">
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.required">
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span

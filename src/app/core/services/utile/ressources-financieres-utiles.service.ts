@@ -31,6 +31,7 @@ export class RessourcesFinancieresUtileService {
     allocationsLogementMensuellesNetFoyer.moisNMoins3 = 0;
     allocationsCAF.allocationsLogementMensuellesNetFoyer = allocationsLogementMensuellesNetFoyer;
     allocationsCAF.pensionsAlimentairesFoyer = 0;
+    allocationsCAF.prestationAccueilJeuneEnfant = 0;
     ressourcesFinancieres.allocationsCAF = allocationsCAF;
     const allocationsCPAM = new AllocationsCPAM();
     allocationsCPAM.allocationSupplementaireInvalidite = 0;
@@ -62,6 +63,7 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
       ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
       ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer);
+      ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant);
     }
     if (ressourcesFinancieres.allocationsCPAM) {
       ressourcesFinancieres.allocationsCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.pensionInvalidite);

@@ -166,6 +166,7 @@ export class DeConnecteRessourcesFinancieresService {
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2);
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3);
       montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.pensionsAlimentairesFoyer);
+      montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.allocationsCAF.prestationAccueilJeuneEnfant);
     }
     return montant;
   }

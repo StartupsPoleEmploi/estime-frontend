@@ -41,6 +41,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
+    this.isRessourcesFinancieresFoyerFormSubmitted = true;
     if (form.valid) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationRessourcesFoyerEventEmitter.emit();

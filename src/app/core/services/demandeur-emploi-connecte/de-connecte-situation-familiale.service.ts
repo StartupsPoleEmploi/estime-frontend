@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import PersonnesAChargePage from '../../../../../cypress/integration-commun/pages/personnes-a-charge.page';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSituationFamilialeService {
@@ -62,11 +63,24 @@ export class DeConnecteSituationFamilialeService {
     return isRessourcesFinancieresPersonnesAChargeValides;
   }
 
-
-
   public isEnCouple(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale?.isEnCouple;
+  }
+
+  public has2PersonnesACharges(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.situationFamiliale?.personnesACharge.length >=2;
+  }
+
+  public hasPersonneAChargeMoinsDe3Ans(): boolean {
+    let hasPersonneAChargeMoinsDe3Ans = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
+      if(!hasPersonneAChargeMoinsDe3Ans) hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
+
+    });
+    return hasPersonneAChargeMoinsDe3Ans;
   }
 }
 
