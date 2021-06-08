@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
-import PersonnesAChargePage from '../../../../../cypress/integration-commun/pages/personnes-a-charge.page';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSituationFamilialeService {
