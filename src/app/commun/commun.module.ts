@@ -15,6 +15,7 @@ import { FilArianeComponent } from './components/fil-ariane/fil-ariane.component
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { DateInputsComponent } from './components/date-inputs/date-inputs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/text-with-euro-symbol.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NotFoundComponent,
     PageLoadingComponent,
     SigninRedirectCallbackComponent,
-    DateInputsComponent
+    DateInputsComponent,
+    TextWithEuroSymbolComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -47,7 +49,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     HeaderComponent,
     PageLoadingComponent,
-    DateInputsComponent
+    DateInputsComponent,
+    TextWithEuroSymbolComponent
   ]
 })
 export class CommunModule { }

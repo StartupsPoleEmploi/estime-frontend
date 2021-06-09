@@ -14,8 +14,7 @@
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                     [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet" required
                     placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel" ngAutofocus>
-                <span class="text-side-input">€</span>
-                <span class="text-2-side-input">net/jour</span>
+                <app-text-with-euro-symbol message="net/jour"></app-text-with-euro-symbol>
             </div>
             <span
                 *ngIf="this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)"
@@ -57,8 +56,7 @@
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0}"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA" required
                     placeholder="Montant" inputmode="decimal" #allocationMensuelleNetRSA="ngModel" ngAutofocus>
-                <span class="text-side-input">€</span>
-                <span class="text-side-input">le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <span
                 *ngIf="this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && (this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0)"
@@ -112,7 +110,7 @@
                     class="max-with-input-type-montant form-control" placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH " required
                     inputmode="decimal" #allocationMensuelleNetAAH="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -204,7 +202,7 @@
                     [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisM0AvantPeriodeSimulee="ngModel">
-                <span class="text-side-input">€ net</span>
+                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -231,7 +229,7 @@
                     [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
-                <span class="text-side-input">€ net</span>
+                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -258,7 +256,7 @@
                     [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
-                <span class="text-side-input">€ net</span>
+                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -284,7 +282,7 @@
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)}"
                     required inputmode="decimal" #pensionInvalidite="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -314,7 +312,7 @@
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)}"
                     required inputmode="decimal" #allocationSupplementaireInvalidite="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -340,7 +338,7 @@
                     [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois == 0)}"
                     required inputmode="decimal" #revenusCreateurEntreprise="ngModel">
-                <span class="text-side-input">€ net total 3 derniers mois</span>
+                <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"

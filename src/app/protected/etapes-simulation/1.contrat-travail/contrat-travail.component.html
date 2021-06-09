@@ -183,7 +183,7 @@
                                 [(ngModel)]="futurTravail.salaireMensuelBrut"
                                 inputmode="decimal"
                                 #salaireMensuelBrut="ngModel">
-                            <span class="text-side-input">€ mensuel brut</span>
+                            <app-text-with-euro-symbol message="mensuel brut"></app-text-with-euro-symbol>
                         </div>
                         <span
                             *ngIf="futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0"
@@ -221,7 +221,7 @@
                                 [ngClass]="{'ng-invalid':futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelNet)}"
                                 inputmode="decimal"
                                 #salaireMensuelNet="ngModel">
-                            <span class="text-side-input">€ mensuel net</span>
+                            <app-text-with-euro-symbol message="mensuel net"></app-text-with-euro-symbol>
                         </div>
                         <span
                             *ngIf="futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0"

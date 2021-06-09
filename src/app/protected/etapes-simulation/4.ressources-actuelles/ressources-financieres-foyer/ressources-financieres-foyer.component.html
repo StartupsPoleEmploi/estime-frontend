@@ -28,10 +28,7 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
-                    <span class="text-side-input">
-                        € au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(1)
-                        }}
-                    </span>
+                    <app-text-with-euro-symbol [message]="'au mois de '  + this.dateUtileService.getDateFormateeAvantDateJour(1)"></app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -62,10 +59,7 @@
                         required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
-                    <span class="text-side-input">
-                        € au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(2)
-                        }}
-                    </span>
+                    <app-text-with-euro-symbol [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)"></app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -96,10 +90,7 @@
                         required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
-                    <span class="text-side-input">
-                        € au mois de {{ this.dateUtileService.getDateFormateeAvantDateJour(3)
-                        }}
-                    </span>
+                    <app-text-with-euro-symbol [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)"></app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -150,7 +141,7 @@
                     required
                     (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -189,7 +180,7 @@
                     required
                     (click)="$event.target.select()"
                     #prestationAccueilJeuneEnfantFoyer="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -228,7 +219,7 @@
                     required
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
-                <span class="text-side-input">€ le mois dernier</span>
+                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -277,7 +268,7 @@
                     required
                     inputmode="decimal"
                     #revenusImmobilier="ngModel">
-                <span class="text-side-input">€ net total 3 derniers mois</span>
+                <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
