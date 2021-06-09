@@ -8,9 +8,8 @@
   margin-left: 15px;
   margin-right: 15px;
   @media #{$small-device} {
-    width: $size-card-form-etape-simulation;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   .accordion-button {
     background-color: $color-white-1;
