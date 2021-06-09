@@ -67,18 +67,16 @@ export class DeConnecteSituationFamilialeService {
     return demandeurEmploiConnecte.situationFamiliale?.isEnCouple;
   }
 
-  public has2PersonnesACharges(): boolean {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.situationFamiliale?.personnesACharge.length >=2;
-  }
-
   public hasPersonneAChargeMoinsDe3Ans(): boolean {
     let hasPersonneAChargeMoinsDe3Ans = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
-      if(!hasPersonneAChargeMoinsDe3Ans) hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
+    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
+        if(!hasPersonneAChargeMoinsDe3Ans) hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
+  
+      });
+    }
 
-    });
     return hasPersonneAChargeMoinsDe3Ans;
   }
 }

@@ -28,6 +28,9 @@ select {
   margin-bottom: 30px;
   margin-top: 0 !important;
   padding-bottom: 30px;
+  @media #{$small-device} {
+    width: $size-card-form-etape-simulation;
+  }
   .first-btn {
     margin-right: 5px;
     @media #{$small-device} {
