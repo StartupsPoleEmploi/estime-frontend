@@ -57,6 +57,7 @@
         </label>
         <label
             name="beneficiaireRSA"
+            *ngIf="!deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()"
             class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
             btnCheckbox

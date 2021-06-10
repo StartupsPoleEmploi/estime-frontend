@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Personne } from '@models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { DeConnecteBenefiaireAidesSocialesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -17,7 +18,8 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService
   ) { }
 
   ngOnInit(): void {
