@@ -51,8 +51,9 @@ select {
 .card-form-style-1 {
   margin-top: 2rem;
   @media #{$small-device} {
-    padding-left: 33px !important;
-    padding-right: 15px !important;
+    padding-left: 6rem !important;
+    padding-right: 6rem !important;
+    padding-top: 3rem
   }
   @media #{$small-device} {
     margin-left: 7%;
@@ -204,9 +205,18 @@ input:-webkit-autofill:focus {
   .label, span {
     color: $color-blue-2;
     font-size: 16px;
-    font-weight: 500;
     margin-bottom: 0;
   }
+
+  .label {
+    font-weight: bold;
+  }￼
+
+
+  .span {
+    font-weight: 500;
+  }
+
   .text-side-input {
     color: $color-blue-1;
     font-size: 16px;
