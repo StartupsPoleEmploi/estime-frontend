@@ -6,14 +6,6 @@ stages:
     - deploy-application-production
     - dynamic-application-security-testing
 
-cache: &global_cache
-  key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm/
-    - cache/Cypress
-    - node_modules/
-    - .sonar/cache
-
 build_frontend_application :
     stage: build-phase-1
     image:
@@ -29,8 +21,6 @@ build_frontend_application :
     artifacts:
       paths:
         - ./dist
-    cache:
-      <<: *global_cache
 
 generate_whitelist_pe :
     stage: build-phase-1
@@ -66,7 +56,6 @@ cypress-e2e:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
-    allow_failure: true
     artifacts:
       when: always
       paths:
@@ -74,8 +63,6 @@ cypress-e2e:
         - cypress/screenshots
         - dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
       expire_in: 1 day
-    cache:
-      <<: *global_cache
 
 build-docker-image-recette:
     stage: build-phase-2
@@ -128,8 +115,6 @@ sonar_quality_analyse :
     dependencies:
     - cypress-e2e
     allow_failure: true
-    cache:
-      <<: *global_cache
 
 deploy_application_recette:
     stage: deploy-application-recette
