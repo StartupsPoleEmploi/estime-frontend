@@ -4,11 +4,20 @@
         class="close pull-right"
         aria-label="Close"
         (click)="onClickButtonClosePopup()">
-        <span aria-hidden="true">&times;</span>
+        <i class="fas fa-times-circle mb-2  ml-auto"></i>
     </button>
 </div>
 <div class="modal-body">
-    Votre session a expiré, vous devez vous reconnecter pour continuer votre simulation.
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1">
+                    <img alt="" src="./assets/images/info-blue-1.svg">
+            </div>
+            <div class="col-11">
+                <span>Votre session a expiré, vous devez vous reconnecter pour continuer votre simulation.</span>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button
