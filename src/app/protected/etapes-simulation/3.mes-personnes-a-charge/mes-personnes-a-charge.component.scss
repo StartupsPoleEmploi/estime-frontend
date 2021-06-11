@@ -1,5 +1,9 @@
 @import "../../../../assets/scss/variables";
 
+.container-fluid {
+  margin-top: 2rem;
+}
+
 .container-fluid-title {
   @media #{$small-device} {
     padding-left: 257px !important;
