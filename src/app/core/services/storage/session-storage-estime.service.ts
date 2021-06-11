@@ -4,10 +4,10 @@ import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { KeysStorageEnum } from '@enumerations/keys-storage.enum';
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { SessionStorageService } from "ngx-webstorage";
-import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { NiveauMessagesErreurEnum } from '@app/commun/enumerations/niveaux-message-erreur';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { Individu } from "@models/individu";
+import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
 
 @Injectable({ providedIn: 'root' })
 export class SessionStorageEstimeService {
@@ -73,7 +73,7 @@ export class SessionStorageEstimeService {
 
   public storeMessageDemandeurEmploiNonAutorise(): void {
     const message = new MessageErreur();
-    message.texte = MessagesErreurEnum.POPULATION_NON_AUTORISEE;
+    message.code = CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE;
     message.niveau = NiveauMessagesErreurEnum.INFO;
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE, message);
   }

@@ -13,6 +13,7 @@ import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoi
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ContactComponent } from './contact/contact.component';
 import { AccessibiliteComponent } from './accessibilite/accessibilite.component';
+import { ModalPopulationNonAutoriseeComponent } from './homepage/modal-population-non-autorisee/modal-population-non-autorisee.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccessibiliteComponent } from './accessibilite/accessibilite.component'
     TemoignagesDesktopComponent,
     TemoignagesMobileComponent,
     ContactComponent,
-    AccessibiliteComponent
+    AccessibiliteComponent,
+    ModalPopulationNonAutoriseeComponent
   ],
   imports: [
     AlertModule.forRoot(),
