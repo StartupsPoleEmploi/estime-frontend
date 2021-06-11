@@ -99,6 +99,15 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetAlloctionPAJE(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }

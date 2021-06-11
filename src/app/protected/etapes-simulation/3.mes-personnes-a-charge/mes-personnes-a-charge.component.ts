@@ -67,9 +67,11 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.isNouvellePersonneAChargeFormDisplay = false;
       this.isModeModification = false;
     }
-    if(this.personnesACharge && this.personnesACharge.length === 0) {
+    if(!this.deConnecteSituationFamilialeService.hasPersonneACharge()) {
       this.deConnecteService.unsetAllocationsFamiliales();
       this.deConnecteService.unsetPensionsAlimentaires();
+    } else if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
+      this.deConnecteService.unsetAlloctionPAJE();
     }
   }
 

@@ -43,6 +43,25 @@ export class DeConnecteSituationFamilialeService {
     return hasPersonneAChargeAvecRessourcesFinancieres;
   }
 
+  public hasPersonneAChargeMoinsDe3Ans(): boolean {
+    let hasPersonneAChargeMoinsDe3Ans = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.situationFamiliale
+        && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
+        if(!hasPersonneAChargeMoinsDe3Ans) {
+          hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
+        }
+      });
+    }
+    return hasPersonneAChargeMoinsDe3Ans;
+  }
+
+  public isEnCouple(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.situationFamiliale?.isEnCouple;
+  }
+
   public isRessourcesFinancieresConjointValides(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return this.personneUtileService.isRessourcesFinancieresValides(demandeurEmploiConnecte.situationFamiliale.conjoint);
@@ -60,24 +79,6 @@ export class DeConnecteSituationFamilialeService {
       }
     });
     return isRessourcesFinancieresPersonnesAChargeValides;
-  }
-
-  public isEnCouple(): boolean {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.situationFamiliale?.isEnCouple;
-  }
-
-  public hasPersonneAChargeMoinsDe3Ans(): boolean {
-    let hasPersonneAChargeMoinsDe3Ans = false;
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
-      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
-        if(!hasPersonneAChargeMoinsDe3Ans) hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
-  
-      });
-    }
-
-    return hasPersonneAChargeMoinsDe3Ans;
   }
 }
 
