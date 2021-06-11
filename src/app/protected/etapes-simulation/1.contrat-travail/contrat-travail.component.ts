@@ -6,6 +6,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { TypesContratTavailEnum } from '@enumerations/types-contrat-travail.enum';
 import { FuturTravail } from '@models/futur-travail';
@@ -40,6 +41,7 @@ export class ContratTravailComponent implements OnInit {
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
     private router: Router,
+    public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService
   ) {
 
