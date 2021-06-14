@@ -224,6 +224,7 @@
           </button>
           <button
               class="btn-style-perso-1 second-btn"
+              [ngClass]="{'order-first': screenService.isExtraSmallScreen()}"
               type="button"
               data-testid="btn-obtenir-simulation"
               (click)="onClickButtonObtenirSimulation()">
