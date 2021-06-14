@@ -4,6 +4,7 @@ import { Personne } from '@models/personne';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-ressources-financieres-conjoint',
@@ -21,6 +22,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
+    public screenService: ScreenService,
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
     private personneUtileService: PersonneUtileService

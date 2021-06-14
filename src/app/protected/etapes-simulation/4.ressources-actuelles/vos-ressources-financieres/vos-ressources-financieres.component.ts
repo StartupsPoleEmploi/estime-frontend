@@ -12,6 +12,7 @@ import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ress
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
 import { NumeroProchainMoisDeclarationRSA } from "@models/numero-prochain-mois-declaration-rsa";
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -40,6 +41,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public screenService: ScreenService,
     private elementRef: ElementRef,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
   ) {

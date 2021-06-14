@@ -13,6 +13,11 @@
             </div>
             <div class="mb-2">
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">
+                        au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
+                    </span>
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -28,7 +33,13 @@
                         ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
-                    <app-text-with-euro-symbol [message]="'au mois de '  + this.dateUtileService.getDateFormateeAvantDateJour(1)"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
+                        [message]="'au mois de '  + this.dateUtileService.getDateFormateeAvantDateJour(1)">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -44,6 +55,11 @@
             </div>
             <div class="mb-2">
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">
+                        au mois de  {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
+                    </span>
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -59,7 +75,13 @@
                         required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
-                    <app-text-with-euro-symbol [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
+                        [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -75,6 +97,11 @@
             </div>
             <div class="mb-2">
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">
+                    au mois de  {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}
+                    </span>
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -90,7 +117,13 @@
                         required
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
-                    <app-text-with-euro-symbol [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
+                        [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
+                    </app-text-with-euro-symbol>                        
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -126,6 +159,11 @@
                 </label>
             </div>
             <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    le mois dernier
+                </span>
                 <input
                     name="allocationsFamilialesMensuellesNetFoyer"
                     data-testid="input-af"
@@ -141,7 +179,11 @@
                     required
                     (click)="$event.target.select()"
                     #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()"
+                    message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -166,6 +208,11 @@
                 </label>
             </div>
             <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    le mois dernier
+                </span>
                 <input
                     name="montantPAJEFoyer"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -180,7 +227,11 @@
                     required
                     (click)="$event.target.select()"
                     #prestationAccueilJeuneEnfantFoyer="ngModel">
-                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()"
+                    message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -205,6 +256,11 @@
                 </label>
             </div>
             <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    le mois dernier
+                </span>
                 <input
                     name="montantPersionsAlimentairesFoyer"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -219,7 +275,11 @@
                     required
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
-                <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()"
+                    message="le mois dernier"></app-text-with-euro-symbol>                    
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -254,6 +314,11 @@
                 </label>
             </div>
             <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    net total 3 derniers mois
+                </span>
                 <input
                     name="revenusImmobilier"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -268,7 +333,13 @@
                     required
                     inputmode="decimal"
                     #revenusImmobilier="ngModel">
-                <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol 
+                    *ngIf="screenService.isExtraSmallScreen()">
+                </app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    message="net total 3 derniers mois">
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span

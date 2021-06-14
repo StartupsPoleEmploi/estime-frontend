@@ -20,6 +20,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="salaireNet"
                         type="text"
@@ -34,7 +37,13 @@
                         placeholder="Montant"
                         inputmode="decimal"
                         #salaireNet="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>                            
                 </div>
                 <div class="row">
                     <span
@@ -65,6 +74,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="allocationMensuelleNetARE"
                         type="text"
@@ -78,7 +90,13 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetARE="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                   <span
@@ -109,6 +127,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="allocationMensuelleNetASS"
                         type="text"
@@ -123,7 +144,13 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetASS="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span
@@ -154,6 +181,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="allocationMensuelleNetRSA"
                         type="text"
@@ -168,7 +198,13 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetRSA="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span
@@ -199,6 +235,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="allocationMensuelleNetAAH"
                         type="text"
@@ -213,7 +252,13 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetAAH="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span
@@ -244,6 +289,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="pensionInvalidite"
                         type="text"
@@ -258,7 +306,13 @@
                         inputmode="decimal"
                         required
                         #pensionInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span
@@ -285,6 +339,9 @@
                     </label>
                 </div>
                 <div class="row">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">le mois dernier</span>
                     <input
                         name="allocationSupplementaireInvalidite"
                         type="text"
@@ -299,7 +356,13 @@
                         inputmode="decimal"
                         required
                         #allocationSupplementaireInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()" 
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span
