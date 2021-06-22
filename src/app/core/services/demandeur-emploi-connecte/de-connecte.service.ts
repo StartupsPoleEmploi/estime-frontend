@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
@@ -10,6 +11,7 @@ import { Personne } from '@models/personne';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
+import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 
 
@@ -19,6 +21,7 @@ export class DeConnecteService {
   private demandeurEmploiConnecte: DemandeurEmploi;
 
   constructor(
+    private brutNetService: BrutNetService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
@@ -44,6 +47,9 @@ export class DeConnecteService {
   }
 
   public setConjointRessourcesFinancieres(conjoint: Personne) {
+    if(conjoint.ressourcesFinancieres.salaire) {
+      conjoint.ressourcesFinancieres.salaire.montantBrut = this.brutNetService.getBrutFromNet(conjoint.ressourcesFinancieres.salaire.montantNet);
+    }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(conjoint.ressourcesFinancieres);
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres = ressourcesFinancieresMontantsAvecDot;
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -60,7 +66,7 @@ export class DeConnecteService {
   }
 
   public setFuturTravail(futurTravail: FuturTravail) {
-    futurTravail.salaireMensuelNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaireMensuelNet);
+    futurTravail.salaire.montantNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaire.montantNet);
     futurTravail.nombreHeuresTravailleesSemaine = this.numberUtileService.replaceCommaByDot(futurTravail.nombreHeuresTravailleesSemaine);
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -73,6 +79,9 @@ export class DeConnecteService {
 
   public setPersonnesChargeRessourcesFinancieres(personnesDTO: Array<PersonneDTO>): void {
     personnesDTO.forEach(personneDTO => {
+      if(personneDTO.personne.ressourcesFinancieres.salaire) {
+        personneDTO.personne.ressourcesFinancieres.salaire.montantBrut = this.brutNetService.getBrutFromNet(personneDTO.personne.ressourcesFinancieres.salaire.montantNet);
+      }
       personneDTO.personne.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(personneDTO.personne.ressourcesFinancieres);
       this.demandeurEmploiConnecte.situationFamiliale.personnesACharge[personneDTO.index].ressourcesFinancieres = personneDTO.personne.ressourcesFinancieres;
     });
@@ -80,6 +89,9 @@ export class DeConnecteService {
   }
 
   public setRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
+    if(ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+      this.setMontantsBrutSalairesAvantPeriodeSimulation(ressourcesFinancieres.salairesAvantPeriodeSimulation);
+    }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);
     this.demandeurEmploiConnecte.ressourcesFinancieres = ressourcesFinancieresMontantsAvecDot;
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -121,11 +133,14 @@ export class DeConnecteService {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
       if(this.demandeurEmploiConnecte.beneficiaireAidesSociales.beneficiaireASS) {
         if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
-          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantBrut = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantBrut = 0;
         }
         if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 2) {
-          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet = 0;
+          this.demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantBrut = 0;
         }
       }
     }
@@ -253,7 +268,7 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.salarie = false;
       if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaireNet = null;
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.salaire = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
@@ -281,4 +296,15 @@ export class DeConnecteService {
     }
   }
 
+  private setMontantsBrutSalairesAvantPeriodeSimulation(salairesAvantPeriodeSimulation: SalairesAvantPeriodeSimulation):void {
+    if(salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation && salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet) {
+      salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantBrut = this.brutNetService.getBrutFromNet(salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet);
+    }
+    if(salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation && salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet) {
+      salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantBrut = this.brutNetService.getBrutFromNet(salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet);
+    }
+    if(salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation && salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet) {
+      salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantBrut = this.brutNetService.getBrutFromNet(salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet);
+    }
+  }
 }

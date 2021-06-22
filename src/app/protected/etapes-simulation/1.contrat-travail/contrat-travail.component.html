@@ -178,9 +178,9 @@
                                 (keyup)="calculSalaireMensuelNet();"
                                 maxlength="6"
                                 class="form-control"
-                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut)}"
+                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut)}"
                                 placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaireMensuelBrut"
+                                [(ngModel)]="futurTravail.salaire.montantBrut"
                                 inputmode="decimal"
                                 #salaireMensuelBrut="ngModel">
                             <app-text-with-euro-symbol message="mensuel brut"></app-text-with-euro-symbol>
@@ -191,13 +191,13 @@
                             </span>
                         </div>
                         <span
-                            *ngIf="futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0"
+                            *ngIf="futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut">
+                            *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                         <span
@@ -206,7 +206,7 @@
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                         </span>
                     </div>
-                    <div 
+                    <div
                         *ngIf="screenService.isExtraSmallScreen()"
                         class="col-12">
                         <span class="net-ou-brut font-weight-bold">ou</span>
@@ -224,14 +224,14 @@
                                 maxlength="6"
                                 class="form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaireMensuelNet"
-                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelNet)}"
+                                [(ngModel)]="futurTravail.salaire.montantNet"
+                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantNet)}"
                                 inputmode="decimal"
                                 #salaireMensuelNet="ngModel">
                             <app-text-with-euro-symbol message="mensuel net"></app-text-with-euro-symbol>
                         </div>
                         <span
-                            *ngIf="futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0"
+                            *ngIf="futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -242,7 +242,7 @@
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaireMensuelNet">
+                            *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaire.montantNet">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>

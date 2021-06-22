@@ -114,7 +114,7 @@ export class BlockRessourcesEstimeesService {
   }
 
   private addRowPaie(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales): void {
-    const montant = demandeurEmploi.futurTravail.salaireMensuelNet;
+    const montant = demandeurEmploi.futurTravail.salaire.montantNet;
     const imageBase64 = ImagesBase64Enum.PAIE;
     const row = this.createRowMontant(body, montant , imageBase64, simulationAidesSociales.simulationsMensuelles.length);
     body.push(row);

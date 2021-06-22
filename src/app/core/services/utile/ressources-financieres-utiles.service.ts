@@ -69,7 +69,10 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.allocationsCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
       ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite);
     }
-    ressourcesFinancieres.salaireNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaireNet);
+    if(ressourcesFinancieres.salaire) {
+      ressourcesFinancieres.salaire.montantNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
+      ressourcesFinancieres.salaire.montantBrut  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantBrut);
+    }
     ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
     ressourcesFinancieres.revenusImmobilier3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier3DerniersMois);
     return ressourcesFinancieres;

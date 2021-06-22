@@ -63,7 +63,7 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
@@ -126,7 +126,7 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
@@ -217,7 +217,7 @@
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation"
+                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisM0AvantPeriodeSimulee="ngModel">
                 <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
@@ -244,7 +244,7 @@
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation"
+                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
                 <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
@@ -271,7 +271,7 @@
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation"
+                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet"
                     required inputmode="decimal" (click)="$event.target.select()"
                     #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
                 <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
@@ -307,7 +307,7 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
@@ -346,7 +346,7 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
@@ -383,7 +383,7 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="net total 3 derniers mois">
                 </app-text-with-euro-symbol>
             </div>

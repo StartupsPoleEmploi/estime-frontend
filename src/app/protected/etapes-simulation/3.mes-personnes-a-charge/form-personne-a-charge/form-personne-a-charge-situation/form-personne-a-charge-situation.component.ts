@@ -3,6 +3,7 @@ import { Personne } from '@models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteBenefiaireAidesSocialesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service';
+import { Salaire } from '@app/commun/models/salaire';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -73,9 +74,10 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxIsSalarie(): void {
     if(!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.salaire = null;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.salaire = new Salaire();
     }
   }
 
@@ -127,7 +129,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   private unsetSalaire(): void {
     this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.salaireNet = null;
+    this.nouvellePersonneACharge.ressourcesFinancieres.salaire = null;
   }
 
   private unsetAAH(): void {

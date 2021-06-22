@@ -25,8 +25,8 @@
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.salaireNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.salaireNet && (conjoint.ressourcesFinancieres.salaireNet == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.salaire.montantNet"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.salaire.montantNet && (conjoint.ressourcesFinancieres.salaire.montantNet == 0)}"
                     required
                     placeholder="Montant"
                     inputmode="decimal"
@@ -35,9 +35,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol>                    
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -51,7 +51,7 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.salaireNet && (conjoint.ressourcesFinancieres.salaireNet == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.salaire.montantNet && (conjoint.ressourcesFinancieres.salaire.montantNet == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -89,9 +89,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol>      
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -143,9 +143,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol>    
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -197,9 +197,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol> 
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -251,9 +251,9 @@
                 *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol> 
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -305,9 +305,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol> 
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span
@@ -355,9 +355,9 @@
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier">
-                </app-text-with-euro-symbol> 
+                </app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span

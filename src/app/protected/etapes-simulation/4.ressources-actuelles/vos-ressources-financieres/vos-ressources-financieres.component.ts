@@ -13,6 +13,7 @@ import { DeConnecteRessourcesFinancieresService } from '@app/core/services/deman
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
 import { NumeroProchainMoisDeclarationRSA } from "@models/numero-prochain-mois-declaration-rsa";
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { Salaire } from '@app/commun/models/salaire';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -194,9 +195,19 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private creerSalairesAvantPeriodeSimulation(): SalairesAvantPeriodeSimulation {
     const salairesAvantPeriodeSimulation = new SalairesAvantPeriodeSimulation();
-    salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = 0;
-    salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = 0;
-    salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation = 0;
+
+    salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation = new Salaire();
+    salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet = 0;
+    salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantBrut = 0;
+
+    salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation = new Salaire();
+    salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet = 0;
+    salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantBrut = 0;
+
+    salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation = new Salaire();
+    salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet = 0;
+    salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantBrut = 0;
+
     return salairesAvantPeriodeSimulation;
   }
 

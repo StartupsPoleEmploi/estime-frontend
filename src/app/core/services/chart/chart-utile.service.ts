@@ -142,7 +142,7 @@ export class ChartUtileService {
     for (let index = 0; index < simulationAidesSociales.simulationsMensuelles.length; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaireMensuelNet;
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois();
     }

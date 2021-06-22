@@ -10,6 +10,7 @@ import { Personne } from "@models/personne";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { DateUtileService } from './date-util.service';
 import * as moment from 'moment';
+import { Salaire } from '@app/commun/models/salaire';
 
 @Injectable({ providedIn: 'root' })
 export class PersonneUtileService {
@@ -66,7 +67,7 @@ export class PersonneUtileService {
   public isRessourcesFinancieresValides(personne: Personne): boolean {
     let isValide = true;
     if(personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
-      isValide = personne.ressourcesFinancieres.salaireNet > 0;
+      isValide = personne.ressourcesFinancieres.salaire.montantNet > 0;
     }
     if(personne.beneficiaireAidesSociales.beneficiaireARE || personne.beneficiaireAidesSociales.beneficiaireASS) {
       isValide = personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet > 0;
