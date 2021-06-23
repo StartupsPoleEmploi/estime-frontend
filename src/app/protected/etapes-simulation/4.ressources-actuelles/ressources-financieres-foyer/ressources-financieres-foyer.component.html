@@ -105,7 +105,7 @@
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        data-testid="input-apl-mois-moins-2"
+                        data-testid="input-apl-mois-moins-3"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         type="text"
                         min="0"
@@ -123,7 +123,7 @@
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
-                    </app-text-with-euro-symbol>                        
+                    </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
                     <span class="error-input-message"
@@ -279,7 +279,7 @@
                     *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier"></app-text-with-euro-symbol>                    
+                    message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
                 <span class="error-input-message"
@@ -333,11 +333,11 @@
                     required
                     inputmode="decimal"
                     #revenusImmobilier="ngModel">
-                <app-text-with-euro-symbol 
+                <app-text-with-euro-symbol
                     *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()" 
+                    *ngIf="!screenService.isExtraSmallScreen()"
                     message="net total 3 derniers mois">
                 </app-text-with-euro-symbol>
             </div>
