@@ -27,6 +27,7 @@ export class ResultatSimulationComponent implements OnInit {
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  hoveredButtonSimulationMensuelle: number;
 
 
   constructor(
@@ -58,6 +59,14 @@ export class ResultatSimulationComponent implements OnInit {
       this.aideSocialeSelected = null;
       this.selectAideAfficherDetail();
     }
+  }
+
+  public onMouseOverButtonSimulationMensuelle(index) {
+    this.hoveredButtonSimulationMensuelle = index;
+  }
+
+  public onMouseLeaveButtonSimulationMensuelle() {
+    this.hoveredButtonSimulationMensuelle = -1;
   }
 
   public changeAideSocialeSelected(aideSocialeSelected: AideSociale) {

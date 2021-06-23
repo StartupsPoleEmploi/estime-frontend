@@ -8,7 +8,7 @@ export class ScreenService {
   isTabletScreenDevice: boolean;
   resizeObservable: Observable<Event>;
   resizeSubscription: Subscription;
-  sizeMinTabletSrceen = 768;
+  sizeMinTabletScreen = 768;
   sizeMinDesktopScreen = 992;
 
   constructor() {
@@ -50,11 +50,11 @@ export class ScreenService {
 
   private checkIsExtraSmallScreen(): boolean {
     const widthScreen = Number(window.innerWidth);
-    return widthScreen < this.sizeMinTabletSrceen;
+    return widthScreen < this.sizeMinTabletScreen;
   }
 
   private checkIsTabletScreen(): boolean {
     const widthScreen = Number(window.innerWidth);
-    return widthScreen >= this.sizeMinTabletSrceen && widthScreen < this.sizeMinDesktopScreen;
+    return widthScreen >= this.sizeMinTabletScreen && widthScreen < this.sizeMinDesktopScreen;
   }
 }

@@ -104,6 +104,11 @@
       @media #{$extra-small-device} {
         background-color: unset;
       }
+      margin-bottom: 4rem;
+    }
+    #details_ressources_estimees_title {
+      text-align: center;
+      margin:auto;
     }
   }
   .card {
@@ -150,13 +155,26 @@
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
         padding: 1.25rem;
+        height: 77px !important;
         text-align: center;
         @media #{$small-device} {
-          padding: 0.15rem;
+          padding: 0.15rem !important;
           border-radius: 8px;
         }
+        vertical-align: text-bottom;
         &.active {
-          background-color: $color-grey-1;
+          #span-mois-annee span {
+            color: $color-blue-3 !important;
+            font-size: 16px;
+          }
+          span {
+            font-size: 22px;
+            font-weight: 900;
+          }
+          background-color: $color-blue-8;
+        }
+        &.hovered {
+          background-color: $color-blue-7;
         }
         #span-mois-annee {
           @media #{$tablet-device} {
@@ -167,11 +185,19 @@
             display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
             display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
             height: 100%;
+            font-size: 14px;
+            @media #{$extra-small-device} {
+              font-size: 16px !important;
+              font-weight: 900 !important;
+            }
           }
           span {
-            font-size: 16px;
-            color: $color-blue-3;
+            font-size: 14px;
+            color: $color-blue-1;
             font-weight: bold;
+            @media #{$extra-small-device} {
+              font-size: 16px !important;
+            }
           }
         }
         span {
@@ -179,9 +205,9 @@
             font-size: 17px;
           }
           @media #{$medium-device} {
-            font-size: 24px;
+            font-size: 18px;
           }
-          font-weight: 900;
+          font-weight: 600;
         }
       }
       .card-footer {

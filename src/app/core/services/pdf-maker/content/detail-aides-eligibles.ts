@@ -118,7 +118,7 @@ export class DetailAidesEligiblesService {
 
     const style = new Style();
     style.color = '#23333C';
-    style.fontSize = 16;
+    style.fontSize = 15;
     style.bold = true;
     cell.style = style;
 

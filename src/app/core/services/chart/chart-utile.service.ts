@@ -294,7 +294,7 @@ export class ChartUtileService {
 
     options.responsive = true;
     options.maintainAspectRation = true;
-    options.aspectRatio = this.screenService.isExtraSmallScreen() ? 0.8 : 3;
+    options.aspectRatio = this.getAspectRatio();
     options.legend = this.getLegend(data);
     options.plugins = this.getPlugins(data);
     options.scales = this.getScales();
@@ -303,10 +303,16 @@ export class ChartUtileService {
     return options;
   }
 
+  private getAspectRatio() {
+    if(this.screenService.isExtraSmallScreen()) return 0.5;
+    if(this.screenService.isTabletScreen()) return 1;
+    return 3;
+  }
+
   private getLegend(data: Data): Legend {
     const legend = new Legend();
 
-    legend.position = this.screenService.isExtraSmallScreen()
+    legend.position = (this.screenService.isExtraSmallScreen() || this.screenService.isTabletScreen())
       ? 'bottom'
       : 'right';
     legend.align = 'start';
@@ -349,7 +355,7 @@ export class ChartUtileService {
     datalabels.color = 'black';
     datalabels.display = function (ctx) {
       return (
-        ctx.chart.options.legend.position == 'right' &&
+        ctx.chart.options.aspectRatio != 0.5 &&
         ctx.datasetIndex == datasetsSize - 1
       );
     };
