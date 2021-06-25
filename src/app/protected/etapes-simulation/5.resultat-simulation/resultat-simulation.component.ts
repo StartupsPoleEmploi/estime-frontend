@@ -106,19 +106,11 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public getSrcImgButtonImprimerSimulation(): string {
-    let text = './assets/images/print.svg';
-    if(this.screenService.isExtraSmallScreen()) {
-      text = './assets/images/download.svg';
-    }
-    return text;
+    return './assets/images/download.svg';
   }
 
   public getTextButtonImprimerSimulation(): string {
-    let text = 'Imprimer la simulation';
-    if(this.screenService.isExtraSmallScreen()) {
-      text = 'Télécharger la simulation';
-    }
-    return text;
+    return 'Télécharger la simulation';
   }
 
   private loadDataSimulationAidesSociales(): void {

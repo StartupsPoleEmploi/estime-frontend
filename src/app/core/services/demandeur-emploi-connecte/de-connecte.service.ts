@@ -149,7 +149,7 @@ export class DeConnecteService {
   public unsetAllocationMensuelleNetASS(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = 0;
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
@@ -158,7 +158,7 @@ export class DeConnecteService {
   public unsetInfosRSA(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
     if(this.demandeurEmploiConnecte.situationFamiliale) {
