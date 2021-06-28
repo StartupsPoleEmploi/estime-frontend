@@ -49,9 +49,7 @@
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">le mois dernier</span>
+                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="allocationMensuelleNetRSA" type="text" data-testid="input-allocation-mensuelle-net-rsa"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="5"
@@ -59,12 +57,9 @@
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0}"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA" required
                     placeholder="Montant" inputmode="decimal" #allocationMensuelleNetRSA="ngModel" ngAutofocus>
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
+                <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
             <span
@@ -112,9 +107,7 @@
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">le mois dernier</span>
+                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="allocationMensuelleNetAAH" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" min="0"
@@ -122,12 +115,9 @@
                     class="max-with-input-type-montant form-control" placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH " required
                     inputmode="decimal" #allocationMensuelleNetAAH="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
+                <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
             <div class="row">
@@ -294,21 +284,16 @@
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">le mois dernier</span>
+                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="pensionInvalidite" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" class="max-with-input-type-montant form-control" placeholder="Montant"
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (this.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)}"
                     required inputmode="decimal" #pensionInvalidite="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
+                <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
             <div class="row">
@@ -332,9 +317,7 @@
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">le mois dernier</span>
+                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="allocationSupplementaireInvalidite"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
@@ -342,12 +325,9 @@
                     [(ngModel)]="ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)}"
                     required inputmode="decimal" #allocationSupplementaireInvalidite="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
+                <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="le mois dernier">
                 </app-text-with-euro-symbol>
             </div>
             <div class="row">
@@ -368,9 +348,7 @@
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">
+                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">
                     net total 3 derniers mois
                 </span>
                 <input name="revenusCreateurEntreprise" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -379,11 +357,9 @@
                     [(ngModel)]="ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois == 0)}"
                     required inputmode="decimal" #revenusCreateurEntreprise="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
+                <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                     message="net total 3 derniers mois">
                 </app-text-with-euro-symbol>
             </div>
