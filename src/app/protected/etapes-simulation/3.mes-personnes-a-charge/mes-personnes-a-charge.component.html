@@ -93,31 +93,30 @@
               [numeroNouvellePersonne]="numeroNouvellePersonne"
               (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
           </app-form-personne-a-charge>
+          <div
+            class="div-buttons-form d-flex justify-content-center"
+            *ngIf="isNouvellePersonneAChargeFormDisplay === false">
+            <button
+                class="btn-style-perso-2 first-btn"
+                (click)="onClickButtonRetour()">
+                <div>
+                    <img alt="" src="./assets/images/return-arrow-v2.svg">
+                    <span>Retour</span>
+                </div>
+            </button>
+            <button
+                class="btn-style-perso-1 second-btn"
+                data-testid="btn-personnes-charge-suivant"
+                (click)="onClickButtonSuivant()">
+                <div>
+                    <span>Suivant</span>
+                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+          </div>
       </div>
   </div>
-  <div class="container-fluid">
-      <div
-          class="div-buttons-form d-flex justify-content-center"
-          *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-          <button
-              class="btn-style-perso-2 first-btn"
-              (click)="onClickButtonRetour()">
-              <div>
-                <img alt="" src="./assets/images/return-arrow-v2.svg">
-                <span>Retour</span>
-              </div>
-          </button>
-          <button
-              class="btn-style-perso-1 second-btn"
-              data-testid="btn-personnes-charge-suivant"
-              (click)="onClickButtonSuivant()">
-              <div>
-                <span>Suivant</span>
-                <img alt="" src="./assets/images/icon-bt-primaire.svg">
-              </div>
-          </button>
-      </div>
-  </div>
+  
 
   <ng-template #popoverPersonnesAChargeTemplate>
       <div class="container">

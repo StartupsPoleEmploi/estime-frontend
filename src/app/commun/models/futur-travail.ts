@@ -1,9 +1,10 @@
+import { Salaire } from "@models/salaire";
+
 export class FuturTravail {
   distanceKmDomicileTravail: number;
   nombreHeuresTravailleesSemaine: number;
   nombreMoisContratCDD: number;
   nombreTrajetsDomicileTravail: number;
-  salaireMensuelNet: number;
-  salaireMensuelBrut: number;
+  salaire: Salaire;
   typeContrat: string;
 }

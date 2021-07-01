@@ -2,10 +2,12 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { TypesContratTavailEnum } from '@enumerations/types-contrat-travail.enum';
 import { FuturTravail } from '@models/futur-travail';
@@ -40,6 +42,7 @@ export class ContratTravailComponent implements OnInit {
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
     private router: Router,
+    public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService
   ) {
 
@@ -59,6 +62,9 @@ export class ContratTravailComponent implements OnInit {
     } else {
       this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
+      this.futurTravail.salaire = new Salaire();
+      this.futurTravail.salaire.montantBrut = null;
+      this.futurTravail.salaire.montantNet = null;
     }
   }
 
@@ -85,26 +91,26 @@ export class ContratTravailComponent implements OnInit {
 
   public calculSalaireMensuelNet() {
     this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaireMensuelBrut >= 100 && this.futurTravail.salaireMensuelBrut != null) {
-      this.futurTravail.salaireMensuelNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaireMensuelBrut);
+    if (this.futurTravail.salaire.montantBrut >= 100 && this.futurTravail.salaire.montantBrut != null) {
+      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut);
     } else {
-      this.futurTravail.salaireMensuelNet = undefined;
+      this.futurTravail.salaire.montantNet = undefined;
     }
   }
 
   public calculSalaireMensuelBrut() {
     this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaireMensuelNet >= 57 && this.futurTravail.salaireMensuelNet != null) {
-      this.futurTravail.salaireMensuelBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaireMensuelNet);
+    if (this.futurTravail.salaire.montantNet >= 57 && this.futurTravail.salaire.montantNet != null) {
+      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet);
     } else {
-      this.futurTravail.salaireMensuelBrut = undefined;
+      this.futurTravail.salaire.montantBrut = undefined;
     }
   }
 
   private isDonneesSaisiesValides(form: FormGroup): boolean {
     return form.valid
-      && this.futurTravail.salaireMensuelBrut > 0
-      && this.futurTravail.salaireMensuelNet > 0
+      && this.futurTravail.salaire.montantBrut > 0
+      && this.futurTravail.salaire.montantNet > 0
       && !this.isNombreHeuresTravailleesSemaineInvalide()
   }
 

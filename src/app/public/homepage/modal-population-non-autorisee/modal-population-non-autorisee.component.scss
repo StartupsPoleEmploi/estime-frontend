@@ -1,17 +1,20 @@
 @import "../../../../assets/scss/variables";
 
-
-
 .modal-base {
   background-color: $color-white-1;
   color: $color-blue-1;
 }
+
+
 
 .modal-header {
   @extend .modal-base;
   border-bottom: 0;
   padding-bottom: 0;
   padding-top: 1rem;
+  p {
+    font-size: 18px;
+  }
   button {
     opacity: unset !important;
     span {
@@ -27,17 +30,9 @@
 .modal-body {
   @extend .modal-base;
   border-bottom: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
   span {
-    font-weight: bold;
     font-size: 18px;
   }
 }
-
-.modal-footer {
-  button {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  border-top: 0;
-}
-

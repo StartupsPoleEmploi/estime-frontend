@@ -5,6 +5,7 @@ import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeu
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PopoverDirective } from 'ngx-bootstrap/popover';
 
@@ -32,6 +33,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     public dateUtileService: DateUtileService,
+    public screenService: ScreenService,
     private elementRef: ElementRef,
   ) {
 

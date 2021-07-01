@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
@@ -269,6 +270,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetConjointSalaire();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.situationFamiliale.conjoint.ressourcesFinancieres.salaire = new Salaire();
     }
   }
 

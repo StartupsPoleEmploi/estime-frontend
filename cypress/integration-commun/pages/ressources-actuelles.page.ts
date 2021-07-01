@@ -14,8 +14,8 @@ class RessourcesActuellesPage {
 
   public saisirAllocationLogementFoyer(montant: string): void {
     this.saisirAllocationsLogementFoyerMoisMoins1(montant);
-    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
-    this.saisirAllocationsLogementFoyerMoisMoins1(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins2(montant);
+    this.saisirAllocationsLogementFoyerMoisMoins3(montant);
   }
 
   public saisirAllocationsLogementFoyerMoisMoins1(montant : string): void {

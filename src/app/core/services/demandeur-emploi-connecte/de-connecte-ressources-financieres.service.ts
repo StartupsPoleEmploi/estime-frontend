@@ -54,8 +54,15 @@ export class DeConnecteRessourcesFinancieresService {
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
       if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
-        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation);
-        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation);
+        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet);
+        }
+        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet);
+        }
+        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet);
+        }
       }
     }
     return montant;
@@ -66,7 +73,9 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.conjoint) {
       const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
-      montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaireNet);
+      if(ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantNet);
+      }
     }
     return montant;
   }
@@ -78,7 +87,7 @@ export class DeConnecteRessourcesFinancieresService {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
         if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
           const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaireNet);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
         }
       });
     }

@@ -38,7 +38,7 @@ export class DeConnecteSimulationAidesSocialesService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
 
-    const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaireMensuelNet);
+    const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaire.montantNet);
     const revenusIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois());
     const revenusImmobilier = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois());
     const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);

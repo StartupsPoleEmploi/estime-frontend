@@ -32,14 +32,8 @@
                           </div>
                           <div class="col-9 col-md-10 col-text-button">
                               <div class="text-button">Vos ressources</div>
-                              <!-- <div *ngIf="!isVosRessourcesDisplay">
-                                  Total des revenus : {{montantRevenusVosRessources}} €
-                              </div>
                               <div *ngIf="!isVosRessourcesDisplay">
-                                  Total des aides : {{montantAidesVosRessources}} €
-                              </div> -->
-                              <div *ngIf="!isVosRessourcesDisplay">
-                                  Total de vos ressources : {{montantVosRessources}} €
+                                  Total : {{montantVosRessources}} €
                               </div>
                           </div>
                           <div class="col-1 col-md-1 col-chevron">
@@ -80,14 +74,8 @@
                           </div>
                           <div class="col-9 col-md-10 col-text-button">
                               <div id="label-vos-ressources" class="text-button">Ressources conjoint(e)</div>
-                              <!-- <div *ngIf="!isRessourcesConjointDisplay">
-                                  Total revenus : {{montantRevenusRessourcesConjoint}} €
-                              </div>
                               <div *ngIf="!isRessourcesConjointDisplay">
-                                  Total des aides : {{montantAidesRessourcesConjoint}} €
-                              </div> -->
-                              <div *ngIf="!isVosRessourcesDisplay">
-                                  Total des ressources du conjoint : {{montantRessourcesConjoint}} €
+                                  Total : {{montantRessourcesConjoint}} €
                               </div>
                           </div>
                           <div class="col-1 col-md-1 col-chevron">
@@ -128,14 +116,8 @@
                           </div>
                           <div class="col-9 col-md-10 col-text-button">
                               <div id="label-ressources-conjoint" class="text-button">Ressources personne(s) à charge</div>
-                              <!-- <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                  Total revenus : {{montantRevenusPersonnesCharge}} €
-                              </div>
                               <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                  Total des aides : {{montantAidesPersonnesCharge}} €
-                              </div> -->
-                              <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                  Total des ressources des personnes à charge : {{montantRessourcesPersonnesCharge}} €
+                                  Total : {{montantRessourcesPersonnesCharge}} €
                               </div>
                           </div>
                           <div class="col-1 col-md-1 col-chevron">
@@ -187,11 +169,8 @@
                                   #popoverRessourceFoyer="bs-popover">
                               </div>
                               </div>
-                              <!-- <div *ngIf="!isRessourcesFoyerDisplay">
-                                  Total des aides des mois précédents : {{montantAidesFoyer}} €
-                              </div> -->
                               <div *ngIf="!isRessourcesFoyerDisplay">
-                                  Total des ressources du foyer : {{montantRessourcesFoyer}} €
+                                  Total : {{montantRessourcesFoyer}} €
                               </div>
                           </div>
                           <div class="col-1 col-md-1 col-chevron">
@@ -224,6 +203,7 @@
           </button>
           <button
               class="btn-style-perso-1 second-btn"
+              [ngClass]="{'order-first': screenService.isExtraSmallScreen()}"
               type="button"
               data-testid="btn-obtenir-simulation"
               (click)="onClickButtonObtenirSimulation()">

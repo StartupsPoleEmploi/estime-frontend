@@ -1,5 +1,9 @@
 @import "../../../../assets/scss/variables";
 
+.container-fluid {
+  margin-top: 2rem;
+}
+
 #contrat-travail-div-infos-lieu-travail {
   margin-bottom: 1rem !important;
   img {
@@ -35,8 +39,5 @@ input {
 
 .net-ou-brut {
   color: $color-blue-2;
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-  line-height: 2.3rem;
-
+  line-height: 2.2rem;
 }

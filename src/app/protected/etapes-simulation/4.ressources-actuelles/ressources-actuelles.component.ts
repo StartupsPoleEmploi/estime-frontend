@@ -10,6 +10,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { RessourcesFinancieresUtileService } from "@app/core/services/utile/ressources-financieres-utiles.service";
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieresConjointComponent } from '@app/protected/etapes-simulation/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
@@ -72,6 +73,7 @@ export class RessourcesActuellesComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
+    public screenService: ScreenService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,

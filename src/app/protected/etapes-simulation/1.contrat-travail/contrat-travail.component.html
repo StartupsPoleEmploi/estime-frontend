@@ -11,7 +11,7 @@
             [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
             #futurTravailForm="ngForm">
             <div class="row">
-                <div class="col-12 col-md-3 form-group">
+                <div class="col-12 col-sm-4 form-group">
                     <div class="row mb-1">
                         <label
                             class="label"
@@ -65,7 +65,7 @@
                     </span>
                 </div>
                 <div
-                    class="col-12 col-md form-group form-group-nombre-mois"
+                    class="col-12 col-sm-4 form-group form-group-nombre-mois"
                     *ngIf="futurTravail.typeContrat == 'CDD'">
                     <label
                         class="label mb-2"
@@ -153,7 +153,7 @@
                         class="label"
                         aria-describedby="infobulle-contrat-travail-salaire"
                         for="salaire-mensuel-net">
-                        * Indiquez le salaire mensuel brut ou net
+                        * Salaire mensuel brut ou net
                         <div
                             id="infobulle-contrat-travail-salaire"
                             role="tooltip"
@@ -166,7 +166,7 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
                         <div class="row">
                             <input
                                 id="salaireMensuelBrut"
@@ -178,21 +178,26 @@
                                 (keyup)="calculSalaireMensuelNet();"
                                 maxlength="6"
                                 class="form-control"
-                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut)}"
+                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut)}"
                                 placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaireMensuelBrut"
+                                [(ngModel)]="futurTravail.salaire.montantBrut"
                                 inputmode="decimal"
                                 #salaireMensuelBrut="ngModel">
                             <app-text-with-euro-symbol message="mensuel brut"></app-text-with-euro-symbol>
+                            <span
+                                *ngIf="!screenService.isExtraSmallScreen()"
+                                class="ml-3 mr-3 net-ou-brut font-weight-bold text-center">
+                                ou
+                            </span>
                         </div>
                         <span
-                            *ngIf="futurTravail.salaireMensuelBrut && futurTravail.salaireMensuelBrut == 0"
+                            *ngIf="futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelBrut">
+                            *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                         <span
@@ -201,10 +206,12 @@
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                         </span>
                     </div>
-                    <div class="col-sm-12 col-md-2">
-                        <span class="net-ou-brut">ou</span>
+                    <div
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="col-12">
+                        <span class="net-ou-brut font-weight-bold">ou</span>
                     </div>
-                    <div class="col-sm-12 col-md-6">
+                    <div class="col-12 col-sm-5">
                         <div class="row">
                             <input
                                 id="salaireMensuelNet"
@@ -217,14 +224,14 @@
                                 maxlength="6"
                                 class="form-control"
                                 placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaireMensuelNet"
-                                [ngClass]="{'ng-invalid':futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaireMensuelNet)}"
+                                [(ngModel)]="futurTravail.salaire.montantNet"
+                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantNet)}"
                                 inputmode="decimal"
                                 #salaireMensuelNet="ngModel">
                             <app-text-with-euro-symbol message="mensuel net"></app-text-with-euro-symbol>
                         </div>
                         <span
-                            *ngIf="futurTravail.salaireMensuelNet && futurTravail.salaireMensuelNet == 0"
+                            *ngIf="futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -235,7 +242,7 @@
                         </span>
                         <span
                             class="row error-input-message"
-                            *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaireMensuelNet">
+                            *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaire.montantNet">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
@@ -328,29 +335,27 @@
                 </span>
             </div>
         </form>
-    </div>
-</div>
-<div class="container-fluid">
-    <div class="div-buttons-form d-flex justify-content-center">
-        <button
-            class="btn-style-perso-2 first-btn"
-            (click)="onClickButtonRetour()"
-            data-testid="btn-futur-travail-retour">
-            <div>
-                <img alt="" src="./assets/images/return-arrow-v2.svg">
-                <span>Retour</span>
-            </div>
-        </button>
-        <button
-            class="btn-style-perso-1 second-btn"
-            type="submit"
-            data-testid="btn-futur-travail-suivant"
-            (click)="onSubmitFuturTravailForm(futurTravailForm)">
-            <div>
-                <span>Suivant</span>
-                <img alt="" src="./assets/images/icon-bt-primaire.svg">
-            </div>
-        </button>
+        <div class="div-buttons-form d-flex justify-content-center">
+            <button
+                class="btn-style-perso-2 first-btn"
+                (click)="onClickButtonRetour()"
+                data-testid="btn-futur-travail-retour">
+                <div>
+                    <img alt="" src="./assets/images/return-arrow-v2.svg">
+                    <span>Retour</span>
+                </div>
+            </button>
+            <button
+                class="btn-style-perso-1 second-btn"
+                type="submit"
+                data-testid="btn-futur-travail-suivant"
+                (click)="onSubmitFuturTravailForm(futurTravailForm)">
+                <div>
+                    <span>Suivant</span>
+                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+        </div>
     </div>
 </div>
 

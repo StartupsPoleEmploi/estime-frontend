@@ -28,7 +28,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
   it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
-    const primeActivite = "82";
+    const primeActivite = "84";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -96,7 +96,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
   it('En tant que demandeur emploi célibataire, sans enfant, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, APL=120 €, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
-    const primeActivite = "60";
+    const primeActivite = "61";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -165,7 +165,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
   it('En tant que demandeur emploi célibataire, 1 enfant de 9 ans, CDI 20h, salaire=1150 €, domicile->travail=35km / 20 trajets, ASS=16.49 €, APL=120 €, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
-    const primeActivite = "99";
+    const primeActivite = "105";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -238,7 +238,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
   it('En tant que demandeur emploi célibataire, 2 enfant de 9 ans et 12 ans, CDI 20h, salaire=1150€, domicile->travail=35km / 20 trajets, ASS=16.49€, APL=120€, AF=250€, je souhaite obtenir ma simulation', () => {
 
     const salaire = "1150";
-    const primeActivite = "68";
+    const primeActivite = "85";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);

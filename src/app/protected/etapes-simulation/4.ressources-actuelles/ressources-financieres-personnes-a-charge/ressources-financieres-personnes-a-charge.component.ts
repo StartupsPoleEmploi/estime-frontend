@@ -6,6 +6,7 @@ import { PersonneDTO } from '@models/dto/personne-dto';
 import { FormGroup, NgForm } from '@angular/forms';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-ressources-financieres-personnes-a-charge',
@@ -26,6 +27,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService : DeConnecteService,
+    public screenService: ScreenService,
     private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }

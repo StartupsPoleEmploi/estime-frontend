@@ -569,33 +569,32 @@
               </span>
           </div>
       </form>
+      <div class="div-buttons-form d-flex justify-content-center">
+        <button
+            data-testid="btn-ma-situation-retour"
+            class="btn-style-perso-2 first-btn"
+            (click)="onClickButtonRetour()"
+            type="button">
+            <div>
+                <img alt="" src="./assets/images/return-arrow-v2.svg">
+                <span>Retour</span>
+            </div>
+        </button>
+        <button
+            data-testid="btn-ma-situation-suivant"
+            class="btn-style-perso-1 second-btn"
+            type="submit"
+            aria-label="quantity of pens"
+            (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">
+            <div>
+                <span>Suivant</span>
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
+      </div>
   </div>
 </div>
-<div class="container-fluid">
-  <div class="div-buttons-form d-flex justify-content-center">
-      <button
-          data-testid="btn-ma-situation-retour"
-          class="btn-style-perso-2 first-btn"
-          (click)="onClickButtonRetour()"
-          type="button">
-          <div>
-              <img alt="" src="./assets/images/return-arrow-v2.svg">
-              <span>Retour</span>
-          </div>
-      </button>
-      <button
-          data-testid="btn-ma-situation-suivant"
-          class="btn-style-perso-1 second-btn"
-          type="submit"
-          aria-label="quantity of pens"
-          (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">
-          <div>
-              <span>Suivant</span>
-              <img alt="" src="./assets/images/icon-bt-primaire.svg">
-          </div>
-      </button>
-  </div>
-</div>
+  
 
 <ng-template #popoverSituationDemandeurTemplate>
   <div class="container">

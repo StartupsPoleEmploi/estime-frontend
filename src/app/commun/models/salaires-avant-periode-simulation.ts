@@ -1,5 +1,7 @@
+import { Salaire } from "@models/salaire";
+
 export class SalairesAvantPeriodeSimulation {
-  salaireMoisDemandeSimulation: number;
-  salaireMoisMoins1MoisDemandeSimulation: number;
-  salaireMoisMoins2MoisDemandeSimulation: number;
+  salaireMoisDemandeSimulation: Salaire;
+  salaireMoisMoins1MoisDemandeSimulation: Salaire;
+  salaireMoisMoins2MoisDemandeSimulation: Salaire;
 }

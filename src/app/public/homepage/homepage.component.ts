@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalPopulationNonAutoriseeComponent } from './modal-population-non-autorisee/modal-population-non-autorisee.component';
 
 @Component({
   selector: 'app-homepage',
@@ -23,6 +26,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
+    private bsModalService: BsModalService,
     public individuConnectedService: IndividuConnectedService,
     public peConnectService: PeConnectService,
     private router: Router,
@@ -53,12 +57,17 @@ export class HomepageComponent implements OnInit {
   }
 
   private checkDemandeurEmploiConnecte(): void {
-    this.messageErreur = this.authorizationService.getMessageErreur();
-    if (this.messageErreur) {
-      this.messageErreurElement.nativeElement.focus();
+    const messageErreur = this.authorizationService.getMessageErreur();
+    if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
+      this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg' });
+    } else {
+      this.messageErreur = messageErreur;
+      if (this.messageErreur) {
+        this.messageErreurElement.nativeElement.focus();
+      }
     }
   }
-
+  
   @HostListener("window:scroll", [])
   onWindowScroll() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
