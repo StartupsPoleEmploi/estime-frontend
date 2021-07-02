@@ -14,14 +14,25 @@
             </li>
             <li
                 class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0">
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0">
+                <app-item-ressource-actuelle
+                    [codeRessource]="codesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR"
+                    [isColPictoArrowDisplay]="false"
+                    [libelleRessource]="libellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR"
+                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois()">
+                </app-item-ressource-actuelle>
+                <hr *ngIf="isItemRevenusMicroEntrepriseIsNotLast()">
+            </li>
+            <li
+                class="list-group-item"
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0">
                 <app-item-ressource-actuelle
                     [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                     [isColPictoArrowDisplay]="false"
                     [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                    [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois()">
+                    [montantRessource]="deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois()">
                 </app-item-ressource-actuelle>
-                <hr *ngIf="isItemRevenusCreateurEntrepriseIsNotLast()">
+                <hr *ngIf="isItemBeneficesTravailleurIndependantIsNotLast()">
             </li>
             <li
                 class="list-group-item"

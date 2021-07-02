@@ -72,9 +72,21 @@ export class MaSituationComponent implements OnInit {
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
   }
 
-  public onClickCheckBoxIsCreateurEntreprise(): void {
-    if (!this.informationsPersonnelles.createurEntreprise) {
-      this.deConnecteService.unsetRevenusCreateurEntreprise();
+  public onClickCheckBoxIsMicroEntrepreneur(): void {
+    if (!this.informationsPersonnelles.microEntrepreneur) {
+      this.deConnecteService.unsetRevenusMicroEntrepreneur();
+    } else {
+      this.deConnecteService.unsetBeneficesTravailleurIndependant();
+      this.informationsPersonnelles.travailleurIndependant = false;
+    }
+  }
+
+  public onClickCheckBoxIsTravailleurIndependant(): void {
+    if (!this.informationsPersonnelles.travailleurIndependant) {
+      this.deConnecteService.unsetBeneficesTravailleurIndependant();
+    } else {
+      this.deConnecteService.unsetRevenusMicroEntrepreneur();
+      this.informationsPersonnelles.microEntrepreneur = false;
     }
   }
 
@@ -170,11 +182,15 @@ export class MaSituationComponent implements OnInit {
       }
       if(situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
         this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
-        this.onClickCheckBoxHasRevenusImmobilier();
+        this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if(situationPersonne === this.situationPersonneEnum.CREATEUR_ENTREPRISE) {
-        this.informationsPersonnelles.createurEntreprise = !this.informationsPersonnelles.createurEntreprise;
-        this.onClickCheckBoxIsCreateurEntreprise();
+      if(situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
+        this.informationsPersonnelles.microEntrepreneur = !this.informationsPersonnelles.microEntrepreneur;
+        this.onClickCheckBoxIsMicroEntrepreneur();
+      }
+      if(situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
+        this.informationsPersonnelles.travailleurIndependant = !this.informationsPersonnelles.travailleurIndependant;
+        this.onClickCheckBoxIsTravailleurIndependant();
       }
       if(situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.beneficiaireAidesSociales.beneficiairePensionInvalidite = !this.beneficiaireAidesSociales.beneficiairePensionInvalidite;
@@ -240,7 +256,6 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
       this.deConnecteService.unsetConjointAllocationARE();
-      this.deConnecteService.unsetConjointAllocationRSA();
     }
   }
 
@@ -250,7 +265,6 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
       this.deConnecteService.unsetConjointAllocationASS();
-      this.deConnecteService.unsetConjointAllocationRSA();
     }
   }
 
@@ -259,8 +273,24 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetConjointAllocationRSA();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
-      this.deConnecteService.unsetConjointAllocationARE();
-      this.deConnecteService.unsetConjointAllocationASS();
+    }
+  }
+
+  public onClickCheckBoxConjointIsMicroEntrepreneur(): void {
+    if (!this.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur) {
+      this.deConnecteService.unsetConjointRevenusMicroEntrepreneur();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.deConnecteService.unsetConjointBeneficesTravailleurIndependant();
+    }
+  }
+
+  public onClickCheckBoxConjointIsTravailleurIndependant(): void {
+    if (!this.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant) {
+      this.deConnecteService.unsetConjointBeneficesTravailleurIndependant();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+      this.deConnecteService.unsetConjointRevenusMicroEntrepreneur();
     }
   }
 
@@ -284,6 +314,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxConjointIsSansRessource(): void {
     this.deConnecteService.unsetConjointSalaire();
     this.deConnecteService.unsetConjointtAllocationsAidesSociales();
+    this.deConnecteService.unsetConjointRevenusMicroEntrepreneur();
+    this.deConnecteService.unsetConjointBeneficesTravailleurIndependant();
   }
 
 

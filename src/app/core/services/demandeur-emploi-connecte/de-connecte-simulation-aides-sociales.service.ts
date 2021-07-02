@@ -39,12 +39,13 @@ export class DeConnecteSimulationAidesSocialesService {
     const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
 
     const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaire.montantNet);
-    const revenusIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois());
+    const revenusMicroEntreprise = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois());
+    const revenusIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois());
     const revenusImmobilier = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois());
     const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return Math.floor(salaireFuturTravail + revenusIndependant + revenusImmobilier + montantAllocationsCPAM + montantTotalAidesMoisSimule);
+    return Math.floor(salaireFuturTravail + revenusMicroEntreprise + revenusIndependant + revenusImmobilier + montantAllocationsCPAM + montantTotalAidesMoisSimule);
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {

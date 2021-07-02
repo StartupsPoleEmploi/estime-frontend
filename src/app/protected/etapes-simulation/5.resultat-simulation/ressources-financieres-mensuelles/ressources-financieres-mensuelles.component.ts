@@ -81,7 +81,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemSalaireIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
@@ -89,7 +90,16 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
-  public isItemRevenusCreateurEntrepriseIsNotLast(): boolean {
+  public isItemRevenusMicroEntrepriseIsNotLast(): boolean {
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
+    || this.aidesService.getMontantAAH(this.simulationSelected) > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0
+    || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemBeneficesTravailleurIndependantIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0

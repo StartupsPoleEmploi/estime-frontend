@@ -17,9 +17,14 @@ export class DeConnecteInfosPersonnellesService {
     return demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true
   }
 
-  public createurEntreprise(): boolean {
+  public travailleurIndependant(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.createurEntreprise === true
+    return demandeurEmploiConnecte.informationsPersonnelles.travailleurIndependant === true
+  }
+
+  public microEntrepreneur(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.informationsPersonnelles.microEntrepreneur === true
   }
 
   public isDesDom(): boolean {

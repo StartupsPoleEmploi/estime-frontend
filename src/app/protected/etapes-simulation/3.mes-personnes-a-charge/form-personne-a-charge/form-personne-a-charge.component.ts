@@ -119,7 +119,8 @@ export class FormPersonneAChargeComponent implements OnInit {
     if(this.nouvellePersonneACharge.informationsPersonnelles) {
       this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-      this.nouvellePersonneACharge.informationsPersonnelles.createurEntreprise = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
       this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
      }
   }

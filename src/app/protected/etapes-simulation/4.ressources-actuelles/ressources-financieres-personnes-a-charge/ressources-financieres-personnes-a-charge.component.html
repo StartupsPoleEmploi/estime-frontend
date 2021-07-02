@@ -377,6 +377,84 @@
                     </span>
                 </div>
             </div>
+            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
+                <div class="row mb-2">
+                    <label class="label" for="personneAChargeRevenusMicroEntreprise">
+                        * Chiffre d'affaires en tant que micro entrepreneur
+                    </label>
+                </div>
+                <div class="row">
+                    <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">
+                        net total 3 derniers mois
+                    </span>
+                    <input name="personneAChargeRevenusMicroEntreprise" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois"
+                        [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois && (personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois == 0)}"
+                        required inputmode="decimal" #personneAChargeRevenusMicroEntreprise3DerniersMois="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
+                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
+                        message="net total 3 derniers mois">
+                    </app-text-with-euro-symbol>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeRevenusMicroEntreprise?.touched)  && personneAChargeRevenusMicroEntreprise?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeRevenusMicroEntreprise?.touched)  && personneAChargeRevenusMicroEntreprise?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                    <span
+                        *ngIf="personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois && (personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois == 0)"
+                        class="error-input-message">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
+                <div class="row mb-2">
+                    <label class="label" for="personneAChargeBeneficesTravailleurIndependant">
+                        * Bénéfices en tant qu'indépendant
+                    </label>
+                </div>
+                <div class="row">
+                    <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">
+                        des bénéfices de l'année dernière
+                    </span>
+                    <input name="personneAChargeBeneficesTravailleurIndependant"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        type="text"
+                        maxlength="6" min="0"
+                        class="max-with-input-type-montant form-control"
+                        placeholder="Montant"
+                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice"
+                        [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice == 0)}"
+                        required inputmode="decimal"
+                        #personneAChargeBeneficesTravailleurIndependantDernierExercice="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesTravailleurIndependant?.touched)  && personneAChargeBeneficesTravailleurIndependant?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesTravailleurIndependant?.touched)  && personneAChargeBeneficesTravailleurIndependant?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                    <span
+                        *ngIf="personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice == 0)"
+                        class="error-input-message">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="row row-button-valider">
             <button

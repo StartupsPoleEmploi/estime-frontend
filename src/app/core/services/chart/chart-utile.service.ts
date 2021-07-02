@@ -144,7 +144,8 @@ export class ChartUtileService {
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois();
     }
     dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);
@@ -254,6 +255,15 @@ export class ChartUtileService {
       {
         label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30,' '),
         backgroundColor: CouleursAidesDiagrammeEnum.TRAVAILLEUR_INDEPENDANT,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR,
+      {
+        label: LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.MICRO_ENTREPRENEUR,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
