@@ -341,7 +341,7 @@
                 </span>
             </div>
         </div>
-        <div class="form-group" *ngIf="deConnecteInfosPersonnellesService.microEntrepreneur()">
+        <div class="form-group" *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row mb-2">
                 <label class="label" for="revenusMicroEntreprise">
                     * Chiffre d'affaires en tant que micro entrepreneur
@@ -386,7 +386,7 @@
                 </span>
             </div>
         </div>
-        <div class="form-group" *ngIf="deConnecteInfosPersonnellesService.travailleurIndependant()">
+        <div class="form-group" *ngIf="deConnecteInfosPersonnellesService.isTravailleurIndependant()">
             <div class="row mb-2">
                 <label class="label" for="beneficesTravailleurIndependantDernierExercice">
                     * Bénéfices en tant qu'indépendant

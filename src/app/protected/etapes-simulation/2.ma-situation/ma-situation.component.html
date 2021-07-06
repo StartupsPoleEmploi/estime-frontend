@@ -288,7 +288,7 @@
                   </label>
                   <span
                       class="row error-input-message"
-                      *ngIf="isInformationsPersonnellesFormSubmitted  && !isSelectionAideOk">
+                      *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationPeOuCafSelectionnee()">
                       {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
                   </span>
               </div>

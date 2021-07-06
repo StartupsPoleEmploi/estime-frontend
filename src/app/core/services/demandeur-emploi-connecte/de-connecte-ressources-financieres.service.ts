@@ -230,10 +230,10 @@ export class DeConnecteRessourcesFinancieresService {
     if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()) {
       isValide = ressourcesFinancieres.allocationsCPAM.pensionInvalidite > 0;
     }
-    if(isValide && this.deConnecteInfosPersonnellesService.travailleurIndependant()) {
+    if(isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant()) {
       isValide = ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0;
     }
-    if(isValide && this.deConnecteInfosPersonnellesService.microEntrepreneur()) {
+    if(isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur()) {
       isValide = ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0;
     }
     return isValide;

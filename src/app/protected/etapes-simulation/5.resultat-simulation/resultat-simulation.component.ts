@@ -105,14 +105,6 @@ export class ResultatSimulationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
-  public getSrcImgButtonImprimerSimulation(): string {
-    return './assets/images/download.svg';
-  }
-
-  public getTextButtonImprimerSimulation(): string {
-    return 'Télécharger la simulation';
-  }
-
   private loadDataSimulationAidesSociales(): void {
     this.simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();
     //si l'utilisateur est sur smartphone, aucune préselection

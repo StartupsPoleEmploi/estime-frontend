@@ -30,7 +30,6 @@ export class MaSituationComponent implements OnInit {
   informationsPersonnelles: InformationsPersonnelles;
   isInformationsPersonnellesFormSubmitted = false;
   isSituationConjointNotValide = false;
-  isSelectionAideOk: boolean = true;
   situationFamiliale: SituationFamiliale;
 
   nationalitesEnum: typeof NationalitesEnum = NationalitesEnum;
@@ -128,12 +127,10 @@ export class MaSituationComponent implements OnInit {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      if(this.checkSelectionAideOk()) {
+      if(this.isAllocationPeOuCafSelectionnee()) {
         this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
-      } else {
-        this.isSelectionAideOk = false;
       }
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
@@ -144,6 +141,12 @@ export class MaSituationComponent implements OnInit {
     if (nationalite !== NationalitesEnum.AUTRE) {
       this.informationsPersonnelles.titreSejourEnFranceValide = null;
     }
+  }
+
+  public isAllocationPeOuCafSelectionnee(): boolean {
+    return (this.beneficiaireAidesSociales.beneficiaireASS
+        || this.beneficiaireAidesSociales.beneficiaireRSA
+        || this.beneficiaireAidesSociales.beneficiaireAAH);
   }
 
 
@@ -333,12 +336,6 @@ export class MaSituationComponent implements OnInit {
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
-  }
-
-  private checkSelectionAideOk(): boolean {
-    return (this.beneficiaireAidesSociales.beneficiaireASS
-        || this.beneficiaireAidesSociales.beneficiaireRSA
-        || this.beneficiaireAidesSociales.beneficiaireAAH);
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
