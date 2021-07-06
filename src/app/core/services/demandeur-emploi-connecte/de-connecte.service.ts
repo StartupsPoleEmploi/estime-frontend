@@ -149,7 +149,7 @@ export class DeConnecteService {
   public unsetAllocationMensuelleNetASS(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = 0;
       this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
@@ -158,7 +158,7 @@ export class DeConnecteService {
   public unsetInfosRSA(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
     if(this.demandeurEmploiConnecte.situationFamiliale) {
@@ -264,6 +264,22 @@ export class DeConnecteService {
     }
   }
 
+  public unsetConjointRevenusMicroEntrepreneur(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur = false;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetConjointBeneficesTravailleurIndependant(): void {
+    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant = false;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetConjointSalaire(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.salarie = false;
@@ -282,9 +298,16 @@ export class DeConnecteService {
     }
   }
 
-  public unsetRevenusCreateurEntreprise(): void {
+  public unsetRevenusMicroEntrepreneur(): void {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetBeneficesTravailleurIndependant(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }

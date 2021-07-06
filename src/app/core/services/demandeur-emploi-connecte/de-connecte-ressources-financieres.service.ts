@@ -52,16 +52,22 @@ export class DeConnecteRessourcesFinancieresService {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois);
-      if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
-        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet);
+      const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
+      if(ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.revenusMicroEntreprise3DerniersMois);
+      }
+      if(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice);
+      }
+      if(ressourcesFinancieres.salairesAvantPeriodeSimulation) {
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet);
         }
-        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet);
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet);
         }
-        if(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet);
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet);
         }
       }
     }
@@ -76,6 +82,12 @@ export class DeConnecteRessourcesFinancieresService {
       if(ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantNet);
       }
+      if(ressourcesFinancieresConjoint.revenusMicroEntreprise3DerniersMois) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.revenusMicroEntreprise3DerniersMois);
+      }
+      if(ressourcesFinancieresConjoint.beneficesTravailleurIndependantDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.beneficesTravailleurIndependantDernierExercice);
+      }
     }
     return montant;
   }
@@ -87,7 +99,15 @@ export class DeConnecteRessourcesFinancieresService {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
         if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
           const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
+          if(ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
+            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
+          }
+          if(ressourcesFinancieresPersonne.revenusMicroEntreprise3DerniersMois) {
+            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.revenusMicroEntreprise3DerniersMois);
+          }
+          if(ressourcesFinancieresPersonne.beneficesTravailleurIndependantDernierExercice) {
+            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.beneficesTravailleurIndependantDernierExercice);
+          }
         }
       });
     }
@@ -132,11 +152,29 @@ export class DeConnecteRessourcesFinancieresService {
     return montant;
   }
 
-  public getRevenusTravailleurIndependantSur1Mois(): number {
+  public getRevenusMicroEntrepriseSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois) {
-      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois / 3);
+    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
+      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois / 3);
+    }
+    return montant;
+  }
+
+  public getBeneficesTravailleurIndependantDernierExercice(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice;
+    }
+    return montant;
+  }
+
+  public getBeneficesTravailleurIndependantSur1Mois(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice / 12);
     }
     return montant;
   }
@@ -192,8 +230,11 @@ export class DeConnecteRessourcesFinancieresService {
     if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()) {
       isValide = ressourcesFinancieres.allocationsCPAM.pensionInvalidite > 0;
     }
-    if(isValide && this.deConnecteInfosPersonnellesService.createurEntreprise()) {
-      isValide = ressourcesFinancieres.revenusCreateurEntreprise3DerniersMois > 0;
+    if(isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant()) {
+      isValide = ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0;
+    }
+    if(isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur()) {
+      isValide = ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0;
     }
     return isValide;
   }

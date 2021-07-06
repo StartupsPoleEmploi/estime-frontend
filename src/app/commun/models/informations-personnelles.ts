@@ -3,7 +3,8 @@ export class InformationsPersonnelles {
   dateNaissance: string;
   email: string;
   hasRevenusImmobilier: boolean;
-  createurEntreprise: boolean;
+  travailleurIndependant: boolean;
+  microEntrepreneur: boolean;
   habiteDansDOM: boolean;
   isProprietaireSansPretOuLogeGratuit: boolean;
   salarie: boolean;

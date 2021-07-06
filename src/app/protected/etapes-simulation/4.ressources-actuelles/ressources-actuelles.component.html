@@ -1,232 +1,202 @@
-  <app-page-loading
-      *ngIf="isPageLoadingDisplay"
-      message="Calcul de votre simulation en cours..."></app-page-loading>
-  <div class="container-fluid form-container-fluid">
-      <alert
-          type="danger"
-          *ngIf="messageErreur">
-          {{messageErreur}}
-      </alert>
-      <div class="div-title-formulaire">
-          <h1 class="h1-style-2">
-              4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}
-          </h1>
-          <div class="text-under-h1">
-              {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
-          </div>
-      </div>
-      <div class="block-ressources">
-          <div id="block-vos-ressources">
-              <button
-                  type="button"
-                  role="button"
-                  class="btn accordion-button"
-                  (click)="onClickButtonVosRessources()">
-                  <div class="container-fluid container-fluid-button">
-                      <div class="row">
-                          <div class="col-2 col-md-1 col-euro-sign">
-                              <img
-                                  alt=""
-                                  class="euro-sign"
-                                  src="./assets/images/euro.svg">
-                          </div>
-                          <div class="col-9 col-md-10 col-text-button">
-                              <div class="text-button">Vos ressources</div>
-                              <div *ngIf="!isVosRessourcesDisplay">
-                                  Total : {{montantVosRessources}} €
-                              </div>
-                          </div>
-                          <div class="col-1 col-md-1 col-chevron">
-                              <div>
-                                  <i
-                                      *ngIf="isVosRessourcesDisplay"
-                                      class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                                  <i
-                                      *ngIf="!isVosRessourcesDisplay"
-                                      class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </button>
-              <app-vos-ressources-financieres
-                  [hidden]="!isVosRessourcesDisplay"
-                  [ressourcesFinancieres]="ressourcesFinancieres"
-                  (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter()">
-              </app-vos-ressources-financieres>
-          </div>
-          <div
-              *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()"
-              id="block-ressources-conjoint">
-              <button
-                  type="button"
-                  role="button"
-                  aria-describedby="label-vos-ressources"
-                  class="btn accordion-button"
-                  (click)="onClickButtonRessourcesConjoint()">
-                  <div class="container-fluid container-fluid-button">
-                      <div class="row">
-                          <div class="col-2 col-md-1 col-euro-sign">
-                              <img
-                                  alt=""
-                                  class="euro-sign"
-                                  src="./assets/images/euro.svg">
-                          </div>
-                          <div class="col-9 col-md-10 col-text-button">
-                              <div id="label-vos-ressources" class="text-button">Ressources conjoint(e)</div>
-                              <div *ngIf="!isRessourcesConjointDisplay">
-                                  Total : {{montantRessourcesConjoint}} €
-                              </div>
-                          </div>
-                          <div class="col-1 col-md-1 col-chevron">
-                              <div>
-                                  <i
-                                      *ngIf="isRessourcesConjointDisplay"
-                                      class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                                  <i
-                                      *ngIf="!isRessourcesConjointDisplay"
-                                      class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </button>
-              <app-ressources-financieres-conjoint
-                  [hidden]="!isRessourcesConjointDisplay"
-                  (validationRessourcesConjointEventEmitter)="traiterValidationRessourcesFinancieresConjointEventEmitter()">
+<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
+<div class="container-fluid form-container-fluid">
+    <alert type="danger" *ngIf="messageErreur">
+        {{messageErreur}}
+    </alert>
+    <div class="div-title-formulaire">
+        <h1 class="h1-style-2">
+            4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}
+        </h1>
+        <div class="text-under-h1">
+            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+        </div>
+    </div>
+    <div class="block-ressources">
+        <div id="block-vos-ressources">
+            <button type="button" role="button" class="btn accordion-button" (click)="onClickButtonVosRessources()">
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img alt="" class="euro-sign" src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div class="text-button">Vos ressources</div>
+                            <!-- <div *ngIf="!isVosRessourcesDisplay">
+                            Total des revenus : {{montantRevenusVosRessources}} €
+                        </div>
+                        <div *ngIf="!isVosRessourcesDisplay">
+                            Total des aides : {{montantAidesVosRessources}} €
+                        </div> -->
+                            <div *ngIf="!isVosRessourcesDisplay">
+                                Total : {{montantVosRessources}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i *ngIf="isVosRessourcesDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i *ngIf="!isVosRessourcesDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <app-vos-ressources-financieres [hidden]="!isVosRessourcesDisplay"
+                [ressourcesFinancieres]="ressourcesFinancieres"
+                (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter()">
+            </app-vos-ressources-financieres>
+        </div>
+        <div *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()"
+            id="block-ressources-conjoint">
+            <button type="button" role="button" aria-describedby="label-vos-ressources" class="btn accordion-button"
+                (click)="onClickButtonRessourcesConjoint()">
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img alt="" class="euro-sign" src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div id="label-vos-ressources" class="text-button">Ressources conjoint(e)</div>
+                            <!-- <div *ngIf="!isRessourcesConjointDisplay">
+                            Total revenus : {{montantRevenusRessourcesConjoint}} €
+                        </div>
+                        <div *ngIf="!isRessourcesConjointDisplay">
+                            Total des aides : {{montantAidesRessourcesConjoint}} €
+                        </div> -->
+                            <div *ngIf="!isRessourcesConjointDisplay">
+                                Total : {{montantRessourcesConjoint}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i *ngIf="isRessourcesConjointDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i *ngIf="!isRessourcesConjointDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <app-ressources-financieres-conjoint [hidden]="!isRessourcesConjointDisplay"
+                (validationRessourcesConjointEventEmitter)="traiterValidationRessourcesFinancieresConjointEventEmitter()">
 
-              </app-ressources-financieres-conjoint>
-          </div>
-          <div
-              *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()"
-              id="block-ressources-personnes-a-charge">
-              <button
-                  type="button"
-                  role="button"
-                  aria-describedby="label-ressources-conjoint"
-                  class="btn accordion-button"
-                  (click)="onClickButtonRessourcesPersonnesCharge()">
-                  <div class="container-fluid container-fluid-button">
-                      <div class="row">
-                          <div class="col-2 col-md-1 col-euro-sign">
-                              <img
-                                  alt=""
-                                  class="euro-sign"
-                                  src="./assets/images/euro.svg">
-                          </div>
-                          <div class="col-9 col-md-10 col-text-button">
-                              <div id="label-ressources-conjoint" class="text-button">Ressources personne(s) à charge</div>
-                              <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                  Total : {{montantRessourcesPersonnesCharge}} €
-                              </div>
-                          </div>
-                          <div class="col-1 col-md-1 col-chevron">
-                              <div>
-                                  <i
-                                      *ngIf="isRessourcesPersonnesChargeDisplay"
-                                      class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                                  <i
-                                      *ngIf="!isRessourcesPersonnesChargeDisplay"
-                                      class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </button>
-              <app-ressources-financieres-personnes-a-charge
-                  [hidden]="!isRessourcesPersonnesChargeDisplay"
-                  (validationRessourcesPersonnesAChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
+            </app-ressources-financieres-conjoint>
+        </div>
+        <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()"
+            id="block-ressources-personnes-a-charge">
+            <button type="button" role="button" aria-describedby="label-ressources-conjoint"
+                class="btn accordion-button" (click)="onClickButtonRessourcesPersonnesCharge()">
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img alt="" class="euro-sign" src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div id="label-ressources-conjoint" class="text-button">Ressources personne(s) à charge
+                            </div>
+                            <!-- <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                            Total revenus : {{montantRevenusPersonnesCharge}} €
+                        </div>
+                        <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                            Total des aides : {{montantAidesPersonnesCharge}} €
+                        </div> -->
+                            <div *ngIf="!isRessourcesPersonnesChargeDisplay">
+                                Total : {{montantRessourcesPersonnesCharge}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i *ngIf="isRessourcesPersonnesChargeDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i *ngIf="!isRessourcesPersonnesChargeDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <app-ressources-financieres-personnes-a-charge [hidden]="!isRessourcesPersonnesChargeDisplay"
+                (validationRessourcesPersonnesAChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
 
-              </app-ressources-financieres-personnes-a-charge>
-          </div>
-          <div id="block-ressources-foyer">
-              <button
-                  type="button"
-                  role="button"
-                  class="btn accordion-button"
-                  aria-describedby="label-ressources-foyer"
-                  (click)="onClickButtonRessourcesFoyer()">
-                  <div class="container-fluid container-fluid-button">
-                      <div class="row">
-                          <div class="col-2 col-md-1 col-euro-sign">
-                              <img
-                                  alt=""
-                                  class="euro-sign"
-                                  src="./assets/images/euro.svg">
-                          </div>
-                          <div class="col-9 col-md-10 col-text-button">
-                              <div id="label-ressources-foyer" class="text-button">
-                                  Ressources du foyer
-                                  <div
-                                  id="infobulle-ressource-foyer"
-                                  role="tooltip"
-                                  class="img-interrogation-icon"
-                                  [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}"
-                                  placement="right"
-                                  tag-action="ouverture-infobulle-ressource-foyer"
-                                  [popover]="popoverRessourceFoyerTemplate"
-                                  (click)="onClickPopoverRessourceFoyer($event)"
-                                  #popoverRessourceFoyer="bs-popover">
-                              </div>
-                              </div>
-                              <div *ngIf="!isRessourcesFoyerDisplay">
-                                  Total : {{montantRessourcesFoyer}} €
-                              </div>
-                          </div>
-                          <div class="col-1 col-md-1 col-chevron">
-                              <div>
-                                  <i
-                                      *ngIf="isRessourcesFoyerDisplay"
-                                      class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
-                                  <i
-                                      *ngIf="!isRessourcesFoyerDisplay"
-                                      class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </button>
-              <app-ressources-financieres-foyer
-                  [hidden]="!isRessourcesFoyerDisplay"
-                  [ressourcesFinancieres]="ressourcesFinancieres"
-                  (validationRessourcesFoyerEventEmitter)="traiterValidationRessourcesFinancieresFoyerEventEmitter()"></app-ressources-financieres-foyer>
-          </div>
-      </div>
-      <div class="div-buttons-form row d-flex justify-content-center">
-          <button
-              class="btn-style-perso-2 first-btn"
-              (click)="onClickButtonRetour()">
-              <div>
-                  <img alt="" src="./assets/images/return-arrow-v2.svg">
-                  <span>Retour</span>
-              </div>
-          </button>
-          <button
-              class="btn-style-perso-1 second-btn"
-              [ngClass]="{'order-first': screenService.isExtraSmallScreen()}"
-              type="button"
-              data-testid="btn-obtenir-simulation"
-              (click)="onClickButtonObtenirSimulation()">
-              <div>
-                  <span>Obtenir ma simulation</span>
-                  <img alt="" src="./assets/images/icon-bt-primaire.svg">
-              </div>
-          </button>
-      </div>
-  </div>
+            </app-ressources-financieres-personnes-a-charge>
+        </div>
+        <div id="block-ressources-foyer">
+            <button type="button" role="button" class="btn accordion-button" aria-describedby="label-ressources-foyer"
+                (click)="onClickButtonRessourcesFoyer()">
+                <div class="container-fluid container-fluid-button">
+                    <div class="row">
+                        <div class="col-2 col-md-1 col-euro-sign">
+                            <img alt="" class="euro-sign" src="./assets/images/euro.svg">
+                        </div>
+                        <div class="col-9 col-md-10 col-text-button">
+                            <div id="label-ressources-foyer" class="text-button">
+                                Ressources du foyer
+                                <div id="infobulle-ressource-foyer" role="tooltip" class="img-interrogation-icon"
+                                    [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}" placement="right"
+                                    tag-action="ouverture-infobulle-ressource-foyer"
+                                    [popover]="popoverRessourceFoyerTemplate"
+                                    (click)="onClickPopoverRessourceFoyer($event)" #popoverRessourceFoyer="bs-popover">
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="!isRessourcesFoyerDisplay">
+                            Total des aides des mois précédents : {{montantAidesFoyer}} €
+                        </div> -->
+                            <div *ngIf="!isRessourcesFoyerDisplay">
+                                Total : {{montantRessourcesFoyer}} €
+                            </div>
+                        </div>
+                        <div class="col-1 col-md-1 col-chevron">
+                            <div>
+                                <i *ngIf="isRessourcesFoyerDisplay"
+                                    class="fas fa-chevron-up mt-auto mb-auto mr-4 ml-auto"></i>
+                                <i *ngIf="!isRessourcesFoyerDisplay"
+                                    class="fas fa-chevron-down mt-auto mb-auto mr-4 ml-auto"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </button>
+            <app-ressources-financieres-foyer [hidden]="!isRessourcesFoyerDisplay"
+                [ressourcesFinancieres]="ressourcesFinancieres"
+                (validationRessourcesFoyerEventEmitter)="traiterValidationRessourcesFinancieresFoyerEventEmitter()">
+            </app-ressources-financieres-foyer>
+        </div>
+    </div>
+    <div class="div-buttons-form row d-flex justify-content-center">
+        <div class="" [ngClass]="{'text-center': this.screenService.isExtraSmallScreen()}">
+            <button class="btn-style-perso-2 first-btn" (click)="onClickButtonRetour()">
+                <div>
+                    <img alt="" src="./assets/images/return-arrow-v2.svg">
+                    <span>Retour</span>
+                </div>
+            </button>
+        </div>
+        <div [ngStyle]="{'margin-bottom': (this.screenService.isExtraSmallScreen())?'10vh':'0'}"></div>
+        <div class="" [ngClass]="{'text-center': this.screenService.isExtraSmallScreen()}">
+            <button
+                class="btn-style-perso-1 second-btn"
+                type="button"
+                data-testid="btn-obtenir-simulation"
+                (click)="onClickButtonObtenirSimulation()">
+                <div>
+                    <span>Obtenir ma simulation</span>
+                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
 
 
-  <ng-template #popoverRessourceFoyerTemplate>
-    <div
-        class="container"
-        (click)="onClickPopoverRessourceFoyer($event)">
+<ng-template #popoverRessourceFoyerTemplate>
+    <div class="container" (click)="onClickPopoverRessourceFoyer($event)">
         <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2  ml-auto"
+            <i class="fas fa-times-circle mb-2  ml-auto"
                 (click)="onClickClosePopoverRessourceFoyerTemplate($event, popoverRessourceFoyer)"></i>
         </div>
         <div class="row">
-
             <p>
                 Ces différents montants permettent de savoir si vous pourriez
                 <b>
@@ -235,6 +205,4 @@
             </p>
         </div>
     </div>
-  </ng-template>
-
-
+</ng-template>

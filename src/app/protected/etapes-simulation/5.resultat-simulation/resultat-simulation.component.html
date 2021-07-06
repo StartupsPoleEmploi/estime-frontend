@@ -25,8 +25,8 @@
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
-                    <img alt="" [src]="getSrcImgButtonImprimerSimulation()">
-                    <span>{{getTextButtonImprimerSimulation()}}</span>
+                    <img alt="" src="./assets/images/download.svg">
+                    <span>Télécharger la simulation</span>
                 </div>
             </button>
         </div>
@@ -37,12 +37,7 @@
         </div>
     </div>
     <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4 row-style-2">
-      <div class="col-12 col-md-6 mt-auto mb-auto">
-        <h4 class="h4-style-1">
-            Avant reprise d'emploi
-        </h4>
-      </div>
-      <div id="card-revenus-actuels" class="col-12 col-md-6">
+      <div id="card-revenus-actuels" class="col-12 col-md-12">
         <div class="card">
           <h3 style="font-family: Lato">Revenus et aides</h3>
           <span data-testid="span-revenus-aides-actuelles">{{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €</span>
@@ -50,15 +45,10 @@
       </div>
     </div>
     <div id="row-montants-total" class="row row-style-2">
-        <div *ngIf="!screenService.isExtraSmallScreen()" class="col-12 col-md-3 pl-0">
+        <div class="col-12 col-md-12 pl-0 pr-0">
           <div class="card">
-            <h4 class="h4-style-1 text-center  mt-auto mb-auto">Avant reprise d'emploi</h4>
-          </div>
-        </div>
-        <div class="col-12 col-md-9 pl-0 pr-0">
-          <div class="card">
-            <h4 class="h4-style-1 mt-auto mb-auto">
-                Mes ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+            <h4 id="details_ressources_estimees_title" class="h4-style-1 mt-auto mb-auto">
+                Détail des ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
             </h4>
           </div>
         </div>
@@ -66,29 +56,17 @@
     <div
         class="row "
         [ngClass]="{'card-deck': !screenService.isExtraSmallScreen(), 'card-sm-simulations': screenService.isExtraSmallScreen()}">
-        <div *ngIf="!screenService.isExtraSmallScreen()"
-            id="card-revenus-actuels"
-            class="col-12 col-md-3">
-            <div class="card">
-              <div class="div-title-card">
-                <h3 style="font-family: Lato">Revenus et aides</h3>
-              </div>
-              <div class="div-span-card">
-                <span data-testid="span-revenus-aides-actuelles">
-                    {{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €
-                </span>
-              </div>
-            </div>
-        </div>
         <div
-            class="col-12 col-md-9 card first-card"
+            class="col-12 col-md-12 card first-card"
             *ngFor="let simulationMensuel of simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
             <div class="card second-card" role="button">
                 <div
-                    [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel)}"
+                    [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
                     class="card-body"
                     data-testid="card-simulation-mensuel"
+                    (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
+                    (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
                     (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
                     <div class="row">
                         <div id="span-mois-annee" class="col-6 mt-auto mb-auto p-0 col-md-12">
@@ -153,7 +131,7 @@
             id="resultat_simulation_bouton_refaire_simulation"
             class="btn-style-perso-1 second-btn"
             type="button"
-            data-testid="btn-obtenir-simulation"
+            data-testid="btn-refaire-simulation"
             (click)="onClickButtonRefaireSimulation()">
             <div class="px-0 justify-content-center">
                 <span>Refaire une simulation</span>

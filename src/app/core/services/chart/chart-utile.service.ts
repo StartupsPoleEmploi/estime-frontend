@@ -144,7 +144,8 @@ export class ChartUtileService {
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusTravailleurIndependantSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois();
     }
     dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);
@@ -259,6 +260,15 @@ export class ChartUtileService {
       }
     );
 
+    dataObject.datasets.set(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR,
+      {
+        label: LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.MICRO_ENTREPRENEUR,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
     dataObject.datasets.set(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI,
       {
         label: ChartUtileService.LIBELLE_RESSOURCES_AVANT_REPRISE_EMPLOI.padEnd(20,' '),
@@ -294,7 +304,7 @@ export class ChartUtileService {
 
     options.responsive = true;
     options.maintainAspectRation = true;
-    options.aspectRatio = this.screenService.isExtraSmallScreen() ? 0.8 : 3;
+    options.aspectRatio = this.getAspectRatio();
     options.legend = this.getLegend(data);
     options.plugins = this.getPlugins(data);
     options.scales = this.getScales();
@@ -303,10 +313,16 @@ export class ChartUtileService {
     return options;
   }
 
+  private getAspectRatio() {
+    if(this.screenService.isExtraSmallScreen()) return 0.5;
+    if(this.screenService.isTabletScreen()) return 1;
+    return 3;
+  }
+
   private getLegend(data: Data): Legend {
     const legend = new Legend();
 
-    legend.position = this.screenService.isExtraSmallScreen()
+    legend.position = (this.screenService.isExtraSmallScreen() || this.screenService.isTabletScreen())
       ? 'bottom'
       : 'right';
     legend.align = 'start';
@@ -349,7 +365,7 @@ export class ChartUtileService {
     datalabels.color = 'black';
     datalabels.display = function (ctx) {
       return (
-        ctx.chart.options.legend.position == 'right' &&
+        ctx.chart.options.aspectRatio != 0.5 &&
         ctx.datasetIndex == datasetsSize - 1
       );
     };

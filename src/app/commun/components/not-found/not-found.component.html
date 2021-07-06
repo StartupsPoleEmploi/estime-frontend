@@ -1,3 +1,36 @@
 <div class="container-fluid">
-  <alert type="warning">Cette page n'existe pas.</alert>
+  <div class="row">
+    <div id="not-found-first-col" class="col-md-6">
+      <div class="container-fluid">
+        <div class="row row-title">
+          <div class="col-md-12">
+            <h1 id="not-found-title">Page inconnue !</h1>
+          </div>
+        </div>
+        <div class="row row-text">
+          <div class="col-md-12">
+            <p id="not-found-text">Désolés, la page que vous demandez n'existe pas.</p>
+          </div>
+        </div>
+        <div class="row row-button">
+          <div class="col-md-12">
+            <button
+                id="not-found-retour-accueil-button"
+                class="btn-style-perso-1 first-btn"
+                type="button"
+                (click)="onClickButtonRetourAccueil()">
+                <div class="">
+                    <img alt="Flèche retour à l'accueil" class="float-left" src="./assets/images/return-arrow-v2.svg">
+                    <span>Retour à l'accueil</span>
+                </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="404-image" class="col-md-6">
+      <img alt="Image 404 page inconnue" src="./assets/images/error-404-colour.svg">
+    </div>
+  </div>
+
 </div>

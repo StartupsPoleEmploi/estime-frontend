@@ -27,6 +27,7 @@ export class ResultatSimulationComponent implements OnInit {
   simulationAidesSociales: SimulationAidesSociales;
   simulationSelected: SimulationMensuelle;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  hoveredButtonSimulationMensuelle: number;
 
 
   constructor(
@@ -58,6 +59,14 @@ export class ResultatSimulationComponent implements OnInit {
       this.aideSocialeSelected = null;
       this.selectAideAfficherDetail();
     }
+  }
+
+  public onMouseOverButtonSimulationMensuelle(index) {
+    this.hoveredButtonSimulationMensuelle = index;
+  }
+
+  public onMouseLeaveButtonSimulationMensuelle() {
+    this.hoveredButtonSimulationMensuelle = -1;
   }
 
   public changeAideSocialeSelected(aideSocialeSelected: AideSociale) {
@@ -94,22 +103,6 @@ export class ResultatSimulationComponent implements OnInit {
 
   public onClickButtonRefaireSimulation(): void {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
-  }
-
-  public getSrcImgButtonImprimerSimulation(): string {
-    let text = './assets/images/print.svg';
-    if(this.screenService.isExtraSmallScreen()) {
-      text = './assets/images/download.svg';
-    }
-    return text;
-  }
-
-  public getTextButtonImprimerSimulation(): string {
-    let text = 'Imprimer la simulation';
-    if(this.screenService.isExtraSmallScreen()) {
-      text = 'Télécharger la simulation';
-    }
-    return text;
   }
 
   private loadDataSimulationAidesSociales(): void {

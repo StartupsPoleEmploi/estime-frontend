@@ -30,7 +30,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = null;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
@@ -38,9 +38,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = 0;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
-      this.unsetASS();
-      this.unsetRSA();
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
@@ -48,9 +46,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = 0;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
-      this.unsetARE();
-      this.unsetRSA();
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
@@ -58,9 +54,25 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = 0;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
-      this.unsetARE();
-      this.unsetASS();
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
+  public onClickCheckBoxIsMicroEntrepreneur(): void {
+    if (!this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
+      this.unsetRevenusMicroEntrepreneur();
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.unsetBeneficesTravailleurIndependant();
+    }
+  }
+
+  public onClickCheckBoxIsTravailleurIndependant(): void {
+    if (!this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
+      this.unsetBeneficesTravailleurIndependant();
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.unsetRevenusMicroEntrepreneur();
     }
   }
 
@@ -68,7 +80,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(!this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.pensionInvalidite = null;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource= false;
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
@@ -84,6 +96,8 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   public onClickCheckBoxIsSansRessource(): void {
     this.unsetSalaire();
     this.unsetRessourcesAllocations();
+    this.unsetRevenusMicroEntrepreneur();
+    this.unsetBeneficesTravailleurIndependant();
   }
 
   public handleKeyUpOnButtonSituation(e: any, situationConjoint: string) {
@@ -111,6 +125,14 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
       if(situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = !this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
+      }
+      if(situationConjoint === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
+        this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = !this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
+        this.onClickCheckBoxIsMicroEntrepreneur();
+      }
+      if(situationConjoint === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
+        this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = !this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant;
+        this.onClickCheckBoxIsTravailleurIndependant();
       }
       if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
         this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = !this.nouvellePersonneACharge.informationsPersonnelles.sansRessource;
@@ -157,6 +179,20 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF) {
       this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
       this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = null;
+    }
+  }
+
+  private unsetRevenusMicroEntrepreneur(): void {
+    if(this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
+      this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+    }
+  }
+
+  private unsetBeneficesTravailleurIndependant(): void {
+    if(this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
+      this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
     }
   }
 
