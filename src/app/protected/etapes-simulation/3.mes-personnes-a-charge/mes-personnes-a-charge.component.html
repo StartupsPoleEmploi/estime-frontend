@@ -62,10 +62,10 @@
                   <button
                       name="button-card-add-personne"
                       class="button-card-add-personne"
+                      (click)="onClickButtonAjouterPersonne()"
                       (keyup)="handleKeyUpOnButtonAjouterPersonne($event)">
                       <div
                           class="card card-add-personne"
-                          (click)="onClickButtonAjouterPersonne()"
                           data-testid="btn-ajouter-personne-charge">
                           <div class="card-body d-flex align-items-center">
                               <div
