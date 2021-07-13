@@ -319,3 +319,15 @@ VS Code is available on [the official website](https://code.visualstudio.com/)
 - TypeScript Hero
 - vsc-organize-imports
 - ESLint
+
+# [CLI] List of commands
+
+|        Commande    |               Description                   |
+|--------------------|---------------------------------------------|
+|npm start           |Start application on localhost               |
+|npm run build:prod  |Build application production environment     |
+|npm run start:ngx   |Launch application with ngx to get code coverage by Cypess tests|
+|npm run cy:open     |Launch Cypress Test Runner                   |
+|npm run cy:run      |Launch Cypress tests                         |
+|npx browserlist     |List browser compatibility                   | 
+|npm run stats:size  |Launch bundle size analyser                  |

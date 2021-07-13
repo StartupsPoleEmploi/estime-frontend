@@ -329,7 +329,17 @@ foo@bar:~estime-frontend$ npm run **nom_script**
 - vsc-organize-imports
 - ESLint
 
+# [CLI] Liste des commandes
 
+|        Commande    |               Description                   |
+|--------------------|---------------------------------------------|
+|npm start           |Démarrer l'application sur localhost         |
+|npm run build:prod  |Build l'application environnement production |
+|npm run start:ngx   |Lancer l'application avec ngx pour remonter couverture code par les tests Cypress|
+|npm run cy:open     |Lancer Cypress Test Runner                   |
+|npm run cy:run      |Lancer les tests Cypress                     |
+|npx browserlist     |Lister versions navigateur compatibles       | 
+|npm run stats:size  |Lancer l'analyse de la taille du bundle      |
 
 
 
