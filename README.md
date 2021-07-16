@@ -338,7 +338,7 @@ foo@bar:~estime-frontend$ npm run **nom_script**
 |npm run start:ngx   |Lancer l'application avec ngx pour remonter couverture code par les tests Cypress|
 |npm run cy:open     |Lancer Cypress Test Runner                   |
 |npm run cy:run      |Lancer les tests Cypress                     |
-|npx browserlist     |Lister versions navigateur compatibles       | 
+|npx browserlist     |Lister versions des navigateurs compatibles  | 
 |npm run stats:size  |Lancer l'analyse de la taille du bundle      |
 
 
