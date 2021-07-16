@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Individu } from '@models/individu';
 import { KeysStorageEnum } from "@enumerations/keys-storage.enum";
 import { CookieService } from 'ngx-cookie-service';
 import { Environment } from '@app/commun/models/environment';

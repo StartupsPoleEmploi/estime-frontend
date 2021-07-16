@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { Subscription } from 'rxjs';
@@ -21,9 +21,7 @@ export class FooterComponent implements OnInit {
     this.subscribeRouteNavigationEndObservable();
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();

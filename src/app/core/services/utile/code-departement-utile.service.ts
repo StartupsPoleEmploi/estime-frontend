@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { NumberUtileService } from './number-util.service';
-import * as moment from 'moment';
-
 @Injectable({providedIn: 'root'})
 export class CodeDepartementUtileService {
 
