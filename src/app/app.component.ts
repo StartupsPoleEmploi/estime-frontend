@@ -19,9 +19,7 @@ export class AppComponent implements OnInit {
     this.subscribeRouteNavigationEndObservable();
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();

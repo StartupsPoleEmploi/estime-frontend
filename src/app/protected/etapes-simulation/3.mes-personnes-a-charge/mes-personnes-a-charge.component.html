@@ -30,6 +30,7 @@
                       *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                       <div class="card-header">
                           <i
+                              alt="Iĉone croix fermer"
                               role="button"
                               class="fas fa-times-circle float-right"
                               (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
@@ -72,7 +73,7 @@
                                   id="row-card-body-add-personne"
                                   class="row">
                                   <div class="col-3 col-card-body">
-                                      <img alt="" src="./assets/images/ajouter-personne.svg">
+                                      <img alt="Icône ajouter personne à charge" src="./assets/images/ajouter-personne.svg">
                                   </div>
                                   <div class="col-9 col-card-body">
                                       <span>
@@ -100,7 +101,7 @@
                 class="btn-style-perso-2 first-btn"
                 (click)="onClickButtonRetour()">
                 <div>
-                    <img alt="" src="./assets/images/return-arrow-v2.svg">
+                    <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -110,7 +111,7 @@
                 (click)="onClickButtonSuivant()">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                    <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">
                 </div>
             </button>
           </div>
