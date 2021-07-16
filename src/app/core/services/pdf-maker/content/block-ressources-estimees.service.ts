@@ -16,7 +16,6 @@ import { Text } from '../models/text';
 import { ImagesBase64Enum } from "@app/commun/enumerations/images-base64.enum";
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { LibellesRessourcesFinancieresEnum } from '@app/commun/enumerations/libelles-ressources-financieres.enum';
-import { style } from '@angular/animations';
 
 @Injectable({ providedIn: 'root' })
 export class BlockRessourcesEstimeesService {

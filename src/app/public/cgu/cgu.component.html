@@ -54,7 +54,7 @@
       ESTIME utilise le moteur de calcul OpenFisca pour réaliser la simulation des ressources financières de l’utilisateur concernant la Prime d’activité. OpenFisca est un logiciel open source développé par Etalab, une administration publique rattachée à la Direction interministérielle du numérique.
       <br>
       <br>
-      La simulation est réalisée à partir des informations renseignées par l’utilisateur lors de son utilisation du service et des informations remontées par l’intermédiaire des API de Pôle emploi. 
+      La simulation est réalisée à partir des informations renseignées par l’utilisateur lors de son utilisation du service et des informations remontées par l’intermédiaire des API de Pôle emploi.
       <br>
       <br>
       Aussi à des fins d'amélioration de service, il est possible que vous receviez par mail un questionnaire de satisfaction suite à l'utilisation du service Estime.
@@ -95,14 +95,13 @@
       id="div-text-info-suppression-donnees-perso"
       [class]="isErreurMessageInfoSuppression ? 'message-error' : 'message-ok'"
       class="card mt-3"
-      *ngIf="messageInfoSuppressionDonneesPerso"
-      >
+      *ngIf="messageInfoSuppressionDonneesPerso">
                 <div class="row">
                     <div
                         id="img-text-info-suppression-donnees-perso"
                         class="col-auto">
                         <div>
-                          <img alt="" [src]="isErreurMessageInfoSuppression ? './assets/images/info-blue-1.svg' : './assets/images/check-mark.svg'">
+                          <img alt="Icône résultat suppression données personnelles" [src]="isErreurMessageInfoSuppression ? './assets/images/info-blue-1.svg' : './assets/images/check-mark.svg'">
                         </div>
                     </div>
                     <div

@@ -10,7 +10,6 @@ import { Personne } from "@models/personne";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { DateUtileService } from './date-util.service';
 import * as moment from 'moment';
-import { Salaire } from '@app/commun/models/salaire';
 
 @Injectable({ providedIn: 'root' })
 export class PersonneUtileService {
