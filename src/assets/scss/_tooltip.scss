@@ -3,12 +3,14 @@
   vertical-align: sub;
   margin-left: 5px;
   width: 23px;
+  height: 23px;
+  background-size: 100% 100%;
   cursor: pointer;
-  content: url("../images/question.svg");
+  background: no-repeat  url("../images/question.svg");
   &:hover {
-    content: url("../images/question_hover.svg");
+    background: no-repeat  url("../images/question_hover.svg");
   }
   &.popover-open {
-    content: url("../images/question_click.svg");
+    background: no-repeat  url("../images/question_click.svg");
   }
 }
