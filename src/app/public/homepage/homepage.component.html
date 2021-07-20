@@ -13,7 +13,9 @@
                 <div id="first-div-inside-first-col" class="align-text-bottom">
                     <div class="div-span-title">
                         <span>
-                            Vous percevez un minima social ?
+                            Vous percevez un
+                            <div *ngIf="screenService.isScreenInferieur(376)"></div>
+                            minima social ?
                         </span>
                     </div>
                     <div [ngClass]="{'btn-sticks':this.stickyButton}">
