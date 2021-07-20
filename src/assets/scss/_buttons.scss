@@ -92,7 +92,6 @@
   }
 
   .img-btn-se-connecter {
-    content: url("../images/personne.svg");
     color: #1B2B67;
   }
   .label-btn-se-connecter {
@@ -132,8 +131,10 @@
     margin-left: 7px;
   }
   .img-btn-se-deconnecter {
-    content: url("../images/signout.svg");
+    background: no-repeat url("../images/signout.svg");
     width: 18px;
+    height: 19px;
+    background-size: 100% 100%;
   }
 }
 .btn-se-deconnecter-sm {
@@ -142,7 +143,7 @@
   float: right;
   height: 18px;
   .img-btn-se-deconnecter {
-    content: url("../images/signout.svg");
+    background: no-repeat url("../images/signout.svg");
     height: 18px;
     width: 18px;
   }
