@@ -3,7 +3,6 @@ import { ElementRef, Injectable } from '@angular/core';
 @Injectable({providedIn: 'root'})
 export class ControleChampFormulaireService {
 
-
   REGEX_DECIMAL = "^[0-9]{1,5}((\.|\,)[0-9]{1,2})?$";
   MESSAGE_CHAMP_OBLIGATOIRE = "Ce champ est obligatoire"
   MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX = "Tous les champs marqués d'un astérisque (*) sont obligatoires";
@@ -23,13 +22,12 @@ export class ControleChampFormulaireService {
 
   public isKeyAuthorizeForDecimal(event): boolean {
     let pattSeparator = /^(\.|\,)$/;
-    return pattSeparator.test(event.key) || this.isKeyAuthorizeForNumberOnly(event);
+    return pattSeparator.test(event.key) || this.isKeyAuthorizeForNumberOnly(event) || this.isExceptKeyAuthorized(event);
   }
 
   public isKeyAuthorizeForNumberOnly(event): boolean {
     let patt = /^([0-9])$/;
-    let result = patt.test(event.key);
-    return result;
+    return patt.test(event.key) || this.isExceptKeyAuthorized(event);
   }
 
   public focusOnFirstInvalidElement(elementRef: ElementRef): void {
@@ -45,10 +43,9 @@ export class ControleChampFormulaireService {
         invalidElementsToFocus.focus();
       }
     }
-
-
   }
 
-
-
+  private isExceptKeyAuthorized(event): boolean {
+    return event.key === "Backspace" || event.key === "Tab";
+  }
 }
