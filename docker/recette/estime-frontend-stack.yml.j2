@@ -20,11 +20,6 @@ services:
       interval: 1m
       retries: 10
       start_period: 15s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "5"
     deploy:
       replicas: 2
       resources:
