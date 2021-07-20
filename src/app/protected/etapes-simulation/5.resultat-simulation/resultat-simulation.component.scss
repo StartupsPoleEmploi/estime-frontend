@@ -45,7 +45,7 @@
     }
     div {
       height: 100%;
-      @media #{$small-device} {
+      @media #{$extra-small-device} {
         max-width: 565px;
       }
       font-size: 16px;
