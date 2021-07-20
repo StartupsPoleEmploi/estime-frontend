@@ -38,14 +38,25 @@
                     <br>
                     <span class="text-document">
                         - Votre
-                        <span class="text-important ">
-                            notification de droits CAF
+                        <span class="text-important">
+                            notification de droits
+                            <div *ngIf="screenService.isScreenInferieur(376)"></div>
+                            CAF ou MSA
                             <a
                                 target="_blank"
                                 aria-describedby="infobulle-derniere-notification-pole-emploi"
                                 href="./assets/documents/attestation-caf.pdf">
                                 <div id="infobulle-derniere-notification-pole-emploi" role="infobulle-notification-droits-caf" class="img-interrogation-icon" tag-action="ouverture-infobulle-notification-droits-caf"></div>
                             </a>
+                        </span>
+                    </span>
+                    <br>
+                    <span class="text-document">
+                        - Votre
+                        <span class="text-important ">
+                            dernière notification
+                            <div *ngIf="screenService.isScreenInferieur(376)"></div>
+                            de pension d'invalidité
                         </span>
                     </span>
                 </p>

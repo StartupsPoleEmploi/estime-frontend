@@ -13,6 +13,28 @@
   }
 }
 
+.btn-imprimer-simulation {
+
+  img {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+  }
+  #telecharger_simulation_text {
+    text-decoration: none;
+    color: $color-blue-2;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
+
 .container-fluid {
   margin-top: 2rem;
   padding-left: 15px;
@@ -171,7 +193,7 @@
             font-size: 22px;
             font-weight: 900;
           }
-          background-color: $color-blue-9;
+          background-color: $color-blue-8;
         }
         &.hovered {
           background-color: $color-blue-7;
