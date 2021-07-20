@@ -229,16 +229,6 @@
   max-height: fit-content;
 }
 
-.btn-imprimer-simulation {
-  @extend .btn-style-perso-4;
-  margin: auto;
-  width: 250px;
-  img {
-    width: 30px;
-  }
-}
-
-
 .btn-group-input-date {
   display: flex !important;
   .jour-input {
