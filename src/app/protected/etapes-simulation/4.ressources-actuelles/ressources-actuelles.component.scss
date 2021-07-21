@@ -94,7 +94,11 @@
     background-color: unset;
   }
   .btn-style-perso-1 {
-    width: 250px;
+
+    width: 260px;
+    span {
+      margin-left: 3px;
+    }
     @media #{$extra-small-device} {
       line-height: 1.2rem;
       margin-bottom: 1rem;
