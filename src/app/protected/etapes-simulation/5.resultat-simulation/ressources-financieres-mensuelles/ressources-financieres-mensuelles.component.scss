@@ -15,7 +15,7 @@
       padding-left: 6px;
     }
     &.active {
-      background-color: $color-blue-8;
+      background-color: $color-blue-8!important;
     }
     &:hover {
       background-color: $color-blue-7!important;
@@ -87,9 +87,6 @@
       max-height: unset;
       .row {
         padding-left: 6px;
-      }
-      &.active {
-        background-color: $color-grey-1;
       }
     }
     hr {
