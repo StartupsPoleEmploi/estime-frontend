@@ -7,6 +7,7 @@ import { DateUtileService } from '../utile/date-util.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 import { DeConnecteBenefiaireAidesSocialesService } from './de-connecte-benefiaire-aides-sociales.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
+import { DeConnecteSituationFamilialeService } from './de-connecte-situation-familiale.service';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {
@@ -16,12 +17,14 @@ export class DeConnecteRessourcesFinancieresService {
     private deConnecteService: DeConnecteService,
     private deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
     private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
   ) {
 
   }
+
 
 
   public getMontantVosRessources(): number {
