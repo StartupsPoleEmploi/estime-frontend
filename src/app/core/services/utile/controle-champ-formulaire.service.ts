@@ -17,6 +17,7 @@ export class ControleChampFormulaireService {
   MESSAGE_MONTANT_JOURNALIER_ASS = "Ce montant doit être compris en 1 et 50";
   MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
   MESSAGE_SELECTION_AU_MOINS_UNE_AIDE = "Veuillez sélectionner au moins une allocation Pôle emploi ou CAF (ASS, AAH, RSA).";
+  MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
   MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 

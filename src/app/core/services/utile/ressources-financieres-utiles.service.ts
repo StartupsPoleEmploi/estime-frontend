@@ -6,6 +6,7 @@ import { NumberUtileService } from "@app/core/services/utile/number-util.service
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
 import { AllocationsLogementMensuellesNetFoyer } from '@app/commun/models/allocations-logement-mensuelles-net-foyer';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
+import { SalaireAvantPeriodeSimulation } from '@app/commun/models/salaire-avant-periode-simulation';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -85,7 +86,67 @@ export class RessourcesFinancieresUtileService {
         && ressourcesFinancieres.nombreMoisTravaillesDerniersMois != 0)
   }
 
+  /**
+   * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
+   * Conditions de validité :
+   *  -> si le demandeur n'a pas travaillé ces derniers mois.
+   *  -> si le demandeur est bénéficiaire ASS ou RSA et qu'au moins 1 champ salaire est renseigné.
+   *  -> si le demandeur est bénéficiaire AAH.
+   *    -> si il a indiqué avoir travaillé 4 mois et qu'au moins 1 champ salaire est renseigné,
+   *    -> si il a indiqué avoir travaillé 5 mois et qu'au moins 2 champs salaire sont renseignés,
+   *    -> si il a indiqué avoir travaillé 6 mois et que 3 champs salaire sont renseignés.
+   *
+   * @param ressourcesFinancieres
+   */
+  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, isBeneficiaireAAH: boolean, isBeneficiareASSOuRSA: boolean): boolean {
+    let isChampsSalairesValides = true;
+    if(ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
+      if(isBeneficiareASSOuRSA) {
+        isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
+      }
+      if(isBeneficiaireAAH) {
+        //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
+        switch(+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
+          case 4: {
+            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
+            break;
+          }
+          case 5: {
+            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 2;
+            break;
+          }
+          case 6: {
+            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) === 3;
+            break;
+          }
+          default: {
+            isChampsSalairesValides = true;
+            break;
+          }
+        }
+      }
+    }
+    return isChampsSalairesValides;
+  }
+
+
+  private getNombreMoisTravaillesDerniersMois(ressourcesFinancieres: RessourcesFinancieres): number {
+    let nombreMoisTravaillesDerniersMois = 0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation)?1:0;
+    return nombreMoisTravaillesDerniersMois;
+  }
+
+  private isMoisTravaille(salaireAvantPeriodeSimulation: SalaireAvantPeriodeSimulation): boolean {
+    return !salaireAvantPeriodeSimulation.isSansSalaire && salaireAvantPeriodeSimulation.salaire.montantNet > 0;
+  }
+
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+  }
+
+  public isMontantJournalierRSAInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0;
   }
 }

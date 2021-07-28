@@ -60,14 +60,14 @@ export class DeConnecteRessourcesFinancieresService {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice);
       }
       if(ressourcesFinancieres.salairesAvantPeriodeSimulation) {
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet);
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet);
         }
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet);
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet);
         }
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet);
+        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet);
         }
       }
     }
@@ -224,7 +224,10 @@ export class DeConnecteRessourcesFinancieresService {
     if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
       isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
     }
-    if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+    if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
+      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
+    }
+    if(this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
     if(isValide && this.deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()) {
@@ -250,13 +253,19 @@ export class DeConnecteRessourcesFinancieresService {
 
   private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS)
-    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres)
+    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, false, true)
     && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
+  }
+
+  private isDonneesRSASaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return ressourcesFinancieres.allocationsCAF.prochaineDeclarationRSA
+    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, false, true)
+    && !this.ressourcesFinancieresUtileService.isMontantJournalierRSAInvalide(ressourcesFinancieres);
   }
 
   private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH > 0
-    && this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres);
+    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, true, false);
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {

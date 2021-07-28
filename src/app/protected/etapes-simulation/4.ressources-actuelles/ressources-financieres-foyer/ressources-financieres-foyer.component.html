@@ -12,12 +12,12 @@
                 </label>
             </div>
             <div class="mb-2">
-                <div class="row">
-                    <span
-                        *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                    <span class="text-side-input ml-0">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                     </span>
+                </div>
+                <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -30,7 +30,6 @@
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1"
                         inputmode="decimal"
-                        ngAutofocus
                         (click)="$event.target.select()"
                         #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
                     <app-text-with-euro-symbol
@@ -54,12 +53,12 @@
                 </div>
             </div>
             <div class="mb-2">
-                <div class="row">
-                    <span
-                        *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
-                        au mois de  {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
+                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                    <span class="text-side-input ml-0">
+                        au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
                     </span>
+                </div>
+                <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -96,12 +95,12 @@
                 </div>
             </div>
             <div class="mb-2">
-                <div class="row">
-                    <span
-                        *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
-                    au mois de  {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}
+                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                    <span class="text-side-input ml-0">
+                        au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}
                     </span>
+                </div>
+                <div class="row">
                     <input
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
