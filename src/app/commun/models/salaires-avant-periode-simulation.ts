@@ -1,7 +1,7 @@
-import { Salaire } from "@models/salaire";
+import { SalaireAvantPeriodeSimulation } from "@models/salaire-avant-periode-simulation";
 
 export class SalairesAvantPeriodeSimulation {
-  salaireMoisDemandeSimulation: Salaire;
-  salaireMoisMoins1MoisDemandeSimulation: Salaire;
-  salaireMoisMoins2MoisDemandeSimulation: Salaire;
+  salaireMoisDemandeSimulation: SalaireAvantPeriodeSimulation;
+  salaireMoisMoins1MoisDemandeSimulation: SalaireAvantPeriodeSimulation;
+  salaireMoisMoins2MoisDemandeSimulation: SalaireAvantPeriodeSimulation;
 }

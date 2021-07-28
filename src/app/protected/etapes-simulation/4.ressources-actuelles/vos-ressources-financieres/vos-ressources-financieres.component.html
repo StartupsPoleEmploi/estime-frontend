@@ -7,13 +7,13 @@
                 </label>
             </div>
             <div class="row">
-                <input name="allocationJournaliereNetASS" type="text" data-testid="input-allocation-journaliere-net-ass"
+                <input id="input-allocation-journaliere-net-ass" name="allocationJournaliereNetASS" type="text" data-testid="input-allocation-journaliere-net-ass"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="5"
                     class="form-control"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || this.ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                     [(ngModel)]="ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet" required
-                    placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel" ngAutofocus>
+                    placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel">
                 <app-text-with-euro-symbol message="net/jour"></app-text-with-euro-symbol>
             </div>
             <span
@@ -49,14 +49,13 @@
                 </label>
             </div>
             <div class="row">
-                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="allocationMensuelleNetRSA" type="text" data-testid="input-allocation-mensuelle-net-rsa"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0" maxlength="8"
                     class="form-control"
                     [ngClass]="{'ng-invalid': this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && this.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0}"
                     [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA" required
-                    placeholder="Montant" inputmode="decimal" #allocationMensuelleNetRSA="ngModel" ngAutofocus>
+                    placeholder="Montant" inputmode="decimal" #allocationMensuelleNetRSA="ngModel">
                 <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
                 </app-text-with-euro-symbol>
                 <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="le mois dernier">
@@ -107,7 +106,6 @@
                 </label>
             </div>
             <div class="row">
-                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="allocationMensuelleNetAAH" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" min="0"
@@ -172,7 +170,7 @@
             </span>
         </div>
         <div class="form-group"
-            *ngIf="(deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() || deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS())  && ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true">
+            *ngIf="isAfficherSelectNombreMoisTravailles6DerniersMois()">
             <div class="row flex-column">
                 <label class="label mb-2" for="nombreMoisTravailleAuCoursDerniersMois">
                     * J'ai travaillé
@@ -180,7 +178,6 @@
                 <select name="nombreMoisTravailleAuCoursDerniersMois"
                     [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                     class="fit-content form-control" data-width="auto" required
-                    (click)="onClickBoutonNombreMoisTravailleAuCoursDerniersMois()"
                     [ngClass]="{'option-selected': ressourcesFinancieres.nombreMoisTravaillesDerniersMois !== 0, 'ng-invalid': (isRessourcesFinancieresFormSubmitted || nombreMoisTravailleAuCoursDerniersMois.touched)  && !this.ressourcesFinancieresUtileService.isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(this.ressourcesFinancieres)}"
                     #nombreMoisTravailleAuCoursDerniersMois="ngModel">
                     <option [value]="0" disabled>
@@ -196,85 +193,140 @@
                 </span>
             </div>
         </div>
-        <div class="form-group" *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(0)">
-            <div class="row mb-2">
-                <label class="label" for="salaireMoisM0AvantPeriodeSimulee">
-                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(0)}}
-                </label>
+        <div *ngIf="isAfficherChampsSalaires();">
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label class="label" for="salaireMoisM0AvantPeriodeSimulee">
+                        * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(0)}}
+                    </label>
+                </div>
+                <div class="row">
+                    <input name="salaireMoisM0AvantPeriodeSimulee"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet"
+                        [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
+                        required inputmode="decimal" (click)="$event.target.select()"
+                        [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
+                        [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
+                        #salaireMoisM0AvantPeriodeSimulee="ngModel"
+                        >
+                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-check form-check-inline">
+                        <input  id="pasDeSalaireMois0AvantPeriodeSimulee"
+                            name="pasDeSalaireMois0AvantPeriodeSimulee"
+                            type="checkbox" class="checkbox-pas-de-salaire form-check-input"
+                            [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
+                            (click)="onClickPasDeSalaire(0)"
+                            (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 0)"
+                            #isSansSalaireMoisDemandeSimulation="ngModel">
+                        <label for="pasDeSalaireMois0AvantPeriodeSimulee" class="form-check-label">Je n'ai pas reçu de salaire ce mois-là</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
             </div>
-            <div class="row">
-                <input name="salaireMoisM0AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                    maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.montantNet"
-                    required inputmode="decimal" (click)="$event.target.select()"
-                    #salaireMoisM0AvantPeriodeSimulee="ngModel">
-                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label class="label" for="salaireMoisMMoins1AvantPeriodeSimulee">
+                        * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
+                    </label>
+                </div>
+                <div class="row">
+                    <input name="salaireMoisMMoins1AvantPeriodeSimulee"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet"
+                        [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
+                        inputmode="decimal" (click)="$event.target.select()"
+                        [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
+                        [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
+                        #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
+                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-check form-check-inline">
+                        <input  id="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
+                            name="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
+                            type="checkbox" class="checkbox-pas-de-salaire form-check-input"
+                            [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
+                            (click)="onClickPasDeSalaire(1)"
+                            (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 1)"
+                            #isSansSalaireMoisMMoins1AvantPeriodeSimulee="ngModel">
+                        <label for="pasDeSalaireMoisNMoins1AvantPeriodeSimulee" class="form-check-label">Je n'ai pas reçu de salaire ce mois-là</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
             </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisM0AvantPeriodeSimulee?.touched)  && salaireMoisM0AvantPeriodeSimulee?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(1)">
-            <div class="row mb-2">
-                <label class="label" for="salaireMoisMMoins1AvantPeriodeSimulee">
-                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
-                </label>
-            </div>
-            <div class="row">
-                <input name="salaireMoisMMoins1AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                    maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.montantNet"
-                    required inputmode="decimal" (click)="$event.target.select()"
-                    #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
-                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins1AvantPeriodeSimulee?.touched)  && salaireMoisMMoins1AvantPeriodeSimulee?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="isAfficherSalaireMoisMoinsNAvantSimulation(2)">
-            <div class="row mb-2">
-                <label class="label" for="salaireMoisMMoins2AvantPeriodeSimulee">
-                    * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
-                </label>
-            </div>
-            <div class="row">
-                <input name="salaireMoisMMoins2AvantPeriodeSimulee"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                    maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.montantNet"
-                    required inputmode="decimal" (click)="$event.target.select()"
-                    #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
-                <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
+            <div class="form-group">
+                <div class="row mb-2">
+                    <label class="label" for="salaireMoisMMoins2AvantPeriodeSimulee">
+                        * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        name="salaireMoisMMoins2AvantPeriodeSimulee"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
+                        [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet"
+                        [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
+                        inputmode="decimal" (click)="$event.target.select()"
+                        [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
+                        [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
+                        #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
+                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+                </div>
+                <div class="row mt-2">
+                    <div class="form-check form-check-inline">
+                        <input  id="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
+                            name="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
+                            type="checkbox" class="checkbox-pas-de-salaire form-check-input"
+                            [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
+                            (click)="onClickPasDeSalaire(2)"
+                            (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 2)"
+                            #isSansSalaireMoisNMoins2AvantPeriodeSimulee="ngModel">
+                        <label for="pasDeSalaireMoisNMoins2AvantPeriodeSimulee" class="form-check-label">Je n'ai pas reçu de salaire ce mois-là</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisMMoins2AvantPeriodeSimulee?.touched)  && salaireMoisMMoins2AvantPeriodeSimulee?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasTroisMoisSansSalaire">
+                        Vous avez indiqué avoir travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois. Veuillez renseigner {{nombreMoisManquant===3?'':'au moins'}} {{nombreMoisManquant}} mois de salaire.
+                    </span>
+                </div>
             </div>
         </div>
         <div class="form-group" *ngIf="deConnecteBenefiaireAidesSocialesService.isBeneficiairePensionInvalidite()">
@@ -284,7 +336,6 @@
                 </label>
             </div>
             <div class="row">
-                <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">le mois dernier</span>
                 <input name="pensionInvalidite" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                     maxlength="6" class="max-with-input-type-montant form-control" placeholder="Montant"
