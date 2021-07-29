@@ -153,8 +153,7 @@
                 <div class="row mb-2">
                     <label
                         class="label"
-                        aria-describedby="infobulle-contrat-travail-salaire"
-                        for="salaire-mensuel-net">
+                        aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut ou net
                         <div
                             id="infobulle-contrat-travail-salaire"
@@ -174,6 +173,7 @@
                                 id="salaireMensuelBrut"
                                 pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                 name="salaireMensuelBrut"
+                                aria-label="Salaire mensuel brut"
                                 data-testid="input-salaire-mensuel-brut"
                                 type="text"
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
@@ -219,6 +219,7 @@
                                 id="salaireMensuelNet"
                                 pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                 name="salaireMensuelNet"
+                                aria-label="Salaire mensuel net"
                                 data-testid="input-salaire-mensuel-net"
                                 type="text"
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
@@ -268,7 +269,7 @@
                 <div class="row flex-column mb-2">
                     <label
                         class="label"
-                        for="distance-domicile-lieu-travail">
+                        for="distanceDomicileLieuTravail">
                         * Distance envisagée entre votre domicile et le lieu de travail
                     </label>
                 </div>
