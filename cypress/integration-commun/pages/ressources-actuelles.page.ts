@@ -4,12 +4,20 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-journaliere-net-ass]').type(montant);
   }
 
-  public saisirAAH(montant : string): void {
-    cy.get('[data-testid=input-aah').type(montant);
+  public saisirMontantMensuelAAH(montant : string): void {
+    cy.get('[data-testid=input-allocation-mensuelle-aah]').type(montant);
+  }
+
+  public saisirMontantMensuelRSA(montant : string): void {
+    cy.get('[data-testid=input-allocation-mensuelle-net-rsa]').type(montant);
+  }
+
+  public selectOptionMoisProchaineDeclarationRSA(value: string): void {
+    cy.get('[data-testid=select-prochaine-declaration-rsa]').select(value)
   }
 
   public saisirPensionInvalidite(montant : string): void {
-    cy.get('[data-testid=input-pension-invalidite').type(montant);
+    cy.get('[data-testid=input-pension-invalidite]').type(montant);
   }
 
   public saisirAllocationLogementFoyer(montant: string): void {
@@ -40,8 +48,40 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-annee-date]').type(annee);
   }
 
-  public clickOnAvezTavailleAuCoursDesDerniersMoisNon(): void {
+  public clickOnAvezVousTravailleAuCoursDesDerniersMoisNon(): void {
     cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-non]').click({force: true});
+  }
+
+  public clickOnAvezVousTravailleAuCoursDesDerniersMoisOui(): void {
+    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-oui]').click({force: true});
+  }
+
+  public selectOptionNombreMoisTravaillesAvantSimulation(value: string): void {
+    cy.get('[data-testid=select-nombre-mois-travailles-avant-simulation]').select(value)
+  }
+
+  public saisirSalaireMoisDemande(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-mois-demande-avant-simulation]').type(montantSalaire);
+  }
+
+  public clickOnPasDeSalaireMoisDemande(): void {
+    cy.get('[data-testid=checkbox-pas-de-salaire-mois-demande-avant-simulation]').click();
+  }
+
+  public saisirSalaire1MoisAvantSimulation(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-mois-moins-1-avant-simulation]').type(montantSalaire);
+  }
+
+  public clickOnPasDeSalaireMoisMoins1AvantSimulation(): void {
+    cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-1-avant-simulation]').click();
+  }
+
+  public saisirSalaire2MoisAvantSimulation(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-mois-moins-2-avant-simulation]').type(montantSalaire);
+  }
+
+  public clickOnPasDeSalaireMoisMoins2AvantSimulation(): void {
+    cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-2-avant-simulation]').click();
   }
 
   public clickOnValiderRessourcesFoyer(): void {
@@ -52,10 +92,10 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=btn-vos-ressources-valider]').click();
   }
 
-  public clickOnObtenirMaSimulation(): void {
+  public clickOnObtenirMaSimulation(waitingTime: number) {
     cy.get('[data-testid=btn-obtenir-simulation]').click();
     //wait pour attendre le retour du service effectuant la simulation
-    cy.wait(3000);
+    cy.wait(waitingTime);
   }
 }
 export default RessourcesActuellesPage
