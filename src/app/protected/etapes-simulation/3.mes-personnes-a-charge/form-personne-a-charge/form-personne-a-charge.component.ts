@@ -9,6 +9,9 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { AllocationsCAF } from '@models/allocations-caf';
 import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
 import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
+import { DeConnecteSituationFamilialeService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service';
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 
 @Component({
   selector: 'app-form-personne-a-charge',
@@ -32,6 +35,8 @@ export class FormPersonneAChargeComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
+    private deConnecteService: DeConnecteService,
+    private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }
@@ -45,6 +50,9 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.checkAndSaveDateNaissanceNouvellePersonneConnecte();
     if (this.isDonneesFormulaireNouvellePersonneValides(form)) {
       this.resetNouvellePersonneAChargeForm();
+      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
+        this.deConnecteService.unsetAlloctionPAJE();
+      }
       this.ajoutNouvellePersonneEventEmitter.emit(true);
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);

@@ -37,6 +37,9 @@ select {
   .second-btn {
     margin-left: 15px;
     width: 140px;
+    @media #{$extra-small-device} {
+      width: 150px;
+    }
     @media #{$small-device} {
       margin-left: 10px;
     }
