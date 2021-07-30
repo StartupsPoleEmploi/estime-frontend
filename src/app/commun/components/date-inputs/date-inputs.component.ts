@@ -10,7 +10,6 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 })
 export class DateInputsComponent implements OnInit {
 
-
   @Input() dateSaisie: DateDecomposee;
   @Input() isFormSubmitted: boolean;
 

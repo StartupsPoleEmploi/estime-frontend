@@ -77,6 +77,7 @@
                     <select
                         id="nombreMoisCDD"
                         name="nombreMoisCDD"
+                        aria-label="Nombre de mois de votre contrat CDD"
                         data-testid="select-nombre--mois-cdd"
                         [(ngModel)]="futurTravail.nombreMoisContratCDD"
                         class="form-control"
@@ -115,6 +116,7 @@
                         class="form-control"
                         data-testid="input-duree-hebdomadaire"
                         id="dureeHebdomadaire"
+                        aria-label="Durée hebdomadaire en heures par semaine"
                         inputmode="decimal"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         maxlength="4"
@@ -342,6 +344,7 @@
             <button
                 class="btn-style-perso-2 first-btn"
                 (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente"
                 data-testid="btn-futur-travail-retour">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
@@ -351,6 +354,7 @@
             <button
                 id="btn-futur-travail-suivant"
                 class="btn-style-perso-1 second-btn"
+                aria-label="Passer à la page suivante"
                 type="submit"
                 data-testid="btn-futur-travail-suivant"
                 (click)="onSubmitFuturTravailForm(futurTravailForm)">

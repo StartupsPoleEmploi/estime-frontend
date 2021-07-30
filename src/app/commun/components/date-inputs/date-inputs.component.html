@@ -1,7 +1,7 @@
 <div class="row btn-group-input-date">
-
   <input
       name="jourDate"
+      attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}"
       (change)="onChangeOrKeyUpDateJour()"
       class="form-control jour-input"
       [ngClass]="{'date-invalid': dateSaisie.isJourInvalide || dateSaisie.isDateSuperieurDateJour}"
@@ -20,6 +20,7 @@
       #jourDate="ngModel">
   <input
       name="moisDate"
+      attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}"
       (change)="onChangeOrKeyUpDateMois()"
       class="form-control mois-input"
       [ngClass]="{'date-invalid': dateSaisie.isMoisInvalide || dateSaisie.isDateSuperieurDateJour}"
@@ -38,6 +39,7 @@
       #moisDate="ngModel">
   <input
       name="anneeDate"
+      attr.aria-label="année {{ dateSaisie.libelleAriaLabel }}"
       class="form-control annee-input"
       [ngClass]="{'date-invalid': dateSaisie.isAnneeInvalide || dateSaisie.isDateSuperieurDateJour}"
       (click)="$event.target.select()"

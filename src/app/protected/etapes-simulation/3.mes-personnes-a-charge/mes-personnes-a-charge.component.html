@@ -30,8 +30,9 @@
                       *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                       <div class="card-header">
                           <i
-                              alt="Iĉone croix fermer"
+                              id="btn-supprimer-personne-a-charge"
                               role="button"
+                              alt="Supprimer personne à charge"
                               class="fas fa-times-circle float-right"
                               (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)">
                           </i>
@@ -44,7 +45,7 @@
                                       class
                                       src="./assets/images/personne.svg">
                               </div>
-                              <div class="col-9 col-card-body">
+                              <div id="div-infos-personne" class="col-9 col-card-body">
                                   <span class="span-personne">Personne {{indexOfelement + 1}}</span>
                                   <span>
                                       {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
@@ -54,6 +55,7 @@
                       </div>
                       <div class="card-footer">
                           <a
+                              alt="Modifier personne à charge"
                               class="float-right"
                               (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
                               Modifier
@@ -63,6 +65,7 @@
                   <button
                       name="button-card-add-personne"
                       class="button-card-add-personne"
+                      aria-label="Ajouter une personne à charge"
                       (click)="onClickButtonAjouterPersonne()"
                       (keyup)="handleKeyUpOnButtonAjouterPersonne($event)">
                       <div

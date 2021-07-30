@@ -59,7 +59,7 @@ export class MaSituationComponent implements OnInit {
     this.beneficiaireAidesSociales = demandeurEmploiConnecte.beneficiaireAidesSociales;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
-    this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance);
+    this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance");
   }
 
   public onClickButtonRetour(): void {

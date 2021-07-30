@@ -153,8 +153,9 @@ export class DateUtileService {
     return dateDecomposee;
   }
 
-  public getDateDecomposeeFromStringDate(dateADecompose: string): DateDecomposee {
+  public getDateDecomposeeFromStringDate(dateADecompose: string, libelleAriaLabel: string): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
+    dateDecomposee.libelleAriaLabel = libelleAriaLabel;
     if (dateADecompose) {
       const dateADecomposeTab = dateADecompose.split("-");
       dateDecomposee.jour = dateADecomposeTab[2];

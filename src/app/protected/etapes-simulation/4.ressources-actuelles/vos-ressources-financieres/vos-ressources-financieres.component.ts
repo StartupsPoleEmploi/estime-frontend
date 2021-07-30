@@ -54,7 +54,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS);
+    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS, "date derniere ouverture droit ASS");
     if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
       this.initOptionsProchaineDeclarationRSA();
     }

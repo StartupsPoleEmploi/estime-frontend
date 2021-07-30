@@ -1,4 +1,5 @@
 export class DateDecomposee {
+  libelleAriaLabel: string;
   jour: string;
   mois: string;
   annee: string;
