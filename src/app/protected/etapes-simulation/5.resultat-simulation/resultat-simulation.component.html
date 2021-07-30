@@ -2,30 +2,35 @@
     <h1 class="h1-style-2">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
         <div
-        id="infobulle-resultat-simulation"
-        role="tooltip"
-        class="img-interrogation-icon"
-        style="vertical-align: baseline;"
-        [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
-        placement="right top"
-        tag-action="ouverture-infobulle-resultat-simulation"
-        [popover]="popoverResultatSimulationTemplate"
-        #popoverResultatSimulation="bs-popover"></div>
+            id="infobulle-resultat-simulation"
+            role="tooltip"
+            class="img-interrogation-icon"
+            style="vertical-align: baseline;"
+            [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
+            placement="right top"
+            tag-action="ouverture-infobulle-resultat-simulation"
+            [popover]="popoverResultatSimulationTemplate"
+            #popoverResultatSimulation="bs-popover"></div>
     </h1>
     <div class="row row-style-2">
         <div
             id="alert-resultat-simulation"
             class="col-12 col-md-9 mt-auto mb-auto">
-            <div id="label-alerte-montants-resultat-simulation" class="mx-2 text-justify">
-                Les futures allocations logement, familiales et autres ressources du foyer, ainsi que le prélèvement à la source sont à ajouter au résultat de la simulation. Nous travaillons actuellement à enrichir ce résultat des allocations logement recalculées ainsi que des prestations familiales. Nous faisons tout pour vous les proposer très prochainement.            </div>
+            <div
+                id="label-alerte-montants-resultat-simulation"
+                class="mx-2 text-justify">
+                Les futures allocations logement, familiales et autres ressources du foyer, ainsi que le prélèvement à la source sont à ajouter au résultat de la simulation. Nous travaillons actuellement à enrichir ce résultat des allocations logement recalculées ainsi que des prestations familiales. Nous faisons tout pour vous les proposer très prochainement.
             </div>
+        </div>
         <div class="col-12 col-md-3 mt-auto mb-auto d-flex justify-content-center">
             <span
                 class="btn-imprimer-simulation"
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
-                    <img alt="Icône téléchargement" src="./assets/images/download_2.svg">
+                    <img
+                        alt="Icône téléchargement"
+                        src="./assets/images/download_2.svg">
                     <span id="telecharger_simulation_text">Télécharger la simulation</span>
                 </div>
             </span>
@@ -36,21 +41,31 @@
             <app-ressources-financieres-diagramme [simulationAidesSociales]="simulationAidesSociales"></app-ressources-financieres-diagramme>
         </div>
     </div>
-    <div *ngIf="screenService.isExtraSmallScreen()" class="row mt-4 row-style-2">
-      <div id="card-revenus-actuels" class="col-12 col-md-12">
-        <div class="card">
-          <h3 style="font-family: Lato">Revenus et aides</h3>
-          <span data-testid="span-revenus-aides-actuelles">{{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €</span>
+    <div
+        *ngIf="screenService.isExtraSmallScreen()"
+        class="row mt-4 row-style-2">
+        <div
+            id="card-revenus-actuels"
+            class="col-12 col-md-12">
+            <div class="card">
+                <h3 style="font-family: Lato">Revenus et aides</h3>
+                <span data-testid="span-revenus-aides-actuelles">
+                    {{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €
+                </span>
+            </div>
         </div>
-      </div>
     </div>
-    <div id="row-montants-total" class="row row-style-2">
+    <div
+        id="row-montants-total"
+        class="row row-style-2">
         <div class="col-12 col-md-12 pl-0 pr-0">
-          <div class="card">
-            <h4 id="details_ressources_estimees_title" class="h4-style-1 mt-auto mb-auto">
-                Détail des ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
-            </h4>
-          </div>
+            <div class="card">
+                <h4
+                    id="details_ressources_estimees_title"
+                    class="h4-style-1 mt-auto mb-auto">
+                    Détail des ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+                </h4>
+            </div>
         </div>
     </div>
     <div
@@ -60,7 +75,11 @@
             class="col-12 col-md-12 card first-card"
             *ngFor="let simulationMensuel of simulationAidesSociales.simulationsMensuelles; let index = index;"
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
-            <div class="card second-card" role="button">
+            <div
+                id="btn-simulation-mois-{{index}}"
+                class="card second-card"
+                aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
+                role="button">
                 <div
                     [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
                     class="card-body"
@@ -69,8 +88,10 @@
                     (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
                     (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
                     <div class="row">
-                        <div id="span-mois-annee" class="col-6 mt-auto mb-auto p-0 col-md-12">
-                            <span >
+                        <div
+                            id="span-mois-annee"
+                            class="col-6 mt-auto mb-auto p-0 col-md-12">
+                            <span>
                                 {{getDateStringFormat(simulationMensuel)}}
                             </span>
                         </div>
@@ -83,10 +104,14 @@
                             *ngIf="screenService.isExtraSmallScreen()"
                             class="col-1 p-0  ml-auto mr-1">
                             <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                <i alt="" class="fas fa-chevron-down"></i>
+                                <i
+                                    alt
+                                    class="fas fa-chevron-down"></i>
                             </span>
                             <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                <i alt=""  class="fas fa-chevron-right"></i>
+                                <i
+                                    alt
+                                    class="fas fa-chevron-right"></i>
                             </span>
                         </div>
                     </div>
@@ -116,13 +141,17 @@
         </div>
     </div>
 
-    <div id="resultat_simulation_div_boutons" class="div-buttons-form row d-flex justify-content-center">
+    <div
+        id="resultat_simulation_div_boutons"
+        class="div-buttons-form row d-flex justify-content-center">
         <button
             id="resultat_simulation_bouton_retour"
             class="btn-style-perso-2 first-btn float-right"
             (click)="onClickButtonRetour()">
             <div>
-                <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
+                <img
+                    alt="Icône flèche retour"
+                    src="./assets/images/return-arrow-v2.svg">
                 <span>Retour</span>
             </div>
         </button>
