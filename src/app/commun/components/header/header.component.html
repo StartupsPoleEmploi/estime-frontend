@@ -20,6 +20,7 @@
 
             <div class="col pr-0">
                 <button
+                    id="btn-se-deconnecter"
                     class="btn-se-deconnecter d-none d-sm-block"
                     *ngIf="this.isLoggedIn"
                     (click)="logout()"
@@ -38,6 +39,7 @@
                 </button>
 
                 <div
+                    id="btn-pe-connect"
                     class="btn-se-connecter d-none d-sm-block"
                     *ngIf="!this.isLoggedIn"
                     data-testid="btn-pe-connect"
