@@ -153,8 +153,9 @@ export class DateUtileService {
     return dateDecomposee;
   }
 
-  public getDateDecomposeeFromStringDate(dateADecompose: string, libelleAriaLabel: string): DateDecomposee {
+  public getDateDecomposeeFromStringDate(dateADecompose: string, libelleAriaLabel: string, libelleTypeDate: string): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
+    dateDecomposee.libelleTypeDate = libelleTypeDate;
     dateDecomposee.libelleAriaLabel = libelleAriaLabel;
     if (dateADecompose) {
       const dateADecomposeTab = dateADecompose.split("-");

@@ -54,7 +54,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public onClickButtonModifierPersonneACharge(personneAModifier: Personne, indexPersonneAModifier: number): void {
     this.nouvellePersonneACharge = { ...personneAModifier };
-    this.dateNaissanceNouvellePersonne = this.dateUtileService.getDateDecomposeeFromStringDate(this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance, "date de naissance personne à charge");
+    this.dateNaissanceNouvellePersonne = this.dateUtileService.getDateDecomposeeFromStringDate(this.nouvellePersonneACharge.informationsPersonnelles.dateNaissance, "date de naissance personne à charge", "DateNaissancePersonneACharge");
     this.isNouvellePersonneAChargeFormDisplay = true;
     this.isModeModification = true;
     this.numeroNouvellePersonne = indexPersonneAModifier + 1;

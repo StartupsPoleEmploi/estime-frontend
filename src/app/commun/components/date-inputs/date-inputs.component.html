@@ -1,5 +1,6 @@
 <div class="row btn-group-input-date">
   <input
+      id="inputJour{{ dateSaisie.libelleTypeDate }}"
       name="jourDate"
       attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}"
       (change)="onChangeOrKeyUpDateJour()"
@@ -19,6 +20,7 @@
       type="text"
       #jourDate="ngModel">
   <input
+      id="inputMois{{ dateSaisie.libelleTypeDate }}"
       name="moisDate"
       attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}"
       (change)="onChangeOrKeyUpDateMois()"
@@ -38,6 +40,7 @@
       required
       #moisDate="ngModel">
   <input
+      id="inputAnnee{{ dateSaisie.libelleTypeDate }}"
       name="anneeDate"
       attr.aria-label="année {{ dateSaisie.libelleAriaLabel }}"
       class="form-control annee-input"
