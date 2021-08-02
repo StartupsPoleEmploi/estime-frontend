@@ -18,13 +18,13 @@
     }
     h1 {
       color: $color-blue-1;
-      font-size: 24px;
+      font-size: 1.5em;
       font-weight: bold;
       font-family: Poppins;
       padding-bottom: 2rem;
       text-align: center;
       @media #{$large-device} {
-        font-size: 30px;
+        font-size: 1.875em;
       }
     }
     @media #{$medium-device} {
@@ -57,17 +57,17 @@
         span {
           color: $color-blue-2;
           font-weight: bold;
-          font-size: 18px;
+          font-size: 1.125em;
           @media #{$medium-device}, #{$large-device} {
             display: inline-block;
-            font-size: 22px;
+            font-size: 1.375em;
             vertical-align: middle;
             line-height: normal;
           }
         }
       }
       .card-text {
-        font-size: 16px;
+        font-size: 1em;
       }
       .card-header {
         border: none;
@@ -76,7 +76,7 @@
         span {
           color: $color-blue-2;
           font-weight: bold;
-          font-size: 22px;
+          font-size: 1.375em;
         }
       }
     }

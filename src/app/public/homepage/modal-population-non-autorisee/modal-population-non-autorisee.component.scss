@@ -13,12 +13,12 @@
   padding-bottom: 0;
   padding-top: 1rem;
   p {
-    font-size: 18px;
+    font-size: 1.125em;
   }
   button {
     opacity: unset !important;
     span {
-      font-size: 1.5rem;
+      font-size: 1.5em;
       color: $color-blue-1;
     }
     &:focus {
@@ -31,8 +31,8 @@
   @extend .modal-base;
   border-bottom: 0;
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 1.125em;
   span {
-    font-size: 18px;
+    font-size: 1.125em;
   }
 }
