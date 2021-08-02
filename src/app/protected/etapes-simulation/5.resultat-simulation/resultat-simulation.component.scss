@@ -1,275 +1,257 @@
-@import "../../../../assets/scss/variables";
+  @import "../../../../assets/scss/variables";
 
-.row-style-2 {
-  margin-right: 0;
-  @media #{$small-device} {
-    margin-right: 15px;
-  }
-}
-
-.h1-style-2 {
-  @media #{$extra-small-device} {
-    max-width: 220px;
-  }
-}
-
-.btn-imprimer-simulation {
-
-  img {
-    width: 24px;
-    height: 24px;
-    margin-right: 0.5rem;
-  }
-  #telecharger_simulation_text {
-    text-decoration: none;
-    color: $color-blue-2;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 0.875em;
-    line-height: 17px;
-
-    &:hover {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  }
-}
-
-.container-fluid {
-  margin-top: 2rem;
-  padding-left: 15px;
-
-  #alert-resultat-simulation {
-    @media #{$extra-small-device} {
-      margin-bottom: 25px !important;
-    }
-    div {
-      height: 100%;
-      @media #{$extra-small-device} {
-        max-width: 565px;
-      }
-      font-size: 1em;
-      color: $color-blue-2;
-      letter-spacing: 0;
-      line-height: 24px;
-    }
-  }
-  #card-revenus-actuels {
-    padding-left: 9px;
-    padding-right: 9px;
-    @media #{$small-device} {
-      padding-left: 0;
-      padding-right: 15px;
-    }
-    .card {
-      border: 0;
-      height: 100%;
-      margin-right: 0;
-      margin-left: 0;
-      text-align: center;
-      padding: 0.4rem 1rem;
-      width: 100%;
-      @media #{$extra-small-device} {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .div-title-card {
-        @media #{$tablet-device} {
-          min-height: 50px;
-        }
-        align-items: center;
-        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-        display: -ms-flexbox; /* TWEENER - IE 10 */
-        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-        display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-        height: 100%;
-        justify-content: center;
-        h3 {
-          color: $color-blue-3;
-          font-weight: 600;
-          margin-bottom: 0;
-          font-size: 1em;
-        }
-      }
-      .div-span-card {
-        align-items: center;
-        display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-        display: -ms-flexbox; /* TWEENER - IE 10 */
-        display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-        display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-        height: 100%;
-        justify-content: center;
-      }
-
-      span {
-        font-weight: 900;
-        @media #{$small-device} {
-          font-size: 1.063em;
-        }
-        @media #{$medium-device} {
-          font-size: 1.5em;
-        }
-      }
-      .card-body {
-        background-color: $color-white-3;
-      }
-    }
-  }
-  #row-montants-total {
-    margin-top: 0.5rem;
-    @media #{$small-device} {
-      margin-top: 1.5rem;
-    }
-    .card {
-      height: 100%;
-      padding: 10px;
-      @media #{$extra-small-device} {
-        background-color: unset;
-      }
-      margin-bottom: 4rem;
-    }
-    #details_ressources_estimees_title {
-      text-align: center;
-      margin:auto;
-    }
-  }
-  .card {
-    border: 0;
-  }
-  .card-deck {
-    border: 0;
-    border-radius: 8px;
-    margin-bottom: 0;
-    @media #{$small-device} {
-      padding-bottom: 5px;
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-  .first-card {
-    border: 0;
-    border-radius: 8px;
-    margin-left: 0;
+  .row-style-2 {
     margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
-    @media #{$extra-small-device} {
-      padding-left: 0;
-      padding-right: 0;
-    }
     @media #{$small-device} {
-      margin-bottom: 0px;
-      &:not(.isLastCard) {
-        border-right: 1px solid $color-grey-2 !important;
-        border-radius: 0 !important;
+      margin-right: 15px;
+    }
+  }
+
+  .h1-style-2 {
+    @media #{$extra-small-device} {
+      max-width: 220px;
+    }
+  }
+
+
+
+
+  .btn-imprimer-simulation {
+
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 0.5rem;
+    }
+    #telecharger_simulation_text {
+      text-decoration: none;
+      color: $color-blue-2;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.875em;
+      line-height: 17px;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
       }
     }
-    .second-card {
-      border: 0;
-      cursor: pointer;
-      margin-bottom: 0;
-      @media #{$small-device} {
-        margin: 5px;
-        margin-left: -7px;
-        margin-right: -7px;
+  }
+
+  .container-fluid {
+    margin-top: 2rem;
+    padding-left: 15px;
+
+    #alert-resultat-simulation {
+      @media #{$extra-small-device} {
+        margin-bottom: 25px !important;
       }
-      .card-body {
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        padding: 1.25rem;
-        height: 77px !important;
+      div {
+        height: 100%;
+        @media #{$extra-small-device} {
+          max-width: 565px;
+        }
+        font-size: 1em;
+        color: $color-blue-2;
+        letter-spacing: 0;
+        line-height: 24px;
+      }
+    }
+    #card-revenus-actuels {
+      padding-left: 9px;
+      padding-right: 9px;
+      @media #{$small-device} {
+        padding-left: 0;
+        padding-right: 15px;
+      }
+      .card {
+        border: 0;
+        height: 100%;
+        margin-right: 0;
+        margin-left: 0;
         text-align: center;
-        @media #{$small-device} {
-          padding: 0.15rem !important;
-          border-radius: 8px;
+        padding: 0.4rem 1rem;
+        width: 100%;
+        @media #{$extra-small-device} {
+          margin-left: auto;
+          margin-right: auto;
         }
-        vertical-align: text-bottom;
-        &.active {
-          #span-mois-annee span {
-            color: $color-blue-3 !important;
-            font-size: 1em;
-          }
-          span {
-            font-size: 1.375em;
-            font-weight: 900;
-          }
-          background-color: $color-blue-8;
-        }
-        &.hovered {
-          background-color: $color-blue-7;
-        }
-        #span-mois-annee {
-          @media #{$tablet-device} {
-            min-height: 50px;
-            align-items: center;
-            display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-            display: -ms-flexbox; /* TWEENER - IE 10 */
-            display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-            display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-            height: 100%;
-            font-size: 0.875em;
-            @media #{$extra-small-device} {
-              font-size: 1em !important;
-              font-weight: 900 !important;
-            }
-          }
-          span {
-            font-size: 0.875em;
-            color: $color-blue-1;
-            font-weight: bold;
-            @media #{$extra-small-device} {
-              font-size: 1em !important;
-            }
-          }
+        .card-title {
+          font-family: Lato;
+          font-size: 1.3em;
+          text-align: center;
+          font-weight: 400;
+          line-height: 2rem;
         }
         span {
+          font-weight: 900;
           @media #{$small-device} {
             font-size: 1.063em;
           }
           @media #{$medium-device} {
-            font-size: 1.125em;
+            font-size: 1.5em;
           }
-          font-weight: 600;
+        }
+        .card-body {
+          background-color: $color-white-3;
         }
       }
-      .card-footer {
+    }
+    #row-montants-total {
+      margin-top: 0.5rem;
+      @media #{$small-device} {
+        margin-top: 1.5rem;
+      }
+      .card {
+        height: 100%;
+        padding: 10px;
+        @media #{$extra-small-device} {
+          background-color: unset;
+        }
+        margin-bottom: 4rem;
+      }
+      #details_ressources_estimees_title {
+        text-align: center;
+        margin:auto;
+      }
+    }
+    .card {
+      border: 0;
+    }
+    .card-deck {
+      border: 0;
+      border-radius: 8px;
+      margin-bottom: 0;
+      @media #{$small-device} {
+        padding-bottom: 5px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+    .first-card {
+      border: 0;
+      border-radius: 8px;
+      margin-left: 0;
+      margin-right: 0;
+      margin-bottom: 10px;
+      width: 100%;
+      @media #{$extra-small-device} {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      @media #{$small-device} {
+        margin-bottom: 0px;
+        &:not(.isLastCard) {
+          border-right: 1px solid $color-grey-2 !important;
+          border-radius: 0 !important;
+        }
+      }
+      .second-card {
+        border: 0;
+        cursor: pointer;
+        margin-bottom: 0;
+        @media #{$small-device} {
+          margin: 5px;
+          margin-left: -7px;
+          margin-right: -7px;
+        }
+        .card-body {
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          padding: 1.25rem;
+          height: 77px !important;
+          text-align: center;
+          @media #{$small-device} {
+            padding: 0.15rem !important;
+            border-radius: 8px;
+          }
+          vertical-align: text-bottom;
+          &.active {
+            #span-mois-annee span {
+              color: $color-blue-3 !important;
+              font-size: 1em;
+            }
+            span {
+              font-size: 1.375em;
+              font-weight: 900;
+            }
+            background-color: $color-blue-8;
+          }
+          &.hovered {
+            background-color: $color-blue-7;
+          }
+          #span-mois-annee {
+            @media #{$tablet-device} {
+              min-height: 50px;
+              align-items: center;
+              display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+              display: -ms-flexbox; /* TWEENER - IE 10 */
+              display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+              display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+              height: 100%;
+              font-size: 0.875em;
+              @media #{$extra-small-device} {
+                font-size: 1em !important;
+                font-weight: 900 !important;
+              }
+            }
+            span {
+              font-size: 0.875em;
+              color: $color-blue-1;
+              font-weight: bold;
+              @media #{$extra-small-device} {
+                font-size: 1em !important;
+              }
+            }
+          }
+          span {
+            @media #{$small-device} {
+              font-size: 1.063em;
+            }
+            @media #{$medium-device} {
+              font-size: 1.125em;
+            }
+            font-weight: 600;
+          }
+        }
+        .card-footer {
+          background-color: unset;
+          padding-bottom: 0;
+        }
+      }
+    }
+    .card-sm-simulations {
+      margin-right: 0 !important;
+      padding-left: 9px !important;
+      padding-right: 9px !important;
+    }
+
+    .div-button-retour {
+      margin-top: 20px;
+      margin-bottom: 30px;
+      .btn-style-perso-2 {
         background-color: unset;
-        padding-bottom: 0;
+      }
+    }
+    .row {
+      @media #{$small-device} {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    #resultat_simulation_div_boutons {
+
+      margin:auto!important;
+      margin-top:45px!important;
+      background-color: unset;
+
+      #resultat_simulation_bouton_retour {
+        background-color:unset;
+        // width:auto;
+      }
+      #resultat_simulation_bouton_refaire_simulation {
+        width: 250px!important;
       }
     }
   }
-  .card-sm-simulations {
-    margin-right: 0 !important;
-    padding-left: 9px !important;
-    padding-right: 9px !important;
-  }
-
-  .div-button-retour {
-    margin-top: 20px;
-    margin-bottom: 30px;
-    .btn-style-perso-2 {
-      background-color: unset;
-    }
-  }
-  .row {
-    @media #{$small-device} {
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  #resultat_simulation_div_boutons {
-
-    margin:auto!important;
-    margin-top:45px!important;
-    background-color: unset;
-
-    #resultat_simulation_bouton_retour {
-      background-color:unset;
-      // width:auto;
-    }
-    #resultat_simulation_bouton_refaire_simulation {
-      width: 250px!important;
-    }
-  }
-}

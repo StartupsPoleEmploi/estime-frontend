@@ -66,6 +66,14 @@ h2 {
   font-size: 1.7em;
 }
 
+.h2-style-2 {
+  @extend .font-effect-title;
+  color: $color-blue-1;
+  font-size: 1.313em;
+  font-weight: bold;
+  text-align: left;
+}
+
 .h2-style-3 {
   @extend .font-effect-title;
   text-align: center;
@@ -104,13 +112,6 @@ h4 , h5, h6 {
   text-align: center;
 }
 
-.h4-style-1 {
-  @extend .font-effect-title;
-  color: $color-blue-1;
-  font-size: 1.313em;
-  font-weight: bold;
-  text-align: left;
-}
 
 .h5-style-1 {
   @extend .font-effect-title;
