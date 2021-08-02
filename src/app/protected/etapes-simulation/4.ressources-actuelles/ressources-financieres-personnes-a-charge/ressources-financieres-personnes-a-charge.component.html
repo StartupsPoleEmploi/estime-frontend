@@ -15,15 +15,18 @@
                 <div class="row mb-2">
                     <label
                         class="label"
-                        for="salaireNet">
+                        for="salaireNetPersonneACharge">
                         * Salaire net perçu
                     </label>
                 </div>
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
+                        attr.aria-label="Salaire perçu par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         name="salaireNet"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -37,9 +40,7 @@
                         placeholder="Montant"
                         inputmode="decimal"
                         #salaireNet="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -76,8 +77,11 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
+                        attr.aria-label="ARE (Allocation Retour Emploi) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         name="allocationMensuelleNetARE"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -90,31 +94,29 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetARE="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
                     </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
-                      {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                  </span>
-                  <span
-                      class="error-input-message"
-                      *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                  </span>
-                  <span
-                      *ngIf="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)"
-                      class="error-input-message">
-                      {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                  </span>
-              </div>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    </span>
+                    <span
+                        *ngIf="personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)"
+                        class="error-input-message">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                    </span>
+                </div>
             </div>
             <div
                 class="form-group"
@@ -129,9 +131,12 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
                         name="allocationMensuelleNetASS"
+                        attr.aria-label="ASS (Allocation Solidarité Spécifique)) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -144,9 +149,7 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetASS="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -183,9 +186,12 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
                         name="allocationMensuelleNetRSA"
+                        attr.aria-label="RSA (Revenu Solidarité Active) perçu par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -198,9 +204,7 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetRSA="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -237,9 +241,12 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
                         name="allocationMensuelleNetAAH"
+                        attr.aria-label="AAH (Allocation Adulte Handicapé) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -252,9 +259,7 @@
                         inputmode="decimal"
                         required
                         #allocationMensuelleNetAAH="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -291,9 +296,12 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
                         name="pensionInvalidite"
+                        attr.aria-label="Pension d'invalidité perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         type="text"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -306,9 +314,7 @@
                         inputmode="decimal"
                         required
                         #pensionInvalidite="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -341,10 +347,13 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">le mois dernier</span>
+                        class="text-side-input ml-0">
+                        le mois dernier
+                    </span>
                     <input
                         name="allocationSupplementaireInvalidite"
                         type="text"
+                        attr.aria-label="Allocation supplémentaire d'invalidité perçue le mois dernier par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         min="0"
@@ -356,9 +365,7 @@
                         inputmode="decimal"
                         required
                         #allocationSupplementaireInvalidite="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         message="le mois dernier">
@@ -377,34 +384,51 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
                 <div class="row mb-2">
-                    <label class="label" for="personneAChargeRevenusMicroEntreprise">
+                    <label
+                        class="label"
+                        for="personneAChargeRevenusMicroEntreprise">
                         * Chiffre d'affaires en tant que micro entrepreneur
                     </label>
                 </div>
                 <div class="row">
-                    <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">
                         net total 3 derniers mois
                     </span>
-                    <input name="personneAChargeRevenusMicroEntreprise" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control" placeholder="Montant"
+                    <input
+                        name="personneAChargeRevenusMicroEntreprise"
+                        attr.aria-label="Chiffre d'affaires net total 3 derniers mois en tant que micro entrepreneur pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        type="text"
+                        maxlength="6"
+                        min="0"
+                        class="max-with-input-type-montant form-control"
+                        placeholder="Montant"
                         [(ngModel)]="personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois"
                         [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois && (personneDTO.personne.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois == 0)}"
-                        required inputmode="decimal" #personneAChargeRevenusMicroEntreprise3DerniersMois="ngModel">
-                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
-                    <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
+                        required
+                        inputmode="decimal"
+                        #personneAChargeRevenusMicroEntreprise3DerniersMois="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
                         message="net total 3 derniers mois">
                     </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                    <span class="error-input-message"
+                    <span
+                        class="error-input-message"
                         *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeRevenusMicroEntreprise?.touched)  && personneAChargeRevenusMicroEntreprise?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
-                    <span class="error-input-message"
+                    <span
+                        class="error-input-message"
                         *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeRevenusMicroEntreprise?.touched)  && personneAChargeRevenusMicroEntreprise?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
@@ -415,36 +439,50 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
+            <div
+                class="form-group"
+                *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
                 <div class="row mb-2">
-                    <label class="label" for="personneAChargeBeneficesTravailleurIndependant">
+                    <label
+                        class="label"
+                        for="personneAChargeBeneficesTravailleurIndependant">
                         * Bénéfices en tant qu'indépendant
                     </label>
                 </div>
                 <div class="row">
-                    <span *ngIf="screenService.isExtraSmallScreen()" class="text-side-input ml-0">
+                    <span
+                        *ngIf="screenService.isExtraSmallScreen()"
+                        class="text-side-input ml-0">
                         des bénéfices de l'année dernière
                     </span>
-                    <input name="personneAChargeBeneficesTravailleurIndependant"
+                    <input
+                        name="personneAChargeBeneficesTravailleurIndependant"
+                        attr.aria-label="Bénéfices de l'année dernière en tant qu'indépendant pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                         type="text"
-                        maxlength="6" min="0"
+                        maxlength="6"
+                        min="0"
                         class="max-with-input-type-montant form-control"
                         placeholder="Montant"
                         [(ngModel)]="personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice"
                         [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice == 0)}"
-                        required inputmode="decimal"
+                        required
+                        inputmode="decimal"
                         #personneAChargeBeneficesTravailleurIndependantDernierExercice="ngModel">
                     <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                    <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()" message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
+                        message="sur le dernier exercice clos"></app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                    <span class="error-input-message"
+                    <span
+                        class="error-input-message"
                         *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesTravailleurIndependant?.touched)  && personneAChargeBeneficesTravailleurIndependant?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
-                    <span class="error-input-message"
+                    <span
+                        class="error-input-message"
                         *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesTravailleurIndependant?.touched)  && personneAChargeBeneficesTravailleurIndependant?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
@@ -459,6 +497,7 @@
         <div class="row row-button-valider">
             <button
                 class="btn-style-perso-3"
+                aria-label="Valider votre saisie"
                 type="submit">
                 <div>
                     <span>Valider</span>

@@ -102,6 +102,7 @@
             *ngIf="isNouvellePersonneAChargeFormDisplay === false">
             <button
                 class="btn-style-perso-2 first-btn"
+                aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
@@ -111,6 +112,7 @@
             <button
                 id="btn-personnes-charge-suivant"
                 class="btn-style-perso-1 second-btn"
+                aria-label="Passer à la page suivante"
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonSuivant()">
                 <div>

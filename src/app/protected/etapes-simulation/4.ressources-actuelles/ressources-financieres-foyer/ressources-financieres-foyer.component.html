@@ -19,6 +19,7 @@
                 </div>
                 <div class="row">
                     <input
+                        attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-1"
@@ -60,6 +61,7 @@
                 </div>
                 <div class="row">
                     <input
+                        attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-2"
@@ -102,6 +104,7 @@
                 </div>
                 <div class="row">
                     <input
+                        attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
                         name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-3"
@@ -164,6 +167,7 @@
                     le mois dernier
                 </span>
                 <input
+                    attr.aria-label="Allocations familiales du mois dernier"
                     name="allocationsFamilialesMensuellesNetFoyer"
                     data-testid="input-af"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -213,6 +217,7 @@
                     le mois dernier
                 </span>
                 <input
+                    id="montantPAJEFoyer"
                     name="montantPAJEFoyer"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -261,6 +266,7 @@
                     le mois dernier
                 </span>
                 <input
+                    id="montantPersionsAlimentairesFoyer"
                     name="montantPersionsAlimentairesFoyer"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -299,7 +305,7 @@
             <div class="row mb-2">
                 <label
                     class="label"
-                    for="revenusImmobilier">
+                    for="revenusImmobilierFoyer">
                     * Revenus annuels de placement ou du patrimoine
                     <div
                         id="infobulle-revenus-immobilier"
@@ -319,6 +325,7 @@
                     net total 3 derniers mois
                 </span>
                 <input
+                    id="revenusImmobilierFoyer"
                     name="revenusImmobilier"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -361,6 +368,7 @@
         <div class="row row-button-valider">
             <button
                 id="btn-ressources-foyer-valider"
+                aria-label="Valider votre saisie"
                 class="btn-style-perso-3"
                 type="submit"
                 data-testid="btn-ressources-foyer-valider">
