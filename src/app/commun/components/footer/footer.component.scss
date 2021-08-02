@@ -54,17 +54,17 @@ footer {
         .col-texte-service-estime {
           max-width: 265px;
           span {
-            font-size: 12px;
+            font-size: 0.75em;
           }
         }
       }
     }
     .row-1-footer-div-2 {
-      font-size: 12px;
+      font-size: 0.75em;
       margin-left: 0;
       margin-right: auto;
       @media #{$medium-device} {
-        font-size: 16px;
+        font-size: 1em;
         min-width: 380px;
       }
       div {
@@ -135,9 +135,9 @@ footer {
             width: 176px;
           }
           span {
-            font-size: 6px !important;
+            font-size: 0.375em !important;
             @media #{$medium-device} {
-              font-size: 9px !important;
+              font-size: 0.563em !important;
             }
           }
         }
@@ -150,10 +150,10 @@ footer {
     padding-top: 15px;
     text-align: center;
     span {
-      font-size: 8px;
+      font-size: 0.5em;
       width: 100%;
       @media #{$medium-device} {
-        font-size: 12px;
+        font-size: 0.75em;
       }
     }
   }

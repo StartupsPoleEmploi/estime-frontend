@@ -1,24 +1,27 @@
-a {
-  cursor: pointer;
-  text-decoration: none;
-  &:hover, &:focus {
-    text-decoration: underline;
-    text-underline-position: under;
-  }
-}
 
-span {
-  text-decoration: underline;
-  font-weight: 800;
-  font-size: 12px;
-}
 
-.breadcrumb {
-  background-color: unset;
-  font-size: 12px;
-  padding-left: 0;
-}
+
+
 
 .container-fluid {
   margin-top: 2rem;
+
+  .breadcrumb {
+    background-color: unset;
+    font-size: 0.75em;
+    padding-left: 0;
+    span {
+      text-decoration: underline;
+      font-weight: 800;
+    }
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      &:hover, &:focus {
+        text-decoration: underline;
+        text-underline-position: under;
+      }
+    }
+  }
 }

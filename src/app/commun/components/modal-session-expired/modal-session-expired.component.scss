@@ -15,7 +15,7 @@
   button {
     opacity: unset !important;
     span {
-      font-size: 1.5rem;
+      font-size: 1.5em;
       color: $color-blue-1;
     }
     &:focus {
@@ -29,7 +29,7 @@
   border-bottom: 0;
   span {
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.125em;
   }
 }
 
