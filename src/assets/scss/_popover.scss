@@ -7,15 +7,15 @@ popover-container {
 .popover {
   background: $color-blue-5;
   color: $color-white-3;
-  font-size: 0.9rem !important;
+  font-size: 0.9em !important;
   p {
-    font-size: 0.9rem !important;
+    font-size: 0.9em !important;
   }
 }
 
 .close-popover {
   cursor: pointer;
-  font-size: 19px;
+  font-size: 1.188em;
 }
 
 /* Needed to have the triangle match the grey background of the popover */

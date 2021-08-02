@@ -4,7 +4,7 @@ select {
 
 .fa-info-circle {
   span {
-    font-size: 0.9rem!important;
+    font-size: 0.9em!important;
     color: black!important;
     font-weight: 300 !important;
     vertical-align: middle!important;
@@ -20,7 +20,7 @@ select {
 
 .custom-control-label {
   color: $color-blue-1;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 .div-buttons-form {
@@ -95,7 +95,7 @@ form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::befor
 
 .error-input-message {
   color: $color-red-5 !important;
-  font-size: 12px !important;
+  font-size: 0.75em !important;
   margin-top: 2px;
 }
 
@@ -160,7 +160,7 @@ input:-webkit-autofill:focus {
   }
   input {
     color: $color-blue-1;
-    font-size: 1rem;
+    font-size: 1em;
     font-weight: bold;
     margin-top: auto;
     margin-bottom: auto;
@@ -171,21 +171,21 @@ input:-webkit-autofill:focus {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     &::placeholder {
       color: $color-blue-1!important;
-      font-size: 16px;
+      font-size: 1em;
       font-weight: 400 !important;
       opacity: 0.7; /* Firefox */
     }
     /* Internet Explorer 10-11 */
     &:-ms-input-placeholder {
       color: $color-blue-1!important;
-      font-size: 16px;
+      font-size: 1em;
       font-weight: 400 !important;
       opacity: 0.7;
     }
   }
   select {
     color: $color-blue-1;
-    font-size: 1rem;
+    font-size: 1em;
     margin-top: auto;
     margin-bottom: auto;
     width: auto;
@@ -202,7 +202,7 @@ input:-webkit-autofill:focus {
   }
   .label, span {
     color: $color-blue-2;
-    font-size: 16px;
+    font-size: 1em;
     margin-bottom: 0;
   }
 
@@ -217,7 +217,7 @@ input:-webkit-autofill:focus {
 
   .text-side-input {
     color: $color-blue-1;
-    font-size: 16px;
+    font-size: 1em;
     font-weight: 300;
     margin-bottom: auto;
     margin-left: 0.5rem;
@@ -236,7 +236,7 @@ input:-webkit-autofill:focus {
     margin-top: auto;
     margin-bottom: auto;
     @media #{$small-device} {
-      font-size: 0.9rem;
+      font-size: 0.9em;
     }
   }
 }
