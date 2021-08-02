@@ -25,7 +25,7 @@
     color: $color-blue-2;
     font-style: normal;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 0.875em;
     line-height: 17px;
 
     &:hover {
@@ -48,7 +48,7 @@
       @media #{$extra-small-device} {
         max-width: 565px;
       }
-      font-size: 16px;
+      font-size: 1em;
       color: $color-blue-2;
       letter-spacing: 0;
       line-height: 24px;
@@ -88,7 +88,7 @@
           color: $color-blue-3;
           font-weight: 600;
           margin-bottom: 0;
-          font-size: 16px;
+          font-size: 1em;
         }
       }
       .div-span-card {
@@ -104,10 +104,10 @@
       span {
         font-weight: 900;
         @media #{$small-device} {
-          font-size: 17px;
+          font-size: 1.063em;
         }
         @media #{$medium-device} {
-          font-size: 24px;
+          font-size: 1.5em;
         }
       }
       .card-body {
@@ -187,10 +187,10 @@
         &.active {
           #span-mois-annee span {
             color: $color-blue-3 !important;
-            font-size: 16px;
+            font-size: 1em;
           }
           span {
-            font-size: 22px;
+            font-size: 1.375em;
             font-weight: 900;
           }
           background-color: $color-blue-8;
@@ -207,27 +207,27 @@
             display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
             display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
             height: 100%;
-            font-size: 14px;
+            font-size: 0.875em;
             @media #{$extra-small-device} {
-              font-size: 16px !important;
+              font-size: 1em !important;
               font-weight: 900 !important;
             }
           }
           span {
-            font-size: 14px;
+            font-size: 0.875em;
             color: $color-blue-1;
             font-weight: bold;
             @media #{$extra-small-device} {
-              font-size: 16px !important;
+              font-size: 1em !important;
             }
           }
         }
         span {
           @media #{$small-device} {
-            font-size: 17px;
+            font-size: 1.063em;
           }
           @media #{$medium-device} {
-            font-size: 18px;
+            font-size: 1.125em;
           }
           font-weight: 600;
         }
