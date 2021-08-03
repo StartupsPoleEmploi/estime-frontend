@@ -1,4 +1,4 @@
-<h5 class="row h5-style-1" style="font-family: Lato">Mes ressources et aides actuelles</h5>
+<span class="row title-liste-details-aides-style-1">Mes ressources et aides actuelles</span>
 <div class="row mt-3">
     <div class="card">
         <ul class="list-group list-group-flush">
@@ -153,9 +153,8 @@
         </div>
     </div>
 </div>
-<h5
-    class="row h5-style-2 mt-4"
-    style="font-family: Lato"
+<span
+    class="row title-liste-details-aides-style-2 mt-4"
     *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
     <img
         id="img-hand-finger"
@@ -163,7 +162,7 @@
         src="./assets/images/hand-finger-right.svg"
         class="mr-2">
     Les aides que vous pourriez obtenir
-</h5>
+</span>
 <div
     class="row mt-3"
     *ngIf="aidesService.hasAidesObtenir(simulationSelected)">

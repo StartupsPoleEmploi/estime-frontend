@@ -7,40 +7,33 @@
   .card-body {
     padding-top: 0.5rem;
     padding-bottom: 0;
-  }
-  p {
-    font-size: 1em;
-  }
-  h5 {
-    margin-bottom: 0.2rem;
-    font-weight: bold;
-    font-size: 1.313em;
-    text-align: left;
-  }
-  h6 {
-    font-size: 0.9em;
-    text-align: left;
-    font-weight: 800;
-    margin-bottom: 0.1rem;
-  }
-  hr {
-    border-bottom-right-radius: 10px;
-    margin: 0;
-    &.aah {
-      border-top: 7px solid $color-green-4;
+    .card-title {
+      span {
+        font-family: Lato;
+        font-size: 1.313em;
+        font-weight: bold;
+        margin-bottom: 0.2rem;
+        text-align: left;
+      }
+      hr {
+        border-bottom-right-radius: 10px;
+        margin: 0;
+        &.aah {
+          border-top: 7px solid $color-green-4;
+        }
+        &.agepi {
+          border-top: 7px solid $color-violet-2;
+        }
+        &.am {
+          border-top: 7px solid $color-orange-2;
+        }
+        &.ass {
+          border-top: 7px solid $color-orange-3;
+        }
+        &.pa {
+          border-top: 7px solid $color-violet-1;
+        }
+      }
     }
-    &.agepi {
-      border-top: 7px solid $color-violet-2;
-    }
-    &.am {
-      border-top: 7px solid $color-orange-2;
-    }
-    &.ass {
-      border-top: 7px solid $color-orange-3;
-    }
-    &.pa {
-      border-top: 7px solid $color-violet-1;
-    }
-
   }
 }

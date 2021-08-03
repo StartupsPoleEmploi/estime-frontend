@@ -5,56 +5,25 @@
     width: 1.1rem;
   }
 }
-.li-aide-sociale-selectable {
-  padding-right: 8px !important;
-  padding-left: 4px !important;
-  button {
-    text-align: left;
-    max-height: unset;
-    .row {
-      padding-left: 6px;
-    }
-    &.active {
-      background-color: $color-blue-8!important;
-    }
-    &:hover {
-      background-color: $color-blue-7!important;
-    }
-  }
+
+#card-aides-obtenir {
+  height: 100%;
 }
 
-.card-message-alerte-aide {
-  background-color: unset;
-  border: 1px solid $color-grey-1 !important;
-  border-radius: 4px;
-  margin-top: 10px;
-  padding: 8px 25px 8px 25px;
-  span {
-    font-size: 0.875em;
-    line-height: 21px;
-  }
-  .row {
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-    .img-card-message-alerte-aide {
-      max-width: fit-content !important;
-      padding-right: 5px;
-      padding-left: 5px;
-      div {
-        width: 20px;
-        height: 100%;
-        position: relative;
-        img {
-          bottom: 0;
-          margin: auto;
-          position: absolute;
-          top: 0;
-          width: 22px;
-        }
-      }
-    }
-  }
+.title-liste-details-aides {
+  font-family: Lato;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.title-liste-details-aides-style-1 {
+  @extend .title-liste-details-aides;
+  color: $color-blue-1;
+}
+
+.title-liste-details-aides-style-2 {
+  @extend .title-liste-details-aides;
+  color: $color-blue-2;
 }
 
 .card {
@@ -108,6 +77,56 @@
   }
 }
 
-#card-aides-obtenir {
-  height: 100%;
+
+.card-message-alerte-aide {
+  background-color: unset;
+  border: 1px solid $color-grey-1 !important;
+  border-radius: 4px;
+  margin-top: 10px;
+  padding: 8px 25px 8px 25px;
+  span {
+    font-size: 0.875em;
+    line-height: 21px;
+  }
+  .row {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    .img-card-message-alerte-aide {
+      max-width: fit-content !important;
+      padding-right: 5px;
+      padding-left: 5px;
+      div {
+        width: 20px;
+        height: 100%;
+        position: relative;
+        img {
+          bottom: 0;
+          margin: auto;
+          position: absolute;
+          top: 0;
+          width: 22px;
+        }
+      }
+    }
+  }
 }
+
+.li-aide-sociale-selectable {
+  padding-right: 8px !important;
+  padding-left: 4px !important;
+  button {
+    text-align: left;
+    max-height: unset;
+    .row {
+      padding-left: 6px;
+    }
+    &.active {
+      background-color: $color-blue-8!important;
+    }
+    &:hover {
+      background-color: $color-blue-7!important;
+    }
+  }
+}
+
