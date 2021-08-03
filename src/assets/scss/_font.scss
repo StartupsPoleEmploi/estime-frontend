@@ -3,8 +3,74 @@ body {
   font-size: 1em;
 }
 
+h1 {
+  @extend .font-effect-title;
+  font-size: 1.8em;
+  text-align: center;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 2.2em;
+  }
+}
+
+h2 {
+  @extend .font-effect-title;
+  font-size: 1.7em;
+  text-align: center;
+  font-weight: 600;
+
+}
+
+h3 {
+  @extend .font-effect-title;
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: 400;
+  line-height: 2rem;
+}
+
+h4 , h5, h6 {
+  @extend .font-effect-title;
+  font-size: 1.2em;
+  text-align: center;
+}
+
 p, span, ul {
   @extend .font-effect;
+  font-size: 1em;
+}
+
+.h1-style-1 {
+  @extend .font-effect-title;
+  @extend .h1-style-1;
+  text-align: left;
+  font-size: 1.5em;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 2.25em;
+  }
+}
+
+.h2-style-1 {
+  @extend .font-effect-title;
+  color: $color-blue-1;
+  font-size: 1.313em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.h2-style-2 {
+  @extend .font-effect-title;
+  text-align: left;
+  color: $color-blue-3;
+  font-size: 1.125em;
+  @media #{$medium-device}, #{$large-device}  {
+    font-size: 1.5em;
+  }
+}
+
+.h3-style-1 {
+  @extend .font-effect-title;
+  text-align: left;
+  font-weight: bold;
   font-size: 1em;
 }
 
@@ -18,124 +84,13 @@ p, span, ul {
   color: $color-blue-1;
 }
 
-h1 {
-  @extend .font-effect-title;
-  font-size: 1.8em;
-  text-align: center;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 2.2em;
-  }
-}
-
-.h1-style-1 {
-  @extend .font-effect-title;
-  text-align: center;
+.text-important {
   color: $color-blue-2;
-  font-size: 1.7em;
-}
-
-.h1-style-2 {
-  @extend .font-effect-title;
-  @extend .h1-style-1;
-  text-align: left;
-  font-size: 1.5em;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 2.25em;
-  }
+  font-weight: bold;
 }
 
 .text-under-h1 {
   margin-top: -0.5rem;
   font-size: 0.9em;
   color: $color-blue-2;
-}
-
-
-h2 {
-  @extend .font-effect-title;
-  font-size: 1.7em;
-  text-align: center;
-  font-weight: 600;
-
-}
-
-.h2-style-1 {
-  @extend .font-effect-title;
-  text-align: center;
-  color: $color-blue-2;
-  font-size: 1.7em;
-}
-
-.h2-style-2 {
-  @extend .font-effect-title;
-  color: $color-blue-1;
-  font-size: 1.313em;
-  font-weight: bold;
-  text-align: left;
-}
-
-.h2-style-3 {
-  @extend .font-effect-title;
-  text-align: center;
-  color: $color-blue-2;
-  font-size: 1.7em;
-}
-
-.h2-style-4 {
-  @extend .font-effect-title;
-  text-align: left;
-  color: $color-blue-3;
-  font-size: 1.125em;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 1.5em;
-  }
-}
-
-h3 {
-  @extend .font-effect-title;
-  font-size: 1.3em;
-  text-align: center;
-  font-weight: 400;
-  line-height: 2rem;
-}
-
-.h3-style-1 {
-  @extend .font-effect-title;
-  text-align: left;
-  font-weight: bold;
-  font-size: 1em;
-}
-
-h4 , h5, h6 {
-  @extend .font-effect-title;
-  font-size: 1.2em;
-  text-align: center;
-}
-
-
-.h5-style-1 {
-  @extend .font-effect-title;
-  text-align: left;
-  color: #23333C;
-  font-size: 1em;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 1.1em;
-  }
-}
-
-.h5-style-2 {
-  @extend .font-effect-title;
-  text-align: left;
-  color: $color-blue-2;
-  font-size: 1em;
-  @media #{$medium-device}, #{$large-device}  {
-    font-size: 1.1em;
-  }
-}
-
-
-
-.text-important {
-  color: $color-blue-2;
-  font-weight: bold;
 }
