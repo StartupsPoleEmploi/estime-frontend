@@ -9,7 +9,7 @@
                   <label
                       class="label"
                       for="input-allocation-journaliere-net-ass">
-                      * Montant net de votre allocation journalière
+                      * Montant net de votre allocation journalière ASS
                   </label>
               </div>
               <div class="row">
@@ -125,6 +125,7 @@
                   <select
                       id="prochaineDeclarationRSA"
                       name="prochaineDeclarationRSA"
+                      data-testid="select-prochaine-declaration-rsa"
                       [(ngModel)]="ressourcesFinancieres.allocationsCAF.prochaineDeclarationRSA"
                       class="fit-content form-control"
                       [ngClass]="{'option-selected':ressourcesFinancieres.allocationsCAF.prochaineDeclarationRSA !== null}"
@@ -162,6 +163,7 @@
               <div class="row">
                   <input
                       name="allocationMensuelleNetAAH"
+                      data-testid="input-allocation-mensuelle-aah"
                       pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                       (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                       type="text"
@@ -264,6 +266,7 @@
                       * J'ai travaillé
                   </label>
                   <select
+                      data-testid="select-nombre-mois-travailles-avant-simulation"
                       name="nombreMoisTravailleAuCoursDerniersMois"
                       [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                       aria-label="nombre de mois travaillés au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois"
@@ -303,6 +306,7 @@
                       <input
                           id="salaireMoisM0AvantPeriodeSimulee"
                           name="salaireMoisM0AvantPeriodeSimulee"
+                          data-testid="input-salaire-mois-demande-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -325,6 +329,7 @@
                           <input
                               id="pasDeSalaireMois0AvantPeriodeSimulee"
                               name="pasDeSalaireMois0AvantPeriodeSimulee"
+                              data-testid="checkbox-pas-de-salaire-mois-demande-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
@@ -363,6 +368,7 @@
                       <input
                           id="salaireMoisMMoins1AvantPeriodeSimulee"
                           name="salaireMoisMMoins1AvantPeriodeSimulee"
+                          data-testid="input-salaire-mois-moins-1-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -384,6 +390,7 @@
                           <input
                               id="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
                               name="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
+                              data-testid="checkbox-pas-de-salaire-mois-moins-1-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
@@ -422,6 +429,7 @@
                       <input
                           id="salaireMoisMMoins2AvantPeriodeSimulee"
                           name="salaireMoisMMoins2AvantPeriodeSimulee"
+                          data-testid="input-salaire-mois-moins-2-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -443,6 +451,7 @@
                           <input
                               id="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
                               name="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
+                              data-testid="checkbox-pas-de-salaire-mois-moins-2-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"

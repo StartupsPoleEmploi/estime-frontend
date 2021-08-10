@@ -16,6 +16,14 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-aah]').click();
   }
 
+  public clickOnSituationASS() {
+    cy.get('[data-testid=btn-situation-ass]').click();
+  }
+
+  public clickOnSituationRSA() {
+    cy.get('[data-testid=btn-situation-rsa]').click();
+  }
+
   public clickOnSituationPensionInvalidite() {
     cy.get('[data-testid=btn-situation-pension-invalidite]').click();
   }
@@ -53,7 +61,23 @@ class MaSituationPage {
   }
 
   public clickOnSituationConjointAucuneRessource() {
-    cy.get('[data-testid=btn-situation-conjoint-aucune-ressource').click();
+    cy.get('[data-testid=btn-situation-conjoint-aucune-ressource]').click();
+  }
+
+  public clickOnVousVivezSeulOui(): void {
+    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-oui]').click({force: true});
+  }
+
+  public clickOnVousVivezSeulNon(): void {
+    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({force: true});
+  }
+
+  public clickOnVousEtesProprietaireOui(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui]').click({force: true});
+  }
+
+  public clickOnVousEtesProprietaireNon(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non]').click({force: true});
   }
 
   public clickOnSuivant() {
