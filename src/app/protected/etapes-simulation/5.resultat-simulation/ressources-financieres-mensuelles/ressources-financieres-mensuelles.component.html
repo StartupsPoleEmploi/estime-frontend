@@ -46,7 +46,7 @@
                 <hr *ngIf="isItemRevenusImmobilierIsNotLast()">
             </li>
             <li
-                class="list-group-item li-aide-sociale-selectable"
+                class="list-group-item li-aide-selectable"
                 *ngIf="aidesService.getMontantAAH(simulationSelected) > 0">
                 <button
                     type="button"
@@ -54,26 +54,26 @@
                     class="btn"
                     tabindex="0"
                     style="cursor: pointer;"
-                    [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
+                    [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
                     (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                     <app-item-ressource-actuelle
                         [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                         [isColPictoArrowDisplay]="true"
-                        [isAideSocialSelected]="isAideSocialSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)"
+                        [isAideSelected]="isAideSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)"
                         [libelleRessource]="libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                         [montantRessource]="aidesService.getMontantAAH(simulationSelected)"
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
                 </button>
-                <app-detail-aide-sociale
+                <app-detail-aide
                     class="d-sm-none"
-                    *ngIf="aideSocialeSelected && aideSocialeSelected.code === codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
-                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                    *ngIf="aideSelected && aideSelected.code === codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
+                    [aideSelected]="aideSelected"></app-detail-aide>
                 <hr *ngIf="isItemAahIsNotLast()">
             </li>
             <li
                 class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.pensionInvalidite > 0">
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0">
                 <app-item-ressource-actuelle
                     [codeRessource]="codesAidesEnum.PENSION_INVALIDITE"
                     [isColPictoArrowDisplay]="false"
@@ -85,7 +85,7 @@
             </li>
             <li
                 class="list-group-item"
-                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.allocationsCPAM?.allocationSupplementaireInvalidite > 0">
+                *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.allocationSupplementaireInvalidite > 0">
                 <app-item-ressource-actuelle
                     [codeRessource]="codesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE"
                     [isColPictoArrowDisplay]="false"
@@ -109,7 +109,7 @@
                 <hr *ngIf="isItemRsaIsNotLast()">
             </li>
             <li
-                class="list-group-item li-aide-sociale-selectable"
+                class="list-group-item li-aide-selectable"
                 *ngIf="aidesService.getMontantASS(simulationSelected) > 0">
                 <button
                     type="button"
@@ -117,22 +117,22 @@
                     class="btn"
                     tabindex="0"
                     style="cursor: pointer;"
-                    [ngClass]="{'active': isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
+                    [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
                     (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
                     <app-item-ressource-actuelle
                         [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
                         data-testid="row-ass"
                         [isColPictoArrowDisplay]="true"
-                        [isAideSocialSelected]="isAideSocialSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)"
+                        [isAideSelected]="isAideSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)"
                         [libelleRessource]="libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
                         [montantRessource]="aidesService.getMontantASS(simulationSelected)"
                         [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
                     </app-item-ressource-actuelle>
                 </button>
-                <app-detail-aide-sociale
+                <app-detail-aide
                     class="d-sm-none"
-                    *ngIf="aideSocialeSelected && aideSocialeSelected.code === codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
-                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                    *ngIf="aideSelected && aideSelected.code === codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
+                    [aideSelected]="aideSelected"></app-detail-aide>
             </li>
         </ul>
     </div>
@@ -173,28 +173,28 @@
             class="btn-group-vertical"
             role="group">
             <div
-                class="w-100 li-aide-sociale-selectable"
+                class="w-100 li-aide-selectable"
                 *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
                 <button
                     type="button"
                     role="button"
                     class="btn"
                     tabindex="0"
-                    [ngClass]="{'active': isAideSocialSelected(aideKeyValue.value.code)}"
-                    (click)="onClickButtonAideSocialObtenir(aideKeyValue.value)">
+                    [ngClass]="{'active': isAideSelected(aideKeyValue.value.code)}"
+                    (click)="onClickButtonAideObtenir(aideKeyValue.value)">
                     <app-item-ressource-actuelle
                         [codeRessource]="aideKeyValue.value.code"
-                        [isAideSocialSelected]="isAideSocialSelected(aideKeyValue.value.code)"
+                        [isAideSelected]="isAideSelected(aideKeyValue.value.code)"
                         [isColPictoArrowDisplay]="true"
                         [libelleRessource]="aideKeyValue.value.nom"
                         [montantRessource]="aideKeyValue.value.montant"
                         [organismeRessource]="aideKeyValue.value.organisme">
                     </app-item-ressource-actuelle>
                 </button>
-                <app-detail-aide-sociale
+                <app-detail-aide
                     class="d-sm-none"
-                    *ngIf="aideSocialeSelected && aidesService.isAideDemandeurPourraObtenir(aideSocialeSelected)"
-                    [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                    *ngIf="aideSelected && aidesService.isAideDemandeurPourraObtenir(aideSelected)"
+                    [aideSelected]="aideSelected"></app-detail-aide>
                 <hr *ngIf="!isLastAideKeyValue(index)">
             </div>
         </div>

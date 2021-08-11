@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { AllocationsCAF } from "@models/allocations-caf";
-import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
+import { AidesCAF } from "@models/aides-caf";
+import { AidesPoleEmploi } from "@models/aides-pole-emploi";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
-import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
-import { AllocationsLogementMensuellesNetFoyer } from '@app/commun/models/allocations-logement-mensuelles-net-foyer';
+import { AidesCPAM } from '@models/aides-cpam';
+import { AllocationsLogement } from '@models/allocations-logement';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
-import { SalaireAvantPeriodeSimulation } from '@app/commun/models/salaire-avant-periode-simulation';
+import { SalaireAvantPeriodeSimulation } from '@models/salaire-avant-periode-simulation';
+import { AidesFamiliales } from '@models/aides-familiales';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -18,27 +19,20 @@ export class RessourcesFinancieresUtileService {
 
   }
 
-  public creerRessourcesFinancieres(): RessourcesFinancieres {
-    const ressourcesFinancieres = new RessourcesFinancieres();
-    ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
-    const allocationsPE = new AllocationsPoleEmploi();
-    ressourcesFinancieres.allocationsPoleEmploi = allocationsPE;
-    const allocationsCAF = new AllocationsCAF();
-    allocationsCAF.prochaineDeclarationRSA = null;
-    allocationsCAF.allocationsFamilialesMensuellesNetFoyer = 0;
-    const allocationsLogementMensuellesNetFoyer = new AllocationsLogementMensuellesNetFoyer();
-    allocationsLogementMensuellesNetFoyer.moisNMoins1 = 0;
-    allocationsLogementMensuellesNetFoyer.moisNMoins2 = 0;
-    allocationsLogementMensuellesNetFoyer.moisNMoins3 = 0;
-    allocationsCAF.allocationsLogementMensuellesNetFoyer = allocationsLogementMensuellesNetFoyer;
-    allocationsCAF.pensionsAlimentairesFoyer = 0;
-    allocationsCAF.prestationAccueilJeuneEnfant = 0;
-    ressourcesFinancieres.allocationsCAF = allocationsCAF;
-    const allocationsCPAM = new AllocationsCPAM();
-    allocationsCPAM.allocationSupplementaireInvalidite = 0;
-    allocationsCPAM.pensionInvalidite = 0;
-    ressourcesFinancieres.allocationsCPAM = allocationsCPAM;
-    return ressourcesFinancieres;
+  public creerAidesCPAM(): AidesCPAM {
+    const aidesCPAM = new AidesCPAM();
+    aidesCPAM.allocationSupplementaireInvalidite = 0;
+    return aidesCPAM;
+  }
+
+  public creerAidesFamiliales(): AidesFamiliales {
+    const aidesFamiliales = new AidesFamiliales();
+    aidesFamiliales.allocationsFamiliales = 0;
+    aidesFamiliales.allocationSoutienFamilial = 0;
+    aidesFamiliales.complementFamilial = 0;
+    aidesFamiliales.pensionsAlimentairesFoyer = 0;
+    aidesFamiliales.prestationAccueilJeuneEnfant = 0;
+    return aidesFamiliales;
   }
 
   /**
@@ -51,24 +45,15 @@ export class RessourcesFinancieresUtileService {
    * Peut-être pas possible car l'utilisation d'un pipe avec le two way data binding ne fonctionne pas.
    */
   public replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
-    if (ressourcesFinancieres.allocationsPoleEmploi) {
-      ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet);
-      ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet);
+    if (ressourcesFinancieres.aidesPoleEmploi) {
+      this.replaceCommaByDotMontantsAidesPoleEmploi(ressourcesFinancieres);
     }
-    if (ressourcesFinancieres.allocationsCAF) {
-      if (ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer) {
-        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1);
-        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2);
-        ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3);
-      }
-      ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH);
-      ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA);
-      ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer);
-      ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant);
+    if (ressourcesFinancieres.aidesCAF) {
+      this.replaceCommaByDotMontantsAidesCAF(ressourcesFinancieres);
     }
-    if (ressourcesFinancieres.allocationsCPAM) {
-      ressourcesFinancieres.allocationsCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.pensionInvalidite);
-      ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite);
+    if (ressourcesFinancieres.aidesCPAM) {
+      ressourcesFinancieres.aidesCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite);
+      ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
     }
     if(ressourcesFinancieres.salaire) {
       ressourcesFinancieres.salaire.montantNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
@@ -129,7 +114,6 @@ export class RessourcesFinancieresUtileService {
     return isChampsSalairesValides;
   }
 
-
   private getNombreMoisTravaillesDerniersMois(ressourcesFinancieres: RessourcesFinancieres): number {
     let nombreMoisTravaillesDerniersMois = 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation)?1:0;
@@ -143,10 +127,41 @@ export class RessourcesFinancieresUtileService {
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet && (ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet == 0 || ressourcesFinancieres.allocationsPoleEmploi.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+    return ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet && (ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
   }
 
   public isMontantJournalierRSAInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0;
+    return ressourcesFinancieres.aidesCAF.allocationRSA && ressourcesFinancieres.aidesCAF.allocationRSA == 0;
   }
+
+  private replaceCommaByDotMontantsAidesCAF(ressourcesFinancieres: RessourcesFinancieres): void {
+    if (ressourcesFinancieres.aidesCAF) {
+      ressourcesFinancieres.aidesCAF.allocationAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationAAH);
+      ressourcesFinancieres.aidesCAF.allocationRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationRSA);
+      if(ressourcesFinancieres.aidesCAF.allocationsLogement) {
+        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1);
+        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins2);
+        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins3);
+      }
+      if(ressourcesFinancieres.aidesCAF.aidesFamiliales) {
+        ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales);
+        ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial);
+        ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial);
+        ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer);
+        ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant);
+      }
+    }
+  }
+
+  private replaceCommaByDotMontantsAidesPoleEmploi(ressourcesFinancieres: RessourcesFinancieres): void {
+    if(ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+      ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet);
+      ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet);
+    }
+    if(ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+      ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet);
+      ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
+    }
+  }
+
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
+import { SimulationAides } from '@models/simulation-aides';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class RessourcesFinancieresDiagrammeComponent implements OnInit {
 
-  @Input() simulationAidesSociales: SimulationAidesSociales;
+  @Input() simulationAides: SimulationAides;
 
   constructor(
     public screenService: ScreenService

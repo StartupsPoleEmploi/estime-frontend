@@ -23,7 +23,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { FormPersonneAChargeSituationComponent } from './etapes-simulation/3.mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge-situation/form-personne-a-charge-situation.component';
 import { FormPersonneAChargeComponent } from './etapes-simulation/3.mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge.component';
-import { DetailAideSocialeComponent } from './etapes-simulation/5.resultat-simulation/detail-aide-sociale/detail-aide-sociale.component';
+import { DetailAideComponent } from './etapes-simulation/5.resultat-simulation/detail-aide/detail-aide.component';
 import { ItemRessourceActuelleComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-mensuelles/item-ressource-actuelle/item-ressource-actuelle.component';
 import { RessourcesFinancieresMensuellesComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-mensuelles/ressources-financieres-mensuelles.component';
 import { EtapesSimulationComponent } from './etapes-simulation/etapes-simulation.component';
@@ -36,7 +36,7 @@ import { ChartModule } from 'angular2-chartjs';
   declarations: [
     AvantDeCommencerSimulationComponent,
     ContratTravailComponent,
-    DetailAideSocialeComponent,
+    DetailAideComponent,
     EtapesSimulationComponent,
     FormPersonneAChargeComponent,
     FormPersonneAChargeSituationComponent,

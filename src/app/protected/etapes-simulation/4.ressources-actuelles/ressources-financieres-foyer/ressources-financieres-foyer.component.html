@@ -8,11 +8,13 @@
                 <label
                     class="label"
                     for="montantAllocationsLogement">
-                    Allocations logement perçues pour les 3 derniers mois
+                    * Allocations logement perçues pour les 3 derniers mois
                 </label>
             </div>
             <div class="mb-2">
-                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                <div
+                    class="row"
+                    *ngIf="screenService.isExtraSmallScreen()">
                     <span class="text-side-input ml-0">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                     </span>
@@ -20,7 +22,7 @@
                 <div class="row">
                     <input
                         attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
-                        name="allocationsLogementMensuellesNetFoyerMoisNMoins1"
+                        name="allocationsLogementMoisNMoins1"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-1"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -29,32 +31,33 @@
                         maxlength="6"
                         class="max-with-input-type-montant form-control"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins1"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1"
                         inputmode="decimal"
                         (click)="$event.target.select()"
-                        #allocationsLogementMensuellesNetFoyerMoisNMoins1="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                        #allocationsLogementMoisNMoins1="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         [message]="'au mois de '  + this.dateUtileService.getDateFormateeAvantDateJour(1)">
                     </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins1?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins1?.errors?.required">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins1?.touched)  && allocationsLogementMoisNMoins1?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
                         class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins1.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins1.errors?.pattern">
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins1.touched)  && allocationsLogementMoisNMoins1.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
             </div>
             <div class="mb-2">
-                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                <div
+                    class="row"
+                    *ngIf="screenService.isExtraSmallScreen()">
                     <span class="text-side-input ml-0">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
                     </span>
@@ -62,7 +65,7 @@
                 <div class="row">
                     <input
                         attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
-                        name="allocationsLogementMensuellesNetFoyerMoisNMoins2"
+                        name="allocationsLogementMoisNMoins2"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-2"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -71,33 +74,34 @@
                         maxlength="6"
                         class="max-with-input-type-montant form-control"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins2"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins2"
                         inputmode="decimal"
                         required
                         (click)="$event.target.select()"
-                        #allocationsLogementMensuellesNetFoyerMoisNMoins2="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                        #allocationsLogementMoisNMoins2="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
                     </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins2?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins2?.errors?.required">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins2?.touched)  && allocationsLogementMoisNMoins2?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
                         class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins2.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins2.errors?.pattern">
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins2.touched)  && allocationsLogementMoisNMoins2.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
             </div>
             <div class="mb-2">
-                <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                <div
+                    class="row"
+                    *ngIf="screenService.isExtraSmallScreen()">
                     <span class="text-side-input ml-0">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}
                     </span>
@@ -105,7 +109,7 @@
                 <div class="row">
                     <input
                         attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
-                        name="allocationsLogementMensuellesNetFoyerMoisNMoins3"
+                        name="allocationsLogementMoisNMoins3"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         data-testid="input-apl-mois-moins-3"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -114,27 +118,26 @@
                         maxlength="6"
                         class="max-with-input-type-montant form-control"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsLogementMensuellesNetFoyer.moisNMoins3"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins3"
                         inputmode="decimal"
                         required
                         (click)="$event.target.select()"
-                        #allocationsLogementMensuellesNetFoyerMoisNMoins3="ngModel">
-                    <app-text-with-euro-symbol
-                        *ngIf="screenService.isExtraSmallScreen()">
-                    </app-text-with-euro-symbol>
+                        #allocationsLogementMoisNMoins3="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                     <app-text-with-euro-symbol
                         *ngIf="!screenService.isExtraSmallScreen()"
                         [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
                     </app-text-with-euro-symbol>
                 </div>
                 <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins3?.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins3?.errors?.required">
+                    <span
+                        class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins3?.touched)  && allocationsLogementMoisNMoins3?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                     <span
                         class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMensuellesNetFoyerMoisNMoins3.touched)  && allocationsLogementMensuellesNetFoyerMoisNMoins3.errors?.pattern">
+                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsLogementMoisNMoins3.touched)  && allocationsLogementMoisNMoins3.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                     </span>
                 </div>
@@ -142,22 +145,12 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteSituationFamilialeService.hasPersonneACharge()">
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)">
             <div class="row mb-2">
                 <label
                     class="label"
-                    for="allocationsFamilialesMensuellesNetFoyer">
-                    Allocations familiales
-                    <div
-                        id="infobulle-allocation-familiale"
-                        role="tooltip"
-                        class="img-interrogation-icon"
-                        [ngClass]="{'popover-open': popoverAllocationFamiliale.isOpen}"
-                        placement="right"
-                        (click)="onClickPopoverAllocationFamiliale($event)"
-                        tag-action="ouverture-infobulle-allocation-familiale"
-                        [popover]="popoverAllocationFamilialeTemplate"
-                        #popoverAllocationFamiliale="bs-popover"></div>
+                    for="allocationsFamiliales">
+                    * Allocations familiales
                 </label>
             </div>
             <div class="row">
@@ -168,7 +161,7 @@
                 </span>
                 <input
                     attr.aria-label="Allocations familiales du mois dernier"
-                    name="allocationsFamilialesMensuellesNetFoyer"
+                    name="allocationsFamiliales"
                     data-testid="input-af"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -177,25 +170,125 @@
                     maxlength="6"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.allocationsFamilialesMensuellesNetFoyer"
+                    [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales"
                     inputmode="decimal"
                     required
                     (click)="$event.target.select()"
-                    #allocationsFamilialesMensuellesNetFoyer="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                    #allocationsFamiliales="ngModel">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer?.touched)  && allocationsFamilialesMensuellesNetFoyer?.errors?.required">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamiliales?.touched)  && allocationsFamiliales?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamilialesMensuellesNetFoyer.touched)  && allocationsFamilialesMensuellesNetFoyer.errors?.pattern">
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamiliales.touched)  && allocationsFamiliales.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="allocationSoutienFamilial">
+                    * Allocation soutien familial
+                </label>
+            </div>
+            <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    le mois dernier
+                </span>
+                <input
+                    attr.aria-label="Allocation de soutien familiale du mois dernier"
+                    name="allocationSoutienFamilial"
+                    data-testid="input-af"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    maxlength="6"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial"
+                    inputmode="decimal"
+                    required
+                    (click)="$event.target.select()"
+                    #allocationSoutienFamilial="ngModel">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()"
+                    message="le mois dernier"></app-text-with-euro-symbol>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationSoutienFamilial?.touched)  && allocationSoutienFamilial?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationSoutienFamilial.touched)  && allocationSoutienFamilial.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+            </div>
+        </div>
+        <div
+            class="form-group"
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
+            <div class="row mb-2">
+                <label
+                    class="label"
+                    for="allocationsFamiliales">
+                    * Complément familial
+                </label>
+            </div>
+            <div class="row">
+                <span
+                    *ngIf="screenService.isExtraSmallScreen()"
+                    class="text-side-input ml-0">
+                    le mois dernier
+                </span>
+                <input
+                    attr.aria-label="Complément familial du mois dernier"
+                    name="complementFamilial"
+                    data-testid="input-af"
+                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                    type="text"
+                    min="0"
+                    maxlength="6"
+                    class="max-with-input-type-montant form-control"
+                    placeholder="Montant"
+                    [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial"
+                    inputmode="decimal"
+                    required
+                    (click)="$event.target.select()"
+                    #complementFamilial="ngModel">
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol
+                    *ngIf="!screenService.isExtraSmallScreen()"
+                    message="le mois dernier"></app-text-with-euro-symbol>
+            </div>
+            <div class="row">
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || complementFamilial?.touched)  && complementFamilial?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || complementFamilial.touched)  && complementFamilial.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
@@ -226,19 +319,19 @@
                     maxlength="6"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.prestationAccueilJeuneEnfant"
+                    [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant"
                     inputmode="decimal"
                     required
                     (click)="$event.target.select()"
                     #prestationAccueilJeuneEnfantFoyer="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
-                <span class="error-input-message"
+                <span
+                    class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || prestationAccueilJeuneEnfantFoyer?.touched)  && prestationAccueilJeuneEnfantFoyer?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
@@ -251,7 +344,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="deConnecteSituationFamilialeService.hasPersonneACharge()">
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -275,19 +368,19 @@
                     maxlength="6"
                     class="max-with-input-type-montant form-control"
                     placeholder="Montant"
-                    [(ngModel)]="ressourcesFinancieres.allocationsCAF.pensionsAlimentairesFoyer"
+                    [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer"
                     inputmode="decimal"
                     required
                     (click)="$event.target.select()"
                     #pensionsAlimentairesFoyer="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
                     message="le mois dernier"></app-text-with-euro-symbol>
             </div>
             <div class="row">
-                <span class="error-input-message"
+                <span
+                    class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer?.touched)  && pensionsAlimentairesFoyer?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
@@ -339,9 +432,7 @@
                     required
                     inputmode="decimal"
                     #revenusImmobilier="ngModel">
-                <app-text-with-euro-symbol
-                    *ngIf="screenService.isExtraSmallScreen()">
-                </app-text-with-euro-symbol>
+                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
                     message="net total 3 derniers mois">
@@ -379,47 +470,3 @@
         </div>
     </form>
 </div>
-
-<ng-template #popoverAllocationFamilialeTemplate>
-    <div class="container" (click)="onClickPopoverAllocationFamiliale($event)">
-        <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2 ml-auto"
-                (click)="onClickClosePopoverAllocationFamiliale($event)"></i>
-        </div>
-        <div class="row">
-            <p>
-                Vous devez déclarer ici la somme de vos
-                <b>
-                    allocations familiales, allocation de soutien familial
-                </b>
-                et
-                <b>complément de soutien familial.</b>
-            </p>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #popoverRevenusImmobiliersTemplate>
-    <div class="container" (click)="onClickPopoverRevenusImmobiliers($event)">
-        <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2 ml-auto"
-                (click)="onClickClosePopoverRevenusImmobiliers($event)"></i>
-        </div>
-        <div class="row">
-            <p>
-                <b>
-                    Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
-                </b>
-
-                <br>
-                * revenus fonciers ou micro-fonciers
-                <br>
-                * revenus des capitaux (actions, obligations)
-                <br>
-                * bénéfices d'une rente viagère
-            </p>
-        </div>
-    </div>
-</ng-template>

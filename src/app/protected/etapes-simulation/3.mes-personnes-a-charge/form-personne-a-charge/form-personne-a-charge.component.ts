@@ -6,9 +6,9 @@ import { PersonneUtileService } from '@app/core/services/utile/personne-utile.se
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
-import { AllocationsCAF } from '@models/allocations-caf';
-import { AllocationsPoleEmploi } from '@models/allocations-pole-emploi';
-import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
+import { AidesCAF } from '@models/aides-caf';
+import { AidesPoleEmploi } from '@models/aides-pole-emploi';
+import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { DeConnecteSituationFamilialeService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -53,6 +53,7 @@ export class FormPersonneAChargeComponent implements OnInit {
       if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
         this.deConnecteService.unsetAlloctionPAJE();
       }
+      this.deConnecteService.setAidesFamiliales();
       this.ajoutNouvellePersonneEventEmitter.emit(true);
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
@@ -100,11 +101,11 @@ export class FormPersonneAChargeComponent implements OnInit {
   private isSituationValide(): boolean {
     return this.nouvellePersonneACharge.informationsPersonnelles.salarie
     || this.nouvellePersonneACharge.informationsPersonnelles.sansRessource
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA
-    || this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite;
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite;
   }
 
   private unsetRessourcesFinancieres(): void {
@@ -112,15 +113,15 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.nouvellePersonneACharge.ressourcesFinancieres = null;
     }
     this.resetInformationsPersonnelles();
-    this.resetBeneficiaireAidesSociales();
+    this.resetBeneficiaireAides();
   }
 
   private creerRessourcesFinancieres(): void {
     this.nouvellePersonneACharge.ressourcesFinancieres = new RessourcesFinancieres();
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
-    this.nouvellePersonneACharge.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF = new AidesCAF();
+    this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi = new AidesPoleEmploi();
+    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM = new AidesCPAM();
+    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = 0;
   }
 
   private resetInformationsPersonnelles(): void {
@@ -133,13 +134,13 @@ export class FormPersonneAChargeComponent implements OnInit {
      }
   }
 
-  private resetBeneficiaireAidesSociales(): void {
-    if(this.nouvellePersonneACharge.beneficiaireAidesSociales) {
-      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH = false;
-      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE = false;
-      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS = false;
-      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA = false;
-      this.nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
+  private resetBeneficiaireAides(): void {
+    if(this.nouvellePersonneACharge.beneficiaireAides) {
+      this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH = false;
+      this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE = false;
+      this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS = false;
+      this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA = false;
+      this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite = false;
     }
   }
 }

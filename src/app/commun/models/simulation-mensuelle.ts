@@ -1,6 +1,6 @@
-import { AideSociale } from "@models/aide-sociale";
+import { Aide } from "@models/aide";
 
 export class SimulationMensuelle {
   datePremierJourMoisSimule: string;
-  mesAides: Map<string, AideSociale>;
+  mesAides: Map<string, Aide>;
 }

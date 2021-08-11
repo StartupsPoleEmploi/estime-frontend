@@ -4,7 +4,7 @@ import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enu
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
-import { DeConnecteSimulationAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service";
+import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
@@ -12,7 +12,7 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { RessourcesFinancieresUtileService } from "@app/core/services/utile/ressources-financieres-utiles.service";
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieresConjointComponent } from '@app/protected/etapes-simulation/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
@@ -25,7 +25,7 @@ import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/
 })
 export class RessourcesActuellesComponent implements OnInit {
 
-  beneficiaireAidesSociales: BeneficiaireAidesSociales;
+  beneficiaireAides: BeneficiaireAides;
 
   //gestion affichage accordions
   isVosRessourcesDisplay = true;
@@ -75,7 +75,7 @@ export class RessourcesActuellesComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public screenService: ScreenService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
+    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private elementRef: ElementRef,
     private estimeApiService: EstimeApiService,
@@ -120,8 +120,8 @@ export class RessourcesActuellesComponent implements OnInit {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
       this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).then(
-        (simulationAidesSociales) => {
-          this.deConnecteSimulationAidesSocialesService.setSimulationAidesSociales(simulationAidesSociales);
+        (simulationAides) => {
+          this.deConnecteSimulationAidesService.setSimulationAides(simulationAides);
           this.isPageLoadingDisplay = false;
           this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
         }, (erreur) => {
@@ -182,8 +182,6 @@ export class RessourcesActuellesComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
-    } else {
-      this.ressourcesFinancieres = this.ressourcesFinancieresUtileService.creerRessourcesFinancieres();
     }
   }
 

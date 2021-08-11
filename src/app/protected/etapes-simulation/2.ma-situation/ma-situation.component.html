@@ -156,7 +156,7 @@
                       class="label"
                       for="situationsExceptionnelles"
                       aria-describedby="infobulle-ma-situation-vous-percevez">
-                      Vous percevez
+                      * Vous percevez
                       <div
                           id="infobulle-ma-situation-vous-percevez"
                           role="tooltip"
@@ -175,7 +175,7 @@
                       aria-label="Vous êtes bénéficiaire de l'ASS"
                       class="radio-button-style-1"
                       data-testid="btn-situation-ass"
-                      [(ngModel)]="beneficiaireAidesSociales.beneficiaireASS"
+                      [(ngModel)]="beneficiaireAides.beneficiaireASS"
                       btnCheckbox
                       tabindex="0"
                       role="button"
@@ -192,7 +192,7 @@
                       class="radio-button-style-1"
                       aria-label="Vous êtes bénéficiaire du RSA"
                       data-testid="btn-situation-rsa"
-                      [(ngModel)]="beneficiaireAidesSociales.beneficiaireRSA"
+                      [(ngModel)]="beneficiaireAides.beneficiaireRSA"
                       btnCheckbox
                       tabindex="0"
                       role="button"
@@ -263,17 +263,15 @@
                   <label
                       name="beneficiaireAAH"
                       class="radio-button-style-1"
-                      [ngClass]="{'disable-radio-button-style-1': beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi}"
                       data-testid="btn-situation-aah"
                       aria-label="Vous êtes bénéficiaire de l'AAH"
-                      [(ngModel)]="beneficiaireAidesSociales.beneficiaireAAH"
+                      [(ngModel)]="beneficiaireAides.beneficiaireAAH"
                       btnCheckbox
                       tabindex="0"
                       role="button"
                       #beneficiaireAAH="ngModel"
                       (click)="onClickCheckBoxHasAAH()"
-                      (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)"
-                      [disabled]="beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi">
+                      (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
                       <div>
                           <span>{{situationPersonneEnum.AAH}}</span>
                       </div>
@@ -283,7 +281,7 @@
                       class="radio-button-style-1"
                       data-testid="btn-situation-pension-invalidite"
                       aria-label="Vous percevez une pension d'invalidité"
-                      [(ngModel)]="beneficiaireAidesSociales.beneficiairePensionInvalidite"
+                      [(ngModel)]="beneficiaireAides.beneficiairePensionInvalidite"
                       btnCheckbox
                       tabindex="0"
                       role="button"
@@ -357,7 +355,7 @@
           </div>
           <div
               class="form-group"
-              *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAidesSociales.beneficiaireRSA === true">
+              *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
               <div class="row mb-2">
                   <label
                       class="label"
@@ -447,7 +445,7 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE"
                       (click)="onClickCheckBoxConjointHasARE()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
                       <div>
@@ -463,7 +461,7 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS"
                       (click)="onClickCheckBoxConjointHasASS()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
                       <div>
@@ -471,7 +469,7 @@
                       </div>
                   </label>
                   <label
-                      *ngIf="beneficiaireAidesSociales.beneficiaireRSA === false"
+                      *ngIf="beneficiaireAides.beneficiaireRSA === false"
                       #conjointHasRSA="ngModel"
                       name="conjointHasRSA"
                       aria-label="Votre conjoint(e) perçoit le RSA"
@@ -480,7 +478,7 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA"
                       (click)="onClickCheckBoxConjointHasRSA()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
                       <div>
@@ -534,7 +532,7 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH"
                       (click)="onClickCheckBoxConjointHasAAH()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
                       <div>
@@ -550,7 +548,7 @@
                       btnCheckbox
                       tabindex="0"
                       role="button"
-                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite"
+                      [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite"
                       (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
                       <div>
@@ -586,7 +584,7 @@
           </div>
           <div
               class="form-group"
-              *ngIf="beneficiaireAidesSociales.beneficiaireRSA === true">
+              *ngIf="beneficiaireAides.beneficiaireRSA === true">
               <div class="row mb-2">
                   <label
                       class="label"

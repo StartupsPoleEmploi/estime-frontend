@@ -38,7 +38,7 @@
     </div>
     <div class="row row-style-2">
         <div class="col-12 mt-auto mb-auto">
-            <app-ressources-financieres-diagramme [simulationAidesSociales]="simulationAidesSociales"></app-ressources-financieres-diagramme>
+            <app-ressources-financieres-diagramme [simulationAides]="simulationAides"></app-ressources-financieres-diagramme>
         </div>
     </div>
     <div
@@ -50,7 +50,7 @@
             <div class="card">
                 <span class="card-title">Revenus et aides</span>
                 <span data-testid="span-revenus-aides-actuelles">
-                    {{simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation}} €
+                    {{simulationAides.montantRessourcesFinancieresMoisAvantSimulation}} €
                 </span>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 <h2
                     id="details_ressources_estimees_title"
                     class="h2-style-1 mt-auto mb-auto">
-                    Détail des ressources estimées après reprise d'emploi pour les {{simulationAidesSociales.simulationsMensuelles.length}} mois à venir
+                    Détail des ressources estimées après reprise d'emploi pour les {{simulationAides.simulationsMensuelles.length}} mois à venir
                 </h2>
             </div>
         </div>
@@ -73,7 +73,7 @@
         [ngClass]="{'card-deck': !screenService.isExtraSmallScreen(), 'card-sm-simulations': screenService.isExtraSmallScreen()}">
         <div
             class="col-12 col-md-12 card first-card"
-            *ngFor="let simulationMensuel of simulationAidesSociales.simulationsMensuelles; let index = index;"
+            *ngFor="let simulationMensuel of simulationAides.simulationsMensuelles; let index = index;"
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
             <div
                 id="btn-simulation-mois-{{index}}"
@@ -97,7 +97,7 @@
                         </div>
                         <div class="col-4 p-0 mt-auto mb-auto ml-auto mr-0 col-md-12">
                             <span>
-                                {{deConnecteSimulationAidesSocialesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
+                                {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                             </span>
                         </div>
                         <div
@@ -122,8 +122,8 @@
                     <app-ressources-financieres-mensuelles
                         class="col-12"
                         [simulationSelected]="simulationSelected"
-                        [aideSocialeSelected]="aideSocialeSelected"
-                        (newAideSocialeSelected)="changeAideSocialeSelected($event)"></app-ressources-financieres-mensuelles>
+                        [aideSelected]="aideSelected"
+                        (newAideSelected)="changeAideSelected($event)"></app-ressources-financieres-mensuelles>
                 </div>
             </div>
         </div>
@@ -133,11 +133,11 @@
             <app-ressources-financieres-mensuelles
                 class="col-6"
                 [simulationSelected]="simulationSelected"
-                [aideSocialeSelected]="aideSocialeSelected"
-                (newAideSocialeSelected)="changeAideSocialeSelected($event)"></app-ressources-financieres-mensuelles>
-            <app-detail-aide-sociale
+                [aideSelected]="aideSelected"
+                (newAideSelected)="changeAideSelected($event)"></app-ressources-financieres-mensuelles>
+            <app-detail-aide
                 class="col-6 pr-0"
-                [aideSocialeSelected]="aideSocialeSelected"></app-detail-aide-sociale>
+                [aideSelected]="aideSelected"></app-detail-aide>
         </div>
     </div>
 

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { SimulationAidesSociales } from "@models/simulation-aides-sociales";
+import { SimulationAides } from "@models/simulation-aides";
 import { SessionStorageService } from "ngx-webstorage";
 import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
 import { DeConnecteService } from './de-connecte.service';
 import { DeConnecteRessourcesFinancieresService } from './de-connecte-ressources-financieres.service';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
-import { AllocationsCPAM } from '@app/commun/models/allocations-cpam';
+import { AidesCPAM } from '@app/commun/models/aides-cpam';
 
 @Injectable({ providedIn: 'root' })
-export class DeConnecteSimulationAidesSocialesService {
+export class DeConnecteSimulationAidesService {
 
-  private simulationAidesSociales: SimulationAidesSociales;
+  private simulationAides: SimulationAides;
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -22,16 +22,16 @@ export class DeConnecteSimulationAidesSocialesService {
 
   }
 
-  public getSimulationAidesSociales(): SimulationAidesSociales {
-    if (!this.simulationAidesSociales) {
-      this.simulationAidesSociales = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
+  public getSimulationAides(): SimulationAides {
+    if (!this.simulationAides) {
+      this.simulationAides = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
     }
-    return this.simulationAidesSociales;
+    return this.simulationAides;
   }
 
-  public setSimulationAidesSociales(simulationAidesSociales: SimulationAidesSociales): void {
-    this.simulationAidesSociales = simulationAidesSociales;
-    this.saveSimulationAidesSocialesInSessionStorage();
+  public setSimulationAides(simulationAides: SimulationAides): void {
+    this.simulationAides = simulationAides;
+    this.saveSimulationAidesInSessionStorage();
   }
 
   public calculerMontantTotalRessourcesMois(simulation: SimulationMensuelle): number {
@@ -42,10 +42,10 @@ export class DeConnecteSimulationAidesSocialesService {
     const revenusMicroEntreprise = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois());
     const revenusIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois());
     const revenusImmobilier = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois());
-    const montantAllocationsCPAM = this.calculerMontantAllocationsCPAM(ressourcesFinancieres.allocationsCPAM);
+    const montantAidesCPAM = this.calculerMontantAidesCPAM(ressourcesFinancieres.aidesCPAM);
     const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
 
-    return Math.floor(salaireFuturTravail + revenusMicroEntreprise + revenusIndependant + revenusImmobilier + montantAllocationsCPAM + montantTotalAidesMoisSimule);
+    return Math.floor(salaireFuturTravail + revenusMicroEntreprise + revenusIndependant + revenusImmobilier + montantAidesCPAM + montantTotalAidesMoisSimule);
   }
 
   private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
@@ -61,16 +61,16 @@ export class DeConnecteSimulationAidesSocialesService {
     return montant;
   }
 
-  private calculerMontantAllocationsCPAM(allocationsCPAM: AllocationsCPAM) {
+  private calculerMontantAidesCPAM(aidesCPAM: AidesCPAM) {
     let montant = 0;
-    if(allocationsCPAM) {
-      montant +=  this.numberUtileService.getMontantSafe(allocationsCPAM.pensionInvalidite)
-        + this.numberUtileService.getMontantSafe(allocationsCPAM.allocationSupplementaireInvalidite);
+    if(aidesCPAM) {
+      montant +=  this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
+        + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }
     return montant
   }
 
-  private saveSimulationAidesSocialesInSessionStorage(): void {
-    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAidesSociales);
+  private saveSimulationAidesInSessionStorage(): void {
+    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAides);
   }
 }

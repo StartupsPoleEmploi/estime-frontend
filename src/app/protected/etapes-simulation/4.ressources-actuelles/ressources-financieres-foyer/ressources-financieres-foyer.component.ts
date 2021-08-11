@@ -7,7 +7,7 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { PopoverDirective } from 'ngx-bootstrap/popover'
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -19,7 +19,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   isRessourcesFinancieresFoyerFormSubmitted = false;
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
-  @ViewChild('popoverAllocationFamiliale') popoverAllocationFamiliale: PopoverDirective;
   @ViewChild('popoverRevenusImmobiliers') popoverRevenusImmobiliers: PopoverDirective;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
@@ -50,15 +49,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
-  }
-
-  public onClickPopoverAllocationFamiliale(event) {
-    event.stopPropagation();
-  }
-
-  public onClickClosePopoverAllocationFamiliale(event) {
-    event.stopPropagation();
-    this.popoverAllocationFamiliale.hide();
   }
 
   public onClickPopoverRevenusImmobiliers(event) {

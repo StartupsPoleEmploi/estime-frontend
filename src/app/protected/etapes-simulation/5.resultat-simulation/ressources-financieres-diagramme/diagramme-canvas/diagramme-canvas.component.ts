@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
+import { SimulationAides } from '@models/simulation-aides';
 import { ChartUtileService } from '@app/core/services/chart/chart-utile.service';
 @Component({
   selector: 'app-diagramme-canvas',
@@ -9,7 +9,7 @@ import { ChartUtileService } from '@app/core/services/chart/chart-utile.service'
 export class DiagrammeCanvasComponent implements OnInit {
 
 
-  @Input() simulationAidesSociales: SimulationAidesSociales;
+  @Input() simulationAides: SimulationAides;
   public chart;
 
   constructor(

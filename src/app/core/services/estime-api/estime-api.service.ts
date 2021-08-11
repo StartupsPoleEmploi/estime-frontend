@@ -4,7 +4,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
 import { Individu } from '@models/individu';
 import { PeConnectPayload } from '@models/pe-connect-payload';
-import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
+import { SimulationAides } from '@models/simulation-aides';
 import { IndividuConnectedService } from '../connexion/individu-connected.service';
 import { QueryParamEnum } from "@enumerations/query-param.enum";
 import { OptionsHTTP } from "@models/options-http";
@@ -33,9 +33,9 @@ export class EstimeApiService {
     return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeur_emploi`, individuConnected, options).toPromise();
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAidesSociales> {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
     const options = this.getHttpHeaders();
-    return this.http.post<SimulationAidesSociales>(`${this.pathDemandeurEmploiService}demandeur_emploi/simulation_aides_sociales`, demandeurEmploi, options).toPromise();
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}demandeur_emploi/simulation_aides`, demandeurEmploi, options).toPromise();
   }
 
   public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {

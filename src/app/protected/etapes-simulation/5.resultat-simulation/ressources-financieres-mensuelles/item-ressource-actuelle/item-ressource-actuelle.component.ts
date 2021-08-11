@@ -10,7 +10,7 @@ export class ItemRessourceActuelleComponent implements OnInit {
 
 
   @Input() codeRessource: string;
-  @Input() isAideSocialSelected: boolean;
+  @Input() isAideSelected: boolean;
   @Input() isColPictoArrowDisplay: boolean;
   @Input() isLastItem: boolean;
   @Input() libelleRessource: string;

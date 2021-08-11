@@ -1,13 +1,13 @@
-import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
-import { AllocationsCAF } from "@models/allocations-caf";
-import { AllocationsCPAM } from "@models/allocations-cpam";
+import { AidesPoleEmploi } from "@models/aides-pole-emploi";
+import { AidesCAF } from "@models/aides-caf";
+import { AidesCPAM } from "@models/aides-cpam";
 import { SalairesAvantPeriodeSimulation } from "@models/salaires-avant-periode-simulation";
 import { Salaire } from "@models/salaire";
 
 export class RessourcesFinancieres {
-  allocationsCAF: AllocationsCAF;
-  allocationsPoleEmploi: AllocationsPoleEmploi;
-  allocationsCPAM : AllocationsCPAM;
+  aidesCAF: AidesCAF;
+  aidesPoleEmploi: AidesPoleEmploi;
+  aidesCPAM : AidesCPAM;
   hasTravailleAuCoursDerniersMois: boolean;
   nombreMoisTravaillesDerniersMois: number;
   beneficesTravailleurIndependantDernierExercice: number;

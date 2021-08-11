@@ -1,4 +1,4 @@
-export class AideSociale {
+export class Aide {
   code: string;
   conditionsAcces: string;
   detail: string;

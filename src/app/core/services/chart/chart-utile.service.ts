@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { CodesRessourcesFinancieresEnum } from '@enumerations/codes-ressources-financieres.enum';
 import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
@@ -9,7 +9,7 @@ import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
 import { LibellesRessourcesFinancieresEnum } from '@enumerations/libelles-ressources-financieres.enum';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-import { DeConnecteSimulationAidesSocialesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides-sociales.service';
+import { DeConnecteSimulationAidesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides.service';
 import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '../utile/aides.service';
 import { DateUtileService } from '../utile/date-util.service';
@@ -43,7 +43,7 @@ export class ChartUtileService {
   constructor(
     private deConnecteService: DeConnecteService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    private deConnecteSimulationAidesSocialesService: DeConnecteSimulationAidesSocialesService,
+    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     private dateUtileService: DateUtileService,
     private aidesService: AidesService,
     private screenService: ScreenService
@@ -62,12 +62,12 @@ export class ChartUtileService {
   }
 
   private getData(): Data {
-    const simulationAidesSociales = this.deConnecteSimulationAidesSocialesService.getSimulationAidesSociales();
+    const simulationAides = this.deConnecteSimulationAidesService.getSimulationAides();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const data: Data = new Data();
 
-    data.labels = this.getLabels(simulationAidesSociales);
-    data.datasets = this.getDatasets(simulationAidesSociales, demandeurEmploiConnecte);
+    data.labels = this.getLabels(simulationAides);
+    data.datasets = this.getDatasets(simulationAides, demandeurEmploiConnecte);
 
     return data;
   }
@@ -76,13 +76,13 @@ export class ChartUtileService {
    * Fonction qui permet de déterminer les labels des mois qui déterminent les colonnes du diagramme
    * Le premier label est laissé vide car la première colonne concerne les ressources avant simulation
    *
-   * @param simulationAidesSociales
+   * @param simulationAides
    * @returns labelsMois
    */
-  private getLabels(simulationAidesSociales): Array<string> {
+  private getLabels(simulationAides): Array<string> {
     const labelsMois = Array();
     labelsMois.push('');
-    simulationAidesSociales.simulationsMensuelles.forEach(
+    simulationAides.simulationsMensuelles.forEach(
       (simulationMensuelle) => {
         labelsMois.push(
           this.dateUtileService.getLibelleDateStringFormat(
@@ -100,14 +100,14 @@ export class ChartUtileService {
    *
    * Pour ce faire, on parcourt les simulationsMensuelles et les aides qui les composent et on ajoute la valeur correspondante dans un tableau
    *
-   * @param simulationAidesSociales
+   * @param simulationAides
    * @param demandeurEmploiConnecte
    * @returns Array<Dataset>
    */
-  private getDatasets(simulationAidesSociales: SimulationAidesSociales, demandeurEmploiConnecte: DemandeurEmploi): Array<Dataset> {
+  private getDatasets(simulationAides: SimulationAides, demandeurEmploiConnecte: DemandeurEmploi): Array<Dataset> {
     const dataObject = this.initDatasets();
 
-    simulationAidesSociales.simulationsMensuelles.forEach((simulationMensuelle, index) => {
+    simulationAides.simulationsMensuelles.forEach((simulationMensuelle, index) => {
         for (let key in simulationMensuelle.mesAides) {
           switch (key) {
             case CodesAidesEnum.AGEPI: {
@@ -139,7 +139,7 @@ export class ChartUtileService {
         }
       }
     );
-    for (let index = 0; index < simulationAidesSociales.simulationsMensuelles.length; index++) {
+    for (let index = 0; index < simulationAides.simulationsMensuelles.length; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
@@ -147,7 +147,7 @@ export class ChartUtileService {
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois();
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois();
     }
-    dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAidesSociales.montantRessourcesFinancieresMoisAvantSimulation;
+    dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAides.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);
   }
 

@@ -26,7 +26,7 @@
         <label
             name="beneficiaireARE"
             class="radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireARE"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireARE"
             btnCheckbox
             tabindex="0"
             role="button"
@@ -42,7 +42,7 @@
         <label
             name="beneficiaireASS"
             class="radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireASS"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireASS"
             btnCheckbox
             tabindex="0"
             role="button"
@@ -57,9 +57,9 @@
         </label>
         <label
             name="beneficiaireRSA"
-            *ngIf="!deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()"
+            *ngIf="!deConnecteBenefiaireAidesService.isBeneficiaireRSA()"
             class="radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireRSA"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA"
             btnCheckbox
             tabindex="0"
             role="button"
@@ -111,7 +111,7 @@
         <label
             name="beneficiaireAAH"
             class="radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiaireAAH"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH"
             btnCheckbox
             tabindex="0"
             role="button"
@@ -127,7 +127,7 @@
         <label
             name="beneficiairePensionInvalidite"
             class="radio-button-style-1"
-            [(ngModel)]="nouvellePersonneACharge.beneficiaireAidesSociales.beneficiairePensionInvalidite"
+            [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite"
             btnCheckbox
             tabindex="0"
             role="button"

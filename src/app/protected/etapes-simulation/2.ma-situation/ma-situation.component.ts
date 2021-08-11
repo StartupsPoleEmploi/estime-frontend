@@ -11,7 +11,7 @@ import { SituationFamilialeUtileService } from '@app/core/services/utile/situati
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
 import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
@@ -25,7 +25,7 @@ import { PopoverDirective } from 'ngx-bootstrap/popover';
 })
 export class MaSituationComponent implements OnInit {
 
-  beneficiaireAidesSociales: BeneficiaireAidesSociales;
+  beneficiaireAides: BeneficiaireAides;
   dateNaissance: DateDecomposee;
   informationsPersonnelles: InformationsPersonnelles;
   isInformationsPersonnellesFormSubmitted = false;
@@ -56,7 +56,7 @@ export class MaSituationComponent implements OnInit {
 
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.beneficiaireAidesSociales = demandeurEmploiConnecte.beneficiaireAidesSociales;
+    this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
@@ -90,19 +90,19 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasAAH(): void {
-    if (!this.beneficiaireAidesSociales.beneficiaireAAH) {
+    if (!this.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetAllocationMensuelleNetAAH();
     }
   }
 
   public onClickCheckBoxHasASS(): void {
-    if (!this.beneficiaireAidesSociales.beneficiaireASS) {
+    if (!this.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
     }
   }
 
   public onClickCheckBoxHasRSA(): void {
-    if (!this.beneficiaireAidesSociales.beneficiaireRSA) {
+    if (!this.beneficiaireAides.beneficiaireRSA) {
       this.deConnecteService.unsetInfosRSA();
     }
   }
@@ -114,8 +114,10 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasPensionInvalidite(): void {
-    if (!this.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+    if (!this.beneficiaireAides.beneficiairePensionInvalidite) {
       this.deConnecteService.unsetPensionInvalidite();
+    } else {
+      this.deConnecteService.setPensionInvalidite();
     }
   }
 
@@ -128,7 +130,7 @@ export class MaSituationComponent implements OnInit {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       if(this.isAllocationPeOuCafSelectionnee()) {
-        this.deConnecteService.setBeneficiaireAidesSociales(this.beneficiaireAidesSociales);
+        this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
       }
@@ -144,9 +146,9 @@ export class MaSituationComponent implements OnInit {
   }
 
   public isAllocationPeOuCafSelectionnee(): boolean {
-    return (this.beneficiaireAidesSociales.beneficiaireASS
-        || this.beneficiaireAidesSociales.beneficiaireRSA
-        || this.beneficiaireAidesSociales.beneficiaireAAH);
+    return (this.beneficiaireAides.beneficiaireASS
+        || this.beneficiaireAides.beneficiaireRSA
+        || this.beneficiaireAides.beneficiaireAAH);
   }
 
 
@@ -180,7 +182,7 @@ export class MaSituationComponent implements OnInit {
   public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void  {
     if (event.keyCode === 13) {
       if(situationPersonne === this.situationPersonneEnum.AAH) {
-        this.beneficiaireAidesSociales.beneficiaireAAH = !this.beneficiaireAidesSociales.beneficiaireAAH;
+        this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
       }
       if(situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
@@ -196,7 +198,7 @@ export class MaSituationComponent implements OnInit {
         this.onClickCheckBoxIsTravailleurIndependant();
       }
       if(situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
-        this.beneficiaireAidesSociales.beneficiairePensionInvalidite = !this.beneficiaireAidesSociales.beneficiairePensionInvalidite;
+        this.beneficiaireAides.beneficiairePensionInvalidite = !this.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
       }
     }
@@ -205,7 +207,7 @@ export class MaSituationComponent implements OnInit {
   public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string): void  {
     if (e.keyCode === 13) {
       if(situationConjoint === this.situationPersonneEnum.AAH) {
-        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH;
+        this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxConjointHasAAH();
       }
       if(situationConjoint === this.situationPersonneEnum.SALARIE) {
@@ -213,15 +215,15 @@ export class MaSituationComponent implements OnInit {
         this.onClickCheckBoxConjointIsSalarie();
       }
       if(situationConjoint === this.situationPersonneEnum.RSA) {
-        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA;
+        this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxConjointHasRSA();
       }
       if(situationConjoint === this.situationPersonneEnum.ARE) {
-        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE;
+        this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE;
         this.onClickCheckBoxConjointHasARE();
       }
       if(situationConjoint === this.situationPersonneEnum.ASS) {
-        this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS;
+        this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxConjointHasASS();
       }
       if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
@@ -238,15 +240,15 @@ export class MaSituationComponent implements OnInit {
     return this.situationFamiliale.conjoint
       && (this.situationFamiliale.conjoint.informationsPersonnelles.salarie
         || this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA
-        || this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite);
+        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH
+        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE
+        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS
+        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA
+        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite);
   }
 
   public onClickCheckBoxConjointHasAAH(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireAAH) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetConjointAllocationAAH();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -254,7 +256,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasASS(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireASS) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetConjointAllocationASS();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -263,7 +265,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasARE(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireARE) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE) {
       this.deConnecteService.unsetConjointAllocationARE();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -272,7 +274,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasRSA(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiaireRSA) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA) {
       this.deConnecteService.unsetConjointAllocationRSA();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -307,7 +309,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasPensionInvalidite(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
+    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite) {
       this.deConnecteService.unsetConjointPensionInvalidite();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
@@ -316,7 +318,7 @@ export class MaSituationComponent implements OnInit {
 
   public onClickCheckBoxConjointIsSansRessource(): void {
     this.deConnecteService.unsetConjointSalaire();
-    this.deConnecteService.unsetConjointtAllocationsAidesSociales();
+    this.deConnecteService.unsetConjointAides();
     this.deConnecteService.unsetConjointRevenusMicroEntrepreneur();
     this.deConnecteService.unsetConjointBeneficesTravailleurIndependant();
   }

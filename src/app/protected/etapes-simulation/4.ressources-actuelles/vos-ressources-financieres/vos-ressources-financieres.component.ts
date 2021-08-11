@@ -6,7 +6,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
-import { DeConnecteBenefiaireAidesSocialesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides-sociales.service";
+import { DeConnecteBenefiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service";
 import { SalairesAvantPeriodeSimulation } from '@app/commun/models/salaires-avant-periode-simulation';
 import { SalaireAvantPeriodeSimulation } from '@app/commun/models/salaire-avant-periode-simulation';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
@@ -43,7 +43,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
-    public deConnecteBenefiaireAidesSocialesService: DeConnecteBenefiaireAidesSocialesService,
+    public deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public screenService: ScreenService,
@@ -54,8 +54,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA()) {
+    this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA()) {
       this.initOptionsProchaineDeclarationRSA();
     }
     if (this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
@@ -94,7 +94,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public getNombreMoisTravailleAuCoursDerniersMois(): number {
     let nombreMoisTravaillesDerniersMois = 3;
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) nombreMoisTravaillesDerniersMois = 6;
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireAAH()) nombreMoisTravaillesDerniersMois = 6;
     return nombreMoisTravaillesDerniersMois;
   }
 
@@ -122,14 +122,14 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation == null) {
         this.ressourcesFinancieres.salairesAvantPeriodeSimulation = this.creerSalairesAvantPeriodeSimulation();
       }
-      if (this.optionsNombreMoisTravailles == null && this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH()) {
+      if (this.optionsNombreMoisTravailles == null && this.deConnecteBenefiaireAidesService.isBeneficiaireAAH()) {
         this.initOptionsNombreMoisTravailles();
       }
     }
   }
 
   public onClickBoutonNombreMoisTravailleAuCoursDerniersMois(): void {
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       if (this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
         if (this.ressourcesFinancieres.salairesAvantPeriodeSimulation) {
           this.ressourcesFinancieres.salairesAvantPeriodeSimulation = null;
@@ -216,7 +216,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public isAfficherSelectNombreMoisTravailles6DerniersMois(): boolean {
-    return this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH() && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true
+    return this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true
   }
 
   public isAfficherChampsSalaires():boolean {
@@ -225,7 +225,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
-    if (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS()) {
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       this.checkAndSaveDateDernierOuvertureDroitASS();
     }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
@@ -238,7 +238,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
-      this.ressourcesFinancieres.allocationsPoleEmploi.dateDerniereOuvertureDroitASS = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
+      this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
 
@@ -249,8 +249,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
       // on vérifie si lorsque le formulaire n'est pas valide c'est parce que la saisie des champs salaires est invalide
       if(!isValide) {
-        const isBeneficiaireAAH = this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireAAH();
-        const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireASS() || this.deConnecteBenefiaireAidesSocialesService.isBeneficiaireRSA());
+        const isBeneficiaireAAH = this.deConnecteBenefiaireAidesService.isBeneficiaireAAH();
+        const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesService.isBeneficiaireASS() || this.deConnecteBenefiaireAidesService.isBeneficiaireRSA());
         this.hasTroisMoisSansSalaire = !this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
         this.nombreMoisManquant = isBeneficiaireAAH?this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois-3:1;
       }

@@ -24,10 +24,10 @@ export class DeConnecteSituationFamilialeService {
     return hasConjointSituationAvecRessource;
   }
 
-  public hasPersonneACharge(): boolean {
+  public hasPersonneAChargeSuperieur(nombrePersonne: number): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale.personnesACharge
-    && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0;
+    && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > nombrePersonne;
   }
 
   public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {

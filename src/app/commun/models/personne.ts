@@ -1,9 +1,9 @@
 import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 
 export class Personne {
-  beneficiaireAidesSociales: BeneficiaireAidesSociales
+  beneficiaireAides: BeneficiaireAides
   informationsPersonnelles: InformationsPersonnelles;
   ressourcesFinancieres: RessourcesFinancieres;
 }

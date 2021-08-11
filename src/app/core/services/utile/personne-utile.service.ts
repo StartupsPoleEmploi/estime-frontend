@@ -1,10 +1,10 @@
 
 import { Injectable } from '@angular/core';
-import { BeneficiaireAidesSociales } from '@models/beneficiaire-aides-sociales';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DateDecomposee } from '@models/date-decomposee';
-import { AllocationsCAF } from "@models/allocations-caf";
-import { AllocationsPoleEmploi } from "@models/allocations-pole-emploi";
-import { AllocationsCPAM } from "@models/allocations-cpam";
+import { AidesCAF } from "@models/aides-caf";
+import { AidesPoleEmploi } from "@models/aides-pole-emploi";
+import { AidesCPAM } from "@models/aides-cpam";
 import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { Personne } from "@models/personne";
 import { RessourcesFinancieres } from "@models/ressources-financieres";
@@ -24,16 +24,16 @@ export class PersonneUtileService {
 
   public creerPersonne(isAvecRessourcesFinancieres: boolean): Personne {
     const personne = new Personne();
-  personne.beneficiaireAidesSociales = this.initBeneficiaireAidesSociales();
+  personne.beneficiaireAides = this.initBeneficiaireAides();
     personne.informationsPersonnelles = new InformationsPersonnelles();
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
     if(isAvecRessourcesFinancieres) {
       personne.ressourcesFinancieres = new RessourcesFinancieres();
-      personne.ressourcesFinancieres.allocationsCAF = new AllocationsCAF();
-      personne.ressourcesFinancieres.allocationsPoleEmploi = new AllocationsPoleEmploi();
-      personne.ressourcesFinancieres.allocationsCPAM = new AllocationsCPAM();
-      personne.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite = 0;
+      personne.ressourcesFinancieres.aidesCAF = new AidesCAF();
+      personne.ressourcesFinancieres.aidesPoleEmploi = new AidesPoleEmploi();
+      personne.ressourcesFinancieres.aidesCPAM = new AidesCPAM();
+      personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = 0;
     }
     return personne;
   }
@@ -43,7 +43,7 @@ export class PersonneUtileService {
     if (personne.informationsPersonnelles) {
       if (!personne.informationsPersonnelles.sansRessource
         && (personne.informationsPersonnelles.salarie
-          || this.hasRessourcesAidesSociales(personne))) {
+          || this.hasRessourcesAides(personne))) {
         hasRessourcesFinancieres = true;
       }
     }
@@ -68,44 +68,43 @@ export class PersonneUtileService {
     if(personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
       isValide = personne.ressourcesFinancieres.salaire.montantNet > 0;
     }
-    if(personne.beneficiaireAidesSociales.beneficiaireARE || personne.beneficiaireAidesSociales.beneficiaireASS) {
-      isValide = personne.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet > 0;
+    if(personne.beneficiaireAides.beneficiaireARE) {
+      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
     }
-    if(personne.beneficiaireAidesSociales.beneficiaireRSA) {
-      isValide = personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA > 0;
+    if(personne.beneficiaireAides.beneficiaireASS) {
+      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
     }
-    if(personne.beneficiaireAidesSociales.beneficiaireAAH) {
-      isValide = personne.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH > 0;
+    if(personne.beneficiaireAides.beneficiaireRSA) {
+      isValide = personne.ressourcesFinancieres.aidesCAF.allocationRSA > 0;
     }
-    if(personne.beneficiaireAidesSociales.beneficiairePensionInvalidite) {
-      isValide = personne.ressourcesFinancieres.allocationsCPAM.pensionInvalidite > 0;
+    if(personne.beneficiaireAides.beneficiaireAAH) {
+      isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
+    }
+    if(personne.beneficiaireAides.beneficiairePensionInvalidite) {
+      isValide = personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
     return isValide;
   }
 
-  private hasRessourcesAidesSociales(personne: Personne): boolean {
-    return personne.beneficiaireAidesSociales
+  private hasRessourcesAides(personne: Personne): boolean {
+    return personne.beneficiaireAides
       && (
-        personne.beneficiaireAidesSociales.beneficiaireAAH
-        || personne.beneficiaireAidesSociales.beneficiaireARE
-        || personne.beneficiaireAidesSociales.beneficiaireASS
-        || personne.beneficiaireAidesSociales.beneficiaireRSA
-        || personne.beneficiaireAidesSociales.beneficiairePensionInvalidite
+        personne.beneficiaireAides.beneficiaireAAH
+        || personne.beneficiaireAides.beneficiaireARE
+        || personne.beneficiaireAides.beneficiaireASS
+        || personne.beneficiaireAides.beneficiaireRSA
+        || personne.beneficiaireAides.beneficiairePensionInvalidite
       );
   }
 
-  private initBeneficiaireAidesSociales(): BeneficiaireAidesSociales {
-    const beneficiaireAidesSociales = new BeneficiaireAidesSociales();
-    beneficiaireAidesSociales.beneficiaireAAH = false;
-    beneficiaireAidesSociales.beneficiaireARE = false;
-    beneficiaireAidesSociales.beneficiaireASS = false;
-    beneficiaireAidesSociales.beneficiairePensionInvalidite = false;
-    beneficiaireAidesSociales.beneficiaireRSA = false;
-    beneficiaireAidesSociales.topAAHRecupererViaApiPoleEmploi = false;
-    beneficiaireAidesSociales.topARERecupererViaApiPoleEmploi = false;
-    beneficiaireAidesSociales.topASSRecupererViaApiPoleEmploi = false;
-    beneficiaireAidesSociales.topRSARecupererViaApiPoleEmploi = false
-    return beneficiaireAidesSociales
+  private initBeneficiaireAides(): BeneficiaireAides {
+    const beneficiaireAides = new BeneficiaireAides();
+    beneficiaireAides.beneficiaireAAH = false;
+    beneficiaireAides.beneficiaireARE = false;
+    beneficiaireAides.beneficiaireASS = false;
+    beneficiaireAides.beneficiairePensionInvalidite = false;
+    beneficiaireAides.beneficiaireRSA = false;
+    return beneficiaireAides
   }
 }
 

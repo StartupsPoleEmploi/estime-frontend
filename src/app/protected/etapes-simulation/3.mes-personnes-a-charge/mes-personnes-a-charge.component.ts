@@ -67,11 +67,15 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.isNouvellePersonneAChargeFormDisplay = false;
       this.isModeModification = false;
     }
-    if(!this.deConnecteSituationFamilialeService.hasPersonneACharge()) {
-      this.deConnecteService.unsetAllocationsFamiliales();
-      this.deConnecteService.unsetPensionsAlimentaires();
-    } else if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
-      this.deConnecteService.unsetAlloctionPAJE();
+    if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)) {
+      this.deConnecteService.unsetAidesFamiliales();
+    } else {
+      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
+        this.deConnecteService.unsetAlloctionPAJE();
+      }
+      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)) {
+        this.deConnecteService.unsetAllocationsFamiliales();
+      }
     }
   }
 

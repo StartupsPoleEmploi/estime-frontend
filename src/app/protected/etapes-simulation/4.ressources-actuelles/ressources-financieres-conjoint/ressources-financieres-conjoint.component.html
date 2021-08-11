@@ -60,7 +60,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireARE">
+            *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -83,8 +83,8 @@
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -107,7 +107,7 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -115,7 +115,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireASS">
+            *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -138,8 +138,8 @@
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -162,7 +162,7 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet && (conjoint.ressourcesFinancieres.allocationsPoleEmploi.allocationMensuelleNet == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -170,7 +170,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireRSA">
+            *ngIf="conjoint.beneficiaireAides.beneficiaireRSA">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -186,19 +186,19 @@
                 </span>
                 <input
                     id="conjointAllocationMensuelleNetRSA"
-                    name="allocationMensuelleNetRSA"
+                    name="allocationRSA"
                     type="text"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && (conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCAF.allocationRSA"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCAF.allocationRSA && (conjoint.ressourcesFinancieres.aidesCAF.allocationRSA == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
-                    #allocationMensuelleNetRSA="ngModel">
+                    #allocationRSA="ngModel">
                 <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
@@ -208,16 +208,16 @@
             <div class="row">
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.required">
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetRSA?.touched)  && allocationMensuelleNetRSA?.errors?.pattern">
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA && (conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetRSA == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesCAF.allocationRSA && (conjoint.ressourcesFinancieres.aidesCAF.allocationRSA == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -225,7 +225,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAidesSociales.beneficiaireAAH">
+            *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -241,19 +241,19 @@
                 </span>
                 <input
                     id="conjointAllocationMensuelleNetAAH"
-                    name="allocationMensuelleNetAAH"
+                    name="allocationAAH"
                     type="text"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH && (conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCAF.allocationAAH"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieres.aidesCAF.allocationAAH == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
-                    #allocationMensuelleNetAAH="ngModel">
+                    #allocationAAH="ngModel">
                 <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                 <app-text-with-euro-symbol
                     *ngIf="!screenService.isExtraSmallScreen()"
@@ -263,16 +263,16 @@
             <div class="row">
                 <span
                     class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH?.touched)  && allocationMensuelleNetAAH?.errors?.required">
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
                 <span
                     class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetAAH.touched)  && allocationMensuelleNetAAH.errors?.pattern">
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH && (conjoint.ressourcesFinancieres.allocationsCAF.allocationMensuelleNetAAH == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieres.aidesCAF.allocationAAH == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -280,7 +280,7 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAidesSociales.beneficiairePensionInvalidite">
+            *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
             <div class="row mb-2">
                 <label
                     class="label"
@@ -303,8 +303,8 @@
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -327,7 +327,7 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.pensionInvalidite == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite && (conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -354,8 +354,8 @@
                     min="0"
                     maxlength="6"
                     class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)}"
+                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -378,7 +378,7 @@
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
                 <span
-                    *ngIf="conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.allocationsCPAM.allocationSupplementaireInvalidite == 0)"
+                    *ngIf="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite == 0)"
                     class="error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>

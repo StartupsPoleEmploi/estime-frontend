@@ -1,6 +1,6 @@
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 
-export class SimulationAidesSociales {
+export class SimulationAides {
   montantRessourcesFinancieresMoisAvantSimulation: number;
   simulationsMensuelles: Array<SimulationMensuelle>;
 }

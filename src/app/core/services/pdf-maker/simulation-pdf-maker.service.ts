@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from "@models/demandeur-emploi";
-import { SimulationAidesSociales } from '@models/simulation-aides-sociales';
+import { SimulationAides } from '@models/simulation-aides';
 import pdfMakeModule from 'pdfmake/build/pdfmake';
 import pdfFontsModule from 'pdfmake/build/vfs_fonts';
 import { ScreenService } from '../utile/screen.service';
@@ -29,10 +29,10 @@ export class SimulationPdfMakerService {
     this.isExtraSmallScreen = this.screenService.isExtraSmallScreen();
   }
 
-  public generatePdf(demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales) {
+  public generatePdf(demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides) {
 
     const def = {
-      content: this.getContent(demandeurEmploi, simulationAidesSociales),
+      content: this.getContent(demandeurEmploi, simulationAides),
       styles: this.getStyles(),
       pageMargins: [ 40, 40, 40, 40 ],
       footer: function(currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }
@@ -45,14 +45,14 @@ export class SimulationPdfMakerService {
     }
   }
 
-  private getContent(demandeurEmploi: DemandeurEmploi, simulationAidesSociales: SimulationAidesSociales): any {
+  private getContent(demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): any {
     let content = [];
     this.addLogoEstime(content);
     this.addTitle(content);
     this.blockInformationsService.addBlockInformations(content);
-    this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulationAidesSociales);
+    this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulationAides);
     this.addTextAvertissement(content);
-    this.detailAidesEligiblesService.addPagesDetailAides(content, simulationAidesSociales);
+    this.detailAidesEligiblesService.addPagesDetailAides(content, simulationAides);
     return content;
   }
 

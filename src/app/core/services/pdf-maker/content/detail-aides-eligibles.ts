@@ -1,8 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { AideSociale } from '@app/commun/models/aide-sociale';
-import { SimulationAidesSociales } from '@app/commun/models/simulation-aides-sociales';
+import { Aide } from '@app/commun/models/aide';
+import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { AidesService } from '../../utile/aides.service';
 import { Style } from '../models/style';
 import { Cell } from '../models/table/cell';
@@ -23,69 +23,69 @@ export class DetailAidesEligiblesService {
 
   }
 
-  public addPagesDetailAides(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
-    if(this.aidesService.hasAide(simulationAidesSociales, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
-      this.addAideASS(content, simulationAidesSociales);
+  public addPagesDetailAides(content: Array<any>, simulationAides: SimulationAides): void {
+    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+      this.addAideASS(content, simulationAides);
     }
-    if (this.aidesService.hasAide(simulationAidesSociales, CodesAidesEnum.AGEPI)) {
-      this.addAideAGEPI(content, simulationAidesSociales);
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AGEPI)) {
+      this.addAideAGEPI(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAidesSociales, CodesAidesEnum.AIDE_MOBILITE)) {
-      this.addAideMobilite(content, simulationAidesSociales);
+    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_MOBILITE)) {
+      this.addAideMobilite(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAidesSociales, CodesAidesEnum.PRIME_ACTIVITE)) {
-      this.addPrimeActivite(content, simulationAidesSociales);
+    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.PRIME_ACTIVITE)) {
+      this.addPrimeActivite(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAidesSociales, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
-      this.addAideAAH(content, simulationAidesSociales);
+    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+      this.addAideAAH(content, simulationAides);
     }
   }
 
-  private addAideASS(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  private addAideASS(content: Array<any>, simulationAides: SimulationAides): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAidesSociales, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     const imageBase64 = ImagesBase64Enum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
     this.addTableTitle(content, aide, imageBase64, '#F8CF8D');
     this.addContentAideASS(content, aide);
   }
 
-  private addAideAGEPI(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  private addAideAGEPI(content: Array<any>, simulationAides: SimulationAides): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAidesSociales, CodesAidesEnum.AGEPI);
+    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.AGEPI);
     const imageBase64 = ImagesBase64Enum.AGEPI;
     this.addTableTitle(content, aide, imageBase64, '#FFC6FF');
     this.addContentAideAGEPI(content, aide);
   }
 
-  private addAideMobilite(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  private addAideMobilite(content: Array<any>, simulationAides: SimulationAides): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAidesSociales, CodesAidesEnum.AIDE_MOBILITE);
+    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.AIDE_MOBILITE);
     const imageBase64 = ImagesBase64Enum.AIDE_MOBILITE;
     this.addTableTitle(content, aide, imageBase64, '#F1A378');
     this.addContentAideMobilite(content, aide);
   }
 
-  private addPrimeActivite(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  private addPrimeActivite(content: Array<any>, simulationAides: SimulationAides): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAidesSociales, CodesAidesEnum.PRIME_ACTIVITE);
+    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.PRIME_ACTIVITE);
     const imageBase64 = ImagesBase64Enum.PRIME_ACTIVITE;
     this.addTableTitle(content, aide, imageBase64, '#BDB2FF');
     this.addContentPrimeActivite(content, aide);
   }
 
-  private addAideAAH(content: Array<any>, simulationAidesSociales: SimulationAidesSociales): void {
+  private addAideAAH(content: Array<any>, simulationAides: SimulationAides): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAidesSociales, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
+    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
     const imageBase64 = ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES;
     this.addTableTitle(content, aide, imageBase64, '#C7F0BD');
     this.addContentAideAAH(content, aide);
   }
 
-  private addTableTitle(content: Array<any>, aideSociale: AideSociale, imageBase64: string, colorLineTitle: string): void {
+  private addTableTitle(content: Array<any>, aide: Aide, imageBase64: string, colorLineTitle: string): void {
     let body = new Array<Array<Cell>>();
     const row = new Array<Cell>();
     row.push(this.createCell1(imageBase64));
-    row.push(this.createCell2(aideSociale));
+    row.push(this.createCell2(aide));
     body.push(row);
     content.push(this.createTableElement(body));
     this.createLineTitle(content, colorLineTitle);
@@ -112,9 +112,9 @@ export class DetailAidesEligiblesService {
     return cell;
   }
 
-  private createCell2(aideSociale: AideSociale): Cell {
+  private createCell2(aide: Aide): Cell {
     const cell = new Cell();
-    cell.text = `\n${aideSociale.nom} (${aideSociale.organisme})`;
+    cell.text = `\n${aide.nom} (${aide.organisme})`;
 
     const style = new Style();
     style.color = '#23333C';
@@ -126,12 +126,12 @@ export class DetailAidesEligiblesService {
     return cell;
   }
 
-  private addContentAideAAH(content: Array<any>, aideAAH: AideSociale): void {
+  private addContentAideAAH(content: Array<any>, aideAAH: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAAH.detail);
     content.push(contentDetailAide);
   }
 
-  private addContentAideAGEPI(content: Array<any>, aideAGEPI: AideSociale): void {
+  private addContentAideAGEPI(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
     contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
     contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
@@ -139,14 +139,14 @@ export class DetailAidesEligiblesService {
     content.push(contentDetailAide);
   }
 
-  private addContentAideASS(content: Array<any>, aideASS: AideSociale): void {
+  private addContentAideASS(content: Array<any>, aideASS: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideASS.detail);
     content.push(contentDetailAide);
   }
 
 
 
-  private addContentAideMobilite(content: Array<any>, aideAGEPI: AideSociale): void {
+  private addContentAideMobilite(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
     contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
     contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
@@ -156,7 +156,7 @@ export class DetailAidesEligiblesService {
     content.push(contentDetailAide);
   }
 
-  private addContentPrimeActivite(content: Array<any>, aideAGEPI: AideSociale): void {
+  private addContentPrimeActivite(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
     contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
     contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
