@@ -122,11 +122,7 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
