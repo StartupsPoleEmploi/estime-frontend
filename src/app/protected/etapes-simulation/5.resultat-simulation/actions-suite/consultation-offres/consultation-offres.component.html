@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class [ngClass]="{'btn-sticks':this.stickyButton}">
+        <div id="block-offres-emploi" class="card-text text-center" >
+            <img alt="Offres d'emploi" src="./assets/images/job1.svg" class="mb-3 mt-2">
+            <p>Rechercher des offres qui correspondent à vos critères de simulation sur pôle emploi.fr</p>
+        </div>
+        <div class="text-center">
+            <button id="btn-offres-emploi" 
+            type="button"
+            aria-label="Voir les offres d'emploi"
+            class="btn-style-perso-1 btn-offres-emploi mt-2" 
+            data-testid="btn-offres-emploi"
+            (click)="btnClick()"
+            >
+
+            <div class="text-center">
+                <span class="mr-2">Voir les offres d'emploi</span>
+                <img alt="Voir les offres d'emploi" src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
+        </div>
+    </div>
+</div>

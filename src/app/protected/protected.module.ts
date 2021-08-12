@@ -32,6 +32,10 @@ import { FilEtapesMobileComponent } from './etapes-simulation/fil-etapes/fil-eta
 import { RessourcesFinancieresDiagrammeComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-diagramme/ressources-financieres-diagramme.component';
 import { DiagrammeCanvasComponent } from './etapes-simulation/5.resultat-simulation/ressources-financieres-diagramme/diagramme-canvas/diagramme-canvas.component';
 import { ChartModule } from 'angular2-chartjs';
+import { ConsultationOffresComponent } from './etapes-simulation/5.resultat-simulation/actions-suite/consultation-offres/consultation-offres.component';
+import { InscriptionAtelierComponent } from './etapes-simulation/5.resultat-simulation/actions-suite/inscription-atelier/inscription-atelier.component';
+import { MettreAJourProfilComponent } from './etapes-simulation/5.resultat-simulation/actions-suite/mettre-a-jour-profil/mettre-a-jour-profil.component';
+import { ActionsSuiteComponent } from './etapes-simulation/5.resultat-simulation/actions-suite/actions-suite.component';
 @NgModule({
   declarations: [
     AvantDeCommencerSimulationComponent,
@@ -53,7 +57,11 @@ import { ChartModule } from 'angular2-chartjs';
     FilEtapesDesktopComponent,
     FilEtapesMobileComponent,
     RessourcesFinancieresDiagrammeComponent,
-    DiagrammeCanvasComponent
+    DiagrammeCanvasComponent,
+    ConsultationOffresComponent,
+    InscriptionAtelierComponent,
+    MettreAJourProfilComponent,
+    ActionsSuiteComponent
   ],
   imports: [
     AccordionModule.forRoot(),
