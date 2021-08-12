@@ -6,7 +6,7 @@ import { NumberUtileService } from "@app/core/services/utile/number-util.service
 import { AidesCPAM } from '@models/aides-cpam';
 import { AllocationsLogement } from '@models/allocations-logement';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
-import { SalaireAvantPeriodeSimulation } from '@models/salaire-avant-periode-simulation';
+import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
 import { AidesFamiliales } from '@models/aides-familiales';
 
 @Injectable({ providedIn: 'root' })
@@ -116,14 +116,14 @@ export class RessourcesFinancieresUtileService {
 
   private getNombreMoisTravaillesDerniersMois(ressourcesFinancieres: RessourcesFinancieres): number {
     let nombreMoisTravaillesDerniersMois = 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation)?1:0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation)?1:0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3)?1:0;
     return nombreMoisTravaillesDerniersMois;
   }
 
-  private isMoisTravaille(salaireAvantPeriodeSimulation: SalaireAvantPeriodeSimulation): boolean {
-    return !salaireAvantPeriodeSimulation.isSansSalaire && salaireAvantPeriodeSimulation.salaire.montantNet > 0;
+  private isMoisTravaille(moisTravailleAvantSimulation: MoisTravailleAvantSimulation): boolean {
+    return !moisTravailleAvantSimulation.isSansSalaire && moisTravailleAvantSimulation.salaire.montantNet > 0;
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {

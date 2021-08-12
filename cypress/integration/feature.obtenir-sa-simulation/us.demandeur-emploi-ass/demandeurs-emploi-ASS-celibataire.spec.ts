@@ -214,7 +214,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite = "105";
+    const primeActivite = "182";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -237,7 +237,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const personnesAChargePage = new PersonnesAChargePage();
     personnesAChargePage.clickOnAjouterUnePersonneACharge();
-    personnesAChargePage.saisirDateNaissance("05", "08", "2011");
+    personnesAChargePage.saisirDateNaissance("05", "08", "2019");
     personnesAChargePage.clickOnValider();
     personnesAChargePage.clickOnSuivant();
 
@@ -304,7 +304,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "460";
-    const primeActivite = "85";
+    const primeActivite = "286";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -327,10 +327,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const personnesAChargePage = new PersonnesAChargePage();
     personnesAChargePage.clickOnAjouterUnePersonneACharge();
-    personnesAChargePage.saisirDateNaissance("05", "08", "2011");
+    personnesAChargePage.saisirDateNaissance("05", "08", "2019");
     personnesAChargePage.clickOnValider();
     personnesAChargePage.clickOnAjouterUnePersonneACharge();
-    personnesAChargePage.saisirDateNaissance("05", "08", "2011");
+    personnesAChargePage.saisirDateNaissance("05", "08", "2019");
     personnesAChargePage.clickOnValider();
     personnesAChargePage.clickOnSuivant();
 

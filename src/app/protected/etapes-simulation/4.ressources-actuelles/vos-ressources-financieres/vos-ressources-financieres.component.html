@@ -314,13 +314,13 @@
                           min="0"
                           class="max-with-input-type-montant form-control"
                           placeholder="Montant"
-                          [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet"
+                          [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet"
                           [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
                           required
                           inputmode="decimal"
                           (click)="$event.target.select()"
-                          [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
-                          [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
+                          [required]="!ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire"
+                          [disabled]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire"
                           #salaireMoisM0AvantPeriodeSimulee="ngModel">
                       <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                   </div>
@@ -332,7 +332,7 @@
                               data-testid="checkbox-pas-de-salaire-mois-demande-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
-                              [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.isSansSalaire"
+                              [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire"
                               (click)="onClickPasDeSalaire(0)"
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 0)"
                               #isSansSalaireMoisDemandeSimulation="ngModel">
@@ -376,12 +376,12 @@
                           min="0"
                           class="max-with-input-type-montant form-control"
                           placeholder="Montant"
-                          [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet"
+                          [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet"
                           [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
                           inputmode="decimal"
                           (click)="$event.target.select()"
-                          [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
-                          [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
+                          [required]="!ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire"
+                          [disabled]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire"
                           #salaireMoisMMoins1AvantPeriodeSimulee="ngModel">
                       <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                   </div>
@@ -393,7 +393,7 @@
                               data-testid="checkbox-pas-de-salaire-mois-moins-1-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
-                              [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.isSansSalaire"
+                              [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire"
                               (click)="onClickPasDeSalaire(1)"
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 1)"
                               #isSansSalaireMoisMMoins1AvantPeriodeSimulee="ngModel">
@@ -437,12 +437,12 @@
                           min="0"
                           class="max-with-input-type-montant form-control"
                           placeholder="Montant"
-                          [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet"
+                          [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet"
                           [ngClass]="{'ng-invalid': hasTroisMoisSansSalaire}"
                           inputmode="decimal"
                           (click)="$event.target.select()"
-                          [required]="!ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
-                          [disabled]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
+                          [required]="!ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire"
+                          [disabled]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire"
                           #salaireMoisMMoins2AvantPeriodeSimulee="ngModel">
                       <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                   </div>
@@ -454,7 +454,7 @@
                               data-testid="checkbox-pas-de-salaire-mois-moins-2-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
-                              [(ngModel)]="ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.isSansSalaire"
+                              [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire"
                               (click)="onClickPasDeSalaire(2)"
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 2)"
                               #isSansSalaireMoisNMoins2AvantPeriodeSimulee="ngModel">

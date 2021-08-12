@@ -229,7 +229,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const dateDeNaissancePersonne1 = {
       "jour":"05",
       "mois":"08",
-      "annee":"2011"
+      "annee":"2019"
     };
     // VARIABLES PAGE MES RESSOURCES
     const allocationJournaliereNetASS = "16.49";
@@ -245,8 +245,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite1 = "50";
-    const primeActivite2 = "205";
+    const primeActivite1 = "133";
+    const primeActivite2 = "416";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);

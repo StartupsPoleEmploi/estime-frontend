@@ -59,15 +59,15 @@ export class DeConnecteRessourcesFinancieresService {
       if(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice);
       }
-      if(ressourcesFinancieres.salairesAvantPeriodeSimulation) {
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisDemandeSimulation.salaire.montantNet);
+      if(ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
         }
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins1MoisDemandeSimulation.salaire.montantNet);
+        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
         }
-        if(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.salairesAvantPeriodeSimulation.salaireMoisMoins2MoisDemandeSimulation.salaire.montantNet);
+        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
         }
       }
     }

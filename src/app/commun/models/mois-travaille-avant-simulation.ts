@@ -1,6 +1,6 @@
 import { Salaire } from "@models/salaire";
 
-export class SalaireAvantPeriodeSimulation {
+export class MoisTravailleAvantSimulation {
   salaire: Salaire;
   isSansSalaire: boolean;
 }

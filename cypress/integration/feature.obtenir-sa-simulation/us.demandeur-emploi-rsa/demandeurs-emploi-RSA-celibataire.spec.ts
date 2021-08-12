@@ -39,8 +39,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const prochaineDeclarationRSA = "3";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
-    const primeActivite = "163";
-    const primeActiviteB = "246";
+    const primeActivite = "158";
+    const primeActiviteB = "237";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -211,7 +211,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const dateDeNaissancePersonne1 = {
       "jour":"01",
       "mois":"01",
-      "annee":"2012"
+      "annee":"2017"
     };
     // VARIABLES PAGE MA SITUATION
     const nationalite = NationalitesEnum.FRANCAISE;
@@ -222,10 +222,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite = "288";
+    const primeActivite = "350";
     const primeActiviteB = "431";
     const rsa = "500";
-    const rsaB = "15";
+    const rsaB = "108";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
@@ -322,12 +322,12 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const dateDeNaissancePersonne1 = {
       "jour":"01",
       "mois":"01",
-      "annee":"2012"
+      "annee":"2017"
     };
     const dateDeNaissancePersonne2 = {
       "jour":"01",
       "mois":"01",
-      "annee":"2009"
+      "annee":"2016"
     };
     // VARIABLES PAGE MES RESSOURCES
     const montantMensuelRSA = "500";
@@ -336,8 +336,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const allocationFamilialeFoyer = "250";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
-    const montantAGEPI = "400";
-    const primeActivite = "295";
+    const montantAGEPI = "460";
+    const primeActivite = "419";
     const primeActiviteB = "442";
     const rsa = "500";
     const rsaB = "31";
