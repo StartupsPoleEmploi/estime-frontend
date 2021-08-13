@@ -223,7 +223,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
     const primeActivite = "350";
-    const primeActiviteB = "431";
+    const primeActiviteB = "525";
     const rsa = "500";
     const rsaB = "108";
 
@@ -338,9 +338,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAideMobilite = "346";
     const montantAGEPI = "460";
     const primeActivite = "419";
-    const primeActiviteB = "442";
+    const primeActiviteB = "629";
     const rsa = "500";
-    const rsaB = "31";
+    const rsaB = "218";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserIdentifiant, environment.peConnectUserMotDePasse);
