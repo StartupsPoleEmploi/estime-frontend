@@ -1,4 +1,5 @@
 @import "../../../../../assets/scss/variables";
+
 .centerActionsSuite {
    margin-top: 2rem;
    margin-bottom: 1rem;
@@ -10,4 +11,12 @@
  .card {
     margin: 0.5rem;
     padding: 0rem;  
+ }
+
+ .carte {
+   margin: 4px;
+   @media #{$extra-small-device} {
+     margin-left: 0;
+     margin-right: 0;
+   }
  }
