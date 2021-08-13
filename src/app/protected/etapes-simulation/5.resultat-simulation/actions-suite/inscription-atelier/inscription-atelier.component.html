@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class [ngClass]="{'btn-sticks':this.stickyButton}">
+        <div id="block-inscription-atelier" class="card-text text-center" >
+            <img alt="Offres d'emploi" src="./assets/images/coworking 1.svg" class="mb-3 mt-2">
+            <p>Vous inscrire aux ateliers pour être accompagné dans la préparation de vos candidatures</p>
+        </div>
+        <div class="text-center">
+            <button id="btn-inscription-atelier" 
+            type="button"
+            aria-label="S'inscrire à l'atelier"
+            class="btn-style-perso-1 btn-inscription-atelier mt-2" 
+            data-testid="btn-inscription-atelier"
+            (click)="btnClick()"
+            >
+
+            <div class="text-center">
+                <span class="mr-2">Voir les services à la carte</span>
+                <img alt="Voir les services à la carte" src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
+        </div>
+    </div>
+</div>
