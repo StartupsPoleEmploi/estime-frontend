@@ -79,9 +79,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisDemande();
-    ressourcesActuellesPage.saisirSalaire1MoisAvantSimulation(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaire2MoisAvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
+    ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
@@ -173,9 +173,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisDemande();
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.saisirSalaire2MoisAvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
+    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(allocationLogementFoyer);
@@ -280,9 +280,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.saisirSalaireMoisDemande(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaire1MoisAvantSimulation(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaire2MoisAvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(allocationLogementFoyer);
@@ -395,7 +395,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisDemande();
+    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
     ressourcesActuellesPage.clickOnValiderVosRessources();
