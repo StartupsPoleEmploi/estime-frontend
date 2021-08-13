@@ -88,6 +88,10 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-3-avant-simulation]').click();
   }
 
+  public clickOnValiderRessourcesConjoint(): void {
+    cy.get('[data-testid=btn-ressources-conjoint-valider]').click();
+  }
+
   public clickOnValiderRessourcesFoyer(): void {
     cy.get('[data-testid=btn-ressources-foyer-valider]').click();
   }

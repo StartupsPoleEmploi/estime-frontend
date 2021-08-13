@@ -33,7 +33,7 @@ class MaSituationPage {
   }
 
   public clickOnSituationFamilialeCouple() {
-    cy.get('[data-testid=btn-situation-familiale-seul]').click();
+    cy.get('[data-testid=btn-situation-familiale-couple]').click();
   }
 
   public clickOnSituationConjointSalarie() {
@@ -64,11 +64,11 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-conjoint-aucune-ressource]').click();
   }
 
-  public clickOnVousVivezSeulOui(): void {
+  public clickOnVousVivezSeulDepuisPlusDe18MoisOui(): void {
     cy.get('[data-testid=btn-is-seul-plus-de-18-mois-oui]').click({force: true});
   }
 
-  public clickOnVousVivezSeulNon(): void {
+  public clickOnVousVivezSeulDepuisPlusDe18MoisNon(): void {
     cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({force: true});
   }
 
