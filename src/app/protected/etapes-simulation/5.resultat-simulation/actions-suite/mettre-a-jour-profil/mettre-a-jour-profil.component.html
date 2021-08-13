@@ -1,21 +1,22 @@
 <div class="container-fluid">
     <div class [ngClass]="{'btn-sticks':this.stickyButton}">
         <div id="block-mettre-a-jour-profil" class="card-text text-center" >
-            <img alt="Offres d'emploi" src="./assets/images/approved 1.svg" class="mb-3 mt-2">
+            <img alt="Icône profil candidat" src="./assets/images/profil_candidat.svg" class="mb-3 mt-2">
             <p>Mettre à jour votre profil candidat pour améliorer votre visibilité auprès des recruteurs</p>
         </div>
         <div class="text-center">
-            <button id="btn-mettre-a-jour-profil" 
+            <button id="btn-mettre-a-jour-profil"
             type="button"
-            aria-label="Mettre à jour mon profil"
-            class="btn-style-perso-1 btn-offres-emploi mt-2" 
+            aria-label="Mettre à jour son profil candidat"
+            class="btn-style-perso-1 btn-offres-emploi mt-2"
             data-testid="btn-mettre-a-jour-profil"
+            tag-action="Clique sur mettre à jour son profil candidat"
             (click)="btnClick()"
             >
 
             <div class="text-center">
                 <span class="mr-2">Mettre à jour mon profil</span>
-                <img alt="Mettre à jour mon profil" src="./assets/images/icon-bt-primaire.svg">
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
             </div>
         </button>
         </div>
