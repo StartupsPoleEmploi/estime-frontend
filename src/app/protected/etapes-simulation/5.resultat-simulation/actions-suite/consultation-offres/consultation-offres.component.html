@@ -1,14 +1,14 @@
 <div class="container-fluid">
-    <div class [ngClass]="{'btn-sticks':this.stickyButton}">
-        <div id="block-offres-emploi" class="card-text text-center" >
+    <div>
+        <div id="block-offres-emploi" class="card-body text-center card-action-suite" >
             <img alt="Icône rechercher offres d'emploi" src="./assets/images/rechercher_offres.svg" class="mb-3 mt-2">
             <p>Rechercher des offres qui correspondent à vos critères de simulation sur pôle emploi.fr</p>
         </div>
-        <div class="text-center">
+        <div class="text-center card-body card-body-btn-action">
             <button id="btn-offres-emploi"
             type="button"
             aria-label="Rechercher des offres d'emploi"
-            class="btn-style-perso-1 btn-offres-emploi mt-2"
+            class="btn-style-perso-1 btn-action-suite mt-auto"
             data-testid="btn-offres-emploi"
             tag-action="Clique sur rechercher des offres d'emploi"
             (click)="btnClick()"
