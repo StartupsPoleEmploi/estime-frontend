@@ -1,5 +1,12 @@
 @import "../../../../../../assets/scss/variables";
 
+.container-action{
+    @media #{$extra-small-device} {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
 .card-body-btn-action{
     @media #{$extra-small-device} {
         padding-left: 0;
