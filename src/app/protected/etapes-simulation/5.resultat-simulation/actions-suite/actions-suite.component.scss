@@ -7,10 +7,28 @@
    text-align:center;
  }
 
+ .liste-actions{
+   @media #{$extra-small-device} {
+      margin-left: -15px;
+      margin-right: 0px;
+   }
+   @media #{$small-device} {
+      margin-left: -15px;
+      margin-right: 0px;
+   }
+ }
 
  .card {
     margin: 0.5rem;
     padding: 0rem;  
  }
 
+ span {
+   font-size: 21px;
+   font-family: Poppins;
+   font-weight: 700;
+   letter-spacing: 0;
+   line-height: 31,5px;
+   color: $color-blue-1;
+ }
 
