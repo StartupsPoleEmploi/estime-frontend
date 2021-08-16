@@ -88,6 +88,10 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-salaire-mois-moins-3-avant-simulation]').type(montantSalaire);
   }
 
+  public saisirPrestationAccueilJeuneEnfant(montantPAGE: string): void {
+    cy.get('[data-testid=input-prestation-accueil-jeune-enfant]').type(montantPAGE);
+  }
+
   public clickOnPasDeSalaireMoisMoins3AvantSimulation(): void {
     cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-3-avant-simulation]').click();
   }

@@ -20,6 +20,9 @@ export class DateUtileTests {
   private getJourOuMoisFormate(jourOuMois: string): string {
     let jourOuMoisFormate = jourOuMois;
     if(jourOuMois.length === 1) {
+      if(jourOuMois === '0') {
+        jourOuMois = '1';
+      }
       jourOuMoisFormate =  `0${jourOuMois}`;
     }
     return jourOuMoisFormate;

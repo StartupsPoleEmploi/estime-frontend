@@ -283,7 +283,6 @@ export class DateUtileService {
   }
 
   public isDatePlusDe3AnsEt1Mois(date: Date): boolean {
-    let isDatePlusDe3AnsEt1Mois = false;
     let datePlus3AnsEt1Mois = this.ajouterMoisToDate(date, this.MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE);
     return moment(datePlus3AnsEt1Mois).isSameOrAfter(Date.now());
   }

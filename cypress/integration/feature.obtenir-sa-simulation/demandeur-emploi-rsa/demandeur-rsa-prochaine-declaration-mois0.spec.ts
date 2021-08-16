@@ -206,7 +206,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
   it('demandeur célibataire, seul deuis plus de 18 mois, non propriétaire, sans enfant,' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 500€, déclaration trimetrielle en M, non travaillé au cours des 3 derniers mois' +
+    'RSA 500€, déclaration trimetrielle en M, travaillé au cours des 3 derniers mois avec salaire 0 juillet,  salaire 380 juin, salaire 0 mai' +
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
 
@@ -304,7 +304,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     it('demandeur célibataire, seul deuis plus de 18 mois, non propriétaire, sans enfant,' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 500€, déclaration trimetrielle en M, non travaillé au cours des 3 derniers mois' +
+    'RSA 500€, déclaration trimetrielle en M, travaillé au cours des 3 derniers mois avec salaire 380 juillet,  salaire 380 juin, salaire 380 mai' +
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
 
