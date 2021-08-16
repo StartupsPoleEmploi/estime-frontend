@@ -42,6 +42,10 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-af]').type(montant);
   }
 
+  public saisirAllocationSoutienFamilialeFoyer(montant: string): void {
+    cy.get('[data-testid=input-asf]').type(montant);
+  }
+
   public saisirDateDerniereOuvertureDroitASS(jour: string, mois: string, annee: string): void {
     cy.get('[data-testid=input-jour-date]').type(jour);
     cy.get('[data-testid=input-mois-date]').type(mois);
@@ -60,15 +64,11 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-nombre-mois-travailles-avant-simulation]').select(value)
   }
 
-  public saisirSalaireMoisDemande(montantSalaire: string): void {
-    cy.get('[data-testid=input-salaire-mois-demande-avant-simulation]').type(montantSalaire);
+  public saisirSalaireConjoint(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-conjoint]').type(montantSalaire);
   }
 
-  public clickOnPasDeSalaireMoisDemande(): void {
-    cy.get('[data-testid=checkbox-pas-de-salaire-mois-demande-avant-simulation]').click();
-  }
-
-  public saisirSalaire1MoisAvantSimulation(montantSalaire: string): void {
+  public saisirSalaireMoisMoins1AvantSimulation(montantSalaire: string): void {
     cy.get('[data-testid=input-salaire-mois-moins-1-avant-simulation]').type(montantSalaire);
   }
 
@@ -76,12 +76,28 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-1-avant-simulation]').click();
   }
 
-  public saisirSalaire2MoisAvantSimulation(montantSalaire: string): void {
+  public saisirSalaireMoisMoins2AvantSimulation(montantSalaire: string): void {
     cy.get('[data-testid=input-salaire-mois-moins-2-avant-simulation]').type(montantSalaire);
   }
 
   public clickOnPasDeSalaireMoisMoins2AvantSimulation(): void {
     cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-2-avant-simulation]').click();
+  }
+
+  public saisirSalaireMoisMoins3AvantSimulation(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-mois-moins-3-avant-simulation]').type(montantSalaire);
+  }
+
+  public saisirPrestationAccueilJeuneEnfant(montantPAGE: string): void {
+    cy.get('[data-testid=input-prestation-accueil-jeune-enfant]').type(montantPAGE);
+  }
+
+  public clickOnPasDeSalaireMoisMoins3AvantSimulation(): void {
+    cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-3-avant-simulation]').click();
+  }
+
+  public clickOnValiderRessourcesConjoint(): void {
+    cy.get('[data-testid=btn-ressources-conjoint-valider]').click();
   }
 
   public clickOnValiderRessourcesFoyer(): void {
@@ -91,6 +107,9 @@ class RessourcesActuellesPage {
   public clickOnValiderVosRessources(): void {
     cy.get('[data-testid=btn-vos-ressources-valider]').click();
   }
+
+
+
 
   public clickOnObtenirMaSimulation(waitingTime: number) {
     cy.get('[data-testid=btn-obtenir-simulation]').click();

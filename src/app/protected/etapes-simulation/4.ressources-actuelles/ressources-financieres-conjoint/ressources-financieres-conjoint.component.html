@@ -22,6 +22,7 @@
                 <input
                     id="conjointSalaireNet"
                     name="salaireNet"
+                    data-testid="input-salaire-conjoint"
                     type="text"
                     pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                     (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -496,7 +497,8 @@
         <div class="row row-button-valider">
             <button
                 class="btn-style-perso-3"
-                aria-label="Valider votre saisie"
+                aria-label="Valider ressources finançière de votre conjoint"
+                data-testid="btn-ressources-conjoint-valider"
                 type="submit">
                 <div>
                     <span>Valider</span>

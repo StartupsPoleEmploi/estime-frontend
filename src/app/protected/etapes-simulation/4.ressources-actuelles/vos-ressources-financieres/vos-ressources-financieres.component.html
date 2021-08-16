@@ -298,15 +298,15 @@
                   <div class="row mb-2">
                       <label
                           class="label"
-                          for="salaireMoisM0AvantPeriodeSimulee">
+                          for="salaireMoisMoins1AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(0)}}
                       </label>
                   </div>
                   <div class="row">
                       <input
-                          id="salaireMoisM0AvantPeriodeSimulee"
-                          name="salaireMoisM0AvantPeriodeSimulee"
-                          data-testid="input-salaire-mois-demande-avant-simulation"
+                          id="salaireMoisMoins1AvantSimulation"
+                          name="salaireMoisMoins1AvantSimulation"
+                          data-testid="input-salaire-mois-moins-1-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -327,9 +327,9 @@
                   <div class="row mt-2">
                       <div class="form-check form-check-inline">
                           <input
-                              id="pasDeSalaireMois0AvantPeriodeSimulee"
-                              name="pasDeSalaireMois0AvantPeriodeSimulee"
-                              data-testid="checkbox-pas-de-salaire-mois-demande-avant-simulation"
+                              id="pasDeSalaireMoisMoins1AvantSimulation"
+                              name="pasDeSalaireMoisMoins1AvantSimulation"
+                              data-testid="checkbox-pas-de-salaire-mois-moins-1-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire"
@@ -337,7 +337,7 @@
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 0)"
                               #isSansSalaireMoisDemandeSimulation="ngModel">
                           <label
-                              for="pasDeSalaireMois0AvantPeriodeSimulee"
+                              for="pasDeSalaireMoisMoins1AvantSimulation"
                               class="form-check-label">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
@@ -360,15 +360,15 @@
                   <div class="row mb-2">
                       <label
                           class="label"
-                          for="salaireMoisMMoins1AvantPeriodeSimulee">
+                          for="salaireMoisMoins2AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                       </label>
                   </div>
                   <div class="row">
                       <input
-                          id="salaireMoisMMoins1AvantPeriodeSimulee"
-                          name="salaireMoisMMoins1AvantPeriodeSimulee"
-                          data-testid="input-salaire-mois-moins-1-avant-simulation"
+                          id="salaireMoisMoins2AvantSimulation"
+                          name="salaireMoisMoins2AvantSimulation"
+                          data-testid="input-salaire-mois-moins-2-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -388,9 +388,9 @@
                   <div class="row mt-2">
                       <div class="form-check form-check-inline">
                           <input
-                              id="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
-                              name="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
-                              data-testid="checkbox-pas-de-salaire-mois-moins-1-avant-simulation"
+                              id="pasDeSalaireMoisMoins2AvantSimulation"
+                              name="pasDeSalaireMoisMoins2AvantSimulation"
+                              data-testid="checkbox-pas-de-salaire-mois-moins-2-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire"
@@ -398,7 +398,7 @@
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 1)"
                               #isSansSalaireMoisMMoins1AvantPeriodeSimulee="ngModel">
                           <label
-                              for="pasDeSalaireMoisNMoins1AvantPeriodeSimulee"
+                              for="pasDeSalaireMoisMoins2AvantSimulation"
                               class="form-check-label">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
@@ -421,15 +421,15 @@
                   <div class="row mb-2">
                       <label
                           class="label"
-                          for="salaireMoisMMoins2AvantPeriodeSimulee">
+                          for="salaireMoisMoins3AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
                       </label>
                   </div>
                   <div class="row">
                       <input
-                          id="salaireMoisMMoins2AvantPeriodeSimulee"
-                          name="salaireMoisMMoins2AvantPeriodeSimulee"
-                          data-testid="input-salaire-mois-moins-2-avant-simulation"
+                          id="salaireMoisMoins3AvantSimulation"
+                          name="salaireMoisMoins3AvantSimulation"
+                          data-testid="input-salaire-mois-moins-3-avant-simulation"
                           pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                           (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                           type="text"
@@ -449,9 +449,9 @@
                   <div class="row mt-2">
                       <div class="form-check form-check-inline">
                           <input
-                              id="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
-                              name="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
-                              data-testid="checkbox-pas-de-salaire-mois-moins-2-avant-simulation"
+                              id="pasDeSalaireMoisMoins3AvantSimulation"
+                              name="pasDeSalaireMoisMoins3AvantSimulation"
+                              data-testid="checkbox-pas-de-salaire-mois-moins-3-avant-simulation"
                               type="checkbox"
                               class="checkbox-pas-de-salaire form-check-input"
                               [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire"
@@ -459,7 +459,7 @@
                               (keyup)="handleKeyUpOnCheckBoxPasDeSalaire($event, 2)"
                               #isSansSalaireMoisNMoins2AvantPeriodeSimulee="ngModel">
                           <label
-                              for="pasDeSalaireMoisNMoins2AvantPeriodeSimulee"
+                              for="pasDeSalaireMoisMoins3AvantSimulation"
                               class="form-check-label">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
