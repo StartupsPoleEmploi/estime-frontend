@@ -40,9 +40,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE MA SITUATION
     const nationalite = NationalitesEnum.FRANCAISE;
     // VARIABLES PAGE MES RESSOURCES
+    const montantAPL = "310";
     const montantMensuelRSA = "500";
     const prochaineDeclarationRSA = "1";
-    const montantAPL = "310";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = "497";
     const montantPrimeActivite_M4_M5_M6 = "174";
@@ -132,13 +132,14 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const dateUtileTests = new DateUtileTests();
     const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(4);
     // VARIABLES PAGE MES RESSOURCES
+    const montantAPL = "420";
     const montantMensuelRSA = "170";
     const prochaineDeclarationRSA = "1";
-    const montantAPL = "420";
+    const salaireConjoint = "700";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = "175";
-    const montantPrimeActivite_M1_M2_M3 = "431";
-    const montantPrimeActivite_M4_M5_M6 = "277";
+    const montantPrimeActivite_M1_M2_M3 = "429";
+    const montantPrimeActivite_M4_M5_M6 = "273";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
@@ -172,6 +173,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
+
+    ressourcesActuellesPage.saisirSalaireConjoint(salaireConjoint);
+    ressourcesActuellesPage.clickOnValiderRessourcesConjoint();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();

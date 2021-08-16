@@ -64,6 +64,10 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-nombre-mois-travailles-avant-simulation]').select(value)
   }
 
+  public saisirSalaireConjoint(montantSalaire: string): void {
+    cy.get('[data-testid=input-salaire-conjoint]').type(montantSalaire);
+  }
+
   public saisirSalaireMoisMoins1AvantSimulation(montantSalaire: string): void {
     cy.get('[data-testid=input-salaire-mois-moins-1-avant-simulation]').type(montantSalaire);
   }
@@ -99,6 +103,9 @@ class RessourcesActuellesPage {
   public clickOnValiderVosRessources(): void {
     cy.get('[data-testid=btn-vos-ressources-valider]').click();
   }
+
+
+
 
   public clickOnObtenirMaSimulation(waitingTime: number) {
     cy.get('[data-testid=btn-obtenir-simulation]').click();

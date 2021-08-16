@@ -112,6 +112,296 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();
   });
+
+  it('demandeur en couple, non propriétaire, 0 enfant,' +
+    'CDI 35h, salaire net 1231€,' +
+    'RSA 710€, déclaration trimetrielle en M, non travaillé au cours des 3 derniers mois' +
+    'APL 370€' +
+    'conjoint sans ressource' +
+    'domicile->travail 10kms / 20 trajets', () => {
+
+      // VARIABLES PAGE FUTUR CONTRAT
+      const dureeHebdomadaire = "35";
+      const salaire = "1231";
+      const distanceDomicileLieuTravail = "10";
+      const nombreTrajetsDomicileTravail = "20";
+      // VARIABLES PAGE MA SITUATION
+      const nationalite = NationalitesEnum.FRANCAISE;
+      // VARIABLES PAGE PERSONNES A CHARGE
+      // VARIABLES PAGE MES RESSOURCES
+      const montantAPL = "370";
+      const montantMensuelRSA = "710";
+      const prochaineDeclarationRSA = "0";
+      // VARIABLES PAGE RESULTAT SIMULATION
+      const montantRSA_M1_M2 = "710";
+      const montantPrimeActivite_M3_M4_M5 = "256";
+      const montantPrimeActivite_M6 = "384";
+
+      const homePage = new HomePage();
+      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
+
+      const avantDeCommencerPage = new AvantDeCommencerPage();
+      avantDeCommencerPage.clickOnJeCommence();
+
+      const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnTypeContratCDI();
+      monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
+      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+      monFuturContratTravailPage.saisirNombreTrajetsDomicileTravail(nombreTrajetsDomicileTravail);
+      monFuturContratTravailPage.clickOnSuivant();
+
+      const maSituationPage = new MaSituationPage();
+      maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationFamilialeCouple();
+      maSituationPage.clickOnSituationConjointAucuneRessource();
+      maSituationPage.clickOnVousEtesProprietaireNon();
+      maSituationPage.clickOnSuivant();
+
+      const personnesAChargePage = new PersonnesAChargePage();
+      personnesAChargePage.clickOnSuivant();
+
+      const ressourcesActuellesPage = new RessourcesActuellesPage();
+      ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
+      ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+      ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
+      ressourcesActuellesPage.clickOnValiderVosRessources();
+
+      ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
+      ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
+
+      ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+
+      const resultatMaSimulationPage = new ResultatMaSimulationPage();
+      resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
+      //premier mois
+      resultatMaSimulationPage.clickOnMois(0);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //deuxième mois
+      resultatMaSimulationPage.clickOnMois(1);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //troisième mois
+      resultatMaSimulationPage.clickOnMois(2);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //quatrième mois
+      resultatMaSimulationPage.clickOnMois(3);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+
+      //cinquième mois
+      resultatMaSimulationPage.clickOnMois(4);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //sixième mois
+      resultatMaSimulationPage.clickOnMois(5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M6);
+
+      const headerSection = new HeaderSection();
+      headerSection.clickOnSeDeconnecter();
+    });
+
+  it('demandeur célibataire, seul deuis plus de 18 mois, non propriétaire, sans enfant,' +
+    'CDI 15h, salaire net 500€,' +
+    'RSA 500€, déclaration trimetrielle en M, non travaillé au cours des 3 derniers mois' +
+    'APL 310€' +
+    'domicile->travail 10kms / 20 trajets', () => {
+
+      // VARIABLES PAGE FUTUR CONTRAT
+      const dureeHebdomadaire = "15";
+      const salaire = "500";
+      const distanceDomicileLieuTravail = "10";
+      const nombreTrajetsDomicileTravail = "20";
+      // VARIABLES PAGE MA SITUATION
+      const nationalite = NationalitesEnum.FRANCAISE;
+      // VARIABLES PAGE MES RESSOURCES
+      const montantMensuelRSA = "500";
+      const prochaineDeclarationRSA = "0";
+      const montantAPL = "310";
+      const montantSalaireMoisMoins2 = "380";
+      // VARIABLES PAGE RESULTAT SIMULATION
+      const montantRSA_M1_M2 = "500";
+      const montantRSA_M3_M4_M5 = "176";
+      const montantRSA_M6 = "16";
+      const montantPrimeActivite_M3_M4_M5 = "196";
+      const montantPrimeActivite_M6 = "294";
+
+      const homePage = new HomePage();
+      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
+
+      const avantDeCommencerPage = new AvantDeCommencerPage();
+      avantDeCommencerPage.clickOnJeCommence();
+
+      const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnTypeContratCDI();
+      monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
+      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+      monFuturContratTravailPage.saisirNombreTrajetsDomicileTravail(nombreTrajetsDomicileTravail);
+      monFuturContratTravailPage.clickOnSuivant();
+
+      const maSituationPage = new MaSituationPage();
+      maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationFamilialeSeul();
+      maSituationPage.clickOnVousVivezSeulDepuisPlusDe18MoisOui();
+      maSituationPage.clickOnVousEtesProprietaireNon();
+      maSituationPage.clickOnSuivant();
+
+      const personnesAChargePage = new PersonnesAChargePage();
+      personnesAChargePage.clickOnSuivant();
+
+      const ressourcesActuellesPage = new RessourcesActuellesPage();
+      ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
+      ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+      ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
+      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.clickOnValiderVosRessources();
+
+      ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
+      ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
+
+      ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+
+      const resultatMaSimulationPage = new ResultatMaSimulationPage();
+      resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
+      //premier mois
+      resultatMaSimulationPage.clickOnMois(0);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //deuxième mois
+      resultatMaSimulationPage.clickOnMois(1);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //troisième mois
+      resultatMaSimulationPage.clickOnMois(2);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //quatrième mois
+      resultatMaSimulationPage.clickOnMois(3);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //cinquième mois
+      resultatMaSimulationPage.clickOnMois(4);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //sixième mois
+      resultatMaSimulationPage.clickOnMois(5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M6);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M6);
+
+      const headerSection = new HeaderSection();
+      headerSection.clickOnSeDeconnecter();
+    });
+
+    it('demandeur célibataire, seul deuis plus de 18 mois, non propriétaire, sans enfant,' +
+    'CDI 15h, salaire net 500€,' +
+    'RSA 500€, déclaration trimetrielle en M, non travaillé au cours des 3 derniers mois' +
+    'APL 310€' +
+    'domicile->travail 10kms / 20 trajets', () => {
+
+      // VARIABLES PAGE FUTUR CONTRAT
+      const dureeHebdomadaire = "15";
+      const salaire = "500";
+      const distanceDomicileLieuTravail = "10";
+      const nombreTrajetsDomicileTravail = "20";
+      // VARIABLES PAGE MA SITUATION
+      const nationalite = NationalitesEnum.FRANCAISE;
+      // VARIABLES PAGE MES RESSOURCES
+      const montantMensuelRSA = "500";
+      const prochaineDeclarationRSA = "0";
+      const montantAPL = "310";
+      const montantSalaireMoisMoins1 = "380";
+      const montantSalaireMoisMoins2 = "380";
+      const montantSalaireMoisMoins3 = "380";
+      // VARIABLES PAGE RESULTAT SIMULATION
+      const montantRSA_M1_M2 = "500";
+      const montantRSA_M3_M4_M5 = "54";
+      const montantRSA_M6 = "16";
+      const montantPrimeActivite_M3_M4_M5 = "270";
+      const montantPrimeActivite_M6 = "294";
+
+      const homePage = new HomePage();
+      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
+
+      const avantDeCommencerPage = new AvantDeCommencerPage();
+      avantDeCommencerPage.clickOnJeCommence();
+
+      const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnTypeContratCDI();
+      monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
+      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+      monFuturContratTravailPage.saisirNombreTrajetsDomicileTravail(nombreTrajetsDomicileTravail);
+      monFuturContratTravailPage.clickOnSuivant();
+
+      const maSituationPage = new MaSituationPage();
+      maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationFamilialeSeul();
+      maSituationPage.clickOnVousVivezSeulDepuisPlusDe18MoisOui();
+      maSituationPage.clickOnVousEtesProprietaireNon();
+      maSituationPage.clickOnSuivant();
+
+      const personnesAChargePage = new PersonnesAChargePage();
+      personnesAChargePage.clickOnSuivant();
+
+      const ressourcesActuellesPage = new RessourcesActuellesPage();
+      ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
+      ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+      ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(montantSalaireMoisMoins1);
+      ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
+      ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(montantSalaireMoisMoins3);
+      ressourcesActuellesPage.clickOnValiderVosRessources();
+
+      ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
+      ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
+
+      ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+
+      const resultatMaSimulationPage = new ResultatMaSimulationPage();
+      resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
+      //premier mois
+      resultatMaSimulationPage.clickOnMois(0);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //deuxième mois
+      resultatMaSimulationPage.clickOnMois(1);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2);
+      //troisième mois
+      resultatMaSimulationPage.clickOnMois(2);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //quatrième mois
+      resultatMaSimulationPage.clickOnMois(3);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //cinquième mois
+      resultatMaSimulationPage.clickOnMois(4);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M3_M4_M5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M3_M4_M5);
+      //sixième mois
+      resultatMaSimulationPage.clickOnMois(5);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M6);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActivite_M6);
+
+      const headerSection = new HeaderSection();
+      headerSection.clickOnSeDeconnecter();
+    });
+
 });
 
 

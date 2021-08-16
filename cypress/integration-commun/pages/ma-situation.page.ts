@@ -61,7 +61,7 @@ class MaSituationPage {
   }
 
   public clickOnSituationConjointAucuneRessource() {
-    cy.get('[data-testid=btn-situation-conjoint-aucune-ressource]').click();
+    cy.get('[data-testid=btn-situation-conjoint-sans-ressource]').click();
   }
 
   public clickOnVousVivezSeulDepuisPlusDe18MoisOui(): void {
