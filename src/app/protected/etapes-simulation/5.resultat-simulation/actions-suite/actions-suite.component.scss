@@ -18,6 +18,14 @@
    }
  }
 
+ .liste-actions .item{
+   border: 1px solid transparent;
+ }
+
+ .liste-actions .item:hover{
+   border: 1px solid black;
+ }
+
  .card {
     margin: 0.5rem;
     padding: 0rem;  
