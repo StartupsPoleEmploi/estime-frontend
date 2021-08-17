@@ -6,6 +6,10 @@ stages:
     - deploy-application-production
     - dynamic-application-security-testing
 
+variables:
+    LAUNCH_CYPRESS_TESTS: 'true'
+
+
 cache: &global_cache
   key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
   paths:
@@ -75,6 +79,9 @@ cypress-e2e:
       expire_in: 1 day
     cache:
       <<: *global_cache
+    only:
+      variables:
+        - $LAUNCH_CYPRESS_TESTS == 'true'
 
 
 build-docker-image-recette:
