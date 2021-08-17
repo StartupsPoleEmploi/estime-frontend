@@ -72,7 +72,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public onClickButtonAideObtenir(aide: Aide) {
-    if(this.screenService.isExtraSmallScreen() && this.isAideSelected(aide.code)) {
+    if(this.isAideSelected(aide.code)) {
       this.aideSelected = null;
     } else  {
       this.aideSelected = aide;

@@ -309,6 +309,10 @@ export class ChartUtileService {
     options.plugins = this.getPlugins(data);
     options.scales = this.getScales();
     options.layout = this.getLayout();
+    options.borderRadius =  {
+      topRight: 4,
+      topLeft: 4
+    };
 
     return options;
   }
@@ -316,15 +320,13 @@ export class ChartUtileService {
   private getAspectRatio() {
     if(this.screenService.isExtraSmallScreen()) return 0.5;
     if(this.screenService.isTabletScreen()) return 1;
-    return 3;
+    return 2;
   }
 
   private getLegend(data: Data): Legend {
     const legend = new Legend();
 
-    legend.position = (this.screenService.isExtraSmallScreen() || this.screenService.isTabletScreen())
-      ? 'bottom'
-      : 'right';
+    legend.position = 'bottom';
     legend.align = 'start';
     legend.labels = this.getLegendLabels(data);
 
@@ -335,8 +337,9 @@ export class ChartUtileService {
     const aidesDisponibles = this.getAidesDisponibles(data);
     const labels = new Labels();
 
-    labels.boxWidth = 13;
     labels.fontSize = 13;
+    labels.boxWidth = 42;
+    labels.boxHeight = 42;
     labels.fontFamily = 'Lato';
     labels.fontColor = 'black';
     labels.padding = 20;

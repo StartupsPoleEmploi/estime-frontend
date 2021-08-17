@@ -13,28 +13,80 @@
     }
   }
 
+  .row-telecharger-ou-refaire {
+    margin-top: 2rem;
 
-
-
-  .btn-imprimer-simulation {
-
-    img {
-      width: 24px;
-      height: 24px;
-      margin-right: 0.5rem;
-    }
-    #telecharger_simulation_text {
-      text-decoration: none;
-      color: $color-blue-2;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 0.875em;
-      line-height: 17px;
-
+    .btn-telecharger-ou-refaire {
+      img {
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+        color: $color-blue-10;
+      }
+      span {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 14px;
+        line-height: 21px;
+        color: $color-blue-10;
+      }
       &:hover {
         cursor: pointer;
         text-decoration: underline;
       }
+    }
+
+    #btn-telecharger-simulation {
+      float: right;
+      @media #{$extra-small-device} {
+        text-align: center;
+        float: unset;
+      }
+    }
+
+    #btn-refaire-simulation {
+      float: left;
+      @media #{$extra-small-device} {
+        text-align: center;
+        float: unset;
+      }
+    }
+  }
+
+  #row-onglets-resultat-simulation {
+    margin-top: 2rem;
+
+    .btn-onglet-resultat-simulation {
+      width: 100%;
+      min-height: 65px;
+      background-color: white;
+      border-radius: 0.5rem;
+
+      span {
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 21px;
+        line-height: 31px;
+        color: black;
+      }
+
+      &.isOngletInactive {
+        background-color: $color-blue-9-o5;
+        span {
+          font-weight: normal;
+          color: $color-blue-1 !important;
+        }
+      }
+    }
+
+    #btn-onglet-details {
+      float: right;
+    }
+
+    #btn-onglet-evolution {
+      float: left;
     }
   }
 
@@ -120,7 +172,7 @@
     }
     .card-deck {
       border: 0;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       margin-bottom: 0;
       @media #{$small-device} {
         padding-bottom: 5px;
@@ -130,22 +182,12 @@
     }
     .first-card {
       border: 0;
-      border-radius: 8px;
+      border-radius: 0.5rem;
       margin-left: 0;
       margin-right: 0;
-      margin-bottom: 10px;
+      margin-bottom: 0.75rem;
       width: 100%;
-      @media #{$extra-small-device} {
-        padding-left: 0;
-        padding-right: 0;
-      }
-      @media #{$small-device} {
-        margin-bottom: 0px;
-        &:not(.isLastCard) {
-          border-right: 1px solid $color-grey-2 !important;
-          border-radius: 0 !important;
-        }
-      }
+      background-color: unset;
       .second-card {
         border: 0;
         cursor: pointer;
@@ -155,17 +197,18 @@
           margin-left: -7px;
           margin-right: -7px;
         }
+        background-color: unset;
         .card-body {
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-          padding: 1.25rem;
-          height: 77px !important;
+          padding: 0.25rem;
+          height: 4.5rem !important;
           text-align: center;
-          @media #{$small-device} {
-            padding: 0.15rem !important;
-            border-radius: 8px;
-          }
+          border-radius: 0.5rem;
           vertical-align: text-bottom;
+          background-color: $color-white-1;
+
+          @media #{$extra-small-device} {
+            padding: 1.25rem;
+          }
           &.active {
             #span-mois-annee span {
               color: $color-blue-3 !important;
@@ -181,27 +224,9 @@
             background-color: $color-blue-7;
           }
           #span-mois-annee {
-            @media #{$tablet-device} {
-              min-height: 50px;
-              align-items: center;
-              display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-              display: -ms-flexbox; /* TWEENER - IE 10 */
-              display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-              display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
-              height: 100%;
-              font-size: 0.875em;
-              @media #{$extra-small-device} {
-                font-size: 1em !important;
-                font-weight: 900 !important;
-              }
-            }
-            span {
-              font-size: 0.875em;
-              color: $color-blue-1;
-              font-weight: bold;
-              @media #{$extra-small-device} {
-                font-size: 1em !important;
-              }
+            @media #{$extra-small-device} {
+              font-size: 1em !important;
+              font-weight: 900 !important;
             }
           }
           span {
@@ -218,9 +243,24 @@
           background-color: unset;
           padding-bottom: 0;
         }
+        .card-footer-mobile {
+          background-color: unset;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+          border: 0;
+        }
+        .card-footer-desktop {
+          background-color: unset;
+          padding-bottom: 0;
+          border: 0;
+        }
       }
     }
-    .card-sm-simulations {
+    .card-simulations-desktop {
+      border: 0;
+      line-height: 4.5rem;
+    }
+    .card-simulations-mobile {
       margin-right: 0 !important;
       padding-left: 9px !important;
       padding-right: 9px !important;

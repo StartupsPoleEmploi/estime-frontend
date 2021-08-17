@@ -15,17 +15,20 @@
     <div class="row row-style-2">
         <div
             id="alert-resultat-simulation"
-            class="col-12 col-md-9 mt-auto mb-auto">
+            class="col-12 col-md-12 mt-auto mb-auto">
             <div
                 id="label-alerte-montants-resultat-simulation"
                 class="mx-2 text-justify">
                 Les futures allocations logement, familiales et autres ressources du foyer, ainsi que le prélèvement à la source sont à ajouter au résultat de la simulation. Nous travaillons actuellement à enrichir ce résultat des allocations logement recalculées ainsi que des prestations familiales. Nous faisons tout pour vous les proposer très prochainement.
             </div>
         </div>
-        <div class="col-12 col-md-3 mt-auto mb-auto d-flex justify-content-center">
+    </div>
+    <div class="row row-telecharger-ou-refaire row-style-2">
+        <div class="col-12 col-md-6 my-auto">
             <span
-                class="btn-imprimer-simulation"
-                data-testid="btn-personnes-charge-suivant"
+                id="btn-telecharger-simulation"
+                class="btn-telecharger-ou-refaire"
+                data-testid="btn-telecharger-simulation"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
                     <img
@@ -35,112 +38,109 @@
                 </div>
             </span>
         </div>
+        <div [ngStyle]="{'margin-bottom': (this.screenService.isExtraSmallScreen())?'10vh':'0'}"></div>
+        <div class="col-12 col-md-6 my-auto">
+            <span
+                id="btn-refaire-simulation"
+                class="btn-telecharger-ou-refaire"
+                data-testid="btn-refaire-simulation"
+                (click)="onClickButtonRefaireSimulation()">
+                <div>
+                    <img
+                        alt="Icône refaire simulation"
+                        src="./assets/images/refaire_simulation.svg">
+                    <span id="refaire_simulation_text">Refaire une simulation</span>
+                </div>
+            </span>
+        </div>
     </div>
-    <div class="row row-style-2">
+    <div id="row-onglets-resultat-simulation" class="row">
+        <div id="col-onglet-1-resultat-simulation" class="col-6">
+            <button
+                id="btn-onglet-details"
+                class="btn btn-onglet-resultat-simulation"
+                (click)="onClickOnglet(true)"
+                [ngClass]="{isOngletInactive: !afficherDetails}">
+                <span>
+                    Détail des ressources estimées
+                </span>
+            </button>
+        </div>
+        <div id="col-onglet-2-resultat-simulation" class="col-6">
+            <button
+                id="btn-onglet-evolution"
+                class="btn btn-onglet-resultat-simulation"
+                (click)="onClickOnglet(false)"
+                [ngClass]="{isOngletInactive: afficherDetails}">
+                <span>
+                    Évolution des ressources sur 6 mois
+                </span>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="afficherDetails" class="mt-5">
+        <div class="row mb-3"
+            [ngClass]="{'card-simulations-mobile': screenService.isExtraSmallScreen(), 'card-simulations-desktop': !screenService.isExtraSmallScreen()}">
+            <div
+                class="col-12 col-md-12 card first-card"
+                *ngFor="let simulationMensuel of simulationAides.simulationsMensuelles; let index = index;"
+                [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
+                <div
+                    id="btn-simulation-mois-{{index}}"
+                    class="card second-card"
+                    aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
+                    role="button">
+                    <div
+                        [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
+                        class="card-body"
+                        data-testid="card-simulation-mensuel"
+                        (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
+                        (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
+                        (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
+                        <div class="row">
+                            <div id="span-mois-annee" [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
+                                <span>
+                                    {{getDateStringFormat(simulationMensuel)}}
+                                </span>
+                            </div>
+                            <div [ngClass]="{'col-6': !screenService.isExtraSmallScreen()}"></div>
+                            <div [ngClass]="{'col-4 p-0 mt-auto mb-auto ml-auto mr-0': screenService.isExtraSmallScreen(), 'col-2': !screenService.isExtraSmallScreen()}">
+                                <span class="float-right">
+                                    {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
+                                </span>
+                            </div>
+                            <div class="col-1" [ngClass]="{'p-0 ml-auto mr-1': screenService.isExtraSmallScreen()}">
+                                <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
+                                    <i alt class="fas fa-chevron-down"></i>
+                                </span>
+                                <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
+                                    <i alt class="fas fa-chevron-right"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="card-footer"
+                        [ngClass]="{'card-footer-mobile': screenService.isExtraSmallScreen(), 'card-footer-desktop': !screenService.isExtraSmallScreen()}"
+                        *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
+                        <app-ressources-financieres-mensuelles
+                            [simulationSelected]="simulationSelected"
+                            [aideSelected]="aideSelected"
+                            (newAideSelected)="changeAideSelected($event)"></app-ressources-financieres-mensuelles>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!afficherDetails" class="row row-style-2">
         <div class="col-12 mt-auto mb-auto">
             <app-ressources-financieres-diagramme [simulationAides]="simulationAides"></app-ressources-financieres-diagramme>
         </div>
     </div>
-    <div
-        *ngIf="screenService.isExtraSmallScreen()"
-        class="row mt-4 row-style-2">
-        <div
-            id="card-revenus-actuels"
-            class="col-12 col-md-12">
-            <div class="card">
-                <span class="card-title">Revenus et aides</span>
-                <span data-testid="span-revenus-aides-actuelles">
-                    {{simulationAides.montantRessourcesFinancieresMoisAvantSimulation}} €
-                </span>
-            </div>
-        </div>
+    <div id="actions-suite">
+        <app-actions-suite>
+        </app-actions-suite>
     </div>
-    <div
-        id="row-montants-total"
-        class="row row-style-2">
-        <div class="col-12 col-md-12 pl-0 pr-0">
-            <div class="card">
-                <h2
-                    id="details_ressources_estimees_title"
-                    class="h2-style-1 mt-auto mb-auto">
-                    Détail des ressources estimées après reprise d'emploi pour les {{simulationAides.simulationsMensuelles.length}} mois à venir
-                </h2>
-            </div>
-        </div>
-    </div>
-    <div
-        class="row "
-        [ngClass]="{'card-deck': !screenService.isExtraSmallScreen(), 'card-sm-simulations': screenService.isExtraSmallScreen()}">
-        <div
-            class="col-12 col-md-12 card first-card"
-            *ngFor="let simulationMensuel of simulationAides.simulationsMensuelles; let index = index;"
-            [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
-            <div
-                id="btn-simulation-mois-{{index}}"
-                class="card second-card"
-                aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
-                role="button">
-                <div
-                    [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
-                    class="card-body"
-                    data-testid="card-simulation-mensuel"
-                    (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
-                    (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
-                    (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
-                    <div class="row">
-                        <div
-                            id="span-mois-annee"
-                            class="col-6 mt-auto mb-auto p-0 col-md-12">
-                            <span>
-                                {{getDateStringFormat(simulationMensuel)}}
-                            </span>
-                        </div>
-                        <div class="col-4 p-0 mt-auto mb-auto ml-auto mr-0 col-md-12">
-                            <span>
-                                {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
-                            </span>
-                        </div>
-                        <div
-                            *ngIf="screenService.isExtraSmallScreen()"
-                            class="col-1 p-0  ml-auto mr-1">
-                            <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                <i
-                                    alt
-                                    class="fas fa-chevron-down"></i>
-                            </span>
-                            <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                <i
-                                    alt
-                                    class="fas fa-chevron-right"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="card-footer"
-                    *ngIf="isSimulationMensuelleSelected(simulationMensuel) && screenService.isExtraSmallScreen()">
-                    <app-ressources-financieres-mensuelles
-                        class="col-12"
-                        [simulationSelected]="simulationSelected"
-                        [aideSelected]="aideSelected"
-                        (newAideSelected)="changeAideSelected($event)"></app-ressources-financieres-mensuelles>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div *ngIf="simulationSelected && !screenService.isExtraSmallScreen()">
-        <div class="row mt-3">
-            <app-ressources-financieres-mensuelles
-                class="col-6"
-                [simulationSelected]="simulationSelected"
-                [aideSelected]="aideSelected"
-                (newAideSelected)="changeAideSelected($event)"></app-ressources-financieres-mensuelles>
-            <app-detail-aide
-                class="col-6 pr-0"
-                [aideSelected]="aideSelected"></app-detail-aide>
-        </div>
-    </div>
-
     <div
         id="resultat_simulation_div_boutons"
         class="div-buttons-form row d-flex justify-content-center">
@@ -155,24 +155,7 @@
                 <span>Retour</span>
             </div>
         </button>
-        <div [ngStyle]="{'margin-bottom': (this.screenService.isExtraSmallScreen())?'10vh':'0'}"></div>
-        <button
-            id="resultat_simulation_bouton_refaire_simulation"
-            class="btn-style-perso-1 second-btn"
-            type="button"
-            data-testid="btn-refaire-simulation"
-            (click)="onClickButtonRefaireSimulation()">
-            <div class="px-0 justify-content-center">
-                <span>Refaire une simulation</span>
-            </div>
-        </button>
     </div>
-
-    <div id="actions-suite">
-        <app-actions-suite>
-        </app-actions-suite>
-    </div>
-
 </div>
 
 <ng-template #popoverResultatSimulationTemplate>

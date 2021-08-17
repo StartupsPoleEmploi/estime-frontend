@@ -11,4 +11,5 @@ export class Options {
     responsive: boolean;
     maintainAspectRation: boolean;
     aspectRatio: number;
+    borderRadius: Object;
 }

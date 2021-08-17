@@ -29,6 +29,7 @@ export class ResultatSimulationComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   hoveredButtonSimulationMensuelle: number;
 
+  afficherDetails: boolean;
 
   constructor(
     private aidesService: AidesService,
@@ -44,6 +45,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   ngOnInit(): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.afficherDetails = true;
     this.loadDataSimulationAides();
   }
 
@@ -52,13 +54,11 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
-    if (this.screenService.isExtraSmallScreen()) {
-      this.traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel);
-    } else {
-      this.simulationSelected = simulationMensuel;
-      this.aideSelected = null;
-      this.selectAideAfficherDetail();
-    }
+    this.traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel);
+  }
+
+  public onClickOnglet(afficherDetails: boolean): void {
+    this.afficherDetails = afficherDetails;
   }
 
   public onMouseOverButtonSimulationMensuelle(index) {
@@ -107,11 +107,6 @@ export class ResultatSimulationComponent implements OnInit {
 
   private loadDataSimulationAides(): void {
     this.simulationAides = this.deConnecteSimulationAidesService.getSimulationAides();
-    //si l'utilisateur est sur smartphone, aucune préselection
-    if (!this.screenService.isExtraSmallScreen()) {
-      this.simulationSelected = this.simulationAides.simulationsMensuelles[0];
-      this.selectAideAfficherDetail();
-    }
   }
 
 
