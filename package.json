@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "scripts": {
     "build:dev": "npm install && ng build",
-    "build:prod": "npm ci && ng build --configuration production --build-optimizer",
+    "build:prod": "npm install && ng build --configuration production --build-optimizer",
     "cy:verify": "cypress verify",
     "cy:info": "cypress info",
     "cy:version": "cypress version",
