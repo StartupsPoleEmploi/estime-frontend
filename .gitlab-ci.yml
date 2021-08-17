@@ -33,6 +33,7 @@ build_frontend_application :
     artifacts:
       paths:
         - ./dist
+        - /root/.npm/_logs/*.log
     cache:
       <<: *global_cache
 
