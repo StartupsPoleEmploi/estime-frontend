@@ -7,7 +7,7 @@ stages:
     - dynamic-application-security-testing
 
 variables:
-    LAUNCH_CYPRESS_TESTS: 'true'
+    LAUNCH_CYPRESS_TESTS: "true"
 
 
 cache: &global_cache
@@ -67,7 +67,7 @@ cypress-e2e:
     #lancement des tests cypress
     - npm run cy:run
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "master" && $LAUNCH_CYPRESS_TESTS == "true"'
       changes:
         - src/**/*
     artifacts:
@@ -79,10 +79,6 @@ cypress-e2e:
       expire_in: 1 day
     cache:
       <<: *global_cache
-    only:
-      variables:
-        - $LAUNCH_CYPRESS_TESTS == 'true'
-
 
 build-docker-image-recette:
     stage: build-phase-2
