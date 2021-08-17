@@ -153,12 +153,12 @@
                     * Allocations familiales
                 </label>
             </div>
+            <div
+                class="row"
+                *ngIf="screenService.isExtraSmallScreen()">
+                <span class="text-side-input ml-0">le mois dernier</span>
+            </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">
-                    le mois dernier
-                </span>
                 <input
                     attr.aria-label="Allocations familiales du mois dernier"
                     name="allocationsFamiliales"
@@ -203,12 +203,12 @@
                     * Allocation soutien familial
                 </label>
             </div>
+            <div
+                class="row"
+                *ngIf="screenService.isExtraSmallScreen()">
+                <span class="text-side-input ml-0">le mois dernier</span>
+            </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">
-                    le mois dernier
-                </span>
                 <input
                     attr.aria-label="Allocation de soutien familiale du mois dernier"
                     name="allocationSoutienFamilial"
@@ -253,12 +253,13 @@
                     * Complément familial
                 </label>
             </div>
-            <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
+            <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+              <span
                     class="text-side-input ml-0">
                     le mois dernier
                 </span>
+            </div>
+            <div class="row">
                 <input
                     attr.aria-label="Complément familial du mois dernier"
                     name="complementFamilial"
@@ -303,12 +304,13 @@
                     * PAJE (prestation d'accueil du jeune enfant)
                 </label>
             </div>
-            <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
+            <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+              <span
                     class="text-side-input ml-0">
                     le mois dernier
                 </span>
+            </div>
+            <div class="row">
                 <input
                     id="montantPAJEFoyer"
                     name="montantPAJEFoyer"
@@ -353,12 +355,10 @@
                     * Pensions alimentaires du foyer perçues
                 </label>
             </div>
+            <div class="row" *ngIf="screenService.isExtraSmallScreen()">
+                    <span class="text-side-input ml-0">le mois dernier</span>
+            </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0">
-                    le mois dernier
-                </span>
                 <input
                     id="montantPersionsAlimentairesFoyer"
                     name="montantPersionsAlimentairesFoyer"
@@ -412,12 +412,13 @@
                         #popoverRevenusImmobiliers="bs-popover"></div>
                 </label>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="screenService.isExtraSmallScreen()">
                 <span
-                    *ngIf="screenService.isExtraSmallScreen()"
                     class="text-side-input ml-0">
                     net total 3 derniers mois
                 </span>
+            </div>
+            <div class="row">
                 <input
                     id="revenusImmobilierFoyer"
                     name="revenusImmobilier"
