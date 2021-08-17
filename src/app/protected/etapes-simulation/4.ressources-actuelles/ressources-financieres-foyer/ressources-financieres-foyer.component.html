@@ -33,6 +33,7 @@
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1"
                         inputmode="decimal"
+                        required
                         (click)="$event.target.select()"
                         #allocationsLogementMoisNMoins1="ngModel">
                     <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>

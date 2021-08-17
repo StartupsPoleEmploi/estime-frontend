@@ -87,11 +87,16 @@ select.ng-invalid.ng-touched {
   }
 }
 
-.radio-button-style-1.ng-invalid.ng-touched,
-form.submitted .radio-button-style-1.ng-invalid,
-form.submitted  .custom-control-input.ng-invalid  ~ .custom-control-label::before {
+form.submitted .radio-button-style-1.ng-invalid.ng-touched,
+form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-label::before {
   border-color: $color-red-5;
 }
+
+/*.radio-button-style-1.ng-invalid.ng-touched,
+form.submitted .radio-button-style-1.ng-invalid.ng-touched,
+form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-label::before {
+  border-color: $color-red-5;
+}*/
 
 .error-input-message {
   color: $color-red-5 !important;
@@ -136,11 +141,13 @@ input[type=number] {
 
 input:-webkit-autofill {
   -webkit-box-shadow:0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
+  box-shadow:0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
   -webkit-text-fill-color: #333;
 }
 
 input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 50px $color-white-3 inset;/*your box-shadow*/
+  box-shadow: 0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
   -webkit-text-fill-color: #333;
 }
 
