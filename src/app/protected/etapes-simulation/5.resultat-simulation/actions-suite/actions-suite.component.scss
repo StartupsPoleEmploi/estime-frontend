@@ -5,6 +5,9 @@
    margin-bottom: 1rem;
    width: 100%;
    text-align:center;
+   @media #{$extra-small-device} {
+      margin-left: -10px;
+   }
  }
 
  .liste-actions{
@@ -16,14 +19,6 @@
       margin-left: -15px;
       margin-right: 0px;
    }
- }
-
- .liste-actions .item{
-   border: 1px solid transparent;
- }
-
- .liste-actions .item:hover{
-   border: 1px solid black;
  }
 
  .card {
