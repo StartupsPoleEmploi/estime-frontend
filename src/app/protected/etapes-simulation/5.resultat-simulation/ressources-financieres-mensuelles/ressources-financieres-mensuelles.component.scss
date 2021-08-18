@@ -4,10 +4,6 @@
   margin-bottom: 1.5rem;
 }
 
-// #div-aides-obtenir {
-
-// }
-
 .div-aides-container {
   background-color: unset;
   width: 100%;
@@ -94,7 +90,6 @@
       padding-bottom: 0;
       height: 4.5rem;
       cursor: default;
-
       @media #{$extra-small-device} {
         padding-left: 1rem !important;
         border: 0;
@@ -117,6 +112,7 @@
   border: 1px solid $color-grey-1 !important;
   border-radius: 0.25rem;
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   span {
     font-size: 0.875em;

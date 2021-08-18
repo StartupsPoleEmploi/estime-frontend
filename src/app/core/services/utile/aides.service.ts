@@ -47,6 +47,18 @@ export class AidesService {
     return message;
   }
 
+  public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
+    let message = null;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.AGEPI) {
+          message = aide.messageAlerte;
+        }
+      }
+    }
+    return message;
+  }
+
   public getMontantRSA(simulationSelected: SimulationMensuelle): number {
     let montant = 0;
     if(simulationSelected.mesAides) {

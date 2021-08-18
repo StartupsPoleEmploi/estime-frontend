@@ -186,6 +186,22 @@
                         </button>
                     </li>
                     <app-detail-aide *ngIf="isAideSelected(aideKeyValue.value.code) && aidesService.isAideDemandeurPourraObtenir(aideSelected)" [aideSelected]="aideSelected"></app-detail-aide>
+                    <div
+                        *ngIf="(aidesService.getMessageAlerteAGEPI(simulationSelected) && aideKeyValue.value.code == codesAidesEnum.AGEPI)"
+                        class="card card-body card-message-alerte-aide">
+                        <div class="row">
+                            <div class="img-card-message-alerte-aide col-auto">
+                                <div>
+                                    <img alt="Icône information" src="./assets/images/info.svg">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span>
+                                    {{aidesService.getMessageAlerteAGEPI(simulationSelected)}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>
