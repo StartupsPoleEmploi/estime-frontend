@@ -202,6 +202,22 @@
                             </div>
                         </div>
                     </div>
+                    <div
+                        *ngIf="(aidesService.getMessageAlertePrimeActiviteRSA(simulationSelected) && aideKeyValue.value.code == codesAidesEnum.PRIME_ACTIVITE)"
+                        class="card card-body card-message-alerte-aide">
+                        <div class="row">
+                            <div class="img-card-message-alerte-aide col-auto">
+                                <div>
+                                    <img alt="Icône information" src="./assets/images/info.svg">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span>
+                                    {{aidesService.getMessageAlertePrimeActiviteRSA(simulationSelected)}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </ul>
         </div>

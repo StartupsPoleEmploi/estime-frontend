@@ -35,23 +35,23 @@ export class AidesService {
     return montant;
   }
 
-  public getMessageAlerteASS(simulationSelected: SimulationMensuelle): string {
-    let message = null;
-    if(simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          message = aide.messageAlerte;
-        }
-      }
-    }
-    return message;
+  public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
+    return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AGEPI)
   }
 
-  public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
+  public getMessageAlerteASS(simulationSelected: SimulationMensuelle): string {
+    return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)
+  }
+
+  public getMessageAlertePrimeActiviteRSA(simulationSelected: SimulationMensuelle): string {
+    return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.PRIME_ACTIVITE);
+  }
+
+  private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
     let message = null;
     if(simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.AGEPI) {
+        if(codeAide === codeAideAlerte) {
           message = aide.messageAlerte;
         }
       }
