@@ -163,7 +163,7 @@
                             class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverSalaireNet.isOpen}"
                             placement="right"
-                            tag-action="ouverture-infobulle-contrat-travail-salaire"
+                            tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
                             [popover]="popoverSalaireNetTemplate"
                             #popoverSalaireNet="bs-popover"></div>
                     </label>
@@ -311,7 +311,7 @@
                             class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
                             placement="right"
-                            tag-action="ouverture-infobulle-contrat-travail-nombre-trajets"
+                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                             [popover]="popoverNombreTrajetTemplate"
                             #popoverNombreTrajet="bs-popover"></div>
                     </label>
@@ -345,7 +345,8 @@
                 class="btn-style-perso-2 first-btn"
                 (click)="onClickButtonRetour()"
                 aria-label="Retour à la page précédente"
-                data-testid="btn-futur-travail-retour">
+                data-testid="btn-futur-travail-retour"
+                tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>
@@ -357,7 +358,8 @@
                 aria-label="Passer à la page suivante"
                 type="submit"
                 data-testid="btn-futur-travail-suivant"
-                (click)="onSubmitFuturTravailForm(futurTravailForm)">
+                (click)="onSubmitFuturTravailForm(futurTravailForm)"
+                tag-navigation="clic_bouton_suivant">
                 <div>
                     <span>Suivant</span>
                     <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">

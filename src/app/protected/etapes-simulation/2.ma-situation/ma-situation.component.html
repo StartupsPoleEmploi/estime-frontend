@@ -656,6 +656,7 @@
             class="btn-style-perso-2 first-btn"
             aria-label="Retour à la page précédente"
             (click)="onClickButtonRetour()"
+            tag-navigation="clic_bouton_retour"
             type="button">
             <div>
                 <img alt="Iĉone flèche retour" src="./assets/images/return-arrow-v2.svg">
@@ -669,7 +670,8 @@
             aria-label="Passer à la page suivante"
             type="submit"
             aria-label="quantity of pens"
-            (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)">
+            (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
+            tag-navigation="clic_bouton_suivant">
             <div>
                 <span>Suivant</span>
                 <img alt="Iĉone flèche suivant" src="./assets/images/icon-bt-primaire.svg">

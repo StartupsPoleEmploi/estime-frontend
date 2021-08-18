@@ -408,7 +408,7 @@
                         class="img-interrogation-icon"
                         [ngClass]="{'popover-open': popoverRevenusImmobiliers.isOpen}"
                         placement="right"
-                        tag-action="ouverture-infobulle-revenus-immobilier"
+                        tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                         [popover]="popoverRevenusImmobiliersTemplate"
                         #popoverRevenusImmobiliers="bs-popover"></div>
                 </label>
@@ -465,7 +465,8 @@
                 aria-label="Valider ressources finançière de votre foyer"
                 class="btn-style-perso-3"
                 type="submit"
-                data-testid="btn-ressources-foyer-valider">
+                data-testid="btn-ressources-foyer-valider"
+                tag-action="clic_bouton_valider_ressources_foyer">
                 <div>
                     <span>Valider</span>
                 </div>

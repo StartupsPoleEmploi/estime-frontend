@@ -7,7 +7,8 @@
                         <img
                         alt="Logo du service Estime"
                         src="./assets/images/logo-estime.svg"
-                        (click)="onClickLogoEstime()">
+                        (click)="onClickLogoEstime()"
+                        tag-navigation="clic_logo_estime_footer_retour_accueil">
                     </div>
                     <div class="col-12 col-texte-service-estime">
                         <span>
@@ -19,13 +20,13 @@
             </div>
             <div class="col-sm-12 col-md-auto my-auto row-1-footer-div-2">
                 <div>
-                    <a (click)="onClickLinkContact()">Nous contacter</a>
+                    <a (click)="onClickLinkContact()" tag-navigation="clic_lien_footer_nous_contacter">Nous contacter</a>
                 </div>
                 <div>
-                    <a (click)="onClickLinkAccessibilite()">Accessibilité</a>
+                    <a (click)="onClickLinkAccessibilite()" tag-navigation="clic_lien_footer_accessibilite">Accessibilité</a>
                 </div>
                 <div>
-                    <a (click)="onClickLinkCGU()">Conditions Générales d'Utilisation</a>
+                    <a (click)="onClickLinkCGU()" tag-navigation="clic_lien_footer_cgu">Conditions Générales d'Utilisation</a>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3 my-auto row-1-footer-div-3">

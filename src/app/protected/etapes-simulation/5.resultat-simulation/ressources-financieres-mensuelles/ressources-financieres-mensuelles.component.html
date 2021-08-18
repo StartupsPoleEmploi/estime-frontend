@@ -176,12 +176,12 @@
                 class="w-100 li-aide-selectable"
                 *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
                 <button
-                    type="button"
-                    role="button"
                     class="btn"
                     tabindex="0"
                     [ngClass]="{'active': isAideSelected(aideKeyValue.value.code)}"
-                    (click)="onClickButtonAideObtenir(aideKeyValue.value)">
+                    (click)="onClickButtonAideObtenir(aideKeyValue.value)"
+                    attr.aria-label="Voir la description de l'aide {{aideKeyValue.value.nom}}"
+                    tag-action="clic_bouton_description_aide">
                     <app-item-ressource-actuelle
                         [codeRessource]="aideKeyValue.value.code"
                         [isAideSelected]="isAideSelected(aideKeyValue.value.code)"

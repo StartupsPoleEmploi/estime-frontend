@@ -26,7 +26,8 @@
             <span
                 class="btn-imprimer-simulation"
                 data-testid="btn-personnes-charge-suivant"
-                (click)="onClickButtonImprimerMaSimulation()">
+                (click)="onClickButtonImprimerMaSimulation()"
+                tag-download="clic_bouton_telecharger_ma_simulation">
                 <div>
                     <img
                         alt="Icône téléchargement"
@@ -77,16 +78,19 @@
             [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
             <div
                 id="btn-simulation-mois-{{index}}"
-                class="card second-card"
-                aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
-                role="button">
+                class="card second-card">
                 <div
                     [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
                     class="card-body"
                     data-testid="card-simulation-mensuel"
                     (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
                     (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
-                    (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
+                    (click)="onClickButtonSimulationMensuelle(simulationMensuel)"
+                    attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
+                    tag-action="clic_bouton_detail_ressources_du_mois"
+                    role="button"
+
+                   >
                     <div class="row">
                         <div
                             id="span-mois-annee"
