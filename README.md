@@ -314,6 +314,32 @@ foo@bar:~estime-frontend$ npm run **nom_script**
 | start:ngx             | lance l'application sur localhost:9001 avec ngx-build-plus, utile pour remonter une couverture de code par les tests Cypress |
 | stats:size            | génération d'un rapport sur la taille du bundle ([webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)) |
 
+# [Livraison] Livrer une nouvelle version en production
+
+Une image Docker Nginx contenant le code source de l'application Angular est livrée sur les différents environnements (recette, production). Cette image est versionnée en **release-candidate pour la recette** et en **release pour la production**.
+
+## Procédure de build et de livraison d'une version release en production
+
+Après s'être assuré du bon fonctionnement de l'application sur l'environnement de recette, voici les étapes à suivre pour livrer la version de l'application de recette en production.
+
+### La veille de la mise en prodction
+
+* mettre à jour les informations de version du fichier ***src/version.json*** et la version du fichier ***package.json***. Possibilité de vérifier la version actuelle en production via [https://estime.pole-emploi.fr/version.json](https://estime.pole-emploi.fr/version.json).
+
+* commit les changements et livrer en recette (exemple message commit : "création version production v1.5.0").
+
+* une fois la livraison en recette effectuée, lancer dans le pipeline GitLab CI, les jobs **build-docker-image-production** et **generate-docker-stack-production**
+
+* poser un tag via GitLab dans **Repository => Tags** (exemple nommage du tag : v1.5.0-version-mise-en-prod)
+
+### Mise en production le lendemain
+
+* lancer le job **deploy_application_production**
+
+* se connecter sur la machine pour vérifier que tout se passe bien, voir section [Suivi opérationnel](#suivi-opérationnel-comment-dépanner-lapplication-sur-un-serveur-docker-swarm-)
+
+*  envoyer une notification à l'équipe
+
 
 # [VS Code] Quelques plugins utiles
 
