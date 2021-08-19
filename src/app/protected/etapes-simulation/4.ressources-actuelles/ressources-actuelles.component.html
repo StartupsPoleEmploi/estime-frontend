@@ -169,7 +169,7 @@
                                     class="img-interrogation-icon"
                                     [ngClass]="{'popover-open': popoverRessourceFoyer.isOpen}"
                                     placement="right"
-                                    tag-action="ouverture-infobulle-ressource-foyer"
+                                    tag-action="clic_infobulle_ressources_du_foyer"
                                     [popover]="popoverRessourceFoyerTemplate"
                                     (click)="onClickPopoverRessourceFoyer($event)"
                                     #popoverRessourceFoyer="bs-popover">
@@ -204,7 +204,8 @@
             <button
                 class="btn-style-perso-2 first-btn"
                 aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()">
+                (click)="onClickButtonRetour()"
+                tag-navigation="clic_bouton_retour">
                 <div>
                     <img
                         alt="Icône euro"
@@ -222,7 +223,8 @@
                 aria-label="Obtenir ma simulation"
                 class="btn-style-perso-1 second-btn"
                 data-testid="btn-obtenir-simulation"
-                (click)="onClickButtonObtenirSimulation()">
+                (click)="onClickButtonObtenirSimulation()"
+                tag-action="clic_bouton_obtenir_ma_simulation">
                 <div>
                     <span>Obtenir ma simulation</span>
                     <img

@@ -17,7 +17,7 @@
                     class="img-interrogation-icon"
                     [ngClass]="{'popover-open': popoverPersonnesACharge.isOpen}"
                     placement="right"
-                    tag-action="ouverture-infobulle-personnes-charge-nbr-enfant"
+                    tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
                     [popover]="popoverPersonnesAChargeTemplate"
                     #popoverPersonnesACharge="bs-popover">
                   </div>
@@ -103,7 +103,8 @@
             <button
                 class="btn-style-perso-2 first-btn"
                 aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()">
+                (click)="onClickButtonRetour()"
+                tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>
@@ -114,7 +115,8 @@
                 class="btn-style-perso-1 second-btn"
                 aria-label="Passer à la page suivante"
                 data-testid="btn-personnes-charge-suivant"
-                (click)="onClickButtonSuivant()">
+                (click)="onClickButtonSuivant()"
+                tag-navigation="clic_bouton_suivant">
                 <div>
                     <span>Suivant</span>
                     <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">
