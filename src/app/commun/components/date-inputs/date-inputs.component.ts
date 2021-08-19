@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DateDecomposee } from '@app/commun/models/date-decomposee';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
@@ -8,8 +8,9 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
   templateUrl: './date-inputs.component.html',
   styleUrls: ['./date-inputs.component.scss']
 })
-export class DateInputsComponent implements OnInit {
+export class DateInputsComponent implements OnInit, AfterViewInit {
 
+  @Input() autofocus: boolean;
   @Input() dateSaisie: DateDecomposee;
   @Input() isFormSubmitted: boolean;
 
@@ -25,7 +26,14 @@ export class DateInputsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.dateUtileService.checkFormatDateAvecInferieurDateJour(this.dateSaisie);
+  }
+
+  ngAfterViewInit() {
+    if(this.autofocus && !this.dateSaisie.jour) {
+      this.jourDateInput.nativeElement.focus();
+    }
   }
 
   public onChangeOrKeyUpDateJour(): void {

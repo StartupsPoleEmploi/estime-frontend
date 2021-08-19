@@ -2,8 +2,10 @@
     <div class="card-title">
         <span>Personne {{numeroNouvellePersonne}}</span>
         <i
+            tabindex="0"
             class="fas fa-times-circle mb-2 mr-2 float-right"
-            (click)="onClickButtonAnnuler()">
+            (click)="onClickButtonAnnuler()"
+            (keyup)="handleKeyUpOnButtonAnnuler($event)">
         </i>
     </div>
     <div class="card-body">
@@ -21,6 +23,7 @@
                 </div>
                 <div class="form-group">
                     <app-date-inputs
+                        [autofocus]="true"
                         [dateSaisie]="dateNaissanceNouvellePersonne"
                         [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
                         (dateChanged)="gererAffichageNouvellePersonneSituationForm()">

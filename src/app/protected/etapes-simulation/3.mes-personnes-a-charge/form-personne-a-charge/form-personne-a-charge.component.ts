@@ -79,6 +79,13 @@ export class FormPersonneAChargeComponent implements OnInit {
     }
   }
 
+  public handleKeyUpOnButtonAnnuler(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonAnnuler();
+    }
+  }
+
+
   private resetNouvellePersonneAChargeForm(): void {
     this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
     this.isNouvellePersonnesAChargeFormSubmitted = false;

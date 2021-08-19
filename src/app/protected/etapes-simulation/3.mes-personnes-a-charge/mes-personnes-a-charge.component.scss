@@ -69,6 +69,9 @@
       font-size: 0.9em;
       text-decoration: underline;
       color: $color-blue-1;
+      &:focus-visible {
+        outline: -webkit-focus-ring-color auto 1px;
+      }
     }
   }
 }

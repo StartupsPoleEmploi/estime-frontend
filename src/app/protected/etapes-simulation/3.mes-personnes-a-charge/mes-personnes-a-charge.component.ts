@@ -121,4 +121,11 @@ export class MesPersonnesAChargeComponent implements OnInit {
       this.onClickButtonAjouterPersonne();
     }
   }
+
+  public handleKeyUpOnButtonSupprimerPersonne(event: any, index: number) {
+    if (event.keyCode === 13) {
+      this.onClickButtonSupprimerPersonneACharge(index);
+    }
+  }
+
 }
