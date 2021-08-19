@@ -8,6 +8,7 @@ import { AllocationsLogement } from '@models/allocations-logement';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
 import { AidesFamiliales } from '@models/aides-familiales';
+import { AllocationASS } from '@app/commun/models/allocation-ass';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -33,6 +34,19 @@ export class RessourcesFinancieresUtileService {
     aidesFamiliales.pensionsAlimentairesFoyer = 0;
     aidesFamiliales.prestationAccueilJeuneEnfant = 0;
     return aidesFamiliales;
+  }
+
+  public creerAidesPoleEmploi(): AidesPoleEmploi {
+    const aidesPoleEmploi = new AidesPoleEmploi();
+    return aidesPoleEmploi;
+  }
+
+  public creerAllocationASS(): AllocationASS {
+    const allocationASS = new AllocationASS();
+    allocationASS.allocationJournaliereNet = null;
+    allocationASS.allocationMensuelleNet = null;
+    allocationASS.dateDerniereOuvertureDroit = null;
+    return allocationASS;
   }
 
   /**

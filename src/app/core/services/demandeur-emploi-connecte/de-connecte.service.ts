@@ -77,6 +77,22 @@ export class DeConnecteService {
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
+  public setAllocationMensuelleNetASS(): void {
+    this.setAidesPoleEmploi();
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
+      && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
+      }
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+  }
+
+  public setAidesPoleEmploi() : void {
+    if(!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
+    }
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+  }
+
   public setPensionInvalidite(): void {
     this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM = this.ressourcesFinancieresUtileService.creerAidesCPAM();
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);

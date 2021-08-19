@@ -98,6 +98,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxHasASS(): void {
     if (!this.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
+    } else {
+      this.deConnecteService.setAllocationMensuelleNetASS();
     }
   }
 
