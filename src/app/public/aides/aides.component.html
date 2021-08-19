@@ -1,0 +1,68 @@
+<div class="container-fluid form-container-fluid">
+        <h1 class="h1-style-1 titre-aides">
+            {{pageTitlesEnum.AIDES}}
+            <div id="liste-aides" placement="right top" tag-action="liste-aides"></div>
+        </h1>
+
+    <div class="row container-aides">
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    L’Allocation de Solidarité Spécifique
+                </p>
+                <p class="card-text">L’allocation spécifique de solidarité (ASS) est une allocation qui peut prendre le relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à l’allocation ARE se terminent. </p>
+                <nav>
+                    <a (click)="onClickDesc('ASS')">En savoir plus</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    Aide à la mobilité (Pôle emploi)
+                </p>
+                <p class="card-text">Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de déplacement, de repas, et d’hébergement.</p>
+                <nav>
+                    <a (click)="onClickDesc('AM')">En savoir plus</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    La prime d'activité
+                </p>
+                <p class="card-text">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>
+                <nav>
+                    <a (click)="onClickDesc('PA')">En savoir plus</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    L'aide à la garde d'enfants pour parent isolé
+                </p>
+                <p class="card-text">L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf, divorcé).</p>
+                <nav>
+                    <a (click)="onClickDesc('AGEPI')">En savoir plus</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    Allocation Adulte Handicapé
+                </p>
+                <p class="card-text">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. </p>
+                <nav>
+                    <a (click)="onClickDesc('AAH')">En savoir plus</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
