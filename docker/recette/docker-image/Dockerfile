@@ -17,6 +17,7 @@ COPY ./docker/commun/fail2ban/filter.d/*.conf /etc/fail2ban/filter.d/
 
 #copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
+COPY ./docker/commun/nginx-conf/security-headers.conf /etc/nginx/
 COPY ./docker/recette/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 COPY ./whitelist_pole_emploi /etc/nginx/includes/
 
