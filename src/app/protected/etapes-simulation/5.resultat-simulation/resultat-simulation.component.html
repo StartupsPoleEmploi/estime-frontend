@@ -111,10 +111,10 @@
                             </div>
                             <div class="col-1" [ngClass]="{'p-0 ml-auto mr-1': screenService.isExtraSmallScreen()}">
                                 <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-down"></i>
+                                    <i alt class="fas fa-chevron-up"></i>
                                 </span>
                                 <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-right"></i>
+                                    <i alt class="fas fa-chevron-down"></i>
                                 </span>
                             </div>
                         </div>
@@ -140,21 +140,6 @@
     <div id="actions-suite">
         <app-actions-suite>
         </app-actions-suite>
-    </div>
-    <div
-        id="resultat_simulation_div_boutons"
-        class="div-buttons-form row d-flex justify-content-center">
-        <button
-            id="resultat_simulation_bouton_retour"
-            class="btn-style-perso-2 first-btn float-right"
-            (click)="onClickButtonRetour()">
-            <div>
-                <img
-                    alt="Icône flèche retour"
-                    src="./assets/images/return-arrow-v2.svg">
-                <span>Retour</span>
-            </div>
-        </button>
     </div>
 </div>
 

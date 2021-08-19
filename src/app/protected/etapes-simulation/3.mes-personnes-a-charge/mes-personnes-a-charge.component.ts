@@ -120,7 +120,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public hasPersonneACharge(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0) return true
+    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0) return true
     return false;
   }
 
