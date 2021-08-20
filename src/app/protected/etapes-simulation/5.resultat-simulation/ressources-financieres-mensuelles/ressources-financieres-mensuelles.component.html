@@ -53,13 +53,15 @@
                 </li>
                 <li
                     class="list-group-item li-aide-selectable"
+                    tabindex="0"
                     [ngClass]="{'is-item-not-last': isItemAahIsNotLast()}"
-                    *ngIf="aidesService.getMontantAAH(simulationSelected) > 0">
+                    *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
+                    (keyup)="handleKeyUpOnAideActuelle($event, codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                     <button
                         type="button"
                         role="button"
                         class="btn"
-                        tabindex="0"
+                        tabindex="-1"
                         style="cursor: pointer;"
                         [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
                         (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
@@ -116,12 +118,14 @@
                 </li>
                 <li
                     class="list-group-item li-aide-selectable"
-                    *ngIf="aidesService.getMontantASS(simulationSelected) > 0">
+                    tabindex="0"
+                    *ngIf="aidesService.getMontantASS(simulationSelected) > 0"
+                    (keyup)="handleKeyUpOnAideActuelle($event, codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
                     <button
                         type="button"
                         role="button"
                         class="btn"
-                        tabindex="0"
+                        tabindex="  -1"
                         style="cursor: pointer;"
                         [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
                         (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
@@ -166,13 +170,16 @@
         <div id="card-aides-obtenir" class="card">
             <ul class="list-group list-group-flush">
                 <div *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesSimulationMensuelle; let index = index;">
-                    <li class="list-group-item li-aide-selectable"
-                    [ngClass]="{'active': isAideSelected(aideKeyValue.value.code), 'is-item-not-last': !isLastAideKeyValue(index)}">
+                    <li
+                    class="list-group-item li-aide-selectable"
+                    tabindex="0"
+                    [ngClass]="{'active': isAideSelected(aideKeyValue.value.code), 'is-item-not-last': !isLastAideKeyValue(index)}"
+                    (keyup)="handleKeyUpOnAideObtenir($event,aideKeyValue.value)">
                         <button
                             type="button"
                             role="button"
                             class="btn"
-                            tabindex="0"
+                            tabindex="-1"
                             [ngClass]="{}"
                             (click)="onClickButtonAideObtenir(aideKeyValue.value)">
                             <app-item-ressource-actuelle

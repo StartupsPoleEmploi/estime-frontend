@@ -135,4 +135,16 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   public isItemRsaIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
+
+  public handleKeyUpOnAideActuelle(event: any, codeAideActuelle: string) {
+    if (event.keyCode === 13) {
+      this.onClickButtonAideActuelle(codeAideActuelle);
+    }
+  }
+
+  public handleKeyUpOnAideObtenir(event: any, aideObtenir: Aide) {
+    if (event.keyCode === 13) {
+      this.onClickButtonAideObtenir(aideObtenir);
+    }
+  }
 }

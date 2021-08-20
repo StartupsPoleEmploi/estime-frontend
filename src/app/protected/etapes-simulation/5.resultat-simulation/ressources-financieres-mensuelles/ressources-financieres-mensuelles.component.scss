@@ -158,6 +158,11 @@
   &:hover {
     background-color: $color-blue-7!important;
   }
+  &:focus {
+    background-color: $color-blue-7!important;
+    border: 0!important;
+    outline: none !important;
+  }
 }
 
 .is-item-not-last {

@@ -156,4 +156,10 @@ export class ResultatSimulationComponent implements OnInit {
       this.aideSelected = null;
     }
   }
+
+  public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {
+    if (event.keyCode === 13) {
+      this.onClickButtonSimulationMensuelle(simulationMensuelle);
+    }
+  }
 }

@@ -83,10 +83,22 @@
 
     #btn-onglet-details {
       float: right;
+      &:hover {
+        background-color: $color-blue-7!important;
+      }
+      &:focus {
+        background-color: $color-blue-7!important;
+      }
     }
 
     #btn-onglet-evolution {
       float: left;
+      &:hover {
+        background-color: $color-blue-7!important;
+      }
+      &:focus {
+        background-color: $color-blue-7!important;
+      }
     }
   }
 
@@ -222,6 +234,11 @@
           }
           &.hovered {
             background-color: $color-blue-7;
+          }
+          &:focus {
+            background-color: $color-blue-7!important;
+            border: 0!important;
+            outline: none !important;
           }
           #span-mois-annee {
             @media #{$extra-small-device} {

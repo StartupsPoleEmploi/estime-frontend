@@ -29,6 +29,7 @@
                 id="btn-telecharger-simulation"
                 class="btn-telecharger-ou-refaire"
                 data-testid="btn-telecharger-simulation"
+                tabindex="0"
                 (click)="onClickButtonImprimerMaSimulation()">
                 <div>
                     <img
@@ -44,6 +45,7 @@
                 id="btn-refaire-simulation"
                 class="btn-telecharger-ou-refaire"
                 data-testid="btn-refaire-simulation"
+                tabindex="0"
                 (click)="onClickButtonRefaireSimulation()">
                 <div>
                     <img
@@ -60,6 +62,7 @@
                 id="btn-onglet-details"
                 class="btn btn-onglet-resultat-simulation"
                 (click)="onClickOnglet(true)"
+                tabindex="0"
                 [ngClass]="{isOngletInactive: !afficherDetails}">
                 <span>
                     Détail des ressources estimées
@@ -71,6 +74,7 @@
                 id="btn-onglet-evolution"
                 class="btn btn-onglet-resultat-simulation"
                 (click)="onClickOnglet(false)"
+                tabindex="0"
                 [ngClass]="{isOngletInactive: afficherDetails}">
                 <span>
                     Évolution des ressources sur 6 mois
@@ -94,9 +98,11 @@
                         [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
                         class="card-body"
                         data-testid="card-simulation-mensuel"
+                        tabindex="0"
                         (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
                         (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
-                        (click)="onClickButtonSimulationMensuelle(simulationMensuel)">
+                        (click)="onClickButtonSimulationMensuelle(simulationMensuel)"
+                        (keyup)="handleKeyUpOnSimulationMensuelle($event, simulationMensuel)">
                         <div class="row">
                             <div id="span-mois-annee" [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
                                 <span>
