@@ -198,21 +198,3 @@ deploy_application_production:
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
       - ssh $HOST_SERVER_USER@$HOST_SERVER_IP_PROD "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
-
-dast:
-  stage: dynamic-application-security-testing
-  image:
-    name: "$SECURE_ANALYZERS_PREFIX/dast:$DAST_VERSION"
-  variables:
-    GIT_STRATEGY: none
-    DAST_VERSION: 1
-    SECURE_ANALYZERS_PREFIX: "registry.gitlab.com/gitlab-org/security-products/analyzers"
-    DAST_WEBSITE: https://estime.pole-emploi.fr/
-    DAST_MARKDOWN_REPORT: report.md
-  script:
-    - /analyze
-  artifacts:
-    paths:
-      - report.md
-    expire_in: 1 day
-  when: manual
