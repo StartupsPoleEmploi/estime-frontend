@@ -79,6 +79,10 @@ export class MesPersonnesAChargeComponent implements OnInit {
     }
   }
 
+  public onClickButtonPasDePersonneACharge(): void {
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
+  }
+
   public onClickButtonRetour(): void {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
   }
@@ -114,6 +118,12 @@ export class MesPersonnesAChargeComponent implements OnInit {
     }
   }
 
+  public hasPersonneACharge(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0) return true
+    return false;
+  }
+
   /******* */
 
   public handleKeyUpOnButtonAjouterPersonne(event: any) {
@@ -128,4 +138,9 @@ export class MesPersonnesAChargeComponent implements OnInit {
     }
   }
 
+  public handleKeyUpOnButtonPasDePersonneACharge(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonPasDePersonneACharge();
+    }
+  }
 }

@@ -1,13 +1,36 @@
 @import "../../../../../assets/scss/variables";
 
+#div-aides-actuelles {
+  margin-bottom: 1.5rem;
+}
+
+.div-aides-container {
+  background-color: unset;
+  width: 100%;
+
+  .title-hr {
+    margin-top: 0;
+  }
+
+  @media #{$extra-small-device} {
+    background-color: white;
+    border-radius: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
 #img-hand-finger {
   @media #{$extra-small-device} {
     width: 1.1rem;
   }
-}
-
-#card-aides-obtenir {
-  height: 100%;
 }
 
 .title-liste-details-aides {
@@ -18,7 +41,15 @@
 
 .title-liste-details-aides-style-1 {
   @extend .title-liste-details-aides;
-  color: $color-blue-1;
+  color: $color-black-1;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.3125rem;
+  line-height: 25px;
+  margin-left: 0.5rem;
+  @media #{$extra-small-device} {
+    font-size: 0.875rem;
+  }
 }
 
 .title-liste-details-aides-style-2 {
@@ -29,18 +60,10 @@
 .card {
   border: 0;
   width: 100%;
+  background-color: unset;
+
   button {
     width: 100%;
-  }
-  hr {
-    display: block;
-    height: 0;
-    border: 0;
-    border-top: 1px solid $color-grey-2;
-    margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    margin-bottom: 10px;
   }
   .btn-group-vertical {
     width: 100%;
@@ -58,32 +81,39 @@
         padding-left: 6px;
       }
     }
-    hr {
-      margin-left: 15px;
-      margin-right: 15px;
-    }
   }
   .list-group {
-    padding-top: 10px;
-    @media #{$small-device} {
-      padding: 10px;
-    }
     .list-group-item {
       border: 0;
-      padding-left: 16px;
+      padding-left: 3rem !important;
       padding-top: 0;
       padding-bottom: 0;
+      height: 4.5rem;
+      cursor: default;
+      @media #{$extra-small-device} {
+        padding-left: 1rem !important;
+        border: 0;
+
+        &:not(.is-item-not-last) {
+          padding-top:0.5rem;
+        }
+      }
+
+    }
+    .is-item-not-last {
+      color: $color-grey-2;
+      width: 100%;
     }
   }
 }
 
-
 .card-message-alerte-aide {
   background-color: unset;
   border: 1px solid $color-grey-1 !important;
-  border-radius: 4px;
-  margin-top: 10px;
-  padding: 8px 25px 8px 25px;
+  border-radius: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
   span {
     font-size: 0.875em;
     line-height: 21px;
@@ -92,6 +122,7 @@
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+    line-height: normal;
     .img-card-message-alerte-aide {
       max-width: fit-content !important;
       padding-right: 5px;
@@ -113,20 +144,27 @@
 }
 
 .li-aide-selectable {
-  padding-right: 8px !important;
-  padding-left: 4px !important;
   button {
     text-align: left;
     max-height: unset;
+    padding:unset;
     .row {
       padding-left: 6px;
     }
-    &.active {
-      background-color: $color-blue-8!important;
-    }
-    &:hover {
-      background-color: $color-blue-7!important;
-    }
+  }
+  &.active {
+    background-color: $color-blue-8!important;
+  }
+  &:hover {
+    background-color: $color-blue-7!important;
+  }
+  &:focus {
+    background-color: $color-blue-7!important;
+    border: 0!important;
+    outline: none !important;
   }
 }
 
+.is-item-not-last {
+  border-bottom: 1px solid $color-grey-2 !important;
+}

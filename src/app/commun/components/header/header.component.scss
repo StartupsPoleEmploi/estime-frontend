@@ -30,6 +30,20 @@ header {
     #signout-sm:hover {
       color: $color-blue-3 !important;
     }
+
+    #logo-marianne-header {
+      width: 1.5rem;
+      @media #{$medium-device} {
+        width: 3.5rem;
+      }
+    }
+    .logo-marianne-header-homepage {
+      padding-top: 2rem !important;
+      width: 4rem !important;
+      @media #{$medium-device} {
+        width: 5.5rem !important;
+      }
+    }
     #logo-estime-header {
       width: 7rem;
       @media #{$medium-device} {
@@ -38,7 +52,7 @@ header {
       cursor: pointer;
     }
     .logo-estime-header-homepage {
-      width: 11rem!important;
+      width: 7rem!important;
       padding-top: 2rem!important;
       @media #{$medium-device} {
         width: 12.5rem!important;

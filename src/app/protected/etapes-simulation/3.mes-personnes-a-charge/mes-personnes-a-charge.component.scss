@@ -91,6 +91,9 @@
     border-color: $color-black-1;
     box-shadow: -1px 1px 6px 2px $color-black-3;
   }
+  .active {
+    background-color: $color-blue-5;
+  }
   .card-add-personne {
     min-height: 113px;
     border: 0;
@@ -117,4 +120,9 @@
       margin-left: 14px;
     }
   }
+}
+
+
+.button-card-pas-de-personne-a-charge {
+  @extend .button-card-add-personne;
 }
