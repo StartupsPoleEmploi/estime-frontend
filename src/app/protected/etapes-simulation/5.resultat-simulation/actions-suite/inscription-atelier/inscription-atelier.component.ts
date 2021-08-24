@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-inscription-atelier',
@@ -6,13 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inscription-atelier.component.scss']
 })
 export class InscriptionAtelierComponent implements OnInit {
+  @Input() onClickButtonInscriptionAtelier: () => void;
   stickyButton = false;
 
-  constructor() { }
 
-  btnClick = function(){
-    window.open('https://candidat.pole-emploi.fr/prestations/servicescarte', '_blank');
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-consultation-offres',
@@ -6,13 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./consultation-offres.component.scss']
 })
 export class ConsultationOffresComponent implements OnInit {
+  @Input() onClickButtonVoirOffres: () => void;
   stickyButton = false;
 
   constructor() { }
-
-  btnClick = function(){
-    window.open('https://candidat.pole-emploi.fr/offres/emploi', '_blank');
-  }
 
   ngOnInit(): void {
   }

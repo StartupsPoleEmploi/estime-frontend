@@ -12,4 +12,16 @@ export class ActionsSuiteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public onClickButtonMettreAJourProfil(): void {
+    window.open('https://candidat.pole-emploi.fr/profil-professionnel/#/profil/synthese', '_blank');
+  }
+
+  public onClickButtonInscriptionAtelier(): void {
+    window.open('https://candidat.pole-emploi.fr/prestations/servicescarte', '_blank');
+  }
+
+  public onClickButtonVoirOffres(): void {
+    window.open('https://candidat.pole-emploi.fr/offres/emploi', '_blank');
+  }
+
 }

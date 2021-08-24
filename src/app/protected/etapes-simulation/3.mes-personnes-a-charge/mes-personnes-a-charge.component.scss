@@ -26,6 +26,12 @@
   min-width: 205px;
   max-width: 205px;
   margin-top: 10px;
+  @media #{$extra-small-device} {
+    width: 40vw !important;
+    min-height: 20vh !important;
+    margin-right: 1rem;
+    min-width:unset!important
+  }
   img {
     margin-left: 10px;
   }
@@ -76,6 +82,12 @@
   }
 }
 
+.card-deck {
+  @media #{$extra-small-device} {
+    margin-left:0.9rem;
+  }
+}
+
 .button-card-add-personne {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -86,6 +98,11 @@
   margin-top: 10px;
   @media #{$small-device} {
     margin-left: 15px;
+  }
+  @media #{$extra-small-device} {
+    width: 40vw !important;
+    min-height: 20vh !important;
+    margin-right: 1rem;
   }
   &:hover, &:focus {
     border-color: $color-black-1;
@@ -113,6 +130,16 @@
       .row {
         margin-left: -13px;
         margin-right: -13px;
+      }
+    }
+    #add-personne-icon {
+      @media #{$extra-small-device} {
+        margin-bottom: 1rem !important;
+      }
+    }
+    #pas-de-personne-text {
+      @media #{$extra-small-device} {
+        margin-top: 1rem !important;
       }
     }
     img {

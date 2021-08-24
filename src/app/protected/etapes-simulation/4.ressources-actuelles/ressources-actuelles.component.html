@@ -198,9 +198,7 @@
         </div>
     </div>
     <div class="div-buttons-form row d-flex justify-content-center">
-        <div
-            class
-            [ngClass]="{'text-center': this.screenService.isExtraSmallScreen()}">
+        <div *ngIf="!screenService.isExtraSmallScreen()">
             <button
                 class="btn-style-perso-2 first-btn"
                 aria-label="Retour à la page précédente"
@@ -214,7 +212,6 @@
                 </div>
             </button>
         </div>
-        <div [ngStyle]="{'margin-bottom': (this.screenService.isExtraSmallScreen())?'10vh':'0'}"></div>
         <div
             class
             [ngClass]="{'text-center': this.screenService.isExtraSmallScreen()}">
@@ -230,6 +227,20 @@
                     <img
                         alt="Icône euro"
                         src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+        </div>
+        <div *ngIf="this.screenService.isExtraSmallScreen()" class="text-center">
+            <button
+                class="btn-style-perso-2 first-btn"
+                aria-label="Retour à la page précédente"
+                (click)="onClickButtonRetour()"
+                tag-navigation="clic_bouton_retour">
+                <div>
+                    <img
+                        alt="Icône euro"
+                        src="./assets/images/return-arrow-v2.svg">
+                    <span>Retour</span>
                 </div>
             </button>
         </div>

@@ -10,7 +10,9 @@
       <div class="card card-body card-form  card-form-style-1">
           <div class="row mb-3">
               <label class="label" aria-describedby="infobulle-personnes-charge-nbr-enfant">
-                  Nombre d'enfant(s) ou de personne(s) à charge
+                  Nombre d'enfant(s) ou de
+                  <div *ngIf="screenService.isScreenInferieur(767)"></div>
+                  personne(s) à charge
                   <div
                     id="infobulle-personnes-charge-nbr-enfant"
                     role="tooltip"
@@ -24,7 +26,7 @@
               </label>
           </div>
           <div class="row mb-2">
-              <div class="card-deck">
+              <div class="card-deck row">
                   <div
                       class="card card-personne card-personne-list"
                       *ngFor="let personne of personnesACharge;let indexOfelement=index;">
@@ -41,13 +43,13 @@
                       </div>
                       <div class="card-body d-flex align-items-center">
                           <div class="row">
-                              <div class="col-3 col-card-body">
+                              <div class="col-md-3 col-xs-12 col-card-body">
                                   <img
                                   alt=""
                                       class
                                       src="./assets/images/personne.svg">
                               </div>
-                              <div id="div-infos-personne" class="col-9 col-card-body">
+                              <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
                                   <span class="span-personne">Personne {{indexOfelement + 1}}</span>
                                   <span>
                                       {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
@@ -81,10 +83,10 @@
                               <div
                                   id="row-card-body-add-personne"
                                   class="row">
-                                  <div class="col-3 col-card-body">
+                                  <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
                                       <img alt="Icône ajouter personne à charge" src="./assets/images/ajouter-personne.svg">
                                   </div>
-                                  <div class="col-9 col-card-body">
+                                  <div class="col-md-9 col-xs-12 col-card-body">
                                       <span>
                                           Ajouter un enfant ou une personne à charge
                                       </span>
@@ -107,7 +109,7 @@
                               <div
                                   id="row-card-body-add-personne"
                                   class="row">
-                                  <div class="col-12 col-card-body">
+                                  <div id="pas-de-personne-text" class="col-12 col-card-body">
                                       <span>
                                           Je n'ai pas d'enfant ou de personne à charge
                                       </span>

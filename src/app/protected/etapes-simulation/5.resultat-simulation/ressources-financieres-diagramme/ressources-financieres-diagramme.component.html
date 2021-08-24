@@ -1,17 +1,5 @@
 <div id="ressources-financieres-diagramme-container" class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <h2 id="ressources-financieres-diagramme-title" class="h2-style-1 mt-3 pt-3">
-                Prévisions de ressources totales pour les 6 mois à venir
-            </h2>
-        </div>
-    </div>
-    <div *ngIf="screenService.isExtraSmallScreen()" class="row">
-        <div id="diagramme-canvas-container-extra-small-screen" class="col-12 mt-auto mb-auto">
-            <app-diagramme-canvas [simulationAides]="simulationAides"></app-diagramme-canvas>
-        </div>
-    </div>
-    <div *ngIf="!screenService.isExtraSmallScreen()" class="row">
         <div id="diagramme-canvas-container-extra-small-screen" class="col-12 mt-auto mb-auto">
             <app-diagramme-canvas [simulationAides]="simulationAides"></app-diagramme-canvas>
         </div>

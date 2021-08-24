@@ -40,7 +40,7 @@
 }
 
 .btn-primary-perso {
-  background-color: $color-blue-3;
+  background-color: $color-blue-10;
   &:hover,
   &:focus-visible {
     background-color: $color-blue-2;
@@ -168,7 +168,7 @@
 .btn-style-perso-2 {
   @extend .action-btn-base;
   background-color: $color-white-3;
-  color: $color-blue-2;
+  color: $color-blue-10;
   display: inline-flex;
   &:hover,
   &:focus-visible {

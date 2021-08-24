@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-mettre-a-jour-profil',
@@ -6,15 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mettre-a-jour-profil.component.scss']
 })
 export class MettreAJourProfilComponent implements OnInit {
+  @Input() onClickButtonMettreAJourProfil: () => void;
   stickyButton = false;
 
   constructor() { }
 
-  btnClick = function(){
-    window.open('https://candidat.pole-emploi.fr/profil-professionnel/#/profil/synthese', '_blank');
-  }
-
   ngOnInit(): void {
   }
-
 }

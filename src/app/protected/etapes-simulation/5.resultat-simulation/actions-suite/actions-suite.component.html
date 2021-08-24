@@ -3,21 +3,18 @@
 </div>
 
 <div class="row liste-actions">
-    <div class="card col-sm item">
-        <app-consultation-offres >
-
+    <div class="card col-sm item" (click)="onClickButtonVoirOffres()">
+        <app-consultation-offres [onClickButtonVoirOffres]="onClickButtonVoirOffres">
         </app-consultation-offres>
     </div>
 
-    <div class="card col-sm item">
-        <app-mettre-a-jour-profil>
-
+    <div class="card col-sm item" (click)="onClickButtonMettreAJourProfil()">
+        <app-mettre-a-jour-profil [onClickButtonMettreAJourProfil]="onClickButtonMettreAJourProfil">
         </app-mettre-a-jour-profil>
     </div>
 
-    <div class="card col-sm item">
-        <app-inscription-atelier>
-
+    <div class="card col-sm item" (click)="onClickButtonInscriptionAtelier()">
+        <app-inscription-atelier [onClickButtonInscriptionAtelier]="onClickButtonInscriptionAtelier">
         </app-inscription-atelier>
     </div>
 </div>

@@ -66,7 +66,7 @@
                 tabindex="0"
                 [ngClass]="{isOngletInactive: !afficherDetails}">
                 <span>
-                    Détail des ressources estimées
+                    Détail <span *ngIf="!screenService.isExtraSmallScreen()">des ressources estimées</span>
                 </span>
             </button>
         </div>
@@ -78,7 +78,7 @@
                 tabindex="0"
                 [ngClass]="{isOngletInactive: afficherDetails}">
                 <span>
-                    Évolution des ressources sur 6 mois
+                    Évolution <span *ngIf="!screenService.isExtraSmallScreen()">des ressources sur 6 mois</span>
                 </span>
             </button>
         </div>

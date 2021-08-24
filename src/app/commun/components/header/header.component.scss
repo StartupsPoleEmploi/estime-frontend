@@ -32,9 +32,9 @@ header {
     }
 
     #logo-marianne-header {
-      width: 1.5rem;
+      width: 3.5rem;
       @media #{$medium-device} {
-        width: 3.5rem;
+        width: 4rem;
       }
     }
     .logo-marianne-header-homepage {
@@ -42,6 +42,7 @@ header {
       width: 4rem !important;
       @media #{$medium-device} {
         width: 5.5rem !important;
+        padding-left: 1rem;
       }
     }
     #logo-estime-header {

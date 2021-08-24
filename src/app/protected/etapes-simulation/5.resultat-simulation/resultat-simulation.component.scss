@@ -16,6 +16,10 @@
   .row-telecharger-ou-refaire {
     margin-top: 2rem;
 
+    @media #{$extra-small-device} {
+      margin-top: 0rem !important;
+    }
+
     .btn-telecharger-ou-refaire {
       img {
         width: 24px;
@@ -57,12 +61,27 @@
   #row-onglets-resultat-simulation {
     margin-top: 2rem;
 
+    #col-onglet-1-resultat-simulation {
+      @media #{$extra-small-device} {
+        padding-right: 0.15rem;
+      }
+    }
+
+    #col-onglet-2-resultat-simulation {
+      @media #{$extra-small-device} {
+        padding-left: 0.15rem;
+      }
+    }
+
     .btn-onglet-resultat-simulation {
       width: 100%;
-      min-height: 65px;
+      min-height: 4rem;
       background-color: white;
       border-radius: 0.5rem;
 
+      @media #{$extra-small-device} {
+        min-height: 2rem;
+      }
       span {
         font-family: Poppins;
         font-style: normal;
@@ -104,6 +123,7 @@
 
   .container-fluid {
     margin-top: 2rem;
+    margin-bottom: 4rem;
     padding-left: 15px;
 
     #alert-resultat-simulation {

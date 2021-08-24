@@ -11,6 +11,7 @@ import { RoutesEnum } from '@enumerations/routes.enum';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
     private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public screenService: ScreenService,
     private router: Router
   ) { }
 

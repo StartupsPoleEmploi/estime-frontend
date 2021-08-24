@@ -1,5 +1,12 @@
 @import "../../../../../../assets/scss/variables";
 
+.container-action {
+    &:hover {
+        .card-action-suite-text {
+            font-weight: bold;
+        }
+    }
+}
 .card-body-btn-action{
     @media #{$extra-small-device} {
         padding-left: 0;
