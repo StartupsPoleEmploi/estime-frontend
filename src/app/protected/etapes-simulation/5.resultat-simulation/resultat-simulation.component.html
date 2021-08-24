@@ -78,7 +78,7 @@
                 tabindex="0"
                 [ngClass]="{isOngletInactive: afficherDetails}">
                 <span>
-                    Évolution <span *ngIf="!screenService.isExtraSmallScreen()">des ressources sur 6 mois</span>
+                    Évolution <span *ngIf="!screenService.isExtraSmallScreen()">des ressources sur {{ nombreMoisSimules }} mois</span>
                 </span>
             </button>
         </div>

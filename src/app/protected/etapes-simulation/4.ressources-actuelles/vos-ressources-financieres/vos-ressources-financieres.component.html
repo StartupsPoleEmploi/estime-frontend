@@ -480,8 +480,8 @@
                   <div class="row">
                       <span
                           class="error-input-message"
-                          *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasTroisMoisSansSalaire">
-                          Vous avez indiqué avoir travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois. Veuillez renseigner {{nombreMoisManquant === 3 ?'':'au moins'}} {{nombreMoisManquant}} mois de salaire.
+                          *ngIf="(isRessourcesFinancieresFormSubmitted)  && erreurSaisieSalaires">
+                          Le nombre de mois travaillés au cours de ces {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois ne correspond pas avec vos déclarations de salaire.
                       </span>
                   </div>
               </div>

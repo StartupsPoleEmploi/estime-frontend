@@ -28,8 +28,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
   optionsProchaineDeclarationRSA: Array<NumeroProchainMoisDeclarationRSA>;
   // flag qui passe à vrai quand on a déclaré avoir toucher un salaire dans les derniers mois mais qu'on ne remplit aucun salaire
-  hasTroisMoisSansSalaire: boolean;
-  nombreMoisManquant: number;
+  erreurSaisieSalaires: boolean;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
@@ -246,15 +245,14 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
-    this.hasTroisMoisSansSalaire = false;
+    this.erreurSaisieSalaires = false;
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
       // on vérifie si lorsque le formulaire n'est pas valide c'est parce que la saisie des champs salaires est invalide
       if(!isValide) {
         const isBeneficiaireAAH = this.deConnecteBenefiaireAidesService.isBeneficiaireAAH();
         const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesService.isBeneficiaireASS() || this.deConnecteBenefiaireAidesService.isBeneficiaireRSA());
-        this.hasTroisMoisSansSalaire = !this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
-        this.nombreMoisManquant = isBeneficiaireAAH?this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois-3:1;
+        this.erreurSaisieSalaires = !this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
       }
     }
     return isValide;

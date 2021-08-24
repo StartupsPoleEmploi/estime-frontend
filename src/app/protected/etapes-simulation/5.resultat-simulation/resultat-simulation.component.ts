@@ -30,6 +30,7 @@ export class ResultatSimulationComponent implements OnInit {
   hoveredButtonSimulationMensuelle: number;
 
   afficherDetails: boolean;
+  nombreMoisSimules: number;
 
   constructor(
     private aidesService: AidesService,
@@ -47,6 +48,7 @@ export class ResultatSimulationComponent implements OnInit {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.afficherDetails = true;
     this.loadDataSimulationAides();
+    this.nombreMoisSimules = this.simulationAides.simulationsMensuelles.length;
   }
 
   public onClickButtonImprimerMaSimulation(): void {
