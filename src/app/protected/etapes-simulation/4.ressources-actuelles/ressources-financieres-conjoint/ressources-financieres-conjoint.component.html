@@ -305,7 +305,7 @@
                     maxlength="6"
                     class="form-control"
                     [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite}"
+                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite && conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -356,7 +356,6 @@
                     maxlength="6"
                     class="form-control"
                     [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite == 0)}"
                     placeholder="Montant"
                     inputmode="decimal"
                     required
@@ -377,11 +376,6 @@
                     class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
             </div>
         </div>

@@ -309,7 +309,7 @@
                         maxlength="6"
                         class="form-control"
                         [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
-                        [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0)}"
+                        [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite && personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0}"
                         placeholder="Montant"
                         inputmode="decimal"
                         required
