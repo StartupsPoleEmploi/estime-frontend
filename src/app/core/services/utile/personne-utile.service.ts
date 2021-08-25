@@ -43,7 +43,8 @@ export class PersonneUtileService {
     if (personne.informationsPersonnelles) {
       if (!personne.informationsPersonnelles.sansRessource
         && (personne.informationsPersonnelles.salarie
-          || this.hasRessourcesAides(personne))) {
+          || this.hasRessourcesAides(personne)
+          || this.hasRevenus(personne))) {
         hasRessourcesFinancieres = true;
       }
     }
@@ -94,6 +95,15 @@ export class PersonneUtileService {
         || personne.beneficiaireAides.beneficiaireASS
         || personne.beneficiaireAides.beneficiaireRSA
         || personne.beneficiaireAides.beneficiairePensionInvalidite
+      );
+  }
+
+  private hasRevenus(personne: Personne): boolean {
+    return personne.informationsPersonnelles
+      && (
+        personne.informationsPersonnelles.hasRevenusImmobilier
+        || personne.informationsPersonnelles.microEntrepreneur
+        || personne.informationsPersonnelles.travailleurIndependant
       );
   }
 
