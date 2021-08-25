@@ -4,6 +4,7 @@ import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteBenefiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service';
 import { Salaire } from '@app/commun/models/salaire';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -20,6 +21,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
+    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     public deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService
   ) { }
 
@@ -28,32 +30,37 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasAAH(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH = null;
+      this.unsetAAH();
     } else {
+      this.setAAH();
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
   public onClickCheckBoxHasARE(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = 0;
+      this.nouvellePersonneACharge
+      this.unsetARE();
     } else {
+      this.setARE();
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
   public onClickCheckBoxHasASS(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = 0;
+      this.unsetASS();
     } else {
+      this.setASS();
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
 
   public onClickCheckBoxHasRSA(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA = 0;
+      this.unsetRSA();
     } else {
+      this.setRSA();
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
@@ -78,8 +85,9 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasPensionInvalidite(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
+      this.unsetPensionInvalidite();
     } else {
+      this.setPensionInvalidite();
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
     }
   }
@@ -154,10 +162,26 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieres.salaire = null;
   }
 
+  private setAAH(): void {
+    this.setAidesCAF();
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF
+      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH) {
+        this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH = null;
+    }
+  }
+
   private unsetAAH(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH = false;
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH = null;
+    }
+  }
+
+  private setASS(): void {
+    this.setAidesPoleEmploi();
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
+      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
     }
   }
 
@@ -168,10 +192,27 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     }
   }
 
+  private setARE(): void {
+    this.setAidesPoleEmploi();
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
+      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
+    }
+  }
+
   private unsetARE(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE= false;
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = null;
+    }
+  }
+
+  private setRSA(): void {
+    this.setAidesCAF();
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF
+      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA = null;
     }
   }
 
@@ -196,10 +237,33 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     }
   }
 
+  private setPensionInvalidite(): void {
+    this.setAidesCPAM();
+  }
+
   private unsetPensionInvalidite(): void {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite = false;
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
+    }
+  }
+
+
+  private setAidesCAF(): void {
+    if(!this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF = this.ressourcesFinancieresUtileService.creerAidesCAF();
+    }
+  }
+
+  private setAidesPoleEmploi(): void {
+    if(!this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
+    }
+  }
+
+  private setAidesCPAM(): void {
+    if(!this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM) {
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM = this.ressourcesFinancieresUtileService.creerAidesCPAM();
     }
   }
 }

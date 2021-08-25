@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
-  bigEstimeLogo = false;
+  isHomepage = false;
   subscriptionStatutIndividuChangedObservable: Subscription;
   subscriptionRouteNavigationEndObservable: Subscription;
 
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if(routerEvent instanceof NavigationEnd) {
-        this.bigEstimeLogo =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+        this.isHomepage =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
       }
     });
   }

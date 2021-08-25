@@ -112,7 +112,9 @@ export class FormPersonneAChargeComponent implements OnInit {
     || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
     || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
     || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite;
+    || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
+    || this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant
+    || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
   }
 
   private unsetRessourcesFinancieres(): void {

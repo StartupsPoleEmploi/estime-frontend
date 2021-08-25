@@ -6,21 +6,21 @@
                     id="logo-marianne-header"
                     alt="Logo république Française"
                     src="./assets/images/marianne.svg"
-                    [ngClass]="{'logo-marianne-header-homepage':this.bigEstimeLogo}">
+                    [ngClass]="{'logo-marianne-header-homepage':isHomepage}">
             </div>
             <div class="col-auto pl-0 ml-0">
                 <img
                     id="logo-estime-header"
                     alt="Logo du service Estime"
                     src="./assets/images/logo-estime.svg"
-                    [ngClass]="{'logo-estime-header-homepage':this.bigEstimeLogo}"
+                    [ngClass]="{'logo-estime-header-homepage':isHomepage}"
                     (click)="onClickLogoEstime()"
                     tag-navigation="clic_logo_estime_header_retour_accueil">
             </div>
             <div class="col-auto pl-0 ml-0">
                 <div
                     id="div-beta"
-                    [ngClass]="{'mt-4':this.bigEstimeLogo}"
+                    [ngClass]="{'mt-4':isHomepage, 'd-none': !isHomepage}"
                     class="ml-2">
                     <span>BETA</span>
                 </div>

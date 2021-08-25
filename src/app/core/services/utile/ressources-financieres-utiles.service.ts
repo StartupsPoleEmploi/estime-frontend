@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AidesCAF } from "@models/aides-caf";
-import { AidesPoleEmploi } from "@models/aides-pole-emploi";
-import { RessourcesFinancieres } from "@models/ressources-financieres";
-import { NumberUtileService } from "@app/core/services/utile/number-util.service";
-import { AidesCPAM } from '@models/aides-cpam';
-import { AllocationsLogement } from '@models/allocations-logement';
-import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
-import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
-import { AidesFamiliales } from '@models/aides-familiales';
+import { AllocationARE } from '@app/commun/models/allocation-are';
 import { AllocationASS } from '@app/commun/models/allocation-ass';
+import { NumberUtileService } from "@app/core/services/utile/number-util.service";
+import { AidesCAF } from "@models/aides-caf";
+import { AidesCPAM } from '@models/aides-cpam';
+import { AidesFamiliales } from '@models/aides-familiales';
+import { AidesPoleEmploi } from "@models/aides-pole-emploi";
+import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
+import { RessourcesFinancieres } from "@models/ressources-financieres";
+import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
@@ -36,9 +36,21 @@ export class RessourcesFinancieresUtileService {
     return aidesFamiliales;
   }
 
+  public creerAidesCAF(): AidesCAF {
+    const aidesCAF = new AidesCAF();
+    return aidesCAF;
+  }
+
   public creerAidesPoleEmploi(): AidesPoleEmploi {
     const aidesPoleEmploi = new AidesPoleEmploi();
     return aidesPoleEmploi;
+  }
+
+  public creerAllocationARE(): AllocationARE {
+    const allocationARE = new AllocationARE();
+    allocationARE.allocationJournaliereNet = null;
+    allocationARE.allocationMensuelleNet = null;
+    return allocationARE;
   }
 
   public creerAllocationASS(): AllocationASS {
@@ -106,14 +118,27 @@ export class RessourcesFinancieresUtileService {
       if(isBeneficiaireAAH) {
         //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
         switch(+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
+          // si on indique n'avoir travaillé qu'1 mois on ne peut remplir plus d'1 salaire
+          case 1: {
+            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) <= 1;
+            break;
+          }
+          // si on indique n'avoir travaillé que 2 mois on ne peut remplir plus de 2 salaire
+          case 2: {
+            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) <= 2;
+            break;
+          }
+          // si on indique avoir travaillé 4 mois on doit remplir au moins 1 salaire
           case 4: {
             isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
             break;
           }
+          // si on indique avoir travaillé 5 mois on doit remplir au moins 2 salaires
           case 5: {
             isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 2;
             break;
           }
+          // si on indique avoir travaillé 6 mois on doit remplir au moins 3 salaires
           case 6: {
             isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) === 3;
             break;
