@@ -186,7 +186,8 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   }
 
   private unsetASS(): void {
-    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi) {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
+      && this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS = false;
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = null;
     }
@@ -201,7 +202,8 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   }
 
   private unsetARE(): void {
-    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi) {
+    if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
+      && this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE= false;
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = null;
     }

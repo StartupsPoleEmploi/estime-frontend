@@ -106,6 +106,9 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxHasRSA(): void {
     if (!this.beneficiaireAides.beneficiaireRSA) {
       this.deConnecteService.unsetInfosRSA();
+    } else {
+      this.deConnecteService.setAllocationRSA();
+      this.deConnecteService.unsetConjointAllocationRSA();
     }
   }
 

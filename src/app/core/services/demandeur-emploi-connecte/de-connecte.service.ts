@@ -220,6 +220,24 @@ export class DeConnecteService {
     }
   }
 
+  public setAllocationRSA(): void {
+    this.setAidesCAF();
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA = null;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA = null;
+      }
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+  }
+
+
+  public setAidesCAF() : void {
+    if(!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF = this.ressourcesFinancieresUtileService.creerAidesCAF();
+    }
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+  }
+
   public unsetPensionInvalidite(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres &&
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM) {
