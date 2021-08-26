@@ -123,6 +123,14 @@ export class AidesService {
     return aide;
   }
 
+  public getAideByCodeSansSimulation(codeAideToFind: string): Aide {
+    let aide = null;
+    if(codeAideToFind === "AAH"){
+      aide = new Aide()
+    }
+    return aide;
+  }
+
   public hasAide(simulationAides: SimulationAides, codeAide: string) {
     let hasAide = false;
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
