@@ -166,7 +166,7 @@ export class RessourcesFinancieresUtileService {
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet && (ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
+    return ressourcesFinancieres.aidesPoleEmploi.allocationASS && (ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX);
   }
 
   public isMontantJournalierRSAInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {

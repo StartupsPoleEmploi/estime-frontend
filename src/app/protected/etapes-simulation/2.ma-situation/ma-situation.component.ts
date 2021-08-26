@@ -68,6 +68,7 @@ export class MaSituationComponent implements OnInit {
   }
 
     public onClickCheckBoxSituationFamiliale(): void {
+    this.situationFamiliale.isSeulPlusDe18Mois = null;
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
   }
 
@@ -186,6 +187,10 @@ export class MaSituationComponent implements OnInit {
 
   public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void  {
     if (event.keyCode === 13) {
+      if(situationPersonne === this.situationPersonneEnum.ASS) {
+        this.beneficiaireAides.beneficiaireASS = !this.beneficiaireAides.beneficiaireASS;
+        this.onClickCheckBoxHasASS();
+      }
       if(situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
@@ -205,6 +210,10 @@ export class MaSituationComponent implements OnInit {
       if(situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.beneficiaireAides.beneficiairePensionInvalidite = !this.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
+      }
+      if(situationPersonne === this.situationPersonneEnum.RSA) {
+        this.beneficiaireAides.beneficiaireRSA = !this.beneficiaireAides.beneficiaireRSA;
+        this.onClickCheckBoxHasRSA();
       }
     }
   }
@@ -230,6 +239,10 @@ export class MaSituationComponent implements OnInit {
       if(situationConjoint === this.situationPersonneEnum.ASS) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxConjointHasASS();
+      }
+      if(situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
+        this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite;
+        this.onClickCheckBoxConjointHasPensionInvalidite();
       }
       if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
         this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = !this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource;
