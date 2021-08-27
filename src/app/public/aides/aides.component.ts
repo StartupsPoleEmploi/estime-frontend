@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { Aide } from '@app/commun/models/aide';
-import { DetailAide } from '@app/commun/models/detail-aide';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { AidesService } from '@app/core/services/utile/aides.service';
 
 @Component({
   selector: 'app-aides',
@@ -18,17 +13,33 @@ export class AidesComponent implements OnInit {
   messageErreur: String;
   aideDetail: String;
   codeAide: String;
+  aideIcon: String;
+  aideTitre: String;
 
   constructor(
-    private router: Router, 
     private estimeApiService: EstimeApiService
    ) { 
    }
 
-  public onClickDesc(typeAides): void{
-    //this.selectAideActuelle();
-    this.codeAide = "AAH";
-    this.router.navigate([RoutesEnum.AIDES_DESCRIPTION]);
+  public onClickDesc(codeAide): void{
+    this.selectAide(codeAide);
+    this.codeAide = codeAide;
+    if(codeAide === "ASS"){
+      this.aideIcon = "../assets/images/AssIcon.svg";
+      this.aideTitre = "L’Allocation de Solidarité Spécifique";
+    }else if(codeAide === "AAH"){
+      this.aideIcon = "../assets/images/AahIcon.svg";
+      this.aideTitre = "Allocation Adulte Handicapé";
+    }else if(codeAide === "PA"){
+      this.aideIcon = "../assets/images/PaIcon.svg";
+      this.aideTitre = "La prime d'activité";
+    }else if(codeAide === "AM"){
+      this.aideIcon = "../assets/images/AmIcon.svg";
+      this.aideTitre = "Aide à la mobilité (Pôle emploi)";
+    }else if(codeAide === "AGEPI"){
+      this.aideIcon = "../assets/images/AgepiIcon.svg";
+      this.aideTitre = "L'aide à la garde d'enfants pour parent isolé";
+    }
     
   }
 
@@ -39,17 +50,14 @@ export class AidesComponent implements OnInit {
     .then( 
       (detailAideBackEnd) => {
         this.aideDetail = detailAideBackEnd.detail;
-      console.log(self.aideDetail);
     }, (erreur) => {
       console.log("error");
     }
     );
-    console.log(this.aideDetail);
   }
 
 
   ngOnInit(): void {
-    //this.selectAide("AAH");
   }
 
 }
