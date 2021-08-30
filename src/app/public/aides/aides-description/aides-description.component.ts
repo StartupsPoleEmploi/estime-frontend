@@ -10,7 +10,12 @@ import { EstimeApiService } from '@app/core/services/estime-api/estime-api.servi
 })
 export class AidesDescriptionComponent implements OnInit {
   @Input() aideDetail: String;
+  @Input() aideLienExterne: String;
   constructor(private estimeApiService: EstimeApiService) { }
+
+  btnClick = function(){
+    window.open(this.aideLienExterne, '_blank');
+  }
 
   ngOnInit(): void {
   }

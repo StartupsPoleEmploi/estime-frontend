@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AidesCarteHeadersComponent implements OnInit {
   @Input() aideIcon: String;
   @Input() aideTitre: String;
+  @Input() aideColor: String;
   constructor() { }
 
   ngOnInit(): void {

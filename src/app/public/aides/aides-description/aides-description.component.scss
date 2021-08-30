@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/variables";
+
+.card-body-btn-action{
+    @media #{$extra-small-device} {
+        padding-left: 0;
+        padding-right: 0;
+     }
+}
+
+.btn-aides-suite{
+    @media #{$extra-small-device} {
+       margin-left: 0;
+       margin-right: 0;
+    }
+ }

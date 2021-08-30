@@ -1,5 +1,11 @@
 @import "../../../assets/scss/variables";
 
+.row-aides{
+    width: 53rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .container-aides {
     display: flex;
     justify-content: center;
@@ -22,7 +28,7 @@
     width: 298px;
     left: 298px;
     top: 28px;
-    background: #f8cf8d;
+    //background: #f8cf8d;
     align-items: left;
 }
 
@@ -91,12 +97,15 @@
 
 .titre-autres-aides{
     height: 36px;
-    width: 248px;
+    width: 30rem;
     top: 781px;
     font-family: Poppins;
     font-size: 30px;
     font-weight: 700;
     line-height: 36px;
     text-align: left;
-    color: #1B2B67;     
+    color: #1B2B67; 
+    display: flex;
+    justify-content: left;    
 }
+
