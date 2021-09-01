@@ -27,6 +27,12 @@ export class FooterComponent implements OnInit {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
 
+  public onClickAides(): void{
+    this.router.navigate([RoutesEnum.AIDES]);
+    if(this.router.url === "/aides"){
+      location.reload();
+    }
+  }
 
   public onClickLinkAccessibilite(): void {
     this.router.navigate([RoutesEnum.ACCESSIBILITE]);

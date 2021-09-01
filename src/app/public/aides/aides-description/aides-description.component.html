@@ -1,0 +1,23 @@
+<div class="card-body card-body-description">
+    <div id="block-detail-aide" class="card-text" [innerHTML]="aideDetail"></div>
+
+    <div 
+    *ngIf="aideLienExterne !== ''"
+    class="text-center">
+        <button id="btn-aides-detail"
+            type="button"
+            aria-label="Faire la demande d'aide"
+            class="btn-style-perso-1 btn-aides-suite"
+            data-testid="btn-aides-detail"
+            tag-action="clique_bouton_demande_aide"
+            (click)="btnAideClick()"
+            >
+    
+            <div class="text-center">
+                <span class="mr-2">Faire la demande d'aide</span>
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
+    </div>
+
+</div>

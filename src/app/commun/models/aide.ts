@@ -7,4 +7,7 @@ export class Aide {
   nom: string;
   organisme: string;
   reportee: boolean;
+  lienExterne: String;
+  iconeAide: String;
+  couleurAide: String;
 }

@@ -14,6 +14,9 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ContactComponent } from './contact/contact.component';
 import { AccessibiliteComponent } from './accessibilite/accessibilite.component';
 import { ModalPopulationNonAutoriseeComponent } from './homepage/modal-population-non-autorisee/modal-population-non-autorisee.component';
+import { AidesComponent } from './aides/aides.component';
+import { AidesDescriptionComponent } from './aides/aides-description/aides-description.component';
+import { AidesCarteHeadersComponent } from './aides/aides-carte-headers/aides-carte-headers.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { ModalPopulationNonAutoriseeComponent } from './homepage/modal-populatio
     TemoignagesMobileComponent,
     ContactComponent,
     AccessibiliteComponent,
-    ModalPopulationNonAutoriseeComponent
+    ModalPopulationNonAutoriseeComponent,
+    AidesComponent,
+    AidesDescriptionComponent,
+    AidesCarteHeadersComponent,
   ],
   imports: [
     AlertModule.forRoot(),
