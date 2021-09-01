@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Aide } from '@app/commun/models/aide';
-import { DetailAide } from '@app/commun/models/detail-aide';
 import { QueryParamEnum } from "@enumerations/query-param.enum";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';

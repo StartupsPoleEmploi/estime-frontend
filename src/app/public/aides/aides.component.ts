@@ -9,14 +9,14 @@ import { EstimeApiService } from '@app/core/services/estime-api/estime-api.servi
 })
 export class AidesComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
-  detailAide: String;
-  messageErreur: String;
-  aideDetail: String;
-  aideLienExterne: String;
-  codeAide: String;
-  aideIcon: String;
-  aideTitre: String;
-  aideColor: String;
+  detailAide: string;
+  messageErreur: string;
+  aideDetail: string;
+  aideLienExterne: string;
+  codeAide: string;
+  aideIcon: string;
+  aideTitre: string;
+  aideColor: string;
 
   constructor(
     private estimeApiService: EstimeApiService
@@ -29,7 +29,7 @@ export class AidesComponent implements OnInit {
     window.scroll(0,0);
   }
 
-  private selectAide(codeAide: String) {
+  private selectAide(codeAide: string) {
     this.estimeApiService
     .getDetailAide(codeAide)
     .then(
