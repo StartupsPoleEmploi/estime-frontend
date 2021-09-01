@@ -1,7 +1,9 @@
-<div class="card-body">
+<div class="card-body card-body-description">
     <div id="block-detail-aide" class="card-text" [innerHTML]="aideDetail"></div>
 
-    <div class="text-center">
+    <div 
+    *ngIf="aideLienExterne !== ''"
+    class="text-center">
         <button id="btn-aides-detail"
             type="button"
             aria-label="Faire la demande d'aide"

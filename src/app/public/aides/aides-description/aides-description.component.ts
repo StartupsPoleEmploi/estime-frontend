@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation  } from '@angular/core';
 import { Aide } from '@app/commun/models/aide';
 
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
@@ -6,7 +6,8 @@ import { EstimeApiService } from '@app/core/services/estime-api/estime-api.servi
 @Component({
   selector: 'app-aides-description',
   templateUrl: './aides-description.component.html',
-  styleUrls: ['./aides-description.component.scss']
+  styleUrls: ['./aides-description.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AidesDescriptionComponent implements OnInit {
   @Input() aideDetail: String;
