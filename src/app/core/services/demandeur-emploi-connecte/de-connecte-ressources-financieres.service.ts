@@ -7,7 +7,6 @@ import { DateUtileService } from '../utile/date-util.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 import { DeConnecteBenefiaireAidesService } from './de-connecte-benefiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
-import { DeConnecteSituationFamilialeService } from './de-connecte-situation-familiale.service';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {

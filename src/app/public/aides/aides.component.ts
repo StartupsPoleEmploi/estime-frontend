@@ -20,7 +20,7 @@ export class AidesComponent implements OnInit {
 
   constructor(
     private estimeApiService: EstimeApiService
-   ) { 
+   ) {
    }
 
   public onClickAideSavoirPlus(codeAide): void{
@@ -32,16 +32,16 @@ export class AidesComponent implements OnInit {
   private selectAide(codeAide: String) {
     this.estimeApiService
     .getDetailAide(codeAide)
-    .then( 
+    .then(
       (detailAideBackEnd) => {
         this.aideDetail = detailAideBackEnd.detail;
         this.aideLienExterne = detailAideBackEnd.lienExterne;
         this.aideIcon = "../assets/images/" + detailAideBackEnd.iconeAide;
         this.aideTitre = detailAideBackEnd.nom;
         this.aideColor = detailAideBackEnd.couleurAide;
-    }, (erreur) => {
-      console.log("Erreur lors de la récupération des descriptions de l'aide");
-    }
+      }, (erreur) => {
+        console.log("Erreur lors de la récupération des descriptions de l'aide");
+      }
     );
   }
 

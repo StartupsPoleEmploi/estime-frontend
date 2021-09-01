@@ -10,7 +10,6 @@ import { AidesCAF } from '@models/aides-caf';
 import { AidesPoleEmploi } from '@models/aides-pole-emploi';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { DeConnecteSituationFamilialeService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service';
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 
 @Component({

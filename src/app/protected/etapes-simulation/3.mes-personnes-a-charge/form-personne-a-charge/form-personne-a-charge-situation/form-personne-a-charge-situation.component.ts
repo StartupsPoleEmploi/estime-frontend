@@ -39,7 +39,6 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxHasARE(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE) {
-      this.nouvellePersonneACharge
       this.unsetARE();
     } else {
       this.setARE();

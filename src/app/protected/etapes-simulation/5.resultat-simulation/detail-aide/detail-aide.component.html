@@ -1,13 +1,18 @@
-<div
-    class="card"
-    *ngIf="aideSelected">
-    <div class="card-body">
-        <div class="card-title">
-            <span>
-                {{aideSelected.nom}} ({{aideSelected.organisme}})
-            </span>
-            <hr [ngClass]="aideSelected.code.toLowerCase()">
-        </div>
-        <div id="block-detail-aide" class="card-text" [innerHTML]="aideSelected.detail"></div>
+<div class="card-body card-body-description">
+    <div id="block-detail-aide" class="card-text" [innerHTML]="aideSelected.detail"></div>
+    <div *ngIf="aideSelected.lienExterne !== ''"
+        class="text-center">
+        <button id="btn-aides-detail"
+            type="button"
+            aria-label="Faire la demande d'aide"
+            class="btn-style-perso-1 btn-aides-suite"
+            data-testid="btn-aides-detail"
+            tag-action="clique_bouton_demande_aide"
+            (click)="onClickFaireLaDemandeAide()">
+            <div class="text-center">
+                <span class="mr-2">Faire la demande d'aide</span>
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+            </div>
+        </button>
     </div>
 </div>
