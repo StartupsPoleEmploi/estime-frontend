@@ -14,7 +14,7 @@ export class AidesDescriptionComponent implements OnInit {
   @Input() aideLienExterne: String;
   constructor(private estimeApiService: EstimeApiService) { }
 
-  btnClick = function(){
+  btnAideClick = function(){
     window.open(this.aideLienExterne, '_blank');
   }
 

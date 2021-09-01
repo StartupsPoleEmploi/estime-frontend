@@ -2,8 +2,8 @@
 
 .card-body-btn-action{
     @media #{$extra-small-device} {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
      }
 }
 
@@ -15,27 +15,28 @@
 .card-body{
     margin: 0rem;
     padding: 1rem;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 1.5rem;
     text-align: left;
 
 }
 
 .card{
     margin-bottom: 1rem;
+    border: none;
 }
 
 .btn-aides-suite{
     @media #{$extra-small-device} {
-       margin-left: 0;
-       margin-right: 0;
+       margin-left: 0rem;
+       margin-right: 0rem;
     }
 }
 
  ol.no_number{
     list-style-type: none;
-    padding-left: 0px !important;
+    padding-left: 0rem !important;
  }
 
  li.leaf1{

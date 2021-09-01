@@ -23,7 +23,7 @@ export class AidesComponent implements OnInit {
    ) { 
    }
 
-  public onClickDesc(codeAide): void{
+  public onClickAideSavoirPlus(codeAide): void{
     this.selectAide(codeAide);
     this.codeAide = codeAide;
     window.scroll(0,0);
@@ -40,7 +40,7 @@ export class AidesComponent implements OnInit {
         this.aideTitre = detailAideBackEnd.nom;
         this.aideColor = detailAideBackEnd.couleurAide;
     }, (erreur) => {
-      console.log("error");
+      console.log("Erreur lors de la récupération des descriptions de l'aide");
     }
     );
   }
