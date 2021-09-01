@@ -29,7 +29,6 @@ export class FooterComponent implements OnInit {
 
   public onClickAides(): void{
     this.router.navigate([RoutesEnum.AIDES]);
-    console.log(this.router.url);
     if(this.router.url === "/aides"){
       location.reload();
     }

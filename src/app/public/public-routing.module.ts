@@ -12,15 +12,9 @@ import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
-  {
-    path: RoutesEnum.AIDES,
-    component: AidesComponent,
-  },
-  {
-    path: RoutesEnum.AIDES_DESCRIPTION,
-    component: AidesDescriptionComponent,
-  },
   { path: RoutesEnum.ACCESSIBILITE, component: AccessibiliteComponent },
+  { path: RoutesEnum.AIDES, component: AidesComponent },
+  { path: RoutesEnum.AIDES_DESCRIPTION, component: AidesDescriptionComponent },
   { path: RoutesEnum.CGU, component: CguComponent },
   { path: RoutesEnum.CONTACT, component: ContactComponent },
   { path: RoutesEnum.SIGNIN_CALLBACK, component: SigninRedirectCallbackComponent },
