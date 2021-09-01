@@ -50,8 +50,7 @@ export class EstimeApiService {
 
   public getDetailAide(codeAide: String): Promise<Aide>{
     var response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
-    //console.log(response);
-    return response; 
+    return response;
   }
 
   private getHttpHeaders() {
