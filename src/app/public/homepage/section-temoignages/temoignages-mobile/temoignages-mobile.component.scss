@@ -2,20 +2,19 @@
 
 .card {
   background-color: $color-white-2;
-  border: 1px solid $color-blue-2;
+  border: 0.0625rem solid $color-blue-2;
   border-radius: 8px;
   box-shadow: none;
-  font-size: 1em;
-  height: 185px;
-  padding: 30px;
+  height: 11.5625rem;
+  padding: 1.875rem;
   div {
     position: relative;
     height: 100%;
-    margin-top: 35px;
+    margin-top: 2.1875rem;
     span {
       bottom: 0;
-      font-weight: bold;
       position: absolute;
+      font-weight: bold !important;
     }
   }
 }

@@ -1,27 +1,23 @@
 @import "../../../../../assets/scss/variables";
 
 .card-deck {
-  max-width: 1050px;
+  max-width: 65.625rem;
   margin-left: auto;
   margin-right: auto;
   .card {
     background-color: $color-white-2;
-    border: 1px solid $color-blue-2;
-    border-radius: 8px;
+    border: 0.0625rem solid $color-blue-2;
+    border-radius: 0.5rem;
     box-shadow: none;
-    padding: 30px;
-    span {
-      font-size: 1em!important;
-    }
+    padding: 1.875rem;
     div {
       position: relative;
       height: 100%;
-      margin-top: 35px;
+      margin-top: 2.1875rem;
       span {
         bottom: 0;
-        font-weight: bold;
         position: absolute;
-        font-size: 1em!important;
+        font-weight: bold !important;
       }
     }
   }

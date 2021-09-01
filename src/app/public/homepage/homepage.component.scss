@@ -2,7 +2,7 @@
 
 #section-presentation {
   background-color: white;
-  padding-bottom:  7rem !important;
+  padding-bottom:  3rem !important;
 
   @media #{$extra-small-device} {
     padding-bottom: 3rem !important;
@@ -14,8 +14,37 @@
       width: fit-content;
     }
   }
+
+  .row-0 {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+
+    .div-info-beneficiaires {
+      align-items: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      width: 100%;
+      height: 3.5rem;
+      color: $color-blue-2;
+      background-color: $color-grey-1;
+      div {
+        img {
+          padding-right: 0.25rem;
+          padding-bottom: 0.1rem;
+          @media #{$extra-small-device} {
+            padding: 0;
+          }
+        }
+      }
+
+      @media #{$extra-small-device} {
+        height: 8.5rem;
+      }
+    }
+  }
   .row-1 {
-    padding-top: 4rem;
+    padding-top: 2rem;
     .row-1-first-col {
       @media #{$small-device} {
         max-width: 71% !important;
@@ -66,8 +95,8 @@
         }
       }
       .btn-je-commence {
-        height: 46px;
-        width: 235px;
+        height: 2.875rem;
+        width: 17.75rem;
         -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
         box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
         @media #{$extra-small-device} {
@@ -77,12 +106,7 @@
 
         span {
           height: 29px;
-          width: 168.49px;
           color: #FFFFFF;
-          font-family: Lato;
-          font-size: 1.5em;
-          letter-spacing: 0;
-          line-height: 25px;
           vertical-align:top;
         }
       }
@@ -95,8 +119,8 @@
           z-index:20;
           margin-right: auto;
           margin-left: auto;
-          padding-bottom: 9rem;
-          height: $espace-se-connecter-sticky-height;
+          padding-bottom:5.5rem;
+          height: 4.5rem;
           width: 100%;
           background-color: $color-blue-5;
 

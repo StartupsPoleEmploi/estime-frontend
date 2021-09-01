@@ -1,173 +1,68 @@
 @import "../../../../assets/scss/variables";
 
 #section-etapes {
-  background-color: $color-blue-2;
   padding-bottom: 1.5rem;
   #titre-section-etapes {
-    color: $color-white-3;
-    font-size: 1.875em;
-    font-weight: bold;
-    font-family: Poppins;
+    color: $color-blue-2;
     padding-bottom: 2rem;
     padding-top: 2rem;
-    line-height: 46px;
-    @media #{$large-device} {
-      font-size: 2.25em;
-    }
   }
   .row {
-    @media #{$small-device} {
-      width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .col-chevron {
-      padding-left: 25px;
-      padding-right: 25px;
-      @media #{$extra-large-device} {
-        padding-left: 2rem;
-        padding-right: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    .row-etape {
+      height: 7rem;
+
+      @media #{$extra-small-device} {
+        height: unset;
+        margin-bottom: 2rem;
       }
-      div {
-        width: 28px;
-        height: 100%;
-        position: relative;
-        img {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          margin: auto;
+    }
+
+    div {
+      .numero-etape-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .icons-etapes {
+          float:right;
+          @media #{$extra-small-device} {
+            float: none;
+          }
         }
       }
     }
-    .col-style-0 {
-      @media #{$small-device} {
-        padding-left: 0;
-        padding-right: 0;
+
+
+    .text-etapes {
+      @media #{$extra-small-device} {
+        text-align: center;
+        padding-top: 1rem;
       }
-      @media #{$small-device} and (max-width:991px) {
-        .card-2 {
-          margin-left: 2.5rem !important;
-          margin-right: 0.5rem !important;
-        }
+      .intro-text-etape {
+        padding-bottom: 1rem;
+        font-weight: bold !important;
       }
-      .card {
-        background-color: inherit;
-        border: none;
-        line-height: 27px;
-        margin-left: auto;
+      span {
+        color: $color-blue-2;
+      }
+    }
+
+    .btn-je-commence {
+      height: 2.875rem;
+      width: 17.75rem;
+      -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
+      box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
+      @media #{$extra-small-device} {
         margin-right: auto;
-        padding-left: 0;
-        .card-body {
-          @media #{$small-device} {
-            padding-left: 0;
-            padding-right: 0;
-          }
-          .icon-tache-homepage {
-            position: absolute;
-            left: $left-icon-tache-homepage;
-            z-index: 1;
+        margin-left: auto;
+      }
 
-            @media #{$small-device} {
-              content: url("../../../../assets/images/icon-tache-homepage.svg");
-            }
-            @media #{$medium-device} {
-              content: url("../../../../assets/images/icon-tache-homepage.svg");
-            }
-            @media #{$tablet-device} {
-              content: url("../../../../assets/images/icon-tache-homepage.svg");
-            }
-            @media #{$large-device} {
-              content: url("../../../../assets/images/icon-tache-homepage.svg");
-            }
-            @media #{$extra-large-device} {
-              content: url("../../../../assets/images/icon-tache-homepage.svg");
-            }
-          }
-          .icons-and-number-etape {
-            position: absolute;
-            z-index: 2;
-            .icons-etape {
-              margin-top : $margin-top-icons-etape;
-              margin-left: $margin-left-icons-etape;
-            }
-          }
-          .numero-etape {
-            padding-right: 6px;
-            margin-top: $margin-top-numero-etape;
-            margin-left: $margin-left-numero-etape;
-
-            @media #{$extra-small-device} {
-              margin-top: unset;
-              margin-left: unset;
-            }
-            span {
-              color: $color-orange-1;
-              font-size: 2.5em;
-              font-weight: 600;
-              font-family: Poppins;
-            }
-            @media #{$small-device} {
-              padding-left: 0;
-            }
-          }
-          #text-etape-1-home {
-            @media #{$small-device} {
-              width: 240px !important;
-            }
-            @media #{$medium-device} {
-              width: 230px !important;
-            }
-            @media #{$large-device} {
-              width: 296px !important;
-            }
-          }
-          #text-etape-2-home {
-            @media #{$small-device} {
-              width: 240px !important;
-            }
-            @media #{$medium-device} {
-              width: 230px !important;
-            }
-            @media #{$large-device} {
-              width: 296px !important;
-            }
-          }
-          #text-etape-3-home {
-            @media #{$small-device} {
-              width: 240px !important;
-            }
-            @media #{$medium-device} {
-              width: 230px !important;
-            }
-            @media #{$large-device} {
-              width: 296px !important;
-            }
-          }
-
-          .text-etape {
-            color: $color-white-3;
-            font-size: 1.25em;
-            max-width: 80%;
-            margin-top: 9rem;
-            padding-top: 7px;
-            @media #{$small-device} {
-              max-width: 100%;
-              padding-right: 0;
-            }
-            @media #{$extra-small-device} {
-              margin-top: 0.2rem;
-              margin-left: 3.5rem;
-              font-size: 1.375em;
-            }
-
-            .text-etape-main {
-              color: $color-white-3;
-
-              font-weight: bold;
-            }
-          }
-        }
+      span {
+        height: 29px;
+        color: #FFFFFF;
+        vertical-align:top;
       }
     }
   }

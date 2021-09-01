@@ -18,7 +18,6 @@ import { ModalPopulationNonAutoriseeComponent } from './modal-population-non-aut
 export class HomepageComponent implements OnInit {
 
   messageErreur: MessageErreur;
-  toto: string;
   stickyButton = false;
   scrollPositionOffset: number;
 
@@ -36,7 +35,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
-    this.scrollPositionOffset = document.getElementById('section-etapes').offsetTop;
+    this.scrollPositionOffset = document.getElementById('section-description').offsetTop;
   }
 
   public login(): void {
@@ -67,7 +66,7 @@ export class HomepageComponent implements OnInit {
       }
     }
   }
-  
+
   @HostListener("window:scroll", [])
   onWindowScroll() {
     const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;

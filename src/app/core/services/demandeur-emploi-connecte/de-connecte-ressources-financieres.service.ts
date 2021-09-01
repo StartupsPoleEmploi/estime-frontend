@@ -232,10 +232,10 @@ export class DeConnecteRessourcesFinancieresService {
     if(this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
     }
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireRSA()) {
+    if(this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() && isValide) {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
     }
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireAAH()) {
+    if(this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && isValide) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
     if(isValide && this.deConnecteBenefiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {

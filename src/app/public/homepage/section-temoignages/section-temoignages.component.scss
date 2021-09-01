@@ -5,13 +5,6 @@
   padding-top: 2rem;
   h1 {
     padding-bottom: 2rem;
-    font-size: 1.5em;
-    font-weight: bold;
-    font-family: Poppins;
-    color: $color-blue-2;
-    @media #{$large-device} {
-      font-size: 1.875em;
-    }
   }
   .container-fluid {
     padding-left: 15px;

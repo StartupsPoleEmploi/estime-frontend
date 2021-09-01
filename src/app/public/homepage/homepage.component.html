@@ -8,33 +8,39 @@
                 {{messageErreur.texte}}
             </alert>
         </div>
+        <div class="row row-0">
+            <div class="col-12">
+                <div class="row div-info-beneficiaires body-2-typo">
+                    <div class="col-2">
+                        <img alt="Iĉone flèche je commence" src="./assets/images/info-blue-2.svg">
+                    </div>
+                    <div class="col-10">
+                        Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE.
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row row-1">
             <div class="row-1-first-col col-md-auto">
                 <div id="first-div-inside-first-col" class="align-text-bottom">
-                    <div class="div-span-title">
-                        <span>
-                            Vous percevez un
-                            <div *ngIf="screenService.isScreenInferieur(767)"></div>
-                            minima social ?
-                        </span>
+                    <div>
+                        <h1 class="headline-1-typo">
+                            Combien vous gagneriez si vous repreniez un
+                            <div *ngIf="screenService.isExtraSmallScreen()"></div>
+                            emploi ?
+                        </h1>
                     </div>
                     <div [ngClass]="{'btn-sticks':this.stickyButton}">
-                        <div>
-                        <h1>
-                            Simulez le montant de vos aides en cas de reprise d'emploi.
-                        </h1>
-                        </div>
                         <button
                             id="btn-je-commence"
                             type="button"
                             aria-label="Je commence ma simulation"
-                            class="btn-style-perso-1 btn-je-commence mt-4 d-flex justify-content-center"
-                            data-testid=" btn-je-commence"
+                            class="btn-style-perso-1 btn-je-commence mt-4 d-flex justify-content-center button-typo"
+                            data-testid="btn-je-commence"
                             tag-action="clic_bouton_je_commence"
                             (click)="login()">
-
                             <div>
-                                <span>Je commence</span>
+                                <span>Je commence la simulation</span>
                                 <img alt="Iĉone flèche je commence" src="./assets/images/icon-bt-primaire.svg">
                             </div>
                         </button>
@@ -50,6 +56,7 @@
         </div>
     </div>
 </section>
-<app-section-etapes-simulation id="section-etapes"></app-section-etapes-simulation>
-<app-section-questions></app-section-questions>
+<app-section-description id="section-description"></app-section-description>
+<app-section-etapes-simulation id="section-etapes" [login]="login"></app-section-etapes-simulation>
+<app-section-aides></app-section-aides>
 <app-section-temoignages [stickyButton]="this.stickyButton"></app-section-temoignages>

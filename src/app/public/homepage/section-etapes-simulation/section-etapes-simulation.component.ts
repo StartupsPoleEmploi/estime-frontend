@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 
 @Component({
@@ -7,6 +7,8 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
   styleUrls: ['./section-etapes-simulation.component.scss']
 })
 export class SectionEtapesSimulationComponent implements OnInit {
+
+  @Input() login: () => void;
 
   constructor(
     public screenService: ScreenService
