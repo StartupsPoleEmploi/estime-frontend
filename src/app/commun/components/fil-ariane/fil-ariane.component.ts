@@ -44,7 +44,6 @@ export class FilArianeComponent implements OnInit {
   public onClickLinkRoute(libelleRoute): void {
     if(libelleRoute === PageTitlesEnum.AIDES) {
       this.router.navigate([RoutesEnum.AIDES]);
-      this.libelleRouteActiveNiveau2
     }
   }
 
