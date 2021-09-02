@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 
 @Component({
@@ -10,15 +11,18 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 })
 export class SectionAidesComponent implements OnInit {
 
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+
   constructor(
     private router: Router,
-    public screenService: ScreenService
+    public screenService: ScreenService,
   ) { }
 
   ngOnInit(): void {}
 
-  public onClickVoirAides(): void {
-    this.router.navigate([RoutesEnum.ACCESSIBILITE]);
+  public onClickVoirAides(codeAide: string): void {
+    if(codeAide) this.router.navigate([RoutesEnum.AIDES,codeAide]);
+    else this.router.navigate([RoutesEnum.AIDES]);
   }
 
 }

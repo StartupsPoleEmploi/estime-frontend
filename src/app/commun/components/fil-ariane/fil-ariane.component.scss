@@ -10,12 +10,14 @@
     background-color: unset;
     font-size: 0.75em;
     padding-left: 0;
-    span {
-      text-decoration: underline;
-      font-weight: 800;
-    }
 
-    a {
+    .active {
+      span {
+        text-decoration: underline;
+        font-weight: 800;
+      }
+    }
+    a, span {
       cursor: pointer;
       text-decoration: none;
       &:hover, &:focus {

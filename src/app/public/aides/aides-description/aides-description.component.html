@@ -1,18 +1,44 @@
-<div class="card-body card-body-description">
-    <div id="block-detail-aide" class="card-text" [innerHTML]="aideDetail"></div>
-    <div *ngIf="aideLienExterne !== ''"
-        class="text-center">
-        <button id="btn-aides-detail"
-            type="button"
-            aria-label="Faire la demande d'aide"
-            class="btn-style-perso-1 btn-aides-suite"
-            data-testid="btn-aides-detail"
-            tag-action="clique_bouton_demande_aide"
-            (click)="onClickFaireLaDemandeAide()">
-            <div class="text-center">
-                <span class="mr-2">Faire la demande d'aide</span>
-                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+<div class="container-fluid">
+    <alert
+        type="danger"
+        *ngIf="messageErreur">
+        {{messageErreur}}
+    </alert>
+    <div class="titre-carte">
+        <div class="row">
+            <div class="col-lg-1">
+                <img class="icone-carte" alt="" [src]="aideSelected.iconeAide">
             </div>
-        </button>
+            <div class="col-lg-11" style="padding-left: 0%;">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p class="titre-carte-texte">
+                            {{ this.aideSelected.nom }}
+                        </p>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="rectangle" [style]="this.aideSelected.couleurAide"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body card-body-description">
+        <div id="block-detail-aide" class="card-text" [innerHTML]="aideSelected.detail"></div>
+        <div *ngIf="aideSelected.lienExterne"
+            class="text-center">
+            <button id="btn-aides-detail"
+                type="button"
+                aria-label="Faire la demande d'aide"
+                class="btn-style-perso-1 btn-aides-suite"
+                data-testid="btn-aides-detail"
+                tag-action="clique_bouton_demande_aide"
+                (click)="onClickFaireLaDemandeAide()">
+                <div class="text-center">
+                    <span class="mr-2">Faire la demande d'aide</span>
+                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                </div>
+            </button>
+        </div>
     </div>
 </div>

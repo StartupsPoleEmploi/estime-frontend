@@ -18,6 +18,7 @@
 
         @media #{$extra-small-device} {
           margin-top: 2rem;
+          cursor: pointer;
         }
     }
 
@@ -43,20 +44,22 @@
         border-top-right-radius: 0.5rem;
         margin: 0;
         &.agepi {
-          border-top: 0.4rem solid $color-violet-2;
+          border-top: 0.4rem solid $color-agepi;
         }
         &.am {
-          border-top: 0.4rem solid $color-orange-2;
+          border-top: 0.4rem solid $color-am;
         }
         &.pa {
-          border-top: 0.4rem solid $color-violet-1;
+          border-top: 0.4rem solid $color-pa;
         }
     }
     .en-savoir-plus-aide {
         padding-top: 0.5rem;
-        a {
+        cursor: pointer;
+        span {
             color: $color-blue-10;
             text-decoration: none;
+            cursor: pointer;
         }
     }
 

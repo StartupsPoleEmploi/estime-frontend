@@ -1,33 +1,25 @@
 <div class="container-fluid form-container-fluid">
     <div class="row row-aides">
         <div class="col-sm-12 align-self-center toutes-les-aides">
-            <h1 *ngIf="codeAide === undefined" class="h1-style-1 titre-aides">
+            <h1 *ngIf="!aideSelectedCode" class="h1-style-1 titre-aides">
                 {{pageTitlesEnum.AIDES}}
                 <div id="liste-aides" placement="right top" tag-action="liste-aides"></div>
             </h1>
         </div>
 
         <div class="col-sm-12 align-self-center">
-            <app-aides-carte-headers class="row" *ngIf="codeAide !== undefined" [aideIcon]="aideIcon"
-                [aideTitre]="aideTitre" [aideColor]="aideColor">
-            </app-aides-carte-headers>
-        </div>
-
-        <div class="col-sm-12 align-self-center">
-            <app-aides-description *ngIf="codeAide !== undefined" class="col-12 pr-0 row aide-description"
-                [aideDetail]="aideDetail" [aideLienExterne]="aideLienExterne">
-            </app-aides-description>
+            <router-outlet class="row"></router-outlet>
         </div>
 
         <div class="col-sm-12">
-            <h2 *ngIf="codeAide !== undefined" class="titre-autres-aides row">
+            <h2 *ngIf="aideSelectedCode !== undefined" class="titre-autres-aides row">
                 Les autres aides
             </h2>
         </div>
 
         <div class="col-sm-12 align-self-center">
             <div class="row container-aides">
-                <div *ngIf="codeAide !== 'ASS'" class="card">
+                <div *ngIf="aideSelectedCode !== 'ASS'" class="card">
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
@@ -43,7 +35,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="rectangle" style="background: #F8CF8D;"></div>
+                                            <div class="rectangle ass"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,12 +45,12 @@
                             qui
                             peut prendre le relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à
                             l’allocation ARE se terminent. </p>
-                        <nav>
-                            <a (click)="onClickAideSavoirPlus('ASS')">
+                        <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
+                            <a (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)" tag-navigation="details-en-savoir-plus-ass">
                                 <div class="en-savoir-plus">
                                     En savoir plus
                                 </div>
-                                <img src="./assets/images/fleche-droite.svg">
+                                <img src="./assets/images/fleche-droite.svg" alt="">
                             </a>
                         </nav>
                     </div>
@@ -66,7 +58,7 @@
             </div>
 
             <div class="row container-aides">
-                <div *ngIf="codeAide !== 'AM'" class="card">
+                <div *ngIf="aideSelectedCode !== codesAidesEnum.AIDE_MOBILITE" class="card">
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
@@ -82,7 +74,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="rectangle" style="background: #F1A378;"></div>
+                                            <div class="rectangle am"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -91,12 +83,12 @@
                         <p class="card-text texte-aide">Vous reprenez un emploi éloigné de votre lieu de résidence, une
                             aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou
                             partie de vos frais de déplacement, de repas, et d’hébergement.</p>
-                        <nav>
-                            <a (click)="onClickAideSavoirPlus('AM')">
+                        <nav aria-label="En savoir plus sur l'aide à la mobilité">
+                            <a (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)" tag-navigation="details-en-savoir-plus-am">
                                 <div class="en-savoir-plus">
                                     En savoir plus
                                 </div>
-                                <img src="./assets/images/fleche-droite.svg">
+                                <img src="./assets/images/fleche-droite.svg" alt="">
                             </a>
                         </nav>
                     </div>
@@ -104,7 +96,7 @@
             </div>
 
             <div class="row container-aides">
-                <div *ngIf="codeAide !== 'PA'" class="card">
+                <div *ngIf="aideSelectedCode !== codesAidesEnum.PRIME_ACTIVITE" class="card">
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
@@ -120,7 +112,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="rectangle" style="background: #BDB2FF;"></div>
+                                            <div class="rectangle pa"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -129,12 +121,12 @@
                         <p class="card-text texte-aide">La Prime d’activité est une aide financière, versée par la
                             CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources
                             modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>
-                        <nav>
-                            <a (click)="onClickAideSavoirPlus('PA')">
+                        <nav aria-label="En savoir plus sur la prime d'activité">
+                            <a (click)="onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)" tag-navigation="details-en-savoir-plus-pa">
                                 <div class="en-savoir-plus">
                                     En savoir plus
                                 </div>
-                                <img src="./assets/images/fleche-droite.svg">
+                                <img src="./assets/images/fleche-droite.svg" alt="">
                             </a>
                         </nav>
                     </div>
@@ -142,7 +134,7 @@
             </div>
 
             <div class="row container-aides">
-                <div *ngIf="codeAide !== 'AGEPI'" class="card">
+                <div *ngIf="aideSelectedCode !== codesAidesEnum.AGEPI" class="card">
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
@@ -159,7 +151,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="rectangle" style="background: #FFC6FF;"></div>
+                                            <div class="rectangle agepi"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -168,12 +160,12 @@
                         <p class="card-text texte-aide">L’AGEPI est une participation aux frais de garde
                             d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation
                             pour un parent isolé (célibataire, veuf, divorcé).</p>
-                        <nav>
-                            <a (click)="onClickAideSavoirPlus('AGEPI')">
+                        <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
+                            <a (click)="onClickAideSavoirPlus(codesAidesEnum.AGEPI)" tag-navigation="details-en-savoir-plus-agepi">
                                 <div class="en-savoir-plus">
                                     En savoir plus
                                 </div>
-                                <img src="./assets/images/fleche-droite.svg">
+                                <img src="./assets/images/fleche-droite.svg" alt="">
                             </a>
                         </nav>
                     </div>
@@ -181,7 +173,7 @@
             </div>
 
             <div class="row container-aides">
-                <div *ngIf="codeAide !== 'AAH'" class="card">
+                <div *ngIf="aideSelectedCode !== codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES" class="card">
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
@@ -197,7 +189,7 @@
                                             </p>
                                         </div>
                                         <div class="col-lg-12">
-                                            <div class="rectangle" style="background: #C7F0BD;"></div>
+                                            <div class="rectangle aah"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,12 +198,12 @@
                         <p class="card-text texte-aide">Lorsque vous commencez à travailler, vos revenus
                             professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le
                             calcul de votre AAH. </p>
-                        <nav>
-                            <a (click)="onClickAideSavoirPlus('AAH')">
+                        <nav aria-label="En savoir plus sur l'allocation adultes handicapés" tag-navigation="details-en-savoir-plus-aah">
+                            <a (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                                 <div class="en-savoir-plus">
                                     En savoir plus
                                 </div>
-                                <img src="./assets/images/fleche-droite.svg">
+                                <img src="./assets/images/fleche-droite.svg" alt="">
                             </a>
                         </nav>
                     </div>

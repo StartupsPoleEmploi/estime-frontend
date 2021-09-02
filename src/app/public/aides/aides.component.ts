@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { Aide } from '@app/commun/models/aide';
 
 @Component({
   selector: 'app-aides',
@@ -9,44 +12,21 @@ import { EstimeApiService } from '@app/core/services/estime-api/estime-api.servi
 })
 export class AidesComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
-  detailAide: string;
-  messageErreur: string;
-  aideDetail: string;
-  aideLienExterne: string;
-  codeAide: string;
-  aideIcon: string;
-  aideTitre: string;
-  aideColor: string;
 
-  constructor(
-    private estimeApiService: EstimeApiService
-   ) {
+  ICONS_PATH = "../../assets/images/";
+
+  aideSelected: Aide;
+  aideSelectedCode: string;
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+
+  constructor(private router: Router) {
    }
 
-  public onClickAideSavoirPlus(codeAide): void{
-    this.selectAide(codeAide);
-    this.codeAide = codeAide;
-    window.scroll(0,0);
+  public onClickAideSavoirPlus(codeAide): void {
+    let aideRoute = "/"+codeAide;
+
+    this.router.navigate([RoutesEnum.AIDES+aideRoute]);
   }
 
-  private selectAide(codeAide: string) {
-    this.estimeApiService
-    .getDetailAide(codeAide)
-    .then(
-      (detailAideBackEnd) => {
-        this.aideDetail = detailAideBackEnd.detail;
-        this.aideLienExterne = detailAideBackEnd.lienExterne;
-        this.aideIcon = "../assets/images/" + detailAideBackEnd.iconeAide;
-        this.aideTitre = detailAideBackEnd.nom;
-        this.aideColor = detailAideBackEnd.couleurAide;
-      }, (erreur) => {
-        console.log("Erreur lors de la récupération des descriptions de l'aide");
-      }
-    );
-  }
-
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Subscription } from 'rxjs';
@@ -12,7 +14,13 @@ import { Subscription } from 'rxjs';
 export class FilArianeComponent implements OnInit {
 
   libelleRouteActive: string;
+  libelleRouteActiveNiveau2: string;
   subscriptionRouteNavigationEndObservable: Subscription;
+
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+  libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
+
+  routesAides: Object = {};
 
   constructor(
     private router: Router
@@ -21,6 +29,7 @@ export class FilArianeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setRoutesAides();
     this.setLibelleRouteActiveSafe(this.router.url);
   }
 
@@ -32,15 +41,44 @@ export class FilArianeComponent implements OnInit {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
+  public onClickLinkRoute(libelleRoute): void {
+    if(libelleRoute === PageTitlesEnum.AIDES) {
+      this.router.navigate([RoutesEnum.AIDES]);
+      this.libelleRouteActiveNiveau2
+    }
+  }
+
   private setLibelleRouteActive(pathRouteActivated: string): void {
 
+    this.libelleRouteActiveNiveau2 = '';
+
     switch (pathRouteActivated) {
-      case RoutesEnum.AIDES:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        break;
       case RoutesEnum.ACCESSIBILITE:
         this.libelleRouteActive = PageTitlesEnum.ACCESSIBILITE;
         break;
+      case RoutesEnum.AIDES:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        break;
+      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.AGEPI}`:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.AGEPI];
+        break
+      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.AIDE_MOBILITE}`:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.AIDE_MOBILITE];
+        break
+      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}`:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES];
+        break
+      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}`:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE];
+        break
+      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.PRIME_ACTIVITE}`:
+        this.libelleRouteActive = PageTitlesEnum.AIDES;
+        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.PRIME_ACTIVITE];
+        break
       case RoutesEnum.AVANT_COMMENCER_SIMULATION:
         this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
         break;
@@ -84,6 +122,19 @@ export class FilArianeComponent implements OnInit {
   private setLibelleRouteActiveSafe(url: string): void {
     const pathRouteActivated = url.substring(1, url.length);
     this.setLibelleRouteActive(pathRouteActivated);
+  }
+
+
+  /**
+   * Méthode permettant de lier les routes des aides à un libelle pour le fil d'arianne
+   * ex: /aides/AM => Toutes les aides / Aide à la mobilité
+   */
+  private setRoutesAides() {
+    this.routesAides[this.codesAidesEnum.AGEPI] = this.libellesAidesEnum.AGEPI;
+    this.routesAides[this.codesAidesEnum.AIDE_MOBILITE] = this.libellesAidesEnum.AIDE_MOBILITE;
+    this.routesAides[this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES] = this.libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
+    this.routesAides[this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE] = this.libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
+    this.routesAides[this.codesAidesEnum.PRIME_ACTIVITE] = this.libellesAidesEnum.PRIME_ACTIVITE;
   }
 
 }

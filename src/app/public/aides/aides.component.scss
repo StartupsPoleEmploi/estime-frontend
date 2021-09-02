@@ -30,6 +30,22 @@
     top: 1.75rem;
     //background: #f8cf8d;
     align-items: left;
+
+    &.agepi {
+        background: $color-agepi;
+    }
+    &.am {
+        background: $color-am;
+    }
+    &.pa {
+        background: $color-pa;
+    }
+    &.ass {
+        background: $color-ass;
+    }
+    &.aah {
+        background: $color-aah;
+    }
 }
 
 .col-lg-11 {
@@ -108,8 +124,8 @@
     font-weight: 700;
     line-height: 2.25rem;
     text-align: left;
-    color: #1B2B67; 
+    color: #1B2B67;
     display: flex;
-    justify-content: left;    
+    justify-content: left;
 }
 

@@ -2,7 +2,8 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a (click)="onClickLinkAccueil()">Accueil</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><span>{{libelleRouteActive}}</span></li>
+      <li class="breadcrumb-item" [ngClass]="{'active':!this.libelleRouteActiveNiveau2}" aria-current="page" (click)="onClickLinkRoute(libelleRouteActive)"><span>{{libelleRouteActive}}</span></li>
+      <li class="breadcrumb-item active" aria-current="page"><span>{{libelleRouteActiveNiveau2}}</span></li>
     </ol>
   </nav>
 </div>
