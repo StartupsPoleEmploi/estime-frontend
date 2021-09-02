@@ -7,8 +7,8 @@ import { Component, Input, OnInit, ViewEncapsulation  } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class AidesDescriptionComponent implements OnInit {
-  @Input() aideDetail: String;
-  @Input() aideLienExterne: String;
+  @Input() aideDetail: string;
+  @Input() aideLienExterne: string;
   constructor() { }
 
   onClickFaireLaDemandeAide = function(){

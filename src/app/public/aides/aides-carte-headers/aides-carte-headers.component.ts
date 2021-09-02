@@ -6,9 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./aides-carte-headers.component.scss']
 })
 export class AidesCarteHeadersComponent implements OnInit {
-  @Input() aideIcon: String;
-  @Input() aideTitre: String;
-  @Input() aideColor: String;
+  @Input() aideIcon: string;
+  @Input() aideTitre: string;
+  @Input() aideColor: string;
   constructor() { }
 
   ngOnInit(): void {

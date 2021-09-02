@@ -47,7 +47,7 @@ export class EstimeApiService {
     return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options).toPromise();
   }
 
-  public getDetailAide(codeAide: String): Promise<Aide>{
+  public getDetailAide(codeAide: string): Promise<Aide>{
     var response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
     return response;
   }
