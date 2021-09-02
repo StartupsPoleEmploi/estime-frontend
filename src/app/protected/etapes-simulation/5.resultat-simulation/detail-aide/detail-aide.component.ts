@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Aide } from '@models/aide';
 
 @Component({
   selector: 'app-detail-aide',
   templateUrl: './detail-aide.component.html',
-  styleUrls: ['./detail-aide.component.scss']
+  styleUrls: ['./../../../../public/aides/aides-description/aides-description.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DetailAideComponent implements OnInit {
 
@@ -13,6 +14,10 @@ export class DetailAideComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClickFaireLaDemandeAide = function () {
+    window.open(this.aideLienExterne, '_blank');
   }
 
 }

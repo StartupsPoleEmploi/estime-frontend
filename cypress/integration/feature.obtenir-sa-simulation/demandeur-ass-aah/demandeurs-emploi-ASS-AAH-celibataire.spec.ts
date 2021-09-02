@@ -245,7 +245,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite1 = "133";
+    const primeActivite1 = "138";
     const primeActivite2 = "416";
 
     const homePage = new HomePage();

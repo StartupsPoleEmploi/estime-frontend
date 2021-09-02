@@ -16,6 +16,9 @@ import { AccessibiliteComponent } from './accessibilite/accessibilite.component'
 import { ModalPopulationNonAutoriseeComponent } from './homepage/modal-population-non-autorisee/modal-population-non-autorisee.component';
 import { SectionDescriptionComponent } from './homepage/section-description/section-description.component';
 import { SectionAidesComponent } from './homepage/section-aides/section-aides.component';
+import { AidesComponent } from './aides/aides.component';
+import { AidesDescriptionComponent } from './aides/aides-description/aides-description.component';
+import { AidesCarteHeadersComponent } from './aides/aides-carte-headers/aides-carte-headers.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { SectionAidesComponent } from './homepage/section-aides/section-aides.co
     AccessibiliteComponent,
     ModalPopulationNonAutoriseeComponent,
     SectionDescriptionComponent,
-    SectionAidesComponent
+    SectionAidesComponent,
+    AidesComponent,
+    AidesDescriptionComponent,
+    AidesCarteHeadersComponent
   ],
   imports: [
     AlertModule.forRoot(),

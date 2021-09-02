@@ -1,0 +1,65 @@
+@import "../../../../assets/scss/variables";
+
+.card-body-btn-action{
+    @media #{$extra-small-device} {
+        padding-left: 0rem !important;
+        padding-right: 0rem !important;
+     }
+}
+
+.card-body-description{
+    padding-right: 0rem;
+    padding-left: 0rem;
+
+}
+
+.card-paragraph {
+   margin: 0rem;
+   padding: 1rem;
+   font-size: 1rem;
+   font-weight: 400;
+   line-height: 1.5rem;
+   text-align: left;
+}
+
+.card{
+    margin-bottom: 1rem;
+    border: none;
+}
+
+.btn-aides-suite{
+    @media #{$extra-small-device} {
+       margin-left: 0rem;
+       margin-right: 0rem;
+    }
+}
+
+ ol.no_number{
+    list-style-type: none;
+    padding-left: 0rem !important;
+ }
+
+ li.leaf1{
+    background: url("../../../../assets/images//liste1.svg") no-repeat left top;
+    padding-left: 3rem;
+    padding-bottom: 1.219rem;
+ }
+
+ li.leaf2{
+    background: url("../../../../assets/images//liste2.svg") no-repeat left top;
+    padding-left: 3rem;
+    padding-bottom: 1.219rem;
+ }
+
+ li.leaf3{
+    background: url("../../../../assets/images//liste3.svg") no-repeat left top;
+    padding-left: 3rem;
+    padding-bottom: 1.219rem;
+ }
+
+ li.leaf4{
+    background: url("../../../../assets/images//liste4.svg") no-repeat left top;
+    padding-left: 3rem;
+    padding-bottom: 1.219rem;
+ }
+

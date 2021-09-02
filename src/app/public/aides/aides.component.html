@@ -1,0 +1,222 @@
+<div class="container-fluid form-container-fluid">
+    <div class="row row-aides">
+        <div class="col-sm-12 align-self-center toutes-les-aides">
+            <h1 *ngIf="codeAide === undefined" class="h1-style-1 titre-aides">
+                {{pageTitlesEnum.AIDES}}
+                <div id="liste-aides" placement="right top" tag-action="liste-aides"></div>
+            </h1>
+        </div>
+
+        <div class="col-sm-12 align-self-center">
+            <app-aides-carte-headers class="row" *ngIf="codeAide !== undefined" [aideIcon]="aideIcon"
+                [aideTitre]="aideTitre" [aideColor]="aideColor">
+            </app-aides-carte-headers>
+        </div>
+
+        <div class="col-sm-12 align-self-center">
+            <app-aides-description *ngIf="codeAide !== undefined" class="col-12 pr-0 row aide-description"
+                [aideDetail]="aideDetail" [aideLienExterne]="aideLienExterne">
+            </app-aides-description>
+        </div>
+
+        <div class="col-sm-12">
+            <h2 *ngIf="codeAide !== undefined" class="titre-autres-aides row">
+                Les autres aides
+            </h2>
+        </div>
+
+        <div class="col-sm-12 align-self-center">
+            <div class="row container-aides">
+                <div *ngIf="codeAide !== 'ASS'" class="card">
+                    <div class="card-body">
+                        <div class="titre-carte">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <img class="icone-carte" alt="Icone de L’Allocation de Solidarité Spécifique"
+                                        src="./assets/images/AssIcon.svg">
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="titre-carte-texte">
+                                                L’Allocation de Solidarité Spécifique
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="rectangle" style="background: #F8CF8D;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text texte-aide">L’allocation spécifique de solidarité (ASS) est une allocation
+                            qui
+                            peut prendre le relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à
+                            l’allocation ARE se terminent. </p>
+                        <nav>
+                            <a (click)="onClickAideSavoirPlus('ASS')">
+                                <div class="en-savoir-plus">
+                                    En savoir plus
+                                </div>
+                                <img src="./assets/images/fleche-droite.svg">
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container-aides">
+                <div *ngIf="codeAide !== 'AM'" class="card">
+                    <div class="card-body">
+                        <div class="titre-carte">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <img class="icone-carte" alt="Icone de Aide à la mobilité"
+                                        src="./assets/images/AmIcon.svg">
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="titre-carte-texte">
+                                                Aide à la mobilité (Pôle emploi)
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="rectangle" style="background: #F1A378;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text texte-aide">Vous reprenez un emploi éloigné de votre lieu de résidence, une
+                            aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou
+                            partie de vos frais de déplacement, de repas, et d’hébergement.</p>
+                        <nav>
+                            <a (click)="onClickAideSavoirPlus('AM')">
+                                <div class="en-savoir-plus">
+                                    En savoir plus
+                                </div>
+                                <img src="./assets/images/fleche-droite.svg">
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container-aides">
+                <div *ngIf="codeAide !== 'PA'" class="card">
+                    <div class="card-body">
+                        <div class="titre-carte">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <img class="icone-carte" alt="Icone de La prime d'activité"
+                                        src="./assets/images/PaIcon.svg">
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="titre-carte-texte">
+                                                La prime d'activité
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="rectangle" style="background: #BDB2FF;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text texte-aide">La Prime d’activité est une aide financière, versée par la
+                            CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources
+                            modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>
+                        <nav>
+                            <a (click)="onClickAideSavoirPlus('PA')">
+                                <div class="en-savoir-plus">
+                                    En savoir plus
+                                </div>
+                                <img src="./assets/images/fleche-droite.svg">
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container-aides">
+                <div *ngIf="codeAide !== 'AGEPI'" class="card">
+                    <div class="card-body">
+                        <div class="titre-carte">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <img class="icone-carte"
+                                        alt="Icone de L'aide à la garde d'enfants pour parent isolé"
+                                        src="./assets/images/AgepiIcon.svg">
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="titre-carte-texte">
+                                                L'aide à la garde d'enfants pour parent isolé
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="rectangle" style="background: #FFC6FF;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text texte-aide">L’AGEPI est une participation aux frais de garde
+                            d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation
+                            pour un parent isolé (célibataire, veuf, divorcé).</p>
+                        <nav>
+                            <a (click)="onClickAideSavoirPlus('AGEPI')">
+                                <div class="en-savoir-plus">
+                                    En savoir plus
+                                </div>
+                                <img src="./assets/images/fleche-droite.svg">
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row container-aides">
+                <div *ngIf="codeAide !== 'AAH'" class="card">
+                    <div class="card-body">
+                        <div class="titre-carte">
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <img class="icone-carte" alt="Icone de Allocation Adulte Handicapé"
+                                        src="./assets/images/AahIcon.svg">
+                                </div>
+                                <div class="col-lg-11">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="titre-carte-texte">
+                                                Allocation Adulte Handicapé
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="rectangle" style="background: #C7F0BD;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="card-text texte-aide">Lorsque vous commencez à travailler, vos revenus
+                            professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le
+                            calcul de votre AAH. </p>
+                        <nav>
+                            <a (click)="onClickAideSavoirPlus('AAH')">
+                                <div class="en-savoir-plus">
+                                    En savoir plus
+                                </div>
+                                <img src="./assets/images/fleche-droite.svg">
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
