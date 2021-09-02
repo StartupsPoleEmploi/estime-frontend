@@ -248,11 +248,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     this.erreurSaisieSalaires = false;
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
-      // on vérifie si lorsque le formulaire n'est pas valide c'est parce que la saisie des champs salaires est invalide
-      if(!isValide) {
+      // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
+      if(isValide) {
         const isBeneficiaireAAH = this.deConnecteBenefiaireAidesService.isBeneficiaireAAH();
         const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesService.isBeneficiaireASS() || this.deConnecteBenefiaireAidesService.isBeneficiaireRSA());
-        this.erreurSaisieSalaires = !this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
+        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
+        if(!isValide) this.erreurSaisieSalaires = true;
       }
     }
     return isValide;

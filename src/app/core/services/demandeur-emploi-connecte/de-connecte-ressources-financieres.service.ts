@@ -260,19 +260,17 @@ export class DeConnecteRessourcesFinancieresService {
 
   private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
-    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, false, true)
+
     && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
   }
 
   private isDonneesRSASaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA
-    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, false, true)
     && !this.ressourcesFinancieresUtileService.isMontantJournalierRSAInvalide(ressourcesFinancieres);
   }
 
   private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesCAF.allocationAAH > 0
-    && this.ressourcesFinancieresUtileService.isChampsSalairesValides(ressourcesFinancieres, true, false);
+    return ressourcesFinancieres.aidesCAF.allocationAAH > 0;
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {
