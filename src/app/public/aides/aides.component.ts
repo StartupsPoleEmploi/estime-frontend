@@ -24,6 +24,7 @@ export class AidesComponent implements OnInit {
 
   public onClickAideSavoirPlus(codeAide): void {
     let aideRoute = "/"+codeAide;
+    this.aideSelectedCode = codeAide;
 
     this.router.navigate([RoutesEnum.AIDES+aideRoute]);
   }

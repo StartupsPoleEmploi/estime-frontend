@@ -1,7 +1,7 @@
 <div class="container-fluid form-container-fluid">
     <div class="row row-aides">
         <div class="col-sm-12 align-self-center toutes-les-aides">
-            <h1 *ngIf="!aideSelectedCode" class="h1-style-1 titre-aides">
+            <h1 *ngIf="aideSelectedCode !== undefined" class="h1-style-1 titre-aides">
                 {{pageTitlesEnum.AIDES}}
                 <div id="liste-aides" placement="right top" tag-action="liste-aides"></div>
             </h1>
@@ -23,6 +23,7 @@
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
+                                <a (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
                                 <div class="col-lg-1">
                                     <img class="icone-carte" alt="Icone de L’Allocation de Solidarité Spécifique"
                                         src="./assets/images/AssIcon.svg">
@@ -39,6 +40,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <p class="card-text texte-aide">L’allocation spécifique de solidarité (ASS) est une allocation
@@ -62,6 +64,7 @@
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
+                                <a (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)">
                                 <div class="col-lg-1">
                                     <img class="icone-carte" alt="Icone de Aide à la mobilité"
                                         src="./assets/images/AmIcon.svg">
@@ -78,6 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <p class="card-text texte-aide">Vous reprenez un emploi éloigné de votre lieu de résidence, une
@@ -100,6 +104,7 @@
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
+                                <a (click)="onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)">
                                 <div class="col-lg-1">
                                     <img class="icone-carte" alt="Icone de La prime d'activité"
                                         src="./assets/images/PaIcon.svg">
@@ -116,6 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <p class="card-text texte-aide">La Prime d’activité est une aide financière, versée par la
@@ -138,6 +144,7 @@
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
+                                <a (click)="onClickAideSavoirPlus(codesAidesEnum.AGEPI)">
                                 <div class="col-lg-1">
                                     <img class="icone-carte"
                                         alt="Icone de L'aide à la garde d'enfants pour parent isolé"
@@ -155,6 +162,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <p class="card-text texte-aide">L’AGEPI est une participation aux frais de garde
@@ -177,6 +185,7 @@
                     <div class="card-body">
                         <div class="titre-carte">
                             <div class="row">
+                                <a (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                                 <div class="col-lg-1">
                                     <img class="icone-carte" alt="Icone de Allocation Adulte Handicapé"
                                         src="./assets/images/AahIcon.svg">
@@ -193,6 +202,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         </div>
                         <p class="card-text texte-aide">Lorsque vous commencez à travailler, vos revenus
