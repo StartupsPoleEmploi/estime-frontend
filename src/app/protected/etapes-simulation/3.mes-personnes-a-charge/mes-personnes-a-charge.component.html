@@ -1,17 +1,17 @@
   <div class="container-fluid form-container-fluid">
       <div class="div-title-formulaire">
-          <h1 class="h1-style-1">
+          <h1 class="h1-style-1 headline-1-typo">
               3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
           </h1>
-          <div class="text-under-h1">
+          <div class="text-under-h1 body-2-typo">
               {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
           </div>
       </div>
       <div class="card card-body card-form  card-form-style-1">
           <div class="row mb-3">
-              <label class="label" aria-describedby="infobulle-personnes-charge-nbr-enfant">
+              <label class="label headline-4-typo" aria-describedby="infobulle-personnes-charge-nbr-enfant">
                   Nombre d'enfant(s) ou de
-                  <div *ngIf="screenService.isScreenInferieur(767)"></div>
+                  <div *ngIf="screenService.isExtraSmallScreen()"></div>
                   personne(s) à charge
                   <div
                     id="infobulle-personnes-charge-nbr-enfant"
@@ -50,8 +50,8 @@
                                       src="./assets/images/personne.svg">
                               </div>
                               <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
-                                  <span class="span-personne">Personne {{indexOfelement + 1}}</span>
-                                  <span>
+                                  <span class="span-personne headline-4-typo">Personne {{indexOfelement + 1}}</span>
+                                  <span class="body-2-typo">
                                       {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
                                   </span>
                               </div>
@@ -62,7 +62,7 @@
                               tabindex="0"
                               href="javascript:;"
                               alt="Modifier personne à charge"
-                              class="float-right"
+                              class="float-right caption-2-typo"
                               (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
                               Modifier
                           </a>
@@ -87,7 +87,7 @@
                                       <img alt="Icône ajouter personne à charge" src="./assets/images/ajouter-personne.svg">
                                   </div>
                                   <div class="col-md-9 col-xs-12 col-card-body">
-                                      <span>
+                                      <span class="body-2-typo">
                                           Ajouter un enfant ou une personne à charge
                                       </span>
                                   </div>
@@ -132,7 +132,7 @@
             class="div-buttons-form d-flex justify-content-center"
             *ngIf="isNouvellePersonneAChargeFormDisplay === false">
             <button
-                class="btn-style-perso-2 first-btn"
+                class="btn-style-perso-2 first-btn button-typo"
                 aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">
@@ -143,7 +143,7 @@
             </button>
             <button
                 id="btn-personnes-charge-suivant"
-                class="btn-style-perso-1 second-btn"
+                class="btn-style-perso-1 second-btn button-typo"
                 aria-label="Passer à la page suivante"
                 data-testid="btn-personnes-charge-suivant"
                 (click)="onClickButtonSuivant()"
@@ -166,7 +166,7 @@
                   (click)="popoverPersonnesACharge.hide()"></i>
           </div>
           <div class="row">
-              <b>Qui sont les « personnes à charge » ?</b>
+              <h5>Qui sont les « personnes à charge » ?</h5>
               <p>
                   Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
               </p>

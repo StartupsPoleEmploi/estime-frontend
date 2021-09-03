@@ -2,14 +2,14 @@
     <div class="row mb-2">
         <label
             class="label"
-            for="situation">
+            for="situation headline-4-typo">
             * Cette personne perçoit
         </label>
     </div>
     <div class="row">
         <label
             name="salarie"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.salarie"
             btnCheckbox
             tabindex="0"
@@ -25,7 +25,7 @@
         </label>
         <label
             name="beneficiaireARE"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireARE"
             btnCheckbox
             tabindex="0"
@@ -41,7 +41,7 @@
         </label>
         <label
             name="beneficiaireASS"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireASS"
             btnCheckbox
             tabindex="0"
@@ -58,7 +58,7 @@
         <label
             name="beneficiaireRSA"
             *ngIf="!deConnecteBenefiaireAidesService.isBeneficiaireRSA()"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA"
             btnCheckbox
             tabindex="0"
@@ -74,7 +74,7 @@
         </label>
         <label
             name="beneficiaireAAH"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH"
             btnCheckbox
             tabindex="0"
@@ -90,7 +90,7 @@
         </label>
         <label
             name="beneficiairePensionInvalidite"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite"
             btnCheckbox
             tabindex="0"
@@ -106,7 +106,7 @@
         </label>
         <label
             name="sansRessource"
-            class="radio-button-style-1"
+            class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource"
             btnCheckbox
             tabindex="0"

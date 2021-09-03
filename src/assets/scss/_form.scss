@@ -100,8 +100,8 @@ form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-l
 
 .error-input-message {
   color: $color-red-5 !important;
-  font-size: 0.75em !important;
   margin-top: 2px;
+  @extend .caption-typo;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {

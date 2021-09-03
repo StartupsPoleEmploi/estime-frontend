@@ -6,7 +6,7 @@
         <div
             class="form-group"
             *ngFor="let personneDTO of personnesDTO">
-            <span class="libelle-personne row">
+            <span class="libelle-personne row headline-4-typo">
                 Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
             </span>
             <div
@@ -14,7 +14,7 @@
                 *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="salaireNetPersonneACharge">
                         * Salaire net perçu
                     </label>
@@ -22,7 +22,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -69,7 +69,7 @@
                 *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="allocationMensuelleNetARE">
                         * ARE (Allocation Retour Emploi) perçue
                     </label>
@@ -77,7 +77,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -123,7 +123,7 @@
                 *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="allocationMensuelleNetASS">
                         * ASS (Allocation Solidarité Spécifique) perçue
                     </label>
@@ -131,7 +131,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -178,7 +178,7 @@
                 *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireRSA">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="allocationRSA">
                         * RSA (Revenu Solidarité Active) perçu
                     </label>
@@ -186,7 +186,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -233,7 +233,7 @@
                 *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="allocationAAH">
                         * AAH (Allocation Adulte Handicapé) perçue
                     </label>
@@ -241,7 +241,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -288,7 +288,7 @@
                 *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="pensionInvalidite">
                         * Pension d'invalidité perçue
                     </label>
@@ -296,7 +296,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -339,7 +339,7 @@
                 </div>
                 <div class="row mt-3 mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="allocationSupplementaireInvalidite">
                         * Allocation supplémentaire d'invalidité perçue
                     </label>
@@ -347,7 +347,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         le mois dernier
                     </span>
                     <input
@@ -389,7 +389,7 @@
                 *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="personneAChargeRevenusMicroEntreprise">
                         * Chiffre d'affaires en tant que micro entrepreneur
                     </label>
@@ -397,7 +397,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         net total 3 derniers mois
                     </span>
                     <input
@@ -444,7 +444,7 @@
                 *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="personneAChargeBeneficesTravailleurIndependant">
                         * Bénéfices en tant qu'indépendant
                     </label>
@@ -452,7 +452,7 @@
                 <div class="row">
                     <span
                         *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0">
+                        class="text-side-input ml-0 body-2-typo">
                         des bénéfices de l'année dernière
                     </span>
                     <input
@@ -496,7 +496,7 @@
         </div>
         <div class="row row-button-valider">
             <button
-                class="btn-style-perso-3"
+                class="btn-style-perso-3 button-typo"
                 aria-label="Valider ressources finançières de vos personnes à charge"
                 type="submit"
                 tag-action="clic_bouton_valider_ressources_personnes_a_charge">

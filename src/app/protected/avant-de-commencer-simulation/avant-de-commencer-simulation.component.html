@@ -5,16 +5,16 @@
         *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
-    <h1 class="h1-style-1">
+    <h1 class="h1-style-1 headline-1-typo">
         {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
     </h1>
     <div class="card card-body">
         <div class="row">
             <div class="col-12">
-                <p>
+                <p class="body-1-typo">
                     Pour faire l’estimation la plus juste, nous vous demandons les ressources de votre foyer, notamment les allocations que vous percevez.
                 </p>
-                <p>
+                <p class="body-1-typo">
                     <img
                         class="mr-2"
                         alt="Icône liste à puce"
@@ -25,7 +25,7 @@
                         - Votre
                         <span class="text-important">
                             dernière notification
-                            <div *ngIf="screenService.isScreenInferieur(767)"></div>
+                            <div *ngIf="screenService.isExtraSmallScreen()"></div>
                             ASS Pôle Emploi
                             <a
                                 aria-describedby="infobulle-derniere-notification-pole-emploi"
@@ -46,7 +46,7 @@
                         - Votre
                         <span class="text-important">
                             notification de droits
-                            <div *ngIf="screenService.isScreenInferieur(767)"></div>
+                            <div *ngIf="screenService.isExtraSmallScreen()"></div>
                             CAF ou MSA
                             <a
                                 target="_blank"
@@ -68,7 +68,7 @@
                         - Votre
                         <span class="text-important ">
                             dernière notification
-                            <div *ngIf="screenService.isScreenInferieur(767)"></div>
+                            <div *ngIf="screenService.isExtraSmallScreen()"></div>
                             de pension d'invalidité
                         </span>
                     </span>
@@ -88,7 +88,7 @@
                         </div>
                         <div
                             id="text-info-simulation"
-                            class="col">
+                            class="col body-2-typo">
                             <span>
                                 Les résultats qui vous seront donnés ne sont qu’une estimation, ils sont susceptibles d’évoluer en fonction de votre situation, et des évolutions réglementaires.
                             </span>
@@ -103,7 +103,7 @@
                     (click)="onClickButtonJeContinue()"
                     tag-navigation="clic_bouton_je_continue">
                     <div>
-                        <span>Je continue</span>
+                        <span class="button-typo">Je continue</span>
                         <img
                             alt="Icône flèche je continue"
                             src="./assets/images/icon-bt-primaire.svg">

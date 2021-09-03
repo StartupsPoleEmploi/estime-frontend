@@ -41,12 +41,12 @@ p, span, ul {
 
 .h1-style-1 {
   @extend .font-effect-title;
-  @extend .h1-style-1;
   text-align: left;
   font-size: 1.5em;
   @media #{$medium-device}, #{$large-device}  {
     font-size: 2.25em;
   }
+  color: $color-blue-2 !important;
 }
 
 .h2-style-1 {
@@ -142,6 +142,7 @@ p, span, ul {
 }
 
 .headline-5-typo {
+  text-align: start;
   font-size: 1rem !important; // 16px
   line-height: 1.5rem !important; // 24px
   @media #{$extra-small-device} {

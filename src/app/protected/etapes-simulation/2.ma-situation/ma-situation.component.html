@@ -1,7 +1,7 @@
 <div class="container-fluid form-container-fluid">
   <div class="div-title-formulaire">
-      <h1 class="h1-style-1">2. {{pageTitlesEnum.MA_SITUATION}}</h1>
-      <div class="text-under-h1">
+      <h1 class="h1-style-1 headline-1-typo">2. {{pageTitlesEnum.MA_SITUATION}}</h1>
+      <div class="text-under-h1 body-2-typo">
           {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
       </div>
   </div>
@@ -12,7 +12,7 @@
           <div class="form-group">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="codePostal">
                       * Votre code postal
                   </label>
@@ -46,7 +46,7 @@
           <div class="form-group">
               <div class="row  mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="dateNaissance">
                       * Votre date de naissance
                   </label>
@@ -61,7 +61,7 @@
           <div class="form-group">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="nationalite">
                       * Votre nationalité
                   </label>
@@ -101,7 +101,7 @@
               *ngIf="informationsPersonnelles.nationalite === nationalitesEnum.AUTRE">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="titreSejourValide">
                       Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
                   </label>
@@ -153,7 +153,7 @@
           <div class="form-group">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="situationsExceptionnelles"
                       aria-describedby="infobulle-ma-situation-vous-percevez">
                       * Vous percevez
@@ -183,7 +183,7 @@
                       (click)="onClickCheckBoxHasASS()"
                       (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)">
                       <div>
-                          <span>{{situationPersonneEnum.ASS}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
                       </div>
                   </label>
                   <label
@@ -191,7 +191,7 @@
                       name="beneficiaireRSA"
                       class="radio-button-style-1"
                       aria-label="Vous êtes bénéficiaire du RSA"
-                      data-testid="btn-situation-rsa"
+                      data-testid="btn-situation-rsa button-typo"
                       [(ngModel)]="beneficiaireAides.beneficiaireRSA"
                       btnCheckbox
                       tabindex="0"
@@ -200,7 +200,7 @@
                       (click)="onClickCheckBoxHasRSA()"
                       (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)">
                       <div>
-                          <span>{{situationPersonneEnum.RSA}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                       </div>
                   </label>
                   <label
@@ -208,7 +208,7 @@
                       name="hasRevenusImmobilier"
                       data-testid="btn-situation-revenu-immobilier"
                       aria-label="Vous avez des revenus immobilier"
-                      class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                      class="radio-button-style-1 mt-perso-sm ml-perso-lm button-typo"
                       [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
                       btnCheckbox
                       tabindex="0"
@@ -217,9 +217,7 @@
                       (click)="onClickCheckBoxHasRevenusImmobilier()"
                       (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
                       <div>
-                          <span>
-                              {{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}
-                          </span>
+                          <span class="body-2-typo">                              {{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
                       </div>
                   </label>
                   <label
@@ -235,7 +233,7 @@
                       (click)="onClickCheckBoxHasAAH()"
                       (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
                       <div>
-                          <span>{{situationPersonneEnum.AAH}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
                       </div>
                   </label>
                   <label
@@ -251,9 +249,7 @@
                       (click)="onClickCheckBoxHasPensionInvalidite()"
                       (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
                       <div>
-                          <span>
-                              {{situationPersonneEnum.PENSION_INVALIDITE}}
-                          </span>
+                          <span class="body-2-typo">                              {{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                       </div>
                   </label>
                   <span
@@ -266,7 +262,7 @@
           <div class="form-group">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="situationFamilialeDemandeur">
                       * Votre situation familiale
                   </label>
@@ -287,7 +283,7 @@
                       [(ngModel)]="situationFamiliale.isEnCouple"
                       (keyup)="handleKeyUpOnButtonSituationFamiliale($event, false)">
                       <div>
-                          <span>{{situationsFamilialesEnum.SEULE}}</span>
+                          <span class="body-2-typo">{{situationsFamilialesEnum.SEULE}}</span>
                       </div>
                   </label>
                   <label
@@ -305,7 +301,7 @@
                       [(ngModel)]="situationFamiliale.isEnCouple"
                       (keyup)="handleKeyUpOnButtonSituationFamiliale($event, true)">
                       <div>
-                          <span>{{situationsFamilialesEnum.EN_COUPLE}}</span>
+                          <span class="body-2-typo">{{situationsFamilialesEnum.EN_COUPLE}}</span>
                       </div>
                   </label>
               </div>
@@ -320,7 +316,7 @@
               *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="isSeulPlusDe18Mois">
                       * Vous vivez seul.e depuis plus de 18 mois ?
                   </label>
@@ -340,7 +336,7 @@
                           [value]="true"
                           #isSeulPlusDe18Mois="ngModel">
                       <label
-                          class="custom-control-label"
+                          class="custom-control-label body-2-typo"
                           for="isSeulPlusDe18MoisOui">
                           oui
                       </label>
@@ -359,7 +355,7 @@
                           [value]="false"
                           #isSeulPlusDe18Mois="ngModel">
                       <label
-                          class="custom-control-label"
+                          class="custom-control-label body-2-typo"
                           for="isSeulPlusDe18MoisNon">
                           non
                       </label>
@@ -376,7 +372,7 @@
               *ngIf="situationFamiliale.isEnCouple === true">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="situationConjoint">
                       * Votre conjoint(e) perçoit
                   </label>
@@ -395,7 +391,7 @@
                       (click)="onClickCheckBoxConjointIsSalarie()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
                       <div>
-                          <span>{{situationPersonneEnum.SALARIE}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
                       </div>
                   </label>
                   <label
@@ -411,7 +407,7 @@
                       (click)="onClickCheckBoxConjointHasARE()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
                       <div>
-                          <span>{{situationPersonneEnum.ARE}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
                       </div>
                   </label>
                   <label
@@ -427,7 +423,7 @@
                       (click)="onClickCheckBoxConjointHasASS()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
                       <div>
-                          <span>{{situationPersonneEnum.ASS}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
                       </div>
                   </label>
                   <label
@@ -444,7 +440,7 @@
                       (click)="onClickCheckBoxConjointHasRSA()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
                       <div>
-                          <span>{{situationPersonneEnum.RSA}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                       </div>
                   </label>
                   <label
@@ -460,7 +456,7 @@
                       (click)="onClickCheckBoxConjointHasAAH()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
                       <div>
-                          <span>{{situationPersonneEnum.AAH}}</span>
+                          <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
                       </div>
                   </label>
                   <label
@@ -476,9 +472,7 @@
                       (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
                       <div>
-                          <span>
-                              {{situationPersonneEnum.PENSION_INVALIDITE}}
-                          </span>
+                          <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                       </div>
                   </label>
                   <label
@@ -494,9 +488,7 @@
                       (click)="onClickCheckBoxConjointIsSansRessource()"
                       (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">
                       <div>
-                          <span>
-                              {{situationPersonneEnum.SANS_RESSOURCE}}
-                          </span>
+                          <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
                       </div>
                   </label>
               </div>
@@ -511,7 +503,7 @@
               *ngIf="beneficiaireAides.beneficiaireRSA === true || situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA === true">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="isProprietaireSansPretOuLogeGratuit"
                       aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
                       * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
@@ -541,7 +533,7 @@
                           [value]="true"
                           #isProprietaireSansPretOuLogeGratuit="ngModel">
                       <label
-                          class="custom-control-label"
+                          class="custom-control-label body-2-typo"
                           for="isProprietaireSansPretOuLogeGratuitOui">
                           oui
                       </label>
@@ -560,7 +552,7 @@
                           [value]="false"
                           #isProprietaireSansPretOuLogeGratuit="ngModel">
                       <label
-                          class="custom-control-label"
+                          class="custom-control-label body-2-typo"
                           for="isProprietaireSansPretOuLogeGratuitNon">
                           non
                       </label>
@@ -577,7 +569,7 @@
         <button
             id="btn-ma-situation-retour"
             data-testid="btn-ma-situation-retour"
-            class="btn-style-perso-2 first-btn"
+            class="btn-style-perso-2 first-btn button-typo"
             aria-label="Retour à la page précédente"
             (click)="onClickButtonRetour()"
             tag-navigation="clic_bouton_retour"
@@ -590,7 +582,7 @@
         <button
             id="btn-ma-situation-suivant"
             data-testid="btn-ma-situation-suivant"
-            class="btn-style-perso-1 second-btn"
+            class="btn-style-perso-1 second-btn button-typo"
             aria-label="Passer à la page suivante"
             type="submit"
             aria-label="quantity of pens"

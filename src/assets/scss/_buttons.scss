@@ -312,4 +312,6 @@
   cursor: auto;
 }
 
-
+select, option {
+  @extend .body-2-typo;
+}

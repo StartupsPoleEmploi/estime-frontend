@@ -1,7 +1,7 @@
 <div class="container-fluid form-container-fluid">
     <div class="div-title-formulaire">
-        <h1 class="h1-style-1">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
-        <div class="text-under-h1">
+        <h1 class="h1-style-1 headline-1-typo">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
+        <div class="text-under-h1 body-2-typo">
             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
         </div>
     </div>
@@ -14,7 +14,7 @@
                 <div class="col-12 col-sm-4 form-group">
                     <div class="row mb-1">
                         <label
-                            class="label"
+                            class="label headline-4-typo"
                             for="typeContrat">
                             * Type de contrat
                         </label>
@@ -33,9 +33,10 @@
                                 [value]="typesContratTavailEnum.CDI"
                                 required
                                 #typeContrat="ngModel"
+                                style="color:red;"
                                 (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDI)">
                             <label
-                                class="custom-control-label"
+                                class="custom-control-label body-2-typo"
                                 for="typeContratCDI">
                                 {{typesContratTavailEnum.CDI}}
                             </label>
@@ -54,7 +55,7 @@
                                 #typeContrat="ngModel"
                                 (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDD)">
                             <label
-                                class="custom-control-label"
+                                class="custom-control-label body-2-typo"
                                 for="typeContratCDD">
                                 {{typesContratTavailEnum.CDD}}
                             </label>
@@ -70,7 +71,7 @@
                     class="col-12 col-sm-4 form-group form-group-nombre-mois"
                     *ngIf="futurTravail.typeContrat == 'CDD'">
                     <label
-                        class="label mb-2"
+                        class="label mb-2 headline-4-typo"
                         for="nombreMoisCDD">
                         * Nombre de mois
                     </label>
@@ -106,7 +107,7 @@
             <div class="form-group">
                 <div class="row flex-column mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="dureeHebdomadaire">
                         * Durée hebdomadaire
                     </label>
@@ -128,7 +129,7 @@
                         required
                         type="text"
                         #dureeHebdomadaire="ngModel">
-                    <span class="text-side-input">heures par semaine</span>
+                    <span class="text-side-input body-2-typo">heures par semaine</span>
                 </div>
                 <span
                     *ngIf="this.futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX"
@@ -154,7 +155,7 @@
             <div class="form-group">
                 <div class="row mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut ou net
                         <div
@@ -213,7 +214,7 @@
                     <div
                         *ngIf="screenService.isExtraSmallScreen()"
                         class="col-12">
-                        <span class="net-ou-brut font-weight-bold">ou</span>
+                        <span class="net-ou-brut font-weight-bold body-2-typo">ou</span>
                     </div>
                     <div class="col-12 col-sm-5">
                         <div class="row">
@@ -270,7 +271,7 @@
             <div class="form-group">
                 <div class="row flex-column mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="distanceDomicileLieuTravail">
                         * Distance à parcourir entre votre domicile et le lieu de travail
                     </label>
@@ -290,7 +291,7 @@
                         required
                         inputmode="numeric"
                         #distanceDomicileLieuTravail="ngModel">
-                    <span class="text-side-input">km</span>
+                    <span class="text-side-input body-2-typo">km</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -301,7 +302,7 @@
             <div class="form-group">
                 <div class="row flex-column mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de jours où vous irez sur le lieu de travail
@@ -331,7 +332,7 @@
                         required
                         inputmode="numeric"
                         #nombreTrajetsDomicileTravail="ngModel">
-                    <span class="text-side-input">par mois</span>
+                    <span class="text-side-input body-2-typo">par mois</span>
                 </div>
                 <span
                     class="row error-input-message"
@@ -349,7 +350,7 @@
                 tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
-                    <span>Retour</span>
+                    <span class="button-typo">Retour</span>
                 </div>
             </button>
             <button
@@ -361,7 +362,7 @@
                 (click)="onSubmitFuturTravailForm(futurTravailForm)"
                 tag-navigation="clic_bouton_suivant">
                 <div>
-                    <span>Suivant</span>
+                    <span class="button-typo">Suivant</span>
                     <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">
                 </div>
             </button>
@@ -377,7 +378,9 @@
                 (click)="popoverSalaireNet.hide()"></i>
         </div>
         <div class="row">
-            <b>Qu'est ce que le salaire brut et net ?</b>
+            <h5>
+                Qu'est ce que le salaire brut et net ?
+            </h5>
             <p>
                 Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations sociales et du prélévement à la source.
             </p>
@@ -396,9 +399,9 @@
                 (click)="popoverNombreTrajet.hide()"></i>
         </div>
         <div class="row">
-            <p>
-                <b>Exemples de calculs :</b>
-            </p>
+            <h5>
+                Exemples de calculs :
+            </h5>
             <p>
                 Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc indiquer
                 <b>

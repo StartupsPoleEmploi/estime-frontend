@@ -8,10 +8,10 @@
         {{messageErreur}}
     </alert>
     <div class="div-title-formulaire">
-        <h1 class="h1-style-1">
+        <h1 class="h1-style-1 headline-1-typo">
             4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}
         </h1>
-        <div class="text-under-h1">
+        <div class="text-under-h1 body-2-typo">
             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
         </div>
     </div>
@@ -30,7 +30,7 @@
                                 class="euro-sign"
                                 src="./assets/images/euro.svg">
                         </div>
-                        <div class="col-9 col-md-10 col-text-button">
+                        <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div class="text-button">Vos ressources</div>
                             <div *ngIf="!isVosRessourcesDisplay">Total : {{montantVosRessources}} €</div>
                         </div>
@@ -70,7 +70,7 @@
                                 class="euro-sign"
                                 src="./assets/images/euro.svg">
                         </div>
-                        <div class="col-9 col-md-10 col-text-button">
+                        <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div
                                 id="label-vos-ressources"
                                 class="text-button">
@@ -114,7 +114,7 @@
                                 class="euro-sign"
                                 src="./assets/images/euro.svg">
                         </div>
-                        <div class="col-9 col-md-10 col-text-button">
+                        <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div
                                 id="label-ressources-conjoint"
                                 class="text-button">
@@ -158,7 +158,7 @@
                                 class="euro-sign"
                                 src="./assets/images/euro.svg">
                         </div>
-                        <div class="col-9 col-md-10 col-text-button">
+                        <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div
                                 id="label-ressources-foyer"
                                 class="text-button">
@@ -189,7 +189,7 @@
     <div class="div-buttons-form row d-flex justify-content-center">
         <div *ngIf="!screenService.isExtraSmallScreen()">
             <button
-                class="btn-style-perso-2 first-btn"
+                class="btn-style-perso-2 first-btn button-typo"
                 aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">
@@ -207,7 +207,7 @@
             <button
                 id="btn-obtenir-simulation"
                 aria-label="Obtenir ma simulation"
-                class="btn-style-perso-1 second-btn"
+                class="btn-style-perso-1 second-btn button-typo"
                 data-testid="btn-obtenir-simulation"
                 (click)="onClickButtonObtenirSimulation()"
                 tag-action="clic_bouton_obtenir_ma_simulation">
@@ -221,7 +221,7 @@
         </div>
         <div *ngIf="this.screenService.isExtraSmallScreen()" class="text-center">
             <button
-                class="btn-style-perso-2 first-btn"
+                class="btn-style-perso-2 first-btn button-typo"
                 aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">

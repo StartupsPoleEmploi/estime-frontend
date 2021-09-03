@@ -7,7 +7,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiaireASS()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="input-allocation-journaliere-net-ass">
                       * Montant net de votre allocation journalière ASS
                   </label>
@@ -57,7 +57,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiaireASS()">
               <div class="row  mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="dateDerniereOuvertureDroit">
                       * Date dernière ouverture de droit à l'ASS
                   </label>
@@ -74,7 +74,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiaireRSA()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="allocationRSA">
                       * RSA (Revenu de Solidarité Active) perçu
                   </label>
@@ -123,7 +123,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiaireRSA()">
               <div class="row flex-column">
                   <label
-                      class="label mb-2"
+                      class="label mb-2 headline-4-typo"
                       for="prochaineDeclarationRSA">
                       * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle RSA ?
                   </label>
@@ -160,7 +160,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiaireAAH()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="allocationAAH">
                       * Allocation Adulte Handicapé (AAH) perçue
                   </label>
@@ -208,7 +208,7 @@
           <div class="form-group">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="hasTravailleAuCoursDerniersMois">
                       * Avez-vous travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois ?
                   </label>
@@ -302,7 +302,7 @@
               <div class="form-group">
                   <div class="row mb-2">
                       <label
-                          class="label"
+                          class="label headline-4-typo"
                           for="salaireMoisMoins1AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(0)}}
                       </label>
@@ -343,7 +343,7 @@
                               #isSansSalaireMoisDemandeSimulation="ngModel">
                           <label
                               for="pasDeSalaireMoisMoins1AvantSimulation"
-                              class="form-check-label">
+                              class="form-check-label body-2-typo">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
                       </div>
@@ -364,7 +364,7 @@
               <div class="form-group">
                   <div class="row mb-2">
                       <label
-                          class="label"
+                          class="label headline-4-typo"
                           for="salaireMoisMoins2AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                       </label>
@@ -404,7 +404,7 @@
                               #isSansSalaireMoisMMoins1AvantPeriodeSimulee="ngModel">
                           <label
                               for="pasDeSalaireMoisMoins2AvantSimulation"
-                              class="form-check-label">
+                              class="form-check-label body-2-typo">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
                       </div>
@@ -425,7 +425,7 @@
               <div class="form-group">
                   <div class="row mb-2">
                       <label
-                          class="label"
+                          class="label headline-4-typo"
                           for="salaireMoisMoins3AvantSimulation">
                           * Salaire en {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
                       </label>
@@ -465,7 +465,7 @@
                               #isSansSalaireMoisNMoins2AvantPeriodeSimulee="ngModel">
                           <label
                               for="pasDeSalaireMoisMoins3AvantSimulation"
-                              class="form-check-label">
+                              class="form-check-label body-2-typo">
                               Je n'ai pas reçu de salaire ce mois-là
                           </label>
                       </div>
@@ -496,7 +496,7 @@
               *ngIf="deConnecteBenefiaireAidesService.isBeneficiairePensionInvalidite()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="pensionInvalidite">
                       * Pension d'invalidité perçue
                   </label>
@@ -541,7 +541,7 @@
               </div>
               <div class="row mt-3 mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="allocationSupplementaireInvalidite">
                       * Allocation supplémentaire d'invalidité perçue
                   </label>
@@ -549,7 +549,7 @@
               <div class="row">
                   <span
                       *ngIf="screenService.isExtraSmallScreen()"
-                      class="text-side-input ml-0">
+                      class="text-side-input ml-0 body-2-typo">
                       le mois dernier
                   </span>
                   <input
@@ -590,7 +590,7 @@
               *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="revenusMicroEntreprise">
                       * Chiffre d'affaires en tant que micro entrepreneur
                   </label>
@@ -598,7 +598,7 @@
               <div class="row">
                   <span
                       *ngIf="screenService.isExtraSmallScreen()"
-                      class="text-side-input ml-0">
+                      class="text-side-input ml-0 body-2-typo">
                       net total 3 derniers mois
                   </span>
                   <input
@@ -645,7 +645,7 @@
               *ngIf="deConnecteInfosPersonnellesService.isTravailleurIndependant()">
               <div class="row mb-2">
                   <label
-                      class="label"
+                      class="label headline-4-typo"
                       for="beneficesTravailleurIndependantDernierExercice">
                       * Bénéfices en tant qu'indépendant
                   </label>
@@ -653,7 +653,7 @@
               <div class="row">
                   <span
                       *ngIf="screenService.isExtraSmallScreen()"
-                      class="text-side-input ml-0">
+                      class="text-side-input ml-0 body-2-typo">
                       des bénéfices de l'année dernière
                   </span>
                   <input
@@ -698,7 +698,7 @@
       <div class="row row-button-valider">
           <button
               id="btn-vos-ressources-valider"
-              class="btn-style-perso-3"
+              class="btn-style-perso-3 button-typo"
               aria-label="Valider votre saisie"
               data-testid="btn-vos-ressources-valider"
               (click)="onSubmitRessourcesFinancieresForm(vosRessourcesFinancieresForm)"

@@ -7,9 +7,13 @@ popover-container {
 .popover {
   background: $color-blue-5;
   color: $color-white-3;
-  font-size: 0.9em !important;
+
+  h5 {
+    @extend .headline-5-typo;
+  }
+
   p {
-    font-size: 0.9em !important;
+    @extend .body-2-typo;
   }
 }
 

@@ -6,7 +6,7 @@
         <div class="form-group">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="montantAllocationsLogement">
                     * Allocations logement perçues pour les 3 derniers mois
                 </label>
@@ -15,7 +15,7 @@
                 <div
                     class="row"
                     *ngIf="screenService.isExtraSmallScreen()">
-                    <span class="text-side-input ml-0">
+                    <span class="text-side-input ml-0 body-2-typo">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                     </span>
                 </div>
@@ -59,7 +59,7 @@
                 <div
                     class="row"
                     *ngIf="screenService.isExtraSmallScreen()">
-                    <span class="text-side-input ml-0">
+                    <span class="text-side-input ml-0 body-2-typo">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}
                     </span>
                 </div>
@@ -103,7 +103,7 @@
                 <div
                     class="row"
                     *ngIf="screenService.isExtraSmallScreen()">
-                    <span class="text-side-input ml-0">
+                    <span class="text-side-input ml-0 body-2-typo">
                         au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}
                     </span>
                 </div>
@@ -149,7 +149,7 @@
             *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="allocationsFamiliales">
                     * Allocations familiales
                 </label>
@@ -157,7 +157,7 @@
             <div
                 class="row"
                 *ngIf="screenService.isExtraSmallScreen()">
-                <span class="text-side-input ml-0">le mois dernier</span>
+                <span class="text-side-input ml-0 body-2-typo">le mois dernier</span>
             </div>
             <div class="row">
                 <input
@@ -199,7 +199,7 @@
             *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="allocationSoutienFamilial">
                     * Allocation soutien familial
                 </label>
@@ -207,7 +207,7 @@
             <div
                 class="row"
                 *ngIf="screenService.isExtraSmallScreen()">
-                <span class="text-side-input ml-0">le mois dernier</span>
+                <span class="text-side-input ml-0 body-2-typo">le mois dernier</span>
             </div>
             <div class="row">
                 <input
@@ -249,14 +249,14 @@
             *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="allocationsFamiliales">
                     * Complément familial
                 </label>
             </div>
             <div class="row" *ngIf="screenService.isExtraSmallScreen()">
               <span
-                    class="text-side-input ml-0">
+                    class="text-side-input ml-0 body-2-typo">
                     le mois dernier
                 </span>
             </div>
@@ -300,14 +300,14 @@
             *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans();">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="montantPAJEFoyer">
                     * PAJE (prestation d'accueil du jeune enfant)
                 </label>
             </div>
             <div class="row" *ngIf="screenService.isExtraSmallScreen()">
               <span
-                    class="text-side-input ml-0">
+                    class="text-side-input ml-0 body-2-typo">
                     le mois dernier
                 </span>
             </div>
@@ -351,13 +351,13 @@
             *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="montantPersionsAlimentairesFoyer">
                     * Pensions alimentaires du foyer perçues
                 </label>
             </div>
             <div class="row" *ngIf="screenService.isExtraSmallScreen()">
-                    <span class="text-side-input ml-0">le mois dernier</span>
+                    <span class="text-side-input ml-0 body-2-typo">le mois dernier</span>
             </div>
             <div class="row">
                 <input
@@ -399,7 +399,7 @@
             *ngIf="deConnecteInfosPersonnellesService.hasRevenusImmobilier()">
             <div class="row mb-2">
                 <label
-                    class="label"
+                    class="label headline-4-typo"
                     for="revenusImmobilierFoyer">
                     * Revenus annuels de placement ou du patrimoine
                     <div
@@ -415,7 +415,7 @@
             </div>
             <div class="row" *ngIf="screenService.isExtraSmallScreen()">
                 <span
-                    class="text-side-input ml-0">
+                    class="text-side-input ml-0 body-2-typo">
                     net total 3 derniers mois
                 </span>
             </div>
@@ -463,7 +463,7 @@
             <button
                 id="btn-ressources-foyer-valider"
                 aria-label="Valider ressources finançière de votre foyer"
-                class="btn-style-perso-3"
+                class="btn-style-perso-3 button-typo"
                 type="submit"
                 data-testid="btn-ressources-foyer-valider"
                 tag-action="clic_bouton_valider_ressources_foyer">
@@ -474,3 +474,24 @@
         </div>
     </form>
 </div>
+
+<ng-template #popoverRevenusImmobiliersTemplate>
+    <div class="container" (click)="onClickPopoverRevenusImmobiliers($event)">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2 ml-auto"
+                (click)="onClickClosePopoverRevenusImmobiliers($event)"></i>
+        </div>
+        <div class="row">
+            <h5>
+                Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
+            </h5>
+            <p> * revenus fonciers ou micro-fonciers
+                <br>
+                * revenus des capitaux (actions, obligations)
+                <br>
+                * bénéfices d'une rente viagère
+            </p>
+        </div>
+    </div>
+</ng-template>

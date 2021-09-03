@@ -1,6 +1,6 @@
 <div class="row card">
     <div class="card-title">
-        <span>Personne {{numeroNouvellePersonne}}</span>
+        <span class="headline-3-typo">Personne {{numeroNouvellePersonne}}</span>
         <i
             tabindex="0"
             class="fas fa-times-circle mb-2 mr-2 float-right"
@@ -16,12 +16,12 @@
             <div class="form-group">
                 <div class="mb-2">
                     <label
-                        class="label"
+                        class="label headline-4-typo"
                         for="dateNaissance">
                         * Date de naissance
                     </label>
                 </div>
-                <div class="form-group">
+                <div class="form-group ml-3">
                     <app-date-inputs
                         [dateSaisie]="dateNaissanceNouvellePersonne"
                         [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
@@ -37,7 +37,7 @@
             </app-form-personne-a-charge-situation>
             <div>
                 <button
-                    class="btn-style-perso-3"
+                    class="btn-style-perso-3 button-typo"
                     type="submit"
                     data-testid="btn-valider-personne-charge">
                     <div>
