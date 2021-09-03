@@ -1,31 +1,5 @@
 @import "../../../assets/scss/variables";
 
-.row-aides{
-    width: 53rem;
-    margin-right: auto;
-    margin-left: auto;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-.container-aides {
-    display: flex;
-    justify-content: center;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-.titre-carte {
-    display: flex;
-    margin-top: 0rem !important;
-}
-
 .icone-carte {
     float: left;
 }
@@ -36,9 +10,7 @@
 
 .rectangle {
     height: 0.188rem;
-    width: 18.625rem;
-    left: 18.625rem;
-    top: 1.75rem;
+    width: 70%;
     align-items: left;
 
     &.agepi {
@@ -56,124 +28,65 @@
     &.aah {
         background: $color-aah;
     }
-    
+}
+
+.card-aides {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border: unset;
+
     @media #{$extra-small-device} {
-        display: none;
+      margin-top: 1rem;
+      cursor: pointer;
     }
 }
 
-.col-lg-11 {
-    padding-left: 0rem;
-}
+.card-title-aides {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    .icon-aide {
+        padding-right:0.5rem;
+        float: left;
+    }
 
-.titre-carte-texte {
-    padding: 0rem;
-    width: 51.75rem;
-    height: 1.938rem;
-    left: 3.375rem;
-    top: 0.281rem;
-    margin: 0rem 0.75rem;
-    font-family: Poppins;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.25rem;
-    text-align: left;
-    color: #1b2b67;
-    margin: 0rem;
-}
+    .intitule-aide {
+        color: $color-blue-2;
 
-.texte-aide {
-    margin-top: 1rem;
-    @media #{$extra-small-device} {
-        display:none
+        .aide-organisme {
+            color: $color-grey-5;
+        }
     }
 }
+
+.card-body-aides {
+    padding: 0;
+    padding-top: 0.5rem;
+}
+
 
 .en-savoir-plus {
-    font-family: Lato;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.5rem;
-    letter-spacing: 0rem;
-    text-align: left;
-    color: #2349d7;
+    color: $color-blue-10;
     text-decoration: none;
     float: left;
-    padding-right: 0.5rem;
-    @media #{$extra-small-device} {
-        display:none
+    cursor: pointer;
+
+    img {
+        vertical-align: middle;
     }
 }
 
 .titre-aides {
-    width: 57.1rem;
-    vertical-align: baseline;
-    font-size: 2.25rem;
-    font-family: Poppins;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 2.25rem;
-    margin-left: auto;
-    margin-right: auto;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: 2rem;
-        margin-right: auto;
-        font-size: 3.5rem;
-    }
-}
-
-.card {
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-    width: 57.1rem;
-    height: 11rem;
-    padding: 1rem;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-.card-body {
-    padding: 0rem;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-.toutes-les-aides{
-    padding: 0rem;
-}
-
-.titre-autres-aides{
-    height: 2.25rem;
-    width: 30rem;
-    top: 48.813rem;
-    font-family: Poppins;
-    font-size: 1.875rem;
-    font-weight: 700;
-    line-height: 2.25rem;
     text-align: left;
-    color: #1B2B67;
-    display: flex;
-    justify-content: left;
-    @media #{$extra-small-device} {
-        width: fit-content !important;
-        margin-left: 0rem;
-        margin-right: auto;
-        font-family: Poppins;
-        font-size: 3.75rem;
-        letter-spacing: 0rem;
-        text-align: left;
-        height: 2.25rem;
-        width: 14.5rem;
-        left: 1rem;
-    }
+    padding-left: 1rem;
+    color: $color-blue-2;
+
 }
 
+.titre-autres-aides {
+    @extend .titre-aides;
+    margin-top:4rem;
+}

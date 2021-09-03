@@ -6,7 +6,6 @@
 }
 
 .titre-aides {
-   width: 57.1rem;
    vertical-align: baseline;
    font-size: 2.25rem;
    font-family: Poppins;
@@ -17,39 +16,41 @@
    margin-right: auto;
 }
 
-.titre-carte-texte {
-   padding: 0rem;
-   width: 51.75rem;
-   height: 1.938rem;
-   left: 3.375rem;
-   top: 0.281rem;
-   margin: 0rem 0.75rem;
-   font-family: Poppins;
-   font-size: 2.25rem;
-   font-style: normal;
-   font-weight: 700;
-   line-height: 2.25rem;
-   letter-spacing: 0rem;
-   text-align: left;
-   text-align: left;
-   color: #1b2b67;
-   margin: 0rem;
+.titre-detail-aide {
+   margin-top: 1rem;
+   color: $color-blue-2;
 }
 
 .rectangle {
-   margin-top: 00.5rem;
-   height: 0.188rem;
-   width: 41.5rem;
-   left: 41.5rem;
-   top: 2.75rem;
    align-items: left;
+   height: 0.188rem;
+   width: 100%;
 }
 
-.icone-carte{
-   margin-left:auto;
-   margin-right:auto;
-   display:block;
-   margin-right: 0%;
+.icone-carte {
+   max-height: 100%;
+   max-width: 100%;
+   width: auto;
+   height: auto;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+
+   @media #{$extra-small-device} {
+      max-height: unset;
+      max-width: unset;
+      width: unset;
+      height: unset;
+      position: unset;
+      top: unset;
+      bottom: unset;
+      left: unset;
+      right: unset;
+      margin: unset;
+   }
 }
 
 .card-body-btn-action{
@@ -115,3 +116,6 @@
     padding-bottom: 1.219rem;
  }
 
+.headlines-descriptions-aides {
+   color: $color-blue-2;
+}

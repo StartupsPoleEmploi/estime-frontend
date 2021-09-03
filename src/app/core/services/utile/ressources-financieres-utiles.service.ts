@@ -150,7 +150,6 @@ export class RessourcesFinancieresUtileService {
         }
       }
     }
-    console.log("beneficiaireASS : "+isBeneficiareASSOuRSA+ " - beneficiaireAAH : " +isBeneficiaireAAH + " - champValides : " + isChampsSalairesValides);
     return isChampsSalairesValides;
   }
 

@@ -6,19 +6,17 @@
     </alert>
     <div class="titre-carte">
         <div class="row">
-            <div class="col-lg-1">
+            <div class="col-md-1 col-12">
                 <img class="icone-carte" alt="" [src]="aideSelected.iconeAide">
             </div>
-            <div class="col-lg-11" style="padding-left: 0%;">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p class="titre-carte-texte">
-                            {{ this.aideSelected.nom }}
-                        </p>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="rectangle" [style]="this.aideSelected.couleurAide"></div>
-                    </div>
+            <div class="col-md-11 col-12">
+                <div class="row ml-1">
+                    <p class="titre-detail-aide headline-1-typo">
+                        {{ this.aideSelected.nom }}
+                    </p>
+                </div>
+                <div class="row ml-1">
+                    <div class="rectangle" [style]="this.aideSelected.couleurAide"></div>
                 </div>
             </div>
         </div>
@@ -30,7 +28,7 @@
             <button id="btn-aides-detail"
                 type="button"
                 aria-label="Faire la demande d'aide"
-                class="btn-style-perso-1 btn-aides-suite"
+                class="btn-style-perso-1 btn-aides-suite button-typo"
                 data-testid="btn-aides-detail"
                 tag-action="clique_bouton_demande_aide"
                 (click)="onClickFaireLaDemandeAide()">
