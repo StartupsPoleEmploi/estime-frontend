@@ -2,18 +2,18 @@
     <div class="col-auto paie mt-auto mb-auto col-code-ressource"
          [ngClass]="[codeRessource.toLowerCase()]">
          <div>
-           <span>{{codeRessource}}</span>
+           <span class="overline-typo">{{codeRessource}}</span>
          </div>
     </div>
     <div class="col-auto mt-auto mb-auto col-libelle">
         <div class="row flex-column">
-            <span class="span-libelle-aide">{{libelleRessource}}</span>
-            <span *ngIf="organismeRessource" class="span-organisme">{{organismeRessource}}</span>
+            <span class="span-libelle-aide body-2-typo">{{libelleRessource}}</span>
+            <span *ngIf="organismeRessource" class="span-organisme overline-typo">{{organismeRessource}}</span>
         </div>
     </div>
     <div class="col-auto mt-auto mb-auto col-montant" data-testid="col-montant-ressource">
       <div data-testid="div-span-montant-ressource" class="span-montant-ressource">
-        <span data-testid="span-montant-ressource">
+        <span data-testid="span-montant-ressource" class="headline-5-typo">
             {{montantRessource}} €
         </span>
       </div>

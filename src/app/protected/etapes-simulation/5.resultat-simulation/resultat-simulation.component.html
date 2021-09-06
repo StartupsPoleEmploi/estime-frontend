@@ -1,5 +1,5 @@
 <div class="container-fluid form-container-fluid">
-    <h1 class="h1-style-1">
+    <h1 class="h1-style-1 headline-1-typo">
         5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
         <div
             id="infobulle-resultat-simulation"
@@ -18,7 +18,7 @@
             class="col-12 col-md-12 mt-auto mb-auto">
             <div
                 id="label-alerte-montants-resultat-simulation"
-                class="mx-2 text-justify">
+                class="mx-2 text-justify body-2-typo">
                 Les futures allocations logement, familiales et autres ressources du foyer, ainsi que le prélèvement à la source sont à ajouter au résultat de la simulation. Nous travaillons actuellement à enrichir ce résultat des allocations logement recalculées ainsi que des prestations familiales. Nous faisons tout pour vous les proposer très prochainement.
             </div>
         </div>
@@ -36,7 +36,7 @@
                     <img
                         alt="Icône téléchargement"
                         src="./assets/images/download_2.svg">
-                    <span id="telecharger_simulation_text">Télécharger la simulation</span>
+                    <span id="telecharger_simulation_text" class="button-typo">Télécharger la simulation</span>
                 </div>
             </span>
         </div>
@@ -52,7 +52,7 @@
                     <img
                         alt="Icône refaire simulation"
                         src="./assets/images/refaire_simulation.svg">
-                    <span id="refaire_simulation_text">Refaire une simulation</span>
+                    <span id="refaire_simulation_text" class="button-typo">Refaire une simulation</span>
                 </div>
             </span>
         </div>
@@ -65,8 +65,8 @@
                 (click)="onClickOnglet(true)"
                 tabindex="0"
                 [ngClass]="{isOngletInactive: !afficherDetails}">
-                <span>
-                    Détail <span *ngIf="!screenService.isExtraSmallScreen()">des ressources estimées</span>
+                <span class="button-typo">
+                    Détail <span *ngIf="!screenService.isExtraSmallScreen()" class="button-typo">des ressources estimées</span>
                 </span>
             </button>
         </div>
@@ -77,8 +77,8 @@
                 (click)="onClickOnglet(false)"
                 tabindex="0"
                 [ngClass]="{isOngletInactive: afficherDetails}">
-                <span>
-                    Évolution <span *ngIf="!screenService.isExtraSmallScreen()">des ressources sur {{ nombreMoisSimules }} mois</span>
+                <span class="button-typo">
+                    Évolution <span *ngIf="!screenService.isExtraSmallScreen()" class="button-typo">des ressources sur {{ nombreMoisSimules }} mois</span>
                 </span>
             </button>
         </div>
@@ -107,23 +107,23 @@
                         attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
                         tag-action="clic_bouton_detail_ressources_du_mois">
                         <div class="row">
-                            <div id="span-mois-annee" [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
-                                <span>
+                            <div [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
+                                <span class="span-mois-annee headline-4-typo">
                                     {{getDateStringFormat(simulationMensuel)}}
                                 </span>
                             </div>
                             <div [ngClass]="{'col-6': !screenService.isExtraSmallScreen()}"></div>
                             <div [ngClass]="{'col-4 p-0 mt-auto mb-auto ml-auto mr-0': screenService.isExtraSmallScreen(), 'col-2': !screenService.isExtraSmallScreen()}">
-                                <span class="float-right">
+                                <span  class="span-montant-mensuel headline-4-typo float-right">
                                     {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                                 </span>
                             </div>
                             <div class="col-1" [ngClass]="{'p-0 ml-auto mr-1': screenService.isExtraSmallScreen()}">
                                 <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-up"></i>
+                                    <i alt class="fas fa-chevron-up span-montant-mensuel"></i>
                                 </span>
                                 <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-down"></i>
+                                    <i alt class="fas fa-chevron-down span-montant-mensuel"></i>
                                 </span>
                             </div>
                         </div>
@@ -160,7 +160,7 @@
                 (click)="popoverResultatSimulation.hide()"></i>
         </div>
         <div class="row">
-            <p>
+            <p class="body-2-typo">
                 Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont susceptibles d'évoluer.
             </p>
         </div>

@@ -7,13 +7,13 @@
     padding-bottom: 2rem;
   }
   .container-fluid {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
 .section-temoignage-avec-sticky-button {
   @media #{$extra-small-device} {
-    margin-bottom: calc(#{$espace-se-connecter-sticky-height});
+    margin-bottom: calc(#{$espace-se-connecter-sticky-height} + 2rem);
   }
 }

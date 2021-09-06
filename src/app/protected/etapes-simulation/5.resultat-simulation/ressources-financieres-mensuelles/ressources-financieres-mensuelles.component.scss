@@ -108,15 +108,12 @@
 }
 
 .card-message-alerte-aide {
-  background-color: unset;
-  border: 1px solid $color-grey-1 !important;
-  border-radius: 0.25rem;
-  margin-top: 0.5rem;
+  background-color: $color-grey-1;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  padding: 1rem 0.5rem 0.5rem 1rem;
   span {
-    font-size: 0.875em;
-    line-height: 21px;
+    color: $color-blue-2
   }
   .row {
     margin-left: auto;

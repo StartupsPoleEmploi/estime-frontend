@@ -12,10 +12,10 @@
             [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}"
             >
             <div class="numero-etape">
-              <span *ngIf="etapeActive <= etapeSimulation.numero">{{etapeSimulation.numero}}</span>
+              <span *ngIf="etapeActive <= etapeSimulation.numero" class="overline-typo">{{etapeSimulation.numero}}</span>
               <span *ngIf="etapeActive > etapeSimulation.numero" id="checkmark"></span>
             </div>
-            <div class="titre-etape" [innerHTML]="etapeSimulation.titre"></div>
+            <div class="titre-etape caption-typo" [innerHTML]="etapeSimulation.titre"></div>
           </div>
       </li>
   </ol>

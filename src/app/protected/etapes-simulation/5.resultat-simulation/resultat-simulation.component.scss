@@ -62,12 +62,14 @@
     margin-top: 2rem;
 
     #col-onglet-1-resultat-simulation {
+      padding-right: 0rem;
       @media #{$extra-small-device} {
         padding-right: 0.15rem;
       }
     }
 
     #col-onglet-2-resultat-simulation {
+      padding-left: 0rem;
       @media #{$extra-small-device} {
         padding-left: 0.15rem;
       }
@@ -75,49 +77,51 @@
 
     .btn-onglet-resultat-simulation {
       width: 100%;
-      min-height: 4rem;
-      background-color: white;
+      min-height: 3rem;
+      background-color: $color-blue-2;
       border-radius: 0.5rem;
+      border: 0.0625rem solid $color-blue-2;
 
       @media #{$extra-small-device} {
         min-height: 2rem;
       }
       span {
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 21px;
-        line-height: 31px;
-        color: black;
+        color:white;
+      }
+
+      &:hover {
+        background-color: $color-blue-2-darker!important;
+        span {
+          color:white !important;
+
+        }
+      }
+      &:focus {
+        background-color: $color-blue-2-darker!important;
+        span {
+          color:white !important;
+        }
       }
 
       &.isOngletInactive {
-        background-color: $color-blue-9-o5;
+        background-color: unset;
         span {
-          font-weight: normal;
-          color: $color-blue-1 !important;
+          font-weight: normal !important;
+          color: $color-blue-1;
         }
       }
     }
 
     #btn-onglet-details {
       float: right;
-      &:hover {
-        background-color: $color-blue-7!important;
-      }
-      &:focus {
-        background-color: $color-blue-7!important;
-      }
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
 
     #btn-onglet-evolution {
       float: left;
-      &:hover {
-        background-color: $color-blue-7!important;
-      }
-      &:focus {
-        background-color: $color-blue-7!important;
-      }
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
   }
 
@@ -135,10 +139,7 @@
         @media #{$extra-small-device} {
           max-width: 565px;
         }
-        font-size: 1em;
         color: $color-blue-2;
-        letter-spacing: 0;
-        line-height: 24px;
       }
     }
     #card-revenus-actuels {
@@ -159,22 +160,6 @@
         @media #{$extra-small-device} {
           margin-left: auto;
           margin-right: auto;
-        }
-        .card-title {
-          font-family: Lato;
-          font-size: 1.3em;
-          text-align: center;
-          font-weight: 400;
-          line-height: 2rem;
-        }
-        span {
-          font-weight: 900;
-          @media #{$small-device} {
-            font-size: 1.063em;
-          }
-          @media #{$medium-device} {
-            font-size: 1.5em;
-          }
         }
         .card-body {
           background-color: $color-white-3;
@@ -242,14 +227,6 @@
             padding: 1.25rem;
           }
           &.active {
-            #span-mois-annee span {
-              color: $color-blue-3 !important;
-              font-size: 1em;
-            }
-            span {
-              font-size: 1.375em;
-              font-weight: 900;
-            }
             background-color: $color-blue-8;
           }
           &.hovered {
@@ -260,20 +237,14 @@
             border: 0!important;
             outline: none !important;
           }
-          #span-mois-annee {
-            @media #{$extra-small-device} {
-              font-size: 1em !important;
-              font-weight: 900 !important;
-            }
-          }
           span {
-            @media #{$small-device} {
-              font-size: 1.063em;
-            }
-            @media #{$medium-device} {
-              font-size: 1.125em;
-            }
-            font-weight: 600;
+            line-height:4.5rem !important;
+          }
+          .span-mois-annee {
+            color: $color-blue-10 !important;
+          }
+          .span-montant-mensuel {
+            color: $color-blue-2;
           }
         }
         .card-footer {
@@ -296,6 +267,7 @@
     .card-simulations-desktop {
       border: 0;
       line-height: 4.5rem;
+      position: relative;
     }
     .card-simulations-mobile {
       margin-right: 0 !important;

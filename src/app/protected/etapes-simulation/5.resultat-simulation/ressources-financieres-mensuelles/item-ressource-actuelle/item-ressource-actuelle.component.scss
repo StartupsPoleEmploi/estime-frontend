@@ -87,12 +87,9 @@
       }
     }
     .span-organisme {
-      color: $color-blue-2;
-      margin-left: 15px;
-      font-size: 0.813em;
-      @media #{$small-device} {
-        font-size: 1em;
-      }
+      color: $color-grey-5;
+      margin-left: 1rem;
+      text-transform: uppercase;
     }
   }
   .col-montant {
@@ -104,15 +101,7 @@
     width: 20% !important;
     .span-montant-ressource {
       span {
-        font-weight: 800;
-        font-size: 0.75em;
-        @media #{$small-device} {
-          font-size: 0.875em;
-        }
-        @media #{$medium-device} {
-          font-size: 1.125em;
-        }
-        color: $color-black-1;
+        color: $color-blue-2;
       }
     }
   }

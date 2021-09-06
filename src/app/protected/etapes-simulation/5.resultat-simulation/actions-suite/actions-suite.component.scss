@@ -1,12 +1,12 @@
 @import "../../../../../assets/scss/variables";
 
-.centerActionsSuite {
+.center-actions-suite {
    margin-top: 2rem;
    margin-bottom: 1rem;
    width: 100%;
    text-align:center;
    @media #{$extra-small-device} {
-      margin-left: -10px;
+      margin-left: -0.625rem;
    }
    span {
       color: $color-blue-2;
@@ -15,19 +15,19 @@
 
  .liste-actions{
    @media #{$extra-small-device} {
-      margin-left: -15px;
-      margin-right: 0px;
+      margin-left: -0.9375rem;
+      margin-right: 0rem;
    }
    @media #{$small-device} {
-      margin-left: -15px;
-      margin-right: 0px;
+      margin-left: -0.9375rem;
+      margin-right: 0rem;
    }
 
    .item {
       cursor: pointer;
 
       &:hover {
-         border: $color-blue-2 1px solid;
+         border: $color-blue-2 0.0625rem solid;
       }
    }
  }

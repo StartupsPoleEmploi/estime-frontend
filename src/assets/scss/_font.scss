@@ -209,8 +209,8 @@ p, span, ul {
 }
 
 .caption-typo {
-  font-size: 1.125rem !important; // 12px
-  line-height: 1.6875rem !important; // 18px
+  font-size: 0.75rem !important; // 12px
+  line-height: 1.125rem !important; // 18px
   @media #{$extra-small-device} {
     font-size: 0.625rem !important; // 10px
     line-height: 0.9375 !important; // 15px

@@ -1,20 +1,14 @@
 @import "../../../../assets/scss/variables";
 
 footer {
-  padding-left: 10px;
+  padding-left: 0.75rem;
   background-color: $color-white-1;
-  bottom: 0;
   display: block;
-  height: 15rem;
-  left: 0;
   position: absolute;
+  height: 17.5rem;
+  bottom: 0;
+  left: 0;
   right: 0;
-  @media #{$tablet-device} {
-    height: 11rem;
-  }
-  @media #{$medium-device} {
-    height: 17rem;
-  }
   a {
     color: $color-blue-1;
     text-decoration: none;
@@ -24,11 +18,12 @@ footer {
     }
   }
   .row-1-footer {
-    padding-top: 20px;
-    @media #{$medium-device} {
-      padding-bottom: 15px;
-      padding-right: 15px;
-      padding-top: 45px;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+
+    @media #{$extra-small-device} {
+      padding-bottom: 0rem;
     }
     .row-1-footer-div-1 {
       display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
@@ -161,6 +156,6 @@ footer {
 
 .footer-avec-sticky-button {
   @media #{$extra-small-device} {
-    bottom: calc(#{$espace-se-connecter-sticky-height} + 1rem);
+    bottom: calc(#{$espace-se-connecter-sticky-height});
   }
 }
