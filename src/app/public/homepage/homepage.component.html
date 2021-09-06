@@ -1,13 +1,5 @@
 <section id="section-presentation">
-    <div class="container-fluid">
-        <div id="div-message-erreur-homepage">
-            <input type="hidden" ngModel #messageErreurElement>
-            <alert
-                type="{{messageErreur.niveau}}"
-                *ngIf="messageErreur">
-                {{messageErreur.texte}}
-            </alert>
-        </div>
+    <div [ngClass]="{'container-fluid':!screenService.isExtraSmallScreen()}">
         <div class="row row-0">
             <div class="col-12">
                 <div class="row div-info-beneficiaires body-2-typo">
@@ -19,6 +11,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div id="div-message-erreur-homepage">
+            <input type="hidden" ngModel #messageErreurElement>
+            <alert
+                type="{{messageErreur.niveau}}"
+                *ngIf="messageErreur">
+                {{messageErreur.texte}}
+            </alert>
         </div>
         <div class="row row-1">
             <div class="row-1-first-col col-md-auto">

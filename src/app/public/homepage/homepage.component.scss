@@ -16,9 +16,25 @@
   }
 
   .row-0 {
-    margin-left: 0;
-    margin-right: 0;
+    @media #{$extra-small-device} {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
     width: 100%;
+
+    .row {
+      @media #{$extra-small-device} {
+        margin-right: 0;
+        margin-left: 0;
+      }
+    }
+
+    .col-12 {
+      @media #{$extra-small-device} {
+        padding-right: 0;
+        padding-left: 0;
+      }
+    }
 
     .div-info-beneficiaires {
       align-items: center;
@@ -39,7 +55,7 @@
       }
 
       @media #{$extra-small-device} {
-        height: 8.5rem;
+        height: 7rem;
       }
     }
   }

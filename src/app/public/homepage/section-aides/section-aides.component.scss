@@ -9,6 +9,10 @@
       color: $color-blue-2;
       padding-bottom: 2rem;
       padding-top: 2rem;
+
+      @media #{$extra-small-device} {
+        padding-bottom: 0rem;
+      }
     }
 
     .card-aides {
