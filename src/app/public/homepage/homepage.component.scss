@@ -4,9 +4,6 @@
   background-color: white;
   padding-bottom:  3rem !important;
 
-  @media #{$extra-small-device} {
-    padding-bottom: 3rem !important;
-  }
   .row {
     @media #{$small-device} {
       margin-left: auto;
@@ -61,6 +58,9 @@
   }
   .row-1 {
     padding-top: 2rem;
+    @media #{$extra-small-device} {
+      padding-top: 1rem;
+    }
     .row-1-first-col {
       @media #{$small-device} {
         max-width: 71% !important;

@@ -95,15 +95,19 @@ p, span, ul {
   color: $color-blue-2;
 }
 
-/** NEW UI TYPO SYSTEM **/
+/** NEW UI TYPO SYSTEM
+
+TODO : décommenter si changement validé par UX
+
+*/
 
 .headline-1-typo {
   font-size: 2.375rem !important; // 38px
   line-height: 3.375rem !important; // 54px
-  @media #{$extra-small-device} {
-    font-size: 1.75rem !important; // 28px
-    line-height: 2.5rem !important; // 40px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1.75rem !important; // 28px
+  //   line-height: 2.5rem !important; // 40px
+  // }
   font-family: Poppins !important;
   font-weight: bold !important;
 }
@@ -111,10 +115,10 @@ p, span, ul {
 .headline-2-typo {
   font-size: 1.75rem !important; // 28px
   line-height: 2.5rem !important; // 40px
-  @media #{$extra-small-device} {
-    font-size: 1.375rem !important; // 22px
-    line-height: 1.875rem !important; // 30px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1.375rem !important; // 22px
+  //   line-height: 1.875rem !important; // 30px
+  // }
   font-family: Poppins !important;
   font-weight: bold !important;
 }
@@ -122,10 +126,10 @@ p, span, ul {
 .headline-3-typo {
   font-size: 1.375rem !important; // 22px
   line-height: 2.0625rem !important; // 33px
-  @media #{$extra-small-device} {
-    font-size: 1.0625rem !important; // 17px
-    line-height: 1.5625rem !important; // 25px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1.0625rem !important; // 17px
+  //   line-height: 1.5625rem !important; // 25px
+  // }
   font-family: Poppins !important;
   font-weight: bold !important;
 }
@@ -133,10 +137,10 @@ p, span, ul {
 .headline-4-typo {
   font-size: 1.125rem !important; // 18px
   line-height: 1.6875rem !important; // 27px
-  @media #{$extra-small-device} {
-    font-size: 0.9375rem !important; // 15px
-    line-height: 1.375rem !important; // 22px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 0.9375rem !important; // 15px
+  //   line-height: 1.375rem !important; // 22px
+  // }
   font-family: Poppins !important;
   font-weight: bold !important;
 }
@@ -145,10 +149,10 @@ p, span, ul {
   text-align: start;
   font-size: 1rem !important; // 16px
   line-height: 1.5rem !important; // 24px
-  @media #{$extra-small-device} {
-    font-size: 0.875rem !important; // 14px
-    line-height: 1.3125rem !important; // 21px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 0.875rem !important; // 14px
+  //   line-height: 1.3125rem !important; // 21px
+  // }
   font-family: Poppins !important;
   font-weight: bold !important;
 }
@@ -156,10 +160,10 @@ p, span, ul {
 .intro-typo {
   font-size: 1.25rem !important; // 20px
   line-height: 1.875rem !important; // 30px
-  @media #{$extra-small-device} {
-    font-size: 1.125rem !important; // 18px
-    line-height: 1.6875rem !important; // 27px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1.125rem !important; // 18px
+  //   line-height: 1.6875rem !important; // 27px
+  // }
   font-family: Lato !important;
   font-weight: normal !important;
 }
@@ -167,10 +171,10 @@ p, span, ul {
 .button-typo {
   font-size: 1.125rem !important; // 18px
   line-height: 1.6875rem !important; // 27px
-  @media #{$extra-small-device} {
-    font-size: 1rem !important; // 16px
-    line-height: 1.5rem !important; // 24px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1rem !important; // 16px
+  //   line-height: 1.5rem !important; // 24px
+  // }
   font-family: Lato !important;
   font-weight: bold !important;
 }
@@ -178,10 +182,10 @@ p, span, ul {
 .body-1-typo {
   font-size: 1.125rem !important; // 18px
   line-height: 1.6875rem !important; // 27px
-  @media #{$extra-small-device} {
-    font-size: 1rem !important; // 16px
-    line-height: 1.5rem !important; // 24px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 1rem !important; // 16px
+  //   line-height: 1.5rem !important; // 24px
+  // }
   font-family: Lato !important;
   font-weight: normal !important;
 }
@@ -189,10 +193,10 @@ p, span, ul {
 .body-2-typo {
   font-size: 1rem !important; // 16px
   line-height: 1.5rem !important; // 24px
-  @media #{$extra-small-device} {
-    font-size: 0.875rem !important; // 14px
-    line-height: 1.3125rem!important; // 21px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 0.875rem !important; // 14px
+  //   line-height: 1.3125rem!important; // 21px
+  // }
   font-family: Lato !important;
   font-weight: normal !important;
 }
@@ -200,10 +204,10 @@ p, span, ul {
 .overline-typo {
   font-size: 0.75rem !important; // 12px
   line-height: 1.125rem !important; // 18px
-  @media #{$extra-small-device} {
-    font-size: 0.6875rem !important; // 11px
-    line-height: 1.125rem !important; // 18px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 0.6875rem !important; // 11px
+  //   line-height: 1.125rem !important; // 18px
+  // }
   font-family: Lato !important;
   font-weight: bold !important;
 }
@@ -211,10 +215,10 @@ p, span, ul {
 .caption-typo {
   font-size: 0.75rem !important; // 12px
   line-height: 1.125rem !important; // 18px
-  @media #{$extra-small-device} {
-    font-size: 0.625rem !important; // 10px
-    line-height: 0.9375 !important; // 15px
-  }
+  // @media #{$extra-small-device} {
+  //   font-size: 0.625rem !important; // 10px
+  //   line-height: 0.9375 !important; // 15px
+  // }
   font-family: Lato !important;
   font-weight: normal !important;
 }
