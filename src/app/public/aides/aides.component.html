@@ -19,12 +19,16 @@
         <div class="col-sm-12 align-self-center">
             <div *ngIf="aideSelectedCode != codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE" class="row">
                 <div class="col-12">
-                    <div class="card card-aides" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
+                    <div class="card card-aides" (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
                         <div class="card-title-aides row">
-                            <div class="col-2 col-md-1">
-                                <img class="icon-aide" src="./assets/images/AssIcon.svg" alt="">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource" [ngClass]="[codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE.toLowerCase()]">
+                                     <div>
+                                       <span class="overline-typo">{{codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}}</span>
+                                     </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
                                         L’Allocation de Solidarité Spécifique
@@ -34,8 +38,8 @@
                                     <div class="rectangle ass"></div>
                                 </div>
                             </div>
-                            <div class="col-2" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <div class="col-auto mt-auto mb-auto col-picto-arrow"><span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span></div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -56,25 +60,27 @@
             </div>
             <div *ngIf="aideSelectedCode != codesAidesEnum.AIDE_MOBILITE" class="row">
                 <div class="col-12">
-                    <div class="card card-aides" (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)">
+                    <div class="card card-aides" (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)">
                         <div class="card-title-aides row">
-                            <div class="col-2 col-md-1">
-                                <img class="icon-aide" src="./assets/images/AmIcon.svg" alt="">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource" [ngClass]="[codesAidesEnum.AIDE_MOBILITE.toLowerCase()]">
+                                     <div>
+                                       <span class="overline-typo">{{codesAidesEnum.AIDE_MOBILITE}}</span>
+                                     </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        Aide à la mobilité
-                                        <br>
-                                        <span class="aide-organisme overline-typo">PÔLE EMPLOI</span>
+                                        Aide à la mobilité (Pôle emploi)
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle am"></div>
                                 </div>
                             </div>
-                            <div class="col-2" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <div class="col-auto mt-auto mb-auto col-picto-arrow"><span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span></div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -94,12 +100,16 @@
             </div>
             <div *ngIf="aideSelectedCode != codesAidesEnum.PRIME_ACTIVITE" class="row">
                 <div class="col-12">
-                    <div class="card card-aides" (click)="onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)">
+                    <div class="card card-aides" (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)">
                         <div class="card-title-aides row">
-                            <div class="col-2 col-md-1">
-                                <img class="icon-aide" src="./assets/images/PaIcon.svg" alt="">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource" [ngClass]="[codesAidesEnum.PRIME_ACTIVITE.toLowerCase()]">
+                                     <div>
+                                       <span class="overline-typo">{{codesAidesEnum.PRIME_ACTIVITE}}</span>
+                                     </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
                                         La prime d'activité
@@ -109,8 +119,8 @@
                                     <div class="rectangle pa"></div>
                                 </div>
                             </div>
-                            <div class="col-2" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <div class="col-auto mt-auto mb-auto col-picto-arrow"><span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span></div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -131,12 +141,16 @@
             </div>
             <div *ngIf="aideSelectedCode != codesAidesEnum.AGEPI" class="row">
                 <div class="col-12">
-                    <div class="card card-aides" (click)="onClickAideSavoirPlus(codesAidesEnum.AGEPI)">
+                    <div class="card card-aides" (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.AGEPI)">
                         <div class="card-title-aides row">
-                            <div class="col-2 col-md-1">
-                                <img class="icon-aide" src="./assets/images/AgepiIcon.svg" alt="">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource" [ngClass]="[codesAidesEnum.AGEPI.toLowerCase()]">
+                                     <div>
+                                       <span class="overline-typo">{{codesAidesEnum.AGEPI}}</span>
+                                     </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
                                         L'aide à la garde d'enfants pour parents isolés
@@ -146,8 +160,8 @@
                                     <div class="rectangle agepi"></div>
                                 </div>
                             </div>
-                            <div class="col-2" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <div class="col-auto mt-auto mb-auto col-picto-arrow"><span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span></div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -168,12 +182,16 @@
             </div>
             <div *ngIf="aideSelectedCode != codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES" class="row">
                 <div class="col-12">
-                    <div class="card card-aides" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
+                    <div class="card card-aides" (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                         <div class="card-title-aides row">
-                            <div class="col-2 col-md-1">
-                                <img class="icon-aide" src="./assets/images/AahIcon.svg" alt="">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource" [ngClass]="[codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES.toLowerCase()]">
+                                     <div>
+                                       <span class="overline-typo">{{codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}}</span>
+                                     </div>
+                                </div>
                             </div>
-                            <div class="col-8 col-md-11">
+                            <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
                                         Allocation Adulte Handicapé
@@ -183,8 +201,8 @@
                                     <div class="rectangle aah"></div>
                                 </div>
                             </div>
-                            <div class="col-2" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <div class="col-auto mt-auto mb-auto col-picto-arrow"><span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span></div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">

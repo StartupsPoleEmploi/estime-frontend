@@ -5,12 +5,8 @@
 }
 
 .block-ressources {
-  margin-left: 15px;
-  margin-right: 15px;
-  @media #{$small-device} {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
+  margin-left: 1rem;
+  margin-right: 1rem;
   .accordion-button {
     background-color: $color-white-1;
     border-radius: 0;
@@ -71,8 +67,7 @@
 
 .div-buttons-form {
   background-color: unset;
-  margin-top: 45px !important;
-  margin-bottom: 5px;
+  margin-top: 2.8125rem !important;
   margin-left: auto;
   margin-right: auto;
   @media #{$extra-small-device} {

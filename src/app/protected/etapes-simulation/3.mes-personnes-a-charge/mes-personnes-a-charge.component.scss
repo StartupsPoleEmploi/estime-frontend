@@ -28,7 +28,7 @@
   margin-top: 10px;
   @media #{$extra-small-device} {
     width: 40vw !important;
-    min-height: 20vh !important;
+    min-height: 22vh !important;
     margin-right: 1rem;
     min-width:unset!important
   }
@@ -101,7 +101,7 @@
   }
   @media #{$extra-small-device} {
     width: 40vw !important;
-    min-height: 20vh !important;
+    min-height: 22vh !important;
     margin-right: 1rem;
   }
   &:hover, &:focus {

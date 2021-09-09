@@ -46,26 +46,6 @@
                     data-testid="btn-se-deconnecter-sm">
                     <div class="img-btn-se-deconnecter"></div>
                 </button>
-
-                <div
-                    id="btn-pe-connect"
-                    class="btn-se-connecter d-none d-sm-block"
-                    *ngIf="!this.isLoggedIn"
-                    data-testid="btn-pe-connect"
-                    tag-action="clic_bouton_se_connecter_avec_pole_emploi"
-                    (click)="login()">
-                    <div
-                        class="float-right"
-                        style="display:inline-flex; margin-top: 7px;">
-                        <img
-                            alt="Icône se connecter"
-                            class="img-btn-se-connecter"
-                            src="./assets/images/personne.svg">
-                        <div class="label-btn-se-connecter button-typo">
-                            Me connecter avec mes identifiants Pôle emploi
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

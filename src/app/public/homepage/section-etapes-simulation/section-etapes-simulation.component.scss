@@ -2,6 +2,7 @@
 
 #section-etapes {
   padding-bottom: 1.5rem;
+  background-color: white;
   #titre-section-etapes {
     color: $color-blue-2;
     padding-bottom: 2rem;
@@ -36,6 +37,9 @@
 
 
     .text-etapes {
+      padding-left: 0rem;
+      padding-right: 0rem;
+
       @media #{$extra-small-device} {
         text-align: center;
         padding-top: 1rem;
@@ -57,6 +61,7 @@
       @media #{$extra-small-device} {
         margin-right: auto;
         margin-left: auto;
+        width: 100%;
       }
 
       span {

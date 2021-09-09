@@ -35,24 +35,19 @@
 
     .div-info-beneficiaires {
       align-items: center;
-      padding: 1rem;
       margin-top: 3rem;
       width: 100%;
-      height: 3.5rem;
-      color: $color-blue-2;
       background-color: $color-grey-1;
-      div {
-        img {
-          padding-right: 0.25rem;
-          padding-bottom: 0.1rem;
-          @media #{$extra-small-device} {
-            padding: 0;
-          }
+      padding: 1rem;
+
+      .col-1, .col-11 {
+        @media #{$extra-small-device} {
+          padding: 0;
         }
       }
-
-      @media #{$extra-small-device} {
-        height: 7rem;
+      .text-info-beneficiaire {
+        color: $color-blue-2;
+        padding-left: 1rem;
       }
     }
   }
@@ -118,6 +113,7 @@
         @media #{$extra-small-device} {
           margin-right: auto;
           margin-left: auto;
+          width: 100%;
         }
 
         span {
@@ -133,25 +129,12 @@
           left: 0;
           right: 0;
           z-index:20;
-          margin-right: auto;
-          margin-left: auto;
           padding-bottom:5.5rem;
           height: 4.5rem;
-          width: 100%;
+          width: 100vw;
           background-color: $color-blue-5;
-
-          h1 {
-            height: 46px;
-            width: 265px;
-            color: $color-blue-1;
-            font-family: Poppins;
-            font-size: 1em;
-            font-weight: bold;
-            letter-spacing: 0;
-            line-height: 25px;
-            margin-right: auto;
-            margin-left: auto;
-          }
+          padding-left: 1rem;
+          padding-right: 1rem;
         }
       }
     }

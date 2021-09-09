@@ -107,18 +107,18 @@
                         attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
                         tag-action="clic_bouton_detail_ressources_du_mois">
                         <div class="row">
-                            <div [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
+                            <div [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12 text-left': screenService.isExtraSmallScreen(), 'col-3 pl-5 text-left': !screenService.isExtraSmallScreen()}">
                                 <span class="span-mois-annee headline-4-typo">
                                     {{getDateStringFormat(simulationMensuel)}}
                                 </span>
                             </div>
                             <div [ngClass]="{'col-6': !screenService.isExtraSmallScreen()}"></div>
-                            <div [ngClass]="{'col-4 p-0 mt-auto mb-auto ml-auto mr-0': screenService.isExtraSmallScreen(), 'col-2': !screenService.isExtraSmallScreen()}">
+                            <div [ngClass]="{'col-4 p-0 mt-auto mb-auto': screenService.isExtraSmallScreen(), 'col-2': !screenService.isExtraSmallScreen()}">
                                 <span  class="span-montant-mensuel headline-4-typo float-right">
                                     {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}} €
                                 </span>
                             </div>
-                            <div class="col-1" [ngClass]="{'p-0 ml-auto mr-1': screenService.isExtraSmallScreen()}">
+                            <div class="col-1" [ngClass]="{'': screenService.isExtraSmallScreen()}">
                                 <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
                                     <i alt class="fas fa-chevron-up span-montant-mensuel"></i>
                                 </span>
@@ -141,8 +141,8 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!afficherDetails" class="row row-style-2">
-        <div class="col-12 mt-auto mb-auto">
+    <div *ngIf="!afficherDetails" class="row row-style-3">
+        <div class="col-12">
             <app-ressources-financieres-diagramme [simulationAides]="simulationAides"></app-ressources-financieres-diagramme>
         </div>
     </div>

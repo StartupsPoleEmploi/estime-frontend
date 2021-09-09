@@ -5,10 +5,14 @@ footer {
   background-color: $color-white-1;
   display: block;
   position: absolute;
-  height: 17.5rem;
+  height: $footer-height-desktop;
   bottom: 0;
   left: 0;
   right: 0;
+
+  @media #{$extra-small-device} {
+    height: $footer-height-mobile;
+  }
   a {
     color: $color-blue-1;
     text-decoration: none;
@@ -24,6 +28,8 @@ footer {
 
     @media #{$extra-small-device} {
       padding-bottom: 0rem;
+      padding-top: 1.5rem;
+
     }
     .row-1-footer-div-1 {
       display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */

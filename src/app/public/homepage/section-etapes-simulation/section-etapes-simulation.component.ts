@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 
 @Component({
@@ -11,6 +12,7 @@ export class SectionEtapesSimulationComponent implements OnInit {
   @Input() login: () => void;
 
   constructor(
+    public peConnectService: PeConnectService,
     public screenService: ScreenService
   ) { }
 

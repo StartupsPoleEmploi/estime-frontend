@@ -1,9 +1,6 @@
 
 /** Obligé de mettre ce css à un niveau plus haut pour qu'il soit pris en compte dans le innertHTML **/
 #block-detail-aide {
-  p, ul, li, span {
-    font-size: 1em !important;
-  }
   ol, ul {
     padding-inline-start: 15px;
   }
@@ -31,12 +28,9 @@ body {
   display : table;
   width :100% ;
   background-color: $color-white-2;
-  padding-bottom: 16rem;
-  @media #{$tablet-device} {
-    padding-bottom: 12rem;
-  }
-  @media #{$medium-device} {
-    padding-bottom: 18rem;
+  padding-bottom: calc(#{$footer-height-desktop} + 3rem);
+  @media #{$extra-small-device} {
+    padding-bottom: calc(#{$footer-height-mobile} + 3rem);
   }
 }
 

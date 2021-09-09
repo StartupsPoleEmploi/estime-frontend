@@ -91,6 +91,8 @@
       height: 4.5rem;
       cursor: default;
       @media #{$extra-small-device} {
+        height: unset;
+        min-height: 3.5rem;
         padding-left: 1rem !important;
         border: 0;
 
@@ -143,7 +145,6 @@
 .li-aide-selectable {
   button {
     text-align: left;
-    max-height: unset;
     padding:unset;
     .row {
       padding-left: 6px;

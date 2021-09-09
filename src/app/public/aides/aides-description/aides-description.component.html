@@ -6,17 +6,19 @@
     </alert>
     <div class="titre-carte">
         <div class="row">
-            <div class="col-md-1 col-12">
-                <img class="icone-carte" alt="" [src]="aideSelected.iconeAide">
+            <div class="col-md-12 col-12">
+                <div class="mt-auto mb-auto code-ressource" [ngClass]="[aideSelected.code.toLowerCase()]">
+                     <div>
+                       <span class="overline-typo">{{aideSelected.code}}</span>
+                     </div>
+                </div>
             </div>
-            <div class="col-md-11 col-12">
-                <div class="row ml-1">
+            <div class="col-md-12 col-12">
+                <div class="row mx-1">
                     <p class="titre-detail-aide headline-1-typo">
                         {{ this.aideSelected.nom }}
                     </p>
-                </div>
-                <div class="row ml-1">
-                    <div class="rectangle" [style]="this.aideSelected.couleurAide"></div>
+                    <div class="rectangle" [ngClass]="[aideSelected.code.toLowerCase()]"></div>
                 </div>
             </div>
         </div>

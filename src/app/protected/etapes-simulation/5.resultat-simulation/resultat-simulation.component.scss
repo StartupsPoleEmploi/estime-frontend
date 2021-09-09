@@ -1,9 +1,19 @@
   @import "../../../../assets/scss/variables";
 
+
+  .container-fluid {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
   .row-style-2 {
     margin-right: 0;
-    @media #{$small-device} {
-      margin-right: 15px;
+  }
+  .row-style-3 {
+    margin: 0;
+
+    .col-12 {
+      margin: 0;
+      padding: 0;
     }
   }
 
@@ -59,24 +69,22 @@
   }
 
   #row-onglets-resultat-simulation {
+    margin:0;
     margin-top: 2rem;
+    justify-content: center;
 
     #col-onglet-1-resultat-simulation {
-      padding-right: 0rem;
-      @media #{$extra-small-device} {
-        padding-right: 0.15rem;
-      }
+      padding-left: 0rem;
+      padding-right: 0.15rem;
     }
 
     #col-onglet-2-resultat-simulation {
-      padding-left: 0rem;
-      @media #{$extra-small-device} {
-        padding-left: 0.15rem;
-      }
+      padding-right: 0rem;
+      padding-left: 0.15rem;
     }
 
     .btn-onglet-resultat-simulation {
-      width: 100%;
+      width: calc(100%);
       min-height: 3rem;
       background-color: $color-blue-2;
       border-radius: 0.5rem;
@@ -89,18 +97,8 @@
         color:white;
       }
 
-      &:hover {
-        background-color: $color-blue-2-darker!important;
-        span {
-          color:white !important;
-
-        }
-      }
       &:focus {
         background-color: $color-blue-2-darker!important;
-        span {
-          color:white !important;
-        }
       }
 
       &.isOngletInactive {
@@ -109,26 +107,28 @@
           font-weight: normal !important;
           color: $color-blue-1;
         }
+
+        &:hover {
+          background-color: unset !important;
+          border: 0.125rem solid $color-blue-2-darker!important;
+          span {
+            color:$color-blue-2-darker!important;
+
+          }
+        }
+        &:focus {
+          background-color: unset !important;
+          border: 0.125rem solid $color-blue-2-darker!important;
+          span {
+            color:$color-blue-2-darker!important;
+          }
+        }
       }
-    }
-
-    #btn-onglet-details {
-      float: right;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-    }
-
-    #btn-onglet-evolution {
-      float: left;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
     }
   }
 
   .container-fluid {
     margin-top: 2rem;
-    margin-bottom: 4rem;
-    padding-left: 15px;
 
     #alert-resultat-simulation {
       @media #{$extra-small-device} {
@@ -203,13 +203,15 @@
       margin-left: 0;
       margin-right: 0;
       margin-bottom: 0.75rem;
+      padding-left: 0rem;
+      padding-right: 0rem;
       width: 100%;
       background-color: unset;
       .second-card {
         border: 0;
         cursor: pointer;
         margin-bottom: 0;
-        @media #{$small-device} {
+        @media #{$extra-small-device} {
           margin: 5px;
           margin-left: -7px;
           margin-right: -7px;
@@ -222,9 +224,9 @@
           border-radius: 0.5rem;
           vertical-align: text-bottom;
           background-color: $color-white-1;
-
           @media #{$extra-small-device} {
-            padding: 1.25rem;
+            padding-right: 1rem;
+            padding-left: 1rem;
           }
           &.active {
             background-color: $color-blue-8;
@@ -242,6 +244,11 @@
           }
           .span-mois-annee {
             color: $color-blue-10 !important;
+            @media #{$extra-small-device} {
+              padding-left: 0.5rem;
+              white-space: nowrap;
+              float:left;
+            }
           }
           .span-montant-mensuel {
             color: $color-blue-2;
@@ -271,8 +278,7 @@
     }
     .card-simulations-mobile {
       margin-right: 0 !important;
-      padding-left: 9px !important;
-      padding-right: 9px !important;
+      margin-left: 0 !important;
     }
 
     .div-button-retour {

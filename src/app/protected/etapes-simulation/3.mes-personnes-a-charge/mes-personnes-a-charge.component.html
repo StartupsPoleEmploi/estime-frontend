@@ -86,7 +86,7 @@
                                   <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
                                       <img alt="Icône ajouter personne à charge" src="./assets/images/ajouter-personne.svg">
                                   </div>
-                                  <div class="col-md-9 col-xs-12 col-card-body">
+                                  <div class="col-md-9 col-xs-12 col-card-body" [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
                                       <span class="body-2-typo">
                                           Ajouter un enfant ou une personne à charge
                                       </span>
@@ -110,7 +110,7 @@
                                   id="row-card-body-add-personne"
                                   class="row">
                                   <div id="pas-de-personne-text" class="col-12 col-card-body">
-                                      <span>
+                                      <span class="body-2-typo">
                                           Je n'ai pas d'enfant ou de personne à charge
                                       </span>
                                   </div>

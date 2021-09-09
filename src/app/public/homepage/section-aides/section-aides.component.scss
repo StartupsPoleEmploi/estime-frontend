@@ -19,9 +19,11 @@
         padding: 1.25rem;
         border-radius: 0.5rem;
         border: unset;
+        min-height: 19.125rem;
 
         @media #{$extra-small-device} {
-          margin-top: 2rem;
+          min-height: unset;
+          margin-top: 1rem;
           cursor: pointer;
         }
     }
@@ -67,6 +69,13 @@
         }
     }
 
+    .row-button-aides {
+      @media #{$extra-small-device} {
+        margin-left: 0rem;
+        margin-right: 0rem;
+      }
+    }
+
     .btn-voir-toutes-les-aides {
         height: 2.875rem;
         width: 14.5rem;
@@ -75,6 +84,7 @@
         @media #{$extra-small-device} {
           margin-right: auto;
           margin-left: auto;
+          width: 100%;
         }
 
         span {

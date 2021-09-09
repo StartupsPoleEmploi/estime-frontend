@@ -13,7 +13,6 @@
                         [libelleRessource]="libellesRessourcesFinancieresEnum.SALAIRE"
                         [montantRessource]=" demandeurEmploiConnecte.futurTravail.salaire.montantNet">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item"
@@ -162,7 +161,7 @@
     </div>
 </div>
 <div id="div-aides-obtenir" class="div-aides-container" *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
-    <span class="row title-liste-details-aides-style-1">
+    <span class="row title-liste-details-aides-style-1 headline-5-typo">
         Les aides que vous pouvez demander
     </span>
     <hr class="title-hr">

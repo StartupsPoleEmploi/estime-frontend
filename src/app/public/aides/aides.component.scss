@@ -10,7 +10,7 @@
 
 .rectangle {
     height: 0.188rem;
-    width: 70%;
+    width: 100%;
     align-items: left;
 
     &.agepi {
@@ -33,23 +33,53 @@
 .card-aides {
     padding: 1.25rem;
     border-radius: 0.5rem;
-    margin-right: 0.5rem;
-    margin-left: 0.5rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
     border: unset;
 
     @media #{$extra-small-device} {
-      margin-top: 1rem;
       cursor: pointer;
     }
 }
 
 .card-title-aides {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding-bottom: 0.5rem;
+
+    @media #{$extra-small-device} {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div {
+        &.col-icon  {
+            padding-right:0;
+            @media #{$extra-small-device} {
+                padding-right: unset;
+            }
+        }
+        &.col-title {
+            margin-left: 0.75rem;
+            @media #{$extra-small-device} {
+                margin-left: unset;
+            }
+        }
+        &.col-chevron {
+            @media #{$extra-small-device} {
+                padding-left: 0;
+                padding-right: 1rem;
+                span {
+                    float: right;
+                }
+            }
+        }
+    }
+
     .icon-aide {
-        padding-right:0.5rem;
+        @media #{$extra-small-device} {
+            padding: unset;
+        }
         float: left;
     }
 

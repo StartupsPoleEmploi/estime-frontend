@@ -14,6 +14,6 @@
 
 .section-temoignage-avec-sticky-button {
   @media #{$extra-small-device} {
-    margin-bottom: calc(#{$espace-se-connecter-sticky-height} + 2rem);
+    margin-bottom: calc(#{$espace-se-connecter-sticky-height} + 3rem);
   }
 }

@@ -15,9 +15,6 @@ export class AidesDescriptionComponent implements OnInit {
   @Input() aideDetail: string;
   @Input() aideLienExterne: string;
 
-
-  ICONS_PATH = "./assets/images/";
-
   aideSelected: Aide;
   aideSelectedCode: string;
   subscriptionRouteNavigationEndObservable: Subscription;
@@ -41,7 +38,6 @@ export class AidesDescriptionComponent implements OnInit {
       this.estimeApiService
         .getDetailAide(this.aideSelectedCode).then(
           (aideFromBackend) => {
-            aideFromBackend.iconeAide = this.ICONS_PATH + aideFromBackend.iconeAide;
             this.aideSelected = aideFromBackend;
           }, (erreur) => {
             this.messageErreur = MessagesErreurEnum.ERREUR_RECUPERATION_AIDES

@@ -8,6 +8,4 @@ export class Aide {
   organisme: string;
   reportee: boolean;
   lienExterne: string;
-  iconeAide: string;
-  couleurAide: string;
 }
