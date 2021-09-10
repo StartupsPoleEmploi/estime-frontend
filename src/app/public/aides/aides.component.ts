@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Aide } from '@app/commun/models/aide';
@@ -20,6 +21,7 @@ export class AidesComponent implements OnInit {
   aideSelected: Aide;
   aideSelectedCode: string;
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+  libellesAidesEnum: typeof LibellesAidesEnum  = LibellesAidesEnum;
   subscriptionRouteNavigationEndObservable: Subscription;
   isAideSelected: boolean;
 

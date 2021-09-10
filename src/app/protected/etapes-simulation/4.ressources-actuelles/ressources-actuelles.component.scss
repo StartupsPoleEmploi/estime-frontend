@@ -88,18 +88,23 @@
   .btn-style-perso-2 {
     background-color: unset;
   }
-  .btn-style-perso-1 {
 
-    width: 260px;
+  #btn-obtenir-simulation {
+
+    min-width: 16.25rem;
     span {
-      margin-left: 3px;
+      margin-left: 0.1875rem;
     }
     @media #{$extra-small-device} {
       line-height: 1.2rem;
       margin-bottom: 1rem;
       div {
-        padding-left: 8px;
+        padding-left: 0.5;
       }
     }
+    @media #{$extra-small-device}  {
+
+    }
+
   }
 }

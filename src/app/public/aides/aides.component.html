@@ -31,7 +31,7 @@
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        L’Allocation de Solidarité Spécifique
+                                        {{libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}}
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
-                            <p class="card-text texte-aide">
+                            <p class="card-text texte-aide body-1-typo">
                                 L’allocation spécifique de solidarité (ASS) est une allocation qui peut prendre le relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à l’allocation ARE se terminent.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
@@ -72,7 +72,7 @@
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        Aide à la mobilité (Pôle emploi)
+                                        {{libellesAidesEnum.AIDE_MOBILITE}}
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
-                            <p class="card-text texte-aide">
+                            <p class="card-text texte-aide body-1-typo">
                                 Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de déplacement, de repas, et d’hébergement.                            </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
                                 <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)" tag-navigation="details-en-savoir-plus-am">
@@ -112,7 +112,7 @@
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        La prime d'activité
+                                        {{libellesAidesEnum.PRIME_ACTIVITE}}
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
-                            <p class="card-text texte-aide">
+                            <p class="card-text texte-aide body-1-typo">
                                 La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
@@ -153,7 +153,7 @@
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        L'aide à la garde d'enfants pour parents isolés
+                                        {{libellesAidesEnum.AGEPI}}
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
@@ -165,7 +165,7 @@
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
-                            <p class="card-text texte-aide">
+                            <p class="card-text texte-aide body-1-typo">
                                 L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf, divorcé).
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
@@ -194,7 +194,7 @@
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
                                     <span class="intitule-aide headline-4-typo">
-                                        Allocation Adulte Handicapé
+                                        {{libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}}
                                     </span>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
@@ -206,7 +206,7 @@
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
-                            <p class="card-text texte-aide">
+                            <p class="card-text texte-aide body-1-typo">
                                 Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">

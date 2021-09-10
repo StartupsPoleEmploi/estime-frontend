@@ -10,10 +10,10 @@
 <div class="modal-body">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-1">
-                    <img alt="Icône information" src="./assets/images/info-blue-1.svg">
+            <div class="col-12 col-md-1 text-center">
+                <img alt="Icône information" src="./assets/images/info-blue-1.svg">
             </div>
-            <div class="col-11">
+            <div class="col-12 col-md-11 text-center">
                 <span>Votre session a expiré, vous devez vous reconnecter pour continuer votre simulation.</span>
             </div>
         </div>
@@ -22,11 +22,9 @@
 <div class="modal-footer">
     <button
         type="button"
-        class="btn-pe-connect"
+        class="btn-homepage btn-pe-connect"
         (click)="onClickButtonSeConnecterAvecPE()">
-        <div>
-            <img alt="Icône se connecter avec Pôle emploi" src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
-            <span class="button-typo">Se connecter avec pôle emploi</span>
-        </div>
+        <span class="button-typo">Me connecter avec Pôle emploi</span>
+        <img *ngIf="!screenService.isExtraSmallScreen()" alt="Icône se connecter avec Pôle emploi" src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
     </button>
 </div>

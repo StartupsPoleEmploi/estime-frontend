@@ -12,8 +12,6 @@ import { Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class AidesDescriptionComponent implements OnInit {
-  @Input() aideDetail: string;
-  @Input() aideLienExterne: string;
 
   aideSelected: Aide;
   aideSelectedCode: string;
@@ -26,7 +24,7 @@ export class AidesDescriptionComponent implements OnInit {
     ) { }
 
   onClickFaireLaDemandeAide = function(){
-    window.open(this.aideLienExterne, '_blank');
+    window.open(this.aideSelected.lienExterne, '_blank');
   }
 
   ngOnInit(): void {

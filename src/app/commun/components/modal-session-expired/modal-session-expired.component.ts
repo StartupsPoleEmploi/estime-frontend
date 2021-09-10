@@ -5,6 +5,7 @@ import { IndividuConnectedService } from '@app/core/services/connexion/individu-
 import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
 import { CookiesEstimeService } from "@app/core/services/storage/cookies-estime.service";
 import { SessionStorageEstimeService } from "@app/core/services/storage/session-storage-estime.service";
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -22,6 +23,7 @@ export class ModalSessionExpiredComponent implements OnInit {
     private individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
     private sessionStorageEstimeService: SessionStorageEstimeService,
+    public screenService: ScreenService,
     private router: Router
   ) {
 

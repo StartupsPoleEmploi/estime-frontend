@@ -40,6 +40,10 @@
       background-color: $color-grey-1;
       padding: 1rem;
 
+      @media #{$extra-small-device} {
+        margin-top: 2rem;
+      }
+
       .col-1, .col-11 {
         @media #{$extra-small-device} {
           padding: 0;

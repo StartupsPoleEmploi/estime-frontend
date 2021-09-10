@@ -3,7 +3,7 @@ import MirePeConnectPage from './mire-pe-connect.page'
 class HomePage {
 
   clickOnSeConnecterAvecPoleEmploi(nomUtilisateur: string, motDePasse: string) {
-    cy.get('[data-testid=btn-je-commence]').click();;
+    cy.get('[data-testid=btn-je-commence]').click();
 
     //wait pour affichage mise PE Connect
     cy.wait(3000);
