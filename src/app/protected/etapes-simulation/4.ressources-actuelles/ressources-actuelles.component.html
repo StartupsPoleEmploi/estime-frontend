@@ -207,16 +207,14 @@
             <button
                 id="btn-obtenir-simulation"
                 aria-label="Obtenir ma simulation"
-                class="btn-style-perso-1 second-btn button-typo"
+                class="btn-homepage second-btn d-flex justify-content-center button-typo"
                 data-testid="btn-obtenir-simulation"
                 (click)="onClickButtonObtenirSimulation()"
                 tag-action="clic_bouton_obtenir_ma_simulation">
-                <div>
-                    <span>Obtenir ma simulation</span>
-                    <img
-                        alt="Icône euro"
-                        src="./assets/images/icon-bt-primaire.svg">
-                </div>
+                <span>Obtenir ma simulation</span>
+                <img
+                    alt="Icône euro"
+                    src="./assets/images/icon-bt-primaire.svg">
             </button>
         </div>
         <div *ngIf="this.screenService.isExtraSmallScreen()" class="text-center col-12">
