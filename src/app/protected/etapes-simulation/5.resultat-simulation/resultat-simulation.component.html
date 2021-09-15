@@ -93,7 +93,7 @@
                 <div
                     id="btn-simulation-mois-{{index}}"
                     class="card second-card"
-                    aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
+                    attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
                     role="button">
                     <div
                         [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
@@ -144,6 +144,22 @@
     <div *ngIf="!afficherDetails" class="row row-style-3">
         <div class="col-12">
             <app-ressources-financieres-diagramme [simulationAides]="simulationAides"></app-ressources-financieres-diagramme>
+            <div
+                *ngIf="aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)"
+                class="card card-body card-message-alerte-aide">
+                <div class="row">
+                    <div class="img-card-message-alerte-aide col-auto">
+                        <div>
+                            <img alt="Icône information" src="./assets/images/info.svg">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <span class="body-2-typo">
+                            {{aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)}}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="actions-suite">

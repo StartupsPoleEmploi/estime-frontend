@@ -24,7 +24,6 @@
                         [libelleRessource]="libellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR"
                         [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois()">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item"
@@ -36,7 +35,6 @@
                         [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                         [montantRessource]="deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois()">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item"
@@ -48,7 +46,6 @@
                         [libelleRessource]="libellesRessourcesFinancieresEnum.IMMOBILIER"
                         [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item li-aide-selectable"
@@ -86,7 +83,6 @@
                         [montantRessource]="aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte)"
                         [organismeRessource]="organismeAidesEnum.CPAM">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item"
@@ -99,7 +95,6 @@
                         [montantRessource]="aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte)"
                         [organismeRessource]="organismeAidesEnum.CPAM">
                     </app-item-ressource-actuelle>
-
                 </li>
                 <li
                     class="list-group-item"
@@ -113,8 +108,62 @@
                         [montantRessource]="aidesService.getMontantRSA(simulationSelected)"
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
-
                 </li>
+                <li
+                    class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemAllocationSoutienFamilialIsNotLast()}"
+                    *ngIf="aidesService.getMontantAllocationSoutienFamilial(simulationSelected) > 0">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL"
+                        data-testid="row-asf"
+                        [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL"
+                        [montantRessource]="aidesService.getMontantAllocationSoutienFamilial(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
+                <li
+                    class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemAllocationsFamilialesIsNotLast()}"
+                    *ngIf="aidesService.getMontantAllocationsFamiliales(simulationSelected) > 0">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.ALLOCATIONS_FAMILIALES"
+                        data-testid="row-af"
+                        [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATIONS_FAMILIALES"
+                        [montantRessource]="aidesService.getMontantAllocationsFamiliales(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
+                <li
+                    class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemComplementFamilialIsNotLast()}"
+                    *ngIf="aidesService.getMontantComplementFamilial(simulationSelected) > 0">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.COMPLEMENT_FAMILIAL"
+                        data-testid="row-cf"
+                        [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.COMPLEMENT_FAMILIAL"
+                        [montantRessource]="aidesService.getMontantComplementFamilial(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
+                <div
+                    *ngIf="aidesService.getMessageAlerteAidesFamiliales(simulationSelected)"
+                    class="card card-body card-message-alerte-aide">
+                    <div class="row">
+                        <div class="img-card-message-alerte-aide col-auto">
+                            <div>
+                                <img alt="Icône information" src="./assets/images/info.svg">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <span class="body-2-typo">
+                                {{aidesService.getMessageAlerteAidesFamiliales(simulationSelected)}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <li
                     class="list-group-item li-aide-selectable"
                     tabindex="0"

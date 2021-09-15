@@ -126,6 +126,18 @@ export class ChartUtileService {
               dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
             }
+            case CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL: {
+              dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL).data[index + 1] = simulationMensuelle.mesAides[key].montant;
+              break;
+            }
+            case CodesAidesEnum.ALLOCATIONS_FAMILIALES: {
+              dataObject.datasets.get(CodesAidesEnum.ALLOCATIONS_FAMILIALES).data[index + 1] = simulationMensuelle.mesAides[key].montant;
+              break;
+            }
+            case CodesAidesEnum.COMPLEMENT_FAMILIAL: {
+              dataObject.datasets.get(CodesAidesEnum.COMPLEMENT_FAMILIAL).data[index + 1] = simulationMensuelle.mesAides[key].montant;
+              break;
+            }
             case CodesAidesEnum.PRIME_ACTIVITE: {
               dataObject.datasets.get(CodesAidesEnum.PRIME_ACTIVITE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
@@ -192,6 +204,33 @@ export class ChartUtileService {
       {
         label: LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE.padEnd(30,' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL,
+      {
+        label: LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SOUTIEN_FAMILIAL,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATIONS_FAMILIALES,
+      {
+        label: LibellesAidesEnum.ALLOCATIONS_FAMILIALES.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATIONS_FAMILIALES,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.COMPLEMENT_FAMILIAL,
+      {
+        label: LibellesAidesEnum.COMPLEMENT_FAMILIAL.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.COMPLEMENT_FAMILIAL,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }

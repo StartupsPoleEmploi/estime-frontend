@@ -52,7 +52,10 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   public filtrerAidesSimulationMensuelle(aideKeyValue: any): boolean {
     return aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
     && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
-    && aideKeyValue.value.code !== CodesAidesEnum.RSA;
+    && aideKeyValue.value.code !== CodesAidesEnum.RSA
+    && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
+    && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
+    && aideKeyValue.value.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL;
   }
 
 
@@ -126,13 +129,30 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
-
   public isItemAllocationSupplementaireInvaliditeIsNotLast(): boolean {
     return this.aidesService.getMontantRSA(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemRsaIsNotLast(): boolean {
+    return this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemAllocationsFamilialesIsNotLast(): boolean {
+    return this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemAllocationSoutienFamilialIsNotLast(): boolean {
+    return this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemComplementFamilialIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 

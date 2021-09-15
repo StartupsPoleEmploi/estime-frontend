@@ -4,35 +4,38 @@ import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
+import { RessourcesFinancieresUtileService } from './ressources-financieres-utiles.service';
 
 @Injectable({providedIn: 'root'})
 export class AidesService {
 
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM = 30;
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM = 10;
+  private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
+
 
   public getMontantAAH(simulationSelected: SimulationMensuelle): number {
-    let montant = 0;
-    if(simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES) {
-          montant = Number(aide.montant);
-        }
-      }
-    }
-    return montant;
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
   }
 
   public getMontantASS(simulationSelected: SimulationMensuelle): number {
-    let montant = 0;
-    if(simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE) {
-          montant = Number(aide.montant);
-        }
-      }
-    }
-    return montant;
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+  }
+
+  public getMontantRSA(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.RSA);
+  }
+
+  public getMontantAllocationsFamiliales(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATIONS_FAMILIALES);
+  }
+
+  public getMontantAllocationSoutienFamilial(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
+  }
+
+  public getMontantComplementFamilial(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.COMPLEMENT_FAMILIAL);
   }
 
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
@@ -47,6 +50,28 @@ export class AidesService {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.PRIME_ACTIVITE);
   }
 
+  public getMessageAlerteAidesFamiliales(simulationSelected: SimulationMensuelle): string {
+    let message = null;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
+          || codeAide === CodesAidesEnum.ALLOCATIONS_FAMILIALES
+          || codeAide === CodesAidesEnum.COMPLEMENT_FAMILIAL) {
+          message = aide.messageAlerte;
+        }
+      }
+    }
+    return message;
+  }
+
+  public getMessageAlerteAidesFamilialesNoSelect(simulationsAides: SimulationAides): string {
+    let message = null;
+    if(simulationsAides.simulationsMensuelles != null) {
+      message = this.getMessageAlerteAidesFamiliales(simulationsAides.simulationsMensuelles[0])
+    }
+    return message;
+  }
+
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
     let message = null;
     if(simulationSelected.mesAides) {
@@ -57,18 +82,6 @@ export class AidesService {
       }
     }
     return message;
-  }
-
-  public getMontantRSA(simulationSelected: SimulationMensuelle): number {
-    let montant = 0;
-    if(simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.RSA) {
-          montant = Number(aide.montant);
-        }
-      }
-    }
-    return montant;
   }
 
   public getMontantPensionInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
@@ -177,6 +190,18 @@ export class AidesService {
       && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM)
       || (!demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
       && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM) ;
+  }
+
+  private getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
+    let montant = 0;
+    if(simulationSelected.mesAides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if(codeAide === codeAideSelected) {
+          montant = Number(aide.montant);
+        }
+      }
+    }
+    return montant;
   }
 
 }

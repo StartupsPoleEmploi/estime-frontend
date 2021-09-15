@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Aide } from '@app/commun/models/aide';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
