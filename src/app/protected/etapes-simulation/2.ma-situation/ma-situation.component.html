@@ -500,7 +500,12 @@
           </div>
           <div
               class="form-group"
-              *ngIf="beneficiaireAides.beneficiaireRSA === true || situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA === true">
+              *ngIf="beneficiaireAides.beneficiaireRSA === true
+                || (situationFamiliale.conjoint != null
+                    && situationFamiliale.conjoint.beneficiaireAides != null
+                    && situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA === true
+                    )
+            ">
               <div class="row mb-2">
                   <label
                       class="label headline-4-typo"
