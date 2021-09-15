@@ -287,6 +287,19 @@ export class DateUtileService {
     return moment(datePlus3AnsEt1Mois).isSameOrAfter(Date.now());
   }
 
+  /**
+   * Fonction qui permet de déterminer quel déterminant ("de" ou "d'") on doit placer avant un mois donné
+   * @param moisEtAnnee
+   * @returns
+   */
+  public getDeterminantAvantMois(moisEtAnnee: string): string {
+    let determinant = "de ";
+    let mois = moisEtAnnee.split(" ")[0];
+    let moisMinuscule = mois.toLowerCase();
+    if(moisMinuscule == "avril" || moisMinuscule == "août" ||  moisMinuscule == "octobre") determinant = "d'";
+    return determinant;
+  }
+
   /************ private methods ***********************/
 
   private addZeroToNumber(numberToAddZero: number): string {

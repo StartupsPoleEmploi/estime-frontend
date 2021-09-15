@@ -16,7 +16,7 @@
                     class="row"
                     *ngIf="screenService.isExtraSmallScreen()">
                     <span class="text-side-input ml-0 body-2-typo">
-                        au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
+                        au mois {{this.dateUtileService.getDeterminantAvantMois(this.dateUtileService.getDateFormateeAvantDateJour(1))}}{{this.dateUtileService.getDateFormateeAvantDateJour(1)}}
                     </span>
                 </div>
                 <div class="row">
