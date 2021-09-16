@@ -55,7 +55,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     && aideKeyValue.value.code !== CodesAidesEnum.RSA
     && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
     && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
-    && aideKeyValue.value.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL;
+    && aideKeyValue.value.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
+    && aideKeyValue.value.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
   }
 
 
@@ -153,6 +154,11 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemComplementFamilialIsNotLast(): boolean {
+    return this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+      || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemPrestationAccueilJeuneEnfantIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 

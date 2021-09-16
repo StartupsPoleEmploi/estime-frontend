@@ -11,6 +11,7 @@ export enum CouleursAidesDiagrammeEnum {
     IMMOBILIER = '#6096BA',
     MICRO_ENTREPRENEUR = '#FFFFB9',
     PAIE = '#83C5BE',
+    PRESTATION_ACCUEIL_JEUNE_ENFANT = '#FF7675',
     PENSION_INVALIDITE = '#FFFFB9',
     PRIME_ACTIVITE = '#BDB2FF',
     RSA = '#ADE8F4',

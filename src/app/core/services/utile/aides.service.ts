@@ -38,6 +38,10 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.COMPLEMENT_FAMILIAL);
   }
 
+  public getMontantPrestationAccueilJeuneEnfant(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT);
+  }
+
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AGEPI)
   }

@@ -7,6 +7,7 @@ export enum LibellesAidesEnum {
   ALLOCATION_SUPPLEMENTAIRE_INVALIDITE = 'Allocation supplémentaire d\'invalidité',
   ALLOCATIONS_FAMILIALES= 'Allocations Familiales',
   COMPLEMENT_FAMILIAL = 'Complément Familial',
+  PRESTATION_ACCUEIL_JEUNE_ENFANT = 'Prestation d\'Accueil du Jeune Enfant',
   PRIME_ACTIVITE = 'Prime d\'Activité',
   PENSION_INVALIDITE = 'Pension d\'invalidité',
   RSA = 'Revenu de Solidarité Active'

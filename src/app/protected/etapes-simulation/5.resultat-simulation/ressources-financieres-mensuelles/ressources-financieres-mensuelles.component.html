@@ -154,6 +154,19 @@
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
                 </li>
+                <li
+                    class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemPrestationAccueilJeuneEnfantIsNotLast()}"
+                    *ngIf="aidesService.getMontantPrestationAccueilJeuneEnfant(simulationSelected) > 0">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT"
+                        data-testid="row-paje"
+                        [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT"
+                        [montantRessource]="aidesService.getMontantPrestationAccueilJeuneEnfant(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
                 <div
                     *ngIf="aidesService.getMessageAlerteAidesFamiliales(simulationSelected)"
                     class="card card-body card-message-alerte-aide">
