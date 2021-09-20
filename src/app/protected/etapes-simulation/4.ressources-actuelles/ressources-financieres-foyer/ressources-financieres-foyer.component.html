@@ -402,7 +402,7 @@
                     class="label headline-4-typo"
                     for="revenusImmobilierFoyer">
                     * Revenus annuels de placement ou du patrimoine
-                    <div
+                    <button
                         id="infobulle-revenus-immobilier"
                         role="tooltip"
                         class="img-interrogation-icon"
@@ -410,7 +410,7 @@
                         placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                         [popover]="popoverRevenusImmobiliersTemplate"
-                        #popoverRevenusImmobiliers="bs-popover"></div>
+                        #popoverRevenusImmobiliers="bs-popover"></button>
                 </label>
             </div>
             <div class="row" *ngIf="screenService.isExtraSmallScreen()">

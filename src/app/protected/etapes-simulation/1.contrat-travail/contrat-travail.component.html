@@ -158,7 +158,7 @@
                         class="label headline-4-typo"
                         aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut ou net
-                        <div
+                        <button
                             id="infobulle-contrat-travail-salaire"
                             role="tooltip"
                             class="img-interrogation-icon"
@@ -166,7 +166,7 @@
                             placement="right"
                             tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
                             [popover]="popoverSalaireNetTemplate"
-                            #popoverSalaireNet="bs-popover"></div>
+                            #popoverSalaireNet="bs-popover"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -306,15 +306,16 @@
                         aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de jours où vous irez sur le lieu de travail
-                        <div
+                        <button
                             id="infobulle-contrat-travail-nombre-trajets"
                             role="tooltip"
+                            tabindex="0"
                             class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
                             placement="right"
                             tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                             [popover]="popoverNombreTrajetTemplate"
-                            #popoverNombreTrajet="bs-popover"></div>
+                            #popoverNombreTrajet="bs-popover"></button>
                     </label>
                 </div>
                 <div class="row">

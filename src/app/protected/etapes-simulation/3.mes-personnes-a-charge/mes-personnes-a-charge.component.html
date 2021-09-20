@@ -13,7 +13,7 @@
                   Nombre d'enfant(s) ou de
                   <div *ngIf="screenService.isExtraSmallScreen()"></div>
                   personne(s) à charge
-                  <div
+                  <button
                     id="infobulle-personnes-charge-nbr-enfant"
                     role="tooltip"
                     class="img-interrogation-icon"
@@ -22,7 +22,7 @@
                     tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
                     [popover]="popoverPersonnesAChargeTemplate"
                     #popoverPersonnesACharge="bs-popover">
-                  </div>
+              </button>
               </label>
           </div>
           <div class="row mb-2">
