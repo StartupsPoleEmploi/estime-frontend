@@ -157,7 +157,7 @@
                       for="situationsExceptionnelles"
                       aria-describedby="infobulle-ma-situation-vous-percevez">
                       * Vous percevez
-                      <div
+                      <button
                           id="infobulle-ma-situation-vous-percevez"
                           role="tooltip"
                           class="img-interrogation-icon"
@@ -165,7 +165,7 @@
                           placement="right"
                           tag-action="ouverture-infobulle-ma-situation-vous-percevez"
                           [popover]="popoverSituationDemandeurTemplate"
-                          #popoverSituationDemandeur="bs-popover"></div>
+                          #popoverSituationDemandeur="bs-popover"></button>
                   </label>
               </div>
               <div class="row">
@@ -512,7 +512,7 @@
                       for="isProprietaireSansPretOuLogeGratuit"
                       aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
                       * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
-                      <div
+                      <button
                       id="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
                       role="tooltip"
                       class="img-interrogation-icon"
@@ -520,7 +520,7 @@
                       placement="right"
                       tag-action="ouverture-infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
                       [popover]="popoverSituationLogementTemplate"
-                      #popoverSituationLogement="bs-popover"></div>
+                      #popoverSituationLogement="bs-popover"></button>
                   </label>
               </div>
               <div class="row">
