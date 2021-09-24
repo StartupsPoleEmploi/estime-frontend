@@ -265,7 +265,7 @@ export class DeConnecteRessourcesFinancieresService {
   }
 
   private isDonneesRSASaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA
+    return ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle
     && !this.ressourcesFinancieresUtileService.isMontantJournalierRSAInvalide(ressourcesFinancieres);
   }
 

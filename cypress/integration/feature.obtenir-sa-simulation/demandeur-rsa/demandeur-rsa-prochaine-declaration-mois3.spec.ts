@@ -41,7 +41,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const nationalite = NationalitesEnum.FRANCAISE;
     // VARIABLES PAGE MES RESSOURCES
     const montantMensuelRSA = "500";
-    const prochaineDeclarationRSA = "3";
+    const prochaineDeclarationTrimestrielle = "3";
     const montantAPL = "310";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = "500";
@@ -74,7 +74,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
@@ -139,7 +139,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAPL = "490";
     const montantPAGE = "170";
     const montantMensuelRSA = "350";
-    const prochaineDeclarationRSA = "3";
+    const prochaineDeclarationTrimestrielle = "3";
     const salaireConjoint = "380";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = montantMensuelRSA;
@@ -178,7 +178,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
@@ -257,7 +257,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantMensuelRSA = "380";
     const montantSalaireMoisMoins1 = "380";
     const montantSalaireMoisMoins2 = "380";
-    const prochaineDeclarationRSA = "3";
+    const prochaineDeclarationTrimestrielle = "3";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = montantMensuelRSA;
     const montantRSA_M4_M5_M6 = "54";
@@ -289,7 +289,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(montantSalaireMoisMoins1);
     ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
@@ -354,7 +354,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantMensuelRSA = "500";
     const montantSalaireMoisMoins2 = "380";
     const montantSalaireMoisMoins3 = "500";
-    const prochaineDeclarationRSA = "3";
+    const prochaineDeclarationTrimestrielle = "3";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2_M3 = montantMensuelRSA;
     const montantRSA_M4_M5_M6 = "176";
@@ -386,7 +386,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
     ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);

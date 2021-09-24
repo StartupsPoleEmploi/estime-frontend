@@ -44,6 +44,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(9);
     // VARIABLES PAGE MES RESSOURCES
     const allocationAAH = "900";
+    const prochaineDeclarationTrimestrielle = "0";
     const allocationSoutienFamiliale = "117";
     const montantSalaireMoisMoins1 = "850";
     const montantSalaireMoisMoins2 = "800";
@@ -54,8 +55,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAAH_M1_M2_M3_M4_M5_M6 = "171";
     const montantAideMobilite = "504";
     const montantAgepi = "400";
-    const montantPrimeActiviteM2_M3_M4 = "303";
-    const montantPrimeActiviteM5_M6 = "438";
+    const montantPrimeActiviteM4_M5_M6 = "438";
 
 
     const homePage = new HomePage();
@@ -85,6 +85,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelAAH(allocationAAH);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
     ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(montantSalaireMoisMoins1);
@@ -109,27 +110,25 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     resultatMaSimulationPage.clickOnMois(1);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaireNet);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, montantAAH_M1_M2_M3_M4_M5_M6);
-    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM2_M3_M4);
     //troisième mois
     resultatMaSimulationPage.clickOnMois(2);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaireNet);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, montantAAH_M1_M2_M3_M4_M5_M6);
-    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM2_M3_M4);
     //quatrième mois
     resultatMaSimulationPage.clickOnMois(3);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaireNet);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, montantAAH_M1_M2_M3_M4_M5_M6);
-    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM2_M3_M4);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM4_M5_M6);
     //cinquième mois
     resultatMaSimulationPage.clickOnMois(4);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaireNet);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, montantAAH_M1_M2_M3_M4_M5_M6);
-    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM5_M6);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM4_M5_M6);
     //sixième mois
     resultatMaSimulationPage.clickOnMois(5);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaireNet);
     resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, montantAAH_M1_M2_M3_M4_M5_M6);
-    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM5_M6);
+    resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, montantPrimeActiviteM4_M5_M6);
 
     const headerSection = new HeaderSection();
     headerSection.clickOnSeDeconnecter();

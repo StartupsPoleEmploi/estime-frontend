@@ -42,7 +42,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE MES RESSOURCES
     const montantAPL = "310";
     const montantMensuelRSA = "500";
-    const prochaineDeclarationRSA = "1";
+    const prochaineDeclarationTrimestrielle = "1";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1 = montantMensuelRSA;
     const montantPrimeActivite_M5_M6 = "174";
@@ -73,7 +73,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
@@ -131,7 +131,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE MES RESSOURCES
     const montantAPL = "420";
     const montantMensuelRSA = "170";
-    const prochaineDeclarationRSA = "1";
+    const prochaineDeclarationTrimestrielle = "1";
     const salaireConjoint = "700";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1 = montantMensuelRSA;
@@ -168,7 +168,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 

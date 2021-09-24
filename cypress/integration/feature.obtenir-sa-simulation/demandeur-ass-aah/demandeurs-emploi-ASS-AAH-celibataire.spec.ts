@@ -43,6 +43,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       "annee":"2019"
     };
     const montantMensuelAAH = "500";
+    const prochaineDeclarationTrimestrielle = "0";
     const nombreMoisTravaillesAvantSimulation = "5";
     const salaireNetAvantSimulation = "500"
     // VARIABLES PAGE RESULTAT SIMULATION
@@ -77,6 +78,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
@@ -137,6 +139,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "annee":"2019"
       };
       const montantMensuelAAH = "500";
+      const prochaineDeclarationTrimestrielle = "0";
       const nombreMoisTravaillesAvantSimulation = "4";
       const salaireNetAvantSimulation = "500"
       const allocationLogementFoyer = "120";
@@ -171,6 +174,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
@@ -239,6 +243,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       "annee":"2019"
     };
     const montantMensuelAAH = "500";
+    const prochaineDeclarationTrimestrielle = "0";
     const nombreMoisTravaillesAvantSimulation = "3";
     const salaireNetAvantSimulation = "500"
     const allocationLogementFoyer = "120";
@@ -278,6 +283,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
     ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireNetAvantSimulation);
@@ -353,6 +359,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "annee":"2019"
       };
       const montantMensuelAAH = "500";
+      const prochaineDeclarationTrimestrielle = "0";
       const nombreMoisTravaillesAvantSimulation = "3";
       const allocationLogementFoyer = "120";
       const allocationFamilialeFoyer = "250";
@@ -393,6 +400,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();

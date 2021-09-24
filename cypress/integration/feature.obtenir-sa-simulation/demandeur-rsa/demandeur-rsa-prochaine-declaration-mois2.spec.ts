@@ -40,7 +40,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const nationalite = NationalitesEnum.FRANCAISE;
     // VARIABLES PAGE MES RESSOURCES
     const montantMensuelRSA = "500";
-    const prochaineDeclarationRSA = "2";
+    const prochaineDeclarationTrimestrielle = "2";
     const montantAPL = "310";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2 = montantMensuelRSA;
@@ -74,7 +74,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
@@ -135,7 +135,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAPL = "310";
     const montantMensuelRSA = "500";
     const montantSalaireMoisMoins2 = "500";
-    const prochaineDeclarationRSA = "2";
+    const prochaineDeclarationTrimestrielle = "2";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantRSA_M1_M2 = montantMensuelRSA;
     const montantRSA_M3_M4_M5 = "176";
@@ -169,7 +169,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
     ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);

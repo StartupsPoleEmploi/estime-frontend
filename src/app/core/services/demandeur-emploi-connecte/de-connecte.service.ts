@@ -225,7 +225,7 @@ export class DeConnecteService {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA) {
         this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA = null;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
       }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
@@ -348,7 +348,7 @@ export class DeConnecteService {
     if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA = null;
+        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }

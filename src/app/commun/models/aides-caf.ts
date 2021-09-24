@@ -6,5 +6,5 @@ export class AidesCAF {
   allocationRSA: number;
   aidesFamiliales: AidesFamiliales
   allocationsLogement: AllocationsLogement;
-  prochaineDeclarationRSA: number;
+  prochaineDeclarationTrimestrielle: number;
 }

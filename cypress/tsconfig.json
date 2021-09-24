@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["../node_modules/cypress", "**/*.ts", "integration-commun/utile/estime-session.service.ts", "ci/environment.ts.j2", "ci/environment.local.ts.j2", "integration/feature.obtenir-sa-simulation/demandeur-emploi-rsa/demandeur-rsa-prochaine-declaration-mois1.spec"],
+  "include": ["../node_modules/cypress", "**/*.ts", "integration-commun/utile/estime-session.service.ts", "ci/environment.ts.j2", "ci/environment.local.ts.j2", "integration/feature.obtenir-sa-simulation/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois1.spec"],
   "types": ["cypress"],
   "compilerOptions": {
     "sourceMap": false

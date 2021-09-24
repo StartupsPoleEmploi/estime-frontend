@@ -12,8 +12,8 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-mensuelle-net-rsa]').type(montant);
   }
 
-  public selectOptionMoisProchaineDeclarationRSA(value: string): void {
-    cy.get('[data-testid=select-prochaine-declaration-rsa]').select(value)
+  public selectOptionMoisProchaineDeclarationTrimestrielle(value: string): void {
+    cy.get('[data-testid=select-prochaine-declaration-trimestrielle]').select(value)
   }
 
   public saisirPensionInvalidite(montant : string): void {

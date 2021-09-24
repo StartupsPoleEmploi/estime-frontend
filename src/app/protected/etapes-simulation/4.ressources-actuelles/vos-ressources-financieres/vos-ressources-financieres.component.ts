@@ -12,7 +12,7 @@ import { MoisTravailleAvantSimulation } from '@app/commun/models/mois-travaille-
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
-import { NumeroProchainMoisDeclarationRSA } from "@models/numero-prochain-mois-declaration-rsa";
+import { NumeroProchainMoisDeclarationTrimestrielle } from "@app/commun/models/numero-prochain-mois-declaration-trimestrielle";
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { Salaire } from '@app/commun/models/salaire';
 
@@ -26,7 +26,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
-  optionsProchaineDeclarationRSA: Array<NumeroProchainMoisDeclarationRSA>;
+  optionsProchaineDeclarationTrimestrielle: Array<NumeroProchainMoisDeclarationTrimestrielle>;
   // flag qui passe à vrai quand on a déclaré avoir toucher un salaire dans les derniers mois mais qu'on ne remplit aucun salaire
   erreurSaisieSalaires: boolean;
 
@@ -56,8 +56,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if(this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
     }
-    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA()) {
-      this.initOptionsProchaineDeclarationRSA();
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() || this.deConnecteBenefiaireAidesService.isBeneficiaireAAH()) {
+      this.initOptionsProchaineDeclarationTrimestrielle();
     }
     if (this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
       this.initOptionsNombreMoisTravailles();
@@ -66,15 +66,15 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   /**
-   * Fonction qui permet d'initialiser les options du select de mois de prochaine déclaration RSA
+   * Fonction qui permet d'initialiser les options du select de mois de prochaine déclaration trimestrielle
    */
-  private initOptionsProchaineDeclarationRSA() {
-    this.optionsProchaineDeclarationRSA = new Array<NumeroProchainMoisDeclarationRSA>();
+  private initOptionsProchaineDeclarationTrimestrielle() {
+    this.optionsProchaineDeclarationTrimestrielle = new Array<NumeroProchainMoisDeclarationTrimestrielle>();
     for (let i = 0; i < 4; i++) {
-      const numeroProchainMoisDeclarationRSA = new NumeroProchainMoisDeclarationRSA();
-      numeroProchainMoisDeclarationRSA.value = i;
-      numeroProchainMoisDeclarationRSA.label = this.dateUtileService.getLibelleMoisApresDateJour(i);
-      this.optionsProchaineDeclarationRSA.push(numeroProchainMoisDeclarationRSA);
+      const numeroProchainMoisDeclarationTrimestrielle = new NumeroProchainMoisDeclarationTrimestrielle();
+      numeroProchainMoisDeclarationTrimestrielle.value = i;
+      numeroProchainMoisDeclarationTrimestrielle.label = this.dateUtileService.getLibelleMoisApresDateJour(i);
+      this.optionsProchaineDeclarationTrimestrielle.push(numeroProchainMoisDeclarationTrimestrielle);
     }
   }
 

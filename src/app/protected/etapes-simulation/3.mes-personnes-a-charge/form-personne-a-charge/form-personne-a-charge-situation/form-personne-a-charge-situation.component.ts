@@ -213,7 +213,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if(this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF
       && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA) {
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
     }
   }
 
