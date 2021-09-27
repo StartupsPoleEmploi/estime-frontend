@@ -56,8 +56,8 @@
             </div>
         </label>
         <label
+            *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('personnesACharge') || nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA"
             name="beneficiaireRSA"
-            *ngIf="!deConnecteBenefiaireAidesService.isBeneficiaireRSA()"
             class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA"
             btnCheckbox

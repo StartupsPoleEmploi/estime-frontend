@@ -54,7 +54,8 @@
             </app-vos-ressources-financieres>
         </div>
         <div
-            *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()"
+            *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
+            && !ressourceConjointSeulementRSA"
             id="block-ressources-conjoint">
             <button
                 type="button"
@@ -98,7 +99,8 @@
             </app-ressources-financieres-conjoint>
         </div>
         <div
-            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()"
+            *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
+            && !ressourcePersonnesAChargeSeulementRSA"
             id="block-ressources-personnes-a-charge">
             <button
                 type="button"

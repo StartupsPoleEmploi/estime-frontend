@@ -4,6 +4,92 @@
         [ngClass]="{'submitted':isRessourcesFinancieresFoyerFormSubmitted}"
         #ressourcesFinancieresFoyerForm="ngForm">
         <div class="form-group">
+            <div
+            class="form-group"
+            *ngIf="deConnecteBenefiaireAidesService.hasFoyerRSA()">
+                <div class="row mb-2">
+                    <label
+                        class="label headline-4-typo"
+                        for="allocationRSA">
+                        * RSA (Revenu de Solidarité Active) perçu
+                    </label>
+                </div>
+                <div class="row">
+                    <input
+                        id="allocationRSA"
+                        name="allocationRSA"
+                        type="text"
+                        data-testid="input-allocation-mensuelle-net-rsa-foyer"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                        min="0"
+                        maxlength="8"
+                        class="form-control"
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCAF.allocationRSA && this.ressourcesFinancieres.aidesCAF.allocationRSA == 0}"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationRSA"
+                        required
+                        placeholder="Montant"
+                        inputmode="decimal"
+                        #allocationRSA="ngModel">
+                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol
+                        *ngIf="!screenService.isExtraSmallScreen()"
+                        message="le mois dernier">
+                    </app-text-with-euro-symbol>
+                </div>
+                <span
+                    *ngIf="this.ressourcesFinancieres.aidesCAF.allocationRSA && (this.ressourcesFinancieres.aidesCAF.allocationRSA == 0)"
+                    class="row error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationRSA.touched)  && allocationRSA.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isRessourcesFinancieresFormSubmitted || allocationRSA.touched)  && allocationRSA.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                </span>
+            </div>
+            <div
+                class="form-group"
+                *ngIf="deConnecteBenefiaireAidesService.hasFoyerRSA()">
+                <div class="row flex-column">
+                    <label
+                        class="label mb-2 headline-4-typo"
+                        for="prochaineDeclarationRSA">
+                        * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle RSA ?
+                    </label>
+                    <select
+                        id="prochaineDeclarationRSA"
+                        name="prochaineDeclarationRSA"
+                        data-testid="select-prochaine-declaration-rsa-foyer"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA"
+                        class="fit-content form-control"
+                        [ngClass]="{'option-selected':ressourcesFinancieres.aidesCAF.prochaineDeclarationRSA !== null}"
+                        data-width="auto"
+                        required
+                        #prochaineDeclarationRSA="ngModel">
+                        <option
+                            [value]="null"
+                            disabled>
+                            Sélectionner
+                        </option>
+                        <option
+                            *ngFor="let moisProchaineDeclarationRSA of optionsProchaineDeclarationRSA"
+                            [value]="moisProchaineDeclarationRSA.value">
+                            {{ moisProchaineDeclarationRSA.label }}
+                        </option>
+                    </select>
+                    <span
+                        class="row error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || prochaineDeclarationRSA.touched)  && prochaineDeclarationRSA.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                </div>
+            </div>
             <div class="row mb-2">
                 <label
                     class="label headline-4-typo"
@@ -459,6 +545,74 @@
                 </span>
             </div>
         </div>
+
+            <div
+              class="form-group"
+              *ngIf="deConnecteBenefiaireAidesService.hasFoyerRSA()">
+              <div class="row mb-2">
+                  <label
+                      class="label headline-4-typo"
+                      for="isProprietaireSansPretOuLogeGratuit"
+                      aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
+                      * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
+                      <button
+                      id="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                      role="tooltip"
+                      class="img-interrogation-icon"
+                      [ngClass]="{'popover-open': popoverSituationLogement.isOpen}"
+                      placement="right"
+                      tag-action="ouverture-infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                      [popover]="popoverSituationLogementTemplate"
+                      #popoverSituationLogement="bs-popover"></button>
+                  </label>
+              </div>
+              <div class="row">
+                  <div class="custom-control custom-radio">
+                      <input
+                          id="isProprietaireSansPretOuLogeGratuitOui"
+                          name="isProprietaireSansPretOuLogeGratuitOui"
+                          aria-label="Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement"
+                          data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui-foyer"
+                          type="radio"
+                          class="custom-control-input"
+                          (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, true)"
+                          [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                          required
+                          [value]="true"
+                          #isProprietaireSansPretOuLogeGratuit="ngModel">
+                      <label
+                          class="custom-control-label body-2-typo"
+                          for="isProprietaireSansPretOuLogeGratuitOui">
+                          oui
+                      </label>
+                  </div>
+                  <div class="custom-control custom-radio ml-2">
+                      <input
+                          id="isProprietaireSansPretOuLogeGratuitNon"
+                          name="isProprietaireSansPretOuLogeGratuitNon"
+                          aria-label="Vous n'êtes pas propriétaire"
+                          data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-non-foyer"
+                          type="radio"
+                          class="custom-control-input"
+                          (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, false)"
+                          [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit"
+                          required
+                          [value]="false"
+                          #isProprietaireSansPretOuLogeGratuit="ngModel">
+                      <label
+                          class="custom-control-label body-2-typo"
+                          for="isProprietaireSansPretOuLogeGratuitNon">
+                          non
+                      </label>
+                  </div>
+              </div>
+                <span
+                    class="row error-input-message"
+                    *ngIf="(isInformationsPersonnellesFormSubmitted || isProprietaireSansPretOuLogeGratuit.touched) && isProprietaireSansPretOuLogeGratuit.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+
         <div class="row row-button-valider">
             <button
                 id="btn-ressources-foyer-valider"

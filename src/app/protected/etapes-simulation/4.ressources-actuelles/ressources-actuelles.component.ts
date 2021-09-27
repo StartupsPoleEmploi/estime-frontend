@@ -6,6 +6,7 @@ import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
+import { DeConnecteBenefiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -58,6 +59,10 @@ export class RessourcesActuellesComponent implements OnInit {
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
+  ressourceConjointSeulementRSA: boolean;
+  ressourcePersonnesAChargeSeulementRSA: boolean;
+  conjointRSA: boolean;
+
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
     { label: "2 mois", value: 2, default: false },
@@ -77,17 +82,75 @@ export class RessourcesActuellesComponent implements OnInit {
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    public deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService,
     private elementRef: ElementRef,
     private estimeApiService: EstimeApiService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     private router: Router
   ) {
 
   }
 
   ngOnInit(): void {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.loadDataRessourcesFinancieres();
     this.calculerMontantsRessourcesFinancieres();
+    this.ressourceConjointSeulementRSA = this.checkConjointToucheSeulementRSA();
+    this.ressourcePersonnesAChargeSeulementRSA = this.checkPersonnesAChargeToucheSeulementRSA();
+    if (this.deConnecteService.getDemandeurEmploiConnecte().situationFamiliale.isEnCouple
+      && demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA) {
+      this.conjointRSA = true;
+    } else {
+      this.conjointRSA = false;
+    }
+  }
+
+  private checkPersonnesAChargeToucheSeulementRSA(): boolean {
+    let result = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const personnesACharge = demandeurEmploiConnecte.situationFamiliale.personnesACharge;
+    if (personnesACharge != null && personnesACharge.length > 0) {
+      for (let personne of personnesACharge) {
+        if (personne.beneficiaireAides.beneficiaireRSA
+          && !personne.informationsPersonnelles.salarie
+          && !personne.beneficiaireAides.beneficiaireAAH
+          && !personne.beneficiaireAides.beneficiaireARE
+          && !personne.beneficiaireAides.beneficiaireASS
+          && !personne.beneficiaireAides.beneficiairePensionInvalidite
+          && (personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === null
+            || personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0)
+          && !personne.informationsPersonnelles.microEntrepreneur
+          && !personne.informationsPersonnelles.travailleurIndependant) {
+          result = true;
+        } else {
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
+
+  private checkConjointToucheSeulementRSA(): boolean {
+    let result = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const conjoint = demandeurEmploiConnecte.situationFamiliale.conjoint;
+    if (demandeurEmploiConnecte.situationFamiliale.isEnCouple
+      && conjoint != null
+      && (conjoint.beneficiaireAides.beneficiaireRSA
+        && !conjoint.informationsPersonnelles.salarie
+        && !conjoint.beneficiaireAides.beneficiaireAAH
+        && !conjoint.beneficiaireAides.beneficiaireARE
+        && !conjoint.beneficiaireAides.beneficiaireASS
+        && !conjoint.beneficiaireAides.beneficiairePensionInvalidite
+        && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === null
+          || conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0)
+        && !conjoint.informationsPersonnelles.microEntrepreneur
+        && !conjoint.informationsPersonnelles.travailleurIndependant)
+    ) {
+      result = true;
+    } else {
+      result = false;
+    }
+    return result;
   }
 
   public onClickPopoverRessourceFoyer(event) {
@@ -174,7 +237,7 @@ export class RessourcesActuellesComponent implements OnInit {
 
   public traiterValidationRessourcesFinancieresFoyerEventEmitter(): void {
     this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
-    this.montantRessourcesFoyer= this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer();
+    this.montantRessourcesFoyer = this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer();
     this.isRessourcesFoyerDisplay = false;
   }
 
@@ -213,7 +276,7 @@ export class RessourcesActuellesComponent implements OnInit {
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
     }
-    if(isValide) {
+    if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres);
     }
     if (!isValide) {
@@ -226,8 +289,8 @@ export class RessourcesActuellesComponent implements OnInit {
   private isSaisieRessourcesFinancieresConjointValide(): boolean {
     let isSaisieFormulairesValide = true;
     if (this.hasConjointAvecRessourcesFinancieresInvalide()) {
-        this.isRessourcesConjointDisplay = true;
-        isSaisieFormulairesValide = false;
+      this.isRessourcesConjointDisplay = true;
+      isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
   }
@@ -235,8 +298,8 @@ export class RessourcesActuellesComponent implements OnInit {
   private isSaisieRessourcesFinancieresPersonnesAChargeValide(): boolean {
     let isSaisieFormulairesValide = true;
     if (this.hasPersonneAChargeAvecRessourcesFinancieresInvalide()) {
-        this.isRessourcesPersonnesChargeDisplay = true;
-        isSaisieFormulairesValide = false;
+      this.isRessourcesPersonnesChargeDisplay = true;
+      isSaisieFormulairesValide = false;
     }
     return isSaisieFormulairesValide;
   }
@@ -252,21 +315,23 @@ export class RessourcesActuellesComponent implements OnInit {
 
   private hasPersonneAChargeAvecRessourcesFinancieresInvalide(): boolean {
     let hasPersonneAChargeAvecRessourcesFinancieresInvalide = false;
-    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
+      && !this.deConnecteSituationFamilialeService.hasPersonneAChargeSeulementRSA()) {
       if (!this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid
         || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresPersonnesAChargeValides()) {
-          hasPersonneAChargeAvecRessourcesFinancieresInvalide = true;
-        }
+        hasPersonneAChargeAvecRessourcesFinancieresInvalide = true;
+      }
     }
     return hasPersonneAChargeAvecRessourcesFinancieresInvalide;
   }
 
   private hasConjointAvecRessourcesFinancieresInvalide(): boolean {
     let hasConjointAvecRessourcesFinancieresInvalide = false;
-    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()) {
-      if(!this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid
+    if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
+      && !this.deConnecteSituationFamilialeService.hasConjointSeulementRSA()) {
+      if ((!this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid)
         || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresConjointValides()) {
-          hasConjointAvecRessourcesFinancieresInvalide = true;
+        hasConjointAvecRessourcesFinancieresInvalide = true;
       }
     }
     return hasConjointAvecRessourcesFinancieresInvalide;

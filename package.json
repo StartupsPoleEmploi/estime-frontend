@@ -14,7 +14,7 @@
     "e2e:record": "cypress run --record",
     "lint": "ng lint",
     "ng": "ng",
-    "start": "ng serve --open --port 9001",
+    "start": "ng serve --open --port 9001 --host 127.0.0.1",
     "start:ngx": "ng run estime:serve-ngx --port 9001",
     "stats:size": "ng build --stats-json && webpack-bundle-analyzer dist/estime/stats.json",
     "test": "ng test",

@@ -3,15 +3,16 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { DeConnecteBenefiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
 import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
-import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
@@ -49,6 +50,7 @@ export class MaSituationComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBenefiaireAidesService,
     private router: Router,
     private situationFamilialeUtileService: SituationFamilialeUtileService,
     private elementRef: ElementRef
@@ -67,7 +69,7 @@ export class MaSituationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
-    public onClickCheckBoxSituationFamiliale(): void {
+  public onClickCheckBoxSituationFamiliale(): void {
     this.situationFamiliale.isSeulPlusDe18Mois = null;
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
   }
@@ -135,7 +137,7 @@ export class MaSituationComponent implements OnInit {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      if(this.isAllocationPeOuCafSelectionnee()) {
+      if (this.isAllocationPeOuCafSelectionnee()) {
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
@@ -153,14 +155,14 @@ export class MaSituationComponent implements OnInit {
 
   public isAllocationPeOuCafSelectionnee(): boolean {
     return (this.beneficiaireAides.beneficiaireASS
-        || this.beneficiaireAides.beneficiaireRSA
-        || this.beneficiaireAides.beneficiaireAAH);
+      || this.beneficiaireAides.beneficiaireRSA
+      || this.beneficiaireAides.beneficiaireAAH);
   }
 
 
   /************ gestion évènements press enter ************************/
 
-  public handleKeyUpOnButtonTitreSejour(event: any, value: boolean): void  {
+  public handleKeyUpOnButtonTitreSejour(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.informationsPersonnelles.titreSejourEnFranceValide = value;
     }
@@ -179,72 +181,66 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
+  public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void {
     if (event.keyCode === 13) {
-      this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
-    }
-  }
-
-  public handleKeyUpOnButtonSituationDemandeur(event: any, situationPersonne: string): void  {
-    if (event.keyCode === 13) {
-      if(situationPersonne === this.situationPersonneEnum.ASS) {
+      if (situationPersonne === this.situationPersonneEnum.ASS) {
         this.beneficiaireAides.beneficiaireASS = !this.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxHasASS();
       }
-      if(situationPersonne === this.situationPersonneEnum.AAH) {
+      if (situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
       }
-      if(situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
+      if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
         this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if(situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
+      if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
         this.informationsPersonnelles.microEntrepreneur = !this.informationsPersonnelles.microEntrepreneur;
         this.onClickCheckBoxIsMicroEntrepreneur();
       }
-      if(situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
+      if (situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
         this.informationsPersonnelles.travailleurIndependant = !this.informationsPersonnelles.travailleurIndependant;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if(situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
+      if (situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.beneficiaireAides.beneficiairePensionInvalidite = !this.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
       }
-      if(situationPersonne === this.situationPersonneEnum.RSA) {
+      if (situationPersonne === this.situationPersonneEnum.RSA) {
         this.beneficiaireAides.beneficiaireRSA = !this.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxHasRSA();
       }
     }
   }
 
-  public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string): void  {
+  public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string): void {
     if (e.keyCode === 13) {
-      if(situationConjoint === this.situationPersonneEnum.AAH) {
+      if (situationConjoint === this.situationPersonneEnum.AAH) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxConjointHasAAH();
       }
-      if(situationConjoint === this.situationPersonneEnum.SALARIE) {
+      if (situationConjoint === this.situationPersonneEnum.SALARIE) {
         this.situationFamiliale.conjoint.informationsPersonnelles.salarie = !this.situationFamiliale.conjoint.informationsPersonnelles.salarie;
         this.onClickCheckBoxConjointIsSalarie();
       }
-      if(situationConjoint === this.situationPersonneEnum.RSA) {
+      if (situationConjoint === this.situationPersonneEnum.RSA) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxConjointHasRSA();
       }
-      if(situationConjoint === this.situationPersonneEnum.ARE) {
+      if (situationConjoint === this.situationPersonneEnum.ARE) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE;
         this.onClickCheckBoxConjointHasARE();
       }
-      if(situationConjoint === this.situationPersonneEnum.ASS) {
+      if (situationConjoint === this.situationPersonneEnum.ASS) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxConjointHasASS();
       }
-      if(situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
+      if (situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxConjointHasPensionInvalidite();
       }
-      if(situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
+      if (situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
         this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = !this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource;
         this.onClickCheckBoxConjointIsSansRessource();
       }

@@ -36,6 +36,25 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     this.loadData();
   }
 
+  public personneRecoitRSASeulement(personneDTO : PersonneDTO) : boolean{
+    let result = false;
+    const personne = personneDTO.personne;
+    if(personne.beneficiaireAides.beneficiaireRSA
+      && !personne.informationsPersonnelles.salarie
+      && !personne.beneficiaireAides.beneficiaireAAH
+      && !personne.beneficiaireAides.beneficiaireARE
+      && !personne.beneficiaireAides.beneficiaireASS
+      && !personne.beneficiaireAides.beneficiairePensionInvalidite
+      && personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0
+      && !personne.informationsPersonnelles.microEntrepreneur
+      && !personne.informationsPersonnelles.travailleurIndependant){
+        result = true;
+    }else{
+        result = false;
+    }
+    return result;
+  }
+
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
     this.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
     if(this.isDonneesSaisiesFormulaireValides(form)) {

@@ -6,7 +6,9 @@
         <div
             class="form-group"
             *ngFor="let personneDTO of personnesDTO">
-            <span class="libelle-personne row headline-4-typo">
+            <span
+                *ngIf="!personneRecoitRSASeulement(personneDTO)" 
+                class="libelle-personne row headline-4-typo">
                 Personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
             </span>
             <div
@@ -168,61 +170,6 @@
                     </span>
                     <span
                         *ngIf="personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
-                </div>
-            </div>
-            <div
-                class="form-group"
-                *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireRSA">
-                <div class="row mb-2">
-                    <label
-                        class="label headline-4-typo"
-                        for="allocationRSA">
-                        * RSA (Revenu Solidarité Active) perçu
-                    </label>
-                </div>
-                <div class="row">
-                    <span
-                        *ngIf="screenService.isExtraSmallScreen()"
-                        class="text-side-input ml-0 body-2-typo">
-                        le mois dernier
-                    </span>
-                    <input
-                        name="allocationRSA"
-                        attr.aria-label="RSA (Revenu Solidarité Active) perçu par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                        type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        min="0"
-                        maxlength="6"
-                        class="form-control"
-                        [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationRSA"
-                        [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationRSA && (personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationRSA == 0)}"
-                        placeholder="Montant"
-                        inputmode="decimal"
-                        required
-                        #allocationRSA="ngModel">
-                    <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                    <app-text-with-euro-symbol
-                        *ngIf="!screenService.isExtraSmallScreen()"
-                        message="le mois dernier">
-                    </app-text-with-euro-symbol>
-                </div>
-                <div class="row">
-                    <span
-                        class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span
-                        class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationRSA && (personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationRSA == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
