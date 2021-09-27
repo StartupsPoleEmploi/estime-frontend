@@ -52,20 +52,20 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
-      if(ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
+      if (ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.revenusMicroEntreprise3DerniersMois);
       }
-      if(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+      if (ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice);
       }
-      if(ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
           montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
         }
-        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
+        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
           montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
         }
-        if(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
+        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
           montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
         }
       }
@@ -78,13 +78,13 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.conjoint) {
       const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
-      if(ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
+      if (ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantNet);
       }
-      if(ressourcesFinancieresConjoint.revenusMicroEntreprise3DerniersMois) {
+      if (ressourcesFinancieresConjoint.revenusMicroEntreprise3DerniersMois) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.revenusMicroEntreprise3DerniersMois);
       }
-      if(ressourcesFinancieresConjoint.beneficesTravailleurIndependantDernierExercice) {
+      if (ressourcesFinancieresConjoint.beneficesTravailleurIndependantDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.beneficesTravailleurIndependantDernierExercice);
       }
     }
@@ -98,13 +98,13 @@ export class DeConnecteRessourcesFinancieresService {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
         if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
           const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
-          if(ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
+          if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
             montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
           }
-          if(ressourcesFinancieresPersonne.revenusMicroEntreprise3DerniersMois) {
+          if (ressourcesFinancieresPersonne.revenusMicroEntreprise3DerniersMois) {
             montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.revenusMicroEntreprise3DerniersMois);
           }
-          if(ressourcesFinancieresPersonne.beneficesTravailleurIndependantDernierExercice) {
+          if (ressourcesFinancieresPersonne.beneficesTravailleurIndependantDernierExercice) {
             montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.beneficesTravailleurIndependantDernierExercice);
           }
         }
@@ -118,6 +118,9 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
+      if (this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
+      }
     }
     return montant;
   }
@@ -125,17 +128,19 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantAidesVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres) {
+    if (demandeurEmploiConnecte.ressourcesFinancieres) {
       if (demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationAAH);
-        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
+        if (!this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+          montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
+        }
       }
       if (demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite);
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
       }
-      if(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
-        if(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+      if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
+        if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
           const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
           montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet));
         }
@@ -147,8 +152,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getRevenusImmobilierSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois) {
-      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois / 3);
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois / 3);
     }
     return montant;
   }
@@ -156,8 +161,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getRevenusMicroEntrepriseSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
-      montant +=  Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois / 3);
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois / 3);
     }
     return montant;
   }
@@ -165,7 +170,7 @@ export class DeConnecteRessourcesFinancieresService {
   public getBeneficesTravailleurIndependantDernierExercice(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
       montant += demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice;
     }
     return montant;
@@ -174,7 +179,7 @@ export class DeConnecteRessourcesFinancieresService {
   public getBeneficesTravailleurIndependantSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
       montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice / 12);
     }
     return montant;
@@ -209,14 +214,14 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const ressourcesFinancieresFoyer = demandeurEmploiConnecte.ressourcesFinancieres;
     if (ressourcesFinancieresFoyer && ressourcesFinancieresFoyer.aidesCAF) {
-      if(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales) {
+      if (ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.allocationsFamiliales);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.allocationSoutienFamilial);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.complementFamilial);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant);
       }
-      if(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement) {
+      if (ressourcesFinancieresFoyer.aidesCAF.allocationsLogement) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins1);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins2);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins3);
@@ -228,22 +233,22 @@ export class DeConnecteRessourcesFinancieresService {
   public isDonneesRessourcesFinancieresValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isValide = true;
 
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
     }
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() && isValide) {
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBenefiaireAidesService.hasFoyerRSA() && isValide) {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
     }
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && isValide) {
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && isValide) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
-    if(isValide && this.deConnecteBenefiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
+    if (isValide && this.deConnecteBenefiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
       isValide = ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
-    if(isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant() && isValide) {
+    if (isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant() && isValide) {
       isValide = ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0;
     }
-    if(isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isValide) {
+    if (isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isValide) {
       isValide = ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0;
     }
     return isValide;
@@ -251,7 +256,10 @@ export class DeConnecteRessourcesFinancieresService {
 
   public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isValide = true;
-    if(isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
+    if (this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
+    }
+    if (this.deConnecteInfosPersonnellesService.hasRevenusImmobilier() && isValide) {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
     return isValide;
@@ -261,7 +269,7 @@ export class DeConnecteRessourcesFinancieresService {
   private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
 
-    && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
+      && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
   }
 
   private isDonneesRSASaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
@@ -297,10 +305,10 @@ export class DeConnecteRessourcesFinancieresService {
     let montant = 0;
     if (ressourcesFinancieres.aidesPoleEmploi) {
       const aidesPoleEmploi = ressourcesFinancieres.aidesPoleEmploi;
-      if(aidesPoleEmploi.allocationASS) {
+      if (aidesPoleEmploi.allocationASS) {
         montant += this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationASS.allocationMensuelleNet);
       }
-      if(aidesPoleEmploi.allocationARE) {
+      if (aidesPoleEmploi.allocationARE) {
         montant += this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationARE.allocationMensuelleNet);
       }
     }

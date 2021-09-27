@@ -63,7 +63,7 @@ cypress-e2e:
     #lancement de l'application via le serveur local
     - npm run start:ngx &
     #attente du lancement de l'application
-    - wait-on http://localhost:9001/
+    - wait-on http://127.0.0.1:9001/
     #lancement des tests cypress
     - npm run cy:run
     rules:

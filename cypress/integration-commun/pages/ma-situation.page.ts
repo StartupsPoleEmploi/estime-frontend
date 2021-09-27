@@ -72,14 +72,6 @@ class MaSituationPage {
     cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({force: true});
   }
 
-  public clickOnVousEtesProprietaireOui(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui]').click({force: true});
-  }
-
-  public clickOnVousEtesProprietaireNon(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non]').click({force: true});
-  }
-
   public clickOnSuivant() {
     cy.get('[data-testid=btn-ma-situation-suivant]').click();
   }

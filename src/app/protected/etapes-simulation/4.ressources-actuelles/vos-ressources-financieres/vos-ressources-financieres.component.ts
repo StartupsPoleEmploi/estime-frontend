@@ -14,7 +14,13 @@ import { DeConnecteRessourcesFinancieresService } from '@app/core/services/deman
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@app/commun/models/numero-prochain-mois-declaration-trimestrielle";
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { Salaire } from '@app/commun/models/salaire';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
+import { SituationFamiliale } from '@models/situation-familiale';
+import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
+import { DemandeurEmploi } from '@models/demandeur-emploi';
+import { InformationsPersonnelles } from '@models/informations-personnelles';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -29,6 +35,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   optionsProchaineDeclarationTrimestrielle: Array<NumeroProchainMoisDeclarationTrimestrielle>;
   // flag qui passe à vrai quand on a déclaré avoir toucher un salaire dans les derniers mois mais qu'on ne remplit aucun salaire
   erreurSaisieSalaires: boolean;
+
+  informationsPersonnelles: InformationsPersonnelles;
+  beneficiaireAides: BeneficiaireAides;
+  situationFamiliale: SituationFamiliale;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
@@ -47,13 +57,17 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public screenService: ScreenService,
     private elementRef: ElementRef,
-    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private situationFamilialeUtileService: SituationFamilialeUtileService,
   ) {
 
   }
 
   ngOnInit(): void {
-    if(this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
       this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
     }
     if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() || this.deConnecteBenefiaireAidesService.isBeneficiaireAAH()) {
@@ -63,6 +77,21 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.initOptionsNombreMoisTravailles();
       this.initSalairesAvantPeriodeSimulation();
     }
+    this.loadDataSituationFamiliale(demandeurEmploiConnecte);
+    this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
+  }
+
+  public isBeneficiaireRSACelibataireSansEnfants(): boolean {
+    let result = false;
+
+    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA()
+      && !this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
+      && !this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
+      && !(this.deConnecteSituationFamilialeService.isEnCouple()
+        && this.deConnecteSituationFamilialeService.hasPersonneACharge())) {
+      result = true;
+    }
+    return result;
   }
 
   /**
@@ -82,7 +111,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
    * Fonction qui permet d'initialiser les options du select du nombre de mois travaillés
    * sur les 6 derniers mois dans le cas d'un demandeur AAH
    */
-   private initOptionsNombreMoisTravailles(): void {
+  private initOptionsNombreMoisTravailles(): void {
     this.optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
     const nbrMoisTravaille = 6;
     for (let i = 1; i <= nbrMoisTravaille; i++) {
@@ -106,11 +135,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
    * (quand on rafraichit la page ou qu'on change de situation par exemple)
    */
   private initSalairesAvantPeriodeSimulation(): void {
-    if(this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      ||(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1 == null
+    if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
+      || (this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1 == null
         && this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2 == null
         && this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3 == null))
-        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
+      this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
   }
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
@@ -220,7 +249,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true
   }
 
-  public isAfficherChampsSalaires():boolean {
+  public isAfficherChampsSalaires(): boolean {
     return this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
   }
 
@@ -249,11 +278,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
-      if(isValide) {
+      if (isValide) {
         const isBeneficiaireAAH = this.deConnecteBenefiaireAidesService.isBeneficiaireAAH();
-        const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesService.isBeneficiaireASS() || this.deConnecteBenefiaireAidesService.isBeneficiaireRSA());
+        const isBeneficiareASSOuRSA = (this.deConnecteBenefiaireAidesService.isBeneficiaireASS() || (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBenefiaireAidesService.hasFoyerRSA()));
         isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
-        if(!isValide) this.erreurSaisieSalaires = true;
+        if (!isValide) this.erreurSaisieSalaires = true;
       }
     }
     return isValide;
@@ -282,5 +311,19 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(event): void {
     event.stopPropagation();
     this.dateUtileService.checkFormatAnnee(this.dateDernierOuvertureDroitASS);
+  }
+
+  private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
+    if (demandeurEmploiConnecte.situationFamiliale) {
+      this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
+    } else {
+      this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
+    }
+  }
+
+  public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
+    if (event.keyCode === 13) {
+      this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
+    }
   }
 }

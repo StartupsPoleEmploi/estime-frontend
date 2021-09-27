@@ -14,7 +14,7 @@ Accéder à l'application : [https://estime.pole-emploi.fr/](https://estime.pole
 
 ![schéma architecure Estime](.gitlab/images/schema_architecure_v3.png)
 
-- [Github application REST Springboot](https://github.com/StartupsPoleEmploi/estime-backend)  
+- [Github application REST Springboot](https://github.com/StartupsPoleEmploi/estime-backend)
 - [Github application REST Openfisca](https://github.com/StartupsPoleEmploi/openfisca-france).
 
 
@@ -37,13 +37,13 @@ Ce projet a été généré avec [Angular CLI](https://cli.angular.io/) et utili
 
 ## librairies HTML et CSS
 
-- [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
+- [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/)
 - [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
 - [Scss](https://sass-lang.com/guide), préprocesseur de CSS.
 
 ## Gestion des dépendances avec npm
 
-Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^ dans le package.json, les versions sont mise à jour manuellement. 
+Les mises à jour des dépendances du projet se font avec npm. Pour contrôler la mise à jour des versions, pas d'utilisation de ~  ou ^ dans le package.json, les versions sont mise à jour manuellement.
 
 :wrench:  Outils utiles :
 
@@ -55,7 +55,7 @@ Les mises à jour des dépendances du projet se font avec npm. Pour contrôler l
 
 ## Prérequis
 
-Installation de NodeJS avec une **version 12.11.x minimum**. 
+Installation de NodeJS avec une **version 12.11.x minimum**.
 
 :thumbsup: Installer [NodeJS](https://nodejs.org/en/) avec un outil permettant de gérer plusieurs versions de Node (exemple : nvm). Plus d'informations, par [ici](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
@@ -68,7 +68,7 @@ foo@bar:~$ npm -v
 
 ## Les étapes à suivre
 
-1. Installer Angular CLI 
+1. Installer Angular CLI
 
    ```console
    foo@bar:~$ npm install -g @angular/cli
@@ -85,12 +85,12 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm install
    ```
-1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments** 
+1. Créer un fichier nommé ***environment.local.ts*** dans **estime-frontend/src/environments**
 
-   - Copier le contenu suivant et remplacer les variables **%% à renseigner %%** 
-   - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#application-rest-springboot-installer-lapplication-en-local) 
+   - Copier le contenu suivant et remplacer les variables **%% à renseigner %%**
+   - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#application-rest-springboot-installer-lapplication-en-local)
    <br />
-   
+
    ```
    export const environment = {
       production: false,
@@ -98,7 +98,7 @@ foo@bar:~$ npm -v
       apiEstimeURL: '%% à renseigner %%',
       /******** OpenID Connect PE properties ************/
       peconnectClientid: '%% à renseigner %%',
-      peconnectRedirecturi: 'http://localhost:9001/',
+      peconnectRedirecturi: 'http://127.0.0.1:9001/',
       peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
       /******** url du script TagCommander (activation du taggage et du consentement Cookies)  ************/
@@ -180,8 +180,8 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
-1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%** 
-   
+1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%**
+
    ```
    version: '3.8'
 
@@ -198,7 +198,7 @@ foo@bar:~$ npm -v
             TAG_COMMANDER_SCRIPT_URL: ""
             TZ: "Europe/Paris"
    ```
-1. Se positionner dans le répertoire de votre fichier docker-compose.yml et démarrer le conteneur : 
+1. Se positionner dans le répertoire de votre fichier docker-compose.yml et démarrer le conteneur :
 
    ```shell
    foo@bar:~docker-compose-directory$ docker-compose up -d
@@ -221,7 +221,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
    ```
    foo@bar:~$ docker container ls | grep estime-frontend
    ```
-   
+
    Les conteneurs doivent être au statut **UP** et **healthy**.
 
 - Consulter les logs :
@@ -236,7 +236,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
    - Exécuter la commande suivante :
 
       ```
-      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
+      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend
       ```
 
 - Stopper le service :
@@ -247,7 +247,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 ## Zero Downtime Deployment
 
-Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application. 
+Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application.
 
 ```
 healthcheck:
@@ -310,8 +310,8 @@ foo@bar:~estime-frontend$ npm run **nom_script**
 | build:prod            | build l'application avec le profil prod                   |
 | cy:open               | lance l'utilitaire Cypress Test Runner                    |
 | cy:run                | lance les tests Cypress                                   |
-| start                 | lance l'application dans le navigateur sur localhost:9001 |
-| start:ngx             | lance l'application sur localhost:9001 avec ngx-build-plus, utile pour remonter une couverture de code par les tests Cypress |
+| start                 | lance l'application dans le navigateur sur 127.0.0.1:9001 |
+| start:ngx             | lance l'application sur 127.0.0.1:9001 avec ngx-build-plus, utile pour remonter une couverture de code par les tests Cypress |
 | stats:size            | génération d'un rapport sur la taille du bundle ([webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)) |
 
 # [Livraison] Livrer une nouvelle version en production
@@ -364,7 +364,7 @@ Après s'être assuré du bon fonctionnement de l'application sur l'environnemen
 |npm run start:ngx   |Lancer l'application avec ngx pour remonter couverture code par les tests Cypress|
 |npm run cy:open     |Lancer Cypress Test Runner                   |
 |npm run cy:run      |Lancer les tests Cypress                     |
-|npx browserlist     |Lister versions des navigateurs compatibles  | 
+|npx browserlist     |Lister versions des navigateurs compatibles  |
 |npm run stats:size  |Lancer l'analyse de la taille du bundle      |
 
 

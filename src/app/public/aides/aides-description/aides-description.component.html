@@ -7,9 +7,9 @@
     <div class="titre-carte">
         <div class="row">
             <div class="col-md-12 col-12">
-                <div class="mt-auto mb-auto code-ressource" [ngClass]="[aideSelected.code.toLowerCase()]">
+                <div class="mt-auto mb-auto code-ressource" [ngClass]="[aideSelectedCode.toLowerCase()]">
                      <div>
-                       <span class="overline-typo">{{aideSelected.code}}</span>
+                       <span class="overline-typo">{{aideSelectedCode}}</span>
                      </div>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                     <p class="titre-detail-aide headline-1-typo">
                         {{ this.aideSelected.nom }}
                     </p>
-                    <div class="rectangle" [ngClass]="[aideSelected.code.toLowerCase()]"></div>
+                    <div class="rectangle" [ngClass]="[aideSelectedCode.toLowerCase()]"></div>
                 </div>
             </div>
         </div>

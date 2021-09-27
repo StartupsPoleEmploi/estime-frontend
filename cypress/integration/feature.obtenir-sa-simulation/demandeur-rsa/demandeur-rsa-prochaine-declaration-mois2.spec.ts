@@ -66,7 +66,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     maSituationPage.selectNationalite(nationalite);
     maSituationPage.clickOnSituationFamilialeSeul();
     maSituationPage.clickOnVousVivezSeulDepuisPlusDe18MoisOui();
-    maSituationPage.clickOnVousEtesProprietaireNon();
     maSituationPage.clickOnSuivant();
 
     const personnesAChargePage = new PersonnesAChargePage();
@@ -76,6 +75,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
     ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
+    ressourcesActuellesPage.clickOnVousEtesProprietaireNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
@@ -161,7 +161,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     maSituationPage.selectNationalite(nationalite);
     maSituationPage.clickOnSituationFamilialeSeul();
     maSituationPage.clickOnVousVivezSeulDepuisPlusDe18MoisOui();
-    maSituationPage.clickOnVousEtesProprietaireNon();
     maSituationPage.clickOnSuivant();
 
     const personnesAChargePage = new PersonnesAChargePage();
@@ -174,6 +173,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
     ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
     ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+    ressourcesActuellesPage.clickOnVousEtesProprietaireNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);

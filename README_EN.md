@@ -10,11 +10,11 @@ Offer a simulator to encourage an unemployed person to take back a job in giving
 
 Access to the application : [https://estime.pole-emploi.fr/](https://estime.pole-emploi.fr/)
 
-# [Software Architecture] Simplified diagram 
+# [Software Architecture] Simplified diagram
 
 ![Estime Software Architecture](.gitlab/images/schema_architecure_v3.png)
 
-- [Github - Springboot REST application](https://github.com/StartupsPoleEmploi/estime-backend)  
+- [Github - Springboot REST application](https://github.com/StartupsPoleEmploi/estime-backend)
 - [Github - Openfisca REST application](https://github.com/StartupsPoleEmploi/openfisca-france).
 
 
@@ -32,19 +32,19 @@ This project has been generated with [the Angular CLI](https://cli.angular.io/) 
 - **./src/app/public :** public components, reachable not logged in (homepage, cgu, etc...).
 - **./src/app/protected :** protected components, reachable only logged in (simulation steps, etc.).
 - **./src/app/commun :** common components, directives, guards, pipes, models
-- **./src/app/core :** singleton services 
+- **./src/app/core :** singleton services
 - **./docker :** Docker configuration files
-- **./cypress :** e2e tests 
+- **./cypress :** e2e tests
 
 ## HTML and CSS librairies
 
-- [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/) 
+- [Bootstrap 4](https://getbootstrap.com/docs/4.1/components/alerts/)
 - [ngx-bootstrap.](https://valor-software.com/ngx-bootstrap/#/documentation).
 - [Scss](https://sass-lang.com/guide), Syntactically Awesome Style Sheets.
 
 ## Manage dependencies with npm
 
-NPM is used to manage the dependencies of this project. To control the updating, this project doesn't use ~ or ^ in package.json. Dependancy versions are updated manually. 
+NPM is used to manage the dependencies of this project. To control the updating, this project doesn't use ~ or ^ in package.json. Dependancy versions are updated manually.
 
 :wrench: Tools to help :
 
@@ -56,7 +56,7 @@ NPM is used to manage the dependencies of this project. To control the updating,
 
 ## Prerequisites
 
-Install NodeJS with **minimal version 12.11.x**. 
+Install NodeJS with **minimal version 12.11.x**.
 
 :thumbsup: Install [NodeJS](https://nodejs.org/en/) with a tool like nvm to manage several versions easily. More informations by [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm).
 
@@ -69,7 +69,7 @@ foo@bar:~$ npm -v
 
 ## Steps to follow
 
-1. Install Angular CLI 
+1. Install Angular CLI
 
    ```console
    foo@bar:~$ npm install -g @angular/cli
@@ -89,12 +89,12 @@ foo@bar:~$ npm -v
    ```console
    foo@bar:~estime-frontend$ npm install
    ```
-1. Create a file named ***environment.local.ts*** in **estime-frontend/src/environments** 
+1. Create a file named ***environment.local.ts*** in **estime-frontend/src/environments**
 
-   - Copy the next lines and replace variables **%% à renseigner %%** 
+   - Copy the next lines and replace variables **%% à renseigner %%**
    - For the **apiEstimeURL** parameter, consult [Springboot REST Application](#api-estime-backend-appeler-lapi-coeur-metier-estime) section
    <br />
-   
+
    ```
    export const environment = {
       production: false,
@@ -102,7 +102,7 @@ foo@bar:~$ npm -v
       apiEstimeURL: '%% à renseigner %%',
       /******** OpenID Connect PE properties ************/
       peconnectClientid: '%% à renseigner %%',
-      peconnectRedirecturi: 'http://localhost:9001/',
+      peconnectRedirecturi: 'http://127.0.0.1:9001/',
       peconnectScope: '%% à renseigner %%',
       peconnectIdentityServerURL: 'https://authentification-candidat.pole-emploi.fr',
       /******** url du script TagCommander (activation du taggage et du consentement Cookies)  ************/
@@ -184,8 +184,8 @@ foo@bar:~$ npm -v
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
-1. Create a docker-compose.yml file, don't forget to replace variables **%% à renseigner %%** 
-   
+1. Create a docker-compose.yml file, don't forget to replace variables **%% à renseigner %%**
+
    ```
    version: '3.8'
 
@@ -202,7 +202,7 @@ foo@bar:~$ npm -v
             TAG_COMMANDER_SCRIPT_URL: ""
             TZ: "Europe/Paris"
    ```
-1. Go to your docker-compose file directory and run the container : 
+1. Go to your docker-compose file directory and run the container :
 
    ```shell
    foo@bar:~docker-compose-directory$ docker-compose up -d
@@ -225,7 +225,7 @@ Dashboard with Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=e
    ```
    foo@bar:~$ docker container ls | grep estime-frontend
    ```
-   
+
    Containers must be in status **UP** and **healthy**.
 
 - Watch logs :
@@ -240,7 +240,7 @@ Dashboard with Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=e
    - Execute the next command :
 
       ```
-      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend 
+      foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend
       ```
 
 - Stop the service :
@@ -251,7 +251,7 @@ Dashboard with Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboard?id=e
 
 ## Zero Downtime Deployment
 
-The Docker service is configured to get zero downtime during deployment. 
+The Docker service is configured to get zero downtime during deployment.
 
 ```
 healthcheck:
@@ -304,7 +304,7 @@ You just have to access to [https://estime.pole-emploi.fr/version.json](https://
 
 # [IDE] VS Code
 
-VS Code is available on [the official website](https://code.visualstudio.com/) 
+VS Code is available on [the official website](https://code.visualstudio.com/)
 
 :wrench:  Some useful plugins :
 
@@ -329,5 +329,5 @@ VS Code is available on [the official website](https://code.visualstudio.com/)
 |npm run start:ngx   |Launch application with ngx to get code coverage by Cypess tests|
 |npm run cy:open     |Launch Cypress Test Runner                   |
 |npm run cy:run      |Launch Cypress tests                         |
-|npx browserlist     |List browser compatibility                   | 
+|npx browserlist     |List browser compatibility                   |
 |npm run stats:size  |Launch bundle size analyser                  |

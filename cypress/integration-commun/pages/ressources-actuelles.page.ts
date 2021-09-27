@@ -16,6 +16,14 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-prochaine-declaration-trimestrielle]').select(value)
   }
 
+  public saisirMontantMensuelRSAFoyer(montant : string): void {
+    cy.get('[data-testid=input-allocation-mensuelle-net-rsa-foyer]').type(montant);
+  }
+
+  public selectOptionMoisProchaineDeclarationTrimestrielleFoyer(value: string): void {
+    cy.get('[data-testid=select-prochaine-declaration-rsa-foyer]').select(value)
+  }
+
   public saisirPensionInvalidite(montant : string): void {
     cy.get('[data-testid=input-pension-invalidite]').type(montant);
   }
@@ -94,6 +102,22 @@ class RessourcesActuellesPage {
 
   public clickOnPasDeSalaireMoisMoins3AvantSimulation(): void {
     cy.get('[data-testid=checkbox-pas-de-salaire-mois-moins-3-avant-simulation]').click();
+  }
+
+  public clickOnVousEtesProprietaireOui(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui]').click({force: true});
+  }
+
+  public clickOnVousEtesProprietaireNon(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non]').click({force: true});
+  }
+
+  public clickOnVousEtesProprietaireOuiFoyer(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui-foyer]').click({force: true});
+  }
+
+  public clickOnVousEtesProprietaireNonFoyer(): void {
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non-foyer]').click({force: true});
   }
 
   public clickOnValiderRessourcesConjoint(): void {

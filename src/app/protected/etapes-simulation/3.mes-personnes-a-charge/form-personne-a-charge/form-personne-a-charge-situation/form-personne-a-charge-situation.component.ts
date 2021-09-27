@@ -5,6 +5,8 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DeConnecteBenefiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service';
 import { Salaire } from '@app/commun/models/salaire';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -16,17 +18,18 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   @Input() nouvellePersonneACharge: Personne;
   @Input() isNouvellePersonnesAChargeFormSubmitted: boolean;
   @Input() isSituationNotValide: boolean;
+  beneficiaireAides: BeneficiaireAides;
 
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
-    public deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService
+    public deConnecteBeneficiaireAidesService: DeConnecteBenefiaireAidesService,
+    public deConnecteService: DeConnecteService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public onClickCheckBoxHasAAH(): void {
     if(!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH) {
