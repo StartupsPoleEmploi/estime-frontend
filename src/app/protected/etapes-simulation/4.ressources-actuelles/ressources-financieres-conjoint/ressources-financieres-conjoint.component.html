@@ -171,61 +171,6 @@
         </div>
         <div
             class="form-group"
-            *ngIf="conjoint.beneficiaireAides.beneficiaireRSA">
-            <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointAllocationMensuelleNetRSA">
-                    * RSA (Revenu Solidarité Active) perçu
-                </label>
-            </div>
-            <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointAllocationMensuelleNetRSA"
-                    name="allocationRSA"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCAF.allocationRSA"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCAF.allocationRSA && (conjoint.ressourcesFinancieres.aidesCAF.allocationRSA == 0)}"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #allocationRSA="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
-            </div>
-            <div class="row">
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span
-                    class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationRSA?.touched)  && allocationRSA?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieres.aidesCAF.allocationRSA && (conjoint.ressourcesFinancieres.aidesCAF.allocationRSA == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div
-            class="form-group"
             *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
             <div class="row mb-2">
                 <label

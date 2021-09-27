@@ -65,7 +65,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     maSituationPage.selectNationalite(nationalite);
     maSituationPage.clickOnSituationFamilialeSeul();
     maSituationPage.clickOnVousVivezSeulDepuisPlusDe18MoisOui();
-    maSituationPage.clickOnVousEtesProprietaireNon();
     maSituationPage.clickOnSuivant();
 
     const personnesAChargePage = new PersonnesAChargePage();
@@ -75,6 +74,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
     ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
+    ressourcesActuellesPage.clickOnVousEtesProprietaireNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
@@ -159,7 +159,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     maSituationPage.selectNationalite(nationalite);
     maSituationPage.clickOnSituationFamilialeCouple();
     maSituationPage.clickOnSituationConjointSalarie();
-    maSituationPage.clickOnVousEtesProprietaireNon();
     maSituationPage.clickOnSuivant();
 
     const personnesAChargePage = new PersonnesAChargePage();
@@ -169,8 +168,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     personnesAChargePage.clickOnSuivant();
 
     const ressourcesActuellesPage = new RessourcesActuellesPage();
-    ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
-    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSA(prochaineDeclarationRSA);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
@@ -178,6 +175,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.clickOnValiderRessourcesConjoint();
 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(montantAPL);
+    ressourcesActuellesPage.saisirMontantMensuelRSAFoyer(montantMensuelRSA);
+    ressourcesActuellesPage.selectOptionMoisProchaineDeclarationRSAFoyer(prochaineDeclarationRSA);
+    ressourcesActuellesPage.clickOnVousEtesProprietaireNonFoyer();
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
     ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);

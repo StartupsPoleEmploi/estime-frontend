@@ -15,10 +15,10 @@ export class DeConnecteSituationFamilialeService {
   public hasConjointSituationAvecRessource(): boolean {
     let hasConjointSituationAvecRessource = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      if(demandeurEmploiConnecte.situationFamiliale.conjoint
+    if (demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
+      if (demandeurEmploiConnecte.situationFamiliale.conjoint
         && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
-          hasConjointSituationAvecRessource = true;
+        hasConjointSituationAvecRessource = true;
       }
     }
     return hasConjointSituationAvecRessource;
@@ -27,15 +27,15 @@ export class DeConnecteSituationFamilialeService {
   public hasPersonneAChargeSuperieur(nombrePersonne: number): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale.personnesACharge
-    && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > nombrePersonne;
+      && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > nombrePersonne;
   }
 
   public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {
     let hasPersonneAChargeAvecRessourcesFinancieres = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
-        if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+        if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
           hasPersonneAChargeAvecRessourcesFinancieres = true;
         }
       });
@@ -43,13 +43,38 @@ export class DeConnecteSituationFamilialeService {
     return hasPersonneAChargeAvecRessourcesFinancieres;
   }
 
+
+  public hasPersonneAChargeSeulementRSA(): boolean {
+    let hasPersonneAChargeAvecSeulementRSA = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (this.hasPersonneAChargeAvecRessourcesFinancieres()) {
+      hasPersonneAChargeAvecSeulementRSA = demandeurEmploiConnecte.situationFamiliale.personnesACharge.some(
+        personne => this.personneUtileService.isBeneficiaireSeulementRSA(personne));
+    }
+    return hasPersonneAChargeAvecSeulementRSA;
+  }
+
+
+  public hasConjointSeulementRSA(): boolean {
+    let hasConjointAvecSeulementRSA = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
+      if (demandeurEmploiConnecte.situationFamiliale.conjoint !== null) {
+        if (this.personneUtileService.isBeneficiaireSeulementRSA(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
+          hasConjointAvecSeulementRSA = true;
+        }
+      }
+    }
+    return hasConjointAvecSeulementRSA;
+  }
+
   public hasPersonneAChargeMoinsDe3Ans(): boolean {
     let hasPersonneAChargeMoinsDe3Ans = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale
-        && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
-        if(!hasPersonneAChargeMoinsDe3Ans) {
+        if (!hasPersonneAChargeMoinsDe3Ans) {
           hasPersonneAChargeMoinsDe3Ans = this.personneUtileService.isAgeInferieurA3Ans(personneACharge.informationsPersonnelles.dateNaissance)
         }
       });
@@ -57,9 +82,20 @@ export class DeConnecteSituationFamilialeService {
     return hasPersonneAChargeMoinsDe3Ans;
   }
 
+  public hasPersonneACharge(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.situationFamiliale != null
+      && demandeurEmploiConnecte.situationFamiliale.personnesACharge != null
+      && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0;
+  }
+
   public isEnCouple(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale?.isEnCouple;
+  }
+
+  public isCelibataireSansEnfant(): boolean {
+    return !this.isEnCouple() && !this.hasPersonneACharge();
   }
 
   public isRessourcesFinancieresConjointValides(): boolean {
@@ -71,14 +107,15 @@ export class DeConnecteSituationFamilialeService {
     let isRessourcesFinancieresPersonnesAChargeValides = true;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
-      if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+      if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
         const isRessourcesFinancieresPersonneValides = this.personneUtileService.isRessourcesFinancieresValides(personne);
-        if(!isRessourcesFinancieresPersonneValides) {
+        if (!isRessourcesFinancieresPersonneValides) {
           isRessourcesFinancieresPersonnesAChargeValides = false;
         }
       }
     });
     return isRessourcesFinancieresPersonnesAChargeValides;
   }
+
 }
 
