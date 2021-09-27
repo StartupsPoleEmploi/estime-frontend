@@ -88,7 +88,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-    ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+    ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
 
     const resultatMaSimulationPage = new ResultatMaSimulationPage();
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -185,7 +185,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(allocationLogementFoyer);
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-    ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+    ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
 
     const resultatMaSimulationPage = new ResultatMaSimulationPage();
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -294,7 +294,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationLogementFoyer(allocationLogementFoyer);
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-    ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+    ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
 
     const resultatMaSimulationPage = new ResultatMaSimulationPage();
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -412,7 +412,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirAllocationFamilialeFoyer(allocationFamilialeFoyer);
     ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-    ressourcesActuellesPage.clickOnObtenirMaSimulation(3000);
+    ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
 
     const resultatMaSimulationPage = new ResultatMaSimulationPage();
     resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
