@@ -10,5 +10,6 @@ export enum LibellesAidesEnum {
   PRESTATION_ACCUEIL_JEUNE_ENFANT = 'Prestation d\'Accueil du Jeune Enfant',
   PRIME_ACTIVITE = 'Prime d\'Activité',
   PENSION_INVALIDITE = 'Pension d\'invalidité',
+  PENSIONS_ALIMENTAIRES = 'Pensions Alimentaires du Foyer',
   RSA = 'Revenu de Solidarité Active'
 }

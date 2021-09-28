@@ -146,6 +146,10 @@ export class ChartUtileService {
               dataObject.datasets.get(CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
             }
+            case CodesAidesEnum.PENSIONS_ALIMENTAIRES: {
+              dataObject.datasets.get(CodesAidesEnum.PENSIONS_ALIMENTAIRES).data[index + 1] = simulationMensuelle.mesAides[key].montant;
+              break;
+            }
             case CodesAidesEnum.RSA: {
               dataObject.datasets.get(CodesAidesEnum.RSA).data[index + 1] = simulationMensuelle.mesAides[key].montant;
               break;
@@ -253,6 +257,15 @@ export class ChartUtileService {
       {
         label: LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT.padEnd(30,' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.PENSIONS_ALIMENTAIRES,
+      {
+        label: LibellesAidesEnum.PENSIONS_ALIMENTAIRES.padEnd(30,' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.PENSIONS_ALIMENTAIRES,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }

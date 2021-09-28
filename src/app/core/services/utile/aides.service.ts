@@ -42,6 +42,10 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT);
   }
 
+  public getMontantPensionsAlimentaires(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PENSIONS_ALIMENTAIRES);
+  }
+
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AGEPI)
   }

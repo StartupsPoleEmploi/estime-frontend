@@ -167,6 +167,19 @@
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
                 </li>
+                <li
+                    class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemPensionsAlimentairesIsNotLast()}"
+                    *ngIf="aidesService.getMontantPensionsAlimentaires(simulationSelected) > 0">
+                    <app-item-ressource-actuelle
+                        [codeRessource]="codesAidesEnum.PENSIONS_ALIMENTAIRES"
+                        data-testid="row-paf"
+                        [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.PENSIONS_ALIMENTAIRES"
+                        [montantRessource]="aidesService.getMontantPensionsAlimentaires(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
                 <div
                     *ngIf="aidesService.getMessageAlerteAidesFamiliales(simulationSelected)"
                     class="card card-body card-message-alerte-aide">

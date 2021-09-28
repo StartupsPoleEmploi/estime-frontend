@@ -91,6 +91,11 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -100,6 +105,11 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -108,6 +118,11 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -115,23 +130,43 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemAahIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemPensionInvaliditeIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.allocationSupplementaireInvalidite > 0
     || this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemAllocationSupplementaireInvaliditeIsNotLast(): boolean {
     return this.aidesService.getMontantRSA(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
+    || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -139,26 +174,38 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return this.aidesService.getMontantAllocationsFamiliales(this.simulationSelected) > 0
     || this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
     || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemAllocationsFamilialesIsNotLast(): boolean {
     return this.aidesService.getMontantAllocationSoutienFamilial(this.simulationSelected) > 0
     || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemAllocationSoutienFamilialIsNotLast(): boolean {
     return this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
+    || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+    || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemComplementFamilialIsNotLast(): boolean {
     return this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
+      || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemPrestationAccueilJeuneEnfantIsNotLast(): boolean {
+    return this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemPensionsAlimentairesIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
