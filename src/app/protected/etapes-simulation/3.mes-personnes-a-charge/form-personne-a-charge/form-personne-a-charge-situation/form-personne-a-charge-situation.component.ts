@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Personne } from '@models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { DeConnecteBenefiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service';
+import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { Salaire } from '@app/commun/models/salaire';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -25,7 +25,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBenefiaireAidesService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteService: DeConnecteService
   ) { }
 

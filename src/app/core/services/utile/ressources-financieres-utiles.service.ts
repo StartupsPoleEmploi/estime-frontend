@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { AidesLogement } from '@app/commun/models/aides-logement';
 import { AllocationARE } from '@app/commun/models/allocation-are';
 import { AllocationASS } from '@app/commun/models/allocation-ass';
+import { AllocationsLogement } from '@app/commun/models/allocations-logement';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { AidesCAF } from "@models/aides-caf";
 import { AidesCPAM } from '@models/aides-cpam';
@@ -34,6 +36,22 @@ export class RessourcesFinancieresUtileService {
     aidesFamiliales.pensionsAlimentairesFoyer = 0;
     aidesFamiliales.prestationAccueilJeuneEnfant = 0;
     return aidesFamiliales;
+  }
+
+  public creerAidesLogement(): AidesLogement {
+    const aidesLogement = new AidesLogement();
+    aidesLogement.aidePersonnaliseeLogement = this.creerAllocationLogement();
+    aidesLogement.allocationLogementFamiliale = this.creerAllocationLogement();;
+    aidesLogement.allocationLogementSociale = this.creerAllocationLogement();;
+    return aidesLogement;
+  }
+
+  public creerAllocationLogement(): AllocationsLogement {
+    const allocationsLogement = new AllocationsLogement();
+    allocationsLogement.moisNMoins1 = 0;
+    allocationsLogement.moisNMoins2 = 0;
+    allocationsLogement.moisNMoins3 = 0;
+    return allocationsLogement;
   }
 
   public creerAidesCAF(): AidesCAF {
@@ -177,10 +195,22 @@ export class RessourcesFinancieresUtileService {
     if (ressourcesFinancieres.aidesCAF) {
       ressourcesFinancieres.aidesCAF.allocationAAH = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationAAH);
       ressourcesFinancieres.aidesCAF.allocationRSA = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationRSA);
-      if(ressourcesFinancieres.aidesCAF.allocationsLogement) {
-        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins1);
-        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins2);
-        ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.allocationsLogement.moisNMoins3);
+      if (ressourcesFinancieres.aidesCAF.aidesLogement) {
+        if (ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement) {
+          ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1);
+          ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2);
+          ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3);
+        }
+        if (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale) {
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1);
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2);
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3);
+        }
+        if (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale) {
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1);
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2);
+          ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3);
+        }
       }
       if(ressourcesFinancieres.aidesCAF.aidesFamiliales) {
         ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales);

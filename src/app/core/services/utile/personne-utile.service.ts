@@ -88,10 +88,10 @@ export class PersonneUtileService {
   }
 
   public isBeneficiaireSeulementRSA(personne: Personne): boolean{
-    let isBeneficiare = false 
+    let isBeneficiare = false
     if(personne !== null){
-      isBeneficiare = !personne.beneficiaireAides.beneficiaireARE 
-      && !personne.beneficiaireAides.beneficiaireAAH 
+      isBeneficiare = !personne.beneficiaireAides.beneficiaireARE
+      && !personne.beneficiaireAides.beneficiaireAAH
       && !personne.beneficiaireAides.beneficiaireASS
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
       && personne.beneficiaireAides.beneficiaireRSA;
@@ -126,6 +126,9 @@ export class PersonneUtileService {
     beneficiaireAides.beneficiaireASS = false;
     beneficiaireAides.beneficiairePensionInvalidite = false;
     beneficiaireAides.beneficiaireRSA = false;
+    beneficiaireAides.beneficiaireAPL = false;
+    beneficiaireAides.beneficiaireALF = false;
+    beneficiaireAides.beneficiaireALS = false;
     return beneficiaireAides
   }
 }

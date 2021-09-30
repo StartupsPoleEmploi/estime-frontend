@@ -4,7 +4,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { DeConnecteSituationFamilialeService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service';
 
 @Injectable({ providedIn: 'root' })
-export class DeConnecteBenefiaireAidesService {
+export class DeConnecteBeneficiaireAidesService {
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -84,6 +84,13 @@ export class DeConnecteBenefiaireAidesService {
     && (
       this.isDemandeurBeneficiaireRSA() || this.isConjointBeneficiaireRSA() || this.isPersonneAChargeBeneficiaireRSA()
     );
+  }
+
+  public isBeneficiaireAideLogement(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.beneficiaireAides.beneficiaireAPL
+      || demandeurEmploiConnecte.beneficiaireAides.beneficiaireALF
+      || demandeurEmploiConnecte.beneficiaireAides.beneficiaireALS;
   }
 
 }

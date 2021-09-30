@@ -8,13 +8,16 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PopoverDirective } from 'ngx-bootstrap/popover';
-import { DeConnecteBenefiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service";
+import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@models/numero-prochain-mois-declaration-trimestrielle";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
+import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -38,28 +41,33 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   beneficiaireAides: BeneficiaireAides;
   situationFamiliale: SituationFamiliale;
 
+  libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBenefiaireAidesService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public dateUtileService: DateUtileService,
     public screenService: ScreenService,
-    public deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService,
     private elementRef: ElementRef,
-    private situationFamilialeUtileService: SituationFamilialeUtileService
+    private situationFamilialeUtileService: SituationFamilialeUtileService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
   ) {
 
   }
 
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+    if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) {
       this.initOptionsProchaineDeclarationTrimestrielle();
     }
+    this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
+    this.loadAidesLogement(demandeurEmploiConnecte);
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
@@ -81,6 +89,41 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.popoverRevenusImmobiliers.hide();
   }
 
+
+  public onClickCheckBoxHasAPL(): void {
+    if (!this.beneficiaireAides.beneficiaireAPL) {
+      this.deConnecteService.unsetAPL();
+    } else {
+      this.deConnecteService.unsetALF();
+      this.beneficiaireAides.beneficiaireALF = false;
+      this.deConnecteService.unsetALS();
+      this.beneficiaireAides.beneficiaireALS = false;
+    }
+  }
+
+  public onClickCheckBoxHasALF(): void {
+    if (!this.beneficiaireAides.beneficiaireALF) {
+      this.deConnecteService.unsetALF();
+    } else {
+      this.deConnecteService.unsetAPL();
+      this.beneficiaireAides.beneficiaireAPL = false;
+      this.deConnecteService.unsetALS();
+      this.beneficiaireAides.beneficiaireALS = false;
+    }
+  }
+
+  public onClickCheckBoxHasALS(): void {
+    if (!this.beneficiaireAides.beneficiaireALS) {
+      this.deConnecteService.unsetALS();
+    } else {
+      this.beneficiaireAides.beneficiaireALS = true;
+      this.deConnecteService.unsetAPL();
+      this.beneficiaireAides.beneficiaireAPL = false;
+      this.deConnecteService.unsetALF();
+      this.beneficiaireAides.beneficiaireALF = false;
+    }
+  }
+
   private initOptionsProchaineDeclarationTrimestrielle() {
     this.optionsProchaineDeclarationTrimestrielle = new Array<NumeroProchainMoisDeclarationTrimestrielle>();
     for (let i = 0; i < 4; i++) {
@@ -99,9 +142,40 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
+  private loadAidesLogement(demandeurEmploiConnecte: DemandeurEmploi): void {
+    if (demandeurEmploiConnecte.ressourcesFinancieres
+      && demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement) {
+      this.ressourcesFinancieres.aidesCAF.aidesLogement = demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement;
+    } else {
+      this.ressourcesFinancieres.aidesCAF.aidesLogement = this.ressourcesFinancieresUtileService.creerAidesLogement();
+    }
+  }
+
   public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
+    }
+  }
+
+  public handleKeyUpOnButtonAPL(event: any): void {
+    if (event.keyCode === 13) {
+      this.beneficiaireAides.beneficiaireAPL = !this.beneficiaireAides.beneficiaireAPL;
+      this.onClickCheckBoxHasAPL();
+    }
+  }
+
+  public handleKeyUpOnButtonALF(event: any): void {
+    if (event.keyCode === 13) {
+      this.beneficiaireAides.beneficiaireALF = !this.beneficiaireAides.beneficiaireALF;
+      this.onClickCheckBoxHasALF();
+    }
+  }
+
+  public handleKeyUpOnButtonALS(event: any): void {
+    if (event.keyCode === 13) {
+      this.beneficiaireAides.beneficiaireALS = !this.beneficiaireAides.beneficiaireALS;
+      this.onClickCheckBoxHasALS();
     }
   }
 

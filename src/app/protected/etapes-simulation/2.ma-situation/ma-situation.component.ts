@@ -6,7 +6,7 @@ import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { DeConnecteBenefiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-benefiaire-aides.service';
+import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
@@ -50,7 +50,7 @@ export class MaSituationComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBenefiaireAidesService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private router: Router,
     private situationFamilialeUtileService: SituationFamilialeUtileService,
     private elementRef: ElementRef

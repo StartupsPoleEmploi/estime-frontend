@@ -5,7 +5,7 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { DateUtileService } from '../utile/date-util.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
-import { DeConnecteBenefiaireAidesService } from './de-connecte-benefiaire-aides.service';
+import { DeConnecteBeneficiaireAidesService } from './de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +14,7 @@ export class DeConnecteRessourcesFinancieresService {
   constructor(
     private dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
-    private deConnecteBenefiaireAidesService: DeConnecteBenefiaireAidesService,
+    private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
@@ -118,7 +118,7 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
-      if (this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+      if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
       }
     }
@@ -131,7 +131,7 @@ export class DeConnecteRessourcesFinancieresService {
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       if (demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationAAH);
-        if (!this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+        if (!this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
           montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
         }
       }
@@ -221,10 +221,22 @@ export class DeConnecteRessourcesFinancieresService {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer);
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant);
       }
-      if (ressourcesFinancieresFoyer.aidesCAF.allocationsLogement) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins1);
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins2);
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.allocationsLogement.moisNMoins3);
+      if (ressourcesFinancieresFoyer.aidesCAF.aidesLogement) {
+        if (ressourcesFinancieresFoyer.aidesCAF.aidesLogement.aidePersonnaliseeLogement) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3);
+        }
+        if (ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementFamiliale) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3);
+        }
+        if (ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementSociale) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2);
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3);
+        }
       }
     }
     return montant;
@@ -233,16 +245,16 @@ export class DeConnecteRessourcesFinancieresService {
   public isDonneesRessourcesFinancieresValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isValide = true;
 
-    if (this.deConnecteBenefiaireAidesService.isBeneficiaireASS()) {
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
       isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
     }
-    if (this.deConnecteBenefiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBenefiaireAidesService.hasFoyerRSA() && isValide) {
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBeneficiaireAidesService.hasFoyerRSA() && isValide) {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
     }
-    if (this.deConnecteBenefiaireAidesService.isBeneficiaireAAH() && isValide) {
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() && isValide) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
-    if (isValide && this.deConnecteBenefiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
+    if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
       isValide = ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
     if (isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant() && isValide) {
@@ -256,7 +268,7 @@ export class DeConnecteRessourcesFinancieresService {
 
   public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isValide = true;
-    if (this.deConnecteBenefiaireAidesService.hasFoyerRSA()) {
+    if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
     }
     if (this.deConnecteInfosPersonnellesService.hasRevenusImmobilier() && isValide) {

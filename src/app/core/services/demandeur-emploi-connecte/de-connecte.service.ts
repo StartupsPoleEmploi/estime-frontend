@@ -220,6 +220,42 @@ export class DeConnecteService {
     }
   }
 
+  public unsetAPL(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 = 0;
+        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      }
+  }
+
+  public unsetALF(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 = 0;
+        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      }
+  }
+
+  public unsetALS(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 = 0;
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 = 0;
+        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+      }
+  }
+
   public setAllocationRSA(): void {
     this.setAidesCAF();
     if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
