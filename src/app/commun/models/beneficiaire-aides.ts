@@ -4,4 +4,7 @@ export class BeneficiaireAides {
   beneficiaireASS: boolean;
   beneficiaireRSA: boolean;
   beneficiairePensionInvalidite: boolean;
+  beneficiaireAPL: boolean;
+  beneficiaireALF: boolean;
+  beneficiaireALS: boolean;
 }

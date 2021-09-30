@@ -1,10 +1,10 @@
-import { AllocationsLogement } from "@models/allocations-logement";
 import { AidesFamiliales } from "@models/aides-familiales";
+import { AidesLogement } from "./aides-logement";
 
 export class AidesCAF {
   allocationAAH: number;
   allocationRSA: number;
-  aidesFamiliales: AidesFamiliales
-  allocationsLogement: AllocationsLogement;
+  aidesFamiliales: AidesFamiliales;
+  aidesLogement: AidesLogement;
   prochaineDeclarationTrimestrielle: number;
 }
