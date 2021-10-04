@@ -38,8 +38,6 @@ export class MaSituationComponent implements OnInit {
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  @ViewChild('popoverSituationLogement', { read: PopoverDirective }) popoverSituationLogement: PopoverDirective;
-
   nationaliteSelectOptions = [
     { label: NationalitesEnum.FRANCAISE },
     { label: NationalitesEnum.RESSORTISSANT_EUROPEEN_OU_SUISSE },
@@ -127,10 +125,6 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.deConnecteService.setPensionInvalidite();
     }
-  }
-
-  public onClickClosePopoverSituationLogement(): void {
-    this.popoverSituationLogement.hide();
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {

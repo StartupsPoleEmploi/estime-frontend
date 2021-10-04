@@ -27,6 +27,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
   @ViewChild('popoverRevenusImmobiliers') popoverRevenusImmobiliers: PopoverDirective;
+  @ViewChild('popoverSituationLogement') popoverSituationLogement: PopoverDirective;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 
@@ -79,6 +80,16 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public onClickClosePopoverRevenusImmobiliers(event) {
     event.stopPropagation();
     this.popoverRevenusImmobiliers.hide();
+  }
+
+
+  public onClickPopoverSituationLogement(event) {
+    event.stopPropagation();  }
+
+
+  public onClickClosePopoverSituationLogement(event): void {
+    event.stopPropagation();
+    this.popoverSituationLogement.hide();
   }
 
   private initOptionsProchaineDeclarationTrimestrielle() {
