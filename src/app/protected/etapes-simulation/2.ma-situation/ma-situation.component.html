@@ -205,6 +205,44 @@
                       </div>
                   </label>
                   <label
+                      id="btn-is-micro-entrepreneur"
+                      name="microEntrepreneur"
+                      aria-label="Vous êtes micro entrepreneur"
+                      class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                      data-testid="btn-situation-micro-entrepreneur"
+                      [(ngModel)]="informationsPersonnelles.microEntrepreneur"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      #microEntrepreneur="ngModel"
+                      (click)="onClickCheckBoxIsMicroEntrepreneur()"
+                      (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+                      <div>
+                          <span>
+                              {{situationPersonneEnum.MICRO_ENTREPRENEUR}}
+                          </span>
+                      </div>
+                  </label>
+                  <label
+                      id="btn-is-travailleur-independant"
+                      name="travailleurIndependant"
+                      aria-label="Vous êtes travailleur indépendant"
+                      class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                      data-testid="btn-situation-travailleur-independant"
+                      [(ngModel)]="informationsPersonnelles.travailleurIndependant"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      #travailleurIndependant="ngModel"
+                      (click)="onClickCheckBoxIsTravailleurIndependant()"
+                      (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
+                      <div>
+                          <span>
+                              {{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}
+                          </span>
+                      </div>
+                  </label>
+                  <label
                       id="btn-has-revenus-immobilier"
                       name="hasRevenusImmobilier"
                       data-testid="btn-situation-revenu-immobilier"
@@ -443,6 +481,44 @@
                       <div>
                           <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                       </div>
+                  </label>
+                  <label
+                      id="btn-conjoint-is-micro-entrepreneur"
+                      name="conjointIsMicroEntrepreneur"
+                      aria-label="Votre conjoint(e) est micro entrepreneur"
+                      class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                      data-testid="btn-situation-conjoint-micro-entrepreneur"
+                      [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur"
+                      btnCheckbox
+                      tabindex="0"
+                      role="button"
+                      #conjointIsMicroEntrepreneur="ngModel"
+                      (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
+                      (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+                      <div>
+                          <span>
+                              {{situationPersonneEnum.MICRO_ENTREPRENEUR}}
+                          </span>
+                      </div>
+                  </label>
+                  <label
+                    id="btn-conjoint-is-travailleur-independant"
+                    name="conjointIsTravailleurIndependant"
+                    aria-label="Votre conjoint(e) est travailleur indépendant"
+                    class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+                    data-testid="btn-situation-conjoint-travailleur-independant"
+                    [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant"
+                    btnCheckbox
+                    tabindex="0"
+                    role="button"
+                    #conjointIsTravailleurIndependant="ngModel"
+                    (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
+                    (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
+                    <div>
+                        <span>
+                            {{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}
+                        </span>
+                    </div>
                   </label>
                   <label
                       #conjointHasAAH="ngModel"

@@ -73,6 +73,42 @@
             </div>
         </label>
         <label
+          id="btn-personne-a-charge-is-micro-entrepreneur"
+          name="personneAChargeIsMicroEntrepreneur"
+          class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+          data-testid="btn-situation-personne-a-charge-micro-entrepreneur"
+          [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur"
+          btnCheckbox
+          tabindex="0"
+          role="button"
+          #personneAChargeIsMicroEntrepreneur="ngModel"
+          (click)="onClickCheckBoxIsMicroEntrepreneur()"
+          (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+          <div>
+              <span>
+                  {{situationPersonneEnum.MICRO_ENTREPRENEUR}}
+              </span>
+          </div>
+        </label>
+        <label
+          id="btn-personne-a-charge-is-travailleur-independant"
+          name="personne-a-chargeIsTravailleurIndependant"
+          class="radio-button-style-1 mt-perso-sm ml-perso-lm"
+          data-testid="btn-situation-personne-a-charge-travailleur-independant"
+          [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant"
+          btnCheckbox
+          tabindex="0"
+          role="button"
+          #personneAChargeIsTravailleurIndependant="ngModel"
+          (click)="onClickCheckBoxIsTravailleurIndependant()"
+          (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
+          <div>
+              <span>
+                  {{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}
+              </span>
+          </div>
+        </label>
+        <label
             name="beneficiaireAAH"
             class="radio-button-style-1 body-2-typo"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH"
