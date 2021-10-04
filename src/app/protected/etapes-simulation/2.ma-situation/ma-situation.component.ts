@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -17,7 +17,6 @@ import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-ma-situation',
@@ -37,8 +36,6 @@ export class MaSituationComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
-
-  @ViewChild('popoverSituationLogement', { read: PopoverDirective }) popoverSituationLogement: PopoverDirective;
 
   nationaliteSelectOptions = [
     { label: NationalitesEnum.FRANCAISE },
@@ -127,10 +124,6 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.deConnecteService.setPensionInvalidite();
     }
-  }
-
-  public onClickClosePopoverSituationLogement(): void {
-    this.popoverSituationLogement.hide();
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {

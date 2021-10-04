@@ -182,6 +182,10 @@ export class AidesService {
     return aide && aide.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
         && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
         && aide.code !== CodesAidesEnum.RSA
+        && aide.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
+        && aide.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
+        && aide.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
+        && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
   }
 
   /**
