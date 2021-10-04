@@ -21,6 +21,7 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -46,6 +47,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
   @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
+  @ViewChild('popoverSituationLogement') popoverSituationLogement: PopoverDirective;
 
 
   constructor(
@@ -264,6 +266,15 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
+  }
+
+  public onClickPopoverSituationLogement(event) {
+    event.stopPropagation();  }
+
+
+  public onClickClosePopoverSituationLogement(event): void {
+    event.stopPropagation();
+    this.popoverSituationLogement.hide();
   }
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
