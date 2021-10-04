@@ -82,10 +82,9 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.popoverRevenusImmobiliers.hide();
   }
 
-
   public onClickPopoverSituationLogement(event) {
-    event.stopPropagation();  }
-
+    event.stopPropagation();
+  }
 
   public onClickClosePopoverSituationLogement(event): void {
     event.stopPropagation();
