@@ -17,6 +17,7 @@ import { SectionDescriptionComponent } from './homepage/section-description/sect
 import { SectionAidesComponent } from './homepage/section-aides/section-aides.component';
 import { AidesComponent } from './aides/aides.component';
 import { AidesDescriptionComponent } from './aides/aides-description/aides-description.component';
+import { StatsComponent } from './stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AidesDescriptionComponent } from './aides/aides-description/aides-descr
     SectionDescriptionComponent,
     SectionAidesComponent,
     AidesComponent,
-    AidesDescriptionComponent
+    AidesDescriptionComponent,
+    StatsComponent
   ],
   imports: [
     AlertModule.forRoot(),

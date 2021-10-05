@@ -90,7 +90,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.popoverRevenusImmobiliers.hide();
   }
 
-
   public onClickCheckBoxHasAPL(): void {
     if (!this.beneficiaireAides.beneficiaireAPL) {
       this.deConnecteService.unsetAPL();

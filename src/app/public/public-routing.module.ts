@@ -9,6 +9,7 @@ import { AidesComponent } from './aides/aides.component';
 import { CguComponent } from './cgu/cgu.component';
 import { ContactComponent } from './contact/contact.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent, pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: RoutesEnum.CGU, component: CguComponent },
   { path: RoutesEnum.CONTACT, component: ContactComponent },
   { path: RoutesEnum.SIGNIN_CALLBACK, component: SigninRedirectCallbackComponent },
+  { path: 'stats', component: StatsComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
 

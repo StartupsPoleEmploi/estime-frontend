@@ -698,7 +698,9 @@
                       class="label headline-4-typo"
                       for="isProprietaireSansPretOuLogeGratuit"
                       aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
-                      * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement ?
+                      * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés
+                      <div *ngIf="!screenService.isExtraSmallScreen()"></div>
+                      ou vous êtes logé gratuitement ?
                       <button
                       id="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
                       role="tooltip"
@@ -706,6 +708,7 @@
                       [ngClass]="{'popover-open': popoverSituationLogement.isOpen}"
                       placement="right"
                       tag-action="ouverture-infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                      (click)="$event.preventDefault();"
                       [popover]="popoverSituationLogementTemplate"
                       #popoverSituationLogement="bs-popover"></button>
                   </label>
@@ -771,3 +774,19 @@
           </button>
       </div>
   </div>
+
+
+<ng-template  #popoverSituationLogementTemplate>
+    <div class="container" (click)="onClickPopoverSituationLogement($event)">
+        <div class="close-popover row">
+            <i
+                class="fas fa-times-circle mb-2 ml-auto"
+                (click)="onClickClosePopoverSituationLogement($event)"></i>
+        </div>
+        <div class="row">
+            <p>
+                Répondez par non si vous payez un loyer, vous êtes hébergé et vous payez une participation pour ce logement ou vous êtes propriétaire et remboursez un prêt.
+            </p>
+        </div>
+    </div>
+  </ng-template>
