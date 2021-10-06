@@ -55,7 +55,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAAH_M5_M6 = "171";
     const montantAideMobilite = "504";
     const montantAgepi = "400";
-    const montantPrimeActiviteM4_M5_M6 = "193";
+    const montantPrimeActiviteM4_M5_M6 = "194";
 
 
     const homePage = new HomePage();

@@ -133,7 +133,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "0";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2_M3 = "712";
-      const montantPrimeActivite_M4_M5_M6 = "256";
+      const montantPrimeActivite_M4_M5_M6 = "257";
 
       const homePage = new HomePage();
       homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
@@ -223,7 +223,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantSalaireMoisMoins2 = "380";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2_M3 = "497";
-      const montantRSA_M4_M5_M6 = "176";
+      const montantRSA_M4_M5_M6 = "177";
       const montantPrimeActivite_M4_M5_M6 = "196";
 
       const homePage = new HomePage();
@@ -319,8 +319,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantSalaireMoisMoins2 = "380";
       const montantSalaireMoisMoins3 = "380";
       // VARIABLES PAGE RESULTAT SIMULATION
-      const montantRSA_M1_M2_M3 = "375";
-      const montantRSA_M4_M5_M6 = "54";
+      const montantRSA_M1_M2_M3 = "376";
+      const montantRSA_M4_M5_M6 = "55";
       const montantPrimeActivite_M4_M5_M6 = "270";
 
       const homePage = new HomePage();

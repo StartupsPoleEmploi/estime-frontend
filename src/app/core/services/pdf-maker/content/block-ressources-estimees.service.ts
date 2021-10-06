@@ -123,11 +123,11 @@ export class BlockRessourcesEstimeesService {
       this.addRowIMMO(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0) {
+    if (demandeurEmploi.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0) {
       this.addRowMICR(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice) {
+    if (demandeurEmploi.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
       this.addRowINDP(body, simulationAides);
       nbrRows++;
     }
@@ -210,7 +210,7 @@ export class BlockRessourcesEstimeesService {
   }
 
   private addRowMICR(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois();
+    const montant = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
     const imageBase64 = ImagesBase64Enum.MICRO_ENTREPRENEUR;
     const libelle = LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
@@ -218,7 +218,7 @@ export class BlockRessourcesEstimeesService {
   }
 
   private addRowINDP(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois();
+    const montant = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
     const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
     const libelle = LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);

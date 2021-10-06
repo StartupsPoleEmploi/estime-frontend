@@ -16,26 +16,26 @@
                 </li>
                 <li
                     class="list-group-item"
-                    [ngClass]="{'is-item-not-last': isItemRevenusMicroEntrepriseIsNotLast()}"
-                    *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0">
+                    [ngClass]="{'is-item-not-last': isItemBeneficesMicroEntrepriseIsNotLast()}"
+                    *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0">
                     <app-item-ressource-actuelle
                         [codeRessource]="codesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR"
                         attr.data-testid="row-micro"
                         [isColPictoArrowDisplay]="false"
                         [libelleRessource]="libellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR"
-                        [montantRessource]="deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois()">
+                        [montantRessource]="deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois()">
                     </app-item-ressource-actuelle>
                 </li>
                 <li
                     class="list-group-item"
-                    [ngClass]="{'is-item-not-last': isItemBeneficesTravailleurIndependantIsNotLast()}"
-                    *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0">
+                    [ngClass]="{'is-item-not-last': isItemChiffreAffairesIndependantIsNotLast()}"
+                    *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0">
                     <app-item-ressource-actuelle
                         [codeRessource]="codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
                         attr.data-testid="row-indep"
                         [isColPictoArrowDisplay]="false"
                         [libelleRessource]="libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT"
-                        [montantRessource]="deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois()">
+                        [montantRessource]="deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois()">
                     </app-item-ressource-actuelle>
                 </li>
                 <li

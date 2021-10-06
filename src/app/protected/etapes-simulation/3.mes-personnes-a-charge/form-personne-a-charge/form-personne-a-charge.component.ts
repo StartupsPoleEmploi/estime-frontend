@@ -131,8 +131,8 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM = new AidesCPAM();
     this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = 0;
     this.nouvellePersonneACharge.ressourcesFinancieres.revenusImmobilier3DerniersMois = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = 0;
   }
 
   private resetInformationsPersonnelles(): void {

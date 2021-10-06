@@ -85,8 +85,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   }
 
   public isItemSalaireIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois > 0
-    || this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0
+    || this.demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
@@ -99,8 +99,8 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
-  public isItemRevenusMicroEntrepriseIsNotLast(): boolean {
-    return this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice > 0
+  public isItemBeneficesMicroEntrepriseIsNotLast(): boolean {
+    return this.demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0
@@ -113,7 +113,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
-  public isItemBeneficesTravailleurIndependantIsNotLast(): boolean {
+  public isItemChiffreAffairesIndependantIsNotLast(): boolean {
     return this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0
     || this.aidesService.getMontantAAH(this.simulationSelected) > 0
     || this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0

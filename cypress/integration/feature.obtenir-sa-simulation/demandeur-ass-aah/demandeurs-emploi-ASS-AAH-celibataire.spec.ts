@@ -145,7 +145,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const montantAPL = "120";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
-    const primeActivite = "61";
+    const primeActivite = "62";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
@@ -251,8 +251,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite1 = "138";
-    const primeActivite2 = "416";
+    const primeActivite1 = "139";
+    const primeActivite2 = "417";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);

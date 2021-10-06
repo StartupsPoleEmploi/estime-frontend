@@ -103,8 +103,8 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.salaire.montantNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
       ressourcesFinancieres.salaire.montantBrut  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantBrut);
     }
-    ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusMicroEntreprise3DerniersMois);
-    ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice);
+    ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice);
+    ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.chiffreAffairesIndependantDernierExercice);
     ressourcesFinancieres.revenusImmobilier3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier3DerniersMois);
     return ressourcesFinancieres;
   }

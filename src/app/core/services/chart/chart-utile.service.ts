@@ -164,8 +164,8 @@ export class ChartUtileService {
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
       dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesTravailleurIndependantSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusMicroEntrepriseSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
+      dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
     }
     dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAides.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);

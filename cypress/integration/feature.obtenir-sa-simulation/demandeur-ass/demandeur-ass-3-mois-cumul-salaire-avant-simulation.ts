@@ -56,8 +56,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "450";
     const montantAgepi = "400";
-    const montantPrimeActiviteM2_M3_M4 = "140";
-    const montantPrimeActiviteM5_M6 = "421";
+    const montantPrimeActiviteM2_M3_M4 = "141";
+    const montantPrimeActiviteM5_M6 = "422";
 
     const homePage = new HomePage();
     homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);

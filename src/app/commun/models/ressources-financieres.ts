@@ -10,8 +10,8 @@ export class RessourcesFinancieres {
   aidesCPAM : AidesCPAM;
   hasTravailleAuCoursDerniersMois: boolean;
   nombreMoisTravaillesDerniersMois: number;
-  beneficesTravailleurIndependantDernierExercice: number;
-  revenusMicroEntreprise3DerniersMois: number;
+  chiffreAffairesIndependantDernierExercice: number;
+  beneficesMicroEntrepriseDernierExercice: number;
   revenusImmobilier3DerniersMois: number;
   periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation;
   salaire: Salaire;

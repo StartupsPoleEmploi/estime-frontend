@@ -418,18 +418,18 @@ export class DeConnecteService {
     }
   }
 
-  public unsetConjointRevenusMicroEntrepreneur(): void {
+  public unsetConjointBeneficesMicroEntreprise(): void {
     if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur = false;
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
-  public unsetConjointBeneficesTravailleurIndependant(): void {
+  public unsetConjointChiffreAffairesIndependant(): void {
     if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant = false;
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
@@ -444,16 +444,16 @@ export class DeConnecteService {
     }
   }
 
-  public unsetRevenusMicroEntrepreneur(): void {
+  public unsetBeneficesMicroEntreprise(): void {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
-  public unsetBeneficesTravailleurIndependant(): void {
+  public unsetChiffreAffairesIndependant(): void {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }

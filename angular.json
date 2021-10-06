@@ -47,7 +47,11 @@
             "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "allowedCommonJsDependencies": [
+              "angular2-chartjs",
+              "pdfmake/build/pdfmake"
+            ]
           },
           "configurations": {
             "production": {

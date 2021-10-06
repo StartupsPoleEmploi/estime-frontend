@@ -69,19 +69,19 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   public onClickCheckBoxIsMicroEntrepreneur(): void {
     if (!this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
-      this.unsetRevenusMicroEntrepreneur();
+      this.unsetBeneficesMicroEntreprise();
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-      this.unsetBeneficesTravailleurIndependant();
+      this.unsetChiffreAffairesIndependant();
     }
   }
 
   public onClickCheckBoxIsTravailleurIndependant(): void {
     if (!this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
-      this.unsetBeneficesTravailleurIndependant();
+      this.unsetChiffreAffairesIndependant();
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-      this.unsetRevenusMicroEntrepreneur();
+      this.unsetBeneficesMicroEntreprise();
     }
   }
 
@@ -106,8 +106,8 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   public onClickCheckBoxIsSansRessource(): void {
     this.unsetSalaire();
     this.unsetRessourcesAllocations();
-    this.unsetRevenusMicroEntrepreneur();
-    this.unsetBeneficesTravailleurIndependant();
+    this.unsetBeneficesMicroEntreprise();
+    this.unsetChiffreAffairesIndependant();
   }
 
   public handleKeyUpOnButtonSituation(e: any, situationConjoint: string) {
@@ -227,17 +227,17 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     }
   }
 
-  private unsetRevenusMicroEntrepreneur(): void {
+  private unsetBeneficesMicroEntreprise(): void {
     if(this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
       this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
     }
   }
 
-  private unsetBeneficesTravailleurIndependant(): void {
+  private unsetChiffreAffairesIndependant(): void {
     if(this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
       this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice = null;
+      this.nouvellePersonneACharge.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
     }
   }
 

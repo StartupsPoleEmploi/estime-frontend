@@ -586,19 +586,14 @@
               <div class="row mb-2">
                   <label
                       class="label headline-4-typo"
-                      for="revenusMicroEntreprise">
-                      * Chiffre d'affaires en tant que micro entrepreneur
+                      for="beneficesMicroEntrepriseDernierExercice">
+                      * Bénéfices en tant que micro entrepreneur
                   </label>
               </div>
               <div class="row">
-                  <span
-                      *ngIf="screenService.isExtraSmallScreen()"
-                      class="text-side-input ml-0 body-2-typo">
-                      net total 3 derniers mois
-                  </span>
                   <input
-                      id="revenusMicroEntreprise"
-                      name="revenusMicroEntreprise"
+                      id="beneficesMicroEntrepriseDernierExercice"
+                      name="beneficesMicroEntrepriseDernierExercice"
                       pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                       (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                       type="text"
@@ -606,30 +601,30 @@
                       min="0"
                       class="max-with-input-type-montant form-control"
                       placeholder="Montant"
-                      [(ngModel)]="ressourcesFinancieres.revenusMicroEntreprise3DerniersMois"
-                      [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois == 0)}"
+                      [(ngModel)]="ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice"
+                      [ngClass]="{'ng-invalid': this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)}"
                       required
                       inputmode="decimal"
-                      #revenusMicroEntreprise3DerniersMois="ngModel">
+                      #beneficesMicroEntrepriseDernierExercice="ngModel">
                   <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                   <app-text-with-euro-symbol
                       *ngIf="!screenService.isExtraSmallScreen()"
-                      message="net total 3 derniers mois">
+                      message="sur le dernier exercice clos">
                   </app-text-with-euro-symbol>
               </div>
               <div class="row">
                   <span
                       class="row error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || revenusMicroEntreprise?.touched)  && revenusMicroEntreprise?.errors?.required">
+                      *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesMicroEntrepriseDernierExercice?.touched)  && beneficesMicroEntrepriseDernierExercice?.errors?.required">
                       {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                   </span>
                   <span
                       class="row error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || revenusMicroEntreprise?.touched)  && revenusMicroEntreprise?.errors?.pattern">
+                      *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesMicroEntrepriseDernierExercice?.touched)  && beneficesMicroEntrepriseDernierExercice?.errors?.pattern">
                       {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                   </span>
                   <span
-                      *ngIf="this.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois && (this.ressourcesFinancieres.revenusMicroEntreprise3DerniersMois == 0)"
+                      *ngIf="this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)"
                       class="row error-input-message">
                       {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                   </span>
@@ -641,19 +636,14 @@
               <div class="row mb-2">
                   <label
                       class="label headline-4-typo"
-                      for="beneficesTravailleurIndependantDernierExercice">
-                      * Bénéfices en tant qu'indépendant
+                      for="chiffreAffairesIndependantDernierExercice">
+                      * Chiffre d'affaires en tant qu'indépendant
                   </label>
               </div>
               <div class="row">
-                  <span
-                      *ngIf="screenService.isExtraSmallScreen()"
-                      class="text-side-input ml-0 body-2-typo">
-                      des bénéfices de l'année dernière
-                  </span>
                   <input
-                      id="beneficesTravailleurIndependantDernierExercice"
-                      name="beneficesTravailleurIndependantDernierExercice"
+                      id="chiffreAffairesIndependantDernierExercice"
+                      name="chiffreAffairesIndependantDernierExercice"
                       pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                       (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                       type="text"
@@ -661,29 +651,30 @@
                       min="0"
                       class="max-with-input-type-montant form-control"
                       placeholder="Montant"
-                      [(ngModel)]="ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice"
-                      [ngClass]="{'ng-invalid': this.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice && (this.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice == 0)}"
+                      [(ngModel)]="ressourcesFinancieres.chiffreAffairesIndependantDernierExercice"
+                      [ngClass]="{'ng-invalid': this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)}"
                       required
                       inputmode="decimal"
-                      #beneficesTravailleurIndependantDernierExercice="ngModel">
+                      #chiffreAffairesIndependantDernierExercice="ngModel">
                   <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
                   <app-text-with-euro-symbol
                       *ngIf="!screenService.isExtraSmallScreen()"
-                      message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                      message="sur le dernier exercice clos">
+                  </app-text-with-euro-symbol>
               </div>
               <div class="row">
                   <span
                       class="row error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesTravailleurIndependantDernierExercice?.touched)  && beneficesTravailleurIndependantDernierExercice?.errors?.required">
+                      *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.required">
                       {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                   </span>
                   <span
                       class="row error-input-message"
-                      *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesTravailleurIndependantDernierExercice?.touched)  && beneficesTravailleurIndependantDernierExercice?.errors?.pattern">
+                      *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.pattern">
                       {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                   </span>
                   <span
-                      *ngIf="this.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice && (this.ressourcesFinancieres.beneficesTravailleurIndependantDernierExercice == 0)"
+                      *ngIf="this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)"
                       class="row error-input-message">
                       {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                   </span>

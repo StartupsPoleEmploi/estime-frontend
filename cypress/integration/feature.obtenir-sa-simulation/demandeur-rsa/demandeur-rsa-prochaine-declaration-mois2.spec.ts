@@ -46,7 +46,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantRSA_M1_M2 = montantMensuelRSA;
       const montantRSA_M3_M4_M5 = "102";
       const montantPrimeActivite_M3_M4_M5 = "58";
-      const montantPrimeActivite_M6 = "174";
+      const montantPrimeActivite_M6 = "175";
 
       const homePage = new HomePage();
       homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
@@ -138,7 +138,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "2";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2 = montantMensuelRSA;
-      const montantRSA_M3_M4_M5 = "176";
+      const montantRSA_M3_M4_M5 = "177";
       const montantRSA_M6 = "16";
       const montantPrimeActivite_M3_M4_M5 = "196";
       const montantPrimeActivite_M6 = "294";
