@@ -131,6 +131,38 @@ export class BlockRessourcesEstimeesService {
       this.addRowINDP(body, simulationAides);
       nbrRows++;
     }
+    if (demandeurEmploi.beneficiaireAides.beneficiaireALF) {
+      this.addRowALF(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.beneficiaireAides.beneficiaireALS) {
+      this.addRowALS(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.beneficiaireAides.beneficiaireAPL) {
+      this.addRowAPL(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial) {
+      this.addRowASF(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales) {
+      this.addRowAF(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial) {
+      this.addRowCF(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant) {
+      this.addRowPAJE(body, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer) {
+      this.addRowPAF(body, simulationAides);
+      nbrRows++;
+    }
 
     content.push(this.createTableElement(body, simulationAides.simulationsMensuelles.length, nbrRows));
   }
@@ -222,6 +254,118 @@ export class BlockRessourcesEstimeesService {
     const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
     const libelle = LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
+    body.push(row);
+  }
+
+  private addRowAPL(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.AIDE_PERSONALISEE_LOGEMENT;
+    const libelle = LibellesAidesEnum.AIDE_PERSONALISEE_LOGEMENT;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantAah = this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle);
+      row.push(this.createCellMontant(montantAah));
+    });
+    body.push(row);
+  }
+
+  private addRowALF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIAL;
+    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantAah = this.aidesService.getMontantAllocationLogementFamilial(simulationMensuelle);
+      row.push(this.createCellMontant(montantAah));
+    });
+    body.push(row);
+  }
+
+  private addRowALS(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIAL;
+    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantAah = this.aidesService.getMontantAllocationLogementSocial(simulationMensuelle);
+      row.push(this.createCellMontant(montantAah));
+    });
+    body.push(row);
+  }
+
+  private addRowASF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_SOUTIEN_FAMILIAL;
+    const libelle = LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantASF = this.aidesService.getMontantAllocationSoutienFamilial(simulationMensuelle);
+      row.push(this.createCellMontant(montantASF));
+    });
+    body.push(row);
+  }
+
+  private addRowAF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.ALLOCATIONS_FAMILIALES;
+    const libelle = LibellesAidesEnum.ALLOCATIONS_FAMILIALES;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantAF = this.aidesService.getMontantAllocationsFamiliales(simulationMensuelle);
+      row.push(this.createCellMontant(montantAF));
+    });
+    body.push(row);
+  }
+
+  private addRowCF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.COMPLEMENT_FAMILIAL;
+    const libelle = LibellesAidesEnum.COMPLEMENT_FAMILIAL;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantCF = this.aidesService.getMontantComplementFamilial(simulationMensuelle);
+      row.push(this.createCellMontant(montantCF));
+    });
+    body.push(row);
+  }
+
+  private addRowPAJE(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
+    const libelle = LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantPAJE = this.aidesService.getMontantPrestationAccueilJeuneEnfant(simulationMensuelle);
+      row.push(this.createCellMontant(montantPAJE));
+    });
+    body.push(row);
+  }
+
+  private addRowPAF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+    const row = new Array<Cell>();
+    const imageBase64 = ImagesBase64Enum.PENSIONS_ALIMENTAIRES;
+    const libelle = LibellesAidesEnum.PENSIONS_ALIMENTAIRES;
+    row.push(this.createCellImageRessource(imageBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    //création des cellules pour chaque simulation mensuelle
+    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantPAF = this.aidesService.getMontantPensionsAlimentaires(simulationMensuelle);
+      row.push(this.createCellMontant(montantPAF));
+    });
     body.push(row);
   }
 

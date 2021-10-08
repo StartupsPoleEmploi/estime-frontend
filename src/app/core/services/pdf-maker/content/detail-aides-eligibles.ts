@@ -24,19 +24,19 @@ export class DetailAidesEligiblesService {
   }
 
   public addPagesDetailAides(content: Array<any>, simulationAides: SimulationAides): void {
-    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
       this.addAideASS(content, simulationAides);
     }
     if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AGEPI)) {
       this.addAideAGEPI(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_MOBILITE)) {
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_MOBILITE)) {
       this.addAideMobilite(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.PRIME_ACTIVITE)) {
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.PRIME_ACTIVITE)) {
       this.addPrimeActivite(content, simulationAides);
     }
-    if(this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
       this.addAideAAH(content, simulationAides);
     }
   }
@@ -133,9 +133,6 @@ export class DetailAidesEligiblesService {
 
   private addContentAideAGEPI(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
-    contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
-    contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
-    contentDetailAide[5].text = '\n' + contentDetailAide[5].text + '\n';
     content.push(contentDetailAide);
   }
 
@@ -144,23 +141,13 @@ export class DetailAidesEligiblesService {
     content.push(contentDetailAide);
   }
 
-
-
   private addContentAideMobilite(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
-    contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
-    contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
-    contentDetailAide[5].text = '\n' + contentDetailAide[5].text + '\n';
-    contentDetailAide[8].text = '\n' + contentDetailAide[8].text + '\n';
-    contentDetailAide[10].text = '\n' + contentDetailAide[10].text + '\n';
     content.push(contentDetailAide);
   }
 
   private addContentPrimeActivite(content: Array<any>, aideAGEPI: Aide): void {
     const contentDetailAide = htmlToPdfmake(aideAGEPI.detail);
-    contentDetailAide[1].text = '\n' + contentDetailAide[1].text + '\n';
-    contentDetailAide[3].text = '\n' + contentDetailAide[3].text + '\n';
-    contentDetailAide[7].text = '\n' + contentDetailAide[7].text + '\n';
     content.push(contentDetailAide);
   }
 

@@ -6,7 +6,7 @@ import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { RessourcesFinancieresUtileService } from './ressources-financieres-utiles.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AidesService {
 
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM = 30;
@@ -46,6 +46,18 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PENSIONS_ALIMENTAIRES);
   }
 
+  public getMontantAidePersonnaliseeLogement(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_PERSONALISEE_LOGEMENT);
+  }
+
+  public getMontantAllocationLogementFamilial(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL);
+  }
+
+  public getMontantAllocationLogementSocial(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL);
+  }
+
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AGEPI)
   }
@@ -60,9 +72,9 @@ export class AidesService {
 
   public getMessageAlerteAidesFamiliales(simulationSelected: SimulationMensuelle): string {
     let message = null;
-    if(simulationSelected.mesAides) {
+    if (simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
+        if (codeAide === CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
           || codeAide === CodesAidesEnum.ALLOCATIONS_FAMILIALES
           || codeAide === CodesAidesEnum.COMPLEMENT_FAMILIAL) {
           message = aide.messageAlerte;
@@ -74,7 +86,7 @@ export class AidesService {
 
   public getMessageAlerteAidesFamilialesNoSelect(simulationsAides: SimulationAides): string {
     let message = null;
-    if(simulationsAides.simulationsMensuelles != null) {
+    if (simulationsAides.simulationsMensuelles != null) {
       message = this.getMessageAlerteAidesFamiliales(simulationsAides.simulationsMensuelles[0])
     }
     return message;
@@ -82,9 +94,9 @@ export class AidesService {
 
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
     let message = null;
-    if(simulationSelected.mesAides) {
+    if (simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === codeAideAlerte) {
+        if (codeAide === codeAideAlerte) {
           message = aide.messageAlerte;
         }
       }
@@ -94,26 +106,26 @@ export class AidesService {
 
   public getMontantPensionInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
     let montant = 0;
-    if(demandeurEmploiConnecte.ressourcesFinancieres &&
-        demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
-          demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite
+    if (demandeurEmploiConnecte.ressourcesFinancieres &&
+      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
+      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite
     ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite);
     return montant;
   }
 
   public getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
     let montant = 0;
-    if(demandeurEmploiConnecte.ressourcesFinancieres &&
-        demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
-          demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite
+    if (demandeurEmploiConnecte.ressourcesFinancieres &&
+      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
+      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite
     ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
     return montant;
   }
 
-  public hasAidesObtenirSimulationAides(simulationAides: SimulationAides): boolean  {
+  public hasAidesObtenirSimulationAides(simulationAides: SimulationAides): boolean {
     let hasAidesObtenirSimulationAides = false;
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      if(this.hasAidesObtenir(simulationMensuelle)) {
+      if (this.hasAidesObtenir(simulationMensuelle)) {
         hasAidesObtenirSimulationAides = true;
       }
     });
@@ -122,13 +134,13 @@ export class AidesService {
 
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {
     let hasAidesObtenir = false;
-    if(simulationSelected) {
-        const aides = Object.values(simulationSelected.mesAides);
-        aides.forEach((aide) => {
-          if(this.isAideDemandeurPourraObtenir(aide)) {
-            hasAidesObtenir = true;
-            }
-        });
+    if (simulationSelected) {
+      const aides = Object.values(simulationSelected.mesAides);
+      aides.forEach((aide) => {
+        if (this.isAideDemandeurPourraObtenir(aide)) {
+          hasAidesObtenir = true;
+        }
+      });
     }
     return hasAidesObtenir;
   }
@@ -137,7 +149,7 @@ export class AidesService {
     let aide = null;
 
     for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.mesAides)) {
-      if(aideSimulationMensuelle && codeAide === codeAideToFind) {
+      if (aideSimulationMensuelle && codeAide === codeAideToFind) {
         aide = aideSimulationMensuelle;
       }
     }
@@ -148,7 +160,7 @@ export class AidesService {
     let aide = null;
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
       for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.mesAides)) {
-        if(aideSimulationMensuelle && codeAide === codeAideToFind) {
+        if (aideSimulationMensuelle && codeAide === codeAideToFind) {
           aide = aideSimulationMensuelle;
         }
       }
@@ -159,7 +171,7 @@ export class AidesService {
   public hasAide(simulationAides: SimulationAides, codeAide: string) {
     let hasAide = false;
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      if(this.hasAideByCode(simulationMensuelle, codeAide)) {
+      if (this.hasAideByCode(simulationMensuelle, codeAide)) {
         hasAide = true;
       }
     });
@@ -168,24 +180,24 @@ export class AidesService {
 
   public hasAideByCode(simulationSelected: SimulationMensuelle, codeAideToFind: string): boolean {
     let hasAidesObtenir = false;
-    if(simulationSelected) {
-        for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-          if(aide && codeAide === codeAideToFind) {
-            hasAidesObtenir = true;
-          }
+    if (simulationSelected) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+        if (aide && codeAide === codeAideToFind) {
+          hasAidesObtenir = true;
         }
+      }
     }
     return hasAidesObtenir;
   }
 
   public isAideDemandeurPourraObtenir(aide: Aide): boolean {
     return aide && aide.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
-        && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
-        && aide.code !== CodesAidesEnum.RSA
-        && aide.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
-        && aide.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
-        && aide.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
-        && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
+      && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
+      && aide.code !== CodesAidesEnum.RSA
+      && aide.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
+      && aide.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
+      && aide.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
+      && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
   }
 
   /**
@@ -201,14 +213,14 @@ export class AidesService {
     return (demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
       && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM)
       || (!demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
-      && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM) ;
+        && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM);
   }
 
   private getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
     let montant = 0;
-    if(simulationSelected.mesAides) {
+    if (simulationSelected.mesAides) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
-        if(codeAide === codeAideSelected) {
+        if (codeAide === codeAideSelected) {
           montant = Number(aide.montant);
         }
       }
