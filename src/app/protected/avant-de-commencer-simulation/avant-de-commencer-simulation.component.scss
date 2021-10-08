@@ -2,15 +2,19 @@
 
 .container-fluid {
   margin-bottom: 30px;
+
   @media #{$extra-small-device} {
     padding-left: 0;
     padding-right: 0;
   }
+
   margin-top: 2rem;
+
   h1 {
     margin-bottom: 15px;
     text-align: center;
   }
+
   .card {
     background-color: $color-white-3;
     border: none;
@@ -18,26 +22,32 @@
     max-width: 600px;
     margin: auto;
     padding: 20px 15px 20px 15px;
+
     @media #{$small-device} {
       padding: 30px 70px 30px 70px;
     }
+
     #div-info-simulation {
       color: $color-blue-3;
       border: 1px solid $color-blue-3;
       border-radius: 4px;
       padding: 8px;
+
       .row {
         margin-left: auto;
         margin-right: auto;
         width: fit-content;
+
         #img-info-simulation {
           max-width: fit-content !important;
           padding-right: 5px;
           padding-left: 5px;
+
           div {
             width: 20px;
             height: 100%;
             position: relative;
+
             img {
               bottom: 0;
               margin: auto;
@@ -47,9 +57,11 @@
             }
           }
         }
+
         #text-info-simulation {
           padding-right: 5px;
           line-height: 18px;
+
           span {
             color: $color-blue-3;
             font-size: 0.75em;
@@ -57,18 +69,20 @@
         }
       }
     }
+
     .text-document {
       @media #{$small-device} {
         margin-left: 2rem;
       }
     }
+
     .btn-style-perso-1 {
       margin: auto;
       width: 188px;
+
       @media #{$extra-small-device} {
         width: 185px;
       }
     }
   }
 }
-

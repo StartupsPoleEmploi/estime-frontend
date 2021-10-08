@@ -5,9 +5,11 @@
     padding-right: 1rem;
     padding-left: 1rem;
   }
+
   .row-style-2 {
     margin-right: 0;
   }
+
   .row-style-3 {
     margin: 0;
 
@@ -37,6 +39,7 @@
         margin-right: 0.5rem;
         color: $color-blue-10;
       }
+
       span {
         font-family: Poppins;
         font-style: normal;
@@ -45,6 +48,7 @@
         line-height: 21px;
         color: $color-blue-10;
       }
+
       &:hover {
         cursor: pointer;
         text-decoration: underline;
@@ -53,6 +57,7 @@
 
     #btn-telecharger-simulation {
       float: right;
+
       @media #{$extra-small-device} {
         text-align: center;
         float: unset;
@@ -61,6 +66,7 @@
 
     #btn-refaire-simulation {
       float: left;
+
       @media #{$extra-small-device} {
         text-align: center;
         float: unset;
@@ -69,7 +75,7 @@
   }
 
   #row-onglets-resultat-simulation {
-    margin:0;
+    margin: 0;
     margin-top: 2rem;
     justify-content: center;
 
@@ -93,16 +99,18 @@
       @media #{$extra-small-device} {
         min-height: 2rem;
       }
+
       span {
-        color:white;
+        color: white;
       }
 
       &:focus {
-        background-color: $color-blue-2-darker!important;
+        background-color: $color-blue-2-darker !important;
       }
 
       &.isOngletInactive {
         background-color: unset;
+
         span {
           font-weight: normal !important;
           color: $color-blue-1;
@@ -110,17 +118,20 @@
 
         &:hover {
           background-color: unset !important;
-          border: 0.125rem solid $color-blue-2-darker!important;
+          border: 0.125rem solid $color-blue-2-darker !important;
+
           span {
-            color:$color-blue-2-darker!important;
+            color: $color-blue-2-darker !important;
 
           }
         }
+
         &:focus {
           background-color: unset !important;
-          border: 0.125rem solid $color-blue-2-darker!important;
+          border: 0.125rem solid $color-blue-2-darker !important;
+
           span {
-            color:$color-blue-2-darker!important;
+            color: $color-blue-2-darker !important;
           }
         }
       }
@@ -134,21 +145,27 @@
       @media #{$extra-small-device} {
         margin-bottom: 25px !important;
       }
+
       div {
         height: 100%;
+
         @media #{$extra-small-device} {
           max-width: 565px;
         }
+
         color: $color-blue-2;
       }
     }
+
     #card-revenus-actuels {
       padding-left: 9px;
       padding-right: 9px;
+
       @media #{$small-device} {
         padding-left: 0;
         padding-right: 15px;
       }
+
       .card {
         border: 0;
         height: 100%;
@@ -157,46 +174,58 @@
         text-align: center;
         padding: 0.4rem 1rem;
         width: 100%;
+
         @media #{$extra-small-device} {
           margin-left: auto;
           margin-right: auto;
         }
+
         .card-body {
           background-color: $color-white-3;
         }
       }
     }
+
     #row-montants-total {
       margin-top: 0.5rem;
+
       @media #{$small-device} {
         margin-top: 1.5rem;
       }
+
       .card {
         height: 100%;
         padding: 10px;
+
         @media #{$extra-small-device} {
           background-color: unset;
         }
+
         margin-bottom: 4rem;
       }
+
       #details_ressources_estimees_title {
         text-align: center;
-        margin:auto;
+        margin: auto;
       }
     }
+
     .card {
       border: 0;
     }
-    .card-deck {
+
+    .card-group {
       border: 0;
       border-radius: 0.5rem;
       margin-bottom: 0;
+
       @media #{$small-device} {
         padding-bottom: 5px;
         margin-left: 0;
         margin-right: 0;
       }
     }
+
     .first-card {
       border: 0;
       border-radius: 0.5rem;
@@ -207,16 +236,20 @@
       padding-right: 0rem;
       width: 100%;
       background-color: unset;
+
       .second-card {
         border: 0;
         cursor: pointer;
         margin-bottom: 0;
+
         @media #{$extra-small-device} {
           margin: 5px;
           margin-left: -7px;
           margin-right: -7px;
         }
+
         background-color: unset;
+
         .card-body {
           padding: 0.25rem;
           height: 4.5rem !important;
@@ -224,46 +257,57 @@
           border-radius: 0.5rem;
           vertical-align: text-bottom;
           background-color: $color-white-1;
+
           @media #{$extra-small-device} {
             padding-right: 1rem;
             padding-left: 1rem;
           }
+
           &.active {
             background-color: $color-blue-8;
           }
+
           &.hovered {
             background-color: $color-blue-7;
           }
+
           &:focus {
-            background-color: $color-blue-7!important;
-            border: 0!important;
+            background-color: $color-blue-7 !important;
+            border: 0 !important;
             outline: none !important;
           }
+
           span {
-            line-height:4.5rem !important;
+            line-height: 4.5rem !important;
           }
+
           .span-mois-annee {
             color: $color-blue-10 !important;
+
             @media #{$extra-small-device} {
               padding-left: 0.5rem;
               white-space: nowrap;
-              float:left;
+              float: left;
             }
           }
+
           .span-montant-mensuel {
             color: $color-blue-2;
           }
         }
+
         .card-footer {
           background-color: unset;
           padding-bottom: 0;
         }
+
         .card-footer-mobile {
           background-color: unset;
           padding-right: 0 !important;
           padding-left: 0 !important;
           border: 0;
         }
+
         .card-footer-desktop {
           background-color: unset;
           padding-bottom: 0;
@@ -271,11 +315,13 @@
         }
       }
     }
+
     .card-simulations-desktop {
       border: 0;
       line-height: 4.5rem;
       position: relative;
     }
+
     .card-simulations-mobile {
       margin-right: 0 !important;
       margin-left: 0 !important;
@@ -284,10 +330,12 @@
     .div-button-retour {
       margin-top: 20px;
       margin-bottom: 30px;
+
       .btn-style-perso-2 {
         background-color: unset;
       }
     }
+
     .row {
       @media #{$small-device} {
         margin-left: 0;
@@ -297,16 +345,17 @@
 
     #resultat_simulation_div_boutons {
 
-      margin:auto!important;
-      margin-top:45px!important;
+      margin: auto !important;
+      margin-top: 45px !important;
       background-color: unset;
 
       #resultat_simulation_bouton_retour {
-        background-color:unset;
+        background-color: unset;
         // width:auto;
       }
+
       #resultat_simulation_bouton_refaire_simulation {
-        width: 250px!important;
+        width: 250px !important;
       }
     }
   }
@@ -316,22 +365,27 @@
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     padding: 1rem 0.5rem 0.5rem 1rem;
+
     span {
       color: $color-blue-2
     }
+
     .row {
       margin-left: auto;
       margin-right: auto;
       width: fit-content;
       line-height: normal;
+
       .img-card-message-alerte-aide {
         max-width: fit-content !important;
         padding-right: 5px;
         padding-left: 5px;
+
         div {
           width: 20px;
           height: 100%;
           position: relative;
+
           img {
             bottom: 0;
             margin: auto;

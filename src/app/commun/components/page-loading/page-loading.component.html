@@ -1,12 +1,16 @@
 <div class="container-fluid">
-  <div class="row h-100">
-    <div class="my-auto ml-auto mr-auto">
-        <div class= "row">
-          <i alt="loading"  class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
-        </div>
-        <div class= "row" role="alert" aria-busy="true">
-          <span alt="loading" class="body-2-typo">{{message}}</span>
+    <div class="row h-100">
+        <div class="my-auto col d-flex flex-column align-items-center">
+            <div class="row mb-2">
+                <div class="col">
+                    <i alt="loading" class="fa fa-spinner fa-spin fa-4x fa-fw"></i>
+                </div>
+            </div>
+            <div class="row" role="alert" aria-busy="true">
+                <div class="col">
+                    <span alt="loading" class="body-2-typo">{{message}}</span>
+                </div>
+            </div>
         </div>
     </div>
- </div>
 </div>

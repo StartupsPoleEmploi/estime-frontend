@@ -38,3 +38,7 @@ popover-container {
 .popover.right .arrow:after {
   border-left-color: $color-blue-5;
 }
+
+.popover-container {
+  padding: 0!important;
+}

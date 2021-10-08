@@ -1,96 +1,49 @@
 <div class="row btn-group-input-date">
-  <input
-      id="inputJour{{ dateSaisie.libelleTypeDate }}"
-      name="jourDate"
-      attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}"
-      (change)="onChangeOrKeyUpDateJour()"
-      class="form-control jour-input"
-      [ngClass]="{'date-invalid': dateSaisie.isJourInvalide || dateSaisie.isDateSuperieurDateJour}"
-      (click)="$event.target.select()"
-      data-testid="input-jour-date"
-      (focusout)="onFocusOutDateJour()"
-      inputmode="numeric"
-      (keyup)="onChangeOrKeyUpDateJour()"
-      (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-      maxlength="2"
-      min="0"
-      [(ngModel)]="dateSaisie.jour"
-      placeholder="JJ"
-      required
-      type="text"
-      #jourDate="ngModel">
-  <input
-      id="inputMois{{ dateSaisie.libelleTypeDate }}"
-      name="moisDate"
-      attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}"
-      (change)="onChangeOrKeyUpDateMois()"
-      class="form-control mois-input"
-      [ngClass]="{'date-invalid': dateSaisie.isMoisInvalide || dateSaisie.isDateSuperieurDateJour}"
-      (click)="$event.target.select()"
-      data-testid="input-mois-date"
-      (focusout)="onFocusOutDateMois()"
-      inputmode="numeric"
-      (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-      (keyup)="onChangeOrKeyUpDateMois()"
-      maxlength="2"
-      min="0"
-      [(ngModel)]="dateSaisie.mois"
-      placeholder="MM"
-      type="text"
-      required
-      #moisDate="ngModel">
-  <input
-      id="inputAnnee{{ dateSaisie.libelleTypeDate }}"
-      name="anneeDate"
-      attr.aria-label="année {{ dateSaisie.libelleAriaLabel }}"
-      class="form-control annee-input"
-      [ngClass]="{'date-invalid': dateSaisie.isAnneeInvalide || dateSaisie.isDateSuperieurDateJour}"
-      (click)="$event.target.select()"
-      data-testid="input-annee-date"
-      (focusout)="onFocusOutDateAnnee()"
-      inputmode="numeric"
-      (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-      (keyup)="onChangeOrKeyUpDateAnnee()"
-      maxlength="4"
-      min="1900"
-      [(ngModel)]="dateSaisie.annee"
-      placeholder="AAAA"
-      required
-      type="text"
-      #anneeDate="ngModel">
+    <div class="col">
+        <input id="inputJour{{ dateSaisie.libelleTypeDate }}" name="jourDate"
+            attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}" (change)="onChangeOrKeyUpDateJour()"
+            class="form-control jour-input d-inline"
+            [ngClass]="{'date-invalid': dateSaisie.isJourInvalide || dateSaisie.isDateSuperieurDateJour}"
+            (click)="$event.target.select()" data-testid="input-jour-date" (focusout)="onFocusOutDateJour()"
+            inputmode="numeric" (keyup)="onChangeOrKeyUpDateJour()"
+            (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" maxlength="2" min="0"
+            [(ngModel)]="dateSaisie.jour" placeholder="JJ" required type="text" #jourDate="ngModel">
+        <input id="inputMois{{ dateSaisie.libelleTypeDate }}" name="moisDate"
+            attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}" (change)="onChangeOrKeyUpDateMois()"
+            class="form-control mois-input d-inline"
+            [ngClass]="{'date-invalid': dateSaisie.isMoisInvalide || dateSaisie.isDateSuperieurDateJour}"
+            (click)="$event.target.select()" data-testid="input-mois-date" (focusout)="onFocusOutDateMois()"
+            inputmode="numeric" (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+            (keyup)="onChangeOrKeyUpDateMois()" maxlength="2" min="0" [(ngModel)]="dateSaisie.mois" placeholder="MM"
+            type="text" required #moisDate="ngModel">
+        <input id="inputAnnee{{ dateSaisie.libelleTypeDate }}" name="anneeDate"
+            attr.aria-label="année {{ dateSaisie.libelleAriaLabel }}" class="form-control annee-input d-inline"
+            [ngClass]="{'date-invalid': dateSaisie.isAnneeInvalide || dateSaisie.isDateSuperieurDateJour}"
+            (click)="$event.target.select()" data-testid="input-annee-date" (focusout)="onFocusOutDateAnnee()"
+            inputmode="numeric" (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+            (keyup)="onChangeOrKeyUpDateAnnee()" maxlength="4" min="1900" [(ngModel)]="dateSaisie.annee"
+            placeholder="AAAA" required type="text" #anneeDate="ngModel">
+    </div>
 </div>
-<span
-  class="row error-input-message"
-  *ngIf="(isFormSubmitted || jourDate.touched)  && jourDate.errors?.required">
-  {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+<span class="row error-input-message" *ngIf="(isFormSubmitted || jourDate.touched)  && jourDate.errors?.required">
+    {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="(isFormSubmitted || moisDate.touched)  && moisDate.errors?.required">
-  {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+<span class="row error-input-message" *ngIf="(isFormSubmitted || moisDate.touched)  && moisDate.errors?.required">
+    {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="(isFormSubmitted || anneeDate.touched) && anneeDate.errors?.required">
-  {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+<span class="row error-input-message" *ngIf="(isFormSubmitted || anneeDate.touched) && anneeDate.errors?.required">
+    {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="dateSaisie.isJourInvalide">
-  {{dateSaisie.messageErreurFormatJour}}
+<span class="row error-input-message" *ngIf="dateSaisie.isJourInvalide">
+    {{dateSaisie.messageErreurFormatJour}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="dateSaisie.isMoisInvalide">
-  {{dateSaisie.messageErreurFormatMois}}
+<span class="row error-input-message" *ngIf="dateSaisie.isMoisInvalide">
+    {{dateSaisie.messageErreurFormatMois}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="dateSaisie.isAnneeInvalide">
-  {{dateSaisie.messageErreurFormatAnnee}}
+<span class="row error-input-message" *ngIf="dateSaisie.isAnneeInvalide">
+    {{dateSaisie.messageErreurFormatAnnee}}
 </span>
-<span
-  class="row error-input-message"
-  *ngIf="!dateSaisie.isJourInvalide && !dateSaisie.isMoisInvalide && !dateSaisie.isAnneeInvalide && dateSaisie.isDateSuperieurDateJour">
-  {{dateSaisie.messageErreurSuperieurDateJour}}
+<span class="row error-input-message"
+    *ngIf="!dateSaisie.isJourInvalide && !dateSaisie.isMoisInvalide && !dateSaisie.isAnneeInvalide && dateSaisie.isDateSuperieurDateJour">
+    {{dateSaisie.messageErreurSuperieurDateJour}}
 </span>

@@ -2,7 +2,7 @@
 
 #section-presentation {
   background-color: white;
-  padding-bottom:  3rem !important;
+  padding-bottom: 3rem !important;
 
   .row {
     @media #{$small-device} {
@@ -17,6 +17,7 @@
       margin-left: 0 !important;
       margin-right: 0 !important;
     }
+
     width: 100%;
 
     .row {
@@ -44,29 +45,36 @@
         margin-top: 2rem;
       }
 
-      .col-1, .col-11 {
+      .col-1,
+      .col-11 {
         @media #{$extra-small-device} {
           padding: 0;
         }
       }
+
       .text-info-beneficiaire {
         color: $color-blue-2;
         padding-left: 1rem;
       }
     }
   }
+
   .row-1 {
     padding-top: 2rem;
+
     @media #{$extra-small-device} {
       padding-top: 1rem;
     }
+
     .row-1-first-col {
       @media #{$small-device} {
         max-width: 71% !important;
       }
+
       .div-span-title {
         max-width: 540px;
         margin-bottom: 1rem;
+
         span {
           font-size: 1.5em;
           font-family: Poppins;
@@ -76,6 +84,7 @@
           color: $color-blue-1;
         }
       }
+
       h1 {
         font-size: 2.375em;
         margin-top: 10px;
@@ -85,6 +94,7 @@
         margin-bottom: 2rem;
         line-height: 48px;
         width: 90%;
+
         @media #{$large-device} {
           font-size: 2.375em;
           margin-top: 0;
@@ -92,28 +102,34 @@
           width: 85%;
         }
       }
+
       .btn-pe-connect {
         margin-bottom: 25px;
         margin-top: 10px;
+
         @media #{$small-device} {
           margin-bottom: 0;
           margin-top: 15px;
         }
       }
+
       .btn-style-perso-1 {
         margin-bottom: 20px;
         margin-top: 20px;
         width: 216px;
+
         @media #{$small-device} {
           margin-bottom: 0;
           margin-top: 20px;
         }
       }
+
       .btn-je-commence {
         height: 2.875rem;
         width: 17.75rem;
-        -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
-        box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
+        -webkit-box-shadow: 0px 12px 34px -15px rgba(0, 0, 0, 0.68);
+        box-shadow: 0px 12px 34px -15px rgba(0, 0, 0, 0.68);
+
         @media #{$extra-small-device} {
           margin-right: auto;
           margin-left: auto;
@@ -123,17 +139,18 @@
         span {
           height: 29px;
           color: #FFFFFF;
-          vertical-align:top;
+          vertical-align: top;
         }
       }
+
       .btn-sticks {
         @media #{$extra-small-device} {
           position: fixed !important;
           bottom: 0;
           left: 0;
           right: 0;
-          z-index:20;
-          padding-bottom:5.5rem;
+          z-index: 20;
+          padding-bottom: 5.5rem;
           height: 4.5rem;
           width: 100vw;
           background-color: $color-blue-5;
@@ -142,53 +159,67 @@
         }
       }
     }
+
     .row-1-second-col {
       @media #{$small-device} {
         min-width: 29% !important;
       }
+
       @media #{$extra-small-device} {
         margin-top: 2rem;
       }
+
       #image-homepage-calculette {
-        width:294px;
+        width: 294px;
       }
     }
   }
+
   .row-2 {
     @media #{$small-device} {
       margin-top: 35px;
     }
+
     .row-2-first-col {
       @media #{$small-device} {
         max-width: 65% !important;
       }
+
       #div-span-texte-ressources-completes {
         max-width: 480px;
         margin-bottom: 22px;
       }
+
       h2 {
         font-size: 1.625em;
         text-align: left;
+
         @media #{$medium-device} {
           margin-top: 35px;
         }
       }
+
       span {
         font-size: 1.25em;
       }
     }
+
     .row-2-second-col {
       @media #{$small-device} {
         max-width: 35% !important;
       }
+
       #image-homepage-smartphone {
         margin-top: 20px;
         text-align: center;
+
         @media #{$small-device} {
           margin-right: 20px;
         }
+
         img {
           width: 100%;
+
           @media #{$small-device} {
             width: 104%;
           }

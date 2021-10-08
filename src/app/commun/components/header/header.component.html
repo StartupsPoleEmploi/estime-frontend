@@ -1,14 +1,14 @@
 <header [ngClass]="{'header-logged-in': this.isLoggedIn}">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-auto pl-0 ml-0">
+            <div class="col-auto ps-0 ms-0">
                 <img
                     id="logo-marianne-header"
                     alt="Logo république Française"
                     src="./assets/images/marianne.svg"
                     [ngClass]="{'logo-marianne-header-homepage':isHomepage}">
             </div>
-            <div class="col-auto pl-0 ml-0">
+            <div class="col-auto ps-0 ms-0">
                 <img
                     id="logo-estime-header"
                     alt="Logo du service Estime"
@@ -17,16 +17,16 @@
                     (click)="onClickLogoEstime()"
                     tag-navigation="clic_logo_estime_header_retour_accueil">
             </div>
-            <div class="col-auto pl-0 ml-0">
+            <div class="col-auto ps-0 ms-0">
                 <div
                     id="div-beta"
                     [ngClass]="{'mt-4':isHomepage, 'd-none': !isHomepage}"
-                    class="ml-2">
+                    class="ms-2">
                     <span>BETA</span>
                 </div>
             </div>
 
-            <div class="col pr-0">
+            <div class="col pe-0">
                 <button
                     id="btn-se-deconnecter"
                     class="btn-se-deconnecter d-none d-sm-block"

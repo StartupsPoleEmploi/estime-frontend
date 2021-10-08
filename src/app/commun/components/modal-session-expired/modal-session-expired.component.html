@@ -1,10 +1,6 @@
 <div class="modal-header">
-    <button
-        type="button"
-        class="close pull-right"
-        aria-label="Close"
-        (click)="onClickButtonClosePopup()">
-        <i class="fas fa-times-circle mb-2  ml-auto"></i>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="onClickButtonClosePopup()">
+        <i class="fas fa-times-circle mb-2  ms-auto"></i>
     </button>
 </div>
 <div class="modal-body">
@@ -20,11 +16,9 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button
-        type="button"
-        class="btn-homepage btn-pe-connect"
-        (click)="onClickButtonSeConnecterAvecPE()">
+    <button type="button" class="btn-homepage btn-pe-connect" (click)="onClickButtonSeConnecterAvecPE()">
         <span class="button-typo">Me connecter avec Pôle emploi</span>
-        <img *ngIf="!screenService.isExtraSmallScreen()" alt="Icône se connecter avec Pôle emploi" src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
+        <img *ngIf="!screenService.isExtraSmallScreen()" alt="Icône se connecter avec Pôle emploi"
+            src="./assets/images/logo-pole-emploi-mono-picto-white.svg">
     </button>
 </div>

@@ -1,54 +1,31 @@
 <div class="card card-body card-form">
-    <form
-        (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
+    <form (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
         #ressourcesFinancieresConjointForm="ngForm">
-        <div
-            class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.salarie">
+        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.salarie">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointSalaireNet">
+                <label class="label headline-4-typo" for="conjointSalaireNet">
                     * Salaire net perçu
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointSalaireNet"
-                    name="salaireNet"
-                    data-testid="input-salaire-conjoint"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.salaire.montantNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.salaire.montantNet && (conjoint.ressourcesFinancieres.salaire.montantNet == 0)}"
-                    required
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    #salaireNet="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointSalaireNet" name="salaireNet" data-testid="input-salaire-conjoint" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.salaire.montantNet"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.salaire.montantNet && (conjoint.ressourcesFinancieres.salaire.montantNet == 0)}"
+                        required placeholder="Montant" inputmode="decimal" #salaireNet="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -59,51 +36,30 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
+        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointAllocationMensuelleNetARE">
+                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetARE">
                     * ARE (Allocation Retour Emploi) perçue
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointAllocationMensuelleNetARE"
-                    name="allocationMensuelleNetARE"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)}"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #allocationMensuelleNetARE="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)}"
+                        placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetARE="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -114,51 +70,30 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
+        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointAllocationMensuelleNetASS">
+                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetASS">
                     * ASS (Allocation Solidarité Spécifique) perçue
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointAllocationMensuelleNetASS"
-                    name="allocationMensuelleNetASS"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #allocationMensuelleNetASS="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
+                        placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetASS="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -169,51 +104,30 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
+        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointAllocationMensuelleNetAAH">
+                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetAAH">
                     * AAH (Allocation Adulte Handicapé) perçue
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointAllocationMensuelleNetAAH"
-                    name="allocationAAH"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCAF.allocationAAH"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieres.aidesCAF.allocationAAH == 0)}"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #allocationAAH="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.aidesCAF.allocationAAH"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieres.aidesCAF.allocationAAH == 0)}"
+                        placeholder="Montant" inputmode="decimal" required #allocationAAH="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -224,51 +138,30 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
+        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointPensionInvalidite">
+                <label class="label headline-4-typo" for="conjointPensionInvalidite">
                     * Pension d'invalidité perçue
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointPensionInvalidite"
-                    name="pensionInvalidite"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite && conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0}"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #pensionInvalidite="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointPensionInvalidite" name="pensionInvalidite" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite && conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0}"
+                        placeholder="Montant" inputmode="decimal" required #pensionInvalidite="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -279,91 +172,59 @@
                 </span>
             </div>
             <div class="row mt-3 mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointAllocationSupplementaireInvalidite">
+                <label class="label headline-4-typo" for="conjointAllocationSupplementaireInvalidite">
                     * Allocation supplémentaire d'invalidité perçue
                 </label>
             </div>
             <div class="row">
-                <span
-                    *ngIf="screenService.isExtraSmallScreen()"
-                    class="text-side-input ml-0 body-2-typo">
-                    le mois dernier
-                </span>
-                <input
-                    id="conjointAllocationSupplementaireInvalidite"
-                    name="allocationSupplementaireInvalidite"
-                    type="text"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    min="0"
-                    maxlength="6"
-                    class="form-control"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
-                    placeholder="Montant"
-                    inputmode="decimal"
-                    required
-                    #allocationSupplementaireInvalidite="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="le mois dernier">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointAllocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
+                        type="text" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="6" class="form-control d-inline"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
+                        placeholder="Montant" inputmode="decimal" required
+                        #allocationSupplementaireInvalidite="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.microEntrepreneur">
+        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.microEntrepreneur">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointBeneficesMicroEntrepriseDernierExercice">
+                <label class="label headline-4-typo" for="conjointBeneficesMicroEntrepriseDernierExercice">
                     * Bénéfices en tant que micro entrepreneur
                 </label>
             </div>
             <div class="row">
-                <input
-                    id="conjointBeneficesMicroEntrepriseDernierExercice"
-                    name="conjointBeneficesMicroEntrepriseDernierExercice"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    maxlength="6"
-                    min="0"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)}"
-                    required
-                    inputmode="decimal"
-                    #conjointBeneficesMicroEntrepriseDernierExercice="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="sur le dernier exercice clos">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointBeneficesMicroEntrepriseDernierExercice"
+                        name="conjointBeneficesMicroEntrepriseDernierExercice"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)}"
+                        required inputmode="decimal" #conjointBeneficesMicroEntrepriseDernierExercice="ngModel">
+                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -374,46 +235,32 @@
                 </span>
             </div>
         </div>
-        <div
-            class="form-group"
-            *ngIf="conjoint.informationsPersonnelles.travailleurIndependant">
+        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.travailleurIndependant">
             <div class="row mb-2">
-                <label
-                    class="label headline-4-typo"
-                    for="conjointChiffreAffairesIndependantDernierExercice">
+                <label class="label headline-4-typo" for="conjointChiffreAffairesIndependantDernierExercice">
                     * Chiffre d'affaires en tant qu'indépendant
                 </label>
             </div>
             <div class="row">
-                <input
-                    id="conjointChiffreAffairesIndependantDernierExercice"
-                    name="conjointChiffreAffairesIndependantDernierExercice"
-                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                    type="text"
-                    maxlength="6"
-                    min="0"
-                    class="max-with-input-type-montant form-control"
-                    placeholder="Montant"
-                    [(ngModel)]="conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice"
-                    [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)}"
-                    required
-                    inputmode="decimal"
-                    #conjointChiffreAffairesIndependantDernierExercice="ngModel">
-                <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"></app-text-with-euro-symbol>
-                <app-text-with-euro-symbol
-                    *ngIf="!screenService.isExtraSmallScreen()"
-                    message="sur le dernier exercice clos">
-                </app-text-with-euro-symbol>
+                <div class="col">
+                    <input id="conjointChiffreAffairesIndependantDernierExercice"
+                        name="conjointChiffreAffairesIndependantDernierExercice"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)}"
+                        required inputmode="decimal" #conjointChiffreAffairesIndependantDernierExercice="ngModel">
+                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                </div>
             </div>
             <div class="row">
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="error-input-message"
+                <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                 </span>
@@ -425,16 +272,16 @@
             </div>
         </div>
         <div class="row row-button-valider">
-            <button
-                class="btn-style-perso-3 button-typo"
-                aria-label="Valider ressources finançière de votre conjoint"
-                data-testid="btn-ressources-conjoint-valider"
-                tag-action="clic_bouton_valider_ressources_conjoint"
-                type="submit">
-                <div>
-                    <span>Valider</span>
-                </div>
-            </button>
+            <div class="col">
+                <button class="btn-style-perso-3 button-typo"
+                    aria-label="Valider ressources finançière de votre conjoint"
+                    data-testid="btn-ressources-conjoint-valider" tag-action="clic_bouton_valider_ressources_conjoint"
+                    type="submit">
+                    <div>
+                        <span>Valider</span>
+                    </div>
+                </button>
+            </div>
         </div>
     </form>
 </div>

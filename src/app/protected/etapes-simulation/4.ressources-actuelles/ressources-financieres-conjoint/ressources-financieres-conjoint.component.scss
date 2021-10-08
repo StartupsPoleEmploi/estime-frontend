@@ -8,9 +8,12 @@
   border-top: 0;
   margin-top: 0;
   padding-top: 1.5rem;
-  @media #{$medium-device}, #{$large-device} {
+
+  @media #{$medium-device},
+  #{$large-device} {
     padding-left: 4rem;
   }
+
   .div-buttons-form {
     margin-top: 2rem;
   }
@@ -20,4 +23,3 @@
   margin-top: 30px;
   margin-bottom: 10px;
 }
-

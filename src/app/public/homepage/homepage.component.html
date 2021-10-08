@@ -3,12 +3,15 @@
         <div class="row row-0">
             <div class="col-12">
                 <div class="row div-info-beneficiaires body-2-typo">
-                    <span [ngClass]="{'col-1': screenService.isExtraSmallScreen()}" class="icone-info-beneficiaire">
-                        <img alt="Iĉone flèche je commence" src="./assets/images/info-blue-2.svg">
-                    </span>
-                    <span [ngClass]="{'col-11': screenService.isExtraSmallScreen()}" class="text-info-beneficiaire">
-                        Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE.
-                    </span>
+                    <div>
+                        <span [ngClass]="{'col-1': screenService.isExtraSmallScreen()}" class="icone-info-beneficiaire">
+                            <img alt="Iĉone flèche je commence" src="./assets/images/info-blue-2.svg">
+                        </span>
+                        <span [ngClass]="{'col-11': screenService.isExtraSmallScreen()}" class="text-info-beneficiaire">
+                            Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert
+                            prochainement aux bénéficiaires de l’ARE.
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -16,9 +19,7 @@
     <div class="container-fluid">
         <div id="div-message-erreur-homepage">
             <input type="hidden" ngModel #messageErreurElement>
-            <alert
-                type="{{messageErreur.niveau}}"
-                *ngIf="messageErreur">
+            <alert type="{{messageErreur.niveau}}" *ngIf="messageErreur">
                 {{messageErreur.texte}}
             </alert>
         </div>
@@ -31,24 +32,17 @@
                         </h1>
                     </div>
                     <div [ngClass]="{'btn-sticks':this.stickyButton}">
-                        <button
-                            id="btn-je-commence"
-                            type="button"
-                            aria-label="Je commence ma simulation"
+                        <button id="btn-je-commence" type="button" aria-label="Je commence ma simulation"
                             class="btn-homepage mt-4 d-flex justify-content-center button-typo"
-                            data-testid="btn-je-commence"
-                            tag-action="clic_bouton_je_commence"
-                            (click)="login()">
-                                <span>Je commence la simulation</span>
-                                <img alt="Iĉone flèche je commence" src="./assets/images/icon-bt-primaire.svg">
+                            data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
+                            <span>Je commence la simulation</span>
+                            <img alt="Iĉone flèche je commence" src="./assets/images/icon-bt-primaire.svg">
                         </button>
                     </div>
                 </div>
             </div>
             <div class="row-1-second-col d-md-block d-lg-block d-xl-block col-md-auto">
-                <img
-                    id="image-homepage-calculette"
-                    alt="Image calculette"
+                <img id="image-homepage-calculette" alt="Image calculette"
                     src="../../../assets/images/homepage-calculette-v5.svg">
             </div>
         </div>

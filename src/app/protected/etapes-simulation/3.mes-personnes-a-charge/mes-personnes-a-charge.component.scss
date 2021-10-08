@@ -21,20 +21,25 @@
 }
 
 .card-personne-list {
-  border: 1px solid black;
+  border: 1px solid black !important;
+  border-radius: .25rem !important;
   min-height: 103px;
   min-width: 205px;
   max-width: 205px;
   margin-top: 10px;
+
   @media #{$extra-small-device} {
     width: 40vw !important;
     min-height: 22vh !important;
     margin-right: 1rem;
-    min-width:unset!important
+    padding-right: 0rem !important;
+    min-width: unset !important
   }
+
   img {
     margin-left: 10px;
   }
+
   .card-body {
     line-height: 1;
     max-width: 205px;
@@ -43,48 +48,82 @@
 
     .col-card-body {
       margin: auto;
+
       i {
         font-size: 1.5em;
       }
+
       .span-personne {
         color: $color-blue-10;
         font-weight: 600;
       }
     }
   }
-  .card-header {
-    background-color: unset;
-    border-bottom: 0;
-    border-top: 0;
-    padding-top: 0.3rem;
-    padding-right: 0.3rem;
-    padding-bottom: 0;
-    i {
-      cursor: pointer;
-    }
-  }
-  .card-footer {
-    background-color: unset;
-    border-bottom: 0;
-    border-top: 0;
-    padding-bottom: 0.3rem;
-    padding-right: 0.3rem;
-    padding-top: 0;
-    a {
-      cursor: pointer;
-      font-size: 0.9em;
-      text-decoration: underline;
-      color: $color-blue-1;
-      &:focus-visible {
-        outline: -webkit-focus-ring-color auto 1px;
-      }
-    }
-  }
 }
 
-.card-deck {
+.card-group {
   @media #{$extra-small-device} {
-    margin-left:0.9rem;
+    margin-left: -0.75rem;
+    margin-top: 1rem;
+  }
+
+  .card {
+    border: 1px solid black !important;
+    border-radius: .25rem !important;
+    width: 14rem;
+
+    @media #{$extra-small-device} {
+      max-width: 40vw !important;
+      min-height: 22vh !important;
+      // margin-right: 1rem;
+      padding-right: 0rem !important;
+      min-width: unset !important
+    }
+
+    .card-header {
+      background-color: unset;
+      border-bottom: 0;
+      border-top: 0;
+      padding-top: 0.3rem;
+      padding-right: 0.3rem;
+      padding-bottom: 0;
+
+      i {
+        cursor: pointer;
+      }
+    }
+
+    .col-card-body {
+      margin: auto;
+
+      i {
+        font-size: 1.5em;
+      }
+
+      .span-personne {
+        color: $color-blue-10;
+      }
+    }
+
+    .card-footer {
+      background-color: unset;
+      border-bottom: 0;
+      border-top: 0;
+      padding-bottom: 0.3rem;
+      padding-right: 0.3rem;
+      padding-top: 0;
+
+      a {
+        cursor: pointer;
+        font-size: 0.9em;
+        text-decoration: underline;
+        color: $color-blue-1;
+
+        &:focus-visible {
+          outline: -webkit-focus-ring-color auto 1px;
+        }
+      }
+    }
   }
 }
 
@@ -93,30 +132,30 @@
   border-radius: 0.25rem;
   background-color: unset;
   padding: 0;
-  min-height: 115px;
-  max-height: 115px;
-  margin-top: 10px;
-  @media #{$small-device} {
-    margin-left: 15px;
-  }
+
   @media #{$extra-small-device} {
     width: 40vw !important;
     min-height: 22vh !important;
     margin-right: 1rem;
   }
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     border-color: $color-black-1;
     box-shadow: -1px 1px 6px 2px $color-black-3;
   }
+
   .active {
     background-color: $color-blue-5;
   }
+
   .card-add-personne {
     min-height: 113px;
     border: 0;
     margin-left: 0;
     margin-right: 0;
     cursor: pointer;
+
     .card-body {
       line-height: 1;
       max-width: 205px;
@@ -124,24 +163,29 @@
       padding: 0.8rem;
       cursor: pointer;
       margin-bottom: 0.2rem;
+
       span {
         color: $color-blue-1;
       }
+
       .row {
         margin-left: -13px;
         margin-right: -13px;
       }
     }
+
     #add-personne-icon {
       @media #{$extra-small-device} {
         margin-bottom: 1rem !important;
       }
     }
+
     #pas-de-personne-text {
       @media #{$extra-small-device} {
         margin-top: 1rem !important;
       }
     }
+
     img {
       width: 1.7rem;
       margin-left: 14px;
@@ -152,4 +196,10 @@
 
 .button-card-pas-de-personne-a-charge {
   @extend .button-card-add-personne;
+}
+
+
+.label {
+  margin-left: calc(-.5 * var(--bs-gutter-x));
+  margin-right: calc(-.5 * var(--bs-gutter-x));
 }

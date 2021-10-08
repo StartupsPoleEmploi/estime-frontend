@@ -6,99 +6,69 @@
         </div>
     </div>
     <div class="card card-body card-form card-form-style-1">
-        <form
-            id="futurTravailForm"
-            [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
-            #futurTravailForm="ngForm">
+        <form id="futurTravailForm" [ngClass]="{'submitted':isFuturTravailFormSubmitted}" #futurTravailForm="ngForm">
             <div class="row">
-                <div class="col-12 col-sm-4 form-group">
+                <div class="col-12 col-sm-6 form-group">
                     <div class="row mb-1">
-                        <label
-                            class="label headline-4-typo"
-                            for="typeContrat">
+                        <label class="label headline-4-typo" for="typeContrat">
                             * Type de contrat
                         </label>
                     </div>
                     <div class="row">
-                        <div class="custom-control custom-radio">
-                            <input
-                                id="typeContratCDI"
-                                name="typeContratCDI"
-                                aria-label="Type de contrat CDI"
-                                data-testid="btn-type-contrat-cdi"
-                                type="radio"
-                                class="custom-control-input"
-                                [(ngModel)]="futurTravail.typeContrat"
-                                (click)="unsetNombreMoisContrat(typesContratTavailEnum.CDI)"
-                                [value]="typesContratTavailEnum.CDI"
-                                required
-                                #typeContrat="ngModel"
-                                style="color:red;"
-                                (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDI)">
-                            <label
-                                class="custom-control-label body-2-typo"
-                                for="typeContratCDI">
-                                {{typesContratTavailEnum.CDI}}
-                            </label>
-                        </div>
-                        <div class="custom-control custom-radio ml-2">
-                            <input
-                                id="typeContratCDD"
-                                name="typeContratCDD"
-                                aria-label="Type de contrat CDD"
-                                data-testid="btn-type-contrat-cdd"
-                                type="radio"
-                                class="custom-control-input"
-                                [(ngModel)]="futurTravail.typeContrat"
-                                [value]="typesContratTavailEnum.CDD"
-                                required
-                                #typeContrat="ngModel"
-                                (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDD)">
-                            <label
-                                class="custom-control-label body-2-typo"
-                                for="typeContratCDD">
-                                {{typesContratTavailEnum.CDD}}
-                            </label>
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <input id="typeContratCDI" name="typeContratCDI" aria-label="Type de contrat CDI"
+                                    data-testid="btn-type-contrat-cdi" type="radio" class="form-check-input"
+                                    [(ngModel)]="futurTravail.typeContrat"
+                                    (click)="unsetNombreMoisContrat(typesContratTavailEnum.CDI)"
+                                    [value]="typesContratTavailEnum.CDI" required #typeContrat="ngModel"
+                                    style="color:red;"
+                                    (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDI)">
+                                <label class="form-check-label body-2-typo" for="typeContratCDI">
+                                    {{typesContratTavailEnum.CDI}}
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input id="typeContratCDD" name="typeContratCDD" aria-label="Type de contrat CDD"
+                                    data-testid="btn-type-contrat-cdd" type="radio" class="form-check-input"
+                                    [(ngModel)]="futurTravail.typeContrat" [value]="typesContratTavailEnum.CDD" required
+                                    #typeContrat="ngModel"
+                                    (keyup)="handleKeyUpOnButtonTypeContrat($event, typesContratTavailEnum.CDD)">
+                                <label class="form-check-label body-2-typo" for="typeContratCDD">
+                                    {{typesContratTavailEnum.CDD}}
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <span
-                        class="row error-input-message"
+                    <span class="row error-input-message"
                         *ngIf="(isFuturTravailFormSubmitted || typeContrat.touched)  && typeContrat.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
-                <div
-                    class="col-12 col-sm-4 form-group form-group-nombre-mois"
-                    *ngIf="futurTravail.typeContrat == 'CDD'">
-                    <label
-                        class="label mb-2 headline-4-typo"
-                        for="nombreMoisCDD">
-                        * Nombre de mois
-                    </label>
-                    <select
-                        id="nombreMoisCDD"
-                        name="nombreMoisCDD"
-                        aria-label="Nombre de mois de votre contrat CDD"
-                        data-testid="select-nombre--mois-cdd"
-                        [(ngModel)]="futurTravail.nombreMoisContratCDD"
-                        class="form-control"
-                        data-width="auto"
-                        required
-                        [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
-                        #nombreMoisCDD="ngModel">
-                        <option
-                            [value]="null"
-                            disabled>
-                            Sélectionner
-                        </option>
-                        <option
-                            *ngFor="let nombreMois of nombreMoisCDDSelectOptions"
-                            [value]="nombreMois.value">
-                            {{ nombreMois.label }}
-                        </option>
-                    </select>
-                    <span
-                        class="error-input-message"
+                <div class="col-12 col-sm-6 form-group" *ngIf="futurTravail.typeContrat == 'CDD'">
+                    <div class="row">
+                        <label class="label mb-2 headline-4-typo" for="nombreMoisCDD">
+                            * Nombre de mois
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <select id="nombreMoisCDD" name="nombreMoisCDD"
+                                aria-label="Nombre de mois de votre contrat CDD" data-testid="select-nombre--mois-cdd"
+                                [(ngModel)]="futurTravail.nombreMoisContratCDD" class="form-select" data-width="auto"
+                                required [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
+                                #nombreMoisCDD="ngModel">
+                                <option [value]="null" disabled>
+                                    Sélectionner
+                                </option>
+                                <option *ngFor="let nombreMois of nombreMoisCDDSelectOptions"
+                                    [value]="nombreMois.value">
+                                    {{ nombreMois.label }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <span class="error-input-message"
                         *ngIf="(isFuturTravailFormSubmitted || nombreMoisCDD.touched)  && nombreMoisCDD.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
@@ -106,30 +76,23 @@
             </div>
             <div class="form-group">
                 <div class="row flex-column mb-2">
-                    <label
-                        class="label headline-4-typo"
-                        for="dureeHebdomadaire">
+                    <label class="label headline-4-typo" for="dureeHebdomadaire">
                         * Durée hebdomadaire
                     </label>
                 </div>
                 <div class="row">
-                    <input
-                        class="form-control"
-                        data-testid="input-duree-hebdomadaire"
-                        id="dureeHebdomadaire"
-                        aria-label="Durée hebdomadaire en heures par semaine"
-                        inputmode="decimal"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                        maxlength="4"
-                        name="dureeHebdomadaire"
-                        [ngClass]="{'ng-invalid': (futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0) || futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX}"
-                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        placeholder="Nombre"
-                        required
-                        type="text"
-                        #dureeHebdomadaire="ngModel">
-                    <span class="text-side-input body-2-typo">heures par semaine</span>
+                    <div>
+                        <input class="form-control d-inline" data-testid="input-duree-hebdomadaire"
+                            id="dureeHebdomadaire" aria-label="Durée hebdomadaire en heures par semaine"
+                            inputmode="decimal"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" maxlength="4"
+                            name="dureeHebdomadaire"
+                            [ngClass]="{'ng-invalid': (futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine == 0) || futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX}"
+                            [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
+                            pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" placeholder="Nombre" required
+                            type="text" #dureeHebdomadaire="ngModel">
+                        <span class="text-side-input d-inline body-2-typo">heures par semaine</span>
+                    </div>
                 </div>
                 <span
                     *ngIf="this.futurTravail.nombreHeuresTravailleesSemaine && futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX"
@@ -141,122 +104,88 @@
                     class="row error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isFuturTravailFormSubmitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isFuturTravailFormSubmitted || dureeHebdomadaire.touched)  && dureeHebdomadaire.errors?.pattern">
                     {{controleChampFormulaireService.MESSAGE_DUREE_HEBDO_INCORRECTE}}
                 </span>
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label
-                        class="label headline-4-typo"
-                        aria-describedby="infobulle-contrat-travail-salaire">
+                    <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut ou net
-                        <button
-                            id="infobulle-contrat-travail-salaire"
-                            role="tooltip"
-                            class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': popoverSalaireNet.isOpen}"
-                            placement="right"
+                        <button id="infobulle-contrat-travail-salaire" role="tooltip" class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': popoverSalaireNet.isOpen}" placement="right"
                             tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
-                            [popover]="popoverSalaireNetTemplate"
-                            #popoverSalaireNet="bs-popover"></button>
+                            [popover]="popoverSalaireNetTemplate" #popoverSalaireNet="bs-popover"></button>
                     </label>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-5 col-xl-4">
+                    <div class="col-12 col-md-4">
                         <div class="row">
-                            <input
-                                id="salaireMensuelBrut"
-                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                name="salaireMensuelBrut"
-                                aria-label="Salaire mensuel brut"
-                                data-testid="input-salaire-mensuel-brut"
-                                type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
-                                (keyup)="calculSalaireMensuelNet();"
-                                maxlength="6"
-                                class="form-control"
-                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut)}"
-                                placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaire.montantBrut"
-                                inputmode="decimal"
-                                #salaireMensuelBrut="ngModel">
-                            <app-text-with-euro-symbol message="mensuel brut"></app-text-with-euro-symbol>
-                            <span
-                                *ngIf="!screenService.isExtraSmallScreen()"
-                                class="ml-3 mr-3 net-ou-brut font-weight-bold text-center">
-                                ou
-                            </span>
+                            <div>
+                                <input id="salaireMensuelBrut"
+                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" name="salaireMensuelBrut"
+                                    aria-label="Salaire mensuel brut" data-testid="input-salaire-mensuel-brut"
+                                    type="text"
+                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
+                                    (keyup)="calculSalaireMensuelNet();" maxlength="6" class="form-control d-inline"
+                                    [ngClass]="{'ng-invalid':futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut)}"
+                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantBrut"
+                                    inputmode="decimal" #salaireMensuelBrut="ngModel">
+                                <app-text-with-euro-symbol class="d-inline" message="mensuel brut">
+                                </app-text-with-euro-symbol>
+                            </div>
                         </div>
-                        <span
-                            *ngIf="futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0"
+                        <span *ngIf="futurTravail.salaire.montantBrut && futurTravail.salaire.montantBrut == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
-                        <span
-                            class="row error-input-message"
+                        <span class="row error-input-message"
                             *ngIf="isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantBrut">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
-                        <span
-                            class="row error-input-message"
+                        <span class="row error-input-message"
                             *ngIf="(isFuturTravailSalaireFormSubmitted || salaireMensuelBrut.touched)  && salaireMensuelBrut.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                         </span>
                     </div>
-                    <div
-                        *ngIf="screenService.isExtraSmallScreen()"
-                        class="col-12">
-                        <span class="net-ou-brut font-weight-bold body-2-typo">ou</span>
+                    <div class="col-12 col-md-1">
+                        <span class="net-ou-brut font-weight-bold body-2-typo d-inline text-side-input">ou</span>
                     </div>
-                    <div class="col-12 col-sm-5">
+                    <div class="col-12 col-md">
                         <div class="row">
-                            <input
-                                id="salaireMensuelNet"
-                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                name="salaireMensuelNet"
-                                aria-label="Salaire mensuel net"
-                                data-testid="input-salaire-mensuel-net"
-                                type="text"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                (keyup)="calculSalaireMensuelBrut();"
-                                maxlength="6"
-                                class="form-control"
-                                placeholder="Montant"
-                                [(ngModel)]="futurTravail.salaire.montantNet"
-                                [ngClass]="{'ng-invalid':futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantNet)}"
-                                inputmode="decimal"
-                                #salaireMensuelNet="ngModel">
-                            <app-text-with-euro-symbol message="mensuel net"></app-text-with-euro-symbol>
+                            <div>
+                                <input id="salaireMensuelNet" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                    name="salaireMensuelNet" aria-label="Salaire mensuel net"
+                                    data-testid="input-salaire-mensuel-net" type="text"
+                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                    (keyup)="calculSalaireMensuelBrut();" maxlength="6" class="form-control d-inline"
+                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantNet"
+                                    [ngClass]="{'ng-invalid':futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantNet)}"
+                                    inputmode="decimal" #salaireMensuelNet="ngModel">
+                                <app-text-with-euro-symbol message="mensuel net"></app-text-with-euro-symbol>
+                            </div>
                         </div>
-                        <span
-                            *ngIf="futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0"
+                        <span *ngIf="futurTravail.salaire.montantNet && futurTravail.salaire.montantNet == 0"
                             class="row error-input-message">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
-                        <span
-                            class="row error-input-message"
+                        <span class="row error-input-message"
                             *ngIf="(isFuturTravailSalaireFormSubmitted || salaireMensuelNet.touched)  && salaireMensuelNet.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
                         </span>
-                        <span
-                            class="row error-input-message"
+                        <span class="row error-input-message"
                             *ngIf="isFuturTravailSalaireFormSubmitted   && !futurTravail.salaire.montantNet">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                 </div>
             </div>
-            <div
-                id="contrat-travail-div-infos-lieu-travail"
-                class="row  mb-2">
+            <div id="contrat-travail-div-infos-lieu-travail" class="row  mb-2">
                 <div class="col-auto">
                     <div>
                         <img alt="Iĉone information" src="./assets/images/info-grey.svg">
@@ -264,104 +193,73 @@
                 </div>
                 <div class="col">
                     <span>
-                        Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité
+                        Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la
+                        mobilité
                     </span>
                 </div>
             </div>
             <div class="form-group">
                 <div class="row flex-column mb-2">
-                    <label
-                        class="label headline-4-typo"
-                        for="distanceDomicileLieuTravail">
+                    <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
                         * Distance à parcourir entre votre domicile et le lieu de travail
                     </label>
                 </div>
                 <div class="row">
-                    <input
-                        id="distanceDomicileLieuTravail"
-                        name="distanceDomicileLieuTravail"
-                        data-testid="input-distance-domicile-lieu-travail"
-                        type="text"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                        min="0"
-                        maxlength="4"
-                        class="form-control"
-                        placeholder="Distance"
-                        [(ngModel)]="futurTravail.distanceKmDomicileTravail"
-                        required
-                        inputmode="numeric"
-                        #distanceDomicileLieuTravail="ngModel">
-                    <span class="text-side-input body-2-typo">km</span>
+                    <div>
+                        <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail"
+                            data-testid="input-distance-domicile-lieu-travail" type="text"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="4" class="form-control d-inline" placeholder="Distance"
+                            [(ngModel)]="futurTravail.distanceKmDomicileTravail" required inputmode="numeric"
+                            #distanceDomicileLieuTravail="ngModel">
+                        <span class="text-side-input d-inline body-2-typo">km</span>
+                    </div>
                 </div>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isFuturTravailFormSubmitted || distanceDomicileLieuTravail.touched)  && distanceDomicileLieuTravail.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
             <div class="form-group">
                 <div class="row flex-column mb-2">
-                    <label
-                        class="label headline-4-typo"
-                        aria-describedby="infobulle-contrat-travail-nombre-trajets"
+                    <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de jours où vous irez sur le lieu de travail
-                        <button
-                            id="infobulle-contrat-travail-nombre-trajets"
-                            role="tooltip"
-                            tabindex="0"
-                            class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
-                            placement="right"
-                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
-                            [popover]="popoverNombreTrajetTemplate"
-                            #popoverNombreTrajet="bs-popover"></button>
+                        <button id="infobulle-contrat-travail-nombre-trajets" role="tooltip" tabindex="0"
+                            class="img-interrogation-icon" [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
+                            placement="right" tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                            [popover]="popoverNombreTrajetTemplate" #popoverNombreTrajet="bs-popover"></button>
                     </label>
                 </div>
                 <div class="row">
-                    <input
-                        id="nombreTrajetsDomicileTravail"
-                        name="nombreTrajetsDomicileTravail"
-                        data-testid="input-nombre-trajets-domicile-travail"
-                        type="text"
-                        min="0"
-                        maxlength="2"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                        class="form-control"
-                        placeholder="Nombre"
-                        [(ngModel)]="futurTravail.nombreTrajetsDomicileTravail"
-                        required
-                        inputmode="numeric"
-                        #nombreTrajetsDomicileTravail="ngModel">
-                    <span class="text-side-input body-2-typo">par mois</span>
+                    <div>
+                        <input id="nombreTrajetsDomicileTravail" name="nombreTrajetsDomicileTravail"
+                            data-testid="input-nombre-trajets-domicile-travail" type="text" min="0" maxlength="2"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                            class="form-control d-inline" placeholder="Nombre"
+                            [(ngModel)]="futurTravail.nombreTrajetsDomicileTravail" required inputmode="numeric"
+                            #nombreTrajetsDomicileTravail="ngModel">
+                        <span class="text-side-input d-inline body-2-typo">par mois</span>
+                    </div>
                 </div>
-                <span
-                    class="row error-input-message"
+                <span class="row error-input-message"
                     *ngIf="(isFuturTravailFormSubmitted || nombreTrajetsDomicileTravail.touched)  && nombreTrajetsDomicileTravail.errors?.required">
                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                 </span>
             </div>
         </form>
         <div class="div-buttons-form d-flex justify-content-center">
-            <button
-                class="btn-style-perso-2 first-btn"
-                (click)="onClickButtonRetour()"
-                aria-label="Retour à la page précédente"
-                data-testid="btn-futur-travail-retour"
+            <button class="btn-style-perso-2 first-btn" (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente" data-testid="btn-futur-travail-retour"
                 tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
                     <span class="button-typo">Retour</span>
                 </div>
             </button>
-            <button
-                id="btn-futur-travail-suivant"
-                class="btn-style-perso-1 second-btn"
-                aria-label="Passer à la page suivante"
-                type="submit"
-                data-testid="btn-futur-travail-suivant"
-                (click)="onSubmitFuturTravailForm(futurTravailForm)"
-                tag-navigation="clic_bouton_suivant">
+            <button id="btn-futur-travail-suivant" class="btn-style-perso-1 second-btn"
+                aria-label="Passer à la page suivante" type="submit" data-testid="btn-futur-travail-suivant"
+                (click)="onSubmitFuturTravailForm(futurTravailForm)" tag-navigation="clic_bouton_suivant">
                 <div>
                     <span class="button-typo">Suivant</span>
                     <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">
@@ -372,53 +270,59 @@
 </div>
 
 <ng-template #popoverSalaireNetTemplate>
-    <div class="container">
+    <div class="container popover-container">
         <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2  ml-auto"
-                (click)="popoverSalaireNet.hide()"></i>
+            <div>
+                <i class="fas fa-times-circle mb-2 ms-auto float-end" (click)="popoverSalaireNet.hide()"></i>
+            </div>
         </div>
         <div class="row">
             <h5>
                 Qu'est ce que le salaire brut et net ?
             </h5>
             <p>
-                Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations sociales et du prélévement à la source.
+                Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
+                sociales et du prélévement à la source.
             </p>
             <p>
-                En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes perçues avant déduction des cotisations sociales.
+                En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes
+                perçues avant déduction des cotisations sociales.
             </p>
         </div>
     </div>
 </ng-template>
 
 <ng-template #popoverNombreTrajetTemplate>
-    <div class="container">
+    <div class="container popover-container">
         <div class="close-popover row">
-            <i
-                class="fas fa-times-circle mb-2  ml-auto"
-                (click)="popoverNombreTrajet.hide()"></i>
+            <div>
+                <i class="fas fa-times-circle mb-2 ms-auto float-end" (click)="popoverNombreTrajet.hide()"></i>
+            </div>
         </div>
         <div class="row">
             <h5>
                 Exemples de calculs :
             </h5>
             <p>
-                Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc indiquer
+                Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer
+                le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc
+                indiquer
                 <b>
                     20 trajets aller par mois (5 allers x 4 semaines)
                 </b>
                 .
             </p>
             <p>
-                Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le weekend le temps de sa période d'essai d'un mois. Il va indiquer
+                Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le
+                weekend le temps de sa période d'essai d'un mois. Il va indiquer
                 <b>
                     4 trajets aller par mois (4 weekends par mois)
                 </b>
                 .
             </p>
             <p>
-                S'il s'agit d'un poste itinérant, vous devez prendre en compte uniquement les déplacements entre le siège de l'entreprise et votre domicile. Cela exclut les déplacements chez les clients.
+                S'il s'agit d'un poste itinérant, vous devez prendre en compte uniquement les déplacements entre le
+                siège de l'entreprise et votre domicile. Cela exclut les déplacements chez les clients.
             </p>
         </div>
     </div>

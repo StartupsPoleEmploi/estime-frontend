@@ -7,11 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PageLoadingComponent implements OnInit {
 
-  @Input() message: string;
+	@Input() message: string;
 
-  constructor() {}
+	constructor() { }
 
-  ngOnInit() {
+	ngOnInit() {
 		if (this.message == null) {
 			this.message = "Veuillez patienter...";
 		}

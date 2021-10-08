@@ -5,9 +5,9 @@
 }
 
 #div-title-ma-situation {
-  @media #{$medium-device}, #{$large-device} {
+
+  @media #{$medium-device},
+  #{$large-device} {
     padding-left: 172px !important;
   }
 }
-
-
