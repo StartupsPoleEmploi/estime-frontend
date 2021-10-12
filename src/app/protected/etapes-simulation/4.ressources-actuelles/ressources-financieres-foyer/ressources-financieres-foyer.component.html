@@ -49,8 +49,8 @@
                             tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireAPL"
                             (keyup)="handleKeyUpOnButtonAPL($event)">
                             <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.AIDE_PERSONALISEE_LOGEMENT}}
-                                    ({{codesAidesEnum.AIDE_PERSONALISEE_LOGEMENT}})</span>
+                                <span class="body-2-typo">{{libellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}}
+                                    ({{codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}})</span>
                             </div>
                         </label>
                         <label id="btn-beneficiaire-alf" #beneficiaireALF="ngModel" (click)="onClickCheckBoxHasALF()"
@@ -59,8 +59,8 @@
                             tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireALF"
                             (keyup)="handleKeyUpOnButtonALF($event)">
                             <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL}}
-                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL}})</span>
+                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}}
+                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}})</span>
                             </div>
                         </label>
                         <label id="btn-beneficiaire-als" #beneficiaireALS="ngModel" (click)="onClickCheckBoxHasALS()"
@@ -69,8 +69,8 @@
                             tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireALS"
                             (keyup)="handleKeyUpOnButtonALS($event)">
                             <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL}}
-                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL}})</span>
+                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}}
+                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}})</span>
                             </div>
                         </label>
                     </div>
@@ -117,16 +117,6 @@
                             </app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins1?.touched || alfMoisNMoins1?.touched || alsMoisNMoins1?.touched)  && (aplMoisNMoins1?.errors?.required || alfMoisNMoins1?.errors?.required || alsMoisNMoins1?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins1?.touched || alfMoisNMoins1?.touched || alsMoisNMoins1?.touched)  && (aplMoisNMoins1?.errors?.required || alfMoisNMoins1?.errors?.required || alsMoisNMoins1?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                        </span>
-                    </div>
                 </div>
                 <div class="mb-2">
                     <div class="row">
@@ -162,16 +152,6 @@
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
                             </app-text-with-euro-symbol>
                         </div>
-                    </div>
-                    <div class="row">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins2?.touched || alfMoisNMoins2?.touched || alsMoisNMoins2?.touched)  && (aplMoisNMoins2?.errors?.required || alfMoisNMoins2?.errors?.required || alsMoisNMoins2?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins2?.touched || alfMoisNMoins2?.touched || alsMoisNMoins2?.touched)  && (aplMoisNMoins2?.errors?.required || alfMoisNMoins2?.errors?.required || alsMoisNMoins2?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                        </span>
                     </div>
                 </div>
                 <div class="mb-2">
@@ -209,16 +189,11 @@
                             </app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins3?.touched || alfMoisNMoins3?.touched || alsMoisNMoins3?.touched)  && (aplMoisNMoins3?.errors?.required || alfMoisNMoins3?.errors?.required || alsMoisNMoins3?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || aplMoisNMoins3?.touched || alfMoisNMoins3?.touched || alsMoisNMoins3?.touched)  && (aplMoisNMoins3?.errors?.required || alfMoisNMoins3?.errors?.required || alsMoisNMoins3?.errors?.required)">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                        </span>
-                    </div>
+                </div>
+                <div class="row">
+                    <span class="row error-input-message" *ngIf="isAuMoinsUnAideLogementSuperieureAZero();">
+                        {{controleChampFormulaireService.MESSAGE_MONTANTS_0}}
+                    </span>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { ElementRef, Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ControleChampFormulaireService {
 
   REGEX_DECIMAL = "^[0-9]{1,5}((\.|\,)[0-9]{1,2})?$";
@@ -18,6 +18,7 @@ export class ControleChampFormulaireService {
   MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
   MESSAGE_SELECTION_AU_MOINS_UNE_AIDE = "Veuillez sélectionner au moins une allocation Pôle emploi ou CAF (ASS, AAH, RSA).";
   MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";
+  MESSAGE_MONTANTS_0 = "Veuillez renseigner au moins un montant.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
   MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 
@@ -33,14 +34,14 @@ export class ControleChampFormulaireService {
 
   public focusOnFirstInvalidElement(elementRef: ElementRef): void {
     const invalidElements = elementRef.nativeElement.querySelectorAll('.ng-invalid');
-    if(invalidElements) {
+    if (invalidElements) {
       let invalidElementsToFocus = null;
       invalidElements.forEach(invalidElement => {
-        if(!invalidElementsToFocus && invalidElement.localName !== 'form') {
+        if (!invalidElementsToFocus && invalidElement.localName !== 'form') {
           invalidElementsToFocus = invalidElement;
         }
       });
-      if(invalidElementsToFocus) {
+      if (invalidElementsToFocus) {
         invalidElementsToFocus.focus();
       }
     }

@@ -1,12 +1,12 @@
 //smartphones
-$extra-small-device:  "screen and (max-width:767px)";
+$extra-small-device: "screen and (max-width:767px)";
 //tablets
-$small-device:  "screen and (min-width:768px)";
+$small-device: "screen and (min-width:768px)";
 $tablet-device : "screen and (min-width:768px) and (max-width:991px)";
 //desktops
 $medium-device: "screen and (min-width:992px)";
-$large-device:  "screen and (min-width:1200px)";
-$extra-large-device:  "screen and (min-width:1400px)";
+$large-device: "screen and (min-width:1200px)";
+$extra-large-device: "screen and (min-width:1400px)";
 
 $header-height : 64px;
 $header-height-small-device : 86px;
@@ -16,17 +16,17 @@ $color-black-2:#3E3E3E;
 $color-black-3:#9a9a9a;
 
 $color-blue-1: #23333C;
-$color-blue-1-o5:rgba(35,51,60,0.05);
+$color-blue-1-o5:rgba(35, 51, 60, 0.05);
 $color-blue-2: #1B2B67;
 $color-blue-2-darker : #200D4F;
 $color-blue-3: #3853B9;
 $color-blue-4: #ADE8F4;
 $color-blue-5: #DEEEFF;
 $color-blue-6: #8089AA;
-$color-blue-7: rgba(222,238,255,0.5);
-$color-blue-8: rgba(222,238,255,0.7);
+$color-blue-7: rgba(222, 238, 255, 0.5);
+$color-blue-8: rgba(222, 238, 255, 0.7);
 $color-blue-9: #D6D9E4;
-$color-blue-9-o5:rgba(214,217,228,0.5);
+$color-blue-9-o5:rgba(214, 217, 228, 0.5);
 $color-blue-10: #2349D7;
 
 
@@ -55,7 +55,7 @@ $color-red-6: #FBE9E9;
 $color-violet-1: #BDB2FF;
 $color-violet-2: #FFC6FF;
 
-$color-white-1: white ;
+$color-white-1: white;
 $color-white-2: #f9f9f9;
 $color-white-3: #FFFFFF;
 

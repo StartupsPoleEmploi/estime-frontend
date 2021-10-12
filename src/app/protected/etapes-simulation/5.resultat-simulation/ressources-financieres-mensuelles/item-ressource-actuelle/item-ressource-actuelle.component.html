@@ -1,10 +1,10 @@
 <div class="row" data-testid="row-montant-ressource">
     <div class="col-2 col-md-1 col-code-ressource">
-      <div class="code-ressource" [ngClass]="[codeRessource.toLowerCase()]">
-           <div class="">
-             <span class="overline-typo">{{codeRessource}}</span>
-           </div>
-      </div>
+        <div class="code-ressource" [ngClass]="[codeRessource.toLowerCase()]">
+            <div class="">
+                <span class="overline-typo">{{codeRessource}}</span>
+            </div>
+        </div>
     </div>
     <div class="col-6 col-md-6 my-auto col-libelle">
         <div class="row flex-column">
@@ -13,13 +13,23 @@
         </div>
     </div>
     <div class="col-3 my-auto col-montant" data-testid="col-montant-ressource">
-      <div data-testid="div-span-montant-ressource" class="span-montant-ressource">
-        <span data-testid="span-montant-ressource" class="headline-5-typo">
-            {{montantRessource}} €
-        </span>
-      </div>
+        <div data-testid="div-span-montant-ressource" class="span-montant-ressource">
+            <span data-testid="span-montant-ressource" class="headline-5-typo">
+                {{libelleMontantRessource}}
+            </span>
+        </div>
     </div>
-    <div class="col-1 my-auto col-picto-arrow" *ngIf="!isColPictoArrowDisplay"><span></span></div>
-    <div class="col-1 my-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && !isAideSelected"><span class="span-chevron"><i alt="" class="fas fa-chevron-down"></i></span></div>
-    <div class="col-1 my-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && isAideSelected"><span class="span-chevron"><i alt="" class="fas fa-chevron-up"></i></span></div>
+    <div class="col-1 my-auto col-picto-arrow" *ngIf="!isColPictoArrowDisplay">
+        <span></span>
+    </div>
+    <div class="col-1 my-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && !isAideSelected">
+        <span class="span-chevron">
+            <i alt="" class="fas fa-chevron-down"></i>
+        </span>
+    </div>
+    <div class="col-1 my-auto col-picto-arrow" *ngIf="isColPictoArrowDisplay && isAideSelected">
+        <span class="span-chevron">
+            <i alt="" class="fas fa-chevron-up"></i>
+        </span>
+    </div>
 </div>

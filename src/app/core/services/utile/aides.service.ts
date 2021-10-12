@@ -4,14 +4,17 @@ import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
-import { RessourcesFinancieresUtileService } from './ressources-financieres-utiles.service';
+import { DateUtileService } from './date-util.service';
 
 @Injectable({ providedIn: 'root' })
 export class AidesService {
 
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM = 30;
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM = 10;
-  private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
+
+  constructor(
+    private dateUtileService: DateUtileService
+  ) { }
 
 
   public getMontantAAH(simulationSelected: SimulationMensuelle): number {
@@ -47,15 +50,15 @@ export class AidesService {
   }
 
   public getMontantAidePersonnaliseeLogement(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_PERSONALISEE_LOGEMENT);
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
   }
 
   public getMontantAllocationLogementFamilial(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL);
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
   }
 
   public getMontantAllocationLogementSocial(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL);
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
   }
 
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
@@ -90,6 +93,11 @@ export class AidesService {
       message = this.getMessageAlerteAidesFamiliales(simulationsAides.simulationsMensuelles[0])
     }
     return message;
+  }
+
+  public getMessageAlerteAidesLogement(): string {
+    let moisProchaineDeclaration = this.dateUtileService.getLibelleMoisApresDateJour(1);
+    return "Vos aides au logement seront recalculées à partir du mois de " + moisProchaineDeclaration + ". Vous pouvez simuler de façon plus précise <a class='simulateur-caf-link' href='https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/estimervosdroits/lelogement'>le nouveau montant sur le site de la CAF.</a>";
   }
 
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
@@ -197,7 +205,10 @@ export class AidesService {
       && aide.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
       && aide.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
       && aide.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
-      && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
+      && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT
+      && aide.code !== CodesAidesEnum.PENSIONS_ALIMENTAIRES
+      && aide.code !== CodesAidesEnum.PENSION_INVALIDITE
+      && aide.code !== CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
   }
 
   /**

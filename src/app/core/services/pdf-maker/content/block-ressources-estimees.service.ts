@@ -259,8 +259,8 @@ export class BlockRessourcesEstimeesService {
 
   private addRowAPL(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.AIDE_PERSONALISEE_LOGEMENT;
-    const libelle = LibellesAidesEnum.AIDE_PERSONALISEE_LOGEMENT;
+    const imageBase64 = ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT;
+    const libelle = LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT;
     row.push(this.createCellImageRessource(imageBase64));
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle
@@ -273,8 +273,8 @@ export class BlockRessourcesEstimeesService {
 
   private addRowALF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIAL;
-    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIAL;
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE;
+    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
     row.push(this.createCellImageRessource(imageBase64));
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle
@@ -287,8 +287,8 @@ export class BlockRessourcesEstimeesService {
 
   private addRowALS(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIAL;
-    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIAL;
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE;
+    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
     row.push(this.createCellImageRessource(imageBase64));
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle

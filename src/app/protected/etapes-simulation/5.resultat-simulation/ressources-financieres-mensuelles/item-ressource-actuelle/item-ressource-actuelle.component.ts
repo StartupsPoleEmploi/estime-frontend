@@ -17,12 +17,15 @@ export class ItemRessourceActuelleComponent implements OnInit {
   @Input() montantRessource: number;
   @Input() organismeRessource: string;
 
+  libelleMontantRessource: string;
+
   constructor(
     public screenService: ScreenService
   ) {
   }
 
   ngOnInit(): void {
+    this.libelleMontantRessource = this.montantRessource > 0 ? this.montantRessource + ' €' : '';
   }
 
 }

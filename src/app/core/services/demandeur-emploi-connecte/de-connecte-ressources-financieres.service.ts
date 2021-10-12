@@ -7,6 +7,8 @@ import { DateUtileService } from '../utile/date-util.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 import { DeConnecteBeneficiaireAidesService } from './de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
+import { Personne } from '@app/commun/models/personne';
+import { PeriodeTravailleeAvantSimulation } from '@app/commun/models/periode-travaillee-avant-simulation';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {
@@ -58,16 +60,22 @@ export class DeConnecteRessourcesFinancieresService {
       if (ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.chiffreAffairesIndependantDernierExercice);
       }
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
-        }
-        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
-        }
-        if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
-          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
-        }
+      montant += this.getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres);
+    }
+    return montant;
+  }
+
+  private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres: RessourcesFinancieres): number {
+    let montant = 0;
+    if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
+      }
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
+      }
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
       }
     }
     return montant;
@@ -96,19 +104,25 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
-        if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
-          const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
-          if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
-            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
-          }
-          if (ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice) {
-            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice);
-          }
-          if (ressourcesFinancieresPersonne.chiffreAffairesIndependantDernierExercice) {
-            montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.chiffreAffairesIndependantDernierExercice);
-          }
-        }
+        montant += this.getMontantRevenusPersonneACharge(personne);
       });
+    }
+    return montant;
+  }
+
+  private getMontantRevenusPersonneACharge(personne: Personne): number {
+    let montant = 0;
+    if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
+      const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
+      if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
+      }
+      if (ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice);
+      }
+      if (ressourcesFinancieresPersonne.chiffreAffairesIndependantDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.chiffreAffairesIndependantDernierExercice);
+      }
     }
     return montant;
   }
@@ -273,6 +287,46 @@ export class DeConnecteRessourcesFinancieresService {
     }
     if (this.deConnecteInfosPersonnellesService.hasRevenusImmobilier() && isValide) {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
+    }
+    isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
+    return isValide;
+  }
+
+  private isDonneesAPLValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isValide = true;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAPL()) {
+      isValide = ressourcesFinancieres.aidesCAF != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement != null &&
+        (ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 > 0);
+    }
+    return isValide;
+  }
+
+  private isDonneesALFValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isValide = true;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireALF()) {
+      isValide = ressourcesFinancieres.aidesCAF != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale != null &&
+        (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 > 0);
+    }
+    return isValide;
+  }
+
+  private isDonneesALSValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isValide = true;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireALS()) {
+      isValide = ressourcesFinancieres.aidesCAF != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale != null &&
+        (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 > 0
+          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 > 0);
     }
     return isValide;
   }

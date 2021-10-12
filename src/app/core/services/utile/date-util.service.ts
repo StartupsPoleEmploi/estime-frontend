@@ -24,8 +24,8 @@ export class DateUtileService {
 
   public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
-    if(this.isDateValide(dateDecomposee)) {
-      if(this.isDateDecomposeAfterDateJour(dateDecomposee)) {
+    if (this.isDateValide(dateDecomposee)) {
+      if (this.isDateDecomposeAfterDateJour(dateDecomposee)) {
         dateDecomposee.isDateSuperieurDateJour = true;
       }
     }
@@ -43,7 +43,7 @@ export class DateUtileService {
     this.checkFormatAnnee(dateDecomposee);
   }
 
-  public  checkFormatJour(dateDecomposee: DateDecomposee): void {
+  public checkFormatJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isJourInvalide = false;
     dateDecomposee.messageErreurFormatJour = undefined;
     if (dateDecomposee && dateDecomposee.jour) {
@@ -53,11 +53,11 @@ export class DateUtileService {
         dateDecomposee.isJourInvalide = true;
       }
       if (dateDecomposee.jour.length != 2) {
-        dateDecomposee.messageErreurFormatJour =  "Le jour doit être au format JJ";
+        dateDecomposee.messageErreurFormatJour = "Le jour doit être au format JJ";
         dateDecomposee.isJourInvalide = true;
       }
       if (dateDecomposee.jour === "00" || parseInt(dateDecomposee.jour) > 31) {
-        dateDecomposee.messageErreurFormatJour =  "Le jour est incorrect";
+        dateDecomposee.messageErreurFormatJour = "Le jour est incorrect";
         dateDecomposee.isJourInvalide = true;
       }
     }
@@ -173,11 +173,10 @@ export class DateUtileService {
   }
 
   public getDateFromDateDecomposee(dateADecompose: DateDecomposee): Date {
-    const dateFormat = new Date(
+    return new Date(
       parseInt(dateADecompose.annee),
       parseInt(dateADecompose.mois) - 1,
       parseInt(dateADecompose.jour));
-    return dateFormat;
   }
 
   public getLibelleMoisApresDateJour(nMoisApresDateJour): string {
@@ -187,20 +186,20 @@ export class DateUtileService {
     return this.getLibelleMoisByMoisNumber(mois);
   }
 
-   /**
-   * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
-   * exemple :
-   * date du jour = 01/03/2021, si nMoisAvantDateJour = 2 alors dateFormatee = "janvier 2021"
-   *
-   * @param nMoisAvantSimulation
-   */
+  /**
+  * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
+  * exemple :
+  * date du jour = 01/03/2021, si nMoisAvantDateJour = 2 alors dateFormatee = "janvier 2021"
+  *
+  * @param nMoisAvantSimulation
+  */
   public getDateFormateeAvantDateJour(nMoisAvantDateJour: number): string {
     const dateJour = new Date();
     if (nMoisAvantDateJour == 0) {
-        return this.getLibelleDateFromDate(dateJour).toLowerCase();
+      return this.getLibelleDateFromDate(dateJour).toLowerCase();
     } else {
-        const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
-        return this.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
+      const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
+      return this.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
     }
   }
 
@@ -233,8 +232,8 @@ export class DateUtileService {
 
   public isDateDecomposeeSaisieAvecInferieurDateJourValide(dateDecomposee: DateDecomposee): boolean {
     let isValid = true;
-    if(this.isDateValide(dateDecomposee)) {
-      if(this.isDateDecomposeAfterDateJour(dateDecomposee)) {
+    if (this.isDateValide(dateDecomposee)) {
+      if (this.isDateDecomposeAfterDateJour(dateDecomposee)) {
         isValid = false;
       }
     } else {
@@ -245,8 +244,8 @@ export class DateUtileService {
 
   public isDateValide(dateDecomposee: DateDecomposee): boolean {
     return this.isJourValide(dateDecomposee)
-    && this.isMoisValide(dateDecomposee)
-    && this.isAnneeValide(dateDecomposee)
+      && this.isMoisValide(dateDecomposee)
+      && this.isAnneeValide(dateDecomposee)
   }
 
   public isJourValide(dateDecomposee: DateDecomposee): boolean {
@@ -296,7 +295,7 @@ export class DateUtileService {
     let determinant = "de ";
     let mois = moisEtAnnee.split(" ")[0];
     let moisMinuscule = mois.toLowerCase();
-    if(moisMinuscule == "avril" || moisMinuscule == "août" ||  moisMinuscule == "octobre") determinant = "d'";
+    if (moisMinuscule == "avril" || moisMinuscule == "août" || moisMinuscule == "octobre") determinant = "d'";
     return determinant;
   }
 

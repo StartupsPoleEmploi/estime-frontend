@@ -3,8 +3,9 @@
 .container-fluid {
   text-align: center;
   margin-top: 2vh;
+
   @media #{$extra-small-device} {
-    margin-bottom : 6rem;
+    margin-bottom: 6rem;
   }
 
   #not-found-first-col {
@@ -12,50 +13,39 @@
       margin-top: 5rem;
       margin-bottom: 0.5rem;
       text-align: left;
+
       #not-found-title {
-        height: 36px;
-        width: 346px;
         color: $color-blue-2;
-        font-family: Lato;
-        font-size: 3em;
-        font-weight: 900;
-        letter-spacing: 0;
-        line-height: 36px;
+        text-align: unset !important;
       }
     }
+
     .row-text {
       margin-bottom: 2rem;
       text-align: left;
-      #not-found-text {
-        height: 46px;
-        width: 527px;
-        color: $color-blue-1;
-        font-family: Lato;
-        font-size: 1.5em;
-        letter-spacing: 0;
-        line-height: 46px;
-      }
     }
+
     .row-button {
       margin-bottom: 2rem;
       text-align: left;
 
       @media #{$extra-small-device} {
-        margin-bottom : 6rem;
+        margin-bottom: 6rem;
       }
+
       #not-found-retour-accueil-button {
         height: 42px;
         width: 220px;
+
         img {
           margin-left: -10px;
         }
+
         span {
           margin-right: 20px;
           margin-left: auto;
         }
       }
     }
-
   }
-
 }

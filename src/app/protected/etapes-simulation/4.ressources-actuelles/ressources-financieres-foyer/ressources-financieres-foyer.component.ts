@@ -18,6 +18,7 @@ import { SituationFamilialeUtileService } from '@app/core/services/utile/situati
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -51,6 +52,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     public dateUtileService: DateUtileService,
     public screenService: ScreenService,
     private elementRef: ElementRef,
@@ -73,7 +75,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
     this.isRessourcesFinancieresFoyerFormSubmitted = true;
-    if (form.valid) {
+    if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationRessourcesFoyerEventEmitter.emit();
     } else {
@@ -162,6 +164,10 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
+  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+    return form.valid && this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres);
+  }
+
   public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
@@ -187,6 +193,23 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.beneficiaireAides.beneficiaireALS = !this.beneficiaireAides.beneficiaireALS;
       this.onClickCheckBoxHasALS();
     }
+  }
+
+  public isAuMoinsUnAideLogementSuperieureAZero(): boolean {
+    return (
+      (this.beneficiaireAides.beneficiaireAPL
+        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 == 0))
+      || (this.beneficiaireAides.beneficiaireALF
+        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 == 0))
+      || (this.beneficiaireAides.beneficiaireALS
+        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 == 0
+          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 == 0))
+    );
   }
 
 }
