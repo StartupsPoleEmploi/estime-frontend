@@ -41,8 +41,8 @@ export class RessourcesFinancieresUtileService {
   public creerAidesLogement(): AidesLogement {
     const aidesLogement = new AidesLogement();
     aidesLogement.aidePersonnaliseeLogement = this.creerAllocationLogement();
-    aidesLogement.allocationLogementFamiliale = this.creerAllocationLogement();;
-    aidesLogement.allocationLogementSociale = this.creerAllocationLogement();;
+    aidesLogement.allocationLogementFamiliale = this.creerAllocationLogement();
+    aidesLogement.allocationLogementSociale = this.creerAllocationLogement();
     return aidesLogement;
   }
 
@@ -99,9 +99,9 @@ export class RessourcesFinancieresUtileService {
       ressourcesFinancieres.aidesCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite);
       ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
     }
-    if(ressourcesFinancieres.salaire) {
-      ressourcesFinancieres.salaire.montantNet  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
-      ressourcesFinancieres.salaire.montantBrut  = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantBrut);
+    if (ressourcesFinancieres.salaire) {
+      ressourcesFinancieres.salaire.montantNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
+      ressourcesFinancieres.salaire.montantBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantBrut);
     }
     ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice);
     ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.chiffreAffairesIndependantDernierExercice);
@@ -129,13 +129,13 @@ export class RessourcesFinancieresUtileService {
    */
   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, isBeneficiaireAAH: boolean, isBeneficiareASSOuRSA: boolean): boolean {
     let isChampsSalairesValides = true;
-    if(ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if(isBeneficiareASSOuRSA) {
+    if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
+      if (isBeneficiareASSOuRSA) {
         isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
       }
-      if(isBeneficiaireAAH) {
+      if (isBeneficiaireAAH) {
         //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
-        switch(+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
+        switch (+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
           // si on indique n'avoir travaillé qu'1 mois on ne peut remplir plus d'1 salaire
           case 1: {
             isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) <= 1;
@@ -173,9 +173,9 @@ export class RessourcesFinancieresUtileService {
 
   private getNombreMoisTravaillesDerniersMois(ressourcesFinancieres: RessourcesFinancieres): number {
     let nombreMoisTravaillesDerniersMois = 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1)?1:0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2)?1:0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3)?1:0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1) ? 1 : 0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2) ? 1 : 0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3) ? 1 : 0;
     return nombreMoisTravaillesDerniersMois;
   }
 
@@ -212,7 +212,7 @@ export class RessourcesFinancieresUtileService {
           ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3);
         }
       }
-      if(ressourcesFinancieres.aidesCAF.aidesFamiliales) {
+      if (ressourcesFinancieres.aidesCAF.aidesFamiliales) {
         ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales);
         ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial);
         ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial);
@@ -223,11 +223,11 @@ export class RessourcesFinancieresUtileService {
   }
 
   private replaceCommaByDotMontantsAidesPoleEmploi(ressourcesFinancieres: RessourcesFinancieres): void {
-    if(ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+    if (ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
       ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet);
       ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet);
     }
-    if(ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+    if (ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet);
       ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
     }
