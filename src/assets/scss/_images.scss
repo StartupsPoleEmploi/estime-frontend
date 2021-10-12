@@ -50,12 +50,9 @@
     background-color: $color-are;
   }
 
-  &.pi {
-    background-color: $color-pi;
-  }
-
+  &.pi,
   &.asi {
-    background-color: $color-asi;
+    background-color: $color-pi;
   }
 
   &.rsa {
@@ -65,7 +62,7 @@
   &.apl,
   &.alf,
   &.als {
-    background-color: $color-af;
+    background-color: $color-al;
   }
 
   &.af,

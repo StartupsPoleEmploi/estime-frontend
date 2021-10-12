@@ -95,9 +95,11 @@ export class AidesService {
     return message;
   }
 
-  public getMessageAlerteAidesLogement(): string {
+  public getMessageAlerteAidesLogement(withLink: boolean = true): string {
     let moisProchaineDeclaration = this.dateUtileService.getLibelleMoisApresDateJour(1);
-    return "Vos aides au logement seront recalculées à partir du mois de " + moisProchaineDeclaration + ". Vous pouvez simuler de façon plus précise <a class='simulateur-caf-link' href='https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/estimervosdroits/lelogement'>le nouveau montant sur le site de la CAF.</a>";
+    let message = "Vos aides au logement seront recalculées à partir du mois de " + moisProchaineDeclaration + "."
+    if (withLink) message += "Vous pouvez simuler de façon plus précise <a class='simulateur-caf-link' href='https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/estimervosdroits/lelogement'>le nouveau montant sur le site de la CAF.</a>";
+    return message;
   }
 
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {

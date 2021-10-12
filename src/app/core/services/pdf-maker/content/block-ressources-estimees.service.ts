@@ -37,7 +37,6 @@ export class BlockRessourcesEstimeesService {
     }
   }
 
-
   /******* méthode création table "Les aides que vous pourriez obtenir" */
 
   public addTableAidesObtenir(content: Array<any>, simulationAides: SimulationAides): void {
@@ -64,6 +63,24 @@ export class BlockRessourcesEstimeesService {
       this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.PRIME_ACTIVITE, imageBase64, libelle);
       nbrRows++;
     }
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT)) {
+      const imageBase64 = ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT;
+      const libelle = LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT;
+      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE)) {
+      const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE;
+      const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
+      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
+      const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE;
+      const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
+      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      nbrRows++;
+    }
 
     content.push(this.createTableElement(body, simulationAides.simulationsMensuelles.length, nbrRows));
   }
@@ -82,6 +99,14 @@ export class BlockRessourcesEstimeesService {
       }
       row.push(this.createCellMontant(montant));
     });
+    body.push(row);
+  }
+
+  private addRowAidesLogement(body: Array<Array<Cell>>, simulationAides: SimulationAides, imageAideBase64: string, libelle: string): void {
+    const row = new Array<Cell>();
+    row.push(this.createCellImageRessource(imageAideBase64));
+    row.push(this.createCellLibelleRessource(libelle));
+    row.push(this.createCellMontantAidesLogement(simulationAides.simulationsMensuelles.length));
     body.push(row);
   }
 
@@ -108,15 +133,16 @@ export class BlockRessourcesEstimeesService {
       this.addRowAAHPourBeneficiaireAAH(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF) {
-      if (!demandeurEmploi.beneficiaireAides.beneficiaireAAH
-        && demandeurEmploi.ressourcesFinancieres.aidesCAF.allocationAAH > 0) {
-        this.addRowAAH(body, demandeurEmploi, simulationAides);
-        nbrRows++;
-      }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF && !demandeurEmploi.beneficiaireAides.beneficiaireAAH && demandeurEmploi.ressourcesFinancieres.aidesCAF.allocationAAH > 0) {
+      this.addRowAAH(body, demandeurEmploi, simulationAides);
+      nbrRows++;
     }
     if (demandeurEmploi.beneficiaireAides.beneficiairePensionInvalidite) {
       this.addRowPensionInvalidite(body, demandeurEmploi, simulationAides);
+      nbrRows++;
+    }
+    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite > 0) {
+      this.addRowASI(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
     if (demandeurEmploi.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0) {
@@ -129,18 +155,6 @@ export class BlockRessourcesEstimeesService {
     }
     if (demandeurEmploi.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
       this.addRowINDP(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.beneficiaireAides.beneficiaireALF) {
-      this.addRowALF(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.beneficiaireAides.beneficiaireALS) {
-      this.addRowALS(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.beneficiaireAides.beneficiaireAPL) {
-      this.addRowAPL(body, simulationAides);
       nbrRows++;
     }
     if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial) {
@@ -233,6 +247,14 @@ export class BlockRessourcesEstimeesService {
     body.push(row);
   }
 
+  private addRowASI(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
+    const imageBase64 = ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
+    const montant = demandeurEmploi.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite;
+    const libelle = LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
+    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
+    body.push(row);
+  }
+
   private addRowIMMO(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const montant = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
     const imageBase64 = ImagesBase64Enum.IMMOBILIER;
@@ -254,48 +276,6 @@ export class BlockRessourcesEstimeesService {
     const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
     const libelle = LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowAPL(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT;
-    const libelle = LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAah = this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle);
-      row.push(this.createCellMontant(montantAah));
-    });
-    body.push(row);
-  }
-
-  private addRowALF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE;
-    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAah = this.aidesService.getMontantAllocationLogementFamilial(simulationMensuelle);
-      row.push(this.createCellMontant(montantAah));
-    });
-    body.push(row);
-  }
-
-  private addRowALS(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE;
-    const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAah = this.aidesService.getMontantAllocationLogementSocial(simulationMensuelle);
-      row.push(this.createCellMontant(montantAah));
-    });
     body.push(row);
   }
 
@@ -531,6 +511,19 @@ export class BlockRessourcesEstimeesService {
     cell.style = new Style();
     cell.style.alignment = 'center';
     cell.style.bold = true;
+    return cell;
+  }
+
+  private createCellMontantAidesLogement(colSpan: number): Cell {
+    const cell = new Cell();
+    cell.colSpan = colSpan;
+    cell.style = new Style();
+    cell.style.alignment = 'center';
+    cell.style.fontSize = 11;
+    cell.text = new Text();
+    cell.text.text = '\n' + this.aidesService.getMessageAlerteAidesLogement(false);
+    cell.text.style = new Style();
+    cell.text.style.margin = [0, 30, 1000, 0];
     return cell;
   }
 
