@@ -1,7 +1,7 @@
 @import "../../../assets/scss/variables";
 
 .container-fluid {
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
 
   @media #{$extra-small-device} {
     padding-left: 0;
@@ -11,27 +11,27 @@
   margin-top: 2rem;
 
   h1 {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
     text-align: center;
   }
 
   .card {
     background-color: $color-white-3;
     border: none;
-    line-height: 27px;
-    max-width: 600px;
+    line-height: 1.6875rem;
+    max-width: 37.5rem;
     margin: auto;
-    padding: 20px 15px 20px 15px;
+    padding: 1.25rem 0.9375rem 1.25rem 0.9375rem;
 
     @media #{$small-device} {
-      padding: 30px 70px 30px 70px;
+      padding: 1.875rem 4.375rem 1.875rem 4.375rem;
     }
 
     #div-info-simulation {
       color: $color-blue-3;
-      border: 1px solid $color-blue-3;
-      border-radius: 4px;
-      padding: 8px;
+      border: 0.0625rem solid $color-blue-3;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
 
       .row {
         margin-left: auto;
@@ -40,11 +40,11 @@
 
         #img-info-simulation {
           max-width: fit-content !important;
-          padding-right: 5px;
-          padding-left: 5px;
+          padding-right: 0.3125rem;
+          padding-left: 0.3125rem;
 
           div {
-            width: 20px;
+            width: 1.25rem;
             height: 100%;
             position: relative;
 
@@ -53,14 +53,14 @@
               margin: auto;
               position: absolute;
               top: 0;
-              width: 23px;
+              width: 1.4375rem;
             }
           }
         }
 
         #text-info-simulation {
-          padding-right: 5px;
-          line-height: 18px;
+          padding-right: 0.3125rem;
+          line-height: 1.125rem;
 
           span {
             color: $color-blue-3;
@@ -78,11 +78,7 @@
 
     .btn-style-perso-1 {
       margin: auto;
-      width: 188px;
-
-      @media #{$extra-small-device} {
-        width: 185px;
-      }
+      width: 11.75rem;
     }
   }
 }

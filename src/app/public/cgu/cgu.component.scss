@@ -14,17 +14,20 @@
 
 .ul-liens-aide-navigateur li span {
   display: inline-block;
-  word-break:break-word;
-  vertical-align:top;
+  word-break: break-word;
+  vertical-align: top;
 }
 
 #div-text-info-suppression-donnees-perso {
   background-color: $color-blue-7 !important;
+
   &.message-error {
     background-color: $color-red-3 !important;
+
     .row {
       #text-info-suppression-donnees-perso {
         max-width: 16.875rem;
+
         @media #{$small-device} {
           max-width: 22.5rem;
         }
@@ -36,21 +39,27 @@
   border: unset;
   margin-left: auto;
   margin-right: auto;
+
   @media #{$small-device} {
     max-width: 27.8125rem;
   }
+
   padding: 0.625rem;
+
   .row {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+
     #img-text-info-suppression-donnees-perso {
       padding-left: 0;
       padding-right: 0.625rem;
+
       div {
         width: 1.25rem;
         height: 100%;
         position: relative;
+
         img {
           position: absolute;
           top: 0;
@@ -59,17 +68,17 @@
         }
       }
     }
+
     #text-info-suppression-donnees-perso {
       padding: 0;
+
       span {
         color: $color-blue-3;
       }
+
       @media #{$extra-small-device} {
         max-width: 14.0625rem;
       }
     }
   }
 }
-
-
-

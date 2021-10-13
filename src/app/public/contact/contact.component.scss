@@ -5,22 +5,26 @@
     padding-left: 0;
     padding-right: 0;
   }
+
   .card {
     background-color: unset;
     border: none;
-    margin-bottom: -16px;
+    margin-bottom: -1rem;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25px;
+    margin-top: 1.5625rem;
     padding-bottom: 0;
     padding-top: 0;
+
     @media #{$small-device} {
-      margin-top: 45px;
-      max-width: 980px;
-      padding: 75px 30px 0 30px;
+      margin-top: 2.8125rem;
+      max-width: 61.25rem;
+      padding: 4.6875rem 1.875rem 0 1.875rem;
     }
+
     a {
       display: block;
+
       img {
         display: block;
         margin-left: auto;

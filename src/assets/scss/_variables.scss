@@ -1,15 +1,15 @@
 //smartphones
-$extra-small-device: "screen and (max-width:767px)";
+$extra-small-device: "screen and (max-width:47.9375rem)";
 //tablets
-$small-device: "screen and (min-width:768px)";
-$tablet-device : "screen and (min-width:768px) and (max-width:991px)";
+$small-device: "screen and (min-width:48rem)";
+$tablet-device : "screen and (min-width:48rem) and (max-width:61.9375rem)";
 //desktops
-$medium-device: "screen and (min-width:992px)";
-$large-device: "screen and (min-width:1200px)";
-$extra-large-device: "screen and (min-width:1400px)";
+$medium-device: "screen and (min-width:62rem)";
+$large-device: "screen and (min-width:75rem)";
+$extra-large-device: "screen and (min-width:87.5rem)";
 
-$header-height : 64px;
-$header-height-small-device : 86px;
+$header-height : 4rem;
+$header-height-small-device : 5.375rem;
 
 $color-black-1: black;
 $color-black-2:#3E3E3E;
@@ -82,11 +82,11 @@ $size-card-form-etape-simulation: 80%;
 
 // variables pour les icones des étapes de la home page
 
-$left-icon-tache-homepage: 60px;
-$margin-top-numero-etape: 30px;
-$margin-left-numero-etape: calc(#{$left-icon-tache-homepage} + 15px);
-$margin-top-icons-etape: calc(0px - #{$margin-top-numero-etape});
-$margin-left-icons-etape: calc(#{$left-icon-tache-homepage} + 60px);
+$left-icon-tache-homepage: 3.75rem;
+$margin-top-numero-etape: 1.875rem;
+$margin-left-numero-etape: calc(#{$left-icon-tache-homepage} + 1rem);
+$margin-top-icons-etape: calc(0rem - #{$margin-top-numero-etape});
+$margin-left-icons-etape: calc(#{$left-icon-tache-homepage} + 3.75rem);
 
 $espace-se-connecter-sticky-height: 5.5rem;
 $footer-height-mobile: 18.5rem;

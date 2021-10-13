@@ -1,4 +1,5 @@
-.btn-base, .btn {
+.btn-base,
+.btn {
 
   &:hover,
   &:focus {
@@ -12,12 +13,17 @@
   border: 0.0625rem $color-blue-1 solid;
   border-radius: 0.25rem;
   cursor: pointer;
+
   div {
     align-items: center;
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;
+    /* NEW, Spec - Firefox, Chrome, Opera */
     height: 100%;
   }
 }
@@ -26,26 +32,35 @@
   @extend .btn-base;
   border: none;
   border-radius: 1.875rem;
+
   @media #{$small-device} {
     border-radius: 1.375rem;
   }
+
   height: 2.625rem;
+
   div {
     align-items: center;
-    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-    display: -ms-flexbox; /* TWEENER - IE 10 */
-    display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-    display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+    display: -webkit-box;
+    /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+    display: -ms-flexbox;
+    /* TWEENER - IE 10 */
+    display: -webkit-flex;
+    /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+    display: flex;
+    /* NEW, Spec - Firefox, Chrome, Opera */
     height: 100%;
   }
 }
 
 .btn-primary-perso {
   background-color: $color-blue-10;
+
   &:hover,
   &:focus-visible {
     background-color: $color-blue-2;
   }
+
   div {
     span {
       color: $color-white-3;
@@ -60,10 +75,12 @@
   height: 3.3125rem;
   padding: 0.375rem 0rem 0rem 0.5625rem;
   width: 19.875rem;
+
   div {
     img {
       width: 3.875rem;
     }
+
     span {
       font-weight: bold;
       margin-left: 0.0625rem;
@@ -78,22 +95,23 @@
   border: 0.0625rem solid;
   border-radius: 0 0 0 6.25rem;
   border-color: $color-blue-10;
-  height: calc(#{$header-height} - 10px);
+  height: calc(#{$header-height} - 0.625rem);
   width: 22rem;
   padding-right: 2rem;
   background-color: $color-blue-10;
   cursor: pointer;
-  text-align:center;
+  text-align: center;
   display: flex;
-  z-index:100;
+  z-index: 100;
 
   @media #{$small-device} {
-    height: calc(#{$header-height-small-device} - 10px);
+    height: calc(#{$header-height-small-device} - 0.625rem);
   }
 
   .img-btn-se-connecter {
     color: $color-white-1;
   }
+
   .label-btn-se-connecter {
     width: 14.25rem;
     color: $color-white-1;
@@ -107,25 +125,31 @@
   float: right;
   height: 2.5rem;
   width: 12.25rem;
+
   &:hover,
   &:focus-visible {
     background-color: $color-blue-2;
     border: none;
+
     span {
       color: $color-white-3;
     }
+
     .img-btn-se-deconnecter {
       content: url("../images/signout-white.svg");
     }
   }
+
   div {
     justify-content: center;
   }
+
   span {
     color: $color-blue-2;
     font-size: 0.75em;
     margin-left: 0.4375rem;
   }
+
   .img-btn-se-deconnecter {
     background: no-repeat url("../images/signout.svg");
     width: 1.125rem;
@@ -133,11 +157,13 @@
     background-size: 100% 100%;
   }
 }
+
 .btn-se-deconnecter-sm {
   @extend .action-btn-base;
   background-color: $color-white-3;
   float: right;
   height: 1.125rem;
+
   .img-btn-se-deconnecter {
     background: no-repeat url("../images/signout.svg");
     height: 1.125rem;
@@ -148,9 +174,11 @@
 .btn-style-perso-1 {
   @extend .action-btn-base;
   @extend .btn-primary-perso;
+
   div {
     padding-left: 1rem;
     width: 100%;
+
     img {
       margin-left: auto;
       margin-right: 0.375rem;
@@ -163,6 +191,7 @@
   background-color: $color-white-3;
   color: $color-blue-10;
   display: inline-flex;
+
   &:hover,
   &:focus-visible {
     div {
@@ -171,6 +200,7 @@
       }
     }
   }
+
   div {
     span {
       margin-left: 0.625rem;
@@ -181,10 +211,12 @@
 .btn-style-perso-3 {
   @extend .action-btn-base;
   @extend .btn-primary-perso;
+
   div {
     padding-left: 1rem;
     padding-right: 1rem;
     width: 100%;
+
     span {
       font-size: 1.125em;
     }
@@ -195,16 +227,19 @@
   @extend .action-btn-base;
   @extend .btn-primary-perso;
   border-radius: 0.5rem;
+
   div {
     padding-left: 1rem;
     padding-right: 1rem;
     width: 100%;
+
     span {
       font-size: 0.875em;
       margin: auto;
       line-height: 0.9375rem;
       padding-left: 0.3125rem;
     }
+
     img {
       width: 1.875rem;
       height: 1.875rem;
@@ -214,30 +249,36 @@
 
 .btn-style-perso-5 {
   @extend .btn-style-perso-3;
-  box-shadow: 0 0.625rem 1.25rem 0 rgba(27,43,103,0.3);
+  box-shadow: 0 0.625rem 1.25rem 0 rgba(27, 43, 103, 0.3);
   min-height: 3.75rem;
+
   @media #{$small-device} {
     min-height: 1.25rem;
   }
+
   max-height: fit-content;
 }
 
 .btn-group-input-date {
   display: flex !important;
+
   .jour-input {
     min-width: 3.4375rem;
     max-width: 3.4375rem;
   }
+
   .mois-input {
     margin-left: 0.25rem;
     min-width: 3.4375rem;
     max-width: 3.4375rem;
   }
+
   .annee-input {
     min-width: 4.6875rem;
     margin-left: 0.25rem;
     max-width: 4.6875rem;
   }
+
   select.default-value {
     color: #808080;
   }
@@ -249,15 +290,19 @@
   background-clip: padding-box;
   border: 0.0625rem solid #ced4da;
   border-radius: 0.25rem;
+
   button {
     font-weight: bold;
+
     &:disabled {
       opacity: 0.35 !important;
     }
+
     &:focus-visible {
       box-shadow: none;
     }
   }
+
   span {
     vertical-align: middle;
   }
@@ -267,35 +312,42 @@
   @extend .radio-btn-base;
   font-size: 1em;
   padding: 0.375rem 0.75rem;
-  max-width: 290px;
+  max-width: 18.125rem;
   margin-right: 0.3rem;
   margin-top: 0.3rem;
+
   @media #{$small-device} {
     max-width: fit-content;
+
     &:not(.active):hover {
       background-color: $color-blue-1-o5;
       border: 0.0625rem $color-black-1 solid;
       box-shadow: -0.0625rem 0.0625rem 0.25rem 0rem $color-blue-1;
     }
   }
+
   &:focus-visible {
     border-color: $color-grey-4;
     background-color: $color-grey-4;
+
     div {
       span {
         color: $color-white-3;
       }
     }
   }
+
   &:not(:disabled):not(.disabled).active {
     background-color: $color-blue-1;
     border-color: $color-blue-1;
+
     div {
       span {
         color: $color-white-3;
       }
     }
   }
+
   div {
     span {
       color: $color-blue-1;
@@ -307,7 +359,8 @@
   cursor: auto;
 }
 
-select, option {
+select,
+option {
   @extend .body-2-typo;
 }
 
@@ -317,9 +370,9 @@ select, option {
 
   height: 2.875rem;
   min-width: 14.5rem;
-  width:unset!important;
-  -webkit-box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
-  box-shadow: 0px 12px 34px -15px rgba(0,0,0,0.68);
+  width: unset !important;
+  -webkit-box-shadow: 0rem 0.75rem 2.125rem -0.9375rem rgba(0, 0, 0, 0.68);
+  box-shadow: 0rem 0.75rem 2.125rem -0.9375rem rgba(0, 0, 0, 0.68);
 
   display: -webkit-box;
   display: -moz-box;
@@ -345,12 +398,12 @@ select, option {
 
 
   span {
-    height: 29px;
+    height: 1.8125rem;
     color: #FFFFFF;
-    vertical-align:top;
+    vertical-align: top;
 
     @media #{$medium-device} {
-      margin-right:auto;
+      margin-right: auto;
       padding-left: 0.75rem;
     }
   }

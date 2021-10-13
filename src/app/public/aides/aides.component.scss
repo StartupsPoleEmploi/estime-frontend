@@ -1,122 +1,132 @@
 @import "../../../assets/scss/variables";
 
 .icone-carte {
-    float: left;
+  float: left;
 }
 
-.container{
-    display: flex;
+.container {
+  display: flex;
 }
 
 .rectangle {
-    height: 0.188rem;
-    width: 100%;
-    align-items: left;
+  height: 0.188rem;
+  width: 100%;
+  align-items: left;
 
-    &.agepi {
-        background: $color-agepi;
-    }
-    &.am {
-        background: $color-am;
-    }
-    &.pa {
-        background: $color-pa;
-    }
-    &.ass {
-        background: $color-ass;
-    }
-    &.aah {
-        background: $color-aah;
-    }
+  &.agepi {
+    background: $color-agepi;
+  }
+
+  &.am {
+    background: $color-am;
+  }
+
+  &.pa {
+    background: $color-pa;
+  }
+
+  &.ass {
+    background: $color-ass;
+  }
+
+  &.aah {
+    background: $color-aah;
+  }
 }
 
 .card-aides {
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-    border: unset;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  border: unset;
 
-    @media #{$extra-small-device} {
-      cursor: pointer;
-    }
+  @media #{$extra-small-device} {
+    cursor: pointer;
+  }
 }
 
 .card-title-aides {
-    padding-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
 
+  @media #{$extra-small-device} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  div {
+    &.col-icon {
+      padding-right: 0;
+
+      @media #{$extra-small-device} {
+        padding-right: unset;
+      }
+    }
+
+    &.col-title {
+      margin-left: 0.75rem;
+
+      @media #{$extra-small-device} {
+        margin-left: unset;
+      }
+    }
+
+    &.col-chevron {
+      @media #{$extra-small-device} {
+        padding-left: 0;
+        padding-right: 1rem;
+
+        span {
+          float: right;
+        }
+      }
+    }
+  }
+
+  .icon-aide {
     @media #{$extra-small-device} {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      padding: unset;
     }
 
-    div {
-        &.col-icon  {
-            padding-right:0;
-            @media #{$extra-small-device} {
-                padding-right: unset;
-            }
-        }
-        &.col-title {
-            margin-left: 0.75rem;
-            @media #{$extra-small-device} {
-                margin-left: unset;
-            }
-        }
-        &.col-chevron {
-            @media #{$extra-small-device} {
-                padding-left: 0;
-                padding-right: 1rem;
-                span {
-                    float: right;
-                }
-            }
-        }
-    }
+    float: left;
+  }
 
-    .icon-aide {
-        @media #{$extra-small-device} {
-            padding: unset;
-        }
-        float: left;
-    }
+  .intitule-aide {
+    color: $color-blue-2;
 
-    .intitule-aide {
-        color: $color-blue-2;
-
-        .aide-organisme {
-            color: $color-grey-5;
-        }
+    .aide-organisme {
+      color: $color-grey-5;
     }
+  }
 }
 
 .card-body-aides {
-    padding: 0;
-    padding-top: 0.5rem;
+  padding: 0;
+  padding-top: 0.5rem;
 }
 
 
 .en-savoir-plus {
-    color: $color-blue-10;
-    text-decoration: none;
-    float: left;
-    cursor: pointer;
+  color: $color-blue-10;
+  text-decoration: none;
+  float: left;
+  cursor: pointer;
 
-    img {
-        vertical-align: middle;
-    }
+  img {
+    vertical-align: middle;
+  }
 }
 
 .titre-aides {
-    text-align: left;
-    padding-left: 1rem;
-    color: $color-blue-2;
+  text-align: left;
+  padding-left: 1rem;
+  color: $color-blue-2;
 
 }
 
 .titre-autres-aides {
-    @extend .titre-aides;
-    margin-top:4rem;
+  @extend .titre-aides;
+  margin-top: 4rem;
 }

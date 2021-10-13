@@ -4,10 +4,10 @@ select {
 
 .fa-info-circle {
   span {
-    font-size: 0.9em!important;
-    color: black!important;
+    font-size: 0.9em !important;
+    color: black !important;
     font-weight: 300 !important;
-    vertical-align: middle!important;
+    vertical-align: middle !important;
   }
 }
 
@@ -24,35 +24,43 @@ select {
 }
 
 .div-buttons-form {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+
   @media #{$small-device} {
     width: auto;
   }
+
   .first-btn {
-    margin-right: 5px;
+    margin-right: 0.3125rem;
+
     @media #{$small-device} {
-      margin-right: 20px;
+      margin-right: 1.25rem;
     }
   }
+
   .second-btn {
-    margin-left: 15px;
-    width: 140px;
+    margin-left: 1rem;
+    width: 8.75rem;
+
     @media #{$extra-small-device} {
-      width: 150px;
+      width: 9.375rem;
     }
+
     @media #{$small-device} {
-      margin-left: 10px;
+      margin-left: 0.625rem;
     }
   }
 }
 
 .card-form-style-1 {
   margin-top: 2rem;
+
   @media #{$small-device} {
     padding-left: 6rem !important;
     padding-right: 6rem !important;
     padding-top: 3rem
   }
+
   @media #{$small-device} {
     margin-left: 7%;
     margin-right: 7%;
@@ -60,8 +68,9 @@ select {
 }
 
 .div-title-formulaire {
-  padding-left: 15px !important;
-  padding-right: 15px !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+
   @media #{$small-device} {
     margin-left: 7%;
     margin-right: 7%;
@@ -81,14 +90,15 @@ input.date-invalid.ng-touched,
 input.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
   background-color: $color-red-6;
-  border: 1px solid $color-red-5;
+  border: 0.0625rem solid $color-red-5;
+
   option {
-    background-color: $color-white-3!important;
+    background-color: $color-white-3 !important;
   }
 }
 
 form.submitted .radio-button-style-1.ng-invalid.ng-touched,
-form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-label::before {
+form.submitted .custom-control-input.ng-invalid.ng-touched~.custom-control-label::before {
   border-color: $color-red-5;
 }
 
@@ -100,26 +110,28 @@ form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-l
 
 .error-input-message {
   color: $color-red-5 !important;
-  margin-top: 2px;
+  margin-top: 0.125rem;
   @extend .caption-typo;
 }
 
-.custom-control-input:checked ~ .custom-control-label::before {
+.custom-control-input:checked~.custom-control-label::before {
   border-color: $color-blue-1;
   background-color: $color-blue-1;
   box-shadow: none;
 }
 
-.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
+.custom-radio .custom-control-input:disabled:checked~.custom-control-label::before {
   background-color: $color-blue-1;
 }
 
 .form-control {
   border-color: $color-grey-1;
+
   &:focus {
     border-color: $color-blue-1;
     box-shadow: none;
   }
+
   input {
     @media #{$extra-small-device} {
       width: 40vw !important;
@@ -135,6 +147,7 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
@@ -145,14 +158,18 @@ input[type=number] {
 /** change style after autofill **/
 
 input:-webkit-autofill {
-  -webkit-box-shadow:0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
-  box-shadow:0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
+  -webkit-box-shadow: 0 0 0 3.125rem $color-white-3 inset;
+  /* Change the color to your own background color */
+  box-shadow: 0 0 0 3.125rem $color-white-3 inset;
+  /* Change the color to your own background color */
   -webkit-text-fill-color: #333;
 }
 
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 50px $color-white-3 inset;/*your box-shadow*/
-  box-shadow: 0 0 0 50px $color-white-3 inset; /* Change the color to your own background color */
+  -webkit-box-shadow: 0 0 0 3.125rem $color-white-3 inset;
+  /*your box-shadow*/
+  box-shadow: 0 0 0 3.125rem $color-white-3 inset;
+  /* Change the color to your own background color */
   -webkit-text-fill-color: #333;
 }
 
@@ -161,47 +178,56 @@ input:-webkit-autofill:focus {
 
 .card-form {
   border: 0;
+
   @media #{$extra-small-device} {
-    padding-left: 33px;
-    padding-right: 33px;
+    padding-left: 2.0625rem;
+    padding-right: 2.0625rem;
   }
 
   @media #{$small-device} {
     margin-top: 2rem;
     padding-left: 4rem;
   }
+
   input {
     color: $color-blue-1;
     font-size: 1em;
     font-weight: bold;
-    max-width: 100px;
+    max-width: 6.25rem;
+
     @media #{$extra-small-device} {
       max-width: 30vw;
     }
+
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     &::placeholder {
-      color: $color-blue-1!important;
+      color: $color-blue-1 !important;
       font-size: 1em;
       font-weight: 400 !important;
-      opacity: 0.7; /* Firefox */
+      opacity: 0.7;
+      /* Firefox */
     }
+
     /* Internet Explorer 10-11 */
     &:-ms-input-placeholder {
-      color: $color-blue-1!important;
+      color: $color-blue-1 !important;
       font-size: 1em;
       font-weight: 400 !important;
       opacity: 0.7;
     }
   }
+
   select {
     color: $color-blue-1;
     font-size: 1em;
     margin-top: auto;
     margin-bottom: auto;
     width: auto;
+
     @media #{$extra-small-device} {
-      max-width: 235px;
+      max-width: 14.6875rem;
     }
+
     &.option-selected {
       font-weight: bold;
     }
@@ -210,7 +236,9 @@ input:-webkit-autofill:focus {
   .interrogation-icon {
     cursor: pointer;
   }
-  .label, span {
+
+  .label,
+  span {
     color: $color-blue-2;
     font-size: 1em;
     margin-bottom: 0;
@@ -218,10 +246,9 @@ input:-webkit-autofill:focus {
 
   .label {
     font-weight: bold;
-  }￼
+  }
 
-
-  .span {
+  ￼ .span {
     font-weight: 500;
   }
 
@@ -233,18 +260,22 @@ input:-webkit-autofill:focus {
     margin-left: 0.5rem;
     margin-top: auto;
   }
+
   .text-2-side-input {
     @extend .text-side-input;
+
     @media #{$small-device} {
       line-height: 1rem;
-      max-width: 100px;
+      max-width: 6.25rem;
     }
   }
+
   .label-left-style-1 {
     font-weight: 400;
     margin-right: 0.3rem;
     margin-top: auto;
     margin-bottom: auto;
+
     @media #{$small-device} {
       font-size: 0.9em;
     }

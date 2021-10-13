@@ -3,7 +3,9 @@ a {
   color: $color-blue-1;
   cursor: pointer;
   text-decoration: underline;
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     text-decoration: none;
     outline: unset;
   }

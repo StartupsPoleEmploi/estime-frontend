@@ -12,15 +12,19 @@
   border-bottom: 0;
   padding-bottom: 0;
   padding-top: 1rem;
+
   p {
     font-size: 1.125em;
   }
+
   button {
     opacity: unset !important;
+
     span {
       font-size: 1.5em;
       color: $color-blue-1;
     }
+
     &:focus {
       outline: unset;
     }
@@ -30,8 +34,9 @@
 .modal-body {
   @extend .modal-base;
   border-bottom: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   font-size: 1.125em;
+
   span {
     font-size: 1.125em;
   }

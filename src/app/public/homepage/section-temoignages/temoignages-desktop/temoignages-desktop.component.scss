@@ -4,6 +4,7 @@
   max-width: 65.625rem;
   margin-left: auto;
   margin-right: auto;
+
   .card {
     background-color: $color-white-2;
     border: 0.0625rem solid $color-blue-2;
@@ -12,10 +13,12 @@
     padding: 1.875rem;
     margin-left: 1rem;
     margin-right: 1rem;
+
     div {
       position: relative;
       height: 100%;
       margin-top: 2.1875rem;
+
       span {
         bottom: 0;
         position: absolute;

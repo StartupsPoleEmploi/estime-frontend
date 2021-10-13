@@ -45,7 +45,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 1.3125rem;
-  line-height: 25px;
+  line-height: 1.5625rem;
   margin-left: 0.5rem;
 
   @media #{$extra-small-device} {
@@ -77,14 +77,14 @@
       padding: 0.4rem 1rem;
     }
 
-    margin-top: 5px;
+    margin-top: 0.3125rem;
 
     button {
       text-align: left;
       max-height: unset;
 
       .row {
-        padding-left: 6px;
+        padding-left: 0.375rem;
       }
     }
   }
@@ -136,11 +136,11 @@
 
     .img-card-message-alerte-aide {
       max-width: fit-content !important;
-      padding-right: 5px;
-      padding-left: 5px;
+      padding-right: 0.3125rem;
+      padding-left: 0.3125rem;
 
       div {
-        width: 20px;
+        width: 1.25rem;
         height: 100%;
         position: relative;
 
@@ -149,7 +149,7 @@
           margin: auto;
           position: absolute;
           top: 0;
-          width: 22px;
+          width: 1.25rem;
         }
       }
     }
@@ -162,7 +162,7 @@
     padding: unset;
 
     .row {
-      padding-left: 6px;
+      padding-left: 0.375rem;
     }
   }
 
@@ -182,7 +182,7 @@
 }
 
 .is-item-not-last {
-  border-bottom: 1px solid $color-grey-2 !important;
+  border-bottom: 0.0625rem solid $color-grey-2 !important;
 }
 
 

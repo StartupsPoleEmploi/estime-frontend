@@ -1,48 +1,49 @@
 @import "../../../../../assets/scss/variables";
 
 .center-actions-suite {
-   margin-top: 2rem;
-   margin-bottom: 1rem;
-   width: 100%;
-   text-align:center;
-   @media #{$extra-small-device} {
-      margin-left: -0.625rem;
-   }
-   span {
-      color: $color-blue-2;
-   }
- }
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  text-align: center;
 
- .liste-actions{
-   @media #{$extra-small-device} {
-      margin-left: -0.9375rem;
-      margin-right: 0rem;
-   }
-   @media #{$small-device} {
-      margin-left: -0.9375rem;
-      margin-right: 0rem;
-   }
+  @media #{$extra-small-device} {
+    margin-left: -0.625rem;
+  }
 
-   .item {
-      cursor: pointer;
+  span {
+    color: $color-blue-2;
+  }
+}
 
-      &:hover {
-         border: $color-blue-2 0.0625rem solid;
-      }
-   }
- }
+.liste-actions {
+  @media #{$extra-small-device} {
+    margin-left: -0.9375rem;
+    margin-right: 0rem;
+  }
 
- .card {
-    margin: 0.5rem;
-    padding: 0rem;
- }
+  @media #{$small-device} {
+    margin-left: -0.9375rem;
+    margin-right: 0rem;
+  }
 
- span {
-   font-size: 21px;
-   font-family: Poppins;
-   font-weight: 700;
-   letter-spacing: 0;
-   line-height: 31,5px;
-   color: $color-blue-1;
- }
+  .item {
+    cursor: pointer;
 
+    &:hover {
+      border: $color-blue-2 0.0625rem solid;
+    }
+  }
+}
+
+.card {
+  margin: 0.5rem;
+  padding: 0rem;
+}
+
+span {
+  font-size: 1.3125rem;
+  font-family: Poppins;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: $color-blue-1;
+}

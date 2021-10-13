@@ -28,8 +28,8 @@
 
     .btn-telecharger-ou-refaire {
       img {
-        width: 24px;
-        height: 24px;
+        width: 1.5rem;
+        height: 1.5rem;
         margin-right: 0.5rem;
         color: $color-blue-10;
       }
@@ -38,8 +38,8 @@
         font-family: Poppins;
         font-style: normal;
         font-weight: bold;
-        font-size: 14px;
-        line-height: 21px;
+        font-size: 0.875rem;
+        line-height: 1.3125rem;
         color: $color-blue-10;
       }
 
@@ -137,14 +137,14 @@
 
     #alert-resultat-simulation {
       @media #{$extra-small-device} {
-        margin-bottom: 25px !important;
+        margin-bottom: 1.5625rem !important;
       }
 
       div {
         height: 100%;
 
         @media #{$extra-small-device} {
-          max-width: 565px;
+          max-width: 35.3125rem;
         }
 
         color: $color-blue-2;
@@ -152,12 +152,12 @@
     }
 
     #card-revenus-actuels {
-      padding-left: 9px;
-      padding-right: 9px;
+      padding-left: 0.5625rem;
+      padding-right: 0.5625rem;
 
       @media #{$small-device} {
         padding-left: 0;
-        padding-right: 15px;
+        padding-right: 0.9375rem;
       }
 
       .card {
@@ -189,7 +189,7 @@
 
       .card {
         height: 100%;
-        padding: 10px;
+        padding: 0.625rem;
 
         @media #{$extra-small-device} {
           background-color: unset;
@@ -214,7 +214,7 @@
       margin-bottom: 0;
 
       @media #{$small-device} {
-        padding-bottom: 5px;
+        padding-bottom: 0.3125rem;
         margin-left: 0;
         margin-right: 0;
       }
@@ -237,9 +237,9 @@
         margin-bottom: 0;
 
         @media #{$extra-small-device} {
-          margin: 5px;
-          margin-left: -7px;
-          margin-right: -7px;
+          margin: 0.3125rem;
+          margin-left: -0.4375rem;
+          margin-right: -0.4375rem;
         }
 
         background-color: unset;
@@ -322,8 +322,8 @@
     }
 
     .div-button-retour {
-      margin-top: 20px;
-      margin-bottom: 30px;
+      margin-top: 1.25rem;
+      margin-bottom: 1.875rem;
 
       .btn-style-perso-2 {
         background-color: unset;
@@ -340,7 +340,7 @@
     #resultat_simulation_div_boutons {
 
       margin: auto !important;
-      margin-top: 45px !important;
+      margin-top: 40.3125rem !important;
       background-color: unset;
 
       #resultat_simulation_bouton_retour {
@@ -349,7 +349,7 @@
       }
 
       #resultat_simulation_bouton_refaire_simulation {
-        width: 250px !important;
+        width: 15.625rem !important;
       }
     }
   }
@@ -372,11 +372,11 @@
 
       .img-card-message-alerte-aide {
         max-width: fit-content !important;
-        padding-right: 5px;
-        padding-left: 5px;
+        padding-right: 0.3125rem;
+        padding-left: 0.3125rem;
 
         div {
-          width: 20px;
+          width: 1.25rem;
           height: 100%;
           position: relative;
 
@@ -385,7 +385,7 @@
             margin: auto;
             position: absolute;
             top: 0;
-            width: 22px;
+            width: 1.375rem;
           }
         }
       }

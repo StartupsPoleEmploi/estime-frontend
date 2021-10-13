@@ -13,14 +13,17 @@ footer {
   @media #{$extra-small-device} {
     height: $footer-height-mobile;
   }
+
   a {
     color: $color-blue-1;
     text-decoration: none;
+
     &:hover {
       text-decoration: underline;
       outline: none;
     }
   }
+
   .row-1-footer {
     padding-bottom: 1rem;
     padding-right: 1rem;
@@ -31,112 +34,145 @@ footer {
       padding-top: 1.5rem;
 
     }
+
     .row-1-footer-div-1 {
-      display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6, BB7 */
-      display: -ms-flexbox; /* TWEENER - IE 10 */
-      display: -webkit-flex; /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
-      display: flex; /* NEW, Spec - Firefox, Chrome, Opera */
+      display: -webkit-box;
+      /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex;
+      /* NEW, Spec - Firefox, Chrome, Opera */
       justify-content: center;
       align-items: center;
-      line-height: 26px !important;
+      line-height: 1.625rem !important;
+
       @media #{$medium-device} {
         margin-left: 0;
         margin-right: auto;
       }
+
       .row {
-        max-width: 260px;
+        max-width: 16.25rem;
+
         img {
           cursor: pointer;
-          width: 69px;
+          width: 4.3125rem;
+
           @media #{$medium-device} {
-            width: 157px;
+            width: 9.8125rem;
           }
         }
+
         .col-texte-service-estime {
-          max-width: 265px;
+          max-width: 16.5625rem;
+
           span {
             font-size: 0.75em;
           }
         }
       }
     }
+
     .row-1-footer-div-2 {
       font-size: 0.75em;
       margin-left: 0;
       margin-right: auto;
+
       @media #{$medium-device} {
-        font-size: 1em;
-        min-width: 380px;
+        font-size: 1rem;
+        min-width: 23.75rem;
       }
+
       div {
-        padding-top: 9px;
-        padding-bottom: 9px;
+        padding-top: 0.5625rem;
+        padding-bottom: 0.5625rem;
+
         @media #{$medium-device} {
-          padding-top: 12px;
-          padding-bottom: 12px;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
         }
       }
     }
+
     .row-1-footer-div-3 {
-      line-height: 4px !important;
-      padding-top: 15px;
-      padding-bottom: 15px;
+      line-height: 0.25rem !important;
+      padding-top: 0.9375rem;
+      padding-bottom: 0.9375rem;
+
       @media #{$medium-device} {
-        line-height: 10px !important;
+        line-height: 0.625rem !important;
         margin-left: auto;
         margin-right: 0;
-        max-width: 285px;
+        max-width: 17.8125rem;
       }
+
       .row-col-1 {
         padding-right: 0;
+
         @media #{$medium-device} {
-          margin-bottom: 12px;
-          padding-right: 15px;
+          margin-bottom: 0.75rem;
+          padding-right: 0.9375rem;
         }
+
         #logo-pole-emploi-colored {
-          width: 45px;
-          margin-right: 10px;
+          width: 2.8125rem;
+          margin-right: 0.625rem;
+
           @media #{$medium-device} {
-            margin-left: 45px;
+            margin-left: 2.8125rem;
             margin-right: 0;
-            width: 78px;
+            width: 4.875rem;
           }
         }
+
         #logo-fonds-social-europeen-footer {
-          width: 51px;
-          margin-left: 10px;
-          margin-right: 10px;
+          width: 3.1875rem;
+          margin-left: 0.625rem;
+          margin-right: 0.625rem;
+
           @media #{$medium-device} {
             margin-left: 0;
             margin-right: 0;
-            width: 98px;
+            width: 6.125rem;
           }
         }
       }
+
       .row-col-2 {
-        padding-right: 7px;
-        padding-left: 7px;
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+
         @media #{$medium-device} {
-          margin-top: 12px;
+          margin-top: 0.75rem;
         }
+
         #logo-ue-footer {
-          margin-left: 10px;
-          margin-right: 10px;
+          margin-left: 0.625rem;
+          margin-right: 0.625rem;
+
           @media #{$medium-device} {
-            margin-top: 2px;
+            margin-top: 0.125rem;
           }
-          width: 41px;
-          @media screen and (min-width: 768px) {
-            width: 65px;
+
+          width: 2.5625rem;
+
+          @media #{$small-device} {
+            width: 4.0625rem;
           }
         }
+
         #text-fse-footer {
-          width: 84px;
+          width: 5.25rem;
+
           @media #{$medium-device} {
-            width: 176px;
+            width: 11rem;
           }
+
           span {
             font-size: 0.375em !important;
+
             @media #{$medium-device} {
               font-size: 0.563em !important;
             }
@@ -145,14 +181,17 @@ footer {
       }
     }
   }
+
   .row-2-footer {
-    border-top: 1px solid $color-grey-1;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    border-top: 0.0625rem solid $color-grey-1;
+    padding-bottom: 0.9375rem;
+    padding-top: 0.9375rem;
     text-align: center;
+
     span {
       font-size: 0.5em;
       width: 100%;
+
       @media #{$medium-device} {
         font-size: 0.75em;
       }

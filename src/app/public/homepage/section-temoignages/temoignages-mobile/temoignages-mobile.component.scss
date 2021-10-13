@@ -3,14 +3,16 @@
 .card {
   background-color: $color-white-2;
   border: 0.0625rem solid $color-blue-2;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   box-shadow: none;
   height: 11.5625rem;
   padding: 1.875rem;
+
   div {
     position: relative;
     height: 100%;
     margin-top: 2.1875rem;
+
     span {
       bottom: 0;
       position: absolute;

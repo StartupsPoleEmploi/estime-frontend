@@ -72,7 +72,7 @@
       }
 
       .div-span-title {
-        max-width: 540px;
+        max-width: 33.75rem;
         margin-bottom: 1rem;
 
         span {
@@ -80,55 +80,55 @@
           font-family: Poppins;
           font-weight: normal;
           letter-spacing: 0;
-          line-height: 31px;
+          line-height: 1.9375rem;
           color: $color-blue-1;
         }
       }
 
       h1 {
         font-size: 2.375em;
-        margin-top: 10px;
+        margin-top: 0.625rem;
         text-align: left;
         font-family: Poppins-Black;
         font-style: normal;
         margin-bottom: 2rem;
-        line-height: 48px;
+        line-height: 3rem;
         width: 90%;
 
         @media #{$large-device} {
           font-size: 2.375em;
           margin-top: 0;
-          line-height: 57px;
+          line-height: 3.5625rem;
           width: 85%;
         }
       }
 
       .btn-pe-connect {
-        margin-bottom: 25px;
-        margin-top: 10px;
+        margin-bottom: 1.5625rem;
+        margin-top: 0.625rem;
 
         @media #{$small-device} {
           margin-bottom: 0;
-          margin-top: 15px;
+          margin-top: 0.9375rem;
         }
       }
 
       .btn-style-perso-1 {
-        margin-bottom: 20px;
-        margin-top: 20px;
-        width: 216px;
+        margin-bottom: 1.25rem;
+        margin-top: 1.25rem;
+        width: 13.5rem;
 
         @media #{$small-device} {
           margin-bottom: 0;
-          margin-top: 20px;
+          margin-top: 1.25rem;
         }
       }
 
       .btn-je-commence {
         height: 2.875rem;
         width: 17.75rem;
-        -webkit-box-shadow: 0px 12px 34px -15px rgba(0, 0, 0, 0.68);
-        box-shadow: 0px 12px 34px -15px rgba(0, 0, 0, 0.68);
+        -webkit-box-shadow: 0rem 0.75rem 2.125rem -0.9375rem rgba(0, 0, 0, 0.68);
+        box-shadow: 0rem 0.75rem 2.125rem -0.9375rem rgba(0, 0, 0, 0.68);
 
         @media #{$extra-small-device} {
           margin-right: auto;
@@ -137,7 +137,7 @@
         }
 
         span {
-          height: 29px;
+          height: 1.8125rem;
           color: #FFFFFF;
           vertical-align: top;
         }
@@ -170,14 +170,14 @@
       }
 
       #image-homepage-calculette {
-        width: 294px;
+        width: 18.375rem;
       }
     }
   }
 
   .row-2 {
     @media #{$small-device} {
-      margin-top: 35px;
+      margin-top: 2.1875rem;
     }
 
     .row-2-first-col {
@@ -186,8 +186,8 @@
       }
 
       #div-span-texte-ressources-completes {
-        max-width: 480px;
-        margin-bottom: 22px;
+        max-width: 1.875rem;
+        margin-bottom: 1.375rem;
       }
 
       h2 {
@@ -195,7 +195,7 @@
         text-align: left;
 
         @media #{$medium-device} {
-          margin-top: 35px;
+          margin-top: 2.1875rem;
         }
       }
 
@@ -210,11 +210,11 @@
       }
 
       #image-homepage-smartphone {
-        margin-top: 20px;
+        margin-top: 1.25rem;
         text-align: center;
 
         @media #{$small-device} {
-          margin-right: 20px;
+          margin-right: 1.25rem;
         }
 
         img {

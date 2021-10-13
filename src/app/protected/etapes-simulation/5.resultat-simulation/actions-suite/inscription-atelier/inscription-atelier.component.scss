@@ -1,31 +1,32 @@
 @import "../../../../../../assets/scss/variables";
 
-.container-action{
-    @media #{$extra-small-device} {
-        padding-left: 5px;
-        padding-right: 5px;
+.container-action {
+  @media #{$extra-small-device} {
+    padding-left: 0.3125rem;
+    padding-right: 0.3125rem;
+  }
+
+  &:hover {
+    .card-action-suite-text {
+      font-weight: bold;
     }
-    &:hover {
-        .card-action-suite-text {
-            font-weight: bold;
-        }
-    }
+  }
 }
 
-.card-body-btn-action{
-    @media #{$extra-small-device} {
-        padding-left: 0;
-        padding-right: 0;
-     }
+.card-body-btn-action {
+  @media #{$extra-small-device} {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
-.card-action-suite{
-    padding-bottom: 0;
+.card-action-suite {
+  padding-bottom: 0;
 }
 
-.btn-action-suite{
-    @media #{$extra-small-device} {
-       margin-left: 0;
-       margin-right: 0;
-    }
- }
+.btn-action-suite {
+  @media #{$extra-small-device} {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

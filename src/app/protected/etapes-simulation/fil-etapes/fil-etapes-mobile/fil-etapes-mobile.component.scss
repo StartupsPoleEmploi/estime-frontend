@@ -1,9 +1,10 @@
 @import "../../../../../assets/scss/variables";
 
 .container-fluid {
-  margin-top: -15px;
+  margin-top: -1rem;
+
   span {
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 800;
     color: $color-blue-3;
   }

@@ -1,61 +1,72 @@
 @import "../../../../../../assets/scss/variables";
 
 .row {
-  padding-left: 5px;
+  padding-left: 0.3125rem;
+
   @media #{$small-device} {
-    padding-left: 6px;
+    padding-left: 0.375rem;
   }
+
   .col-code-ressource {
     padding-right: 0rem;
     padding-left: 0rem;
     display: flex;
     align-items: center;
   }
+
   .col-libelle {
     padding-right: 0;
     width: 50% !important;
     line-height: 1.5;
     margin-top: auto;
     margin-bottom: auto;
+
     @media #{$extra-small-device} {
       margin-top: unset;
       margin-bottom: unset;
     }
+
     .span-libelle-aide {
       color: $color-blue-1;
       font-weight: bold;
       margin-left: 0;
+
       @media #{$extra-small-device} {
         padding-bottom: 0.5rem;
       }
     }
+
     .span-organisme {
       color: $color-grey-5;
       text-transform: uppercase;
 
     }
   }
+
   .col-montant {
     margin-left: auto;
     margin-right: 0;
-    padding-left: 5px;
+    padding-left: 0.3125rem;
     padding-right: 0;
     text-align: right;
     width: 20% !important;
+
     .span-montant-ressource {
       span {
         color: $color-blue-2;
       }
     }
   }
+
   .col-picto-arrow {
     margin-left: auto;
     margin-right: 0;
     font-weight: bold;
-    padding-left: 10px;
+    padding-left: 0.625rem;
     padding-right: 0;
-    width: 30px;
+    width: 1.875rem;
   }
+
   .span-chevron {
     @media #{$extra-small-device} {
       font-size: 0.8rem;

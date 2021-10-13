@@ -2,37 +2,40 @@
 
 #checkmark {
   display: inline-block;
-  width: 22px;
-  height: 22px;
+  width: 1.375rem;
+  height: 1.375rem;
   border-radius: 50%;
-  -ms-transform: rotate(45deg); /* IE 9 */
-  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(45deg);
+  /* Chrome, Safari, Opera */
   transform: rotate(45deg);
-  margin-top: 2px;
+  margin-top: 0.125rem;
 }
 
 #checkmark:before {
   content: "";
   position: absolute;
-  width: 2px;
-  height: 17px;
+  width: 0.125rem;
+  height: 1rem;
   background-color: $color-white-3;
-  left: 11px;
-  top: -1px;
+  left: 0.6875rem;
+  top: -0.0625;
 }
 
 #checkmark:after {
   content: "";
   position: absolute;
-  width: 7px;
-  height: 2px;
+  width: 0.4375rem;
+  height: 0.125rem;
   background-color: $color-white-3;
-  left: 4px;
-  top: 14px;
+  left: 0.25rem;
+  top: 0.875rem;
 }
 
 .div-fil-etapes-simulation {
-  margin-bottom: 80px;
+  margin-bottom: 5rem;
+
   .etapes {
     width: 100%;
     list-style: none;
@@ -41,53 +44,60 @@
     margin: 0 auto;
     padding-left: 0;
     cursor: pointer;
+
     .hoveredEtape {
       .numero-etape {
-        background-color: $color-blue-6!important;
-        color: $color-blue-6!important;
-        border-color: $color-blue-6!important;
+        background-color: $color-blue-6 !important;
+        color: $color-blue-6 !important;
+        border-color: $color-blue-6 !important;
       }
+
       .titre-etape {
-        color: $color-blue-6!important;
+        color: $color-blue-6 !important;
       }
     }
+
     .etape {
-      font-size: 13px;
+      font-size: 0.8125rem;
       position: relative;
       text-align: center;
       width: 33.33%;
+
       &:not(:first-child)::after {
         content: "";
         position: absolute;
         width: 70%;
-        height: 1px;
+        height: 0.0625rem;
         background-color: $color-grey-1;
         top: 50%;
         left: -35%;
         z-index: -1;
       }
+
       .numero-etape {
         align-items: center;
         background-color: $color-white-3;
-        border: 1px solid $color-grey-1;
+        border: 0.0625rem solid $color-grey-1;
         border-radius: 50%;
         color: $color-blue-2;
         // cursor: auto;
         display: inline-flex;
-        height: 31px;
+        height: 2rem;
         justify-content: center;
         opacity: 0.7;
         position: relative;
         text-align: center;
         text-decoration: none;
-        width: 31px;
+        width: 2rem;
+
         span {
-          font-size: 13px;
-          margin-top: 1px;
+          font-size: 0.8125rem;
+          margin-top: 0.0625rem;
         }
       }
+
       .titre-etape {
-        bottom: -5px;
+        bottom: -0.3125rem;
         color: $color-blue-2;
         height: 0;
         left: 0;
@@ -97,34 +107,41 @@
         right: 0;
       }
     }
+
     .etape-active {
       .numero-etape {
         span {
           color: $color-white-1;
           font-weight: 700;
         }
+
         opacity: unset;
         background-color: $color-blue-10;
         border-color: $color-blue-10;
       }
+
       .titre-etape {
         color: $color-blue-10;
         opacity: unset;
       }
+
       &:not(:first-child)::after {
         background-color: $color-blue-2 !important;
       }
     }
+
     .etape-completee {
       .numero-etape {
         background-color: $color-blue-2;
         border-color: $color-blue-2;
         opacity: unset;
       }
+
       .titre-etape {
         opacity: unset;
         color: $color-blue-2;
       }
+
       &:not(:first-child)::after {
         background-color: $color-blue-2 !important;
       }

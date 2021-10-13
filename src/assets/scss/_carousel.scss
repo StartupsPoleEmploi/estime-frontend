@@ -1,14 +1,16 @@
 .carousel-indicators {
-  bottom: -45px !important;
+  bottom: -2.8125rem !important;
+
   li {
     background-color: $color-blue-2 !important;
   }
 }
 
 .carousel {
-  max-width: 320px;
+  max-width: 20rem;
   margin-left: auto;
   margin-right: auto;
+
   &:focus {
     outline: none !important;
   }
