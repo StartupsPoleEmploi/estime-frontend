@@ -19,17 +19,11 @@
     }
   }
 
-  .h1-style-1 {
-    @media #{$extra-small-device} {
-      max-width: 220px;
-    }
-  }
-
   .row-telecharger-ou-refaire {
     margin-top: 2rem;
 
     @media #{$extra-small-device} {
-      margin-top: -1.5rem !important;
+      margin-top: 1.5rem !important;
     }
 
     .btn-telecharger-ou-refaire {

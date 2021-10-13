@@ -1,17 +1,23 @@
 <div class="container-fluid form-container-fluid">
-    <h1 class="h1-style-1 headline-1-typo">
-        5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
-        <button id="infobulle-resultat-simulation" role="tooltip" class="img-interrogation-icon"
-            style="vertical-align: baseline;" [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
-            placement="right top" tag-action="ouverture-infobulle-resultat-simulation"
-            [popover]="popoverResultatSimulationTemplate" #popoverResultatSimulation="bs-popover"></button>
-    </h1>
+    <div class="row">
+        <div class="col">
+            <h1 class="h1-style-1 headline-1-typo">
+                5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
+                <button id="infobulle-resultat-simulation" role="tooltip" class="img-interrogation-icon"
+                    style="vertical-align: baseline;" [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
+                    placement="right top" tag-action="ouverture-infobulle-resultat-simulation"
+                    [popover]="popoverResultatSimulationTemplate" #popoverResultatSimulation="bs-popover"></button>
+            </h1>
+        </div>
+    </div>
     <div class="row row-style-2">
         <div id="alert-resultat-simulation" class="col-12 col-md-12 mt-auto mb-auto">
             <div id="label-alerte-montants-resultat-simulation" class="mx-2 text-justify body-2-typo">
-                Les futures allocations logement, les autres ressources du foyer, ainsi que le prélèvement à la source
-                sont à ajouter au résultat de la simulation. Nous travaillons actuellement à enrichir ce résultat des
-                allocations logement recalculées. Nous faisons tout pour vous les proposer très prochainement.
+                Votre éventuel prélèvement de l’impôt à la source n’est pas pris en compte dans le résultat.
+            </div>
+            <div id="label-alerte-montants-resultat-simulation" class="mx-2 text-justify body-2-typo">
+                Si vous êtes allocataire, vous devez déclarer immédiatement toute nouvelle activité professionnelle
+                auprès de la CAF pour recalculer vos droits.
             </div>
         </div>
     </div>
@@ -26,7 +32,7 @@
                 </div>
             </span>
         </div>
-        <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 10vh;"></div>
+        <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 2vh;"></div>
         <div class="col-12 col-md-6 my-auto">
             <span id="btn-refaire-simulation" class="btn-telecharger-ou-refaire" data-testid="btn-refaire-simulation"
                 tabindex="0" (click)="onClickButtonRefaireSimulation()">
@@ -75,15 +81,15 @@
                         attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
                         tag-action="clic_bouton_detail_ressources_du_mois">
                         <div class="row">
-                            <div
-                                [ngClass]="{'col-6 mt-auto mb-auto p-0 col-md-12 text-left': screenService.isExtraSmallScreen(), 'col-3 ps-5 text-left': !screenService.isExtraSmallScreen()}">
+                            <div [ngClass]="{'mt-auto mb-auto p-0': screenService.isExtraSmallScreen(), 'ps-5': !screenService.isExtraSmallScreen()}"
+                                class="col-6 col-md-3 text-left">
                                 <span class="span-mois-annee headline-4-typo">
                                     {{getDateStringFormat(simulationMensuel)}}
                                 </span>
                             </div>
-                            <div [ngClass]="{'col-6': !screenService.isExtraSmallScreen()}"></div>
-                            <div
-                                [ngClass]="{'col-4 p-0 mt-auto mb-auto': screenService.isExtraSmallScreen(), 'col-2': !screenService.isExtraSmallScreen()}">
+                            <div *ngIf="!screenService.isExtraSmallScreen()" class=" col-md-6"></div>
+                            <div class="col-4 col-md-2"
+                                [ngClass]="{'p-0 mt-auto mb-auto': screenService.isExtraSmallScreen()}">
                                 <span class="span-montant-mensuel headline-4-typo float-right">
                                     {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}}
                                     €
