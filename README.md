@@ -155,7 +155,7 @@ foo@bar:~$ npm -v
 1. Lancer Cypress :
 
    ```console
-   foo@bar:~estime-frontend$ npm cy:open
+   foo@bar:~estime-frontend$ npm run cy:open
    ```
 
 # [Conteneurisation] Utilisation de Docker
