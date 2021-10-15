@@ -48,7 +48,7 @@ Les mises à jour des dépendances du projet se font avec npm. Pour contrôler l
 :wrench:  Outils utiles :
 
 - [npm-check ](https://www.npmjs.com/package/npm-check)
-- [npm-audi](https://docs.npmjs.com/cli/v6/commands/npm-audit)
+- [npm-audit](https://docs.npmjs.com/cli/v6/commands/npm-audit)
 
 
 # [Développement en local] Lancer l'application sur localhost
@@ -91,7 +91,7 @@ foo@bar:~$ npm -v
    - Pour le paramètre **apiEstimeURL**, consulter la section [Application Springboot](#application-rest-springboot-installer-lapplication-en-local)
    <br />
 
-   ```
+   ```javascript
    export const environment = {
       production: false,
       /******** url de l'api coeur métier Estime ************/
@@ -118,7 +118,7 @@ foo@bar:~$ npm -v
   1. suivre les instructions du **[README du projet](https://github.com/StartupsPoleEmploi/estime-backend)**
   1. renseigner le paramètre apiEstimeURL du fichier environment.local.ts comme ci-dessous :
 
-     ```
+     ```javascript
      export const environment = {
      production: false,
      /******** url de l'api coeur métier Estime ************/
@@ -144,11 +144,13 @@ foo@bar:~$ npm -v
 
    Copier le contenu suivant en valorisant les paramètres  :
 
-   ```
+   ```javascript
    export const environment = {
       urlApplication: '%% à renseigner %%',
-      peConnectUserIdentifiant: '%% à renseigner %%',
-      peConnectUserMotDePasse: '%% à renseigner %%''
+      peConnectUserAahIdentifiant: '%% à renseigner %%',
+      peConnectUserAssIdentifiant: '%% à renseigner %%',
+      peConnectUserRsaIdentifiant: '%% à renseigner %%',
+      peConnectUserMotDePasse: '%% à renseigner %%'
    };
    ```
 
@@ -171,18 +173,18 @@ foo@bar:~$ npm -v
 
 1. Lancer le build de l'application :
 
-   ```
+   ```console
    foo@bar:~estime-frontend$ npm run build:dev
    ```
 1. Lancer le build de l'image Docker :
 
-   ```
+   ```console
    foo@bar:~estime-frontend$ docker build . -f ./docker/local/docker-image/Dockerfile  -t estime-frontend
    ```
 
 1. Créer un fichier docker-compose.yml, n'oubliez pas de valoriser les **%% à renseigner %%**
 
-   ```
+   ```yaml
    version: '3.8'
 
    services:
@@ -218,7 +220,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 - Vérifier que l'application fonctionne correctement :
 
-   ```
+   ```shell
    foo@bar:~$ docker container ls | grep estime-frontend
    ```
 
@@ -226,7 +228,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 - Consulter les logs :
 
-   ```
+   ```shell
    foo@bar:~$ docker service logs estime-frontend_estime-frontend
    ```
 
@@ -235,13 +237,13 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
    - Se positionner dans le répertoire **/home/docker/estime-frontend**
    - Exécuter la commande suivante :
 
-      ```
+      ```shell
       foo@bar:/home/docker/estime-frontend$ docker stack deploy --with-registry-auth -c estime-frontend-stack.yml estime-frontend
       ```
 
 - Stopper le service :
 
-   ```
+   ```shell
    foo@bar:~$ docker stack rm estime-frontend
    ```
 
@@ -249,7 +251,7 @@ Tableau de bord sous Sonarqube : [https://sonarqube.beta.pole-emploi.fr/dashboar
 
 Le service Docker a été configuré afin d'éviter un temps de coupure du service au redémarrage de l'application.
 
-```
+```yaml
 healthcheck:
    test: curl --fail http://localhost:8888/ || exit 1
    timeout: 30s
@@ -279,7 +281,7 @@ Cette configuration permet une réplication du service avec 2 replicas. Lors d'u
 
 Afin de gérer au mieux les ressources du serveur, la quantité de ressources CPU et de mémoire que peut utliser un conteneur a été limitée :
 
-```
+```yaml
 resources:
    reser vations:
       cpus: '0.15'
@@ -290,7 +292,8 @@ resources:
 ```
 
 Voir la consommation CPU et mémoire des conteneurs Docker :
-```
+
+```shell
 foo@bar:~$ docker stats
 ```
 
