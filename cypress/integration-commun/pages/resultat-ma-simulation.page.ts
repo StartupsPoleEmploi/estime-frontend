@@ -6,7 +6,7 @@ class ResultatMaSimulationPage {
   }
 
   public checkMontantRessourceFinanciere(codeRessource: string, montantToCheck: string): void {
-    cy.get(`[ng-reflect-code-ressource=${codeRessource}]`).children('[data-testid=row-montant-ressource]').children('[data-testid=col-montant-ressource]').children('[data-testid=div-span-montant-ressource]').children('[data-testid=span-montant-ressource]').contains(montantToCheck + ' €');
+    cy.get(`[ng-reflect-code-ressource=${codeRessource}]`).children('[data-testid=row-montant-ressource]').children('[data-testid=col-montant-ressource]').children('[data-testid=div-span-montant-ressource]').children('[data-testid=span-montant-ressource]').contains(montantToCheck + '€');
   }
 
   //TODO JLA : somme variable à voir comment faire oour tester le montant réel
