@@ -112,8 +112,11 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1"
                                 inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins1="ngModel">
-                            <app-text-with-euro-symbol
-                                [message]="'au mois de '  + this.dateUtileService.getDateFormateeAvantDateJour(1)">
+                            <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
+                                [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(1)">
+                            </app-text-with-euro-symbol>
+                            <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"
+                                [message]="this.dateUtileService.getDateFormateeAvantDateJour(1)">
                             </app-text-with-euro-symbol>
                         </div>
                     </div>
@@ -148,8 +151,11 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2"
                                 inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins2="ngModel">
-                            <app-text-with-euro-symbol
+                            <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
+                            </app-text-with-euro-symbol>
+                            <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"
+                                [message]="this.dateUtileService.getDateFormateeAvantDateJour(2)">
                             </app-text-with-euro-symbol>
                         </div>
                     </div>
@@ -184,16 +190,24 @@
                                 placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3"
                                 inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins3="ngModel">
-                            <app-text-with-euro-symbol
+                            <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
+                            </app-text-with-euro-symbol>
+                            <app-text-with-euro-symbol *ngIf="screenService.isExtraSmallScreen()"
+                                [message]="this.dateUtileService.getDateFormateeAvantDateJour(3)">
                             </app-text-with-euro-symbol>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="row error-input-message" *ngIf="isAuMoinsUnAideLogementSuperieureAZero();">
-                        {{controleChampFormulaireService.MESSAGE_MONTANTS_0}}
-                    </span>
+                <div class="mb-2">
+                    <div class="row">
+                        <div class="col">
+                            <span class="error-input-message"
+                                *ngIf="isRessourcesFinancieresFoyerFormSubmitted && isAuMoinsUneAideLogementSuperieureAZero();">
+                                {{controleChampFormulaireService.MESSAGE_MONTANTS_0}}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

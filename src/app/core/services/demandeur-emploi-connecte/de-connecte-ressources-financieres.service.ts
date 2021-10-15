@@ -8,7 +8,6 @@ import { RessourcesFinancieresUtileService } from '../utile/ressources-financier
 import { DeConnecteBeneficiaireAidesService } from './de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 import { Personne } from '@app/commun/models/personne';
-import { PeriodeTravailleeAvantSimulation } from '@app/commun/models/periode-travaillee-avant-simulation';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {

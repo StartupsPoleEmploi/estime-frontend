@@ -32,6 +32,7 @@
       margin-left: 0;
 
       @media #{$extra-small-device} {
+        padding: unset !important;
         padding-bottom: 0.5rem;
       }
     }
@@ -40,6 +41,10 @@
       color: $color-grey-5;
       text-transform: uppercase;
 
+      @media #{$extra-small-device} {
+        padding-left: unset !important;
+        float: left;
+      }
     }
   }
 

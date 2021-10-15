@@ -164,6 +164,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
+
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     return form.valid && this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres);
   }
@@ -195,7 +196,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public isAuMoinsUnAideLogementSuperieureAZero(): boolean {
+  public isAuMoinsUneAideLogementSuperieureAZero(): boolean {
     return (
       (this.beneficiaireAides.beneficiaireAPL
         && (this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 == 0

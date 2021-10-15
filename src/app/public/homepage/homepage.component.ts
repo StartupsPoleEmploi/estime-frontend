@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   stickyButton = false;
   scrollPositionOffset: number;
 
-  @ViewChild('messageErreurElement', {static: true}) messageErreurElement;
+  @ViewChild('messageErreurElement', { static: true }) messageErreurElement;
 
   constructor(
     private authorizationService: AuthorizationService,
@@ -43,7 +43,7 @@ export class HomepageComponent implements OnInit {
   }
 
   public onClickButtonJeCommence(): void {
-    if(this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
     else this.login();
   }
 
