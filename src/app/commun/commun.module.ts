@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SigninRedirectCallbackComponent } from '@app/commun/components/signin-redirect-callback/signin-redirect-callback.component';
 import { AutofocusDirective } from "@app/commun/directives/autofocus.directive";
+import { CarouselSwipeDirective } from "@app/commun/directives/carousel-swipe.directive";
 import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -21,6 +22,7 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
 @NgModule({
   declarations: [
     AutofocusDirective,
+    CarouselSwipeDirective,
     CallbackPipe,
     FilArianeComponent,
     FooterComponent,
@@ -43,6 +45,7 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
   ],
   exports: [
     AutofocusDirective,
+    CarouselSwipeDirective,
     CallbackPipe,
     CommonModule,
     FilArianeComponent,
