@@ -1,24 +1,24 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
+import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
+import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
+import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
-import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
-import { NumeroProchainMoisDeclarationTrimestrielle } from "@models/numero-prochain-mois-declaration-trimestrielle";
+import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
-import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
+import { NumeroProchainMoisDeclarationTrimestrielle } from "@models/numero-prochain-mois-declaration-trimestrielle";
+import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { SituationFamiliale } from '@models/situation-familiale';
-import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
-import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
-import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -71,6 +71,9 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
     this.loadAidesLogement(demandeurEmploiConnecte);
+    if(!this.deConnecteSituationFamilialeService.hasTroisPersonneAChargePlusTroisAns()){
+      this.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = 0;
+    }
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
