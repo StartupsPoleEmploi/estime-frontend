@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { DateDecomposee } from "@models/date-decomposee";
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSituationFamilialeService {
 
   constructor(
     private deConnecteService: DeConnecteService,
-    private personneUtileService: PersonneUtileService
+    private personneUtileService: PersonneUtileService,
+    public dateUtileService: DateUtileService
   ) {
 
   }
@@ -28,6 +31,24 @@ export class DeConnecteSituationFamilialeService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale.personnesACharge
       && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > nombrePersonne;
+  }
+
+  public hasTroisPersonneAChargePlusTroisAns() : boolean{
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    let result = false;
+    let hasTroisPersonneAChargePlusTroisAnsCount = 0;
+    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge.length>=3){
+      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => { 
+        let dateDecomposeNaissancePersonneACharge = this.dateUtileService.getDateDecomposeeFromStringDate(personneACharge.informationsPersonnelles.dateNaissance, "date de naissance de la personne à charge", "DateNaissancePersonneACharge");
+        let dateNaissancePersonneACharge = this.dateUtileService.getDateFromDateDecomposee(dateDecomposeNaissancePersonneACharge);
+        let timeDiff = Math.abs(Date.now() - dateNaissancePersonneACharge.getTime());
+        let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+        if(age >= 3 && age <= 21){
+          ++hasTroisPersonneAChargePlusTroisAnsCount;
+        }
+      });
+    }
+    return hasTroisPersonneAChargePlusTroisAnsCount >=3;
   }
 
   public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {
