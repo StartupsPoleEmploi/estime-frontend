@@ -13,7 +13,7 @@ export class StatsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    window.location.href="https://nextcloud.beta.pole-emploi.fr/index.php/apps/onlyoffice/s/5BZTDkwKqtWpXCA";
+    window.location.href = "https://nextcloud.beta.pole-emploi.fr/s/x2aG9jpT3Aew65t";
   }
 
 }
