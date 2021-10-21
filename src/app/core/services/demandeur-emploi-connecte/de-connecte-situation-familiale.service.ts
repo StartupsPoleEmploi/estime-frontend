@@ -40,7 +40,6 @@ export class DeConnecteSituationFamilialeService {
         if (this.personneUtileService.isAgeEntre3Et21Ans(personneACharge.informationsPersonnelles.dateNaissance)) hasTroisPersonnesAChargeEntre3Et21AnsCount++;
       });
     }
-    console.log(hasTroisPersonnesAChargeEntre3Et21AnsCount);
     return hasTroisPersonnesAChargeEntre3Et21AnsCount >= 3;
   }
 
