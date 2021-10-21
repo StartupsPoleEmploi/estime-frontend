@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 
 @Injectable({ providedIn: 'root' })
@@ -7,7 +8,8 @@ export class DeConnecteSituationFamilialeService {
 
   constructor(
     private deConnecteService: DeConnecteService,
-    private personneUtileService: PersonneUtileService
+    private personneUtileService: PersonneUtileService,
+    public dateUtileService: DateUtileService
   ) {
 
   }
@@ -28,6 +30,17 @@ export class DeConnecteSituationFamilialeService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.situationFamiliale.personnesACharge
       && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > nombrePersonne;
+  }
+
+  public has3PersonnesAChargeEntre3Et21Ans(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    let hasTroisPersonnesAChargeEntre3Et21AnsCount = 0;
+    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge.length >= 3) {
+      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
+        if (this.personneUtileService.isAgeEntre3Et21Ans(personneACharge.informationsPersonnelles.dateNaissance)) hasTroisPersonnesAChargeEntre3Et21AnsCount++;
+      });
+    }
+    return hasTroisPersonnesAChargeEntre3Et21AnsCount >= 3;
   }
 
   public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {
