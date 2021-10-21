@@ -25,7 +25,7 @@ export class ItemRessourceActuelleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.libelleMontantRessource = this.montantRessource > 0 ? this.montantRessource + ' €' : '';
+    this.libelleMontantRessource = this.montantRessource > 0 ? this.montantRessource + '€' : '';
   }
 
 }

@@ -24,6 +24,12 @@
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 0.5rem;
+
+
+    @media #{$extra-small-device} {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
   }
 }
 
@@ -63,6 +69,11 @@
   width: 100%;
   background-color: unset;
 
+  @media #{$extra-small-device} {
+    padding-left: unset;
+    padding-right: unset;
+  }
+
   button {
     width: 100%;
   }
@@ -101,6 +112,7 @@
       @media #{$extra-small-device} {
         height: unset;
         min-height: 3.5rem;
+        padding: unset;
         padding-left: 1rem !important;
         border: 0;
 

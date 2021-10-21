@@ -116,7 +116,7 @@
             <div class="form-group">
                 <div class="row mb-2">
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
-                        * Salaire mensuel brut ou net
+                        * Salaire mensuel brut <div *ngIf="screenService.isExtraSmallScreen()"></div>ou net
                         <button id="infobulle-contrat-travail-salaire" role="tooltip" class="img-interrogation-icon"
                             [ngClass]="{'popover-open': popoverSalaireNet.isOpen}" placement="right"
                             tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
