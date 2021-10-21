@@ -71,9 +71,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
     this.loadAidesLogement(demandeurEmploiConnecte);
-    if(!this.deConnecteSituationFamilialeService.hasTroisPersonneAChargePlusTroisAns()){
-      this.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = 0;
-    }
   }
 
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {

@@ -49,8 +49,11 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.checkAndSaveDateNaissanceNouvellePersonneConnecte();
     if (this.isDonneesFormulaireNouvellePersonneValides(form)) {
       this.resetNouvellePersonneAChargeForm();
-      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
-        this.deConnecteService.unsetAlloctionPAJE();
+      if (!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
+        this.deConnecteService.unsetAllocationPAJE();
+      }
+      if (!this.deConnecteSituationFamilialeService.has3PersonnesAChargeEntre3Et21Ans()) {
+        this.deConnecteService.unsetComplementFamilial();
       }
       this.deConnecteService.setAidesFamiliales();
       this.ajoutNouvellePersonneEventEmitter.emit(true);
@@ -65,11 +68,11 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   public gererAffichageNouvellePersonneSituationForm(): void {
-    this.isNouvellePersonneAChargeSituationFormGroupDisplay  = false;
+    this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
     if (this.dateUtileService.isDateValide(this.dateNaissanceNouvellePersonne)) {
-      if(this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
-        this.isNouvellePersonneAChargeSituationFormGroupDisplay  = true;
-        if(!this.nouvellePersonneACharge.ressourcesFinancieres) {
+      if (this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
+        this.isNouvellePersonneAChargeSituationFormGroupDisplay = true;
+        if (!this.nouvellePersonneACharge.ressourcesFinancieres) {
           this.creerRessourcesFinancieres();
         }
       } else {
@@ -99,25 +102,25 @@ export class FormPersonneAChargeComponent implements OnInit {
   private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
     this.isSituationNotValide = !this.isSituationValide();
     return form.valid
-    && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)
-    && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
-      || (this.isNouvellePersonneAChargeSituationFormGroupDisplay && !this.isSituationNotValide))
+      && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)
+      && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
+        || (this.isNouvellePersonneAChargeSituationFormGroupDisplay && !this.isSituationNotValide))
   }
 
   private isSituationValide(): boolean {
     return this.nouvellePersonneACharge.informationsPersonnelles.salarie
-    || this.nouvellePersonneACharge.informationsPersonnelles.sansRessource
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
-    || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
-    || this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant
-    || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
+      || this.nouvellePersonneACharge.informationsPersonnelles.sansRessource
+      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH
+      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
+      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
+      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
+      || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
+      || this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant
+      || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
   }
 
   private unsetRessourcesFinancieres(): void {
-    if(this.nouvellePersonneACharge.ressourcesFinancieres) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieres) {
       this.nouvellePersonneACharge.ressourcesFinancieres = null;
     }
     this.resetInformationsPersonnelles();
@@ -136,17 +139,17 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private resetInformationsPersonnelles(): void {
-    if(this.nouvellePersonneACharge.informationsPersonnelles) {
+    if (this.nouvellePersonneACharge.informationsPersonnelles) {
       this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
       this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
       this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
       this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
-     }
+    }
   }
 
   private resetBeneficiaireAides(): void {
-    if(this.nouvellePersonneACharge.beneficiaireAides) {
+    if (this.nouvellePersonneACharge.beneficiaireAides) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH = false;
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE = false;
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS = false;

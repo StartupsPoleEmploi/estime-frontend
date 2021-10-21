@@ -286,6 +286,12 @@ export class DateUtileService {
     return moment(datePlus3AnsEt1Mois).isSameOrAfter(Date.now());
   }
 
+  public isDateEntre3Et21Ans(date: Date): boolean {
+    let datePlus3Ans = this.ajouterMoisToDate(date, 36);
+    let dateMoins21Ans = this.ajouterMoisToDate(date, 252);
+    return moment(Date.now()).isBetween(datePlus3Ans, dateMoins21Ans);
+  }
+
   /**
    * Fonction qui permet de déterminer quel déterminant ("de" ou "d'") on doit placer avant un mois donné
    * @param moisEtAnnee

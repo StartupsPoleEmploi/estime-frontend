@@ -65,17 +65,20 @@ export class MesPersonnesAChargeComponent implements OnInit {
   public onClickButtonSupprimerPersonneACharge(index: number): void {
     this.personnesACharge.splice(index, 1);
     this.deConnecteService.setPersonnesACharge(this.personnesACharge);
-    if(this.numeroNouvellePersonne === index + 1) {
+    if (this.numeroNouvellePersonne === index + 1) {
       this.isNouvellePersonneAChargeFormDisplay = false;
       this.isModeModification = false;
     }
-    if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)) {
+    if (!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)) {
       this.deConnecteService.unsetAidesFamiliales();
     } else {
-      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
-        this.deConnecteService.unsetAlloctionPAJE();
+      if (!this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans()) {
+        this.deConnecteService.unsetAllocationPAJE();
       }
-      if(!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)) {
+      if (!this.deConnecteSituationFamilialeService.has3PersonnesAChargeEntre3Et21Ans()) {
+        this.deConnecteService.unsetComplementFamilial();
+      }
+      if (!this.deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)) {
         this.deConnecteService.unsetAllocationsFamiliales();
       }
     }
@@ -90,13 +93,12 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonSuivant(): void {
-    this.deConnecteSituationFamilialeService.hasPersonneAChargeMoinsDe3Ans();
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESSOURCES_ACTUELLES]);
   }
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {
     if (isAjoutPersonneSubmit) {
-      if(this.nouvellePersonneACharge.ressourcesFinancieres) {
+      if (this.nouvellePersonneACharge.ressourcesFinancieres) {
         this.nouvellePersonneACharge.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
       }
       if (!this.isModeModification) {
@@ -122,7 +124,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public hasPersonneACharge(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(demandeurEmploiConnecte.situationFamiliale.personnesACharge && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0) return true
+    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge && demandeurEmploiConnecte.situationFamiliale.personnesACharge.length > 0) return true
     return false;
   }
 
