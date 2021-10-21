@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter, Injector } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
@@ -49,21 +49,32 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
   @ViewChild('popoverSituationLogement') popoverSituationLogement: PopoverDirective;
 
+  // services à injecter dynamiquement
+  public controleChampFormulaireService: ControleChampFormulaireService;
+  public dateUtileService: DateUtileService;
+  public deConnecteService: DeConnecteService;
+  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
+  public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
+  public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
+  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
+  public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
+  public screenService: ScreenService;
+  private situationFamilialeUtileService: SituationFamilialeUtileService;
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
-    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    public screenService: ScreenService,
     private elementRef: ElementRef,
-    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
-    private situationFamilialeUtileService: SituationFamilialeUtileService,
+    private injector: Injector
   ) {
-
+    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
+    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
+    this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
+    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
+    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
+    this.screenService = injector.get<ScreenService>(ScreenService);
+    this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
   }
 
   ngOnInit(): void {
@@ -269,7 +280,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickPopoverSituationLogement(event) {
-    event.stopPropagation();  }
+    event.stopPropagation();
+  }
 
 
   public onClickClosePopoverSituationLogement(event): void {
@@ -329,12 +341,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
     } else {
       this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
-    }
-  }
-
-  public handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit(event: any, value: boolean): void {
-    if (event.keyCode === 13) {
-      this.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = value;
     }
   }
 }

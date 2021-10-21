@@ -13,12 +13,17 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
+import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
+import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
 
   private demandeurEmploiConnecte: DemandeurEmploi;
+
+  private statutOccupationLogementEnum: typeof StatutOccupationLogementEnum = StatutOccupationLogementEnum;
+  private statutOccupationLogementLibelleEnum: typeof StatutOccupationLogementLibelleEnum = StatutOccupationLogementLibelleEnum;
 
   constructor(
     private brutNetService: BrutNetService,
@@ -52,7 +57,7 @@ export class DeConnecteService {
   }
 
   public setConjointRessourcesFinancieres(conjoint: Personne) {
-    if(conjoint.ressourcesFinancieres.salaire) {
+    if (conjoint.ressourcesFinancieres.salaire) {
       conjoint.ressourcesFinancieres.salaire.montantBrut = this.brutNetService.getBrutFromNet(conjoint.ressourcesFinancieres.salaire.montantNet);
     }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(conjoint.ressourcesFinancieres);
@@ -79,15 +84,15 @@ export class DeConnecteService {
 
   public setAllocationMensuelleNetASS(): void {
     this.setAidesPoleEmploi();
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
       && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
+    }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
-  public setAidesPoleEmploi() : void {
-    if(!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
+  public setAidesPoleEmploi(): void {
+    if (!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -95,17 +100,17 @@ export class DeConnecteService {
 
   public setPensionInvalidite(): void {
     this.setAidesCPAM();
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM
-      && ( !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM
+      && (!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite
         || !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite)) {
-          this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = null;
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = null;
+    }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
-  public setAidesCPAM() : void {
-    if(!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM) {
+  public setAidesCPAM(): void {
+    if (!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM = this.ressourcesFinancieresUtileService.creerAidesCPAM();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -118,7 +123,7 @@ export class DeConnecteService {
 
   public setPersonnesChargeRessourcesFinancieres(personnesDTO: Array<PersonneDTO>): void {
     personnesDTO.forEach(personneDTO => {
-      if(personneDTO.personne.ressourcesFinancieres.salaire) {
+      if (personneDTO.personne.ressourcesFinancieres.salaire) {
         personneDTO.personne.ressourcesFinancieres.salaire.montantBrut = this.brutNetService.getBrutFromNet(personneDTO.personne.ressourcesFinancieres.salaire.montantNet);
       }
       personneDTO.personne.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(personneDTO.personne.ressourcesFinancieres);
@@ -128,7 +133,7 @@ export class DeConnecteService {
   }
 
   public setRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
-    if(ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+    if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
       this.setMontantsBrutSalairesAvantPeriodeSimulation(ressourcesFinancieres.periodeTravailleeAvantSimulation);
       this.setSansSalaire(ressourcesFinancieres.periodeTravailleeAvantSimulation);
     }
@@ -138,9 +143,9 @@ export class DeConnecteService {
   }
 
   public setSituationFamiliale(situationFamiliale: SituationFamiliale): void {
-    if(!situationFamiliale.isEnCouple) {
+    if (!situationFamiliale.isEnCouple) {
       this.unsetConjoint();
-    } else if(!situationFamiliale.conjoint) {
+    } else if (!situationFamiliale.conjoint) {
       situationFamiliale.conjoint = this.personneUtileService.creerPersonne(true);
     }
     this.demandeurEmploiConnecte.situationFamiliale = situationFamiliale;
@@ -180,15 +185,15 @@ export class DeConnecteService {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationAAH = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      if(this.demandeurEmploiConnecte.beneficiaireAides.beneficiaireASS) {
-        if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+      if (this.demandeurEmploiConnecte.beneficiaireAides.beneficiaireASS) {
+        if (this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet = 0;
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantBrut = 0;
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet = 0;
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = 0;
         }
-        if(this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 2) {
+        if (this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 2) {
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet = 0;
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = 0;
         }
@@ -212,63 +217,60 @@ export class DeConnecteService {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
-    if(this.demandeurEmploiConnecte.situationFamiliale) {
+    if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.isSeulPlusDe18Mois = null;
-    }
-    if(this.demandeurEmploiConnecte.informationsPersonnelles) {
-      this.demandeurEmploiConnecte.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = null;
     }
   }
 
   public unsetAPL(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 = 0;
-        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
   }
 
   public unsetALF(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 = 0;
-        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
   }
 
   public unsetALS(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 = 0;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 = 0;
-        this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
   }
 
   public setAllocationRSA(): void {
     this.setAidesCAF();
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
-      }
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
+    }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
 
-  public setAidesCAF() : void {
-    if(!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
+  public setAidesCAF(): void {
+    if (!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF = this.ressourcesFinancieresUtileService.creerAidesCAF();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -317,9 +319,9 @@ export class DeConnecteService {
     }
   }
 
-  public setConjointAllocationAAH() : void {
+  public setConjointAllocationAAH(): void {
     this.setConjointAidesCAF();
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationAAH) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationAAH = null;
     }
@@ -329,7 +331,7 @@ export class DeConnecteService {
   public unsetConjointAllocationARE(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE = false;
-      if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = null;
@@ -338,9 +340,9 @@ export class DeConnecteService {
     }
   }
 
-  public setConjointAllocationARE() : void {
+  public setConjointAllocationARE(): void {
     this.setConjointAidesPoleEmploi();
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
     }
@@ -350,7 +352,7 @@ export class DeConnecteService {
   public unsetConjointAllocationASS(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = false;
-      if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = null;
@@ -361,7 +363,7 @@ export class DeConnecteService {
 
   public setConjointAllocationASS(): void {
     this.setConjointAidesPoleEmploi();
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
     }
@@ -371,8 +373,8 @@ export class DeConnecteService {
   public unsetConjointAllocationRSA(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA = false;
-      if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
-      && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF) {
+      if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+        && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -381,10 +383,10 @@ export class DeConnecteService {
 
   public setConjointAllocationRSA(): void {
     this.setConjointAidesCAF();
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA) {
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.allocationRSA = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
@@ -392,7 +394,7 @@ export class DeConnecteService {
   public unsetConjointPensionInvalidite(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite = false;
-      if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
+      if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = null;
@@ -403,23 +405,23 @@ export class DeConnecteService {
 
   public setConjointPensionInvalidite(): void {
     this.setConjointAidesCPAM();
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite) {
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = null;
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   public unsetConjointRessourcesFinancieres(): void {
-    if(this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
+    if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetConjointBeneficesMicroEntreprise(): void {
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur = false;
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -427,7 +429,7 @@ export class DeConnecteService {
   }
 
   public unsetConjointChiffreAffairesIndependant(): void {
-    if(this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant = false;
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -445,68 +447,101 @@ export class DeConnecteService {
   }
 
   public unsetBeneficesMicroEntreprise(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetChiffreAffairesIndependant(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   public unsetRevenusImmobilier(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 
   private setConjointAidesCAF(): void {
-    if(!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF) {
+    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCAF = this.ressourcesFinancieresUtileService.creerAidesCAF();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   private setConjointAidesCPAM(): void {
-    if(!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM) {
+    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesCPAM = this.ressourcesFinancieresUtileService.creerAidesCPAM();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
   private setConjointAidesPoleEmploi(): void {
-    if(!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi) {
+    if (!this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
-  private setMontantsBrutSalairesAvantPeriodeSimulation(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation):void {
-    if(periodeTravailleeAvantSimulation.moisMoins1 && periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
+  private setMontantsBrutSalairesAvantPeriodeSimulation(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
+    if (periodeTravailleeAvantSimulation.moisMoins1 && periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
       periodeTravailleeAvantSimulation.moisMoins1.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
     }
-    if(periodeTravailleeAvantSimulation.moisMoins2 && periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
+    if (periodeTravailleeAvantSimulation.moisMoins2 && periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
       periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
     }
-    if(periodeTravailleeAvantSimulation.moisMoins3 && periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
+    if (periodeTravailleeAvantSimulation.moisMoins3 && periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
       periodeTravailleeAvantSimulation.moisMoins3.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
     }
   }
 
-  private setSansSalaire(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation):void {
-    if(periodeTravailleeAvantSimulation.moisMoins1) {
+  private setSansSalaire(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
+    if (periodeTravailleeAvantSimulation.moisMoins1) {
       periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet === 0;
     }
-    if(periodeTravailleeAvantSimulation.moisMoins2) {
+    if (periodeTravailleeAvantSimulation.moisMoins2) {
       periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet === 0;
     }
-    if(periodeTravailleeAvantSimulation.moisMoins3) {
+    if (periodeTravailleeAvantSimulation.moisMoins3) {
       periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet === 0;
     }
+  }
+
+  public unsetStatutOccupationLogement(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = false;
+  }
+
+  public setIsLocataireMeuble(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = true;
+  }
+
+  public setIsLocataireNonMeuble(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = true;
+  }
+
+  public setIsLocataireHLM(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = true;
+  }
+
+  public setIsProprietaire(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = true;
+  }
+
+  public setIsProprietaireAvecEmprunt(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = true;
+  }
+
+  public setIsLogeGratuitement(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = true;
   }
 }

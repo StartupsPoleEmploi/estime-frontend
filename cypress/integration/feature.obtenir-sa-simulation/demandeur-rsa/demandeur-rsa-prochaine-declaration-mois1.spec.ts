@@ -41,6 +41,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
       const montantAPL = "310";
+      const montantLoyer = "500";
+      const montantCharges = "30";
       const montantMensuelRSA = "500";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -74,10 +76,12 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
-      ressourcesActuellesPage.clickOnVousEtesProprietaireNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
+      ressourcesActuellesPage.selectionnerLocataireNonMeuble();
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
+      ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
+      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
@@ -130,6 +134,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(4);
       // VARIABLES PAGE MES RESSOURCES
       const montantAPL = "420";
+      const montantLoyer = "500";
+      const montantCharges = "30";
       const montantMensuelRSA = "170";
       const prochaineDeclarationTrimestrielle = "1";
       const salaireConjoint = "700";
@@ -171,11 +177,13 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
       ressourcesActuellesPage.saisirSalaireConjoint(salaireConjoint);
       ressourcesActuellesPage.clickOnValiderRessourcesConjoint();
+      ressourcesActuellesPage.selectionnerLocataireNonMeuble();
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
+      ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
+      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.saisirMontantMensuelRSAFoyer(montantMensuelRSA);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
-      ressourcesActuellesPage.clickOnVousEtesProprietaireNonFoyer();
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
