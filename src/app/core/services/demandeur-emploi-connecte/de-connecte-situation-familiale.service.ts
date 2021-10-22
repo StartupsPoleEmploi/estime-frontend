@@ -35,7 +35,8 @@ export class DeConnecteSituationFamilialeService {
   public has3PersonnesAChargeEntre3Et21Ans(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     let hasTroisPersonnesAChargeEntre3Et21AnsCount = 0;
-    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge.length >= 3) {
+    if (demandeurEmploiConnecte.situationFamiliale
+      && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personneACharge => {
         if (this.personneUtileService.isAgeEntre3Et21Ans(personneACharge.informationsPersonnelles.dateNaissance)) hasTroisPersonnesAChargeEntre3Et21AnsCount++;
       });
