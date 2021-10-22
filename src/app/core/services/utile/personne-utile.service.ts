@@ -24,11 +24,11 @@ export class PersonneUtileService {
 
   public creerPersonne(isAvecRessourcesFinancieres: boolean): Personne {
     const personne = new Personne();
-  personne.beneficiaireAides = this.initBeneficiaireAides();
+    personne.beneficiaireAides = this.initBeneficiaireAides();
     personne.informationsPersonnelles = new InformationsPersonnelles();
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
-    if(isAvecRessourcesFinancieres) {
+    if (isAvecRessourcesFinancieres) {
       personne.ressourcesFinancieres = new RessourcesFinancieres();
       personne.ressourcesFinancieres.aidesCAF = new AidesCAF();
       personne.ressourcesFinancieres.aidesPoleEmploi = new AidesPoleEmploi();
@@ -60,41 +60,46 @@ export class PersonneUtileService {
   }
 
   public isAgeInferieurA3Ans(dateNaissanceString: string): boolean {
-    let dateNaissance = moment(dateNaissanceString,'YYYY-MM-DD').toDate();
+    let dateNaissance = moment(dateNaissanceString, 'YYYY-MM-DD').toDate();
     return this.dateUtileService.isDatePlusDe3AnsEt1Mois(dateNaissance);
+  }
+
+  public isAgeEntre3Et21Ans(dateNaissanceString: string): boolean {
+    let dateNaissance = moment(dateNaissanceString, 'YYYY-MM-DD').toDate();
+    return this.dateUtileService.isDateEntre3Et21Ans(dateNaissance);
   }
 
   public isRessourcesFinancieresValides(personne: Personne): boolean {
     let isValide = true;
-    if(personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
+    if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
       isValide = personne.ressourcesFinancieres.salaire.montantNet > 0;
     }
-    if(personne.beneficiaireAides.beneficiaireARE) {
+    if (personne.beneficiaireAides.beneficiaireARE) {
       isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
     }
-    if(personne.beneficiaireAides.beneficiaireASS) {
+    if (personne.beneficiaireAides.beneficiaireASS) {
       isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
     }
-    if(personne.beneficiaireAides.beneficiaireRSA) {
+    if (personne.beneficiaireAides.beneficiaireRSA) {
       isValide = personne.ressourcesFinancieres.aidesCAF.allocationRSA > 0;
     }
-    if(personne.beneficiaireAides.beneficiaireAAH) {
+    if (personne.beneficiaireAides.beneficiaireAAH) {
       isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
     }
-    if(personne.beneficiaireAides.beneficiairePensionInvalidite) {
+    if (personne.beneficiaireAides.beneficiairePensionInvalidite) {
       isValide = personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
     return isValide;
   }
 
-  public isBeneficiaireSeulementRSA(personne: Personne): boolean{
+  public isBeneficiaireSeulementRSA(personne: Personne): boolean {
     let isBeneficiare = false
-    if(personne !== null){
+    if (personne !== null) {
       isBeneficiare = !personne.beneficiaireAides.beneficiaireARE
-      && !personne.beneficiaireAides.beneficiaireAAH
-      && !personne.beneficiaireAides.beneficiaireASS
-      && !personne.beneficiaireAides.beneficiairePensionInvalidite
-      && personne.beneficiaireAides.beneficiaireRSA;
+        && !personne.beneficiaireAides.beneficiaireAAH
+        && !personne.beneficiaireAides.beneficiaireASS
+        && !personne.beneficiaireAides.beneficiairePensionInvalidite
+        && personne.beneficiaireAides.beneficiaireRSA;
     }
     return isBeneficiare;
   }
@@ -114,7 +119,7 @@ export class PersonneUtileService {
     return personne.informationsPersonnelles
       && (
         personne.informationsPersonnelles.hasRevenusImmobilier
-        || personne.informationsPersonnelles.microEntrepreneur
+        || personne.informationsPersonnelles.microEntrepreneur
         || personne.informationsPersonnelles.travailleurIndependant
       );
   }

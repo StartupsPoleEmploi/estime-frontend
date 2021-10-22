@@ -161,11 +161,20 @@ export class DeConnecteService {
     }
   }
 
-  public unsetAlloctionPAJE(): void {
+  public unsetAllocationPAJE(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieres
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant = 0;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
+  public unsetComplementFamilial(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
