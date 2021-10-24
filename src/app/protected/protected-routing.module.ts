@@ -7,9 +7,7 @@ import { ContratTravailComponent } from './etapes-simulation/1.contrat-travail/c
 import { MaSituationComponent } from './etapes-simulation/2.ma-situation/ma-situation.component';
 import { MesPersonnesAChargeComponent } from './etapes-simulation/3.mes-personnes-a-charge/mes-personnes-a-charge.component';
 import { RessourcesActuellesComponent } from './etapes-simulation/4.ressources-actuelles/ressources-actuelles.component';
-import { ResultatSimulationComponent } from './etapes-simulation/5.resultat-simulation/resultat-simulation.component';
 import { EtapesSimulationComponent } from './etapes-simulation/etapes-simulation.component';
-
 
 const routes: Routes = [
   {path: RoutesEnum.AVANT_COMMENCER_SIMULATION, component: AvantDeCommencerSimulationComponent, canActivate: [IsLoggedInGuard]},
@@ -40,7 +38,9 @@ const routes: Routes = [
       },
       {
         path: RoutesEnum.RESULTAT_SIMULATION,
-        component: ResultatSimulationComponent,
+        loadChildren: () => 
+          import('./etapes-simulation/5.resultat-simulation/resultat-simulation.module')
+            .then(m => m.ResultatSimulationModule),
         canActivate: [IsLoggedInGuard]
       }
     ]
