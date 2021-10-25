@@ -2,7 +2,7 @@
     <span class="row title-liste-details-aides-style-1 headline-5-typo">Mes ressources et aides actuelles</span>
     <hr class="title-hr">
     <div class="row">
-        <div class="card">
+        <div class="card card-simulation-mensuelle">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item" [ngClass]="{'is-item-not-last': isItemSalaireIsNotLast()}">
                     <app-item-ressource-actuelle [codeRessource]="codesRessourcesFinancieresEnum.PAIE"
@@ -41,7 +41,8 @@
                     [ngClass]="{'is-item-not-last': isItemAahIsNotLast()}"
                     *ngIf="aidesService.getMontantAAH(simulationSelected) > 0"
                     (keyup)="handleKeyUpOnAideActuelle($event, codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
-                    <button type="button" role="button" class="btn" tabindex="-1" style="cursor: pointer;"
+                    <button type="button" role="button" class="btn aide-selectable-button" tabindex="-1"
+                        style="cursor: pointer;"
                         [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)}"
                         (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)">
                         <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
@@ -175,7 +176,8 @@
                 <li class="list-group-item li-aide-selectable" tabindex="0"
                     *ngIf="aidesService.getMontantASS(simulationSelected) > 0"
                     (keyup)="handleKeyUpOnAideActuelle($event, codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
-                    <button type="button" role="button" class="btn" tabindex="  -1" style="cursor: pointer;"
+                    <button type="button" role="button" class="btn aide-selectable-button" tabindex="  -1"
+                        style="cursor: pointer;"
                         [ngClass]="{'active': isAideSelected(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)}"
                         (click)="onClickButtonAideActuelle(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)">
                         <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE"
@@ -215,14 +217,14 @@
     </span>
     <hr class="title-hr">
     <div class="row">
-        <div id="card-aides-obtenir" class="card">
+        <div id="card-aides-obtenir" class="card card-simulation-mensuelle">
             <ul class="list-group list-group-flush">
                 <div
                     *ngFor="let aideKeyValue of simulationSelected.mesAides | keyvalue | callback: filtrerAidesLogement; let index = index;">
                     <li class="list-group-item" [ngClass]="{'is-item-not-last': !isLastAideKeyValue(index)}">
                         <app-item-ressource-actuelle [codeRessource]="aideKeyValue.value.code"
                             data-testid="row-{{aideKeyValue.value.code}}" [isColPictoArrowDisplay]="false"
-                            [libelleRessource]="aideKeyValue.value.nom" [montantRessource]="0"
+                            [libelleRessource]="aideKeyValue.value.nom" [montantRessource]="aideKeyValue.value.montant"
                             [organismeRessource]="aideKeyValue.value.organisme">
                         </app-item-ressource-actuelle>
                     </li>
@@ -245,8 +247,8 @@
                     <li class="list-group-item li-aide-selectable" tabindex="0"
                         [ngClass]="{'active': isAideSelected(aideKeyValue.value.code), 'is-item-not-last': !isLastAideKeyValue(index)}"
                         (keyup)="handleKeyUpOnAideObtenir($event,aideKeyValue.value)">
-                        <button type="button" role="button" class="btn" tabindex="-1" [ngClass]="{}"
-                            (click)="onClickButtonAideObtenir(aideKeyValue.value)"
+                        <button type="button" role="button" class="btn aide-selectable-button" tabindex="-1"
+                            [ngClass]="{}" (click)="onClickButtonAideObtenir(aideKeyValue.value)"
                             attr.aria-label="Voir la description de l'aide {{aideKeyValue.value.nom}}"
                             tag-action="clic_bouton_description_aide">
                             <app-item-ressource-actuelle [codeRessource]="aideKeyValue.value.code"
