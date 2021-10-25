@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from "@models/demandeur-emploi";
 import { SimulationAides } from '@models/simulation-aides';
-import pdfMakeModule from 'pdfmake/build/pdfmake.min';
+import pdfMakeModule from 'pdfmake/build/pdfmake';
 import pdfFontsModule from 'pdfmake/build/vfs_fonts';
 import { ScreenService } from '../utile/screen.service';
 import { BlockInformationsService } from "./content/bloc-informations.service";
