@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
+import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DateUtileService } from './date-util.service';
 
 @Injectable({ providedIn: 'root' })
@@ -13,9 +15,19 @@ export class AidesService {
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM = 10;
 
   constructor(
-    private dateUtileService: DateUtileService
+    private dateUtileService: DateUtileService,
+    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService
   ) { }
 
+  public hasAideLogement(simulationAides: SimulationAides): boolean {
+    const premierMoisSimulation = simulationAides.simulationsMensuelles[0]
+    const aides = Object.values(premierMoisSimulation.mesAides);
+    return (aides.some(
+      (aide) => aide && (aide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
+        || aide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
+        || aide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)
+    ));
+  }
 
   public getMontantAAH(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
@@ -53,11 +65,11 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
   }
 
-  public getMontantAllocationLogementFamilial(simulationSelected: SimulationMensuelle): number {
+  public getMontantAllocationLogementFamiliale(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
   }
 
-  public getMontantAllocationLogementSocial(simulationSelected: SimulationMensuelle): number {
+  public getMontantAllocationLogementSociale(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
   }
 
@@ -96,10 +108,22 @@ export class AidesService {
   }
 
   public getMessageAlerteAidesLogement(withLink: boolean = true): string {
-    let moisProchaineDeclaration = this.dateUtileService.getLibelleMoisApresDateJour(1);
-    let message = "Vos aides au logement seront recalculées à partir du mois de " + moisProchaineDeclaration + "."
+    let moisProchaineDeclaration = this.getMoisRecalculAidesLogement();
+    let message = "Vos aides au logement seront recalculées à partir du mois de " + moisProchaineDeclaration + ". "
     if (withLink) message += "Vous pouvez simuler de façon plus précise <a class='simulateur-caf-link' href='https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/estimervosdroits/lelogement'>le nouveau montant sur le site de la CAF.</a>";
     return message;
+  }
+
+  private getMoisRecalculAidesLogement(): string {
+    let moisProchainRecalcul = 2;
+    const ressourcesFinancieres = this.deConnecteRessourcesFinancieresService.getRessourcesFinancieres();
+    if (ressourcesFinancieres != null &&
+      ressourcesFinancieres.aidesCAF != null &&
+      ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle &&
+      (ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 0 || ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 3)) {
+      moisProchainRecalcul = 1;
+    }
+    return this.dateUtileService.getLibelleMoisApresDateJour(moisProchainRecalcul);
   }
 
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
@@ -147,7 +171,7 @@ export class AidesService {
     if (simulationSelected) {
       const aides = Object.values(simulationSelected.mesAides);
       aides.forEach((aide) => {
-        if (this.isAideDemandeurPourraObtenir(aide)) {
+        if (this.isAideDemandeurPourraObtenir(aide) && this.isAidePasAideLogementPremierMois(aide)) {
           hasAidesObtenir = true;
         }
       });
@@ -211,6 +235,13 @@ export class AidesService {
       && aide.code !== CodesAidesEnum.PENSIONS_ALIMENTAIRES
       && aide.code !== CodesAidesEnum.PENSION_INVALIDITE
       && aide.code !== CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
+  }
+
+  public isAidePasAideLogementPremierMois(aide: Aide): boolean {
+    return aide && (aide.code !== CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
+      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
+      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)
+      || aide.montant == 0;
   }
 
   /**
