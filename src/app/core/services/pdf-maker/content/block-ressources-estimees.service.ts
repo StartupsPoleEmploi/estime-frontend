@@ -141,7 +141,7 @@ export class BlockRessourcesEstimeesService {
       this.addRowPensionInvalidite(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite > 0) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM?.allocationSupplementaireInvalidite > 0) {
       this.addRowASI(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
@@ -157,23 +157,23 @@ export class BlockRessourcesEstimeesService {
       this.addRowINDP(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationSoutienFamilial) {
       this.addRowASF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationsFamiliales) {
       this.addRowAF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.complementFamilial) {
       this.addRowCF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.prestationAccueilJeuneEnfant) {
       this.addRowPAJE(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.pensionsAlimentairesFoyer) {
       this.addRowPAF(body, simulationAides);
       nbrRows++;
     }

@@ -24,6 +24,11 @@ export class DeConnecteRessourcesFinancieresService {
 
   }
 
+  public getRessourcesFinancieres(): RessourcesFinancieres {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.ressourcesFinancieres;
+  }
+
   public getMontantVosRessources(): number {
     let montant = 0;
     montant = this.getMontantAidesVosRessources() + this.getMontantRevenusVosRessources();

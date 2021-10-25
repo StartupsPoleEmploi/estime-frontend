@@ -11,6 +11,7 @@ import { CodesRessourcesFinancieresEnum } from "@app/commun/enumerations/codes-r
 import { LibellesAidesEnum } from "@enumerations/libelles-aides.enum";
 import { OrganismeAidesEnum } from "@enumerations/organismes-aides.enum";
 import { LibellesRessourcesFinancieresEnum } from "@enumerations/libelles-ressources-financieres.enum";
+import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 
 @Component({
   selector: 'app-ressources-financieres-mensuelles',
@@ -21,7 +22,7 @@ import { LibellesRessourcesFinancieresEnum } from "@enumerations/libelles-ressou
 export class RessourcesFinancieresMensuellesComponent implements OnInit {
 
   demandeurEmploiConnecte: DemandeurEmploi;
-
+  ressourcesFinancieres: RessourcesFinancieres;
 
   @Input() simulationSelected: SimulationMensuelle;
   @Input() aideSelected: Aide;
@@ -38,8 +39,7 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
   constructor(
     public aidesService: AidesService,
     public deConnecteService: DeConnecteService,
-    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    private screenService: ScreenService
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService
   ) { }
 
   ngOnInit(): void {
@@ -66,13 +66,12 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       && aideKeyValue.value.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
   }
 
-
   public filtrerAidesLogement(aideKeyValue: any): boolean {
-    return aideKeyValue.value.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
+    return (aideKeyValue.value.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
       || aideKeyValue.value.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
-      || aideKeyValue.value.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
+      || aideKeyValue.value.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)
+      && aideKeyValue.value.montant == 0;
   }
-
 
   public isLastAideKeyValue(index: number): boolean {
     let size = 0;
@@ -110,6 +109,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -124,6 +126,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -137,6 +142,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -149,6 +157,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -160,6 +171,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -171,6 +185,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -181,6 +198,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -190,6 +210,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -198,6 +221,9 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
       || this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
@@ -205,21 +231,49 @@ export class RessourcesFinancieresMensuellesComponent implements OnInit {
     return this.aidesService.getMontantComplementFamilial(this.simulationSelected) > 0
       || this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemComplementFamilialIsNotLast(): boolean {
     return this.aidesService.getMontantPrestationAccueilJeuneEnfant(this.simulationSelected) > 0
       || this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemPrestationAccueilJeuneEnfantIsNotLast(): boolean {
     return this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
       || this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 
   public isItemPensionsAlimentairesIsNotLast(): boolean {
+    return this.aidesService.getMontantAidePersonnaliseeLogement(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
+      || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemAidePersonnaliseeLogementIsNotLast(): boolean {
+    return this.aidesService.getMontantPensionsAlimentaires(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementFamiliale(this.simulationSelected) > 0
+      || this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
+      || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemAllocationLogementFamilialeIsNotLast(): boolean {
+    return this.aidesService.getMontantAllocationLogementSociale(this.simulationSelected) > 0
+      || this.aidesService.getMontantASS(this.simulationSelected) > 0
+  }
+
+  public isItemAllocationLogementSocialeIsNotLast(): boolean {
     return this.aidesService.getMontantASS(this.simulationSelected) > 0
   }
 

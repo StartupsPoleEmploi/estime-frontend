@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -32,16 +32,27 @@ export class MesPersonnesAChargeComponent implements OnInit {
   personnesACharge: Array<Personne>;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
+  // services à injecter dynamiquement
+  public controleChampFormulaireService: ControleChampFormulaireService;
+  public dateUtileService: DateUtileService;
+  public deConnecteService: DeConnecteService;
+  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
+  public personneUtileService: PersonneUtileService;
+  private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
+  public screenService: ScreenService;
+
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    private dateUtileService: DateUtileService,
-    private deConnecteService: DeConnecteService,
-    private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    public personneUtileService: PersonneUtileService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
-    public screenService: ScreenService,
+    private injector: Injector,
     private router: Router
-  ) { }
+  ) {
+    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
+    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.personneUtileService = injector.get<PersonneUtileService>(PersonneUtileService);
+    this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
+    this.screenService = injector.get<ScreenService>(ScreenService);
+  }
 
   ngOnInit(): void {
     this.loadDataPersonnesACharge();

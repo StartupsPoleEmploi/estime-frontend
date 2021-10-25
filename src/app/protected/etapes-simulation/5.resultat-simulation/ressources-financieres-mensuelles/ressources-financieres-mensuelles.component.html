@@ -129,6 +129,34 @@
                         [organismeRessource]="organismeAidesEnum.CAF">
                     </app-item-ressource-actuelle>
                 </li>
+                <li class="list-group-item" [ngClass]="{'is-item-not-last': isItemAidePersonnaliseeLogementIsNotLast()}"
+                    *ngIf="aidesService.getMontantAidePersonnaliseeLogement(simulationSelected) > 0">
+                    <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT"
+                        data-testid="row-paf" [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT"
+                        [montantRessource]="aidesService.getMontantAidePersonnaliseeLogement(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
+                <li class="list-group-item"
+                    [ngClass]="{'is-item-not-last': isItemAllocationLogementFamilialeIsNotLast()}"
+                    *ngIf="aidesService.getMontantAllocationLogementFamiliale(simulationSelected) > 0">
+                    <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE"
+                        data-testid="row-paf" [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE"
+                        [montantRessource]=" aidesService.getMontantAllocationLogementFamiliale(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
+                <li class="list-group-item" [ngClass]="{'is-item-not-last': isItemAllocationLogementSocialeIsNotLast()}"
+                    *ngIf="aidesService.getMontantAllocationLogementSociale(simulationSelected) > 0">
+                    <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE"
+                        data-testid="row-paf" [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE"
+                        [montantRessource]=" aidesService.getMontantAllocationLogementSociale(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.CAF">
+                    </app-item-ressource-actuelle>
+                </li>
                 <div *ngIf="aidesService.getMessageAlerteAidesFamiliales(simulationSelected)"
                     class="card card-body card-message-alerte-aide">
                     <div class="row">
