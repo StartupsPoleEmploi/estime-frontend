@@ -70,6 +70,11 @@ cypress-e2e:
     - if: '$CI_COMMIT_BRANCH == "master" && $LAUNCH_CYPRESS_TESTS == "true"'
       changes:
         - src/**/*
+      when: on_success
+    - if: '$CI_COMMIT_BRANCH != "master" && $LAUNCH_CYPRESS_TESTS == "true"'
+      changes:
+        - src/**/*
+      when: manual
     artifacts:
       when: always
       paths:

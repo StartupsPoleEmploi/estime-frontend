@@ -108,56 +108,69 @@ export class ChartUtileService {
     const dataObject = this.initDatasets();
 
     simulationAides.simulationsMensuelles.forEach((simulationMensuelle, index) => {
-        for (let key in simulationMensuelle.mesAides) {
-          switch (key) {
-            case CodesAidesEnum.AGEPI: {
-              dataObject.datasets.get(CodesAidesEnum.AGEPI).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.AIDE_MOBILITE: {
-              dataObject.datasets.get(CodesAidesEnum.AIDE_MOBILITE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES: {
-              dataObject.datasets.get(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE: {
-              dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL: {
-              dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.ALLOCATIONS_FAMILIALES: {
-              dataObject.datasets.get(CodesAidesEnum.ALLOCATIONS_FAMILIALES).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.COMPLEMENT_FAMILIAL: {
-              dataObject.datasets.get(CodesAidesEnum.COMPLEMENT_FAMILIAL).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.PRIME_ACTIVITE: {
-              dataObject.datasets.get(CodesAidesEnum.PRIME_ACTIVITE).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT: {
-              dataObject.datasets.get(CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.PENSIONS_ALIMENTAIRES: {
-              dataObject.datasets.get(CodesAidesEnum.PENSIONS_ALIMENTAIRES).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            case CodesAidesEnum.RSA: {
-              dataObject.datasets.get(CodesAidesEnum.RSA).data[index + 1] = simulationMensuelle.mesAides[key].montant;
-              break;
-            }
-            default:
+      const aides = Object.values(simulationMensuelle.mesAides);
+      aides.forEach((aide) => {
+        switch (aide.code) {
+          case CodesAidesEnum.AGEPI: {
+            dataObject.datasets.get(CodesAidesEnum.AGEPI).data[index + 1] = aide.montant;
+            break;
           }
+          case CodesAidesEnum.AIDE_MOBILITE: {
+            dataObject.datasets.get(CodesAidesEnum.AIDE_MOBILITE).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATIONS_FAMILIALES: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATIONS_FAMILIALES).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.COMPLEMENT_FAMILIAL: {
+            dataObject.datasets.get(CodesAidesEnum.COMPLEMENT_FAMILIAL).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.PRIME_ACTIVITE: {
+            dataObject.datasets.get(CodesAidesEnum.PRIME_ACTIVITE).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT: {
+            dataObject.datasets.get(CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.PENSIONS_ALIMENTAIRES: {
+            dataObject.datasets.get(CodesAidesEnum.PENSIONS_ALIMENTAIRES).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.RSA: {
+            dataObject.datasets.get(CodesAidesEnum.RSA).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT: {
+            dataObject.datasets.get(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE).data[index + 1] = aide.montant;
+            break;
+          }
+          case CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE: {
+            dataObject.datasets.get(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE).data[index + 1] = aide.montant;
+            break;
+          }
+          default:
         }
-      }
+      });
+    }
     );
     for (let index = 0; index < simulationAides.simulationsMensuelles.length; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
@@ -183,7 +196,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.AGEPI,
       {
-        label: LibellesAidesEnum.AGEPI.padEnd(30,' '),
+        label: LibellesAidesEnum.AGEPI.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.AGEPI,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -192,7 +205,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.AIDE_MOBILITE,
       {
-        label: LibellesAidesEnum.AIDE_MOBILITE.padEnd(30,' '),
+        label: LibellesAidesEnum.AIDE_MOBILITE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.AIDE_MOBILITE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -201,7 +214,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES,
       {
-        label: LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES.padEnd(30,' '),
+        label: LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_ADULTES_HANDICAPES,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -210,7 +223,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
       {
-        label: LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE.padEnd(30,' '),
+        label: LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -219,7 +232,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL,
       {
-        label: LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL.padEnd(30,' '),
+        label: LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SOUTIEN_FAMILIAL,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -228,7 +241,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.ALLOCATIONS_FAMILIALES,
       {
-        label: LibellesAidesEnum.ALLOCATIONS_FAMILIALES.padEnd(30,' '),
+        label: LibellesAidesEnum.ALLOCATIONS_FAMILIALES.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATIONS_FAMILIALES,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -237,7 +250,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.COMPLEMENT_FAMILIAL,
       {
-        label: LibellesAidesEnum.COMPLEMENT_FAMILIAL.padEnd(30,' '),
+        label: LibellesAidesEnum.COMPLEMENT_FAMILIAL.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.COMPLEMENT_FAMILIAL,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -246,7 +259,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.PENSION_INVALIDITE,
       {
-        label: LibellesAidesEnum.PENSION_INVALIDITE.padEnd(30,' '),
+        label: LibellesAidesEnum.PENSION_INVALIDITE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PENSION_INVALIDITE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -255,7 +268,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT,
       {
-        label: LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT.padEnd(30,' '),
+        label: LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -264,7 +277,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.PENSIONS_ALIMENTAIRES,
       {
-        label: LibellesAidesEnum.PENSIONS_ALIMENTAIRES.padEnd(30,' '),
+        label: LibellesAidesEnum.PENSIONS_ALIMENTAIRES.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PENSIONS_ALIMENTAIRES,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -273,7 +286,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE,
       {
-        label: LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE.padEnd(30,' '),
+        label: LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -282,8 +295,35 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.PRIME_ACTIVITE,
       {
-        label: LibellesAidesEnum.PRIME_ACTIVITE.padEnd(30,' '),
+        label: LibellesAidesEnum.PRIME_ACTIVITE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PRIME_ACTIVITE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT,
+      {
+        label: LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT.padEnd(30, ' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.AIDE_PERSONNALISEE_LOGEMENT,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE,
+      {
+        label: LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE.padEnd(30, ' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_LOGEMENT_FAMILIALE,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE,
+      {
+        label: LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE.padEnd(30, ' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATION_LOGEMENT_SOCIALE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
@@ -291,7 +331,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesAidesEnum.RSA,
       {
-        label: LibellesAidesEnum.RSA.padEnd(30,' '),
+        label: LibellesAidesEnum.RSA.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.RSA,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -300,7 +340,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesRessourcesFinancieresEnum.PAIE,
       {
-        label: LibellesRessourcesFinancieresEnum.SALAIRE.padEnd(30,' '),
+        label: LibellesRessourcesFinancieresEnum.SALAIRE.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.PAIE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -309,7 +349,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesRessourcesFinancieresEnum.IMMOBILIER,
       {
-        label: LibellesRessourcesFinancieresEnum.IMMOBILIER.padEnd(30,' '),
+        label: LibellesRessourcesFinancieresEnum.IMMOBILIER.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.IMMOBILIER,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -318,7 +358,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT,
       {
-        label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30,' '),
+        label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.TRAVAILLEUR_INDEPENDANT,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -327,7 +367,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR,
       {
-        label: LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR.padEnd(30,' '),
+        label: LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.MICRO_ENTREPRENEUR,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -336,7 +376,7 @@ export class ChartUtileService {
 
     dataObject.datasets.set(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI,
       {
-        label: ChartUtileService.LIBELLE_RESSOURCES_AVANT_REPRISE_EMPLOI.padEnd(20,' '),
+        label: ChartUtileService.LIBELLE_RESSOURCES_AVANT_REPRISE_EMPLOI.padEnd(20, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.RESSOURCES_AVANT_REPRISE_EMPLOI,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
@@ -374,7 +414,7 @@ export class ChartUtileService {
     options.plugins = this.getPlugins(data);
     options.scales = this.getScales();
     options.layout = this.getLayout();
-    options.borderRadius =  {
+    options.borderRadius = {
       topRight: 4,
       topLeft: 4
     };
@@ -383,8 +423,8 @@ export class ChartUtileService {
   }
 
   private getAspectRatio() {
-    if(this.screenService.isExtraSmallScreen()) return 0.5;
-    if(this.screenService.isTabletScreen()) return 1;
+    if (this.screenService.isExtraSmallScreen()) return 0.5;
+    if (this.screenService.isTabletScreen()) return 1;
     return 2;
   }
 
@@ -448,7 +488,7 @@ export class ChartUtileService {
         datasets.map((dataset) => {
           sum += dataset.data[ctx.dataIndex];
         });
-        if(sum != 0) return `${sum.toString()} ${DevisesEnum.EURO.symbole}`;
+        if (sum != 0) return `${sum.toString()} ${DevisesEnum.EURO.symbole}`;
       }
       return '';
     };

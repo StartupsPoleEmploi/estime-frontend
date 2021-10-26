@@ -66,19 +66,19 @@ export class BlockRessourcesEstimeesService {
     if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT)) {
       const imageBase64 = ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT;
       const libelle = LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT;
-      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      this.addRowAidesLogement(body, simulationAides, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, imageBase64, libelle);
       nbrRows++;
     }
     if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE)) {
       const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE;
       const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
-      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      this.addRowAidesLogement(body, simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE, imageBase64, libelle);
       nbrRows++;
     }
     if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
       const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE;
       const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
-      this.addRowAidesLogement(body, simulationAides, imageBase64, libelle);
+      this.addRowAidesLogement(body, simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, imageBase64, libelle);
       nbrRows++;
     }
 
@@ -102,11 +102,32 @@ export class BlockRessourcesEstimeesService {
     body.push(row);
   }
 
-  private addRowAidesLogement(body: Array<Array<Cell>>, simulationAides: SimulationAides, imageAideBase64: string, libelle: string): void {
+  private addRowAidesLogement(body: Array<Array<Cell>>, simulationAides: SimulationAides, codeAideToAdd: string, imageAideBase64: string, libelle: string): void {
     const row = new Array<Cell>();
     row.push(this.createCellImageRessource(imageAideBase64));
     row.push(this.createCellLibelleRessource(libelle));
-    row.push(this.createCellMontantAidesLogement(simulationAides.simulationsMensuelles.length));
+
+    const ressourcesFinancieres = this.deConnecteRessourcesFinancieresService.getRessourcesFinancieres();
+    // Si la déclaration trimestrielle est au mois 0 ou au mois 3,
+    // on indique que la prochaine déclaration déterminera le montant pour tous les mois
+    // on crée alors autant de colonnes fusionnée qu'il y a de mois de simulation qu'on insère ensuite dans la ligne
+    if (ressourcesFinancieres.aidesCAF != null
+      && ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle != null
+      && (ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 0
+        || ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 3)) {
+      row.push(this.createCellMessageAidesLogement(simulationAides.simulationsMensuelles.length));
+    }
+    // Sinon on donne le montant actuel avant recalcul puis on y ajoute de colonnes fusionnées jusqu'à arriver au nombre de mois de simulation
+    else {
+      simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+        for (let [codeAide, aide] of Object.entries(simulationMensuelle.mesAides)) {
+          if (aide && aide.montant != 0 && codeAide === codeAideToAdd) {
+            row.push(this.createCellMontant(aide.montant));
+          }
+        }
+      });
+      row.push(this.createCellMessageAidesLogement(simulationAides.simulationsMensuelles.length - 1));
+    }
     body.push(row);
   }
 
@@ -141,7 +162,7 @@ export class BlockRessourcesEstimeesService {
       this.addRowPensionInvalidite(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite > 0) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM?.allocationSupplementaireInvalidite > 0) {
       this.addRowASI(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
@@ -157,23 +178,23 @@ export class BlockRessourcesEstimeesService {
       this.addRowINDP(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationSoutienFamilial) {
       this.addRowASF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationsFamiliales) {
       this.addRowAF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.complementFamilial) {
       this.addRowCF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.prestationAccueilJeuneEnfant) {
       this.addRowPAJE(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer) {
+    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.pensionsAlimentairesFoyer) {
       this.addRowPAF(body, simulationAides);
       nbrRows++;
     }
@@ -514,7 +535,7 @@ export class BlockRessourcesEstimeesService {
     return cell;
   }
 
-  private createCellMontantAidesLogement(colSpan: number): Cell {
+  private createCellMessageAidesLogement(colSpan: number): Cell {
     const cell = new Cell();
     cell.colSpan = colSpan;
     cell.style = new Style();
