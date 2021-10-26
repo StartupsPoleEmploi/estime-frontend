@@ -24,8 +24,11 @@
             <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                 <div class="card">
                     <div class="card-header">
-                        <i id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
-                            alt="Supprimer personne à charge" class="fas fa-times-circle float-end"
+                        <i id="btn-supprimer-personne-a-charge" 
+                            role="button" 
+                            tabindex="0"
+                            alt="Supprimer personne à charge" 
+                            class="fas fa-times-circle float-end"
                             (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
                             (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
                         </i>
@@ -44,7 +47,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a tabindex="0" href="javascript:;" alt="Modifier personne à charge"
+                        <a tabindex="0" 
+                            href="javascript:;" 
+                            alt="Modifier personne à charge"
                             class="float-end caption-2-typo"
                             (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
                             Modifier
@@ -53,17 +58,20 @@
                 </div>
             </div>
             <div class="col">
-                <button name="button-card-add-personne" class="button-card-add-personne"
-                    aria-label="Ajouter une personne à charge" (click)="onClickButtonAjouterPersonne()"
+                <button name="button-card-add-personne" 
+                    class="button-card-add-personne"
+                    aria-label="Ajouter une personne à charge" 
+                    (click)="onClickButtonAjouterPersonne()"
                     (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
                     *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-                    <div class="card card-add-personne" data-testid="btn-ajouter-personne-charge"
+                    <div class="card card-add-personne" 
+                        data-testid="btn-ajouter-personne-charge"
                         [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}">
                         <div class="card-body d-flex align-items-center">
                             <div id="row-card-body-add-personne" class="row">
-                                <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
-                                    <img alt="Icône ajouter personne à charge"
-                                        src="./assets/images/ajouter-personne.svg">
+                                <div id="add-personne-icon" 
+                                    class="col-md-3 col-xs-12 col-card-body">
+                                    <img alt="" src="./assets/images/ajouter-personne.svg">
                                 </div>
                                 <div class="col-md-9 col-xs-12 col-card-body"
                                     [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
@@ -105,7 +113,7 @@
             <button class="btn-style-perso-2 first-btn button-typo" aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()" tag-navigation="clic_bouton_retour">
                 <div>
-                    <img alt="Icône flèche retour" src="./assets/images/return-arrow-v2.svg">
+                    <img alt="" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -114,7 +122,7 @@
                 (click)="onClickButtonSuivant()" tag-navigation="clic_bouton_suivant">
                 <div>
                     <span>Suivant</span>
-                    <img alt="Icône flèche suivant" src="./assets/images/icon-bt-primaire.svg">
+                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
                 </div>
             </button>
         </div>
