@@ -1,7 +1,9 @@
 @import "../../../../assets/scss/variables";
 
 #section-temoignages {
-  padding-bottom: 2rem;
+  @media #{$medium-device} {
+    padding-bottom: 2rem;
+  }
   padding-top: 2rem;
 
   h1 {

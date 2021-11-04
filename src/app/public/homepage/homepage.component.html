@@ -2,17 +2,10 @@
     <div [ngClass]="{'container-fluid':!screenService.isExtraSmallScreen()}">
         <div class="row row-0">
             <div class="col-12">
-                <div class="row div-info-beneficiaires body-2-typo">
-                    <div>
-                        <span [ngClass]="{'col-1': screenService.isExtraSmallScreen()}" class="icone-info-beneficiaire">
-                            <img alt="Commencer la simulation" src="./assets/images/info-blue-2.svg">
-                        </span>
-                        <span [ngClass]="{'col-11': screenService.isExtraSmallScreen()}" class="text-info-beneficiaire">
-                            Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert
-                            prochainement aux bénéficiaires de l’ARE.
-                        </span>
-                    </div>
-                </div>
+                <p aria-label="Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE."  class="row div-info-beneficiaires body-2-typo text-info-beneficiaire">
+                  <img class="col-1" alt="" src="./assets/images/info-blue-2.svg">
+                  <span class="col-11" >Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE.</span>
+                </p>
             </div>
         </div>
     </div>
@@ -32,12 +25,12 @@
                         </h1>
                     </div>
                     <div [ngClass]="{'btn-sticks':this.stickyButton}">
-                        <button id="btn-je-commence" 
-                            type="button" 
+                        <button id="btn-je-commence"
+                            type="button"
                             aria-label="Commencer la simulation"
                             class="btn-homepage mt-4 d-flex justify-content-center button-typo"
-                            data-testid="btn-je-commence" 
-                            tag-action="clic_bouton_je_commence" 
+                            data-testid="btn-je-commence"
+                            tag-action="clic_bouton_je_commence"
                             (click)="login()">
                             <span>Je commence la simulation</span>
                             <img alt="" src="./assets/images/icon-bt-primaire.svg">

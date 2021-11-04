@@ -68,8 +68,8 @@ footer {
         .col-texte-service-estime {
           max-width: 16.5625rem;
 
-          span {
-            font-size: 0.75em;
+          p {
+            line-height: 2.125em !important;
           }
         }
       }
@@ -170,8 +170,9 @@ footer {
             width: 11rem;
           }
 
-          span {
+          p {
             font-size: 0.375em !important;
+            line-height: 1.6em !important;
 
             @media #{$medium-device} {
               font-size: 0.563em !important;
