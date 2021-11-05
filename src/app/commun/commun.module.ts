@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { SigninRedirectCallbackComponent } from '@app/commun/components/signin-redirect-callback/signin-redirect-callback.component';
 import { AutofocusDirective } from "@app/commun/directives/autofocus.directive";
 import { CarouselSwipeDirective } from "@app/commun/directives/carousel-swipe.directive";
@@ -36,7 +35,6 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
   ],
   imports: [
     AlertModule.forRoot(),
-    BrowserModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

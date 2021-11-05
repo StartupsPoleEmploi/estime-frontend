@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { Environment } from "@models/environment";
 import { environment } from '@environments/environment';
 import { CookieService } from 'ngx-cookie-service';
@@ -8,6 +7,10 @@ import { AppComponent } from './app.component';
 import { CommunModule } from './commun/commun.module';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
+import { PublicModule } from './public/public.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,8 +19,11 @@ import { RouterModule } from '@angular/router';
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    CommonModule,
     CommunModule,
     CoreModule,
+    PublicModule,
     RouterModule
   ],
   providers: [
