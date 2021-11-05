@@ -1,3 +1,5 @@
+<app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
 <div class="container-fluid form-container-fluid">
     <div class="row">
         <div class="col">
@@ -23,10 +25,10 @@
     </div>
     <div class="row row-telecharger-ou-refaire row-style-2">
         <div class="col-12 col-md-6 my-auto">
-            <span id="btn-telecharger-simulation" 
+            <span id="btn-telecharger-simulation"
                 class="btn-telecharger-ou-refaire"
-                data-testid="btn-telecharger-simulation" 
-                tabindex="0" 
+                data-testid="btn-telecharger-simulation"
+                tabindex="0"
                 (click)="onClickButtonImprimerMaSimulation()"
                 tag-download="clic_bouton_telecharger_ma_simulation">
                 <div>
@@ -37,10 +39,10 @@
         </div>
         <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 2vh;"></div>
         <div class="col-12 col-md-6 my-auto">
-            <span id="btn-refaire-simulation" 
-                class="btn-telecharger-ou-refaire" 
+            <span id="btn-refaire-simulation"
+                class="btn-telecharger-ou-refaire"
                 data-testid="btn-refaire-simulation"
-                tabindex="0" 
+                tabindex="0"
                 (click)="onClickButtonRefaireSimulation()">
                 <div>
                     <img alt="" src="./assets/images/refaire_simulation.svg">

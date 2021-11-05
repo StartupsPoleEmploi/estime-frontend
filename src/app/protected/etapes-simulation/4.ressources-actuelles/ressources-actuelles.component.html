@@ -1,4 +1,6 @@
 <app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
+<app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
 <div class="container-fluid form-container-fluid">
     <alert type="danger" *ngIf="messageErreur">
         {{messageErreur}}
@@ -41,9 +43,9 @@
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
             && !ressourceConjointSeulementRSA" id="block-ressources-conjoint">
-            <button type="button" 
-                    role="button" 
-                    aria-describedby="label-vos-ressources" 
+            <button type="button"
+                    role="button"
+                    aria-describedby="label-vos-ressources"
                     aria-label="Vos ressources en Euros"
                     class="btn accordion-btn"
                 (click)="onClickButtonRessourcesConjoint()">
@@ -76,9 +78,9 @@
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
             && !ressourcePersonnesAChargeSeulementRSA" id="block-ressources-personnes-a-charge">
-            <button type="button" 
-                role="button" 
-                aria-describedby="label-ressources-conjoint" 
+            <button type="button"
+                role="button"
+                aria-describedby="label-ressources-conjoint"
                 aria-label="Vos ressources en Euros"
                 class="btn accordion-btn"
                 (click)="onClickButtonRessourcesPersonnesCharge()">
@@ -112,9 +114,9 @@
             </app-ressources-financieres-personnes-a-charge>
         </div>
         <div id="block-ressources-foyer">
-            <button type="button" 
-                role="button" 
-                class="btn accordion-btn" 
+            <button type="button"
+                role="button"
+                class="btn accordion-btn"
                 aria-describedby="label-ressources-foyer"
                 aria-label="Vos ressources en Euros"
                 (click)="onClickButtonRessourcesFoyer()">
@@ -149,7 +151,7 @@
     <div class="div-buttons-form row d-flex justify-content-center">
         <div class="col" *ngIf="!screenService.isExtraSmallScreen()">
             <button class="btn-style-perso-2 first-btn button-typo d-inline float-end"
-                aria-label="Retour à la page précédente" 
+                aria-label="Retour à la page précédente"
                 (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">
                 <div>
@@ -159,10 +161,10 @@
             </button>
         </div>
         <div class="col" [ngClass]="{'text-center col-12': this.screenService.isExtraSmallScreen()}">
-            <button id="btn-obtenir-simulation" 
+            <button id="btn-obtenir-simulation"
                 aria-label="Obtenir ma simulation"
                 class="btn-homepage d-flex justify-content-center button-typo d-inline"
-                data-testid="btn-obtenir-simulation" 
+                data-testid="btn-obtenir-simulation"
                 (click)="onClickButtonObtenirSimulation()"
                 tag-action="clic_bouton_obtenir_ma_simulation">
                 <span>Obtenir ma simulation</span>
@@ -170,9 +172,9 @@
             </button>
         </div>
         <div class="col" *ngIf="this.screenService.isExtraSmallScreen()" class="text-center col-12">
-            <button class="btn-style-perso-2 first-btn button-typo" 
+            <button class="btn-style-perso-2 first-btn button-typo"
                 aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()" 
+                (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="" src="./assets/images/return-arrow-v2.svg">

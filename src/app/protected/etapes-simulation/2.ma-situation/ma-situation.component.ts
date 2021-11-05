@@ -17,6 +17,7 @@ import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
   selector: 'app-ma-situation',
@@ -50,7 +51,8 @@ export class MaSituationComponent implements OnInit {
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private router: Router,
     private situationFamilialeUtileService: SituationFamilialeUtileService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    public screenService: ScreenService
   ) { }
 
   ngOnInit(): void {
