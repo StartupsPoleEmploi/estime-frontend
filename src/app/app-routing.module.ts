@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { RoutesEnum } from './commun/enumerations/routes.enum';
-import { AvantDeCommencerSimulationModule } from './protected/avant-de-commencer-simulation/avant-de-commencer-simulation.module';
-import { EtapesSimulationModule } from './protected/etapes-simulation/etapes-simulation.module';
-
 
 const routes: Routes = [
   {
     path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
-    loadChildren: () => AvantDeCommencerSimulationModule
+    loadChildren: () => import('./protected/avant-de-commencer-simulation/avant-de-commencer-simulation.module').then(m => m.AvantDeCommencerSimulationModule)
   },
   {
     path: RoutesEnum.ETAPES_SIMULATION,
-    loadChildren: () => EtapesSimulationModule
+    loadChildren: () => import('./protected/etapes-simulation/etapes-simulation.module').then(m => m.EtapesSimulationModule)
   }
 ];
 
@@ -23,8 +20,6 @@ const routerOptions: ExtraOptions = {
     scrollOffset: [0, 0],
     relativeLinkResolution: 'legacy'
 };
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routerOptions)],
