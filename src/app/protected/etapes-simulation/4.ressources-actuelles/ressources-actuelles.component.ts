@@ -90,6 +90,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.loadDataRessourcesFinancieres();
     this.calculerMontantsRessourcesFinancieres();

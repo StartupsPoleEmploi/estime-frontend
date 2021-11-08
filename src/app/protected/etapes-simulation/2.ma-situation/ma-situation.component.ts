@@ -56,6 +56,7 @@ export class MaSituationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
