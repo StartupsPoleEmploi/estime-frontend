@@ -22,7 +22,6 @@ import { FormPersonneAChargeComponent } from './3.mes-personnes-a-charge/form-pe
 import { DetailAideComponent } from './5.resultat-simulation/detail-aide/detail-aide.component';
 import { ItemRessourceActuelleComponent } from './5.resultat-simulation/ressources-financieres-mensuelles/item-ressource-actuelle/item-ressource-actuelle.component';
 import { RessourcesFinancieresMensuellesComponent } from './5.resultat-simulation/ressources-financieres-mensuelles/ressources-financieres-mensuelles.component';
-import { EtapesSimulationComponent } from './etapes-simulation.component';
 import { FilEtapesDesktopComponent } from './fil-etapes/fil-etapes-desktop/fil-etapes-desktop.component';
 import { FilEtapesMobileComponent } from './fil-etapes/fil-etapes-mobile/fil-etapes-mobile.component';
 import { RessourcesFinancieresDiagrammeComponent } from './5.resultat-simulation/ressources-financieres-diagramme/ressources-financieres-diagramme.component';
@@ -38,7 +37,6 @@ import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.modul
   declarations: [
     ContratTravailComponent,
     DetailAideComponent,
-    EtapesSimulationComponent,
     FormPersonneAChargeComponent,
     FormPersonneAChargeSituationComponent,
     ItemRessourceActuelleComponent,

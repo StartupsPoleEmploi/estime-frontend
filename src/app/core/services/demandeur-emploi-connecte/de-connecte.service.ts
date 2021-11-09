@@ -15,7 +15,8 @@ import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
-
+import { Router } from '@angular/router';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
@@ -30,9 +31,24 @@ export class DeConnecteService {
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private router: Router,
     private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
 
+  }
+
+  /**
+   * Si on tente un accès au composant etape-simulation ou à ses fils
+   * sans qu'il y ait un demandeur d'emploi connecte présent dans le session storage du navigateur
+   * alors on doit rediriger vers le composant avant-de-commencer.
+   *
+   * Ce cas peut arriver si on tente un accès direct par url à un des composant et que l'on est déjà pe connecté.
+   */
+  public controlerSiDemandeurEmploiConnectePresent(): void {
+    const demandeurEmploiConnecte = this.getDemandeurEmploiConnecte();
+    if (!demandeurEmploiConnecte) {
+      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    }
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
