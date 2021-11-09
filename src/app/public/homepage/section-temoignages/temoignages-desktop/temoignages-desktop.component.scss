@@ -10,7 +10,7 @@
     border: 0.0625rem solid $color-blue-2;
     border-radius: 0.5rem;
     box-shadow: none;
-    padding: 1.875rem;
+    padding: 1.875em;
     margin-left: 1rem;
     margin-right: 1rem;
 
@@ -19,10 +19,11 @@
       height: 100%;
       margin-top: 2.1875rem;
 
-      span {
+      p {
         bottom: 0;
         position: absolute;
         font-weight: bold !important;
+        margin-bottom: 0;
       }
     }
   }

@@ -58,8 +58,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM3_M4_M5 = "97";
       const montantPrimeActiviteM6 = "290";
 
-
-
       const homePage = new HomePage();
       homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
 

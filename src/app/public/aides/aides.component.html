@@ -30,16 +30,18 @@
                             </div>
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <span class="intitule-aide headline-4-typo">
+                                    <h2 class="intitule-aide headline-4-typo">
                                         {{libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}}
-                                    </span>
+                                    </h2>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle ass"></div>
                                 </div>
                             </div>
                             <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
+                                <span class="span-chevron">
+                                    <i alr="" class="fas fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -47,11 +49,9 @@
                                 L’allocation spécifique de solidarité (ASS) est une allocation qui peut prendre le relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à l’allocation ARE se terminent.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
-                                <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)" tag-navigation="details-en-savoir-plus-ass">
-                                    <div class="en-savoir-plus button-typo">
-                                        En savoir plus
-                                    </div>
-                                    <img src="./assets/images/fleche-droite.svg" alt="">
+                                <a class="en-savoir-plus en-savoir-plus button-typo" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)" tag-navigation="details-en-savoir-plus-ass">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/fleche-droite.svg" >
                                 </a>
                             </nav>
                         </div>
@@ -71,27 +71,27 @@
                             </div>
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <span class="intitule-aide headline-4-typo">
+                                    <h2 class="intitule-aide headline-4-typo">
                                         {{libellesAidesEnum.AIDE_MOBILITE}}
-                                    </span>
+                                    </h2>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle am"></div>
                                 </div>
                             </div>
                             <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
+                                <span class="span-chevron">
+                                    <i alt="" class="fas fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
                             <p class="card-text texte-aide body-1-typo">
                                 Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de déplacement, de repas, et d’hébergement.                            </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
-                                <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)" tag-navigation="details-en-savoir-plus-am">
-                                    <div class="en-savoir-plus button-typo">
-                                        En savoir plus
-                                    </div>
-                                    <img src="./assets/images/fleche-droite.svg" alt="">
+                                <a class="en-savoir-plus en-savoir-plus button-typo" (click)="onClickAideSavoirPlus(codesAidesEnum.AIDE_MOBILITE)" tag-navigation="details-en-savoir-plus-am">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/fleche-droite.svg">
                                 </a>
                             </nav>
                         </div>
@@ -111,16 +111,18 @@
                             </div>
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <span class="intitule-aide headline-4-typo">
+                                    <h2 class="intitule-aide headline-4-typo">
                                         {{libellesAidesEnum.PRIME_ACTIVITE}}
-                                    </span>
+                                    </h2>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle pa"></div>
                                 </div>
                             </div>
                             <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
+                                <span class="span-chevron">
+                                    <i alt="" class="fas fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -128,11 +130,9 @@
                                 La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
-                                <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)" tag-navigation="details-en-savoir-plus-pa">
-                                    <div class="en-savoir-plus button-typo">
-                                        En savoir plus
-                                    </div>
-                                    <img src="./assets/images/fleche-droite.svg" alt="">
+                                <a class="en-savoir-plus en-savoir-plus button-typo" (click)="onClickAideSavoirPlus(codesAidesEnum.PRIME_ACTIVITE)" tag-navigation="details-en-savoir-plus-pa">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/fleche-droite.svg">
                                 </a>
                             </nav>
                         </div>
@@ -152,16 +152,18 @@
                             </div>
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <span class="intitule-aide headline-4-typo">
+                                    <h2 class="intitule-aide headline-4-typo">
                                         {{libellesAidesEnum.AGEPI}}
-                                    </span>
+                                    </h2>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle agepi"></div>
                                 </div>
                             </div>
                             <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
+                                <span class="span-chevron">
+                                    <i alt="" class="fas fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -169,11 +171,9 @@
                                 L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf, divorcé).
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
-                                <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.AGEPI)" tag-navigation="details-en-savoir-plus-agepi">
-                                    <div class="en-savoir-plus button-typo">
-                                        En savoir plus
-                                    </div>
-                                    <img src="./assets/images/fleche-droite.svg" alt="">
+                                <a class="en-savoir-plus en-savoir-plus button-typo" (click)="onClickAideSavoirPlus(codesAidesEnum.AGEPI)" tag-navigation="details-en-savoir-plus-agepi">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/fleche-droite.svg">
                                 </a>
                             </nav>
                         </div>
@@ -193,16 +193,18 @@
                             </div>
                             <div class="col-9 col-md-auto col-title">
                                 <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <span class="intitule-aide headline-4-typo">
+                                    <h2 class="intitule-aide headline-4-typo">
                                         {{libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}}
-                                    </span>
+                                    </h2>
                                 </div>
                                 <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
                                     <div class="rectangle aah"></div>
                                 </div>
                             </div>
                             <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
-                                <span class="span-chevron"><i alt="" class="fas fa-chevron-right"></i></span>
+                                <span class="span-chevron">
+                                    <i alt="" class="fas fa-chevron-right"></i>
+                                </span>
                             </div>
                         </div>
                         <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
@@ -210,11 +212,9 @@
                                 Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH.
                             </p>
                             <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
-                                <a class="en-savoir-plus" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)" tag-navigation="details-en-savoir-plus-aah">
-                                    <div class="en-savoir-plus button-typo">
-                                        En savoir plus
-                                    </div>
-                                    <img src="./assets/images/fleche-droite.svg" alt="">
+                                <a class="en-savoir-plus en-savoir-plus button-typo" (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)" tag-navigation="details-en-savoir-plus-aah">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/fleche-droite.svg" >
                                 </a>
                             </nav>
                         </div>

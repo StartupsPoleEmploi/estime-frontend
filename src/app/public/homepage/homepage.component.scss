@@ -45,6 +45,16 @@
         margin-top: 2rem;
       }
 
+      img {
+        width: auto;
+      }
+
+      span {
+        color: $color-blue-2;
+        @media #{$extra-small-device} {
+          padding-left: 10px !important;
+        }
+      }
       .col-1,
       .col-11 {
         @media #{$extra-small-device} {
@@ -52,10 +62,7 @@
         }
       }
 
-      .text-info-beneficiaire {
-        color: $color-blue-2;
-        padding-left: 1rem;
-      }
+
     }
   }
 

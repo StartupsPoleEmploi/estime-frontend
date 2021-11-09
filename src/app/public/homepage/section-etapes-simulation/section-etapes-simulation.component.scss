@@ -48,13 +48,14 @@
         text-align: center;
         padding-top: 1rem;
       }
-
-      .intro-text-etape {
-        padding-bottom: 1rem;
+      p:first-child {
         font-weight: bold !important;
       }
+      .intro-text-etape {
+        padding-bottom: 1rem;
+      }
 
-      span {
+      span, p {
         color: $color-blue-2;
       }
     }

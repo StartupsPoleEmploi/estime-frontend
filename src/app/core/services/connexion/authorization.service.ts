@@ -30,7 +30,7 @@ export class AuthorizationService {
     return this.authentifierIndividu().then(
       (individu) => {
         this.individuConnectedService.saveIndividuConnected(individu);
-        if(individu.populationAutorisee) {
+        if (individu.populationAutorisee) {
           this.sessionPeConnectExpiredService.startCheckUserInactivity();
         } else {
           this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();
@@ -48,7 +48,7 @@ export class AuthorizationService {
 
   public getMessageErreur(): MessageErreur {
     const messageErreurDemandeurNonAutorise = this.sessionStorageEstimeService.getMessageDemandeurEmploi();
-    if(!this.messageErreur && messageErreurDemandeurNonAutorise) {
+    if (!this.messageErreur && messageErreurDemandeurNonAutorise) {
       this.messageErreur = messageErreurDemandeurNonAutorise;
       this.sessionStorageEstimeService.clearMessageDemandeurEmploi();
     }

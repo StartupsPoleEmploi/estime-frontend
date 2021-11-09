@@ -20,11 +20,13 @@
     border-radius: 0.5rem;
     border: unset;
     min-height: 19.125rem;
+    height: 100%;
 
     @media #{$extra-small-device} {
       min-height: unset;
       margin-top: 1rem;
       cursor: pointer;
+      height: auto;
     }
   }
 
@@ -67,13 +69,11 @@
 
   .en-savoir-plus-aide {
     padding-top: 0.5rem;
-    cursor: pointer;
 
-    span {
       color: $color-blue-10;
       text-decoration: none;
       cursor: pointer;
-    }
+
   }
 
   .row-button-aides {

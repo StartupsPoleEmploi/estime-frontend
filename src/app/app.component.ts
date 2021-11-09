@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
 import { Subscription } from 'rxjs';
 
@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
+  isLazyModulesLoading: boolean;
   isDisplayFilAriane: boolean;
   subscriptionRouteNavigationEndObservable: Subscription;
 
@@ -19,7 +20,15 @@ export class AppComponent implements OnInit {
     this.subscribeRouteNavigationEndObservable();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof RouteConfigLoadStart) {
+          this.isLazyModulesLoading = true;
+      } else if (event instanceof RouteConfigLoadEnd) {
+          this.isLazyModulesLoading = false;
+      }
+  });
+  }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();

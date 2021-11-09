@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
+import { RoutesEnum } from './commun/enumerations/routes.enum';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
+    loadChildren: () => import('./protected/avant-de-commencer-simulation/avant-de-commencer-simulation.module').then(m => m.AvantDeCommencerSimulationModule)
+  },
+  {
+    path: RoutesEnum.ETAPES_SIMULATION,
+    loadChildren: () => import('./protected/etapes-simulation/etapes-simulation.module').then(m => m.EtapesSimulationModule)
+  }
+];
 
 //permet de gérer le scroll auto => ici scrollPositionRestoration: 'enabled' positionne le scroll à top
 const routerOptions: ExtraOptions = {
