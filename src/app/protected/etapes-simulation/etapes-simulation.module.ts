@@ -15,7 +15,6 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { FormPersonneAChargeSituationComponent } from './3.mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge-situation/form-personne-a-charge-situation.component';
 import { FormPersonneAChargeComponent } from './3.mes-personnes-a-charge/form-personne-a-charge/form-personne-a-charge.component';
@@ -65,7 +64,6 @@ import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.modul
     CommunModule,
     FormsModule,
     ReactiveFormsModule,
-    PopoverModule.forRoot(),
     ProgressbarModule.forRoot(),
     EtapesSimulationRoutingModule,
     RouterModule,

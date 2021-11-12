@@ -114,10 +114,9 @@
                         aria-describedby="infobulle-ma-situation-vous-percevez">
                         * Vous percevez
                         <button id="infobulle-ma-situation-vous-percevez" role="tooltip" class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': popoverSituationDemandeur.isOpen}" placement="right"
+                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                             tag-action="ouverture-infobulle-ma-situation-vous-percevez"
-                            [popover]="popoverSituationDemandeurTemplate"
-                            #popoverSituationDemandeur="bs-popover"></button>
+                            (click)="modalService.openModal($event, modalSituationDemandeurTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -397,23 +396,16 @@
             </div>
         </form>
         <div class="div-buttons-form d-flex justify-content-center">
-            <button id="btn-ma-situation-retour"
-                data-testid="btn-ma-situation-retour"
-                class="btn-style-perso-2 first-btn button-typo"
-                aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()"
-                tag-navigation="clic_bouton_retour"
-                type="button">
+            <button id="btn-ma-situation-retour" data-testid="btn-ma-situation-retour"
+                class="btn-style-perso-2 first-btn button-typo" aria-label="Retour à la page précédente"
+                (click)="onClickButtonRetour()" tag-navigation="clic_bouton_retour" type="button">
                 <div>
                     <img alt="" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-ma-situation-suivant"
-                data-testid="btn-ma-situation-suivant"
-                class="btn-style-perso-1 second-btn button-typo"
-                aria-label="Passer à la page suivante"
-                type="submit"
+            <button id="btn-ma-situation-suivant" data-testid="btn-ma-situation-suivant"
+                class="btn-style-perso-1 second-btn button-typo" aria-label="Passer à la page suivante" type="submit"
                 aria-label="quantity of pens"
                 (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
                 tag-navigation="clic_bouton_suivant">
@@ -426,27 +418,17 @@
     </div>
 </div>
 
-
-<ng-template #popoverSituationDemandeurTemplate>
-    <div class="container popover-container">
-        <div class="close-popover row">
-            <div>
-                <i class="fas fa-times-circle mb-2 float-end" (click)="popoverSituationDemandeur.hide()"></i>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-
-                <b>Pourquoi me pose-t-on ces questions ?</b>
-            </p>
-
-            <p>
-                Ces situations et les montants des revenus associés ont une incidence sur le calcul de la prime
-                d’activité.
-            </p>
-            <p>
-                C’est pourquoi, il est important de les déclarer.
-            </p>
-        </div>
-    </div>
+<ng-template #modalSituationDemandeurTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Pourquoi me pose-t-on ces questions ?
+        </h4>
+        <p class='body-2-typo'>
+            Ces situations et les montants des revenus associés ont une incidence sur le calcul de la prime
+            d’activité.
+        </p>
+        <p class='body-2-typo'>
+            C’est pourquoi, il est important de les déclarer.
+        </p>">
+    </app-tooltip>
 </ng-template>

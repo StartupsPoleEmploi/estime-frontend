@@ -21,6 +21,7 @@ import { InformationsPersonnellesService } from '@app/core/services/utile/inform
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ma-situation',
@@ -55,6 +56,7 @@ export class MaSituationComponent implements OnInit {
   public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
   private estimeApiService: EstimeApiService;
   private informationsPersonnellesService: InformationsPersonnellesService;
+  public modalService: ModalService;
   public screenService: ScreenService;
   private situationFamilialeUtileService: SituationFamilialeUtileService;
 
@@ -72,6 +74,7 @@ export class MaSituationComponent implements OnInit {
     this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
     this.screenService = injector.get<ScreenService>(ScreenService);
     this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
+    this.modalService = injector.get<ModalService>(ModalService);
   }
 
   ngOnInit(): void {
@@ -396,7 +399,6 @@ export class MaSituationComponent implements OnInit {
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    console.log(demandeurEmploiConnecte.informationsPersonnelles);
     if (!demandeurEmploiConnecte.informationsPersonnelles) {
       this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
       this.informationsPersonnelles.nationalite = null;

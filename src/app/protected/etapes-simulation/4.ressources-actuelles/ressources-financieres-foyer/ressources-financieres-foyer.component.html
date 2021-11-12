@@ -602,10 +602,9 @@
                 <label class="label headline-4-typo" for="revenusImmobilierFoyer">
                     * Revenus annuels de placement ou du patrimoine
                     <button id="infobulle-revenus-immobilier" role="tooltip" class="img-interrogation-icon"
-                        [ngClass]="{'popover-open': popoverRevenusImmobiliers.isOpen}" placement="right"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
-                        (click)="$event.preventDefault();" [popover]="popoverRevenusImmobiliersTemplate"
-                        #popoverRevenusImmobiliers="bs-popover"></button>
+                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
                 </label>
             </div>
             <div class="row">
@@ -650,40 +649,16 @@
     </form>
 </div>
 
-<ng-template #popoverRevenusImmobiliersTemplate>
-    <div class="container" (click)="onClickPopoverRevenusImmobiliers($event)">
-        <div class="close-popover row">
-            <div class="col"><i class="fas fa-times-circle mb-2 ms-auto float-end"
-                    (click)="onClickClosePopoverRevenusImmobiliers($event)"></i>
-            </div>
-        </div>
-        <div class="row">
-            <h5>
-                Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
-            </h5>
-            <p> * revenus fonciers ou micro-fonciers
-                <br>
-                * revenus des capitaux (actions, obligations)
-                <br>
-                * bénéfices d'une rente viagère
-            </p>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #popoverSituationLogementTemplate>
-    <div class="container" (click)="onClickPopoverSituationLogement($event)">
-        <div class="close-popover row">
-            <div class="col">
-                <i class="fas fa-times-circle mb-2 ms-auto float-end"
-                    (click)="onClickClosePopoverSituationLogement($event)"></i>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                Répondez par non si vous payez un loyer, vous êtes hébergé et vous payez une participation pour ce
-                logement ou vous êtes propriétaire et remboursez un prêt.
-            </p>
-        </div>
-    </div>
+<ng-template #modalRevenusImmobiliersTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
+        </h4>
+        <p class='body-2-typo'> * revenus fonciers ou micro-fonciers
+            <br>
+            * revenus des capitaux (actions, obligations)
+            <br>
+            * bénéfices d'une rente viagère
+        </p>">
+    </app-tooltip>
 </ng-template>

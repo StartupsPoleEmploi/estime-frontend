@@ -6,7 +6,6 @@ import { AvantDeCommencerSimulationComponent } from '@app/protected/avant-de-com
 import { BnNgIdleService } from 'bn-ng-idle';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ChartModule } from 'angular2-chartjs';
 import { AvantDeCommencerSimulationRoutingModule } from './avant-de-commencer-simulation-routing.module';
@@ -20,7 +19,6 @@ import { AvantDeCommencerSimulationRoutingModule } from './avant-de-commencer-si
     CommunModule,
     FormsModule,
     ReactiveFormsModule,
-    PopoverModule.forRoot(),
     ProgressbarModule.forRoot(),
     AvantDeCommencerSimulationRoutingModule,
     RouterModule,

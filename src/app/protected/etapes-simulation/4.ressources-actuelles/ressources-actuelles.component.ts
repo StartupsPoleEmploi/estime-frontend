@@ -169,15 +169,6 @@ export class RessourcesActuellesComponent implements OnInit {
     return result;
   }
 
-  public onClickPopoverRessourceFoyer(event) {
-    event.stopPropagation();
-  }
-
-  public onClickClosePopoverRessourceFoyerTemplate(event, popoverRessourceFoyer) {
-    event.stopPropagation();
-    popoverRessourceFoyer.hide();
-  }
-
   public onClickButtonVosRessources(): void {
     this.isVosRessourcesDisplay = !this.isVosRessourcesDisplay;
   }

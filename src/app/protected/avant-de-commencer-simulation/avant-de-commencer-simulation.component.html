@@ -10,56 +10,38 @@
         <div class="row">
             <div class="col-12">
                 <p class="body-1-typo">
-                    Pour faire l’estimation la plus juste, nous vous demandons les ressources de votre foyer, notamment
-                    les allocations que vous percevez.
+                    Pour faire l’estimation la plus juste, en fonction de votre situation, veuillez vous munir de ces
+                    documents :
                 </p>
-                <p class="body-1-typo">
-                    <img alt="" class="me-2" src="./assets/images/hand-finger-right.svg">
-                    <span>Selon votre situation, veuillez vous munir de :</span>
-                    <br>
-                    <span class="text-document">
-                        - Votre
-                        <span class="text-important">
-                            dernière notification ASS Pôle Emploi
-                            <a aria-describedby="infobulle-derniere-notification-pole-emploi"
-                                target="_blank"
-                                aria-label="Voir exemple document dernière notification Pôle emploi"
-                                tag-action="clic_infobulle_document_derniere_notification_pe"
-                                href="./assets/documents/attestation-ass.pdf">
-                                <button id="infobulle-derniere-notification-pole-emploi"
-                                        role="tooltip"
-                                        tabindex="0"
-                                        class="img-interrogation-icon">
-                                </button>
-                            </a>
-                        </span>
-                    </span>
-                    <br>
-                    <span class="text-document">
-                        - Votre
-                        <span class="text-important">
-                            notification de droits CAF ou MSA
-                            <a target="_blank"
-                                aria-describedby="infobulle-derniere-notification-caf-msa"
-                                aria-label="Voir exemple document dernière notification CAF ou MSA"
-                                tag-action="clic_infobulle_document_notification_droits_caf"
-                                href="./assets/documents/attestation-caf.pdf"
-                                rel="noopener noreferrer">
-                                <button id="infobulle-derniere-notification-caf-msa"
-                                    role="infobulle-notification-droits-caf"
-                                    class="img-interrogation-icon">
-                                </button>
-                            </a>
-                        </span>
-                    </span>
-                    <br>
-                    <span class="text-document">
-                        - Votre
-                        <span class="text-important ">
-                            dernière notification de pension d'invalidité
-                        </span>
-                    </span>
-                </p>
+                <div class="documents-demandes">
+                    <div class="items-documents-demandes">
+                        <span class="headline-5-typo headline-5-typo-color">Relevé de situation ARE</span>
+                        <button id="infobulle-trouver-dernier-releve-situation-are" role="tooltip"
+                            class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
+                            placement="right" tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
+                            (click)="modalService.openModal($event, modalDernierReleveDeSituationARE)"></button>
+                    </div>
+                    <hr>
+                    <div class="items-documents-demandes">
+                        <span class="headline-5-typo headline-5-typo-color">Notification de droits ASS</span>
+                        <button id="infobulle-trouver-notification-droits-ass" role="tooltip"
+                            class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
+                            placement="right" tag-action="ouverture-infobulle-trouver-notification-droits-ass"
+                            (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate)"></button>
+                    </div>
+                    <hr>
+                    <div class="items-documents-demandes">
+                        <span class="headline-5-typo headline-5-typo-color">Droits CAF ou MSA</span>
+                        <button id="infobulle-trouver-derniere-attestation-caf" role="tooltip"
+                            class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
+                            placement="right" tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
+                            (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate)"></button>
+                    </div>
+                    <hr>
+                    <div class="items-documents-demandes">
+                        <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
+                    </div>
+                </div>
                 <div id="div-info-simulation" class="card">
                     <div class="row">
                         <div id="img-info-simulation" class="col-auto">
@@ -87,3 +69,45 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalDerniereAttestationCafTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h4 class="headline-4-typo headline-4-typo-color">
+            Où trouver votre dernière attestation de paiement CAF ?
+        </h4>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
+        <ol class="body-2-typo">
+            <li>Connectez-vous à votre compte sur <a class="link-modal" href="https://caf.fr">caf.fr</a></li>
+            <li>Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et
+                mes droits”</li>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “CAF”</h5>
+        <ol class="body-2-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire</li>
+            <li>Accédez à la rubrique mes attestations depuis l’écran d’accueil</li>
+            <li>Dans la liste, sélectionnez attestation de paiement </li>
+            <li>Vous pouvez ensuite la télécharger.</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDernierReleveDeSituationARE>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h4 class="headline-4-typo headline-4-typo-color">
+            Où trouver votre dernier relevé de situation ARE ? </h4>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
+        <ol class="body-2-typo">
+            <li>Connectez-vous sur <a class="link-modal"
+                    href="https://candidat.pole-emploi.fr">candidat.pole-emploi.fr</a></li>
+            <li>Rendez-vous dans “Mes courriers reçus dans le menu en haut à droite de l’écran</li>
+            <li>Dans la liste des courriers reçus vous trouverez vos relevés de situation</li>
+            <li>Choisissez le relevé de situation le plus récent et cliquez sur “Télécharger”</li>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “Mon Espace” de Pôle Emploi :</h5>
+        <ol class="body-2-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire</li>
+            <li>Accédez à vos courriers depuis la barre de menu en bas de l’écran</li>
+            <li>Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l’ouvrir</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>

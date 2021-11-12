@@ -16,6 +16,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { DateInputsComponent } from './components/date-inputs/date-inputs.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/text-with-euro-symbol.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
     PageLoadingComponent,
     SigninRedirectCallbackComponent,
     DateInputsComponent,
-    TextWithEuroSymbolComponent
+    TextWithEuroSymbolComponent,
+    TooltipComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -51,7 +53,8 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
     HeaderComponent,
     PageLoadingComponent,
     DateInputsComponent,
-    TextWithEuroSymbolComponent
+    TextWithEuroSymbolComponent,
+    TooltipComponent
   ]
 })
 export class CommunModule { }

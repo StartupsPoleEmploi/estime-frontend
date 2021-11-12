@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -8,6 +8,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
 import { Aide } from '@models/aide';
@@ -32,16 +33,28 @@ export class ResultatSimulationComponent implements OnInit {
   afficherDetails: boolean;
   nombreMoisSimules: number;
 
+  // services à injecter dynamiquement
+  private aidesService: AidesService;
+  public dateUtileService: DateUtileService;
+  public deConnecteService: DeConnecteService;
+  public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
+  public deConnecteSimulationAidesService: DeConnecteSimulationAidesService;
+  public modalService: ModalService;
+  private router: Router;
+  public screenService: ScreenService;
+  private simulationPdfMakerService: SimulationPdfMakerService;
+
   constructor(
-    private aidesService: AidesService,
-    private dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
-    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
-    private router: Router,
-    public screenService: ScreenService,
-    private simulationPdfMakerService:SimulationPdfMakerService
+    private injector: Injector
   ) {
+    this.aidesService = injector.get<AidesService>(AidesService);
+    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
+    this.deConnecteSimulationAidesService = injector.get<DeConnecteSimulationAidesService>(DeConnecteSimulationAidesService);
+    this.modalService = injector.get<ModalService>(ModalService);
+    this.screenService = injector.get<ScreenService>(ScreenService);
+    this.simulationPdfMakerService = injector.get<SimulationPdfMakerService>(SimulationPdfMakerService);
   }
 
   ngOnInit(): void {
@@ -79,7 +92,7 @@ export class ResultatSimulationComponent implements OnInit {
   public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {
     let dateStringFormat = null;
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
-    if(this.screenService.isTabletScreen()) {
+    if (this.screenService.isTabletScreen()) {
       dateStringFormat = this.dateUtileService.getLibelleDateStringFormatCourt(dateSimulation);
     } else {
       dateStringFormat = this.dateUtileService.getLibelleDateStringFormat(dateSimulation);
@@ -126,7 +139,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   private selectAideAfficherDetail(): void {
     const isAideActuelleSelected = this.selectAideActuelle();
-    if(!isAideActuelleSelected) {
+    if (!isAideActuelleSelected) {
       this.selectFirstAidePourraObtenir();
     }
   }
@@ -134,12 +147,12 @@ export class ResultatSimulationComponent implements OnInit {
   private selectAideActuelle(): boolean {
     let isAideActuelleSelected = false;
     const aideAAH = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
-    if(aideAAH) {
+    if (aideAAH) {
       this.aideSelected = aideAAH;
       isAideActuelleSelected = true;
     } else {
       const aideASS = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
-      if(aideASS) {
+      if (aideASS) {
         this.aideSelected = aideASS;
         isAideActuelleSelected = true;
       }

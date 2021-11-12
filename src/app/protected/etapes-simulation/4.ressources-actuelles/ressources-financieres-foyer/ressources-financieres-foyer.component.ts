@@ -21,7 +21,7 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -33,8 +33,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   isRessourcesFinancieresFoyerFormSubmitted = false;
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
-  @ViewChild('popoverRevenusImmobiliers') popoverRevenusImmobiliers: PopoverDirective;
-  @ViewChild('popoverSituationLogement') popoverSituationLogement: PopoverDirective;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 
@@ -62,6 +60,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
   public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
   private informationsPersonnellesService: InformationsPersonnellesService;
+  public modalService: ModalService;
   private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
   public screenService: ScreenService;
   private situationFamilialeUtileService: SituationFamilialeUtileService;
@@ -77,6 +76,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
     this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
     this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.modalService = injector.get<ModalService>(ModalService);
     this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
     this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
     this.screenService = injector.get<ScreenService>(ScreenService);
@@ -102,15 +102,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
-  }
-
-  public onClickPopoverRevenusImmobiliers(event) {
-    event.stopPropagation();
-  }
-
-  public onClickClosePopoverRevenusImmobiliers(event) {
-    event.stopPropagation();
-    this.popoverRevenusImmobiliers.hide();
   }
 
   public onClickCheckBoxHasAPL(): void {
@@ -145,11 +136,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.deConnecteService.unsetALF();
       this.beneficiaireAides.beneficiaireALF = false;
     }
-  }
-
-  public onClickClosePopoverSituationLogement(event): void {
-    event.stopPropagation();
-    this.popoverSituationLogement.hide();
   }
 
   private initOptionsProchaineDeclarationTrimestrielle() {
@@ -275,10 +261,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.unsetStatutOccupationLogement();
       this.setIsLogeGratuitement();
     }
-  }
-
-  public onClickPopoverSituationLogement(event) {
-    event.stopPropagation();
   }
 
   public isStatutOccupationLogementSelectionne() {

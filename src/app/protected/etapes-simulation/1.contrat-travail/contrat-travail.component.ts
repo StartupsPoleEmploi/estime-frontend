@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -7,6 +7,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { TypesContratTavailEnum } from '@enumerations/types-contrat-travail.enum';
@@ -36,16 +37,26 @@ export class ContratTravailComponent implements OnInit {
     { label: "6 mois et plus", value: 6 }
   ];
 
-  constructor(
-    private aidesService: AidesService,
-    private brutNetService: BrutNetService,
-    private deConnecteService: DeConnecteService,
-    private elementRef: ElementRef,
-    private router: Router,
-    public screenService: ScreenService,
-    public controleChampFormulaireService: ControleChampFormulaireService
-  ) {
+  // services à injecter dynamiquement
+  private aidesService: AidesService;
+  private brutNetService: BrutNetService;
+  private deConnecteService: DeConnecteService;
+  private elementRef: ElementRef;
+  public screenService: ScreenService;
+  public controleChampFormulaireService: ControleChampFormulaireService;
+  public modalService: ModalService;
 
+  constructor(
+    private injector: Injector,
+    private router: Router
+  ) {
+    this.aidesService = injector.get<AidesService>(AidesService);
+    this.brutNetService = injector.get<BrutNetService>(BrutNetService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.elementRef = injector.get<ElementRef>(ElementRef);
+    this.screenService = injector.get<ScreenService>(ScreenService);
+    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
+    this.modalService = injector.get<ModalService>(ModalService);
   }
 
   ngOnInit(): void {
@@ -57,7 +68,7 @@ export class ContratTravailComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.futurTravail) {
       this.futurTravail = demandeurEmploiConnecte.futurTravail;
-      if(this.futurTravail.nombreTrajetsDomicileTravail) {
+      if (this.futurTravail.nombreTrajetsDomicileTravail) {
         this.isNombreTrajetsDomicileTravailDisplay = true;
       }
     } else {

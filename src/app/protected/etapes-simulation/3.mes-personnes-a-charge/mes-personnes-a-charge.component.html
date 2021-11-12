@@ -16,21 +16,18 @@
                 <div *ngIf="screenService.isExtraSmallScreen()"></div>
                 personne(s) à charge
                 <button id="infobulle-personnes-charge-nbr-enfant" role="tooltip" class="img-interrogation-icon"
-                    [ngClass]="{'popover-open': popoverPersonnesACharge.isOpen}" placement="right"
+                    [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                     tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
-                    [popover]="popoverPersonnesAChargeTemplate" #popoverPersonnesACharge="bs-popover">
+                    (click)="modalService.openModal($event, modalPersonnesAChargeTemplate)">
                 </button>
             </label>
         </div>
-        <div class="card-group row row-cols-2 row-cols-md-3 gx-4 gy-2">
+        <div class=" card-group row row-cols-2 row-cols-md-3 gx-4 gy-2">
             <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                 <div class="card">
                     <div class="card-header">
-                        <i id="btn-supprimer-personne-a-charge"
-                            role="button"
-                            tabindex="0"
-                            alt="Supprimer personne à charge"
-                            class="fas fa-times-circle float-end"
+                        <i id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
+                            alt="Supprimer personne à charge" class="fas fa-times-circle float-end"
                             (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
                             (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
                         </i>
@@ -41,7 +38,8 @@
                                 <img alt="" class src="./assets/images/personne.svg">
                             </div>
                             <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
-                                <span class="span-personne headline-4-typo">Personne {{indexOfelement + 1}}</span>
+                                <span class="span-personne headline-4-typo">Personne {{indexOfelement +
+                                    1}}</span>
                                 <span class="body-2-typo">
                                     {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
                                 </span>
@@ -49,9 +47,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a tabindex="0"
-                            href="javascript:;"
-                            alt="Modifier personne à charge"
+                        <a tabindex="0" href="javascript:;" alt="Modifier personne à charge"
                             class="float-end caption-2-typo"
                             (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
                             Modifier
@@ -60,19 +56,15 @@
                 </div>
             </div>
             <div class="col">
-                <button name="button-card-add-personne"
-                    class="button-card-add-personne"
-                    aria-label="Ajouter une personne à charge"
-                    (click)="onClickButtonAjouterPersonne()"
+                <button name="button-card-add-personne" class="button-card-add-personne"
+                    aria-label="Ajouter une personne à charge" (click)="onClickButtonAjouterPersonne()"
                     (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
                     *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-                    <div class="card card-add-personne"
-                        data-testid="btn-ajouter-personne-charge"
+                    <div class="card card-add-personne" data-testid="btn-ajouter-personne-charge"
                         [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}">
                         <div class="card-body d-flex align-items-center">
                             <div id="row-card-body-add-personne" class="row">
-                                <div id="add-personne-icon"
-                                    class="col-md-3 col-xs-12 col-card-body">
+                                <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
                                     <img alt="" src="./assets/images/ajouter-personne.svg">
                                 </div>
                                 <div class="col-md-9 col-xs-12 col-card-body"
@@ -131,19 +123,11 @@
     </div>
 </div>
 
-
-<ng-template #popoverPersonnesAChargeTemplate>
-    <div class="container popover-container">
-        <div class="close-popover row">
-            <div class="col">
-                <i class="fas fa-times-circle mb-2 float-end" (click)="popoverPersonnesACharge.hide()"></i>
-            </div>
-        </div>
-        <div class="row">
-            <h5>Qui sont les « personnes à charge » ?</h5>
-            <p>
-                Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
-            </p>
-        </div>
-    </div>
+<ng-template #modalPersonnesAChargeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>Qui sont les « personnes à charge » ?</h4>
+        <p class='body-2-typo'>
+            Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
+        </p>">
+    </app-tooltip>
 </ng-template>

@@ -6,9 +6,9 @@
             <h1 class="h1-style-1 headline-1-typo">
                 5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
                 <button id="infobulle-resultat-simulation" role="tooltip" class="img-interrogation-icon"
-                    style="vertical-align: baseline;" [ngClass]="{'popover-open': popoverResultatSimulation.isOpen}"
+                    style="vertical-align: baseline;" [ngClass]="{'popover-open': modalService.isOpen}"
                     placement="right top" tag-action="ouverture-infobulle-resultat-simulation"
-                    [popover]="popoverResultatSimulationTemplate" #popoverResultatSimulation="bs-popover"></button>
+                    (click)="modalService.openModal($event, modalResultatSimulationTemplate)"></button>
             </h1>
         </div>
     </div>
@@ -25,11 +25,8 @@
     </div>
     <div class="row row-telecharger-ou-refaire row-style-2">
         <div class="col-12 col-md-6 my-auto">
-            <span id="btn-telecharger-simulation"
-                class="btn-telecharger-ou-refaire"
-                data-testid="btn-telecharger-simulation"
-                tabindex="0"
-                (click)="onClickButtonImprimerMaSimulation()"
+            <span id="btn-telecharger-simulation" class="btn-telecharger-ou-refaire"
+                data-testid="btn-telecharger-simulation" tabindex="0" (click)="onClickButtonImprimerMaSimulation()"
                 tag-download="clic_bouton_telecharger_ma_simulation">
                 <div>
                     <img alt="" src="./assets/images/download_2.svg">
@@ -39,11 +36,8 @@
         </div>
         <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 2vh;"></div>
         <div class="col-12 col-md-6 my-auto">
-            <span id="btn-refaire-simulation"
-                class="btn-telecharger-ou-refaire"
-                data-testid="btn-refaire-simulation"
-                tabindex="0"
-                (click)="onClickButtonRefaireSimulation()">
+            <span id="btn-refaire-simulation" class="btn-telecharger-ou-refaire" data-testid="btn-refaire-simulation"
+                tabindex="0" (click)="onClickButtonRefaireSimulation()">
                 <div>
                     <img alt="" src="./assets/images/refaire_simulation.svg">
                     <span id="refaire_simulation_text" class="button-typo">Refaire une simulation</span>
@@ -151,18 +145,11 @@
     </div>
 </div>
 
-<ng-template #popoverResultatSimulationTemplate>
-    <div class="container">
-        <div class="close-popover row">
-            <div class="col">
-                <i class="fas fa-times-circle mb-2 ms-auto float-end" (click)="popoverResultatSimulation.hide()"></i>
-            </div>
-        </div>
-        <div class="row">
-            <p class="body-2-typo">
-                Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont
-                susceptibles d'évoluer.
-            </p>
-        </div>
-    </div>
+<ng-template #modalResultatSimulationTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-2-typo'>
+            Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont
+            susceptibles d'évoluer.
+        </p>">
+    </app-tooltip>
 </ng-template>
