@@ -1,5 +1,5 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
-<div class="container-fluid">
+<div class="container-fluid" role="form">
     <alert type="danger" *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
@@ -16,7 +16,8 @@
                 <div class="documents-demandes">
                     <div class="items-documents-demandes">
                         <span class="headline-5-typo headline-5-typo-color">Relevé de situation ARE</span>
-                        <button id="infobulle-trouver-dernier-releve-situation-are" role="tooltip"
+                        <button id="infobulle-trouver-dernier-releve-situation-are"
+                            aria-label="Infobulle trouver dernier relevé de situation ARE"
                             class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
                             placement="right" tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
                             (click)="modalService.openModal($event, modalDernierReleveDeSituationARE)"></button>
@@ -24,7 +25,8 @@
                     <hr>
                     <div class="items-documents-demandes">
                         <span class="headline-5-typo headline-5-typo-color">Notification de droits ASS</span>
-                        <button id="infobulle-trouver-notification-droits-ass" role="tooltip"
+                        <button id="infobulle-trouver-notification-droits-ass"
+                            aria-label="Infobulle trouver notification de droits ASS"
                             class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
                             placement="right" tag-action="ouverture-infobulle-trouver-notification-droits-ass"
                             (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate)"></button>
@@ -32,7 +34,8 @@
                     <hr>
                     <div class="items-documents-demandes">
                         <span class="headline-5-typo headline-5-typo-color">Droits CAF ou MSA</span>
-                        <button id="infobulle-trouver-derniere-attestation-caf" role="tooltip"
+                        <button id="infobulle-trouver-derniere-attestation-caf"
+                            aria-label="Infobulle trouver derniere attestation CAF"
                             class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
                             placement="right" tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
                             (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate)"></button>

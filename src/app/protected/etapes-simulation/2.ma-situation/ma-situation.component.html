@@ -1,6 +1,6 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid form-container-fluid" role="form">
     <div class="div-title-formulaire">
         <h1 class="h1-style-1 headline-1-typo">2. {{pageTitlesEnum.MA_SITUATION}}</h1>
         <div class="text-under-h1 body-2-typo">
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="row  mb-2">
-                    <label class="label headline-4-typo" for="dateNaissance">
+                    <label class="label headline-4-typo">
                         * Votre date de naissance
                     </label>
                 </div>
@@ -110,95 +110,72 @@
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="situationsExceptionnelles"
-                        aria-describedby="infobulle-ma-situation-vous-percevez">
+                    <label class="label headline-4-typo">
                         * Vous percevez
-                        <button id="infobulle-ma-situation-vous-percevez" role="tooltip" class="img-interrogation-icon"
+                        <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                             [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                             tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                            aria-label="Infobulle ressources perçues"
                             (click)="modalService.openModal($event, modalSituationDemandeurTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label id="btn-situation-ass" name="beneficiaireASS"
+                        <button id="btn-situation-ass" name="beneficiaireASS"
                             aria-label="Vous êtes bénéficiaire de l'ASS" class="radio-button-style-1"
                             data-testid="btn-situation-ass" [(ngModel)]="beneficiaireAides.beneficiaireASS" btnCheckbox
-                            tabindex="0" role="button" #beneficiaireAAH="ngModel" (click)="onClickCheckBoxHasASS()"
+                            tabindex="0" #beneficiaireAAH="ngModel" (click)="onClickCheckBoxHasASS()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
-                            </div>
-                        </label>
-                        <label *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('demandeur')"
+                            <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
+                        </button>
+                        <button *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('demandeur')"
                             id="btn-situation-rsa" name="beneficiaireRSA" class="radio-button-style-1"
                             aria-label="Vous êtes bénéficiaire du RSA" data-testid="btn-situation-rsa button-typo"
-                            [(ngModel)]="beneficiaireAides.beneficiaireRSA" btnCheckbox tabindex="0" role="button"
+                            [(ngModel)]="beneficiaireAides.beneficiaireRSA" btnCheckbox tabindex="0"
                             #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-is-micro-entrepreneur" name="microEntrepreneur"
+                            <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
+                        </button>
+                        <button id="btn-is-micro-entrepreneur" name="microEntrepreneur"
                             aria-label="Vous êtes micro entrepreneur"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                             data-testid="btn-situation-micro-entrepreneur"
                             [(ngModel)]="informationsPersonnelles.microEntrepreneur" btnCheckbox tabindex="0"
-                            role="button" #microEntrepreneur="ngModel" (click)="onClickCheckBoxIsMicroEntrepreneur()"
+                            #microEntrepreneur="ngModel" (click)="onClickCheckBoxIsMicroEntrepreneur()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
-                            <div>
-                                <span>
-                                    {{situationPersonneEnum.MICRO_ENTREPRENEUR}}
-                                </span>
-                            </div>
-                        </label>
-                        <label id="btn-is-travailleur-independant" name="travailleurIndependant"
+                            <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
+                        </button>
+                        <button id="btn-is-travailleur-independant" name="travailleurIndependant"
                             aria-label="Vous êtes travailleur indépendant"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                             data-testid="btn-situation-travailleur-independant"
                             [(ngModel)]="informationsPersonnelles.travailleurIndependant" btnCheckbox tabindex="0"
-                            role="button" #travailleurIndependant="ngModel"
-                            (click)="onClickCheckBoxIsTravailleurIndependant()"
+                            #travailleurIndependant="ngModel" (click)="onClickCheckBoxIsTravailleurIndependant()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
-                            <div>
-                                <span>
-                                    {{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}
-                                </span>
-                            </div>
-                        </label>
-                        <label id="btn-has-revenus-immobilier" name="hasRevenusImmobilier"
+                            <span class="body-2-typo">{{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
+                        </button>
+                        <button id="btn-has-revenus-immobilier" name="hasRevenusImmobilier"
                             data-testid="btn-situation-revenu-immobilier" aria-label="Vous avez des revenus immobiliers"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
                             [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier" btnCheckbox tabindex="0"
-                            role="button" #hasRevenusImmobilier="ngModel"
-                            (click)="onClickCheckBoxHasRevenusImmobilier()"
+                            #hasRevenusImmobilier="ngModel" (click)="onClickCheckBoxHasRevenusImmobilier()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
-                            </div>
-                        </label>
-                        <label name="beneficiaireAAH" class="radio-button-style-1" data-testid="btn-situation-aah"
+                            <span class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
+                        </button>
+                        <button name="beneficiaireAAH" class="radio-button-style-1" data-testid="btn-situation-aah"
                             aria-label="Vous êtes bénéficiaire de l'AAH" [(ngModel)]="beneficiaireAides.beneficiaireAAH"
-                            btnCheckbox tabindex="0" role="button" #beneficiaireAAH="ngModel"
-                            (click)="onClickCheckBoxHasAAH()"
+                            btnCheckbox tabindex="0" #beneficiaireAAH="ngModel" (click)="onClickCheckBoxHasAAH()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
-                            </div>
-                        </label>
-                        <label name="beneficiairePensionInvalidite" class="radio-button-style-1"
+                            <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
+                        </button>
+                        <button name="beneficiairePensionInvalidite" class="radio-button-style-1"
                             data-testid="btn-situation-pension-invalidite"
                             aria-label="Vous percevez une pension d'invalidité"
                             [(ngModel)]="beneficiaireAides.beneficiairePensionInvalidite" btnCheckbox tabindex="0"
-                            role="button" #beneficiairePensionInvalidite="ngModel"
-                            (click)="onClickCheckBoxHasPensionInvalidite()"
+                            #beneficiairePensionInvalidite="ngModel" (click)="onClickCheckBoxHasPensionInvalidite()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
-                            </div>
-                        </label>
+                            <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
+                        </button>
                     </div>
                     <span class="row error-input-message"
                         *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationPeOuCafSelectionnee()">
@@ -208,32 +185,28 @@
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="situationFamilialeDemandeur">
+                    <label class="label headline-4-typo">
                         * Votre situation familiale
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label id="btn-situation-familiale-seul" #situationFamilialeDemandeur="ngModel"
+                        <button id="btn-situation-familiale-seul" #situationFamilialeDemandeur="ngModel"
                             (click)="onClickCheckBoxSituationFamiliale()" name="situationFamilialeDemandeur"
                             aria-label="Vous êtes célibataire" class="radio-button-style-1"
-                            data-testid="btn-situation-familiale-seul" [btnRadio]="false" tabindex="0" role="button"
-                            required [(ngModel)]="situationFamiliale.isEnCouple"
+                            data-testid="btn-situation-familiale-seul" [btnRadio]="false" tabindex="0" required
+                            [(ngModel)]="situationFamiliale.isEnCouple"
                             (keyup)="handleKeyUpOnButtonSituationFamiliale($event, false)">
-                            <div>
-                                <span class="body-2-typo">{{situationsFamilialesEnum.SEULE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-familiale-couple" #situationFamilialeDemandeur="ngModel"
+                            <span class="body-2-typo">{{situationsFamilialesEnum.SEULE}}</span>
+                        </button>
+                        <button id="btn-situation-familiale-couple" #situationFamilialeDemandeur="ngModel"
                             (click)="onClickCheckBoxSituationFamiliale()" name="situationFamilialeDemandeur"
                             aria-label="Vous êtes en couple" class="radio-button-style-1 ms-1"
-                            data-testid="btn-situation-familiale-couple" [btnRadio]="true" tabindex="0" role="button"
-                            required [(ngModel)]="situationFamiliale.isEnCouple"
+                            data-testid="btn-situation-familiale-couple" [btnRadio]="true" tabindex="0" required
+                            [(ngModel)]="situationFamiliale.isEnCouple"
                             (keyup)="handleKeyUpOnButtonSituationFamiliale($event, true)">
-                            <div>
-                                <span class="body-2-typo">{{situationsFamilialesEnum.EN_COUPLE}}</span>
-                            </div>
-                        </label>
+                            <span class="body-2-typo">{{situationsFamilialesEnum.EN_COUPLE}}</span>
+                        </button>
                     </div>
                 </div>
                 <span class="row error-input-message"
@@ -244,7 +217,7 @@
             <div class="form-group"
                 *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="isSeulPlusDe18Mois">
+                    <label class="label headline-4-typo">
                         * Vous vivez seul.e depuis plus de 18 mois ?
                     </label>
                 </div>
@@ -281,7 +254,7 @@
             </div>
             <div class="form-group" *ngIf="situationFamiliale.isEnCouple === true">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="situationConjoint">
+                    <label class="label headline-4-typo">
                         * Votre conjoint(e) perçoit
                     </label>
                 </div>
@@ -289,103 +262,80 @@
                     <div class="col">
                         <label #conjointIsSalarie="ngModel" name="conjointIsSalarie"
                             aria-label="Votre conjoint(e) perçoit un salaire" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-salarie" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-salarie" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
                             (click)="onClickCheckBoxConjointIsSalarie()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
                         </label>
                         <label #conjointHasARE="ngModel" name="conjointHasARE"
                             aria-label="Votre conjoint(e) perçoit l' ARE" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-are" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-are" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE"
                             (click)="onClickCheckBoxConjointHasARE()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
                         </label>
                         <label #conjointHasASS="ngModel" name="conjointHasASS"
                             aria-label="Votre conjoint(e) perçoit l' ASS" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-ass" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-ass" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS"
                             (click)="onClickCheckBoxConjointHasASS()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
                         </label>
                         <label *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('conjoint')"
                             #conjointHasRSA="ngModel" name="conjointHasRSA"
                             aria-label="Votre conjoint(e) perçoit le RSA" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-rsa" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-rsa" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA"
                             (click)="onClickCheckBoxConjointHasRSA()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                         </label>
                         <label id="btn-conjoint-is-micro-entrepreneur" name="conjointIsMicroEntrepreneur"
                             aria-label="Votre conjoint(e) est micro entrepreneur"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                             data-testid="btn-situation-conjoint-micro-entrepreneur"
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur"
-                            btnCheckbox tabindex="0" role="button" #conjointIsMicroEntrepreneur="ngModel"
+                            btnCheckbox tabindex="0" #conjointIsMicroEntrepreneur="ngModel"
                             (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
-                            <div>
-                                <span>
-                                    {{situationPersonneEnum.MICRO_ENTREPRENEUR}}
-                                </span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
                         </label>
                         <label id="btn-conjoint-is-travailleur-independant" name="conjointIsTravailleurIndependant"
                             aria-label="Votre conjoint(e) est travailleur indépendant"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                             data-testid="btn-situation-conjoint-travailleur-independant"
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant"
-                            btnCheckbox tabindex="0" role="button" #conjointIsTravailleurIndependant="ngModel"
+                            btnCheckbox tabindex="0" #conjointIsTravailleurIndependant="ngModel"
                             (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
                             (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
-                            <div>
-                                <span>
-                                    {{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}
-                                </span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
                         </label>
                         <label #conjointHasAAH="ngModel" name="conjointHasAAH"
                             aria-label="Votre conjoint(e) perçoit l'AAH" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-aah" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-aah" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH"
                             (click)="onClickCheckBoxConjointHasAAH()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
                         </label>
                         <label #conjointHasPensionInvalidite="ngModel" name="conjointHasInvalidite"
                             aria-label="Votre conjoint(e) perçoit une pension d'invalidité" class="radio-button-style-1"
                             data-testid="btn-situation-conjoint-pension-invalidite" btnCheckbox tabindex="0"
-                            role="button"
                             [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite"
                             (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                         </label>
                         <label #conjointIsSansRessource="ngModel" name="conjointIsSansRessource"
                             aria-label="Votre conjoint(e) est sans ressources financières" class="radio-button-style-1"
-                            data-testid="btn-situation-conjoint-sans-ressource" btnCheckbox tabindex="0" role="button"
+                            data-testid="btn-situation-conjoint-sans-ressource" btnCheckbox tabindex="0"
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
                             (click)="onClickCheckBoxConjointIsSansRessource()"
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">
-                            <div>
-                                <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
-                            </div>
+                            <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
                         </label>
                     </div>
                 </div>

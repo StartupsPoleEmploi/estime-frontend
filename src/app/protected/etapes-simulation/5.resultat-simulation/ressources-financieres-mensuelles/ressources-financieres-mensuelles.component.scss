@@ -123,6 +123,10 @@
 
       }
 
+      li {
+        list-style-type: none;
+      }
+
       .is-item-not-last {
         color: $color-grey-2;
         width: 100%;

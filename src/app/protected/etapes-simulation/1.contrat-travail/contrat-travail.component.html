@@ -1,6 +1,6 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid form-container-fluid" role="form">
     <div class="div-title-formulaire">
         <h1 class="h1-style-1 headline-1-typo">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
         <div class="text-under-h1 body-2-typo">
@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 form-group">
                     <div class="row mb-1">
-                        <label class="label headline-4-typo" for="typeContrat">
+                        <label class="label headline-4-typo">
                             * Type de contrat
                         </label>
                     </div>
@@ -119,9 +119,9 @@
                 <div class="row mb-2">
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut <div *ngIf="screenService.isExtraSmallScreen()"></div>ou net
-                        <button id="infobulle-contrat-travail-salaire" role="tooltip" class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                            tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
+                        <button id="infobulle-contrat-travail-salaire" aria-label="Infobulle salaire brut/net"
+                            class="img-interrogation-icon" [ngClass]="{'popover-open': modalService.isOpen}"
+                            placement="right" tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
                             (click)="modalService.openModal($event, modalSalaireNetTemplate)"></button>
                     </label>
                 </div>
@@ -227,9 +227,10 @@
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de jours où vous irez sur le lieu de travail
-                        <button id="infobulle-contrat-travail-nombre-trajets" role="tooltip" tabindex="0"
-                            class="img-interrogation-icon" [ngClass]="{'popover-open': modalService.isOpen}"
-                            placement="right" tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                        <button id="infobulle-contrat-travail-nombre-trajets"
+                            aria-label="Infobulle exemple nombre de trajets" tabindex="0" class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                             (click)="modalService.openModal($event, modalNombreTrajetTemplate)"></button>
                     </label>
                 </div>

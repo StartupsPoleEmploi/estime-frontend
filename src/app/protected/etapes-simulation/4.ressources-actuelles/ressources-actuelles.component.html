@@ -1,7 +1,7 @@
 <app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid form-container-fluid" role="form">
     <alert type="danger" *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
@@ -15,7 +15,7 @@
     </div>
     <div class="block-ressources">
         <div id="block-vos-ressources">
-            <button type="button" role="button" class="btn accordion-btn" (click)="onClickButtonVosRessources()">
+            <button type="button" class="btn accordion-btn" (click)="onClickButtonVosRessources()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
                         <div class="col-2 col-md-1 col-euro-sign">
@@ -43,9 +43,8 @@
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
             && !ressourceConjointSeulementRSA" id="block-ressources-conjoint">
-            <button type="button" role="button" aria-describedby="label-vos-ressources"
-                aria-label="Vos ressources en Euros" class="btn accordion-btn"
-                (click)="onClickButtonRessourcesConjoint()">
+            <button type="button" aria-describedby="label-vos-ressources" aria-label="Vos ressources en Euros"
+                class="btn accordion-btn" (click)="onClickButtonRessourcesConjoint()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
                         <div class="col-2 col-md-1 col-euro-sign">
@@ -74,9 +73,8 @@
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
             && !ressourcePersonnesAChargeSeulementRSA" id="block-ressources-personnes-a-charge">
-            <button type="button" role="button" aria-describedby="label-ressources-conjoint"
-                aria-label="Vos ressources en Euros" class="btn accordion-btn"
-                (click)="onClickButtonRessourcesPersonnesCharge()">
+            <button type="button" aria-describedby="label-ressources-conjoint" aria-label="Vos ressources en Euros"
+                class="btn accordion-btn" (click)="onClickButtonRessourcesPersonnesCharge()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
                         <div class="col-2 col-md-1 col-euro-sign">
@@ -106,7 +104,7 @@
             </app-ressources-financieres-personnes-a-charge>
         </div>
         <div id="block-ressources-foyer">
-            <button type="button" role="button" class="btn accordion-btn" aria-describedby="label-ressources-foyer"
+            <button type="button" class="btn accordion-btn" aria-describedby="label-ressources-foyer"
                 aria-label="Vos ressources en Euros" (click)="onClickButtonRessourcesFoyer()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">

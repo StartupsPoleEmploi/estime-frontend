@@ -235,6 +235,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
+    console.log("hello");
     this.isRessourcesPersonnesChargeDisplay = false;
     this.isRessourcesFoyerDisplay = true;
     this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();

@@ -40,7 +40,7 @@
         </div>
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="dateDerniereOuvertureDroit">
+                <label class="label headline-4-typo">
                     * Date dernière ouverture de droit à l'ASS
                 </label>
             </div>
@@ -94,7 +94,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
+                    <input id="allocationAAH" name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                         maxlength="6" min="0"
@@ -152,7 +152,7 @@
         </div>
         <div class="form-group">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                <label class="label headline-4-typo">
                     * Avez-vous travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois ?
                 </label>
             </div>
@@ -197,7 +197,7 @@
                 </label>
                 <div class="col">
                     <select data-testid="select-nombre-mois-travailles-avant-simulation"
-                        name="nombreMoisTravailleAuCoursDerniersMois"
+                        id="nombreMoisTravailleAuCoursDerniersMois" name="nombreMoisTravailleAuCoursDerniersMois"
                         [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                         aria-label="nombre de mois travaillés au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois"
                         class="fit-content form-select" data-width="auto" required

@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<div class="container-fluid" role="navigation" aria-label="Fil d'étape">
   <span class="overline-typo">Étape {{etapeActive}}/5</span>
-  <progressbar [value]="etapeActive * 20"></progressbar>
+  <progressbar aria-describedby="Fil d'étape" aria-label="Fil d'étape" role="progressbar" [value]="etapeActive * 20">
+  </progressbar>
 </div>
