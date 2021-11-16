@@ -141,6 +141,15 @@
                                 <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                             </div>
                         </label>
+                        <label id="btn-situation-are" name="beneficiaireARE"
+                            aria-label="Vous êtes bénéficiaire de l'ARE" class="radio-button-style-1"
+                            data-testid="btn-situation-are" [(ngModel)]="beneficiaireAides.beneficiaireARE" btnCheckbox
+                            tabindex="0" role="button" #beneficiaireARE="ngModel" (click)="onClickCheckBoxHasARE()"
+                            (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ARE)">
+                            <div>
+                                <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
+                            </div>
+                        </label>
                         <label id="btn-is-micro-entrepreneur" name="microEntrepreneur"
                             aria-label="Vous êtes micro entrepreneur"
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm"

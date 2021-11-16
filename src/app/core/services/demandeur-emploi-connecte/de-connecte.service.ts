@@ -15,6 +15,7 @@ import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
@@ -218,6 +219,17 @@ export class DeConnecteService {
           this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = 0;
         }
       }
+    }
+  }
+
+  public unsetAllocationMensuelleNetARE(): void {
+    if(this.demandeurEmploiConnecte.ressourcesFinancieres 
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi 
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite = null;
     }
   }
 

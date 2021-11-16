@@ -105,6 +105,11 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.setAllocationMensuelleNetASS();
     }
   }
+  public onClickCheckBoxHasARE(): void {
+    if (!this.beneficiaireAides.beneficiaireARE) {
+      this.deConnecteService.unsetAllocationMensuelleNetARE();
+    }
+  }
 
   public onClickCheckBoxHasRSA(): void {
     if (!this.beneficiaireAides.beneficiaireRSA) {
@@ -152,7 +157,8 @@ export class MaSituationComponent implements OnInit {
   public isAllocationPeOuCafSelectionnee(): boolean {
     return (this.beneficiaireAides.beneficiaireASS
       || this.beneficiaireAides.beneficiaireRSA
-      || this.beneficiaireAides.beneficiaireAAH);
+      || this.beneficiaireAides.beneficiaireAAH
+      || this.beneficiaireAides.beneficiaireARE);
   }
 
 
@@ -186,6 +192,10 @@ export class MaSituationComponent implements OnInit {
       if (situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
+      }
+      if (situationPersonne === this.situationPersonneEnum.ARE) {
+        this.beneficiaireAides.beneficiaireARE = ! this.beneficiaireAides.beneficiaireARE;
+        this.onClickCheckBoxHasARE();
       }
       if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
         this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
