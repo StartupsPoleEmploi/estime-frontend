@@ -12,8 +12,6 @@ services:
       TZ: "Europe/Paris"
     networks:
      - estime
-    ports:
-      - 80:8888
     healthcheck:
       test: curl --fail http://localhost:8888/ || exit 1
       timeout: 10s
