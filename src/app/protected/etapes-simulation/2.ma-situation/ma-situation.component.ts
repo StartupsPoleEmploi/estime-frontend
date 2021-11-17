@@ -127,6 +127,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxHasARE(): void {
     if (!this.beneficiaireAides.beneficiaireARE) {
       this.deConnecteService.unsetAllocationMensuelleNetARE();
+    } else {
+      this.deConnecteService.setAllocationMensuelleNetARE();
     }
   }
 
@@ -232,7 +234,7 @@ export class MaSituationComponent implements OnInit {
         this.onClickCheckBoxHasAAH();
       }
       if (situationPersonne === this.situationPersonneEnum.ARE) {
-        this.beneficiaireAides.beneficiaireARE = ! this.beneficiaireAides.beneficiaireARE;
+        this.beneficiaireAides.beneficiaireARE = !this.beneficiaireAides.beneficiaireARE;
         this.onClickCheckBoxHasARE();
       }
       if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {

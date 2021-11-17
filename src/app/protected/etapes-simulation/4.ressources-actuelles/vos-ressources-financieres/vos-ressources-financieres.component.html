@@ -44,7 +44,7 @@
 
 
 
-        <!-- <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
@@ -63,7 +63,7 @@
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
-            <span
+            <!-- <span
                 *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
@@ -80,10 +80,10 @@
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span>
+            </span> -->
         </div>
-         -->
-        <!-- <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
+        
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-allocation-jours-restants">
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
@@ -98,11 +98,11 @@
                         maxlength="5" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)}"
                         [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants"
-                        required placeholder="Montant" inputmode="decimal" #allocationJoursRestants="ngModel">
+                        required placeholder="Nombre" inputmode="decimal" #allocationJoursRestants="ngModel">
                     <span class="text-side-input d-inline body-2-typo">jours</span>
                 </div>
             </div>
-            <span
+            <!-- <span
                 *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
@@ -119,7 +119,7 @@
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span>
+            </span> -->
         </div>
         
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()"> 
@@ -130,77 +130,88 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-allocation-journaliere-brut" name="montantJournaliereBrut" type="text"
+                    <input id="input-allocation-journaliere-brut" name="montantJournalierBrut" type="text"
                         data-testid="input-montant-journalier-brut"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournaliereBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereBrut== 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
-                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournaliereBrut"
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut== 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
+                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut"
                         required placeholder="Montant" inputmode="decimal" #salaireJournalierReferenceBrut="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
-            <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereBrut == 0)"
+            <!-- <span
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
             <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocation && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)"
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ASS}}
             </span>
             <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.required">
+                *ngIf="(isRessourcesFinancieresFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
             <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.pattern">
+                *ngIf="(isRessourcesFinancieresFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span>
+            </span> -->
         </div>
         
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="isConcerneDegressiviteAre">
+                <label class="label headline-4-typo" for="isConcerneDegressivite">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                 </label>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="form-check form-check-inline">
-                        <input id="isConcerneDegressiviteAreOui" name="isConcerneDegressiviteAreOui"
+                        <input id="isConcerneDegressiviteOui" name="isConcerneDegressiviteOui"
                             aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
-                            data-testid="btn-is-concerne-degressivite-are-oui" type="radio" class="form-check-input"
+                            data-testid="btn-is-concerne-degressivite-oui" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, true)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressiviteAre" required [value]="true"
-                            #isConcerneDegressiviteAreOui="ngModel">
-                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteAreOui">
+                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="true"
+                            #isConcerneDegressiviteOui="ngModel">
+                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteOui">
                             oui
                         </label>
                     </div>
                     <div class="form-check form-check-inline ms-2">
-                        <input id="isConcerneDegressiviteAreNon" name="isConcerneDegressiviteAreNon"
+                        <input id="isConcerneDegressiviteNon" name="isConcerneDegressiviteNon"
                             aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
-                            data-testid="btn-is-concerne-degressivite-are-non" type="radio" class="form-check-input"
+                            data-testid="btn-is-concerne-degressivite-non" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, false)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressiviteAre" required [value]="false"
-                            #isConcerneDegressiviteAreNon="ngModel">
-                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteAreNon">
+                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="false"
+                            #isConcerneDegressiviteNon="ngModel">
+                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteNon">
                             non
                         </label>
                     </div>
                 </div>
             </div>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || isConcerneDegressiviteAre.touched) && isConcerneDegressiviteAre.errors?.required">
+            <!-- <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || isConcerneDegressivite.touched) && isConcerneDegressivite.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
+            </span> -->
         </div>
- -->
 
 
+        <div *ngIf="isAfficherMessageARE();">
+            <div class="alert alert-dark" role="alert">
+                <div class="row">
+                    <div class="col-1">
+                        <img alt="" src="./assets/images/info-blue-1.svg">
+                    </div>
+                    <div class="col-11">
+                        <span class="body-2-typo">A ce jour, le résultat de la simulation ne prend pas en compte la dégressivité de l’allocation de retour à l’emploi.</span>
+                    </div>    
+                </div>
+            </div>
+        </div>
 
 
 

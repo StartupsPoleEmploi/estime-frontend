@@ -108,6 +108,15 @@ export class DeConnecteService {
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
+  public setAllocationMensuelleNetARE(): void {
+    this.setAidesPoleEmploi();
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
+      && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
+    }
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte)  
+  }
+
   public setAidesPoleEmploi(): void {
     if (!this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
@@ -231,9 +240,9 @@ export class DeConnecteService {
     if(this.demandeurEmploiConnecte.ressourcesFinancieres 
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi 
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
-      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = 0;
-      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = 0;
-      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants = 0;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants = null;
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite = null;
     }
   }
