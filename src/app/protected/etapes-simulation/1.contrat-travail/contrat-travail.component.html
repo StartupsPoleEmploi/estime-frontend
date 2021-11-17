@@ -1,6 +1,6 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid form-container-fluid" role="form">
     <div class="div-title-formulaire">
         <h1 class="h1-style-1 headline-1-typo">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
         <div class="text-under-h1 body-2-typo">
@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-12 col-sm-6 form-group">
                     <div class="row mb-1">
-                        <label class="label headline-4-typo" for="typeContrat">
+                        <label class="label headline-4-typo">
                             * Type de contrat
                         </label>
                     </div>
@@ -119,10 +119,10 @@
                 <div class="row mb-2">
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut <div *ngIf="screenService.isExtraSmallScreen()"></div>ou net
-                        <button id="infobulle-contrat-travail-salaire" role="tooltip" class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': popoverSalaireNet.isOpen}" placement="right"
-                            tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
-                            [popover]="popoverSalaireNetTemplate" #popoverSalaireNet="bs-popover"></button>
+                        <button id="infobulle-contrat-travail-salaire" aria-label="Infobulle salaire brut/net"
+                            class="img-interrogation-icon" [ngClass]="{'popover-open': modalService.isOpen}"
+                            placement="right" tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
+                            (click)="modalService.openModal($event, modalSalaireNetTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -227,10 +227,11 @@
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-nombre-trajets"
                         for="nombreTrajetsDomicileTravail">
                         * Nombre de jours où vous irez sur le lieu de travail
-                        <button id="infobulle-contrat-travail-nombre-trajets" role="tooltip" tabindex="0"
-                            class="img-interrogation-icon" [ngClass]="{'popover-open': popoverNombreTrajet.isOpen}"
-                            placement="right" tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
-                            [popover]="popoverNombreTrajetTemplate" #popoverNombreTrajet="bs-popover"></button>
+                        <button id="infobulle-contrat-travail-nombre-trajets"
+                            aria-label="Infobulle exemple nombre de trajets" tabindex="0" class="img-interrogation-icon"
+                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                            (click)="modalService.openModal($event, modalNombreTrajetTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -271,61 +272,45 @@
     </div>
 </div>
 
-<ng-template #popoverSalaireNetTemplate>
-    <div class="container popover-container">
-        <div class="close-popover row">
-            <div>
-                <i class="fas fa-times-circle mb-2 ms-auto float-end" (click)="popoverSalaireNet.hide()"></i>
-            </div>
-        </div>
-        <div class="row">
-            <h5>
-                Qu'est ce que le salaire brut et net ?
-            </h5>
-            <p>
-                Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
-                sociales et du prélévement à la source.
-            </p>
-            <p>
-                En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes
-                perçues avant déduction des cotisations sociales.
-            </p>
-        </div>
-    </div>
+<ng-template #modalSalaireNetTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>Qu'est ce que le salaire brut et net ? </h5>
+        <p class='body-2-typo'>
+            Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
+            sociales et du prélévement à la source.
+        </p>
+        <p class='body-2-typo'>
+            En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes
+            perçues avant déduction des cotisations sociales.
+        </p>">
+    </app-tooltip>
 </ng-template>
 
-<ng-template #popoverNombreTrajetTemplate>
-    <div class="container popover-container">
-        <div class="close-popover row">
-            <div>
-                <i class="fas fa-times-circle mb-2 ms-auto float-end" (click)="popoverNombreTrajet.hide()"></i>
-            </div>
-        </div>
-        <div class="row">
-            <h5>
-                Exemples de calculs :
-            </h5>
-            <p>
-                Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer
-                le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc
-                indiquer
-                <b>
-                    20 trajets aller par mois (5 allers x 4 semaines)
-                </b>
-                .
-            </p>
-            <p>
-                Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le
-                weekend le temps de sa période d'essai d'un mois. Il va indiquer
-                <b>
-                    4 trajets aller par mois (4 weekends par mois)
-                </b>
-                .
-            </p>
-            <p>
-                S'il s'agit d'un poste itinérant, vous devez prendre en compte uniquement les déplacements entre le
-                siège de l'entreprise et votre domicile. Cela exclut les déplacements chez les clients.
-            </p>
-        </div>
-    </div>
+<ng-template #modalNombreTrajetTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='healine-4-typo headline-4-typo-color'>
+            Exemples de calculs :
+        </h4>
+        <p class='body-2-typo'>
+            Julie réside à Strasbourg. Elle est intéressée par un poste à temps plein à Colmar. Elle pense effectuer
+            le trajet tous les jours de la semaine (5 allers Strasbourg - Colmar par semaine) . Elle va donc
+            indiquer
+            <b>
+                20 trajets aller par mois (5 allers x 4 semaines)
+            </b>
+            .
+        </p>
+        <p class='body-2-typo'>
+            Rachid habite à Reims et envisage un emploi à Marseille. Il pense y déménager mais revenir à Reims le
+            weekend le temps de sa période d'essai d'un mois. Il va indiquer
+            <b>
+                4 trajets aller par mois (4 weekends par mois)
+            </b>
+            .
+        </p>
+        <p class='body-2-typo'>
+            S'il s'agit d'un poste itinérant, vous devez prendre en compte uniquement les déplacements entre le
+            siège de l'entreprise et votre domicile. Cela exclut les déplacements chez les clients.
+        </p>">
+    </app-tooltip>
 </ng-template>

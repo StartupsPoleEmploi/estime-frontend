@@ -17,7 +17,6 @@ import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-oc
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { ThisReceiver, ThrowStmt } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
@@ -108,13 +107,13 @@ export class DeConnecteService {
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
-  public setAllocationMensuelleNetARE(): void {
+  public setAllocationMensuelleNetARE(): void {
     this.setAidesPoleEmploi();
     if (this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
       && !this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
-        this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
+      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
     }
-    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte)  
+    this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte)
   }
 
   public setAidesPoleEmploi(): void {
@@ -237,8 +236,8 @@ export class DeConnecteService {
   }
 
   public unsetAllocationMensuelleNetARE(): void {
-    if(this.demandeurEmploiConnecte.ressourcesFinancieres 
-      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi 
+    if (this.demandeurEmploiConnecte.ressourcesFinancieres
+      && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = null;
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = null;

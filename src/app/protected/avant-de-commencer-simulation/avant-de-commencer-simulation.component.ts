@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
@@ -23,17 +24,17 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
     private router: Router,
-    public screenService: ScreenService
-    ) {
-
-    }
+    public screenService: ScreenService,
+    public modalService: ModalService
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   public onClickButtonJeContinue(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if(!demandeurEmploiConnecte) {
+    if (!demandeurEmploiConnecte) {
       this.isPageLoadingDisplay = true;
       this.estimeApiService.creerDemandeurEmploi().then(
         (demandeurEmploi) => {

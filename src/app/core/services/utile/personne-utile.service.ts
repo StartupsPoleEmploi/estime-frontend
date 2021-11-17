@@ -80,9 +80,6 @@ export class PersonneUtileService {
     if (personne.beneficiaireAides.beneficiaireASS) {
       isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
     }
-    if (personne.beneficiaireAides.beneficiaireRSA) {
-      isValide = personne.ressourcesFinancieres.aidesCAF.allocationRSA > 0;
-    }
     if (personne.beneficiaireAides.beneficiaireAAH) {
       isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
     }

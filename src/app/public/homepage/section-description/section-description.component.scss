@@ -5,7 +5,8 @@
   padding-bottom: 2.5rem;
   padding-top: 2.5rem;
 
-  h1, p {
+  h1,
+  p {
     color: white;
     text-align: unset;
   }
@@ -38,7 +39,7 @@
         padding-left: 1rem;
       }
 
-      #body-text-description {
+      .body-text-description {
         margin-top: 1rem;
       }
     }

@@ -233,3 +233,11 @@ TODO : décommenter si changement validé par UX
   font-family: Lato !important;
   font-weight: normal !important;
 }
+
+.headline-4-typo-color {
+  color: $color-blue-2 !important;
+}
+
+.headline-5-typo-color {
+  @extend .headline-4-typo-color;
+}

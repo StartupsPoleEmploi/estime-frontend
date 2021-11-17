@@ -82,7 +82,7 @@
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span> -->
         </div>
-        
+
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-allocation-jours-restants">
@@ -121,8 +121,8 @@
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span> -->
         </div>
-        
-        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()"> 
+
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Montant brut de votre allocation journalière pour l'ARE
@@ -160,7 +160,7 @@
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span> -->
         </div>
-        
+
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="isConcerneDegressivite">
@@ -208,7 +208,7 @@
                     </div>
                     <div class="col-11">
                         <span class="body-2-typo">A ce jour, le résultat de la simulation ne prend pas en compte la dégressivité de l’allocation de retour à l’emploi.</span>
-                    </div>    
+                    </div>
                 </div>
             </div>
         </div>
@@ -219,8 +219,8 @@
 
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="dateDerniereOuvertureDroit">
-                    * Date de votre ouverture de droits à l'ASS ou de votre dernier renouvellement
+                <label class="label headline-4-typo">
+                    * Date dernière ouverture de droit à l'ASS
                 </label>
             </div>
             <div class="row">
@@ -273,7 +273,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
+                    <input id="allocationAAH" name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                         maxlength="6" min="0"
@@ -331,7 +331,7 @@
         </div>
         <div class="form-group">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                <label class="label headline-4-typo">
                     * Avez-vous travaillé au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois ?
                 </label>
             </div>
@@ -376,7 +376,7 @@
                 </label>
                 <div class="col">
                     <select data-testid="select-nombre-mois-travailles-avant-simulation"
-                        name="nombreMoisTravailleAuCoursDerniersMois"
+                        id="nombreMoisTravailleAuCoursDerniersMois" name="nombreMoisTravailleAuCoursDerniersMois"
                         [(ngModel)]="ressourcesFinancieres.nombreMoisTravaillesDerniersMois"
                         aria-label="nombre de mois travaillés au cours des {{getNombreMoisTravailleAuCoursDerniersMois()}} derniers mois"
                         class="fit-content form-select" data-width="auto" required
@@ -701,21 +701,3 @@
         </div>
     </div>
 </div>
-
-
-<ng-template #popoverSituationLogementTemplate>
-    <div class="container" (click)="onClickPopoverSituationLogement($event)">
-        <div class="close-popover row">
-            <div class="col">
-                <i class="fas fa-times-circle mb-2 ms-auto float-end"
-                    (click)="onClickClosePopoverSituationLogement($event)"></i>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                Répondez par non si vous payez un loyer, vous êtes hébergé et vous payez une participation pour ce
-                logement ou vous êtes propriétaire et remboursez un prêt.
-            </p>
-        </div>
-    </div>
-</ng-template>

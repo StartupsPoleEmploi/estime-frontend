@@ -169,15 +169,6 @@ export class RessourcesActuellesComponent implements OnInit {
     return result;
   }
 
-  public onClickPopoverRessourceFoyer(event) {
-    event.stopPropagation();
-  }
-
-  public onClickClosePopoverRessourceFoyerTemplate(event, popoverRessourceFoyer) {
-    event.stopPropagation();
-    popoverRessourceFoyer.hide();
-  }
-
   public onClickButtonVosRessources(): void {
     this.isVosRessourcesDisplay = !this.isVosRessourcesDisplay;
   }
@@ -244,6 +235,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
+    console.log("hello");
     this.isRessourcesPersonnesChargeDisplay = false;
     this.isRessourcesFoyerDisplay = true;
     this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
