@@ -264,6 +264,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
   }
 
+  public isAfficherMessageARE(): boolean {
+    return this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite;
+  }
+
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {

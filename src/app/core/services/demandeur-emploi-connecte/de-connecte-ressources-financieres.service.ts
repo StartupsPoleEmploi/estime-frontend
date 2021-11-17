@@ -267,6 +267,9 @@ export class DeConnecteRessourcesFinancieresService {
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() && isValide) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireARE()) {
+      isValide = this.isDonneesARESaisiesValides(ressourcesFinancieres)
+    }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
       isValide = ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
@@ -368,6 +371,14 @@ export class DeConnecteRessourcesFinancieresService {
   private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.aidesCAF.allocationAAH > 0;
   }
+
+
+  //is donnees ARE SAISIE VALIDE comprend tout les champs
+
+  private isDonneesARESaisiesValides(ressourcesFinancieres: RessourcesFinancieres) : boolean {
+    return ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
+  }
+
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {
     let montant = 0;

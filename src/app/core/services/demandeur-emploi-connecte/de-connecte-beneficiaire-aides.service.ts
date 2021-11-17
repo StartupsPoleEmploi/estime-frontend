@@ -23,6 +23,11 @@ export class DeConnecteBeneficiaireAidesService {
     return demandeurEmploiConnecte.beneficiaireAides.beneficiaireAAH;
   }
 
+  public isBeneficiaireARE(): boolean {
+    const demanderEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demanderEmploiConnecte.beneficiaireAides.beneficiaireARE;
+  }
+
   public isBeneficiairePensionInvalidite(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.beneficiaireAides.beneficiairePensionInvalidite;

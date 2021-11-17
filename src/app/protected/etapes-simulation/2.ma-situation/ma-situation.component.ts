@@ -127,6 +127,13 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.setAllocationMensuelleNetASS();
     }
   }
+  public onClickCheckBoxHasARE(): void {
+    if (!this.beneficiaireAides.beneficiaireARE) {
+      this.deConnecteService.unsetAllocationMensuelleNetARE();
+    } else {
+      this.deConnecteService.setAllocationMensuelleNetARE();
+    }
+  }
 
   public onClickCheckBoxHasRSA(): void {
     if (!this.beneficiaireAides.beneficiaireRSA) {
@@ -193,7 +200,8 @@ export class MaSituationComponent implements OnInit {
   public isAllocationPeOuCafSelectionnee(): boolean {
     return (this.beneficiaireAides.beneficiaireASS
       || this.beneficiaireAides.beneficiaireRSA
-      || this.beneficiaireAides.beneficiaireAAH);
+      || this.beneficiaireAides.beneficiaireAAH
+      || this.beneficiaireAides.beneficiaireARE);
   }
 
 
@@ -224,27 +232,31 @@ export class MaSituationComponent implements OnInit {
         this.beneficiaireAides.beneficiaireASS = !this.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxHasASS();
       }
-      if (situationPersonne === this.situationPersonneEnum.AAH) {
+      else if (situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
       }
-      if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
+      else if (situationPersonne === this.situationPersonneEnum.ARE) {
+        this.beneficiaireAides.beneficiaireARE = !this.beneficiaireAides.beneficiaireARE;
+        this.onClickCheckBoxHasARE();
+      }
+      else if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
         this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
+      else if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
         this.informationsPersonnelles.microEntrepreneur = !this.informationsPersonnelles.microEntrepreneur;
         this.onClickCheckBoxIsMicroEntrepreneur();
       }
-      if (situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
+      else if (situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
         this.informationsPersonnelles.travailleurIndependant = !this.informationsPersonnelles.travailleurIndependant;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if (situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
+      else if (situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.beneficiaireAides.beneficiairePensionInvalidite = !this.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
       }
-      if (situationPersonne === this.situationPersonneEnum.RSA) {
+      else if (situationPersonne === this.situationPersonneEnum.RSA) {
         this.beneficiaireAides.beneficiaireRSA = !this.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxHasRSA();
       }
