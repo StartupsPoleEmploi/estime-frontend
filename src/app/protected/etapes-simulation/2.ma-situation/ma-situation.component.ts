@@ -125,6 +125,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
+      this.beneficiaireAides.beneficiaireARE = false;
     }
   }
   public onClickCheckBoxHasARE(): void {
@@ -132,6 +133,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetAllocationMensuelleNetARE();
     } else {
       this.deConnecteService.setAllocationMensuelleNetARE();
+      this.beneficiaireAides.beneficiaireASS = false;
     }
   }
 
