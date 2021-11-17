@@ -159,9 +159,12 @@ export class DeConnecteRessourcesFinancieresService {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
       }
       if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
+        const nbrJourMoisPrecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
         if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
-          const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
-          montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet));
+          montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet));
+        }
+        if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+          montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut));
         }
       }
     }

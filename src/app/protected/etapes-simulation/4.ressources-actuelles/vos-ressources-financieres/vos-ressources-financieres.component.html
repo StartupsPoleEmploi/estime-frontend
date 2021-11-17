@@ -48,6 +48,12 @@
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                        tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                        aria-label="Infobulle ressources perçues"
+                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -63,94 +69,16 @@
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
-            <!-- <span
+            <span
                 *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
-            <span
+            <!-- <span
                 *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > this.controleChampFormulaireService.MONTANT_ARE_SALAIRE_JOURNALIER_REFERENCE_BRUT_MAX)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_SALAIRE_JOURNALIER_REFERENCE_BRUT_ARE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span> -->
-        </div>
-
-        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="input-allocation-jours-restants">
-                    * Nombre de jours d'allocation restants (reliquat) pour l'ARE
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="input-allocation-jours-restants" name="allocationJoursRestants" type="text"
-                        data-testid="input-allocation-jours-restants"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
-                        maxlength="5" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)}"
-                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants"
-                        required placeholder="Nombre" inputmode="decimal" #allocationJoursRestants="ngModel">
-                    <span class="text-side-input d-inline body-2-typo">jours</span>
-                </div>
-            </div>
-            <!-- <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-            </span>
-            <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ARE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereNetARE.touched)  && allocationJournaliereNetARE.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span> -->
-        </div>
-
-        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
-                    * Montant brut de votre allocation journalière pour l'ARE
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="input-allocation-journaliere-brut" name="montantJournalierBrut" type="text"
-                        data-testid="input-montant-journalier-brut"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
-                        maxlength="5" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut== 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
-                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut"
-                        required placeholder="Montant" inputmode="decimal" #salaireJournalierReferenceBrut="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <!-- <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-            </span>
-            <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ASS}}
-            </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -158,13 +86,109 @@
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+            </span>
+        </div>
+
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
+            <div class="row mb-2">
+                <label class="label headline-4-typo" for="input-nombre-jours-restants">
+                    * Nombre de jours d'allocation restants (reliquat) pour l'ARE
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                        tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                        aria-label="Infobulle ressources perçues"
+                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="input-nombre-jours-restants" name="nombreJoursRestants" type="text"
+                        data-testid="input-nombre-jours-restants"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="5" class="form-control d-inline"
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)}"
+                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants"
+                        required placeholder="Nombre" inputmode="decimal" #nombreJoursRestants="ngModel">
+                    <span class="text-side-input d-inline body-2-typo">jours</span>
+                </div>
+            </div>
+            <span
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0)"
+                class="row error-input-message">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+            </span>
+            <!-- <span
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)"
+                class="row error-input-message">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ARE}}
+            </span>-->
+            <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || nombreJoursRestants.touched)  && nombreJoursRestants.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+            <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || nombreJoursRestants.touched)  && nombreJoursRestants.errors?.pattern">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+            </span>
+        </div>
+
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
+            <div class="row mb-2">
+                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                    * Montant brut de votre allocation journalière pour l'ARE
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                        tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                        aria-label="Infobulle ressources perçues"
+                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="input-montant-journalier-brut" name="montantJournalierBrut" type="text"
+                        data-testid="input-montant-journalier-brut"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        maxlength="5" class="form-control d-inline"
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut== 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
+                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut"
+                        required placeholder="Montant" inputmode="decimal" #montantJournalierBrut="ngModel">
+                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <span
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0)"
+                class="row error-input-message">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+            </span>
+            <!-- <span
+                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)"
+                class="row error-input-message">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ASS}}
             </span> -->
+            <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+            <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.pattern">
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+            </span> 
         </div>
 
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="isConcerneDegressivite">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
+                        tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                        aria-label="Infobulle ressources perçues"
+                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -175,7 +199,7 @@
                             data-testid="btn-is-concerne-degressivite-oui" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, true)"
                             [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="true"
-                            #isConcerneDegressiviteOui="ngModel">
+                            #isConcerneDegressivite="ngModel">
                         <label class="form-check-label body-2-typo" for="isConcerneDegressiviteOui">
                             oui
                         </label>
@@ -186,17 +210,17 @@
                             data-testid="btn-is-concerne-degressivite-non" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, false)"
                             [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="false"
-                            #isConcerneDegressiviteNon="ngModel">
+                            #isConcerneDegressivite="ngModel">
                         <label class="form-check-label body-2-typo" for="isConcerneDegressiviteNon">
                             non
                         </label>
                     </div>
                 </div>
             </div>
-            <!-- <span class="row error-input-message"
+            <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || isConcerneDegressivite.touched) && isConcerneDegressivite.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span> -->
+            </span>
         </div>
 
 
@@ -701,3 +725,46 @@
         </div>
     </div>
 </div>
+
+
+<ng-template #modalSituationDemandeurTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur la page 2 de votre dernier relevé de situation Pôle Emploi 
+        </p>
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Où trouver votre dernier relevé de situation ARE ?
+        </h4>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur Internet :
+        </h5>
+        <ol class='body-2-typo'>
+            <li>
+                Rendez-vous votre espace personnel Pôle Emploi, dans la rubrique <i>'Mes courriers reçus' </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
+            </li>
+            <li>
+                Dans la liste des courriers reçus vous trouverez vos notifications ARE
+            </li>
+            <li>
+                Choisissez le relevé de situation le plus récent et cliquez sur <i>'Télécharger'</i>
+            </li>
+        </ol>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur l'application mobile <i>'Mon Espace'</i> de Pôle Emploi :
+        </h5>
+        <ol class='body-2-typo'>
+            <li>
+                Ouvrez l'application et connectez-vous si nécessaire
+            </li>
+            <li>
+                Accédez à vos courriers depuis la barre de menu en bas de l'écran
+            </li>
+            <li>
+                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
+            </li>
+        </ol>">      
+    </app-tooltip>
+</ng-template>

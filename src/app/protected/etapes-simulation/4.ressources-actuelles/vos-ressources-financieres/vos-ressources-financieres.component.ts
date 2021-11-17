@@ -21,6 +21,8 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
+import { ModalService } from '@app/core/services/utile/modal.service';
+
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -55,6 +57,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
   public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
   public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
+  public modalService: ModalService;
   public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
   public screenService: ScreenService;
   private situationFamilialeUtileService: SituationFamilialeUtileService;
@@ -70,6 +73,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
     this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
     this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.modalService = injector.get<ModalService>(ModalService);
     this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
     this.screenService = injector.get<ScreenService>(ScreenService);
     this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
