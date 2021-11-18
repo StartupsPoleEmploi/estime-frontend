@@ -32,11 +32,4 @@ export class DeConnecteInfosPersonnellesService {
     const codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
     return codeDepartement.length == 3;
   }
-
-  public isDeMayotte(): boolean {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
-    return codeDepartement == "976";
-
-  }
 }

@@ -37,154 +37,6 @@
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationRSA">
-                        * Concernant votre logement, vous êtes :
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label id="btn-situation-locataire-non-meuble" name="isLocataireNonMeuble"
-                            aria-label="Vous êtes locataire d'un logement non meublé" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-non-meuble"
-                            [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble"
-                            btnCheckbox tabindex="0" role="button" #isLocataireNonMeuble="ngModel"
-                            (click)="onClickCheckBoxIsLocataireNonMeuble()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_VIDE)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_VIDE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-locataire-meuble" name="isLocataireMeuble"
-                            aria-label="Vous êtes locataire d'un logement meublé" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-meuble"
-                            [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble"
-                            btnCheckbox tabindex="0" role="button" #isLocataireMeuble="ngModel"
-                            (click)="onClickCheckBoxIsLocataireMeuble()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_MEUBLE)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_MEUBLE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-locataire-hlm" name="isLocataireHLM"
-                            aria-label="Vous êtes locataire d'un HLM" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-hlm"
-                            [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM"
-                            btnCheckbox tabindex="0" role="button" #isLocataireHLM="ngModel"
-                            (click)="onClickCheckBoxIsLocataireHLM()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_HLM)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_HLM}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-proprietaire-avec-emprunt" name="isProprietaireAvecEmprunt"
-                            aria-label="Vous êtes propriétaire avec emprunt" class="radio-button-style-1"
-                            data-testid="btn-situation-proprietaire-avec-emprunt"
-                            [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt"
-                            btnCheckbox tabindex="0" role="button" #isProprietaireAvecEmprunt="ngModel"
-                            (click)="onClickCheckBoxIsProprietaireAvecEmprunt()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE_AVEC_EMPRUNT}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-proprietaire" name="isProprietaire"
-                            aria-label="Vous êtes propriétaire sans emprunt" class="radio-button-style-1"
-                            data-testid="btn-situation-proprietaire"
-                            [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire"
-                            btnCheckbox tabindex="0" role="button" #isProprietaire="ngModel"
-                            (click)="onClickCheckBoxIsProprietaire()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.PROPRIETAIRE)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-loge-gratuitement" name="isLogeGratuitement"
-                            aria-label="Vous êtes logé à titre gratuit" class="radio-button-style-1"
-                            data-testid="btn-situation-loge-gratuitement"
-                            [(ngModel)]="informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement"
-                            btnCheckbox tabindex="0" role="button" #isLogeGratuitement="ngModel"
-                            (click)="onClickCheckBoxIsLogeGratuitement()"
-                            (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOGE_GRATUITEMENT)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOGE_GRATUITEMENT}}</span>
-                            </div>
-                        </label>
-                    </div>
-                    <span class="row error-input-message"
-                        *ngIf="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()">
-                        {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UN_STATUT_OCCUPATION_LOGEMENT}}
-                    </span>
-                </div>
-            </div>
-            <div class="form-group" *ngIf="isConcerneParAideLogement()">
-                <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationRSA">
-                        * Votre logement est :
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label id="btn-situation-logement-crous" name="isCrous"
-                            aria-label="Votre logement est un logement CROUS" class="radio-button-style-1"
-                            data-testid="btn-situation-logement-crous"
-                            [(ngModel)]="this.informationsPersonnelles.logement.isCrous" btnCheckbox tabindex="0"
-                            role="button" #isCrous="ngModel" (click)="onClickCheckBoxIsCrous()"
-                            (keyup)="handleKeyUpOnButtonIsCrous($event)">
-                            <div>
-                                <span class="body-2-typo">Un logement CROUS</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-conventionne" name="isConventionne"
-                            aria-label="Votre logement est un logement conventionné" class="radio-button-style-1"
-                            data-testid="btn-situation-logement-conventionne"
-                            [(ngModel)]="this.informationsPersonnelles.logement.isConventionne" btnCheckbox tabindex="0"
-                            role="button" #isConventionne="ngModel" (click)="onClickCheckBoxIsConventionne()"
-                            (keyup)="handleKeyUpOnButtonIsConventionne($event)">
-                            <div>
-                                <span class="body-2-typo">un logement conventionné</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-colloc" name="isColloc"
-                            aria-label="Votre logement est un logement en collocation" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-hlm"
-                            [(ngModel)]="this.informationsPersonnelles.logement.isColloc" btnCheckbox tabindex="0"
-                            role="button" #isColloc="ngModel" (click)="onClickCheckBoxIsColloc()"
-                            (keyup)="handleKeyUpOnButtonIsColloc($event)">
-                            <div>
-                                <span class="body-2-typo">Une collocation</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-chambre" name="isChambre"
-                            aria-label="Votre logement est une chambre" class="radio-button-style-1"
-                            data-testid="btn-situation-logement-chambre"
-                            [(ngModel)]="this.informationsPersonnelles.logement.isChambre" btnCheckbox tabindex="0"
-                            role="button" #isChambre="ngModel" (click)="onClickCheckBoxIsChambre()"
-                            (keyup)="handleKeyUpOnButtonIsChambre($event)">
-                            <div>
-                                <span class="body-2-typo">Une chambre</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-aucun-cas" name="isAucunCas"
-                            aria-label="Votre logement ne correspond à aucun des cas précédents"
-                            class="radio-button-style-1" data-testid="btn-situation-aucun-cas"
-                            [(ngModel)]="this.isAucunCas" btnCheckbox tabindex="0" role="button"
-                            (click)="onClickCheckBoxIsAucunCas()" (keyup)="handleKeyUpOnButtonIsAucunCas($event)">
-                            <div>
-                                <span class="body-2-typo">Aucun de ces cas</span>
-                            </div>
-                        </label>
-                    </div>
-                    <span class="row error-input-message"
-                        *ngIf="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()">
-                        {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UN_STATUT_OCCUPATION_LOGEMENT}}
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row mb-2">
                     <label class="label headline-4-typo" for="situationFamilialeDemandeur">
                         Si vous percevez une de ces aides au logement, veuillez nous préciser laquelle :
                     </label>
@@ -359,72 +211,8 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" *ngIf="isConcerneParAideLogement()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="montantLoyer">
-                    * Montant de votre loyer mensuel hors charges
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="montantLoyer" name="montantLoyer" type="text" data-testid="input-montant-loyer"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
-                        maxlength="8" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0}"
-                        [(ngModel)]="informationsPersonnelles.logement.montantLoyer" required placeholder="Montant"
-                        inputmode="decimal" #montantLoyer="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <span
-                *ngIf="this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantLoyer.touched)  && montantLoyer.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantLoyer.touched)  && montantLoyer.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span>
-        </div>
-        <div class="form-group" *ngIf="isConcerneParAideLogement()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="montantCharges">
-                    * Montant des charges mensuelles de votre logement
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="montantCharges" name="montantCharges" type="text" data-testid="input-montant-charges"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
-                        maxlength="8" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantCharges && this.informationsPersonnelles.logement.montantCharges == 0}"
-                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
-                        inputmode="decimal" #montantCharges="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <span
-                *ngIf="this.informationsPersonnelles.logement.montantCharges && this.informationsPersonnelles.logement.montantCharges == 0"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span>
-        </div>
         <div class="form-group"
-            *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA() || deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || isConcerneParAideLogement()">
+            *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA() || deConnecteBeneficiaireAidesService.isBeneficiaireAAH()">
             <div class="row flex-column">
                 <label class="label mb-2 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
@@ -636,6 +424,56 @@
                 </span>
             </div>
         </div>
+
+        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA()">
+            <div class="row mb-2">
+                <label class="label headline-4-typo" for="isProprietaireSansPretOuLogeGratuit"
+                    aria-describedby="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation">
+                    * Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés
+                    <div *ngIf="!screenService.isExtraSmallScreen()"></div>
+                    ou vous êtes logé gratuitement ?
+                    <button id="infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation" role="tooltip"
+                        class="img-interrogation-icon" [ngClass]="{'popover-open': popoverSituationLogement.isOpen}"
+                        placement="right"
+                        tag-action="ouverture-infobulle-proprietaire-sans-pret-ou-loge-gratuit-ma-situation"
+                        (click)="$event.preventDefault();" [popover]="popoverSituationLogementTemplate"
+                        #popoverSituationLogement="bs-popover"></button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input id="isProprietaireSansPretOuLogeGratuitOui" name="isProprietaireSansPretOuLogeGratuitOui"
+                            aria-label="Vous êtes propriétaire et tous les prêts de votre habitation sont remboursés ou vous êtes logé gratuitement"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui-foyer" type="radio"
+                            class="form-check-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, true)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit" required
+                            [value]="true" #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label class="form-check-label body-2-typo" for="isProprietaireSansPretOuLogeGratuitOui">
+                            oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline ms-2">
+                        <input id="isProprietaireSansPretOuLogeGratuitNon" name="isProprietaireSansPretOuLogeGratuitNon"
+                            aria-label="Vous n'êtes pas propriétaire"
+                            data-testid="btn-is-proprietaire-sans-pret-ou-loge-gratuit-non-foyer" type="radio"
+                            class="form-check-input"
+                            (keyup)="handleKeyUpOnButtonProprietaireSansPretOuLogeGratuit($event, false)"
+                            [(ngModel)]="informationsPersonnelles.isProprietaireSansPretOuLogeGratuit" required
+                            [value]="false" #isProprietaireSansPretOuLogeGratuit="ngModel">
+                        <label class="form-check-label body-2-typo" for="isProprietaireSansPretOuLogeGratuitNon">
+                            non
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <span class="row error-input-message"
+                *ngIf="(isInformationsPersonnellesFormSubmitted || isProprietaireSansPretOuLogeGratuit.touched) && isProprietaireSansPretOuLogeGratuit.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
+        </div>
+
         <div class="row row-button-valider">
             <div class="col">
                 <button id="btn-ressources-foyer-valider" aria-label="Valider ressources finançière de votre foyer"

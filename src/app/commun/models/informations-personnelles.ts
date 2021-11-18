@@ -1,5 +1,3 @@
-import { Logement } from "./logement";
-
 export class InformationsPersonnelles {
   codePostal: string;
   dateNaissance: string;
@@ -7,8 +5,8 @@ export class InformationsPersonnelles {
   hasRevenusImmobilier: boolean;
   travailleurIndependant: boolean;
   microEntrepreneur: boolean;
-  logement: Logement;
   habiteDansDOM: boolean;
+  isProprietaireSansPretOuLogeGratuit: boolean;
   salarie: boolean;
   sansRessource: boolean;
   nationalite: string;

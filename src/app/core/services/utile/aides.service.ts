@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { RessourcesFinancieres } from '@app/commun/models/ressources-financieres';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';

@@ -23,9 +23,9 @@ export class IndividuConnectedService {
   }
 
   public getIndividuConnected(): Individu {
-    if (!this.individuConnecte) {
+    if(!this.individuConnecte) {
       const individuConnected = this.sessionStorageEstimeService.getIndividuConnected();
-      if (!this.individuConnectePeConnectAuthorization) {
+      if(!this.individuConnectePeConnectAuthorization) {
         this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
       }
       individuConnected.peConnectAuthorization = this.individuConnectePeConnectAuthorization.peConnectAuthorization;

@@ -4,6 +4,7 @@ import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
 import { Aide } from '@models/aide';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { AidesService } from "@app/core/services/utile/aides.service";
 import { CodesRessourcesFinancieresEnum } from "@app/commun/enumerations/codes-ressources-financieres.enum";

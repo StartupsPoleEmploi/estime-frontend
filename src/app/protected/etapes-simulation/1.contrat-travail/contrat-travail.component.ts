@@ -49,7 +49,6 @@ export class ContratTravailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.loadDataFuturTravail();
   }
 
