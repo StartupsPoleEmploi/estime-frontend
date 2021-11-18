@@ -9,7 +9,7 @@ RUN apt-get update \
 
 #copy NGINX configuration
 COPY ./docker/commun/nginx-conf/nginx.conf /etc/nginx/
-COPY ./docker/production/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
+COPY ./docker/recette/docker-image/nginx-conf/default.conf /etc/nginx/conf.d/
 COPY ./whitelist_pole_emploi /etc/nginx/includes/
 
 #copy application sources
