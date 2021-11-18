@@ -193,6 +193,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
       && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
+      this.unsetARE();
     }
   }
 
@@ -209,6 +210,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
       && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
+      this.unsetASS();
     }
   }
 

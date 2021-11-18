@@ -11,10 +11,11 @@ export class ModalService {
         private modalService: BsModalService
     ) { }
 
-    openModal(event: Event, template: TemplateRef<any>) {
+    openModal(event: Event, template: TemplateRef<any>, isFullHeight: boolean = false) {
         event.preventDefault();
+        const modalClasses = isFullHeight ? 'gray modal-lg full-height-modal' : 'gray modal-lg';
         this.modalRef = this.modalService.show(template,
-            Object.assign({}, { class: 'gray modal-lg' }));
+            Object.assign({}, { class: modalClasses }));
         this.modalRef.onHide.subscribe((reason: string | any) => {
             this.isOpen = false;
         });

@@ -1,5 +1,7 @@
+import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-tooltip',
@@ -11,9 +13,16 @@ export class TooltipComponent implements OnInit {
   @Input('modalRef') public modalRef: BsModalRef;
   @Input('htmlData') public htmlData: string;
 
-  constructor() { }
+  constructor(
+    private location: LocationStrategy,
+    private modalService: ModalService) {
+    history.pushState(null, null, window.location.href);
+    this.location.onPopState(() => {
+      if (!this.modalService.isOpen) this.location.back();
+    });
+  }
+
 
   ngOnInit(): void {
   }
-
 }

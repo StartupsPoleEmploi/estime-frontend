@@ -231,7 +231,7 @@
                             aria-label="Infobulle exemple nombre de trajets" tabindex="0" class="img-interrogation-icon"
                             [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                             tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
-                            (click)="modalService.openModal($event, modalNombreTrajetTemplate)"></button>
+                            (click)="modalService.openModal($event, modalNombreTrajetTemplate, true)"></button>
                     </label>
                 </div>
                 <div class="row">

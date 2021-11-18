@@ -169,7 +169,8 @@
                     <div class="col">
                         <button id="btn-beneficiaire-apl" #beneficiaireAPL="ngModel"
                             (click)="onClickCheckBoxHasAPL($event)" name="beneficiaireAPL"
-                            aria-label="Vous êtes bénéficiaire de l'APL" class="radio-button-style-1 ms-1"
+                            aria-label="Vous êtes bénéficiaire de l'APL"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
                             data-testid="btn-beneficiaire-apl" btnCheckbox tabindex="0"
                             [(ngModel)]="beneficiaireAides.beneficiaireAPL" (keyup)="handleKeyUpOnButtonAPL($event)">
                             <span class="body-2-typo">{{libellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}}
@@ -177,7 +178,8 @@
                         </button>
                         <button id="btn-beneficiaire-alf" #beneficiaireALF="ngModel"
                             (click)="onClickCheckBoxHasALF($event)" name="beneficiaireALF"
-                            aria-label="Vous êtes bénéficiaire de l'ALF" class="radio-button-style-1 ms-1"
+                            aria-label="Vous êtes bénéficiaire de l'ALF"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
                             data-testid="btn-beneficiaire-alf" btnCheckbox tabindex="0"
                             [(ngModel)]="beneficiaireAides.beneficiaireALF" (keyup)="handleKeyUpOnButtonALF($event)">
                             <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}}
@@ -185,7 +187,8 @@
                         </button>
                         <button id="btn-beneficiaire-als" #beneficiaireALS="ngModel"
                             (click)="onClickCheckBoxHasALS($event)" name="beneficiaireALS"
-                            aria-label="Vous êtes bénéficiaire de l'ALS" class="radio-button-style-1 ms-1"
+                            aria-label="Vous êtes bénéficiaire de l'ALS"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
                             data-testid="btn-beneficiaire-als" btnCheckbox tabindex="0"
                             [(ngModel)]="beneficiaireAides.beneficiaireALS" (keyup)="handleKeyUpOnButtonALS($event)">
                             <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}}
