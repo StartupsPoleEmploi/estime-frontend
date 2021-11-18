@@ -13,21 +13,42 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
-
+import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
+import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
+import { Router } from '@angular/router';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
 
   private demandeurEmploiConnecte: DemandeurEmploi;
 
+  private statutOccupationLogementEnum: typeof StatutOccupationLogementEnum = StatutOccupationLogementEnum;
+  private statutOccupationLogementLibelleEnum: typeof StatutOccupationLogementLibelleEnum = StatutOccupationLogementLibelleEnum;
+
   constructor(
     private brutNetService: BrutNetService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private router: Router,
     private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
 
+  }
+
+  /**
+   * Si on tente un accès au composant etape-simulation ou à ses fils
+   * sans qu'il y ait un demandeur d'emploi connecte présent dans le session storage du navigateur
+   * alors on doit rediriger vers le composant avant-de-commencer.
+   *
+   * Ce cas peut arriver si on tente un accès direct par url à un des composant et que l'on est déjà pe connecté.
+   */
+  public controlerSiDemandeurEmploiConnectePresent(): void {
+    const demandeurEmploiConnecte = this.getDemandeurEmploiConnecte();
+    if (!demandeurEmploiConnecte) {
+      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    }
   }
 
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
@@ -223,9 +244,6 @@ export class DeConnecteService {
     }
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.isSeulPlusDe18Mois = null;
-    }
-    if (this.demandeurEmploiConnecte.informationsPersonnelles) {
-      this.demandeurEmploiConnecte.informationsPersonnelles.isProprietaireSansPretOuLogeGratuit = null;
     }
   }
 
@@ -517,5 +535,38 @@ export class DeConnecteService {
     if (periodeTravailleeAvantSimulation.moisMoins3) {
       periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet === 0;
     }
+  }
+
+  public unsetStatutOccupationLogement(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = false;
+  }
+
+  public setIsLocataireMeuble(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = true;
+  }
+
+  public setIsLocataireNonMeuble(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = true;
+  }
+
+  public setIsLocataireHLM(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = true;
+  }
+
+  public setIsProprietaire(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = true;
+  }
+
+  public setIsProprietaireAvecEmprunt(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = true;
+  }
+
+  public setIsLogeGratuitement(): void {
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = true;
   }
 }

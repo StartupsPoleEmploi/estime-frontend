@@ -8,6 +8,7 @@ import { RessourcesFinancieresUtileService } from '../utile/ressources-financier
 import { DeConnecteBeneficiaireAidesService } from './de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 import { Personne } from '@app/commun/models/personne';
+import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresService {
@@ -278,7 +279,7 @@ export class DeConnecteRessourcesFinancieresService {
     return isValide;
   }
 
-  public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres, informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
@@ -286,7 +287,30 @@ export class DeConnecteRessourcesFinancieresService {
     if (this.deConnecteInfosPersonnellesService.hasRevenusImmobilier() && isValide) {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
+    if (isValide) {
+      isValide = this.isDonneesLogementValides(informationsPersonnelles);
+    }
     isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
+    return isValide;
+  }
+
+  private isDonneesLogementValides(informationsPersonnelles: InformationsPersonnelles): boolean {
+    let isValide = false;
+    if (informationsPersonnelles.logement && informationsPersonnelles.logement.statutOccupationLogement &&
+      (informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
+        || informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
+        || informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble
+        || informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement
+        || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
+        || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
+      if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
+        if (informationsPersonnelles.logement.montantCharges && informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
+          isValide = true;
+        }
+      } else {
+        isValide = true;
+      }
+    }
     return isValide;
   }
 

@@ -55,6 +55,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.loadDataPersonnesACharge();
   }
 

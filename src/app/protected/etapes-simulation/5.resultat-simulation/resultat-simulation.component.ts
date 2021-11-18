@@ -45,6 +45,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.afficherDetails = true;
     this.loadDataSimulationAides();

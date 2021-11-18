@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
@@ -17,6 +18,8 @@ import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
+import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
+import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -42,6 +45,7 @@ export class RessourcesActuellesComponent implements OnInit {
   messageErreur: string;
 
   ressourcesFinancieres: RessourcesFinancieres;
+  informationsPersonnelles: InformationsPersonnelles;
 
   montantAidesFoyer: number;
   montantAidesPersonnesCharge: number;
@@ -74,24 +78,39 @@ export class RessourcesActuellesComponent implements OnInit {
   @ViewChild(RessourcesFinancieresPersonnesAChargeComponent) ressourcesFinancieresPersonnesAChargeComponent: RessourcesFinancieresPersonnesAChargeComponent;
   @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
 
+  // services à injecter dynamiquement
+  public controleChampFormulaireService: ControleChampFormulaireService;
+  public deConnecteService: DeConnecteService;
+  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
+  private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
+  private deConnecteSimulationAidesService: DeConnecteSimulationAidesService;
+  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
+  private estimeApiService: EstimeApiService;
+  private informationsPersonnellesService: InformationsPersonnellesService;
+  public screenService: ScreenService;
+
+
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    public deConnecteService: DeConnecteService,
-    public screenService: ScreenService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
-    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
-    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private elementRef: ElementRef,
-    private estimeApiService: EstimeApiService,
+    private injector: Injector,
     private router: Router
   ) {
-
+    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
+    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
+    this.deConnecteSimulationAidesService = injector.get<DeConnecteSimulationAidesService>(DeConnecteSimulationAidesService);
+    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.estimeApiService = injector.get<EstimeApiService>(EstimeApiService);
+    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
+    this.screenService = injector.get<ScreenService>(ScreenService);
   }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.loadDataRessourcesFinancieres();
+    this.loadDataRessourcesFinancieres(demandeurEmploiConnecte);
+    this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.calculerMontantsRessourcesFinancieres();
     this.ressourceConjointSeulementRSA = this.checkConjointToucheSeulementRSA();
     this.ressourcePersonnesAChargeSeulementRSA = this.checkPersonnesAChargeToucheSeulementRSA();
@@ -146,8 +165,6 @@ export class RessourcesActuellesComponent implements OnInit {
         && !conjoint.informationsPersonnelles.travailleurIndependant)
     ) {
       result = true;
-    } else {
-      result = false;
     }
     return result;
   }
@@ -240,10 +257,18 @@ export class RessourcesActuellesComponent implements OnInit {
     this.isRessourcesFoyerDisplay = false;
   }
 
-  private loadDataRessourcesFinancieres(): void {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+  private loadDataRessourcesFinancieres(demandeurEmploiConnecte: DemandeurEmploi): void {
     if (demandeurEmploiConnecte.ressourcesFinancieres) {
       this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
+    }
+  }
+
+
+  private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
+    if (demandeurEmploiConnecte.informationsPersonnelles) {
+      this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
+    } else {
+      this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
     }
   }
 
@@ -276,7 +301,7 @@ export class RessourcesActuellesComponent implements OnInit {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
     }
     if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres);
+      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
     }
     if (!isValide) {
       this.isVosRessourcesDisplay = true;

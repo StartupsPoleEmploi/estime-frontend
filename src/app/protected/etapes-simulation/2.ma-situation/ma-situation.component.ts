@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Injector, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -17,6 +17,9 @@ import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
+import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
+import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
+import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 
 @Component({
@@ -44,18 +47,35 @@ export class MaSituationComponent implements OnInit {
     { label: NationalitesEnum.AUTRE }
   ];
 
+  // services à injecter dynamiquement
+  public controleChampFormulaireService: ControleChampFormulaireService;
+  public dateUtileService: DateUtileService;
+  public deConnecteService: DeConnecteService;
+  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
+  public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
+  private estimeApiService: EstimeApiService;
+  private informationsPersonnellesService: InformationsPersonnellesService;
+  public screenService: ScreenService;
+  private situationFamilialeUtileService: SituationFamilialeUtileService;
+
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
-    private router: Router,
-    private situationFamilialeUtileService: SituationFamilialeUtileService,
     private elementRef: ElementRef,
-    public screenService: ScreenService
-  ) { }
+    private injector: Injector,
+    private router: Router
+  ) {
+    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
+    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
+    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
+    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
+    this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
+    this.estimeApiService = injector.get<EstimeApiService>(EstimeApiService);
+    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
+    this.screenService = injector.get<ScreenService>(ScreenService);
+    this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
+  }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
@@ -133,6 +153,8 @@ export class MaSituationComponent implements OnInit {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       if (this.isAllocationPeOuCafSelectionnee()) {
+        this.getCodeInseeFromCodePostal(this.informationsPersonnelles.codePostal);
+        this.setDeMayotte();
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
@@ -140,6 +162,23 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
+  }
+
+
+  private getCodeInseeFromCodePostal(codePostal: string): void {
+    const response = this.estimeApiService.getCommuneFromCodePostal(codePostal);
+    response.subscribe(
+      data => {
+        var commune = data.pop();
+        this.informationsPersonnelles.logement.codeInsee = commune.code;
+        this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
+      }
+    );
+  }
+
+  private setDeMayotte(): void {
+    this.informationsPersonnelles.logement.isDeMayotte = this.deConnecteInfosPersonnellesService.isDeMayotte();
+    this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
   }
 
   public unsetTitreSejourEnFranceValide(nationalite: string): void {
@@ -357,8 +396,9 @@ export class MaSituationComponent implements OnInit {
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
+    console.log(demandeurEmploiConnecte.informationsPersonnelles);
     if (!demandeurEmploiConnecte.informationsPersonnelles) {
-      this.informationsPersonnelles = new InformationsPersonnelles();
+      this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
       this.informationsPersonnelles.nationalite = null;
     } else {
       this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
