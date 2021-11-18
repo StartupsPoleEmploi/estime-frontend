@@ -18,15 +18,9 @@ function start_nginx {
 	nginx -g "daemon off;"
 }
 
-function start_fail2ban {
-  log 'start fail2ban'
-  fail2ban-client -x start
-}
-
 function start {
   replace_properties_in_main &&
   replace_properties_in_index &&
-  start_fail2ban &&
   start_nginx
 }
 
