@@ -10,9 +10,16 @@
 
   margin-top: 2rem;
 
-  h1 {
-    margin-bottom: 0.9375rem;
-    text-align: center;
+  .title-container {
+
+    max-width: 37.5rem;
+    padding: 1.25rem 0.9375rem 1.25rem 0.9375rem;
+
+    h1 {
+      margin-bottom: 0.9375rem;
+      text-align: left;
+    }
+
   }
 
   .card {

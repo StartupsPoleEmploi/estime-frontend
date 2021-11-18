@@ -316,13 +316,15 @@
   margin-right: 0.3rem;
   margin-top: 0.3rem;
   background-color: unset;
+  max-width: fit-content;
 
   span {
     color: $color-blue-1 !important;
   }
 
-  @media #{$small-device} {
-    max-width: fit-content;
+  @media #{$extra-small-device} {
+    width: 100%;
+    text-align: left;
 
     &:not(.active):hover {
       background-color: $color-blue-1-o5;
