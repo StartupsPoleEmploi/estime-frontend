@@ -127,13 +127,12 @@ export class RessourcesFinancieresUtileService {
    *
    * @param ressourcesFinancieres
    */
-  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, isBeneficiaireAAH: boolean, isBeneficiareASSOuRSA: boolean): boolean {
-    let isChampsSalairesValides = true;
+   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, isBeneficiaireAAH: boolean, isBeneficiareRSA: boolean, isBeneficiaireASS: boolean): boolean {    let isChampsSalairesValides = true;
     if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if (isBeneficiareASSOuRSA) {
+      if (isBeneficiareRSA) {
         isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
       }
-      if (isBeneficiaireAAH) {
+      if (isBeneficiaireAAH || isBeneficiaireASS) {
         //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
         switch (+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
           // si on indique n'avoir travaillé qu'1 mois on ne peut remplir plus d'1 salaire

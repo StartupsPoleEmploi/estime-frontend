@@ -126,7 +126,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public getNombreMoisTravailleAuCoursDerniersMois(): number {
     let nombreMoisTravaillesDerniersMois = 3;
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) nombreMoisTravaillesDerniersMois = 6;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() 
+    || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()
+    ) nombreMoisTravaillesDerniersMois = 6;
     return nombreMoisTravaillesDerniersMois;
   }
 
@@ -154,8 +156,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
         this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
       }
-      if (this.optionsNombreMoisTravailles == null && this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) {
-        this.initOptionsNombreMoisTravailles();
+      if (this.optionsNombreMoisTravailles == null 
+        && (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() 
+        || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS())) {        this.initOptionsNombreMoisTravailles();
       }
     }
   }
@@ -248,7 +251,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public isAfficherSelectNombreMoisTravailles6DerniersMois(): boolean {
-    return this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true
+    return (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) && this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true
   }
 
   public isAfficherChampsSalaires(): boolean {
@@ -291,9 +294,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
         const isBeneficiaireAAH = this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH();
-        const isBeneficiareASSOuRSA = (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS() || (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBeneficiaireAidesService.hasFoyerRSA()));
-        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareASSOuRSA);
-        if (!isValide) this.erreurSaisieSalaires = true;
+        const isBeneficiareRSA = (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBeneficiaireAidesService.hasFoyerRSA());
+        const isBeneficiaireASS = this.deConnecteBeneficiaireAidesService.isBeneficiaireASS();
+        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareRSA, isBeneficiaireASS);        if (!isValide) this.erreurSaisieSalaires = true;
       }
     }
     return isValide;
