@@ -4,11 +4,11 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-journaliere-net-ass]').type(montant);
   }
 
-  public saisirMontantMensuelAAH(montant : string): void {
+  public saisirMontantMensuelAAH(montant: string): void {
     cy.get('[data-testid=input-allocation-mensuelle-aah]').type(montant);
   }
 
-  public saisirMontantMensuelRSA(montant : string): void {
+  public saisirMontantMensuelRSA(montant: string): void {
     cy.get('[data-testid=input-allocation-mensuelle-net-rsa]').type(montant);
   }
 
@@ -16,7 +16,7 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-prochaine-declaration-trimestrielle]').select(value)
   }
 
-  public saisirMontantMensuelRSAFoyer(montant : string): void {
+  public saisirMontantMensuelRSAFoyer(montant: string): void {
     cy.get('[data-testid=input-allocation-mensuelle-net-rsa-foyer]').type(montant);
   }
 
@@ -24,7 +24,7 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-prochaine-declaration-rsa-foyer]').select(value)
   }
 
-  public saisirPensionInvalidite(montant : string): void {
+  public saisirPensionInvalidite(montant: string): void {
     cy.get('[data-testid=input-pension-invalidite]').type(montant);
   }
 
@@ -46,15 +46,15 @@ class RessourcesActuellesPage {
     this.saisirAPLFoyerMoisMoins3(montant);
   }
 
-  public saisirAPLFoyerMoisMoins1(montant : string): void {
+  public saisirAPLFoyerMoisMoins1(montant: string): void {
     cy.get('[data-testid=input-apl-mois-moins-1]').type(montant);
   }
 
-  public saisirAPLFoyerMoisMoins2(montant : string): void {
+  public saisirAPLFoyerMoisMoins2(montant: string): void {
     cy.get('[data-testid=input-apl-mois-moins-2]').type(montant);
   }
 
-  public saisirAPLFoyerMoisMoins3(montant : string): void {
+  public saisirAPLFoyerMoisMoins3(montant: string): void {
     cy.get('[data-testid=input-apl-mois-moins-3]').type(montant);
   }
 
@@ -64,15 +64,15 @@ class RessourcesActuellesPage {
     this.saisirALFFoyerMoisMoins3(montant);
   }
 
-  public saisirALFFoyerMoisMoins1(montant : string): void {
+  public saisirALFFoyerMoisMoins1(montant: string): void {
     cy.get('[data-testid=input-alf-mois-moins-1]').type(montant);
   }
 
-  public saisirALFFoyerMoisMoins2(montant : string): void {
+  public saisirALFFoyerMoisMoins2(montant: string): void {
     cy.get('[data-testid=input-alf-mois-moins-2]').type(montant);
   }
 
-  public saisirALFFoyerMoisMoins3(montant : string): void {
+  public saisirALFFoyerMoisMoins3(montant: string): void {
     cy.get('[data-testid=input-alf-mois-moins-3]').type(montant);
   }
 
@@ -82,15 +82,15 @@ class RessourcesActuellesPage {
     this.saisirALSFoyerMoisMoins3(montant);
   }
 
-  public saisirALSFoyerMoisMoins1(montant : string): void {
+  public saisirALSFoyerMoisMoins1(montant: string): void {
     cy.get('[data-testid=input-als-mois-moins-1]').type(montant);
   }
 
-  public saisirALSFoyerMoisMoins2(montant : string): void {
+  public saisirALSFoyerMoisMoins2(montant: string): void {
     cy.get('[data-testid=input-als-mois-moins-2]').type(montant);
   }
 
-  public saisirALSFoyerMoisMoins3(montant : string): void {
+  public saisirALSFoyerMoisMoins3(montant: string): void {
     cy.get('[data-testid=input-als-mois-moins-3]').type(montant);
   }
 
@@ -110,11 +110,11 @@ class RessourcesActuellesPage {
   }
 
   public clickOnAvezVousTravailleAuCoursDesDerniersMoisNon(): void {
-    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-non]').click({force: true});
+    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-non]').click({ force: true });
   }
 
   public clickOnAvezVousTravailleAuCoursDesDerniersMoisOui(): void {
-    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-oui]').click({force: true});
+    cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-oui]').click({ force: true });
   }
 
   public selectOptionNombreMoisTravaillesAvantSimulation(value: string): void {
@@ -154,19 +154,19 @@ class RessourcesActuellesPage {
   }
 
   public clickOnVousEtesProprietaireOui(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui]').click({force: true});
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui]').click({ force: true });
   }
 
   public clickOnVousEtesProprietaireNon(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non]').click({force: true});
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non]').click({ force: true });
   }
 
   public clickOnVousEtesProprietaireOuiFoyer(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui-foyer]').click({force: true});
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-oui-foyer]').click({ force: true });
   }
 
   public clickOnVousEtesProprietaireNonFoyer(): void {
-    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non-foyer]').click({force: true});
+    cy.get('[data-testid=btn-is-proprietaire-sans-pret-ou-loge-gratuit-non-foyer]').click({ force: true });
   }
 
   public clickOnValiderRessourcesConjoint(): void {

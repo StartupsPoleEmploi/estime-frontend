@@ -27,7 +27,7 @@ build_frontend_application :
       #lancement du build de l'application
       - npm run build:prod
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
       changes:
         - src/**/*
     artifacts:
@@ -42,7 +42,7 @@ generate_whitelist_pe :
       #création du fichier whitelist Pôle emploi qui contient les IP autorisées pour accéder notamment à adminer
       - echo "$NGINX_WHITELIST_POLE_EMPLOI" > "./whitelist_pole_emploi"
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
       changes:
         - src/**/*
     artifacts:
@@ -67,11 +67,11 @@ cypress-e2e:
     #lancement des tests cypress
     - npm run cy:run
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master" && $LAUNCH_CYPRESS_TESTS == "true"'
+    - if: '$CI_COMMIT_BRANCH == "prod" && $LAUNCH_CYPRESS_TESTS == "true"'
       changes:
         - src/**/*
       when: on_success
-    - if: '$CI_COMMIT_BRANCH != "master" && $LAUNCH_CYPRESS_TESTS == "true"'
+    - if: '$CI_COMMIT_BRANCH != "prod" && $LAUNCH_CYPRESS_TESTS == "true"'
       changes:
         - src/**/*
       when: manual
@@ -95,7 +95,7 @@ build-docker-image-recette:
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
       changes:
         - src/**/*
     dependencies:
@@ -114,7 +114,7 @@ generate-docker-stack-recette:
     paths:
       - ./docker/recette
   rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
       changes:
         - src/**/*
 
@@ -130,7 +130,7 @@ sonar_quality_analyse :
     script:
     - sonar-scanner -Dsonar.qualitygate.wait=true
     rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
+    - if: '$CI_COMMIT_BRANCH == "prod"'
       changes:
         - src/**/*
     dependencies:
