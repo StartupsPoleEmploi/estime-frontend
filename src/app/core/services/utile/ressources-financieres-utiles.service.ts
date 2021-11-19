@@ -10,6 +10,7 @@ import { AidesFamiliales } from '@models/aides-familiales';
 import { AidesPoleEmploi } from "@models/aides-pole-emploi";
 import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
 import { RessourcesFinancieres } from "@models/ressources-financieres";
+import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 
 @Injectable({ providedIn: 'root' })
@@ -127,13 +128,14 @@ export class RessourcesFinancieresUtileService {
    *
    * @param ressourcesFinancieres
    */
-  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, isBeneficiaireAAH: boolean, isBeneficiareASSOuRSA: boolean): boolean {
+  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService): boolean {
     let isChampsSalairesValides = true;
+
     if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if (isBeneficiareASSOuRSA) {
+      if (deConnecteBeneficiaireAidesService.isBeneficiaireRSA()) {
         isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
       }
-      if (isBeneficiaireAAH) {
+      if (deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
         //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
         switch (+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
           // si on indique n'avoir travaillé qu'1 mois on ne peut remplir plus d'1 salaire

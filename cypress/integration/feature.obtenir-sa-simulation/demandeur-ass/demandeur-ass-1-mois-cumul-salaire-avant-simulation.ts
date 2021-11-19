@@ -49,6 +49,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
+      const nombreMoisTravaillesAvantSimulation = "1";
       const salaireMoisMoins1AvantSimulation = "850";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -85,6 +86,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
       ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
       ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
@@ -154,6 +156,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
+      const nombreMoisTravaillesAvantSimulation = "1";
       const salaireMoisMoins1AvantSimulation = "850";
       const allocationSoutienFamiliale = "117";
 
@@ -195,6 +198,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
       ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
       ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();

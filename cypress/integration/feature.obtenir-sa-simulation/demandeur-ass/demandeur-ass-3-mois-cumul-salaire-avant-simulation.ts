@@ -49,6 +49,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
+      const nombreMoisTravaillesAvantSimulation = "3";
       const salaireMoisMoins1AvantSimulation = "850";
       const salaireMoisMoins2AvantSimulation = "1000";
       const salaireMoisMoins3AvantSimulation = "800";
@@ -88,6 +89,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireMoisMoins2AvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireMoisMoins3AvantSimulation);
@@ -157,6 +159,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
+      const nombreMoisTravaillesAvantSimulation = "3";
       const salaireMoisMoins1AvantSimulation = "850";
       const salaireMoisMoins2AvantSimulation = "1000";
       const salaireMoisMoins3AvantSimulation = "800";
@@ -201,6 +204,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
+      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireMoisMoins2AvantSimulation);
       ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireMoisMoins3AvantSimulation);
