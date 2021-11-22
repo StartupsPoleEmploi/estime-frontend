@@ -31,7 +31,7 @@
                             aria-label="Infobulle trouver notification de droits ASS"
                             class="img-interrogation-icon float-end" [ngClass]="{'popover-open': modalService.isOpen}"
                             placement="right" tag-action="ouverture-infobulle-trouver-notification-droits-ass"
-                            (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate, true)"></button>
+                            (click)="modalService.openModal($event, modalDerniereNotificationDroitASSTemplate, true)"></button>
                     </div>
                     <hr>
                     <div class="items-documents-demandes">
@@ -75,27 +75,6 @@
     </div>
 </div>
 
-<ng-template #modalDerniereAttestationCafTemplate>
-    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
-        <h4 class="headline-4-typo headline-4-typo-color">
-            Où trouver votre dernière attestation de paiement CAF ?
-        </h4>
-        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
-        <ol class="body-2-typo">
-            <li>Connectez-vous à votre compte sur <a class="link-modal" href="https://caf.fr">caf.fr</a></li>
-            <li>Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et
-                mes droits”</li>
-        </ol>
-        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “CAF”</h5>
-        <ol class="body-2-typo">
-            <li>Ouvrez l’application et connectez-vous si nécessaire</li>
-            <li>Accédez à la rubrique mes attestations depuis l’écran d’accueil</li>
-            <li>Dans la liste, sélectionnez attestation de paiement </li>
-            <li>Vous pouvez ensuite la télécharger.</li>
-        </ol>'>
-    </app-tooltip>
-</ng-template>
-
 <ng-template #modalDernierReleveDeSituationARE>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData='
         <h4 class="headline-4-typo headline-4-typo-color">
@@ -113,6 +92,47 @@
             <li>Ouvrez l’application et connectez-vous si nécessaire</li>
             <li>Accédez à vos courriers depuis la barre de menu en bas de l’écran</li>
             <li>Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l’ouvrir</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereNotificationDroitASSTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h4 class="headline-4-typo headline-4-typo-color">
+            Où trouver votre dernière notification de droits ASS ?
+        </h4>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
+        <ol class="body-2-typo">
+            <li>Connectez-vous sur <a class="link-modal"
+                    href="https://candidat.pole-emploi.fr">candidat.pole-emploi.fr</a></li>
+            <li>Accéder à la rubrique mes courriers et retrouvez votre dernière notification de droits ASS</li>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “Mon Espace” de Pôle Emploi :</h5>
+        <ol class="body-2-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire</li>
+            <li>Accédez à vos courriers depuis la barre de menu en bas de l’écran</li>
+            <li>Dans la liste identifiez votre dernière notification de droits ASS et tapez dessus pour l’ouvrir.</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereAttestationCafTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h4 class="headline-4-typo headline-4-typo-color">
+            Où trouver votre dernière attestation de paiement CAF ?
+        </h4>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
+        <ol class="body-2-typo">
+            <li>Connectez-vous à votre compte sur <a class="link-modal" href="https://caf.fr">caf.fr</a></li>
+            <li>Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et
+                mes droits”</li>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “CAF”</h5>
+        <ol class="body-2-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire</li>
+            <li>Accédez à la rubrique mes attestations depuis l’écran d’accueil</li>
+            <li>Dans la liste, sélectionnez attestation de paiement </li>
+            <li>Vous pouvez ensuite la télécharger.</li>
         </ol>'>
     </app-tooltip>
 </ng-template>
