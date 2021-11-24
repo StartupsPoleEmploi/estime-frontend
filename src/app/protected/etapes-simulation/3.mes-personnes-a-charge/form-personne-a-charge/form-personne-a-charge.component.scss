@@ -1,10 +1,8 @@
 @import "../../../../../assets/scss/variables";
 
 .card {
-  @media #{$extra-small-device} {
-    margin-left: 0.125rem !important;
-    margin-top: 1rem;
-  }
+  margin-left: 0.125rem !important;
+  margin-top: 1rem;
 
   .card-title {
     padding: 1.25rem;

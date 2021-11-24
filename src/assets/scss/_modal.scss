@@ -1,7 +1,67 @@
-.modal-dialog {
-  top: 25%;
+.modal {
+  display: block !important;
 
-  @media #{$extra-small-device} {
-    max-width: 90% !important;
+  .modal-header {
+    justify-content: right;
+    padding: 0.25rem 0.25rem;
+
+    .btn-close {
+      float: right;
+      @extend .button-typo;
+      color: $color-blue-10 !important;
+      margin: 0.5rem;
+    }
+
+    .label-close {
+      float: right;
+      margin-left: auto;
+      @extend .button-typo;
+      color: $color-blue-10 !important;
+      cursor: pointer;
+      font-weight: normal;
+    }
+
+  }
+
+  .modal-dialog {
+    top: 25%;
+    overflow-y: initial !important;
+    position: sticky;
+
+    &.full-height-modal {
+      @media #{$extra-small-device} {
+        height: 100%;
+        top: 0;
+        margin: 0;
+
+        .modal-content {
+          height: 100%;
+          border-radius: unset;
+        }
+      }
+    }
+  }
+
+  .modal-body {
+    overflow-y: auto;
+
+    .link-modal {
+
+      color: $color-blue-10 !important;
+      text-decoration: none;
+    }
+
+    h4 {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+
+    ol {
+      padding-left: 1.25rem;
+
+      li {
+        padding-left: 0.5rem;
+      }
+    }
   }
 }

@@ -2,9 +2,11 @@
     <div [ngClass]="{'container-fluid':!screenService.isExtraSmallScreen()}">
         <div class="row row-0">
             <div class="col-12">
-                <p aria-label="Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE."  class="row div-info-beneficiaires body-2-typo text-info-beneficiaire">
-                  <img class="col-1" alt="" src="./assets/images/info-blue-2.svg">
-                  <span class="col-11" >Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE.</span>
+                <p aria-label="Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il sera ouvert prochainement aux bénéficiaires de l’ARE."
+                    class="row div-info-beneficiaires body-2-typo text-info-beneficiaire">
+                    <img class="col-1" alt="" src="./assets/images/info-blue-2.svg">
+                    <span class="col-11">Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA ou l’AAH, il
+                        sera ouvert prochainement aux bénéficiaires de l’ARE.</span>
                 </p>
             </div>
         </div>
@@ -25,13 +27,9 @@
                         </h1>
                     </div>
                     <div [ngClass]="{'btn-sticks':this.stickyButton}">
-                        <button id="btn-je-commence"
-                            type="button"
-                            aria-label="Commencer la simulation"
+                        <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
                             class="btn-homepage mt-4 d-flex justify-content-center button-typo"
-                            data-testid="btn-je-commence"
-                            tag-action="clic_bouton_je_commence"
-                            (click)="login()">
+                            data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
                             <span>Je commence la simulation</span>
                             <img alt="" src="./assets/images/icon-bt-primaire.svg">
                         </button>
@@ -39,13 +37,12 @@
                 </div>
             </div>
             <div class="row-1-second-col d-md-block d-lg-block d-xl-block col-md-auto">
-                <img id="image-homepage-calculette" alt=""
-                    src="../../../assets/images/homepage-calculette-v5.svg">
+                <img id="image-homepage-calculette" alt="" src="../../../assets/images/homepage-calculette-v5.svg">
             </div>
         </div>
     </div>
 </section>
-<app-section-description id="section-description"></app-section-description>
-<app-section-etapes-simulation id="section-etapes" [login]="login"></app-section-etapes-simulation>
+<app-section-description></app-section-description>
+<app-section-etapes-simulation [login]="login"></app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
 <app-section-temoignages [stickyButton]="this.stickyButton"></app-section-temoignages>

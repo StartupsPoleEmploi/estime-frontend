@@ -69,6 +69,10 @@ export class RessourcesFinancieresUtileService {
     const allocationARE = new AllocationARE();
     allocationARE.allocationJournaliereNet = null;
     allocationARE.allocationMensuelleNet = null;
+    allocationARE.montantJournalierBrut = null;
+    allocationARE.salaireJournalierReferenceBrut = null;
+    allocationARE.nombreJoursRestants = null;
+    allocationARE.isConcerneDegressivite = null;
     return allocationARE;
   }
 

@@ -21,6 +21,7 @@ import { InformationsPersonnellesService } from '@app/core/services/utile/inform
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ma-situation',
@@ -55,6 +56,7 @@ export class MaSituationComponent implements OnInit {
   public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
   private estimeApiService: EstimeApiService;
   private informationsPersonnellesService: InformationsPersonnellesService;
+  public modalService: ModalService;
   public screenService: ScreenService;
   private situationFamilialeUtileService: SituationFamilialeUtileService;
 
@@ -72,6 +74,7 @@ export class MaSituationComponent implements OnInit {
     this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
     this.screenService = injector.get<ScreenService>(ScreenService);
     this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
+    this.modalService = injector.get<ModalService>(ModalService);
   }
 
   ngOnInit(): void {
@@ -122,6 +125,15 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
+      this.beneficiaireAides.beneficiaireARE = false;
+    }
+  }
+  public onClickCheckBoxHasARE(): void {
+    if (!this.beneficiaireAides.beneficiaireARE) {
+      this.deConnecteService.unsetAllocationMensuelleNetARE();
+    } else {
+      this.deConnecteService.setAllocationMensuelleNetARE();
+      this.beneficiaireAides.beneficiaireASS = false;
     }
   }
 
@@ -190,7 +202,8 @@ export class MaSituationComponent implements OnInit {
   public isAllocationPeOuCafSelectionnee(): boolean {
     return (this.beneficiaireAides.beneficiaireASS
       || this.beneficiaireAides.beneficiaireRSA
-      || this.beneficiaireAides.beneficiaireAAH);
+      || this.beneficiaireAides.beneficiaireAAH
+      || this.beneficiaireAides.beneficiaireARE);
   }
 
 
@@ -221,27 +234,31 @@ export class MaSituationComponent implements OnInit {
         this.beneficiaireAides.beneficiaireASS = !this.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxHasASS();
       }
-      if (situationPersonne === this.situationPersonneEnum.AAH) {
+      else if (situationPersonne === this.situationPersonneEnum.AAH) {
         this.beneficiaireAides.beneficiaireAAH = !this.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH();
       }
-      if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
+      else if (situationPersonne === this.situationPersonneEnum.ARE) {
+        this.beneficiaireAides.beneficiaireARE = !this.beneficiaireAides.beneficiaireARE;
+        this.onClickCheckBoxHasARE();
+      }
+      else if (situationPersonne === this.situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER) {
         this.informationsPersonnelles.hasRevenusImmobilier = !this.informationsPersonnelles.hasRevenusImmobilier;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
+      else if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
         this.informationsPersonnelles.microEntrepreneur = !this.informationsPersonnelles.microEntrepreneur;
         this.onClickCheckBoxIsMicroEntrepreneur();
       }
-      if (situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
+      else if (situationPersonne === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
         this.informationsPersonnelles.travailleurIndependant = !this.informationsPersonnelles.travailleurIndependant;
         this.onClickCheckBoxIsTravailleurIndependant();
       }
-      if (situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
+      else if (situationPersonne === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.beneficiaireAides.beneficiairePensionInvalidite = !this.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite();
       }
-      if (situationPersonne === this.situationPersonneEnum.RSA) {
+      else if (situationPersonne === this.situationPersonneEnum.RSA) {
         this.beneficiaireAides.beneficiaireRSA = !this.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxHasRSA();
       }
@@ -396,7 +413,6 @@ export class MaSituationComponent implements OnInit {
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    console.log(demandeurEmploiConnecte.informationsPersonnelles);
     if (!demandeurEmploiConnecte.informationsPersonnelles) {
       this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
       this.informationsPersonnelles.nationalite = null;

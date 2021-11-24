@@ -159,9 +159,12 @@ export class DeConnecteRessourcesFinancieresService {
         montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
       }
       if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi) {
+        const nbrJourMoisPrecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
         if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
-          const nbrJourMoisPRecedent = this.dateUtileService.getNombreJoursMoisPrecedent()
-          montant += Math.round(nbrJourMoisPRecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet));
+          montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet));
+        }
+        if (demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+          montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut));
         }
       }
     }
@@ -267,6 +270,9 @@ export class DeConnecteRessourcesFinancieresService {
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() && isValide) {
       isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
     }
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireARE()) {
+      isValide = this.isDonneesARESaisiesValides(ressourcesFinancieres);
+    }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite() && isValide) {
       isValide = ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
     }
@@ -367,6 +373,11 @@ export class DeConnecteRessourcesFinancieresService {
 
   private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return ressourcesFinancieres.aidesCAF.allocationAAH > 0;
+  }
+
+  //is donnees ARE SAISIE VALIDE comprend tout les champs
+  private isDonneesARESaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    return ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {

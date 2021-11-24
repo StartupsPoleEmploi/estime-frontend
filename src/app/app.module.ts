@@ -27,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RouterModule
   ],
   providers: [
-    {provide: Environment, useValue: environment},
+    { provide: Environment, useValue: environment },
     CookieService
   ],
   bootstrap: [AppComponent]

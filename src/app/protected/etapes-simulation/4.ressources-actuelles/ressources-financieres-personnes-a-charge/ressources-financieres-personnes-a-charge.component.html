@@ -9,7 +9,7 @@
             </span>
             <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="salaireNetPersonneACharge">
+                    <label class="label headline-4-typo" [for]="'salaireNetPersonneACharge'+personneDTO.index + 1">
                         * Salaire net perçu
                     </label>
                 </div>
@@ -17,7 +17,9 @@
                     <div class="col">
                         <input
                             attr.aria-label="Salaire perçu par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                            name="salaireNet" type="text" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                            [name]="'salaireNetPersonneACharge'+personneDTO.index + 1"
+                            [id]="'salaireNetPersonneACharge'+personneDTO.index + 1" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                             maxlength="6" class="form-control d-inline"
                             [(ngModel)]="personneDTO.personne.ressourcesFinancieres.salaire.montantNet"
@@ -44,7 +46,8 @@
             </div>
             <div class="form-group" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationMensuelleNetARE">
+                    <label class="label headline-4-typo"
+                        [for]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1">
                         * ARE (Allocation Retour Emploi) perçue
                     </label>
                 </div>
@@ -52,7 +55,8 @@
                     <div class="col">
                         <input
                             attr.aria-label="ARE (Allocation Retour Emploi) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                            name="allocationMensuelleNetARE" type="text"
+                            [id]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1"
+                            [name]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -79,13 +83,15 @@
             </div>
             <div class="form-group" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationMensuelleNetASS">
+                    <label class="label headline-4-typo"
+                        [for]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1">
                         * ASS (Allocation Solidarité Spécifique) perçue
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="allocationMensuelleNetASS"
+                        <input [name]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
+                            [id]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
                             attr.aria-label="ASS (Allocation Solidarité Spécifique)) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -114,13 +120,14 @@
             </div>
             <div class="form-group mt-2" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationAAH">
+                    <label class="label headline-4-typo" [for]="'allocationAAHPersonneACharge'+personneDTO.index + 1">
                         * AAH (Allocation Adulte Handicapé) perçue
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="allocationAAH"
+                        <input [name]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
+                            [id]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
                             attr.aria-label="AAH (Allocation Adulte Handicapé) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -149,13 +156,15 @@
             </div>
             <div class="form-group mt-2" *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="pensionInvalidite">
+                    <label class="label headline-4-typo"
+                        [for]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1">
                         * Pension d'invalidité perçue
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="pensionInvalidite"
+                        <input [name]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
+                            [id]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
                             attr.aria-label="Pension d'invalidité perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -182,13 +191,15 @@
                     </span>
                 </div>
                 <div class="row mt-3 mb-2">
-                    <label class="label headline-4-typo" for="allocationSupplementaireInvalidite">
+                    <label class="label headline-4-typo"
+                        [for]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1">
                         * Allocation supplémentaire d'invalidité perçue
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="allocationSupplementaireInvalidite" type="text"
+                        <input [name]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1"
+                            [id]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1" type="text"
                             attr.aria-label="Allocation supplémentaire d'invalidité perçue le mois dernier par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -213,13 +224,15 @@
             </div>
             <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="personneAChargeBeneficesMicroEntreprise">
+                    <label class="label headline-4-typo"
+                        [for]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1">
                         * Bénéfices en tant que micro entrepreneur
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="personneAChargeBeneficesMicroEntreprise"
+                        <input [name]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
+                            [id]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
                             attr.aria-label="Chiffre d'affaires net total 3 derniers mois en tant que micro entrepreneur pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
@@ -250,13 +263,15 @@
             </div>
             <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="personneAChargeChiffreAffairesIndependant">
+                    <label class="label headline-4-typo"
+                        [for]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1">
                         * Chiffre d'affaires en tant qu'indépendant
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input name="personneAChargeChiffreAffairesIndependant"
+                        <input [name]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
+                            [id]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
                             attr.aria-label="Bénéfices de l'année dernière en tant qu'indépendant pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"

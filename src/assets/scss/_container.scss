@@ -1,4 +1,6 @@
 /** Obligé de mettre ce css à un niveau plus haut pour qu'il soit pris en compte dans le innertHTML **/
+
+
 #block-detail-aide {
 
   ol,
@@ -37,6 +39,11 @@ body {
   @media #{$extra-small-device} {
     padding-bottom: calc(#{$footer-height-mobile} + 3rem);
   }
+}
+
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
 }
 
 .container-fluid {

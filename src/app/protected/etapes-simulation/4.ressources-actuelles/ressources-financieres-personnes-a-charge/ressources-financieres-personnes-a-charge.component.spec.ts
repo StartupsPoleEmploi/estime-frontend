@@ -8,9 +8,9 @@ describe('RessourcesFinancieresPersonnesAChargeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RessourcesFinancieresPersonnesAChargeComponent ]
+      declarations: [RessourcesFinancieresPersonnesAChargeComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

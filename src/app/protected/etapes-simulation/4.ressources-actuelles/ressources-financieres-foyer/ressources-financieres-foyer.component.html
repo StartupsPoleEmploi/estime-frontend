@@ -37,81 +37,67 @@
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationRSA">
+                    <label class="label headline-4-typo">
                         * Concernant votre logement, vous êtes :
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label id="btn-situation-locataire-non-meuble" name="isLocataireNonMeuble"
+                        <button id="btn-situation-locataire-non-meuble" name="isLocataireNonMeuble"
                             aria-label="Vous êtes locataire d'un logement non meublé" class="radio-button-style-1"
                             data-testid="btn-situation-locataire-non-meuble"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble"
-                            btnCheckbox tabindex="0" role="button" #isLocataireNonMeuble="ngModel"
-                            (click)="onClickCheckBoxIsLocataireNonMeuble()"
+                            btnCheckbox tabindex="0" #isLocataireNonMeuble="ngModel"
+                            (click)="onClickCheckBoxIsLocataireNonMeuble($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_VIDE)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_VIDE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-locataire-meuble" name="isLocataireMeuble"
+                            <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_VIDE}}</span>
+                        </button>
+                        <button id="btn-situation-locataire-meuble" name="isLocataireMeuble"
                             aria-label="Vous êtes locataire d'un logement meublé" class="radio-button-style-1"
                             data-testid="btn-situation-locataire-meuble"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble"
-                            btnCheckbox tabindex="0" role="button" #isLocataireMeuble="ngModel"
-                            (click)="onClickCheckBoxIsLocataireMeuble()"
+                            btnCheckbox tabindex="0" #isLocataireMeuble="ngModel"
+                            (click)="onClickCheckBoxIsLocataireMeuble($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_MEUBLE)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_MEUBLE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-locataire-hlm" name="isLocataireHLM"
+                            <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_MEUBLE}}</span>
+                        </button>
+                        <button id="btn-situation-locataire-hlm" name="isLocataireHLM"
                             aria-label="Vous êtes locataire d'un HLM" class="radio-button-style-1"
                             data-testid="btn-situation-locataire-hlm"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM"
-                            btnCheckbox tabindex="0" role="button" #isLocataireHLM="ngModel"
-                            (click)="onClickCheckBoxIsLocataireHLM()"
+                            btnCheckbox tabindex="0" #isLocataireHLM="ngModel"
+                            (click)="onClickCheckBoxIsLocataireHLM($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOCATAIRE_HLM)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_HLM}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-proprietaire-avec-emprunt" name="isProprietaireAvecEmprunt"
+                            <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_HLM}}</span>
+                        </button>
+                        <button id="btn-situation-proprietaire-avec-emprunt" name="isProprietaireAvecEmprunt"
                             aria-label="Vous êtes propriétaire avec emprunt" class="radio-button-style-1"
                             data-testid="btn-situation-proprietaire-avec-emprunt"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt"
-                            btnCheckbox tabindex="0" role="button" #isProprietaireAvecEmprunt="ngModel"
-                            (click)="onClickCheckBoxIsProprietaireAvecEmprunt()"
+                            btnCheckbox tabindex="0" #isProprietaireAvecEmprunt="ngModel"
+                            (click)="onClickCheckBoxIsProprietaireAvecEmprunt($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE_AVEC_EMPRUNT}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-proprietaire" name="isProprietaire"
+                            <span
+                                class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE_AVEC_EMPRUNT}}</span>
+                        </button>
+                        <button id="btn-situation-proprietaire" name="isProprietaire"
                             aria-label="Vous êtes propriétaire sans emprunt" class="radio-button-style-1"
                             data-testid="btn-situation-proprietaire"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire"
-                            btnCheckbox tabindex="0" role="button" #isProprietaire="ngModel"
-                            (click)="onClickCheckBoxIsProprietaire()"
+                            btnCheckbox tabindex="0" #isProprietaire="ngModel"
+                            (click)="onClickCheckBoxIsProprietaire($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.PROPRIETAIRE)">
-                            <div>
-                                <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE}}</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-loge-gratuitement" name="isLogeGratuitement"
+                            <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE}}</span>
+                        </button>
+                        <button id="btn-situation-loge-gratuitement" name="isLogeGratuitement"
                             aria-label="Vous êtes logé à titre gratuit" class="radio-button-style-1"
                             data-testid="btn-situation-loge-gratuitement"
                             [(ngModel)]="informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement"
-                            btnCheckbox tabindex="0" role="button" #isLogeGratuitement="ngModel"
-                            (click)="onClickCheckBoxIsLogeGratuitement()"
+                            btnCheckbox tabindex="0" #isLogeGratuitement="ngModel"
+                            (click)="onClickCheckBoxIsLogeGratuitement($event)"
                             (keyup)="handleKeyUpOnButtonStatutOccupationLogement($event, statutOccupationLogementEnum.LOGE_GRATUITEMENT)">
-                            <div>
-                                <span
-                                    class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOGE_GRATUITEMENT}}</span>
-                            </div>
-                        </label>
+                            <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOGE_GRATUITEMENT}}</span>
+                        </button>
                     </div>
                     <span class="row error-input-message"
                         *ngIf="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()">
@@ -121,61 +107,51 @@
             </div>
             <div class="form-group" *ngIf="isConcerneParAideLogement()">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="allocationRSA">
+                    <label class="label headline-4-typo">
                         * Votre logement est :
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label id="btn-situation-logement-crous" name="isCrous"
+                        <button id="btn-situation-logement-crous" name="isCrous"
                             aria-label="Votre logement est un logement CROUS" class="radio-button-style-1"
                             data-testid="btn-situation-logement-crous"
                             [(ngModel)]="this.informationsPersonnelles.logement.isCrous" btnCheckbox tabindex="0"
-                            role="button" #isCrous="ngModel" (click)="onClickCheckBoxIsCrous()"
+                            #isCrous="ngModel" (click)="onClickCheckBoxIsCrous($event)"
                             (keyup)="handleKeyUpOnButtonIsCrous($event)">
-                            <div>
-                                <span class="body-2-typo">Un logement CROUS</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-conventionne" name="isConventionne"
+                            <span class="body-2-typo">Un logement CROUS</span>
+                        </button>
+                        <button id="btn-situation-logement-conventionne" name="isConventionne"
                             aria-label="Votre logement est un logement conventionné" class="radio-button-style-1"
                             data-testid="btn-situation-logement-conventionne"
                             [(ngModel)]="this.informationsPersonnelles.logement.isConventionne" btnCheckbox tabindex="0"
-                            role="button" #isConventionne="ngModel" (click)="onClickCheckBoxIsConventionne()"
+                            #isConventionne="ngModel" (click)="onClickCheckBoxIsConventionne($event)"
                             (keyup)="handleKeyUpOnButtonIsConventionne($event)">
-                            <div>
-                                <span class="body-2-typo">un logement conventionné</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-colloc" name="isColloc"
+                            <span class="body-2-typo">un logement conventionné</span>
+                        </button>
+                        <button id="btn-situation-logement-colloc" name="isColloc"
                             aria-label="Votre logement est un logement en collocation" class="radio-button-style-1"
                             data-testid="btn-situation-locataire-hlm"
                             [(ngModel)]="this.informationsPersonnelles.logement.isColloc" btnCheckbox tabindex="0"
-                            role="button" #isColloc="ngModel" (click)="onClickCheckBoxIsColloc()"
+                            #isColloc="ngModel" (click)="onClickCheckBoxIsColloc($event)"
                             (keyup)="handleKeyUpOnButtonIsColloc($event)">
-                            <div>
-                                <span class="body-2-typo">Une collocation</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-logement-chambre" name="isChambre"
+                            <span class="body-2-typo">Une collocation</span>
+                        </button>
+                        <button id="btn-situation-logement-chambre" name="isChambre"
                             aria-label="Votre logement est une chambre" class="radio-button-style-1"
                             data-testid="btn-situation-logement-chambre"
                             [(ngModel)]="this.informationsPersonnelles.logement.isChambre" btnCheckbox tabindex="0"
-                            role="button" #isChambre="ngModel" (click)="onClickCheckBoxIsChambre()"
+                            #isChambre="ngModel" (click)="onClickCheckBoxIsChambre($event)"
                             (keyup)="handleKeyUpOnButtonIsChambre($event)">
-                            <div>
-                                <span class="body-2-typo">Une chambre</span>
-                            </div>
-                        </label>
-                        <label id="btn-situation-aucun-cas" name="isAucunCas"
+                            <span class="body-2-typo">Une chambre</span>
+                        </button>
+                        <button id="btn-situation-aucun-cas" name="isAucunCas"
                             aria-label="Votre logement ne correspond à aucun des cas précédents"
                             class="radio-button-style-1" data-testid="btn-situation-aucun-cas"
                             [(ngModel)]="this.isAucunCas" btnCheckbox tabindex="0" role="button"
-                            (click)="onClickCheckBoxIsAucunCas()" (keyup)="handleKeyUpOnButtonIsAucunCas($event)">
-                            <div>
-                                <span class="body-2-typo">Aucun de ces cas</span>
-                            </div>
-                        </label>
+                            (click)="onClickCheckBoxIsAucunCas($event)" (keyup)="handleKeyUpOnButtonIsAucunCas($event)">
+                            <span class="body-2-typo">Aucun de ces cas</span>
+                        </button>
                     </div>
                     <span class="row error-input-message"
                         *ngIf="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()">
@@ -185,48 +161,45 @@
             </div>
             <div class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="situationFamilialeDemandeur">
+                    <label class="label headline-4-typo">
                         Si vous percevez une de ces aides au logement, veuillez nous préciser laquelle :
                     </label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <label id="btn-beneficiaire-apl" #beneficiaireAPL="ngModel" (click)="onClickCheckBoxHasAPL()"
-                            name="beneficiaireAPL" aria-label="Vous êtes bénéficiaire de l'APL"
-                            class="radio-button-style-1 ms-1" data-testid="btn-beneficiaire-apl" btnCheckbox
-                            tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireAPL"
-                            (keyup)="handleKeyUpOnButtonAPL($event)">
-                            <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}}
-                                    ({{codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}})</span>
-                            </div>
-                        </label>
-                        <label id="btn-beneficiaire-alf" #beneficiaireALF="ngModel" (click)="onClickCheckBoxHasALF()"
-                            name="beneficiaireALF" aria-label="Vous êtes bénéficiaire de l'ALF"
-                            class="radio-button-style-1 ms-1" data-testid="btn-beneficiaire-alf" btnCheckbox
-                            tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireALF"
-                            (keyup)="handleKeyUpOnButtonALF($event)">
-                            <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}}
-                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}})</span>
-                            </div>
-                        </label>
-                        <label id="btn-beneficiaire-als" #beneficiaireALS="ngModel" (click)="onClickCheckBoxHasALS()"
-                            name="beneficiaireALS" aria-label="Vous êtes bénéficiaire de l'ALS"
-                            class="radio-button-style-1 ms-1" data-testid="btn-beneficiaire-als" btnCheckbox
-                            tabindex="0" role="button" [(ngModel)]="beneficiaireAides.beneficiaireALS"
-                            (keyup)="handleKeyUpOnButtonALS($event)">
-                            <div>
-                                <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}}
-                                    ({{codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}})</span>
-                            </div>
-                        </label>
+                        <button id="btn-beneficiaire-apl" #beneficiaireAPL="ngModel"
+                            (click)="onClickCheckBoxHasAPL($event)" name="beneficiaireAPL"
+                            aria-label="Vous êtes bénéficiaire de l'APL"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                            data-testid="btn-beneficiaire-apl" btnCheckbox tabindex="0"
+                            [(ngModel)]="beneficiaireAides.beneficiaireAPL" (keyup)="handleKeyUpOnButtonAPL($event)">
+                            <span class="body-2-typo">{{libellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}}
+                                ({{codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT}})</span>
+                        </button>
+                        <button id="btn-beneficiaire-alf" #beneficiaireALF="ngModel"
+                            (click)="onClickCheckBoxHasALF($event)" name="beneficiaireALF"
+                            aria-label="Vous êtes bénéficiaire de l'ALF"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                            data-testid="btn-beneficiaire-alf" btnCheckbox tabindex="0"
+                            [(ngModel)]="beneficiaireAides.beneficiaireALF" (keyup)="handleKeyUpOnButtonALF($event)">
+                            <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}}
+                                ({{codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}})</span>
+                        </button>
+                        <button id="btn-beneficiaire-als" #beneficiaireALS="ngModel"
+                            (click)="onClickCheckBoxHasALS($event)" name="beneficiaireALS"
+                            aria-label="Vous êtes bénéficiaire de l'ALS"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                            data-testid="btn-beneficiaire-als" btnCheckbox tabindex="0"
+                            [(ngModel)]="beneficiaireAides.beneficiaireALS" (keyup)="handleKeyUpOnButtonALS($event)">
+                            <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}}
+                                ({{codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}})</span>
+                        </button>
                     </div>
                 </div>
             </div>
             <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireAideLogement()" class="form-group">
                 <div class="row mb-2">
-                    <label class="label headline-4-typo" for="montantAllocationsLogement">
+                    <label class="label headline-4-typo">
                         * Allocations logement perçues pour les 3 derniers mois
                     </label>
                 </div>
@@ -454,14 +427,15 @@
         </div>
         <div class="form-group" *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(1)">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="allocationsFamiliales">
+                <label class="label headline-4-typo" for="montantAllocationsFamiliales">
                     * Allocations familiales
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input attr.aria-label="Allocations familiales du mois dernier" name="allocationsFamiliales"
-                        data-testid="input-af" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    <input id="montantAllocationsFamiliales" attr.aria-label="Allocations familiales du mois dernier"
+                        name="montantAllocationsFamiliales" data-testid="input-af"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales"
@@ -482,14 +456,15 @@
         </div>
         <div class="form-group" *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="allocationSoutienFamilial">
+                <label class="label headline-4-typo" for="montantAllocationSoutienFamiliale">
                     * Allocation soutien familial
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input attr.aria-label="Allocation de soutien familiale du mois dernier"
-                        name="allocationSoutienFamilial" data-testid="input-asf"
+                    <input id="montantAllocationSoutienFamiliale"
+                        attr.aria-label="Allocation de soutien familiale du mois dernier"
+                        name="montantAllocationSoutienFamiliale" data-testid="input-asf"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
@@ -512,14 +487,15 @@
         </div>
         <div class="form-group" *ngIf="deConnecteSituationFamilialeService.has3PersonnesAChargeEntre3Et21Ans()">
             <div class="row mb-2">
-                <label class="label headline-4-typo" for="allocationsFamiliales">
+                <label class="label headline-4-typo" for="montantComplementFamilial">
                     * Complément familial
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input attr.aria-label="Complément familial du mois dernier" name="complementFamilial"
-                        data-testid="input-cf" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                    <input id="montantComplementFamilial" attr.aria-label="Complément familial du mois dernier"
+                        name="montantComplementFamilial" data-testid="input-cf"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial"
@@ -601,16 +577,16 @@
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="revenusImmobilierFoyer">
                     * Revenus annuels de placement ou du patrimoine
-                    <button id="infobulle-revenus-immobilier" role="tooltip" class="img-interrogation-icon"
-                        [ngClass]="{'popover-open': popoverRevenusImmobiliers.isOpen}" placement="right"
+                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon"
+                        [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
-                        (click)="$event.preventDefault();" [popover]="popoverRevenusImmobiliersTemplate"
-                        #popoverRevenusImmobiliers="bs-popover"></button>
+                        aria-label="Infobulle revenus immobilier"
+                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="revenusImmobilierFoyer" name="revenusImmobilier"
+                    <input id="revenusImmobilierFoyer" name="revenusImmobilierFoyer"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -650,40 +626,16 @@
     </form>
 </div>
 
-<ng-template #popoverRevenusImmobiliersTemplate>
-    <div class="container" (click)="onClickPopoverRevenusImmobiliers($event)">
-        <div class="close-popover row">
-            <div class="col"><i class="fas fa-times-circle mb-2 ms-auto float-end"
-                    (click)="onClickClosePopoverRevenusImmobiliers($event)"></i>
-            </div>
-        </div>
-        <div class="row">
-            <h5>
-                Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
-            </h5>
-            <p> * revenus fonciers ou micro-fonciers
-                <br>
-                * revenus des capitaux (actions, obligations)
-                <br>
-                * bénéfices d'une rente viagère
-            </p>
-        </div>
-    </div>
-</ng-template>
-
-<ng-template #popoverSituationLogementTemplate>
-    <div class="container" (click)="onClickPopoverSituationLogement($event)">
-        <div class="close-popover row">
-            <div class="col">
-                <i class="fas fa-times-circle mb-2 ms-auto float-end"
-                    (click)="onClickClosePopoverSituationLogement($event)"></i>
-            </div>
-        </div>
-        <div class="row">
-            <p>
-                Répondez par non si vous payez un loyer, vous êtes hébergé et vous payez une participation pour ce
-                logement ou vous êtes propriétaire et remboursez un prêt.
-            </p>
-        </div>
-    </div>
+<ng-template #modalRevenusImmobiliersTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
+        </h4>
+        <p class='body-2-typo'> * revenus fonciers ou micro-fonciers
+            <br>
+            * revenus des capitaux (actions, obligations)
+            <br>
+            * bénéfices d'une rente viagère
+        </p>">
+    </app-tooltip>
 </ng-template>

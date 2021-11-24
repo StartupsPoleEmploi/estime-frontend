@@ -21,7 +21,7 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -33,8 +33,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   isRessourcesFinancieresFoyerFormSubmitted = false;
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
-  @ViewChild('popoverRevenusImmobiliers') popoverRevenusImmobiliers: PopoverDirective;
-  @ViewChild('popoverSituationLogement') popoverSituationLogement: PopoverDirective;
 
   @Input() ressourcesFinancieres: RessourcesFinancieres;
 
@@ -62,6 +60,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
   public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
   private informationsPersonnellesService: InformationsPersonnellesService;
+  public modalService: ModalService;
   private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
   public screenService: ScreenService;
   private situationFamilialeUtileService: SituationFamilialeUtileService;
@@ -77,6 +76,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
     this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
     this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.modalService = injector.get<ModalService>(ModalService);
     this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
     this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
     this.screenService = injector.get<ScreenService>(ScreenService);
@@ -104,16 +104,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickPopoverRevenusImmobiliers(event) {
-    event.stopPropagation();
-  }
-
-  public onClickClosePopoverRevenusImmobiliers(event) {
-    event.stopPropagation();
-    this.popoverRevenusImmobiliers.hide();
-  }
-
-  public onClickCheckBoxHasAPL(): void {
+  public onClickCheckBoxHasAPL(event: any): void {
+    event.preventDefault();
     if (!this.beneficiaireAides.beneficiaireAPL) {
       this.deConnecteService.unsetAPL();
     } else {
@@ -124,7 +116,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxHasALF(): void {
+  public onClickCheckBoxHasALF(event: any): void {
+    event.preventDefault();
     if (!this.beneficiaireAides.beneficiaireALF) {
       this.deConnecteService.unsetALF();
     } else {
@@ -135,7 +128,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxHasALS(): void {
+  public onClickCheckBoxHasALS(event: any): void {
+    event.preventDefault();
     if (!this.beneficiaireAides.beneficiaireALS) {
       this.deConnecteService.unsetALS();
     } else {
@@ -145,11 +139,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.deConnecteService.unsetALF();
       this.beneficiaireAides.beneficiaireALF = false;
     }
-  }
-
-  public onClickClosePopoverSituationLogement(event): void {
-    event.stopPropagation();
-    this.popoverSituationLogement.hide();
   }
 
   private initOptionsProchaineDeclarationTrimestrielle() {
@@ -195,21 +184,21 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public handleKeyUpOnButtonAPL(event: any): void {
     if (event.keyCode === 13) {
       this.beneficiaireAides.beneficiaireAPL = !this.beneficiaireAides.beneficiaireAPL;
-      this.onClickCheckBoxHasAPL();
+      this.onClickCheckBoxHasAPL(event);
     }
   }
 
   public handleKeyUpOnButtonALF(event: any): void {
     if (event.keyCode === 13) {
       this.beneficiaireAides.beneficiaireALF = !this.beneficiaireAides.beneficiaireALF;
-      this.onClickCheckBoxHasALF();
+      this.onClickCheckBoxHasALF(event);
     }
   }
 
   public handleKeyUpOnButtonALS(event: any): void {
     if (event.keyCode === 13) {
       this.beneficiaireAides.beneficiaireALS = !this.beneficiaireAides.beneficiaireALS;
-      this.onClickCheckBoxHasALS();
+      this.onClickCheckBoxHasALS(event);
     }
   }
 
@@ -234,7 +223,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
 
 
-  public onClickCheckBoxIsLocataireNonMeuble(): void {
+  public onClickCheckBoxIsLocataireNonMeuble(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireNonMeuble();
@@ -242,43 +232,44 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   }
 
-  public onClickCheckBoxIsLocataireMeuble(): void {
+  public onClickCheckBoxIsLocataireMeuble(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireMeuble();
     }
   }
 
-  public onClickCheckBoxIsLocataireHLM(): void {
+  public onClickCheckBoxIsLocataireHLM(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireHLM();
     }
   }
 
-  public onClickCheckBoxIsProprietaire(): void {
+  public onClickCheckBoxIsProprietaire(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire) {
       this.unsetStatutOccupationLogement();
       this.setIsProprietaire();
     }
   }
 
-  public onClickCheckBoxIsProprietaireAvecEmprunt(): void {
+  public onClickCheckBoxIsProprietaireAvecEmprunt(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt) {
       this.unsetStatutOccupationLogement();
       this.setIsProprietaireAvecEmprunt();
     }
   }
 
-  public onClickCheckBoxIsLogeGratuitement(): void {
+  public onClickCheckBoxIsLogeGratuitement(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
       this.unsetStatutOccupationLogement();
       this.setIsLogeGratuitement();
     }
-  }
-
-  public onClickPopoverSituationLogement(event) {
-    event.stopPropagation();
   }
 
   public isStatutOccupationLogementSelectionne() {
@@ -301,59 +292,64 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     if (event.keyCode === 13) {
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_MEUBLE) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble;
-        this.onClickCheckBoxIsLocataireMeuble();
+        this.onClickCheckBoxIsLocataireMeuble(event);
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_VIDE) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble;
-        this.onClickCheckBoxIsLocataireNonMeuble();
+        this.onClickCheckBoxIsLocataireNonMeuble(event);
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_HLM) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM;
-        this.onClickCheckBoxIsLocataireHLM();
+        this.onClickCheckBoxIsLocataireHLM(event);
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.PROPRIETAIRE) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = !this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire;
-        this.onClickCheckBoxIsProprietaire();
+        this.onClickCheckBoxIsProprietaire(event);
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = !this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt;
-        this.onClickCheckBoxIsProprietaireAvecEmprunt();
+        this.onClickCheckBoxIsProprietaireAvecEmprunt(event);
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOGE_GRATUITEMENT) {
         this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = !this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement;
-        this.onClickCheckBoxIsLogeGratuitement();
+        this.onClickCheckBoxIsLogeGratuitement(event);
       }
     }
   }
 
 
 
-  public onClickCheckBoxIsCrous(): void {
+  public onClickCheckBoxIsCrous(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.isCrous) {
       this.isAucunCas = false;
     }
 
   }
 
-  public onClickCheckBoxIsConventionne(): void {
+  public onClickCheckBoxIsConventionne(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.isConventionne) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsColloc(): void {
+  public onClickCheckBoxIsColloc(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.isColloc) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsChambre(): void {
+  public onClickCheckBoxIsChambre(event: any): void {
+    event.preventDefault();
     if (this.informationsPersonnelles.logement.isChambre) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsAucunCas(): void {
+  public onClickCheckBoxIsAucunCas(event: any): void {
+    event.preventDefault();
     this.unsetTypeLogement();
     this.isAucunCas = true;
   }
@@ -381,7 +377,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
   public handleKeyUpOnButtonIsAucunCas(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxIsAucunCas();
+      this.onClickCheckBoxIsAucunCas(event);
     }
   }
 

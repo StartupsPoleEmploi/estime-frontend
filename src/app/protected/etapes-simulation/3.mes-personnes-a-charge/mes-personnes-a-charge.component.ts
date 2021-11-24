@@ -12,6 +12,7 @@ import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   public deConnecteService: DeConnecteService;
   public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
   public personneUtileService: PersonneUtileService;
+  public modalService: ModalService;
   private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
   public screenService: ScreenService;
 
@@ -49,6 +51,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
     this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
     this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
     this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
+    this.modalService = injector.get<ModalService>(ModalService);
     this.personneUtileService = injector.get<PersonneUtileService>(PersonneUtileService);
     this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
     this.screenService = injector.get<ScreenService>(ScreenService);

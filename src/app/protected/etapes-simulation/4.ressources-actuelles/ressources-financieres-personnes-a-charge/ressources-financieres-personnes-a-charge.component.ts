@@ -19,14 +19,14 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
   isRessourcesFinancieresPersonnesChargeFormSubmitted: boolean;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  @ViewChild('ressourcesFinancieresPersonnesChargeForm', { read: NgForm }) ressourcesFinancieresPersonnesChargeForm:FormGroup;
+  @ViewChild('ressourcesFinancieresPersonnesChargeForm', { read: NgForm }) ressourcesFinancieresPersonnesChargeForm: FormGroup;
 
   @Output() validationRessourcesPersonnesAChargeEventEmitter = new EventEmitter<void>();
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
-    public deConnecteService : DeConnecteService,
+    public deConnecteService: DeConnecteService,
     public screenService: ScreenService,
     private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
@@ -36,10 +36,10 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     this.loadData();
   }
 
-  public personneRecoitRSASeulement(personneDTO : PersonneDTO) : boolean{
+  public personneRecoitRSASeulement(personneDTO: PersonneDTO): boolean {
     let result = false;
     const personne = personneDTO.personne;
-    if(personne.beneficiaireAides.beneficiaireRSA
+    if (personne.beneficiaireAides.beneficiaireRSA
       && !personne.informationsPersonnelles.salarie
       && !personne.beneficiaireAides.beneficiaireAAH
       && !personne.beneficiaireAides.beneficiaireARE
@@ -47,17 +47,15 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
       && personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0
       && !personne.informationsPersonnelles.microEntrepreneur
-      && !personne.informationsPersonnelles.travailleurIndependant){
-        result = true;
-    }else{
-        result = false;
+      && !personne.informationsPersonnelles.travailleurIndependant) {
+      result = true;
     }
     return result;
   }
 
   public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
     this.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
-    if(this.isDonneesSaisiesFormulaireValides(form)) {
+    if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
     } else {
@@ -67,10 +65,10 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
-    if(isValide) {
+    if (isValide) {
       this.personnesDTO.forEach((personneDTO) => {
         const personneDTOValide = this.personneUtileService.isRessourcesFinancieresValides(personneDTO.personne);
-        if(!personneDTOValide) {
+        if (!personneDTOValide) {
           isValide = false;
         }
       });
@@ -82,7 +80,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     this.personnesDTO = new Array<PersonneDTO>();
     const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     demandeurConnecte.situationFamiliale.personnesACharge.forEach((personne, index) => {
-      if(this.personneUtileService.hasRessourcesFinancieres(personne)) {
+      if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
         const personneDTO = new PersonneDTO();
         personneDTO.index = index;
         personneDTO.personne = personne;

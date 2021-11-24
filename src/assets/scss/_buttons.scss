@@ -315,9 +315,16 @@
   max-width: 18.125rem;
   margin-right: 0.3rem;
   margin-top: 0.3rem;
+  background-color: unset;
+  max-width: fit-content;
 
-  @media #{$small-device} {
-    max-width: fit-content;
+  span {
+    color: $color-blue-1 !important;
+  }
+
+  @media #{$extra-small-device} {
+    width: 100%;
+    text-align: left;
 
     &:not(.active):hover {
       background-color: $color-blue-1-o5;
@@ -330,10 +337,8 @@
     border-color: $color-grey-4;
     background-color: $color-grey-4;
 
-    div {
-      span {
-        color: $color-white-3;
-      }
+    span {
+      color: $color-white-3;
     }
   }
 
@@ -341,16 +346,8 @@
     background-color: $color-blue-1;
     border-color: $color-blue-1;
 
-    div {
-      span {
-        color: $color-white-3;
-      }
-    }
-  }
-
-  div {
     span {
-      color: $color-blue-1;
+      color: $color-white-3 !important;
     }
   }
 }
