@@ -234,8 +234,12 @@ TODO : décommenter si changement validé par UX
   font-weight: normal !important;
 }
 
-.headline-4-typo-color {
+.headline-3-typo-color {
   color: $color-blue-2 !important;
+}
+
+.headline-4-typo-color {
+  @extend .headline-3-typo-color;
 }
 
 .headline-5-typo-color {

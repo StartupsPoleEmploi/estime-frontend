@@ -38,28 +38,21 @@
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span>
         </div>
-
-
-
-
-
-
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                         [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle ressources perçues"
+                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
                         (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
                     </button>
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut" type="text"
-                        data-testid="input-allocation-journaliere-reference-brut"
+                    <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut"
+                        type="text" data-testid="input-allocation-journaliere-reference-brut"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
@@ -95,8 +88,7 @@
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                         [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle ressources perçues"
+                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
                         (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
                     </button>
                 </label>
@@ -109,8 +101,8 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)}"
-                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants"
-                        required placeholder="Nombre" inputmode="decimal" #nombreJoursRestants="ngModel">
+                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants" required
+                        placeholder="Nombre" inputmode="decimal" #nombreJoursRestants="ngModel">
                     <span class="text-side-input d-inline body-2-typo">jours</span>
                 </div>
             </div>
@@ -140,8 +132,7 @@
                     * Montant brut de votre allocation journalière pour l'ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                         [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle ressources perçues"
+                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
                         (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
                     </button>
                 </label>
@@ -154,8 +145,8 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut== 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
-                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut"
-                        required placeholder="Montant" inputmode="decimal" #montantJournalierBrut="ngModel">
+                        [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut" required
+                        placeholder="Montant" inputmode="decimal" #montantJournalierBrut="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -176,7 +167,7 @@
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-            </span> 
+            </span>
         </div>
 
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
@@ -185,8 +176,7 @@
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                         [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle ressources perçues"
+                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
                         (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
                     </button>
                 </label>
@@ -198,8 +188,8 @@
                             aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
                             data-testid="btn-is-concerne-degressivite-oui" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, true)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="true"
-                            #isConcerneDegressivite="ngModel">
+                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite"
+                            required [value]="true" #isConcerneDegressivite="ngModel">
                         <label class="form-check-label body-2-typo" for="isConcerneDegressiviteOui">
                             oui
                         </label>
@@ -209,8 +199,8 @@
                             aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
                             data-testid="btn-is-concerne-degressivite-non" type="radio" class="form-check-input"
                             (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, false)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite" required [value]="false"
-                            #isConcerneDegressivite="ngModel">
+                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite"
+                            required [value]="false" #isConcerneDegressivite="ngModel">
                         <label class="form-check-label body-2-typo" for="isConcerneDegressiviteNon">
                             non
                         </label>
@@ -231,7 +221,8 @@
                         <img alt="" src="./assets/images/info-blue-1.svg">
                     </div>
                     <div class="col-11">
-                        <span class="body-2-typo">A ce jour, le résultat de la simulation ne prend pas en compte la dégressivité de l’allocation de retour à l’emploi.</span>
+                        <span class="body-2-typo">A ce jour, le résultat de la simulation ne prend pas en compte la
+                            dégressivité de l’allocation de retour à l’emploi.</span>
                     </div>
                 </div>
             </div>
@@ -732,12 +723,11 @@
             Où trouver cette information ?
         </h3>
         <p class='body-2-typo'>
-            Sur la page 2 de votre dernier relevé de situation Pôle Emploi 
+            Sur la page 2 de votre dernier relevé de situation Pôle Emploi 👇
         </p>
-        <div class='row'>
+        <div class='row mb-5'>
             <img class='.code-ressource' src='./assets/images/img_tooltip-are.png'>
         </div>
-        
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
         </h4>
@@ -768,6 +758,6 @@
             <li>
                 Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
             </li>
-        </ol>">      
+        </ol>">
     </app-tooltip>
 </ng-template>
