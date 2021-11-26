@@ -56,6 +56,15 @@
                 <app-detail-aide
                     *ngIf="aideSelected && aideSelected.code === codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES"
                     [aideSelected]="aideSelected"></app-detail-aide>
+                <li class="list-group-item" [ngClass]="{'is-item-not-last': isItemAREIsNotLast()}"
+                    *ngIf="aidesService.getMontantARE(simulationSelected) > 0">
+                    <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.AIDE_RETOUR_EMPLOI"
+                        attr.data-testid="row-are" [isColPictoArrowDisplay]="false"
+                        [libelleRessource]="libellesAidesEnum.AIDE_RETOUR_EMPLOI"
+                        [montantRessource]="aidesService.getMontantARE(simulationSelected)"
+                        [organismeRessource]="organismeAidesEnum.POLE_EMPLOI">
+                    </app-item-ressource-actuelle>
+                </li>
                 <li class="list-group-item" [ngClass]="{'is-item-not-last': isItemPensionInvaliditeIsNotLast()}"
                     *ngIf="demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM?.pensionInvalidite > 0">
                     <app-item-ressource-actuelle [codeRessource]="codesAidesEnum.PENSION_INVALIDITE"

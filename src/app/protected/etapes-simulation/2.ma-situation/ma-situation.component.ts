@@ -125,6 +125,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
+      this.deConnecteService.unsetAllocationMensuelleNetARE();
       this.beneficiaireAides.beneficiaireARE = false;
     }
   }
@@ -133,6 +134,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetAllocationMensuelleNetARE();
     } else {
       this.deConnecteService.setAllocationMensuelleNetARE();
+      this.deConnecteService.unsetAllocationMensuelleNetASS();
       this.beneficiaireAides.beneficiaireASS = false;
     }
   }

@@ -36,6 +36,10 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
   }
 
+  public getMontantARE(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_RETOUR_EMPLOI);
+  }
+
   public getMontantRSA(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.RSA);
   }
@@ -226,6 +230,7 @@ export class AidesService {
   public isAideDemandeurPourraObtenir(aide: Aide): boolean {
     return aide && aide.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
       && aide.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
+      && aide.code !== CodesAidesEnum.AIDE_RETOUR_EMPLOI
       && aide.code !== CodesAidesEnum.RSA
       && aide.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
       && aide.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL

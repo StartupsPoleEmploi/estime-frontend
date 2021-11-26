@@ -5,6 +5,7 @@ export enum LibellesAidesEnum {
   ALLOCATION_ADULTES_HANDICAPES = 'Allocation aux Adultes Handicapés',
   ALLOCATION_LOGEMENT_FAMILIALE = 'Allocation de Logement Familial',
   ALLOCATION_LOGEMENT_SOCIALE = 'Allocation de Logement Social',
+  AIDE_RETOUR_EMPLOI = 'Aide au Retour à l\'Emploi',
   ALLOCATION_SOLIDARITE_SPECIFIQUE = 'Allocation de Solidarité Spécifique',
   ALLOCATION_SOUTIEN_FAMILIAL = 'Allocation de Soutien Familial',
   ALLOCATION_SUPPLEMENTAIRE_INVALIDITE = 'Allocation supplémentaire d\'invalidité',

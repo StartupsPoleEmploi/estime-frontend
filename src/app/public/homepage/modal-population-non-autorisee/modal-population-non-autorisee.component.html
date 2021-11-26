@@ -1,30 +1,29 @@
-<div class="modal-header" tag-page="popup_population_non_autorisee">
-  <div class="col-1" aria-label="Informations">
-    <img alt="" src="./assets/images/info-black.svg">
-  </div>
-
-  <div class="col-10 text-center">
-    <p class="font-weight-bold">Le service ESTIME est destiné aux bénéficiaires des minimas-sociaux inscrits à Pôle
-      emploi.</p>
-  </div>
-
-  <div class="col-1">
-    <button type="button" class="close pull-right m-0 p-0" aria-label="Close" (click)="onClickButtonClosePopup()">
-      <i class="fas fa-times-circle mb-2 ms-auto"></i>
-    </button>
-  </div>
-
+<div class="modal-header">
+  <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
+  <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
+    focus>
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
-  <div class="container-fluid">
+  <div>
     <div class="row">
-      <div class="col-12 text-center">
-        Le service n'est pour le moment pas ouvert <span class="font-weight-bold">aux bénéficiaires de l'ARE</span>. Nous
-        travaillons activement pour réussir à vous proposer le service dans les prochains mois.
-        <br>
-        <br>
-        Merci de votre compréhension.
+      <div class="col-1" aria-label="Informations">
+        <img alt="" src="./assets/images/info-black.svg">
+      </div>
+      <div class="col-10">
+        <h4 class='headline-4-typo headline-4-typo-color text-center'>
+          Le service ESTIME est destiné aux bénéficiaires des minimas-sociaux inscrits à Pôle emploi.
+        </h4>
       </div>
     </div>
+    <p class='body-2-typo text-center'>
+      Le service n'est pour le moment pas ouvert <span class="font-weight-bold">aux bénéficiaires de l'ARE</span>.
+      Nous
+      travaillons activement pour réussir à vous proposer le service dans les prochains mois.
+    </p>
+    <p class='body-2-typo text-center'>
+      Merci de votre compréhension.
+    </p>
   </div>
 </div>
