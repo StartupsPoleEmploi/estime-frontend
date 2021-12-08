@@ -17,7 +17,7 @@ RUN mkdir -p /var/www/estime
 COPY ./dist/estime /var/www/estime
 
 #add useful scripts
-COPY ./docker/commun/scripts/startup.sh .
+COPY ./docker/recette/docker-image/scripts/startup.sh .
 RUN chmod +x startup.sh
 
 ## add permissions for nginx user
