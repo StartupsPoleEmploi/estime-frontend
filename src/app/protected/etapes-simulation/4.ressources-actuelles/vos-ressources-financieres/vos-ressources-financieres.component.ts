@@ -115,7 +115,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
    */
   private initOptionsNombreMoisTravailles(): void {
     this.optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
-    const nbrMoisTravaille = 6;
+    const nbrMoisTravaille = this.getNombreMoisTravailleAuCoursDerniersMois();
     for (let i = 1; i <= nbrMoisTravaille; i++) {
       const nombreMoisTravaille = new NombreMoisTravailles();
       nombreMoisTravaille.value = i;
@@ -126,9 +126,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public getNombreMoisTravailleAuCoursDerniersMois(): number {
     let nombreMoisTravaillesDerniersMois = 3;
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() 
-    || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()
-    ) nombreMoisTravaillesDerniersMois = 6;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) nombreMoisTravaillesDerniersMois = 6;
     return nombreMoisTravaillesDerniersMois;
   }
 
@@ -156,9 +154,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
         this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
       }
-      if (this.optionsNombreMoisTravailles == null 
-        && (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() 
-        || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS())) {        this.initOptionsNombreMoisTravailles();
+      if (this.optionsNombreMoisTravailles == null
+        && (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()
+          || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS())) {
+        this.initOptionsNombreMoisTravailles();
       }
     }
   }
@@ -272,7 +271,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public onClickPopoverSituationLogement(event) {
-    event.stopPropagation();  }
+    event.stopPropagation();
+  }
 
 
   public onClickClosePopoverSituationLogement(event): void {
@@ -296,7 +296,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         const isBeneficiaireAAH = this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH();
         const isBeneficiareRSA = (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBeneficiaireAidesService.hasFoyerRSA());
         const isBeneficiaireASS = this.deConnecteBeneficiaireAidesService.isBeneficiaireASS();
-        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareRSA, isBeneficiaireASS);        if (!isValide) this.erreurSaisieSalaires = true;
+        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, isBeneficiaireAAH, isBeneficiareRSA, isBeneficiaireASS); if (!isValide) this.erreurSaisieSalaires = true;
       }
     }
     return isValide;
