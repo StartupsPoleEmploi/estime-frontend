@@ -48,7 +48,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     const salaireNetAvantSimulation = "500"
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
-    const primeActivite = "69";
+    const primeActivite = "62";
     const primeActiviteB = "185";
 
     const homePage = new HomePage();
