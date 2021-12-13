@@ -73,15 +73,9 @@ export class DeConnecteRessourcesFinancieresService {
   private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres: RessourcesFinancieres): number {
     let montant = 0;
     if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
-      }
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
-      }
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
-      }
+      ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.forEach(mois => {
+        montant += this.numberUtileService.getMontantSafe(mois.salaire.montantNet);
+      });
     }
     return montant;
   }

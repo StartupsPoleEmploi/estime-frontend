@@ -30,6 +30,8 @@ import { PopoverDirective } from 'ngx-bootstrap/popover';
 })
 export class VosRessourcesFinancieresComponent implements OnInit {
 
+  public readonly NOMBRE_MOIS_TRAVAILLES: number = 12;
+
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
@@ -129,16 +131,15 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     const nbrMoisTravaille = this.getNombreMoisTravailleAuCoursDerniersMois();
     for (let i = 1; i <= nbrMoisTravaille; i++) {
       const nombreMoisTravaille = new NombreMoisTravailles();
-      nombreMoisTravaille.value = i;
-      nombreMoisTravaille.label = `${i} mois`;
+      nombreMoisTravaille.index = i;
+      nombreMoisTravaille.label = this.dateUtileService.getDateFormateeAvantDateJour(i);
       this.optionsNombreMoisTravailles.push(nombreMoisTravaille);
     }
+    console.log(this.optionsNombreMoisTravailles);
   }
 
   public getNombreMoisTravailleAuCoursDerniersMois(): number {
-    let nombreMoisTravaillesDerniersMois = 3;
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) nombreMoisTravaillesDerniersMois = 6;
-    return nombreMoisTravaillesDerniersMois;
+    return this.NOMBRE_MOIS_TRAVAILLES;
   }
 
   /**
@@ -148,11 +149,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
    * (quand on rafraichit la page ou qu'on change de situation par exemple)
    */
   private initSalairesAvantPeriodeSimulation(): void {
+
+    const isNull = (mois) => mois == null;
     if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || (this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1 == null
-        && this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2 == null
-        && this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3 == null))
-      this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
+      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull))
+      this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
   }
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
@@ -163,11 +164,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
     } else {
       if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
+        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
       }
-      if (this.optionsNombreMoisTravailles == null
-        && (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()
-          || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS())) {
+      if (this.optionsNombreMoisTravailles == null) {
         this.initOptionsNombreMoisTravailles();
       }
     }
@@ -181,54 +180,39 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         }
       } else {
         if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
+          this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
         }
       }
     }
   }
 
-  private creerSalairesAvantPeriodeSimulation(): PeriodeTravailleeAvantSimulation {
-    const periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
+  private creerSalairesAvantPeriodeSimulation(nombreSalaire): PeriodeTravailleeAvantSimulation {
+    let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
+    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
 
-    const moisMoins1 = new MoisTravailleAvantSimulation();
-    moisMoins1.salaire = new Salaire();
-    moisMoins1.isSansSalaire = false;
-    moisMoins1.salaire.montantNet = 0;
-    moisMoins1.salaire.montantBrut = 0;
+    for (let index = 0; index <= nombreSalaire; index++) {
+      const moisTravaille = new MoisTravailleAvantSimulation();
+      const salaire = new Salaire();
+      salaire.montantNet = 0;
+      salaire.montantBrut = 0;
+      moisTravaille.isSansSalaire = false;
+      moisTravaille.salaire = salaire;
+      moisTravaillesArray.push(moisTravaille);
+    }
+    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
 
-    const moisMoins2 = new MoisTravailleAvantSimulation();
-    moisMoins2.salaire = new Salaire();
-    moisMoins2.isSansSalaire = false;
-    moisMoins2.salaire.montantNet = 0;
-    moisMoins2.salaire.montantBrut = 0;
-
-    const moisMoins3 = new MoisTravailleAvantSimulation();
-    moisMoins3.salaire = new Salaire();
-    moisMoins3.isSansSalaire = false;
-    moisMoins3.salaire.montantNet = 0;
-    moisMoins3.salaire.montantBrut = 0;
-
-    periodeTravailleeAvantSimulation.moisMoins1 = moisMoins1;
-    periodeTravailleeAvantSimulation.moisMoins2 = moisMoins2;
-    periodeTravailleeAvantSimulation.moisMoins3 = moisMoins3;
+    console.log(periodeTravailleeAvantSimulation);
 
     return periodeTravailleeAvantSimulation;
   }
 
 
-  public onClickPasDeSalaire(nMoisAvantSimulation: number) {
-    switch (nMoisAvantSimulation) {
-      case 0:
-        this.unsetSalairesBrutEtNet(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire);
-        break;
-      case 1:
-        this.unsetSalairesBrutEtNet(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire);
-        break;
-      case 2:
-        this.unsetSalairesBrutEtNet(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire);
-        break;
-    }
+  public hasTroisMoisSansSalaire(): boolean {
+    const isNull = (mois) => mois == null;
+    return (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
+      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
   }
+
 
   private unsetSalairesBrutEtNet(salaire: Salaire): Salaire {
     salaire.montantBrut = 0;
@@ -240,23 +224,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (event.keyCode === 13) {
       this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = value;
       this.onClickButtonRadioHasTravailleAuCoursDerniersMois(value);
-    }
-  }
-
-  public handleKeyUpOnCheckBoxPasDeSalaire(event: any, nMoisAvantSimulation: number) {
-    if (event.keyCode === 13) {
-      switch (nMoisAvantSimulation) {
-        case 0:
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire = !this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire;
-          break;
-        case 1:
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire = !this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire;
-          break;
-        case 2:
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire = !this.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire;
-          break;
-      }
-      this.onClickPasDeSalaire(nMoisAvantSimulation);
     }
   }
 
@@ -285,7 +252,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onClickPopoverSituationLogement(event) {
     event.stopPropagation();
   }
-
 
   public onClickClosePopoverSituationLogement(event): void {
     event.stopPropagation();
