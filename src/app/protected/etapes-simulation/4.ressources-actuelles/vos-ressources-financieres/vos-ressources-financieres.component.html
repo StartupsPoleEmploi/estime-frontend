@@ -67,11 +67,6 @@
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
-            <!-- <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > this.controleChampFormulaireService.MONTANT_ARE_SALAIRE_JOURNALIER_REFERENCE_BRUT_MAX)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_SALAIRE_JOURNALIER_REFERENCE_BRUT_ARE}}
-            </span> -->
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -111,11 +106,6 @@
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
-            <!-- <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ARE}}
-            </span>-->
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || nombreJoursRestants.touched)  && nombreJoursRestants.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -155,11 +145,6 @@
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
-            <!-- <span
-                *ngIf="this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_JOURNALIER_ASS}}
-            </span> -->
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -212,8 +197,6 @@
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
         </div>
-
-
         <div *ngIf="isAfficherMessageARE();">
             <div class="alert alert-dark" role="alert">
                 <div class="row">
@@ -227,11 +210,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row mb-2">
                 <label class="label headline-4-typo">
