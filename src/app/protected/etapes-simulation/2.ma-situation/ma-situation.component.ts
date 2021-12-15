@@ -396,7 +396,6 @@ export class MaSituationComponent implements OnInit {
   }
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    console.log(demandeurEmploiConnecte.informationsPersonnelles);
     if (!demandeurEmploiConnecte.informationsPersonnelles) {
       this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
       this.informationsPersonnelles.nationalite = null;
