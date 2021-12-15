@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injector, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -47,31 +47,19 @@ export class MaSituationComponent implements OnInit {
     { label: NationalitesEnum.AUTRE }
   ];
 
-  // services à injecter dynamiquement
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public dateUtileService: DateUtileService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
-  public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
-  private estimeApiService: EstimeApiService;
-  private informationsPersonnellesService: InformationsPersonnellesService;
-  public screenService: ScreenService;
-  private situationFamilialeUtileService: SituationFamilialeUtileService;
-
   constructor(
     private elementRef: ElementRef,
-    private injector: Injector,
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    private estimeApiService: EstimeApiService,
+    private informationsPersonnellesService: InformationsPersonnellesService,
+    public screenService: ScreenService,
+    private situationFamilialeUtileService: SituationFamilialeUtileService,
     private router: Router
   ) {
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
-    this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
-    this.estimeApiService = injector.get<EstimeApiService>(EstimeApiService);
-    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
-    this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
   }
 
   ngOnInit(): void {

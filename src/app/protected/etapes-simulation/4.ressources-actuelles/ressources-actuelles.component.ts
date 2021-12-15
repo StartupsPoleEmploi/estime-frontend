@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -78,32 +78,19 @@ export class RessourcesActuellesComponent implements OnInit {
   @ViewChild(RessourcesFinancieresPersonnesAChargeComponent) ressourcesFinancieresPersonnesAChargeComponent: RessourcesFinancieresPersonnesAChargeComponent;
   @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
 
-  // services à injecter dynamiquement
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
-  private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
-  private deConnecteSimulationAidesService: DeConnecteSimulationAidesService;
-  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
-  private estimeApiService: EstimeApiService;
-  private informationsPersonnellesService: InformationsPersonnellesService;
-  public screenService: ScreenService;
-
-
   constructor(
     private elementRef: ElementRef,
-    private injector: Injector,
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private estimeApiService: EstimeApiService,
+    private informationsPersonnellesService: InformationsPersonnellesService,
+    public screenService: ScreenService,
     private router: Router
   ) {
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
-    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
-    this.deConnecteSimulationAidesService = injector.get<DeConnecteSimulationAidesService>(DeConnecteSimulationAidesService);
-    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
-    this.estimeApiService = injector.get<EstimeApiService>(EstimeApiService);
-    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
   }
 
   ngOnInit(): void {

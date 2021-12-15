@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
@@ -53,34 +53,21 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   isAucunCas: boolean;
 
-  // services à injecter dynamiquement
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public dateUtileService: DateUtileService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
-  public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
-  public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
-  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
-  private informationsPersonnellesService: InformationsPersonnellesService;
-  private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
-  public screenService: ScreenService;
-  private situationFamilialeUtileService: SituationFamilialeUtileService;
 
   constructor(
     private elementRef: ElementRef,
-    private injector: Injector
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private informationsPersonnellesService: InformationsPersonnellesService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public screenService: ScreenService,
+    private situationFamilialeUtileService: SituationFamilialeUtileService
   ) {
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
-    this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
-    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
-    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
-    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
-    this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
-    this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
   }
 
   ngOnInit(): void {
