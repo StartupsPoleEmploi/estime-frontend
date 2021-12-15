@@ -130,46 +130,25 @@ export class RessourcesFinancieresUtileService {
    */
   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService): boolean {
     let isChampsSalairesValides = true;
-
     if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if (deConnecteBeneficiaireAidesService.isBeneficiaireRSA()) {
-        isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
-      }
-      if (deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-        //Le plus(+) est nécessaire sinon on tombe dans le default case - à revoir
-        switch (+ressourcesFinancieres.nombreMoisTravaillesDerniersMois) {
-          // si on indique n'avoir travaillé qu'1 mois on ne peut remplir plus d'1 salaire
-          case 1: {
-            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) <= 1;
-            break;
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+        let tousLesSalairesAZero = true;
+        Object.values(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).forEach((mois) => {
+          console.log(mois)
+          if (mois.salaire != null && mois.salaire.montantNet != 0) {
+            console.log('bip');
+            tousLesSalairesAZero = false;
           }
-          // si on indique n'avoir travaillé que 2 mois on ne peut remplir plus de 2 salaire
-          case 2: {
-            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) <= 2;
-            break;
-          }
-          // si on indique avoir travaillé 4 mois on doit remplir au moins 1 salaire
-          case 4: {
-            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 1;
-            break;
-          }
-          // si on indique avoir travaillé 5 mois on doit remplir au moins 2 salaires
-          case 5: {
-            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) >= 2;
-            break;
-          }
-          // si on indique avoir travaillé 6 mois on doit remplir au moins 3 salaires
-          case 6: {
-            isChampsSalairesValides = this.getNombreMoisTravaillesDerniersMois(ressourcesFinancieres) === 3;
-            break;
-          }
-          default: {
-            isChampsSalairesValides = true;
-            break;
-          }
+        });
+        if (tousLesSalairesAZero) {
+          isChampsSalairesValides = false;
         }
+        console.log("tousLesSalairesAZero : " + tousLesSalairesAZero);
+      } else {
+        isChampsSalairesValides = false;
       }
     }
+    console.log("isChampsSalairesValides : " + isChampsSalairesValides);
     return isChampsSalairesValides;
   }
 

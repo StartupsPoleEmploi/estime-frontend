@@ -201,7 +201,9 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles" class="col col-md-4">
+                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
+                        class="col col-md-4 mt-2"
+                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-10<0}">
                         <div class="ms-2 me-2">
                             <div class="row mb-2">
                                 <label class="label headline-4-typo"
@@ -218,11 +220,9 @@
                                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                                         type="text" maxlength="6" min="0"
                                         class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                        [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
-                                        [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire}" required inputmode="decimal"
-                                        (click)="$event.target.select()"
-                                        [required]="!ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].isSansSalaire"
-                                        [disabled]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].isSansSalaire"
+                                        [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.get(this.dateUtileService.getNombreDateAvantDateJour(optionNombreMoisTravailles.index)).salaire.montantNet"
+                                        [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire()}" required
+                                        inputmode="decimal" (click)="$event.target.select()"
                                         #salaireMoisAvantPeriodeSimulee="ngModel">
                                     <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                                 </div>

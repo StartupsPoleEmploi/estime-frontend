@@ -72,8 +72,8 @@ export class DeConnecteRessourcesFinancieresService {
 
   private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres: RessourcesFinancieres): number {
     let montant = 0;
-    if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.forEach(mois => {
+    if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+      Object.values(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).forEach(mois => {
         montant += this.numberUtileService.getMontantSafe(mois.salaire.montantNet);
       });
     }

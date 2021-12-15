@@ -111,6 +111,16 @@ export class DateUtileService {
 
   /**
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateToFormat
+   */
+  public getNombreDateFromDate(dateToFormat: Date): string {
+    const month = dateToFormat.getMonth() + 1;
+    const year = dateToFormat.getFullYear();;
+    return `${month}-${year}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateSimulation
    */
   public getLibelleDateStringFormat(dateSimulation: string): string {
@@ -200,6 +210,23 @@ export class DateUtileService {
     } else {
       const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
       return this.getLibelleDateFromDate(dateAvantSimulation).toLowerCase();
+    }
+  }
+
+  /**
+  * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
+  * exemple :
+  * date du jour = 01/03/2021, si nMoisAvantDateJour = 2 alors dateFormatee = "janvier 2021"
+  *
+  * @param nMoisAvantSimulation
+  */
+  public getNombreDateAvantDateJour(nMoisAvantDateJour: number): string {
+    const dateJour = new Date();
+    if (nMoisAvantDateJour == 0) {
+      return this.getNombreDateFromDate(dateJour).toLowerCase();
+    } else {
+      const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
+      return this.getNombreDateFromDate(dateAvantSimulation).toLowerCase();
     }
   }
 

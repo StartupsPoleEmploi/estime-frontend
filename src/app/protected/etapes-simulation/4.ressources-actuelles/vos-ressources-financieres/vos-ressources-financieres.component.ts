@@ -149,10 +149,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
    * (quand on rafraichit la page ou qu'on change de situation par exemple)
    */
   private initSalairesAvantPeriodeSimulation(): void {
-
     const isNull = (mois) => mois == null;
     if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull))
+      || Object.values(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).every(isNull))
       this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
   }
 
@@ -188,18 +187,18 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private creerSalairesAvantPeriodeSimulation(nombreSalaire): PeriodeTravailleeAvantSimulation {
     let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
-    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
+    const moisTravaillesMap = new Map<string, MoisTravailleAvantSimulation>();
 
-    for (let index = 0; index <= nombreSalaire; index++) {
+    for (let index = 1; index <= nombreSalaire; index++) {
       const moisTravaille = new MoisTravailleAvantSimulation();
       const salaire = new Salaire();
       salaire.montantNet = 0;
       salaire.montantBrut = 0;
       moisTravaille.isSansSalaire = false;
       moisTravaille.salaire = salaire;
-      moisTravaillesArray.push(moisTravaille);
+      moisTravaillesMap.set(this.dateUtileService.getNombreDateAvantDateJour(index), moisTravaille);
     }
-    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
+    periodeTravailleeAvantSimulation.mois = moisTravaillesMap;
 
     console.log(periodeTravailleeAvantSimulation);
 
@@ -207,10 +206,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
 
-  public hasTroisMoisSansSalaire(): boolean {
+  public hasDouzeMoisSansSalaire(): boolean {
     const isNull = (mois) => mois == null;
     return (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
+      || Object.values(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).every(isNull));
   }
 
 
@@ -241,6 +240,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
       this.checkAndSaveDateDernierOuvertureDroitASS();
     }
+    console.log(this.ressourcesFinancieres)
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit();
