@@ -7,7 +7,7 @@ stages:
     - dynamic-application-security-testing
 
 variables:
-    LAUNCH_CYPRESS_TESTS: "true"
+    LAUNCH_CYPRESS_TESTS: "false"
 
 
 cache: &global_cache
