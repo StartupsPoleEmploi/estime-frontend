@@ -12,12 +12,14 @@ import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simul
 import { RessourcesFinancieres } from "@models/ressources-financieres";
 import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
+import { DateUtileService } from './date-util.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
 
   constructor(
     private controleChampFormulaireService: ControleChampFormulaireService,
+    private dateUtileService: DateUtileService,
     private numberUtileService: NumberUtileService
   ) {
 
@@ -116,42 +118,6 @@ export class RessourcesFinancieresUtileService {
         && ressourcesFinancieres.nombreMoisTravaillesDerniersMois != 0)
   }
 
-  /**
-   * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
-   * Conditions de validité :
-   *  -> si le demandeur n'a pas travaillé ces derniers mois.
-   *  -> si le demandeur est bénéficiaire ASS ou RSA et qu'au moins 1 champ salaire est renseigné.
-   *  -> si le demandeur est bénéficiaire AAH.
-   *    -> si il a indiqué avoir travaillé 4 mois et qu'au moins 1 champ salaire est renseigné,
-   *    -> si il a indiqué avoir travaillé 5 mois et qu'au moins 2 champs salaire sont renseignés,
-   *    -> si il a indiqué avoir travaillé 6 mois et que 3 champs salaire sont renseignés.
-   *
-   * @param ressourcesFinancieres
-   */
-  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres, deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService): boolean {
-    let isChampsSalairesValides = true;
-    if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
-        let tousLesSalairesAZero = true;
-        Object.values(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).forEach((mois) => {
-          console.log(mois)
-          if (mois.salaire != null && mois.salaire.montantNet != 0) {
-            console.log('bip');
-            tousLesSalairesAZero = false;
-          }
-        });
-        if (tousLesSalairesAZero) {
-          isChampsSalairesValides = false;
-        }
-        console.log("tousLesSalairesAZero : " + tousLesSalairesAZero);
-      } else {
-        isChampsSalairesValides = false;
-      }
-    }
-    console.log("isChampsSalairesValides : " + isChampsSalairesValides);
-    return isChampsSalairesValides;
-  }
-
   private getNombreMoisTravaillesDerniersMois(ressourcesFinancieres: RessourcesFinancieres): number {
     let nombreMoisTravaillesDerniersMois = 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[0]) ? 1 : 0;
@@ -162,9 +128,10 @@ export class RessourcesFinancieresUtileService {
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[5]) ? 1 : 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[6]) ? 1 : 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[7]) ? 1 : 0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[8]) ? 1 : 0;
+    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[9]) ? 1 : 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[10]) ? 1 : 0;
     nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[11]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[12]) ? 1 : 0;
     return nombreMoisTravaillesDerniersMois;
   }
 

@@ -117,13 +117,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   private initOptionsNombreMoisTravailles(): void {
     this.optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
     const nbrMoisTravaille = this.getNombreMoisTravailleAuCoursDerniersMois();
-    for (let i = 1; i <= nbrMoisTravaille; i++) {
+    for (let index = 0; index < nbrMoisTravaille; index++) {
       const nombreMoisTravaille = new NombreMoisTravailles();
-      nombreMoisTravaille.index = i;
-      nombreMoisTravaille.label = this.dateUtileService.getDateFormateeAvantDateJour(i);
+      nombreMoisTravaille.index = index;
+      nombreMoisTravaille.label = this.dateUtileService.getDateFormateeAvantDateJour(index + 1);
       this.optionsNombreMoisTravailles.push(nombreMoisTravaille);
     }
-    console.log(this.optionsNombreMoisTravailles);
   }
 
   public getNombreMoisTravailleAuCoursDerniersMois(): number {
@@ -159,37 +158,22 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public onClickBoutonNombreMoisTravailleAuCoursDerniersMois(): void {
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-      if (this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
-        if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation = null;
-        }
-      } else {
-        if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-          this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
-        }
-      }
-    }
-  }
-
   private creerSalairesAvantPeriodeSimulation(nombreSalaire): PeriodeTravailleeAvantSimulation {
     let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
-    const moisTravaillesMap = new Map<string, MoisTravailleAvantSimulation>();
+    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
+    const dateActuelle = new Date();
 
-    for (let index = 1; index <= nombreSalaire; index++) {
+    for (let index = 0; index < nombreSalaire; index++) {
       const moisTravaille = new MoisTravailleAvantSimulation();
       const salaire = new Salaire();
       salaire.montantNet = 0;
       salaire.montantBrut = 0;
       moisTravaille.isSansSalaire = false;
       moisTravaille.salaire = salaire;
-      moisTravaillesMap.set(this.dateUtileService.getNombreDateAvantDateJour(index), moisTravaille);
+      moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
+      moisTravaillesArray.push(moisTravaille);
     }
-    periodeTravailleeAvantSimulation.mois = moisTravaillesMap;
-
-    console.log(periodeTravailleeAvantSimulation);
-
+    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
     return periodeTravailleeAvantSimulation;
   }
 
@@ -228,7 +212,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
       this.checkAndSaveDateDernierOuvertureDroitASS();
     }
-    console.log(this.ressourcesFinancieres)
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
       this.validationVosRessourcesEventEmitter.emit();
@@ -259,7 +242,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
-        isValide = this.ressourcesFinancieresUtileService.isChampsSalairesValides(this.ressourcesFinancieres, this.deConnecteBeneficiaireAidesService);
+        isValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
         if (!isValide) this.erreurSaisieSalaires = true;
       }
     }

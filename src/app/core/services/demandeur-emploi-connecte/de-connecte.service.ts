@@ -150,7 +150,6 @@ export class DeConnecteService {
 
   public setRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
     if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      this.setMontantsBrutSalairesAvantPeriodeSimulation(ressourcesFinancieres.periodeTravailleeAvantSimulation);
       this.setSansSalaire(ressourcesFinancieres.periodeTravailleeAvantSimulation);
     }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);

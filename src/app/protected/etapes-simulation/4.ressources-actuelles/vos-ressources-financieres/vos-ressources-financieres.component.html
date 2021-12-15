@@ -220,7 +220,7 @@
                                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                                         type="text" maxlength="6" min="0"
                                         class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                        [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.get(this.dateUtileService.getNombreDateAvantDateJour(optionNombreMoisTravailles.index)).salaire.montantNet"
+                                        [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
                                         [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire()}" required
                                         inputmode="decimal" (click)="$event.target.select()"
                                         #salaireMoisAvantPeriodeSimulee="ngModel">
@@ -239,6 +239,13 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <span class="col error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && erreurSaisieSalaires">
+                        Le nombre de mois travaillés au cours de ces {{getNombreMoisTravailleAuCoursDerniersMois()}}
+                        derniers mois ne correspond pas avec vos déclarations de salaire.
+                    </span>
                 </div>
             </div>
         </div>

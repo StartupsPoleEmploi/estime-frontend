@@ -273,6 +273,31 @@ export class DeConnecteRessourcesFinancieresService {
     return isValide;
   }
 
+
+  /**
+   * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
+   * @param ressourcesFinancieres
+   */
+   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isChampsSalairesValides = true;
+    if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+        let tousLesSalairesAZero = true;
+        ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
+          if (mois.salaire != null && mois.salaire.montantNet != 0) {
+            tousLesSalairesAZero = false;
+          }
+        });
+        if (tousLesSalairesAZero) {
+          isChampsSalairesValides = false;
+        }
+      } else {
+        isChampsSalairesValides = false;
+      }
+    }
+    return isChampsSalairesValides;
+  }
+
   public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres, informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {

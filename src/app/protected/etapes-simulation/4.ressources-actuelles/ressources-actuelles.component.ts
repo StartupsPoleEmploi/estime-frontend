@@ -285,7 +285,8 @@ export class RessourcesActuellesComponent implements OnInit {
   private isSaisieVosRessourcesFinancieresValide(): boolean {
     let isValide = this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid;
     if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
+      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres)
+        && this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
     }
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
