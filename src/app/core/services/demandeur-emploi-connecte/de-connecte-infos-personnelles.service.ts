@@ -29,14 +29,19 @@ export class DeConnecteInfosPersonnellesService {
 
   public isDesDom(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    let codeDepartement = "";
+    if(demandeurEmploiConnecte.informationsPersonnelles) {
+      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    }
     return codeDepartement.length == 3;
   }
 
   public isDeMayotte(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    let codeDepartement = "";
+    if(demandeurEmploiConnecte.informationsPersonnelles) {
+      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    }
     return codeDepartement == "976";
-
   }
 }

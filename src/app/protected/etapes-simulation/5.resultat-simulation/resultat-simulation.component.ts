@@ -40,7 +40,7 @@ export class ResultatSimulationComponent implements OnInit {
     public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     private router: Router,
     public screenService: ScreenService,
-    private simulationPdfMakerService:SimulationPdfMakerService
+    private simulationPdfMakerService: SimulationPdfMakerService
   ) {
   }
 
@@ -79,7 +79,7 @@ export class ResultatSimulationComponent implements OnInit {
   public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {
     let dateStringFormat = null;
     const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
-    if(this.screenService.isTabletScreen()) {
+    if (this.screenService.isTabletScreen()) {
       dateStringFormat = this.dateUtileService.getLibelleDateStringFormatCourt(dateSimulation);
     } else {
       dateStringFormat = this.dateUtileService.getLibelleDateStringFormat(dateSimulation);
@@ -126,7 +126,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   private selectAideAfficherDetail(): void {
     const isAideActuelleSelected = this.selectAideActuelle();
-    if(!isAideActuelleSelected) {
+    if (!isAideActuelleSelected) {
       this.selectFirstAidePourraObtenir();
     }
   }
@@ -134,12 +134,12 @@ export class ResultatSimulationComponent implements OnInit {
   private selectAideActuelle(): boolean {
     let isAideActuelleSelected = false;
     const aideAAH = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
-    if(aideAAH) {
+    if (aideAAH) {
       this.aideSelected = aideAAH;
       isAideActuelleSelected = true;
     } else {
       const aideASS = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
-      if(aideASS) {
+      if (aideASS) {
         this.aideSelected = aideASS;
         isAideActuelleSelected = true;
       }
