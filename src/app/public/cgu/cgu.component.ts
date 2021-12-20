@@ -36,24 +36,20 @@ export class CguComponent implements OnInit {
   public onClickBoutonSupprimerDonneesPerso(): void {
     const individuConnected = this.individuConnectedService.getIndividuConnected();
     this.isErreurMessageInfoSuppression = false;
-    this.estimeApiService.supprimerDonneesSuiviParcoursDemandeur(individuConnected.idPoleEmploi).subscribe({
-      next: this.traiterRetourSupprimerDonneesPerso.bind(this),
-      error: this.traiterErreurSupprimerDonneesPerso.bind(this)
-    });
+    this.estimeApiService.supprimerDonneesSuiviParcoursDemandeur(individuConnected.idPoleEmploi).then(
+      (retour) => {
+        this.messageInfoSuppressionDonneesPerso = 'Vos données personnelles ont bien été supprimées !';
+      }, (erreur) => {
+        this.isErreurMessageInfoSuppression = true;
+        this.messageInfoSuppressionDonneesPerso = MessagesErreurEnum.SUPPRESSION_DONNEES_PERSO_IMPOSSIBLE;
+      }
+    );
   }
 
   private subscribeStatutIndividuChangedObservable(): void {
-    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn => {
+    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
       this.isLoggedIn = loggedIn;
     });
   }
 
-  private traiterRetourSupprimerDonneesPerso(): void {
-    this.messageInfoSuppressionDonneesPerso = 'Vos données personnelles ont bien été supprimées !';
-  }
-
-  private traiterErreurSupprimerDonneesPerso(): void {
-    this.isErreurMessageInfoSuppression = true;
-    this.messageInfoSuppressionDonneesPerso = MessagesErreurEnum.SUPPRESSION_DONNEES_PERSO_IMPOSSIBLE;
-  }
 }

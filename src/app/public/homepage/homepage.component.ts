@@ -57,14 +57,12 @@ export class HomepageComponent implements OnInit {
 
   private checkDemandeurEmploiConnecte(): void {
     const messageErreur = this.authorizationService.getMessageErreur();
-    if(messageErreur) {
-      if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
-        this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg' });
-      } else {
-        this.messageErreur = messageErreur;
-        if (this.messageErreur) {
-          this.messageErreurElement.nativeElement.focus();
-        }
+    if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
+      this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg' });
+    } else {
+      this.messageErreur = messageErreur;
+      if (this.messageErreur) {
+        this.messageErreurElement.nativeElement.focus();
       }
     }
   }

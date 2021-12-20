@@ -29,31 +29,31 @@ export class EstimeApiService {
     this.pathApiCommunes = 'https://geo.api.gouv.fr/communes?codePostal=';
   }
 
-  public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
-    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
+  public authentifier(peConnectPayload: PeConnectPayload): Promise<Individu> {
+    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload).toPromise();
   }
 
-  public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
+  public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
     const options = this.getHttpHeaders();
     const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options);
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options).toPromise();
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
     const options = this.getHttpHeaders();
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options);
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options).toPromise();
   }
 
-  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
+  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
     const options = this.getHttpHeaders();
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
 
-    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options);
+    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options).toPromise();
   }
 
-
-  public getDetailAide(codeAide: string): Observable<Aide> {
-    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`);
+  public getDetailAide(codeAide: string): Promise<Aide> {
+    let response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
+    return response;
   }
 
 
@@ -73,7 +73,4 @@ export class EstimeApiService {
 
     return optionRequete;
   }
-
-
-
 }
