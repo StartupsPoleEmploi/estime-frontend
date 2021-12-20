@@ -44,11 +44,11 @@ export class EstimeApiService {
     return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
-  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
+  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
     const options = this.getHttpHeaders();
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
 
-    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options).toPromise();
+    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options);
   }
 
   public getDetailAide(codeAide: string): Promise<Aide> {
