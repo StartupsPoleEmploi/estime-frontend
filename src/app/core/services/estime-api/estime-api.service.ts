@@ -39,9 +39,9 @@ export class EstimeApiService {
     return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options);
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
     const options = this.getHttpHeaders();
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options).toPromise();
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
   public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
