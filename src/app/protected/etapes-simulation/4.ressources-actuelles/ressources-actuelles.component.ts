@@ -20,6 +20,8 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-fin
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { SimulationAides } from '@app/commun/models/simulation-aides';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -185,16 +187,10 @@ export class RessourcesActuellesComponent implements OnInit {
     if (this.isSaisieFormulairesValide()) {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-      this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).then(
-        (simulationAides) => {
-          this.deConnecteSimulationAidesService.setSimulationAides(simulationAides);
-          this.isPageLoadingDisplay = false;
-          this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
-        }, (erreur) => {
-          this.isPageLoadingDisplay = false;
-          this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
-        }
-      );
+      this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).subscribe({
+        next: this.traiterRetourSimulerMesAides.bind(this),
+        error: this.traiterErreurSimulerMesAides.bind(this)
+      });
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
     }
@@ -346,5 +342,16 @@ export class RessourcesActuellesComponent implements OnInit {
       }
     }
     return hasConjointAvecRessourcesFinancieresInvalide;
+  }
+
+  private traiterRetourSimulerMesAides(simulationAides: SimulationAides): void {
+    this.deConnecteSimulationAidesService.setSimulationAides(simulationAides);
+    this.isPageLoadingDisplay = false;
+    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
+  }
+
+  private traiterErreurSimulerMesAides(error: HttpErrorResponse): void {
+    this.isPageLoadingDisplay = false;
+    this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
   }
 }
