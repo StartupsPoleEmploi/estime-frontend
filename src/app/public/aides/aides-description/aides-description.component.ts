@@ -34,17 +34,22 @@ export class AidesDescriptionComponent implements OnInit {
     this.subscriptionRouteNavigationEndObservable = this.activatedRoute.params.subscribe(params => {
       this.aideSelectedCode = params['aideCode'];
       this.estimeApiService
-        .getDetailAide(this.aideSelectedCode).then(
-          (aideFromBackend) => {
-            this.aideSelected = aideFromBackend;
-          }, (erreur) => {
-            this.messageErreur = MessagesErreurEnum.ERREUR_RECUPERATION_AIDES
-          }
-        );
+        .getDetailAide(this.aideSelectedCode).subscribe({
+          next: this.traiterRetourGetDetailAide.bind(this),
+          error: this.traiterErreurGetDetailAide.bind(this)
+        });
     });
  }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
+  }
+
+  private traiterRetourGetDetailAide(aideFromBackend): void {
+    this.aideSelected = aideFromBackend;
+  }
+
+  private traiterErreurGetDetailAide(): void {
+    this.messageErreur = MessagesErreurEnum.ERREUR_RECUPERATION_AIDES;
   }
 }
