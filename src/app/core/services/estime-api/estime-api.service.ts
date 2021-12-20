@@ -29,8 +29,8 @@ export class EstimeApiService {
     this.pathApiCommunes = 'https://geo.api.gouv.fr/communes?codePostal=';
   }
 
-  public authentifier(peConnectPayload: PeConnectPayload): Promise<Individu> {
-    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload).toPromise();
+  public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
+    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
   }
 
   public creerDemandeurEmploi(): Observable<DemandeurEmploi> {

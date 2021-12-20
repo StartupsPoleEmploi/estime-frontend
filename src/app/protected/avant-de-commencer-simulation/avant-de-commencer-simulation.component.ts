@@ -40,8 +40,7 @@ import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
         this.estimeApiService.creerDemandeurEmploi().subscribe({
           next: this.traiterRetourCreerDemandeurEmploi.bind(this),
           error: this.traiterErreurCreerDemandeurEmploi.bind(this)
-        }
-        );
+        });
       } else {
         this.router.navigate([`/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`]);
       }

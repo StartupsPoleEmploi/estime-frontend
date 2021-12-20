@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { SessionPeConnectExpiredService } from "@app/core/services/connexion/session-pe-connect-expired.service";
+import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
+import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
+import { Individu } from '@app/commun/models/individu';
+import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 
 @Component({
   selector: 'app-signin-redirect-callback',
@@ -15,30 +19,42 @@ export class SigninRedirectCallbackComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
+    private individuConnectedService: IndividuConnectedService,
+    private peConnectService: PeConnectService,
     private router: Router,
-    private sessionPeConnectExpiredService: SessionPeConnectExpiredService
+    private sessionPeConnectExpiredService: SessionPeConnectExpiredService,
+    private sessionStorageEstimeService: SessionStorageEstimeService
   ) {
 
   }
 
   ngOnInit() {
     this.isPageLoadingDisplay = true;
-    this.authorizationService.completeLogin().then(
-      (individu) => {
-        this.isPageLoadingDisplay = false;
-        if(individu.populationAutorisee) {
-          if(this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
-            this.sessionPeConnectExpiredService.navigateToRouteActivated();
-          } else {
-            this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
-          }
-        }
-      }, (erreur) => {
-        this.isPageLoadingDisplay = false;
-        this.router.navigate([RoutesEnum.HOMEPAGE]);
-      }
-    );
+    this.authorizationService.authentifierIndividu().subscribe({
+      next: this.traiterRetourAuthentifierIndividu.bind(this),
+      error: this.traiterErreurAuthentifierIndividu.bind(this)
+    });
   }
 
+  private traiterRetourAuthentifierIndividu(individu: Individu): void {
+    this.isPageLoadingDisplay = false;
+    this.individuConnectedService.saveIndividuConnected(individu);
+    if (individu.populationAutorisee) {
+      this.sessionPeConnectExpiredService.startCheckUserInactivity();
+      if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
+        this.sessionPeConnectExpiredService.navigateToRouteActivated();
+      } else {
+        this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+      }
+    } else {
+      this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();
+      this.peConnectService.logout();
+    }
+  }
 
+  private traiterErreurAuthentifierIndividu(): void {
+    this.sessionStorageEstimeService.storeMessageDemandeurEmploiConnexionImpossible();
+    this.isPageLoadingDisplay = false;
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
+  }
 }
