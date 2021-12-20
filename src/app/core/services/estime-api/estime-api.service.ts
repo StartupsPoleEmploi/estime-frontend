@@ -33,10 +33,10 @@ export class EstimeApiService {
     return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload).toPromise();
   }
 
-  public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
+  public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
     const options = this.getHttpHeaders();
     const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options).toPromise();
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options);
   }
 
   public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
@@ -52,8 +52,7 @@ export class EstimeApiService {
   }
 
   public getDetailAide(codeAide: string): Promise<Aide> {
-    var response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
-    return response;
+    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
   }
 
 
@@ -73,4 +72,7 @@ export class EstimeApiService {
 
     return optionRequete;
   }
+
+
+
 }
