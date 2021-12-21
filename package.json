@@ -17,6 +17,7 @@
     "start": "ng serve --open --port 9001 --host 127.0.0.1",
     "start:expose": "ng serve --port 9001 --host 127.0.0.1 --disable-host-check",
     "start:ngx": "ng run estime:serve-ngx --host 127.0.0.1 --port 9001",
+    "start:sudo": "sudo -E env \"PATH=$PATH\" ng serve --open --port 80 --host 127.0.0.1 --disable-host-check",
     "stats:size": "ng build --stats-json && webpack-bundle-analyzer dist/estime/stats.json",
     "test": "ng test",
     "sonar": "sonar-scanner"
