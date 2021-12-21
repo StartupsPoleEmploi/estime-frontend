@@ -52,7 +52,7 @@ export class EstimeApiService {
   }
 
   public getDetailAide(codeAide: string): Promise<Aide> {
-    var response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
+    let response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
     return response;
   }
 
