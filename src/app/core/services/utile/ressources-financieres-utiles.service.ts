@@ -3,6 +3,10 @@ import { AidesLogement } from '@app/commun/models/aides-logement';
 import { AllocationARE } from '@app/commun/models/allocation-are';
 import { AllocationASS } from '@app/commun/models/allocation-ass';
 import { AllocationsLogement } from '@app/commun/models/allocations-logement';
+import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
+import { PeriodeTravailleeAvantSimulation } from '@app/commun/models/periode-travaillee-avant-simulation';
+import { Personne } from '@app/commun/models/personne';
+import { Salaire } from '@app/commun/models/salaire';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
 import { AidesCAF } from "@models/aides-caf";
 import { AidesCPAM } from '@models/aides-cpam';
@@ -10,17 +14,20 @@ import { AidesFamiliales } from '@models/aides-familiales';
 import { AidesPoleEmploi } from "@models/aides-pole-emploi";
 import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
 import { RessourcesFinancieres } from "@models/ressources-financieres";
-import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
+import { BrutNetService } from './brut-net.service';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 import { DateUtileService } from './date-util.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresUtileService {
 
+  public readonly NOMBRE_MAX_MOIS_TRAVAILLES: number = 14;
+
   constructor(
     private controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
-    private numberUtileService: NumberUtileService
+    private numberUtileService: NumberUtileService,
+    private brutNetService: BrutNetService
   ) {
 
   }
@@ -112,6 +119,87 @@ export class RessourcesFinancieresUtileService {
     return ressourcesFinancieres;
   }
 
+
+
+  /**
+   * Fonction qui permet d'initialiser les options du select du nombre de mois travaillés
+   * sur les 6 derniers mois dans le cas d'un demandeur AAH
+   */
+  public initOptionsNombreMoisTravailles(): Array<NombreMoisTravailles> {
+    const optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
+    for (let index = 0; index < this.NOMBRE_MAX_MOIS_TRAVAILLES; index++) {
+      const nombreMoisTravaille = new NombreMoisTravailles();
+      nombreMoisTravaille.index = index;
+      nombreMoisTravaille.label = this.dateUtileService.getDateFormateeAvantDateJour(index);
+      optionsNombreMoisTravailles.push(nombreMoisTravaille);
+    }
+    return optionsNombreMoisTravailles;
+  }
+
+  /**
+ *
+ * Fonction qui permet d'initialiser les salaires perçues avant la période de simulation
+ * dans le cas où ceux-ci ne le seraient pas encore mais que hasTravailleAuCoursDerniersMois est déjà vrai
+ * (quand on rafraichit la page ou qu'on change de situation par exemple)
+ */
+  public initSalairesAvantPeriodeSimulation(ressourcesFinancieres: RessourcesFinancieres): RessourcesFinancieres {
+    const isNull = (mois) => mois == null;
+    if (ressourcesFinancieres.periodeTravailleeAvantSimulation == null
+      || ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull)) {
+      ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation();
+    }
+    return ressourcesFinancieres;
+  }
+
+
+
+  public creerSalairesAvantPeriodeSimulationPersonne(personne: Personne): PeriodeTravailleeAvantSimulation {
+    let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
+    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
+    const dateActuelle = new Date();
+    let montantNet = 0;
+    let montantBrut = 0;
+    if (personne.ressourcesFinancieres != null && personne.ressourcesFinancieres.salaire != null && personne.ressourcesFinancieres.salaire.montantNet > 0) {
+      montantNet = personne.ressourcesFinancieres.salaire.montantNet;
+      montantBrut = personne.ressourcesFinancieres.salaire.montantBrut;
+    }
+    for (let index = 0; index < this.NOMBRE_MAX_MOIS_TRAVAILLES; index++) {
+      const moisTravaille = new MoisTravailleAvantSimulation();
+      const salaire = new Salaire();
+      salaire.montantNet = montantNet;
+      salaire.montantBrut = montantBrut;
+      moisTravaille.isSansSalaire = false;
+      moisTravaille.salaire = salaire;
+      moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
+      moisTravaillesArray.push(moisTravaille);
+    }
+    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
+    return periodeTravailleeAvantSimulation;
+  }
+
+  public creerSalairesAvantPeriodeSimulation(): PeriodeTravailleeAvantSimulation {
+    let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
+    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
+    const dateActuelle = new Date();
+
+    for (let index = 0; index < this.NOMBRE_MAX_MOIS_TRAVAILLES; index++) {
+      const moisTravaille = new MoisTravailleAvantSimulation();
+      const salaire = new Salaire();
+      salaire.montantNet = 0;
+      salaire.montantBrut = 0;
+      moisTravaille.isSansSalaire = false;
+      moisTravaille.salaire = salaire;
+      moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
+      moisTravaillesArray.push(moisTravaille);
+    }
+    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
+    return periodeTravailleeAvantSimulation;
+  }
+
+  public getNombreMaxMoisTravailleAuCoursDerniersMois() {
+    return this.NOMBRE_MAX_MOIS_TRAVAILLES;
+  }
+
   public isNombreMoisTravailleAuCoursDerniersMoisSelectedValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
     return !ressourcesFinancieres.hasTravailleAuCoursDerniersMois ||
       (ressourcesFinancieres.hasTravailleAuCoursDerniersMois
@@ -137,6 +225,14 @@ export class RessourcesFinancieresUtileService {
 
   private isMoisTravaille(moisTravailleAvantSimulation: MoisTravailleAvantSimulation): boolean {
     return !moisTravailleAvantSimulation.isSansSalaire && moisTravailleAvantSimulation.salaire.montantNet > 0;
+  }
+
+  public calculSalaireMensuelBrut(salaire: Salaire) {
+    if (salaire.montantNet != null) {
+      salaire.montantBrut = this.brutNetService.getBrutFromNet(salaire.montantNet);
+    } else {
+      salaire.montantBrut = undefined;
+    }
   }
 
   public isMontantJournalierAssInvalide(ressourcesFinancieres: RessourcesFinancieres): boolean {

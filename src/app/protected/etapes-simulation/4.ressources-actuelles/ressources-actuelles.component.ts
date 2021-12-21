@@ -20,6 +20,8 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-fin
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
+import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
+import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -66,6 +68,8 @@ export class RessourcesActuellesComponent implements OnInit {
   ressourcePersonnesAChargeSeulementRSA: boolean;
   conjointRSA: boolean;
 
+  optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
+
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
     { label: "2 mois", value: 2, default: false },
@@ -88,6 +92,7 @@ export class RessourcesActuellesComponent implements OnInit {
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private estimeApiService: EstimeApiService,
     private informationsPersonnellesService: InformationsPersonnellesService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
     public screenService: ScreenService,
     private router: Router
   ) {
@@ -108,6 +113,7 @@ export class RessourcesActuellesComponent implements OnInit {
       this.conjointRSA = false;
     }
   }
+
 
   private checkPersonnesAChargeToucheSeulementRSA(): boolean {
     let result = false;

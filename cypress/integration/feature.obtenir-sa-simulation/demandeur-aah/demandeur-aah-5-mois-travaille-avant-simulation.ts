@@ -45,9 +45,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE MES RESSOURCES
       const allocationAAH = "900";
       const allocationSoutienFamiliale = "117";
-      const montantSalaireMoisMoins1 = "850";
-      const montantSalaireMoisMoins2 = "800";
-      const nombreMoisTravaillesAvantSimulation = "5";
+      const montantSalaireMoisMoins0 = "850";
+      const montantSalaireMoisMoins1 = "800";
+      const montantSalaireMoisMoins3 = "800";
+      const montantSalaireMoisMoins4 = "800";
+      const montantSalaireMoisMoins5 = "800";
 
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAAH_M1 = "900";
@@ -87,10 +89,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirMontantMensuelAAH(allocationAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-      ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(montantSalaireMoisMoins1);
-      ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins1, 1);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins4, 4);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins5, 5);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();
@@ -161,9 +164,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE MES RESSOURCES
       const allocationAAH = "900";
       const allocationSoutienFamiliale = "117";
-      const montantSalaireMoisMoins1 = "850";
-      const montantSalaireMoisMoins2 = "800";
-      const nombreMoisTravaillesAvantSimulation = "5";
+      const montantSalaireMoisMoins0 = "850";
+      const montantSalaireMoisMoins1 = "800";
+      const montantSalaireMoisMoins3 = "800";
+      const montantSalaireMoisMoins4 = "800";
+      const montantSalaireMoisMoins5 = "800";
 
       const montantLoyer = "500";
       const montantCharges = "50";
@@ -207,10 +212,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirMontantMensuelAAH(allocationAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-      ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(montantSalaireMoisMoins1);
-      ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins1, 1);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins4, 4);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins5, 5);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerLocataireNonMeuble();

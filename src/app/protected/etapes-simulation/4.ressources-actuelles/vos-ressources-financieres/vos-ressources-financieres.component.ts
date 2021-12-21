@@ -22,6 +22,7 @@ import { SituationFamilialeUtileService } from '@app/core/services/utile/situati
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -29,8 +30,6 @@ import { PopoverDirective } from 'ngx-bootstrap/popover';
   styleUrls: ['./vos-ressources-financieres.component.scss']
 })
 export class VosRessourcesFinancieresComponent implements OnInit {
-
-  public readonly NOMBRE_MOIS_TRAVAILLES: number = 12;
 
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
@@ -54,6 +53,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
+    private brutNetService: BrutNetService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
@@ -77,8 +77,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.initOptionsProchaineDeclarationTrimestrielle();
     }
     if (this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      this.initOptionsNombreMoisTravailles();
-      this.initSalairesAvantPeriodeSimulation();
+      this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+      this.ressourcesFinancieres = this.ressourcesFinancieresUtileService.initSalairesAvantPeriodeSimulation(this.ressourcesFinancieres);
     }
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
@@ -110,38 +110,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  /**
-   * Fonction qui permet d'initialiser les options du select du nombre de mois travaillés
-   * sur les 6 derniers mois dans le cas d'un demandeur AAH
-   */
-  private initOptionsNombreMoisTravailles(): void {
-    this.optionsNombreMoisTravailles = new Array<NombreMoisTravailles>();
-    const nbrMoisTravaille = this.getNombreMoisTravailleAuCoursDerniersMois();
-    for (let index = 0; index < nbrMoisTravaille; index++) {
-      const nombreMoisTravaille = new NombreMoisTravailles();
-      nombreMoisTravaille.index = index;
-      nombreMoisTravaille.label = this.dateUtileService.getDateFormateeAvantDateJour(index + 1);
-      this.optionsNombreMoisTravailles.push(nombreMoisTravaille);
-    }
-  }
-
-  public getNombreMoisTravailleAuCoursDerniersMois(): number {
-    return this.NOMBRE_MOIS_TRAVAILLES;
-  }
-
-  /**
-   *
-   * Fonction qui permet d'initialiser les salaires perçues avant la période de simulation
-   * dans le cas où ceux-ci ne le seraient pas encore mais que hasTravailleAuCoursDerniersMois est déjà vrai
-   * (quand on rafraichit la page ou qu'on change de situation par exemple)
-   */
-  private initSalairesAvantPeriodeSimulation(): void {
-    const isNull = (mois) => mois == null;
-    if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || Object.values(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).every(isNull))
-      this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
-  }
-
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
     if (hasTravailleAuCoursDerniersMois === false) {
       this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
@@ -150,45 +118,18 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
     } else {
       if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.creerSalairesAvantPeriodeSimulation(this.NOMBRE_MOIS_TRAVAILLES);
+        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.ressourcesFinancieresUtileService.creerSalairesAvantPeriodeSimulation();
       }
       if (this.optionsNombreMoisTravailles == null) {
-        this.initOptionsNombreMoisTravailles();
+        this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
       }
     }
   }
 
-  private creerSalairesAvantPeriodeSimulation(nombreSalaire): PeriodeTravailleeAvantSimulation {
-    let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
-    const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
-    const dateActuelle = new Date();
-
-    for (let index = 0; index < nombreSalaire; index++) {
-      const moisTravaille = new MoisTravailleAvantSimulation();
-      const salaire = new Salaire();
-      salaire.montantNet = 0;
-      salaire.montantBrut = 0;
-      moisTravaille.isSansSalaire = false;
-      moisTravaille.salaire = salaire;
-      moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
-      moisTravaillesArray.push(moisTravaille);
-    }
-    periodeTravailleeAvantSimulation.mois = moisTravaillesArray;
-    return periodeTravailleeAvantSimulation;
-  }
-
-
-  public hasDouzeMoisSansSalaire(): boolean {
+  public hasQuatorzeMoisSansSalaire(): boolean {
     const isNull = (mois) => mois == null;
     return (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || Object.values(this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).every(isNull));
-  }
-
-
-  private unsetSalairesBrutEtNet(salaire: Salaire): Salaire {
-    salaire.montantBrut = 0;
-    salaire.montantNet = 0;
-    return salaire;
+      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
   }
 
   public handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois(event: any, value: boolean) {

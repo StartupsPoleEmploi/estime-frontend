@@ -273,12 +273,11 @@ export class DeConnecteRessourcesFinancieresService {
     return isValide;
   }
 
-
   /**
    * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
    * @param ressourcesFinancieres
    */
-   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isChampsSalairesValides = true;
     if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
       if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {

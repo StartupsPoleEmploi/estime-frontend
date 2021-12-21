@@ -49,8 +49,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
-      const nombreMoisTravaillesAvantSimulation = "1";
-      const salaireMoisMoins1AvantSimulation = "850";
+      const montantSalaireMoisMoins0 = "850";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "450";
@@ -86,10 +85,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-      ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();
@@ -156,8 +152,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
-      const nombreMoisTravaillesAvantSimulation = "1";
-      const salaireMoisMoins1AvantSimulation = "850";
+      const montantSalaireMoisMoins0 = "850";
       const allocationSoutienFamiliale = "117";
 
       const montantLoyer = "500";
@@ -198,10 +193,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-      ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireMoisMoins1AvantSimulation);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerLocataireNonMeuble();
