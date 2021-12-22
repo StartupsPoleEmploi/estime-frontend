@@ -155,8 +155,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const salaireConjoint = "380";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2_M3 = montantMensuelRSA;
-      const montantRSA_M4_M5_M6 = "33";
-      const montantPrimeActivite_M4_M5_M6 = "320";
+      const montantRSA_M4_M5_M6 = "28";
+      const montantPrimeActivite_M4_M5_M6 = "323";
       const montantALF_M2_M3_M4_M5_M6 = "438";
 
       const homePage = new HomePage();
@@ -193,6 +193,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.saisirSalaireConjoint(salaireConjoint);
+      ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOuiConjoint();
       ressourcesActuellesPage.clickOnValiderRessourcesConjoint();
 
       ressourcesActuellesPage.saisirMontantMensuelRSAFoyer(montantMensuelRSA);

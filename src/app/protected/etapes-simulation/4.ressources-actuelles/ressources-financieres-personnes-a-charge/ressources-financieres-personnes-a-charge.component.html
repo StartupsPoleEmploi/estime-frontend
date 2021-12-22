@@ -116,7 +116,7 @@
                                         <input
                                             id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
                                             name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
-                                            attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation"
+                                            attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-personne-a-charge-{{personneDTO.index + 1}}"
                                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
                                             type="text" maxlength="6" min="0"

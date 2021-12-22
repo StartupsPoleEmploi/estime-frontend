@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { RessourcesFinancieresComponent } from './ressources-actuelles.component';
+import { RessourcesActuellesComponent } from './ressources-actuelles.component';
 
 describe('RessourcesFinancieresComponent', () => {
-  let component: RessourcesFinancieresComponent;
-  let fixture: ComponentFixture<RessourcesFinancieresComponent>;
+  let component: RessourcesActuellesComponent;
+  let fixture: ComponentFixture<RessourcesActuellesComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ RessourcesFinancieresComponent ]
+      declarations: [RessourcesActuellesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RessourcesFinancieresComponent);
+    fixture = TestBed.createComponent(RessourcesActuellesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

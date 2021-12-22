@@ -353,9 +353,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantSalaireMoisMoins1 = "380";
       const montantSalaireMoisMoins2 = "380";
       // VARIABLES PAGE RESULTAT SIMULATION
-      const montantRSA_M1_M2_M3 = "376";
+      const montantRSA_M1_M2_M3 = "254";
       const montantRSA_M4_M5_M6 = "55";
-      const montantPrimeActivite_M2_M3 = "74";
+      const montantPrimeActivite_M2_M3 = "149";
       const montantPrimeActivite_M4_M5_M6 = "270";
       const montantALS_M1_M2_M3_M4_M5_M6 = "271";
 
@@ -462,7 +462,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantSalaireMoisMoins1 = "380";
       const montantSalaireMoisMoins2 = "380";
       // VARIABLES PAGE RESULTAT SIMULATION
-      const montantRSA_M1_M2_M3 = "376";
+      const montantRSA_M1_M2_M3 = "254";
       const montantRSA_M4_M5_M6 = "55";
       const montantPrimeActivite_M4_M5_M6 = "270";
 

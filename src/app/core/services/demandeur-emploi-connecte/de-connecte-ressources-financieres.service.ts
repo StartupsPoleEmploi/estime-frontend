@@ -306,9 +306,8 @@ export class DeConnecteRessourcesFinancieresService {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
     if (isValide) {
-      isValide = this.isDonneesLogementValides(informationsPersonnelles);
+      isValide = this.isDonneesLogementValides(informationsPersonnelles) && this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
     }
-    isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
     return isValide;
   }
 
@@ -322,7 +321,7 @@ export class DeConnecteRessourcesFinancieresService {
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
       if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
-        if (informationsPersonnelles.logement.montantCharges && informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
+        if (informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
           isValide = true;
         }
       } else {

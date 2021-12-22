@@ -59,7 +59,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
         isValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.conjoint.ressourcesFinancieres);
-        if (!isValide) this.erreurSaisieSalaires = true;
+        this.erreurSaisieSalaires = !isValide;
       }
     }
     return isValide;

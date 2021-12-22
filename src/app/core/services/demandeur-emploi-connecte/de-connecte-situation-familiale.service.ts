@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
-
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSituationFamilialeService {
 

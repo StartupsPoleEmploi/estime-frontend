@@ -81,7 +81,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
         // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
         if (personneDTOValide) {
           personneDTOValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(personneDTO.personne.ressourcesFinancieres);
-          if (!personneDTOValide) this.erreurSaisieSalaires = true;
+          this.erreurSaisieSalaires = !personneDTOValide;
         }
         if (!personneDTOValide) {
           isValide = false;

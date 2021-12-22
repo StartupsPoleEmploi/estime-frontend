@@ -22,8 +22,11 @@
                             <img alt="" class="euro-sign" src="./assets/images/euro.svg">
                         </div>
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
-                            <div class="text-button">Vos ressources</div>
-                            <div *ngIf="!isVosRessourcesDisplay">Total : {{montantVosRessources}} €</div>
+                            <div class="text-button">
+                                Vos ressources
+                                <img *ngIf="isVosRessourcesValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
+                            </div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>
@@ -54,8 +57,9 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-vos-ressources" class="text-button">
                                 Ressources conjoint(e)
+                                <img *ngIf="isRessourcesConjointValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
                             </div>
-                            <div *ngIf="!isRessourcesConjointDisplay">Total : {{montantRessourcesConjoint}} €</div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>
@@ -70,7 +74,6 @@
             </button>
             <app-ressources-financieres-conjoint [hidden]="!isRessourcesConjointDisplay"
                 (validationRessourcesConjointEventEmitter)="traiterValidationRessourcesFinancieresConjointEventEmitter()">
-
             </app-ressources-financieres-conjoint>
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAgeLegal()
@@ -86,9 +89,8 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-ressources-conjoint" class="text-button">
                                 Ressources personne(s) à charge
-                            </div>
-                            <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                Total : {{montantRessourcesPersonnesCharge}} €
+                                <img *ngIf="isRessourcesPersonnesAChargeValides()" alt=""
+                                    class="icon-ressources-validees" src="./assets/images/icon-check-bleu.svg">
                             </div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
@@ -117,8 +119,9 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-ressources-foyer" class="text-button">
                                 Ressources du foyer
+                                <img *ngIf="isRessourcesFoyerValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
                             </div>
-                            <div *ngIf="!isRessourcesFoyerDisplay">Total : {{montantRessourcesFoyer}} €</div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>

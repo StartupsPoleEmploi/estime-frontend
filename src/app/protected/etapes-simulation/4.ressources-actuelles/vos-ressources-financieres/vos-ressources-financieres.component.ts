@@ -7,15 +7,12 @@ import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieres } from '@models/ressources-financieres';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
-import { PeriodeTravailleeAvantSimulation } from '@app/commun/models/periode-travaillee-avant-simulation';
-import { MoisTravailleAvantSimulation } from '@app/commun/models/mois-travaille-avant-simulation';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@app/commun/models/numero-prochain-mois-declaration-trimestrielle";
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
-import { Salaire } from '@app/commun/models/salaire';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
@@ -178,13 +175,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
-    this.erreurSaisieSalaires = false;
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
         isValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
-        if (!isValide) this.erreurSaisieSalaires = true;
+        this.erreurSaisieSalaires = !isValide;
       }
     }
     return isValide;
