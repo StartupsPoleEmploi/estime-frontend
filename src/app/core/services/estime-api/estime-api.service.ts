@@ -29,33 +29,31 @@ export class EstimeApiService {
     this.pathApiCommunes = 'https://geo.api.gouv.fr/communes?codePostal=';
   }
 
-  public authentifier(peConnectPayload: PeConnectPayload): Promise<Individu> {
-    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload).toPromise();
+  public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
+    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
   }
 
-  public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
+  public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
     const options = this.getHttpHeaders();
     const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options).toPromise();
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options);
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
+  public getAideByCode(codeAide: string): Observable<Aide> {
+    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`);
+  }
+
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
     const options = this.getHttpHeaders();
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options).toPromise();
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
-  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
+  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
     const options = this.getHttpHeaders();
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
 
-    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options).toPromise();
+    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options);
   }
-
-  public getAideByCode(codeAide: string): Promise<Aide> {
-    let response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`).toPromise();
-    return response;
-  }
-
 
   public getCommuneFromCodePostal(codePostal: string): Observable<Commune[]> {
     return this.http.get<Array<Commune>>(`${this.pathApiCommunes}${codePostal}&fields=code`, { observe: 'body', responseType: 'json' });
@@ -74,3 +72,4 @@ export class EstimeApiService {
     return optionRequete;
   }
 }
+

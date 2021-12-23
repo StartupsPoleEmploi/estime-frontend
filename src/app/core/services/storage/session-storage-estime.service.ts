@@ -8,6 +8,7 @@ import { NiveauMessagesErreurEnum } from '@app/commun/enumerations/niveaux-messa
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { Individu } from "@models/individu";
 import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 
 @Injectable({ providedIn: 'root' })
 export class SessionStorageEstimeService {
@@ -77,4 +78,12 @@ export class SessionStorageEstimeService {
     message.niveau = NiveauMessagesErreurEnum.INFO;
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE, message);
   }
+
+  public storeMessageDemandeurEmploiConnexionImpossible(): void {
+    const message = new MessageErreur();
+    message.texte = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
+    message.niveau = NiveauMessagesErreurEnum.ERROR;
+    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE, message);
+  }
+
 }
