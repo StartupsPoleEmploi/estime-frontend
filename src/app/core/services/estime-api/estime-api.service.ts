@@ -34,42 +34,47 @@ export class EstimeApiService {
   }
 
   public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
-    const options = this.getHttpHeaders();
+    const options = this.getHttpHeaders(true);
     const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options);
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeurs_emploi`, individuConnected, options);
   }
 
   public getAideByCode(codeAide: string): Observable<Aide> {
-    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`);
+    const options = this.getHttpHeaders(false);
+    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`, options);
   }
 
   public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
-    const options = this.getHttpHeaders();
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options);
+    const options = this.getHttpHeaders(true);
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
   public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
-    const options = this.getHttpHeaders();
+    const options = this.getHttpHeaders(true);
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
 
-    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options);
+    return this.http.delete(`${this.pathDemandeurEmploiService}demandeurs_emploi/suivi_parcours`, options);
   }
 
   public getCommuneFromCodePostal(codePostal: string): Observable<Commune[]> {
     return this.http.get<Array<Commune>>(`${this.pathApiCommunes}${codePostal}&fields=code`, { observe: 'body', responseType: 'json' });
   }
 
-  private getHttpHeaders() {
-    const individuConnected = this.individuConnectedService.getIndividuConnected();
-
+  private getHttpHeaders(withAuthorization: boolean) {
     const optionRequete = new OptionsHTTP();
-    optionRequete.headers = new HttpHeaders({
-      'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`,
-      'Content-Type': 'application/json'
-    });
-
-
+    if (withAuthorization) {
+      const individuConnected = this.individuConnectedService.getIndividuConnected();
+      optionRequete.headers = new HttpHeaders({
+        'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`,
+        'Content-Type': 'application/json'
+      });
+    } else {
+      optionRequete.headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+    }
     return optionRequete;
   }
+
 }
 
