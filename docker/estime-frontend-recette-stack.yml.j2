@@ -2,19 +2,16 @@ version: '3.8'
 
 services:
   estime-frontend:
-    image: registry.beta.pole-emploi.fr/estime/estime-frontend:release
+    image: registry.beta.pole-emploi.fr/estime/estime-frontend:release-candidate
     environment:
-      PE_CONNECT_CLIENT_ID: "{{ PE_CONNECT_CLIENT_ID }}"
-      PE_CONNECT_REDIRECT_URI: "{{ PE_CONNECT_REDIRECT_URI_PROD }}"
-      PE_CONNECT_SCOPE: "{{ PE_CONNECT_SCOPE }}"
-      PE_CONNECT_IDENTITY_SERVER_URL: "{{ PE_CONNECT_IDENTITY_SERVER_URL }}"
-      TAG_COMMANDER_SCRIPT_URL: "{{ TAG_COMMANDER_SCRIPT_URL_PROD }}"
+      PE_CONNECT_CLIENT_ID: "{{ R7_PE_CONNECT_CLIENT_ID }}"
+      PE_CONNECT_REDIRECT_URI: "{{ R7_PE_CONNECT_REDIRECT_URI }}"
+      PE_CONNECT_SCOPE: "{{ R7_PE_CONNECT_SCOPE }}"
+      PE_CONNECT_IDENTITY_SERVER_URL: "{{ R7_PE_CONNECT_IDENTITY_SERVER_URL }}"
+      TAG_COMMANDER_SCRIPT_URL: "{{ R7_TAG_COMMANDER_SCRIPT_URL }}"
       TZ: "Europe/Paris"
     networks:
      - estime
-    ports:
-      - 80:8888
-      - 443:8443
     healthcheck:
       test: curl --fail http://localhost:8888/ || exit 1
       timeout: 10s
@@ -25,10 +22,10 @@ services:
       replicas: 2
       resources:
         reservations:
-          cpus: '0.30'
+          cpus: '0.15'
           memory: 128Mi
         limits:
-          cpus: '0.60'
+          cpus: '0.30'
           memory: 256Mi
       update_config:
         parallelism: 1
@@ -44,7 +41,7 @@ services:
         max_attempts: 3
         window: 180s
     volumes:
-      - ./etc/nginx/ssl:/etc/nginx/ssl
+      - ./etc/nginx/conf.d:/etc/nginx/conf.d
 
 networks:
   estime:
