@@ -34,7 +34,7 @@ export class AidesDescriptionComponent implements OnInit {
     this.subscriptionRouteNavigationEndObservable = this.activatedRoute.params.subscribe(params => {
       this.aideSelectedCode = params['aideCode'];
       this.estimeApiService
-        .getDetailAide(this.aideSelectedCode).then(
+        .getAideByCode(this.aideSelectedCode).then(
           (aideFromBackend) => {
             this.aideSelected = aideFromBackend;
           }, (erreur) => {
