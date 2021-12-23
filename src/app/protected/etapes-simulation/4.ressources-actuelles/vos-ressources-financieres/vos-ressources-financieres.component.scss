@@ -21,4 +21,10 @@
   .checkbox-pas-de-salaire {
     margin-right: 0.5rem;
   }
+
+  .col-salaire-with-border {
+    @media #{$large-device} {
+      border-bottom: 0.5px solid $color-grey-1;
+    }
+  }
 }

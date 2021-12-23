@@ -29,3 +29,9 @@
   margin-top: 1.875rem;
   margin-bottom: 10p0.625rem;
 }
+
+.col-salaire-with-border {
+  @media #{$large-device} {
+    border-bottom: 0.5px solid $color-grey-1;
+  }
+}

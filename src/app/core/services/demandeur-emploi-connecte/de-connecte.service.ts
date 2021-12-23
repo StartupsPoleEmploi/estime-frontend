@@ -150,7 +150,6 @@ export class DeConnecteService {
 
   public setRessourcesFinancieres(ressourcesFinancieres: RessourcesFinancieres) {
     if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      this.setMontantsBrutSalairesAvantPeriodeSimulation(ressourcesFinancieres.periodeTravailleeAvantSimulation);
       this.setSansSalaire(ressourcesFinancieres.periodeTravailleeAvantSimulation);
     }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);
@@ -209,20 +208,6 @@ export class DeConnecteService {
       && this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF) {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationAAH = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
-    }
-    if (this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      if (this.demandeurEmploiConnecte.beneficiaireAides.beneficiaireASS) {
-        if (this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 1) {
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet = 0;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantBrut = 0;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet = 0;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = 0;
-        }
-        if (this.demandeurEmploiConnecte.ressourcesFinancieres.nombreMoisTravaillesDerniersMois == 2) {
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet = 0;
-          this.demandeurEmploiConnecte.ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = 0;
-        }
-      }
     }
   }
 
@@ -514,27 +499,15 @@ export class DeConnecteService {
   }
 
   private setMontantsBrutSalairesAvantPeriodeSimulation(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
-    if (periodeTravailleeAvantSimulation.moisMoins1 && periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
-      periodeTravailleeAvantSimulation.moisMoins1.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
-    }
-    if (periodeTravailleeAvantSimulation.moisMoins2 && periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
-      periodeTravailleeAvantSimulation.moisMoins2.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
-    }
-    if (periodeTravailleeAvantSimulation.moisMoins3 && periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
-      periodeTravailleeAvantSimulation.moisMoins3.salaire.montantBrut = this.brutNetService.getBrutFromNet(periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
-    }
+    periodeTravailleeAvantSimulation.mois.forEach(mois => {
+      mois.salaire.montantBrut = this.brutNetService.getBrutFromNet(mois.salaire.montantNet);
+    });
   }
 
   private setSansSalaire(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
-    if (periodeTravailleeAvantSimulation.moisMoins1) {
-      periodeTravailleeAvantSimulation.moisMoins1.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet === 0;
-    }
-    if (periodeTravailleeAvantSimulation.moisMoins2) {
-      periodeTravailleeAvantSimulation.moisMoins2.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet === 0;
-    }
-    if (periodeTravailleeAvantSimulation.moisMoins3) {
-      periodeTravailleeAvantSimulation.moisMoins3.isSansSalaire = periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet === 0;
-    }
+    periodeTravailleeAvantSimulation.mois.forEach(mois => {
+      mois.isSansSalaire = mois.salaire.montantNet === 0;
+    });
   }
 
   public unsetStatutOccupationLogement(): void {

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
-
 @Injectable({ providedIn: 'root' })
 export class DeConnecteSituationFamilialeService {
 
@@ -14,14 +13,20 @@ export class DeConnecteSituationFamilialeService {
 
   }
 
+  public hasConjoint(): boolean {
+    let hasConjoint = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.situationFamiliale.isEnCouple && demandeurEmploiConnecte.situationFamiliale.conjoint) {
+      hasConjoint = true;
+    }
+    return hasConjoint;
+  }
+
   public hasConjointSituationAvecRessource(): boolean {
     let hasConjointSituationAvecRessource = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.situationFamiliale.isEnCouple) {
-      if (demandeurEmploiConnecte.situationFamiliale.conjoint
-        && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
-        hasConjointSituationAvecRessource = true;
-      }
+    if (this.hasConjoint && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
+      hasConjointSituationAvecRessource = true;
     }
     return hasConjointSituationAvecRessource;
   }
@@ -42,6 +47,20 @@ export class DeConnecteSituationFamilialeService {
       });
     }
     return hasTroisPersonnesAChargeEntre3Et21AnsCount >= 3;
+  }
+
+  public hasPersonneAChargeAgeLegal(): boolean {
+    let hasPersonneAChargeAvecRessourcesFinancieres = false;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
+      demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
+        if (this.personneUtileService.isAgeLegalPourTravaillerFromPersonne(personne)) {
+          hasPersonneAChargeAvecRessourcesFinancieres = true;
+        }
+      });
+    }
+    return hasPersonneAChargeAvecRessourcesFinancieres;
+
   }
 
   public hasPersonneAChargeAvecRessourcesFinancieres(): boolean {

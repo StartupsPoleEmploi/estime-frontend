@@ -20,6 +20,7 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-fin
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
+import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -47,24 +48,18 @@ export class RessourcesActuellesComponent implements OnInit {
   ressourcesFinancieres: RessourcesFinancieres;
   informationsPersonnelles: InformationsPersonnelles;
 
-  montantAidesFoyer: number;
-  montantAidesPersonnesCharge: number;
-  montantAidesRessourcesConjoint: number;
-  montantAidesVosRessources: number;
-  montantRevenusPersonnesCharge: number;
-  montantRevenusRessourcesConjoint: number;
-  montantRevenusVosRessources: number;
-
-  montantVosRessources: number;
-  montantRessourcesConjoint: number;
-  montantRessourcesPersonnesCharge: number;
-  montantRessourcesFoyer: number;
+  vosRessourcesValidees: boolean;
+  ressourcesConjointValidees: boolean;
+  ressourcesPersonnesAChargeValidees: boolean;
+  ressourcesFoyerValidees: boolean;
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   ressourceConjointSeulementRSA: boolean;
   ressourcePersonnesAChargeSeulementRSA: boolean;
   conjointRSA: boolean;
+
+  optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
 
   nombreMoisCumulAssSalaireSelectOptions = [
     { label: "1 mois", value: 1, default: true },
@@ -98,7 +93,6 @@ export class RessourcesActuellesComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.loadDataRessourcesFinancieres(demandeurEmploiConnecte);
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
-    this.calculerMontantsRessourcesFinancieres();
     this.ressourceConjointSeulementRSA = this.checkConjointToucheSeulementRSA();
     this.ressourcePersonnesAChargeSeulementRSA = this.checkPersonnesAChargeToucheSeulementRSA();
     if (this.deConnecteService.getDemandeurEmploiConnecte().situationFamiliale.isEnCouple
@@ -107,6 +101,10 @@ export class RessourcesActuellesComponent implements OnInit {
     } else {
       this.conjointRSA = false;
     }
+    this.vosRessourcesValidees = this.isDonneesSaisieVosRessourcesFinancieresValide();
+    this.ressourcesConjointValidees = !this.hasConjointAvecRessourcesFinancieresInvalide();
+    this.ressourcesPersonnesAChargeValidees = !this.hasPersonneAChargeAvecRessourcesFinancieresInvalide();
+    this.ressourcesFoyerValidees = this.isDonneesSaisieRessourcesFinancieresFoyerValide();
   }
 
   private checkPersonnesAChargeToucheSeulementRSA(): boolean {
@@ -206,42 +204,51 @@ export class RessourcesActuellesComponent implements OnInit {
 
   public traiterValidationVosRessourcesEventEmitter(): void {
     this.isVosRessourcesDisplay = false;
-    if (this.hasConjointAvecRessourcesFinancieresInvalide()) {
+    if (this.deConnecteSituationFamilialeService.hasConjoint()) {
       this.isRessourcesConjointDisplay = true;
-    } else if (this.hasPersonneAChargeAvecRessourcesFinancieresInvalide()) {
+    } else if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAgeLegal()) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantRevenusVosRessources = this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
-    this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
-    this.montantVosRessources = this.deConnecteRessourcesFinancieresService.getMontantVosRessources();
+    this.vosRessourcesValidees = true;
   }
 
   public traiterValidationRessourcesFinancieresConjointEventEmitter(): void {
     this.isRessourcesConjointDisplay = false;
-    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()) {
+    if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAgeLegal()) {
       this.isRessourcesPersonnesChargeDisplay = true;
     } else {
       this.isRessourcesFoyerDisplay = true;
     }
-    this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
-    this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
-    this.montantRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRessourcesConjoint();
+    this.ressourcesConjointValidees = true;
   }
 
   public traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter(): void {
     this.isRessourcesPersonnesChargeDisplay = false;
     this.isRessourcesFoyerDisplay = true;
-    this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
-    this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
-    this.montantRessourcesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRessourcesPersonnesCharge();
+    this.ressourcesPersonnesAChargeValidees = true;
   }
 
   public traiterValidationRessourcesFinancieresFoyerEventEmitter(): void {
-    this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
-    this.montantRessourcesFoyer = this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer();
     this.isRessourcesFoyerDisplay = false;
+    this.ressourcesFoyerValidees = true;
+  }
+
+  public isVosRessourcesValides(): boolean {
+    return !this.isVosRessourcesDisplay && this.vosRessourcesValidees;
+  }
+
+  public isRessourcesConjointValides(): boolean {
+    return !this.isRessourcesConjointDisplay && this.ressourcesConjointValidees;
+  }
+
+  public isRessourcesPersonnesAChargeValides(): boolean {
+    return !this.isRessourcesPersonnesChargeDisplay && this.ressourcesPersonnesAChargeValidees;
+  }
+
+  public isRessourcesFoyerValides(): boolean {
+    return !this.isRessourcesFoyerDisplay && this.ressourcesFoyerValidees;
   }
 
   private loadDataRessourcesFinancieres(demandeurEmploiConnecte: DemandeurEmploi): void {
@@ -267,28 +274,10 @@ export class RessourcesActuellesComponent implements OnInit {
       && this.deConnecteService.hasRessourcesFinancieres();
   }
 
-  private calculerMontantsRessourcesFinancieres(): void {
-    this.montantRevenusVosRessources = this.deConnecteRessourcesFinancieresService.getMontantRevenusVosRessources();
-    this.montantAidesVosRessources = this.deConnecteRessourcesFinancieresService.getMontantAidesVosRessources();
-    this.montantRevenusRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesConjoint();
-    this.montantAidesRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesConjoint();
-    this.montantAidesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesPersonnesCharge();
-    this.montantRevenusPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRevenusRessourcesPersonnesCharge();
-    this.montantAidesFoyer = this.deConnecteRessourcesFinancieresService.getMontantAidesRessourcesFoyer();
-
-    this.montantVosRessources = this.deConnecteRessourcesFinancieresService.getMontantVosRessources();
-    this.montantRessourcesConjoint = this.deConnecteRessourcesFinancieresService.getMontantRessourcesConjoint();
-    this.montantRessourcesPersonnesCharge = this.deConnecteRessourcesFinancieresService.getMontantRessourcesPersonnesCharge();
-    this.montantRessourcesFoyer = this.deConnecteRessourcesFinancieresService.getMontantRessourcesFoyer()
-  }
-
   private isSaisieVosRessourcesFinancieresValide(): boolean {
     let isValide = this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid;
     if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
-    }
-    if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
+      isValide = this.isDonneesSaisieVosRessourcesFinancieresValide();
     }
     if (!isValide) {
       this.isVosRessourcesDisplay = true;
@@ -324,12 +313,23 @@ export class RessourcesActuellesComponent implements OnInit {
     return isSaisieFormulairesValide;
   }
 
+  private isDonneesSaisieVosRessourcesFinancieresValide(): boolean {
+    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres)
+      && this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
+  }
+
+  private isDonneesSaisieRessourcesFinancieresFoyerValide(): boolean {
+    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
+  }
+
   private hasPersonneAChargeAvecRessourcesFinancieresInvalide(): boolean {
     let hasPersonneAChargeAvecRessourcesFinancieresInvalide = false;
     if (this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
       && !this.deConnecteSituationFamilialeService.hasPersonneAChargeSeulementRSA()) {
-      if (!this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid
-        || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresPersonnesAChargeValides()) {
+      if ((!this.ressourcesFinancieresPersonnesAChargeComponent
+        || !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm
+        || !this.ressourcesFinancieresPersonnesAChargeComponent.ressourcesFinancieresPersonnesChargeForm.valid)
+        && !this.deConnecteSituationFamilialeService.isRessourcesFinancieresPersonnesAChargeValides()) {
         hasPersonneAChargeAvecRessourcesFinancieresInvalide = true;
       }
     }
@@ -340,8 +340,10 @@ export class RessourcesActuellesComponent implements OnInit {
     let hasConjointAvecRessourcesFinancieresInvalide = false;
     if (this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
       && !this.deConnecteSituationFamilialeService.hasConjointSeulementRSA()) {
-      if ((!this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid)
-        || !this.deConnecteSituationFamilialeService.isRessourcesFinancieresConjointValides()) {
+      if ((!this.ressourcesFinancieresConjointComponent
+        || !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm
+        || !this.ressourcesFinancieresConjointComponent.ressourcesFinancieresConjointForm.valid)
+        && !this.deConnecteSituationFamilialeService.isRessourcesFinancieresConjointValides()) {
         hasConjointAvecRessourcesFinancieresInvalide = true;
       }
     }

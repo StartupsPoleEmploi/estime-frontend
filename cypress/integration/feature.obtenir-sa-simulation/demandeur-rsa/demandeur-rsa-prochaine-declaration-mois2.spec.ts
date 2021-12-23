@@ -147,6 +147,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantLoyer = "500";
       const montantCharges = "30";
       const montantMensuelRSA = "500";
+      const montantSalaireMoisMoins0 = "500";
       const montantSalaireMoisMoins2 = "500";
       const prochaineDeclarationTrimestrielle = "2";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -184,9 +185,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantMensuelRSA(montantMensuelRSA);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielle(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-      ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(montantSalaireMoisMoins2);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins3AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins2, 2);
       ressourcesActuellesPage.clickOnValiderVosRessources();
       ressourcesActuellesPage.selectionnerLocataireNonMeuble();
       ressourcesActuellesPage.selectionnerAPL();

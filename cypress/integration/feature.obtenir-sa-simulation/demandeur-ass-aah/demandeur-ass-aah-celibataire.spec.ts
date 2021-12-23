@@ -44,8 +44,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     };
     const montantMensuelAAH = "500";
     const prochaineDeclarationTrimestrielle = "0";
-    const nombreMoisTravaillesAvantSimulation = "5";
-    const salaireNetAvantSimulation = "500"
+    const montantSalaireMoisMoins1 = "500";
+    const montantSalaireMoisMoins2 = "500";
+    const montantSalaireMoisMoins3 = "500";
+    const montantSalaireMoisMoins4 = "500";
+    const montantSalaireMoisMoins5 = "500";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const primeActivite = "62";
@@ -79,10 +82,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-    ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins1, 1);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins2, 2);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins4, 4);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins5, 5);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.selectionnerProprietaire();
@@ -140,8 +144,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     };
     const montantMensuelAAH = "500";
     const prochaineDeclarationTrimestrielle = "0";
-    const nombreMoisTravaillesAvantSimulation = "4";
-    const salaireNetAvantSimulation = "500"
+    const montantSalaireMoisMoins2 = "500"
     const montantAPL = "120";
     const montantLoyer = "500";
     const montantCharges = "30";
@@ -177,10 +180,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-    ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins2, 2);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.selectionnerLocataireNonMeuble();
@@ -251,15 +251,16 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     };
     const montantMensuelAAH = "500";
     const prochaineDeclarationTrimestrielle = "0";
-    const nombreMoisTravaillesAvantSimulation = "3";
-    const salaireNetAvantSimulation = "500"
+    const montantSalaireMoisMoins0 = "500"
+    const montantSalaireMoisMoins1 = "500"
+    const montantSalaireMoisMoins2 = "500"
     const montantAPL = "120";
     const montantLoyer = "500";
     const montantCharges = "30";
     // VARIABLES PAGE RESULTAT SIMULATION
     const montantAideMobilite = "346";
     const montantAGEPI = "400";
-    const primeActivite1 = "19";
+    const primeActivite1 = "25";
     const primeActivite2 = "404";
     const montantALF_M1_M2_M3_M4_M5_M6 = "380";
 
@@ -294,12 +295,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-    ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.saisirSalaireMoisMoins1AvantSimulation(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaireMoisMoins2AvantSimulation(salaireNetAvantSimulation);
-    ressourcesActuellesPage.saisirSalaireMoisMoins3AvantSimulation(salaireNetAvantSimulation);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins1, 1);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins2, 2);
     ressourcesActuellesPage.clickOnValiderVosRessources();
-
 
     ressourcesActuellesPage.selectionnerLocataireNonMeuble();
     ressourcesActuellesPage.selectionnerAPL();
@@ -381,7 +380,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     };
     const montantMensuelAAH = "500";
     const prochaineDeclarationTrimestrielle = "0";
-    const nombreMoisTravaillesAvantSimulation = "3";
+    const montantSalaireMoisMoins3 = "500";
+    const montantSalaireMoisMoins4 = "500";
+    const montantSalaireMoisMoins5 = "500";
     const montantAPL = "120";
     const montantLoyer = "500";
     const montantCharges = "30";
@@ -425,10 +426,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
     ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
     ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-    ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-    ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins4, 4);
+    ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins5, 5);
     ressourcesActuellesPage.clickOnValiderVosRessources();
 
     ressourcesActuellesPage.selectionnerLocataireNonMeuble();
@@ -528,7 +528,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
-      const nombreMoisTravaillesAvantSimulation = "3";
+      const montantSalaireMoisMoins3 = "500";
+      const montantSalaireMoisMoins4 = "500";
+      const montantSalaireMoisMoins5 = "500";
       const allocationFamilialeFoyer = "250";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "346";
@@ -568,10 +570,9 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
-      ressourcesActuellesPage.selectOptionNombreMoisTravaillesAvantSimulation(nombreMoisTravaillesAvantSimulation);
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins1AvantSimulation();
-      ressourcesActuellesPage.clickOnPasDeSalaireMoisMoins2AvantSimulation();
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins4, 4);
+      ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins5, 5);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();

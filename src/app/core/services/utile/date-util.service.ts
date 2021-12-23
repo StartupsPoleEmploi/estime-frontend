@@ -203,6 +203,14 @@ export class DateUtileService {
     }
   }
 
+  public getDateFromStringDate(dateString: string): Date {
+    const dateStringArray = dateString.split("-");
+    return new Date(
+      parseInt(dateStringArray[0]),
+      parseInt(dateStringArray[1]) - 1,
+      parseInt(dateStringArray[2]));
+  }
+
   public ajouterMoisToDate(dateOrigine: Date, nbrMois: number): Date {
     const m = moment(dateOrigine);
     return m.add(nbrMois, 'M').toDate();

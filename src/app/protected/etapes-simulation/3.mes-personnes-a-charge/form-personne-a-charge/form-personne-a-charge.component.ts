@@ -70,7 +70,7 @@ export class FormPersonneAChargeComponent implements OnInit {
   public gererAffichageNouvellePersonneSituationForm(): void {
     this.isNouvellePersonneAChargeSituationFormGroupDisplay = false;
     if (this.dateUtileService.isDateValide(this.dateNaissanceNouvellePersonne)) {
-      if (this.personneUtileService.isAgeLegalPourTravailler(this.dateNaissanceNouvellePersonne)) {
+      if (this.personneUtileService.isAgeLegalPourTravaillerFromDateDecomposee(this.dateNaissanceNouvellePersonne)) {
         this.isNouvellePersonneAChargeSituationFormGroupDisplay = true;
         if (!this.nouvellePersonneACharge.ressourcesFinancieres) {
           this.creerRessourcesFinancieres();

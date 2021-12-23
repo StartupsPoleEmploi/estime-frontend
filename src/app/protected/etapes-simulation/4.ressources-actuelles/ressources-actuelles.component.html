@@ -22,8 +22,11 @@
                             <img alt="" class="euro-sign" src="./assets/images/euro.svg">
                         </div>
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
-                            <div class="text-button">Vos ressources</div>
-                            <div *ngIf="!isVosRessourcesDisplay">Total : {{montantVosRessources}} €</div>
+                            <div class="text-button">
+                                Vos ressources
+                                <img *ngIf="isVosRessourcesValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
+                            </div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>
@@ -41,13 +44,10 @@
                 (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter()">
             </app-vos-ressources-financieres>
         </div>
-        <div *ngIf="deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
+        <div *ngIf="deConnecteSituationFamilialeService.hasConjoint()
             && !ressourceConjointSeulementRSA" id="block-ressources-conjoint">
-            <button type="button"
-                    role="button"
-                    aria-describedby="label-vos-ressources"
-                    aria-label="Vos ressources en Euros"
-                    class="btn accordion-btn"
+            <button type="button" role="button" aria-describedby="label-vos-ressources"
+                aria-label="Vos ressources en Euros" class="btn accordion-btn"
                 (click)="onClickButtonRessourcesConjoint()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
@@ -57,8 +57,9 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-vos-ressources" class="text-button">
                                 Ressources conjoint(e)
+                                <img *ngIf="isRessourcesConjointValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
                             </div>
-                            <div *ngIf="!isRessourcesConjointDisplay">Total : {{montantRessourcesConjoint}} €</div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>
@@ -73,16 +74,12 @@
             </button>
             <app-ressources-financieres-conjoint [hidden]="!isRessourcesConjointDisplay"
                 (validationRessourcesConjointEventEmitter)="traiterValidationRessourcesFinancieresConjointEventEmitter()">
-
             </app-ressources-financieres-conjoint>
         </div>
-        <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
+        <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeAgeLegal()
             && !ressourcePersonnesAChargeSeulementRSA" id="block-ressources-personnes-a-charge">
-            <button type="button"
-                role="button"
-                aria-describedby="label-ressources-conjoint"
-                aria-label="Vos ressources en Euros"
-                class="btn accordion-btn"
+            <button type="button" role="button" aria-describedby="label-ressources-conjoint"
+                aria-label="Vos ressources en Euros" class="btn accordion-btn"
                 (click)="onClickButtonRessourcesPersonnesCharge()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
@@ -92,9 +89,8 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-ressources-conjoint" class="text-button">
                                 Ressources personne(s) à charge
-                            </div>
-                            <div *ngIf="!isRessourcesPersonnesChargeDisplay">
-                                Total : {{montantRessourcesPersonnesCharge}} €
+                                <img *ngIf="isRessourcesPersonnesAChargeValides()" alt=""
+                                    class="icon-ressources-validees" src="./assets/images/icon-check-bleu.svg">
                             </div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
@@ -110,16 +106,11 @@
             </button>
             <app-ressources-financieres-personnes-a-charge [hidden]="!isRessourcesPersonnesChargeDisplay"
                 (validationRessourcesPersonnesAChargeEventEmitter)="traiterValidationRessourcesFinancieresPersonnesChargeEventEmitter()">
-
             </app-ressources-financieres-personnes-a-charge>
         </div>
         <div id="block-ressources-foyer">
-            <button type="button"
-                role="button"
-                class="btn accordion-btn"
-                aria-describedby="label-ressources-foyer"
-                aria-label="Vos ressources en Euros"
-                (click)="onClickButtonRessourcesFoyer()">
+            <button type="button" role="button" class="btn accordion-btn" aria-describedby="label-ressources-foyer"
+                aria-label="Vos ressources en Euros" (click)="onClickButtonRessourcesFoyer()">
                 <div class="container-fluid container-fluid-button">
                     <div class="row">
                         <div class="col-2 col-md-1 col-euro-sign">
@@ -128,8 +119,9 @@
                         <div class="col-9 col-md-10 col-text-button headline-4-typo">
                             <div id="label-ressources-foyer" class="text-button">
                                 Ressources du foyer
+                                <img *ngIf="isRessourcesFoyerValides()" alt="" class="icon-ressources-validees"
+                                    src="./assets/images/icon-check-bleu.svg">
                             </div>
-                            <div *ngIf="!isRessourcesFoyerDisplay">Total : {{montantRessourcesFoyer}} €</div>
                         </div>
                         <div class="col-1 col-md-1 col-chevron">
                             <div>
@@ -151,8 +143,7 @@
     <div class="div-buttons-form row d-flex justify-content-center">
         <div class="col" *ngIf="!screenService.isExtraSmallScreen()">
             <button class="btn-style-perso-2 first-btn button-typo d-inline float-end"
-                aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="" src="./assets/images/return-arrow-v2.svg">
@@ -161,21 +152,17 @@
             </button>
         </div>
         <div class="col" [ngClass]="{'text-center col-12': this.screenService.isExtraSmallScreen()}">
-            <button id="btn-obtenir-simulation"
-                aria-label="Obtenir ma simulation"
+            <button id="btn-obtenir-simulation" aria-label="Obtenir ma simulation"
                 class="btn-homepage d-flex justify-content-center button-typo d-inline"
-                data-testid="btn-obtenir-simulation"
-                (click)="onClickButtonObtenirSimulation()"
+                data-testid="btn-obtenir-simulation" (click)="onClickButtonObtenirSimulation()"
                 tag-action="clic_bouton_obtenir_ma_simulation">
                 <span>Obtenir ma simulation</span>
                 <img alt="" src="./assets/images/icon-bt-primaire.svg">
             </button>
         </div>
         <div class="col" *ngIf="this.screenService.isExtraSmallScreen()" class="text-center col-12">
-            <button class="btn-style-perso-2 first-btn button-typo"
-                aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()"
-                tag-navigation="clic_bouton_retour">
+            <button class="btn-style-perso-2 first-btn button-typo" aria-label="Retour à la page précédente"
+                (click)="onClickButtonRetour()" tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="" src="./assets/images/return-arrow-v2.svg">
                     <span>Retour</span>

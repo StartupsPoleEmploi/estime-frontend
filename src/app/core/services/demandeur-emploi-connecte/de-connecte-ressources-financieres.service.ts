@@ -72,16 +72,10 @@ export class DeConnecteRessourcesFinancieresService {
 
   private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres: RessourcesFinancieres): number {
     let montant = 0;
-    if (ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins1.salaire.montantNet);
-      }
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins2.salaire.montantNet);
-      }
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.periodeTravailleeAvantSimulation.moisMoins3.salaire.montantNet);
-      }
+    if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+      Object.values(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).forEach(mois => {
+        montant += this.numberUtileService.getMontantSafe(mois.salaire.montantNet);
+      });
     }
     return montant;
   }
@@ -279,6 +273,30 @@ export class DeConnecteRessourcesFinancieresService {
     return isValide;
   }
 
+  /**
+   * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
+   * @param ressourcesFinancieres
+   */
+  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    let isChampsSalairesValides = true;
+    if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
+      if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+        let tousLesSalairesAZero = true;
+        ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
+          if (mois.salaire != null && mois.salaire.montantNet != 0) {
+            tousLesSalairesAZero = false;
+          }
+        });
+        if (tousLesSalairesAZero) {
+          isChampsSalairesValides = false;
+        }
+      } else {
+        isChampsSalairesValides = false;
+      }
+    }
+    return isChampsSalairesValides;
+  }
+
   public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres, informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
@@ -288,9 +306,8 @@ export class DeConnecteRessourcesFinancieresService {
       isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
     if (isValide) {
-      isValide = this.isDonneesLogementValides(informationsPersonnelles);
+      isValide = this.isDonneesLogementValides(informationsPersonnelles) && this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
     }
-    isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
     return isValide;
   }
 
@@ -304,7 +321,7 @@ export class DeConnecteRessourcesFinancieresService {
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
       if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
-        if (informationsPersonnelles.logement.montantCharges && informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
+        if (informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
           isValide = true;
         }
       } else {

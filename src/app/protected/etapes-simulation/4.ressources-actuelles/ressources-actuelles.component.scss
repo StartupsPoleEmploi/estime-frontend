@@ -41,6 +41,14 @@
       padding-left: 0.8rem;
       padding-right: 0.8rem;
 
+      .icon-ressources-validees {
+        padding-left: 1rem;
+
+        @media #{$extra-small-device} {
+          padding-left: 0.5rem;
+        }
+      }
+
       .col-euro-sign {
         padding-left: 0;
         padding-right: 0;

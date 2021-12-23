@@ -378,7 +378,7 @@
                 </div>
             </div>
             <span
-                *ngIf="this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0"
+                *ngIf="isRessourcesFinancieresFoyerFormSubmitted && this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
@@ -403,21 +403,11 @@
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="8" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantCharges && this.informationsPersonnelles.logement.montantCharges == 0}"
-                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
+                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" placeholder="Montant"
                         inputmode="decimal" #montantCharges="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
-            <span
-                *ngIf="this.informationsPersonnelles.logement.montantCharges && this.informationsPersonnelles.logement.montantCharges == 0"
-                class="row error-input-message">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-            </span>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
