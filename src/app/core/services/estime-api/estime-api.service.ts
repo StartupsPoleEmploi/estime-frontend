@@ -46,6 +46,7 @@ export class EstimeApiService {
 
   public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
     const options = this.getHttpHeaders(true);
+    this.setPeConnectAuthorization(demandeurEmploi);
     return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
@@ -76,5 +77,9 @@ export class EstimeApiService {
     return optionRequete;
   }
 
+  private setPeConnectAuthorization(demandeurEmploi: DemandeurEmploi): void{
+    const individuConnected = this.individuConnectedService.getIndividuConnected();
+    demandeurEmploi.peConnectAuthorization = individuConnected.peConnectAuthorization;
+  }
 }
 

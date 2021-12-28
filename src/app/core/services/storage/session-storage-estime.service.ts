@@ -57,6 +57,8 @@ export class SessionStorageEstimeService {
   }
 
   public storeDemandeurEmploiConnecte(demandeurEmploiConnecte: DemandeurEmploi): void {
+    //pour des raison de sécurité, on ne stocke pas les authorization dans session storage
+    demandeurEmploiConnecte.peConnectAuthorization = null;
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY, demandeurEmploiConnecte);
   }
 
