@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { IndividuConnectePeConnectAuthorization } from "@models/individu-connecte-pe-connect-authorization";
+import { PeConnectAuthorization } from '@app/commun/models/pe-connect-authorization';
 
 @Injectable({ providedIn: 'root' })
 export class IndividuConnectedService {
@@ -25,10 +26,7 @@ export class IndividuConnectedService {
   public getIndividuConnected(): Individu {
     if (!this.individuConnecte) {
       const individuConnected = this.sessionStorageEstimeService.getIndividuConnected();
-      if (!this.individuConnectePeConnectAuthorization) {
-        this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
-      }
-      individuConnected.peConnectAuthorization = this.individuConnectePeConnectAuthorization.peConnectAuthorization;
+      individuConnected.peConnectAuthorization = this.getPeConnectAuthorization();
       this.individuConnecte = individuConnected;
     }
     return this.individuConnecte;
@@ -57,5 +55,12 @@ export class IndividuConnectedService {
     individuConnectePeConnectAuthorization.idPoleEmploi = individuConnecte.idPoleEmploi
     individuConnectePeConnectAuthorization.peConnectAuthorization = individuConnecte.peConnectAuthorization;
     return individuConnectePeConnectAuthorization;
+  }
+
+  private getPeConnectAuthorization(): PeConnectAuthorization {
+    if (!this.individuConnectePeConnectAuthorization) {
+      this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+    }
+    return this.individuConnectePeConnectAuthorization.peConnectAuthorization;
   }
 }

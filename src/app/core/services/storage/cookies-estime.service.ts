@@ -39,8 +39,8 @@ export class CookiesEstimeService {
 
   private getDateCookieExpire(tokenPeConnectExpireIn: number): Date {
 
-    //on enlève 3min pour refaire une demande avant l'expiration du token qui obligerait l'utilisateur a se réauthentifier.
-    const dureeStorageCookieEnSecond = tokenPeConnectExpireIn - 180;
+    //on enlève 2min pour refaire une demande avant l'expiration du token qui obligerait l'utilisateur a se réauthentifier.
+    const dureeStorageCookieEnSecond = tokenPeConnectExpireIn - 120;
     const dureeStorageCookieEnMin = dureeStorageCookieEnSecond / 60;
 
     //création de la date d'expiration du cookie
