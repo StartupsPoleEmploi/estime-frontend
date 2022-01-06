@@ -30,8 +30,8 @@ export class DeConnecteInfosPersonnellesService {
   public isDesDom(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     let codeDepartement = "";
-    if(demandeurEmploiConnecte.informationsPersonnelles) {
-      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    if (demandeurEmploiConnecte.informationsPersonnelles) {
+      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.logement.coordonnees.codePostal);
     }
     return codeDepartement.length == 3;
   }
@@ -39,8 +39,8 @@ export class DeConnecteInfosPersonnellesService {
   public isDeMayotte(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     let codeDepartement = "";
-    if(demandeurEmploiConnecte.informationsPersonnelles) {
-      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.codePostal);
+    if (demandeurEmploiConnecte.informationsPersonnelles) {
+      codeDepartement = this.codeDepartementUtileService.getCodeDepartement(demandeurEmploiConnecte.informationsPersonnelles.logement.coordonnees.codePostal);
     }
     return codeDepartement == "976";
   }

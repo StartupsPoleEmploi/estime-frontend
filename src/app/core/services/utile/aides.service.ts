@@ -253,9 +253,9 @@ export class AidesService {
    * @returns true si isEligibleAideMobilite
    */
   public isEligibleAideMobilite(demandeurEmploiConnecte: DemandeurEmploi, distanceKmDomicileTravail: number): boolean {
-    return (demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
+    return (demandeurEmploiConnecte.informationsPersonnelles.logement.coordonnees.isDesDOM
       && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM)
-      || (!demandeurEmploiConnecte.informationsPersonnelles.habiteDansDOM
+      || (!demandeurEmploiConnecte.informationsPersonnelles.logement.coordonnees.isDesDOM
         && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM);
   }
 
