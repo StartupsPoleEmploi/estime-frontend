@@ -1,14 +1,18 @@
-import { Component, ElementRef, Injector, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
-import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
+import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
+import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
+import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
 import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
@@ -17,10 +21,6 @@ import { DateDecomposee } from "@models/date-decomposee";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
-import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
-import { ScreenService } from '@app/core/services/utile/screen.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
@@ -48,33 +48,20 @@ export class MaSituationComponent implements OnInit {
     { label: NationalitesEnum.AUTRE }
   ];
 
-  // services à injecter dynamiquement
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public dateUtileService: DateUtileService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService;
-  public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService;
-  private estimeApiService: EstimeApiService;
-  private informationsPersonnellesService: InformationsPersonnellesService;
-  public modalService: ModalService;
-  public screenService: ScreenService;
-  private situationFamilialeUtileService: SituationFamilialeUtileService;
-
   constructor(
     private elementRef: ElementRef,
-    private injector: Injector,
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
+    private estimeApiService: EstimeApiService,
+    private informationsPersonnellesService: InformationsPersonnellesService,
+    public modalService: ModalService,
+    public screenService: ScreenService,
+    private situationFamilialeUtileService: SituationFamilialeUtileService,
     private router: Router
   ) {
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteBeneficiaireAidesService = injector.get<DeConnecteBeneficiaireAidesService>(DeConnecteBeneficiaireAidesService);
-    this.deConnecteInfosPersonnellesService = injector.get<DeConnecteInfosPersonnellesService>(DeConnecteInfosPersonnellesService);
-    this.estimeApiService = injector.get<EstimeApiService>(EstimeApiService);
-    this.informationsPersonnellesService = injector.get<InformationsPersonnellesService>(InformationsPersonnellesService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
-    this.situationFamilialeUtileService = injector.get<SituationFamilialeUtileService>(SituationFamilialeUtileService);
-    this.modalService = injector.get<ModalService>(ModalService);
   }
 
   ngOnInit(): void {
@@ -183,7 +170,7 @@ export class MaSituationComponent implements OnInit {
     const response = this.estimeApiService.getCommuneFromCodePostal(codePostal);
     response.subscribe(
       data => {
-        var commune = data.pop();
+        let commune = data.pop();
         this.informationsPersonnelles.logement.codeInsee = commune.code;
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       }

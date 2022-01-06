@@ -1,6 +1,7 @@
 export class PeConnectAuthorization {
-  accessToken: string;
+  bearerToken: string;
   expireIn: number;
+  expireInDate: string;
   idToken: string;
   refreshToken: string;
   scope: string;

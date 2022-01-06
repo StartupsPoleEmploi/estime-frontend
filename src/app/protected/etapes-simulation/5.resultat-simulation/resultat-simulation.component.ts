@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -33,28 +33,17 @@ export class ResultatSimulationComponent implements OnInit {
   afficherDetails: boolean;
   nombreMoisSimules: number;
 
-  // services à injecter dynamiquement
-  private aidesService: AidesService;
-  public dateUtileService: DateUtileService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService;
-  public deConnecteSimulationAidesService: DeConnecteSimulationAidesService;
-  public modalService: ModalService;
-  private router: Router;
-  public screenService: ScreenService;
-  private simulationPdfMakerService: SimulationPdfMakerService;
-
   constructor(
-    private injector: Injector
+    private aidesService: AidesService,
+    private dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
+    public modalService: ModalService,
+    private router: Router,
+    public screenService: ScreenService,
+    private simulationPdfMakerService: SimulationPdfMakerService
   ) {
-    this.aidesService = injector.get<AidesService>(AidesService);
-    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteRessourcesFinancieresService = injector.get<DeConnecteRessourcesFinancieresService>(DeConnecteRessourcesFinancieresService);
-    this.deConnecteSimulationAidesService = injector.get<DeConnecteSimulationAidesService>(DeConnecteSimulationAidesService);
-    this.modalService = injector.get<ModalService>(ModalService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
-    this.simulationPdfMakerService = injector.get<SimulationPdfMakerService>(SimulationPdfMakerService);
   }
 
   ngOnInit(): void {

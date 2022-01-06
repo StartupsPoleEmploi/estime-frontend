@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -13,7 +13,6 @@ import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
-
 
 @Component({
   selector: 'app-mes-personnes-a-charge',
@@ -33,28 +32,18 @@ export class MesPersonnesAChargeComponent implements OnInit {
   personnesACharge: Array<Personne>;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
-  // services à injecter dynamiquement
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public dateUtileService: DateUtileService;
-  public deConnecteService: DeConnecteService;
-  public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService;
-  public personneUtileService: PersonneUtileService;
-  public modalService: ModalService;
-  private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService;
-  public screenService: ScreenService;
 
   constructor(
-    private injector: Injector,
-    private router: Router
+    private router: Router,
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public dateUtileService: DateUtileService,
+    public deConnecteService: DeConnecteService,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    public modalService: ModalService,
+    public personneUtileService: PersonneUtileService,
+    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public screenService: ScreenService
   ) {
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.dateUtileService = injector.get<DateUtileService>(DateUtileService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.deConnecteSituationFamilialeService = injector.get<DeConnecteSituationFamilialeService>(DeConnecteSituationFamilialeService);
-    this.modalService = injector.get<ModalService>(ModalService);
-    this.personneUtileService = injector.get<PersonneUtileService>(PersonneUtileService);
-    this.ressourcesFinancieresUtileService = injector.get<RessourcesFinancieresUtileService>(RessourcesFinancieresUtileService);
-    this.screenService = injector.get<ScreenService>(ScreenService);
   }
 
   ngOnInit(): void {

@@ -10,7 +10,7 @@ export class DemandeurEmploi {
   beneficiaireAides: BeneficiaireAides;
   futurTravail: FuturTravail;
   informationsPersonnelles: InformationsPersonnelles;
+  peConnectAuthorization: PeConnectAuthorization;
   ressourcesFinancieres: RessourcesFinancieres;
   situationFamiliale: SituationFamiliale;
-  peConnectAuthorization: PeConnectAuthorization;
 }

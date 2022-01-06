@@ -38,7 +38,7 @@
         <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 2vh;"></div>
         <div class="col-12 col-md-6 my-auto">
             <span id="btn-refaire-simulation" class="btn-telecharger-ou-refaire" data-testid="btn-refaire-simulation"
-                tabindex="0" (click)="onClickButtonRefaireSimulation()">
+                tabindex="0" (click)="onClickButtonRefaireSimulation()" tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="" src="./assets/images/refaire_simulation.svg">
                     <span id="refaire_simulation_text" class="button-typo">Refaire une simulation</span>

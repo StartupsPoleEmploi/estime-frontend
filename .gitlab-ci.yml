@@ -7,8 +7,7 @@ stages:
     - dynamic-application-security-testing
 
 variables:
-    LAUNCH_CYPRESS_TESTS: "true"
-
+    LAUNCH_CYPRESS_TESTS: "false"
 
 cache: &global_cache
   key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
@@ -35,19 +34,6 @@ build_frontend_application :
         - ./dist
     cache:
       <<: *global_cache
-
-generate_whitelist_pe :
-    stage: build-phase-1
-    script:
-      #création du fichier whitelist Pôle emploi qui contient les IP autorisées pour accéder notamment à adminer
-      - echo "$NGINX_WHITELIST_POLE_EMPLOI" > "./whitelist_pole_emploi"
-    rules:
-    - if: '$CI_COMMIT_BRANCH == "master"'
-      changes:
-        - src/**/*
-    artifacts:
-      paths:
-        - ./whitelist_pole_emploi
 
 cypress-e2e:
     stage: build-phase-1
@@ -93,14 +79,13 @@ build-docker-image-recette:
     script:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/recette/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
+      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
         - src/**/*
     dependencies:
     - build_frontend_application
-    - generate_whitelist_pe
 
 generate-docker-stack-recette:
   stage: build-phase-2
@@ -108,11 +93,13 @@ generate-docker-stack-recette:
     # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
     name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
   script:
-    - cd docker/recette
-    - p2 -t estime-frontend-stack.yml.j2 -o estime-frontend-stack.yml
+    - cd docker
+    - mkdir recette
+    - p2 -t estime-frontend-recette-stack.yml.j2 -o ./recette/estime-frontend-stack.yml
   artifacts:
     paths:
       - ./docker/recette
+    expire_in: 1 week
   rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
       changes:
@@ -139,7 +126,6 @@ sonar_quality_analyse :
     cache:
       <<: *global_cache
 
-
 deploy_application_recette:
     stage: deploy-application-recette
     before_script:
@@ -147,17 +133,18 @@ deploy_application_recette:
       - apt-get install -y -qq openssh-client rsync iputils-ping
       # add target server in known hosts
       - mkdir ~/.ssh
-      - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+      - echo "$R7_SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
       # add SSH_PRIVATE_KEY in agent store
       - eval $(ssh-agent -s)
-      - ssh-add <(echo "$SSH_PRIVATE_KEY")
+      - ssh-add <(echo "$R7_SSH_PRIVATE_KEY")
       - mkdir -p ~/.ssh
     script:
       # rsync to activate if needed to update estime-frontend-stack.yml
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/scripts/deploy.sh $CI_PROJECT_DIR/docker/recette/estime-frontend-stack.yml $HOST_SERVER_USER@$HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/scripts/deploy.sh $CI_PROJECT_DIR/docker/recette/estime-frontend-stack.yml $HOST_SERVER_USER@$R7_HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/nginx-conf/default.conf $HOST_SERVER_USER@$R7_HOST_SERVER_IP:/home/docker/estime-frontend/etc/nginx/conf.d
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
-      - ssh $HOST_SERVER_USER@$HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
+      - ssh $HOST_SERVER_USER@$R7_HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual
 
 build-docker-image-production:
@@ -168,7 +155,7 @@ build-docker-image-production:
     script:
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/production/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release
+      - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release
     when: manual
 
 generate-docker-stack-production:
@@ -177,8 +164,9 @@ generate-docker-stack-production:
     # https://git.beta.pole-emploi.fr/customize-docker-images/p2cli.git
     name: registry.beta.pole-emploi.fr/customize-docker-images/p2cli
   script:
-    - cd docker/production
-    - p2 -t estime-frontend-stack.yml.j2 -o estime-frontend-stack.yml
+    - cd docker
+    - mkdir production
+    - p2 -t estime-frontend-production-stack.yml.j2 -o ./production/estime-frontend-stack.yml
   artifacts:
     paths:
       - ./docker/production
@@ -191,15 +179,16 @@ deploy_application_production:
       - apt-get install -y -qq openssh-client rsync iputils-ping
       # add target server in known hosts
       - mkdir ~/.ssh
-      - echo "$SSH_KNOWN_HOSTS_PROD" >> ~/.ssh/known_hosts
+      - echo "$PROD_SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
       - chmod 644 ~/.ssh/known_hosts
       # add SSH_PRIVATE_KEY in agent store
       - eval $(ssh-agent -s)
-      - ssh-add <(echo "$SSH_PRIVATE_KEY_PROD")
+      - ssh-add <(echo "$PROD_SSH_PRIVATE_KEY")
       - mkdir -p ~/.ssh
     script:
       # rsync config files on server
-      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/commun/scripts/deploy.sh $CI_PROJECT_DIR/docker/production/estime-frontend-stack.yml $HOST_SERVER_USER@$HOST_SERVER_IP_PROD:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/scripts/deploy.sh $CI_PROJECT_DIR/docker/production/estime-frontend-stack.yml $HOST_SERVER_USER@$PROD_HOST_SERVER_IP:/home/docker/estime-frontend
+      - rsync -avz --no-perms --no-owner --no-group -e 'ssh'  $CI_PROJECT_DIR/docker/nginx-conf/default.conf $HOST_SERVER_USER@$PROD_HOST_SERVER_IP:/home/docker/estime-frontend/etc/nginx/conf.d
       # exec deploy.sh to deploy docker stack estime-frontend or update estime-frontend image service
-      - ssh $HOST_SERVER_USER@$HOST_SERVER_IP_PROD "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
+      - ssh $HOST_SERVER_USER@$PROD_HOST_SERVER_IP "cd /home/docker/estime-frontend && ./deploy.sh $CI_REGISTRY $CI_REGISTRY_USER $CI_REGISTRY_PASSWORD"
     when: manual

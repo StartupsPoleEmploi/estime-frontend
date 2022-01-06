@@ -29,54 +29,57 @@ export class EstimeApiService {
     this.pathApiCommunes = 'https://geo.api.gouv.fr/communes?codePostal=';
   }
 
-  public authentifier(peConnectPayload: PeConnectPayload): Promise<Individu> {
-    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload).toPromise();
+  public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
+    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
   }
 
-  public creerDemandeurEmploi(): Promise<DemandeurEmploi> {
-    const options = this.getHttpHeaders();
+  public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
+    const options = this.getHttpHeaders(true);
     const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi`, individuConnected, options).toPromise();
+    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeurs_emploi`, individuConnected, options);
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Promise<SimulationAides> {
-    const options = this.getHttpHeaders();
+  public getAideByCode(codeAide: string): Observable<Aide> {
+    const options = this.getHttpHeaders(false);
+    return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`, options);
+  }
+
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
+    const options = this.getHttpHeaders(true);
     this.setPeConnectAuthorization(demandeurEmploi);
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/simulation_aides`, demandeurEmploi, options).toPromise();
+    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
-  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Promise<Object> {
-    const options = this.getHttpHeaders();
+  public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
+    const options = this.getHttpHeaders(true);
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);
 
-    return this.http.delete(`${this.pathDemandeurEmploiService}individus/demandeur_emploi/suivi_parcours`, options).toPromise();
+    return this.http.delete(`${this.pathDemandeurEmploiService}demandeurs_emploi/suivi_parcours`, options);
   }
-
-  public getDetailAide(codeAide: string): Promise<Aide> {
-    var response = this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}/details`).toPromise();
-    return response;
-  }
-
 
   public getCommuneFromCodePostal(codePostal: string): Observable<Commune[]> {
     return this.http.get<Array<Commune>>(`${this.pathApiCommunes}${codePostal}&fields=code`, { observe: 'body', responseType: 'json' });
   }
 
-  private getHttpHeaders() {
-    const individuConnected = this.individuConnectedService.getIndividuConnected();
-
+  private getHttpHeaders(withAuthorization: boolean) {
     const optionRequete = new OptionsHTTP();
-    optionRequete.headers = new HttpHeaders({
-      'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`,
-      'Content-Type': 'application/json'
-    });
-
-
+    if (withAuthorization) {
+      const individuConnected = this.individuConnectedService.getIndividuConnected();
+      optionRequete.headers = new HttpHeaders({
+        'Authorization': `Bearer ${individuConnected.peConnectAuthorization.idToken}`,
+        'Content-Type': 'application/json'
+      });
+    } else {
+      optionRequete.headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+    }
     return optionRequete;
   }
 
-  private setPeConnectAuthorization(demandeurEmploi: DemandeurEmploi): void{
+  private setPeConnectAuthorization(demandeurEmploi: DemandeurEmploi): void {
     const individuConnected = this.individuConnectedService.getIndividuConnected();
     demandeurEmploi.peConnectAuthorization = individuConnected.peConnectAuthorization;
   }
 }
+

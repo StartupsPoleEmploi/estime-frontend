@@ -51,9 +51,19 @@ export class PersonneUtileService {
     return hasRessourcesFinancieres;
   }
 
-  public isAgeLegalPourTravailler(dateNaissance: DateDecomposee): boolean {
+  public isAgeLegalPourTravaillerFromPersonne(personne: Personne): boolean {
+    const dateNaissanceString = personne.informationsPersonnelles.dateNaissance;
+    const dateNaissance = this.dateUtileService.getDateFromStringDate(dateNaissanceString);
+    return this.isDateNaissanceSuperieurAAgeLegal(dateNaissance);
+  }
+
+  public isAgeLegalPourTravaillerFromDateDecomposee(dateNaissance: DateDecomposee): boolean {
     const dateNaissanceFormatDate = this.dateUtileService.getDateFromDateDecomposee(dateNaissance);
-    const diffEnMilliseconds = Date.now() - dateNaissanceFormatDate.getTime();
+    return this.isDateNaissanceSuperieurAAgeLegal(dateNaissanceFormatDate);
+  }
+
+  private isDateNaissanceSuperieurAAgeLegal(dateNaissance: Date): boolean {
+    const diffEnMilliseconds = Date.now() - dateNaissance.getTime();
     const dateAge = new Date(diffEnMilliseconds);
     const ageEnAnnee = Math.abs(dateAge.getUTCFullYear() - 1970);
     return ageEnAnnee >= this.AGE_LEGAL_POUR_TRAVAILLE ? true : false;
@@ -132,6 +142,13 @@ export class PersonneUtileService {
     beneficiaireAides.beneficiaireALF = false;
     beneficiaireAides.beneficiaireALS = false;
     return beneficiaireAides
+  }
+
+  public unsetSalairesAvantPeriodeSimulation(personne: Personne): void {
+    if (personne.ressourcesFinancieres &&
+      personne.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
+      personne.ressourcesFinancieres.periodeTravailleeAvantSimulation = null
+    }
   }
 }
 
