@@ -88,18 +88,20 @@
                         Indiquez le montant des salaires de votre conjoint(e) de
                         {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                         {{optionsNombreMoisTravailles[0].label}}.
-                        Ces information vont nous servir à calculer vos droits à l’aide au logement.
+                        Ces informations vont nous servir à calculer vos droits à l’aide au logement.
                     </label>
                 </div>
                 <div class="row">
                     <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                        class="col col-md-4 mt-2"
+                        class="col-12 col-md-4 mt-2"
                         [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
                         <div class="ms-2 me-2">
                             <div class="row mb-2">
                                 <label class="label headline-4-typo"
                                     [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
-                                    * Salaire en {{ optionNombreMoisTravailles.label }}
+                                    * Salaire
+                                    <span *ngIf="!screenService.isExtraSmallScreen()">en </span>
+                                    {{ optionNombreMoisTravailles.label }}
                                 </label>
                             </div>
                             <div class="row mb-4">
