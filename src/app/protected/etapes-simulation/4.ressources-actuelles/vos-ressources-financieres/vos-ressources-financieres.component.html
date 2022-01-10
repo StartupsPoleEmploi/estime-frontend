@@ -198,7 +198,8 @@
                         Indiquez le montant de vos salaires de
                         {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                         {{optionsNombreMoisTravailles[0].label}}.
-                        Ces informations vont nous servir à calculer vos droits à l’aide au logement.
+                        <br>
+                        <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
                     </label>
                 </div>
                 <div class="row">
@@ -209,9 +210,7 @@
                             <div class="row mb-2">
                                 <label class="label headline-4-typo"
                                     [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
-                                    * Salaire
-                                    <span *ngIf="!screenService.isExtraSmallScreen()">en </span>
-                                    {{ optionNombreMoisTravailles.label }}
+                                    * Salaire en {{ optionNombreMoisTravailles.label }}
                                 </label>
                             </div>
                             <div class="row mb-4">
