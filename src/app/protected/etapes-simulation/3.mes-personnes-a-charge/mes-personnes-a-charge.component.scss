@@ -128,6 +128,7 @@
 }
 
 .button-card-add-personne {
+  height: 100%;
   border: 0.0625rem solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   background-color: unset;
@@ -150,6 +151,7 @@
   }
 
   .card-add-personne {
+    height: 100%;
     min-height: 7.0625rem;
     border: 0;
     margin-left: 0;
@@ -193,13 +195,6 @@
   }
 }
 
-
 .button-card-pas-de-personne-a-charge {
   @extend .button-card-add-personne;
-}
-
-
-.label {
-  margin-left: calc(-.5 * var(--bs-gutter-x));
-  margin-right: calc(-.5 * var(--bs-gutter-x));
 }

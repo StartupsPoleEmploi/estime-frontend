@@ -1,5 +1,6 @@
 
 import { Injectable } from '@angular/core';
+import { Coordonnees } from '@app/commun/models/coordonnees';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { Logement } from '@app/commun/models/logement';
 import { StatutOccupationLogement } from '@app/commun/models/statut-occupation-logement';
@@ -17,19 +18,18 @@ export class InformationsPersonnellesService {
 
   public creerLogement(): Logement {
     const logement = new Logement();
-    logement.codeInsee = '';
     logement.isChambre = false;
     logement.isColloc = false;
     logement.isConventionne = false;
     logement.isCrous = false;
-    logement.isDeMayotte = false;
-    logement.montantCharges = 0;
-    logement.montantLoyer = 0;
+    logement.montantCharges = null;
+    logement.montantLoyer = null;
     logement.statutOccupationLogement = this.creerStatutOccupationLogement();
+    logement.coordonnees = this.creerCoordonnees();
     return logement;
   }
 
-  public creerStatutOccupationLogement(): StatutOccupationLogement {
+  private creerStatutOccupationLogement(): StatutOccupationLogement {
     const statutOccupationLogement = new StatutOccupationLogement();
     statutOccupationLogement.isLocataireMeuble = false;
     statutOccupationLogement.isLocataireNonMeuble = false;
@@ -38,6 +38,12 @@ export class InformationsPersonnellesService {
     statutOccupationLogement.isProprietaireAvecEmprunt = false;
     statutOccupationLogement.isLogeGratuitement = false;
     return statutOccupationLogement;
+  }
 
+  private creerCoordonnees(): Coordonnees {
+    const coordonnees = new Coordonnees();
+    coordonnees.codeInsee = '';
+    coordonnees.codePostal = '';
+    return coordonnees;
   }
 }

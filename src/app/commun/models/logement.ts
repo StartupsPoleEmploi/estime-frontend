@@ -1,8 +1,8 @@
+import { Coordonnees } from "./coordonnees";
 import { StatutOccupationLogement } from "./statut-occupation-logement";
 
 export class Logement {
-  codeInsee: string;
-  isDeMayotte: boolean;
+  coordonnees: Coordonnees;
   statutOccupationLogement: StatutOccupationLogement;
   isCrous: boolean;
   isColloc: boolean;

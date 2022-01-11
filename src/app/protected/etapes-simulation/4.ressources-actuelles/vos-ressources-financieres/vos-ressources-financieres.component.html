@@ -198,12 +198,13 @@
                         Indiquez le montant de vos salaires de
                         {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                         {{optionsNombreMoisTravailles[0].label}}.
-                        Ces information vont nous servir à calculer vos droits à l’aide au logement.
+                        <br>
+                        <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
                     </label>
                 </div>
                 <div class="row">
                     <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                        class="col col-md-4 mt-2"
+                        class="col-12 col-md-4 mt-2"
                         [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
                         <div class="ms-2 me-2">
                             <div class="row mb-2">
