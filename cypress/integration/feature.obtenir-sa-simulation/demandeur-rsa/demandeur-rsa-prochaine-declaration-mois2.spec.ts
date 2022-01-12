@@ -31,6 +31,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
 
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois2/celibataire-locataire.json' })
+
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
       const salaire = "1231";
@@ -86,7 +88,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -131,9 +133,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
   it('demandeur célibataire, seul deuis plus de 18 mois, non propriétaire, sans enfant,' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 500€, déclaration trimetrielle en M2, travaillé au cours des 3 derniers mois avec salaire 380 juillet,  salaire 380 juin, salaire 0 mai' +
+    'RSA 500€, déclaration trimetrielle en M2, travaillé au cours des 3 derniers mois avec salaire 500 juillet,  salaire 0 juin, salaire 500 mai' +
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois2/celibataire-locataire-travaille-2-mois.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "15";
@@ -195,7 +199,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();

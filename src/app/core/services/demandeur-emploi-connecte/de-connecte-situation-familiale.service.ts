@@ -25,7 +25,7 @@ export class DeConnecteSituationFamilialeService {
   public hasConjointSituationAvecRessource(): boolean {
     let hasConjointSituationAvecRessource = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (this.hasConjoint && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
+    if (this.hasConjoint() && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
       hasConjointSituationAvecRessource = true;
     }
     return hasConjointSituationAvecRessource;

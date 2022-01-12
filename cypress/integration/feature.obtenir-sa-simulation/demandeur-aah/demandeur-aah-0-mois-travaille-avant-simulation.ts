@@ -14,7 +14,7 @@ import { CodesRessourcesFinancieresEnum } from '@app/commun/enumerations/codes-r
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import HeaderSection from '../../../integration-commun/sections/header.section';
 
-describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi AAH'), () => {
+describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi AAH - 0 mois travaillé avant simulation'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
@@ -31,6 +31,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     '0 mois travaillé avant simulation, ' +
     'futur contrat CDI, salaire 940€ net, 35h/semaine,' +
     'kilométrage domicile -> taf = 80kms + 12 trajets', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-aah/demandeur-aah-0-mois-travaille-avant-simulation/sans-logement.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
@@ -89,7 +91,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationSoutienFamilialeFoyer(allocationSoutienFamiliale);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -137,6 +139,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     'futur contrat CDI, salaire 940€ net, 35h/semaine,' +
     'kilométrage domicile -> taf = 80kms + 12 trajets' +
     'locataire (loyer : 500, charges 50)', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-aah/demandeur-aah-0-mois-travaille-avant-simulation/avec-logement.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
@@ -204,7 +208,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationSoutienFamilialeFoyer(allocationSoutienFamiliale);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
