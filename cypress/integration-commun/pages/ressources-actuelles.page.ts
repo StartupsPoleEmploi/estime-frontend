@@ -217,10 +217,8 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=btn-vos-ressources-valider]').click();
   }
 
-  public clickOnObtenirMaSimulation(waitingTime: number) {
+  public clickOnObtenirMaSimulation() {
     cy.get('[data-testid=btn-obtenir-simulation]').click();
-    //wait pour attendre le retour du service effectuant la simulation
-    cy.wait(waitingTime);
   }
 }
 export default RessourcesActuellesPage
