@@ -66,7 +66,7 @@ cypress-e2e:
       paths:
         - coverage
         - cypress/screenshots
-        - dist/cypress/integration/feature.obtenir-sa-simulation/us.demandeur-emploi-ass/demandeurs-emploi-ASS-celibataire.spec.ts.xml
+        - dist/cypress/integration/feature.obtenir-sa-simulation
       expire_in: 1 day
     cache:
       <<: *global_cache
