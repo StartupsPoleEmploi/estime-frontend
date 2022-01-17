@@ -44,7 +44,9 @@ export class MaSituationComponent implements OnInit {
 
   nationaliteSelectOptions = [
     { label: NationalitesEnum.FRANCAISE },
-    { label: NationalitesEnum.RESSORTISSANT_EUROPEEN_OU_SUISSE },
+    { label: NationalitesEnum.RESSORTISSANT_UNION_EUROPEENNE },
+    { label: NationalitesEnum.RESSORTISSANT_ESPACE_ECONOMIQUE_EUROPEEN },
+    { label: NationalitesEnum.SUISSE },
     { label: NationalitesEnum.AUTRE }
   ];
 
