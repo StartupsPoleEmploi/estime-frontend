@@ -6,8 +6,7 @@
             <h1 class="h1-style-1 headline-1-typo">
                 5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
                 <button id="infobulle-resultat-simulation" class="img-interrogation-icon"
-                    aria-label="Infobulle évolution de résultat" style="vertical-align: baseline;"
-                    [ngClass]="{'popover-open': modalService.isOpen}" placement="right top"
+                    aria-label="Infobulle évolution de résultat" style="vertical-align: baseline;" placement="right top"
                     tag-action="ouverture-infobulle-resultat-simulation"
                     (click)="modalService.openModal($event, modalResultatSimulationTemplate)"></button>
             </h1>

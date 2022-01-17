@@ -120,8 +120,8 @@
                     <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
                         * Salaire mensuel brut <div *ngIf="screenService.isExtraSmallScreen()"></div>ou net
                         <button id="infobulle-contrat-travail-salaire" aria-label="Infobulle salaire brut/net"
-                            class="img-interrogation-icon" [ngClass]="{'popover-open': modalService.isOpen}"
-                            placement="right" tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
+                            class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_salaire_mensuel_brut_ou_net"
                             (click)="modalService.openModal($event, modalSalaireNetTemplate)"></button>
                     </label>
                 </div>
@@ -229,8 +229,7 @@
                         * Nombre de jours où vous irez sur le lieu de travail
                         <button id="infobulle-contrat-travail-nombre-trajets"
                             aria-label="Infobulle exemple nombre de trajets" tabindex="0" class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                            placement="right" tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                             (click)="modalService.openModal($event, modalNombreTrajetTemplate, true)"></button>
                     </label>
                 </div>

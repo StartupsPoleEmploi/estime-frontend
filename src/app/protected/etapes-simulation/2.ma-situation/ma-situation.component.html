@@ -113,8 +113,7 @@
                     <label class="label headline-4-typo">
                         * Vous percevez
                         <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
-                            [ngClass]="{'popover-open': modalService.isOpen}" placement="right"
-                            tag-action="ouverture-infobulle-ma-situation-vous-percevez"
+                            placement="right" tag-action="ouverture-infobulle-ma-situation-vous-percevez"
                             aria-label="Infobulle ressources perçues"
                             (click)="modalService.openModal($event, modalSituationDemandeurTemplate)"></button>
                     </label>
@@ -198,6 +197,9 @@
                 <div class="row mb-2">
                     <label class="label headline-4-typo">
                         * Votre situation familiale
+                        <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon" placement="right"
+                            tag-action="ouverture-infobulle-ma-situation-conjoint" aria-label="Infobulle conjoint"
+                            (click)="modalService.openModal($event, modalSituationConjointTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -390,6 +392,14 @@
         </p>
         <p class='body-2-typo'>
             C’est pourquoi, il est important de les déclarer.
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalSituationConjointTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-2-typo'>
+            Votre conjoint est la personne avec laquelle vous êtes marié.e, pacsé.e ou en concubinage.
         </p>">
     </app-tooltip>
 </ng-template>
