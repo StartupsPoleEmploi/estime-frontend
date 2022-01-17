@@ -20,8 +20,8 @@
                         <input id="codePostal" name="codePostal" type="text"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                             maxlength="5" minlength="5" class="form-control" placeholder="ex : 75001"
-                            [(ngModel)]="informationsPersonnelles.codePostal" required #codePostal="ngModel"
-                            inputmode="numeric">
+                            [(ngModel)]="informationsPersonnelles.logement.coordonnees.codePostal" required
+                            #codePostal="ngModel" inputmode="numeric">
                     </div>
                 </div>
                 <span class="row error-input-message"

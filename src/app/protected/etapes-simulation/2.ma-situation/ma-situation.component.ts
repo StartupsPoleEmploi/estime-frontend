@@ -5,10 +5,10 @@ import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
+import { CommuneApiService } from '@app/core/services/communes-api/communes-api.service';
 import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
@@ -51,11 +51,11 @@ export class MaSituationComponent implements OnInit {
   constructor(
     private elementRef: ElementRef,
     public controleChampFormulaireService: ControleChampFormulaireService,
+    private communeApiService: CommuneApiService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    private estimeApiService: EstimeApiService,
     private informationsPersonnellesService: InformationsPersonnellesService,
     public modalService: ModalService,
     public screenService: ScreenService,
@@ -154,8 +154,7 @@ export class MaSituationComponent implements OnInit {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       if (this.isAllocationPeOuCafSelectionnee()) {
-        this.getCodeInseeFromCodePostal(this.informationsPersonnelles.codePostal);
-        this.setDeMayotte();
+        this.getCodeInseeFromCodePostal(this.informationsPersonnelles.logement.coordonnees.codePostal);
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
@@ -165,21 +164,15 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-
   private getCodeInseeFromCodePostal(codePostal: string): void {
-    const response = this.estimeApiService.getCommuneFromCodePostal(codePostal);
+    const response = this.communeApiService.getCommuneFromCodePostal(codePostal);
     response.subscribe(
       data => {
         let commune = data.pop();
-        this.informationsPersonnelles.logement.codeInsee = commune.code;
+        this.informationsPersonnelles.logement.coordonnees.codeInsee = commune.code;
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       }
     );
-  }
-
-  private setDeMayotte(): void {
-    this.informationsPersonnelles.logement.isDeMayotte = this.deConnecteInfosPersonnellesService.isDeMayotte();
-    this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
   }
 
   public unsetTitreSejourEnFranceValide(nationalite: string): void {

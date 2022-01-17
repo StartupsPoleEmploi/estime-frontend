@@ -57,10 +57,6 @@ export class EstimeApiService {
     return this.http.delete(`${this.pathDemandeurEmploiService}demandeurs_emploi/suivi_parcours`, options);
   }
 
-  public getCommuneFromCodePostal(codePostal: string): Observable<Commune[]> {
-    return this.http.get<Array<Commune>>(`${this.pathApiCommunes}${codePostal}&fields=code`, { observe: 'body', responseType: 'json' });
-  }
-
   private getHttpHeaders(withAuthorization: boolean) {
     const optionRequete = new OptionsHTTP();
     if (withAuthorization) {

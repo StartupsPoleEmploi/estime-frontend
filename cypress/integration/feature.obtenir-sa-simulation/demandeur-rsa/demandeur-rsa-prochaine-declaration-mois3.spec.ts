@@ -32,6 +32,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
 
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois3/test1-celibataire-locataire-travaille-0-mois.json' })
+
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
       const salaire = "1231";
@@ -85,7 +87,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -133,6 +135,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
     'enfant 2 ans, enfant 4 ans' +
     'domicile->travail 10kms / 20 trajets', () => {
 
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois3/test2-en-couple-locataire-travaille-0-mois.json' })
+
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "15";
       const salaire = "500";
@@ -149,7 +153,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantAPLDeclare = "490";
       const montantLoyer = "500";
       const montantCharges = "30";
-      const montantPAGE = "170";
+      const montantPAJE = "170";
       const montantMensuelRSA = "350";
       const prochaineDeclarationTrimestrielle = "3";
       const salaireConjoint = "380";
@@ -204,10 +208,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.saisirAllocationFamilialeFoyer(montantAF);
-      ressourcesActuellesPage.saisirPrestationAccueilJeuneEnfant(montantPAGE);
+      ressourcesActuellesPage.saisirPrestationAccueilJeuneEnfant(montantPAJE);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -216,6 +220,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesRessourcesFinancieresEnum.PAIE, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.RSA, montantRSA_M1_M2_M3);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATIONS_FAMILIALES, montantAF);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT, montantPAJE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, montantAPLDeclare);
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(1);
@@ -258,9 +263,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
   it('demandeur célibataire, non propriétaire, 0 enfant' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 380€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 380 juillet,  salaire 380 juin, salaire 0 mai' +
+    'RSA 380€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 380 juillet, salaire 380 juin, salaire 0 mai' +
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois3/test3-celibataire-locataire-travaille-2-mois-M0-M1.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "15";
@@ -320,7 +327,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -365,9 +372,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
   it('demandeur célibataire, non propriétaire, 0 enfant' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 380€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 380 juillet,  salaire 380 juin, salaire 0 mai' +
+    'RSA 500€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 0 M0, salaire 380 M-1, salaire 500 M-2' +
     'APL 310€' +
     'domicile->travail 10kms / 20 trajets', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois3/test4-celibataire-locataire-travaille-2-mois-M1-M2.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "15";
@@ -427,7 +436,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();
@@ -470,12 +479,13 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       headerSection.clickOnSeDeconnecter();
     });
 
-  it('demandeur célibataire, non propriétaire, 0 enfant' +
+  it('demandeur célibataire, propriétaire, 0 enfant' +
     'CDI 15h, salaire net 500€,' +
-    'RSA 380€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 380 juillet,  salaire 380 juin, salaire 0 mai' +
-    'APL 310€' +
+    'RSA 500€, déclaration trimetrielle en M3, travaillé au cours des 3 derniers mois avec salaire 380 juillet, salaire 380 juin, salaire 0 mai' +
     'domicile->travail 10kms / 20 trajets' +
     'proprietaire', () => {
+
+      cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-rsa/demandeur-rsa-prochaine-declaration-mois3/test5-celibataire-proprietaire-travaille-2-mois.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "15";
@@ -491,8 +501,8 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "3";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2_M3 = montantMensuelRSA;
-      const montantRSA_M4_M5_M6 = "177";
-      const montantPrimeActivite_M4_M5_M6 = "196";
+      const montantRSA_M4_M5_M6 = "123";
+      const montantPrimeActivite_M4_M5_M6 = "270";
 
       const homePage = new HomePage();
       homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserRsaIdentifiant, environment.peConnectUserMotDePasse);
@@ -527,7 +537,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerProprietaire();
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
-      ressourcesActuellesPage.clickOnObtenirMaSimulation(4000);
+      ressourcesActuellesPage.clickOnObtenirMaSimulation();
 
       const resultatMaSimulationPage = new ResultatMaSimulationPage();
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();

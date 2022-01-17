@@ -58,10 +58,7 @@ select {
   @media #{$small-device} {
     padding-left: 6rem !important;
     padding-right: 6rem !important;
-    padding-top: 3rem
-  }
-
-  @media #{$small-device} {
+    padding-top: 3rem;
     margin-left: 7%;
     margin-right: 7%;
   }
@@ -180,8 +177,8 @@ input:-webkit-autofill:focus {
   border: 0;
 
   @media #{$extra-small-device} {
-    padding-left: 2.0625rem;
-    padding-right: 2.0625rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   @media #{$small-device} {

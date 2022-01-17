@@ -376,11 +376,15 @@
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="8" class="form-control d-inline"
-                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" placeholder="Montant"
+                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
                         inputmode="decimal" #montantCharges="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
+            <span class="row error-input-message"
+                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.required">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+            </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
