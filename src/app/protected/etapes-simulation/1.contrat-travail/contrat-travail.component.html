@@ -204,6 +204,11 @@
                 <div class="row flex-column mb-2">
                     <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
                         * Distance à parcourir entre votre domicile et le lieu de travail
+                        <button id="infobulle-contrat-travail-distance-travail"
+                            aria-label="Infobulle calcul de distance domicile / travail" tabindex="0"
+                            class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_calcul_distance_domicile_travail"
+                            (click)="modalService.openModal($event, modalDistanceTravailTemplate, true)"></button>
                     </label>
                 </div>
                 <div class="row">
@@ -276,12 +281,29 @@
         <h4 class='headline-4-typo headline-4-typo-color'>Qu'est ce que le salaire brut et net ? </h5>
         <p class='body-2-typo'>
             Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
-            sociales et du prélévement à la source.
+            sociales et du prélèvement à la source.
         </p>
         <p class='body-2-typo'>
             En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes
             perçues avant déduction des cotisations sociales.
         </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDistanceTravailTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='healine-4-typo headline-4-typo-color'>
+            Calcul de distance domicile / travail :
+        </h4>
+        <p class='body-2-typo'>
+            Le kilométrage entre votre domicile et votre travail (ou le cas échéant le temps de trajet) est ainsi évalué :
+        </p>
+        <ul>
+            <li class='body-2-typo'>distance du code postal/ville du lieu de domicile du demandeur ;</li>
+            <li class='body-2-typo'>au code postal/ville du lieu de déroulement de l’action de reclassement</li>
+            <li class='body-2-typo'>dans les conditions normales de circulation,</li>
+            <li class='body-2-typo'>en sélectionnant le trajet le plus court via <a href='https://fr.mappy.com'>https://fr.mappy.com<a>.</li>
+        </ul>">
     </app-tooltip>
 </ng-template>
 
