@@ -133,8 +133,9 @@
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Montant brut de votre allocation journalière pour l'ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                        aria-label="Infobulle taux réduit degressivité"
+                        (click)="modalService.openModal($event, modalSituationDemandeurAllocationJournaliereTemplate)">
                     </button>
                 </label>
             </div>
@@ -603,6 +604,65 @@
 
 <ng-template #modalSituationDemandeurTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur la page 2 de votre dernier relevé de situation Pôle Emploi 👇
+        </p>
+        <div class='row mb-5'>
+            <img class='.code-ressource' src='./assets/images/img_tooltip-are.png'>
+        </div>
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Où trouver votre dernier relevé de situation ARE ?
+        </h4>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur Internet :
+        </h5>
+        <ol class='body-2-typo'>
+            <li>
+                Rendez-vous votre espace personnel Pôle Emploi, dans la rubrique <i>'Mes courriers reçus' </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
+            </li>
+            <li>
+                Dans la liste des courriers reçus vous trouverez vos notifications ARE
+            </li>
+            <li>
+                Choisissez le relevé de situation le plus récent et cliquez sur <i>'Télécharger'</i>
+            </li>
+        </ol>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur l'application mobile <i>'Mon Espace'</i> de Pôle Emploi :
+        </h5>
+        <ol class='body-2-typo'>
+            <li>
+                Ouvrez l'application et connectez-vous si nécessaire
+            </li>
+            <li>
+                Accédez à vos courriers depuis la barre de menu en bas de l'écran
+            </li>
+            <li>
+                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
+            </li>
+        </ol>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalSituationDemandeurAllocationJournaliereTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <div class='card card-body card-message-info mb-3'>
+            <div class='row'>
+                <div class='img-card-message-info col-auto'>
+                    <div>
+                        <img alt='' src='./assets/images/info.svg'>
+                    </div>
+                </div>
+                <div class='col'>
+                    <span class='body-2-typo'>
+                        Si vous êtes soumis à la dégressivité, c'est dans ce champ que vous pouvez renseigner votre montant brut d'allocation journalière réduite
+                    </span>
+                </div>
+            </div>
+        </div>
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
