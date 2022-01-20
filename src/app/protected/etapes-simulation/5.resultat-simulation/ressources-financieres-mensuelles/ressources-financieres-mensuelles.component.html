@@ -287,6 +287,21 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="(aidesService.getMessageAlerteAideMobilite(simulationSelected) && aideKeyValue.value.code == codesAidesEnum.AIDE_MOBILITE)"
+                        class="card card-body card-message-alerte-aide">
+                        <div class="row">
+                            <div class="img-card-message-alerte-aide col-auto">
+                                <div>
+                                    <img alt="" src="./assets/images/info.svg">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span>
+                                    {{aidesService.getMessageAlerteAideMobilite(simulationSelected)}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <div *ngIf="(aidesService.getMessageAlertePrimeActiviteRSA(simulationSelected) && aideKeyValue.value.code == codesAidesEnum.PRIME_ACTIVITE)"
                         class="card card-body card-message-alerte-aide">
                         <div class="row">

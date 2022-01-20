@@ -80,6 +80,10 @@ export class AidesService {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AGEPI)
   }
 
+  public getMessageAlerteAideMobilite(simulationSelected: SimulationMensuelle): string {
+    return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AIDE_MOBILITE)
+  }
+
   public getMessageAlerteASS(simulationSelected: SimulationMensuelle): string {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)
   }
