@@ -295,7 +295,8 @@ export class MaSituationComponent implements OnInit {
         || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA
         || this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite
         || this.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant
-        || this.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur);
+        || this.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur
+        || this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier);
   }
 
   public onClickCheckBoxConjointHasAAH(): void {
@@ -354,6 +355,14 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxConjointHasRevenusImmobilier(): void {
+    if (!this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier) {
+      this.deConnecteService.unsetConjointRevenusImmobilier();
+    } else {
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
   public onClickCheckBoxConjointIsSalarie(): void {
     if (!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
       this.deConnecteService.unsetConjointSalaire();
@@ -377,6 +386,7 @@ export class MaSituationComponent implements OnInit {
     this.deConnecteService.unsetConjointAides();
     this.deConnecteService.unsetConjointBeneficesMicroEntreprise();
     this.deConnecteService.unsetConjointChiffreAffairesIndependant();
+    this.deConnecteService.unsetConjointRevenusImmobilier();
   }
 
 

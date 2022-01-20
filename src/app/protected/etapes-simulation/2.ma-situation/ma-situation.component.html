@@ -313,7 +313,7 @@
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur"
                             btnCheckbox tabindex="0" #conjointIsMicroEntrepreneur="ngModel"
                             (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
-                            (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
                             <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
                         </button>
                         <button id="btn-conjoint-is-travailleur-independant" name="conjointIsTravailleurIndependant"
@@ -323,8 +323,18 @@
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant"
                             btnCheckbox tabindex="0" #conjointIsTravailleurIndependant="ngModel"
                             (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
-                            (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
+                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
                             <span class="body-2-typo">{{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
+                        </button>
+                        <button id="btn-conjoint-has-revenus-immobilier" name="conjointHasRevenusImmobilier"
+                            data-testid="btn-situation-conjoint-revenu-immobilier"
+                            aria-label="Votre conjoint(e) a des revenus immobiliers"
+                            class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
+                            [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier"
+                            btnCheckbox tabindex="0" #hasRevenusImmobilier="ngModel"
+                            (click)="onClickCheckBoxConjointHasRevenusImmobilier()"
+                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
+                            <span class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
                         </button>
                         <button #conjointHasAAH="ngModel" name="conjointHasAAH"
                             aria-label="Votre conjoint(e) perçoit l'AAH" class="radio-button-style-1"

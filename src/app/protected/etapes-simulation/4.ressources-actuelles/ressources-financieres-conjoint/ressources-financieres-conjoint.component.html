@@ -375,17 +375,69 @@
                 </span>
             </div>
         </div>
-        <div class="row row-button-valider">
-            <div class="col">
-                <button class="btn-style-perso-3 button-typo"
-                    aria-label="Valider ressources finançière de votre conjoint"
-                    data-testid="btn-ressources-conjoint-valider" tag-action="clic_bouton_valider_ressources_conjoint"
-                    type="submit">
-                    <div>
-                        <span>Valider</span>
-                    </div>
-                </button>
+        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
+            <div class="row mb-2">
+                <label class="label headline-4-typo" for="revenusImmobilierFoyer">
+                    * Revenus annuels de placement ou du patrimoine
+                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
+                        aria-label="Infobulle revenus immobilier"
+                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="conjointRevenusImmobilier" name="conjointRevenusImmobilier"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
+                        [(ngModel)]="conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois"
+                        [ngClass]="{'ng-invalid': this.conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)}"
+                        required inputmode="decimal" #conjointRevenusImmobilier="ngModel">
+                    <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <div class="row">
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+                <span class="error-input-message"
+                    *ngIf="this.conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
+            </div>
+            <div class="row row-button-valider">
+                <div class="col">
+                    <button class="btn-style-perso-3 button-typo"
+                        aria-label="Valider ressources finançière de votre conjoint"
+                        data-testid="btn-ressources-conjoint-valider"
+                        tag-action="clic_bouton_valider_ressources_conjoint" type="submit">
+                        <div>
+                            <span>Valider</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 </div>
+
+<ng-template #modalRevenusImmobiliersTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
+        </h4>
+        <p class='body-2-typo'> * revenus fonciers ou micro-fonciers
+            <br>
+            * revenus des capitaux (actions, obligations)
+            <br>
+            * bénéfices d'une rente viagère
+        </p>">
+    </app-tooltip>
+</ng-template>

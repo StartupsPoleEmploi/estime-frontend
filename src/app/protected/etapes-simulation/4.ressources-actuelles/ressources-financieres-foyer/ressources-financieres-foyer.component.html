@@ -567,44 +567,6 @@
                 </span>
             </div>
         </div>
-        <div class="form-group" *ngIf="deConnecteInfosPersonnellesService.hasRevenusImmobilier()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="revenusImmobilierFoyer">
-                    * Revenus annuels de placement ou du patrimoine
-                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
-                        aria-label="Infobulle revenus immobilier"
-                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="revenusImmobilierFoyer" name="revenusImmobilierFoyer"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant" [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)}"
-                        required inputmode="decimal" #revenusImmobilier="ngModel">
-                    <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                </span>
-                <span
-                    *ngIf="this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
         <div class="row row-button-valider">
             <div class="col">
                 <button id="btn-ressources-foyer-valider" aria-label="Valider ressources finançière de votre foyer"
@@ -618,17 +580,3 @@
         </div>
     </form>
 </div>
-
-<ng-template #modalRevenusImmobiliersTemplate>
-    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h4 class='headline-4-typo headline-4-typo-color'>
-            Retrouvez cette information sur le dernier avis d'imposition sur le revenu :
-        </h4>
-        <p class='body-2-typo'> * revenus fonciers ou micro-fonciers
-            <br>
-            * revenus des capitaux (actions, obligations)
-            <br>
-            * bénéfices d'une rente viagère
-        </p>">
-    </app-tooltip>
-</ng-template>

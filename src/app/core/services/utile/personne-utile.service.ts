@@ -80,21 +80,39 @@ export class PersonneUtileService {
   }
 
   public isRessourcesFinancieresValides(personne: Personne): boolean {
+    return this.isAidesValides(personne) && this.isRevenusValides(personne);
+  }
+
+  private isAidesValides(personne: Personne): boolean {
+    let isValide = true;
+    if (isValide && personne.beneficiaireAides.beneficiaireARE) {
+      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
+    }
+    if (isValide && personne.beneficiaireAides.beneficiaireASS) {
+      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
+    }
+    if (isValide && personne.beneficiaireAides.beneficiaireAAH) {
+      isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
+    }
+    if (isValide && personne.beneficiaireAides.beneficiairePensionInvalidite) {
+      isValide = personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
+    }
+    return isValide;
+  }
+
+  private isRevenusValides(personne: Personne): boolean {
     let isValide = true;
     if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
       isValide = personne.ressourcesFinancieres.salaire.montantNet > 0;
     }
-    if (personne.beneficiaireAides.beneficiaireARE) {
-      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
+    if (isValide && personne.informationsPersonnelles.microEntrepreneur) {
+      isValide = personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0;
     }
-    if (personne.beneficiaireAides.beneficiaireASS) {
-      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
+    if (isValide && personne.informationsPersonnelles.travailleurIndependant) {
+      isValide = personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0;
     }
-    if (personne.beneficiaireAides.beneficiaireAAH) {
-      isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
-    }
-    if (personne.beneficiaireAides.beneficiairePensionInvalidite) {
-      isValide = personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
+    if (isValide && personne.informationsPersonnelles.hasRevenusImmobilier) {
+      isValide = personne.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
     }
     return isValide;
   }

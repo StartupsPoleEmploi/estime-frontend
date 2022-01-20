@@ -8,6 +8,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ressources-financieres-conjoint',
@@ -32,6 +33,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
+    public modalService: ModalService,
     private personneUtileService: PersonneUtileService,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
   ) { }

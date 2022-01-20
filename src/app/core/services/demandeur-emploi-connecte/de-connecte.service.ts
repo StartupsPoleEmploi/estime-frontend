@@ -466,6 +466,14 @@ export class DeConnecteService {
     }
   }
 
+  public unsetConjointRevenusImmobilier(): void {
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier = false;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.revenusImmobilier3DerniersMois = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetConjointSalaire(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.salarie = false;
