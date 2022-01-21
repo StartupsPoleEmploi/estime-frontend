@@ -166,61 +166,6 @@
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span>
         </div>
-
-        <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="isConcerneDegressivite">
-                    * Êtes-vous concerné.e par la dégressivité de l'ARE ?
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
-                    </button>
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input id="isConcerneDegressiviteOui" name="isConcerneDegressiviteOui"
-                            aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
-                            data-testid="btn-is-concerne-degressivite-oui" type="radio" class="form-check-input"
-                            (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, true)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite"
-                            required [value]="true" #isConcerneDegressivite="ngModel">
-                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteOui">
-                            oui
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline ms-2">
-                        <input id="isConcerneDegressiviteNon" name="isConcerneDegressiviteNon"
-                            aria-label="Êtes-vous concerné.e par la dégressivité de l'ARE"
-                            data-testid="btn-is-concerne-degressivite-non" type="radio" class="form-check-input"
-                            (keyup)="handleKeyUpOnButtonConcerneDegressiviteAre($event, false)"
-                            [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite"
-                            required [value]="false" #isConcerneDegressivite="ngModel">
-                        <label class="form-check-label body-2-typo" for="isConcerneDegressiviteNon">
-                            non
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || isConcerneDegressivite.touched) && isConcerneDegressivite.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-        </div>
-        <div *ngIf="isAfficherMessageARE();">
-            <div class="alert alert-dark" role="alert">
-                <div class="row">
-                    <div class="col-1">
-                        <img alt="" src="./assets/images/info-blue-1.svg">
-                    </div>
-                    <div class="col-11">
-                        <span class="body-2-typo">A ce jour, le résultat de la simulation ne prend pas en compte la
-                            dégressivité de l’allocation de retour à l’emploi.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="form-group"
             *ngIf="deConnecteSituationFamilialeService.isCelibataireSansEnfant() && deConnecteBeneficiaireAidesService.isBeneficiaireRSA()">
             <div class="row mb-2">
