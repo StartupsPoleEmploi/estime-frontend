@@ -13,7 +13,7 @@ export class StatsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    window.location.href = "https://nextcloud.beta.pole-emploi.fr/s/3SaPze7xW837GNb";
+    window.location.href = "https://datastudio.google.com/reporting/f7fae1db-bfde-4c18-ab2e-cd1da8e9917a/page/8l8gC";
   }
 
 }
