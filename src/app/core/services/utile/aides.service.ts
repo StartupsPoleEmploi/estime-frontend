@@ -13,6 +13,8 @@ export class AidesService {
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM = 30;
   private static AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM_DOM = 10;
 
+  codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
+
   constructor(
     private dateUtileService: DateUtileService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService
@@ -86,6 +88,10 @@ export class AidesService {
 
   public getMessageAlerteASS(simulationSelected: SimulationMensuelle): string {
     return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)
+  }
+
+  public getMessageAlerteARE(simulationSelected: SimulationMensuelle): string {
+    return this.getMessageAlerteAide(simulationSelected, CodesAidesEnum.AIDE_RETOUR_EMPLOI)
   }
 
   public getMessageAlertePrimeActiviteRSA(simulationSelected: SimulationMensuelle): string {

@@ -217,6 +217,20 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="aidesService.getMessageAlerteARE(simulationSelected)" class="card card-body card-message-info">
+            <div class="row">
+                <div class="img-card-message-info col-auto">
+                    <div>
+                        <img alt="" src="./assets/images/info.svg">
+                    </div>
+                </div>
+                <div class="col">
+                    <span class="body-2-typo">
+                        {{aidesService.getMessageAlerteARE(simulationSelected)}}
+                    </span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div id="div-aides-obtenir" class="div-aides-container" *ngIf="aidesService.hasAidesObtenir(simulationSelected)">
