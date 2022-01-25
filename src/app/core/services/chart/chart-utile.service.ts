@@ -135,6 +135,10 @@ export class ChartUtileService {
             dataObject.datasets.get(CodesAidesEnum.ALLOCATIONS_FAMILIALES).data[index + 1] = aide.montant;
             break;
           }
+          case CodesAidesEnum.AIDE_RETOUR_EMPLOI: {
+            dataObject.datasets.get(CodesAidesEnum.AIDE_RETOUR_EMPLOI).data[index + 1] = aide.montant;
+            break;
+          }
           case CodesAidesEnum.COMPLEMENT_FAMILIAL: {
             dataObject.datasets.get(CodesAidesEnum.COMPLEMENT_FAMILIAL).data[index + 1] = aide.montant;
             break;
@@ -243,6 +247,15 @@ export class ChartUtileService {
       {
         label: LibellesAidesEnum.ALLOCATIONS_FAMILIALES.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.ALLOCATIONS_FAMILIALES,
+        data: [0, 0, 0, 0, 0, 0, 0],
+        barPercentage: ChartUtileService.BAR_PERCENTAGE
+      }
+    );
+
+    dataObject.datasets.set(CodesAidesEnum.AIDE_RETOUR_EMPLOI,
+      {
+        label: LibellesAidesEnum.AIDE_RETOUR_EMPLOI.padEnd(30, ' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.AIDE_RETOUR_EMPLOI,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
