@@ -3,12 +3,12 @@
     <alert type="danger" *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
-    <div class="title-container mx-auto">
-        <h1 class="h1-style-1 headline-1-typo">
-            {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
-        </h1>
-    </div>
     <div class="card card-body">
+        <div class="title-container">
+            <h1 class="h1-style-1 headline-1-typo">
+                {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
+            </h1>
+        </div>
         <div class="row">
             <div class="col-12">
                 <p class="body-1-typo">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <button id="btn-je-continue-avant-commencer" data-testid="btn-je-continue-avant-commencer" type="button"
-                    class="btn-style-perso-1 mt-4 d-flex justify-content-center" (click)="onClickButtonJeContinue()"
+                    class="btn-style-perso-1 d-flex justify-content-center" (click)="onClickButtonJeContinue()"
                     tag-navigation="clic_bouton_je_continue">
                     <div>
                         <span class="button-typo">Je continue</span>

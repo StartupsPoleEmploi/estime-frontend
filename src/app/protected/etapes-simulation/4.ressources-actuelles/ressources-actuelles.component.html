@@ -1,4 +1,4 @@
-<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours..."></app-page-loading>
+<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
 <div class="container-fluid form-container-fluid" role="form">
