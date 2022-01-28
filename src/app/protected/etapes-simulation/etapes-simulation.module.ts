@@ -31,6 +31,9 @@ import { InscriptionAtelierComponent } from './5.resultat-simulation/actions-sui
 import { MettreAJourProfilComponent } from './5.resultat-simulation/actions-suite/mettre-a-jour-profil/mettre-a-jour-profil.component';
 import { ActionsSuiteComponent } from './5.resultat-simulation/actions-suite/actions-suite.component';
 import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.module';
+import { MoisApresSimulationComponent } from './5.resultat-simulation/mois-apres-simulation/mois-apres-simulation.component';
+import { DetailMoisApresSimulationComponent } from './5.resultat-simulation/mois-apres-simulation/detail-mois-apres-simulation/detail-mois-apres-simulation.component';
+import { DetailAideApresSimulationComponent } from './5.resultat-simulation/mois-apres-simulation/detail-mois-apres-simulation/detail-aide-apres-simulation/detail-aide-apres-simulation.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.modul
     ConsultationOffresComponent,
     InscriptionAtelierComponent,
     MettreAJourProfilComponent,
-    ActionsSuiteComponent
+    ActionsSuiteComponent,
+    MoisApresSimulationComponent,
+    DetailMoisApresSimulationComponent,
+    DetailAideApresSimulationComponent
   ],
   imports: [
     AccordionModule.forRoot(),

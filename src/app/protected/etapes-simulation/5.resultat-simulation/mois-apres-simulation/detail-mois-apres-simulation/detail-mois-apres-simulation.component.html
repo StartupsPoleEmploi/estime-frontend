@@ -1,0 +1,167 @@
+<div id="details-mois-container">
+    <div *ngIf="aidesADemander.length != 0" id="aides-a-demander">
+        <div id="titre-aides-a-demander" class="row">
+            <div class="col-md-12 col-12 text-start">
+                <h4 class="headline-4-typo headline-3-typo-color text-start ps-3">Les aides que vous pouvez demander
+                </h4>
+            </div>
+        </div>
+        <div id="liste-aides-a-demander" class="row">
+            <div class="col-md-12 col-12">
+                <div class="card aide-a-demander-row"
+                    [class]="{'aide-avec-detail':isAideAvecDetail(aide), 'aide-selected': isAideSelected(aide)}"
+                    *ngFor="let aide of aidesADemander">
+                    <div class="row" (click)="onClickOnAide(aide)">
+                        <div [class]="isAideAvecDetail(aide) ? 'col-md-10 col-11':'col-md-12 col-12'">
+                            <div *ngIf="!screenService.isExtraSmallScreen()" class="row row-premiere-col"
+                                [class]="{'row-selected': isAideSelected(aide)}">
+                                <div class="col-md-4 col-8">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12 col-montant">
+                                            <span class="headline-4-typo color-blue-10-typo">
+                                                {{ aide.montant }} €
+                                            </span>
+                                            <span class="body-2-typo ms-2">{{ aide.nom }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <div class="demande-a-effectuer">
+                                                <span class="overline-typo">DEMANDE À EFFECTUER</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-4 col-icones">
+                                    <div class="row">
+                                        <div class="code-ressource me-1" [ngClass]="[aide.code.toLowerCase()]">
+                                            <div class="">
+                                                <span class="overline-typo">{{aide.code}}</span>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="aide.organisme" class="icone-organisme me-1"
+                                            [class]="aide.organisme.toLowerCase()">
+                                            <div class="">
+                                                <img alt=""
+                                                    [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="screenService.isExtraSmallScreen()" class="row row-premiere-col">
+                                <div class="col-12">
+                                    <div class="row mb-1">
+                                        <div class="col-12 div-vertically-centered">
+                                            <span class="headline-4-typo color-blue-10-typo me-2">
+                                                {{ aide.montant }} €
+                                            </span>
+                                            <div class="code-ressource me-1" [ngClass]="[aide.code.toLowerCase()]">
+                                                <div class="">
+                                                    <span class="overline-typo">{{aide.code}}</span>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="aide.organisme" class="icone-organisme me-1"
+                                                [class]="aide.organisme.toLowerCase()">
+                                                <div class="">
+                                                    <img alt=""
+                                                        [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <span class="body-2-typo">{{ aide.nom }}</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="demande-a-effectuer">
+                                            <span class="overline-typo">DEMANDE À EFFECTUER</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="isAideAvecDetail(aide)"
+                            class="col-md-2 col-1 div-vertically-centered justify-content-end">
+                            <span class="bouton-detail body-2-typo color-blue-2-typo"
+                                *ngIf="isDetailVisible(aide.code)">
+                                <span *ngIf="!screenService.isExtraSmallScreen()">Fermer le détail</span>
+                                <i alt class="ps-2 fas fa-chevron-up span-montant-mensuel"></i>
+                            </span>
+                            <span class="bouton-detail body-2-typo color-blue-2-typo"
+                                *ngIf="!isDetailVisible(aide.code)">
+                                <span *ngIf="!screenService.isExtraSmallScreen()">Voir le détail</span>
+                                <i alt class="ps-2 fas fa-chevron-down span-montant-mensuel"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <app-detail-aide-apres-simulation class="detail-aide-apres-simulation" *ngIf="isAideSelected(aide)"
+                        [aide]="aide">
+                    </app-detail-aide-apres-simulation>
+                    <app-message-info [contenu]="aide.messageAlerte"></app-message-info>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="ressourcesActuelles.length != 0" id="ressources-actuelles" class="mt-4">
+        <div id="titre-ressources-actuelles" class="row">
+            <div class="col-md-12 col-12 text-start">
+                <h4 class="headline-4-typo headline-3-typo-color text-start ps-3">Vos ressources et aides actuelles</h4>
+            </div>
+        </div>
+        <div id="liste-ressources-actuellles" class="row">
+            <div class="col-md-12 col-12">
+                <div class="card ressource-actuelle-row" *ngFor="let ressourceActuelle of ressourcesActuelles">
+                    <div *ngIf="!screenService.isExtraSmallScreen()" class="row row-premiere-col">
+                        <div class="col-md-12 div-vertically-centered">
+                            <span class=" headline-4-typo color-blue-10-typo">
+                                {{ ressourceActuelle.montant }} €
+                            </span>
+                            <span class="body-2-typo ms-1">&nbsp;{{ ressourceActuelle.nom }}</span>
+                            <div class="code-ressource ms-5 me-1" [ngClass]="[ressourceActuelle.code.toLowerCase()]">
+                                <div class="">
+                                    <span class="overline-typo">{{ressourceActuelle.code}}</span>
+                                </div>
+                            </div>
+                            <div *ngIf="ressourceActuelle.organisme" class="icone-organisme me-1"
+                                [class]="ressourceActuelle.organisme.toLowerCase()">
+                                <div class="">
+                                    <img alt=""
+                                        [src]="'./assets/images/icon-'+ressourceActuelle.organisme.toLowerCase()+'.png'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="screenService.isExtraSmallScreen()" class="row row-premiere-col">
+                        <div class="col-12">
+                            <div class="row mb-1">
+                                <div class="col-12 div-vertically-centered">
+                                    <span class="headline-4-typo color-blue-10-typo me-2">
+                                        {{ ressourceActuelle.montant }} €
+                                    </span>
+                                    <div class="code-ressource me-1" [ngClass]="[ressourceActuelle.code.toLowerCase()]">
+                                        <div class="">
+                                            <span class="overline-typo">{{ressourceActuelle.code}}</span>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="ressourceActuelle.organisme" class="icone-organisme me-1"
+                                        [class]="ressourceActuelle.organisme.toLowerCase()">
+                                        <div class="">
+                                            <img alt=""
+                                                [src]="'./assets/images/icon-'+ressourceActuelle.organisme.toLowerCase()+'.png'">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <span class="body-2-typo">{{ ressourceActuelle.nom }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <app-message-info *ngIf="ressourceActuelle.messageAlerte"
+                        [contenu]="ressourceActuelle.messageAlerte"></app-message-info>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

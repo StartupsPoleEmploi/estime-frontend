@@ -289,4 +289,8 @@ export class AidesService {
     return montant;
   }
 
+  public isAideAvecDetail(aide: Aide): boolean {
+    return aide.detail != null && aide.detail != "";
+  }
+
 }

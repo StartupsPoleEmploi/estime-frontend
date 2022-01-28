@@ -1,0 +1,49 @@
+<div id="mois-apres-simulation-container" class="card"
+    [class]="{'mois-selected':isSimulationMensuelleSelected(simulationActuelle)}"
+    (click)="onClickAfficherDetail(simulationActuelle)">
+    <div class="row">
+        <div class="col-md-6 col-10 align-items-start"
+            [class]="{'div-vertically-centered':(!screenService.isExtraSmallScreen() && isSimulationMensuelleSelected(simulationActuelle))}">
+            <div id="row_montant_et_date" class="row">
+                <h3 id="montant_ressources_avant_simulation" class="headline-3-typo color-blue-10-typo text-start">
+                    {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}} €
+                    <span class="body-2-typo" [class]="{'date-bold':screenService.isExtraSmallScreen()}">
+                        en {{getDateStringFormat(simulationActuelle)}}
+                    </span>
+                </h3>
+            </div>
+            <div *ngIf="(screenService.isExtraSmallScreen() && isNoSimulationMensuelleSelected()) || (!screenService.isExtraSmallScreen() && !isSimulationMensuelleSelected(simulationActuelle))"
+                id="row_icones_aides" class="row ms-1">
+                <div *ngFor="let aideOuRevenu of aidesEtRevenusMois; let i = index" attr.data-index="i"
+                    class="icone-col">
+                    <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
+                        class="code-ressource me-1" [class]="[aideOuRevenu.code.toLowerCase(), getOverflowClass(i)]">
+                        <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
+                            class="">
+                            <span class="overline-typo">{{aideOuRevenu.code}}</span>
+                        </div>
+                        <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
+                            class="">
+                            <span class="overline-typo">+{{+getAidesEtRevenusOverFlow()}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-2 div-vertically-centered justify-content-end">
+            <span class="bouton_detail body-2-typo color-blue-2-typo"
+                *ngIf="isSimulationMensuelleSelected(simulationActuelle)">
+                <span *ngIf="!screenService.isExtraSmallScreen()">Fermer le détail</span>
+                <i alt class="ps-2 fas fa-chevron-up span-montant-mensuel"></i>
+            </span>
+            <span class="bouton_detail body-2-typo color-blue-2-typo"
+                *ngIf="!isSimulationMensuelleSelected(simulationActuelle)">
+                <span *ngIf="!screenService.isExtraSmallScreen()">Voir le détail</span>
+                <i alt class="ps-2 fas fa-chevron-down span-montant-mensuel"></i>
+            </span>
+        </div>
+    </div>
+</div>
+<app-detail-mois-apres-simulation *ngIf="isSimulationMensuelleSelected(simulationActuelle)" [aides]="aideMois"
+    [revenus]="revenusMois">
+</app-detail-mois-apres-simulation>

@@ -225,7 +225,7 @@
       border-radius: 0.5rem;
       margin-left: 0;
       margin-right: 0;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
       padding-left: 0rem;
       padding-right: 0rem;
       width: 100%;
@@ -351,5 +351,28 @@
       #resultat_simulation_bouton_refaire_simulation {
         width: 15.625rem !important;
       }
+    }
+  }
+
+  #card_ressources_avant_simulation {
+    div {
+      padding-left: 2rem !important;
+    }
+
+    @media #{$extra-small-device} {
+      width: 100vw !important;
+      margin-left: -1rem !important;
+      margin-right: -1rem !important;
+    }
+  }
+
+  .titre-apres-reprise-emploi {
+    padding-left: 2rem !important;
+
+
+    @media #{$extra-small-device} {
+      width: 100vw !important;
+      margin-left: -1rem !important;
+      margin-right: -1rem !important;
     }
   }

@@ -17,7 +17,7 @@ import { DateInputsComponent } from './components/date-inputs/date-inputs.compon
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/text-with-euro-symbol.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
-
+import { MessageInfoComponent } from './components/message-info/message-info.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,8 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
     SigninRedirectCallbackComponent,
     DateInputsComponent,
     TextWithEuroSymbolComponent,
-    TooltipComponent
+    TooltipComponent,
+    MessageInfoComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -54,7 +55,8 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
     PageLoadingComponent,
     DateInputsComponent,
     TextWithEuroSymbolComponent,
-    TooltipComponent
+    TooltipComponent,
+    MessageInfoComponent
   ]
 })
 export class CommunModule { }

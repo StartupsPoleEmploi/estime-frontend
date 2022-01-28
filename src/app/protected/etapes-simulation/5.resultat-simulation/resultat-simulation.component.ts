@@ -54,6 +54,10 @@ export class ResultatSimulationComponent implements OnInit {
     this.nombreMoisSimules = this.simulationAides.simulationsMensuelles.length;
   }
 
+  public simulationSelection(simulationSelected: SimulationMensuelle) {
+    this.simulationSelected = simulationSelected;
+  }
+
   public onClickButtonImprimerMaSimulation(): void {
     this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulationAides);
   }

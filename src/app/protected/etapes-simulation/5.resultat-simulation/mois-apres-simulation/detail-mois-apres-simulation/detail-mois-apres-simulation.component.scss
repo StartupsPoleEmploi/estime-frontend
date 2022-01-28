@@ -1,0 +1,153 @@
+@import "../../../../../../assets/scss/variables";
+
+#details-mois-container {
+  margin-bottom: 1rem;
+
+  .card {
+    border: 0;
+    border-radius: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+
+    @media #{$extra-small-device} {
+      width: 100vw !important;
+      margin-left: -1rem !important;
+    }
+
+    .row-premiere-col {
+      line-height: 1.5rem !important;
+
+      .col-montant {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .bouton-detail {
+      cursor: pointer;
+    }
+
+    .demande-a-effectuer {
+      margin-top: 0.5rem;
+      background-color: $color-grey-1;
+      border-radius: 0.3125rem;
+      text-align: center;
+
+      width: fit-content;
+
+      span {
+        color: $color-blue-2;
+        padding: 0.75rem;
+      }
+    }
+
+
+  }
+
+  .ressource-actuelle-row,
+  .aide-a-demander-row {
+    border-radius: unset !important;
+    border-bottom: 0.0125rem solid $color-grey-1;
+    margin: 0rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    @media #{$extra-small-device} {
+      height: unset !important;
+
+    }
+
+    &.aide-avec-detail {
+      cursor: pointer;
+    }
+
+    &:last-child {
+      border-bottom: unset !important;
+    }
+
+    .col-principale {
+
+      display: flex;
+      align-items: center;
+      height: 4.5rem;
+    }
+  }
+
+  .col-icones {
+
+    display: flex;
+    align-items: center;
+
+  }
+
+  .icone-organisme {
+
+    &.pe {
+      background-color: $color-white-1;
+    }
+
+    &.caf {
+      background-color: #106BB0;
+    }
+
+    border-radius: 0.5rem;
+    height: 2.5rem !important;
+    width: 2.625rem !important;
+    text-align: center;
+
+    div {
+      align-items: center;
+      display: -webkit-box;
+      /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex;
+      /* NEW, Spec - Firefox, Chrome, Opera */
+      height: 100%;
+      justify-content: center;
+
+      img {
+        height: 2rem;
+        width: 2.125rem;
+      }
+
+    }
+  }
+
+  .div-vertically-centered {
+    align-items: center;
+    display: flex;
+  }
+
+  .aide-selected {
+    background-color: $color-blue-5;
+    border-radius: 0.5rem 0.5rem 0 0;
+
+    .row-premiere-col {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.detail-aide-apres-simulation {
+  background-color: $color-white-1;
+  margin-left: -2rem;
+  margin-right: -2rem;
+  margin-bottom: -1.5rem;
+}
+
+#titre-aides-a-demander {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#titre-ressources-actuelles {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
