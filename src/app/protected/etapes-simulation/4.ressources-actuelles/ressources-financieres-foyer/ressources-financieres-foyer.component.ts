@@ -270,8 +270,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public isConcerneParAideLogement(): boolean {
     return this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
       || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt
+      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble;
   }
 
   public handleKeyUpOnButtonStatutOccupationLogement(event: any, statutOccupationLogementPersonne: string): void {
@@ -302,8 +301,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       }
     }
   }
-
-
 
   public onClickCheckBoxIsCrous(event: any): void {
     event.preventDefault();
