@@ -384,7 +384,7 @@ export class DeConnecteRessourcesFinancieresService {
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
 
-      if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
+      if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
         if (informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
           isValide = true;
         }
