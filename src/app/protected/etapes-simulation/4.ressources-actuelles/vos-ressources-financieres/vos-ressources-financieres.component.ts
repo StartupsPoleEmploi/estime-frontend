@@ -19,7 +19,6 @@ import { SituationFamilialeUtileService } from '@app/core/services/utile/situati
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { ModalService } from '@app/core/services/utile/modal.service';
-import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 
 @Component({
   selector: 'app-vos-ressources-financieres',

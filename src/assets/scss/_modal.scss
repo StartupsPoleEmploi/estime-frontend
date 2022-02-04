@@ -79,6 +79,7 @@
   height: unset !important;
 
   .modal-content {
+    min-height: 100vh;
     border-right: none;
     border-top: none;
     border-bottom: none;
