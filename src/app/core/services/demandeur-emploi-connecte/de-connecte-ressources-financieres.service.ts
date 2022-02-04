@@ -293,7 +293,7 @@ export class DeConnecteRessourcesFinancieresService {
       isValide = this.isDonneesARESaisiesValides(ressourcesFinancieres);
     }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()) {
-      isValide = ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
+      isValide = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite) > 0;
     }
     return isValide;
   }
@@ -342,7 +342,10 @@ export class DeConnecteRessourcesFinancieresService {
       isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
     }
     if (isValide) {
-      isValide = this.isDonneesLogementValides(informationsPersonnelles) && this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
+      isValide = this.isDonneesLogementValides(informationsPersonnelles);
+    }
+    if (isValide) {
+      isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
     }
     return isValide;
   }
@@ -356,7 +359,6 @@ export class DeConnecteRessourcesFinancieresService {
         || informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
         || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
-
       if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
         if (informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
           isValide = true;
@@ -409,8 +411,8 @@ export class DeConnecteRessourcesFinancieresService {
 
 
   private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
-
+    return ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit
+      && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
       && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
   }
 
@@ -425,7 +427,9 @@ export class DeConnecteRessourcesFinancieresService {
 
   //is donnees ARE SAISIE VALIDE comprend tout les champs
   private isDonneesARESaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
+    return ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > 0 &&
+      ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > 0 &&
+      ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
   }
 
   private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {

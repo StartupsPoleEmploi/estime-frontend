@@ -108,8 +108,7 @@ export class RessourcesFinancieresUtileService {
       this.replaceCommaByDotMontantsAidesCAF(ressourcesFinancieres);
     }
     if (ressourcesFinancieres.aidesCPAM) {
-      ressourcesFinancieres.aidesCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite);
-      ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
+      this.replaceCommaByDotMontantsAidesCPAM(ressourcesFinancieres);
     }
     if (ressourcesFinancieres.salaire) {
       ressourcesFinancieres.salaire.montantNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.salaire.montantNet);
@@ -152,8 +151,6 @@ export class RessourcesFinancieresUtileService {
     }
     return ressourcesFinancieres;
   }
-
-
 
   public creerSalairesAvantPeriodeSimulationPersonne(personne: Personne): PeriodeTravailleeAvantSimulation {
     let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
@@ -276,6 +273,13 @@ export class RessourcesFinancieresUtileService {
     }
   }
 
+  private replaceCommaByDotMontantsAidesCPAM(ressourcesFinancieres: RessourcesFinancieres): void {
+    if (ressourcesFinancieres.aidesCPAM) {
+      ressourcesFinancieres.aidesCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite);
+      ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
+    }
+  }
+
   private replaceCommaByDotMontantsAidesPoleEmploi(ressourcesFinancieres: RessourcesFinancieres): void {
     if (ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
       ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationJournaliereNet);
@@ -292,7 +296,7 @@ export class RessourcesFinancieresUtileService {
    * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
    * @param ressourcesFinancieres
    */
-   public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
     let isChampsSalairesValides = true;
     if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
       if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
