@@ -7,7 +7,7 @@ stages:
     - dynamic-application-security-testing
 
 variables:
-    LAUNCH_CYPRESS_TESTS: "false"
+    LAUNCH_CYPRESS_TESTS: "true"
 
 cache: &global_cache
   key: ${$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG}
