@@ -238,6 +238,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire) {
       this.unsetStatutOccupationLogement();
+      this.unsetInformationsLogement();
       this.setIsProprietaire();
     }
   }
@@ -246,6 +247,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt) {
       this.unsetStatutOccupationLogement();
+      this.unsetInformationsLogement();
       this.setIsProprietaireAvecEmprunt();
     }
   }
@@ -254,6 +256,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     event.preventDefault();
     if (this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
       this.unsetStatutOccupationLogement();
+      this.unsetInformationsLogement();
       this.setIsLogeGratuitement();
     }
   }
@@ -403,5 +406,10 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.informationsPersonnelles.logement.isConventionne = false;
     this.informationsPersonnelles.logement.isChambre = false;
     this.informationsPersonnelles.logement.isColloc = false;
+  }
+
+  private unsetInformationsLogement(): void {
+    this.informationsPersonnelles.logement.montantLoyer = 0;
+    this.informationsPersonnelles.logement.montantCharges = 0;
   }
 }

@@ -351,7 +351,7 @@
                 </div>
             </div>
             <span
-                *ngIf="isRessourcesFinancieresFoyerFormSubmitted && this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0"
+                *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantLoyer.touched) && this.informationsPersonnelles.logement.montantLoyer == 0"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
@@ -569,7 +569,7 @@
         </div>
         <div class="row row-button-valider">
             <div class="col">
-                <button id="btn-ressources-foyer-valider" aria-label="Valider ressources finançière de votre foyer"
+                <button id="btn-ressources-foyer-valider" aria-label="Valider ressources financière de votre foyer"
                     class="btn-style-perso-3 button-typo" type="submit" data-testid="btn-ressources-foyer-valider"
                     tag-action="clic_bouton_valider_ressources_foyer">
                     <div>
