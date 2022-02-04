@@ -9,16 +9,19 @@ export class ModalService {
 
     constructor(
         private modalService: BsModalService
-    ) { }
+    ) {
+        this.modalService.onHidden.subscribe(() => {
+            this.isOpen = false;
+        });
+        this.modalService.onShown.subscribe(() => {
+            this.isOpen = true;
+        });
+    }
 
     openModal(event: Event, template: TemplateRef<any>, isFullHeight: boolean = false) {
         event.preventDefault();
         const modalClasses = isFullHeight ? 'gray modal-lg full-height-modal' : 'gray modal-lg';
         this.modalRef = this.modalService.show(template,
             Object.assign({}, { class: modalClasses }));
-        this.modalRef.onHide.subscribe((reason: string | any) => {
-            this.isOpen = false;
-        });
-        this.isOpen = true;
     }
 }

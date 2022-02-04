@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DateDecomposee } from "@models/date-decomposee";
 import * as moment from 'moment';
 
@@ -96,6 +97,11 @@ export class DateUtileService {
     const month = dateJour.getMonth();
     const year = dateJour.getFullYear();
     return this.getNombreJoursMois(month, year);
+  }
+
+  public getLibelleDateActuelle(): string {
+    const dateJour = new Date();
+    return this.getLibelleDateFromDate(dateJour);
   }
 
   /**
@@ -209,6 +215,19 @@ export class DateUtileService {
       parseInt(dateStringArray[0]),
       parseInt(dateStringArray[1]) - 1,
       parseInt(dateStringArray[2]));
+  }
+
+
+  public getDateStringFormatSimulationMensuelle(simulationMensuelle: SimulationMensuelle, isTabletScreen: boolean): string {
+    let dateStringFormat = null;
+    const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
+    if (isTabletScreen) {
+      dateStringFormat = this.getLibelleDateStringFormatCourt(dateSimulation);
+    } else {
+      dateStringFormat = this.getLibelleDateStringFormat(dateSimulation);
+
+    }
+    return dateStringFormat;
   }
 
   public ajouterMoisToDate(dateOrigine: Date, nbrMois: number): Date {

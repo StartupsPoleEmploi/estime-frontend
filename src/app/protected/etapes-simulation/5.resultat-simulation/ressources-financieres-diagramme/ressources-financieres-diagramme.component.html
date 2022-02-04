@@ -5,22 +5,3 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div *ngIf="aidesService.hasAideLogement(simulationAides)" class="card card-body card-message-info">
-                <div class="row">
-                    <div class="img-card-message-info col-auto">
-                        <div>
-                            <img alt="" src="./assets/images/info.svg">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <span [innerHtml]="aidesService.getMessageAlerteAidesLogement()">
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

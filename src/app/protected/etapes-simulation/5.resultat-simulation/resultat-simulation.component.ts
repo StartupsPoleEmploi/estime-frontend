@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -10,7 +10,7 @@ import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
-import { CodesAidesEnum } from "@enumerations/codes-aides.enum";
+import { SideModalService } from '@app/core/services/utile/side-modal.service';
 import { Aide } from '@models/aide';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { SimulationAides } from '@models/simulation-aides';
@@ -33,6 +33,9 @@ export class ResultatSimulationComponent implements OnInit {
   afficherDetails: boolean;
   nombreMoisSimules: number;
 
+  @ViewChild('modalDetailAideApresSimulation') modalDetailAideApresSimulation;
+  @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
+
   constructor(
     private aidesService: AidesService,
     private dateUtileService: DateUtileService,
@@ -42,6 +45,7 @@ export class ResultatSimulationComponent implements OnInit {
     public modalService: ModalService,
     private router: Router,
     public screenService: ScreenService,
+    public sideModalService: SideModalService,
     private simulationPdfMakerService: SimulationPdfMakerService
   ) {
   }
@@ -54,16 +58,18 @@ export class ResultatSimulationComponent implements OnInit {
     this.nombreMoisSimules = this.simulationAides.simulationsMensuelles.length;
   }
 
-  public simulationSelection(simulationSelected: SimulationMensuelle) {
-    this.simulationSelected = simulationSelected;
+  public simulationSelection(simulationMensuelle: SimulationMensuelle) {
+    this.sideModalService.openSideModalMois(this.modalDetailMoisApresSimulation)
+    this.simulationSelected = simulationMensuelle;
+  }
+
+  public aideSelection(aide: Aide) {
+    this.sideModalService.openSideModalAide(this.modalDetailAideApresSimulation);
+    this.aideSelected = aide;
   }
 
   public onClickButtonImprimerMaSimulation(): void {
     this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulationAides);
-  }
-
-  public onClickButtonSimulationMensuelle(simulationMensuel: SimulationMensuelle): void {
-    this.traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel);
   }
 
   public onClickOnglet(afficherDetails: boolean): void {
@@ -118,57 +124,21 @@ export class ResultatSimulationComponent implements OnInit {
     this.simulationAides = this.deConnecteSimulationAidesService.getSimulationAides();
   }
 
-
-  private traiterOnClickButtonSimulationMensuelleForSmartphone(simulationMensuel: SimulationMensuelle): void {
-    //si click sur la même simulation, on unset l'attribut simulationSelected pour ne plus afficher le détail
-    // sinon on set l'attribut simulationSelected avec celle sélectionnée
-    if (this.isSimulationMensuelleSelected(simulationMensuel)) {
-      this.simulationSelected = null;
-    } else {
-      this.simulationSelected = simulationMensuel;
-      this.aideSelected = null;
-    }
-  }
-
-  private selectAideAfficherDetail(): void {
-    const isAideActuelleSelected = this.selectAideActuelle();
-    if (!isAideActuelleSelected) {
-      this.selectFirstAidePourraObtenir();
-    }
-  }
-
-  private selectAideActuelle(): boolean {
-    let isAideActuelleSelected = false;
-    const aideAAH = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
-    if (aideAAH) {
-      this.aideSelected = aideAAH;
-      isAideActuelleSelected = true;
-    } else {
-      const aideASS = this.aidesService.getAideByCodeFromSimulationMensuelle(this.simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
-      if (aideASS) {
-        this.aideSelected = aideASS;
-        isAideActuelleSelected = true;
-      }
-    }
-    return isAideActuelleSelected;
-  }
-
-  private selectFirstAidePourraObtenir(): void {
-    if (this.aidesService.hasAidesObtenir(this.simulationSelected)) {
-      const aides = Object.values(this.simulationSelected.mesAides);
-      aides.forEach((aide) => {
-        if (this.aidesService.isAideDemandeurPourraObtenir(aide)) {
-          this.aideSelected = aide;
-        }
-      });
-    } else {
-      this.aideSelected = null;
-    }
-  }
-
   public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {
     if (event.keyCode === 13) {
-      this.onClickButtonSimulationMensuelle(simulationMensuelle);
+      this.simulationSelection(simulationMensuelle);
+    }
+  }
+
+  public handleKeyUpOnTelechargerSimulation(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonImprimerMaSimulation();
+    }
+  }
+
+  public handleKeyUpOnRefaireSimulation(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonRefaireSimulation();
     }
   }
 }

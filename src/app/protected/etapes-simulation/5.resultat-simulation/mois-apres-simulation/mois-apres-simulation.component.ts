@@ -20,7 +20,6 @@ export class MoisApresSimulationComponent implements OnInit {
   @Input() simulationActuelle: SimulationMensuelle;
   @Output() simulationSelection = new EventEmitter<SimulationMensuelle>();
 
-
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
 
   aideMois: Aide[];
@@ -36,8 +35,9 @@ export class MoisApresSimulationComponent implements OnInit {
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
-    public screenService: ScreenService,
-  ) { }
+    public screenService: ScreenService
+  ) {
+  }
 
   ngOnInit(
   ): void {
@@ -45,27 +45,11 @@ export class MoisApresSimulationComponent implements OnInit {
     this.aideMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
     this.revenusMois = this.deConnecteSimulationAidesService.getRevenusApresSimulation(this.demandeurEmploiConnecte);
     this.aidesEtRevenusMois = this.aideMois.concat(this.revenusMois);
+
   }
 
   public onClickAfficherDetail(simulationActuelle: SimulationMensuelle): void {
-    let simulationSelected = null;
-    if (!this.isSimulationMensuelleSelected(simulationActuelle)) {
-      simulationSelected = simulationActuelle;
-    }
-    this.simulationSelection.emit(simulationSelected);
-  }
-
-
-  public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {
-    let dateStringFormat = null;
-    const dateSimulation = simulationMensuelle.datePremierJourMoisSimule;
-    if (this.screenService.isTabletScreen()) {
-      dateStringFormat = this.dateUtileService.getLibelleDateStringFormatCourt(dateSimulation);
-    } else {
-      dateStringFormat = this.dateUtileService.getLibelleDateStringFormat(dateSimulation);
-
-    }
-    return dateStringFormat;
+    this.simulationSelection.emit(simulationActuelle);
   }
 
   public getAidesMois(simulationMensuelle: SimulationMensuelle) {

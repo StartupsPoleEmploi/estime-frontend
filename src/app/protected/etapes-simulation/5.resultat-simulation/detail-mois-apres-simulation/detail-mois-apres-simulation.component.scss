@@ -1,7 +1,41 @@
-@import "../../../../../../assets/scss/variables";
+@import "../../../../../assets/scss/variables";
 
 #details-mois-container {
+  background-color: $color-white-2;
   margin-bottom: 1rem;
+
+  .div_detail_mois_with_padding {
+    padding: 0rem 1.5rem;
+
+    @media #{$extra-small-device} {
+      padding: 0rem 1rem;
+    }
+  }
+
+  .div_bouton_retour_detail_mois {
+    height: 5.5rem;
+    background-color: $color-white-1;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    @media #{$extra-small-device} {
+      height: 4rem;
+    }
+
+    .bouton_retour {
+      cursor: pointer;
+    }
+
+    span {
+      font-weight: bold !important;
+    }
+  }
+
+  .div_mois_montant_mois_detail_mois {
+    margin-top: 1.5rem;
+  }
 
   .card {
     border: 0;
@@ -9,14 +43,9 @@
     margin-left: 0;
     margin-right: 0;
     padding: 0.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     width: 100%;
-
-    @media #{$extra-small-device} {
-      width: 100vw !important;
-      margin-left: -1rem !important;
-    }
 
     .row-premiere-col {
       line-height: 1.5rem !important;
@@ -58,7 +87,6 @@
 
     @media #{$extra-small-device} {
       height: unset !important;
-
     }
 
     &.aide-avec-detail {
@@ -135,12 +163,6 @@
   }
 }
 
-.detail-aide-apres-simulation {
-  background-color: $color-white-1;
-  margin-left: -2rem;
-  margin-right: -2rem;
-  margin-bottom: -1.5rem;
-}
 
 #titre-aides-a-demander {
   margin-top: 1rem;
@@ -150,4 +172,12 @@
 #titre-ressources-actuelles {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.demande-a-effectuer {
+  margin-left: 0.5rem;
+  padding: 0.5rem;
+  background-color: $color-red-7 !important;
+  border-radius: 0.3125rem;
+  color: $color-red-4;
 }
