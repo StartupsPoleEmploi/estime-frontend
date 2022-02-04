@@ -187,6 +187,33 @@ export class DeConnecteRessourcesFinancieresService {
     return montant;
   }
 
+  public getFuturSalaireNet(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.futurTravail && demandeurEmploiConnecte.futurTravail.salaire && demandeurEmploiConnecte.futurTravail.salaire.montantNet > 0) {
+      montant += demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    }
+    return montant;
+  }
+
+  public getPensionInvalidite(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite;
+    }
+    return montant;
+  }
+
+  public getAllocationSupplementaireInvalidite(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite > 0) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite;
+    }
+    return montant;
+  }
+
   public getRevenusImmobilierSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();

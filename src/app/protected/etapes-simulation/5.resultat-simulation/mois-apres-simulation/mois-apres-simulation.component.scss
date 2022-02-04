@@ -1,0 +1,29 @@
+@import "../../../../../assets/scss/variables";
+
+.mois-apres-simulation-container {
+  cursor: pointer;
+
+  .div-vertically-centered {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.date-bold {
+  font-weight: 700 !important;
+}
+
+.icone-col {
+  width: unset;
+  padding: unset;
+}
+
+.overflow {
+  background-color: $color-white-1;
+  border: 1px solid $color-grey-1;
+}
+
+.vertical-separator {
+  height: 100%;
+  border-left: 1px solid $color-grey-1;
+}

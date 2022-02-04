@@ -70,3 +70,37 @@
     }
   }
 }
+
+.side-modal {
+  margin: unset !important;
+  margin-left: auto !important;
+  width: 37.5% !important;
+  overflow-y: auto !important;
+  height: unset !important;
+
+  .modal-content {
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+  }
+
+  @media #{$extra-small-device} {
+    width: 100% !important;
+  }
+}
+
+.fade {
+  &:not(.modal-backdrop) {
+    outline: 0;
+    transition: transform 0.2s ease-in-out;
+    -webkit-transition: transform 0.2s ease-in-out;
+    transform: translateX(100%);
+  }
+
+}
+
+.fade.show {
+  &:not(.modal-backdrop) {
+    transform: none;
+  }
+}

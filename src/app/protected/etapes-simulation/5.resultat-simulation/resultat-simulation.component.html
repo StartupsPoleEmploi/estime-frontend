@@ -27,6 +27,7 @@
         <div class="col-12 col-md-6 my-auto">
             <span id="btn-telecharger-simulation" class="btn-telecharger-ou-refaire"
                 data-testid="btn-telecharger-simulation" tabindex="0" (click)="onClickButtonImprimerMaSimulation()"
+                (keyup)="handleKeyUpOnTelechargerSimulation($event)"
                 tag-download="clic_bouton_telecharger_ma_simulation">
                 <div>
                     <img alt="" src="./assets/images/download_2.svg">
@@ -37,7 +38,8 @@
         <div *ngIf="this.screenService.isExtraSmallScreen()" style="margin-bottom: 2vh;"></div>
         <div class="col-12 col-md-6 my-auto">
             <span id="btn-refaire-simulation" class="btn-telecharger-ou-refaire" data-testid="btn-refaire-simulation"
-                tabindex="0" (click)="onClickButtonRefaireSimulation()" tag-navigation="clic_bouton_retour">
+                tabindex="0" (click)="onClickButtonRefaireSimulation()" (keyup)="handleKeyUpOnRefaireSimulation($event)"
+                tag-navigation="clic_bouton_retour">
                 <div>
                     <img alt="" src="./assets/images/refaire_simulation.svg">
                     <span id="refaire_simulation_text" class="button-typo">Refaire une simulation</span>
@@ -66,54 +68,31 @@
         </div>
     </div>
     <div *ngIf="afficherDetails" class="mt-5">
-        <div class="row mb-3"
-            [ngClass]="{'card-simulations-mobile': screenService.isExtraSmallScreen(), 'card-simulations-desktop': !screenService.isExtraSmallScreen()}">
-            <div class="col-12 col-md-12 card first-card"
-                *ngFor="let simulationMensuel of simulationAides.simulationsMensuelles; let index = index;"
-                [ngClass]="{isLastCard: isLastSimulationMensuelle(index)}">
-                <div id="btn-simulation-mois-{{index}}" class="card second-card"
-                    attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
-                    role="button">
-                    <div [ngClass]="{active: isSimulationMensuelleSelected(simulationMensuel), hovered: index == hoveredButtonSimulationMensuelle}"
-                        class="card-body" data-testid="card-simulation-mensuel" tabindex="0"
-                        (mouseover)="onMouseOverButtonSimulationMensuelle(index)"
-                        (mouseleave)="onMouseLeaveButtonSimulationMensuelle()"
-                        (click)="onClickButtonSimulationMensuelle(simulationMensuel)"
-                        (keyup)="handleKeyUpOnSimulationMensuelle($event, simulationMensuel)" role="button"
-                        attr.aria-label="Voir ressources fincancières de {{getDateStringFormat(simulationMensuel)}}"
-                        tag-action="clic_bouton_detail_ressources_du_mois">
-                        <div class="row">
-                            <div [ngClass]="{'mt-auto mb-auto p-0': screenService.isExtraSmallScreen(), 'ps-5': !screenService.isExtraSmallScreen()}"
-                                class="col-6 col-md-3 text-left">
-                                <span class="span-mois-annee headline-4-typo">
-                                    {{getDateStringFormat(simulationMensuel)}}
-                                </span>
-                            </div>
-                            <div *ngIf="!screenService.isExtraSmallScreen()" class=" col-md-6"></div>
-                            <div class="col-4 col-md-2"
-                                [ngClass]="{'p-0 mt-auto mb-auto': screenService.isExtraSmallScreen()}">
-                                <span class="span-montant-mensuel headline-4-typo float-right">
-                                    {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuel)}}
-                                    €
-                                </span>
-                            </div>
-                            <div class="col-1" [ngClass]="{'': screenService.isExtraSmallScreen()}">
-                                <span *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-up span-montant-mensuel"></i>
-                                </span>
-                                <span *ngIf="!isSimulationMensuelleSelected(simulationMensuel)">
-                                    <i alt class="fas fa-chevron-down span-montant-mensuel"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer"
-                        [ngClass]="{'card-footer-mobile': screenService.isExtraSmallScreen(), 'card-footer-desktop': !screenService.isExtraSmallScreen()}"
-                        *ngIf="isSimulationMensuelleSelected(simulationMensuel)">
-                        <app-ressources-financieres-mensuelles [simulationSelected]="simulationSelected"
-                            [aideSelected]="aideSelected" (newAideSelected)="changeAideSelected($event)">
-                        </app-ressources-financieres-mensuelles>
-                    </div>
+        <div id="title_avant_simulation">
+            <h3 class="headline-3-typo color-blue-2-typo text-start">Avant reprise d'emploi</h3>
+        </div>
+        <div id="card_ressources_avant_simulation" class="card row mb-3">
+            <div class="col-12 col-md-12">
+                <h4 id="mois_ressources_avant_simulation" class="headline-4-typo color-blue-2-typo text-start">
+                    {{ dateUtileService.getLibelleDateActuelle() }}
+                </h4>
+                <h5 id="montant_ressources_avant_simulation" class="headline-5-typo color-blue-10-typo text-start">
+                    {{simulationAides.montantRessourcesFinancieresMoisAvantSimulation}} € net
+                </h5>
+            </div>
+        </div>
+        <div id="title_apres_simulation">
+            <h3 class="headline-3-typo color-blue-2-typo text-start">Après reprise d'emploi</h3>
+        </div>
+        <div class="ressources_avant_simulation">
+            <div class="card_ressources_apres_simulation card row mb-3"
+                [ngClass]="{'card-simulations-mobile': screenService.isExtraSmallScreen(), 'card-simulations-desktop': !screenService.isExtraSmallScreen()}"
+                *ngFor="let simulationMensuelle of simulationAides.simulationsMensuelles; let index = index;"
+                tabindex="0" (keyup)="handleKeyUpOnSimulationMensuelle($event,simulationMensuelle);">
+                <div class="col-md-12 col-12">
+                    <app-mois-apres-simulation [simulationSelected]="simulationSelected"
+                        [simulationActuelle]="simulationMensuelle" (simulationSelection)="simulationSelection($event)">
+                    </app-mois-apres-simulation>
                 </div>
             </div>
         </div>
@@ -122,21 +101,9 @@
         <div class="col-12">
             <app-ressources-financieres-diagramme [simulationAides]="simulationAides">
             </app-ressources-financieres-diagramme>
-            <div *ngIf="aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)"
-                class="card card-body card-message-info">
-                <div class="row">
-                    <div class="img-card-message-info col-auto">
-                        <div>
-                            <img alt="" src="./assets/images/info.svg">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <span class="body-2-typo">
-                            {{aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)}}
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <app-message-info *ngIf="aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)" [contenu]="
+                aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)">
+            </app-message-info>
         </div>
     </div>
     <div id="actions-suite">
@@ -152,4 +119,15 @@
             susceptibles d'évoluer.
         </p>">
     </app-tooltip>
+</ng-template>
+
+<ng-template #modalDetailMoisApresSimulation>
+    <app-detail-mois-apres-simulation *ngIf="simulationSelected" [simulationActuelle]="simulationSelected"
+        (aideSelection)="aideSelection($event)">
+    </app-detail-mois-apres-simulation>
+</ng-template>
+
+<ng-template #modalDetailAideApresSimulation>
+    <app-detail-aide-apres-simulation *ngIf="aideSelected" [aide]="aideSelected">
+    </app-detail-aide-apres-simulation>
 </ng-template>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { CodesRessourcesFinancieresEnum } from '@app/commun/enumerations/codes-ressources-financieres.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
@@ -251,7 +252,11 @@ export class AidesService {
       && aide.code !== CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE
       && aide.code !== CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
       && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
-      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
+      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
+      && aide.code !== CodesRessourcesFinancieresEnum.PAIE
+      && aide.code !== CodesRessourcesFinancieresEnum.IMMOBILIER
+      && aide.code !== CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR
+      && aide.code !== CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT;
   }
 
   public isAidePasAideLogementPremierMois(aide: Aide): boolean {
@@ -287,6 +292,10 @@ export class AidesService {
       }
     }
     return montant;
+  }
+
+  public isAideAvecDetail(aide: Aide): boolean {
+    return aide.detail != null && aide.detail != "";
   }
 
 }
