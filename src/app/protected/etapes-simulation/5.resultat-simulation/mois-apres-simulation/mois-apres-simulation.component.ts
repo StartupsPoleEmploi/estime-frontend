@@ -48,7 +48,8 @@ export class MoisApresSimulationComponent implements OnInit {
 
   }
 
-  public onClickAfficherDetail(simulationActuelle: SimulationMensuelle): void {
+  public onClickAfficherDetail(event, simulationActuelle: SimulationMensuelle): void {
+    event.preventDefault();
     this.simulationSelection.emit(simulationActuelle);
   }
 

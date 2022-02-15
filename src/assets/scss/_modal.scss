@@ -93,8 +93,8 @@
 .fade {
   &:not(.modal-backdrop) {
     outline: 0;
-    transition: transform 0.2s ease-in-out;
-    -webkit-transition: transform 0.2s ease-in-out;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transition: transform 0.5s ease-in-out;
     transform: translateX(100%);
   }
 
@@ -103,5 +103,11 @@
 .fade.show {
   &:not(.modal-backdrop) {
     transform: none;
+  }
+}
+
+body.modal-open {
+  @media #{$extra-small-device} {
+    position: absolute;
   }
 }

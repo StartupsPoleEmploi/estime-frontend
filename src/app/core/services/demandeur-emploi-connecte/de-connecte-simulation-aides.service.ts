@@ -88,8 +88,6 @@ export class DeConnecteSimulationAidesService {
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAides);
   }
 
-
-
   public getAidesSimulationMensuelle(simulationMensuelle: SimulationMensuelle): Aide[] {
     let aides = [];
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_RETOUR_EMPLOI), aides);
@@ -105,6 +103,7 @@ export class DeConnecteSimulationAidesService {
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.COMPLEMENT_FAMILIAL), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PENSIONS_ALIMENTAIRES), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PRIME_ACTIVITE), aides);
     return aides;
   }
@@ -134,6 +133,11 @@ export class DeConnecteSimulationAidesService {
       aide.montant = montant;
     }
     return aide;
+  }
+
+  public getDatePremierMoisSimule(): string {
+    let simulationAides = this.getSimulationAides();
+    return simulationAides.simulationsMensuelles[0].datePremierJourMoisSimule;
   }
 
 }

@@ -2,20 +2,24 @@ class ResultatMaSimulationPage {
 
   //TODO JLA : somme variable à voir comment faire oour tester le montant réel
   public checkMontantRevenusEtAidesActuelles(): void {
-    cy.get('[data-testid=span-revenus-aides-actuelles]').should('not.be.empty');
+    cy.get('[data-testid=montant_ressources_actuelles]').scrollIntoView().should('not.be.empty');
   }
 
-  public checkMontantRessourceFinanciere(codeRessource: string, montantToCheck: string): void {
-    cy.get(`[ng-reflect-code-ressource=${codeRessource}]`).children('[data-testid=row-montant-ressource]').children('[data-testid=col-montant-ressource]').children('[data-testid=div-span-montant-ressource]').children('[data-testid=span-montant-ressource]').contains(montantToCheck + '€');
+  public checkMontantRessourceFinanciere(codeRessource: string, indexMois: number, montantToCheck: string): void {
+    cy.get(`[data-testid=aide_${codeRessource}_mois_${indexMois}]`).scrollIntoView().contains(montantToCheck + ' €');
   }
 
   //TODO JLA : somme variable à voir comment faire oour tester le montant réel
-  public checkMontantRessourceFinanciereNotEmpty(codeRessource: string): void {
-    cy.get(`[ng-reflect-code-ressource=${codeRessource}]`).children('[data-testid=row-montant-ressource]').children('[data-testid=col-montant-ressource]').children('[data-testid=div-span-montant-ressource]').children('[data-testid=span-montant-ressource]').should('not.be.empty');
+  public checkMontantRessourceFinanciereNotEmpty(codeRessource: string, indexMois: number): void {
+    cy.get(`[data-testid=aide_${codeRessource}_mois_${indexMois}]`).scrollIntoView().should('not.be.empty');
   }
 
   public clickOnMois(indexMois: number): void {
-    cy.get('[data-testid=card-simulation-mensuel]').eq(indexMois).click();
+    cy.get(`[data-testid=detail_mois_${indexMois}]`).click();
+  }
+
+  public clickOnRetour(): void {
+    cy.get('[data-testid=bouton_retour_detail_mois]').click();
   }
 }
 export default ResultatMaSimulationPage
