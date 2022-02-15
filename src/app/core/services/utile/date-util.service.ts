@@ -79,6 +79,13 @@ export class DateUtileService {
     }
   }
 
+  public getIndexMoisSimule(datePremierMoisSimule: string, dateMoisSimule: string) {
+    let dateMoisSimuleDate = this.getDateFromStringDate(dateMoisSimule);
+    let datePremierMoisSimuleDate = this.getDateFromStringDate(datePremierMoisSimule);
+    return dateMoisSimuleDate.getMonth() - datePremierMoisSimuleDate.getMonth() +
+      (12 * (dateMoisSimuleDate.getFullYear() - datePremierMoisSimuleDate.getFullYear())) + 1;
+  }
+
   public checkFormatAnnee(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isAnneeInvalide = false;
     dateDecomposee.messageErreurFormatAnnee = undefined;

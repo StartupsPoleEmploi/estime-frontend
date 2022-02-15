@@ -61,8 +61,10 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   }
 
   public onClickOnAide(aide): void {
-    this.aideSelected = aide;
-    this.aideSelection.emit(aide);
+    if (this.isAideAvecDetail(aide)) {
+      this.aideSelected = aide;
+      this.aideSelection.emit(aide);
+    }
   }
 
   public handleKeyUpOnAide(event: any, aide: Aide) {

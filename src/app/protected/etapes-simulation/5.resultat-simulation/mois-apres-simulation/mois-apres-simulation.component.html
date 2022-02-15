@@ -1,5 +1,6 @@
-<div class="mois-apres-simulation-container" type="button"
-    (click)="onClickAfficherDetail(simulationActuelle)" >
+<div class="mois-apres-simulation-container" type="button" (click)="onClickAfficherDetail($event, simulationActuelle)"
+    tag-action="clic_bouton_detail_mois"
+    attr.data-testid="detail_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
     <div *ngIf="!screenService.isExtraSmallScreen()">
         <div class="row">
             <div class="col-md-2 col-10 align-items-start">
@@ -54,7 +55,7 @@
     </div>
     <div *ngIf="screenService.isExtraSmallScreen()">
         <div class="row">
-            <div class="col-10 align-items-start">
+            <div class="col-10 align-items-start gx-0">
                 <div class="libelle_mois_apres_simulation_row row">
                     <div class="col-md-12">
                         <h4 class="headline-4-typo color-blue-2-typo text-start">
@@ -90,7 +91,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-2 div-vertically-centered justify-content-end">
+            <div class="col-2 div-vertically-centered justify-content-end gx-0">
                 <span class="bouton_detail body-2-typo color-blue-10-typo">
                     <span class="bouton_detail body-2-typo color-blue-10-typo"
                         *ngIf="!screenService.isExtraSmallScreen()">Voir le détail</span>
