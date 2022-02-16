@@ -77,6 +77,8 @@ build-docker-image-recette:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
+      # test robot.txt
+      - cp $CI_PROJECT_DIR/src/robots-production.txt $CI_PROJECT_DIR/dist/robot.txt
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release-candidate
