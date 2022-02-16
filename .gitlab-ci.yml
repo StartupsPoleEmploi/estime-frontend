@@ -32,6 +32,7 @@ build_frontend_application :
     artifacts:
       paths:
         - ./dist
+        - ./node_modules
     cache:
       <<: *global_cache
 
