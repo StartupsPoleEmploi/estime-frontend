@@ -53,6 +53,10 @@
         color: $color-blue-2;
         font-weight: bold !important;
         text-align: left !important;
+
+        @media #{$extra-small-device} {
+          text-align: center !important;
+        }
       }
 
       .intro-text-etape {

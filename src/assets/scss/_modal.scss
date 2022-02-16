@@ -80,9 +80,7 @@
 
   .modal-content {
     min-height: 100vh;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
+    border: none;
   }
 
   @media #{$extra-small-device} {

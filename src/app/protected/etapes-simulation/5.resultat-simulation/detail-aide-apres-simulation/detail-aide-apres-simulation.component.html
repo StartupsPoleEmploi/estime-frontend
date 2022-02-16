@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-md-10 col-12 ps-1 div-vertically-centered"
-                [class]="{'pt-2': screenService.isExtraSmallScreen()}">
+                [class]="{'pt-2': screenService.isScreenInferieur(1600)}">
                 <span class="headline-2-typo color-blue-2-typo ms-2">{{ aide.nom }}</span>
             </div>
         </div>
