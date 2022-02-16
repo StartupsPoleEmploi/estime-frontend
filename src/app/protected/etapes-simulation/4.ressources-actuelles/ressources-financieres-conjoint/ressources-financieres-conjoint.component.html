@@ -375,6 +375,40 @@
                 </span>
             </div>
         </div>
+        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.hasPensionRetraite">
+            <div class="row mb-2">
+                <label class="label headline-4-typo" for="conjointPensionRetraite">
+                    * Pension de retraite nette perçue
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="conjointPensionRetraite" name="conjointPensionRetraite"
+                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant" [(ngModel)]="conjoint.ressourcesFinancieres.pensionRetraite"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieres.pensionRetraite && (conjoint.ressourcesFinancieres.pensionRetraite == 0)}"
+                        required inputmode="decimal" #conjointPensionRetraite="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <div class="row">
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.required">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+                <span class="error-input-message"
+                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                </span>
+                <span
+                    *ngIf="conjoint.ressourcesFinancieres.conjointPensionRetraite && (conjoint.ressourcesFinancieres.conjointPensionRetraite == 0)"
+                    class="error-input-message">
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                </span>
+            </div>
+        </div>
         <div class="form-group" *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
             <div class="row mb-2">
                 <label class="label headline-4-typo" for="revenusImmobilierFoyer">

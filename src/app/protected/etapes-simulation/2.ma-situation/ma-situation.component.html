@@ -336,6 +336,14 @@
                             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
                             <span class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
                         </button>
+                        <button #conjointHasPensionInvalidite="ngModel" name="conjointIsRetraite"
+                            aria-label="Votre conjoint(e) perçoit une pension de retraite" class="radio-button-style-1"
+                            data-testid="btn-situation-conjoint-pension-retraite" btnCheckbox tabindex="0"
+                            [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite"
+                            (click)="onClickCheckBoxConjointHasPensionRetraite()"
+                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_RETRAITE)">
+                            <span class="body-2-typo">{{situationPersonneEnum.PENSION_RETRAITE}}</span>
+                        </button>
                         <button #conjointHasAAH="ngModel" name="conjointHasAAH"
                             aria-label="Votre conjoint(e) perçoit l'AAH" class="radio-button-style-1"
                             data-testid="btn-situation-conjoint-aah" btnCheckbox tabindex="0"

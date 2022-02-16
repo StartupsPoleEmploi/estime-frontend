@@ -7,6 +7,8 @@ import { Salaire } from '@app/commun/models/salaire';
 import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
+import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
+import { DateDecomposee } from '@app/commun/models/date-decomposee';
 
 @Component({
   selector: 'app-form-personne-a-charge-situation',
@@ -17,6 +19,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   @Input() nouvellePersonneACharge: Personne;
   @Input() isNouvellePersonnesAChargeFormSubmitted: boolean;
+  @Input() dateNaissanceNouvellePersonne: DateDecomposee;
   @Input() isSituationNotValide: boolean;
   beneficiaireAides: BeneficiaireAides;
 
@@ -25,11 +28,17 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public personneUtileService: PersonneUtileService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteService: DeConnecteService
   ) { }
 
   ngOnInit(): void { }
+
+  public hasAgeEligibleRetraite(): boolean {
+    console.log(this.dateNaissanceNouvellePersonne);
+    return this.personneUtileService.isAgeEligibleRetraite(this.dateNaissanceNouvellePersonne);
+  }
 
   public onClickCheckBoxHasAAH(event): void {
     event.preventDefault();
@@ -101,6 +110,15 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxHasPensionRetraite(event): void {
+    event.preventDefault();
+    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
+      this.unsetPensionRetraite();
+    } else {
+      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
   public onClickCheckBoxIsSalarie(event): void {
     event.preventDefault();
     if (!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
@@ -144,6 +162,10 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
       else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_INVALIDITE) {
         this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite = !this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite(e);
+      }
+      else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_RETRAITE) {
+        this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite = !this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite;
+        this.onClickCheckBoxHasPensionRetraite(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
         this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = !this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
@@ -262,7 +284,12 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
       this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
     }
   }
-
+  private unsetPensionRetraite(): void {
+    if (this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite) {
+      this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite = false;
+      this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite = null;
+    }
+  }
 
   private setAidesCAF(): void {
     if (!this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {

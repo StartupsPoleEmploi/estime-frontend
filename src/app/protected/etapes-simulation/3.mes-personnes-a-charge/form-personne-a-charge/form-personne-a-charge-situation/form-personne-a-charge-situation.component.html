@@ -59,6 +59,14 @@
       (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.PENSION_INVALIDITE)">
       <span>{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
     </button>
+    <button *ngIf="hasAgeEligibleRetraite()" #personneAChargeHasPensionInvalidite="ngModel"
+      name="beneficiairePensionInvalidite" aria-label="Cette personne à charge perçoit une pension de retraite"
+      class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-retraite" btnCheckbox tabindex="0"
+      [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite"
+      (click)="onClickCheckBoxConjointHasPensionRetraite()"
+      (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_RETRAITE)">
+      <span class="body-2-typo">{{situationPersonneEnum.PENSION_RETRAITE}}</span>
+    </button>
     <button name="sansRessource" class="radio-button-style-1"
       [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource" btnCheckbox tabindex="0"
       #isSansEmploi="ngModel" (click)="onClickCheckBoxIsSansRessource($event)"

@@ -474,6 +474,14 @@ export class DeConnecteService {
     }
   }
 
+  public unsetConjointPensionRetraite(): void {
+    if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres) {
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite = false;
+      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres.pensionRetraite = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetConjointSalaire(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale && this.demandeurEmploiConnecte.situationFamiliale.conjoint) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.informationsPersonnelles.salarie = false;

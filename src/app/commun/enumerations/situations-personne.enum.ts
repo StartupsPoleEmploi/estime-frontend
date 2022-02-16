@@ -8,5 +8,6 @@ export enum SituationPersonneEnum {
   RSA = "Le RSA (Revenu Solidarité Active)",
   SALARIE = "Un salaire",
   SANS_RESSOURCE = "Aucune ressource",
-  TRAVAILLEUR_INDEPENDANT = "Des revenus en tant que travailleur indépendant"
+  TRAVAILLEUR_INDEPENDANT = "Des revenus en tant que travailleur indépendant",
+  PENSION_RETRAITE = "Une pension de retraite"
 }

@@ -116,7 +116,8 @@ export class FormPersonneAChargeComponent implements OnInit {
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
       || this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant
-      || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
+      || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur
+      || this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite;
   }
 
   private unsetRessourcesFinancieres(): void {
@@ -136,6 +137,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieres.revenusImmobilier3DerniersMois = 0;
     this.nouvellePersonneACharge.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = 0;
     this.nouvellePersonneACharge.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite = 0;
   }
 
   private resetInformationsPersonnelles(): void {

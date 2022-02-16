@@ -7,12 +7,13 @@ import { Salaire } from "@models/salaire";
 export class RessourcesFinancieres {
   aidesCAF: AidesCAF;
   aidesPoleEmploi: AidesPoleEmploi;
-  aidesCPAM : AidesCPAM;
+  aidesCPAM: AidesCPAM;
   hasTravailleAuCoursDerniersMois: boolean;
   nombreMoisTravaillesDerniersMois: number;
   chiffreAffairesIndependantDernierExercice: number;
   beneficesMicroEntrepriseDernierExercice: number;
   revenusImmobilier3DerniersMois: number;
+  pensionRetraite: number;
   periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation;
   salaire: Salaire;
 }

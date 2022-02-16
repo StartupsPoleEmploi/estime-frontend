@@ -6,6 +6,7 @@ export class InformationsPersonnelles {
   hasRevenusImmobilier: boolean;
   travailleurIndependant: boolean;
   microEntrepreneur: boolean;
+  hasPensionRetraite: boolean;
   logement: Logement;
   salarie: boolean;
   sansRessource: boolean;

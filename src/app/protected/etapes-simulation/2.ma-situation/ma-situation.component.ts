@@ -267,6 +267,10 @@ export class MaSituationComponent implements OnInit {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE;
         this.onClickCheckBoxConjointHasARE();
       }
+      if (situationConjoint === this.situationPersonneEnum.PENSION_RETRAITE) {
+        this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite = !this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite;
+        this.onClickCheckBoxConjointHasPensionRetraite();
+      }
       if (situationConjoint === this.situationPersonneEnum.ASS) {
         this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxConjointHasASS();
@@ -296,7 +300,8 @@ export class MaSituationComponent implements OnInit {
         || this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite
         || this.situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant
         || this.situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur
-        || this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier);
+        || this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier
+        || this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite);
   }
 
   public onClickCheckBoxConjointHasAAH(): void {
@@ -377,6 +382,14 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetConjointPensionInvalidite();
     } else {
       this.deConnecteService.setConjointPensionInvalidite();
+      this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
+    }
+  }
+
+  public onClickCheckBoxConjointHasPensionRetraite(): void {
+    if (!this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite) {
+      this.deConnecteService.unsetConjointPensionRetraite();
+    } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
     }
   }

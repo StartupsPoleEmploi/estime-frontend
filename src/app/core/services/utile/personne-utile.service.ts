@@ -79,6 +79,11 @@ export class PersonneUtileService {
     return this.dateUtileService.isDateEntre3Et21Ans(dateNaissance);
   }
 
+  public isAgeEligibleRetraite(dateNaissanceDecomposee: DateDecomposee): boolean {
+    let dateNaissance = this.dateUtileService.getDateFromDateDecomposee(dateNaissanceDecomposee);
+    return this.dateUtileService.isDateEligibleRetraite(dateNaissance);
+  }
+
   public isRessourcesFinancieresValides(personne: Personne): boolean {
     return this.isAidesValides(personne) && this.isRevenusValides(personne);
   }

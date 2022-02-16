@@ -22,6 +22,7 @@ export class DateUtileService {
   ];
 
   MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE = 37; // 3 ans et 1 mois
+  MOIS_ELIGIBILITE_RETRAITE = 360; // 30 ans
 
   public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
@@ -318,6 +319,11 @@ export class DateUtileService {
   public isDatePlusDe3AnsEt1Mois(date: Date): boolean {
     let datePlus3AnsEt1Mois = this.ajouterMoisToDate(date, this.MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE);
     return moment(datePlus3AnsEt1Mois).isSameOrAfter(Date.now());
+  }
+
+  public isDateEligibleRetraite(date: Date): boolean {
+    let dateEligibiliteRetraite = this.ajouterMoisToDate(date, this.MOIS_ELIGIBILITE_RETRAITE);
+    return moment(dateEligibiliteRetraite).isSameOrBefore(Date.now());
   }
 
   public isDateEntre3Et21Ans(date: Date): boolean {

@@ -117,10 +117,9 @@ export class RessourcesFinancieresUtileService {
     ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice);
     ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.chiffreAffairesIndependantDernierExercice);
     ressourcesFinancieres.revenusImmobilier3DerniersMois = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.revenusImmobilier3DerniersMois);
+    ressourcesFinancieres.pensionRetraite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.pensionRetraite);
     return ressourcesFinancieres;
   }
-
-
 
   /**
    * Fonction qui permet d'initialiser les options du select du nombre de mois travaillés
