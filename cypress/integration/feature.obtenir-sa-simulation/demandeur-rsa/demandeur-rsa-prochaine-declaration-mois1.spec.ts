@@ -1,4 +1,4 @@
-const specTitleSimulationDeASS = require("cypress-sonarqube-reporter/specTitle");
+const specTitleSimulationDeRSA = require("cypress-sonarqube-reporter/specTitle");
 import HomePage from '../../../integration-commun/pages/home.page';
 import MonFuturContratTravailPage from '../../../integration-commun/pages/mon-futur-contrat-travail.page';
 import MaSituationPage from '../../../integration-commun/pages/ma-situation.page'
@@ -14,7 +14,7 @@ import { CodesAidesEnum } from "../../../../src/app/commun/enumerations/codes-ai
 import { CodesRessourcesFinancieresEnum } from "../../../../src/app/commun/enumerations/codes-ressources-financieres.enum";
 import { DateUtileTests } from '../../../integration-commun/utile/date-utile-tests.service';
 
-describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi RSA'), () => {
+describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi RSA'), () => {
 
 
   beforeEach(() => {

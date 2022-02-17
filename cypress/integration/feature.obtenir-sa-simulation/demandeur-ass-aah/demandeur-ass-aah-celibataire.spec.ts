@@ -1,4 +1,4 @@
-const specTitleSimulationDeASS = require("cypress-sonarqube-reporter/specTitle");
+const specTitleSimulationDeASSEtAAH = require("cypress-sonarqube-reporter/specTitle");
 import HomePage from '../../../integration-commun/pages/home.page';
 import MonFuturContratTravailPage from '../../../integration-commun/pages/mon-futur-contrat-travail.page';
 import MaSituationPage from '../../../integration-commun/pages/ma-situation.page'
@@ -13,7 +13,7 @@ import { environment } from '../../../environment'
 import { CodesAidesEnum } from "../../../../src/app/commun/enumerations/codes-aides.enum";
 import { CodesRessourcesFinancieresEnum } from "../../../../src/app/commun/enumerations/codes-ressources-financieres.enum";
 
-describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS et AAH'), () => {
+describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS et AAH'), () => {
 
 
   beforeEach(() => {
