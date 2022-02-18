@@ -115,6 +115,7 @@ sonar_quality_analyse :
       SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Defines the location of the analysis task cache
       GIT_DEPTH: 0 # Tells git to fetch all the branches of the project, required by the analysis task
     script:
+    - npm install typescript
     - sonar-scanner -Dsonar.qualitygate.wait=true
     rules:
     - if: '$CI_COMMIT_BRANCH == "master"'
@@ -153,6 +154,8 @@ build-docker-image-production:
       name: gcr.io/kaniko-project/executor:debug
       entrypoint: [""]
     script:
+      # copy robots policy for production
+      - cp $CI_PROJECT_DIR/src/robots.prod.txt $CI_PROJECT_DIR/dist/estime/robots.txt
       # build estime-frontend docker image and push it in containers registry
       - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
       - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/docker-image/Dockerfile --destination $CI_REGISTRY_IMAGE:release

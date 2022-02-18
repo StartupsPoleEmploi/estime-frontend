@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col">
                     <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut"
-                        type="text" data-testid="input-allocation-journaliere-reference-brut"
+                        type="text" data-testid="input-salaire-journalier-reference-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
@@ -103,7 +103,7 @@
             <div class="row">
                 <div class="col">
                     <input id="input-nombre-jours-restants" name="nombreJoursRestants" type="text"
-                        data-testid="input-nombre-jours-restants"
+                        data-testid="input-nombre-jours-restants-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
@@ -142,7 +142,7 @@
             <div class="row">
                 <div class="col">
                     <input id="input-montant-journalier-brut" name="montantJournalierBrut" type="text"
-                        data-testid="input-montant-journalier-brut"
+                        data-testid="input-montant-allocation-journaliere-brut-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
@@ -556,7 +556,7 @@
             Sur la page 2 de votre dernier relevé de situation Pôle Emploi 👇
         </p>
         <div class='row mb-5'>
-            <img class='code-ressource' src='./assets/images/img_tooltip-are.png'>
+            <img alt='' src='./assets/images/img_tooltip-are.png'>
         </div>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
@@ -615,7 +615,7 @@
             Sur la page 2 de votre dernier relevé de situation Pôle Emploi 👇
         </p>
         <div class='row mb-5'>
-            <img class='code-ressource' src='./assets/images/img_tooltip-are.png'>
+            <img alt='' src='./assets/images/img_tooltip-are.png'>
         </div>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?

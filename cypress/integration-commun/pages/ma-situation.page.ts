@@ -16,6 +16,10 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-aah]').click();
   }
 
+  public clickOnSituationARE() {
+    cy.get('[data-testid=btn-situation-are]').click();
+  }
+
   public clickOnSituationASS() {
     cy.get('[data-testid=btn-situation-ass]').click();
   }
@@ -65,11 +69,11 @@ class MaSituationPage {
   }
 
   public clickOnVousVivezSeulDepuisPlusDe18MoisOui(): void {
-    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-oui]').click({force: true});
+    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-oui]').click({ force: true });
   }
 
   public clickOnVousVivezSeulDepuisPlusDe18MoisNon(): void {
-    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({force: true});
+    cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({ force: true });
   }
 
   public clickOnSuivant() {

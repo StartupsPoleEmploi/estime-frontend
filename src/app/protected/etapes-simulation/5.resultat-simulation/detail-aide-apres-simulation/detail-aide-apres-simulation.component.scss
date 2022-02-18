@@ -38,6 +38,24 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
 
+    .col-md-1 {
+      min-width: 3rem !important;
+      margin-right: 0.5rem;
+      padding-right: unset;
+
+      @media #{$extra-small-device} {
+        margin-right: unset;
+      }
+    }
+
+    .col-md-10 {
+      margin-right: -1rem;
+
+      @media #{$extra-small-device} {
+        margin-right: unset;
+      }
+    }
+
     .icone-organisme {
 
       &.pe {

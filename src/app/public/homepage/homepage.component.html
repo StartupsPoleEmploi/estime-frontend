@@ -1,27 +1,5 @@
 <section id="section-presentation">
-    <div [ngClass]="{'container-fluid':!screenService.isExtraSmallScreen()}">
-        <div class="row row-0">
-            <div class="col-12">
-                <p aria-label="Le simulateur s’adresse aux personnes qui perçoivent l’ASS, le RSA, l’AAH ou l'ARE."
-                    class="row div-info-beneficiaires body-2-typo text-info-beneficiaire">
-                    <img class="col-1" alt="" src="./assets/images/info-blue-2.svg">
-                    <span class="col-11">
-                        Le simulateur s'adresse aux demandeurs d'emploi inscrits qui dépendent du régime général de
-                        l’assurance chômage ainsi qu'aux bénéficiaires de minima sociaux.<br>
-                        Certaines professions et certains territoires ont des règles particulières. Vous pouvez
-                        retrouver les détails sur pole-emploi.fr,
-                        «
-                        <a
-                            href="https://www.pole-emploi.fr/candidat/mes-droits-aux-aides-et-allocati/a-chaque-situation-son-allocatio.html">
-                            chaque situation son allocation
-                        </a>
-                        ».
-                    </span>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid">
+    <div class="container-fluid pt-4">
         <div id="div-message-erreur-homepage">
             <input type="hidden" ngModel #messageErreurElement>
             <alert type="{{messageErreur.niveau}}" *ngIf="messageErreur">
@@ -33,10 +11,10 @@
                 <div id="first-div-inside-first-col" class="align-text-bottom">
                     <div>
                         <h1 class="headline-1-typo">
-                            Combien vous gagneriez si vous repreniez un emploi ?
+                            Découvrez le montant de vos aides en cas d'embauche
                         </h1>
                     </div>
-                    <div [ngClass]="{'btn-sticks':this.stickyButton}">
+                    <div [ngClass]="{'btn-sticks':this.stickyButton}" class="row row-btn-je-commence">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
                             class="btn-homepage mt-4 d-flex justify-content-center button-typo"
                             data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
@@ -50,6 +28,11 @@
                 <img id="image-homepage-calculette" alt="" src="../../../assets/images/homepage-calculette-v5.svg">
             </div>
         </div>
+    </div>
+    <div class="container-fluid div-info-beneficiaires">
+        <app-message-info
+            contenu="Le simulateur s'adresse aux demandeurs d'emploi inscrits qui dépendent du régime général de l'assurance chômage ainsi qu'aux bénéficiaires de minima sociaux">
+        </app-message-info>
     </div>
 </section>
 <app-section-description></app-section-description>

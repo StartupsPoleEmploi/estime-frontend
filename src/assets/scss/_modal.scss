@@ -80,9 +80,7 @@
 
   .modal-content {
     min-height: 100vh;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
+    border: none;
   }
 
   @media #{$extra-small-device} {
@@ -97,7 +95,6 @@
     -webkit-transition: transform 0.5s ease-in-out;
     transform: translateX(100%);
   }
-
 }
 
 .fade.show {
@@ -109,5 +106,40 @@
 body.modal-open {
   @media #{$extra-small-device} {
     position: absolute;
+  }
+}
+
+.card-message-info {
+  background-color: $color-blue-7;
+  border-radius: 0.5rem;
+  width: unset;
+  padding: 1rem;
+
+  span {
+    color: $color-blue-2
+  }
+
+  .row {
+    width: fit-content;
+    line-height: normal;
+
+    .img-card-message-info {
+      max-width: fit-content !important;
+      padding-right: 0.3125rem;
+
+      div {
+        width: 1.25rem;
+        height: 100%;
+        position: relative;
+
+        img {
+          bottom: 0;
+          margin: auto;
+          position: absolute;
+          top: 0;
+          width: 1.25rem;
+        }
+      }
+    }
   }
 }

@@ -28,7 +28,8 @@ export class DetailAideApresSimulationComponent implements OnInit {
   }
 
   onClickFaireLaDemandeAide = function () {
-    window.open(this.aideLienExterne, '_blank');
+    console.log(this.aide.lienExterne);
+    window.open(this.aide.lienExterne, '_blank');
   }
 
 
