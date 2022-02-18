@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Aide } from '@app/commun/models/aide';
-import { Commune } from '@app/commun/models/commune';
 import { QueryParamEnum } from "@enumerations/query-param.enum";
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Environment } from '@models/environment';
@@ -17,7 +16,6 @@ import { IndividuConnectedService } from '../connexion/individu-connected.servic
 export class EstimeApiService {
 
   private pathDemandeurEmploiService: string;
-  private pathApiCommunes: string;
 
   constructor(
     private environment: Environment,
@@ -26,7 +24,6 @@ export class EstimeApiService {
   ) {
 
     this.pathDemandeurEmploiService = this.environment.apiEstimeURL;
-    this.pathApiCommunes = 'https://geo.api.gouv.fr/communes?codePostal=';
   }
 
   public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
