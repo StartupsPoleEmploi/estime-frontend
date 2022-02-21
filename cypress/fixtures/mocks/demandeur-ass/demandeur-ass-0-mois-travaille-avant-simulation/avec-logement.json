@@ -53,6 +53,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -87,6 +97,16 @@
 					"nom": "Allocation de Logement Familiale",
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}
@@ -123,6 +143,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -147,6 +177,16 @@
 					"nom": "Allocation de Logement Familiale",
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}
@@ -183,6 +223,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -217,6 +267,16 @@
 					"nom": "Allocation de Logement Familiale",
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1245.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}

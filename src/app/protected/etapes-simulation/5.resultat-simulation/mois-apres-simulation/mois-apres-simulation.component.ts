@@ -22,9 +22,7 @@ export class MoisApresSimulationComponent implements OnInit {
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
 
-  aideMois: Aide[];
-  revenusMois: Aide[];
-  aidesEtRevenusMois: Aide[];
+  aidesMois: Aide[];
   private static OVERFLOW_LIMIT_REGULAR_SCREEN: number = 5;
   private static OVERFLOW_LIMIT_SMALL_SCREEN: number = 4;
 
@@ -42,19 +40,17 @@ export class MoisApresSimulationComponent implements OnInit {
   ngOnInit(
   ): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.aideMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
-    this.revenusMois = this.deConnecteSimulationAidesService.getRevenusApresSimulation(this.demandeurEmploiConnecte);
-    this.aidesEtRevenusMois = this.aideMois.concat(this.revenusMois);
+    this.aidesMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
+    this.orderAidesMois();
+  }
 
+  private orderAidesMois() {
+    this.aidesMois.sort((a, b) => b.montant - a.montant);
   }
 
   public onClickAfficherDetail(event, simulationActuelle: SimulationMensuelle): void {
     event.preventDefault();
     this.simulationSelection.emit(simulationActuelle);
-  }
-
-  public getAidesMois(simulationMensuelle: SimulationMensuelle) {
-    this.aideMois.push()
   }
 
   public isNoSimulationMensuelleSelected(): boolean {
@@ -79,7 +75,7 @@ export class MoisApresSimulationComponent implements OnInit {
   }
 
   public getAidesEtRevenusOverFlow(): number {
-    return this.screenService.isExtraSmallScreen() ? this.aidesEtRevenusMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.aidesEtRevenusMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
+    return this.screenService.isExtraSmallScreen() ? this.aidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.aidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
   }
 
 }

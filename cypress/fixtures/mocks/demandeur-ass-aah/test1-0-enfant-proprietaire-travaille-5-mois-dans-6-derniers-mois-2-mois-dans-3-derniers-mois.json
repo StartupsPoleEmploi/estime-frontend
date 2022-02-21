@@ -33,12 +33,33 @@
 					"organisme": "Pôle emploi",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
 		{
 			"datePremierJourMoisSimule": "2022-03-01",
-			"mesAides": {}
+			"mesAides": {
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
 		},
 		{
 			"datePremierJourMoisSimule": "2022-04-01",
@@ -51,6 +72,16 @@
 					"nom": "Prime d'Activité",
 					"organisme": "CAF",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}
@@ -67,6 +98,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -82,6 +123,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -96,6 +147,16 @@
 					"nom": "Prime d'Activité",
 					"organisme": "CAF",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}

@@ -27,14 +27,14 @@
             </div>
             <div class="col-md-5 div-vertically-centered">
                 <div id="row_icones_aides" class="row ms-1">
-                    <div *ngFor="let aideOuRevenu of aidesEtRevenusMois; let i = index" attr.data-index="i"
+                    <div *ngFor="let aide of aidesMois; let i = index" attr.data-index="i"
                         class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
                             class="code-ressource me-1"
-                            [class]="[aideOuRevenu.code.toLowerCase(), getOverflowClass(i)]">
+                            [class]="[aide.code.toLowerCase(), getOverflowClass(i)]">
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                 class="">
-                                <span class="overline-typo">{{aideOuRevenu.code}}</span>
+                                <span class="overline-typo">{{aide.code}}</span>
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">

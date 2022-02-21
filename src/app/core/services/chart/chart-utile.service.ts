@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { CodesAidesEnum } from '@enumerations/codes-aides.enum';
-import { CodesRessourcesFinancieresEnum } from '@enumerations/codes-ressources-financieres.enum';
 import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
 import { DevisesEnum } from '@enumerations/devises.enum';
 import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
-import { LibellesRessourcesFinancieresEnum } from '@enumerations/libelles-ressources-financieres.enum';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationAidesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides.service';
@@ -179,10 +177,10 @@ export class ChartUtileService {
     for (let index = 0; index < simulationAides.simulationsMensuelles.length; index++) {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.PAIE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
-      dataObject.datasets.get(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.SALAIRE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+      dataObject.datasets.get(CodesAidesEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
     }
     dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAides.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);
@@ -351,36 +349,36 @@ export class ChartUtileService {
       }
     );
 
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.PAIE,
+    dataObject.datasets.set(CodesAidesEnum.SALAIRE,
       {
-        label: LibellesRessourcesFinancieresEnum.SALAIRE.padEnd(30, ' '),
-        backgroundColor: CouleursAidesDiagrammeEnum.PAIE,
+        label: LibellesAidesEnum.SALAIRE.padEnd(30, ' '),
+        backgroundColor: CouleursAidesDiagrammeEnum.SALAIRE,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
     );
 
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.IMMOBILIER,
+    dataObject.datasets.set(CodesAidesEnum.IMMOBILIER,
       {
-        label: LibellesRessourcesFinancieresEnum.IMMOBILIER.padEnd(30, ' '),
+        label: LibellesAidesEnum.IMMOBILIER.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.IMMOBILIER,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
     );
 
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT,
+    dataObject.datasets.set(CodesAidesEnum.TRAVAILLEUR_INDEPENDANT,
       {
-        label: LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30, ' '),
+        label: LibellesAidesEnum.TRAVAILLEUR_INDEPENDANT.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.TRAVAILLEUR_INDEPENDANT,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE
       }
     );
 
-    dataObject.datasets.set(CodesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR,
+    dataObject.datasets.set(CodesAidesEnum.MICRO_ENTREPRENEUR,
       {
-        label: LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR.padEnd(30, ' '),
+        label: LibellesAidesEnum.MICRO_ENTREPRENEUR.padEnd(30, ' '),
         backgroundColor: CouleursAidesDiagrammeEnum.MICRO_ENTREPRENEUR,
         data: [0, 0, 0, 0, 0, 0, 0],
         barPercentage: ChartUtileService.BAR_PERCENTAGE

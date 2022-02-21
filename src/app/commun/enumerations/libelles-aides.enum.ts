@@ -11,9 +11,13 @@ export enum LibellesAidesEnum {
   ALLOCATION_SUPPLEMENTAIRE_INVALIDITE = 'Allocation supplémentaire d\'invalidité',
   ALLOCATIONS_FAMILIALES = 'Allocations Familiales',
   COMPLEMENT_FAMILIAL = 'Complément Familial',
+  IMMOBILIER = 'Revenus immobiliers',
+  MICRO_ENTREPRENEUR = 'Revenus micro-entreprise',
   PRESTATION_ACCUEIL_JEUNE_ENFANT = 'Prestation d\'Accueil du Jeune Enfant',
   PRIME_ACTIVITE = 'Prime d\'Activité',
   PENSION_INVALIDITE = 'Pension d\'invalidité',
   PENSIONS_ALIMENTAIRES = 'Pensions Alimentaires du Foyer',
-  RSA = 'Revenu de Solidarité Active'
+  RSA = 'Revenu de Solidarité Active',
+  SALAIRE = 'Salaire net',
+  TRAVAILLEUR_INDEPENDANT = 'Revenus travailleur indépendant'
 }

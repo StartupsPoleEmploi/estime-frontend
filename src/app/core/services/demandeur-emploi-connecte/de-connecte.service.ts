@@ -227,7 +227,6 @@ export class DeConnecteService {
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = null;
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = null;
       this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants = null;
-      this.demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi.allocationARE.isConcerneDegressivite = null;
     }
   }
 

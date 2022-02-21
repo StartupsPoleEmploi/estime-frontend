@@ -104,12 +104,12 @@
                 <div class="col">
                     <input id="input-nombre-jours-restants" name="nombreJoursRestants" type="text"
                         data-testid="input-nombre-jours-restants-are"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="5" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants && (this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0 || this.ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > this.controleChampFormulaireService.MONTANT_ARE_NOMBRE_JOURS_RESTANTS_MAX)}"
                         [(ngModel)]="ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants" required
-                        placeholder="Nombre" inputmode="decimal" #nombreJoursRestants="ngModel">
+                        placeholder="Nombre" inputmode="numeric" #nombreJoursRestants="ngModel">
                     <span class="text-side-input d-inline body-2-typo">jours</span>
                 </div>
             </div>
@@ -124,7 +124,7 @@
             </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || nombreJoursRestants.touched)  && nombreJoursRestants.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
             </span>
         </div>
 
@@ -177,12 +177,12 @@
                 <div class="col">
                     <input id="allocationRSA" name="allocationRSA" type="text"
                         data-testid="input-allocation-mensuelle-net-rsa"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="8" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCAF.allocationRSA && this.ressourcesFinancieres.aidesCAF.allocationRSA == 0}"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationRSA" required placeholder="Montant"
-                        inputmode="decimal" #allocationRSA="ngModel">
+                        inputmode="numeric" #allocationRSA="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -197,7 +197,7 @@
             </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFormSubmitted || allocationRSA.touched)  && allocationRSA.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
             </span>
         </div>
         <div class="form-group" *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireAAH()">
@@ -209,12 +209,12 @@
             <div class="row">
                 <div class="col">
                     <input id="allocationAAH" name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCAF.allocationAAH && (this.ressourcesFinancieres.aidesCAF.allocationAAH == 0)}"
                         class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationAAH " required inputmode="decimal"
+                        [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationAAH " required inputmode="numeric"
                         #allocationAAH="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -226,7 +226,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
                 <span
                     *ngIf="this.ressourcesFinancieres.aidesCAF.allocationAAH && (this.ressourcesFinancieres.aidesCAF.allocationAAH == 0)"
@@ -332,14 +332,14 @@
                                     <input [id]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"
                                         [name]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"
                                         attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation"
-                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                         type="text" maxlength="6" min="0"
                                         class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                         (blur)="this.ressourcesFinancieresUtileService.calculSalaireMensuelBrut(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
                                         [(ngModel)]="ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
                                         [ngClass]="{'ng-invalid': hasQuatorzeMoisSansSalaire()}" required
-                                        inputmode="decimal" (click)="$event.target.select()"
+                                        inputmode="numeric" (click)="$event.target.select()"
                                         #salaireMoisAvantPeriodeSimulee="ngModel">
                                     <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                                 </div>
@@ -347,7 +347,7 @@
                             <div class="row">
                                 <span class="row error-input-message"
                                     *ngIf="(isRessourcesFinancieresFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
-                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                                 </span>
                             </div>
                         </div>
@@ -372,12 +372,12 @@
             <div class="row">
                 <div class="col">
                     <input id="pensionInvalidite" name="pensionInvalidite"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCPAM.pensionInvalidite"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0)}"
-                        required inputmode="decimal" #pensionInvalidite="ngModel">
+                        required inputmode="numeric" #pensionInvalidite="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -388,7 +388,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
                 <span
                     *ngIf="this.ressourcesFinancieres.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0)"
@@ -404,12 +404,12 @@
             <div class="row">
                 <div class="col">
                     <input id="allocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite == 0)}"
-                        required inputmode="decimal" #allocationSupplementaireInvalidite="ngModel">
+                        required inputmode="numeric" #allocationSupplementaireInvalidite="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -420,7 +420,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>
@@ -433,13 +433,13 @@
             <div class="row">
                 <div class="col">
                     <input id="beneficesMicroEntrepriseDernierExercice" name="beneficesMicroEntrepriseDernierExercice"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)}"
-                        required inputmode="decimal" #beneficesMicroEntrepriseDernierExercice="ngModel">
+                        required inputmode="numeric" #beneficesMicroEntrepriseDernierExercice="ngModel">
                     <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -450,7 +450,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesMicroEntrepriseDernierExercice?.touched)  && beneficesMicroEntrepriseDernierExercice?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
                 <span
                     *ngIf="this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)"
@@ -469,13 +469,13 @@
                 <div class="col">
                     <input id="chiffreAffairesIndependantDernierExercice"
                         name="chiffreAffairesIndependantDernierExercice"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.chiffreAffairesIndependantDernierExercice"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)}"
-                        required inputmode="decimal" #chiffreAffairesIndependantDernierExercice="ngModel">
+                        required inputmode="numeric" #chiffreAffairesIndependantDernierExercice="ngModel">
                     <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -486,7 +486,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
                 <span
                     *ngIf="this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)"
@@ -508,12 +508,12 @@
             <div class="row">
                 <div class="col">
                     <input id="revenusImmobilier" name="revenusImmobilier"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant" [(ngModel)]="ressourcesFinancieres.revenusImmobilier3DerniersMois"
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)}"
-                        required inputmode="decimal" #revenusImmobilier="ngModel">
+                        required inputmode="numeric" #revenusImmobilier="ngModel">
                     <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -524,7 +524,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || revenusImmobilier?.touched)  && revenusImmobilier?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
                 <span class="error-input-message"
                     *ngIf="this.ressourcesFinancieres.revenusImmobilier3DerniersMois && (this.ressourcesFinancieres.revenusImmobilier3DerniersMois == 0)">

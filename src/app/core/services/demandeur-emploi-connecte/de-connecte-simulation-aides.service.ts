@@ -7,10 +7,7 @@ import { DeConnecteRessourcesFinancieresService } from './de-connecte-ressources
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { NumberUtileService } from '../utile/number-util.service';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Aide } from '@app/commun/models/aide';
-import { CodesRessourcesFinancieresEnum } from '@app/commun/enumerations/codes-ressources-financieres.enum';
-import { LibellesRessourcesFinancieresEnum } from '@app/commun/enumerations/libelles-ressources-financieres.enum';
 import { AidesService } from '../utile/aides.service';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
@@ -23,8 +20,6 @@ export class DeConnecteSimulationAidesService {
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
   libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
-  codesRessourcesFinancieresEnum: typeof CodesRessourcesFinancieresEnum = CodesRessourcesFinancieresEnum;
-  libellesRessourcesFinancieresEnum: typeof LibellesRessourcesFinancieresEnum = LibellesRessourcesFinancieresEnum;
 
   constructor(
     private aidesService: AidesService,
@@ -90,49 +85,33 @@ export class DeConnecteSimulationAidesService {
 
   public getAidesSimulationMensuelle(simulationMensuelle: SimulationMensuelle): Aide[] {
     let aides = [];
-    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_RETOUR_EMPLOI), aides);
-    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE), aides);
-    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.RSA), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AGEPI), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_MOBILITE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT), aides);
-    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AGEPI), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_RETOUR_EMPLOI), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATIONS_FAMILIALES), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.COMPLEMENT_FAMILIAL), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.IMMOBILIER), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.MICRO_ENTREPRENEUR), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PENSION_INVALIDITE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PENSIONS_ALIMENTAIRES), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.PRIME_ACTIVITE), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.RSA), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.SALAIRE), aides);
+    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.TRAVAILLEUR_INDEPENDANT), aides);
     return aides;
-  }
-
-  public getRevenusApresSimulation(demandeurEmploi: DemandeurEmploi): Aide[] {
-    let revenusMois = [];
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesRessourcesFinancieresEnum.PAIE, this.libellesRessourcesFinancieresEnum.SALAIRE, this.deConnecteRessourcesFinancieresService.getFuturSalaireNet()), revenusMois);
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesAidesEnum.PENSION_INVALIDITE, this.libellesAidesEnum.PENSION_INVALIDITE, this.deConnecteRessourcesFinancieresService.getPensionInvalidite()), revenusMois);
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, this.libellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, this.deConnecteRessourcesFinancieresService.getAllocationSupplementaireInvalidite()), revenusMois);
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR, this.libellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR, this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois()), revenusMois);
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT, this.libellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT, this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois()), revenusMois);
-    this.addAideToAidesArray(this.createAideAvecRevenus(this.codesRessourcesFinancieresEnum.IMMOBILIER, this.libellesRessourcesFinancieresEnum.IMMOBILIER, this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois()), revenusMois);
-    return revenusMois;
   }
 
   private addAideToAidesArray(aide: Aide, aides: Aide[]) {
     if (aide != null) aides.push(aide);
     return aides;
-  }
-
-  private createAideAvecRevenus(code, nom, montant): Aide {
-    let aide = null;
-    if (montant > 0) {
-      aide = new Aide();
-      aide.code = code;
-      aide.nom = nom;
-      aide.montant = montant;
-    }
-    return aide;
   }
 
   public getDatePremierMoisSimule(): string {

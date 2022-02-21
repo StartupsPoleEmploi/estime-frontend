@@ -12,12 +12,12 @@
                     <div class="col">
                         <input id="allocationRSA" name="allocationRSA" type="text"
                             data-testid="input-allocation-mensuelle-net-rsa-foyer"
-                            pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="8" class="form-control d-inline"
                             [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCAF.allocationRSA && this.ressourcesFinancieres.aidesCAF.allocationRSA == 0}"
                             [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationRSA" required placeholder="Montant"
-                            inputmode="decimal" #allocationRSA="ngModel">
+                            inputmode="numeric" #allocationRSA="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 </span>
                 <span class="row error-input-message"
                     *ngIf="(isRessourcesFinancieresFormSubmitted || allocationRSA.touched)  && allocationRSA.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
             <div class="form-group">
@@ -208,31 +208,31 @@
                         <div class="col">
                             <input *ngIf="beneficiaireAides.beneficiaireAPL"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
-                                name="aplMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="aplMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-apl-mois-moins-1"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1"
-                                inputmode="decimal" required (click)="$event.target.select()" #aplMoisNMoins1="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins1="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
-                                name="alfMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alfMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-alf-mois-moins-1"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1"
-                                inputmode="decimal" required (click)="$event.target.select()" #alfMoisNMoins1="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins1="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
-                                name="alsMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alsMoisNMoins1" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-als-mois-moins-1"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1"
-                                inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins1="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins1="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(1)">
                             </app-text-with-euro-symbol>
@@ -247,31 +247,31 @@
                         <div class="col">
                             <input *ngIf="beneficiaireAides.beneficiaireAPL"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
-                                name="aplMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="aplMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-apl-mois-moins-2"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2"
-                                inputmode="decimal" required (click)="$event.target.select()" #aplMoisNMoins2="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins2="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
-                                name="alfMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alfMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-alf-mois-moins-2"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2"
-                                inputmode="decimal" required (click)="$event.target.select()" #alfMoisNMoins2="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins2="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
-                                name="alsMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alsMoisNMoins2" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-als-mois-moins-2"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2"
-                                inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins2="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins2="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
                             </app-text-with-euro-symbol>
@@ -286,31 +286,31 @@
                         <div class="col">
                             <input *ngIf="beneficiaireAides.beneficiaireAPL"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
-                                name="aplMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="aplMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-apl-mois-moins-3"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-REGEX_NUMERIC" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3"
-                                inputmode="decimal" required (click)="$event.target.select()" #aplMoisNMoins3="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins3="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
-                                name="alfMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alfMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-alf-mois-moins-3"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3"
-                                inputmode="decimal" required (click)="$event.target.select()" #alfMoisNMoins3="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins3="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
-                                name="alsMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                name="alsMoisNMoins3" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                 data-testid="input-als-mois-moins-3"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text"
-                                min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
-                                placeholder="Montant"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                type="text" min="0" maxlength="6"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3"
-                                inputmode="decimal" required (click)="$event.target.select()" #alsMoisNMoins3="ngModel">
+                                inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins3="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
                             </app-text-with-euro-symbol>
@@ -341,12 +341,12 @@
             <div class="row">
                 <div class="col">
                     <input id="montantLoyer" name="montantLoyer" type="text" data-testid="input-montant-loyer"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="8" class="form-control d-inline"
                         [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0}"
                         [(ngModel)]="informationsPersonnelles.logement.montantLoyer" required placeholder="Montant"
-                        inputmode="decimal" #montantLoyer="ngModel">
+                        inputmode="numeric" #montantLoyer="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -361,7 +361,7 @@
             </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantLoyer.touched)  && montantLoyer.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
             </span>
         </div>
         <div class="form-group" *ngIf="isConcerneParAideLogement()">
@@ -373,11 +373,11 @@
             <div class="row">
                 <div class="col">
                     <input id="montantCharges" name="montantCharges" type="text" data-testid="input-montant-charges"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="8" class="form-control d-inline"
                         [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
-                        inputmode="decimal" #montantCharges="ngModel">
+                        inputmode="numeric" #montantCharges="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -387,7 +387,7 @@
             </span>
             <span class="row error-input-message"
                 *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
-                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
             </span>
         </div>
         <div class="form-group"
@@ -429,11 +429,12 @@
                 <div class="col">
                     <input id="montantAllocationsFamiliales" attr.aria-label="Allocations familiales du mois dernier"
                         name="montantAllocationsFamiliales" data-testid="input-af"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales"
-                        inputmode="decimal" required (click)="$event.target.select()" #allocationsFamiliales="ngModel">
+                        inputmode="numeric" required (click)="$event.target.select()" #allocationsFamiliales="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -444,7 +445,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationsFamiliales.touched)  && allocationsFamiliales.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>
@@ -459,11 +460,12 @@
                     <input id="montantAllocationSoutienFamiliale"
                         attr.aria-label="Allocation de soutien familiale du mois dernier"
                         name="montantAllocationSoutienFamiliale" data-testid="input-asf"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial"
-                        inputmode="decimal" required (click)="$event.target.select()"
+                        inputmode="numeric" required (click)="$event.target.select()"
                         #allocationSoutienFamilial="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -475,7 +477,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || allocationSoutienFamilial.touched)  && allocationSoutienFamilial.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>
@@ -489,11 +491,12 @@
                 <div class="col">
                     <input id="montantComplementFamilial" attr.aria-label="Complément familial du mois dernier"
                         name="montantComplementFamilial" data-testid="input-cf"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial"
-                        inputmode="decimal" required (click)="$event.target.select()" #complementFamilial="ngModel">
+                        inputmode="numeric" required (click)="$event.target.select()" #complementFamilial="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
@@ -504,7 +507,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || complementFamilial.touched)  && complementFamilial.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>
@@ -518,11 +521,12 @@
                 <div class="col">
                     <input id="montantPAJEFoyer" name="montantPAJEFoyer"
                         data-testid="input-prestation-accueil-jeune-enfant"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant"
-                        inputmode="decimal" required (click)="$event.target.select()"
+                        inputmode="numeric" required (click)="$event.target.select()"
                         #prestationAccueilJeuneEnfantFoyer="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -534,7 +538,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || prestationAccueilJeuneEnfantFoyer.touched)  && prestationAccueilJeuneEnfantFoyer.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>
@@ -547,11 +551,12 @@
             <div class="row">
                 <div class="col">
                     <input id="montantPersionsAlimentairesFoyer" name="montantPersionsAlimentairesFoyer"
-                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" type="text" min="0"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
+                        placeholder="Montant"
                         [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer"
-                        inputmode="decimal" required (click)="$event.target.select()"
+                        inputmode="numeric" required (click)="$event.target.select()"
                         #pensionsAlimentairesFoyer="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -563,7 +568,7 @@
                 </span>
                 <span class="error-input-message"
                     *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || pensionsAlimentairesFoyer.touched)  && pensionsAlimentairesFoyer.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                 </span>
             </div>
         </div>

@@ -171,7 +171,7 @@ export class DeConnecteRessourcesFinancieresService {
         montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationASS.allocationJournaliereNet));
       }
       if (aidesPoleEmploi.allocationARE) {
-        montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationARE.allocationJournaliereNet));
+        montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationARE.montantJournalierBrut));
       }
     }
     return montant;
@@ -302,6 +302,7 @@ export class DeConnecteRessourcesFinancieresService {
   }
 
   public isDonneesRessourcesFinancieresValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+    ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);
     return this.isAidesValides(ressourcesFinancieres) && this.isRevenusValides(ressourcesFinancieres);
   }
 

@@ -63,6 +63,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -108,6 +118,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -153,6 +173,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -178,6 +208,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -203,6 +243,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -228,6 +278,16 @@
 					"organisme": "Caisse d'allocation familiales",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1150.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		}

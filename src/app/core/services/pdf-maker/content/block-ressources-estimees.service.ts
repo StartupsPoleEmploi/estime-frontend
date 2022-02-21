@@ -15,7 +15,6 @@ import { TableElement } from '../models/table/table-element';
 import { Text } from '../models/text';
 import { ImagesBase64Enum } from "@app/commun/enumerations/images-base64.enum";
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
-import { LibellesRessourcesFinancieresEnum } from '@app/commun/enumerations/libelles-ressources-financieres.enum';
 
 @Injectable({ providedIn: 'root' })
 export class BlockRessourcesEstimeesService {
@@ -201,8 +200,8 @@ export class BlockRessourcesEstimeesService {
 
   private addRowPaie(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
     const montant = demandeurEmploi.futurTravail.salaire.montantNet;
-    const imageBase64 = ImagesBase64Enum.PAIE;
-    const libelle = '\n' + LibellesRessourcesFinancieresEnum.SALAIRE;
+    const imageBase64 = ImagesBase64Enum.SALAIRE;
+    const libelle = '\n' + LibellesAidesEnum.SALAIRE;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
   }
@@ -290,7 +289,7 @@ export class BlockRessourcesEstimeesService {
   private addRowIMMO(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const montant = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
     const imageBase64 = ImagesBase64Enum.IMMOBILIER;
-    const libelle = LibellesRessourcesFinancieresEnum.IMMOBILIER;
+    const libelle = LibellesAidesEnum.IMMOBILIER;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
   }
@@ -298,7 +297,7 @@ export class BlockRessourcesEstimeesService {
   private addRowMICR(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const montant = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
     const imageBase64 = ImagesBase64Enum.MICRO_ENTREPRENEUR;
-    const libelle = LibellesRessourcesFinancieresEnum.MICRO_ENTREPRENEUR;
+    const libelle = LibellesAidesEnum.MICRO_ENTREPRENEUR;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
   }
@@ -306,7 +305,7 @@ export class BlockRessourcesEstimeesService {
   private addRowINDP(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
     const montant = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
     const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
-    const libelle = LibellesRessourcesFinancieresEnum.TRAVAILLEUR_INDEPENDANT;
+    const libelle = LibellesAidesEnum.TRAVAILLEUR_INDEPENDANT;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
   }

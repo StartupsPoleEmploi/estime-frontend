@@ -36,7 +36,6 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   ngOnInit(): void { }
 
   public hasAgeEligibleRetraite(): boolean {
-    console.log(this.dateNaissanceNouvellePersonne);
     return this.personneUtileService.isAgeEligibleRetraite(this.dateNaissanceNouvellePersonne);
   }
 

@@ -23,6 +23,16 @@
 					"organisme": "CAF",
 					"lienExterne": "",
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -46,6 +56,16 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -73,6 +93,16 @@
 					"organisme": "CAF",
 					"lienExterne": "",
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -96,6 +126,16 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -123,6 +163,16 @@
 					"organisme": "CAF",
 					"lienExterne": "",
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -146,6 +196,16 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1000.0,
+					"nom": "Salaire",
+					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}

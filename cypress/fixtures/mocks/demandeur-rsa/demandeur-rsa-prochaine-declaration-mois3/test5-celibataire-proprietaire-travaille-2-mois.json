@@ -13,6 +13,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -28,6 +38,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -43,6 +63,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": true
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -67,6 +97,16 @@
 					"nom": "Revenu de Solidarité Active",
 					"organisme": "CAF",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}
@@ -93,6 +133,16 @@
 					"organisme": "CAF",
 					"lienExterne": null,
 					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
+					"reportee": false
 				}
 			}
 		},
@@ -117,6 +167,16 @@
 					"nom": "Prime d'Activité",
 					"organisme": "CAF",
 					"lienExterne": null,
+					"reportee": false
+				},
+				"PAIE": {
+					"code": "PAIE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 500.0,
+					"nom": "Salaire",
+					"organisme": null,
+					"lienExterne": "",
 					"reportee": false
 				}
 			}

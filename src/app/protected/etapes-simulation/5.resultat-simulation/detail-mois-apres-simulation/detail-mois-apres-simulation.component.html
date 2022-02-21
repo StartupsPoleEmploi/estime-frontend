@@ -26,10 +26,9 @@
         </app-message-info>
     </div>
     <div class="div_detail_mois_with_padding">
-        <div class="card my-2 p-3" [class]="{'aide-avec-detail':isAideAvecDetail(aide)}"
-            *ngFor="let aide of aidesEtRevenusMois" (click)="onClickOnAide(aide);"
-            (keyup)="handleKeyUpOnAide($event,aide);" [tabindex]="isAideAvecDetail(aide)?0:-1"
-            tag-action="clic_bouton_detail_aide">
+        <div class="card my-2 p-3" [class]="{'aide-avec-detail':isAideAvecDetail(aide)}" *ngFor="let aide of aidesMois"
+            (click)="onClickOnAide(aide);" (keyup)="handleKeyUpOnAide($event,aide);"
+            [tabindex]="isAideAvecDetail(aide)?0:-1" tag-action="clic_bouton_detail_aide">
             <div class="row pe-3">
                 <div class="col-md-1 col-2">
                     <div class="code-ressource me-1" [ngClass]="[aide.code.toLowerCase()]">

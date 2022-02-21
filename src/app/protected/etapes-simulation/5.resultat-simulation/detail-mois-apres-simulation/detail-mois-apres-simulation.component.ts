@@ -3,7 +3,6 @@ import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } fro
 import { Aide } from '@app/commun/models/aide';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service';
-import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -22,17 +21,13 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   @Input() modalRef: BsModalRef;
   @Output() aideSelection = new EventEmitter<Aide>();
 
-  aideMois: Aide[];
-  revenusMois: Aide[];
-  aidesEtRevenusMois: Aide[];
-
+  aidesMois: Aide[];
   aideSelected: Aide[];
 
   constructor(
     private aidesService: AidesService,
     public dateUtileService: DateUtileService,
     public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
-    private deConnecteService: DeConnecteService,
     public screenService: ScreenService,
     private location: LocationStrategy,
     public sideModalService: SideModalService) {
@@ -45,15 +40,12 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.aideMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
-    this.revenusMois = this.deConnecteSimulationAidesService.getRevenusApresSimulation(demandeurEmploiConnecte);
-    this.aidesEtRevenusMois = this.aideMois.concat(this.revenusMois);
-    this.orderAidesEtRevenusMois();
+    this.aidesMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
+    this.orderAidesMois();
   }
 
-  private orderAidesEtRevenusMois() {
-    this.aidesEtRevenusMois.sort((a, b) => b.montant - a.montant);
+  private orderAidesMois() {
+    this.aidesMois.sort((a, b) => b.montant - a.montant);
   }
 
   public isAideADemander(aide: Aide): boolean {

@@ -74,12 +74,10 @@ export class RessourcesFinancieresUtileService {
 
   public creerAllocationARE(): AllocationARE {
     const allocationARE = new AllocationARE();
-    allocationARE.allocationJournaliereNet = null;
     allocationARE.allocationMensuelleNet = null;
     allocationARE.montantJournalierBrut = null;
     allocationARE.salaireJournalierReferenceBrut = null;
     allocationARE.nombreJoursRestants = null;
-    allocationARE.isConcerneDegressivite = null;
     return allocationARE;
   }
 
@@ -286,7 +284,7 @@ export class RessourcesFinancieresUtileService {
     }
     if (ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
       ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut);
-      ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationJournaliereNet);
+      ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut);
       ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
     }
   }
