@@ -5,18 +5,18 @@ import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum'
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@models/numero-prochain-mois-declaration-trimestrielle";
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
@@ -34,7 +34,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
 
-  @Input() ressourcesFinancieres: RessourcesFinancieres;
+  @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
 
   @Output() validationRessourcesFoyerEventEmitter = new EventEmitter<void>();
 
@@ -59,11 +59,11 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private informationsPersonnellesService: InformationsPersonnellesService,
     public modalService: ModalService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public screenService: ScreenService,
     private situationFamilialeUtileService: SituationFamilialeUtileService
   ) {
@@ -82,7 +82,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
     this.isRessourcesFinancieresFoyerFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
+      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       this.validationRessourcesFoyerEventEmitter.emit();
     } else {
@@ -154,17 +154,17 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
 
   private loadAidesLogement(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.ressourcesFinancieres
-      && demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF
-      && demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement) {
-      this.ressourcesFinancieres.aidesCAF.aidesLogement = demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.aidesLogement;
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
+      && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF
+      && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement) {
+      this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement;
     } else {
-      this.ressourcesFinancieres.aidesCAF.aidesLogement = this.ressourcesFinancieresUtileService.creerAidesLogement();
+      this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesLogement();
     }
   }
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
-    return form.valid && this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
+    return form.valid && this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationFoyerValides(this.ressourcesFinancieresAvantSimulation, this.informationsPersonnelles);
   }
 
   public handleKeyUpOnButtonAPL(event: any): void {
@@ -191,17 +191,17 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public isAuMoinsUneAideLogementSuperieureAZero(): boolean {
     return (
       (this.beneficiaireAides.beneficiaireAPL
-        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 == 0))
+        && (this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 == 0))
       || (this.beneficiaireAides.beneficiaireALF
-        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 == 0))
+        && (this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 == 0))
       || (this.beneficiaireAides.beneficiaireALS
-        && (this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 == 0
-          && this.ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 == 0))
+        && (this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 == 0
+          && this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 == 0))
     );
   }
 

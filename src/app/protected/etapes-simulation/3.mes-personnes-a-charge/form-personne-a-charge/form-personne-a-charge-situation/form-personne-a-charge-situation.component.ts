@@ -4,7 +4,7 @@ import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { Salaire } from '@app/commun/models/salaire';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
@@ -27,7 +27,7 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public personneUtileService: PersonneUtileService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteService: DeConnecteService
@@ -121,10 +121,10 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   public onClickCheckBoxIsSalarie(event): void {
     event.preventDefault();
     if (!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.salaire = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = null;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.salaire = new Salaire();
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = new Salaire();
     }
   }
 
@@ -191,85 +191,85 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
 
   private unsetSalaire(): void {
     this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
-    this.nouvellePersonneACharge.ressourcesFinancieres.salaire = null;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = null;
   }
 
   private setAAH(): void {
     this.setAidesCAF();
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF
-      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH = null;
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF
+      && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH = null;
     }
   }
 
   private unsetAAH(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationAAH = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH = null;
     }
   }
 
   private setASS(): void {
     this.setAidesPoleEmploi();
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
-      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresUtileService.creerAllocationASS();
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
+      && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationASS();
       this.unsetARE();
     }
   }
 
   private unsetASS(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
-      && this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
+      && this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet = null;
     }
   }
 
   private setARE(): void {
     this.setAidesPoleEmploi();
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
-      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresUtileService.creerAllocationARE();
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
+      && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationARE();
       this.unsetASS();
     }
   }
 
   private unsetARE(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi
-      && this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
+      && this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet = null;
     }
   }
 
   private setRSA(): void {
     this.setAidesCAF();
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF
-      && !this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA = null;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle = null;
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF
+      && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle = null;
     }
   }
 
   private unsetRSA(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF.allocationRSA = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA = null;
     }
   }
 
   private unsetBeneficesMicroEntreprise(): void {
     if (this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
       this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice = null;
     }
   }
 
   private unsetChiffreAffairesIndependant(): void {
     if (this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
       this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice = null;
     }
   }
 
@@ -278,33 +278,33 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   }
 
   private unsetPensionInvalidite(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM) {
       this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.pensionInvalidite = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = null;
     }
   }
   private unsetPensionRetraite(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite) {
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.pensionRetraite) {
       this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite = false;
-      this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite = null;
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.pensionRetraite = null;
     }
   }
 
   private setAidesCAF(): void {
-    if (!this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF = this.ressourcesFinancieresUtileService.creerAidesCAF();
+    if (!this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesCAF();
     }
   }
 
   private setAidesPoleEmploi(): void {
-    if (!this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi = this.ressourcesFinancieresUtileService.creerAidesPoleEmploi();
+    if (!this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesPoleEmploi();
     }
   }
 
   private setAidesCPAM(): void {
-    if (!this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM) {
-      this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM = this.ressourcesFinancieresUtileService.creerAidesCPAM();
+    if (!this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesCPAM();
     }
   }
 }

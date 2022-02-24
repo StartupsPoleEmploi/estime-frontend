@@ -5,7 +5,7 @@ import { Personne } from '@models/personne';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { AidesCAF } from '@models/aides-caf';
 import { AidesPoleEmploi } from '@models/aides-pole-emploi';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
@@ -72,7 +72,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     if (this.dateUtileService.isDateValide(this.dateNaissanceNouvellePersonne)) {
       if (this.personneUtileService.isAgeLegalPourTravaillerFromDateDecomposee(this.dateNaissanceNouvellePersonne)) {
         this.isNouvellePersonneAChargeSituationFormGroupDisplay = true;
-        if (!this.nouvellePersonneACharge.ressourcesFinancieres) {
+        if (!this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation) {
           this.creerRessourcesFinancieres();
         }
       } else {
@@ -121,23 +121,23 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private unsetRessourcesFinancieres(): void {
-    if (this.nouvellePersonneACharge.ressourcesFinancieres) {
-      this.nouvellePersonneACharge.ressourcesFinancieres = null;
+    if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation) {
+      this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation = null;
     }
     this.resetInformationsPersonnelles();
     this.resetBeneficiaireAides();
   }
 
   private creerRessourcesFinancieres(): void {
-    this.nouvellePersonneACharge.ressourcesFinancieres = new RessourcesFinancieres();
-    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCAF = new AidesCAF();
-    this.nouvellePersonneACharge.ressourcesFinancieres.aidesPoleEmploi = new AidesPoleEmploi();
-    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM = new AidesCPAM();
-    this.nouvellePersonneACharge.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.revenusImmobilier3DerniersMois = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice = 0;
-    this.nouvellePersonneACharge.ressourcesFinancieres.pensionRetraite = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation = new RessourcesFinancieresAvantSimulation();
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM = new AidesCPAM();
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice = 0;
+    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.pensionRetraite = 0;
   }
 
   private resetInformationsPersonnelles(): void {

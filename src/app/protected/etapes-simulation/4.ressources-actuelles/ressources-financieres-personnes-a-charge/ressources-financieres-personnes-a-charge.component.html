@@ -22,8 +22,8 @@
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.salaire.montantNet"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.salaire.montantNet && (personneDTO.personne.ressourcesFinancieres.salaire.montantNet == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)}"
                             required placeholder="Montant" inputmode="numeric" #salaireNet="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -38,7 +38,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.salaire.montantNet && (personneDTO.personne.ressourcesFinancieres.salaire.montantNet == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -60,7 +60,7 @@
                                 attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
                                 data-testid="btn-has-travaille-au-cours-derniers-mois-oui-personne-a-charge-{{personneDTO.index + 1}}"
                                 type="radio" class="form-check-input"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieres.hasTravailleAuCoursDerniersMois"
+                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                                 (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, true)"
                                 required [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
                                 (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, true)">
@@ -75,7 +75,7 @@
                                 data-testid="btn-has-travaille-au-cours-derniers-mois-non-personne-a-charge-{{personneDTO.index + 1}}"
                                 attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
                                 type="radio" class="form-check-input"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieres.hasTravailleAuCoursDerniersMois"
+                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                                 [value]="false"
                                 (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, false)"
                                 required #hasTravailleAuCoursDerniersMois="ngModel"
@@ -125,8 +125,8 @@
                                             type="text" maxlength="6" min="0"
                                             class="max-with-input-type-montant form-control d-inline"
                                             placeholder="Montant"
-                                            (blur)="this.ressourcesFinancieresUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
+                                            (blur)="this.ressourcesFinancieresUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
+                                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
                                             [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire(personneDTO.personne)}"
                                             required inputmode="numeric" (click)="$event.target.select()"
                                             #salaireMoisAvantPeriodeSimulee="ngModel">
@@ -168,7 +168,7 @@
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
                             placeholder="Montant" inputmode="numeric" required #allocationMensuelleNetARE="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -183,7 +183,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -204,8 +204,8 @@
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
                             placeholder="Montant" inputmode="numeric" required #allocationMensuelleNetASS="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -220,7 +220,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -240,8 +240,8 @@
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationAAH"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationAAH == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)}"
                             placeholder="Montant" inputmode="numeric" required #allocationAAH="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -256,7 +256,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieres.aidesCAF.allocationAAH == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -277,8 +277,8 @@
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite && personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0}"
                             placeholder="Montant" inputmode="numeric" required #pensionInvalidite="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -293,7 +293,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -312,8 +312,8 @@
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite }"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite }"
                             placeholder="Montant" inputmode="numeric" required
                             #allocationSupplementaireInvalidite="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
@@ -346,8 +346,8 @@
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                             placeholder="Montant"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
                             required inputmode="numeric"
                             #personneAChargeBeneficesMicroEntreprise3DerniersMois="ngModel">
                         <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
@@ -363,7 +363,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -385,8 +385,8 @@
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                             placeholder="Montant"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
                             required inputmode="numeric"
                             #personneAChargeChiffreAffairesIndependantDernierExercice="ngModel">
                         <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
@@ -402,7 +402,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -421,8 +421,8 @@
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
                             placeholder="Montant"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieres.pensionRetraite"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieres.pensionRetraite && (personneDTO.personne.ressourcesFinancieres.pensionRetraite == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)}"
                             required inputmode="numeric" #personneAChargePensionRetraite="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -437,7 +437,7 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                     <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieres.pensionRetraite && (personneDTO.personne.ressourcesFinancieres.pensionRetraite == 0)"
+                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)"
                         class="error-input-message">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>

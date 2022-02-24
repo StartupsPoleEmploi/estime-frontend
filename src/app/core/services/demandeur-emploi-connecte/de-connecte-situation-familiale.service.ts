@@ -25,7 +25,7 @@ export class DeConnecteSituationFamilialeService {
   public hasConjointSituationAvecRessource(): boolean {
     let hasConjointSituationAvecRessource = false;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (this.hasConjoint() && this.personneUtileService.hasRessourcesFinancieres(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
+    if (this.hasConjoint() && this.personneUtileService.hasRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte.situationFamiliale.conjoint)) {
       hasConjointSituationAvecRessource = true;
     }
     return hasConjointSituationAvecRessource;
@@ -68,7 +68,7 @@ export class DeConnecteSituationFamilialeService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
-        if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
+        if (this.personneUtileService.hasRessourcesFinancieresAvantSimulation(personne)) {
           hasPersonneAChargeAvecRessourcesFinancieres = true;
         }
       });
@@ -133,15 +133,15 @@ export class DeConnecteSituationFamilialeService {
 
   public isRessourcesFinancieresConjointValides(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return this.personneUtileService.isRessourcesFinancieresValides(demandeurEmploiConnecte.situationFamiliale.conjoint);
+    return this.personneUtileService.isRessourcesFinancieresAvantSimulationValides(demandeurEmploiConnecte.situationFamiliale.conjoint);
   }
 
   public isRessourcesFinancieresPersonnesAChargeValides(): boolean {
     let isRessourcesFinancieresPersonnesAChargeValides = true;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach(personne => {
-      if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
-        const isRessourcesFinancieresPersonneValides = this.personneUtileService.isRessourcesFinancieresValides(personne);
+      if (this.personneUtileService.hasRessourcesFinancieresAvantSimulation(personne)) {
+        const isRessourcesFinancieresPersonneValides = this.personneUtileService.isRessourcesFinancieresAvantSimulationValides(personne);
         if (!isRessourcesFinancieresPersonneValides) {
           isRessourcesFinancieresPersonnesAChargeValides = false;
         }

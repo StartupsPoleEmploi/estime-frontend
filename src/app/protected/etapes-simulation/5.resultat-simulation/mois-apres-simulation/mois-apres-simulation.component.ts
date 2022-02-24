@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -22,7 +23,7 @@ export class MoisApresSimulationComponent implements OnInit {
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
 
-  aidesMois: Aide[];
+  ressourcesFinancieresEtAidesMois: RessourceFinanciere[];
   private static OVERFLOW_LIMIT_REGULAR_SCREEN: number = 5;
   private static OVERFLOW_LIMIT_SMALL_SCREEN: number = 4;
 
@@ -40,12 +41,12 @@ export class MoisApresSimulationComponent implements OnInit {
   ngOnInit(
   ): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.aidesMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
-    this.orderAidesMois();
+    this.ressourcesFinancieresEtAidesMois = this.deConnecteSimulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
+    this.orderRessourcesFinancieresMois();
   }
 
-  private orderAidesMois() {
-    this.aidesMois.sort((a, b) => b.montant - a.montant);
+  private orderRessourcesFinancieresMois() {
+    this.ressourcesFinancieresEtAidesMois.sort((a, b) => b.montant - a.montant);
   }
 
   public onClickAfficherDetail(event, simulationActuelle: SimulationMensuelle): void {
@@ -74,8 +75,8 @@ export class MoisApresSimulationComponent implements OnInit {
     return index == 5 ? 'overflow' : 'else';
   }
 
-  public getAidesEtRevenusOverFlow(): number {
-    return this.screenService.isExtraSmallScreen() ? this.aidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.aidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
+  public getressourcesFinancieresOverFlow(): number {
+    return this.screenService.isExtraSmallScreen() ? this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
   }
 
 }

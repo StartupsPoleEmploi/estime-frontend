@@ -8,9 +8,9 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { Personne } from '@app/commun/models/personne';
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Component({
   selector: 'app-ressources-financieres-personnes-a-charge',
@@ -34,12 +34,12 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     public deConnecteService: DeConnecteService,
     public screenService: ScreenService,
     private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
       && !personne.beneficiaireAides.beneficiaireARE
       && !personne.beneficiaireAides.beneficiaireASS
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
-      && personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0
+      && personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0
       && !personne.informationsPersonnelles.microEntrepreneur
       && !personne.informationsPersonnelles.travailleurIndependant
       && !personne.informationsPersonnelles.hasPensionRetraite) {
@@ -78,10 +78,10 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     let isValide = form.valid;
     if (isValide) {
       this.personnesDTO.forEach((personneDTO) => {
-        let personneDTOValide = this.personneUtileService.isRessourcesFinancieresValides(personneDTO.personne);
+        let personneDTOValide = this.personneUtileService.isRessourcesFinancieresAvantSimulationValides(personneDTO.personne);
         // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
         if (personneDTOValide) {
-          personneDTOValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(personneDTO.personne.ressourcesFinancieres);
+          personneDTOValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isChampsSalairesValides(personneDTO.personne.ressourcesFinancieresAvantSimulation);
           this.erreurSaisieSalaires = !personneDTOValide;
         }
         if (!personneDTOValide) {
@@ -93,7 +93,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+    this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
     this.personnesDTO = new Array<PersonneDTO>();
     const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     demandeurConnecte.situationFamiliale.personnesACharge.forEach((personne, index) => {
@@ -108,33 +108,33 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personne: Personne, hasTravailleAuCoursDerniersMois: boolean): void {
     if (hasTravailleAuCoursDerniersMois === false) {
-      personne.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
-      personne.ressourcesFinancieres.periodeTravailleeAvantSimulation = null;
-      personne.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = false;
+      personne.ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois = 0;
+      personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = null;
+      personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = false;
       this.personneUtileService.unsetSalairesAvantPeriodeSimulation(personne);
     } else {
-      if (personne.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-        personne.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.ressourcesFinancieresUtileService.creerSalairesAvantPeriodeSimulationPersonne(personne);
+      if (personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null) {
+        personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.creerSalairesAvantPeriodeSimulationPersonne(personne);
       }
       if (this.optionsNombreMoisTravailles == null) {
-        this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+        this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
       }
     }
   }
 
   public isAfficherChampsSalairesPersonne(personne: Personne): boolean {
-    return personne.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
+    return personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois;
   }
 
   public hasDouzeMoisSansSalaire(personne: Personne): boolean {
     const isNull = (mois) => mois == null;
-    return (personne.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || personne.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
+    return (personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null
+      || personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.every(isNull));
   }
 
   public handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personne: Personne, event: any, value: boolean) {
     if (event.keyCode === 13) {
-      personne.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = value;
+      personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = value;
       this.onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personne, value);
     }
   }

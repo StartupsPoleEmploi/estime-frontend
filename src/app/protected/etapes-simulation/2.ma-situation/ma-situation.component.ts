@@ -372,7 +372,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.situationFamiliale.conjoint.informationsPersonnelles.salarie) {
       this.deConnecteService.unsetConjointSalaire();
     } else {
-      this.situationFamiliale.conjoint.ressourcesFinancieres.salaire = new Salaire();
+      this.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.salaire = new Salaire();
       this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = false;
     }
   }

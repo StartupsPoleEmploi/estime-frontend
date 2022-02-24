@@ -15,14 +15,14 @@
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="8" class="form-control d-inline"
-                            [ngClass]="{'ng-invalid': this.ressourcesFinancieres.aidesCAF.allocationRSA && this.ressourcesFinancieres.aidesCAF.allocationRSA == 0}"
-                            [(ngModel)]="ressourcesFinancieres.aidesCAF.allocationRSA" required placeholder="Montant"
-                            inputmode="numeric" #allocationRSA="ngModel">
+                            [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA && this.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA == 0}"
+                            [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA" required
+                            placeholder="Montant" inputmode="numeric" #allocationRSA="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
                 <span
-                    *ngIf="this.ressourcesFinancieres.aidesCAF.allocationRSA && (this.ressourcesFinancieres.aidesCAF.allocationRSA == 0)"
+                    *ngIf="this.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA && (this.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA == 0)"
                     class="row error-input-message">
                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                 </span>
@@ -213,7 +213,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1"
                                 inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins1="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
@@ -222,7 +222,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1"
                                 inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins1="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(1)}}"
@@ -231,7 +231,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1"
                                 inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins1="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(1)">
@@ -252,7 +252,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2"
                                 inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins2="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
@@ -261,7 +261,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2"
                                 inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins2="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(2)}}"
@@ -270,7 +270,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2"
                                 inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins2="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(2)">
@@ -291,7 +291,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-REGEX_NUMERIC" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3"
                                 inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins3="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
@@ -300,7 +300,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3"
                                 inputmode="numeric" required (click)="$event.target.select()" #alfMoisNMoins3="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALS"
                                 attr.aria-label="Allocations logement perçue au mois de {{this.dateUtileService.getDateFormateeAvantDateJour(3)}}"
@@ -309,7 +309,7 @@
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
                                 class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3"
                                 inputmode="numeric" required (click)="$event.target.select()" #alsMoisNMoins3="ngModel">
                             <app-text-with-euro-symbol *ngIf="!screenService.isExtraSmallScreen()"
                                 [message]="'au mois de ' + this.dateUtileService.getDateFormateeAvantDateJour(3)">
@@ -399,9 +399,9 @@
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
                         data-testid="select-prochaine-declaration-rsa-foyer"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle"
                         class="fit-content form-select"
-                        [ngClass]="{'option-selected':ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle !== null}"
+                        [ngClass]="{'option-selected':ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle !== null}"
                         data-width="auto" required #prochaineDeclarationTrimestrielle="ngModel">
                         <option [value]="null" disabled>
                             Sélectionner
@@ -433,7 +433,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationsFamiliales"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales.allocationsFamiliales"
                         inputmode="numeric" required (click)="$event.target.select()" #allocationsFamiliales="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -464,7 +464,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.allocationSoutienFamilial"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales.allocationSoutienFamilial"
                         inputmode="numeric" required (click)="$event.target.select()"
                         #allocationSoutienFamilial="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
@@ -495,7 +495,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.complementFamilial"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales.complementFamilial"
                         inputmode="numeric" required (click)="$event.target.select()" #complementFamilial="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -525,7 +525,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales.prestationAccueilJeuneEnfant"
                         inputmode="numeric" required (click)="$event.target.select()"
                         #prestationAccueilJeuneEnfantFoyer="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
@@ -555,7 +555,7 @@
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"
                         placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieres.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales.pensionsAlimentairesFoyer"
                         inputmode="numeric" required (click)="$event.target.select()"
                         #pensionsAlimentairesFoyer="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>

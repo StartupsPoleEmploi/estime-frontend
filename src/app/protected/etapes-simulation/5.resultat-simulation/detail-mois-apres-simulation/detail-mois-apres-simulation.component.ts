@@ -1,10 +1,10 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
-import { Aide } from '@app/commun/models/aide';
+import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service';
-import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { RessourcesFinancieresService } from '@app/core/services/utile/ressources-financieres.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -19,13 +19,13 @@ export class DetailMoisApresSimulationComponent implements OnInit {
 
   @Input() simulationActuelle: SimulationMensuelle;
   @Input() modalRef: BsModalRef;
-  @Output() aideSelection = new EventEmitter<Aide>();
+  @Output() ressourceFinanciereOuAideSelection = new EventEmitter<RessourceFinanciere>();
 
-  aidesMois: Aide[];
-  aideSelected: Aide[];
+  ressourcesFinancieresEtAidesMois: RessourceFinanciere[];
+  ressourceFinanciereOuAideSelected: RessourceFinanciere;
 
   constructor(
-    private aidesService: AidesService,
+    private ressourcesFinancieresService: RessourcesFinancieresService,
     public dateUtileService: DateUtileService,
     public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     public screenService: ScreenService,
@@ -33,35 +33,35 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     public sideModalService: SideModalService) {
     history.pushState(null, null, window.location.href);
     this.location.onPopState(() => {
-      if (typeof this.aideSelected == undefined) {
+      if (typeof this.ressourceFinanciereOuAideSelected == undefined) {
         this.sideModalService.closeSideModalMois();
       }
     });
   }
 
   ngOnInit(): void {
-    this.aidesMois = this.deConnecteSimulationAidesService.getAidesSimulationMensuelle(this.simulationActuelle);
-    this.orderAidesMois();
+    this.ressourcesFinancieresEtAidesMois = this.deConnecteSimulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
+    this.orderRessourcesFinancieresMois();
   }
 
-  private orderAidesMois() {
-    this.aidesMois.sort((a, b) => b.montant - a.montant);
+  private orderRessourcesFinancieresMois() {
+    this.ressourcesFinancieresEtAidesMois.sort((a, b) => b.montant - a.montant);
   }
 
-  public isAideADemander(aide: Aide): boolean {
-    return this.aidesService.isAideDemandeurPourraObtenir(aide);
+  public isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+    return this.ressourcesFinancieresService.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciereOuAide);
   }
 
-  public onClickOnAide(aide): void {
-    if (this.isAideAvecDetail(aide)) {
-      this.aideSelected = aide;
-      this.aideSelection.emit(aide);
+  public onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide): void {
+    if (this.isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)) {
+      this.ressourceFinanciereOuAideSelected = ressourceFinanciereOuAide;
+      this.ressourceFinanciereOuAideSelection.emit(ressourceFinanciereOuAide);
     }
   }
 
-  public handleKeyUpOnAide(event: any, aide: Aide) {
+  public handleKeyUpOnRessourceFinanciereOuAide(event: any, ressourceFinanciereOuAide: RessourceFinanciere) {
     if (event.keyCode === 13) {
-      this.onClickOnAide(aide);
+      this.onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);
     }
   }
 
@@ -71,11 +71,11 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     }
   }
 
-  public isAideSelected(aide): boolean {
-    return this.aideSelected == aide;
+  public isRessourceFinanciereOuAideSelected(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+    return this.ressourceFinanciereOuAideSelected == ressourceFinanciereOuAide;
   }
 
-  public isAideAvecDetail(aide): boolean {
-    return this.aidesService.isAideAvecDetail(aide);
+  public isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+    return this.ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide);
   }
 }

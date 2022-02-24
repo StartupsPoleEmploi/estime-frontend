@@ -1,11 +1,11 @@
 import { PeConnectAuthorization } from "./pe-connect-authorization";
 import { BeneficiaireAides } from "@app/commun/models/beneficiaire-aides";
-import { RessourcesFinancieres } from "@models/ressources-financieres";
+import { RessourcesFinancieresAvantSimulation } from "@app/commun/models/ressources-financieres-avant-simulation";
 
 export class Individu {
   beneficiaireAides: BeneficiaireAides;
   idPoleEmploi: string;
   populationAutorisee: boolean;
   peConnectAuthorization: PeConnectAuthorization;
-  ressourcesFinancieres: RessourcesFinancieres;
+  ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
 }

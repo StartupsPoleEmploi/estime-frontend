@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@models/simulation-aides';
-import { DeConnecteRessourcesFinancieresService } from '../../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationAidesService } from "../../demandeur-emploi-connecte/de-connecte-simulation-aides.service";
 import { AidesService } from '../../utile/aides.service';
 import { DateUtileService } from '../../utile/date-util.service';
@@ -22,7 +22,7 @@ export class BlockRessourcesEstimeesService {
   constructor(
     private aidesService: AidesService,
     private dateUtileService: DateUtileService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteSimulationAidesService: DeConnecteSimulationAidesService
   ) {
 
@@ -91,7 +91,7 @@ export class BlockRessourcesEstimeesService {
     //création des cellules pour chaque simulation mensuelle
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
       let montant = 0;
-      for (let [codeAide, aide] of Object.entries(simulationMensuelle.mesAides)) {
+      for (let [codeAide, aide] of Object.entries(simulationMensuelle.aides)) {
         if (aide && codeAide === codeAideToAdd) {
           montant = aide.montant;
         }
@@ -141,27 +141,27 @@ export class BlockRessourcesEstimeesService {
       this.addRowAAHPourBeneficiaireAAH(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF && !demandeurEmploi.beneficiaireAides.beneficiaireAAH && demandeurEmploi.ressourcesFinancieres.aidesCAF.allocationAAH > 0) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF && !demandeurEmploi.beneficiaireAides.beneficiaireAAH && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH > 0) {
       this.addRowAAH(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationSoutienFamilial) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.allocationSoutienFamilial) {
       this.addRowASF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.allocationsFamiliales) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.allocationsFamiliales) {
       this.addRowAF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.complementFamilial) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.complementFamilial) {
       this.addRowCF(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.prestationAccueilJeuneEnfant) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.prestationAccueilJeuneEnfant) {
       this.addRowPAJE(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCAF.aidesFamiliales?.pensionsAlimentairesFoyer) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.pensionsAlimentairesFoyer) {
       this.addRowPAF(body, simulationAides);
       nbrRows++;
     }
@@ -174,7 +174,7 @@ export class BlockRessourcesEstimeesService {
       this.addRowPensionInvalidite(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.aidesCPAM?.allocationSupplementaireInvalidite > 0) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM?.allocationSupplementaireInvalidite > 0) {
       this.addRowASI(body, demandeurEmploi, simulationAides);
       nbrRows++;
     }
@@ -183,15 +183,15 @@ export class BlockRessourcesEstimeesService {
 
   public addTableRevenusActuelles(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): number {
     let nbrRows = 0;
-    if (demandeurEmploi.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0) {
       this.addRowIMMO(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0) {
       this.addRowMICR(body, simulationAides);
       nbrRows++;
     }
-    if (demandeurEmploi.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
+    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice) {
       this.addRowINDP(body, simulationAides);
       nbrRows++;
     }
@@ -250,7 +250,7 @@ export class BlockRessourcesEstimeesService {
 
   private addRowAAH(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
     const imageBase64 = ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES;
-    const montant = demandeurEmploi.ressourcesFinancieres.aidesCAF.allocationAAH;
+    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH;
     const libelle = LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
@@ -272,7 +272,7 @@ export class BlockRessourcesEstimeesService {
 
   private addRowPensionInvalidite(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
     const imageBase64 = ImagesBase64Enum.PENSION_INVALIDITE;
-    const montant = demandeurEmploi.ressourcesFinancieres.aidesCPAM.pensionInvalidite;
+    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite;
     const libelle = LibellesAidesEnum.PENSION_INVALIDITE;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
@@ -280,14 +280,14 @@ export class BlockRessourcesEstimeesService {
 
   private addRowASI(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
     const imageBase64 = ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
-    const montant = demandeurEmploi.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite;
+    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite;
     const libelle = LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
     body.push(row);
   }
 
   private addRowIMMO(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
+    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getRevenusImmobilierSur1Mois();
     const imageBase64 = ImagesBase64Enum.IMMOBILIER;
     const libelle = LibellesAidesEnum.IMMOBILIER;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
@@ -295,7 +295,7 @@ export class BlockRessourcesEstimeesService {
   }
 
   private addRowMICR(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
+    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getBeneficesMicroEntrepriseSur1Mois();
     const imageBase64 = ImagesBase64Enum.MICRO_ENTREPRENEUR;
     const libelle = LibellesAidesEnum.MICRO_ENTREPRENEUR;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
@@ -303,7 +303,7 @@ export class BlockRessourcesEstimeesService {
   }
 
   private addRowINDP(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
+    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getChiffreAffairesIndependantSur1Mois();
     const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
     const libelle = LibellesAidesEnum.TRAVAILLEUR_INDEPENDANT;
     const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);

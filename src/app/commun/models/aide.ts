@@ -1,10 +1,9 @@
-export class Aide {
-  code: string;
+import { RessourceFinanciere } from "./ressource-financiere";
+
+export class Aide extends RessourceFinanciere {
   conditionsAcces: string;
   detail: string;
   messageAlerte: string;
-  montant: number;
-  nom: string;
   organisme: string;
   reportee: boolean;
   lienExterne: string;

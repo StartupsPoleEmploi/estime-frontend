@@ -26,45 +26,52 @@
         </app-message-info>
     </div>
     <div class="div_detail_mois_with_padding">
-        <div class="card my-2 p-3" [class]="{'aide-avec-detail':isAideAvecDetail(aide)}" *ngFor="let aide of aidesMois"
-            (click)="onClickOnAide(aide);" (keyup)="handleKeyUpOnAide($event,aide);"
-            [tabindex]="isAideAvecDetail(aide)?0:-1" tag-action="clic_bouton_detail_aide">
+        <div class="card my-2 p-3"
+            [class]="{'aide-avec-detail':isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)}"
+            *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois"
+            (click)="onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);"
+            (keyup)="handleKeyUpOnRessourceFinanciereOuAide($event,ressourceFinanciereOuAide);"
+            [tabindex]="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)?0:-1"
+            tag-action="clic_bouton_detail_aide">
             <div class="row pe-3">
                 <div class="col-md-1 col-2">
-                    <div class="code-ressource me-1" [ngClass]="[aide.code.toLowerCase()]">
+                    <div class="code-ressource me-1" [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase()]">
                         <div class="">
-                            <span class="overline-typo">{{aide.code}}</span>
+                            <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-10 col-8 div-vertically-centered">
-                    <span class="body-2-typo ms-2">{{ aide.nom }}</span>
+                    <span class="body-2-typo ms-2">{{ ressourceFinanciereOuAide.nom }}</span>
                 </div>
                 <div class="col-md-1 col-2">
-                    <div *ngIf="aide.organisme" class="icone-organisme me-1" [class]="aide.organisme.toLowerCase()">
+                    <div *ngIf="ressourceFinanciereOuAide.organisme" class="icone-organisme me-1"
+                        [class]="ressourceFinanciereOuAide.organisme.toLowerCase()">
                         <div class="">
-                            <img alt="" [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
+                            <img alt=""
+                                [src]="'./assets/images/icon-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
                         </div>
                     </div>
                 </div>
             </div>
-            <div *ngIf="aide.messageAlerte" class="row mt-3">
-                <app-message-info [contenu]="aide.messageAlerte">
+            <div *ngIf="ressourceFinanciereOuAide.messageAlerte" class="row mt-3">
+                <app-message-info [contenu]="ressourceFinanciereOuAide.messageAlerte">
                 </app-message-info>
             </div>
             <hr>
             <div class="row">
                 <div class="col-md-6 col-10">
                     <span class="headline-4-typo color-blue-10-typo justify-content-start"
-                        attr.data-testid="aide_{{aide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
-                        {{ aide.montant }} €
+                        attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+                        {{ ressourceFinanciereOuAide.montant }} €
                     </span>
-                    <span *ngIf="isAideADemander(aide)" class="demande-a-effectuer overline-typo">
+                    <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)" class="demande-a-effectuer overline-typo">
                         DEMANDE À EFFECTUER
                     </span>
                 </div>
                 <div class="col-md-6 col-2 div-vertically-centered justify-content-end">
-                    <div *ngIf="isAideAvecDetail(aide)" class="justify-content-end">
+                    <div *ngIf="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)"
+                        class="justify-content-end">
                         <span class="bouton-detail body-2-typo color-blue-10-typo">
                             <span *ngIf="!screenService.isExtraSmallScreen()"
                                 class="body-2-typo color-blue-10-typo">Voir le détail</span>

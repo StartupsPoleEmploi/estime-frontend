@@ -4,7 +4,7 @@ import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enu
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { DeConnecteRessourcesFinancieresService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
@@ -14,7 +14,7 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RessourcesFinancieresConjointComponent } from '@app/protected/etapes-simulation/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
@@ -47,7 +47,7 @@ export class RessourcesActuellesComponent implements OnInit {
   isPageLoadingDisplay = false;
   messageErreur: string;
 
-  ressourcesFinancieres: RessourcesFinancieres;
+  ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   informationsPersonnelles: InformationsPersonnelles;
 
   vosRessourcesValidees: boolean;
@@ -80,7 +80,7 @@ export class RessourcesActuellesComponent implements OnInit {
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     private estimeApiService: EstimeApiService,
@@ -93,7 +93,7 @@ export class RessourcesActuellesComponent implements OnInit {
   ngOnInit(): void {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.loadDataRessourcesFinancieres(demandeurEmploiConnecte);
+    this.loadDataRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte);
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.ressourceConjointSeulementRSA = this.checkConjointToucheSeulementRSA();
     this.ressourcePersonnesAChargeSeulementRSA = this.checkPersonnesAChargeToucheSeulementRSA();
@@ -103,7 +103,7 @@ export class RessourcesActuellesComponent implements OnInit {
     } else {
       this.conjointRSA = false;
     }
-    this.vosRessourcesValidees = this.isDonneesSaisieVosRessourcesFinancieresValide();
+    this.vosRessourcesValidees = this.isDonneesSaisieVosRessourcesFinancieresAvantSimulationValide();
     this.ressourcesConjointValidees = !this.hasConjointAvecRessourcesFinancieresInvalide();
     this.ressourcesPersonnesAChargeValidees = !this.hasPersonneAChargeAvecRessourcesFinancieresInvalide();
     this.ressourcesFoyerValidees = this.isDonneesSaisieRessourcesFinancieresFoyerValide();
@@ -121,8 +121,8 @@ export class RessourcesActuellesComponent implements OnInit {
           && !personne.beneficiaireAides.beneficiaireARE
           && !personne.beneficiaireAides.beneficiaireASS
           && !personne.beneficiaireAides.beneficiairePensionInvalidite
-          && (personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === null
-            || personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0)
+          && (personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === null
+            || personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0)
           && !personne.informationsPersonnelles.microEntrepreneur
           && !personne.informationsPersonnelles.travailleurIndependant) {
           result = true;
@@ -146,8 +146,8 @@ export class RessourcesActuellesComponent implements OnInit {
         && !conjoint.beneficiaireAides.beneficiaireARE
         && !conjoint.beneficiaireAides.beneficiaireASS
         && !conjoint.beneficiaireAides.beneficiairePensionInvalidite
-        && (conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === null
-          || conjoint.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite === 0)
+        && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === null
+          || conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0)
         && !conjoint.informationsPersonnelles.microEntrepreneur
         && !conjoint.informationsPersonnelles.travailleurIndependant)
     ) {
@@ -238,12 +238,11 @@ export class RessourcesActuellesComponent implements OnInit {
     return !this.isRessourcesFoyerDisplay && this.ressourcesFoyerValidees;
   }
 
-  private loadDataRessourcesFinancieres(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      this.ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
+  private loadDataRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte: DemandeurEmploi): void {
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation) {
+      this.ressourcesFinancieresAvantSimulation = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
     }
   }
-
 
   private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
     if (demandeurEmploiConnecte.informationsPersonnelles) {
@@ -264,7 +263,7 @@ export class RessourcesActuellesComponent implements OnInit {
   private isSaisieVosRessourcesFinancieresValide(): boolean {
     let isValide = this.vosRessourcesFinancieresComponent.vosRessourcesFinancieresForm.valid;
     if (isValide) {
-      isValide = this.isDonneesSaisieVosRessourcesFinancieresValide();
+      isValide = this.isDonneesSaisieVosRessourcesFinancieresAvantSimulationValide();
     }
     if (!isValide) {
       this.isVosRessourcesDisplay = true;
@@ -300,13 +299,13 @@ export class RessourcesActuellesComponent implements OnInit {
     return isSaisieFormulairesValide;
   }
 
-  private isDonneesSaisieVosRessourcesFinancieresValide(): boolean {
-    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres)
-      && this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
+  private isDonneesSaisieVosRessourcesFinancieresAvantSimulationValide(): boolean {
+    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation)
+      && this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieresAvantSimulation);
   }
 
   private isDonneesSaisieRessourcesFinancieresFoyerValide(): boolean {
-    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresFoyerValides(this.ressourcesFinancieres, this.informationsPersonnelles);
+    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresAvantSimulationFoyerValides(this.ressourcesFinancieresAvantSimulation, this.informationsPersonnelles);
   }
 
   private hasPersonneAChargeAvecRessourcesFinancieresInvalide(): boolean {

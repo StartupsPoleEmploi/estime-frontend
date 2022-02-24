@@ -1,4 +1,4 @@
-import { Component, ElementRef, Injector, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -38,25 +38,17 @@ export class ContratTravailComponent implements OnInit {
   ];
 
   // services à injecter dynamiquement
-  private aidesService: AidesService;
-  private brutNetService: BrutNetService;
-  private deConnecteService: DeConnecteService;
-  private elementRef: ElementRef;
-  public screenService: ScreenService;
-  public controleChampFormulaireService: ControleChampFormulaireService;
-  public modalService: ModalService;
 
   constructor(
-    private injector: Injector,
+    private aidesService: AidesService,
+    private brutNetService: BrutNetService,
+    private deConnecteService: DeConnecteService,
+    private elementRef: ElementRef,
+    public screenService: ScreenService,
+    public controleChampFormulaireService: ControleChampFormulaireService,
+    public modalService: ModalService,
     private router: Router
   ) {
-    this.aidesService = injector.get<AidesService>(AidesService);
-    this.brutNetService = injector.get<BrutNetService>(BrutNetService);
-    this.deConnecteService = injector.get<DeConnecteService>(DeConnecteService);
-    this.elementRef = injector.get<ElementRef>(ElementRef);
-    this.screenService = injector.get<ScreenService>(ScreenService);
-    this.controleChampFormulaireService = injector.get<ControleChampFormulaireService>(ControleChampFormulaireService);
-    this.modalService = injector.get<ModalService>(ModalService);
   }
 
   ngOnInit(): void {
@@ -104,7 +96,8 @@ export class ContratTravailComponent implements OnInit {
   public calculSalaireMensuelNet() {
     this.isFuturTravailSalaireFormSubmitted = false;
     if (this.futurTravail.salaire.montantBrut >= 100 && this.futurTravail.salaire.montantBrut != null) {
-      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut);
+      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+
     } else {
       this.futurTravail.salaire.montantNet = undefined;
     }
@@ -113,7 +106,8 @@ export class ContratTravailComponent implements OnInit {
   public calculSalaireMensuelBrut() {
     this.isFuturTravailSalaireFormSubmitted = false;
     if (this.futurTravail.salaire.montantNet >= 57 && this.futurTravail.salaire.montantNet != null) {
-      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet);
+      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+
     } else {
       this.futurTravail.salaire.montantBrut = undefined;
     }

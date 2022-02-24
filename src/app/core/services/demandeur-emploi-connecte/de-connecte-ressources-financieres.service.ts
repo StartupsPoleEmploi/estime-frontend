@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { NumberUtileService } from "@app/core/services/utile/number-util.service";
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { DateUtileService } from '../utile/date-util.service';
-import { RessourcesFinancieresUtileService } from '../utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '../utile/ressources-financieres-avant-simulation-utile.service';
 import { DeConnecteBeneficiaireAidesService } from './de-connecte-beneficiaire-aides.service';
 import { DeConnecteInfosPersonnellesService } from './de-connecte-infos-personnelles.service';
 import { Personne } from '@app/commun/models/personne';
@@ -14,7 +14,7 @@ import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 
 @Injectable({ providedIn: 'root' })
-export class DeConnecteRessourcesFinancieresService {
+export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
   constructor(
     private dateUtileService: DateUtileService,
@@ -23,14 +23,14 @@ export class DeConnecteRessourcesFinancieresService {
     private deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService
   ) {
 
   }
 
-  public getRessourcesFinancieres(): RessourcesFinancieres {
+  public getRessourcesFinancieresAvantSimulation(): RessourcesFinancieresAvantSimulation {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.ressourcesFinancieres;
+    return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
   }
 
   public getMontantVosRessources(): number {
@@ -60,23 +60,23 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantRevenusVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      const ressourcesFinancieres = demandeurEmploiConnecte.ressourcesFinancieres;
-      if (ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation) {
+      const ressourcesFinancieresAvantSimulation = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
+      if (ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice);
       }
-      if (ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.chiffreAffairesIndependantDernierExercice);
+      if (ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice);
       }
-      montant += this.getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres);
+      montant += this.getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieresAvantSimulation);
     }
     return montant;
   }
 
-  private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieres: RessourcesFinancieres): number {
+  private getMontantPeriodesTravailleesAvantSimulation(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
     let montant = 0;
-    if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
-      Object.values(ressourcesFinancieres.periodeTravailleeAvantSimulation.mois).forEach(mois => {
+    if (ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null) {
+      Object.values(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois).forEach(mois => {
         montant += this.numberUtileService.getMontantSafe(mois.salaire.montantNet);
       });
     }
@@ -87,7 +87,7 @@ export class DeConnecteRessourcesFinancieresService {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.conjoint) {
-      const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
+      const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation;
       if (ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantNet);
       }
@@ -114,8 +114,8 @@ export class DeConnecteRessourcesFinancieresService {
 
   private getMontantRevenusPersonneACharge(personne: Personne): number {
     let montant = 0;
-    if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
-      const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
+    if (this.personneUtileService.hasRessourcesFinancieresAvantSimulation(personne)) {
+      const ressourcesFinancieresPersonne = personne.ressourcesFinancieresAvantSimulation;
       if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
       }
@@ -132,10 +132,10 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantRevenusRessourcesFoyer(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation) {
+      montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois);
       if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
-        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF.allocationRSA);
+        montant += this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA);
       }
     }
     return montant;
@@ -144,10 +144,10 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantAidesVosRessources(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres) {
-      montant += this.getMontantAidesCAF(demandeurEmploiConnecte.ressourcesFinancieres.aidesCAF);
-      montant += this.getMontantAidesPoleEmploi(demandeurEmploiConnecte.ressourcesFinancieres.aidesPoleEmploi);
-      montant += this.getMontantAidesCPAM(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation) {
+      montant += this.getMontantAidesCAF(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF);
+      montant += this.getMontantAidesPoleEmploi(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi);
+      montant += this.getMontantAidesCPAM(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM);
     }
     return montant;
   }
@@ -199,8 +199,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getPensionInvalidite(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0) {
-      montant += demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite;
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite > 0) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite;
     }
     return montant;
   }
@@ -208,8 +208,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getAllocationSupplementaireInvalidite(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite > 0) {
-      montant += demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite;
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite > 0) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite;
     }
     return montant;
   }
@@ -217,8 +217,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getRevenusImmobilierSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois) {
-      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.revenusImmobilier3DerniersMois / 3);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois / 3);
     }
     return montant;
   }
@@ -226,8 +226,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getBeneficesMicroEntrepriseSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice) {
-      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice / 12);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice / 12);
     }
     return montant;
   }
@@ -235,8 +235,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getChiffreAffairesIndependantDernierExercice(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
-      montant += demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice;
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice) {
+      montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice;
     }
     return montant;
   }
@@ -244,8 +244,8 @@ export class DeConnecteRessourcesFinancieresService {
   public getChiffreAffairesIndependantSur1Mois(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieres && demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice) {
-      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice / 12);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice) {
+      montant += Math.round(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice / 12);
     }
     return montant;
   }
@@ -254,7 +254,7 @@ export class DeConnecteRessourcesFinancieresService {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.conjoint) {
-      const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieres;
+      const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation;
       montant += this.getMontantAidesRessources(ressourcesFinancieresConjoint);
     }
     return montant;
@@ -265,8 +265,8 @@ export class DeConnecteRessourcesFinancieresService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.personnesACharge) {
       demandeurEmploiConnecte.situationFamiliale.personnesACharge.forEach((personne) => {
-        if (this.personneUtileService.hasRessourcesFinancieres(personne)) {
-          const ressourcesFinancieresPersonne = personne.ressourcesFinancieres;
+        if (this.personneUtileService.hasRessourcesFinancieresAvantSimulation(personne)) {
+          const ressourcesFinancieresPersonne = personne.ressourcesFinancieresAvantSimulation;
           montant += this.getMontantAidesRessources(ressourcesFinancieresPersonne);
         }
       });
@@ -277,7 +277,7 @@ export class DeConnecteRessourcesFinancieresService {
   public getMontantAidesRessourcesFoyer(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const ressourcesFinancieresFoyer = demandeurEmploiConnecte.ressourcesFinancieres;
+    const ressourcesFinancieresFoyer = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
     if (ressourcesFinancieresFoyer && ressourcesFinancieresFoyer.aidesCAF) {
       if (ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresFoyer.aidesCAF.aidesFamiliales.allocationsFamiliales);
@@ -301,55 +301,55 @@ export class DeConnecteRessourcesFinancieresService {
     return montant;
   }
 
-  public isDonneesRessourcesFinancieresValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(ressourcesFinancieres);
-    return this.isAidesValides(ressourcesFinancieres) && this.isRevenusValides(ressourcesFinancieres);
+  public isDonneesRessourcesFinancieresAvantSimulationValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(ressourcesFinancieresAvantSimulation);
+    return this.isAidesValides(ressourcesFinancieresAvantSimulation) && this.isRevenusValides(ressourcesFinancieresAvantSimulation);
   }
 
-  private isAidesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  private isAidesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-      isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieres);
+      isValide = this.isDonneesASSSaisiesValide(ressourcesFinancieresAvantSimulation);
     }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() && !this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
-      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
+      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieresAvantSimulation);
     }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() && isValide) {
-      isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieres);
+      isValide = this.isDonneesAAHSaisiesValides(ressourcesFinancieresAvantSimulation);
     }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiaireARE()) {
-      isValide = this.isDonneesARESaisiesValides(ressourcesFinancieres);
+      isValide = this.isDonneesARESaisiesValides(ressourcesFinancieresAvantSimulation);
     }
     if (isValide && this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()) {
-      isValide = this.numberUtileService.replaceCommaByDot(ressourcesFinancieres.aidesCPAM.pensionInvalidite) > 0;
+      isValide = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite) > 0;
     }
     return isValide;
   }
 
-  private isRevenusValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  private isRevenusValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
     if (isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant()) {
-      isValide = ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0;
+      isValide = ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice > 0;
     }
     if (isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur()) {
-      isValide = ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0;
+      isValide = ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0;
     }
     if (isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
-      isValide = ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
+      isValide = ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0;
     }
     return isValide;
   }
 
   /**
    * Fonction qui permet de déterminer si la saisie des champs de cumul salaire est correct.
-   * @param ressourcesFinancieres
+   * @param ressourcesFinancieresAvantSimulation
    */
-  public isChampsSalairesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  public isChampsSalairesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isChampsSalairesValides = true;
-    if (ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      if (ressourcesFinancieres.periodeTravailleeAvantSimulation != null && ressourcesFinancieres.periodeTravailleeAvantSimulation.mois != null) {
+    if (ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois) {
+      if (ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null) {
         let tousLesSalairesAZero = true;
-        ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
+        ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
           if (mois.salaire != null && mois.salaire.montantNet != 0) {
             tousLesSalairesAZero = false;
           }
@@ -364,16 +364,16 @@ export class DeConnecteRessourcesFinancieresService {
     return isChampsSalairesValides;
   }
 
-  public isDonneesRessourcesFinancieresFoyerValides(ressourcesFinancieres: RessourcesFinancieres, informationsPersonnelles: InformationsPersonnelles): boolean {
+  public isDonneesRessourcesFinancieresAvantSimulationFoyerValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation, informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA()) {
-      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieres);
+      isValide = this.isDonneesRSASaisiesValide(ressourcesFinancieresAvantSimulation);
     }
     if (isValide) {
       isValide = this.isDonneesLogementValides(informationsPersonnelles);
     }
     if (isValide) {
-      isValide = this.isDonneesAPLValides(ressourcesFinancieres) && this.isDonneesALFValides(ressourcesFinancieres) && this.isDonneesALSValides(ressourcesFinancieres);
+      isValide = this.isDonneesAPLValides(ressourcesFinancieresAvantSimulation) && this.isDonneesALFValides(ressourcesFinancieresAvantSimulation) && this.isDonneesALSValides(ressourcesFinancieresAvantSimulation);
     }
     return isValide;
   }
@@ -398,92 +398,92 @@ export class DeConnecteRessourcesFinancieresService {
     return isValide;
   }
 
-  private isDonneesAPLValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  private isDonneesAPLValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireAPL()) {
-      isValide = ressourcesFinancieres.aidesCAF != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement != null &&
-        (ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 > 0);
+      isValide = ressourcesFinancieresAvantSimulation.aidesCAF != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement != null &&
+        (ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins2 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3 > 0);
     }
     return isValide;
   }
 
-  private isDonneesALFValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  private isDonneesALFValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireALF()) {
-      isValide = ressourcesFinancieres.aidesCAF != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale != null &&
-        (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 > 0);
+      isValide = ressourcesFinancieresAvantSimulation.aidesCAF != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale != null &&
+        (ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins2 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins3 > 0);
     }
     return isValide;
   }
 
-  private isDonneesALSValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
+  private isDonneesALSValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireALS()) {
-      isValide = ressourcesFinancieres.aidesCAF != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement != null &&
-        ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale != null &&
-        (ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 > 0
-          || ressourcesFinancieres.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 > 0);
+      isValide = ressourcesFinancieresAvantSimulation.aidesCAF != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement != null &&
+        ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale != null &&
+        (ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins2 > 0
+          || ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins3 > 0);
     }
     return isValide;
   }
 
 
-  private isDonneesASSSaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit
-      && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
-      && !this.ressourcesFinancieresUtileService.isMontantJournalierAssInvalide(ressourcesFinancieres);
+  private isDonneesASSSaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit
+      && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
+      && !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierAssInvalide(ressourcesFinancieresAvantSimulation);
   }
 
-  private isDonneesRSASaisiesValide(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle
-      && !this.ressourcesFinancieresUtileService.isMontantJournalierRSAInvalide(ressourcesFinancieres);
+  private isDonneesRSASaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    return ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle
+      && !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierRSAInvalide(ressourcesFinancieresAvantSimulation);
   }
 
-  private isDonneesAAHSaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesCAF.allocationAAH > 0;
+  private isDonneesAAHSaisiesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    return ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH > 0;
   }
 
   //is donnees ARE SAISIE VALIDE comprend tout les champs
-  private isDonneesARESaisiesValides(ressourcesFinancieres: RessourcesFinancieres): boolean {
-    return ressourcesFinancieres.aidesPoleEmploi.allocationARE.montantJournalierBrut > 0 &&
-      ressourcesFinancieres.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > 0 &&
-      ressourcesFinancieres.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
+  private isDonneesARESaisiesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut > 0 &&
+      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > 0 &&
+      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
   }
 
-  private getMontantAidesRessources(ressourcesFinancieres: RessourcesFinancieres): number {
+  private getMontantAidesRessources(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
     let montant = 0;
-    if (ressourcesFinancieres) {
-      montant += this.getMontantAidesRessourcesCAF(ressourcesFinancieres);
-      montant += this.getMontantAidesRessourcesPoleEmploi(ressourcesFinancieres);
-      montant += this.getMontantAidesRessourcesCPAM(ressourcesFinancieres);
+    if (ressourcesFinancieresAvantSimulation) {
+      montant += this.getMontantAidesRessourcesCAF(ressourcesFinancieresAvantSimulation);
+      montant += this.getMontantAidesRessourcesPoleEmploi(ressourcesFinancieresAvantSimulation);
+      montant += this.getMontantAidesRessourcesCPAM(ressourcesFinancieresAvantSimulation);
     }
     return montant;
   }
 
-  private getMontantAidesRessourcesCAF(ressourcesFinancieres: RessourcesFinancieres): number {
+  private getMontantAidesRessourcesCAF(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
     let montant = 0;
-    if (ressourcesFinancieres.aidesCAF) {
-      const aidesCAF = ressourcesFinancieres.aidesCAF;
+    if (ressourcesFinancieresAvantSimulation.aidesCAF) {
+      const aidesCAF = ressourcesFinancieresAvantSimulation.aidesCAF;
       montant += this.numberUtileService.getMontantSafe(aidesCAF.allocationAAH)
         + this.numberUtileService.getMontantSafe(aidesCAF.allocationRSA);
     }
     return montant;
   }
 
-  private getMontantAidesRessourcesPoleEmploi(ressourcesFinancieres: RessourcesFinancieres): number {
+  private getMontantAidesRessourcesPoleEmploi(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
     let montant = 0;
-    if (ressourcesFinancieres.aidesPoleEmploi) {
-      const aidesPoleEmploi = ressourcesFinancieres.aidesPoleEmploi;
+    if (ressourcesFinancieresAvantSimulation.aidesPoleEmploi) {
+      const aidesPoleEmploi = ressourcesFinancieresAvantSimulation.aidesPoleEmploi;
       if (aidesPoleEmploi.allocationASS) {
         montant += this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationASS.allocationMensuelleNet);
       }
@@ -494,10 +494,10 @@ export class DeConnecteRessourcesFinancieresService {
     return montant;
   }
 
-  private getMontantAidesRessourcesCPAM(ressourcesFinancieres: RessourcesFinancieres): number {
+  private getMontantAidesRessourcesCPAM(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
     let montant = 0;
-    if (ressourcesFinancieres.aidesCPAM) {
-      const aidesCPAM = ressourcesFinancieres.aidesCPAM;
+    if (ressourcesFinancieresAvantSimulation.aidesCPAM) {
+      const aidesCPAM = ressourcesFinancieresAvantSimulation.aidesCPAM;
       montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
         + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }

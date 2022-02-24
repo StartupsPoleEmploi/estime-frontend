@@ -4,7 +4,7 @@ import { AidesCPAM } from "@models/aides-cpam";
 import { PeriodeTravailleeAvantSimulation } from "@app/commun/models/periode-travaillee-avant-simulation";
 import { Salaire } from "@models/salaire";
 
-export class RessourcesFinancieres {
+export class RessourcesFinancieresAvantSimulation {
   aidesCAF: AidesCAF;
   aidesPoleEmploi: AidesPoleEmploi;
   aidesCPAM: AidesCPAM;

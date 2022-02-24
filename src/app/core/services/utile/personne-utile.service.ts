@@ -7,7 +7,7 @@ import { AidesPoleEmploi } from "@models/aides-pole-emploi";
 import { AidesCPAM } from "@models/aides-cpam";
 import { InformationsPersonnelles } from "@models/informations-personnelles";
 import { Personne } from "@models/personne";
-import { RessourcesFinancieres } from "@models/ressources-financieres";
+import { RessourcesFinancieresAvantSimulation } from "@app/commun/models/ressources-financieres-avant-simulation";
 import { DateUtileService } from './date-util.service';
 import * as moment from 'moment';
 
@@ -29,16 +29,16 @@ export class PersonneUtileService {
     personne.informationsPersonnelles.salarie = false;
     personne.informationsPersonnelles.sansRessource = false;
     if (isAvecRessourcesFinancieres) {
-      personne.ressourcesFinancieres = new RessourcesFinancieres();
-      personne.ressourcesFinancieres.aidesCAF = new AidesCAF();
-      personne.ressourcesFinancieres.aidesPoleEmploi = new AidesPoleEmploi();
-      personne.ressourcesFinancieres.aidesCPAM = new AidesCPAM();
-      personne.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite = 0;
+      personne.ressourcesFinancieresAvantSimulation = new RessourcesFinancieresAvantSimulation();
+      personne.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
+      personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
+      personne.ressourcesFinancieresAvantSimulation.aidesCPAM = new AidesCPAM();
+      personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = 0;
     }
     return personne;
   }
 
-  public hasRessourcesFinancieres(personne: Personne): boolean {
+  public hasRessourcesFinancieresAvantSimulation(personne: Personne): boolean {
     let hasRessourcesFinancieres = false;
     if (personne.informationsPersonnelles) {
       if (!personne.informationsPersonnelles.sansRessource
@@ -84,23 +84,23 @@ export class PersonneUtileService {
     return this.dateUtileService.isDateEligibleRetraite(dateNaissance);
   }
 
-  public isRessourcesFinancieresValides(personne: Personne): boolean {
+  public isRessourcesFinancieresAvantSimulationValides(personne: Personne): boolean {
     return this.isAidesValides(personne) && this.isRevenusValides(personne);
   }
 
   private isAidesValides(personne: Personne): boolean {
     let isValide = true;
     if (isValide && personne.beneficiaireAides.beneficiaireARE) {
-      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet > 0;
     }
     if (isValide && personne.beneficiaireAides.beneficiaireASS) {
-      isValide = personne.ressourcesFinancieres.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet > 0;
     }
     if (isValide && personne.beneficiaireAides.beneficiaireAAH) {
-      isValide = personne.ressourcesFinancieres.aidesCAF.allocationAAH > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH > 0;
     }
     if (isValide && personne.beneficiaireAides.beneficiairePensionInvalidite) {
-      isValide = personne.ressourcesFinancieres.aidesCPAM.pensionInvalidite > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite > 0;
     }
     return isValide;
   }
@@ -108,16 +108,16 @@ export class PersonneUtileService {
   private isRevenusValides(personne: Personne): boolean {
     let isValide = true;
     if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
-      isValide = personne.ressourcesFinancieres.salaire.montantNet > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.salaire.montantNet > 0;
     }
     if (isValide && personne.informationsPersonnelles.microEntrepreneur) {
-      isValide = personne.ressourcesFinancieres.beneficesMicroEntrepriseDernierExercice > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0;
     }
     if (isValide && personne.informationsPersonnelles.travailleurIndependant) {
-      isValide = personne.ressourcesFinancieres.chiffreAffairesIndependantDernierExercice > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice > 0;
     }
     if (isValide && personne.informationsPersonnelles.hasRevenusImmobilier) {
-      isValide = personne.ressourcesFinancieres.revenusImmobilier3DerniersMois > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0;
     }
     return isValide;
   }
@@ -168,9 +168,9 @@ export class PersonneUtileService {
   }
 
   public unsetSalairesAvantPeriodeSimulation(personne: Personne): void {
-    if (personne.ressourcesFinancieres &&
-      personne.ressourcesFinancieres.periodeTravailleeAvantSimulation) {
-      personne.ressourcesFinancieres.periodeTravailleeAvantSimulation = null
+    if (personne.ressourcesFinancieresAvantSimulation &&
+      personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation) {
+      personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = null
     }
   }
 }

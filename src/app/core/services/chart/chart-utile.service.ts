@@ -6,7 +6,7 @@ import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagram
 import { DevisesEnum } from '@enumerations/devises.enum';
 import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationAidesService } from '../demandeur-emploi-connecte/de-connecte-simulation-aides.service';
 import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '../utile/aides.service';
@@ -40,7 +40,7 @@ export class ChartUtileService {
 
   constructor(
     private deConnecteService: DeConnecteService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     private dateUtileService: DateUtileService,
     private aidesService: AidesService,
@@ -106,7 +106,7 @@ export class ChartUtileService {
     const dataObject = this.initDatasets();
 
     simulationAides.simulationsMensuelles.forEach((simulationMensuelle, index) => {
-      const aides = Object.values(simulationMensuelle.mesAides);
+      const aides = Object.values(simulationMensuelle.aides);
       aides.forEach((aide) => {
         switch (aide.code) {
           case CodesAidesEnum.AGEPI: {
@@ -178,9 +178,9 @@ export class ChartUtileService {
       dataObject.datasets.get(CodesAidesEnum.PENSION_INVALIDITE).data[index + 1] = this.aidesService.getMontantPensionInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE).data[index + 1] = this.aidesService.getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte);
       dataObject.datasets.get(CodesAidesEnum.SALAIRE).data[index + 1] = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
-      dataObject.datasets.get(CodesAidesEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresService.getRevenusImmobilierSur1Mois();
-      dataObject.datasets.get(CodesAidesEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresService.getChiffreAffairesIndependantSur1Mois();
-      dataObject.datasets.get(CodesAidesEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresService.getBeneficesMicroEntrepriseSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.IMMOBILIER).data[index + 1] = this.deConnecteRessourcesFinancieresAvantSimulationService.getRevenusImmobilierSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.TRAVAILLEUR_INDEPENDANT).data[index + 1] = this.deConnecteRessourcesFinancieresAvantSimulationService.getChiffreAffairesIndependantSur1Mois();
+      dataObject.datasets.get(CodesAidesEnum.MICRO_ENTREPRENEUR).data[index + 1] = this.deConnecteRessourcesFinancieresAvantSimulationService.getBeneficesMicroEntrepriseSur1Mois();
     }
     dataObject.datasets.get(ChartUtileService.CODE_RESSOURCES_AVANT_REPRISE_EMPLOI).data[0] = simulationAides.montantRessourcesFinancieresMoisAvantSimulation;
     return this.transformDataObjectToDatasets(dataObject);

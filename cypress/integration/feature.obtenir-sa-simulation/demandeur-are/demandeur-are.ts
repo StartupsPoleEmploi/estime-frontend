@@ -30,7 +30,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
     'ARE : SJR : 48, jours restants : 15, Allocation journalière brute : 37' +
     'APL 310€', () => {
 
-      // cy.intercept('PUT', '**/demandeurs_emploi', { fixture: 'mocks/demandeur-are/creation-demandeur-are.json' })
       cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-are/complement-are-4-mois.json' })
 
       // VARIABLES PAGE FUTUR CONTRAT

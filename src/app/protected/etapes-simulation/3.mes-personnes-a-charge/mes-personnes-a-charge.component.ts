@@ -6,7 +6,7 @@ import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeu
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { DateDecomposee } from '@models/date-decomposee';
@@ -41,7 +41,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public modalService: ModalService,
     public personneUtileService: PersonneUtileService,
-    private ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public screenService: ScreenService
   ) {
   }
@@ -102,8 +102,8 @@ export class MesPersonnesAChargeComponent implements OnInit {
 
   public traiterAjoutePersonneEvent(isAjoutPersonneSubmit: boolean): void {
     if (isAjoutPersonneSubmit) {
-      if (this.nouvellePersonneACharge.ressourcesFinancieres) {
-        this.nouvellePersonneACharge.ressourcesFinancieres = this.ressourcesFinancieresUtileService.replaceCommaByDotMontantsRessourcesFinancieres(this.nouvellePersonneACharge.ressourcesFinancieres);
+      if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation) {
+        this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation);
       }
       if (!this.isModeModification) {
         this.personnesACharge.push(this.nouvellePersonneACharge);

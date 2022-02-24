@@ -4,7 +4,7 @@ import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { SimulationAides } from '@app/commun/models/simulation-aides';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
-import { DeConnecteRessourcesFinancieresService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DateUtileService } from './date-util.service';
 
 @Injectable({ providedIn: 'root' })
@@ -17,12 +17,12 @@ export class AidesService {
 
   constructor(
     private dateUtileService: DateUtileService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService
   ) { }
 
   public hasAideLogement(simulationAides: SimulationAides): boolean {
     const premierMoisSimulation = simulationAides.simulationsMensuelles[0]
-    const aides = Object.values(premierMoisSimulation.mesAides);
+    const aides = Object.values(premierMoisSimulation.aides);
     return (aides.some(
       (aide) => aide && (aide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
         || aide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
@@ -100,8 +100,8 @@ export class AidesService {
 
   public getMessageAlerteAidesFamiliales(simulationSelected: SimulationMensuelle): string {
     let message = null;
-    if (simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+    if (simulationSelected.aides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
         if (codeAide === CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
           || codeAide === CodesAidesEnum.ALLOCATIONS_FAMILIALES
           || codeAide === CodesAidesEnum.COMPLEMENT_FAMILIAL) {
@@ -129,11 +129,11 @@ export class AidesService {
 
   private getMoisRecalculAidesLogement(): string {
     let moisProchainRecalcul = 2;
-    const ressourcesFinancieres = this.deConnecteRessourcesFinancieresService.getRessourcesFinancieres();
-    if (ressourcesFinancieres != null &&
-      ressourcesFinancieres.aidesCAF != null &&
-      ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle &&
-      (ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 0 || ressourcesFinancieres.aidesCAF.prochaineDeclarationTrimestrielle == 3)) {
+    const ressourcesFinancieresAvantSimulation = this.deConnecteRessourcesFinancieresAvantSimulationService.getRessourcesFinancieresAvantSimulation();
+    if (ressourcesFinancieresAvantSimulation != null &&
+      ressourcesFinancieresAvantSimulation.aidesCAF != null &&
+      ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle &&
+      (ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle == 0 || ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle == 3)) {
       moisProchainRecalcul = 1;
     }
     return this.dateUtileService.getLibelleMoisApresDateJour(moisProchainRecalcul);
@@ -141,8 +141,8 @@ export class AidesService {
 
   private getMessageAlerteAide(simulationSelected: SimulationMensuelle, codeAideAlerte: string): string {
     let message = null;
-    if (simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+    if (simulationSelected.aides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
         if (codeAide === codeAideAlerte) {
           message = aide.messageAlerte;
         }
@@ -153,19 +153,19 @@ export class AidesService {
 
   public getMontantPensionInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
     let montant = 0;
-    if (demandeurEmploiConnecte.ressourcesFinancieres &&
-      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
-      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite
-    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.pensionInvalidite);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
+      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM &&
+      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite
+    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite);
     return montant;
   }
 
   public getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
     let montant = 0;
-    if (demandeurEmploiConnecte.ressourcesFinancieres &&
-      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM &&
-      demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite
-    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieres.aidesCPAM.allocationSupplementaireInvalidite);
+    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
+      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM &&
+      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite
+    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite);
     return montant;
   }
 
@@ -182,7 +182,7 @@ export class AidesService {
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {
     let hasAidesObtenir = false;
     if (simulationSelected) {
-      const aides = Object.values(simulationSelected.mesAides);
+      const aides = Object.values(simulationSelected.aides);
       aides.forEach((aide) => {
         if (this.isAideDemandeurPourraObtenir(aide) && this.isAidePasAideLogementPremierMois(aide)) {
           hasAidesObtenir = true;
@@ -195,7 +195,7 @@ export class AidesService {
   public getAideByCodeFromSimulationMensuelle(simulationMensuelle: SimulationMensuelle, codeAideToFind: string): Aide {
     let aide = null;
 
-    for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.mesAides)) {
+    for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.aides)) {
       if (aideSimulationMensuelle && codeAide === codeAideToFind) {
         aide = aideSimulationMensuelle;
       }
@@ -206,7 +206,7 @@ export class AidesService {
   public getAideByCode(simulationAides: SimulationAides, codeAideToFind: string): Aide {
     let aide = null;
     simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.mesAides)) {
+      for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.aides)) {
         if (aideSimulationMensuelle && codeAide === codeAideToFind) {
           aide = aideSimulationMensuelle;
         }
@@ -228,7 +228,7 @@ export class AidesService {
   public hasAideByCode(simulationSelected: SimulationMensuelle, codeAideToFind: string): boolean {
     let hasAidesObtenir = false;
     if (simulationSelected) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
         if (aide && codeAide === codeAideToFind) {
           hasAidesObtenir = true;
         }
@@ -283,8 +283,8 @@ export class AidesService {
 
   private getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
     let montant = 0;
-    if (simulationSelected.mesAides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.mesAides)) {
+    if (simulationSelected.aides) {
+      for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
         if (codeAide === codeAideSelected) {
           montant = Number(aide.montant);
         }

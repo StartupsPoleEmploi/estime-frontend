@@ -19,11 +19,11 @@ export class AidesDescriptionComponent implements OnInit {
   messageErreur: string;
 
   constructor(
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private estimeApiService: EstimeApiService
-    ) { }
+  ) { }
 
-  onClickFaireLaDemandeAide = function(){
+  onClickFaireLaDemandeAide = function () {
     window.open(this.aideSelected.lienExterne, '_blank');
   }
 
@@ -39,7 +39,7 @@ export class AidesDescriptionComponent implements OnInit {
           error: this.traiterErreurGetDetailAide.bind(this)
         });
     });
- }
+  }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();

@@ -2,7 +2,7 @@ import Engine, { formatValue } from "publicodes";
 import rules from "modele-social";
 import { Injectable } from '@angular/core';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class BrutNetService {
 
     formatOptions: Object = {
@@ -11,10 +11,12 @@ export class BrutNetService {
     }
     engine: Engine = new Engine(rules);
 
-    public getNetFromBrut(montantBrut: number): number {
+    public getNetFromBrut(montantBrut: number, typeContrat: string = 'CDI', tempsDeTravail: number = 35): number {
         const montantNet =
             this.engine
                 .setSituation({
+                    "contrat salarié": "'" + typeContrat + "'",
+                    "contrat salarié . temps de travail": tempsDeTravail * 4.33,
                     "contrat salarié . rémunération . brut de base": montantBrut
                 })
                 .evaluate("contrat salarié . rémunération . net");
@@ -24,10 +26,12 @@ export class BrutNetService {
         return Math.round(Number(formatValue(montantNet, this.formatOptions).replace(/\s/g, "").replace(/,/g, ".")));
     }
 
-    public getBrutFromNet(montantNet: number): number {
+    public getBrutFromNet(montantNet: number, typeContrat: string = 'CDI', tempsDeTravail: number = 35): number {
         const montantBrut =
             this.engine
                 .setSituation({
+                    "contrat salarié": "'" + typeContrat + "'",
+                    "contrat salarié . temps de travail": tempsDeTravail * 4.33,
                     "contrat salarié . rémunération . net": montantNet
                 })
                 .evaluate("contrat salarié . rémunération . brut de base");

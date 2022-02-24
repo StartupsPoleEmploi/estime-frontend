@@ -4,11 +4,11 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DateDecomposee } from '@models/date-decomposee';
-import { RessourcesFinancieres } from '@models/ressources-financieres';
+import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { NombreMoisTravailles } from "@models/nombre-mois-travailles";
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@app/commun/models/numero-prochain-mois-declaration-trimestrielle";
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -38,7 +38,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   beneficiaireAides: BeneficiaireAides;
   situationFamiliale: SituationFamiliale;
 
-  @Input() ressourcesFinancieres: RessourcesFinancieres;
+  @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
@@ -53,10 +53,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public modalService: ModalService,
-    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService,
+    public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public screenService: ScreenService,
     private situationFamilialeUtileService: SituationFamilialeUtileService
   ) {
@@ -66,14 +66,14 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-      this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
+      this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
     }
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) {
       this.initOptionsProchaineDeclarationTrimestrielle();
     }
-    if (this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois) {
-      this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
-      this.ressourcesFinancieres = this.ressourcesFinancieresUtileService.initSalairesAvantPeriodeSimulation(this.ressourcesFinancieres);
+    if (this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois) {
+      this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
+      this.ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.initSalairesAvantPeriodeSimulation(this.ressourcesFinancieresAvantSimulation);
     }
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
@@ -107,40 +107,40 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
     if (hasTravailleAuCoursDerniersMois === false) {
-      this.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
-      this.ressourcesFinancieres.periodeTravailleeAvantSimulation = null;
-      this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = false;
+      this.ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois = 0;
+      this.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = null;
+      this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = false;
       this.deConnecteService.unsetSalairesAvantPeriodeSimulation();
     } else {
-      if (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-        this.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.ressourcesFinancieresUtileService.creerSalairesAvantPeriodeSimulation();
+      if (this.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null) {
+        this.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.creerSalairesAvantPeriodeSimulation();
       }
       if (this.optionsNombreMoisTravailles == null) {
-        this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+        this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
       }
     }
   }
 
   public hasQuatorzeMoisSansSalaire(): boolean {
     const isNull = (mois) => mois == null;
-    return (this.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || this.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
+    return (this.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null
+      || this.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.every(isNull));
   }
 
   public handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois(event: any, value: boolean) {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = value;
+      this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = value;
       this.onClickButtonRadioHasTravailleAuCoursDerniersMois(value);
     }
   }
 
   public isAfficherSelectNombreMoisTravailles6DerniersMois(): boolean {
-    return this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois === true &&
+    return this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois === true &&
       (this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || this.deConnecteBeneficiaireAidesService.isBeneficiaireASS());
   }
 
   public isAfficherChampsSalaires(): boolean {
-    return this.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
+    return this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois;
   }
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
@@ -149,7 +149,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.checkAndSaveDateDernierOuvertureDroitASS();
     }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieres);
+      this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
       this.validationVosRessourcesEventEmitter.emit();
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
@@ -158,17 +158,17 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   private checkAndSaveDateDernierOuvertureDroitASS(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
-      this.ressourcesFinancieres.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresValides(this.ressourcesFinancieres);
+      isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
-        isValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieres);
+        isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isChampsSalairesValides(this.ressourcesFinancieresAvantSimulation);
         this.erreurSaisieSalaires = !isValide;
       }
     }

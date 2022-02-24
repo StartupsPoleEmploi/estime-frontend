@@ -5,9 +5,9 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { RessourcesFinancieresUtileService } from '@app/core/services/utile/ressources-financieres-utiles.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
-import { DeConnecteRessourcesFinancieresService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
@@ -30,18 +30,18 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public screenService: ScreenService,
-    private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteService: DeConnecteService,
     private elementRef: ElementRef,
     public modalService: ModalService,
     private personneUtileService: PersonneUtileService,
-    public ressourcesFinancieresUtileService: RessourcesFinancieresUtileService
+    public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService
   ) { }
 
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.conjoint = demandeurEmploiConnecte.situationFamiliale.conjoint;
-    this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+    this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
   }
 
   public onSubmitRessourcesFinancieresConjointForm(form: FormGroup): void {
@@ -57,10 +57,10 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
-      isValide = this.personneUtileService.isRessourcesFinancieresValides(this.conjoint);
+      isValide = this.personneUtileService.isRessourcesFinancieresAvantSimulationValides(this.conjoint);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
-        isValide = this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.conjoint.ressourcesFinancieres);
+        isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isChampsSalairesValides(this.conjoint.ressourcesFinancieresAvantSimulation);
         this.erreurSaisieSalaires = !isValide;
       }
     }
@@ -70,33 +70,33 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(hasTravailleAuCoursDerniersMois: boolean): void {
     if (hasTravailleAuCoursDerniersMois === false) {
-      this.conjoint.ressourcesFinancieres.nombreMoisTravaillesDerniersMois = 0;
-      this.conjoint.ressourcesFinancieres.periodeTravailleeAvantSimulation = null;
-      this.conjoint.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = false;
+      this.conjoint.ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois = 0;
+      this.conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = null;
+      this.conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = false;
       this.personneUtileService.unsetSalairesAvantPeriodeSimulation(this.conjoint);
     } else {
-      if (this.conjoint.ressourcesFinancieres.periodeTravailleeAvantSimulation == null) {
-        this.conjoint.ressourcesFinancieres.periodeTravailleeAvantSimulation = this.ressourcesFinancieresUtileService.creerSalairesAvantPeriodeSimulationPersonne(this.conjoint);
+      if (this.conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null) {
+        this.conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.creerSalairesAvantPeriodeSimulationPersonne(this.conjoint);
       }
       if (this.optionsNombreMoisTravailles == null) {
-        this.optionsNombreMoisTravailles = this.ressourcesFinancieresUtileService.initOptionsNombreMoisTravailles();
+        this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
       }
     }
   }
 
   public isAfficherChampsSalairesConjoint(): boolean {
-    return this.conjoint.ressourcesFinancieres.hasTravailleAuCoursDerniersMois;
+    return this.conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois;
   }
 
   public hasDouzeMoisSansSalaireConjoint(): boolean {
     const isNull = (mois) => mois == null;
-    return (this.conjoint.ressourcesFinancieres.periodeTravailleeAvantSimulation == null
-      || this.conjoint.ressourcesFinancieres.periodeTravailleeAvantSimulation.mois.every(isNull));
+    return (this.conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation == null
+      || this.conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.every(isNull));
   }
 
   public handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint(event: any, value: boolean) {
     if (event.keyCode === 13) {
-      this.conjoint.ressourcesFinancieres.hasTravailleAuCoursDerniersMois = value;
+      this.conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois = value;
       this.onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(value);
     }
   }

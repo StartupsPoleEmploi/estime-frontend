@@ -1,4 +1,5 @@
-<app-page-loading *ngIf="isPageLoadingDisplay" message="Calcul de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
+<app-page-loading *ngIf="isPageLoadingDisplay"
+    message="Calcul de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
 <div class="container-fluid form-container-fluid" role="form">
@@ -40,7 +41,7 @@
                 </div>
             </button>
             <app-vos-ressources-financieres [hidden]="!isVosRessourcesDisplay"
-                [ressourcesFinancieres]="ressourcesFinancieres"
+                [ressourcesFinancieresAvantSimulation]="ressourcesFinancieresAvantSimulation"
                 (validationVosRessourcesEventEmitter)="traiterValidationVosRessourcesEventEmitter()">
             </app-vos-ressources-financieres>
         </div>
@@ -133,7 +134,7 @@
                 </div>
             </button>
             <app-ressources-financieres-foyer [hidden]="!isRessourcesFoyerDisplay"
-                [ressourcesFinancieres]="ressourcesFinancieres"
+                [ressourcesFinancieresAvantSimulation]="ressourcesFinancieresAvantSimulation"
                 (validationRessourcesFoyerEventEmitter)="traiterValidationRessourcesFinancieresFoyerEventEmitter()">
             </app-ressources-financieres-foyer>
         </div>
