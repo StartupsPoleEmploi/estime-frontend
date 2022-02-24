@@ -1,69 +1,38 @@
 import { Injectable } from '@angular/core';
-import { SimulationAides } from "@models/simulation-aides";
-import { SessionStorageService } from "ngx-webstorage";
-import { KeysStorageEnum } from "@app/commun/enumerations/keys-storage.enum";
-import { DeConnecteService } from './de-connecte.service';
-import { DeConnecteRessourcesFinancieresAvantSimulationService } from './de-connecte-ressources-financieres.service';
-import { SimulationMensuelle } from '@models/simulation-mensuelle';
-import { NumberUtileService } from '../utile/number-util.service';
-import { AidesCPAM } from '@app/commun/models/aides-cpam';
-import { Aide } from '@app/commun/models/aide';
-import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
-import { AidesService } from '../utile/aides.service';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { SimulationMensuelle } from "@models/simulation-mensuelle";
+import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
+import { Aide } from '@app/commun/models/aide';
+import { AidesService } from './aides.service';
+import { NumberUtileService } from './number-util.service';
+import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
-import { RessourcesFinancieresService } from '../utile/ressources-financieres.service';
+import { RessourcesFinancieresService } from './ressources-financieres.service';
+import { Simulation } from '@app/commun/models/simulation';
 
 @Injectable({ providedIn: 'root' })
-export class DeConnecteSimulationAidesService {
-
-  private simulationAides: SimulationAides;
-
+export class SimulationService {
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
   libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
 
   constructor(
     private aidesService: AidesService,
-    private ressourcesFinancieresService: RessourcesFinancieresService,
-    private deConnecteService: DeConnecteService,
-    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private numberUtileService: NumberUtileService,
-    private sessionStorageService: SessionStorageService
-  ) {
-
-  }
-
-  public getSimulationAides(): SimulationAides {
-    if (!this.simulationAides) {
-      this.simulationAides = this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE);
-    }
-    return this.simulationAides;
-  }
-
-  public setSimulationAides(simulationAides: SimulationAides): void {
-    this.simulationAides = simulationAides;
-    this.saveSimulationAidesInSessionStorage();
-  }
+    private ressourcesFinancieresService: RessourcesFinancieresService
+  ) { }
 
   public calculerMontantTotalRessourcesMois(simulation: SimulationMensuelle): number {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const ressourcesFinancieresAvantSimulation = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
+    const montantTotalRessourcesFinancieresMoisSimule = this.calculerMontantRessourcesFinancieresMois(simulation);
+    const montantTotalAidesMoisSimule = this.calculerMontantAidesMois(simulation);
 
-    const salaireFuturTravail = this.numberUtileService.getMontantSafe(demandeurEmploiConnecte.futurTravail.salaire.montantNet);
-    const beneficesMicroEntreprise = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresAvantSimulationService.getBeneficesMicroEntrepriseSur1Mois());
-    const chiffreAffairesIndependant = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresAvantSimulationService.getChiffreAffairesIndependantSur1Mois());
-    const revenusImmobilier = this.numberUtileService.getMontantSafe(this.deConnecteRessourcesFinancieresAvantSimulationService.getRevenusImmobilierSur1Mois());
-    const montantAidesCPAM = this.calculerMontantAidesCPAM(ressourcesFinancieresAvantSimulation.aidesCPAM);
-    const montantTotalAidesMoisSimule = this.calculerMontantAidesSimuleesMois(simulation);
-
-    return Math.floor(salaireFuturTravail + beneficesMicroEntreprise + chiffreAffairesIndependant + revenusImmobilier + montantAidesCPAM + montantTotalAidesMoisSimule);
+    return Math.floor(montantTotalRessourcesFinancieresMoisSimule + montantTotalAidesMoisSimule);
   }
 
-  private calculerMontantAidesSimuleesMois(simulation: SimulationMensuelle) {
+  public calculerMontantAidesMois(simulation: SimulationMensuelle) {
     let montant = 0;
     if (simulation.aides) {
-      const aides = Object.values(simulation.aides);
+      const aides = this.getAidesSimulationMensuelle(simulation);
       aides.forEach((aide) => {
         if (aide) {
           montant += this.numberUtileService.getMontantSafe(aide.montant);
@@ -73,17 +42,26 @@ export class DeConnecteSimulationAidesService {
     return montant;
   }
 
-  private calculerMontantAidesCPAM(aidesCPAM: AidesCPAM) {
+  public calculerMontantRessourcesFinancieresMois(simulation: SimulationMensuelle) {
+    let montant = 0;
+    if (simulation.ressourcesFinancieres) {
+      const aides = this.getRessourcesFinancieresSimulationMensuelle(simulation);
+      aides.forEach((ressourcesFinancieres) => {
+        if (ressourcesFinancieres) {
+          montant += this.numberUtileService.getMontantSafe(ressourcesFinancieres.montant);
+        }
+      });
+    }
+    return montant;
+  }
+
+  public calculerMontantAidesCPAM(aidesCPAM: AidesCPAM) {
     let montant = 0;
     if (aidesCPAM) {
       montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
         + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }
     return montant
-  }
-
-  private saveSimulationAidesInSessionStorage(): void {
-    this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION_AIDES_SOCIALE, this.simulationAides);
   }
 
   public getAidesSimulationMensuelle(simulationMensuelle: SimulationMensuelle): Aide[] {
@@ -121,6 +99,10 @@ export class DeConnecteSimulationAidesService {
     return this.getRessourcesFinancieresSimulationMensuelle(simulationMensuelle).concat(this.getAidesSimulationMensuelle(simulationMensuelle));
   }
 
+  public hasRessourceFinanciereOuAide(simulation: Simulation) {
+
+  }
+
   private addAideToAidesArray(aide: Aide, aides: Aide[]) {
     if (aide != null) aides.push(aide);
     return aides;
@@ -129,11 +111,6 @@ export class DeConnecteSimulationAidesService {
   private addRessourceFinanciereToRessourcesFinancieresArray(ressourceFinanciere: RessourceFinanciere, ressourcesFinancieres: RessourceFinanciere[]) {
     if (ressourceFinanciere != null) ressourcesFinancieres.push(ressourceFinanciere);
     return ressourcesFinancieres;
-  }
-
-  public getDatePremierMoisSimule(): string {
-    let simulationAides = this.getSimulationAides();
-    return simulationAides.simulationsMensuelles[0].datePremierJourMoisSimule;
   }
 
 }

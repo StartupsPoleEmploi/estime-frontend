@@ -5,7 +5,7 @@ import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
-import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
+import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -22,7 +22,7 @@ import { InformationsPersonnelles } from '@app/commun/models/informations-person
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SimulationAides } from '@app/commun/models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -81,8 +81,8 @@ export class RessourcesActuellesComponent implements OnInit {
     public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    public deConnecteSimulationService: DeConnecteSimulationService,
     private estimeApiService: EstimeApiService,
     private informationsPersonnellesService: InformationsPersonnellesService,
     public screenService: ScreenService,
@@ -336,8 +336,8 @@ export class RessourcesActuellesComponent implements OnInit {
     return hasConjointAvecRessourcesFinancieresInvalide;
   }
 
-  private traiterRetourSimulerMesAides(simulationAides: SimulationAides): void {
-    this.deConnecteSimulationAidesService.setSimulationAides(simulationAides);
+  private traiterRetourSimulerMesAides(simulation: Simulation): void {
+    this.deConnecteSimulationService.setSimulation(simulation);
     this.isPageLoadingDisplay = false;
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
   }

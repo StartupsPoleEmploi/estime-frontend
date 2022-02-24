@@ -1,6 +1,6 @@
 <div class="mois-apres-simulation-container" type="button" (click)="onClickAfficherDetail($event, simulationActuelle)"
     tag-action="clic_bouton_detail_mois"
-    attr.data-testid="detail_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+    attr.data-testid="detail_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
     <div *ngIf="!screenService.isExtraSmallScreen()">
         <div class="row">
             <div class="col-md-2 col-10 align-items-start">
@@ -15,7 +15,7 @@
                 <div class="montant_mois_apres_simulation_row row">
                     <div class="col-md-12">
                         <h5 class="headline-5-typo color-blue-10-typo text-start">
-                            {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
+                            {{simulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
                             €
                             net
                         </h5>
@@ -38,7 +38,7 @@
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">
-                                <span class="overline-typo">+{{+getRessourcesFinancieresOverFlow()}}</span>
+                                <span class="overline-typo">+{{+getRessourcesFinancieresEtAidesOverFlow()}}</span>
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                 <div class="montant_mois_apres_simulation_row row">
                     <div class="col-md-12">
                         <h5 class="headline-5-typo color-blue-10-typo text-start">
-                            {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
+                            {{simulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
                             €
                             net
                         </h5>
@@ -85,7 +85,7 @@
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">
-                                <span class="overline-typo">+{{+getAidesEtRevenusOverFlow()}}</span>
+                                <span class="overline-typo">+{{+getRessourcesFinancieresEtAidesOverFlow()}}</span>
                             </div>
                         </div>
                     </div>

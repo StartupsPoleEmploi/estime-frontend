@@ -2,9 +2,9 @@
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { SimulationAides } from '@models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-import { DeConnecteSimulationAidesService } from "../../demandeur-emploi-connecte/de-connecte-simulation-aides.service";
+import { DeConnecteSimulationService } from "../../demandeur-emploi-connecte/de-connecte-simulation.service";
 import { AidesService } from '../../utile/aides.service';
 import { DateUtileService } from '../../utile/date-util.service';
 import { Style } from '../models/style';
@@ -15,6 +15,8 @@ import { TableElement } from '../models/table/table-element';
 import { Text } from '../models/text';
 import { ImagesBase64Enum } from "@app/commun/enumerations/images-base64.enum";
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
+import { SimulationService } from '../../utile/simulation.service';
+import { RessourcesFinancieresService } from '../../utile/ressources-financieres.service';
 
 @Injectable({ providedIn: 'root' })
 export class BlockRessourcesEstimeesService {
@@ -23,375 +25,164 @@ export class BlockRessourcesEstimeesService {
     private aidesService: AidesService,
     private dateUtileService: DateUtileService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    private deConnecteSimulationAidesService: DeConnecteSimulationAidesService
+    private ressourcesFinancieresService: RessourcesFinancieresService,
+    private simulationAidesService: SimulationService
   ) {
 
   }
 
-  public addElementTableMesRessourcesEstimees(content: Array<any>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-    this.addTableMesRessourcesEstimees(content, simulationAides);
-    this.addTableMesRessourcesEtAidesActuelles(content, demandeurEmploi, simulationAides);
-    if (this.aidesService.hasAidesObtenirSimulationAides(simulationAides)) {
-      this.addTableAidesObtenir(content, simulationAides);
-    }
+  public addElementTableMesRessourcesEstimees(content: Array<any>, demandeurEmploi: DemandeurEmploi, simulation: Simulation): void {
+    this.addTableMesRessourcesEstimees(content, simulation);
+    this.addTableMesRessourcesEtAides(content, simulation);
   }
 
-  /******* méthode création table "Les aides que vous pourriez obtenir" */
+  /************** méthode création table "Mes futures ressources et aides"  *****************/
 
-  public addTableAidesObtenir(content: Array<any>, simulationAides: SimulationAides): void {
+  public addTableMesRessourcesEtAides(content: Array<any>, simulation: Simulation): void {
+
     let body = new Array<Array<Cell>>();
-    let nbrRows = 1;
+    let nbrRows = 2;
 
-    this.addHeaderTable(body, simulationAides.simulationsMensuelles.length, 'Les aides que vous pourriez obtenir');
+    this.addHeaderTable(body, simulation.simulationsMensuelles.length, 'Mes futures ressources et aides');
+    this.addRowPaie(body, simulation);
+    nbrRows += this.addTableAidesPoleEmploi(body, simulation);
+    nbrRows += this.addTableAidesCAF(body, simulation);
+    nbrRows += this.addTableAidesCPAM(body, simulation);
+    nbrRows += this.addTableRevenus(body, simulation);
 
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AGEPI)) {
-      const imageBase64 = ImagesBase64Enum.AGEPI;
-      const libelle = LibellesAidesEnum.AGEPI;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.AGEPI, imageBase64, libelle);
-      nbrRows++;
-    }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_MOBILITE)) {
-      const imageBase64 = ImagesBase64Enum.AIDE_MOBILITE;
-      const libelle = '\n' + LibellesAidesEnum.AIDE_MOBILITE;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.AIDE_MOBILITE, imageBase64, libelle);
-      nbrRows++;
-    }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.PRIME_ACTIVITE)) {
-      const imageBase64 = ImagesBase64Enum.PRIME_ACTIVITE;
-      const libelle = '\n' + LibellesAidesEnum.PRIME_ACTIVITE;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.PRIME_ACTIVITE, imageBase64, libelle);
-      nbrRows++;
-    }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT)) {
-      const imageBase64 = ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT;
-      const libelle = LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, imageBase64, libelle);
-      nbrRows++;
-    }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE)) {
-      const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE;
-      const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE, imageBase64, libelle);
-      nbrRows++;
-    }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
-      const imageBase64 = ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE;
-      const libelle = LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE;
-      this.addRowAideObtenir(body, simulationAides, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, imageBase64, libelle);
-      nbrRows++;
-    }
-
-    content.push(this.createTableElement(body, simulationAides.simulationsMensuelles.length, nbrRows));
+    content.push(this.createTableElement(body, simulation.simulationsMensuelles.length, nbrRows));
   }
 
-  private addRowAideObtenir(body: Array<Array<Cell>>, simulationAides: SimulationAides, codeAideToAdd: string, imageAideBase64: string, libelle: string): void {
+  public addTableAidesPoleEmploi(body: Array<Array<Cell>>, simulation: Simulation): number {
+    let nbrRows = 0;
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE, LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE, ImagesBase64Enum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.AIDE_RETOUR_EMPLOI, LibellesAidesEnum.AIDE_RETOUR_EMPLOI, ImagesBase64Enum.AIDE_RETOUR_EMPLOI);
+
+      nbrRows++;
+    }
+    return nbrRows;
+  }
+
+  public addTableAidesCAF(body: Array<Array<Cell>>, simulation: Simulation): number {
+    let nbrRows = 0;
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.RSA)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.RSA, LibellesAidesEnum.RSA, ImagesBase64Enum.RSA);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES, ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL, LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL, ImagesBase64Enum.ALLOCATION_SOUTIEN_FAMILIAL);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATIONS_FAMILIALES)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATIONS_FAMILIALES, LibellesAidesEnum.ALLOCATIONS_FAMILIALES, ImagesBase64Enum.ALLOCATIONS_FAMILIALES);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.COMPLEMENT_FAMILIAL)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.COMPLEMENT_FAMILIAL, LibellesAidesEnum.COMPLEMENT_FAMILIAL, ImagesBase64Enum.COMPLEMENT_FAMILIAL);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, LibellesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, ImagesBase64Enum.AIDE_PERSONNALISEE_LOGEMENT);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE, LibellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE, ImagesBase64Enum.ALLOCATION_LOGEMENT_FAMILIALE);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, LibellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, ImagesBase64Enum.ALLOCATION_LOGEMENT_SOCIALE);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT, LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT, ImagesBase64Enum.PRESTATION_ACCUEIL_JEUNE_ENFANT);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.PENSIONS_ALIMENTAIRES)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.PENSIONS_ALIMENTAIRES, LibellesAidesEnum.PENSIONS_ALIMENTAIRES, ImagesBase64Enum.PENSIONS_ALIMENTAIRES);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.PRIME_ACTIVITE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.PRIME_ACTIVITE, '\n' + LibellesAidesEnum.PRIME_ACTIVITE, ImagesBase64Enum.PRIME_ACTIVITE);
+      nbrRows++;
+    }
+    return nbrRows;
+  }
+
+  public addTableAidesCPAM(body: Array<Array<Cell>>, simulation: Simulation): number {
+    let nbrRows = 0;
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.PENSION_INVALIDITE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.PENSION_INVALIDITE, LibellesAidesEnum.PENSION_INVALIDITE, ImagesBase64Enum.PENSION_INVALIDITE);
+      nbrRows++;
+    }
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE)) {
+      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
+      nbrRows++;
+    }
+    return nbrRows;
+  }
+
+  public addTableRevenus(body: Array<Array<Cell>>, simulation: Simulation): number {
+    let nbrRows = 0;
+    if (this.ressourcesFinancieresService.hasRessourceFinanciere(simulation, CodesAidesEnum.IMMOBILIER)) {
+      this.addRowRessourceFinanciere(body, simulation, CodesAidesEnum.IMMOBILIER, LibellesAidesEnum.IMMOBILIER, ImagesBase64Enum.IMMOBILIER);
+      nbrRows++;
+    }
+    if (this.ressourcesFinancieresService.hasRessourceFinanciere(simulation, CodesAidesEnum.MICRO_ENTREPRENEUR)) {
+      this.addRowRessourceFinanciere(body, simulation, CodesAidesEnum.MICRO_ENTREPRENEUR, LibellesAidesEnum.MICRO_ENTREPRENEUR, ImagesBase64Enum.MICRO_ENTREPRENEUR);
+      nbrRows++;
+    }
+    if (this.ressourcesFinancieresService.hasRessourceFinanciere(simulation, CodesAidesEnum.TRAVAILLEUR_INDEPENDANT)) {
+      this.addRowRessourceFinanciere(body, simulation, CodesAidesEnum.TRAVAILLEUR_INDEPENDANT, LibellesAidesEnum.TRAVAILLEUR_INDEPENDANT, ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT);
+      nbrRows++;
+    }
+    return nbrRows;
+  }
+
+  private addRowPaie(body: Array<Array<Cell>>, simulation: Simulation): void {
+    this.addRowRessourceFinanciere(body, simulation, CodesAidesEnum.SALAIRE, '\n' + LibellesAidesEnum.SALAIRE, ImagesBase64Enum.SALAIRE);
+  }
+
+  private addRowAide(body: Array<Array<Cell>>, simulation: Simulation, code: string, libelle: string, imageBase64: string) {
     const row = new Array<Cell>();
-    row.push(this.createCellImageRessource(imageAideBase64));
+    row.push(this.createCellImageRessource(imageBase64));
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      let montant = 0;
-      for (let [codeAide, aide] of Object.entries(simulationMensuelle.aides)) {
-        if (aide && codeAide === codeAideToAdd) {
-          montant = aide.montant;
-        }
-      }
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montant = this.aidesService.getMontantAideByCode(simulationMensuelle, code);
       row.push(this.createCellMontant(montant));
     });
     body.push(row);
   }
 
-  /************** méthode création table "Mes ressources et aides actuelles"  *****************/
-
-  public addTableMesRessourcesEtAidesActuelles(content: Array<any>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-
-    let body = new Array<Array<Cell>>();
-    let nbrRows = 1;
-
-    this.addHeaderTable(body, simulationAides.simulationsMensuelles.length, 'Mes ressources et aides actuelles');
-    nbrRows += this.addTableAidesPoleEmploiActuelles(body, demandeurEmploi, simulationAides);
-    nbrRows += this.addTableAidesCAFActuelles(body, demandeurEmploi, simulationAides);
-    nbrRows += this.addTableAidesCPAMActuelles(body, demandeurEmploi, simulationAides);
-    nbrRows += this.addTableRevenusActuelles(body, demandeurEmploi, simulationAides);
-
-    content.push(this.createTableElement(body, simulationAides.simulationsMensuelles.length, nbrRows));
-  }
-
-  public addTableAidesPoleEmploiActuelles(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): number {
-    let nbrRows = 0;
-    this.addRowPaie(body, demandeurEmploi, simulationAides);
-    if (demandeurEmploi.beneficiaireAides.beneficiaireASS) {
-      this.addRowASS(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.beneficiaireAides.beneficiaireARE) {
-      this.addRowARE(body, simulationAides);
-      nbrRows++;
-    }
-    return nbrRows;
-  }
-
-  public addTableAidesCAFActuelles(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): number {
-    let nbrRows = 0;
-    if (demandeurEmploi.beneficiaireAides.beneficiaireRSA) {
-      this.addRowRSA(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.beneficiaireAides.beneficiaireAAH) {
-      this.addRowAAHPourBeneficiaireAAH(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF && !demandeurEmploi.beneficiaireAides.beneficiaireAAH && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH > 0) {
-      this.addRowAAH(body, demandeurEmploi, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.allocationSoutienFamilial) {
-      this.addRowASF(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.allocationsFamiliales) {
-      this.addRowAF(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.complementFamilial) {
-      this.addRowCF(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.prestationAccueilJeuneEnfant) {
-      this.addRowPAJE(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales?.pensionsAlimentairesFoyer) {
-      this.addRowPAF(body, simulationAides);
-      nbrRows++;
-    }
-    return nbrRows;
-  }
-
-  public addTableAidesCPAMActuelles(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): number {
-    let nbrRows = 0;
-    if (demandeurEmploi.beneficiaireAides.beneficiairePensionInvalidite) {
-      this.addRowPensionInvalidite(body, demandeurEmploi, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM?.allocationSupplementaireInvalidite > 0) {
-      this.addRowASI(body, demandeurEmploi, simulationAides);
-      nbrRows++;
-    }
-    return nbrRows;
-  }
-
-  public addTableRevenusActuelles(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): number {
-    let nbrRows = 0;
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0) {
-      this.addRowIMMO(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0) {
-      this.addRowMICR(body, simulationAides);
-      nbrRows++;
-    }
-    if (demandeurEmploi.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice) {
-      this.addRowINDP(body, simulationAides);
-      nbrRows++;
-    }
-    return nbrRows;
-  }
-
-  private addRowPaie(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-    const montant = demandeurEmploi.futurTravail.salaire.montantNet;
-    const imageBase64 = ImagesBase64Enum.SALAIRE;
-    const libelle = '\n' + LibellesAidesEnum.SALAIRE;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowASS(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
+  private addRowRessourceFinanciere(body: Array<Array<Cell>>, simulation: Simulation, code: string, libelle: string, imageBase64: string) {
     const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
-    const libelle = LibellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
     row.push(this.createCellImageRessource(imageBase64));
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAss = this.aidesService.getMontantASS(simulationMensuelle);
-      row.push(this.createCellMontant(montantAss));
-    });
-    body.push(row);
-  }
-
-  private addRowARE(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.AIDE_RETOUR_EMPLOI;
-    const libelle = LibellesAidesEnum.AIDE_RETOUR_EMPLOI;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantARE = this.aidesService.getMontantARE(simulationMensuelle);
-      row.push(this.createCellMontant(montantARE));
-    });
-    body.push(row);
-  }
-
-  private addRowRSA(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.RSA;
-    const libelle = LibellesAidesEnum.RSA;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantRSA = this.aidesService.getMontantRSA(simulationMensuelle);
-      row.push(this.createCellMontant(montantRSA));
-    });
-    body.push(row);
-  }
-
-  private addRowAAH(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES;
-    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH;
-    const libelle = LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowAAHPourBeneficiaireAAH(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES;
-    const libelle = LibellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAah = this.aidesService.getMontantAAH(simulationMensuelle);
-      row.push(this.createCellMontant(montantAah));
-    });
-    body.push(row);
-  }
-
-  private addRowPensionInvalidite(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-    const imageBase64 = ImagesBase64Enum.PENSION_INVALIDITE;
-    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite;
-    const libelle = LibellesAidesEnum.PENSION_INVALIDITE;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowASI(body: Array<Array<Cell>>, demandeurEmploi: DemandeurEmploi, simulationAides: SimulationAides): void {
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
-    const montant = demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite;
-    const libelle = LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowIMMO(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getRevenusImmobilierSur1Mois();
-    const imageBase64 = ImagesBase64Enum.IMMOBILIER;
-    const libelle = LibellesAidesEnum.IMMOBILIER;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowMICR(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getBeneficesMicroEntrepriseSur1Mois();
-    const imageBase64 = ImagesBase64Enum.MICRO_ENTREPRENEUR;
-    const libelle = LibellesAidesEnum.MICRO_ENTREPRENEUR;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowINDP(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const montant = this.deConnecteRessourcesFinancieresAvantSimulationService.getChiffreAffairesIndependantSur1Mois();
-    const imageBase64 = ImagesBase64Enum.TRAVAILLEUR_INDEPENDANT;
-    const libelle = LibellesAidesEnum.TRAVAILLEUR_INDEPENDANT;
-    const row = this.createRowMontant(body, montant, imageBase64, libelle, simulationAides.simulationsMensuelles.length);
-    body.push(row);
-  }
-
-  private addRowASF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATION_SOUTIEN_FAMILIAL;
-    const libelle = LibellesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantASF = this.aidesService.getMontantAllocationSoutienFamilial(simulationMensuelle);
-      row.push(this.createCellMontant(montantASF));
-    });
-    body.push(row);
-  }
-
-  private addRowAF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.ALLOCATIONS_FAMILIALES;
-    const libelle = LibellesAidesEnum.ALLOCATIONS_FAMILIALES;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantAF = this.aidesService.getMontantAllocationsFamiliales(simulationMensuelle);
-      row.push(this.createCellMontant(montantAF));
-    });
-    body.push(row);
-  }
-
-  private addRowCF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.COMPLEMENT_FAMILIAL;
-    const libelle = LibellesAidesEnum.COMPLEMENT_FAMILIAL;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantCF = this.aidesService.getMontantComplementFamilial(simulationMensuelle);
-      row.push(this.createCellMontant(montantCF));
-    });
-    body.push(row);
-  }
-
-  private addRowPAJE(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
-    const libelle = LibellesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantPAJE = this.aidesService.getMontantPrestationAccueilJeuneEnfant(simulationMensuelle);
-      row.push(this.createCellMontant(montantPAJE));
-    });
-    body.push(row);
-  }
-
-  private addRowPAF(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const row = new Array<Cell>();
-    const imageBase64 = ImagesBase64Enum.PENSIONS_ALIMENTAIRES;
-    const libelle = LibellesAidesEnum.PENSIONS_ALIMENTAIRES;
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montantPAF = this.aidesService.getMontantPensionsAlimentaires(simulationMensuelle);
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
+      const montantPAF = this.ressourcesFinancieresService.getMontantRessourceFinanciereByCode(simulationMensuelle, code);
       row.push(this.createCellMontant(montantPAF));
     });
     body.push(row);
   }
 
-
-  /************** méthode création table "Mes ressources estimees"  *****************/
-
-  public addTableMesRessourcesEstimees(content: Array<any>, simulationAides: SimulationAides): void {
+  public addTableMesRessourcesEstimees(content: Array<any>, simulation: Simulation): void {
     let body = new Array<Array<Cell>>();
-    this.addHeaderTableMesRessourcesEstimees(body, simulationAides);
-    this.addRowMontantTotalSimulationMensuelle(body, simulationAides, simulationAides.simulationsMensuelles.length);
-    content.push(this.createTableElementMesRessourcesEstimees(body, simulationAides.simulationsMensuelles.length));
+    this.addHeaderTableMesRessourcesEstimees(body, simulation);
+    this.addRowMontantTotalSimulationMensuelle(body, simulation, simulation.simulationsMensuelles.length);
+    content.push(this.createTableElementMesRessourcesEstimees(body, simulation.simulationsMensuelles.length));
   }
 
-  private addHeaderTableMesRessourcesEstimees(body: Array<Array<Cell>>, simulationAides: SimulationAides): void {
-    const nbrMoisSimule = simulationAides.simulationsMensuelles.length;
+  private addHeaderTableMesRessourcesEstimees(body: Array<Array<Cell>>, simulation: Simulation): void {
+    const nbrMoisSimule = simulation.simulationsMensuelles.length;
     const row = new Array<Cell>();
 
     //add cellule1
@@ -417,15 +208,14 @@ export class BlockRessourcesEstimeesService {
     cell.text = titleCell2;
     return cell;
   }
-
-  private addRowMontantTotalSimulationMensuelle(body: Array<Array<Cell>>, simulationAides: SimulationAides, nbrColumns: number): void {
+  private addRowMontantTotalSimulationMensuelle(body: Array<Array<Cell>>, simulation: Simulation, nbrColumns: number): void {
     const row = new Array<Cell>();
     row.push(this.createCellTitle(' ', '#FFFFFF', 2));
     row.push(new Cell());
     //add des cellules pour chaque simulation mensuelle
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       const libelleDate = this.dateUtileService.getLibelleDateStringFormatCourt(simulationMensuelle.datePremierJourMoisSimule);
-      const montantTotal = this.deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuelle);
+      const montantTotal = this.simulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuelle);
       row.push(this.createCellMontantTotalSimulationMensuelle(libelleDate, montantTotal));
     });
 
@@ -542,19 +332,6 @@ export class BlockRessourcesEstimeesService {
     cell.style = new Style();
     cell.style.alignment = 'center';
     cell.style.bold = true;
-    return cell;
-  }
-
-  private createCellMessageAidesLogement(colSpan: number): Cell {
-    const cell = new Cell();
-    cell.colSpan = colSpan;
-    cell.style = new Style();
-    cell.style.alignment = 'center';
-    cell.style.fontSize = 11;
-    cell.text = new Text();
-    cell.text.text = '\n' + this.aidesService.getMessageAlerteAidesLogement(false);
-    cell.text.style = new Style();
-    cell.text.style.margin = [0, 30, 1000, 0];
     return cell;
   }
 

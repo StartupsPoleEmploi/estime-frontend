@@ -2,11 +2,12 @@ import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
-import { DeConnecteSimulationAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service';
+import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieresService } from '@app/core/services/utile/ressources-financieres.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
+import { SimulationService } from '@app/core/services/utile/simulation.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -27,7 +28,8 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   constructor(
     private ressourcesFinancieresService: RessourcesFinancieresService,
     public dateUtileService: DateUtileService,
-    public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
+    public deConnecteSimulationService: DeConnecteSimulationService,
+    public simulationService: SimulationService,
     public screenService: ScreenService,
     private location: LocationStrategy,
     public sideModalService: SideModalService) {
@@ -40,7 +42,7 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ressourcesFinancieresEtAidesMois = this.deConnecteSimulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
+    this.ressourcesFinancieresEtAidesMois = this.simulationService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
     this.orderRessourcesFinancieresMois();
   }
 

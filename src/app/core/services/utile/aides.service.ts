@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { SimulationAides } from '@app/commun/models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DateUtileService } from './date-util.service';
@@ -20,8 +20,8 @@ export class AidesService {
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService
   ) { }
 
-  public hasAideLogement(simulationAides: SimulationAides): boolean {
-    const premierMoisSimulation = simulationAides.simulationsMensuelles[0]
+  public hasAideLogement(simulation: Simulation): boolean {
+    const premierMoisSimulation = simulation.simulationsMensuelles[0]
     const aides = Object.values(premierMoisSimulation.aides);
     return (aides.some(
       (aide) => aide && (aide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
@@ -112,7 +112,7 @@ export class AidesService {
     return message;
   }
 
-  public getMessageAlerteAidesFamilialesNoSelect(simulationsAides: SimulationAides): string {
+  public getMessageAlerteAidesFamilialesNoSelect(simulationsAides: Simulation): string {
     let message = null;
     if (simulationsAides.simulationsMensuelles != null) {
       message = this.getMessageAlerteAidesFamiliales(simulationsAides.simulationsMensuelles[0])
@@ -169,9 +169,9 @@ export class AidesService {
     return montant;
   }
 
-  public hasAidesObtenirSimulationAides(simulationAides: SimulationAides): boolean {
+  public hasAidesObtenirSimulationAides(simulation: Simulation): boolean {
     let hasAidesObtenirSimulationAides = false;
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       if (this.hasAidesObtenir(simulationMensuelle)) {
         hasAidesObtenirSimulationAides = true;
       }
@@ -194,7 +194,6 @@ export class AidesService {
 
   public getAideByCodeFromSimulationMensuelle(simulationMensuelle: SimulationMensuelle, codeAideToFind: string): Aide {
     let aide = null;
-
     for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.aides)) {
       if (aideSimulationMensuelle && codeAide === codeAideToFind) {
         aide = aideSimulationMensuelle;
@@ -203,9 +202,9 @@ export class AidesService {
     return aide;
   }
 
-  public getAideByCode(simulationAides: SimulationAides, codeAideToFind: string): Aide {
+  public getAideByCode(simulation: Simulation, codeAideToFind: string): Aide {
     let aide = null;
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       for (let [codeAide, aideSimulationMensuelle] of Object.entries(simulationMensuelle.aides)) {
         if (aideSimulationMensuelle && codeAide === codeAideToFind) {
           aide = aideSimulationMensuelle;
@@ -215,9 +214,9 @@ export class AidesService {
     return aide;
   }
 
-  public hasAide(simulationAides: SimulationAides, codeAide: string) {
+  public hasAide(simulation: Simulation, codeAide: string) {
     let hasAide = false;
-    simulationAides.simulationsMensuelles.forEach(simulationMensuelle => {
+    simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       if (this.hasAideByCode(simulationMensuelle, codeAide)) {
         hasAide = true;
       }
@@ -281,14 +280,10 @@ export class AidesService {
         && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM);
   }
 
-  private getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
+  public getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
     let montant = 0;
-    if (simulationSelected.aides) {
-      for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
-        if (codeAide === codeAideSelected) {
-          montant = Number(aide.montant);
-        }
-      }
+    if (this.getAideByCodeFromSimulationMensuelle(simulationSelected, codeAideSelected)) {
+      montant = this.getAideByCodeFromSimulationMensuelle(simulationSelected, codeAideSelected).montant;
     }
     return montant;
   }

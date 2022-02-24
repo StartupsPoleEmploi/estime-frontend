@@ -49,7 +49,7 @@ export class BlockInformationsService {
 
   private createCell2(): Cell {
     const cell = new Cell();
-    cell.text = 'Le montant total de la simulation ne prend pas en compte les allocations logement, familiales, autres ressources du foyer et le prélèvement à la source.';
+    cell.text = 'Les montants simulés ne prennent pas en compte le prélèvement à la source.';
 
     const style = new Style();
     style.color = '#23333C';

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-import { DeConnecteSimulationAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service";
+import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
 import { AidesService } from '@app/core/services/utile/aides.service';
@@ -13,7 +13,7 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
 import { Aide } from '@models/aide';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
-import { SimulationAides } from '@models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
 
 @Component({
@@ -25,7 +25,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   aideSelected: Aide;
   demandeurEmploiConnecte: DemandeurEmploi;
-  simulationAides: SimulationAides;
+  simulation: Simulation;
   simulationSelected: SimulationMensuelle;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   hoveredButtonSimulationMensuelle: number;
@@ -41,7 +41,7 @@ export class ResultatSimulationComponent implements OnInit {
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
+    public deConnecteSimulationAidesService: DeConnecteSimulationService,
     public modalService: ModalService,
     private router: Router,
     public screenService: ScreenService,
@@ -54,8 +54,8 @@ export class ResultatSimulationComponent implements OnInit {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.afficherDetails = true;
-    this.loadDataSimulationAides();
-    this.nombreMoisSimules = this.simulationAides.simulationsMensuelles.length;
+    this.loadDataSimulation();
+    this.nombreMoisSimules = this.simulation.simulationsMensuelles.length;
   }
 
   public simulationSelection(simulationMensuelle: SimulationMensuelle) {
@@ -69,7 +69,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public onClickButtonImprimerMaSimulation(): void {
-    this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulationAides);
+    this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulation);
   }
 
   public onClickOnglet(afficherDetails: boolean): void {
@@ -101,7 +101,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public isLastCardSimulation(index: number): boolean {
-    return index === this.simulationAides.simulationsMensuelles.length - 1;
+    return index === this.simulation.simulationsMensuelles.length - 1;
   }
 
   public isSimulationMensuelleSelected(simulationMensuelle: SimulationMensuelle): boolean {
@@ -109,7 +109,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public isLastSimulationMensuelle(index: number) {
-    return index === this.simulationAides.simulationsMensuelles.length - 1
+    return index === this.simulation.simulationsMensuelles.length - 1
   }
 
   public onClickButtonRetour(): void {
@@ -120,8 +120,8 @@ export class ResultatSimulationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
-  private loadDataSimulationAides(): void {
-    this.simulationAides = this.deConnecteSimulationAidesService.getSimulationAides();
+  private loadDataSimulation(): void {
+    this.simulation = this.deConnecteSimulationAidesService.getSimulation();
   }
 
   public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {

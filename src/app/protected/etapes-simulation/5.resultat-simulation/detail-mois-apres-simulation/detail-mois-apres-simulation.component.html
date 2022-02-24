@@ -15,7 +15,7 @@
                     screenService.isTabletScreen())}}
                 </h2>
                 <h3 class="headline-3-typo color-blue-10-typo text-start" data-testid="montant-ressource">
-                    {{deConnecteSimulationAidesService.calculerMontantTotalRessourcesMois(simulationActuelle)}} €
+                    {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}} €
                     net
                 </h3>
             </div>
@@ -65,7 +65,8 @@
                         attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
                         {{ ressourceFinanciereOuAide.montant }} €
                     </span>
-                    <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)" class="demande-a-effectuer overline-typo">
+                    <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
+                        class="demande-a-effectuer overline-typo">
                         DEMANDE À EFFECTUER
                     </span>
                 </div>

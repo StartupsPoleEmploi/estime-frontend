@@ -169,8 +169,8 @@
                             class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
                             [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier" btnCheckbox tabindex="0"
                             #hasRevenusImmobilier="ngModel" (click)="onClickCheckBoxHasRevenusImmobilier()"
-                            (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
-                            <span class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
+                            (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.IMMOBILIER)">
+                            <span class="body-2-typo">{{situationPersonneEnum.IMMOBILIER}}</span>
                         </button>
                         <button name="beneficiaireAAH" class="radio-button-style-1" data-testid="btn-situation-aah"
                             aria-label="Vous êtes bénéficiaire de l'AAH" [(ngModel)]="beneficiaireAides.beneficiaireAAH"
@@ -333,8 +333,8 @@
                             [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier"
                             btnCheckbox tabindex="0" #hasRevenusImmobilier="ngModel"
                             (click)="onClickCheckBoxConjointHasRevenusImmobilier()"
-                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER)">
-                            <span class="body-2-typo">{{situationPersonneEnum.BENEFICIAIRE_REVENUS_IMMOBILIER}}</span>
+                            (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.IMMOBILIER)">
+                            <span class="body-2-typo">{{situationPersonneEnum.IMMOBILIER}}</span>
                         </button>
                         <button #conjointHasPensionInvalidite="ngModel" name="conjointIsRetraite"
                             aria-label="Votre conjoint(e) perçoit une pension de retraite" class="radio-button-style-1"

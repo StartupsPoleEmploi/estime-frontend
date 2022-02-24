@@ -76,8 +76,9 @@
                 <h4 id="mois_ressources_avant_simulation" class="headline-4-typo color-blue-2-typo text-start">
                     {{ dateUtileService.getLibelleDateActuelle() }}
                 </h4>
-                <h5 id="montant_ressources_avant_simulation" class="headline-5-typo color-blue-10-typo text-start" data-testid="montant_ressources_actuelles">
-                    {{simulationAides.montantRessourcesFinancieresMoisAvantSimulation}} € net
+                <h5 id="montant_ressources_avant_simulation" class="headline-5-typo color-blue-10-typo text-start"
+                    data-testid="montant_ressources_actuelles">
+                    {{simulation.montantRessourcesFinancieresMoisAvantSimulation}} € net
                 </h5>
             </div>
         </div>
@@ -87,8 +88,8 @@
         <div class="ressources_avant_simulation">
             <div class="card_ressources_apres_simulation card row mb-3"
                 [ngClass]="{'card-simulations-mobile': screenService.isExtraSmallScreen(), 'card-simulations-desktop': !screenService.isExtraSmallScreen()}"
-                *ngFor="let simulationMensuelle of simulationAides.simulationsMensuelles; let index = index;"
-                tabindex="0" (keyup)="handleKeyUpOnSimulationMensuelle($event,simulationMensuelle);">
+                *ngFor="let simulationMensuelle of simulation.simulationsMensuelles; let index = index;" tabindex="0"
+                (keyup)="handleKeyUpOnSimulationMensuelle($event,simulationMensuelle);">
                 <div class="col-md-12 col-12">
                     <app-mois-apres-simulation [simulationSelected]="simulationSelected"
                         [simulationActuelle]="simulationMensuelle" (simulationSelection)="simulationSelection($event)">
@@ -99,10 +100,10 @@
     </div>
     <div *ngIf="!afficherDetails" class="row row-style-3">
         <div class="col-12">
-            <app-ressources-financieres-diagramme [simulationAides]="simulationAides">
+            <app-ressources-financieres-diagramme [simulation]="simulation">
             </app-ressources-financieres-diagramme>
-            <app-message-info *ngIf="aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)" [contenu]="
-                aidesService.getMessageAlerteAidesFamilialesNoSelect(simulationAides)">
+            <app-message-info *ngIf="aidesService.getMessageAlerteAidesFamilialesNoSelect(simulation)" [contenu]="
+                aidesService.getMessageAlerteAidesFamilialesNoSelect(simulation)">
             </app-message-info>
         </div>
     </div>

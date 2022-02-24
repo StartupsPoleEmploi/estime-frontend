@@ -1,14 +1,14 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { Aide } from '@app/commun/models/aide';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
-import { DeConnecteSimulationAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation-aides.service';
+import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
+import { SimulationService } from '@app/core/services/utile/simulation.service';
 
 @Component({
   selector: 'app-mois-apres-simulation',
@@ -33,7 +33,8 @@ export class MoisApresSimulationComponent implements OnInit {
     public aidesService: AidesService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
-    public deConnecteSimulationAidesService: DeConnecteSimulationAidesService,
+    public deConnecteSimulationService: DeConnecteSimulationService,
+    public simulationAidesService: SimulationService,
     public screenService: ScreenService
   ) {
   }
@@ -41,7 +42,7 @@ export class MoisApresSimulationComponent implements OnInit {
   ngOnInit(
   ): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.ressourcesFinancieresEtAidesMois = this.deConnecteSimulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
+    this.ressourcesFinancieresEtAidesMois = this.simulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
     this.orderRessourcesFinancieresMois();
   }
 
@@ -75,7 +76,7 @@ export class MoisApresSimulationComponent implements OnInit {
     return index == 5 ? 'overflow' : 'else';
   }
 
-  public getressourcesFinancieresOverFlow(): number {
+  public getRessourcesFinancieresEtAidesOverFlow(): number {
     return this.screenService.isExtraSmallScreen() ? this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
   }
 

@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Aide } from '@app/commun/models/aide';
-import { SimulationAides } from '@app/commun/models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 import { AidesService } from '../../utile/aides.service';
 import { Style } from '../models/style';
 import { Cell } from '../models/table/cell';
@@ -23,59 +23,59 @@ export class DetailAidesEligiblesService {
 
   }
 
-  public addPagesDetailAides(content: Array<any>, simulationAides: SimulationAides): void {
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
-      this.addAideASS(content, simulationAides);
+  public addPagesDetailAides(content: Array<any>, simulation: Simulation): void {
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+      this.addAideASS(content, simulation);
     }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AGEPI)) {
-      this.addAideAGEPI(content, simulationAides);
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.AGEPI)) {
+      this.addAideAGEPI(content, simulation);
     }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.AIDE_MOBILITE)) {
-      this.addAideMobilite(content, simulationAides);
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.AIDE_MOBILITE)) {
+      this.addAideMobilite(content, simulation);
     }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.PRIME_ACTIVITE)) {
-      this.addPrimeActivite(content, simulationAides);
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.PRIME_ACTIVITE)) {
+      this.addPrimeActivite(content, simulation);
     }
-    if (this.aidesService.hasAide(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
-      this.addAideAAH(content, simulationAides);
+    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+      this.addAideAAH(content, simulation);
     }
   }
 
-  private addAideASS(content: Array<any>, simulationAides: SimulationAides): void {
+  private addAideASS(content: Array<any>, simulation: Simulation): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    const aide = this.aidesService.getAideByCode(simulation, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
     const imageBase64 = ImagesBase64Enum.ALLOCATION_SOLIDARITE_SPECIFIQUE;
     this.addTableTitle(content, aide, imageBase64, '#F8CF8D');
     this.addContentAideASS(content, aide);
   }
 
-  private addAideAGEPI(content: Array<any>, simulationAides: SimulationAides): void {
+  private addAideAGEPI(content: Array<any>, simulation: Simulation): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.AGEPI);
+    const aide = this.aidesService.getAideByCode(simulation, CodesAidesEnum.AGEPI);
     const imageBase64 = ImagesBase64Enum.AGEPI;
     this.addTableTitle(content, aide, imageBase64, '#FFC6FF');
     this.addContentAideAGEPI(content, aide);
   }
 
-  private addAideMobilite(content: Array<any>, simulationAides: SimulationAides): void {
+  private addAideMobilite(content: Array<any>, simulation: Simulation): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.AIDE_MOBILITE);
+    const aide = this.aidesService.getAideByCode(simulation, CodesAidesEnum.AIDE_MOBILITE);
     const imageBase64 = ImagesBase64Enum.AIDE_MOBILITE;
     this.addTableTitle(content, aide, imageBase64, '#F1A378');
     this.addContentAideMobilite(content, aide);
   }
 
-  private addPrimeActivite(content: Array<any>, simulationAides: SimulationAides): void {
+  private addPrimeActivite(content: Array<any>, simulation: Simulation): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.PRIME_ACTIVITE);
+    const aide = this.aidesService.getAideByCode(simulation, CodesAidesEnum.PRIME_ACTIVITE);
     const imageBase64 = ImagesBase64Enum.PRIME_ACTIVITE;
     this.addTableTitle(content, aide, imageBase64, '#BDB2FF');
     this.addContentPrimeActivite(content, aide);
   }
 
-  private addAideAAH(content: Array<any>, simulationAides: SimulationAides): void {
+  private addAideAAH(content: Array<any>, simulation: Simulation): void {
     this.addPageBreak(content);
-    const aide = this.aidesService.getAideByCode(simulationAides, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
+    const aide = this.aidesService.getAideByCode(simulation, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
     const imageBase64 = ImagesBase64Enum.ALLOCATION_ADULTES_HANDICAPES;
     this.addTableTitle(content, aide, imageBase64, '#C7F0BD');
     this.addContentAideAAH(content, aide);

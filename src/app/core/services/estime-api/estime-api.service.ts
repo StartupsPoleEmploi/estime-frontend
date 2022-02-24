@@ -7,7 +7,7 @@ import { Environment } from '@models/environment';
 import { Individu } from '@models/individu';
 import { OptionsHTTP } from "@models/options-http";
 import { PeConnectPayload } from '@models/pe-connect-payload';
-import { SimulationAides } from '@models/simulation-aides';
+import { Simulation } from '@app/commun/models/simulation';
 import { Observable } from 'rxjs';
 
 import { IndividuConnectedService } from '../connexion/individu-connected.service';
@@ -41,10 +41,10 @@ export class EstimeApiService {
     return this.http.get<Aide>(`${this.pathDemandeurEmploiService}aides/${codeAide}`, options);
   }
 
-  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<SimulationAides> {
+  public simulerMesAides(demandeurEmploi: DemandeurEmploi): Observable<Simulation> {
     const options = this.getHttpHeaders(true);
     this.setPeConnectAuthorization(demandeurEmploi);
-    return this.http.post<SimulationAides>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
+    return this.http.post<Simulation>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
   public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {

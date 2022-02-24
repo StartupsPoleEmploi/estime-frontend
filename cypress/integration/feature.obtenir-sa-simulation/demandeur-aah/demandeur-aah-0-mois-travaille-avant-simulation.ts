@@ -141,8 +141,8 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
     'enfant à charge de 9 ans, asf 117€, ' +
     'montant AAH 900€, ' +
     '0 mois travaillé avant simulation, ' +
-    'futur contrat CDI, salaire 940€ net, 35h/semaine,' +
-    'kilométrage domicile -> taf = 80kms + 12 trajets' +
+    'futur contrat CDI, salaire 940€ net, 35h/semaine, ' +
+    'kilométrage domicile -> taf = 80kms + 12 trajets, ' +
     'locataire (loyer : 500, charges 50)', () => {
 
       cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-aah/demandeur-aah-0-mois-travaille-avant-simulation/avec-logement.json' })
