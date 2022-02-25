@@ -6,7 +6,6 @@ import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
-import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
@@ -37,11 +36,10 @@ export class ResultatSimulationComponent implements OnInit {
   @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
 
   constructor(
-    private aidesService: AidesService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    public deConnecteSimulationAidesService: DeConnecteSimulationService,
+    public deConnecteSimulationService: DeConnecteSimulationService,
     public modalService: ModalService,
     private router: Router,
     public screenService: ScreenService,
@@ -121,7 +119,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   private loadDataSimulation(): void {
-    this.simulation = this.deConnecteSimulationAidesService.getSimulation();
+    this.simulation = this.deConnecteSimulationService.getSimulation();
   }
 
   public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {

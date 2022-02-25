@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NumberUtileService } from './number-util.service';
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CodeDepartementUtileService {
 
   public static CODE_DEPARTEMENT_VAL_OISE = 95;
@@ -11,12 +11,11 @@ export class CodeDepartementUtileService {
 
   }
 
-
   public getCodeDepartement(codePostal: string): string {
     const deuxPremiersCaracteresCodePostal = codePostal.substring(0, 2);
-    if(this.numberUtileService.isNumeric(deuxPremiersCaracteresCodePostal)) {
+    if (this.numberUtileService.isNumeric(deuxPremiersCaracteresCodePostal)) {
       const deuxPremiersNumber = parseInt(deuxPremiersCaracteresCodePostal);
-      if(deuxPremiersNumber > CodeDepartementUtileService.CODE_DEPARTEMENT_VAL_OISE) {
+      if (deuxPremiersNumber > CodeDepartementUtileService.CODE_DEPARTEMENT_VAL_OISE) {
         return codePostal.substring(0, 3);
       }
     }

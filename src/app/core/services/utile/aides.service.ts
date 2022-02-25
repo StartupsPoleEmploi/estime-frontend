@@ -169,14 +169,14 @@ export class AidesService {
     return montant;
   }
 
-  public hasAidesObtenirSimulationAides(simulation: Simulation): boolean {
-    let hasAidesObtenirSimulationAides = false;
+  public hasAidesObtenirSimulation(simulation: Simulation): boolean {
+    let hasAidesObtenirSimulation = false;
     simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       if (this.hasAidesObtenir(simulationMensuelle)) {
-        hasAidesObtenirSimulationAides = true;
+        hasAidesObtenirSimulation = true;
       }
     });
-    return hasAidesObtenirSimulationAides;
+    return hasAidesObtenirSimulation;
   }
 
   public hasAidesObtenir(simulationSelected: SimulationMensuelle): boolean {

@@ -6,10 +6,8 @@ import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagram
 import { DevisesEnum } from '@enumerations/devises.enum';
 import { LibellesAidesEnum } from '@enumerations/libelles-aides.enum';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationService } from '../demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
-import { AidesService } from '../utile/aides.service';
 import { DateUtileService } from '../utile/date-util.service';
 import { ScreenService } from '../utile/screen.service';
 import { SimulationService } from '../utile/simulation.service';
@@ -31,8 +29,6 @@ import { Ticks } from './models/chart/options/scales/axes/ticks/ticks';
 import { Scales } from './models/chart/options/scales/scales';
 import { DataObject } from './models/dto/dataObject';
 
-
-
 @Injectable({ providedIn: 'root' })
 export class ChartUtileService {
   private static CODE_RESSOURCES_AVANT_REPRISE_EMPLOI = "ressources_avant_reprise_emploi";
@@ -41,12 +37,10 @@ export class ChartUtileService {
 
   constructor(
     private deConnecteService: DeConnecteService,
-    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteSimulationService: DeConnecteSimulationService,
     private dateUtileService: DateUtileService,
-    private aidesService: AidesService,
     private screenService: ScreenService,
-    private simulationAidesService: SimulationService
+    private simulationService: SimulationService
   ) { }
 
   public getChart(): Chart {
@@ -108,7 +102,7 @@ export class ChartUtileService {
     const dataObject = this.initDatasets();
 
     simulation.simulationsMensuelles.forEach((simulationMensuelle, index) => {
-      const ressourcesFinancieresEtAides = this.simulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(simulationMensuelle);
+      const ressourcesFinancieresEtAides = this.simulationService.getRessourcesFinancieresEtAidesSimulationMensuelle(simulationMensuelle);
       ressourcesFinancieresEtAides.forEach((ressourcesFinanciereOuAide) => {
         switch (ressourcesFinanciereOuAide.code) {
           case CodesAidesEnum.AGEPI: {

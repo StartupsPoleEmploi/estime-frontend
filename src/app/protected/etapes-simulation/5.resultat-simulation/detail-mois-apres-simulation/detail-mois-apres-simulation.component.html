@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-md-6 col-10">
                     <span class="headline-4-typo color-blue-10-typo justify-content-start"
-                        attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationAidesService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+                        attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
                         {{ ressourceFinanciereOuAide.montant }} €
                     </span>
                     <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"

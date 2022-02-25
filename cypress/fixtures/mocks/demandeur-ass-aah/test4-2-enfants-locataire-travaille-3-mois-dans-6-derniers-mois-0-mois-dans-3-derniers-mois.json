@@ -6,13 +6,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {
@@ -83,13 +78,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {
@@ -140,13 +130,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {
@@ -197,13 +182,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {
@@ -234,13 +214,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {
@@ -271,13 +246,8 @@
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1150.0,
 					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
+					"montant": 1150.0
 				}
 			},
 			"aides": {

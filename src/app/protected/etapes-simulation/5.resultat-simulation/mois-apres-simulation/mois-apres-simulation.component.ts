@@ -34,7 +34,7 @@ export class MoisApresSimulationComponent implements OnInit {
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteSimulationService: DeConnecteSimulationService,
-    public simulationAidesService: SimulationService,
+    public simulationService: SimulationService,
     public screenService: ScreenService
   ) {
   }
@@ -42,7 +42,7 @@ export class MoisApresSimulationComponent implements OnInit {
   ngOnInit(
   ): void {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.ressourcesFinancieresEtAidesMois = this.simulationAidesService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
+    this.ressourcesFinancieresEtAidesMois = this.simulationService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
     this.orderRessourcesFinancieresMois();
   }
 

@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
-import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
-import { DeConnecteSimulationService } from "../../demandeur-emploi-connecte/de-connecte-simulation.service";
 import { AidesService } from '../../utile/aides.service';
 import { DateUtileService } from '../../utile/date-util.service';
 import { Style } from '../models/style';
@@ -24,9 +22,8 @@ export class BlockRessourcesEstimeesService {
   constructor(
     private aidesService: AidesService,
     private dateUtileService: DateUtileService,
-    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private ressourcesFinancieresService: RessourcesFinancieresService,
-    private simulationAidesService: SimulationService
+    private simulationService: SimulationService
   ) {
 
   }
@@ -215,7 +212,7 @@ export class BlockRessourcesEstimeesService {
     //add des cellules pour chaque simulation mensuelle
     simulation.simulationsMensuelles.forEach(simulationMensuelle => {
       const libelleDate = this.dateUtileService.getLibelleDateStringFormatCourt(simulationMensuelle.datePremierJourMoisSimule);
-      const montantTotal = this.simulationAidesService.calculerMontantTotalRessourcesMois(simulationMensuelle);
+      const montantTotal = this.simulationService.calculerMontantTotalRessourcesMois(simulationMensuelle);
       row.push(this.createCellMontantTotalSimulationMensuelle(libelleDate, montantTotal));
     });
 
