@@ -11,7 +11,7 @@ class EstimeSessionService {
 
   private supprimerSessionPeConnect(): void {
     const individu = this.getIndividuConnected();
-    if(individu !== null) {
+    if (individu !== null) {
       const poleEmploiIdentityServerDeconnexionURI = this.getPoleEmploiIdentityServerDeconnexionURI(individu);
       document.location.replace(poleEmploiIdentityServerDeconnexionURI);
       cy.wait(3000);
@@ -20,7 +20,9 @@ class EstimeSessionService {
 
   private getIndividuConnected(): Individu {
     let individu = null;
-    if(document && document.cookie) {
+    console.log(document.cookie.split('; '));
+    if (document && document.cookie) {
+      console.log(document.cookie.split('; '));
       let cookieValue: any = document.cookie.split('; ').find(row => row.startsWith('estime.peConnectIndividu')).split('=')[1];
       individu = JSON.parse(this.replaceAsciiByCHaractere(cookieValue));
     }
@@ -38,8 +40,8 @@ class EstimeSessionService {
 
   private getPoleEmploiIdentityServerDeconnexionURI(individuConnected: Individu): string {
     return `https://authentification-candidat.pole-emploi.fr/compte/deconnexion?` +
-        `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
-        `&redirect_uri=${environment.urlApplication}/signout-callback`
+      `&id_token_hint=${individuConnected.peConnectAuthorization.idToken}` +
+      `&redirect_uri=${environment.urlApplication}/signout-callback`
   }
 }
 export default EstimeSessionService

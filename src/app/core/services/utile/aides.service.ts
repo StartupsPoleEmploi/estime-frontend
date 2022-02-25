@@ -112,10 +112,10 @@ export class AidesService {
     return message;
   }
 
-  public getMessageAlerteAidesFamilialesNoSelect(simulationsAides: Simulation): string {
+  public getMessageAlerteAidesFamilialesNoSelect(simulation: Simulation): string {
     let message = null;
-    if (simulationsAides.simulationsMensuelles != null) {
-      message = this.getMessageAlerteAidesFamiliales(simulationsAides.simulationsMensuelles[0])
+    if (simulation.simulationsMensuelles != null) {
+      message = this.getMessageAlerteAidesFamiliales(simulation.simulationsMensuelles[0])
     }
     return message;
   }

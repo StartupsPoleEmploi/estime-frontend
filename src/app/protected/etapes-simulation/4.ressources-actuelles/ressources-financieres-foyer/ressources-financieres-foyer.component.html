@@ -290,7 +290,7 @@
                                 data-testid="input-apl-mois-moins-3"
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 type="text" min="0" maxlength="6"
-                                class="max-with-input-type-montant form-control d-REGEX_NUMERIC" placeholder="Montant"
+                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                 [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins3"
                                 inputmode="numeric" required (click)="$event.target.select()" #aplMoisNMoins3="ngModel">
                             <input *ngIf="beneficiaireAides.beneficiaireALF"

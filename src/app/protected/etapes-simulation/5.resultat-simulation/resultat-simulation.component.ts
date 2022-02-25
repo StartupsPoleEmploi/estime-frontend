@@ -6,6 +6,7 @@ import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
+import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
@@ -36,6 +37,7 @@ export class ResultatSimulationComponent implements OnInit {
   @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
 
   constructor(
+    public aidesService: AidesService,
     private dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
