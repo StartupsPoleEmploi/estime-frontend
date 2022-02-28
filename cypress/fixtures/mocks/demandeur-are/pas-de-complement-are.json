@@ -3,6 +3,13 @@
 	"simulationsMensuelles": [
 		{
 			"datePremierJourMoisSimule": "2022-03-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"APL": {
 					"code": "APL",
@@ -13,21 +20,18 @@
 					"organisme": "CAF",
 					"lienExterne": "",
 					"reportee": true
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
-					"lienExterne": "",
-					"reportee": false
 				}
 			}
 		},
 		{
 			"datePremierJourMoisSimule": "2022-04-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"ALS": {
 					"code": "ALS",
@@ -36,16 +40,6 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
-					"lienExterne": "",
-					"reportee": false
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -53,6 +47,13 @@
 		},
 		{
 			"datePremierJourMoisSimule": "2022-05-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"ALS": {
 					"code": "ALS",
@@ -61,16 +62,6 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
-					"lienExterne": "",
-					"reportee": false
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -78,6 +69,13 @@
 		},
 		{
 			"datePremierJourMoisSimule": "2022-06-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"ALS": {
 					"code": "ALS",
@@ -86,16 +84,6 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
-					"lienExterne": "",
-					"reportee": false
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -103,6 +91,13 @@
 		},
 		{
 			"datePremierJourMoisSimule": "2022-07-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"PA": {
 					"code": "PA",
@@ -121,16 +116,6 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
-					"lienExterne": "",
-					"reportee": false
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
@@ -138,6 +123,13 @@
 		},
 		{
 			"datePremierJourMoisSimule": "2022-08-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1200.0
+				}
+			},
 			"aides": {
 				"PA": {
 					"code": "PA",
@@ -156,16 +148,6 @@
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
 					"organisme": "CAF",
-					"lienExterne": "",
-					"reportee": false
-				},
-				"PAIE": {
-					"code": "PAIE",
-					"detail": null,
-					"messageAlerte": null,
-					"montant": 1200.0,
-					"nom": "Salaire",
-					"organisme": null,
 					"lienExterne": "",
 					"reportee": false
 				}
