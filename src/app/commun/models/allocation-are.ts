@@ -1,6 +1,6 @@
 export class AllocationARE {
   allocationMensuelleNet: number;
-  montantJournalierBrut: number;
+  allocationJournaliereBrute: number;
   salaireJournalierReferenceBrut: number;
   nombreJoursRestants: number;
 }

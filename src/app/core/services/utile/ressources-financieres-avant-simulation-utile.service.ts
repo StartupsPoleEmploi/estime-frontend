@@ -75,7 +75,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
   public creerAllocationARE(): AllocationARE {
     const allocationARE = new AllocationARE();
     allocationARE.allocationMensuelleNet = null;
-    allocationARE.montantJournalierBrut = null;
+    allocationARE.allocationJournaliereBrute = null;
     allocationARE.salaireJournalierReferenceBrut = null;
     allocationARE.nombreJoursRestants = null;
     return allocationARE;
@@ -284,7 +284,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     }
     if (ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut);
-      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut);
+      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute);
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
     }
   }

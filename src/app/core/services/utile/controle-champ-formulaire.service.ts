@@ -26,7 +26,7 @@ export class ControleChampFormulaireService {
   MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 
   public isKeyAuthorizeForDecimal(event): boolean {
-    let pattSeparator = /^(\.|\,)$/;
+    let pattSeparator = /^(\d+(?:[\.\,]\d{1,2})?)$/;
     return pattSeparator.test(event.key) || this.isKeyAuthorizeForNumberOnly(event) || this.isExceptKeyAuthorized(event);
   }
 

@@ -250,11 +250,7 @@ export class AidesService {
       && aide.code !== CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE
       && aide.code !== CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
       && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
-      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
-      && aide.code !== CodesAidesEnum.SALAIRE
-      && aide.code !== CodesAidesEnum.IMMOBILIER
-      && aide.code !== CodesAidesEnum.MICRO_ENTREPRENEUR
-      && aide.code !== CodesAidesEnum.TRAVAILLEUR_INDEPENDANT;
+      && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
   }
 
   public isAidePasAideLogementPremierMois(aide: Aide): boolean {

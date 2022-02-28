@@ -141,28 +141,28 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-montant-journalier-brut" name="montantJournalierBrut" type="text"
+                    <input id="input-montant-journalier-brut" name="allocationJournaliereBrute" type="text"
                         data-testid="input-montant-allocation-journaliere-brut-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="5" class="form-control d-inline"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut== 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut"
-                        required placeholder="Montant" inputmode="decimal" #montantJournalierBrut="ngModel">
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute== 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute"
+                        required placeholder="Montant" inputmode="decimal" #allocationJournaliereBrute="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
             <span
-                *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut == 0)"
+                *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == 0)"
                 class="row error-input-message">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
             </span>
             <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.required">
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereBrute.touched)  && allocationJournaliereBrute.errors?.required">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
             <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresFormSubmitted || montantJournalierBrut.touched)  && montantJournalierBrut.errors?.pattern">
+                *ngIf="(isRessourcesFinancieresFormSubmitted || allocationJournaliereBrute.touched)  && allocationJournaliereBrute.errors?.pattern">
                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
             </span>
         </div>

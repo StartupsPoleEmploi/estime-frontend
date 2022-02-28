@@ -8,7 +8,6 @@ class EstimeSessionService {
     cy.window().then(window => window.sessionStorage.clear());
   }
 
-
   private supprimerSessionPeConnect(): void {
     const individu = this.getIndividuConnected();
     if (individu !== null) {
@@ -20,16 +19,14 @@ class EstimeSessionService {
 
   private getIndividuConnected(): Individu {
     let individu = null;
-    console.log(document.cookie.split('; '));
     if (document && document.cookie) {
-      console.log(document.cookie.split('; '));
       let cookieValue: any = document.cookie.split('; ').find(row => row.startsWith('estime.peConnectIndividu')).split('=')[1];
-      individu = JSON.parse(this.replaceAsciiByCHaractere(cookieValue));
+      individu = JSON.parse(this.replaceAsciiCharacter(cookieValue));
     }
     return individu;
   }
 
-  private replaceAsciiByCHaractere(cookieValue: any) {
+  private replaceAsciiCharacter(cookieValue: any) {
     cookieValue = cookieValue.replaceAll('%7B', '{');
     cookieValue = cookieValue.replaceAll('%22', '"');
     cookieValue = cookieValue.replaceAll('%7D', '}');

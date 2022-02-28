@@ -224,7 +224,7 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
       && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
       && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
-      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute = null;
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = null;
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants = null;
     }

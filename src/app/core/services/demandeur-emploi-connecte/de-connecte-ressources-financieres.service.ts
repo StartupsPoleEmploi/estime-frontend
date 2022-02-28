@@ -171,7 +171,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
         montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationASS.allocationJournaliereNet));
       }
       if (aidesPoleEmploi.allocationARE) {
-        montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationARE.montantJournalierBrut));
+        montant += Math.round(nbrJourMoisPrecedent * this.numberUtileService.getMontantSafe(aidesPoleEmploi.allocationARE.allocationJournaliereBrute));
       }
     }
     return montant;
@@ -455,7 +455,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
   //is donnees ARE SAISIE VALIDE comprend tout les champs
   private isDonneesARESaisiesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
-    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.montantJournalierBrut > 0 &&
+    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute > 0 &&
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > 0 &&
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
   }
