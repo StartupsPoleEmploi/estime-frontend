@@ -20,8 +20,11 @@ class EstimeSessionService {
   private getIndividuConnected(): Individu {
     let individu = null;
     if (document && document.cookie) {
-      let cookieValue: any = document.cookie.split('; ').find(row => row.startsWith('estime.peConnectIndividu')).split('=')[1];
-      individu = JSON.parse(this.replaceAsciiCharacter(cookieValue));
+      let cookieValue: any = document.cookie.split('; ').find(row => row.startsWith('estime.peConnectIndividu'));
+      if (cookieValue) {
+        cookieValue = cookieValue.split('=')[1];
+        individu = JSON.parse(this.replaceAsciiCharacter(cookieValue));
+      }
     }
     return individu;
   }

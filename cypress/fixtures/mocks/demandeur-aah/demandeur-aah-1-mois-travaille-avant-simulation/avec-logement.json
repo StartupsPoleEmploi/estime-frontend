@@ -2,6 +2,7 @@
 	"montantRessourcesFinancieresMoisAvantSimulation": 1017.0,
 	"simulationsMensuelles": [
 		{
+			"datePremierJourMoisSimule": "2022-02-01",
 			"ressourcesFinancieres": {
 				"PAIE": {
 					"code": "PAIE",

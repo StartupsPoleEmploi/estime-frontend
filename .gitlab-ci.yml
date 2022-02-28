@@ -44,12 +44,13 @@ cypress-e2e:
     #valoriser les propriétés des fichiers d'environnement avec les variables d'environnement définies dans Gitlab CI
     - p2 -t cypress/ci/environment.cypress.local.ts.j2 -o cypress/environment.ts
     - p2 -t cypress/ci/environment.local.ts.j2 -o src/environments/environment.local.ts
+    - echo "127.0.0.1	estime-e2e.pole-emploi.fr" >> /etc/hosts
     #installation des dépendances du projet
     - npm ci
     #lancement de l'application via le serveur local
     - npm run start:ngx &
     #attente du lancement de l'application
-    - wait-on http://127.0.0.1:9001/
+    - wait-on http://estime-e2e.pole-emploi.fr/
     #lancement des tests cypress
     - npm run cy:run
     rules:
