@@ -48,7 +48,8 @@
                 <div class="row mb-2">
                     <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
                         * Personne {{personneDTO.index + 1}} a-t-elle travaillé au cours des
-                        {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers
+                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                        derniers
                         mois ?
                     </label>
                 </div>
@@ -57,7 +58,7 @@
                         <div class="form-check form-check-inline">
                             <input id="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
                                 name="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
-                                attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
                                 data-testid="btn-has-travaille-au-cours-derniers-mois-oui-personne-a-charge-{{personneDTO.index + 1}}"
                                 type="radio" class="form-check-input"
                                 [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
@@ -73,7 +74,7 @@
                             <input id="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
                                 name="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
                                 data-testid="btn-has-travaille-au-cours-derniers-mois-non-personne-a-charge-{{personneDTO.index + 1}}"
-                                attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
                                 type="radio" class="form-check-input"
                                 [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                                 [value]="false"
@@ -125,7 +126,7 @@
                                             type="text" maxlength="6" min="0"
                                             class="max-with-input-type-montant form-control d-inline"
                                             placeholder="Montant"
-                                            (blur)="this.ressourcesFinancieresUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
+                                            (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
                                             [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
                                             [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire(personneDTO.personne)}"
                                             required inputmode="numeric" (click)="$event.target.select()"
@@ -146,7 +147,7 @@
                         <span class="col error-input-message"
                             *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
                             Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
-                            {{ressourcesFinancieresUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                            {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                             derniers mois. Veuillez renseigner au moins un salaire.
                         </span>
                     </div>
