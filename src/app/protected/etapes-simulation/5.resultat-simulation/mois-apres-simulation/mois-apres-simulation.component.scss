@@ -23,7 +23,11 @@
   border: 1px solid $color-grey-1;
 }
 
+.libelle_montant_mois_apres_simulation {
+  border-right: 1px solid $color-grey-1;
+}
+
 .vertical-separator {
   height: 100%;
-  border-left: 1px solid $color-grey-1;
+  border-right: 1px solid $color-grey-1;
 }
