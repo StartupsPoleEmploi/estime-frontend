@@ -112,6 +112,11 @@ export class DateUtileService {
     return this.getLibelleDateFromDate(dateJour);
   }
 
+  public getLibelleMoisCourtDateActuelle(): string {
+    const dateJour = new Date();
+    return this.getLibelleMoisCourtFromDate(dateJour);
+  }
+
   /**
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateToFormat
@@ -121,6 +126,16 @@ export class DateUtileService {
     const year = dateToFormat.getFullYear();
     const moisLabel = this.getLibelleMoisByMoisNumber(month);
     return `${moisLabel} ${year}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateToFormat
+   */
+  public getLibelleMoisCourtFromDate(dateToFormat: Date): string {
+    const month = dateToFormat.getMonth() + 1;
+    const moisLabel = this.getLibelleMoisByMoisNumber(month).toUpperCase();
+    return `${moisLabel}`;
   }
 
   /**
@@ -141,6 +156,16 @@ export class DateUtileService {
     const dateSimulationSplit = dateSimulation.split('-');
     const moisLabel = this.getLibelleCourtMoisByMoisNumber(parseInt(dateSimulationSplit[1]));
     return `${moisLabel} ${dateSimulationSplit[0]}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre courte"
+   * @param dateSimulation
+   */
+  public getLibelleMoisStringFormatCourt(dateSimulation: string): string {
+    const dateSimulationSplit = dateSimulation.split('-');
+    const moisLabel = this.getLibelleCourtMoisByMoisNumber(parseInt(dateSimulationSplit[1])).toUpperCase();
+    return `${moisLabel}`;
   }
 
   /**

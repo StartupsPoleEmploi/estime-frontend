@@ -201,6 +201,6 @@ footer {
 
 .footer-avec-sticky-button {
   @media #{$extra-small-device} {
-    bottom: calc(#{$espace-se-connecter-sticky-height});
+    bottom: #{$button-sticky-height};
   }
 }

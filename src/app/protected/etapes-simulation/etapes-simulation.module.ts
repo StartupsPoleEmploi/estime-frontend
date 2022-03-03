@@ -23,14 +23,12 @@ import { VosRessourcesFinancieresComponent } from '@app/protected/etapes-simulat
 import { ResultatSimulationComponent } from '@app/protected/etapes-simulation/5.resultat-simulation/resultat-simulation.component';
 import { RessourcesFinancieresDiagrammeComponent } from './5.resultat-simulation/ressources-financieres-diagramme/ressources-financieres-diagramme.component';
 import { DiagrammeCanvasComponent } from './5.resultat-simulation/ressources-financieres-diagramme/diagramme-canvas/diagramme-canvas.component';
-import { ConsultationOffresComponent } from './5.resultat-simulation/actions-suite/consultation-offres/consultation-offres.component';
-import { InscriptionAtelierComponent } from './5.resultat-simulation/actions-suite/inscription-atelier/inscription-atelier.component';
-import { MettreAJourProfilComponent } from './5.resultat-simulation/actions-suite/mettre-a-jour-profil/mettre-a-jour-profil.component';
 import { ActionsSuiteComponent } from './5.resultat-simulation/actions-suite/actions-suite.component';
 import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.module';
 import { MoisApresSimulationComponent } from './5.resultat-simulation/mois-apres-simulation/mois-apres-simulation.component';
 import { DetailMoisApresSimulationComponent } from './5.resultat-simulation/detail-mois-apres-simulation/detail-mois-apres-simulation.component';
 import { DetailAideApresSimulationComponent } from './5.resultat-simulation/detail-aide-apres-simulation/detail-aide-apres-simulation.component';
+import { ActionSuiteComponent } from './5.resultat-simulation/actions-suite/action-suite/action-suite.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +47,11 @@ import { DetailAideApresSimulationComponent } from './5.resultat-simulation/deta
     FilEtapesMobileComponent,
     RessourcesFinancieresDiagrammeComponent,
     DiagrammeCanvasComponent,
-    ConsultationOffresComponent,
-    InscriptionAtelierComponent,
-    MettreAJourProfilComponent,
     ActionsSuiteComponent,
     MoisApresSimulationComponent,
     DetailMoisApresSimulationComponent,
-    DetailAideApresSimulationComponent
+    DetailAideApresSimulationComponent,
+    ActionSuiteComponent
   ],
   imports: [
     AccordionModule.forRoot(),

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InscriptionAtelierComponent } from './inscription-atelier.component';
+import { ActionSuiteComponent } from './action-suite.component';
 
-describe('InscriptionAtelierComponent', () => {
-  let component: InscriptionAtelierComponent;
-  let fixture: ComponentFixture<InscriptionAtelierComponent>;
+describe('ActionSuiteComponent', () => {
+  let component: ActionSuiteComponent;
+  let fixture: ComponentFixture<ActionSuiteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InscriptionAtelierComponent ]
+      declarations: [ ActionSuiteComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InscriptionAtelierComponent);
+    fixture = TestBed.createComponent(ActionSuiteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

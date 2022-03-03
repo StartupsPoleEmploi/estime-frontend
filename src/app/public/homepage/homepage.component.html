@@ -14,10 +14,10 @@
                             Découvrez le montant de vos aides en cas d'embauche
                         </h1>
                     </div>
-                    <div [ngClass]="{'btn-sticks':this.stickyButton}" class="row row-btn-je-commence">
+                    <div class="row row-btn-je-commence'">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
-                            class="btn-homepage mt-4 d-flex justify-content-center button-typo"
-                            data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
+                            class="btn-homepage button-typo" data-testid="btn-je-commence"
+                            tag-action="clic_bouton_je_commence" (click)="login()">
                             <span>Je commence la simulation</span>
                             <img alt="" src="./assets/images/icon-bt-primaire.svg">
                         </button>
@@ -38,4 +38,13 @@
 <app-section-description></app-section-description>
 <app-section-etapes-simulation [login]="login"></app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
-<app-section-temoignages [stickyButton]="this.stickyButton"></app-section-temoignages>
+<app-section-temoignages></app-section-temoignages>
+
+<div *ngIf="this.stickyButton" class="btn-sticks">
+    <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation"
+        class="btn-homepage button-typo" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
+        (click)="login()">
+        <span>Je commence la simulation</span>
+        <img alt="" src="./assets/images/icon-bt-primaire.svg">
+    </button>
+</div>

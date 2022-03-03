@@ -34,10 +34,18 @@ body {
   display: table;
   width: 100%;
   background-color: $color-white-2;
-  padding-bottom: calc(#{$footer-height-desktop} + 3rem);
+  padding-bottom: calc(#{$footer-height-desktop} + 2rem);
 
   @media #{$extra-small-device} {
-    padding-bottom: calc(#{$footer-height-mobile} + 3rem);
+    padding-bottom: calc(#{$footer-height-mobile} + 2rem);
+  }
+
+  &.body-with-sticky-footer {
+    padding-bottom: calc(#{$footer-height-desktop} + #{$button-sticky-height} + 2rem) !important;
+
+    @media #{$extra-small-device} {
+      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 2rem) !important;
+    }
   }
 }
 

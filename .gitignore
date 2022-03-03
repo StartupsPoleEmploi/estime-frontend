@@ -54,3 +54,6 @@ cypress/environment.ts
 # System Files
 .DS_Store
 Thumbs.db
+
+# Dev tools
+launch.sh

@@ -1,4 +1,3 @@
 export class Ticks {
-    maxTicksLimit: number;
-    callback: Function;
+    beginAtZero: boolean;
 }

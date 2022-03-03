@@ -21,13 +21,13 @@ export class FooterComponent implements OnInit {
     this.subscribeRouteNavigationEndObservable();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
 
-  public onClickAides(): void{
+  public onClickAides(): void {
     this.router.navigate([RoutesEnum.AIDES]);
   }
 
@@ -49,8 +49,9 @@ export class FooterComponent implements OnInit {
 
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
-      if(routerEvent instanceof NavigationEnd) {
-        this.stickyFooter =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      if (routerEvent instanceof NavigationEnd) {
+        this.stickyFooter = routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
       }
     });
   }

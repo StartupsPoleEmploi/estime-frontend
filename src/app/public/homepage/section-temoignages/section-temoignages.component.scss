@@ -4,6 +4,7 @@
   @media #{$medium-device} {
     padding-bottom: 2rem;
   }
+
   padding-top: 2rem;
 
   h1 {
@@ -13,11 +14,5 @@
   .container-fluid {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-}
-
-.section-temoignage-avec-sticky-button {
-  @media #{$extra-small-device} {
-    margin-bottom: calc(#{$espace-se-connecter-sticky-height} + 3rem);
   }
 }

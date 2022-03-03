@@ -38,7 +38,7 @@ export class ResultatSimulationComponent implements OnInit {
 
   constructor(
     public aidesService: AidesService,
-    private dateUtileService: DateUtileService,
+    public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
     public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     public deConnecteSimulationService: DeConnecteSimulationService,

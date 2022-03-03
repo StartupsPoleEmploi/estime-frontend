@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Temoignage } from '@app/commun/models/temoignage';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { TemoignageService } from '@app/core/services/utile/temoignage.service';
@@ -9,8 +9,6 @@ import { TemoignageService } from '@app/core/services/utile/temoignage.service';
   styleUrls: ['./section-temoignages.component.scss']
 })
 export class SectionTemoignagesComponent implements OnInit {
-
-  @Input() stickyButton: boolean;
 
   temoignages: Array<Temoignage>;
 
