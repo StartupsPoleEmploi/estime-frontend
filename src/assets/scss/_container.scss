@@ -41,10 +41,8 @@ body {
   }
 
   &.body-with-sticky-footer {
-    padding-bottom: calc(#{$footer-height-desktop} + #{$button-sticky-height} + 2rem) !important;
-
     @media #{$extra-small-device} {
-      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 2rem) !important;
+      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 2.5rem) !important;
     }
   }
 }

@@ -35,6 +35,10 @@ export class FooterComponent implements OnInit {
     this.router.navigate([RoutesEnum.ACCESSIBILITE]);
   }
 
+  public onClickLinkStatistiques(): void {
+    this.router.navigate([RoutesEnum.STATS]);
+  }
+
   public onClickLinkCGU(): void {
     this.router.navigate([RoutesEnum.CGU]);
   }
@@ -46,6 +50,7 @@ export class FooterComponent implements OnInit {
   public onClickLogoEstime(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
+
 
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {

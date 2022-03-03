@@ -54,9 +54,11 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="ressourceFinanciereOuAide.messageAlerte" class="row mt-3">
-                <app-message-info [contenu]="ressourceFinanciereOuAide.messageAlerte">
-                </app-message-info>
+            <div *ngIf="ressourceFinanciereOuAide.messagesAlerte" class="row">
+                <div *ngFor="let messageAlerte of ressourceFinanciereOuAide.messagesAlerte" class="pt-2">
+                    <app-message-info [contenu]="messageAlerte">
+                    </app-message-info>
+                </div>
             </div>
             <hr>
             <div class="row">

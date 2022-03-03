@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: RoutesEnum.CGU, component: CguComponent },
   { path: RoutesEnum.CONTACT, component: ContactComponent },
   { path: RoutesEnum.SIGNIN_CALLBACK, component: SigninRedirectCallbackComponent },
-  { path: 'stats', component: StatsComponent },
-  { path: '404', component: NotFoundComponent },
+  { path: RoutesEnum.STATS, component: StatsComponent },
+  { path: RoutesEnum.NOT_FOUND, component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
 
 ];
