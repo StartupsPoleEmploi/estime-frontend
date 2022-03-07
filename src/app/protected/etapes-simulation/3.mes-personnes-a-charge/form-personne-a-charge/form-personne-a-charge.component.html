@@ -1,20 +1,20 @@
-<div class="row card">
+<div class="card card-form-style-2">
     <div class="card-title">
-        <span class="headline-3-typo">Personne {{numeroNouvellePersonne}}</span>
-        <i tabindex="0" class="fas fa-times-circle mb-2 me-2 float-end" (click)="onClickButtonAnnuler()"
+        <span class="headline-3-typo color-blue-10-typo">Personne {{numeroNouvellePersonne}}</span>
+        <i tabindex="0" class="fas fa-times-circle float-end" (click)="onClickButtonAnnuler()"
             (keyup)="handleKeyUpOnButtonAnnuler($event)">
         </i>
     </div>
     <div class="card-body">
         <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
             [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}" #personnesAChargeForm="ngForm">
-            <div class="form-group">
-                <div class="mb-2">
+            <div class="pb-3">
+                <div class="pb-3">
                     <label class="label headline-4-typo">
                         * Date de naissance
                     </label>
                 </div>
-                <div class="form-group ms-3">
+                <div>
                     <app-date-inputs [dateSaisie]="dateNaissanceNouvellePersonne"
                         [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
                         (dateChanged)="gererAffichageNouvellePersonneSituationForm()">

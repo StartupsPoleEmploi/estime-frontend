@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="col-md-4 col-12">
-            <div class="container-fluid" [class]="screenService.isExtraSmallScreen()?'':'pt-5 sticky-top'">
+            <div class="container-fluid" [ngClass]="screenService.isExtraSmallScreen()?'':'pt-5 sticky-top'">
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">

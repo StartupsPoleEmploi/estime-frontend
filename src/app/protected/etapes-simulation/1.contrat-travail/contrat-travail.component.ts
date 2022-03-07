@@ -27,6 +27,11 @@ export class ContratTravailComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
   messageErreurSalaire: string;
+  hasOffreEmploiOui: boolean;
+  hasOffreEmploiNon: boolean;
+  isTypeContratCDI: boolean;
+  isTypeContratCDD: boolean;
+  typeSalaireDisplay: string;
 
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
@@ -54,6 +59,7 @@ export class ContratTravailComponent implements OnInit {
   ngOnInit(): void {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.loadDataFuturTravail();
+    this.typeSalaireDisplay = 'net';
   }
 
   private loadDataFuturTravail(): void {
@@ -63,12 +69,17 @@ export class ContratTravailComponent implements OnInit {
       if (this.futurTravail.nombreTrajetsDomicileTravail) {
         this.isNombreTrajetsDomicileTravailDisplay = true;
       }
+      this.hasOffreEmploiOui = this.futurTravail.hasOffreEmploiEnVue;
+      this.hasOffreEmploiNon = !this.futurTravail.hasOffreEmploiEnVue;
+      this.isTypeContratCDI = this.futurTravail.typeContrat == this.typesContratTavailEnum.CDI;
+      this.isTypeContratCDD = this.futurTravail.typeContrat == this.typesContratTavailEnum.CDD;
     } else {
       this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
       this.futurTravail.salaire = new Salaire();
       this.futurTravail.salaire.montantBrut = null;
       this.futurTravail.salaire.montantNet = null;
+      this.futurTravail.hasOffreEmploiEnVue = null;
     }
   }
 
@@ -87,10 +98,8 @@ export class ContratTravailComponent implements OnInit {
     }
   }
 
-  public unsetNombreMoisContrat(typeContrat: string): void {
-    if (typeContrat === this.typesContratTavailEnum.CDI) {
-      this.futurTravail.nombreMoisContratCDD = null;
-    }
+  public unsetNombreMoisContrat(): void {
+    this.futurTravail.nombreMoisContratCDD = null;
   }
 
   public calculSalaireMensuelNet() {
@@ -118,15 +127,80 @@ export class ContratTravailComponent implements OnInit {
       && this.futurTravail.salaire.montantBrut > 0
       && this.futurTravail.salaire.montantNet > 0
       && !this.isNombreHeuresTravailleesSemaineInvalide()
+      && !this.isTypeContratInvalide();
   }
 
   private isNombreHeuresTravailleesSemaineInvalide(): boolean {
     return this.futurTravail.nombreHeuresTravailleesSemaine && this.futurTravail.nombreHeuresTravailleesSemaine == 0 || this.futurTravail.nombreHeuresTravailleesSemaine > this.controleChampFormulaireService.MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX;
   }
 
-  public handleKeyUpOnButtonTypeContrat(event: any, typeContrat: string) {
+  private isTypeContratInvalide(): boolean {
+    return this.futurTravail.typeContrat == null || (this.isTypeContratCDI && this.isTypeContratCDD);
+  }
+
+  public onClickCheckBoxHasOffreEmploiOui() {
+    if (this.hasOffreEmploiOui) {
+      this.hasOffreEmploiNon = false;
+      this.futurTravail.hasOffreEmploiEnVue = true;
+    } else {
+      this.futurTravail.hasOffreEmploiEnVue = null;
+    }
+  }
+
+  public onClickCheckBoxHasOffreEmploiNon() {
+    if (this.hasOffreEmploiNon) {
+      this.hasOffreEmploiOui = false;
+      this.futurTravail.hasOffreEmploiEnVue = false;
+    } else {
+      this.futurTravail.hasOffreEmploiEnVue = null;
+    }
+  }
+
+  public onClickCheckBoxIsTypeContratCDI() {
+    if (this.isTypeContratCDI) {
+      this.isTypeContratCDD = false;
+      this.futurTravail.typeContrat = this.typesContratTavailEnum.CDI;
+      this.unsetNombreMoisContrat();
+    } else {
+      this.futurTravail.typeContrat = null;
+    }
+  }
+
+  public onClickCheckBoxIsTypeContratCDD() {
+    if (this.isTypeContratCDD) {
+      this.isTypeContratCDI = false;
+      this.futurTravail.typeContrat = this.typesContratTavailEnum.CDD;
+    } else {
+      this.futurTravail.typeContrat = null;
+      this.unsetNombreMoisContrat();
+    }
+  }
+
+  public handleKeyUpOnButtonOffreEmploiOui(event: any) {
     if (event.keyCode === 13) {
-      this.futurTravail.typeContrat = typeContrat;
+      this.hasOffreEmploiOui = !this.hasOffreEmploiOui;
+      this.onClickCheckBoxHasOffreEmploiOui();
+    }
+  }
+
+  public handleKeyUpOnButtonOffreEmploiNon(event: any) {
+    if (event.keyCode === 13) {
+      this.hasOffreEmploiNon = !this.hasOffreEmploiNon;
+      this.onClickCheckBoxHasOffreEmploiNon();
+    }
+  }
+
+  public handleKeyUpOnButtonIsTypeContratCDI(event: any) {
+    if (event.keyCode === 13) {
+      this.isTypeContratCDI = !this.isTypeContratCDI;
+      this.onClickCheckBoxIsTypeContratCDI();
+    }
+  }
+
+  public handleKeyUpOnButtonIsTypeContratCDD(event: any) {
+    if (event.keyCode === 13) {
+      this.isTypeContratCDD = !this.isTypeContratCDD;
+      this.onClickCheckBoxIsTypeContratCDD();
     }
   }
 

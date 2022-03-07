@@ -478,3 +478,58 @@ option {
 
   }
 }
+
+.row-btn-form {
+
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+
+  .btn-precedent {
+    @extend .btn-style-perso-2;
+
+    padding: unset;
+    margin-right: 1rem;
+    background-color: unset;
+
+    div {
+      padding: unset;
+
+      span {
+        @extend .button-typo;
+        @extend .color-blue-2-typo;
+        margin: unset;
+        padding-right: 0.5rem;
+      }
+
+      img {
+        margin: unset;
+        padding-left: 1.5rem;
+        padding-right: 0.125rem;
+      }
+    }
+  }
+
+  .btn-suivant {
+    @extend .btn-style-perso-1;
+
+    padding: unset;
+    margin-left: 1rem;
+
+    div {
+      padding: unset;
+
+      span {
+        @extend .button-typo;
+        margin: unset;
+        padding-left: 1.5rem;
+        padding-right: 0.5rem;
+      }
+
+      img {
+        margin: unset;
+        padding-right: 0.5rem;
+      }
+    }
+  }
+}

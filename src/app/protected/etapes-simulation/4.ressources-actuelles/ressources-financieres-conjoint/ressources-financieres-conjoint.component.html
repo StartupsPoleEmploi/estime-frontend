@@ -1,9 +1,9 @@
-<div class="card card-body card-form">
+<div class="card card-body card-form card-form-style-3">
     <form (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
         #ressourcesFinancieresConjointForm="ngForm">
-        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.salarie">
-            <div class="row mb-2">
+        <div *ngIf="conjoint.informationsPersonnelles.salarie">
+            <div class="row pb-3">
                 <label class="label headline-4-typo" for="conjointSalaireNet">
                     * Salaire net perçu
                 </label>
@@ -20,445 +20,505 @@
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
             </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
-                    * A-t-il/elle travaillé au cours des
-                    {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                    derniers
-                    mois ?
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                            name="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                            attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                            data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
-                            class="form-check-input"
-                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                            (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
-                            [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
-                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
-                            oui
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline ms-2">
-                        <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
-                            name="hasTravailleAuCoursDerniersMoisNonConjoint"
-                            data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
-                            attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                            type="radio" class="form-check-input"
-                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                            [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
-                            required #hasTravailleAuCoursDerniersMois="ngModel"
-                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
-                            non
-                        </label>
-                    </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
                 </div>
-            </div>
-            <span class="row error-input-message"
-                *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-        </div>
-        <div *ngIf="isAfficherChampsSalairesConjoint();">
-            <div class="form-group">
-                <div class="row mb-3">
-                    <label class="label headline-4-typo">
-                        Indiquez le montant de vos salaires de
-                        {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
-                        {{optionsNombreMoisTravailles[0].label}}.
-                        <br>
-                        <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
-                    </label>
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                    </span>
                 </div>
-                <div class="row">
-                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                        class="col-12 col-md-4 mt-2"
-                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
-                        <div class="ms-2 me-2">
-                            <div class="row mb-2">
-                                <label class="label headline-4-typo"
-                                    [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
-                                    * Salaire en {{ optionNombreMoisTravailles.label }}
-                                </label>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <input
-                                        id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
-                                        name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
-                                        attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-conjoint"
-                                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                        type="text" maxlength="6" min="0"
-                                        class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                        (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
-                                        [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaireConjoint()}" required
-                                        inputmode="decimal" (click)="$event.target.select()"
-                                        #salaireMoisAvantPeriodeSimulee="ngModel">
-                                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <span class="row error-input-message"
-                                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
-                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <span class="col error-input-message"
-                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted)  && erreurSaisieSalaires">
-                        Vous avez déclaré que votre conjoint(e) a travaillé lors de ces
-                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                        derniers mois. Veuillez renseigner au moins un salaire.
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
                 </div>
             </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetARE">
-                    * ARE (Allocation Retour Emploi) perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE" type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)}"
-                        placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetARE="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+            <div>
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                        * A-t-il/elle travaillé au cours des
+                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                        derniers
+                        mois ?
+                    </label>
                 </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetASS">
-                    * ASS (Allocation Solidarité Spécifique) perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS" type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
-                        placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetASS="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointAllocationMensuelleNetAAH">
-                    * AAH (Allocation Adulte Handicapé) perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH" type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)}"
-                        placeholder="Montant" inputmode="numeric" required #allocationAAH="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointPensionInvalidite">
-                    * Pension d'invalidité perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointPensionInvalidite" name="pensionInvalidite" type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0}"
-                        placeholder="Montant" inputmode="numeric" required #pensionInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-            <div class="row mt-3 mb-2">
-                <label class="label headline-4-typo" for="conjointAllocationSupplementaireInvalidite">
-                    * Allocation supplémentaire d'invalidité perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointAllocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
-                        type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                        placeholder="Montant" inputmode="numeric" required
-                        #allocationSupplementaireInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.microEntrepreneur">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointBeneficesMicroEntrepriseDernierExercice">
-                    * Bénéfices en tant que micro entrepreneur
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointBeneficesMicroEntrepriseDernierExercice"
-                        name="conjointBeneficesMicroEntrepriseDernierExercice"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
-                        required inputmode="numeric" #conjointBeneficesMicroEntrepriseDernierExercice="ngModel">
-                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.travailleurIndependant">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointChiffreAffairesIndependantDernierExercice">
-                    * Chiffre d'affaires en tant qu'indépendant
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointChiffreAffairesIndependantDernierExercice"
-                        name="conjointChiffreAffairesIndependantDernierExercice"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
-                        required inputmode="numeric" #conjointChiffreAffairesIndependantDernierExercice="ngModel">
-                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.hasPensionRetraite">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="conjointPensionRetraite">
-                    * Pension de retraite nette perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointPensionRetraite" name="conjointPensionRetraite"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite && (conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)}"
-                        required inputmode="numeric" #conjointPensionRetraite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span
-                    *ngIf="conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite && (conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite == 0)"
-                    class="error-input-message">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="form-group" *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
-            <div class="row mb-2">
-                <label class="label headline-4-typo" for="revenusImmobilierFoyer">
-                    * Revenus annuels de placement ou du patrimoine
-                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
-                        aria-label="Infobulle revenus immobilier"
-                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointRevenusImmobilier" name="conjointRevenusImmobilier"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois"
-                        [ngClass]="{'ng-invalid': this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois == 0)}"
-                        required inputmode="decimal" #conjointRevenusImmobilier="ngModel">
-                    <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row">
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.pattern">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                </span>
-                <span class="error-input-message"
-                    *ngIf="this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois == 0)">
-                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                </span>
-            </div>
-        </div>
-        <div class="row row-button-valider">
-            <div class="col">
-                <button class="btn-style-perso-3 button-typo"
-                    aria-label="Valider ressources finançière de votre conjoint"
-                    data-testid="btn-ressources-conjoint-valider" tag-action="clic_bouton_valider_ressources_conjoint"
-                    type="submit">
-                    <div>
-                        <span>Valider</span>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                                name="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                                attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
+                                class="form-check-input"
+                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
+                                [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
+                            <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
+                                oui
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline ms-2">
+                            <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
+                                name="hasTravailleAuCoursDerniersMoisNonConjoint"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
+                                attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                type="radio" class="form-check-input"
+                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                [value]="false"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)" required
+                                #hasTravailleAuCoursDerniersMois="ngModel"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
+                            <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
+                                non
+                            </label>
+                        </div>
                     </div>
-                </button>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isAfficherChampsSalairesConjoint();">
+                <div>
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
+                            Indiquez le montant de vos salaires de
+                            {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
+                            {{optionsNombreMoisTravailles[0].label}}.
+                            <br>
+                            <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
+                            class="col-12 col-md-4 mt-2"
+                            [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
+                            <div class="ms-2 me-2">
+                                <div class="row pb-3">
+                                    <label class="label headline-4-typo"
+                                        [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
+                                        * Salaire en {{ optionNombreMoisTravailles.label }}
+                                    </label>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col">
+                                        <input
+                                            id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
+                                            name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
+                                            attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-conjoint"
+                                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                            type="text" maxlength="6" min="0"
+                                            class="max-with-input-type-montant form-control d-inline"
+                                            placeholder="Montant"
+                                            (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
+                                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
+                                            [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaireConjoint()}" required
+                                            inputmode="decimal" (click)="$event.target.select()"
+                                            #salaireMoisAvantPeriodeSimulee="ngModel">
+                                        <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span class="error-input-message"
+                                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
+                                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isRessourcesFinancieresConjointFormSubmitted)  && erreurSaisieSalaires">
+                                Vous avez déclaré que votre conjoint(e) a travaillé lors de ces
+                                {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                                derniers mois. Veuillez renseigner au moins un salaire.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointAllocationMensuelleNetARE">
+                        * ARE (Allocation Retour Emploi) perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)}"
+                            placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetARE="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointAllocationMensuelleNetASS">
+                        * ASS (Allocation Solidarité Spécifique) perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
+                            placeholder="Montant" inputmode="decimal" required #allocationMensuelleNetASS="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointAllocationMensuelleNetAAH">
+                        * AAH (Allocation Adulte Handicapé) perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)}"
+                            placeholder="Montant" inputmode="numeric" required #allocationAAH="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointPensionInvalidite">
+                        * Pension d'invalidité perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointPensionInvalidite" name="pensionInvalidite" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0}"
+                            placeholder="Montant" inputmode="numeric" required #pensionInvalidite="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointAllocationSupplementaireInvalidite">
+                        * Allocation supplémentaire d'invalidité perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointAllocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
+                            type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
+                            placeholder="Montant" inputmode="numeric" required
+                            #allocationSupplementaireInvalidite="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.informationsPersonnelles.microEntrepreneur">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointBeneficesMicroEntrepriseDernierExercice">
+                        * Bénéfices en tant que micro entrepreneur
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointBeneficesMicroEntrepriseDernierExercice"
+                            name="conjointBeneficesMicroEntrepriseDernierExercice"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                            maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                            placeholder="Montant"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
+                            required inputmode="numeric" #conjointBeneficesMicroEntrepriseDernierExercice="ngModel">
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.informationsPersonnelles.travailleurIndependant">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointChiffreAffairesIndependantDernierExercice">
+                        * Chiffre d'affaires en tant qu'indépendant
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointChiffreAffairesIndependantDernierExercice"
+                            name="conjointChiffreAffairesIndependantDernierExercice"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                            maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                            placeholder="Montant"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
+                            required inputmode="numeric" #conjointChiffreAffairesIndependantDernierExercice="ngModel">
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.informationsPersonnelles.hasPensionRetraite">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="conjointPensionRetraite">
+                        * Pension de retraite nette perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointPensionRetraite" name="conjointPensionRetraite"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                            maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                            placeholder="Montant"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite && (conjoint.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)}"
+                            required inputmode="numeric" #conjointPensionRetraite="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite && (conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="revenusImmobilierFoyer">
+                        * Revenus annuels de placement ou du patrimoine
+                        <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
+                            aria-label="Infobulle revenus immobilier"
+                            (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointRevenusImmobilier" name="conjointRevenusImmobilier"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                            maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                            placeholder="Montant"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois"
+                            [ngClass]="{'ng-invalid': this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois == 0)}"
+                            required inputmode="decimal" #conjointRevenusImmobilier="ngModel">
+                        <app-text-with-euro-symbol message="net total 3 derniers mois"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-button-valider">
+                <div class="col">
+                    <button class="btn-style-perso-3 button-typo"
+                        aria-label="Valider ressources finançière de votre conjoint"
+                        data-testid="btn-ressources-conjoint-valider"
+                        tag-action="clic_bouton_valider_ressources_conjoint" type="submit">
+                        <div>
+                            <span>Valider</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </form>

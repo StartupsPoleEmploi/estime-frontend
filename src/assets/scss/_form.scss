@@ -12,9 +12,16 @@ select {
 }
 
 .form-container-fluid {
-  @media #{$extra-small-device} {
-    padding-left: 0;
-    padding-right: 0;
+  @media #{$small-device} {
+    margin-left: 7%;
+    margin-right: 7%;
+  }
+
+  @media #{extra-small-device} {
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+
   }
 }
 
@@ -24,7 +31,7 @@ select {
 }
 
 .div-buttons-form {
-  margin-top: 1.25rem;
+  margin-top: 2rem;
 
   @media #{$small-device} {
     width: auto;
@@ -64,13 +71,26 @@ select {
   }
 }
 
-.div-title-formulaire {
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
+.card-form-style-2 {
+  margin-top: 2rem;
+  padding: 1.5rem !important;
+  border: 0.0625rem solid $color-grey-1 !important;
+  border-radius: 0.25rem;
 
-  @media #{$small-device} {
-    margin-left: 7%;
-    margin-right: 7%;
+  @media #{$extra-small-device} {
+    padding: 1rem !important;
+  }
+}
+
+.card-form-style-3 {
+  margin-top: 2rem;
+  padding: 1.5rem !important;
+  border: 0.0625rem solid $color-grey-1 !important;
+  border-top: unset !important;
+  border-radius: 0.25rem;
+
+  @media #{$extra-small-device} {
+    padding: 1rem !important;
   }
 }
 

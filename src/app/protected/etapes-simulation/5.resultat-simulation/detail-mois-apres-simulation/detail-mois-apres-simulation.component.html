@@ -27,7 +27,7 @@
     </div>
     <div class="div_detail_mois_with_padding">
         <div class="card my-2 p-3"
-            [class]="{'aide-avec-detail':isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)}"
+            [ngClass]="{'aide-avec-detail':isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)}"
             *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois"
             (click)="onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);"
             (keyup)="handleKeyUpOnRessourceFinanciereOuAide($event,ressourceFinanciereOuAide);"
@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-1 col-2">
                     <div *ngIf="ressourceFinanciereOuAide.organisme" class="icone-organisme me-1"
-                        [class]="ressourceFinanciereOuAide.organisme.toLowerCase()">
-                        <div class="">
+                        [ngClass]="ressourceFinanciereOuAide.organisme.toLowerCase()">
+                        <div>
                             <img alt=""
                                 [src]="'./assets/images/icon-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
                         </div>

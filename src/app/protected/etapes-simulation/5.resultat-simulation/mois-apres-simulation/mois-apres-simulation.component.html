@@ -28,7 +28,7 @@
                         attr.data-index="i" class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
                             class="code-ressource me-1"
-                            [class]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
+                            [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                 class="">
                                 <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
@@ -74,7 +74,7 @@
                         attr.data-index="i" class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
                             class="code-ressource me-1"
-                            [class]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
+                            [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                 class="">
                                 <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>

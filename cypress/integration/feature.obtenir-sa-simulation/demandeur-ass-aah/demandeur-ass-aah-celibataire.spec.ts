@@ -67,6 +67,7 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
@@ -182,6 +183,7 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
@@ -310,6 +312,7 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
@@ -449,6 +452,7 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
@@ -601,6 +605,7 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);

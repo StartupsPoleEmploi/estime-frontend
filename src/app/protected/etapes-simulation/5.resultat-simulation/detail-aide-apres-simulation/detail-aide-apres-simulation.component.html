@@ -10,7 +10,7 @@
     <div class="div_nom_aide justify-content-start div_detail_aide_with_padding">
         <div class="row">
             <div class="col-md-1 col-2 pe-1">
-                <div *ngIf="aide.organisme" class="icone-organisme me-1" [class]="aide.organisme.toLowerCase()">
+                <div *ngIf="aide.organisme" class="icone-organisme me-1" [ngClass]="aide.organisme.toLowerCase()">
                     <div class="">
                         <img alt="" [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
                     </div>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-md-10 col-12 ps-1 div-vertically-centered"
-                [class]="{'pt-2': screenService.isScreenInferieur(1600)}">
+                [ngClass]="{'pt-2': screenService.isScreenInferieur(1600)}">
                 <span class="headline-2-typo color-blue-2-typo ms-2">{{ aide.nom }}</span>
             </div>
         </div>
