@@ -1,6 +1,6 @@
 export class Dataset {
     label: string;
-    backgroundColor: string;
+    backgroundColor: Array<string>;
     data: Array<number>;
     barPercentage: number;
 }

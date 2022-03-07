@@ -7,6 +7,10 @@
     display: flex;
     align-items: center;
   }
+
+  @media #{$extra-small-device} {
+    padding: 0 1rem;
+  }
 }
 
 .date-bold {
@@ -23,6 +27,6 @@
   border: 1px solid $color-grey-1;
 }
 
-.libelle_montant_mois_apres_simulation {
+.libelle_montant_mois_apres_simulation_col {
   border-right: 1px solid $color-grey-1;
 }

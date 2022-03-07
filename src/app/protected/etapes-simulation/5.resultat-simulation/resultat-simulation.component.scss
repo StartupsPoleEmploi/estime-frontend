@@ -4,6 +4,10 @@
   .container-fluid {
     padding-right: 1rem;
     padding-left: 1rem;
+
+    @media #{$large-device} {
+      max-width: 80vw !important;
+    }
   }
 
   .row-style-2 {
@@ -135,9 +139,10 @@
   .container-fluid {
     margin-top: 2rem;
 
-    #alert-resultat-simulation {
-      @media #{$extra-small-device} {
-        margin-bottom: 1.5625rem !important;
+    #info-resultat-simulation {
+
+      @media #{$large-device} {
+        padding: 0;
       }
 
       div {
@@ -361,8 +366,6 @@
 
     @media #{$extra-small-device} {
       width: 100vw !important;
-      margin-left: -1rem !important;
-      margin-right: -1rem !important;
     }
   }
 
@@ -376,7 +379,7 @@
     }
 
     div {
-      padding: 1rem;
+      padding: 1rem 1.5rem;
     }
   }
 
@@ -385,6 +388,26 @@
     margin: 0;
 
     div {
-      padding: 1rem;
+      padding: 1rem 1.5rem;
     }
+  }
+
+  .col-diagramme-et-mois {
+    @media #{$large-device} {
+      padding-right: 2rem;
+
+    }
+  }
+
+  .sticky-boutons-modifier-refaire-simulation {
+    box-shadow: 0px -2px 6px 0px rgba(216, 216, 216, 1);
+    background-color: white;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    height: $button-sticky-height !important;
+    text-align: center;
+    z-index: 1000;
+    padding: 0.75rem 1rem;
+    align-items: center;
   }

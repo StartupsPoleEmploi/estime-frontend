@@ -1,15 +1,13 @@
 import { Legend } from './legend/legend';
 import { Plugins } from './plugins/plugins';
-import { Scales } from './scales/scales';
 import { Layout } from './layout/layout';
 
 export class Options {
-    legend : Legend;
+    legend: Legend;
     plugins: Plugins;
-    scales: Scales;
+    scales: Object;
     layout: Layout;
     responsive: boolean;
-    maintainAspectRation: boolean;
+    maintainAspectRatio: boolean;
     aspectRatio: number;
-    borderRadius: Object;
 }

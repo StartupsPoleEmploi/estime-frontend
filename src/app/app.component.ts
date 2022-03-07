@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
 import { Subscription } from 'rxjs';
+import { ScreenService } from './core/services/utile/screen.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,9 @@ export class AppComponent implements OnInit {
   subscriptionPopstateEventObservable: Subscription;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private screenService: ScreenService,
+    private renderer: Renderer2
   ) {
     this.subscribeRouteNavigationEndObservable();
     this.subscribePopstateEventObservable();
@@ -40,7 +43,15 @@ export class AppComponent implements OnInit {
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
-        this.isDisplayFilAriane = routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE;
+        this.isDisplayFilAriane = routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE
+          && routerEvent.url.split('?')[0] !== `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
+        if ((routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`)
+          && this.screenService.isExtraSmallScreen()) {
+          this.renderer.addClass(document.body, 'body-with-sticky-footer');
+        } else {
+          this.renderer.removeClass(document.body, 'body-with-sticky-footer');
+        }
       }
     });
   }

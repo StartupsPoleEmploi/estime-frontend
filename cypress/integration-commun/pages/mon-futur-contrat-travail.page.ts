@@ -1,11 +1,19 @@
 class MonFuturContratTravailPage {
 
+  public clickOnHasOffreEmploiOui(): void {
+    cy.get('[data-testid=btn-situation-offre-emploi-oui]').click({ force: true });
+  }
+
+  public clickOnHasOffreEmploiNon(): void {
+    cy.get('[data-testid=btn-situation-offre-emploi-non]').click({ force: true });
+  }
+
   public clickOnTypeContratCDI(): void {
-    cy.get('[data-testid=btn-type-contrat-cdi]').click({force: true});
+    cy.get('[data-testid=btn-type-contrat-cdi]').click({ force: true });
   }
 
   public clickOnTypeContratCDD(): void {
-    cy.get('[data-testid=btn-type-contrat-cdd]').click({force: true});
+    cy.get('[data-testid=btn-type-contrat-cdd]').click({ force: true });
   }
 
   public saisirDureeHebdomadaire(dureeHebdomadaire: string): void {

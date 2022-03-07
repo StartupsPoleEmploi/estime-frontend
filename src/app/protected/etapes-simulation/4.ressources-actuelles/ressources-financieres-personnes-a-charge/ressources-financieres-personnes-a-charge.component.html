@@ -1,14 +1,18 @@
-<div class="card card-body card-form">
+<div class="card card-body card-form card-form-style-3">
     <form (ngSubmit)="onSubmitRessourcesFinancieresPersonnesChargeForm(ressourcesFinancieresPersonnesChargeForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresPersonnesChargeFormSubmitted}"
         #ressourcesFinancieresPersonnesChargeForm="ngForm">
-        <div class="form-group" *ngFor="let personneDTO of personnesDTO">
-            <span *ngIf="!personneRecoitRSASeulement(personneDTO)" class="libelle-personne row headline-4-typo">
-                Personne {{personneDTO.index + 1}}
-                ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
-            </span>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
-                <div class="row mb-2">
+        <div *ngFor="let personneDTO of personnesDTO">
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span *ngIf="!personneRecoitRSASeulement(personneDTO)" class="libelle-personne headline-4-typo">
+                        Personne {{personneDTO.index + 1}}
+                        ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
+                <div class="row pb-3">
                     <label class="label headline-4-typo" [for]="'salaireNetPersonneACharge'+personneDTO.index + 1">
                         * Salaire net perçu
                     </label>
@@ -28,24 +32,29 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="row mb-2">
+            <div>
+                <div class="row pb-3">
                     <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
                         * Personne {{personneDTO.index + 1}} a-t-elle travaillé au cours des
                         {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
@@ -88,20 +97,25 @@
                         </div>
                     </div>
                 </div>
-                <span class="row error-input-message"
-                    *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
-                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                </div>
             </div>
             <div *ngIf="isAfficherChampsSalairesPersonne(personneDTO.personne);">
-                <div class="form-group">
-                    <div class="row mb-3">
+                <div>
+                    <div class="row pb-3">
                         <label class="label headline-4-typo">
                             Indiquez le montant de vos salaires de
                             {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                             {{optionsNombreMoisTravailles[0].label}}.
                             <br>
-                            <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
+                            <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au
+                                logement.</span>
                         </label>
                     </div>
                     <div class="row">
@@ -109,7 +123,7 @@
                             class="col-12 col-md-4 mt-2"
                             [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
                             <div class="ms-2 me-2">
-                                <div class="row mb-2">
+                                <div class="row pb-3">
                                     <label class="label headline-4-typo"
                                         [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
                                         * Salaire en {{ optionNombreMoisTravailles.label }}
@@ -135,26 +149,30 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <span class="row error-input-message"
-                                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
-                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                                    </span>
+                                    <div class="col-12">
+                                        <span class="error-input-message"
+                                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
+                                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <span class="col error-input-message"
-                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
-                            Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
-                            {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                            derniers mois. Veuillez renseigner au moins un salaire.
-                        </span>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
+                                Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
+                                {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                                derniers mois. Veuillez renseigner au moins un salaire.
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1">
                         * ARE (Allocation Retour Emploi) perçue
@@ -174,24 +192,29 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1">
                         * ASS (Allocation Solidarité Spécifique) perçue
@@ -211,24 +234,29 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group mt-2" *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH">
+                <div class="row pb-3">
                     <label class="label headline-4-typo" [for]="'allocationAAHPersonneACharge'+personneDTO.index + 1">
                         * AAH (Allocation Adulte Handicapé) perçue
                     </label>
@@ -247,24 +275,29 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group mt-2" *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1">
                         * Pension d'invalidité perçue
@@ -284,22 +317,27 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="row error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
-                <div class="row mt-3 mb-2">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1">
                         * Allocation supplémentaire d'invalidité perçue
@@ -314,25 +352,29 @@
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
                             [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite }"
+                            [ngClass]="{'ng-invalid': !personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite }"
                             placeholder="Montant" inputmode="numeric" required
                             #allocationSupplementaireInvalidite="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="row error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1">
                         * Bénéfices en tant que micro entrepreneur
@@ -351,27 +393,33 @@
                             [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
                             required inputmode="numeric"
                             #personneAChargeBeneficesMicroEntreprise3DerniersMois="ngModel">
-                        <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos">
+                        </app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise?.touched)  && personneAChargeBeneficesMicroEntreprise?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise?.touched)  && personneAChargeBeneficesMicroEntreprise?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
+                <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1">
                         * Chiffre d'affaires en tant qu'indépendant
@@ -390,27 +438,33 @@
                             [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
                             required inputmode="numeric"
                             #personneAChargeChiffreAffairesIndependantDernierExercice="ngModel">
-                        <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos">
+                        </app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependant?.touched)  && personneAChargeChiffreAffairesIndependant?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependant?.touched)  && personneAChargeChiffreAffairesIndependant?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group" *ngIf="personneDTO.personne.informationsPersonnelles.hasPensionRetraite">
-                <div class="row mb-2">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.hasPensionRetraite">
+                <div class="row pb-3">
                     <label class="label headline-4-typo" for="personneAChargePensionRetraite">
                         * Pension de retraite nette perçue
                     </label>
@@ -428,20 +482,25 @@
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
                 </div>
-                <div class="row">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                    <span
-                        *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)"
-                        class="error-input-message">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

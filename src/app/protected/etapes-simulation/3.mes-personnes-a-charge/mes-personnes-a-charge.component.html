@@ -1,122 +1,124 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid form-container-fluid" role="form">
-    <div class="div-title-formulaire">
-        <h1 class="h1-style-1 headline-1-typo">
-            3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
-        </h1>
-        <div class="text-under-h1 body-2-typo">
-            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+<div class="container-fluid" role="form">
+    <div class="form-container-fluid">
+        <div class="div-title-formulaire">
+            <h1 class="h1-style-1 headline-1-typo">
+                3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
+            </h1>
+            <div class="text-under-h1 body-2-typo">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+            </div>
         </div>
-    </div>
-    <div class="card card-body card-form card-form-style-1">
-        <div class="row mb-3">
-            <label class="label headline-4-typo" aria-describedby="infobulle-personnes-charge-nbr-enfant">
-                Nombre d'enfant(s) ou de
-                <div *ngIf="screenService.isExtraSmallScreen()"></div>
-                personne(s) à charge
-                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
-                    aria-label="Infobulle statut de personne à charge"
-                    placement="right" tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
-                    (click)="modalService.openModal($event, modalPersonnesAChargeTemplate)">
-                </button>
-            </label>
-        </div>
-        <div class=" card-group row row-cols-2 row-cols-md-3 gx-4 gy-2">
-            <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
-                <div class="card">
-                    <div class="card-header">
-                        <i id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
-                            aria-label="Supprimer personne à charge" alt="Supprimer personne à charge"
-                            class="fas fa-times-circle float-end"
-                            (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
-                            (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
-                        </i>
-                    </div>
-                    <div class="card-body d-flex align-items-center">
-                        <div class="row">
-                            <div class="col-md-3 col-xs-12 col-card-body">
-                                <img alt="" class src="./assets/images/personne.svg">
-                            </div>
-                            <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
-                                <span class="span-personne headline-4-typo">Personne {{indexOfelement +
-                                    1}}</span>
-                                <span class="body-2-typo">
-                                    {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
-                                </span>
+        <div class="card card-form card-form-style-2">
+            <div class="row mb-3">
+                <label class="label headline-4-typo" aria-describedby="infobulle-personnes-charge-nbr-enfant">
+                    Nombre d'enfant(s) ou de
+                    <div *ngIf="screenService.isExtraSmallScreen()"></div>
+                    personne(s) à charge
+                    <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
+                        aria-label="Infobulle statut de personne à charge" placement="right"
+                        tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
+                        (click)="modalService.openModal($event, modalPersonnesAChargeTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="card-group row row-cols-2 row-cols-md-4 gx-4 gy-2">
+                <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
+                    <div class="card">
+                        <div class="card-header">
+                            <i id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
+                                aria-label="Supprimer personne à charge" alt="Supprimer personne à charge"
+                                class="fas fa-times-circle float-end"
+                                (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
+                                (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
+                            </i>
+                        </div>
+                        <div class="card-body d-flex align-items-center">
+                            <div class="row">
+                                <div class="col-md-3 col-xs-12 col-card-body">
+                                    <img alt="" class src="./assets/images/personne.svg">
+                                </div>
+                                <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
+                                    <span class="span-personne headline-4-typo">Personne {{indexOfelement +
+                                        1}}</span>
+                                    <span class="body-2-typo">
+                                        {{personne.informationsPersonnelles.dateNaissance | date: 'dd/MM/yyyy'}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <a tabindex="0" alt="Modifier personne à charge" class="float-end caption-2-typo"
-                            (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
-                            Modifier
-                        </a>
+                        <div class="card-footer">
+                            <a tabindex="0" alt="Modifier personne à charge" class="float-end caption-2-typo"
+                                (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
+                                Modifier
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <button name="button-card-add-personne" class="button-card-add-personne"
-                    aria-label="Ajouter une personne à charge" (click)="onClickButtonAjouterPersonne()"
-                    (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
-                    *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-                    <div class="card card-add-personne" data-testid="btn-ajouter-personne-charge"
-                        [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}">
-                        <div class="card-body d-flex align-items-center">
-                            <div id="row-card-body-add-personne" class="row">
-                                <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
-                                    <img alt="" src="./assets/images/ajouter-personne.svg">
-                                </div>
-                                <div class="col-md-9 col-xs-12 col-card-body"
-                                    [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
-                                    <span class="body-2-typo">
-                                        Ajouter un enfant ou une personne à charge
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </button>
-            </div>
-            <div class="col">
-                <button *ngIf="!hasPersonneACharge() &&   isNouvellePersonneAChargeFormDisplay === false"
-                    name="button-card-pas-de-personne-a-charge" class="button-card-pas-de-personne-a-charge"
-                    aria-label="Je n'ai pas de personne à charge" (click)="onClickButtonPasDePersonneACharge()"
-                    (keyup)="handleKeyUpOnButtonPasDePersonneACharge($event)">
-                    <div class="card card-add-personne" data-testid="btn-pas-de-personne-a-charge">
-                        <div class="card-body d-flex align-items-center">
-                            <div id="row-card-body-add-personne" class="row">
-                                <div id="pas-de-personne-text" class="col-12 col-card-body">
-                                    <span class="body-2-typo">
-                                        Je n'ai pas d'enfant ou de personne à charge
-                                    </span>
+                <div class="col">
+                    <button name="button-card-add-personne" class="button-card-add-personne"
+                        aria-label="Ajouter une personne à charge" (click)="onClickButtonAjouterPersonne()"
+                        (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
+                        *ngIf="isNouvellePersonneAChargeFormDisplay === false">
+                        <div class="card card-add-personne" data-testid="btn-ajouter-personne-charge"
+                            [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}">
+                            <div class="card-body d-flex align-items-center">
+                                <div id="row-card-body-add-personne" class="row">
+                                    <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
+                                        <img alt="" src="./assets/images/ajouter-personne.svg">
+                                    </div>
+                                    <div class="col-md-9 col-xs-12 col-card-body"
+                                        [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
+                                        <span class="body-2-typo">
+                                            Ajouter un enfant ou une personne à charge
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </button>
+                    </button>
+                </div>
+                <div class="col">
+                    <button *ngIf="!hasPersonneACharge() &&   isNouvellePersonneAChargeFormDisplay === false"
+                        name="button-card-pas-de-personne-a-charge" class="button-card-pas-de-personne-a-charge"
+                        aria-label="Je n'ai pas de personne à charge" (click)="onClickButtonPasDePersonneACharge()"
+                        (keyup)="handleKeyUpOnButtonPasDePersonneACharge($event)">
+                        <div class="card card-add-personne" data-testid="btn-pas-de-personne-a-charge">
+                            <div class="card-body d-flex align-items-center">
+                                <div id="row-card-body-add-personne" class="row">
+                                    <div id="pas-de-personne-text" class="col-12 col-card-body">
+                                        <span class="body-2-typo">
+                                            Je n'ai pas d'enfant ou de personne à charge
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
             </div>
+            <app-form-personne-a-charge *ngIf="isNouvellePersonneAChargeFormDisplay === true"
+                [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
+                [isModeModification]="isModeModification" [nouvellePersonneACharge]="nouvellePersonneACharge"
+                [numeroNouvellePersonne]="numeroNouvellePersonne"
+                (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
+            </app-form-personne-a-charge>
         </div>
-        <app-form-personne-a-charge *ngIf="isNouvellePersonneAChargeFormDisplay === true"
-            [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne" [isModeModification]="isModeModification"
-            [nouvellePersonneACharge]="nouvellePersonneACharge" [numeroNouvellePersonne]="numeroNouvellePersonne"
-            (ajoutNouvellePersonneEventEmitter)="traiterAjoutePersonneEvent($event)">
-        </app-form-personne-a-charge>
-        <div class="div-buttons-form d-flex justify-content-center"
-            *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-            <button class="btn-style-perso-2 first-btn button-typo" aria-label="Retour à la page précédente"
-                (click)="onClickButtonRetour()" tag-navigation="clic_bouton_retour">
+        <div class="row-btn-form" *ngIf="isNouvellePersonneAChargeFormDisplay === false">
+            <button class="btn-precedent" (click)="onClickButtonRetour()" aria-label="Retour à la page précédente"
+                data-testid="btn-personnes-charge-retour" tag-navigation="clic_bouton_retour">
                 <div>
-                    <img alt="" src="./assets/images/return-arrow-v2.svg">
+                    <img alt="" src="./assets/images/fleche-retour.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-personnes-charge-suivant" class="btn-style-perso-1 second-btn button-typo"
-                aria-label="Passer à la page suivante" data-testid="btn-personnes-charge-suivant"
-                (click)="onClickButtonSuivant()" tag-navigation="clic_bouton_suivant">
+            <button id="btn-personnes-charge-suivant" class="btn-suivant" aria-label="Passer à la page suivante"
+                type="submit" data-testid="btn-personnes-charge-suivant" (click)="onClickButtonSuivant()"
+                tag-navigation="clic_bouton_suivant">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                    <img alt="" src="./assets/images/fleche-suivant.svg">
                 </div>
             </button>
         </div>

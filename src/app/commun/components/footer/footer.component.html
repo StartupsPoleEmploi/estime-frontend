@@ -1,14 +1,11 @@
-<footer [ngClass]="{'footer-avec-sticky-button':this.stickyFooter}">
+<footer [ngClass]="this.stickyFooter?'footer-avec-sticky-button':''">
     <div class="container-fluid">
         <div class="row h-100 row-1-footer">
             <div class="d-none d-md-block d-lg-block d-xl-block col-md-auto my-auto row-1-footer-div-1">
                 <div class="row">
                     <div class="col-12">
-                        <img
-                        alt="Logo du service Estime"
-                        src="./assets/images/logo-estime.svg"
-                        (click)="onClickLogoEstime()"
-                        tag-navigation="clic_logo_estime_footer_retour_accueil">
+                        <img alt="Logo du service Estime" src="./assets/images/logo-estime.svg"
+                            (click)="onClickLogoEstime()" tag-navigation="clic_logo_estime_footer_retour_accueil">
                     </div>
                     <div class="col-12 col-texte-service-estime">
                         <p class="caption-typo">
@@ -20,46 +17,44 @@
             </div>
             <div class="col-sm-12 col-md-auto my-auto row-1-footer-div-2">
                 <div>
-                    <a class="body-2-typo" (click)="onClickAides()" tag-navigation="clic_lien_footer_toutes_les_aides">Toutes les aides</a>
+                    <a class="body-2-typo" (click)="onClickAides()"
+                        tag-navigation="clic_lien_footer_toutes_les_aides">Toutes les aides</a>
                 </div>
                 <div>
-                    <a class="body-2-typo" (click)="onClickLinkContact()" tag-navigation="clic_lien_footer_nous_contacter">Nous contacter</a>
+                    <a class="body-2-typo" (click)="onClickLinkContact()"
+                        tag-navigation="clic_lien_footer_nous_contacter">Nous contacter</a>
                 </div>
                 <div>
-                    <a class="body-2-typo" (click)="onClickLinkAccessibilite()" tag-navigation="clic_lien_footer_accessibilite">Accessibilité</a>
+                    <a class="body-2-typo" (click)="onClickLinkStatistiques()"
+                        tag-navigation="clic_lien_footer_statistiques">Statistiques</a>
                 </div>
                 <div>
-                    <a class="body-2-typo" (click)="onClickLinkCGU()" tag-navigation="clic_lien_footer_cgu">Conditions Générales d'Utilisation</a>
+                    <a class="body-2-typo" (click)="onClickLinkAccessibilite()"
+                        tag-navigation="clic_lien_footer_accessibilite">Accessibilité</a>
+                </div>
+                <div>
+                    <a class="body-2-typo" (click)="onClickLinkCGU()" tag-navigation="clic_lien_footer_cgu">Conditions
+                        Générales d'Utilisation</a>
                 </div>
             </div>
             <div class="col-sm-12 col-md-3 my-auto row-1-footer-div-3">
                 <div class="row h-100">
                     <div class="col-auto col-md-12 my-auto row-col-1">
-                        <img
-                            id="logo-pole-emploi-colored"
-                            alt="Logo de Pôle emploi"
-                            *ngIf="screenService.isExtraSmallScreen()"
-                            src="./assets/images/logo-pole-emploi-v2.png">
-                        <img
-                            id="logo-fonds-social-europeen-footer"
-                            alt="Logo du Fond Social Européen"
+                        <img id="logo-pole-emploi-colored" alt="Logo de Pôle emploi"
+                            *ngIf="screenService.isExtraSmallScreen()" src="./assets/images/logo-pole-emploi-v2.png">
+                        <img id="logo-fonds-social-europeen-footer" alt="Logo du Fond Social Européen"
                             src="./assets/images/logo-fonds-social-europeen-v2.png">
-                        <img
-                            id="logo-pole-emploi-colored"
-                            alt="Logo de Pôle emploi"
-                            *ngIf="!screenService.isExtraSmallScreen()"
-                            src="./assets/images/logo-pole-emploi-v2.png">
+                        <img id="logo-pole-emploi-colored" alt="Logo de Pôle emploi"
+                            *ngIf="!screenService.isExtraSmallScreen()" src="./assets/images/logo-pole-emploi-v2.png">
                     </div>
                     <div class="col-auto col-md-12 d-flex row-col-2">
                         <div>
-                            <img
-                                id="logo-ue-footer"
-                                alt="Logo Union Européenne"
-                                src="./assets/images/logo-ue.svg">
+                            <img id="logo-ue-footer" alt="Logo Union Européenne" src="./assets/images/logo-ue.svg">
                         </div>
                         <div id="text-fse-footer">
                             <p>
-                                Ce dispositif est cofinancé par le Fonds Social Européen dans le cadre du Programme opérationnel national "Emploi et inclusion" 2014-2020
+                                Ce dispositif est cofinancé par le Fonds Social Européen dans le cadre du Programme
+                                opérationnel national "Emploi et inclusion" 2014-2020
                             </p>
                         </div>
                     </div>

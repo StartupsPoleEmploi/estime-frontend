@@ -27,11 +27,11 @@ footer {
   .row-1-footer {
     padding-bottom: 1rem;
     padding-right: 1rem;
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
 
     @media #{$extra-small-device} {
       padding-bottom: 0rem;
-      padding-top: 1.5rem;
+      padding-top: 0.5rem;
 
     }
 
@@ -86,13 +86,8 @@ footer {
       }
 
       div {
-        padding-top: 0.5625rem;
-        padding-bottom: 0.5625rem;
-
-        @media #{$medium-device} {
-          padding-top: 0.75rem;
-          padding-bottom: 0.75rem;
-        }
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
       }
     }
 
@@ -201,6 +196,6 @@ footer {
 
 .footer-avec-sticky-button {
   @media #{$extra-small-device} {
-    bottom: calc(#{$espace-se-connecter-sticky-height});
+    bottom: #{$button-sticky-height};
   }
 }

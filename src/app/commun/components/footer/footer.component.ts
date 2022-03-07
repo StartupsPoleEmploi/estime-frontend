@@ -21,18 +21,22 @@ export class FooterComponent implements OnInit {
     this.subscribeRouteNavigationEndObservable();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
 
-  public onClickAides(): void{
+  public onClickAides(): void {
     this.router.navigate([RoutesEnum.AIDES]);
   }
 
   public onClickLinkAccessibilite(): void {
     this.router.navigate([RoutesEnum.ACCESSIBILITE]);
+  }
+
+  public onClickLinkStatistiques(): void {
+    this.router.navigate([RoutesEnum.STATS]);
   }
 
   public onClickLinkCGU(): void {
@@ -47,10 +51,12 @@ export class FooterComponent implements OnInit {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
+
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
-      if(routerEvent instanceof NavigationEnd) {
-        this.stickyFooter =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      if (routerEvent instanceof NavigationEnd) {
+        this.stickyFooter = routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
       }
     });
   }

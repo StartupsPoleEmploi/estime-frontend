@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
 
 @Component({
   selector: 'app-actions-suite',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActionsSuiteComponent implements OnInit {
 
+  codesActionsEnum: typeof CodesActionsEnum = CodesActionsEnum;
   constructor() { }
 
   ngOnInit(): void {
@@ -22,6 +24,20 @@ export class ActionsSuiteComponent implements OnInit {
 
   public onClickButtonVoirOffres(): void {
     window.open('https://candidat.pole-emploi.fr/offres/emploi', '_blank');
+  }
+
+  public simulationSelection(codeAction: string) {
+    switch (codeAction) {
+      case CodesActionsEnum.MISE_A_JOUR:
+        this.onClickButtonMettreAJourProfil();
+        break;
+      case CodesActionsEnum.OFFRES_EMPLOI:
+        this.onClickButtonVoirOffres();
+        break;
+      case CodesActionsEnum.SERVICES_A_LA_CARTE:
+        this.onClickButtonInscriptionAtelier();
+        break;
+    }
   }
 
 }

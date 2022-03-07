@@ -1,0 +1,5 @@
+export enum CodesActionsEnum {
+    MISE_A_JOUR = 'MISE_A_JOUR',
+    SERVICES_A_LA_CARTE = 'SERVICES_A_LA_CARTE',
+    OFFRES_EMPLOI = 'OFFRES_EMPLOI'
+}

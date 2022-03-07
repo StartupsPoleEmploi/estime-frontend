@@ -259,6 +259,73 @@
   max-height: fit-content;
 }
 
+.btn-style-perso-6 {
+  @extend .action-btn-base;
+  min-height: 3.75rem;
+  width: 100%;
+  background-color: white;
+  border: 1px solid $color-blue-2;
+
+  span {
+    @extend .button-typo;
+    color: $color-blue-2;
+  }
+
+  @media #{$small-device} {
+    min-height: 1.25rem;
+  }
+
+  max-height: fit-content;
+}
+
+.btn-style-perso-7 {
+  @extend .action-btn-base;
+  min-height: 3.75rem;
+  width: 100%;
+  background-color: $color-blue-10;
+  border: 1px solid $color-blue-10;
+
+  img {
+    color: $color-white-1;
+    padding-right: 0.5rem;
+    width: 2rem;
+  }
+
+  span {
+    @extend .button-typo;
+    color: $color-white-1;
+  }
+
+  @media #{$small-device} {
+    min-height: 1.25rem;
+  }
+
+  max-height: fit-content;
+}
+
+.btn-modifier-simulation-sticky {
+  @extend .btn-style-perso-6;
+  max-height: unset;
+  min-height: unset;
+  height: 2.875rem !important;
+  min-width: calc(50vw - 1.5rem);
+  width: fit-content;
+  margin: 0 auto;
+  margin-right: 0.25rem;
+  color: $color-blue-10;
+}
+
+.btn-telecharger-simulation-sticky {
+  @extend .btn-style-perso-7;
+  max-height: unset;
+  min-height: unset;
+  height: 2.875rem !important;
+  min-width: calc(50vw - 1.5rem);
+  width: fit-content;
+  margin: 0 auto;
+  margin-left: 0.25rem;
+}
+
 .btn-group-input-date {
   display: flex !important;
 
@@ -409,5 +476,60 @@ option {
     padding-left: 0.5rem;
     margin-right: 0;
 
+  }
+}
+
+.row-btn-form {
+
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+
+  .btn-precedent {
+    @extend .btn-style-perso-2;
+
+    padding: unset;
+    margin-right: 1rem;
+    background-color: unset;
+
+    div {
+      padding: unset;
+
+      span {
+        @extend .button-typo;
+        @extend .color-blue-2-typo;
+        margin: unset;
+        padding-right: 0.5rem;
+      }
+
+      img {
+        margin: unset;
+        padding-left: 1.5rem;
+        padding-right: 0.125rem;
+      }
+    }
+  }
+
+  .btn-suivant {
+    @extend .btn-style-perso-1;
+
+    padding: unset;
+    margin-left: 1rem;
+
+    div {
+      padding: unset;
+
+      span {
+        @extend .button-typo;
+        margin: unset;
+        padding-left: 1.5rem;
+        padding-right: 0.5rem;
+      }
+
+      img {
+        margin: unset;
+        padding-right: 0.5rem;
+      }
+    }
   }
 }

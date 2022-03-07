@@ -1,5 +1,5 @@
 <div class="row btn-group-input-date">
-    <div class="col">
+    <div class="col-12">
         <input id="inputJour{{ dateSaisie.libelleTypeDate }}" name="jourDate"
             attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}" (change)="onChangeOrKeyUpDateJour()"
             class="form-control jour-input d-inline"
@@ -25,25 +25,41 @@
             placeholder="AAAA" required type="text" #anneeDate="ngModel">
     </div>
 </div>
-<span class="row error-input-message" *ngIf="(isFormSubmitted || jourDate.touched)  && jourDate.errors?.required">
-    {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
-</span>
-<span class="row error-input-message" *ngIf="(isFormSubmitted || moisDate.touched)  && moisDate.errors?.required">
-    {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
-</span>
-<span class="row error-input-message" *ngIf="(isFormSubmitted || anneeDate.touched) && anneeDate.errors?.required">
-    {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
-</span>
-<span class="row error-input-message" *ngIf="dateSaisie.isJourInvalide">
-    {{dateSaisie.messageErreurFormatJour}}
-</span>
-<span class="row error-input-message" *ngIf="dateSaisie.isMoisInvalide">
-    {{dateSaisie.messageErreurFormatMois}}
-</span>
-<span class="row error-input-message" *ngIf="dateSaisie.isAnneeInvalide">
-    {{dateSaisie.messageErreurFormatAnnee}}
-</span>
-<span class="row error-input-message"
-    *ngIf="!dateSaisie.isJourInvalide && !dateSaisie.isMoisInvalide && !dateSaisie.isAnneeInvalide && dateSaisie.isDateSuperieurDateJour">
-    {{dateSaisie.messageErreurSuperieurDateJour}}
-</span>
+<div class="row">
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="(isFormSubmitted || jourDate.touched)  && jourDate.errors?.required">
+            {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="(isFormSubmitted || moisDate.touched)  && moisDate.errors?.required">
+            {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="(isFormSubmitted || anneeDate.touched) && anneeDate.errors?.required">
+            {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="dateSaisie.isJourInvalide">
+            {{dateSaisie.messageErreurFormatJour}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="dateSaisie.isMoisInvalide">
+            {{dateSaisie.messageErreurFormatMois}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="dateSaisie.isAnneeInvalide">
+            {{dateSaisie.messageErreurFormatAnnee}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message"
+            *ngIf="!dateSaisie.isJourInvalide && !dateSaisie.isMoisInvalide && !dateSaisie.isAnneeInvalide && dateSaisie.isDateSuperieurDateJour">
+            {{dateSaisie.messageErreurSuperieurDateJour}}
+        </span>
+    </div>
+</div>

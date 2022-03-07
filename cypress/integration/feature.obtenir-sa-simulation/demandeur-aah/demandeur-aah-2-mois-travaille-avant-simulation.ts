@@ -66,6 +66,7 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaireNet);
@@ -189,6 +190,7 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       avantDeCommencerPage.clickOnJeCommence();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
+      monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaireNet);

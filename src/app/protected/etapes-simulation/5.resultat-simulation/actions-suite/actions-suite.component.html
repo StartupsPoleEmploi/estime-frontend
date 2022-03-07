@@ -1,20 +1,17 @@
-<div class="center-actions-suite">
-    <span class="headline-2-typo">Que souhaitez vous faire maintenant ?</span>
-</div>
-
 <div class="row liste-actions">
-    <div class="card col-sm item" (click)="onClickButtonVoirOffres()">
-        <app-consultation-offres [onClickButtonVoirOffres]="onClickButtonVoirOffres">
-        </app-consultation-offres>
+    <div class="col-12">
+        <app-action-suite text="Rechercher des offres d'emploi" imageLink="rechercher_offres"
+            [codeAction]="codesActionsEnum.OFFRES_EMPLOI" (clickAction)="onClickButtonVoirOffres()">
+        </app-action-suite>
     </div>
-
-    <div class="card col-sm item" (click)="onClickButtonMettreAJourProfil()">
-        <app-mettre-a-jour-profil [onClickButtonMettreAJourProfil]="onClickButtonMettreAJourProfil">
-        </app-mettre-a-jour-profil>
+    <div class="col-12 mt-3">
+        <app-action-suite text="Mettre à jour votre profil candidat" imageLink="profil_candidat"
+            [codeAction]="codesActionsEnum.MISE_A_JOUR" (clickAction)="onClickButtonMettreAJourProfil()">
+        </app-action-suite>
     </div>
-
-    <div class="card col-sm item" (click)="onClickButtonInscriptionAtelier()">
-        <app-inscription-atelier [onClickButtonInscriptionAtelier]="onClickButtonInscriptionAtelier">
-        </app-inscription-atelier>
+    <div class="col-12 mt-3">
+        <app-action-suite text="Participer à des ateliers d'accompagnement" imageLink="atelier_pe"
+            [codeAction]="codesActionsEnum.SERVICES_A_LA_CARTE" (clickAction)="onClickButtonInscriptionAtelier()">
+        </app-action-suite>
     </div>
 </div>

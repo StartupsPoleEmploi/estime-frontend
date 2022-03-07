@@ -35,7 +35,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
-    this.scrollPositionOffset = document.getElementById('section-description').offsetTop;
+    this.scrollPositionOffset = document.getElementById('image-homepage-calculette').offsetTop;
   }
 
   public login(): void {
@@ -57,7 +57,7 @@ export class HomepageComponent implements OnInit {
 
   private checkDemandeurEmploiConnecte(): void {
     const messageErreur = this.authorizationService.getMessageErreur();
-    if(messageErreur) {
+    if (messageErreur) {
       if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
         this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg' });
       } else {
@@ -71,7 +71,7 @@ export class HomepageComponent implements OnInit {
 
   @HostListener("window:scroll", [])
   onWindowScroll() {
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.stickyButton = this.screenService.isButtonSticky(scrollPosition, this.scrollPositionOffset);
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    this.stickyButton = this.screenService.isExtraSmallScreen() && this.screenService.isButtonSticky(scrollPosition, this.scrollPositionOffset);
   }
 }

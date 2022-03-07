@@ -1,8 +1,3 @@
-body {
-  color: $color-blue-1;
-  font-size: 1em;
-}
-
 h1 {
   @extend .font-effect-title;
   font-size: 1.8em;
@@ -36,6 +31,7 @@ h6 {
   @extend .font-effect-title;
   font-size: 1.2em;
   text-align: center;
+  margin: unset;
 }
 
 p,
