@@ -40,55 +40,54 @@
                     </span>
                 </div>
             </div>
-            <div>
-                <div class="row pb-3">
-                    <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
-                        * A-t-il/elle travaillé au cours des
-                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                        derniers
-                        mois ?
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-check form-check-inline">
-                            <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                                name="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                                attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                                data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
-                                class="form-check-input"
-                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
-                                [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
-                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
-                            <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
-                                oui
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline ms-2">
-                            <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
-                                name="hasTravailleAuCoursDerniersMoisNonConjoint"
-                                data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
-                                attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                                type="radio" class="form-check-input"
-                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                                [value]="false"
-                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)" required
-                                #hasTravailleAuCoursDerniersMois="ngModel"
-                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
-                            <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
-                                non
-                            </label>
-                        </div>
+        </div>
+        <div>
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                    * A-t-il/elle travaillé au cours des
+                    {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                    derniers
+                    mois ?
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                            name="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                            attr.aria-label="Votre conjoint.e a travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                            data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
+                            class="form-check-input"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                            (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
+                            [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
+                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
+                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
+                            oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline ms-2">
+                        <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
+                            name="hasTravailleAuCoursDerniersMoisNonConjoint"
+                            data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
+                            attr.aria-label="Votre conjoint.e n'a pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                            type="radio" class="form-check-input"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                            [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
+                            required #hasTravailleAuCoursDerniersMois="ngModel"
+                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
+                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
+                            non
+                        </label>
                     </div>
                 </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                    </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
                 </div>
             </div>
             <div *ngIf="isAfficherChampsSalairesConjoint();">
