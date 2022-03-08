@@ -1,12 +1,6 @@
 @import "../../../assets/scss/variables";
 
 .container-fluid {
-  margin-bottom: 1.875rem;
-
-  @media #{$extra-small-device} {
-    padding-left: 0;
-    padding-right: 0;
-  }
 
   margin-top: 2rem;
 

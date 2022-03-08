@@ -1,66 +1,69 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
 <div class="container-fluid" role="form">
-    <alert type="danger" *ngIf="messageErreur">
-        {{messageErreur}}
-    </alert>
-    <div class="card card-form-style-2">
-        <div class="title-container">
-            <h1 class="h1-style-1 headline-1-typo">
-                {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
-            </h1>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <p class="body-1-typo">
-                    Pour faire l’estimation la plus juste, en fonction de votre situation, veuillez vous munir de ces
-                    documents :
-                </p>
-                <div class="documents-demandes">
-                    <div class="items-documents-demandes">
-                        <span class="headline-5-typo headline-5-typo-color">Relevé de situation ARE</span>
-                        <button id="infobulle-trouver-dernier-releve-situation-are"
-                            aria-label="Infobulle trouver dernier relevé de situation ARE"
-                            class="img-interrogation-icon float-end" placement="right"
-                            tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
-                            (click)="modalService.openModal($event, modalDernierReleveDeSituationARE, true)"></button>
+    <div class="form-container-fluid">
+        <alert type="danger" *ngIf="messageErreur">
+            {{messageErreur}}
+        </alert>
+        <div class="card card-form-style-2">
+            <div class="title-container">
+                <h1 class="h1-style-1 headline-1-typo">
+                    {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="body-1-typo">
+                        Pour faire l’estimation la plus juste, en fonction de votre situation, veuillez vous munir de
+                        ces
+                        documents :
+                    </p>
+                    <div class="documents-demandes">
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Relevé de situation ARE</span>
+                            <button id="infobulle-trouver-dernier-releve-situation-are"
+                                aria-label="Infobulle trouver dernier relevé de situation ARE"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
+                                (click)="modalService.openModal($event, modalDernierReleveDeSituationARE, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Notification de droits ASS</span>
+                            <button id="infobulle-trouver-notification-droits-ass"
+                                aria-label="Infobulle trouver notification de droits ASS"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-notification-droits-ass"
+                                (click)="modalService.openModal($event, modalDerniereNotificationDroitASSTemplate, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Droits CAF ou MSA</span>
+                            <button id="infobulle-trouver-derniere-attestation-caf"
+                                aria-label="Infobulle trouver derniere attestation CAF"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
+                                (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="items-documents-demandes">
-                        <span class="headline-5-typo headline-5-typo-color">Notification de droits ASS</span>
-                        <button id="infobulle-trouver-notification-droits-ass"
-                            aria-label="Infobulle trouver notification de droits ASS"
-                            class="img-interrogation-icon float-end" placement="right"
-                            tag-action="ouverture-infobulle-trouver-notification-droits-ass"
-                            (click)="modalService.openModal($event, modalDerniereNotificationDroitASSTemplate, true)"></button>
-                    </div>
-                    <hr>
-                    <div class="items-documents-demandes">
-                        <span class="headline-5-typo headline-5-typo-color">Droits CAF ou MSA</span>
-                        <button id="infobulle-trouver-derniere-attestation-caf"
-                            aria-label="Infobulle trouver derniere attestation CAF"
-                            class="img-interrogation-icon float-end" placement="right"
-                            tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
-                            (click)="modalService.openModal($event, modalDerniereAttestationCafTemplate, true)"></button>
-                    </div>
-                    <hr>
-                    <div class="items-documents-demandes">
-                        <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
-                    </div>
-                </div>
-                <app-message-info contenu="Les résultats qui vous seront donnés ne sont qu’une estimation, ils sont susceptibles
+                    <app-message-info contenu="Les résultats qui vous seront donnés ne sont qu’une estimation, ils sont susceptibles
                 d’évoluer en fonction de votre situation, et des évolutions réglementaires.">
-                </app-message-info>
+                    </app-message-info>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row-btn-form">
-        <button id="btn-je-continue-avant-commencer" data-testid="btn-je-continue-avant-commencer" type="button"
-            class="btn-suivant" (click)="onClickButtonJeContinue()" tag-navigation="clic_bouton_je_continue">
-            <div>
-                <span class="button-typo">Je continue</span>
-                <img alt="" src="./assets/images/fleche-suivant.svg">
-            </div>
-        </button>
+        <div class="row-btn-form">
+            <button id="btn-je-continue-avant-commencer" data-testid="btn-je-continue-avant-commencer" type="button"
+                class="btn-suivant" (click)="onClickButtonJeContinue()" tag-navigation="clic_bouton_je_continue">
+                <div>
+                    <span class="button-typo">Je continue</span>
+                    <img alt="" src="./assets/images/fleche-suivant.svg">
+                </div>
+            </button>
+        </div>
     </div>
 </div>
 

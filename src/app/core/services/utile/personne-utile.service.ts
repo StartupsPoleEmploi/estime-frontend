@@ -41,14 +41,29 @@ export class PersonneUtileService {
   public hasRessourcesFinancieresAvantSimulation(personne: Personne): boolean {
     let hasRessourcesFinancieres = false;
     if (personne.informationsPersonnelles) {
+      if (this.isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete(personne)) {
+        hasRessourcesFinancieres = true;
+      }
       if (!personne.informationsPersonnelles.sansRessource
         && (personne.informationsPersonnelles.salarie
           || this.hasRessourcesAides(personne)
-          || this.hasRevenus(personne))) {
+          || this.hasRevenus(personne)
+        )
+      ) {
         hasRessourcesFinancieres = true;
       }
     }
     return hasRessourcesFinancieres;
+  }
+
+  private isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete(personne: Personne) {
+    let isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete = false;
+    if (personne.informationsPersonnelles) {
+      if (personne.informationsPersonnelles.sansRessource && personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois == null) {
+        isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete = true;
+      }
+    }
+    return isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete;
   }
 
   public isAgeLegalPourTravaillerFromPersonne(personne: Personne): boolean {
@@ -107,6 +122,9 @@ export class PersonneUtileService {
 
   private isRevenusValides(personne: Personne): boolean {
     let isValide = true;
+    if (personne.informationsPersonnelles && personne.informationsPersonnelles.sansRessource) {
+      isValide = personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois != null;
+    }
     if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
       isValide = personne.ressourcesFinancieresAvantSimulation.salaire.montantNet > 0;
     }

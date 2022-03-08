@@ -366,17 +366,16 @@
                     </label>
                 </div>
                 <div class="row">
-                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                        class="col-12 col-md-4 mt-2"
-                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
-                        <div class="ms-2 me-2">
+                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles" class="col-12 col-md-4"
+                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0, 'mt-3': !screenService.isExtraSmallScreen()}">
+                        <div [ngClass]="{'ms-2 me-2':!screenService.isExtraSmallScreen()}">
                             <div class="row pb-3">
                                 <label class="label headline-4-typo"
                                     [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
                                     * Salaire en {{ optionNombreMoisTravailles.label }}
                                 </label>
                             </div>
-                            <div class="row mb-4">
+                            <div class="row pb-3">
                                 <div class="col">
                                     <input [id]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"
                                         [name]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"

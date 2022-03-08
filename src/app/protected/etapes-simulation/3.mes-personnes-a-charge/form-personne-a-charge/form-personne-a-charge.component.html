@@ -8,13 +8,13 @@
     <div class="card-body">
         <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
             [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}" #personnesAChargeForm="ngForm">
-            <div class="pb-3">
+            <div>
                 <div class="pb-3">
                     <label class="label headline-4-typo">
                         * Date de naissance
                     </label>
                 </div>
-                <div>
+                <div class="pb-3">
                     <app-date-inputs [dateSaisie]="dateNaissanceNouvellePersonne"
                         [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
                         (dateChanged)="gererAffichageNouvellePersonneSituationForm()">

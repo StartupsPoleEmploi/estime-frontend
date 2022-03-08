@@ -75,10 +75,9 @@
             <span>{{situationPersonneEnum.SANS_RESSOURCE}}</span>
         </button>
     </div>
-    <div class="row pb-3">
+    <div class="row pb-3 situations">
         <div class="col-12">
-            <span class="error-input-message pt-3"
-                *ngIf="isNouvellePersonnesAChargeFormSubmitted && isSituationNotValide">
+            <span class="error-input-message" *ngIf="isNouvellePersonnesAChargeFormSubmitted && isSituationNotValide">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
             </span>
         </div>

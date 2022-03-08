@@ -11,7 +11,7 @@
         <div class="card card-form card-form-style-2">
             <form [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
                 #informationsPersonnellesForm="ngForm">
-                <div class="pb-3">
+                <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo" for="codePostal">
                             * Votre code postal
@@ -26,14 +26,14 @@
                                 #codePostal="ngModel" inputmode="numeric">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
-                        <div class="col">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
                                 {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
@@ -41,19 +41,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="pb-3">
+                <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Votre date de naissance
                         </label>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <app-date-inputs [dateSaisie]="dateNaissance"
                             [isFormSubmitted]="isInformationsPersonnellesFormSubmitted">
                         </app-date-inputs>
                     </div>
                 </div>
-                <div class="pb-3">
+                <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo" for="nationalite">
                             * Votre nationalité
@@ -76,8 +76,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row pt-3">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="pb-3" *ngIf="informationsPersonnelles.nationalite === nationalitesEnum.AUTRE">
+                <div *ngIf="informationsPersonnelles.nationalite === nationalitesEnum.AUTRE">
                     <div class="row pb-3">
                         <label class="label headline-4-typo" for="titreSejourValide">
                             Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
@@ -117,8 +117,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row pt-3">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="pb-3">
+                <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Vous percevez
@@ -209,8 +209,8 @@
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                             </button>
                         </div>
-                        <div class="row pt-3">
-                            <div class="col">
+                        <div class="row pb-3">
+                            <div class="col-12">
                                 <span class="error-input-message"
                                     *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationPeOuCafSelectionnee()">
                                     {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
@@ -250,8 +250,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row pt-3">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -259,9 +259,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="pt-3"
-                    *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
-                    <div class="row mb-2">
+                <div *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
+                    <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Vous vivez seul·e depuis plus de 18 mois ?
                         </label>
@@ -292,8 +291,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || isSeulPlusDe18Mois.touched) && isSeulPlusDe18Mois.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
@@ -301,7 +300,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="pt-3" *ngIf="situationFamiliale.isEnCouple === true">
+                <div *ngIf="situationFamiliale.isEnCouple === true">
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Votre conjoint·e perçoit
@@ -409,8 +408,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="row pt-3">
-                        <div class="col">
+                    <div class="row pb-3">
+                        <div class="col-12">
                             <span class="error-input-message"
                                 *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
