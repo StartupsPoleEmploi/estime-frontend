@@ -184,7 +184,7 @@ export class BlockRessourcesEstimeesService {
 
     //add cellule1
     const titleCell2 = '\nDétail des ressources estimées après reprise d’emploi pour les ' + nbrMoisSimule + ' mois à venir';
-    row.push(this.addTitleMesRessourcesEstimees(titleCell2, '#DEEEFF', 8, 'left'));
+    row.push(this.addTitleMesRessourcesEstimees(titleCell2, '#DEEEFF', nbrMoisSimule + 2, 'left'));
     //add cellules vides pour obtenir un nombre de colonnes = nbrMoisSimule + 2
     for (let i = 0; i < nbrMoisSimule + 1; i++) {
       row.push(new Cell());
@@ -266,23 +266,12 @@ export class BlockRessourcesEstimeesService {
 
   private addHeaderTable(body: Array<Array<Cell>>, nbrMoisSimule: number, title: string): void {
     const row = new Array<Cell>();
-    row.push(this.createCellTitle(title, '#DEEEFF', 8));
+    row.push(this.createCellTitle(title, '#DEEEFF', nbrMoisSimule + 2));
     //on ajoute des cellules vides pour obtenir un nombre de colonnes = nbrMoisSimule + 2
     for (let i = 0; i < nbrMoisSimule + 1; i++) {
       row.push(new Cell());
     }
     body.push(row);
-  }
-
-  private createRowMontant(body: Array<Array<Cell>>, montant: number, imageBase64: string, libelle: string, nbrMoisSimule: number): Array<Cell> {
-    const row = new Array<Cell>();
-    row.push(this.createCellImageRessource(imageBase64));
-    row.push(this.createCellLibelleRessource(libelle));
-    //création des cellules pour chaque simulation mensuelle
-    for (let i = 0; i < nbrMoisSimule; i++) {
-      row.push(this.createCellMontant(montant));
-    }
-    return row;
   }
 
   private createTableElement(body: Array<Array<Cell>>, nbrColumns: number, nbrRows: number): TableElement {
@@ -347,7 +336,7 @@ export class BlockRessourcesEstimeesService {
 
   private getWidthsColumns(nbrColumns: number): Array<number> {
     const widthMaxTable = 350;
-    const widthColumn = widthMaxTable / nbrColumns;
+    const widthColumn = Math.floor(widthMaxTable / nbrColumns);
     const widthsColumns = [30, 70];
     for (let i = 0; i < nbrColumns; i++) {
       widthsColumns.push(widthColumn);
