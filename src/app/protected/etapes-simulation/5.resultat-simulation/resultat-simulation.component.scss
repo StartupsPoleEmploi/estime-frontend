@@ -6,7 +6,7 @@
     padding-left: 1rem;
 
     @media #{$large-device} {
-      max-width: 80vw !important;
+      max-width: 72vw !important;
     }
   }
 
@@ -380,6 +380,10 @@
 
     div {
       padding: 1rem 1.5rem;
+
+      @media #{$extra-small-device} {
+        padding: 1rem;
+      }
     }
   }
 
@@ -389,6 +393,10 @@
 
     div {
       padding: 1rem 1.5rem;
+
+      @media #{$extra-small-device} {
+        padding: 1rem;
+      }
     }
   }
 

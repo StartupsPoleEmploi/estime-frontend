@@ -25,6 +25,20 @@ select {
   }
 }
 
+.result-container-fluid {
+  @media #{$small-device} {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media #{extra-small-device} {
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+  }
+}
+
 .custom-control-label {
   color: $color-blue-1;
   font-size: 1em;

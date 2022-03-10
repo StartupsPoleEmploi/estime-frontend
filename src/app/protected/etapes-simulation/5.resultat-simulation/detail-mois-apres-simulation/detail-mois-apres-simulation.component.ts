@@ -1,5 +1,6 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Aide } from '@app/commun/models/aide';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
@@ -20,7 +21,7 @@ export class DetailMoisApresSimulationComponent implements OnInit {
 
   @Input() simulationActuelle: SimulationMensuelle;
   @Input() modalRef: BsModalRef;
-  @Output() ressourceFinanciereOuAideSelection = new EventEmitter<RessourceFinanciere>();
+  @Output() aideSelection = new EventEmitter<Aide>();
 
   ressourcesFinancieresEtAidesMois: RessourceFinanciere[];
   ressourceFinanciereOuAideSelected: RessourceFinanciere;
@@ -54,10 +55,10 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     return this.ressourcesFinancieresService.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciereOuAide);
   }
 
-  public onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide): void {
-    if (this.isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)) {
-      this.ressourceFinanciereOuAideSelected = ressourceFinanciereOuAide;
-      this.ressourceFinanciereOuAideSelection.emit(ressourceFinanciereOuAide);
+  public onClickOnRessourceFinanciereOuAide(aide): void {
+    if (this.isRessourceFinanciereOuAideAvecDetail(aide)) {
+      this.ressourceFinanciereOuAideSelected = aide;
+      this.aideSelection.emit(aide);
     }
   }
 
@@ -77,7 +78,7 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     return this.ressourceFinanciereOuAideSelected == ressourceFinanciereOuAide;
   }
 
-  public isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+  public isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide): boolean {
     return this.ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide);
   }
 }

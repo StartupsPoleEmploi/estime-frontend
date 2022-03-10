@@ -1,4 +1,4 @@
-<div class="container-fluid form-container-fluid" role="form">
+<div class="container-fluid result-container-fluid" role="form">
     <div class="row">
         <div class="col">
             <h1 class="h1-style-1 headline-1-typo">
@@ -16,7 +16,8 @@
                 <div id="info-resultat-simulation" class="col-12 col-md-12 mt-auto mb-auto">
                     <div id="label-alerte-montants-resultat-simulation"
                         class="text-start body-1-typo color-blue-3-typo">
-                        Montants nets, avant éventuel impôt sur le revenu.<br>
+                        Montants nets, avant éventuel impôt sur le revenu.
+                        <br *ngIf="!screenService.isExtraSmallScreen()">
                         Simulation à titre d’information, aucune valeur contractuelle.
                     </div>
                 </div>
@@ -99,7 +100,7 @@
 <div *ngIf="screenService.isExtraSmallScreen()" class="sticky-boutons-modifier-refaire-simulation ">
     <button class="btn btn-modifier-simulation-sticky" data-testid="btn-refaire-simulation" tabindex="0"
         (click)="onClickButtonRefaireSimulation()" (keyup)="handleKeyUpOnRefaireSimulation($event)"
-        tag-navigation="clic_bouton_retour">
+        tag-navigation="clic_bouton_modifier_la_simulation">
         <span>Modifier</span>
     </button>
     <button class="btn btn-telecharger-simulation-sticky" data-testid="btn-telecharger-simulation" tabindex="0"

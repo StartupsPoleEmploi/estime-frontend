@@ -87,10 +87,10 @@ export class RessourcesFinancieresService {
       && ressourceFinanciere.code !== CodesAidesEnum.TRAVAILLEUR_INDEPENDANT;
   }
 
-  public isRessourceFinanciereAvecDetail(ressourceFinanciere: RessourceFinanciere): boolean {
-    if (typeof ressourceFinanciere == typeof Aide) {
+  public isRessourceFinanciereAvecDetail(ressourceFinanciere): boolean {
+    if (ressourceFinanciere.hasOwnProperty('detail')) {
       let aide = ressourceFinanciere as Aide;
       return this.aidesService.isAideAvecDetail(aide);
-    } return false;
+    }
   }
 }

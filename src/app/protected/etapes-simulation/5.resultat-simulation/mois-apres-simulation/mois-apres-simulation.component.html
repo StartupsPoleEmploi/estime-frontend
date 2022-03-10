@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="col-md-5 div-vertically-centered">
-                <div id="row_icones_aides" class="row ms-1">
+                <div id="row_icones_aides" class="row ms-0">
                     <div *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i = index"
                         attr.data-index="i" class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
@@ -50,18 +50,18 @@
         </div>
     </div>
     <div *ngIf="screenService.isExtraSmallScreen()">
-        <div class="row">
+        <div class="row m-0">
             <div class="col-10 align-items-start gx-0">
-                <div class="libelle_mois_apres_simulation_row row">
-                    <div class="col-md-12">
+                <div class="libelle_mois_apres_simulation_row row m-0">
+                    <div class="col-md-12 ps-0">
                         <h4 class="headline-4-typo color-blue-2-typo text-start">
                             {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
                             screenService.isTabletScreen())}}
                         </h4>
                     </div>
                 </div>
-                <div class="montant_mois_apres_simulation_row row">
-                    <div class="col-md-12">
+                <div class="montant_mois_apres_simulation_row row m-0">
+                    <div class="col-md-12 ps-0">
                         <h5 class="headline-5-typo color-blue-10-typo text-start">
                             {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
                             €
@@ -69,8 +69,8 @@
                         </h5>
                     </div>
                 </div>
-                <div id="row_icones_aides" class="row ms-1">
-                    <div *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i = index"
+                <div id="row_icones_aides" class="row ms-0">
+                    <div *ngFor=" let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i=index"
                         attr.data-index="i" class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
                             class="code-ressource me-1"

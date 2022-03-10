@@ -88,3 +88,12 @@
     background-color: $color-paf;
   }
 }
+
+.code-ressource-2 {
+  @extend .code-ressource;
+
+  border-radius: 0.5rem;
+  height: 2.5rem !important;
+  width: 2.625rem !important;
+
+}
