@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
   isHomepage = false;
+  isPageResultat = false;
   subscriptionStatutIndividuChangedObservable: Subscription;
   subscriptionRouteNavigationEndObservable: Subscription;
 
@@ -48,15 +49,18 @@ export class HeaderComponent implements OnInit {
   }
 
   private subscribeStatutIndividuChangedObservable(): void {
-    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn =>  {
+    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
   }
 
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
-      if(routerEvent instanceof NavigationEnd) {
-        this.isHomepage =  routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      if (routerEvent instanceof NavigationEnd) {
+        this.isHomepage = routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
+      }
+      if (routerEvent instanceof NavigationEnd) {
+        this.isPageResultat = routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
       }
     });
   }

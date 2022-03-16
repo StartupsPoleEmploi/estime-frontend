@@ -1,5 +1,5 @@
 <header [ngClass]="{'header-logged-in': this.isLoggedIn}" role="banner" aria-label="Header">
-    <div class="container-fluid">
+    <div class="container-fluid" [ngClass]="{'result-container-fluid': this.isPageResultat}">
         <div class="row">
             <div class="col-auto ps-0 ms-0">
                 <img id="logo-marianne-header" alt="Logo république Française" src="./assets/images/marianne.svg"
