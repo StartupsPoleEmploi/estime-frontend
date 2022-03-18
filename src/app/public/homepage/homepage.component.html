@@ -6,7 +6,7 @@
                 {{messageErreur.texte}}
             </alert>
         </div>
-        <div class="row row-1">
+        <div class="row row-1 align-items-end">
             <div class="row-1-first-col col-md-auto">
                 <div id="first-div-inside-first-col" class="align-text-bottom">
                     <div>
@@ -18,8 +18,15 @@
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
                             class="btn-homepage button-typo" data-testid="btn-je-commence"
                             tag-action="clic_bouton_je_commence" (click)="login()">
-                            <span>Je commence la simulation</span>
-                            <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                            <img alt="" class="image-1" src="./assets/images/logo-pole-emploi-pe-connect-homepage.svg"
+                                *ngIf="!screenService.isExtraSmallScreen()">
+                            <span>Se connecter avec Pôle emploi</span>
+                            <img alt="" class="image-2" src="./assets/images/icon-bt-primaire.svg">
+                        </button>
+                        <button class="btn-link" (click)="onClickPasDeCompte()">
+                            <span>
+                                Vous n'avez pas de compte ?
+                            </span>
                         </button>
                     </div>
                 </div>

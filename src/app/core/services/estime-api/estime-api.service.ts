@@ -30,6 +30,11 @@ export class EstimeApiService {
     return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
   }
 
+  public creerEmail(email: string): Observable<string> {
+    const options = this.getHttpHeaders(false);
+    return this.http.put<string>(`${this.pathDemandeurEmploiService}emails`, email, options);
+  }
+
   public creerDemandeurEmploi(): Observable<DemandeurEmploi> {
     const options = this.getHttpHeaders(true);
     const individuConnected = this.individuConnectedService.getIndividuConnected();

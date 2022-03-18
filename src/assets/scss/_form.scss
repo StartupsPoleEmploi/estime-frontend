@@ -147,6 +147,13 @@ form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-l
   @extend .caption-typo;
 }
 
+
+.success-input-message {
+  color: $color-green-5 !important;
+  margin-top: 0.125rem;
+  @extend .caption-typo;
+}
+
 .custom-control-input:checked~.custom-control-label::before {
   border-color: $color-blue-1;
   background-color: $color-blue-1;

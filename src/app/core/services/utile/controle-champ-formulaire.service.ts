@@ -5,6 +5,7 @@ export class ControleChampFormulaireService {
 
   REGEX_DECIMAL = "^[0-9]{1,5}((\.|\,)[0-9]{1,2})?$";
   REGEX_NUMERIC = "^[0-9]{1,6}$";
+  REGEX_EMAIL = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   MESSAGE_CHAMP_OBLIGATOIRE = "Ce champ est obligatoire";
   MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX = "Tous les champs marqués d'un astérisque (*) sont obligatoires";
   MESSAGE_CODE_POSTAL_INCORRECT = "Le code postal est incorrect";
@@ -22,6 +23,8 @@ export class ControleChampFormulaireService {
   MESSAGE_SELECTION_AU_MOINS_UN_STATUT_OCCUPATION_LOGEMENT = "Veuillez sélectionner l'option correspondant à votre situation.";
   MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";
   MESSAGE_MONTANTS_0 = "Veuillez renseigner au moins un montant.";
+  MESSAGE_EMAIL_INVALIDE = "Cet email semble invalide.";
+  MESSAGE_EMAIL_ENREGISTRE = "Votre email a bien été enregistré.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
   MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 

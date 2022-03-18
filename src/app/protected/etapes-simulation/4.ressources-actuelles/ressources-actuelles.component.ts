@@ -344,6 +344,6 @@ export class RessourcesActuellesComponent implements OnInit {
 
   private traiterErreurSimulerMesAides(error: HttpErrorResponse): void {
     this.isPageLoadingDisplay = false;
-    this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE
+    this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE;
   }
 }

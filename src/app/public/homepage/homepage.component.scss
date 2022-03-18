@@ -2,7 +2,7 @@
 
 #section-presentation {
   background-color: white;
-  padding-bottom: 2rem !important;
+  padding-bottom: 1.5rem !important;
 
   .row {
     @media #{$small-device} {
@@ -14,7 +14,7 @@
 
   .div-info-beneficiaires {
     align-items: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
     width: 100%;
     padding: 1rem;
 
@@ -45,7 +45,7 @@
   }
 
   .row-1 {
-    padding-top: 2rem;
+    padding-top: 1rem;
 
     @media #{$extra-small-device} {
       padding-top: 1rem;

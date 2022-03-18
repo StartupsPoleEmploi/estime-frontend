@@ -1,0 +1,48 @@
+<form id="emailForm" #emailForm="ngForm" (ngSubmit)="onSubmitEmailForm(emailForm)">
+    <div class="modal-header" tag-page="popup_population_non_autorisee">
+        <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
+        <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
+            focus>
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <img id="logo-modal-pas-de-compte" alt="" src="./assets/images/logo-estime-modal-pas-de-compte.svg">
+        <h4 id="titre-modal-pas-de-compte" class='headline-4-typo headline-4-typo-color'>
+            Nous travaillons actuellement sur la mise à disposition d'un parcours sans connexion
+        </h4>
+        <span class='body-2-typo'>
+            Si vous souhaitez être informé de l'ouverture du service veuillez nous communiquer votre email :
+        </span>
+        <input id='input-email' class='form-control d-inline' aria-label='Votre email' placeholder='Votre email'
+            name="email" required type="email" inputmode="email"
+            pattern="{{controleChampFormulaireService.REGEX_EMAIL}}" [(ngModel)]="model.email" #email="ngModel">
+        <button id="bouton-submit-email" type='submit' class='btn btn-style-perso-1' aria-label="Soumettre votre email">
+            <span class='button-typo color-white-typo'>Tenez-moi informé</span>
+        </button>
+
+        <div class="row">
+            <div class="col-12">
+                <span class="error-input-message"
+                    *ngIf="(isEmailFormSubmitted || email.touched)  && email.errors?.pattern">
+                    {{controleChampFormulaireService.MESSAGE_EMAIL_INVALIDE}}
+                </span>
+            </div>
+            <div class="col-12">
+                <span class="error-input-message" *ngIf="(isEmailFormSubmitted || email.touched)  && model.email == ''">
+                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                </span>
+            </div>
+            <div class="col-12">
+                <span class="error-input-message" *ngIf="(isEmailFormSubmitted)  && isRetourApiKO">
+                    {{messageErreur}}
+                </span>
+            </div>
+            <div class="col-12">
+                <span class="success-input-message" *ngIf="(isEmailFormSubmitted)  && isRetourApiOK">
+                    {{controleChampFormulaireService.MESSAGE_EMAIL_ENREGISTRE}}
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

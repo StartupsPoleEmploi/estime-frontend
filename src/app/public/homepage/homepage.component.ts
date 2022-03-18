@@ -5,9 +5,11 @@ import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
 import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
+import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalPasDeCompteComponent } from './modal-pas-de-compte/modal-pas-de-compte.component';
 import { ModalPopulationNonAutoriseeComponent } from './modal-population-non-autorisee/modal-population-non-autorisee.component';
 
 @Component({
@@ -26,6 +28,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private authorizationService: AuthorizationService,
     private bsModalService: BsModalService,
+    public modalService: ModalService,
     public individuConnectedService: IndividuConnectedService,
     public peConnectService: PeConnectService,
     private router: Router,
@@ -45,6 +48,10 @@ export class HomepageComponent implements OnInit {
   public onClickButtonJeCommence(): void {
     if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
     else this.login();
+  }
+
+  public onClickPasDeCompte(): void {
+    this.bsModalService.show(ModalPasDeCompteComponent, { class: 'modal-lg full-height-modal' });
   }
 
   public getLibelleBoutonPeConnect(): string {

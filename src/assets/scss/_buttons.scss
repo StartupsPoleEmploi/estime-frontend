@@ -473,9 +473,35 @@ option {
   }
 
   img {
+    &.image-1 {
+      margin-left: 0;
+      padding-left: 0rem;
+    }
+
     padding-left: 0.5rem;
     margin-right: 0;
 
+  }
+}
+
+.btn-link {
+  background-color: unset;
+  border: unset;
+  width: fit-content;
+  text-decoration: none;
+  padding-left: 1.5rem;
+
+  @media #{$extra-small-device} {
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  span {
+    @extend .button-typo;
+    @extend .color-blue-10-typo;
+
+    text-decoration: none;
   }
 }
 

@@ -18,6 +18,8 @@ import { SectionAidesComponent } from './homepage/section-aides/section-aides.co
 import { AidesComponent } from './aides/aides.component';
 import { AidesDescriptionComponent } from './aides/aides-description/aides-description.component';
 import { StatsComponent } from './stats/stats.component';
+import { ModalPasDeCompteComponent } from './homepage/modal-pas-de-compte/modal-pas-de-compte.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { StatsComponent } from './stats/stats.component';
     SectionAidesComponent,
     AidesComponent,
     AidesDescriptionComponent,
-    StatsComponent
+    StatsComponent,
+    ModalPasDeCompteComponent
   ],
   imports: [
     AlertModule.forRoot(),
     CarouselModule.forRoot(),
     CommunModule,
+    FormsModule,
     PublicRoutingModule
   ]
 })
