@@ -26,8 +26,10 @@ export class EstimeApiService {
     this.pathDemandeurEmploiService = this.environment.apiEstimeURL;
   }
 
-  public authentifier(peConnectPayload: PeConnectPayload): Observable<Individu> {
-    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload);
+  public authentifier(peConnectPayload: PeConnectPayload, trafficSource: string): Observable<Individu> {
+    const options = this.getHttpHeaders(false);
+    options.params = new HttpParams().set(QueryParamEnum.TRAFFIC_SOURCE, trafficSource);
+    return this.http.post<Individu>(`${this.pathDemandeurEmploiService}individus/authentifier`, peConnectPayload, options);
   }
 
   public creerEmail(email: string): Observable<string> {

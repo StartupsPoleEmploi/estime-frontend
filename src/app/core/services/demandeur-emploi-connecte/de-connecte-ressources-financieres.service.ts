@@ -12,6 +12,7 @@ import { InformationsPersonnelles } from '@app/commun/models/informations-person
 import { AidesCAF } from '@app/commun/models/aides-caf';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresAvantSimulationService {
@@ -502,5 +503,72 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
         + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }
     return montant;
+  }
+
+  public getRessourcesAvantSimulationArray(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): Array<string> {
+    let ressourcesAvantSimulationArray = [];
+
+    return ressourcesAvantSimulationArray;
+  }
+
+  private getRessourcesAvantSimulationCAFArray(aidesCAF: AidesCAF): Array<string> {
+    let ressourcesAvantSimulationCAFArray = [];
+    if (aidesCAF != null) {
+      if (aidesCAF.aidesFamiliales != null) {
+        if (aidesCAF.aidesFamiliales.allocationsFamiliales != null && aidesCAF.aidesFamiliales.allocationsFamiliales > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATIONS_FAMILIALES);
+        }
+        if (aidesCAF.aidesFamiliales.complementFamilial != null && aidesCAF.aidesFamiliales.complementFamilial > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.COMPLEMENT_FAMILIAL);
+        }
+        if (aidesCAF.aidesFamiliales.allocationSoutienFamilial != null && aidesCAF.aidesFamiliales.allocationSoutienFamilial > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
+        }
+      }
+      if (aidesCAF.aidesLogement != null) {
+        if (aidesCAF.aidesLogement.aidePersonnaliseeLogement != null && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
+        }
+        if (aidesCAF.aidesLogement.allocationLogementFamiliale != null && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
+        }
+        if (aidesCAF.aidesLogement.allocationLogementSociale != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0) {
+          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
+        }
+      }
+      if (aidesCAF.allocationAAH != null && aidesCAF.allocationAAH > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
+      }
+      if (aidesCAF.allocationRSA != null && aidesCAF.allocationRSA > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.RSA);
+      }
+    }
+    return ressourcesAvantSimulationCAFArray;
+  }
+
+  private getRessourcesAvantSimulationPEArray(aidesPoleEmploi: AidesPoleEmploi): Array<string> {
+    let ressourcesAvantSimulationPEArray = [];
+    if (aidesPoleEmploi != null) {
+      if (aidesPoleEmploi.allocationARE != null && aidesPoleEmploi.allocationARE.allocationJournaliereBrute != null && aidesPoleEmploi.allocationARE.allocationJournaliereBrute > 0) {
+        ressourcesAvantSimulationPEArray.push(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
+      }
+    }
+    if (aidesPoleEmploi.allocationASS != null && aidesPoleEmploi.allocationASS.allocationJournaliereNet != null && aidesPoleEmploi.allocationASS.allocationJournaliereNet > 0) {
+      ressourcesAvantSimulationPEArray.push(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    }
+    return ressourcesAvantSimulationPEArray;
+  }
+
+  private getRessourcesAvantSimulationCPAMArray(aidesCPAM: AidesCPAM): Array<string> {
+    let ressourcesAvantSimulationCPAMArray = [];
+    if (aidesCPAM != null) {
+      if (aidesCPAM.pensionInvalidite != null && aidesCPAM.pensionInvalidite > 0) {
+        ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.PENSION_INVALIDITE);
+      }
+      if (aidesCPAM.allocationSupplementaireInvalidite != null && aidesCPAM.allocationSupplementaireInvalidite > 0) {
+        ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
+      }
+    }
+    return ressourcesAvantSimulationCPAMArray;
   }
 }

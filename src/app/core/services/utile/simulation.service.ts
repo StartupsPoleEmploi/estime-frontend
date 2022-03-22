@@ -99,10 +99,6 @@ export class SimulationService {
     return this.getRessourcesFinancieresSimulationMensuelle(simulationMensuelle).concat(this.getAidesSimulationMensuelle(simulationMensuelle));
   }
 
-  public hasRessourceFinanciereOuAide(simulation: Simulation) {
-
-  }
-
   private addAideToAidesArray(aide: Aide, aides: Aide[]) {
     if (aide != null) aides.push(aide);
     return aides;

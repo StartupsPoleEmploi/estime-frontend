@@ -1,7 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
 import { Subscription } from 'rxjs';
+import { SessionStorageEstimeService } from './core/services/storage/session-storage-estime.service';
 import { ScreenService } from './core/services/utile/screen.service';
 
 @Component({
@@ -15,14 +16,19 @@ export class AppComponent implements OnInit {
   isDisplayFilAriane: boolean;
   subscriptionRouteNavigationEndObservable: Subscription;
   subscriptionPopstateEventObservable: Subscription;
+  subscriptionTrafficSourceObservable: Subscription;
+  private static TRAFFIC_SOURCE: string = 'at_campaign';
 
   constructor(
     private router: Router,
     private screenService: ScreenService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private sessionStorageEstimeService: SessionStorageEstimeService,
+    private route: ActivatedRoute
   ) {
-    this.subscribeRouteNavigationEndObservable();
     this.subscribePopstateEventObservable();
+    this.subscribeRouteNavigationEndObservable();
+    this.subscribeTrafficSourceObservable();
   }
 
   ngOnInit(): void {
@@ -69,6 +75,19 @@ export class AppComponent implements OnInit {
       if (routerEvent instanceof NavigationStart && routerEvent.navigationTrigger === "popstate") {
         if (routerEvent.url.split('?')[0] == `/${RoutesEnum.SIGNIN_CALLBACK}`) {
           this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+        }
+      }
+    });
+  }
+
+  private subscribeTrafficSourceObservable(): void {
+    this.subscriptionTrafficSourceObservable = this.route.queryParams.subscribe(params => {
+      const trafficSource = params.at_campaign;
+      if (params.at_campaign) {
+        if (typeof params.at_campaign === 'string') {
+          this.sessionStorageEstimeService.storeTrafficSource(trafficSource);
+        } else {
+          this.sessionStorageEstimeService.storeTrafficSource(trafficSource.join(', '));
         }
       }
     });

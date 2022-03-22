@@ -26,6 +26,7 @@ export class SessionStorageEstimeService {
     this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION);
     this.sessionStorageService.clear(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY);
     this.sessionStorageService.clear(KeysStorageEnum.INDIVIDU_CONNECTE_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(KeysStorageEnum.TRAFFIC_SOURCE);
   }
 
   public clearMessageDemandeurEmploi(): void {
@@ -56,6 +57,10 @@ export class SessionStorageEstimeService {
     return this.sessionStorageService.retrieve(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE);
   }
 
+  public getTrafficSource(): string {
+    return this.sessionStorageService.retrieve(KeysStorageEnum.TRAFFIC_SOURCE);
+  }
+
   public storeDemandeurEmploiConnecte(demandeurEmploiConnecte: DemandeurEmploi): void {
     //pour des raison de sécurité, on ne stocke pas les authorization dans session storage
     demandeurEmploiConnecte.peConnectAuthorization = null;
@@ -72,6 +77,10 @@ export class SessionStorageEstimeService {
 
   public storePeConnectPayload(peConnectPayload: PeConnectPayload): void {
     this.sessionStorageService.store(KeysStorageEnum.PE_CONNECT_PAYLOAD_STORAGE_SESSION_KEY, peConnectPayload);
+  }
+
+  public storeTrafficSource(trafficSource: string): void {
+    this.sessionStorageService.store(KeysStorageEnum.TRAFFIC_SOURCE, trafficSource);
   }
 
   public storeMessageDemandeurEmploiNonAutorise(): void {

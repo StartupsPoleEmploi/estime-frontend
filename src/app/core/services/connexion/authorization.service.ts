@@ -22,8 +22,9 @@ export class AuthorizationService {
   public authentifierIndividu(): Observable<Individu> {
     const peConnectPayload = this.sessionStorageEstimeService.getPayloadPeConnect();
     peConnectPayload.code = this.activatedRoute.snapshot.queryParams.code;
+    const trafficSource = this.sessionStorageEstimeService.getTrafficSource();
     if (this.activatedRoute.snapshot.queryParams.state === peConnectPayload.state) {
-      return this.estimeApiService.authentifier(peConnectPayload);
+      return this.estimeApiService.authentifier(peConnectPayload, trafficSource);
     } else {
       this.router.navigate([RoutesEnum.HOMEPAGE]);
     }
