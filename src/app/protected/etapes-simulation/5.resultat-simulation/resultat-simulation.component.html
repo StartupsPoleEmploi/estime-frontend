@@ -121,7 +121,7 @@
 
 <ng-template #modalDetailMoisApresSimulation>
     <app-detail-mois-apres-simulation *ngIf="simulationSelected" [simulationActuelle]="simulationSelected"
-        (aideSelection)="aideSelection($event)">
+        [detailMensuel]="detailMensuelSelected" (aideSelection)="aideSelection($event)">
     </app-detail-mois-apres-simulation>
 </ng-template>
 

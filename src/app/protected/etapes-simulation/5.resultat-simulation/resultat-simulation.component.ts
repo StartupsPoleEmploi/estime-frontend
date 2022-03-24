@@ -15,6 +15,9 @@ import { Aide } from '@models/aide';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
+import { DetailTemporaliteService } from '@app/core/services/utile/detail-temporalite.service';
+import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
+import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -27,6 +30,8 @@ export class ResultatSimulationComponent implements OnInit {
   demandeurEmploiConnecte: DemandeurEmploi;
   simulation: Simulation;
   simulationSelected: SimulationMensuelle;
+  detailTemporalite: DetailTemporalite;
+  detailMensuelSelected: DetailMensuel;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   hoveredButtonSimulationMensuelle: number;
 
@@ -46,6 +51,7 @@ export class ResultatSimulationComponent implements OnInit {
     private router: Router,
     public screenService: ScreenService,
     public sideModalService: SideModalService,
+    private detailTemporaliteService: DetailTemporaliteService,
     private simulationPdfMakerService: SimulationPdfMakerService
   ) {
   }
@@ -55,17 +61,23 @@ export class ResultatSimulationComponent implements OnInit {
     this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.afficherDetails = true;
     this.loadDataSimulation();
+    this.loadDetailTemporalite();
     this.nombreMoisSimules = this.simulation.simulationsMensuelles.length;
   }
 
   public simulationSelection(simulationMensuelle: SimulationMensuelle) {
     this.sideModalService.openSideModalMois(this.modalDetailMoisApresSimulation)
     this.simulationSelected = simulationMensuelle;
+    this.detailMensuelSelected = this.getDetailMensuelSelected(simulationMensuelle);
   }
 
   public aideSelection(aide: Aide) {
     this.sideModalService.openSideModalAide(this.modalDetailAideApresSimulation);
     this.aideSelected = aide;
+  }
+
+  private getDetailMensuelSelected(simulationMensuelle: SimulationMensuelle) {
+    return this.detailTemporalite.detailsMensuels[this.dateUtileService.getIndexMoisSimule(this.deConnecteSimulationService.getDatePremierMoisSimule(), simulationMensuelle.datePremierJourMoisSimule) - 1];
   }
 
   public onClickButtonImprimerMaSimulation(): void {
@@ -122,6 +134,10 @@ export class ResultatSimulationComponent implements OnInit {
 
   private loadDataSimulation(): void {
     this.simulation = this.deConnecteSimulationService.getSimulation();
+  }
+
+  private loadDetailTemporalite(): void {
+    this.detailTemporalite = this.detailTemporaliteService.createDetailTemporalite(this.demandeurEmploiConnecte, this.simulation);
   }
 
   public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {

@@ -21,6 +21,23 @@
             </div>
         </div>
     </div>
+    <div *ngIf="detailMensuel.details.length != 0" class="div_points_essentiels div_detail_mois_with_padding mt-2"
+        data-testid="div-montant-ressource">
+        <div class="libelle_mois_apres_simulation_row row">
+            <div class="col-md-12">
+                <h4 class="headline-4-typo color-blue-2-typo text-start">
+                    {{ titrePointEssentielLabel }}
+                </h4>
+                <ul class="mt-2">
+                    <li *ngFor="let detail of detailMensuel.details; let index = index;">
+                        <span class="body-2-typo">
+                            {{detail}}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="div_detail_mois_with_padding">
         <app-message-info contenu="Pensez à déclarer tout changement de situation auprès de votre CAF">
         </app-message-info>

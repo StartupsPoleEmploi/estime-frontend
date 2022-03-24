@@ -1,6 +1,7 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
 import { Aide } from '@app/commun/models/aide';
+import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
@@ -20,11 +21,13 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class DetailMoisApresSimulationComponent implements OnInit {
 
   @Input() simulationActuelle: SimulationMensuelle;
+  @Input() detailMensuel: DetailMensuel;
   @Input() modalRef: BsModalRef;
   @Output() aideSelection = new EventEmitter<Aide>();
 
   ressourcesFinancieresEtAidesMois: RessourceFinanciere[];
   ressourceFinanciereOuAideSelected: RessourceFinanciere;
+  titrePointEssentielLabel: string;
 
   constructor(
     private ressourcesFinancieresService: RessourcesFinancieresService,
@@ -45,6 +48,7 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   ngOnInit(): void {
     this.ressourcesFinancieresEtAidesMois = this.simulationService.getRessourcesFinancieresEtAidesSimulationMensuelle(this.simulationActuelle);
     this.orderRessourcesFinancieresMois();
+    this.titrePointEssentielLabel = this.detailMensuel.details.length == 1 ? "Point essentiel" : "Points essentiels";
   }
 
   private orderRessourcesFinancieresMois() {

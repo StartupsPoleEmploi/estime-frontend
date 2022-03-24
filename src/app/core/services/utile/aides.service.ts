@@ -46,6 +46,10 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.RSA);
   }
 
+  public getMontantPrimeActivite(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PRIME_ACTIVITE);
+  }
+
   public getMontantAllocationsFamiliales(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATIONS_FAMILIALES);
   }
@@ -225,15 +229,15 @@ export class AidesService {
   }
 
   public hasAideByCode(simulationSelected: SimulationMensuelle, codeAideToFind: string): boolean {
-    let hasAidesObtenir = false;
+    let hasAide = false;
     if (simulationSelected) {
       for (let [codeAide, aide] of Object.entries(simulationSelected.aides)) {
         if (aide && codeAide === codeAideToFind) {
-          hasAidesObtenir = true;
+          hasAide = true;
         }
       }
     }
-    return hasAidesObtenir;
+    return hasAide;
   }
 
   public isAideDemandeurPourraObtenir(aide: Aide): boolean {
