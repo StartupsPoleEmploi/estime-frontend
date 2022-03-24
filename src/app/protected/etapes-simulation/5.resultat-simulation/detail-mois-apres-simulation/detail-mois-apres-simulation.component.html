@@ -34,22 +34,42 @@
             [tabindex]="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)?0:-1"
             tag-action="clic_bouton_detail_aide">
             <div class="row pe-3">
-                <div class="col-md-1 col-2">
-                    <div class="code-ressource me-1" [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase()]">
-                        <div class="">
-                            <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                <div class="col-md-1 col-2 div-vertically-centered">
+                    <div>
+                        <div class="code-ressource me-1" [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase()]">
+                            <div class="">
+                                <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-10 col-8 div-vertically-centered">
-                    <span class="body-2-typo ms-2">{{ ressourceFinanciereOuAide.nom }}</span>
+                <div class="col-md-10 col-8">
+                    <div class="row mb-1">
+                        <div class="col">
+                            <span class="headline-4-typo color-blue-10-typo justify-content-start"
+                                attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+                                {{ ressourceFinanciereOuAide.montant }} €
+                            </span>
+                            <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
+                                class="demande-a-effectuer overline-typo">
+                                DEMANDE À EFFECTUER
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="body-2-typo">{{ ressourceFinanciereOuAide.nom }}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-1 col-2">
-                    <div *ngIf="ressourceFinanciereOuAide.organisme" class="icone-organisme me-1"
-                        [ngClass]="ressourceFinanciereOuAide.organisme.toLowerCase()">
-                        <div>
-                            <img alt=""
-                                [src]="'./assets/images/icon-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
+                <div class="col-md-1 col-2 div-vertically-centered">
+                    <div>
+                        <div *ngIf="ressourceFinanciereOuAide.organisme" class="icone-organisme me-1"
+                            [ngClass]="ressourceFinanciereOuAide.organisme.toLowerCase()">
+                            <div>
+                                <img alt=""
+                                    [src]="'./assets/images/icon-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,27 +80,13 @@
                     </app-message-info>
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-6 col-10">
-                    <span class="headline-4-typo color-blue-10-typo justify-content-start"
-                        attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
-                        {{ ressourceFinanciereOuAide.montant }} €
+            <div *ngIf="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)" class="row mt-3">
+                <div class="col-md-12 col-12 div-vertically-centered justify-content-end">
+                    <span class="bouton-detail body-2-typo color-blue-10-typo">
+                        <span *ngIf="!screenService.isExtraSmallScreen()" class="body-2-typo color-blue-10-typo">Voir le
+                            détail</span>
+                        <i alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></i>
                     </span>
-                    <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
-                        class="demande-a-effectuer overline-typo">
-                        DEMANDE À EFFECTUER
-                    </span>
-                </div>
-                <div class="col-md-6 col-2 div-vertically-centered justify-content-end">
-                    <div *ngIf="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)"
-                        class="justify-content-end">
-                        <span class="bouton-detail body-2-typo color-blue-10-typo">
-                            <span *ngIf="!screenService.isExtraSmallScreen()"
-                                class="body-2-typo color-blue-10-typo">Voir le détail</span>
-                            <i alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></i>
-                        </span>
-                    </div>
                 </div>
             </div>
         </div>
