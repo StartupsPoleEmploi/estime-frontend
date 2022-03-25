@@ -1,5 +1,5 @@
 <form id="emailForm" #emailForm="ngForm" (ngSubmit)="onSubmitEmailForm(emailForm)">
-    <div class="modal-header" tag-page="popup_population_non_autorisee">
+    <div class="modal-header" tag-page="popup_pas_de_compte">
         <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
         <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
             focus>
@@ -17,7 +17,8 @@
         <input id='input-email' class='form-control d-inline' aria-label='Votre email' placeholder='Votre email'
             name="email" required type="email" inputmode="email"
             pattern="{{controleChampFormulaireService.REGEX_EMAIL}}" [(ngModel)]="model.email" #email="ngModel">
-        <button id="bouton-submit-email" type='submit' class='btn btn-style-perso-1' aria-label="Soumettre votre email">
+        <button id="bouton-submit-email" type='submit' class='btn btn-style-perso-1' aria-label="Soumettre votre email"
+            tag-action="clic_bouton_ajout_email">
             <span class='button-typo color-white-typo'>Tenez-moi informé</span>
         </button>
 

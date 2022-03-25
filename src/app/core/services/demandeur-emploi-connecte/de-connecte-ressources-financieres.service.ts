@@ -508,34 +508,20 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public getRessourcesAvantSimulationArray(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): Array<string> {
     let ressourcesAvantSimulationArray = [];
 
+    const ressourcesAvantSimulationCAFArray = this.getRessourcesAvantSimulationCAFArray(ressourcesFinancieresAvantSimulation.aidesCAF);
+    const ressourcesAvantSimulationPEArray = this.getRessourcesAvantSimulationPEArray(ressourcesFinancieresAvantSimulation.aidesPoleEmploi);
+    const ressourcesAvantSimulationCPAMArray = this.getRessourcesAvantSimulationCPAMArray(ressourcesFinancieresAvantSimulation.aidesCPAM);
+
+    ressourcesAvantSimulationArray = ressourcesAvantSimulationArray.concat(ressourcesAvantSimulationCAFArray, ressourcesAvantSimulationPEArray, ressourcesAvantSimulationCPAMArray)
+
     return ressourcesAvantSimulationArray;
   }
 
   private getRessourcesAvantSimulationCAFArray(aidesCAF: AidesCAF): Array<string> {
     let ressourcesAvantSimulationCAFArray = [];
     if (aidesCAF != null) {
-      if (aidesCAF.aidesFamiliales != null) {
-        if (aidesCAF.aidesFamiliales.allocationsFamiliales != null && aidesCAF.aidesFamiliales.allocationsFamiliales > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATIONS_FAMILIALES);
-        }
-        if (aidesCAF.aidesFamiliales.complementFamilial != null && aidesCAF.aidesFamiliales.complementFamilial > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.COMPLEMENT_FAMILIAL);
-        }
-        if (aidesCAF.aidesFamiliales.allocationSoutienFamilial != null && aidesCAF.aidesFamiliales.allocationSoutienFamilial > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
-        }
-      }
-      if (aidesCAF.aidesLogement != null) {
-        if (aidesCAF.aidesLogement.aidePersonnaliseeLogement != null && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
-        }
-        if (aidesCAF.aidesLogement.allocationLogementFamiliale != null && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
-        }
-        if (aidesCAF.aidesLogement.allocationLogementSociale != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0) {
-          ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
-        }
-      }
+      this.getRessourcesAvantSimulationAidesLogementArray(aidesCAF, ressourcesAvantSimulationCAFArray);
+      this.getRessourcesAvantSimulationAidesFamilialesArray(aidesCAF, ressourcesAvantSimulationCAFArray);
       if (aidesCAF.allocationAAH != null && aidesCAF.allocationAAH > 0) {
         ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
       }
@@ -544,6 +530,36 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
       }
     }
     return ressourcesAvantSimulationCAFArray;
+  }
+
+
+  private getRessourcesAvantSimulationAidesLogementArray(aidesCAF: AidesCAF, ressourcesAvantSimulationCAFArray: Array<string>): void {
+    if (aidesCAF.aidesLogement != null) {
+      if (aidesCAF.aidesLogement.aidePersonnaliseeLogement != null && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 && aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1 > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
+      }
+      if (aidesCAF.aidesLogement.allocationLogementFamiliale != null && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 && aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1 > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
+      }
+      if (aidesCAF.aidesLogement.allocationLogementSociale != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 != null && aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1 > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
+      }
+    }
+  }
+
+
+  private getRessourcesAvantSimulationAidesFamilialesArray(aidesCAF: AidesCAF, ressourcesAvantSimulationCAFArray: Array<string>): void {
+    if (aidesCAF.aidesFamiliales != null) {
+      if (aidesCAF.aidesFamiliales.allocationsFamiliales != null && aidesCAF.aidesFamiliales.allocationsFamiliales > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATIONS_FAMILIALES);
+      }
+      if (aidesCAF.aidesFamiliales.complementFamilial != null && aidesCAF.aidesFamiliales.complementFamilial > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.COMPLEMENT_FAMILIAL);
+      }
+      if (aidesCAF.aidesFamiliales.allocationSoutienFamilial != null && aidesCAF.aidesFamiliales.allocationSoutienFamilial > 0) {
+        ressourcesAvantSimulationCAFArray.push(CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
+      }
+    }
   }
 
   private getRessourcesAvantSimulationPEArray(aidesPoleEmploi: AidesPoleEmploi): Array<string> {

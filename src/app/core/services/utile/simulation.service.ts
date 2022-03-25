@@ -8,7 +8,6 @@ import { NumberUtileService } from './number-util.service';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { RessourcesFinancieresService } from './ressources-financieres.service';
-import { Simulation } from '@app/commun/models/simulation';
 
 @Injectable({ providedIn: 'root' })
 export class SimulationService {
