@@ -266,19 +266,9 @@ export class DetailTemporaliteService {
     this.situation.are = this.aidesService.getMontantARE(simulationMensuelle);
     this.situation.aah = this.aidesService.getMontantAAH(simulationMensuelle);
     this.situation.ppa = this.aidesService.getMontantPrimeActivite(simulationMensuelle);
-    if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT) || this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE) || this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT)) {
-        this.situation.apl = this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle);
-      } else if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE)) {
-        this.situation.alf = this.aidesService.getMontantAllocationLogementFamiliale(simulationMensuelle);
-      } else if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
-        this.situation.als = this.aidesService.getMontantAllocationLogementSociale(simulationMensuelle);
-      }
-    } else {
-      this.situation.apl = 0;
-      this.situation.als = 0;
-      this.situation.alf = 0;
-    }
+    this.situation.apl = this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle);
+    this.situation.als = this.aidesService.getMontantAllocationLogementSociale(simulationMensuelle);
+    this.situation.alf = this.aidesService.getMontantAllocationLogementFamiliale(simulationMensuelle);
   }
 
   // Fonction qui permet de vérifier si le montant d'une aide à changer ce mois ci
