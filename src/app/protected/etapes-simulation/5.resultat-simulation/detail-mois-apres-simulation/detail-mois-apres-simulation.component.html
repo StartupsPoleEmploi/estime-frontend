@@ -10,11 +10,11 @@
     <div class="div_mois_montant_mois_detail_mois div_detail_mois_with_padding" data-testid="div-montant-ressource">
         <div class="libelle_mois_apres_simulation_row row">
             <div class="col-md-12">
-                <h2 class="headline-2-typo color-blue-2-typo text-start">
+                <h2 class="headline-2-typo color-blue-2-typo text-start d-inline">
                     {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
                     screenService.isTabletScreen())}}
                 </h2>
-                <h3 class="headline-3-typo color-blue-10-typo text-start" data-testid="montant-ressource">
+                <h3 class="headline-3-typo color-blue-10-typo text-start d-inline ms-2" data-testid="montant-ressource">
                     {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}} €
                     net
                 </h3>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-8">
-                    <div class="row mb-1">
+                    <div class="row mb-1 ps-2">
                         <div class="col">
                             <span class="headline-4-typo color-blue-10-typo justify-content-start"
                                 attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
@@ -73,7 +73,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row ps-2">
                         <div class="col">
                             <span class="body-2-typo">{{ ressourceFinanciereOuAide.nom }}</span>
                         </div>

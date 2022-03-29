@@ -205,3 +205,8 @@ ul {
 .color-white-typo {
   color: $color-white-1 !important;
 }
+
+.pointer:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

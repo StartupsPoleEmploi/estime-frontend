@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
@@ -19,6 +20,7 @@ export class MoisApresSimulationComponent implements OnInit {
 
   @Input() simulationSelected: SimulationMensuelle;
   @Input() simulationActuelle: SimulationMensuelle;
+  @Input() detailMensuel: DetailMensuel;
   @Output() simulationSelection = new EventEmitter<SimulationMensuelle>();
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
@@ -78,6 +80,17 @@ export class MoisApresSimulationComponent implements OnInit {
 
   public getRessourcesFinancieresEtAidesOverFlow(): number {
     return this.screenService.isExtraSmallScreen() ? this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_SMALL_SCREEN : this.ressourcesFinancieresEtAidesMois.length - MoisApresSimulationComponent.OVERFLOW_LIMIT_REGULAR_SCREEN;
+  }
+
+  public getResumeDetailMensuel(): string {
+    let resume = "";
+    if (this.detailMensuel.details.length > 0) {
+      resume = this.detailMensuel.details[0];
+      if (this.detailMensuel.details.length > 1) {
+        resume += "... <span class='color-blue-10-typo pointer'>Lire la suite</span>";
+      }
+    }
+    return resume;
   }
 
 }

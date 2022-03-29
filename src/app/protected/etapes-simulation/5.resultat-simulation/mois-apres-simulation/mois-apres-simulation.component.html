@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 div-vertically-centered">
+            <div *ngIf="getResumeDetailMensuel() == ''" class="col-md-5 div-vertically-centered">
                 <div id="row_icones_aides" class="row ms-0">
                     <div *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i = index"
                         attr.data-index="i" class="icone-col">
@@ -41,11 +41,46 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-2 div-vertically-centered justify-content-end">
+            <div *ngIf="getResumeDetailMensuel() == ''"
+                class="col-md-4 col-2 div-vertically-centered justify-content-end">
                 <span class="bouton_detail body-2-typo color-blue-10-typo">
                     <span class="bouton_detail body-2-typo color-blue-10-typo">Voir le détail</span>
                     <i alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></i>
                 </span>
+            </div>
+            <div *ngIf="getResumeDetailMensuel() != ''" class="col-md-9">
+                <div id="row_resume_detail_mensuel" class="row ms-0 mb-2">
+                    <span class=" body-2-typo ps-0" [innerHTML]="getResumeDetailMensuel()">
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 col-10 div-vertically-centered">
+                        <div id="row_icones_aides" class="row ms-0">
+                            <div *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i = index"
+                                attr.data-index="i" class="icone-col">
+                                <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
+                                    class="code-ressource me-1"
+                                    [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
+                                    <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
+                                        class="">
+                                        <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                                    </div>
+                                    <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
+                                        class="">
+                                        <span
+                                            class="overline-typo">+{{+getRessourcesFinancieresEtAidesOverFlow()}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-2 div-vertically-centered justify-content-end">
+                        <span class="bouton_detail body-2-typo color-blue-10-typo">
+                            <span class="bouton_detail body-2-typo color-blue-10-typo">Voir le détail</span>
+                            <i alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></i>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -68,6 +103,10 @@
                             net
                         </h5>
                     </div>
+                </div>
+                <div id="row_resume_detail_mensuel" class="row ms-0 mb-2">
+                    <span class=" body-2-typo ps-0" [innerHTML]="getResumeDetailMensuel()">
+                    </span>
                 </div>
                 <div id="row_icones_aides" class="row ms-0">
                     <div *ngFor=" let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i=index"

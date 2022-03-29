@@ -76,7 +76,7 @@ export class ResultatSimulationComponent implements OnInit {
     this.aideSelected = aide;
   }
 
-  private getDetailMensuelSelected(simulationMensuelle: SimulationMensuelle) {
+  public getDetailMensuelSelected(simulationMensuelle: SimulationMensuelle) {
     return this.detailTemporalite.detailsMensuels[this.dateUtileService.getIndexMoisSimule(this.deConnecteSimulationService.getDatePremierMoisSimule(), simulationMensuelle.datePremierJourMoisSimule) - 1];
   }
 
