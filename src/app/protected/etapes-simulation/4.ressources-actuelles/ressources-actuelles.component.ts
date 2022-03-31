@@ -292,7 +292,7 @@ export class RessourcesActuellesComponent implements OnInit {
 
   private isSaisieRessourcesFinancieresFoyerValide(): boolean {
     let isSaisieFormulairesValide = true;
-    if (!this.ressourcesFinancieresFoyerComponent.ressourcesFinancieresFoyerForm.valid) {
+    if (!this.isDonneesSaisieRessourcesFinancieresFoyerValide()) {
       this.isRessourcesFoyerDisplay = true;
       isSaisieFormulairesValide = false;
     }

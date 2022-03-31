@@ -7,6 +7,8 @@ import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { SituationTemporaliteEnum } from '@app/commun/enumerations/situation-temporalite.enum';
+import { RessourcesFinancieresAvantSimulationUtileService } from './ressources-financieres-avant-simulation-utile.service';
+import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 
 @Injectable({ providedIn: 'root' })
 export class DetailTemporaliteService {
@@ -27,7 +29,8 @@ export class DetailTemporaliteService {
   }
 
   constructor(
-    private aidesService: AidesService
+    private aidesService: AidesService,
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
   ) { }
 
   public createDetailTemporalite(demandeurEmploi: DemandeurEmploi, simulation: Simulation): DetailTemporalite {
@@ -110,6 +113,7 @@ export class DetailTemporaliteService {
   }
 
   private handleMois(simulationMensuelle: SimulationMensuelle, indexMois) {
+    this.handleChangementSalaire(indexMois);
     this.handleChangementAGEPIEtAideMob(simulationMensuelle, indexMois);
     this.handleChangementASS(simulationMensuelle, indexMois);
     this.handleChangementRSA(simulationMensuelle, indexMois);
@@ -117,6 +121,12 @@ export class DetailTemporaliteService {
     this.handleChangementARE(simulationMensuelle, indexMois);
     this.handleChangementAL(simulationMensuelle, indexMois);
     this.handleChangementPPA(simulationMensuelle, indexMois);
+  }
+
+  private handleChangementSalaire(indexMois) {
+    if (indexMois == 0) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.SALAIRE);
+    }
   }
 
   private handleChangementAGEPIEtAideMob(simulationMensuelle: SimulationMensuelle, indexMois: number) {
@@ -127,12 +137,10 @@ export class DetailTemporaliteService {
         // Si uniquement AGEPI
         if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AGEPI)) {
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AIDE_MOBILITE);
-
         }
         // Si uniquement de l'aide à la mobilité
         else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_MOBILITE)) {
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AGEPI);
-
         }
         // Si AGEPI + aide à la mobilité
         else if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AGEPI) && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_MOBILITE)) {
@@ -148,7 +156,8 @@ export class DetailTemporaliteService {
       // Si le demandeur perçoit de l'ASS ce mois-ci
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
         // On conditionne l'affichage du détail au nombre de mois travaillés avant la simulation
-        switch (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois) {
+        const nombreMoisTravailles3DernierMoisAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.getNombreMoisTravaillesXDerniersMois(this.demandeurEmploi.ressourcesFinancieresAvantSimulation, 3)
+        switch (nombreMoisTravailles3DernierMoisAvantSimulation) {
           case 0:
             this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_SANS_CUMUL);
             break;
@@ -167,16 +176,18 @@ export class DetailTemporaliteService {
 
   private handleChangementRSA(simulationMensuelle: SimulationMensuelle, indexMois: number) {
     // Si le demandeur reçoit du RSA le premier mois on lui indique qu'il peut le cumuler avec un salaire
-    if (indexMois == 0) {
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.RSA)) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RSA);
-      }
+    if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.RSA)) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RSA);
     } else {
       // Si le montant du RSA a changé par rapport au mois précédent
       if (this.checkForChangeInSituation(this.situation.rsa, this.aidesService.getMontantRSA(simulationMensuelle))) {
         // Si de la prime d'activité est arrivée
         if (this.checkForChangeInSituation(this.situation.ppa, this.aidesService.getMontantPrimeActivite(simulationMensuelle))) {
-          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RSA_RECALCUL_PRIME_ACTIVITE)
+          if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.RSA)) {
+            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_RSA_PRIME_ACTIVITE);
+          } else {
+            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RSA_RECALCUL_PRIME_ACTIVITE);
+          }
         }
         // Si le demandeur n'a plus le droit a du RSA
         else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.RSA)) {
@@ -254,8 +265,15 @@ export class DetailTemporaliteService {
     // Si le montant de la prime d'activité a changé par rapport au mois précédent
     if (this.checkForChangeInSituation(this.situation.ppa, this.aidesService.getMontantPrimeActivite(simulationMensuelle))) {
       // Si le demandeur a toujours de la prime d'activité
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.PRIME_ACTIVITE)) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PRIME_ACTIVITE);
+      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.PRIME_ACTIVITE) && this.situation.ppa != 0 && !this.checkForChangeInSituation(this.situation.rsa, this.aidesService.getMontantRSA(simulationMensuelle))) {
+        // Si le demandeur avait de la prime d'activité au mois précédent
+        if (this.situation.ppa != 0) {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PRIME_ACTIVITE_RECALCUL);
+        }
+        // Si le demandeur n'avait de prime d'activité au mois précédent
+        else {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PRIME_ACTIVITE);
+        }
       }
     }
   }

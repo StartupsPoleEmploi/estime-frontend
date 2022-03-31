@@ -9,8 +9,8 @@ export enum SituationTemporaliteEnum {
     RSA_RECALCUL_PRIME_ACTIVITE = "Le montant du RSA est recalculé suite à votre déclaration trimestrielle et la prime d'activité complète vos revenus",
     RSA_RECALCUL = "Le montant du RSA est recalculé suite à votre déclaration trimestrielle",
     COMPLEMENT_ARE = "Vous percevez un complément ARE en plus de votre salaire",
-    FIN_COMPLEMENT_ARE = "Vous ne percez plus de complément ARE car vos droits sont épuisés à ce jour",
-    COMPLEMENT_ARE_PARTIEL = "Vous percez un complément ARE partiel à hauteur de vos droits restants",
+    FIN_COMPLEMENT_ARE = "Vous ne percevez plus de complément ARE car vos droits sont épuisés à ce jour",
+    COMPLEMENT_ARE_PARTIEL = "Vous percevez un complément ARE partiel à hauteur de vos droits restants",
     AAH_PARTIEL = "Le montant de votre AAH est réduit car vous avez cumulé 6 mois de salaire",
     FIN_AAH = "Vous ne percevez plus d'AAH car vos droits sont épuisés à ce jour",
     ASS_SANS_CUMUL = "Vous cumulez l'ASS avec votre salaire pendant 3 mois",
@@ -19,5 +19,7 @@ export enum SituationTemporaliteEnum {
     AL_CHANGEMENT_SITUATION = "Votre aide au logement est recalculée suite à votre changement de situation",
     AL_DECLA_TRI = "Votre aide au logement est recalculée suite à votre déclaration trimestrielle",
     FIN_AL = "Vous n'êtes plus éligible à l'aide au logement",
-    PRIME_ACTIVITE = "Vous êtes éligible à la prime d'activité"
+    PRIME_ACTIVITE = "Vous êtes éligible à la prime d'activité",
+    PRIME_ACTIVITE_RECALCUL = "Le montant de votre prime d'activité est recalculé",
+    SALAIRE = "Votre nouveau salaire est pris en compte dans la simulation pour la durée du contrat"
 }

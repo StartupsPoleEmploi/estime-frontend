@@ -215,7 +215,7 @@ export class DeConnecteService {
   public unsetAllocationMensuelleNetAAH(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
       && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF) {
-      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH = 0;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }

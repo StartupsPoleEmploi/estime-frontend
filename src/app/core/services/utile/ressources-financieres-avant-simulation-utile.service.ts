@@ -202,21 +202,31 @@ export class RessourcesFinancieresAvantSimulationUtileService {
         && ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois != 0)
   }
 
-  private getNombreMoisTravaillesDerniersMois(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
-    let nombreMoisTravaillesDerniersMois = 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[0]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[1]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[2]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[3]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[4]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[5]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[6]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[7]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[8]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[9]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[10]) ? 1 : 0;
-    nombreMoisTravaillesDerniersMois += this.isMoisTravaille(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[11]) ? 1 : 0;
-    return nombreMoisTravaillesDerniersMois;
+  public getNombreMoisTravaillesDerniersMois(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): number {
+    let nombreMoisTravaillesAvantSimulation = 0;
+    if (ressourcesFinancieresAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null
+      && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null &&
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
+        nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+      })
+    }
+    return nombreMoisTravaillesAvantSimulation;
+  }
+
+
+  public getNombreMoisTravaillesXDerniersMois(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation, nombreMoisAConsiderer: number): number {
+    let nombreMoisTravaillesAvantSimulation = 0;
+    if (ressourcesFinancieresAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null
+      && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null &&
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois, index) => {
+        if (index < nombreMoisAConsiderer) {
+          nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+        }
+      })
+    }
+    return nombreMoisTravaillesAvantSimulation;
   }
 
   private isMoisTravaille(moisTravailleAvantSimulation: MoisTravailleAvantSimulation): boolean {

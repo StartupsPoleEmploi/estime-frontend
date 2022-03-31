@@ -13,6 +13,7 @@ import { AidesCAF } from '@app/commun/models/aides-caf';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresAvantSimulationService {
@@ -586,5 +587,17 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
       }
     }
     return ressourcesAvantSimulationCPAMArray;
+  }
+
+  public getNombreMoisTravaillesAvantSimulation(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation) {
+    let nombreMoisTravaillesAvantSimulation = 0;
+    if (ressourcesFinancieresAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null
+      && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null &&
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
+      ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
+        nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+      })
+    }
+    return nombreMoisTravaillesAvantSimulation;
   }
 }
