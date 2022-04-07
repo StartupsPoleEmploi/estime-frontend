@@ -137,7 +137,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   private loadDetailTemporalite(): void {
-    this.detailTemporalite = this.detailTemporaliteService.createDetailTemporalite(this.demandeurEmploiConnecte, this.simulation);
+    this.detailTemporalite = this.detailTemporaliteService.createDetailTemporalite(this.simulation);
   }
 
   public handleKeyUpOnSimulationMensuelle(event: any, simulationMensuelle: SimulationMensuelle) {

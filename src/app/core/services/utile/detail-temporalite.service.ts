@@ -8,7 +8,7 @@ import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { SituationTemporaliteEnum } from '@app/commun/enumerations/situation-temporalite.enum';
 import { RessourcesFinancieresAvantSimulationUtileService } from './ressources-financieres-avant-simulation-utile.service';
-import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
+import { DeConnecteService } from './../demandeur-emploi-connecte/de-connecte.service';
 
 @Injectable({ providedIn: 'root' })
 export class DetailTemporaliteService {
@@ -31,13 +31,15 @@ export class DetailTemporaliteService {
   constructor(
     private aidesService: AidesService,
     private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
-  ) { }
+    private deConnecteService: DeConnecteService
+  ) {
+    this.demandeurEmploi = this.deConnecteService.getDemandeurEmploiConnecte();
 
-  public createDetailTemporalite(demandeurEmploi: DemandeurEmploi, simulation: Simulation): DetailTemporalite {
-    this.demandeurEmploi = demandeurEmploi;
     this.initDetailTemporalite();
     this.initSituation();
+   }
 
+  public createDetailTemporalite(simulation: Simulation): DetailTemporalite {
     simulation.simulationsMensuelles.forEach((simulationMensuelle, index) => {
       this.handleMois(simulationMensuelle, index);
       this.applyNewSituation(simulationMensuelle);
@@ -265,7 +267,7 @@ export class DetailTemporaliteService {
     // Si le montant de la prime d'activité a changé par rapport au mois précédent
     if (this.checkForChangeInSituation(this.situation.ppa, this.aidesService.getMontantPrimeActivite(simulationMensuelle))) {
       // Si le demandeur a toujours de la prime d'activité
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.PRIME_ACTIVITE) && this.situation.ppa != 0 && !this.checkForChangeInSituation(this.situation.rsa, this.aidesService.getMontantRSA(simulationMensuelle))) {
+      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.PRIME_ACTIVITE) && !this.checkForChangeInSituation(this.situation.rsa, this.aidesService.getMontantRSA(simulationMensuelle))) {
         // Si le demandeur avait de la prime d'activité au mois précédent
         if (this.situation.ppa != 0) {
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PRIME_ACTIVITE_RECALCUL);
