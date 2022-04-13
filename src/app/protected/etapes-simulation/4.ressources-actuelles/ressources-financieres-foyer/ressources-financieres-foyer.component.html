@@ -350,7 +350,7 @@
                     <input id="montantLoyer" name="montantLoyer" type="text" data-testid="input-montant-loyer"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="8" class="form-control d-inline"
+                        maxlength="8" class="form-control d-inline" (click)="$event.target.select()"
                         [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0}"
                         [(ngModel)]="informationsPersonnelles.logement.montantLoyer" required placeholder="Montant"
                         inputmode="numeric" #montantLoyer="ngModel">
@@ -389,7 +389,7 @@
                     <input id="montantCharges" name="montantCharges" type="text" data-testid="input-montant-charges"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="8" class="form-control d-inline"
+                        maxlength="8" class="form-control d-inline" (click)="$event.target.select()"
                         [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
                         inputmode="numeric" #montantCharges="ngModel">
                     <app-text-with-euro-symbol></app-text-with-euro-symbol>

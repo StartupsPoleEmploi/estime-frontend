@@ -34,12 +34,13 @@ export class DetailTemporaliteService {
     private deConnecteService: DeConnecteService
   ) {
     this.demandeurEmploi = this.deConnecteService.getDemandeurEmploiConnecte();
-
-    this.initDetailTemporalite();
-    this.initSituation();
    }
 
   public createDetailTemporalite(simulation: Simulation): DetailTemporalite {
+
+    this.initDetailTemporalite();
+    this.initSituation();
+
     simulation.simulationsMensuelles.forEach((simulationMensuelle, index) => {
       this.handleMois(simulationMensuelle, index);
       this.applyNewSituation(simulationMensuelle);
@@ -80,10 +81,10 @@ export class DetailTemporaliteService {
   private initSituationAidesCAF() {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH != null) {
-        this.situation.aah = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH;
+        this.situation.aah = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA != null) {
-        this.situation.rsa = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA;
+        this.situation.rsa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA);
       }
       this.initSituationAidesLogement();
     }
@@ -92,13 +93,13 @@ export class DetailTemporaliteService {
   private initSituationAidesLogement() {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement != null) {
-        this.situation.apl = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1;
+        this.situation.apl = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale != null) {
-        this.situation.alf = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1;
+        this.situation.alf = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementFamiliale.moisNMoins1);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale != null) {
-        this.situation.als = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1;
+        this.situation.als = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.allocationLogementSociale.moisNMoins1);
       }
     }
   }
@@ -106,10 +107,10 @@ export class DetailTemporaliteService {
   private initSituationAidesPoleEmploi() {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null) {
-        this.situation.aah = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet;
+        this.situation.aah = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS != null) {
-        this.situation.rsa = this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet;
+        this.situation.rsa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet);
       }
     }
   }
@@ -293,11 +294,15 @@ export class DetailTemporaliteService {
 
   // Fonction qui permet de vérifier si le montant d'une aide à changer ce mois ci
   private checkForChangeInSituation(montantMoisPrecedent: number, montantActuel: number): boolean {
-    return montantMoisPrecedent != montantActuel;
+    return this.getMontantReel(montantMoisPrecedent) != this.getMontantReel(montantActuel);
   }
 
   private addDetailTemporaliteMois(indexMois: number, situation: string) {
     this.detailTemporalite.detailsMensuels[indexMois].details.push(situation);
+  }
+
+  private getMontantReel(valeur) {
+    return valeur != null ? valeur : 0;
   }
 
 }
