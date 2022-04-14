@@ -107,7 +107,7 @@ export class DetailTemporaliteService {
   private initSituationAidesPoleEmploi() {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null) {
-        this.situation.aah = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
+        this.situation.are = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS != null) {
         this.situation.rsa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet);
