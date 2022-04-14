@@ -16,6 +16,7 @@ export enum SituationTemporaliteEnum {
     ASS_SANS_CUMUL = "Vous cumulez l'ASS avec votre salaire pendant 3 mois",
     ASS_1_MOIS_CUMUL = "Vous cumulez l'ASS avec votre salaire pendant 2 mois",
     ASS_2_MOIS_CUMUL = "Vous cumulez l'ASS avec votre salaire pendant 1 mois",
+    FIN_ASS = "Vous ne percevez plus l'ASS car vous l'avez déjà cumulé avec votre salaire pendant 3 mois",
     AL_CHANGEMENT_SITUATION = "Votre aide au logement est recalculée suite à votre changement de situation",
     AL_DECLA_TRI = "Votre aide au logement est recalculée suite à votre déclaration trimestrielle",
     FIN_AL = "Vous n'êtes plus éligible à l'aide au logement",

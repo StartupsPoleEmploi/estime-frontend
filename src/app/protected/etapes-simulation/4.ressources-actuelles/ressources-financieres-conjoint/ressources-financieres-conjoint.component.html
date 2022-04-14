@@ -61,6 +61,7 @@
                             [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                             (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
                             [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
+                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_oui"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
                         <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
                             oui
@@ -74,6 +75,7 @@
                             type="radio" class="form-check-input"
                             [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                             [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
+                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non"
                             required #hasTravailleAuCoursDerniersMois="ngModel"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
                         <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">

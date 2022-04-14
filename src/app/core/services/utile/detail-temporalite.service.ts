@@ -174,6 +174,8 @@ export class DetailTemporaliteService {
             break;
         }
       }
+    } else if(this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle)) && !this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS);
     }
   }
 
@@ -286,6 +288,7 @@ export class DetailTemporaliteService {
     this.situation.rsa = this.aidesService.getMontantRSA(simulationMensuelle);
     this.situation.are = this.aidesService.getMontantARE(simulationMensuelle);
     this.situation.aah = this.aidesService.getMontantAAH(simulationMensuelle);
+    this.situation.ass = this.aidesService.getMontantASS(simulationMensuelle);
     this.situation.ppa = this.aidesService.getMontantPrimeActivite(simulationMensuelle);
     this.situation.apl = this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle);
     this.situation.als = this.aidesService.getMontantAllocationLogementSociale(simulationMensuelle);

@@ -325,6 +325,7 @@
                             [(ngModel)]="ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                             (click)="onClickButtonRadioHasTravailleAuCoursDerniersMois(true)" required [value]="true"
                             #hasTravailleAuCoursDerniersMois="ngModel"
+                            tag-action="clic_a_travaille_au_cours_14_derniers_mois_oui"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, true)">
                         <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOui">
                             oui
@@ -338,6 +339,7 @@
                             [(ngModel)]="ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                             [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMois(false)" required
                             #hasTravailleAuCoursDerniersMois="ngModel"
+                            tag-action="clic_a_travaille_au_cours_14_derniers_mois_non"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, false)">
                         <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNon">
                             non
