@@ -91,6 +91,7 @@ export class ContratTravailComponent implements OnInit {
     this.isFuturTravailFormSubmitted = true;
     this.isFuturTravailSalaireFormSubmitted = true;
     if (this.isDonneesSaisiesValides(form)) {
+      if(!this.afficherNombreTrajetsDomicileTravail()) this.futurTravail.nombreTrajetsDomicileTravail = 0;
       this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     } else {
@@ -212,5 +213,9 @@ export class ContratTravailComponent implements OnInit {
     if (!this.isNombreTrajetsDomicileTravailDisplay) {
       this.futurTravail.nombreTrajetsDomicileTravail = null;
     }
+  }
+
+  public afficherNombreTrajetsDomicileTravail(): boolean {
+    return this.futurTravail.distanceKmDomicileTravail >= 20;
   }
 }
