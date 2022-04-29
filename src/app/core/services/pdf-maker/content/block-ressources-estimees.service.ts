@@ -1,7 +1,6 @@
 
 import { Injectable } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
 import { AidesService } from '../../utile/aides.service';
 import { DateUtileService } from '../../utile/date-util.service';
@@ -28,7 +27,7 @@ export class BlockRessourcesEstimeesService {
 
   }
 
-  public addElementTableMesRessourcesEstimees(content: Array<any>, demandeurEmploi: DemandeurEmploi, simulation: Simulation): void {
+  public addElementTableMesRessourcesEstimees(content: Array<any>, simulation: Simulation): void {
     this.addTableMesRessourcesEstimees(content, simulation);
     this.addTableMesRessourcesEtAides(content, simulation);
   }
@@ -174,7 +173,7 @@ export class BlockRessourcesEstimeesService {
   public addTableMesRessourcesEstimees(content: Array<any>, simulation: Simulation): void {
     let body = new Array<Array<Cell>>();
     this.addHeaderTableMesRessourcesEstimees(body, simulation);
-    this.addRowMontantTotalSimulationMensuelle(body, simulation, simulation.simulationsMensuelles.length);
+    this.addRowMontantTotalSimulationMensuelle(body, simulation);
     content.push(this.createTableElementMesRessourcesEstimees(body, simulation.simulationsMensuelles.length));
   }
 
@@ -205,7 +204,7 @@ export class BlockRessourcesEstimeesService {
     cell.text = titleCell2;
     return cell;
   }
-  private addRowMontantTotalSimulationMensuelle(body: Array<Array<Cell>>, simulation: Simulation, nbrColumns: number): void {
+  private addRowMontantTotalSimulationMensuelle(body: Array<Array<Cell>>, simulation: Simulation): void {
     const row = new Array<Cell>();
     row.push(this.createCellTitle(' ', '#FFFFFF', 2));
     row.push(new Cell());

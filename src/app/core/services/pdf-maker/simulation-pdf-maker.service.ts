@@ -10,6 +10,7 @@ import { BlockRessourcesEstimeesService } from "./content/block-ressources-estim
 import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 import { Style } from './models/style';
 import { Text } from "./models/text";
+import { BlockDonneesSaisiesService } from './content/block-donnees-saisies-service';
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 
@@ -22,6 +23,7 @@ export class SimulationPdfMakerService {
 
   constructor(
     private blockInformationsService: BlockInformationsService,
+    private blockDonneesSaisiesService: BlockDonneesSaisiesService,
     private blockRessourcesEstimeesService: BlockRessourcesEstimeesService,
     private detailAidesEligiblesService: DetailAidesEligiblesService,
     private screenService: ScreenService
@@ -49,9 +51,9 @@ export class SimulationPdfMakerService {
     let content = [];
     this.addLogoEstime(content);
     this.addTitle(content);
+    this.blockDonneesSaisiesService.addBlockDonneesSaisies(content, demandeurEmploi);
     this.blockInformationsService.addBlockInformations(content);
-    this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, demandeurEmploi, simulation);
-    this.addTextAvertissement(content);
+    this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, simulation);
     this.detailAidesEligiblesService.addPagesDetailAides(content, simulation);
     return content;
   }
@@ -69,7 +71,10 @@ export class SimulationPdfMakerService {
       },
       tableStyle4: {
         margin: [0, 0, 0, 0]
-      }
+      },
+      tableStyle5: {
+        margin: [10, 0, 0, 30]
+      },
     };
   }
 

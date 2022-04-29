@@ -13,7 +13,6 @@ import { AidesCAF } from '@app/commun/models/aides-caf';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresAvantSimulationService {
@@ -33,6 +32,13 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public getRessourcesFinancieresAvantSimulation(): RessourcesFinancieresAvantSimulation {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
+  }
+
+  public getMontantTotalRessources(): number {
+    let montant = 0;
+    montant = this.getMontantVosRessources() + this.getMontantRessourcesConjoint() + this.getMontantRessourcesPersonnesCharge() + this.getMontantRessourcesFoyer();
+    return montant;
+
   }
 
   public getMontantVosRessources(): number {

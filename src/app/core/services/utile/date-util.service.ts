@@ -112,6 +112,11 @@ export class DateUtileService {
     return this.getLibelleDateFromDate(dateJour);
   }
 
+  public getLibelleDateHeureActuelle(): string {
+    const dateJour = new Date();
+    return this.getLibelleDateHeureFromDate(dateJour);
+  }
+
   public getLibelleMoisCourtDateActuelle(): string {
     const dateJour = new Date();
     return this.getLibelleMoisCourtFromDate(dateJour);
@@ -121,11 +126,25 @@ export class DateUtileService {
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateToFormat
    */
-  public getLibelleDateFromDate(dateToFormat: Date): string {
+   public getLibelleDateFromDate(dateToFormat: Date): string {
     const month = dateToFormat.getMonth() + 1;
     const year = dateToFormat.getFullYear();
     const moisLabel = this.getLibelleMoisByMoisNumber(month);
     return `${moisLabel} ${year}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateToFormat
+   */
+  public getLibelleDateHeureFromDate(dateToFormat: Date): string {
+    const date = dateToFormat.getDate();
+    const month = dateToFormat.getMonth() + 1;
+    const year = dateToFormat.getFullYear();
+    const hours = dateToFormat.getHours();
+    const minutes = dateToFormat.getMinutes();
+    const moisLabel = this.getLibelleMoisByMoisNumber(month);
+    return `${date} ${moisLabel} ${year} - ${hours}h${minutes}`;
   }
 
   /**
