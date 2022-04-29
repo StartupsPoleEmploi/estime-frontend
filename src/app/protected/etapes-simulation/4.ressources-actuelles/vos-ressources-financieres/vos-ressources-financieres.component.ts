@@ -105,6 +105,28 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
+  public onClickButtonRadioHasDegressiviteAre(hasDegressiviteAre: boolean): void {
+    this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = hasDegressiviteAre;
+    if (hasDegressiviteAre === false) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = null;
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = null;
+    }
+  }
+
+  public onClickCheckBoxTauxPlein(event: any): void {
+    event.preventDefault();
+    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
+    }
+  }
+
+  public onClickCheckBoxTauxReduit(event: any): void {
+    event.preventDefault();
+    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
+    }
+  }
+
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
     if (hasTravailleAuCoursDerniersMois === false) {
       this.ressourcesFinancieresAvantSimulation.nombreMoisTravaillesDerniersMois = 0;
@@ -119,6 +141,44 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
       }
     }
+  }
+
+  public handleKeyUpOnButtonRadioHasDegressiviteAre(event: any, value: boolean) {
+    if (event.keyCode === 13) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = value;
+      this.onClickButtonRadioHasDegressiviteAre(value);
+    }
+  }
+
+  public handleKeyUpOnButtonTauxPlein(event: any): void {
+    if (event.keyCode === 13) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein;
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
+      this.onClickCheckBoxTauxPlein(event);
+    }
+  }
+
+  public handleKeyUpOnButtonTauxReduit(event: any): void {
+    if (event.keyCode === 13) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit;
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
+      this.onClickCheckBoxTauxReduit(event);
+    }
+  }
+
+  public afficherMontantAllocationAre() {
+    return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null)
+  }
+
+  public getLibelleMontantBrutAllocationJournaliere(): string {
+    if(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
+      if(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
+        return "Montant brut de votre allocation journalière à taux plein pour l’ARE";
+      } else {
+        return "Montant brut de votre allocation journalière à taux réduit pour l’ARE";
+      }
+    }
+    return "Montant brut de votre allocation journalière pour l’ARE";
   }
 
   public hasQuatorzeMoisSansSalaire(): boolean {
@@ -160,6 +220,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
+  }
+
+  public isTauxDegressiviteAreSelectionne(): boolean {
+    return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null);
   }
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {

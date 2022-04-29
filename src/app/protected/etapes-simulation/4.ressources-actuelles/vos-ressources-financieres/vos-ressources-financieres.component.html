@@ -151,7 +151,103 @@
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
-                    * Montant brut de votre allocation journalière pour l'ARE
+                    * Êtes-vous concerné.e par la dégressivité de l'ARE ?
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_degressivite_are"
+                        aria-label="Infobulle degressivité"
+                        (click)="modalService.openModal($event, modalDegressiviteTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input id="hasDegressiviteAreOui" name="hasDegressiviteAreOui"
+                            attr.aria-label="Vous êtes concerné par la dégressivité de l'ARE"
+                            data-testid="btn-has-degressivite-are-oui" type="radio"
+                            class="form-check-input"
+                            [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre"
+                            (click)="onClickButtonRadioHasDegressiviteAre(true)" required [value]="true"
+                            #hasDegressiviteAre="ngModel"
+                            tag-action="clic_concerne_degressivite_are_oui"
+                            (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, true)">
+                        <label class="form-check-label" for="hasDegressiviteAreOui">
+                            oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline ms-2">
+                        <input id="hasDegressiviteAreNon" name="hasDegressiviteAreNon"
+                            data-testid="btn-has-degressivite-are-non"
+                            attr.aria-label="Vous n'êtes pas concerné par la dégressivité de l'ARE"
+                            type="radio" class="form-check-input"
+                            [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre"
+                            [value]="false" (click)="onClickButtonRadioHasDegressiviteAre(false)" required
+                            #hasDegressiviteAre="ngModel"
+                            tag-action="clic_concerne_degressivite_are_non"
+                            (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, false)">
+                        <label class="form-check-label" for="hasDegressiviteAreNon">
+                            non
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || hasDegressiviteAre.touched)  && hasDegressiviteAre.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE() && ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                    * Je souhaite simuler le montant de mon allocation en cas de reprise d'emploi en :
+                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                        aria-label="Infobulle taux réduit degressivité"
+                        (click)="modalService.openModal($event, modalSituationDemandeurAllocationJournaliereTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button id="btn-taux-plein-degressivite-are" #tauxPleinDegressiviteAre="ngModel"
+                        (click)="onClickCheckBoxTauxPlein($event)" name="tauxPleinDegressiviteAre"
+                        aria-label="Vous souhaitez simuler le montant de votre allocation en taux plein"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                        data-testid="btn-taux-plein-degressivite-are" btnCheckbox tabindex="0"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein" (keyup)="handleKeyUpOnButtonTauxPlein($event)">
+                        <span class="body-2-typo">
+                            Taux plein (avant application de la dégressivité)
+                        </span>
+                    </button>
+                    <button id="btn-taux-reduit-degressivite-are" #tauxReduitDegressiviteAre="ngModel"
+                        (click)="onClickCheckBoxTauxReduit($event)" name="tauxReduitDegressiviteAre"
+                        aria-label="Vous souhaitez simuler le montant de votre allocation en taux réduit"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                        data-testid="btn-taux-reduit-degressivite-are" btnCheckbox tabindex="0"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit" (keyup)="handleKeyUpOnButtonTauxReduit($event)">
+                        <span class="body-2-typo">
+                            Taux réduit (après application de la dégressivité)
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="isRessourcesFinancieresFormSubmitted  && !isTauxDegressiviteAreSelectionne()">
+                        {{controleChampFormulaireService.MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE() && afficherMontantAllocationAre()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                    * {{ getLibelleMontantBrutAllocationJournaliere() }}
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
@@ -726,6 +822,14 @@
                 Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
             </li>
         </ol>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDegressiviteTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-2-typo'>
+            La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et qui bénéficiaient d'un salaire brut supérieur à 4545 euros par mois
+        </p>">
     </app-tooltip>
 </ng-template>
 
