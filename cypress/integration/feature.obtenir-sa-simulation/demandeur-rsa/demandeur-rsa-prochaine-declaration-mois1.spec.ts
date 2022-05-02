@@ -37,7 +37,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       const dureeHebdomadaire = "35";
       const salaire = "1231";
       const distanceDomicileLieuTravail = "10";
-      const nombreTrajetsDomicileTravail = "20";
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
@@ -63,7 +62,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
       monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
-      monFuturContratTravailPage.saisirNombreTrajetsDomicileTravail(nombreTrajetsDomicileTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -141,7 +139,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       const dureeHebdomadaire = "35";
       const salaire = "1231";
       const distanceDomicileLieuTravail = "10";
-      const nombreTrajetsDomicileTravail = "20";
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE PERSONNES A CHARGE
@@ -174,7 +171,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
       monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
       monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
-      monFuturContratTravailPage.saisirNombreTrajetsDomicileTravail(nombreTrajetsDomicileTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
