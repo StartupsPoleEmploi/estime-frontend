@@ -12,6 +12,22 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-nombre-jours-restants-are]').type(montant);
   }
 
+  public clickOnDegressiviteAREOui(): void {
+    cy.get('[data-testid=btn-has-degressivite-are-oui]').click();
+  }
+
+  public clickOnDegressiviteARENon(): void {
+    cy.get('[data-testid=btn-has-degressivite-are-non]').click();
+  }
+
+  public clickOnTauxPleinDegressiviteARE(): void {
+    cy.get('[data-testid=btn-taux-plein-degressivite-are]').click();
+  }
+
+  public clickOnTauxReduitDegressiviteARE(): void {
+    cy.get('[data-testid=btn-taux-reduit-degressivite-are]').click();
+  }
+
   public saisirAllocationJournaliereBruteAre(montant: string): void {
     cy.get('[data-testid=input-montant-allocation-journaliere-brut-are]').type(montant);
   }
