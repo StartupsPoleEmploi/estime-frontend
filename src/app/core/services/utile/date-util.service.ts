@@ -142,7 +142,7 @@ export class DateUtileService {
     const month = dateToFormat.getMonth() + 1;
     const year = dateToFormat.getFullYear();
     const hours = dateToFormat.getHours();
-    const minutes = dateToFormat.getMinutes();
+    const minutes = dateToFormat.getMinutes().toString().length == 1 ? `0${dateToFormat.getMinutes().toString()}`: dateToFormat.getMinutes().toString();
     const moisLabel = this.getLibelleMoisByMoisNumber(month);
     return `${date} ${moisLabel} ${year} - ${hours}h${minutes}`;
   }
