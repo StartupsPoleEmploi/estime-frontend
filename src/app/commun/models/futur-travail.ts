@@ -8,4 +8,9 @@ export class FuturTravail {
   nombreTrajetsDomicileTravail: number;
   salaire: Salaire;
   typeContrat: string;
+  dureeHebdoTempsPlein: boolean;
+  dureeHebdoMiTemps: boolean;
+  dureeHebdoAutre: boolean;
+  salaireSouhaiteSMIC: boolean;
+  salaireSouhaiteAutre: boolean;
 }

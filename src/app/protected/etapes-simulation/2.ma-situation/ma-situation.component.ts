@@ -252,20 +252,20 @@ export class MaSituationComponent implements OnInit {
   public handleKeyUpOnButtonSituationConjoint(e: any, situationConjoint: string): void {
     if (e.keyCode === 13) {
       if (situationConjoint === this.situationPersonneEnum.ARE || situationConjoint === this.situationPersonneEnum.ASS) {
-        this.handleKeyUpOnButtonSituationConjointAidesPoleEmploi(e, situationConjoint);
+        this.handleKeyUpOnButtonSituationConjointAidesPoleEmploi(situationConjoint);
       }
       if (situationConjoint === this.situationPersonneEnum.AAH || situationConjoint === this.situationPersonneEnum.RSA) {
-        this.handleKeyUpOnButtonSituationConjointAidesCAF(e, situationConjoint);
+        this.handleKeyUpOnButtonSituationConjointAidesCAF(situationConjoint);
       }
       if (situationConjoint === this.situationPersonneEnum.SALARIE
         || situationConjoint === this.situationPersonneEnum.MICRO_ENTREPRENEUR
         || situationConjoint === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT
         || situationConjoint === this.situationPersonneEnum.IMMOBILIER
         || situationConjoint === this.situationPersonneEnum.PENSION_RETRAITE) {
-        this.handleKeyUpOnButtonSituationConjointRessourcesFinancieres(e, situationConjoint);
+        this.handleKeyUpOnButtonSituationConjointRessourcesFinancieres(situationConjoint);
       }
       if (situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
-        this.handleKeyUpOnButtonSituationConjointAidesCPAM(e, situationConjoint);
+        this.handleKeyUpOnButtonSituationConjointAidesCPAM(situationConjoint);
       }
       if (situationConjoint === this.situationPersonneEnum.SANS_RESSOURCE) {
         this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource = !this.situationFamiliale.conjoint.informationsPersonnelles.sansRessource;
@@ -274,7 +274,7 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  private handleKeyUpOnButtonSituationConjointAidesPoleEmploi(e: any, situationConjoint: string) {
+  private handleKeyUpOnButtonSituationConjointAidesPoleEmploi(situationConjoint: string) {
     if (situationConjoint === this.situationPersonneEnum.ASS) {
       this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS;
       this.onClickCheckBoxConjointHasASS();
@@ -285,7 +285,7 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  private handleKeyUpOnButtonSituationConjointAidesCAF(e: any, situationConjoint: string) {
+  private handleKeyUpOnButtonSituationConjointAidesCAF(situationConjoint: string) {
     if (situationConjoint === this.situationPersonneEnum.AAH) {
       this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH;
       this.onClickCheckBoxConjointHasAAH();
@@ -296,14 +296,14 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  private handleKeyUpOnButtonSituationConjointAidesCPAM(e: any, situationConjoint: string) {
+  private handleKeyUpOnButtonSituationConjointAidesCPAM(situationConjoint: string) {
     if (situationConjoint === this.situationPersonneEnum.PENSION_INVALIDITE) {
       this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite = !this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite;
       this.onClickCheckBoxConjointHasPensionInvalidite();
     }
   }
 
-  private handleKeyUpOnButtonSituationConjointRessourcesFinancieres(e: any, situationConjoint: string) {
+  private handleKeyUpOnButtonSituationConjointRessourcesFinancieres(situationConjoint: string) {
     if (situationConjoint === this.situationPersonneEnum.SALARIE) {
       this.situationFamiliale.conjoint.informationsPersonnelles.salarie = !this.situationFamiliale.conjoint.informationsPersonnelles.salarie;
       this.onClickCheckBoxConjointIsSalarie();

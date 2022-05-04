@@ -8,6 +8,26 @@ class MonFuturContratTravailPage {
     cy.get('[data-testid=btn-situation-offre-emploi-non]').click({ force: true });
   }
 
+  public clickOnIsDureeHebdoTempsPlein(): void {
+    cy.get('[data-testid=btn-situation-duree-hebdo-temps-plein]').click({ force: true });
+  }
+
+  public clickOnIsDureeHebdoMiTemps(): void {
+    cy.get('[data-testid=btn-situation-duree-hebdo-mi-temps]').click({ force: true });
+  }
+
+  public clickOnIsDureeHebdoAutre(): void {
+    cy.get('[data-testid=btn-situation-duree-hebdo-autre]').click({ force: true });
+  }
+
+  public clickOnIsSalaireSouhaiteSMIC(): void {
+    cy.get('[data-testid=btn-situation-salaire-souhaite-smic]').click({ force: true });
+  }
+
+  public clickOnIsSalaireSouhaiteAutre(): void {
+    cy.get('[data-testid=btn-situation-salaire-souhaite-autre]').click({ force: true });
+  }
+
   public clickOnTypeContratCDI(): void {
     cy.get('[data-testid=btn-type-contrat-cdi]').click({ force: true });
   }
