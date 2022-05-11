@@ -50,7 +50,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
       this.deConnecteService.setConjointRessourcesFinancieres(this.conjoint);
       this.validationRessourcesConjointEventEmitter.emit();
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

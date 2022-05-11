@@ -181,7 +181,7 @@ export class RessourcesActuellesComponent implements OnInit {
         error: this.traiterErreurSimulerMesAides.bind(this)
       });
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

@@ -86,7 +86,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       this.validationRessourcesFoyerEventEmitter.emit();
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

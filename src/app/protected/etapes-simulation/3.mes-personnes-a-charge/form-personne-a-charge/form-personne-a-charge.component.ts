@@ -58,7 +58,7 @@ export class FormPersonneAChargeComponent implements OnInit {
       this.deConnecteService.setAidesFamiliales();
       this.ajoutNouvellePersonneEventEmitter.emit(true);
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

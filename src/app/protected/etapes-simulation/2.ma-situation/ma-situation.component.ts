@@ -51,7 +51,6 @@ export class MaSituationComponent implements OnInit {
   ];
 
   constructor(
-    private elementRef: ElementRef,
     public controleChampFormulaireService: ControleChampFormulaireService,
     private communeApiService: CommuneApiService,
     public dateUtileService: DateUtileService,
@@ -162,7 +161,7 @@ export class MaSituationComponent implements OnInit {
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MES_PERSONNES_A_CHARGE]);
       }
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

@@ -54,7 +54,6 @@ export class ContratTravailComponent implements OnInit {
     private aidesService: AidesService,
     private brutNetService: BrutNetService,
     private deConnecteService: DeConnecteService,
-    private elementRef: ElementRef,
     public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public modalService: ModalService,
@@ -106,7 +105,7 @@ export class ContratTravailComponent implements OnInit {
       this.deConnecteService.setFuturTravail(this.futurTravail);
       this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

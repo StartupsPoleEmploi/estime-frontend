@@ -198,6 +198,9 @@
   },
   "defaultProject": "estime",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "cache": {
+      "enabled": false
+    }
   }
 }

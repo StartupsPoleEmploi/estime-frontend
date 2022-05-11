@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter, Renderer2 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
@@ -47,7 +47,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   constructor(
-    private elementRef: ElementRef,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
@@ -180,8 +179,8 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public getLibelleMontantBrutAllocationJournaliere(): string {
-    if(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
-      if(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
+    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
+      if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
         return "Montant brut de votre allocation journalière à taux plein pour l’ARE";
       } else {
         return "Montant brut de votre allocation journalière à taux réduit pour l’ARE";
@@ -221,7 +220,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
       this.validationVosRessourcesEventEmitter.emit();
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

@@ -70,7 +70,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
       this.validationRessourcesPersonnesAChargeEventEmitter.emit();
     } else {
-      this.controleChampFormulaireService.focusOnFirstInvalidElement(this.elementRef);
+      this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
   }
 

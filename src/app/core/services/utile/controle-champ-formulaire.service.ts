@@ -1,4 +1,5 @@
 import { ElementRef, Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
 export class ControleChampFormulaireService {
@@ -39,8 +40,8 @@ export class ControleChampFormulaireService {
     return patt.test(event.key) || this.isExceptKeyAuthorized(event);
   }
 
-  public focusOnFirstInvalidElement(elementRef: ElementRef): void {
-    const invalidElements = elementRef.nativeElement.querySelectorAll('.ng-invalid');
+  public focusOnFirstInvalidElement(): void {
+    const invalidElements = document.querySelectorAll('.ng-invalid');
     if (invalidElements) {
       let invalidElementsToFocus = null;
       invalidElements.forEach(invalidElement => {
