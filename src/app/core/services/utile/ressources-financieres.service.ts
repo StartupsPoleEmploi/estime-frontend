@@ -87,6 +87,11 @@ export class RessourcesFinancieresService {
       && ressourceFinanciere.code !== CodesAidesEnum.TRAVAILLEUR_INDEPENDANT;
   }
 
+  public isRessourceFinanciereDemandeurPourraObtenirRSA(ressourceFinanciere: RessourceFinanciere): boolean {
+    return this.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciere)
+      && ressourceFinanciere.code !== CodesAidesEnum.PRIME_ACTIVITE;
+  }
+
   public isRessourceFinanciereAvecDetail(ressourceFinanciere): boolean {
     if (ressourceFinanciere.hasOwnProperty('detail')) {
       let aide = ressourceFinanciere as Aide;
