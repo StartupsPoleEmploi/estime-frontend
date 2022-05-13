@@ -483,10 +483,9 @@ export class MaSituationComponent implements OnInit {
 
   private checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)) {
-      if (this.isNonBeneficiaireACRE) {
+      this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
+      if (this.isNonBeneficiaireACRE()) {
         this.unsetDateRepriseCreationEntreprise();
-      } else {
-        this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
       }
     }
   }
@@ -522,8 +521,8 @@ export class MaSituationComponent implements OnInit {
   }
 
   private unsetDateRepriseCreationEntreprise() {
-    this.dateRepriseCreationEntreprise = null;
     this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
+    this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
   }
 }
