@@ -9,6 +9,7 @@ import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { SituationTemporaliteEnum } from '@app/commun/enumerations/situation-temporalite.enum';
 import { RessourcesFinancieresAvantSimulationUtileService } from './ressources-financieres-avant-simulation-utile.service';
 import { DeConnecteService } from './../demandeur-emploi-connecte/de-connecte.service';
+import { DeConnecteInfosPersonnellesService } from '../demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 
 @Injectable({ providedIn: 'root' })
 export class DetailTemporaliteService {
@@ -31,10 +32,11 @@ export class DetailTemporaliteService {
   constructor(
     private aidesService: AidesService,
     private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
-    private deConnecteService: DeConnecteService
+    private deConnecteService: DeConnecteService,
+    private deConnecteInfosPersonellesService: DeConnecteInfosPersonnellesService
   ) {
     this.demandeurEmploi = this.deConnecteService.getDemandeurEmploiConnecte();
-   }
+  }
 
   public createDetailTemporalite(simulation: Simulation): DetailTemporalite {
 
@@ -118,6 +120,7 @@ export class DetailTemporaliteService {
   private handleMois(simulationMensuelle: SimulationMensuelle, indexMois) {
     this.handleChangementSalaire(indexMois);
     this.handleChangementAGEPIEtAideMob(simulationMensuelle, indexMois);
+    this.handleBeneficiaireACRE(simulationMensuelle, indexMois);
     this.handleChangementASS(simulationMensuelle, indexMois);
     this.handleChangementRSA(simulationMensuelle, indexMois);
     this.handleChangementAAH(simulationMensuelle, indexMois);
@@ -154,28 +157,40 @@ export class DetailTemporaliteService {
   }
 
   private handleChangementASS(simulationMensuelle: SimulationMensuelle, indexMois: number) {
-    // Si on est au premier mois
-    if (indexMois == 0) {
-      // Si le demandeur perçoit de l'ASS ce mois-ci
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
-        // On conditionne l'affichage du détail au nombre de mois travaillés avant la simulation
-        const nombreMoisTravailles3DernierMoisAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.getNombreMoisTravaillesXDerniersMois(this.demandeurEmploi.ressourcesFinancieresAvantSimulation, 3)
-        switch (nombreMoisTravailles3DernierMoisAvantSimulation) {
-          case 0:
-            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_SANS_CUMUL);
-            break;
-          case 1:
-            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_1_MOIS_CUMUL);
-            break;
-          case 2:
-            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_2_MOIS_CUMUL);
-            break;
-          default:
-            break;
+    if (!this.deConnecteInfosPersonellesService.isBeneficiaireACRE) {
+      // Si on est au premier mois
+      if (indexMois == 0) {
+        // Si le demandeur perçoit de l'ASS ce mois-ci
+        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+          // On conditionne l'affichage du détail au nombre de mois travaillés avant la simulation
+          const nombreMoisTravailles3DernierMoisAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.getNombreMoisTravaillesXDerniersMois(this.demandeurEmploi.ressourcesFinancieresAvantSimulation, 3)
+          switch (nombreMoisTravailles3DernierMoisAvantSimulation) {
+            case 0:
+              this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_SANS_CUMUL);
+              break;
+            case 1:
+              this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_1_MOIS_CUMUL);
+              break;
+            case 2:
+              this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_2_MOIS_CUMUL);
+              break;
+            default:
+              break;
+          }
         }
+      } else if (this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle)) && !this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS);
       }
-    } else if(this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle)) && !this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
-      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS);
+    }
+  }
+
+  private handleBeneficiaireACRE(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+    if (this.deConnecteInfosPersonellesService.isBeneficiaireACRE()) {
+      if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_BENEFICIAIRE_ACRE);
+      } else if (this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle)) && !this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS_BENEFICIAIRE_ACRE);
+      }
     }
   }
 

@@ -14,16 +14,21 @@ export class DeConnecteInfosPersonnellesService {
 
   public hasRevenusImmobilier(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true
+    return demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true;
   }
 
   public isTravailleurIndependant(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.travailleurIndependant === true
+    return demandeurEmploiConnecte.informationsPersonnelles.travailleurIndependant === true;
   }
 
   public isMicroEntrepreneur(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.microEntrepreneur === true
+    return demandeurEmploiConnecte.informationsPersonnelles.microEntrepreneur === true;
+  }
+
+  public isBeneficiaireACRE(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return demandeurEmploiConnecte.informationsPersonnelles.isBeneficiaireACRE === true && demandeurEmploiConnecte.informationsPersonnelles.dateRepriseCreationEntreprise != null;
   }
 }

@@ -141,14 +141,14 @@
                             <button id="btn-situation-ass" name="beneficiaireASS"
                                 aria-label="Vous êtes bénéficiaire de l'ASS" class="radio-button-style-1"
                                 data-testid="btn-situation-ass" [(ngModel)]="beneficiaireAides.beneficiaireASS"
-                                btnCheckbox tabindex="0" #beneficiaireAAH="ngModel" (click)="onClickCheckBoxHasASS()"
+                                btnCheckbox tabindex="0" #beneficiaireASS="ngModel" (click)="onClickCheckBoxHasASS()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)">
                                 <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
                             </button>
                             <button
                                 *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('demandeur')"
                                 id="btn-situation-rsa" name="beneficiaireRSA" class="radio-button-style-1"
-                                aria-label="Vous êtes bénéficiaire du RSA" data-testid="btn-situation-rsa button-typo"
+                                aria-label="Vous êtes bénéficiaire du RSA" data-testid="btn-situation-rsa"
                                 [(ngModel)]="beneficiaireAides.beneficiaireRSA" btnCheckbox tabindex="0"
                                 #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)">
@@ -217,6 +217,63 @@
                                 </span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div *ngIf="isConcerneACRE()">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
+                            * Bénéficiez-vous de l'ACRE ?
+                            <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
+                                placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
+                                aria-label="Infobulle bénéficiaire de l'ACRE"
+                                (click)="modalService.openModal($event, modalSituationBeneficiaireACRETemplate)"></button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <input id="isBeneficiaireACREOui" name="isBeneficiaireACREOui"
+                                    aria-label="Vous êtes bénéficiaire de l'ACRE"
+                                    data-testid="btn-is-beneficiaire-acre-oui" type="radio" class="form-check-input"
+                                    (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, true)"
+                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" required [value]="true"
+                                    #isBeneficiaireACRE="ngModel">
+                                <label class="form-check-label body-2-typo" for="isBeneficiaireACREOui">
+                                    oui
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline ms-2">
+                                <input id="isBeneficiaireACRENon" name="isBeneficiaireACRENon"
+                                    aria-label="Vous n'êtes pas bénéficiaire de l'ACRE"
+                                    data-testid="btn-is-beneficiaire-acre-non" type="radio" class="form-check-input"
+                                    (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, false)"
+                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" required [value]="false"
+                                    #isBeneficiaireACRE="ngModel">
+                                <label class="form-check-label body-2-typo" for="isBeneficiaireACRENon">
+                                    non
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isInformationsPersonnellesFormSubmitted || isBeneficiaireACRE.touched) && isBeneficiaireACRE.errors?.required">
+                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isConcerneACRE() && informationsPersonnelles.isBeneficiaireACRE">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
+                            * Votre date de création ou de reprise d'entreprise
+                        </label>
+                    </div>
+                    <div class="row pb-3">
+                        <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
+                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted">
+                        </app-date-inputs>
                     </div>
                 </div>
                 <div>
@@ -446,6 +503,14 @@
         <p class='body-2-typo'>
             Ces situations ou les sommes reçues vont avoir une incidence sur le montant de vos aides ou allocations,
             c’est pourquoi il est important de les déclarer.
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalSituationBeneficiaireACRETemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-2-typo'>
+            L'ACRE consiste en une exonération partielle ou totale de charges sociales, dite exonération de début d'activité pour une durée de 12 mois.
         </p>">
     </app-tooltip>
 </ng-template>

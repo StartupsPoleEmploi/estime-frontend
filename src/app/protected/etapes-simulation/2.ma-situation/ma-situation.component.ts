@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -32,6 +32,7 @@ export class MaSituationComponent implements OnInit {
 
   beneficiaireAides: BeneficiaireAides;
   dateNaissance: DateDecomposee;
+  dateRepriseCreationEntreprise: DateDecomposee;
   informationsPersonnelles: InformationsPersonnelles;
   isInformationsPersonnellesFormSubmitted = false;
   isSituationConjointNotValide = false;
@@ -72,10 +73,12 @@ export class MaSituationComponent implements OnInit {
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
+    this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
   }
 
   public onClickButtonRetour(): void {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
+    this.checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte();
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
@@ -87,6 +90,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxIsMicroEntrepreneur(): void {
     if (!this.informationsPersonnelles.microEntrepreneur) {
       this.deConnecteService.unsetBeneficesMicroEntreprise();
+      this.deConnecteService.unsetBeneficiaireACRE();
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.deConnecteService.unsetChiffreAffairesIndependant();
       this.informationsPersonnelles.travailleurIndependant = false;
@@ -96,6 +101,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxIsTravailleurIndependant(): void {
     if (!this.informationsPersonnelles.travailleurIndependant) {
       this.deConnecteService.unsetChiffreAffairesIndependant();
+      this.deConnecteService.unsetBeneficiaireACRE();
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.deConnecteService.unsetBeneficesMicroEntreprise();
       this.informationsPersonnelles.microEntrepreneur = false;
@@ -111,6 +118,8 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxHasASS(): void {
     if (!this.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
+      this.deConnecteService.unsetBeneficiaireACRE();
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
       this.deConnecteService.unsetAllocationMensuelleNetARE();
@@ -153,6 +162,7 @@ export class MaSituationComponent implements OnInit {
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
+    this.checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       if (this.isAllocationPeOuCafSelectionnee()) {
         this.getCodeInseeFromCodePostal(this.informationsPersonnelles.logement.coordonnees.codePostal);
@@ -189,6 +199,13 @@ export class MaSituationComponent implements OnInit {
       || this.beneficiaireAides.beneficiaireARE);
   }
 
+  public isConcerneACRE(): boolean {
+    return this.beneficiaireAides.beneficiaireASS
+      && (
+        this.informationsPersonnelles.microEntrepreneur
+        || this.informationsPersonnelles.travailleurIndependant
+      )
+  }
 
   /************ gestion évènements press enter ************************/
 
@@ -202,6 +219,12 @@ export class MaSituationComponent implements OnInit {
     if (event.keyCode === 13) {
       this.situationFamiliale.isEnCouple = value;
       this.onClickCheckBoxSituationFamiliale();
+    }
+  }
+
+  public handleKeyUpOnButtonBeneficiaireACRE(event: any, value: boolean): void {
+    if (event.keyCode === 13) {
+      this.informationsPersonnelles.isBeneficiaireACRE = value;
     }
   }
 
@@ -450,10 +473,17 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  private checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte(): void {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)) {
+      this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
+    }
+  }
+
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
+      && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
   }

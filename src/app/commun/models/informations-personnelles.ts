@@ -14,4 +14,6 @@ export class InformationsPersonnelles {
   nom: string;
   prenom: string;
   titreSejourEnFranceValide: boolean;
+  isBeneficiaireACRE: boolean;
+  dateRepriseCreationEntreprise: string;
 }

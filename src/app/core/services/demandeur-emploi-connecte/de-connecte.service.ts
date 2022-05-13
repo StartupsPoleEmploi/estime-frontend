@@ -240,6 +240,15 @@ export class DeConnecteService {
     }
   }
 
+  public unsetBeneficiaireACRE(): void {
+    if (this.demandeurEmploiConnecte.informationsPersonnelles
+      && this.demandeurEmploiConnecte.informationsPersonnelles.isBeneficiaireACRE != null) {
+      this.demandeurEmploiConnecte.informationsPersonnelles.isBeneficiaireACRE = null;
+      this.demandeurEmploiConnecte.informationsPersonnelles.dateRepriseCreationEntreprise = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetInfosRSA(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
       && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF) {
