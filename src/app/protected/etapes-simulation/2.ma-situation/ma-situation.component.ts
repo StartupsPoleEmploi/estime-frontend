@@ -82,6 +82,13 @@ export class MaSituationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
+  public onClickCheckBoxBeneficiaireACRE(value: boolean): void {
+    if (value === false) {
+      this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
+      this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
+    }
+  }
+
   public onClickCheckBoxSituationFamiliale(): void {
     this.situationFamiliale.isSeulPlusDe18Mois = null;
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
@@ -225,6 +232,7 @@ export class MaSituationComponent implements OnInit {
   public handleKeyUpOnButtonBeneficiaireACRE(event: any, value: boolean): void {
     if (event.keyCode === 13) {
       this.informationsPersonnelles.isBeneficiaireACRE = value;
+      this.onClickCheckBoxBeneficiaireACRE(value);
     }
   }
 
@@ -475,7 +483,11 @@ export class MaSituationComponent implements OnInit {
 
   private checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)) {
-      this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
+      if (this.isNonBeneficiaireACRE) {
+        this.unsetDateRepriseCreationEntreprise();
+      } else {
+        this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
+      }
     }
   }
 
@@ -483,7 +495,7 @@ export class MaSituationComponent implements OnInit {
     this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
-      && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)
+      && (this.isNonBeneficiaireACRE() || this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise))
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
   }
@@ -503,5 +515,15 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
     }
+  }
+
+  private isNonBeneficiaireACRE() {
+    return !this.isConcerneACRE() || this.informationsPersonnelles.isBeneficiaireACRE == null || !this.informationsPersonnelles.isBeneficiaireACRE;
+  }
+
+  private unsetDateRepriseCreationEntreprise() {
+    this.dateRepriseCreationEntreprise = null;
+    this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
+    this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
   }
 }

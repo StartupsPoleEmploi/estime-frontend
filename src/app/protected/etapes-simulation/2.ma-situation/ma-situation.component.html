@@ -236,6 +236,7 @@
                                     aria-label="Vous êtes bénéficiaire de l'ACRE"
                                     data-testid="btn-is-beneficiaire-acre-oui" type="radio" class="form-check-input"
                                     (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, true)"
+                                    (click)="onClickCheckBoxBeneficiaireACRE(true)"
                                     [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" required [value]="true"
                                     #isBeneficiaireACRE="ngModel">
                                 <label class="form-check-label body-2-typo" for="isBeneficiaireACREOui">
@@ -247,6 +248,7 @@
                                     aria-label="Vous n'êtes pas bénéficiaire de l'ACRE"
                                     data-testid="btn-is-beneficiaire-acre-non" type="radio" class="form-check-input"
                                     (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, false)"
+                                    (click)="onClickCheckBoxBeneficiaireACRE(false)"
                                     [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" required [value]="false"
                                     #isBeneficiaireACRE="ngModel">
                                 <label class="form-check-label body-2-typo" for="isBeneficiaireACRENon">
