@@ -13,8 +13,9 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
   @Input() autofocus: boolean;
   @Input() dateSaisie: DateDecomposee;
   @Input() isFormSubmitted: boolean;
+  @Input() data_testid: string;
 
-  @Output()dateChanged = new EventEmitter<void>();
+  @Output() dateChanged = new EventEmitter<void>();
 
   @ViewChild('jourDate', { read: ElementRef }) jourDateInput: ElementRef;
   @ViewChild('moisDate', { read: ElementRef }) moisDateInput: ElementRef;
@@ -31,7 +32,7 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.autofocus && !this.dateSaisie.jour) {
+    if (this.autofocus && !this.dateSaisie.jour) {
       this.jourDateInput.nativeElement.focus();
     }
   }
@@ -40,7 +41,7 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
     if (this.dateSaisie.jour && this.dateSaisie.jour.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
       this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
-      if(!this.dateSaisie.isJourInvalide) {
+      if (!this.dateSaisie.isJourInvalide) {
         this.moisDateInput.nativeElement.focus();
       }
     }
@@ -51,7 +52,7 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
     if (this.dateSaisie.mois && this.dateSaisie.mois.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
       this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
-      if(!this.dateSaisie.isMoisInvalide) {
+      if (!this.dateSaisie.isMoisInvalide) {
         this.anneeDateInput.nativeElement.focus();
       }
     }
@@ -59,7 +60,7 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
   }
 
   public onChangeOrKeyUpDateAnnee(): void {
-    if(this.dateSaisie.annee  && this.dateSaisie.annee.length === 4) {
+    if (this.dateSaisie.annee && this.dateSaisie.annee.length === 4) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
       this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
     }
@@ -68,23 +69,44 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
 
   public onFocusOutDateJour(): void {
     this.dateUtileService.checkFormatJour(this.dateSaisie);
-    if(this.dateSaisie.isJourInvalide) {
+    if (this.dateSaisie.isJourInvalide) {
       this.jourDateInput.nativeElement.focus();
     }
   }
 
   public onFocusOutDateMois(): void {
     this.dateUtileService.checkFormatMois(this.dateSaisie);
-    if(this.dateSaisie.isMoisInvalide) {
+    if (this.dateSaisie.isMoisInvalide) {
       this.moisDateInput.nativeElement.focus();
     }
   }
 
   public onFocusOutDateAnnee(): void {
     this.dateUtileService.checkFormatAnnee(this.dateSaisie);
-    if(this.dateSaisie.isAnneeInvalide) {
+    if (this.dateSaisie.isAnneeInvalide) {
       this.anneeDateInput.nativeElement.focus();
     }
+  }
+
+  public getDataTestIdJour() {
+    if (this.data_testid != null) {
+      return `input-jour-date-${this.data_testid}`;
+    }
+    return 'input-jour-date';
+  }
+
+  public getDataTestIdMois() {
+    if (this.data_testid != null) {
+      return `input-mois-date-${this.data_testid}`;
+    }
+    return 'input-mois-date';
+  }
+
+  public getDataTestIdAnnee() {
+    if (this.data_testid != null) {
+      return `input-annee-date-${this.data_testid}`;
+    }
+    return 'input-annee-date';
   }
 
 }

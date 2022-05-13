@@ -44,6 +44,14 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=select-prochaine-declaration-trimestrielle]').select(value)
   }
 
+  public saisirRevenusIndependant(montant: string): void {
+    cy.get('[data-testid=input-revenus-independant]').type(montant);
+  }
+
+  public saisirRevenusMicroEntrepreneur(montant: string): void {
+    cy.get('[data-testid=input-revenus-micro-entrepreneur]').type(montant);
+  }
+
   public saisirMontantMensuelRSAFoyer(montant: string): void {
     cy.get('[data-testid=input-allocation-mensuelle-net-rsa-foyer]').type(montant);
   }

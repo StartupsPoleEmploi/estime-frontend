@@ -8,8 +8,12 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-revenu-immobilier]').click();
   }
 
-  public clickOnSituationCreateurEntreprise() {
-    cy.get('[data-testid=btn-situation-createur-entreprise]').click();
+  public clickOnSituationMicroEntreprise() {
+    cy.get('[data-testid=btn-situation-micro-entrepreneur]').click();
+  }
+
+  public clickOnSituationIndependant() {
+    cy.get('[data-testid=btn-situation-travailleur-independant]').click();
   }
 
   public clickOnSituationAAH() {
@@ -74,6 +78,20 @@ class MaSituationPage {
 
   public clickOnVousVivezSeulDepuisPlusDe18MoisNon(): void {
     cy.get('[data-testid=btn-is-seul-plus-de-18-mois-non]').click({ force: true });
+  }
+
+  public clickOnSituationBeneficiaireACREOui() {
+    cy.get('[data-testid=btn-is-beneficiaire-acre-oui]').click();
+  }
+
+  public clickOnSituationBeneficiaireACRENon() {
+    cy.get('[data-testid=btn-is-beneficiaire-acre-non]').click();
+  }
+
+  public saisirDateCreationRepriseEntreprise(jour: string, mois: string, annee: string): void {
+    cy.get('[data-testid=input-jour-date-reprise-creation-entreprise]').type(jour);
+    cy.get('[data-testid=input-mois-date-reprise-creation-entreprise]').type(mois);
+    cy.get('[data-testid=input-annee-date-reprise-creation-entreprise]').type(annee);
   }
 
   public clickOnSuivant() {

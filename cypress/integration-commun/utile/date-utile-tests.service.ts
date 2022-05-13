@@ -2,6 +2,21 @@ import { DateDecomposee } from "../models/date-decomposee";
 
 export class DateUtileTests {
 
+  public getDateRepriseCreationEntrepriseDepuisXMois(nombreDeMoisDepuisRepriseCreationEntreprise: number): DateDecomposee {
+    const dateDecomposee = new DateDecomposee();
+
+    const dateJour = new Date();
+    const month = dateJour.getMonth() - nombreDeMoisDepuisRepriseCreationEntreprise;
+    const year = dateJour.getFullYear();
+    const dateNaissance = new Date(year, month, 0);
+
+    dateDecomposee.jour = this.getJourOuMoisFormate(dateNaissance.getDay().toString());
+    dateDecomposee.mois = this.getJourOuMoisFormate(dateNaissance.getMonth().toString());
+    dateDecomposee.annee = dateNaissance.getFullYear().toString();
+
+    return dateDecomposee;
+  }
+
   public getDateNaissanceFromAge(age: number): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
 
@@ -19,11 +34,11 @@ export class DateUtileTests {
 
   private getJourOuMoisFormate(jourOuMois: string): string {
     let jourOuMoisFormate = jourOuMois;
-    if(jourOuMois.length === 1) {
-      if(jourOuMois === '0') {
+    if (jourOuMois.length === 1) {
+      if (jourOuMois === '0') {
         jourOuMois = '1';
       }
-      jourOuMoisFormate =  `0${jourOuMois}`;
+      jourOuMoisFormate = `0${jourOuMois}`;
     }
     return jourOuMoisFormate;
   }
