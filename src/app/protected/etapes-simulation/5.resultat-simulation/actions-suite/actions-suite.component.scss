@@ -1,6 +1,7 @@
 @import "../../../../../assets/scss/variables";
 
 .liste-actions {
+  margin: 0;
   padding: 0.5rem;
 
   @media #{$extra-small-device} {

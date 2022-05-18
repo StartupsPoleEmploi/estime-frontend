@@ -74,7 +74,7 @@ export class DeConnecteBeneficiaireAidesService {
     return false;
   }
 
-  public hasFoyerAutreBeneficiaireRSA(situation: string, personneACharge?: Personne): boolean {
+  public hasFoyerAutreBeneficiaireRSA(situation: string): boolean {
     if (situation == "demandeur") {
       return this.isPersonneAChargeBeneficiaireRSA() || this.isConjointBeneficiaireRSA();
     } else if (situation == "conjoint") {

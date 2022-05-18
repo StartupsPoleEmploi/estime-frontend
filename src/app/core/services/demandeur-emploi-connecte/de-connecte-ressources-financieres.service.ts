@@ -606,4 +606,23 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     }
     return nombreMoisTravaillesAvantSimulation;
   }
+
+  public getCriteresSimulation(): string {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const typeContrat = demandeurEmploiConnecte.futurTravail.typeContrat;
+    const nombreMoisContratCDD = demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
+    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
+    return `${typeContrat} ${nombreMoisContratCDD}- ${nombreHeuresTravailleesSemaine}h par semaine - ${salaireNet}€ mensuel`
+  }
+
+
+  public getCriteresSimulationLibelleCourt(): string {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const typeContrat = demandeurEmploiConnecte.futurTravail.typeContrat;
+    const nombreMoisContratCDD = demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
+    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
+    return `${typeContrat} ${nombreMoisContratCDD}· ${nombreHeuresTravailleesSemaine}h · ${salaireNet}€`
+  }
 }

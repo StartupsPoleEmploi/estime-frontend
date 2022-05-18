@@ -303,27 +303,24 @@
   max-height: fit-content;
 }
 
-.btn-modifier-simulation-sticky {
-  @extend .btn-style-perso-6;
-  max-height: unset;
-  min-height: unset;
-  height: 2.875rem !important;
-  min-width: calc(50vw - 1.5rem);
-  width: fit-content;
-  margin: 0 auto;
-  margin-right: 0.25rem;
-  color: $color-blue-10;
-}
-
-.btn-telecharger-simulation-sticky {
+.btn-modifier-criteres-sticky {
   @extend .btn-style-perso-7;
   max-height: unset;
   min-height: unset;
   height: 2.875rem !important;
-  min-width: calc(50vw - 1.5rem);
+  min-width: calc(40vw - 1.5rem);
   width: fit-content;
   margin: 0 auto;
-  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.btn-telecharger-simulation-mobile {
+  @extend .btn-style-perso-6;
+  max-height: unset;
+  min-height: unset;
+  height: 2.875rem !important;
+  margin: 0 auto;
+  color: $color-blue-2;
 }
 
 .btn-group-input-date {

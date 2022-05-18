@@ -1,3 +1,5 @@
+<app-page-loading *ngIf="isPageLoadingDisplay"
+    message="Mise à jour de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <div class="container-fluid result-container-fluid" role="form">
     <div class="row">
         <div class="col">
@@ -64,30 +66,45 @@
             </div>
         </div>
         <div class="col-md-4 col-12">
-            <div [ngClass]="screenService.isExtraSmallScreen()?'pt-3':'pt-5 sticky-top'">
+            <div *ngIf="!screenService.isExtraSmallScreen()" class="pt-5 sticky-top">
+                <div *ngIf="!screenService.isExtraSmallScreen()" class="row mb-3">
+                    <div class="col-md-12">
+                        <div>
+                            <span class="body-1-typo color-blue-2-typo text-start" style="font-weight: 700 !important">
+                                Vos critères :
+                            </span>
+                        </div>
+                        <div>
+                            <span class="body-2-typo color-blue-2-typo text-start">
+                                {{ getCriteresSimulation() }}...
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!screenService.isExtraSmallScreen()" class="row mb-4">
+                    <div class="col-12 col-md-12 my-auto">
+                        <button class="btn btn-style-perso-7" data-testid="btn-modification-criteres" tabindex="0"
+                            (click)="onClickButtonModificationCriteres()"
+                            (keyup)="handleKeyUpOnModificationCriteres($event)"
+                            tag-navigation="clic_bouton_modification_criteres">
+                            <span>Modifier les critères</span>
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-12 my-auto mt-3">
+                        <button class="btn btn-style-perso-6" data-testid="btn-telecharger-simulation" tabindex="0"
+                            (click)="onClickButtonImprimerMaSimulation()"
+                            (keyup)="handleKeyUpOnTelechargerSimulation($event)"
+                            tag-download="clic_bouton_telecharger_ma_simulation">
+                            <img alt="" src="./assets/images/download-blue.svg">
+                            <span>Télécharger</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">
                             Pour aller plus loin
                         </h3>
-                    </div>
-                </div>
-                <div *ngIf="!screenService.isExtraSmallScreen()" class="row mb-4">
-                    <div class="col-12 col-md-12 my-auto">
-                        <button class="btn btn-style-perso-6" data-testid="btn-refaire-simulation" tabindex="0"
-                            (click)="onClickButtonRefaireSimulation()" (keyup)="handleKeyUpOnRefaireSimulation($event)"
-                            tag-navigation="clic_bouton_retour">
-                            <span>Modifier la simulation</span>
-                        </button>
-                    </div>
-                    <div class="col-12 col-md-12 my-auto mt-3">
-                        <button class="btn btn-style-perso-7" data-testid="btn-telecharger-simulation" tabindex="0"
-                            (click)="onClickButtonImprimerMaSimulation()"
-                            (keyup)="handleKeyUpOnTelechargerSimulation($event)"
-                            tag-download="clic_bouton_telecharger_ma_simulation">
-                            <img alt="" src="./assets/images/download_2.svg">
-                            <span>Télécharger</span>
-                        </button>
                     </div>
                 </div>
                 <div id="actions-suite">
@@ -98,18 +115,49 @@
         </div>
     </div>
 </div>
-<div *ngIf="screenService.isExtraSmallScreen()" class="sticky-boutons-modifier-refaire-simulation ">
-    <button class="btn btn-modifier-simulation-sticky" data-testid="btn-refaire-simulation" tabindex="0"
-        (click)="onClickButtonRefaireSimulation()" (keyup)="handleKeyUpOnRefaireSimulation($event)"
-        tag-navigation="clic_bouton_modifier_la_simulation">
-        <span>Modifier</span>
-    </button>
-    <button class="btn btn-telecharger-simulation-sticky" data-testid="btn-telecharger-simulation" tabindex="0"
-        (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
-        tag-download="clic_bouton_telecharger_ma_simulation">
-        <img alt="" src="./assets/images/download_2.svg">
-        <span>Télécharger</span>
-    </button>
+<div *ngIf="screenService.isExtraSmallScreen()" class="container-fluid result-container-fluid pt-3">
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">
+                Pour aller plus loin
+            </h3>
+        </div>
+    </div>
+    <div id="actions-suite" class="row mb-3">
+        <app-actions-suite>
+        </app-actions-suite>
+    </div>
+    <div class="row mb-3 px-3">
+        <button class="btn-telecharger-simulation-mobile" data-testid="btn-telecharger-simulation" tabindex="0"
+            (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
+            tag-download="clic_bouton_telecharger_ma_simulation">
+            <img alt="" src="./assets/images/download-blue.svg">
+            <span>Télécharger</span>
+        </button>
+    </div>
+</div>
+<div *ngIf="screenService.isExtraSmallScreen()" class="sticky-boutons-modifier-refaire-simulation">
+    <div class="row m-0 mb-3">
+        <div class="col-7 px-1 text-start">
+            <div>
+                <span class="body-1-typo color-blue-2-typo" style="font-weight: 700 !important">
+                    Vos critères :
+                </span>
+            </div>
+            <div>
+                <span class="body-2-typo color-blue-2-typo text-start">
+                    {{ getCriteresSimulation() }}...
+                </span>
+            </div>
+        </div>
+        <div class="col-5 px-1">
+            <button class="btn-modifier-criteres-sticky" data-testid="btn-modification-criteres" tabindex="0"
+                (click)="onClickButtonModificationCriteres()" (keyup)="handleKeyUpOnModificationCriteres($event)"
+                tag-navigation="clic_bouton_modifier_la_simulation">
+                <span>Modifier</span>
+            </button>
+        </div>
+    </div>
 </div>
 <ng-template #modalResultatSimulationTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
@@ -118,6 +166,11 @@
             susceptibles d'évoluer.
         </p>">
     </app-tooltip>
+</ng-template>
+
+<ng-template #modalModificationCriteres>
+    <app-modification-criteres (displayLoading)="displayLoading($event)">
+    </app-modification-criteres>
 </ng-template>
 
 <ng-template #modalDetailMoisApresSimulation>

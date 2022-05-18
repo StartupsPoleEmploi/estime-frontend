@@ -29,6 +29,7 @@ import { MoisApresSimulationComponent } from './5.resultat-simulation/mois-apres
 import { DetailMoisApresSimulationComponent } from './5.resultat-simulation/detail-mois-apres-simulation/detail-mois-apres-simulation.component';
 import { DetailAideApresSimulationComponent } from './5.resultat-simulation/detail-aide-apres-simulation/detail-aide-apres-simulation.component';
 import { ActionSuiteComponent } from './5.resultat-simulation/actions-suite/action-suite/action-suite.component';
+import { ModificationCriteresComponent } from './5.resultat-simulation/modification-criteres/modification-criteres.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ActionSuiteComponent } from './5.resultat-simulation/actions-suite/acti
     MoisApresSimulationComponent,
     DetailMoisApresSimulationComponent,
     DetailAideApresSimulationComponent,
-    ActionSuiteComponent
+    ActionSuiteComponent,
+    ModificationCriteresComponent
   ],
   imports: [
     AccordionModule.forRoot(),

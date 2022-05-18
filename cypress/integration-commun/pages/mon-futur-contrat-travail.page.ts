@@ -36,6 +36,10 @@ class MonFuturContratTravailPage {
     cy.get('[data-testid=btn-type-contrat-cdd]').click({ force: true });
   }
 
+  public selectNombreMoisCDD(nombreMois: string): void {
+    cy.get('[data-testid=select-nombre-mois-cdd]').select(nombreMois);
+  }
+
   public saisirDureeHebdomadaire(dureeHebdomadaire: string): void {
     cy.get('[data-testid=input-duree-hebdomadaire]').type(dureeHebdomadaire);
   }

@@ -6,6 +6,7 @@ export class SideModalService {
 
     public modalRefAide: BsModalRef;
     public modalRefMois: BsModalRef;
+    public modalRefModificationCriteres: BsModalRef;
     public isOpen: boolean = false;
 
     constructor(
@@ -32,11 +33,21 @@ export class SideModalService {
             Object.assign({}, { class: modalClasses }));
     }
 
+    openSideModalModifiationCriteres(template: TemplateRef<any>) {
+        const modalClasses = 'gray modal-lg full-height-modal side-modal';
+        this.modalRefModificationCriteres = this.modalService.show(template,
+            Object.assign({}, { class: modalClasses }));
+    }
+
     closeSideModalAide() {
         this.modalRefAide.hide();
     }
 
     closeSideModalMois() {
         this.modalRefMois.hide();
+    }
+
+    closeSideModalModificationCriteres() {
+        this.modalRefModificationCriteres.hide();
     }
 }

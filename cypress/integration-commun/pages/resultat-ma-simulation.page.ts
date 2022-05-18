@@ -21,5 +21,13 @@ class ResultatMaSimulationPage {
   public clickOnRetour(): void {
     cy.get('[data-testid=bouton_retour_detail_mois]').click();
   }
+
+  public clickOnModificationCriteres(): void {
+    cy.get('[data-testid=btn-modification-criteres]').click();
+  }
+
+  public clickOnMettreAJourSimulation(): void {
+    cy.get('[data-testid=btn-mettre-a-jour-simulation]').click();
+  }
 }
 export default ResultatMaSimulationPage

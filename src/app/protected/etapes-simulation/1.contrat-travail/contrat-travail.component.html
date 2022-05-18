@@ -1,9 +1,15 @@
-<app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
-<app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
+<app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen() && !isModificationCriteres"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf=" screenService.isExtraSmallScreen() && !isModificationCriteres">
+</app-fil-etapes-mobile>
 <div class="container-fluid" role="form">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
-            <h1 class="h1-style-1 headline-1-typo">1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}</h1>
+            <h1 *ngIf="!isModificationCriteres" class="h1-style-1 headline-1-typo">
+                1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}
+            </h1>
+            <h1 *ngIf="isModificationCriteres" class="h1-style-1 headline-1-typo">
+                {{pageTitlesEnum.CONTRAT_TRAVAIL}}
+            </h1>
             <div class="text-under-h1 body-2-typo">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
             </div>
@@ -54,7 +60,8 @@
                 <div *ngIf="hasOffreEmploiOui">
                     <div class="card card-form card-form-style-2">
                         <div class="row">
-                            <div class="col-12 col-sm-6">
+                            <div class="col-md-12"
+                                [ngClass]="{'col-6': !isModificationCriteres,'col-12': isModificationCriteres}">
                                 <div class="row pb-3">
                                     <label class="label headline-4-typo">
                                         * Type de contrat
@@ -95,7 +102,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-6 pb-3" *ngIf="isTypeContratCDD">
+                            <div class="col-12 pb-3" *ngIf="isTypeContratCDD"
+                                [ngClass]="{'col-6': !isModificationCriteres,'col-12': isModificationCriteres}">
                                 <div class="row pb-3">
                                     <label class="label headline-4-typo" for="nombreMoisCDD">
                                         * Nombre de mois
@@ -105,7 +113,7 @@
                                     <div class="col">
                                         <select id="nombreMoisCDD" name="nombreMoisCDD"
                                             aria-label="Nombre de mois de votre contrat CDD"
-                                            data-testid="select-nombre--mois-cdd"
+                                            data-testid="select-nombre-mois-cdd"
                                             [(ngModel)]="futurTravail.nombreMoisContratCDD" class="form-select"
                                             data-width="auto" required
                                             [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
@@ -387,7 +395,8 @@
                                                 [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                                                 pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                                 placeholder="Nombre" required type="text" #dureeHebdomadaire="ngModel">
-                                            <span class="text-side-input d-inline body-2-typo">heures par semaine</span>
+                                            <span class="text-side-input d-inline body-2-typo">heures par
+                                                semaine</span>
                                         </div>
                                     </div>
                                 </div>
@@ -465,7 +474,7 @@
                     </div>
                 </div>
             </form>
-            <div class="row-btn-form">
+            <div *ngIf="!isModificationCriteres" class="row-btn-form">
                 <button class="btn-precedent" (click)="onClickButtonRetour()" aria-label="Retour à la page précédente"
                     data-testid="btn-futur-travail-retour" tag-navigation="clic_bouton_retour">
                     <div>
@@ -474,8 +483,8 @@
                     </div>
                 </button>
                 <button id="btn-futur-travail-suivant" class="btn-suivant" aria-label="Passer à la page suivante"
-                    type="submit" data-testid="btn-futur-travail-suivant"
-                    (click)="onSubmitFuturTravailForm(futurTravailForm)" tag-navigation="clic_bouton_suivant">
+                    type="submit" data-testid="btn-futur-travail-suivant" (click)="onSubmitFuturTravailForm()"
+                    tag-navigation="clic_bouton_suivant">
                     <div>
                         <span>Suivant</span>
                         <img alt="" src="./assets/images/fleche-suivant.svg">

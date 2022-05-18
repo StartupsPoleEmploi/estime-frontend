@@ -1,0 +1,33 @@
+<div id="modification-criteres-container">
+    <div class="div_bouton_retour_modification_criteres div-vertically-centered justify-content-start div_modification_criteres_with_padding"
+        (click)="sideModalService.closeSideModalModificationCriteres()" (keyup)="handleKeyUpOnRetour($event);"
+        tabindex="0" tag-action="clic_bouton_retour_modification_criteres"
+        data-testid="bouton_retour_modification_criteres">
+        <span class="bouton_retour body-2-typo color-blue-10-typo">
+            <i alt class="ps-2 pe-2 fas fa-chevron-left"></i>
+            <span class="body-2-typo color-blue-10-typo">Retour</span>
+        </span>
+    </div>
+    <app-contrat-travail #contratTravailComponent [isModificationCriteres]="true"></app-contrat-travail>
+    <div class="div_boutons_validation_modification_criteres div-vertically-centered text-center row">
+        <div class="col-md-6 col-12">
+            <button id="btn-modification-autres-criteres" class="btn mx-auto"
+                (click)="onClickButtonModificationAutresCriteres()" aria-label="Modifier d'autres critères"
+                data-testid="btn-modification-autres-criteres"
+                tag-navigation="clic_bouton_modification_autres_criteres">
+                <div>
+                    <span class="button-typo">Modifier d'autres critères</span>
+                </div>
+            </button>
+        </div>
+        <div class="col-md-6 col-12">
+            <button id="btn-mettre-a-jour-simulation" class="btn-style-perso-1 mx-auto"
+                aria-label="Mettre à jour la simulation" type="submit" data-testid="btn-mettre-a-jour-simulation"
+                (click)="onSubmitModificationCriteresForm()" tag-navigation="clic_bouton_mettre_a_jour_simulation">
+                <div>
+                    <span class="button-typo">Mettre à jour la simulation</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

@@ -18,6 +18,7 @@ import { SimulationMensuelle } from '@models/simulation-mensuelle';
 import { DetailTemporaliteService } from '@app/core/services/utile/detail-temporalite.service';
 import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
+import { ModificationCriteresComponent } from './modification-criteres/modification-criteres.component';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -37,9 +38,12 @@ export class ResultatSimulationComponent implements OnInit {
 
   afficherDetails: boolean;
   nombreMoisSimules: number;
+  isPageLoadingDisplay: boolean;
 
   @ViewChild('modalDetailAideApresSimulation') modalDetailAideApresSimulation;
   @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
+  @ViewChild('modalModificationCriteres') modalModificationCriteres;
+  @ViewChild(ModificationCriteresComponent) modificationCriteresComponent: ModificationCriteresComponent;
 
   constructor(
     public aidesService: AidesService,
@@ -74,6 +78,14 @@ export class ResultatSimulationComponent implements OnInit {
   public aideSelection(aide: Aide) {
     this.sideModalService.openSideModalAide(this.modalDetailAideApresSimulation);
     this.aideSelected = aide;
+  }
+
+  public displayLoading(displayLoading: boolean) {
+    this.isPageLoadingDisplay = displayLoading;
+  }
+
+  public modificationCriteres() {
+    this.sideModalService.openSideModalModifiationCriteres(this.modalModificationCriteres);
   }
 
   public getDetailMensuelSelected(simulationMensuelle: SimulationMensuelle) {
@@ -132,6 +144,10 @@ export class ResultatSimulationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
+  public onClickButtonModificationCriteres(): void {
+    this.modificationCriteres();
+  }
+
   private loadDataSimulation(): void {
     this.simulation = this.deConnecteSimulationService.getSimulation();
   }
@@ -156,5 +172,16 @@ export class ResultatSimulationComponent implements OnInit {
     if (event.keyCode === 13) {
       this.onClickButtonRefaireSimulation();
     }
+  }
+
+  public handleKeyUpOnModificationCriteres(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickButtonModificationCriteres();
+    }
+  }
+
+  public getCriteresSimulation(): string {
+    if (this.screenService.isExtraSmallScreen) return this.deConnecteRessourcesFinancieresAvantSimulationService.getCriteresSimulationLibelleCourt()
+    return this.deConnecteRessourcesFinancieresAvantSimulationService.getCriteresSimulation();
   }
 }

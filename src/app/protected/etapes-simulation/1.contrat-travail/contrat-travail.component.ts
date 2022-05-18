@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { Salaire } from '@app/commun/models/salaire';
@@ -19,6 +19,9 @@ import { FuturTravail } from '@models/futur-travail';
   styleUrls: ['./contrat-travail.component.scss']
 })
 export class ContratTravailComponent implements OnInit {
+
+  @ViewChild('futurTravailForm', { read: NgForm }) futurTravailForm: FormGroup;
+  @Input() isModificationCriteres: boolean;
 
   futurTravail: FuturTravail;
   isFuturTravailFormSubmitted = false;
@@ -47,8 +50,6 @@ export class ContratTravailComponent implements OnInit {
     { label: "5 mois", value: 5 },
     { label: "6 mois et plus", value: 6 }
   ];
-
-  // services à injecter dynamiquement
 
   constructor(
     private aidesService: AidesService,
@@ -97,39 +98,16 @@ export class ContratTravailComponent implements OnInit {
     this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 
-  public onSubmitFuturTravailForm(form: FormGroup): void {
+  public onSubmitFuturTravailForm(): void {
     this.isFuturTravailFormSubmitted = true;
     this.isFuturTravailSalaireFormSubmitted = true;
-    if (this.isDonneesSaisiesValides(form)) {
+    this.propagateSalaire();
+    if (this.isDonneesSaisiesValides(this.futurTravailForm)) {
       if (!this.afficherNombreTrajetsDomicileTravail()) this.futurTravail.nombreTrajetsDomicileTravail = 0;
       this.deConnecteService.setFuturTravail(this.futurTravail);
-      this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
+      if (!this.isModificationCriteres) this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.MA_SITUATION]);
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
-    }
-  }
-
-  public unsetNombreMoisContrat(): void {
-    this.futurTravail.nombreMoisContratCDD = null;
-  }
-
-  public calculSalaireMensuelNet() {
-    this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaire.montantBrut >= 100 && this.futurTravail.salaire.montantBrut != null) {
-      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
-
-    } else {
-      this.futurTravail.salaire.montantNet = undefined;
-    }
-  }
-
-  public calculSalaireMensuelBrut() {
-    this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaire.montantNet >= 57 && this.futurTravail.salaire.montantNet != null) {
-      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
-
-    } else {
-      this.futurTravail.salaire.montantBrut = undefined;
     }
   }
 
@@ -164,7 +142,6 @@ export class ContratTravailComponent implements OnInit {
       || (this.isSalaireSouhaiteSMIC && this.isSalaireSouhaiteAutre)
     );
   }
-
   public onClickCheckBoxHasOffreEmploiOui() {
     if (this.hasOffreEmploiOui) {
       this.hasOffreEmploiNon = false;
@@ -317,12 +294,46 @@ export class ContratTravailComponent implements OnInit {
     }
   }
 
+  public calculSalaireMensuelNet() {
+    this.isFuturTravailSalaireFormSubmitted = false;
+    if (this.futurTravail.salaire.montantBrut >= 100 && this.futurTravail.salaire.montantBrut != null) {
+      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+
+    } else {
+      this.futurTravail.salaire.montantNet = undefined;
+    }
+  }
+
+  public calculSalaireMensuelBrut() {
+    this.isFuturTravailSalaireFormSubmitted = false;
+    if (this.futurTravail.salaire.montantNet >= 57 && this.futurTravail.salaire.montantNet != null) {
+      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+
+    } else {
+      this.futurTravail.salaire.montantBrut = undefined;
+    }
+  }
+
+  private propagateSalaire() {
+    if (this.hasOffreEmploiNon) {
+      if (this.isSalaireSouhaiteSMIC) {
+        this.setSalaireSouhaiteSMIC();
+      } else if (this.isSalaireSouhaiteAutre) {
+        this.setSalaireSouhaiteAutre();
+      }
+    }
+  }
+
   public getMontantSmicMensuelNet() {
     return this.brutNetService.getSmicMensuelNetFromNombreHeure(this.futurTravail.nombreHeuresTravailleesSemaine)
   }
 
   public afficherNombreTrajetsDomicileTravail(): boolean {
     return this.futurTravail.distanceKmDomicileTravail >= 20;
+  }
+
+  public unsetNombreMoisContrat(): void {
+    this.futurTravail.nombreMoisContratCDD = null;
   }
 
   public setDureeHebdoTempsPlein() {

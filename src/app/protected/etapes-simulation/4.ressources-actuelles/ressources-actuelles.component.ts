@@ -21,7 +21,6 @@ import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Simulation } from '@app/commun/models/simulation';
 
 @Component({
@@ -342,7 +341,7 @@ export class RessourcesActuellesComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.RESULTAT_SIMULATION]);
   }
 
-  private traiterErreurSimulerMesAides(error: HttpErrorResponse): void {
+  private traiterErreurSimulerMesAides(): void {
     this.isPageLoadingDisplay = false;
     this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE;
   }

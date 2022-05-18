@@ -1,0 +1,71 @@
+{
+	"montantRessourcesFinancieresMoisAvantSimulation": 1457.0,
+	"simulationsMensuelles": [
+		{
+			"datePremierJourMoisSimule": "2022-03-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1500.0
+				}
+			},
+			"aides": {
+				"APL": {
+					"code": "APL",
+					"detail": null,
+					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
+					"montant": 310.0,
+					"nom": "Aide Personnalisée au Logement",
+					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": true
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2022-04-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1500.0
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"detail": null,
+					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
+					"montant": 271.0,
+					"nom": "Allocation de Logement Sociale",
+					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2022-05-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1500.0
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"detail": null,
+					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
+					"montant": 271.0,
+					"nom": "Allocation de Logement Sociale",
+					"organisme": "CAF",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		}
+	]
+}
