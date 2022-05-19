@@ -656,7 +656,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 3, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
 
-      // cy.wait(1000);
       cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-are/pas-de-complement-are-offre-emploi-non-smic-35h.json' })
 
       resultatMaSimulationPage.clickOnModificationCriteres();

@@ -614,12 +614,6 @@
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                 </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="this.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
-                </div>
             </div>
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isTravailleurIndependant()">
@@ -653,12 +647,6 @@
                     <span class="error-input-message"
                         *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="this.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
                 </div>
             </div>

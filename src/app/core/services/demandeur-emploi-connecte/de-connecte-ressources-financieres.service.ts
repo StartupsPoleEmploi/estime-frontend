@@ -336,12 +336,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
   private isRevenusValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     let isValide = true;
-    if (isValide && this.deConnecteInfosPersonnellesService.isTravailleurIndependant()) {
-      isValide = ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice > 0;
-    }
-    if (isValide && this.deConnecteInfosPersonnellesService.isMicroEntrepreneur()) {
-      isValide = ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0;
-    }
     if (isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
       isValide = ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0;
     }

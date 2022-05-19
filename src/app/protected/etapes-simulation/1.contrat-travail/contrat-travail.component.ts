@@ -20,6 +20,9 @@ import { FuturTravail } from '@models/futur-travail';
 })
 export class ContratTravailComponent implements OnInit {
 
+
+  private static DISTANCE_MINI_AIDE_MOB = 10;
+
   @ViewChild('futurTravailForm', { read: NgForm }) futurTravailForm: FormGroup;
   @Input() isModificationCriteres: boolean;
 
@@ -329,7 +332,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public afficherNombreTrajetsDomicileTravail(): boolean {
-    return this.futurTravail.distanceKmDomicileTravail >= 20;
+    return this.futurTravail.distanceKmDomicileTravail >= ContratTravailComponent.DISTANCE_MINI_AIDE_MOB;
   }
 
   public unsetNombreMoisContrat(): void {

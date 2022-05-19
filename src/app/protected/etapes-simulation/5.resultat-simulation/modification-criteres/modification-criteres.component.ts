@@ -1,24 +1,16 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, OnInit, Input, ViewEncapsulation, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { TypesContratTavailEnum } from '@app/commun/enumerations/types-contrat-travail.enum';
-import { FuturTravail } from '@app/commun/models/futur-travail';
-import { Salaire } from '@app/commun/models/salaire';
 import { Simulation } from '@app/commun/models/simulation';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { AidesService } from '@app/core/services/utile/aides.service';
-import { BrutNetService } from '@app/core/services/utile/brut-net.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
-import { ContactComponent } from '@app/public/contact/contact.component';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ContratTravailComponent } from '../../1.contrat-travail/contrat-travail.component';
 
