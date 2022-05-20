@@ -36,7 +36,7 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
       const salaire = "1231";
-      const distanceDomicileLieuTravail = "10";
+      const distanceDomicileLieuTravail = "8";
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
@@ -138,7 +138,7 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE FUTUR CONTRAT
       const dureeHebdomadaire = "35";
       const salaire = "1231";
-      const distanceDomicileLieuTravail = "10";
+      const distanceDomicileLieuTravail = "8";
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE PERSONNES A CHARGE
