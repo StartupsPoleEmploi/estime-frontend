@@ -71,7 +71,6 @@ export class MaSituationComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
     this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
-    console.log(this.informationsPersonnelles.isBeneficiaireACRE);
     this.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
     this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");

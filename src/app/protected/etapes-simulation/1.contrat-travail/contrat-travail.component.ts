@@ -20,7 +20,6 @@ import { FuturTravail } from '@models/futur-travail';
 })
 export class ContratTravailComponent implements OnInit {
 
-
   private static DISTANCE_MINI_AIDE_MOB = 10;
 
   @ViewChild('futurTravailForm', { read: NgForm }) futurTravailForm: FormGroup;
@@ -399,8 +398,6 @@ export class ContratTravailComponent implements OnInit {
     this.isSalaireSouhaiteSMIC = false;
     this.futurTravail.salaireSouhaiteAutre = true;
     this.futurTravail.salaireSouhaiteSMIC = false;
-    this.futurTravail.salaire.montantNet = null;
-    this.futurTravail.salaire.montantBrut = null;
   }
 
   public unsetSalaireSouhaiteAutre() {
