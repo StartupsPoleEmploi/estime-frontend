@@ -47,6 +47,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantComplementARE = "142";
       const montantComplementAREReduit = "106";
       const montantPrimeActivite_M5_M6 = "62";
@@ -98,25 +99,25 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       //premier mois
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 2, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 2, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 2, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 2, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //troisième mois
       resultatMaSimulationPage.clickOnMois(3);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 3, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 3, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 3, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 3, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //quatrième mois
       resultatMaSimulationPage.clickOnMois(4);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 4, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 4, montantComplementAREReduit);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 4, montantComplementAREReduit);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 4, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //cinquième mois
@@ -160,6 +161,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantComplementARE = "142";
       const montantPrimeActivite_M5_M6 = "62";
       const montantALS_M2_M3_M4_M5_M6 = "271";
@@ -210,38 +212,38 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       //premier mois
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 2, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 2, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 2, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 2, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //troisième mois
       resultatMaSimulationPage.clickOnMois(3);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 3, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 3, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 3, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 3, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //quatrième mois
       resultatMaSimulationPage.clickOnMois(4);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 4, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 4, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 4, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 4, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //cinquième mois
       resultatMaSimulationPage.clickOnMois(5);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 5, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 5, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 5, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 5, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 5, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
       //sixième mois
       resultatMaSimulationPage.clickOnMois(6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 6, salaire);
-      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 6, montantComplementARE);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI, 6, montantComplementARE);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
@@ -273,6 +275,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantPrimeActivite_M5_M6 = "174";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
@@ -323,6 +326,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
@@ -379,6 +383,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantPrimeActivite_M5_M6 = "174";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
@@ -430,6 +435,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
@@ -484,6 +490,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantPrimeActivite_M5_M6 = "170";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
@@ -533,6 +540,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
@@ -592,6 +600,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
+      const montantARECalculé = "1102";
       const montantPrimeActivite_M5_M6 = "170";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
@@ -644,6 +653,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
@@ -669,6 +679,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.clickOnMois(1);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaireMisAJour);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);

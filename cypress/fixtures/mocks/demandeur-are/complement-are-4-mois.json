@@ -15,7 +15,7 @@
 					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
-					"montant": 142.0,
+					"montant": 1102.0,
 					"nom": "Allocation de Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
@@ -43,12 +43,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation de Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -75,12 +75,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation de Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -107,12 +107,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": "À l'issu de ce mois, vous ne percevrez plus l'ARE car votre reliquat sera épuisé sauf si un rechargement a lieu à ce moment-là.",
 					"montant": 106.0,
-					"nom": "Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation de Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false

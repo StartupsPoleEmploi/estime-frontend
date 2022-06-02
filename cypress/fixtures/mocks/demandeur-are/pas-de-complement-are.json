@@ -11,6 +11,16 @@
 				}
 			},
 			"aides": {
+				"ARE": {
+					"code": "ARE",
+					"detail": null,
+					"messageAlerte": null,
+					"montant": 1102.0,
+					"nom": "Allocation de Retour à l'Emploi",
+					"organisme": "PE",
+					"lienExterne": "",
+					"reportee": false
+				},
 				"APL": {
 					"code": "APL",
 					"detail": null,

@@ -10,6 +10,7 @@ export enum LibellesAidesEnum {
   ALLOCATION_SOUTIEN_FAMILIAL = 'Allocation de Soutien Familial',
   ALLOCATION_SUPPLEMENTAIRE_INVALIDITE = 'Allocation supplémentaire d\'invalidité',
   ALLOCATIONS_FAMILIALES = 'Allocations Familiales',
+  COMPLEMENT_AIDE_RETOUR_EMPLOI = 'Complément d\'Aide au Retour à l\'Emploi',
   COMPLEMENT_FAMILIAL = 'Complément Familial',
   IMMOBILIER = 'Revenus immobiliers',
   MICRO_ENTREPRENEUR = 'Revenus micro-entreprise',

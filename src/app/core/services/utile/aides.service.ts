@@ -42,6 +42,10 @@ export class AidesService {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_RETOUR_EMPLOI);
   }
 
+  public getMontantComplementARE(simulationSelected: SimulationMensuelle): number {
+    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI);
+  }
+
   public getMontantRSA(simulationSelected: SimulationMensuelle): number {
     return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.RSA);
   }

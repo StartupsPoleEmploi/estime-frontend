@@ -8,6 +8,7 @@ export enum SituationTemporaliteEnum {
     FIN_RSA_PRIME_ACTIVITE = "Vous n'êtes plus éligible au RSA, la prime d'activité complète vos revenus",
     RSA_RECALCUL_PRIME_ACTIVITE = "Le montant du RSA est recalculé suite à votre déclaration trimestrielle et la prime d'activité complète vos revenus",
     RSA_RECALCUL = "Le montant du RSA est recalculé suite à votre déclaration trimestrielle",
+    RELIQUAT_ARE = "Vous continuez à percevoir le montant complet de votre Allocation de Retour à l'Emploi",
     COMPLEMENT_ARE = "Vous percevez un complément ARE en plus de votre salaire",
     FIN_COMPLEMENT_ARE = "Vous ne percevez plus de complément ARE car vos droits sont épuisés à ce jour",
     COMPLEMENT_ARE_PARTIEL = "Vous percevez un complément ARE partiel à hauteur de vos droits restants",

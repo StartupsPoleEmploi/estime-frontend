@@ -21,7 +21,7 @@ export class DetailTemporaliteService {
   situation = {
     rsa: 0,
     ass: 0,
-    are: 0,
+    complement_are: 0,
     aah: 0,
     ppa: 0,
     apl: 0,
@@ -109,7 +109,7 @@ export class DetailTemporaliteService {
   private initSituationAidesPoleEmploi() {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null) {
-        this.situation.are = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
+        this.situation.complement_are = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
       }
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS != null) {
         this.situation.rsa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet);
@@ -237,18 +237,18 @@ export class DetailTemporaliteService {
 
   private handleChangementARE(simulationMensuelle: SimulationMensuelle, indexMois: number) {
     // Si on est au premier mois
-    if (indexMois == 0) {
-      // Si le demandeur a de l'ARE on lui indique qu'il commence à en toucher depuis sa reprise d'emploi
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
-      }
+    if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RELIQUAT_ARE);
+
+    } else if (indexMois == 1 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI)) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
     }
     // Sinon si on est à n'importe quel autre mois
     else {
       // Si le montant de l'ARE a changé par rapport au mois précédent
-      if (this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantARE(simulationMensuelle))) {
+      if (this.checkForChangeInSituation(this.situation.complement_are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
         // Si le demandeur a toujours de l'ARE
-        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
+        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI)) {
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE_PARTIEL);
         }
         // Sinon le demandeur n'a plus le droit a de l'ARE
@@ -301,7 +301,7 @@ export class DetailTemporaliteService {
   // Méthode qui permet de mettre à jour la situation mensuelle du demandeur avec les données du mois en cours
   private applyNewSituation(simulationMensuelle: SimulationMensuelle) {
     this.situation.rsa = this.aidesService.getMontantRSA(simulationMensuelle);
-    this.situation.are = this.aidesService.getMontantARE(simulationMensuelle);
+    this.situation.complement_are = this.aidesService.getMontantComplementARE(simulationMensuelle);
     this.situation.aah = this.aidesService.getMontantAAH(simulationMensuelle);
     this.situation.ass = this.aidesService.getMontantASS(simulationMensuelle);
     this.situation.ppa = this.aidesService.getMontantPrimeActivite(simulationMensuelle);
