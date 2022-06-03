@@ -43,8 +43,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -75,8 +75,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -107,8 +107,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": "À l'issu de ce mois, vous ne percevrez plus l'ARE car votre reliquat sera épuisé sauf si un rechargement a lieu à ce moment-là.",
 					"montant": 106.0,

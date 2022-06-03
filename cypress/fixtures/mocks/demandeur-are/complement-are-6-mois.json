@@ -43,8 +43,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -75,8 +75,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -107,8 +107,8 @@
 				}
 			},
 			"aides": {
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -149,8 +149,8 @@
 					"lienExterne": "https://www.caf.fr/allocataires/mes-services-en-ligne/faire-une-demande-de-prestation",
 					"reportee": false
 				},
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
@@ -191,8 +191,8 @@
 					"lienExterne": "https://www.caf.fr/allocataires/mes-services-en-ligne/faire-une-demande-de-prestation",
 					"reportee": false
 				},
-				"CARE": {
-					"code": "CARE",
+				"ARE": {
+					"code": "ARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
