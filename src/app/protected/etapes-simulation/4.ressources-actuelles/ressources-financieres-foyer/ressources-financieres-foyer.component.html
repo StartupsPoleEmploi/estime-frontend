@@ -410,8 +410,7 @@
                 </div>
             </div>
         </div>
-        <div
-            *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA() || deConnecteBeneficiaireAidesService.isBeneficiaireAAH() || (isConcerneParAideLogement() && !(deConnecteSituationFamilialeService.isCelibataireSansEnfant() && deConnecteBeneficiaireAidesService.isBeneficiaireRSA()))">
+        <div *ngIf="isConcerneParDeclarationTrimestrielle()">
             <div class="row flex-column">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?

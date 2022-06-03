@@ -270,6 +270,24 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       || this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement;
   }
 
+  public hasAideLogement(): boolean {
+    return this.isConcerneParAideLogement()
+      && (this.beneficiaireAides.beneficiaireALF
+        || this.beneficiaireAides.beneficiaireALS
+        || this.beneficiaireAides.beneficiaireAPL
+      );
+  }
+
+  public isConcerneParDeclarationTrimestrielle() {
+    return this.deConnecteBeneficiaireAidesService.hasFoyerRSA()
+      || this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()
+      || (this.hasAideLogement()
+        && !(this.deConnecteSituationFamilialeService.isCelibataireSansEnfant()
+          && this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()
+        )
+      );
+  }
+
   public isConcerneParAideLogement(): boolean {
     return this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
       || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
