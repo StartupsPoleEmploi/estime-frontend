@@ -157,11 +157,13 @@ export class DetailTemporaliteService {
   }
 
   private handleChangementASS(simulationMensuelle: SimulationMensuelle, indexMois: number) {
-    if (!this.deConnecteInfosPersonellesService.isBeneficiaireACRE) {
-      // Si on est au premier mois
-      if (indexMois == 0) {
-        // Si le demandeur perçoit de l'ASS ce mois-ci
-        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+    if (!this.deConnecteInfosPersonellesService.isBeneficiaireACRE()) {
+      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
+        // Si on est au premier mois
+        if (indexMois == 0) {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_MAINTIEN);
+        }
+        else if (indexMois == 1) {
           // On conditionne l'affichage du détail au nombre de mois travaillés avant la simulation
           const nombreMoisTravailles3DernierMoisAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.getNombreMoisTravaillesXDerniersMois(this.demandeurEmploi.ressourcesFinancieresAvantSimulation, 3)
           switch (nombreMoisTravailles3DernierMoisAvantSimulation) {
@@ -178,8 +180,10 @@ export class DetailTemporaliteService {
               break;
           }
         }
-      } else if (this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle)) && !this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS);
+      } else {
+        if (this.checkForChangeInSituation(this.situation.ass, this.aidesService.getMontantASS(simulationMensuelle))) {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_ASS);
+        }
       }
     }
   }
