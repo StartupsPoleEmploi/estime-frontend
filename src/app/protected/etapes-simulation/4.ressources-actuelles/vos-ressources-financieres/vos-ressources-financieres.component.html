@@ -148,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
+        <div *ngIf="afficherQuestionDegressiviteAre()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
@@ -196,8 +196,7 @@
                 </div>
             </div>
         </div>
-        <div
-            *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE() && ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre">
+        <div *ngIf="afficherQuestionTypeTauxDegressiviteAre()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Je souhaite simuler le montant de mon allocation en cas de reprise d'emploi en :
@@ -243,7 +242,7 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE() && afficherMontantAllocationAre()">
+        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * {{ getLibelleMontantBrutAllocationJournaliere() }}

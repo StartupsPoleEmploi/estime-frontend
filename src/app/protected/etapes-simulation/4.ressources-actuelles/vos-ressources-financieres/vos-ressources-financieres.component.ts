@@ -27,6 +27,9 @@ import { ModalService } from '@app/core/services/utile/modal.service';
 })
 export class VosRessourcesFinancieresComponent implements OnInit {
 
+
+  SEUIL_DEGRESSIVITE_ARE = 140;
+
   dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
@@ -165,7 +168,15 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public afficherMontantAllocationAre() {
+  public afficherQuestionDegressiviteAre(): boolean {
+    return this.deConnecteBeneficiaireAidesService.isBeneficiaireARE() && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut >= this.SEUIL_DEGRESSIVITE_ARE;
+  }
+
+  public afficherQuestionTypeTauxDegressiviteAre(): boolean {
+    return this.deConnecteBeneficiaireAidesService.isBeneficiaireARE() && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre;
+  }
+
+  public afficherMontantAllocationAre(): boolean {
     return (
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null &&
       (
