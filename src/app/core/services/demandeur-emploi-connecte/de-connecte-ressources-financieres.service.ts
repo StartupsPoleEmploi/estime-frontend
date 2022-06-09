@@ -13,6 +13,9 @@ import { AidesCAF } from '@app/commun/models/aides-caf';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { TypesContratTravailEnum } from '@app/commun/enumerations/types-contrat-travail.enum';
+import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libelles-types-contrat-travail.enum';
+import { LibellesCourtsTypesContratTravailEnum } from '@app/commun/enumerations/libelles-courts-types-contrat-travail.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresAvantSimulationService {
@@ -603,20 +606,34 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
   public getCriteresSimulation(): string {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const typeContrat = demandeurEmploiConnecte.futurTravail.typeContrat;
-    const nombreMoisContratCDD = demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
+    const typeContrat = this.getLibelleTypeContrat(demandeurEmploiConnecte.futurTravail.typeContrat);
+    const nombreMoisContratCDD = (demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' || demandeurEmploiConnecte.futurTravail.typeContrat == 'INTERIM' || demandeurEmploiConnecte.futurTravail.typeContrat == 'IAE') ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
     const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
-    return `${typeContrat} ${nombreMoisContratCDD}- ${nombreHeuresTravailleesSemaine}h par semaine - ${salaireNet}€ mensuel`
+    return `${typeContrat} ${nombreMoisContratCDD} · ${nombreHeuresTravailleesSemaine}h par semaine · ${salaireNet}€ mensuel`
   }
 
 
   public getCriteresSimulationLibelleCourt(): string {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    const typeContrat = demandeurEmploiConnecte.futurTravail.typeContrat;
-    const nombreMoisContratCDD = demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
+    const typeContrat = this.getLibelleTypeContratCourt(demandeurEmploiConnecte.futurTravail.typeContrat);
+    const nombreMoisContratCDD = (demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' || demandeurEmploiConnecte.futurTravail.typeContrat == 'INTERIM' || demandeurEmploiConnecte.futurTravail.typeContrat == 'IAE') ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
     const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
-    return `${typeContrat} ${nombreMoisContratCDD}· ${nombreHeuresTravailleesSemaine}h · ${salaireNet}€`
+    return `${typeContrat} · ${nombreHeuresTravailleesSemaine}h · ${salaireNet}€`
+  }
+
+  private getLibelleTypeContrat(typeContrat: string): string {
+    if (typeContrat == TypesContratTravailEnum.CDD) return LibellesTypesContratTravailEnum.CDD;
+    if (typeContrat == TypesContratTravailEnum.CDI) return LibellesTypesContratTravailEnum.CDI;
+    if (typeContrat == TypesContratTravailEnum.INTERIM) return LibellesTypesContratTravailEnum.INTERIM;
+    if (typeContrat == TypesContratTravailEnum.IAE) return LibellesTypesContratTravailEnum.IAE;
+  }
+
+  private getLibelleTypeContratCourt(typeContrat: string): string {
+    if (typeContrat == TypesContratTravailEnum.CDD) return LibellesCourtsTypesContratTravailEnum.CDD;
+    if (typeContrat == TypesContratTravailEnum.CDI) return LibellesCourtsTypesContratTravailEnum.CDI;
+    if (typeContrat == TypesContratTravailEnum.INTERIM) return LibellesCourtsTypesContratTravailEnum.INTERIM;
+    if (typeContrat == TypesContratTravailEnum.IAE) return LibellesCourtsTypesContratTravailEnum.IAE;
   }
 }

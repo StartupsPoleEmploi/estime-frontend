@@ -66,6 +66,34 @@ input {
 }
 
 
+.btn-checkbox-type-contrat {
+  width: 9.375rem;
+  max-width: 10.625rem;
+  min-width: fit-content;
+  height: 2.5rem;
+  background-color: white;
+  border: 0.0625rem solid $color-blue-9;
+  
+
+  border-radius: 0.25rem;
+
+  @media #{$extra-small-device} {
+    width: 45%;
+    max-width: 8.65rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &.active {
+    border: 0.0625rem solid $color-blue-1;
+    background-color: $color-blue-1;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+
 .btn-checkbox-duree-hebdo,
 .btn-checkbox-salaire-souhaite {
   width: 9.375rem;

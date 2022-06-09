@@ -181,7 +181,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public getCriteresSimulation(): string {
-    if (this.screenService.isExtraSmallScreen) return this.deConnecteRessourcesFinancieresAvantSimulationService.getCriteresSimulationLibelleCourt()
+    if (this.screenService.isExtraSmallScreen()) return this.deConnecteRessourcesFinancieresAvantSimulationService.getCriteresSimulationLibelleCourt()
     return this.deConnecteRessourcesFinancieresAvantSimulationService.getCriteresSimulation();
   }
 }

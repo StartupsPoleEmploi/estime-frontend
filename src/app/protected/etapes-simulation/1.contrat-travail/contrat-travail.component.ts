@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libelles-types-contrat-travail.enum';
 import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
@@ -10,8 +11,9 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
-import { TypesContratTavailEnum } from '@enumerations/types-contrat-travail.enum';
+import { TypesContratTravailEnum } from '@enumerations/types-contrat-travail.enum';
 import { FuturTravail } from '@models/futur-travail';
+import { LibellesCourtsTypesContratTravailEnum } from '@app/commun/enumerations/libelles-courts-types-contrat-travail.enum';
 
 @Component({
   selector: 'app-contrat-travail',
@@ -30,12 +32,16 @@ export class ContratTravailComponent implements OnInit {
   isFuturTravailSalaireFormSubmitted = false;
   isNombreTrajetsDomicileTravailDisplay = false;
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
-  typesContratTavailEnum: typeof TypesContratTavailEnum = TypesContratTavailEnum;
+  TypesContratTravailEnum: typeof TypesContratTravailEnum = TypesContratTravailEnum;
+  LibellesTypesContratTravailEnum: typeof LibellesTypesContratTravailEnum = LibellesTypesContratTravailEnum;
+  LibellesCourtsTypesContratTravailEnum: typeof LibellesCourtsTypesContratTravailEnum = LibellesCourtsTypesContratTravailEnum
   messageErreurSalaire: string;
   hasOffreEmploiOui: boolean;
   hasOffreEmploiNon: boolean;
   isTypeContratCDI: boolean;
   isTypeContratCDD: boolean;
+  isTypeContratInterim: boolean;
+  isTypeContratIAE: boolean;
   typeSalaireDisplay: string;
 
   isDureeHebdoTempsPlein: boolean;
@@ -79,8 +85,10 @@ export class ContratTravailComponent implements OnInit {
       }
       this.hasOffreEmploiOui = this.futurTravail.hasOffreEmploiEnVue;
       this.hasOffreEmploiNon = !this.futurTravail.hasOffreEmploiEnVue;
-      this.isTypeContratCDI = this.futurTravail.typeContrat == this.typesContratTavailEnum.CDI;
-      this.isTypeContratCDD = this.futurTravail.typeContrat == this.typesContratTavailEnum.CDD;
+      this.isTypeContratCDI = this.futurTravail.typeContrat == this.TypesContratTravailEnum.CDI;
+      this.isTypeContratCDD = this.futurTravail.typeContrat == this.TypesContratTravailEnum.CDD;
+      this.isTypeContratInterim = this.futurTravail.typeContrat == this.TypesContratTravailEnum.INTERIM;
+      this.isTypeContratIAE = this.futurTravail.typeContrat == this.TypesContratTravailEnum.IAE;
       this.isDureeHebdoTempsPlein = this.futurTravail.dureeHebdoTempsPlein;
       this.isDureeHebdoMiTemps = this.futurTravail.dureeHebdoMiTemps;
       this.isDureeHebdoAutre = this.futurTravail.dureeHebdoAutre;
@@ -128,7 +136,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   private isTypeContratInvalide(): boolean {
-    return this.futurTravail.typeContrat == null || (this.isTypeContratCDI && this.isTypeContratCDD);
+    return this.futurTravail.typeContrat == null || (this.isTypeContratCDI && this.isTypeContratCDD && this.isTypeContratInterim && this.isTypeContratIAE);
   }
 
   public isDureeHebdoInvalide(): boolean {
@@ -157,7 +165,7 @@ export class ContratTravailComponent implements OnInit {
     if (this.hasOffreEmploiNon) {
       this.hasOffreEmploiOui = false;
       this.futurTravail.hasOffreEmploiEnVue = false;
-      this.futurTravail.typeContrat = TypesContratTavailEnum.CDI;
+      this.futurTravail.typeContrat = TypesContratTravailEnum.CDI;
     } else {
       this.futurTravail.hasOffreEmploiEnVue = null;
     }
@@ -166,7 +174,9 @@ export class ContratTravailComponent implements OnInit {
   public onClickCheckBoxIsTypeContratCDI() {
     if (this.isTypeContratCDI) {
       this.isTypeContratCDD = false;
-      this.futurTravail.typeContrat = this.typesContratTavailEnum.CDI;
+      this.isTypeContratIAE = false;
+      this.isTypeContratIAE = false;
+      this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDI;
       this.unsetNombreMoisContrat();
     } else {
       this.futurTravail.typeContrat = null;
@@ -176,7 +186,33 @@ export class ContratTravailComponent implements OnInit {
   public onClickCheckBoxIsTypeContratCDD() {
     if (this.isTypeContratCDD) {
       this.isTypeContratCDI = false;
-      this.futurTravail.typeContrat = this.typesContratTavailEnum.CDD;
+      this.isTypeContratIAE = false;
+      this.isTypeContratIAE = false;
+      this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDD;
+    } else {
+      this.futurTravail.typeContrat = null;
+      this.unsetNombreMoisContrat();
+    }
+  }
+
+  public onClickCheckBoxIsTypeContratInterim() {
+    if (this.isTypeContratInterim) {
+      this.isTypeContratCDI = false;
+      this.isTypeContratCDD = false;
+      this.isTypeContratIAE = false;
+      this.futurTravail.typeContrat = this.TypesContratTravailEnum.INTERIM;
+    } else {
+      this.futurTravail.typeContrat = null;
+      this.unsetNombreMoisContrat();
+    }
+  }
+
+  public onClickCheckBoxIsTypeContratIAE() {
+    if (this.isTypeContratIAE) {
+      this.isTypeContratCDI = false;
+      this.isTypeContratCDD = false;
+      this.isTypeContratInterim = false;
+      this.futurTravail.typeContrat = this.TypesContratTravailEnum.IAE;
     } else {
       this.futurTravail.typeContrat = null;
       this.unsetNombreMoisContrat();
@@ -248,6 +284,20 @@ export class ContratTravailComponent implements OnInit {
     if (event.keyCode === 13) {
       this.isTypeContratCDD = !this.isTypeContratCDD;
       this.onClickCheckBoxIsTypeContratCDD();
+    }
+  }
+
+  public handleKeyUpOnButtonIsTypeContratInterim(event: any) {
+    if (event.keyCode === 13) {
+      this.isTypeContratInterim = !this.isTypeContratInterim;
+      this.onClickCheckBoxIsTypeContratInterim();
+    }
+  }
+
+  public handleKeyUpOnButtonIsTypeContratIAE(event: any) {
+    if (event.keyCode === 13) {
+      this.isTypeContratIAE = !this.isTypeContratIAE;
+      this.onClickCheckBoxIsTypeContratIAE();
     }
   }
 
