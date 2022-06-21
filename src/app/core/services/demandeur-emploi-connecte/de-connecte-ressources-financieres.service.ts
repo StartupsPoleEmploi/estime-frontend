@@ -617,7 +617,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public getCriteresSimulationLibelleCourt(): string {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const typeContrat = this.getLibelleTypeContratCourt(demandeurEmploiConnecte.futurTravail.typeContrat);
-    const nombreMoisContratCDD = (demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' || demandeurEmploiConnecte.futurTravail.typeContrat == 'INTERIM' || demandeurEmploiConnecte.futurTravail.typeContrat == 'IAE') ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
     const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
     return `${typeContrat} · ${nombreHeuresTravailleesSemaine}h · ${salaireNet}€`
