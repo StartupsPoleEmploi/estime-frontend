@@ -79,7 +79,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirSalaireJournalierReference(salaireJournalierReference);
       ressourcesActuellesPage.saisirNombreJoursRestants(nombreDeJoursRestants);
-      ressourcesActuellesPage.clickOnDegressiviteARENon();
       ressourcesActuellesPage.saisirAllocationJournaliereBruteAre(allocationJournaliereBrute);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -192,7 +191,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirSalaireJournalierReference(salaireJournalierReference);
       ressourcesActuellesPage.saisirNombreJoursRestants(nombreDeJoursRestants);
-      ressourcesActuellesPage.clickOnDegressiviteARENon();
       ressourcesActuellesPage.saisirAllocationJournaliereBruteAre(allocationJournaliereBrute);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -305,7 +303,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirSalaireJournalierReference(salaireJournalierReference);
       ressourcesActuellesPage.saisirNombreJoursRestants(nombreDeJoursRestants);
-      ressourcesActuellesPage.clickOnDegressiviteARENon();
       ressourcesActuellesPage.saisirAllocationJournaliereBruteAre(allocationJournaliereBrute);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -363,7 +360,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
   it('demandeur célibataire, non propriétaire, sans enfant,' +
     'CDI 35h, salaire net 1200€,' +
     'domicile->travail 10kms / 20 trajets' +
-    'ARE : SJR : 48, jours restants : 45, Allocation journalière brute : 37, Degressivite ARE taux reduit' +
+    'ARE : SJR : 140, jours restants : 45, Allocation journalière brute : 82, Degressivite ARE taux reduit' +
     'APL 310€', () => {
 
       cy.intercept('POST', '**/simulation_aides', { fixture: 'mocks/demandeur-are/pas-de-complement-are.json' })
@@ -375,9 +372,9 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
-      const salaireJournalierReference = "48";
+      const salaireJournalierReference = "140";
       const nombreDeJoursRestants = "15";
-      const allocationJournaliereBrute = "37";
+      const allocationJournaliereBrute = "82";
       const montantAPL = "310";
       const montantLoyer = "500";
       const montantCharges = "30";
@@ -518,8 +515,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirSalaireJournalierReference(salaireJournalierReference);
       ressourcesActuellesPage.saisirNombreJoursRestants(nombreDeJoursRestants);
-      ressourcesActuellesPage.clickOnDegressiviteAREOui();
-      ressourcesActuellesPage.clickOnTauxReduitDegressiviteARE();
       ressourcesActuellesPage.saisirAllocationJournaliereBruteAre(allocationJournaliereBrute);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -631,8 +626,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirSalaireJournalierReference(salaireJournalierReference);
       ressourcesActuellesPage.saisirNombreJoursRestants(nombreDeJoursRestants);
-      ressourcesActuellesPage.clickOnDegressiviteAREOui();
-      ressourcesActuellesPage.clickOnTauxReduitDegressiviteARE();
       ressourcesActuellesPage.saisirAllocationJournaliereBruteAre(allocationJournaliereBrute);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
