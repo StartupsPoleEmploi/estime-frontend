@@ -139,43 +139,33 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
   public handleKeyUpOnButtonSituation(e: any, situationPersonneACharge: string) {
     if (e.keyCode === 13) {
       if (situationPersonneACharge === this.situationPersonneEnum.AAH) {
-        this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH = !this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH;
         this.onClickCheckBoxHasAAH(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.SALARIE) {
-        this.nouvellePersonneACharge.informationsPersonnelles.salarie = !this.nouvellePersonneACharge.informationsPersonnelles.salarie;
         this.onClickCheckBoxIsSalarie(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.RSA) {
-        this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA = !this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA;
         this.onClickCheckBoxHasRSA(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.ARE) {
-        this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE = !this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE;
         this.onClickCheckBoxHasARE(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.ASS) {
-        this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS = !this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS;
         this.onClickCheckBoxHasASS(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_INVALIDITE) {
-        this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite = !this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite;
         this.onClickCheckBoxHasPensionInvalidite(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_RETRAITE) {
-        this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite = !this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite;
         this.onClickCheckBoxHasPensionRetraite(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
-        this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = !this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur;
         this.onClickCheckBoxIsMicroEntrepreneur(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
-        this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = !this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant;
         this.onClickCheckBoxIsTravailleurIndependant(e);
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.SANS_RESSOURCE) {
-        this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = !this.nouvellePersonneACharge.informationsPersonnelles.sansRessource;
         this.onClickCheckBoxIsSansRessource(e);
       }
     }

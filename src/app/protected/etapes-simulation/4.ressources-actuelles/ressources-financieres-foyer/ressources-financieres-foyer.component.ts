@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
@@ -50,10 +50,10 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   statutOccupationLogementLibelleEnum: typeof StatutOccupationLogementLibelleEnum = StatutOccupationLogementLibelleEnum;
 
   isAucunCas: boolean;
+  isNonBeneficiaireAL = false;
 
 
   constructor(
-    private elementRef: ElementRef,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
     public deConnecteService: DeConnecteService,
@@ -95,6 +95,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireAPL) {
       this.deConnecteService.unsetAPL();
     } else {
+      this.isNonBeneficiaireAL = false;
       this.deConnecteService.unsetALF();
       this.beneficiaireAides.beneficiaireALF = false;
       this.deConnecteService.unsetALS();
@@ -107,6 +108,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireALF) {
       this.deConnecteService.unsetALF();
     } else {
+      this.isNonBeneficiaireAL = false;
       this.deConnecteService.unsetAPL();
       this.beneficiaireAides.beneficiaireAPL = false;
       this.deConnecteService.unsetALS();
@@ -119,7 +121,19 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireALS) {
       this.deConnecteService.unsetALS();
     } else {
-      this.beneficiaireAides.beneficiaireALS = true;
+      this.isNonBeneficiaireAL = false;
+      this.deConnecteService.unsetAPL();
+      this.beneficiaireAides.beneficiaireAPL = false;
+      this.deConnecteService.unsetALF();
+      this.beneficiaireAides.beneficiaireALF = false;
+    }
+  }
+
+  public onClickCheckBoxPasDAL(event: any): void {
+    event.preventDefault();
+    if (this.isNonBeneficiaireAL) {
+      this.deConnecteService.unsetALS();
+      this.beneficiaireAides.beneficiaireALS = false;
       this.deConnecteService.unsetAPL();
       this.beneficiaireAides.beneficiaireAPL = false;
       this.deConnecteService.unsetALF();
@@ -169,22 +183,25 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   public handleKeyUpOnButtonAPL(event: any): void {
     if (event.keyCode === 13) {
-      this.beneficiaireAides.beneficiaireAPL = !this.beneficiaireAides.beneficiaireAPL;
       this.onClickCheckBoxHasAPL(event);
     }
   }
 
   public handleKeyUpOnButtonALF(event: any): void {
     if (event.keyCode === 13) {
-      this.beneficiaireAides.beneficiaireALF = !this.beneficiaireAides.beneficiaireALF;
       this.onClickCheckBoxHasALF(event);
     }
   }
 
   public handleKeyUpOnButtonALS(event: any): void {
     if (event.keyCode === 13) {
-      this.beneficiaireAides.beneficiaireALS = !this.beneficiaireAides.beneficiaireALS;
       this.onClickCheckBoxHasALS(event);
+    }
+  }
+
+  public handleKeyUpOnButtonPasDAL(event: any): void {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxPasDAL(event);
     }
   }
 

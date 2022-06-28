@@ -177,7 +177,7 @@
             <div>
                 <div class="row pb-3">
                     <label class="label headline-4-typo">
-                        Si vous percevez une de ces aides au logement, veuillez nous préciser laquelle :
+                        Percevez-vous une de ces aides au logement ?
                     </label>
                 </div>
                 <div class="row pb-3">
@@ -200,6 +200,7 @@
                             <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}}
                                 ({{codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE}})</span>
                         </button>
+                        <div *ngIf="!screenService.isExtraSmallScreen()"></div>
                         <button id="btn-beneficiaire-als" #beneficiaireALS="ngModel"
                             (click)="onClickCheckBoxHasALS($event)" name="beneficiaireALS"
                             aria-label="Vous êtes bénéficiaire de l'ALS"
@@ -208,6 +209,14 @@
                             [(ngModel)]="beneficiaireAides.beneficiaireALS" (keyup)="handleKeyUpOnButtonALS($event)">
                             <span class="body-2-typo">{{libellesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}}
                                 ({{codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE}})</span>
+                        </button>
+                        <button id="btn-non-beneficiaire-al" #nonBeneficiaireAL="ngModel"
+                            (click)="onClickCheckBoxPasDAL($event)" name="nonBeneficiaireAL"
+                            aria-label="Vous n'êtes pas bénéficiaire d'une aide au logement"
+                            [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1 btn-al"
+                            data-testid="btn-non-beneficiaire-al" btnCheckbox tabindex="0"
+                            [(ngModel)]="isNonBeneficiaireAL" (keyup)="handleKeyUpOnButtonPasDAL($event)">
+                            <span class="body-2-typo">Je ne perçois pas d'aide au logement</span>
                         </button>
                     </div>
                 </div>
