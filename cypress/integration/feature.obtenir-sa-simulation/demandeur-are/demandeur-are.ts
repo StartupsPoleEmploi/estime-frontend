@@ -476,6 +476,8 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
 
       // VARIABLES PAGE FUTUR CONTRAT
       const salaire = "1269"
+      const distanceDomicileLieuTravail = "35";
+      const nombreTrajetsDomicileTravailParSemaine = "4"
       // VARIABLES PAGE MA SITUATION
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
@@ -488,6 +490,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
+      const montantAideMobilite = "340";
       const montantPrimeActivite_M5_M6 = "170";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
@@ -501,6 +504,9 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiNon();
       monFuturContratTravailPage.clickOnIsDureeHebdoTempsPlein();
       monFuturContratTravailPage.clickOnIsSalaireSouhaiteSMIC();
+      monFuturContratTravailPage.clickDistanceDomicileTravailPlusDe30();
+      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+      monFuturContratTravailPage.clickOnNombreTrajetsParSemaine(nombreTrajetsDomicileTravailParSemaine);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -536,6 +542,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 1, salaire);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT, 1, montantAPL);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_RETOUR_EMPLOI, 1, montantARECalculé);
+      resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.AIDE_MOBILITE, 1, montantAideMobilite);
       resultatMaSimulationPage.clickOnRetour();
       //deuxième mois
       resultatMaSimulationPage.clickOnMois(2);
@@ -665,6 +672,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiNon();
       monFuturContratTravailPage.clickOnIsDureeHebdoTempsPlein();
       monFuturContratTravailPage.clickOnIsSalaireSouhaiteSMIC();
+      monFuturContratTravailPage.clickDistanceDomicileTravailEntre0Et9();
       resultatMaSimulationPage.clickOnMettreAJourSimulation();
 
       resultatMaSimulationPage.checkMontantRevenusEtAidesActuelles();

@@ -73,7 +73,7 @@ input {
   height: 2.5rem;
   background-color: white;
   border: 0.0625rem solid $color-blue-9;
-  
+
 
   border-radius: 0.25rem;
 
@@ -120,10 +120,68 @@ input {
   }
 
   .label-general {
-    color: $color-blue-1;
+    color: black;
   }
 
   .label-precision {
     color: $color-grey-5;
+  }
+}
+
+.btn-checkbox-distance-envisagee {
+  width: 5.625rem;
+  max-width: 5.625rem;
+  min-width: fit-content;
+  height: 2.5rem;
+  background-color: white;
+  border: 0.0625rem solid $color-blue-9;
+  border-radius: 0.25rem;
+
+  span {
+    color: black;
+  }
+
+  @media #{$extra-small-device} {
+    width: 15%;
+    max-width: 5.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &.active {
+    border: 0.0625rem solid $color-blue-1;
+    background-color: $color-blue-1;
+
+    span {
+      color: white;
+    }
+  }
+}
+
+.btn-checkbox-nombre-jours-travailles {
+  width: 2.625rem;
+  max-width: 2.625rem;
+  min-width: fit-content;
+  height: 2.5rem;
+  background-color: white;
+  border: 0.0625rem solid $color-blue-9;
+  border-radius: 0.25rem;
+
+  span {
+    color: black;
+  }
+
+  @media #{$extra-small-device} {
+    width: 15%;
+    max-width: 2.625rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &.active {
+    border: 0.0625rem solid $color-blue-1;
+    background-color: $color-blue-1;
+
+    span {
+      color: white;
+    }
   }
 }

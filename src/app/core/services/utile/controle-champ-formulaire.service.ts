@@ -24,8 +24,7 @@ export class ControleChampFormulaireService {
   MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE = "Veuillez sélectionner le taux plein ou le taux réduit pour votre simulation.";
   MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";
   MESSAGE_MONTANTS_0 = "Veuillez renseigner au moins un montant.";
-  MESSAGE_EMAIL_INVALIDE = "Cet email semble invalide.";
-  MESSAGE_EMAIL_ENREGISTRE = "Votre email a bien été enregistré.";
+  MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE = "La distance renseignée entre votre domicile et votre lieu de travail n'est pas supérieure à 30.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
   MONTANT_NBR_HEURE_HEBDO_TRAVAILLE_MAX = 48;
 

@@ -50,6 +50,17 @@ export class ContratTravailComponent implements OnInit {
   isSalaireSouhaiteSMIC: boolean;
   isSalaireSouhaiteAutre: boolean;
 
+  isNombreTrajets1JourSemaine: boolean;
+  isNombreTrajets2JoursSemaine: boolean;
+  isNombreTrajets3JoursSemaine: boolean;
+  isNombreTrajets4JoursSemaine: boolean;
+  isNombreTrajets5JoursSemaine: boolean;
+
+  isDistanceDomicileTravailEntre0Et9: boolean;
+  isDistanceDomicileTravailEntre10Et19: boolean;
+  isDistanceDomicileTravailEntre20Et30: boolean;
+  isDistanceDomicileTravailPlusDe30: boolean;
+
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
     { label: "2 mois", value: 2 },
@@ -94,6 +105,12 @@ export class ContratTravailComponent implements OnInit {
       this.isDureeHebdoAutre = this.futurTravail.dureeHebdoAutre;
       this.isSalaireSouhaiteSMIC = this.futurTravail.salaireSouhaiteSMIC;
       this.isSalaireSouhaiteAutre = this.futurTravail.salaireSouhaiteAutre;
+      this.isNombreTrajets1JourSemaine = this.futurTravail.nombreTrajets1JourSemaine;
+      this.isNombreTrajets2JoursSemaine = this.futurTravail.nombreTrajets2JoursSemaine;
+      this.isNombreTrajets3JoursSemaine = this.futurTravail.nombreTrajets3JoursSemaine;
+      this.isNombreTrajets4JoursSemaine = this.futurTravail.nombreTrajets4JoursSemaine;
+      this.isNombreTrajets5JoursSemaine = this.futurTravail.nombreTrajets5JoursSemaine;
+      this.loadDataDistanceDomicileTravail();
     } else {
       this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
@@ -102,6 +119,17 @@ export class ContratTravailComponent implements OnInit {
       this.futurTravail.salaire.montantNet = null;
       this.futurTravail.hasOffreEmploiEnVue = null;
     }
+  }
+
+  private loadDataDistanceDomicileTravail() {
+    this.isDistanceDomicileTravailEntre0Et9 = this.futurTravail.distanceDomicileTravailEntre0Et9;
+    this.isDistanceDomicileTravailEntre10Et19 = this.futurTravail.distanceDomicileTravailEntre10Et19;
+    this.isDistanceDomicileTravailEntre20Et30 = this.futurTravail.distanceDomicileTravailEntre20Et30;
+    this.isDistanceDomicileTravailPlusDe30 = this.futurTravail.distanceDomicileTravailPlusDe30;
+
+    if (this.isDistanceDomicileTravailEntre0Et9) this.futurTravail.distanceKmDomicileTravail = 5;
+    else if (this.isDistanceDomicileTravailEntre10Et19) this.futurTravail.distanceKmDomicileTravail = 15;
+    else if (this.isDistanceDomicileTravailEntre20Et30) this.futurTravail.distanceKmDomicileTravail = 25;
   }
 
   public onClickButtonRetour(): void {
@@ -128,7 +156,8 @@ export class ContratTravailComponent implements OnInit {
       && !this.isNombreHeuresTravailleesSemaineInvalide()
       && !this.isTypeContratInvalide()
       && !this.isDureeHebdoInvalide()
-      && !this.isSalaireSouhaiteInvalide();
+      && !this.isSalaireSouhaiteInvalide()
+      && !this.isDistanceDomicileTravailInvalide();
   }
 
   private isNombreHeuresTravailleesSemaineInvalide(): boolean {
@@ -152,6 +181,11 @@ export class ContratTravailComponent implements OnInit {
       || (this.isSalaireSouhaiteSMIC && this.isSalaireSouhaiteAutre)
     );
   }
+
+  public isDistanceDomicileTravailInvalide(): boolean {
+    return this.isDistanceDomicileTravailPlusDe30 && this.futurTravail.distanceKmDomicileTravail < 30;
+  }
+
   public onClickCheckBoxHasOffreEmploiOui() {
     if (this.hasOffreEmploiOui) {
       this.hasOffreEmploiNon = false;
@@ -256,6 +290,77 @@ export class ContratTravailComponent implements OnInit {
       this.setSalaireSouhaiteAutre();
     } else {
       this.unsetSalaireSouhaiteAutre();
+    }
+  }
+
+  public onClickCheckBoxNombresTrajets(nombreTrajetsSemaine: number) {
+    switch (nombreTrajetsSemaine) {
+      case 1:
+        this.setNombreTrajets1JourSemaine();
+        break;
+      case 2:
+        this.setNombreTrajets2JoursSemaine();
+        break;
+      case 3:
+        this.setNombreTrajets3JoursSemaine();
+        break;
+      case 4:
+        this.setNombreTrajets4JoursSemaine();
+        break;
+      case 5:
+        this.setNombreTrajets5JoursSemaine();
+        break;
+    }
+
+  }
+
+  public setNombreTrajetsDomicileTravail(nombreTrajetsSemaine: number) {
+    this.futurTravail.nombreTrajetsDomicileTravail = Math.floor(nombreTrajetsSemaine * 4.33);
+  }
+
+  public handleKeyUpOnButtonNombresTrajets(event: any, nombreTrajetsSemaine: number) {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxNombresTrajets(nombreTrajetsSemaine);
+    }
+  }
+
+  public onClickCheckBoxDistanceDomicileTravailEntre0Et9() {
+    this.setDistanceDomicileTravailEntre0Et9();
+  }
+
+  public onClickCheckBoxDistanceDomicileTravailEntre10Et19() {
+    this.setDistanceDomicileTravailEntre10Et19();
+  }
+
+  public onClickCheckBoxDistanceDomicileTravailEntre20Et30() {
+    this.setDistanceDomicileTravailEntre20Et30();
+  }
+
+  public onClickCheckBoxDistanceDomicileTravailPlusDe30() {
+    this.setDistanceDomicileTravailPlusDe30();
+  }
+
+  public handleKeyUpOnButtonDistanceDomicileTravailEntre0Et9(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxDistanceDomicileTravailEntre0Et9();
+    }
+  }
+
+  public handleKeyUpOnButtonDistanceDomicileTravailEntre10Et19(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxDistanceDomicileTravailEntre10Et19();
+    }
+  }
+
+  public handleKeyUpOnButtonDistanceDomicileTravailEntre20Et30(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxDistanceDomicileTravailEntre20Et30();
+    }
+  }
+
+  public handleKeyUpOnButtonDistanceDomicileTravailPlusDe30(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxDistanceDomicileTravailPlusDe30();
     }
   }
 
@@ -454,5 +559,92 @@ export class ContratTravailComponent implements OnInit {
     this.futurTravail.dureeHebdoTempsPlein = false;
     this.futurTravail.salaire.montantNet = null;
     this.futurTravail.salaire.montantBrut = null;
+  }
+
+  public setNombreTrajets1JourSemaine() {
+    this.unsetNombreTrajetsDomicileTravail();
+    this.isNombreTrajets1JourSemaine = true;
+    this.futurTravail.nombreTrajets1JourSemaine = true;
+    this.setNombreTrajetsDomicileTravail(1);
+  }
+
+  public setNombreTrajets2JoursSemaine() {
+    this.unsetNombreTrajetsDomicileTravail();
+    this.isNombreTrajets2JoursSemaine = true;
+    this.futurTravail.nombreTrajets2JoursSemaine = true;
+    this.setNombreTrajetsDomicileTravail(2);
+  }
+
+  public setNombreTrajets3JoursSemaine() {
+    this.unsetNombreTrajetsDomicileTravail();
+    this.isNombreTrajets3JoursSemaine = true;
+    this.futurTravail.nombreTrajets3JoursSemaine = true;
+    this.setNombreTrajetsDomicileTravail(3);
+  }
+
+  public setNombreTrajets4JoursSemaine() {
+    this.unsetNombreTrajetsDomicileTravail();
+    this.isNombreTrajets4JoursSemaine = true;
+    this.futurTravail.nombreTrajets4JoursSemaine = true;
+    this.setNombreTrajetsDomicileTravail(4);
+  }
+
+  public setNombreTrajets5JoursSemaine() {
+    this.unsetNombreTrajetsDomicileTravail();
+    this.isNombreTrajets5JoursSemaine = true;
+    this.futurTravail.nombreTrajets5JoursSemaine = true;
+    this.setNombreTrajetsDomicileTravail(5);
+  }
+
+  public unsetNombreTrajetsDomicileTravail() {
+    this.isNombreTrajets1JourSemaine = false;
+    this.isNombreTrajets2JoursSemaine = false;
+    this.isNombreTrajets3JoursSemaine = false;
+    this.isNombreTrajets4JoursSemaine = false;
+    this.isNombreTrajets5JoursSemaine = false;
+    this.futurTravail.nombreTrajets1JourSemaine = false;
+    this.futurTravail.nombreTrajets2JoursSemaine = false;
+    this.futurTravail.nombreTrajets3JoursSemaine = false;
+    this.futurTravail.nombreTrajets4JoursSemaine = false;
+    this.futurTravail.nombreTrajets5JoursSemaine = false;
+  }
+
+  public setDistanceDomicileTravailEntre0Et9() {
+    this.unsetDistanceDomicileTravail();
+    this.isDistanceDomicileTravailEntre0Et9 = true;
+    this.futurTravail.distanceDomicileTravailEntre0Et9 = true;
+    this.futurTravail.distanceKmDomicileTravail = 5;
+  }
+
+  public setDistanceDomicileTravailEntre10Et19() {
+    this.unsetDistanceDomicileTravail();
+    this.isDistanceDomicileTravailEntre10Et19 = true;
+    this.futurTravail.distanceDomicileTravailEntre10Et19 = true;
+    this.futurTravail.distanceKmDomicileTravail = 15;
+  }
+
+  public setDistanceDomicileTravailEntre20Et30() {
+    this.unsetDistanceDomicileTravail();
+    this.isDistanceDomicileTravailEntre20Et30 = true;
+    this.futurTravail.distanceDomicileTravailEntre20Et30 = true;
+    this.futurTravail.distanceKmDomicileTravail = 25;
+  }
+
+  public setDistanceDomicileTravailPlusDe30() {
+    this.unsetDistanceDomicileTravail();
+    this.isDistanceDomicileTravailPlusDe30 = true;
+    this.futurTravail.distanceDomicileTravailPlusDe30 = true;
+  }
+
+  public unsetDistanceDomicileTravail() {
+    this.isDistanceDomicileTravailEntre0Et9 = false;
+    this.isDistanceDomicileTravailEntre10Et19 = false;
+    this.isDistanceDomicileTravailEntre20Et30 = false;
+    this.isDistanceDomicileTravailPlusDe30 = false;
+    this.futurTravail.distanceKmDomicileTravail = null;
+    this.futurTravail.distanceDomicileTravailEntre0Et9 = false;
+    this.futurTravail.distanceDomicileTravailEntre10Et19 = false;
+    this.futurTravail.distanceDomicileTravailEntre20Et30 = false;
+    this.futurTravail.distanceDomicileTravailPlusDe30 = false;
   }
 }

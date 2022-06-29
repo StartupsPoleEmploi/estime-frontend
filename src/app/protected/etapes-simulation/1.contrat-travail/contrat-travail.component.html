@@ -327,21 +327,83 @@
                                 </label>
                             </div>
                             <div class="row">
-                                <div>
-                                    <input id="nombreTrajetsDomicileTravail" name="nombreTrajetsDomicileTravail"
-                                        data-testid="input-nombre-trajets-domicile-travail" type="text" min="0"
-                                        maxlength="2"
-                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                        class="form-control d-inline" placeholder="Nombre"
-                                        [(ngModel)]="futurTravail.nombreTrajetsDomicileTravail" required
-                                        inputmode="numeric" #nombreTrajetsDomicileTravail="ngModel">
-                                    <span class="text-side-input d-inline body-2-typo">jours par mois</span>
+                                <div class="col">
+                                    <button id="btn-nombres-trajets-1-jour-semaine" name="nombreTrajets1JourSemaine"
+                                        aria-label="1 jour travaillé par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets1JourSemaine}"
+                                        data-testid="btn-nombres-trajets-1-jour-semaine"
+                                        [(ngModel)]="isNombreTrajets1JourSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets1JourSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-1-jour-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(1)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,1)">
+                                        <span class="body-2-typo">
+                                            1
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-2-jours-semaine" name="nombreTrajets2JoursSemaine"
+                                        aria-label="2 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets2JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-2-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets2JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets2JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-2-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(2)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,2)">
+                                        <span class="body-2-typo">
+                                            2
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-3-jours-semaine" name="nombreTrajets3JoursSemaine"
+                                        aria-label="3 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets3JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-3-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets3JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets3JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-3-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(3)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,3)">
+                                        <span class="body-2-typo">
+                                            3
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-4-jours-semaine" name="nombreTrajets4JoursSemaine"
+                                        aria-label="4 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets4JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-4-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets4JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets4JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-4-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(4)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,4)">
+                                        <span class="body-2-typo">
+                                            4
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-5-jours-semaine" name="nombreTrajets5JoursSemaine"
+                                        aria-label="5 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets5JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-5-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets5JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets5JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-5-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(5)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event, 5)">
+                                        <span class="body-2-typo">
+                                            5
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <span class="error-input-message"
-                                        *ngIf="(isFuturTravailFormSubmitted || nombreTrajetsDomicileTravail.touched)  && nombreTrajetsDomicileTravail.errors?.required">
+                                        *ngIf="(isFuturTravailFormSubmitted) && (nombreTrajets1JourSemaine.errors?.required || nombreTrajets2JoursSemaine.errors?.required || nombreTrajets3JoursSemaine.errors?.required || nombreTrajets4JoursSemaine.errors?.required || nombreTrajets5JoursSemaine.errors?.required)">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                                     </span>
                                 </div>
@@ -491,6 +553,207 @@
                                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                                         </span>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-form card-form-style-2">
+                        <div class="row pb-3">
+                            <div class="col-md-12">
+                                <app-message-info contenu="Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la
+                                                        mobilité">
+                                </app-message-info>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row flex-column pb-3">
+                                <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
+                                    * Distance envisagée entre votre domicile et lieu de travail
+                                    <button id="infobulle-contrat-travail-distance-travail"
+                                        aria-label="Infobulle calcul de distance domicile / travail" tabindex="0"
+                                        class="img-interrogation-icon" placement="right"
+                                        tag-action="clic_infobulle_calcul_distance_domicile_travail"
+                                        (click)="modalService.openModal($event, modalDistanceTravailTemplate, true)"></button>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button id="btn-distance-envisagee-0-9" name="distanceDomicileTravailEntre0Et9"
+                                        aria-label="Distance entre lieu domicile et lieu de travail entre 0 et 9km"
+                                        class="btn-checkbox-distance-envisagee me-2"
+                                        [ngClass]="{'active':isDistanceDomicileTravailEntre0Et9}"
+                                        data-testid="btn-distance-envisagee-0-9"
+                                        [(ngModel)]="isDistanceDomicileTravailEntre0Et9" btnCheckbox tabindex="0"
+                                        required #distanceDomicileTravailEntre0Et9="ngModel"
+                                        tag-action="btn-distance-envisagee-0-9"
+                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre0Et9()"
+                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre0Et9($event)">
+                                        <span class="body-2-typo">
+                                            0 - 9km
+                                        </span>
+                                    </button>
+                                    <button id="btn-distance-envisagee-10-19" name="distanceDomicileTravailEntre10Et19"
+                                        aria-label="Distance entre lieu domicile et lieu de travail entre 10 et 19km"
+                                        class="btn-checkbox-distance-envisagee me-2"
+                                        [ngClass]="{'active':isDistanceDomicileravailEntre10Et19}"
+                                        data-testid="btn-distance-envisagee-10-19"
+                                        [(ngModel)]="isDistanceDomicileTravailEntre10Et19" btnCheckbox tabindex="0"
+                                        required #distanceDomicileTravailEntre10Et19="ngModel"
+                                        tag-action="btn-distance-envisagee-10-19"
+                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre10Et19()"
+                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre10Et19($event)">
+                                        <span class="body-2-typo">
+                                            10 - 19km
+                                        </span>
+                                    </button>
+                                    <button id="btn-distance-envisagee-20-30" name="distanceDomicileTravailEntre20Et30"
+                                        aria-label="Distance entre lieu domicile et lieu de travail entre 20 et 30km"
+                                        class="btn-checkbox-distance-envisagee me-2"
+                                        [ngClass]="{'active':isDistanceDomicileTravailEntre20Et30}"
+                                        data-testid="btn-distance-envisagee-20-30"
+                                        [(ngModel)]="isDistanceDomicileTravailEntre20Et30" btnCheckbox tabindex="0"
+                                        required #distanceDomicileTravailEntre20Et30="ngModel"
+                                        tag-action="btn-distance-envisagee-20-30"
+                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre20Et30()"
+                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre20Et30($event)">
+                                        <span class="body-2-typo">
+                                            20 - 30km
+                                        </span>
+                                    </button>
+                                    <button id="btn-distance-envisagee-plus-de-30"
+                                        name="distanceDomicileTravailPlusDe30"
+                                        aria-label="Distance entre lieu domicile et lieu de travail plus de 30km"
+                                        class="btn-checkbox-distance-envisagee me-2"
+                                        [ngClass]="{'active':isDistanceDomicileTravailPlusDe30}"
+                                        data-testid="btn-distance-envisagee-plus-de-30"
+                                        [(ngModel)]="isDistanceDomicileTravailPlusDe30" btnCheckbox tabindex="0"
+                                        required #distanceDomicileTravailPlusDe30="ngModel"
+                                        tag-action="btn-distance-envisagee-plus-de-30"
+                                        (click)="onClickCheckBoxDistanceDomicileTravailPlusDe30()"
+                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailPlusDe30($event)">
+                                        <span class="body-2-typo">
+                                            + de 30km
+                                        </span>
+                                    </button>
+                                    <input *ngIf="isDistanceDomicileTravailPlusDe30"
+                                        id="distanceDomicileLieuTravailPrecision" name="distanceDomicileLieuTravail"
+                                        data-testid="input-distance-domicile-lieu-travail" type="text"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        min="30" maxlength="4" class="form-control d-inline" placeholder="Distance"
+                                        [(ngModel)]="futurTravail.distanceKmDomicileTravail" required
+                                        inputmode="numeric" #distanceDomicileLieuTravail="ngModel">
+                                    <span *ngIf="isDistanceDomicileTravailPlusDe30"
+                                        class="text-side-input d-inline body-2-typo">km</span>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <span class="error-input-message"
+                                        *ngIf="(isFuturTravailFormSubmitted) && (distanceDomicileTravailEntre0Et9.errors?.required || distanceDomicileTravailEntre10Et19.errors?.required || distanceDomicileTravailEntre20Et30.errors?.required || distanceDomicileTravailPlusDe30.errors?.required)">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="error-input-message"
+                                        *ngIf="(isFuturTravailFormSubmitted) && isDistanceDomicileTravailInvalide()">
+                                        {{controleChampFormulaireService.MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="afficherNombreTrajetsDomicileTravail()">
+                            <div class="row flex-column pb-3">
+                                <label class="label headline-4-typo"
+                                    aria-describedby="infobulle-contrat-travail-nombre-trajets"
+                                    for="nombreTrajetsDomicileTravail">
+                                    * Nombre de jours où vous vous rendrez sur votre lieu de travail
+                                    <button id="infobulle-contrat-travail-nombre-trajets"
+                                        aria-label="Infobulle exemple nombre de trajets" tabindex="0"
+                                        class="img-interrogation-icon" placement="right"
+                                        tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                                        (click)="modalService.openModal($event, modalNombreTrajetTemplate, true)"></button>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <button id="btn-nombres-trajets-1-jour-semaine" name="nombreTrajets1JourSemaine"
+                                        aria-label="1 jour travaillé par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets1JourSemaine}"
+                                        data-testid="btn-nombres-trajets-1-jour-semaine"
+                                        [(ngModel)]="isNombreTrajets1JourSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets1JourSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-1-jour-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(1)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,1)">
+                                        <span class="body-2-typo">
+                                            1
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-2-jours-semaine" name="nombreTrajets2JoursSemaine"
+                                        aria-label="2 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets2JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-2-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets2JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets2JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-2-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(2)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,2)">
+                                        <span class="body-2-typo">
+                                            2
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-3-jours-semaine" name="nombreTrajets3JoursSemaine"
+                                        aria-label="3 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets3JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-3-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets3JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets3JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-3-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(3)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,3)">
+                                        <span class="body-2-typo">
+                                            3
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-4-jours-semaine" name="nombreTrajets4JoursSemaine"
+                                        aria-label="4 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets4JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-4-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets4JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets4JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-4-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(4)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,4)">
+                                        <span class="body-2-typo">
+                                            4
+                                        </span>
+                                    </button>
+                                    <button id="btn-nombres-trajets-5-jours-semaine" name="nombreTrajets5JoursSemaine"
+                                        aria-label="5 jours travaillés par semaine"
+                                        class="btn-checkbox-nombre-jours-travailles me-2"
+                                        [ngClass]="{'active':isNombreTrajets5JoursSemaine}"
+                                        data-testid="btn-nombres-trajets-5-jours-semaine"
+                                        [(ngModel)]="isNombreTrajets5JoursSemaine" btnCheckbox tabindex="0" required
+                                        #nombreTrajets5JoursSemaine="ngModel"
+                                        tag-action="situation-nombres-trajets-5-jours-semaine"
+                                        (click)="onClickCheckBoxNombresTrajets(5)"
+                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event, 5)">
+                                        <span class="body-2-typo">
+                                            5
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="error-input-message"
+                                        *ngIf="(isFuturTravailFormSubmitted) && (nombreTrajets1JourSemaine.errors?.required || nombreTrajets2JoursSemaine.errors?.required || nombreTrajets3JoursSemaine.errors?.required || nombreTrajets4JoursSemaine.errors?.required || nombreTrajets5JoursSemaine.errors?.required)">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
