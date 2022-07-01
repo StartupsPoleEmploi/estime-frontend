@@ -171,14 +171,19 @@ export class ContratTravailComponent implements OnInit {
   public isDureeHebdoInvalide(): boolean {
     return this.hasOffreEmploiNon && (
       (this.isDureeHebdoTempsPlein == null && this.isDureeHebdoMiTemps == null && this.isDureeHebdoAutre == null)
-      || (this.isDureeHebdoTempsPlein && this.isDureeHebdoMiTemps && this.isDureeHebdoAutre)
+      || (
+        (this.isDureeHebdoTempsPlein == this.isDureeHebdoMiTemps)
+        && (this.isDureeHebdoTempsPlein == this.isDureeHebdoAutre)
+        && (this.isDureeHebdoMiTemps == this.isDureeHebdoAutre)
+      )
     );
   }
 
   public isSalaireSouhaiteInvalide(): boolean {
     return this.hasOffreEmploiNon && (
       (this.isSalaireSouhaiteSMIC == null && this.isSalaireSouhaiteAutre == null)
-      || (this.isSalaireSouhaiteSMIC && this.isSalaireSouhaiteAutre)
+      || (this.isSalaireSouhaiteSMIC == this.isSalaireSouhaiteAutre)
+      || (this.isSalaireSouhaiteAutre && this.futurTravail.salaire.montantNet == null)
     );
   }
 
