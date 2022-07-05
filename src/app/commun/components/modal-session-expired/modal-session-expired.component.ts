@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
@@ -13,7 +13,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './modal-session-expired.component.html',
   styleUrls: ['./modal-session-expired.component.scss']
 })
-export class ModalSessionExpiredComponent implements OnInit {
+export class ModalSessionExpiredComponent {
 
   closeBtnName: string;
 
@@ -25,12 +25,7 @@ export class ModalSessionExpiredComponent implements OnInit {
     private sessionStorageEstimeService: SessionStorageEstimeService,
     public screenService: ScreenService,
     private router: Router
-  ) {
-
-  }
-
-  ngOnInit() {
-  }
+  ) { }
 
   public onClickButtonClosePopup(): void {
 

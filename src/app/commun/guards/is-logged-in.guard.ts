@@ -11,8 +11,6 @@ import { SessionStorageEstimeService } from "@app/core/services/storage/session-
 })
 export class IsLoggedInGuard implements CanActivate {
 
-
-
   constructor(
     private peConnectService: PeConnectService,
     private deConnecteService: DeConnecteService,
@@ -22,17 +20,17 @@ export class IsLoggedInGuard implements CanActivate {
   ) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      this.sessionStorageEstimeService.storeRouteActivatedByUser(route);
-      const isLoggedIn = this.individuConnectedService.isLoggedIn();
-      if(!isLoggedIn) {
-        const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-        if(demandeurConnecte){
-          this.peConnectService.login();
-        } else {
-          this.router.navigate([RoutesEnum.HOMEPAGE]);
-        }
+  canActivate(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
+    this.sessionStorageEstimeService.storeRouteActivatedByUser(route);
+    const isLoggedIn = this.individuConnectedService.isLoggedIn();
+    if (!isLoggedIn) {
+      const demandeurConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+      if (demandeurConnecte) {
+        this.peConnectService.login();
+      } else {
+        this.router.navigate([RoutesEnum.HOMEPAGE]);
       }
-      return isLoggedIn;
+    }
+    return isLoggedIn;
   }
 }

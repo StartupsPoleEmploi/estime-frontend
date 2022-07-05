@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
@@ -7,14 +7,11 @@ import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss']
 })
-export class NotFoundComponent implements OnInit {
+export class NotFoundComponent {
 
   constructor(
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   public onClickButtonRetourAccueil(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);

@@ -9,8 +9,6 @@ export class PageLoadingComponent implements OnInit {
 
 	@Input() message: string;
 
-	constructor() { }
-
 	ngOnInit() {
 		if (this.message == null) {
 			this.message = "Veuillez patienter...";
