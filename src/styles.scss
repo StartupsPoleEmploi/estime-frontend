@@ -2,7 +2,6 @@
 /* vairables file to import before others scss files */
 @import "assets/scss/variables";
 /* You can add global styles to this file, and also import other style files */
-@import "assets/scss/accordion";
 @import "assets/scss/alert";
 @import "assets/scss/buttons";
 @import "assets/scss/carousel";
@@ -18,19 +17,21 @@
 @import "assets/scss/tooltip";
 
 .btn-style-perso-2 {
-    &:hover {
-        background-color: unset!important;
-    }
-    &:focus {
-        background-color: unset !important;
-    }
+  &:hover {
+    background-color: unset !important;
+  }
+
+  &:focus {
+    background-color: unset !important;
+  }
 }
 
 .accordion-button {
-    &:hover {
-        background-color: unset!important;
-    }
-    &:focus {
-        background-color: unset !important;
-    }
+  &:hover {
+    background-color: unset !important;
+  }
+
+  &:focus {
+    background-color: unset !important;
+  }
 }
