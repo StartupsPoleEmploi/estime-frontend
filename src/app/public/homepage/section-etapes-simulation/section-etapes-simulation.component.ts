@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 
@@ -7,7 +7,7 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
   templateUrl: './section-etapes-simulation.component.html',
   styleUrls: ['./section-etapes-simulation.component.scss']
 })
-export class SectionEtapesSimulationComponent implements OnInit {
+export class SectionEtapesSimulationComponent {
 
   @Input() login: () => void;
 
@@ -15,8 +15,5 @@ export class SectionEtapesSimulationComponent implements OnInit {
     public peConnectService: PeConnectService,
     public screenService: ScreenService
   ) { }
-
-  ngOnInit(): void {
-  }
 
 }

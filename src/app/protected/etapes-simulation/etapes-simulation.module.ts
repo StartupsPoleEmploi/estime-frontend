@@ -22,7 +22,6 @@ import { RessourcesFinancieresPersonnesAChargeComponent } from '@app/protected/e
 import { VosRessourcesFinancieresComponent } from '@app/protected/etapes-simulation/4.ressources-actuelles/vos-ressources-financieres/vos-ressources-financieres.component';
 import { ResultatSimulationComponent } from '@app/protected/etapes-simulation/5.resultat-simulation/resultat-simulation.component';
 import { RessourcesFinancieresDiagrammeComponent } from './5.resultat-simulation/ressources-financieres-diagramme/ressources-financieres-diagramme.component';
-import { DiagrammeCanvasComponent } from './5.resultat-simulation/ressources-financieres-diagramme/diagramme-canvas/diagramme-canvas.component';
 import { ActionsSuiteComponent } from './5.resultat-simulation/actions-suite/actions-suite.component';
 import { EtapesSimulationRoutingModule } from './etapes-simulation-routing.module';
 import { MoisApresSimulationComponent } from './5.resultat-simulation/mois-apres-simulation/mois-apres-simulation.component';
@@ -47,7 +46,6 @@ import { ModificationCriteresComponent } from './5.resultat-simulation/modificat
     FilEtapesDesktopComponent,
     FilEtapesMobileComponent,
     RessourcesFinancieresDiagrammeComponent,
-    DiagrammeCanvasComponent,
     ActionsSuiteComponent,
     MoisApresSimulationComponent,
     DetailMoisApresSimulationComponent,

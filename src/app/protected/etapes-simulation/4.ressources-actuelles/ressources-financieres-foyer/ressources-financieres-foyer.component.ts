@@ -4,7 +4,6 @@ import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
-import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -12,7 +11,6 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { NumeroProchainMoisDeclarationTrimestrielle } from "@models/numero-prochain-mois-declaration-trimestrielle";
@@ -20,8 +18,8 @@ import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressour
 import { SituationFamiliale } from '@models/situation-familiale';
 import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
-import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
+import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -54,18 +52,16 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
 
   constructor(
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
+    private demandeurEmploiService: DemandeurEmploiService,
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
-    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
+    public deConnecteService: DeConnecteService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    private informationsPersonnellesService: InformationsPersonnellesService,
     public modalService: ModalService,
-    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
-    public screenService: ScreenService,
-    private situationFamilialeUtileService: SituationFamilialeUtileService
+    public screenService: ScreenService
   ) {
   }
 
@@ -73,8 +69,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.initOptionsProchaineDeclarationTrimestrielle();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
-    this.loadDataSituationFamiliale(demandeurEmploiConnecte);
-    this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
+    this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
+    this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.loadAidesLogement(demandeurEmploiConnecte);
     this.isAucunCas = null;
   }
@@ -148,22 +144,6 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       numeroProchainMoisDeclarationTrimesNumeroProchainMoisDeclarationTrimestrielle.value = i;
       numeroProchainMoisDeclarationTrimesNumeroProchainMoisDeclarationTrimestrielle.label = this.dateUtileService.getLibelleMoisApresDateJour(i);
       this.optionsProchaineDeclarationTrimestrielle.push(numeroProchainMoisDeclarationTrimesNumeroProchainMoisDeclarationTrimestrielle);
-    }
-  }
-
-  private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.situationFamiliale) {
-      this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
-    } else {
-      this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
-    }
-  }
-
-  private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.informationsPersonnelles) {
-      this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
-    } else {
-      this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
     }
   }
 

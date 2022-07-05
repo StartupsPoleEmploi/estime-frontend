@@ -1,15 +1,5 @@
   @import "../../../../assets/scss/variables";
 
-
-  .container-fluid {
-    padding-right: 1rem;
-    padding-left: 1rem;
-
-    @media #{$large-device} {
-      max-width: 72vw !important;
-    }
-  }
-
   .row-style-2 {
     margin-right: 0;
   }
@@ -39,7 +29,7 @@
       }
 
       span {
-        font-family: Poppins;
+        font-family: Poppins, sans-serif;
         font-style: normal;
         font-weight: bold;
         font-size: 0.875rem;
@@ -138,6 +128,12 @@
 
   .container-fluid {
     margin-top: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    @media #{$large-device} {
+      max-width: 72vw !important;
+    }
 
     #info-resultat-simulation {
 

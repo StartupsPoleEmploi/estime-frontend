@@ -8,8 +8,6 @@ import { StatutOccupationLogement } from '@app/commun/models/statut-occupation-l
 @Injectable({ providedIn: 'root' })
 export class InformationsPersonnellesService {
 
-  constructor() { }
-
   public creerInformationsPersonnelles(): InformationsPersonnelles {
     const informationsPersonnelles = new InformationsPersonnelles();
     informationsPersonnelles.logement = this.creerLogement();

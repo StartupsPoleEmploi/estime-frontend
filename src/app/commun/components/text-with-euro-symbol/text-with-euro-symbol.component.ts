@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
 @Component({
   selector: 'app-text-with-euro-symbol',
@@ -6,13 +6,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
   styleUrls: ['./text-with-euro-symbol.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextWithEuroSymbolComponent implements OnInit {
+export class TextWithEuroSymbolComponent {
 
-  @Input() message : string
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  @Input() message: string
 
 }

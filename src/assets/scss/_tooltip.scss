@@ -5,9 +5,9 @@
   width: 1.4375rem;
   height: 1.4375rem;
   border: 0;
+  background: no-repeat url("../images/question.svg");
   background-size: 100% 100%;
   cursor: pointer;
-  background: no-repeat url("../images/question.svg");
 
   &:hover {
     background: no-repeat url("../images/question_hover.svg");

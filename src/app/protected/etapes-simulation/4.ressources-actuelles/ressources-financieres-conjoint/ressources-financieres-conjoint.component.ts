@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { Personne } from '@models/personne';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -29,13 +29,12 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
 
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
-    public screenService: ScreenService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteService: DeConnecteService,
-    private elementRef: ElementRef,
-    public modalService: ModalService,
     private personneUtileService: PersonneUtileService,
-    public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService
+    public modalService: ModalService,
+    public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
+    public screenService: ScreenService
   ) { }
 
   ngOnInit(): void {

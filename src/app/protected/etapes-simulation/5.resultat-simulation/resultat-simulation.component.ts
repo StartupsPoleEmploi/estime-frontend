@@ -4,9 +4,7 @@ import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
-import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { SimulationPdfMakerService } from "@app/core/services/pdf-maker/simulation-pdf-maker.service";
-import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
@@ -46,23 +44,19 @@ export class ResultatSimulationComponent implements OnInit {
   @ViewChild(ModificationCriteresComponent) modificationCriteresComponent: ModificationCriteresComponent;
 
   constructor(
-    public aidesService: AidesService,
-    public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
-    public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    public deConnecteSimulationService: DeConnecteSimulationService,
-    public modalService: ModalService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
+    private deConnecteSimulationService: DeConnecteSimulationService,
+    private detailTemporaliteService: DetailTemporaliteService,
+    private simulationPdfMakerService: SimulationPdfMakerService,
     private router: Router,
+    public dateUtileService: DateUtileService,
+    public modalService: ModalService,
     public screenService: ScreenService,
     public sideModalService: SideModalService,
-    private detailTemporaliteService: DetailTemporaliteService,
-    private simulationPdfMakerService: SimulationPdfMakerService
   ) {
   }
 
   ngOnInit(): void {
-    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
-    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.afficherDetails = true;
     this.loadDataSimulation();
     this.loadDetailTemporalite();
@@ -93,7 +87,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public onClickButtonImprimerMaSimulation(): void {
-    this.simulationPdfMakerService.generatePdf(this.demandeurEmploiConnecte, this.simulation);
+    this.simulationPdfMakerService.generatePdf(this.simulation);
   }
 
   public onClickOnglet(afficherDetails: boolean): void {

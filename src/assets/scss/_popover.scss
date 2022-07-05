@@ -29,14 +29,11 @@ popover-container {
 
 .popover.right .arrow:after {
   border-right-color: $color-blue-5;
+  border-left-color: $color-blue-5;
 }
 
 .popover.bottom .arrow:after {
   border-bottom-color: $color-blue-5;
-}
-
-.popover.right .arrow:after {
-  border-left-color: $color-blue-5;
 }
 
 .popover-container {

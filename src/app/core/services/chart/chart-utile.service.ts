@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
 import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagramme.enum';
 import { DevisesEnum } from '@enumerations/devises.enum';
@@ -44,7 +43,7 @@ export class ChartUtileService {
     const data = this.getData();
 
     chart.data = data;
-    chart.options = this.getOptions(data);
+    chart.options = this.getOptions();
     chart.type = this.getType();
     chart.plugins = [ChartDataLabels];
 
@@ -53,11 +52,10 @@ export class ChartUtileService {
 
   private getData(): Data {
     const simulation = this.deConnecteSimulationService.getSimulation();
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const data: Data = new Data();
 
     data.labels = this.getLabels(simulation);
-    data.datasets = this.getDatasets(simulation, demandeurEmploiConnecte);
+    data.datasets = this.getDatasets(simulation);
 
     return data;
   }
@@ -94,7 +92,7 @@ export class ChartUtileService {
    * @param demandeurEmploiConnecte
    * @returns Array<Dataset>
    */
-  private getDatasets(simulation: Simulation, demandeurEmploiConnecte: DemandeurEmploi): Array<Dataset> {
+  private getDatasets(simulation: Simulation): Array<Dataset> {
     const dataObject = this.initDatasets();
 
     simulation.simulationsMensuelles.forEach((simulationMensuelle, index) => {
@@ -152,14 +150,14 @@ export class ChartUtileService {
     return datasets;
   }
 
-  private getOptions(data: Data): Options {
+  private getOptions(): Options {
     const options = new Options();
 
     options.responsive = true;
     options.maintainAspectRatio = true;
     options.aspectRatio = this.getAspectRatio();
     options.legend = null;
-    options.plugins = this.getPlugins(data);
+    options.plugins = this.getPlugins();
     options.scales = this.getScales();
     options.layout = this.getLayout();
 
@@ -172,7 +170,7 @@ export class ChartUtileService {
     return 3;
   }
 
-  private getPlugins(data: Data): Plugins {
+  private getPlugins(): Plugins {
     const plugins = new Plugins();
 
     plugins.datalabels = this.getDatalabels();
@@ -190,7 +188,7 @@ export class ChartUtileService {
       // use the same color as the border
       return ctx.dataset.backgroundColor
     };
-    datalabels.formatter = (value, ctx) => {
+    datalabels.formatter = (_value, ctx) => {
       // Array of visible datasets :
       let datasets = ctx.chart.data.datasets;
       let sum = 0;

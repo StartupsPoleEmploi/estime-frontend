@@ -11,6 +11,7 @@ import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 import { Style } from './models/style';
 import { Text } from "./models/text";
 import { BlockDonneesSaisiesService } from './content/block-donnees-saisies-service';
+import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 
@@ -25,16 +26,19 @@ export class SimulationPdfMakerService {
     private blockInformationsService: BlockInformationsService,
     private blockDonneesSaisiesService: BlockDonneesSaisiesService,
     private blockRessourcesEstimeesService: BlockRessourcesEstimeesService,
+    private deConnecteService: DeConnecteService,
     private detailAidesEligiblesService: DetailAidesEligiblesService,
     private screenService: ScreenService
   ) {
     this.isExtraSmallScreen = this.screenService.isExtraSmallScreen();
   }
 
-  public generatePdf(demandeurEmploi: DemandeurEmploi, simulation: Simulation) {
+  public generatePdf(simulation: Simulation) {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
 
     const def = {
-      content: this.getContent(demandeurEmploi, simulation),
+      content: this.getContent(demandeurEmploiConnecte, simulation),
       styles: this.getStyles(),
       pageMargins: [40, 40, 40, 40],
       footer: function (currentPage, pageCount) { return { text: "Page " + currentPage.toString() + ' sur ' + pageCount, alignment: 'right', style: 'normalText', margin: [0, 20, 20, 0] }; }

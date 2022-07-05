@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 
 @Component({
@@ -6,13 +6,7 @@ import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
   templateUrl: './accessibilite.component.html',
   styleUrls: ['./accessibilite.component.scss']
 })
-export class AccessibiliteComponent implements OnInit {
+export class AccessibiliteComponent {
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

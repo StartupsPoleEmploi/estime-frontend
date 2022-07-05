@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
 
 @Component({
@@ -6,13 +6,9 @@ import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
   templateUrl: './actions-suite.component.html',
   styleUrls: ['./actions-suite.component.scss']
 })
-export class ActionsSuiteComponent implements OnInit {
+export class ActionsSuiteComponent {
 
   codesActionsEnum: typeof CodesActionsEnum = CodesActionsEnum;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public onClickButtonMettreAJourProfil(): void {
     window.open('https://candidat.pole-emploi.fr/profil-professionnel/#/profil/synthese', '_blank');

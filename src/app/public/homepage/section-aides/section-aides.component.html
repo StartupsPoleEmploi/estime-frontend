@@ -1,19 +1,15 @@
 <section id="section-aides">
     <div class="container-fluid">
-        <h1
-            id="titre-section-aides"
-            class="text-center headline-2-typo">
+        <h1 id="titre-section-aides" class="text-center headline-2-typo">
             Tout savoir sur les aides et comment en bénéficier
         </h1>
         <div class="row">
             <div class="col-12 col-md-4">
-                <div
-                    class="card card-aides"
+                <div class="card card-aides"
                     (click)="screenService.isExtraSmallScreen() && onClickVoirAides(codesAidesEnum.AIDE_MOBILITE)">
                     <div class="card-title-aides row">
                         <div class="col-2 col-md-2">
-                            <div
-                                class="mt-auto mb-auto code-ressource"
+                            <div class="mt-auto mb-auto code-ressource"
                                 [ngClass]="[codesAidesEnum.AIDE_MOBILITE.toLowerCase()]">
                                 <div>
                                     <span class="overline-typo">{{codesAidesEnum.AIDE_MOBILITE}}</span>
@@ -23,33 +19,26 @@
                         <div class="col-8 col-md-10">
                             <h2 class="intitule-aide headline-4-typo">Aide à la mobilité</h2>
                         </div>
-                        <div
-                            class="col-2"
-                            *ngIf="screenService.isExtraSmallScreen()">
-                            <div
-                                class="col-auto mt-auto mb-auto col-picto-arrow"
-                                *ngIf="true">
+                        <div class="col-2" *ngIf="screenService.isExtraSmallScreen()">
+                            <div class="col-auto mt-auto mb-auto col-picto-arrow" *ngIf="true">
                                 <span class="span-chevron">
-                                    <i class="fas fa-chevron-right"></i>
+                                    <em class="fas fa-chevron-right"></em>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="!screenService.isExtraSmallScreen()"
-                        class="description-aide-container">
+                    <div *ngIf="!screenService.isExtraSmallScreen()" class="description-aide-container">
                         <hr class="am">
                         <div class="card-body card-body-aides body-1-typo">
                             <p>
-                                Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de déplacement, de repas, et d’hébergement.
+                                Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut
+                                vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de
+                                déplacement, de repas, et d’hébergement.
                             </p>
-                            <a
-                                class="en-savoir-plus-aide button-typo"
+                            <a class="en-savoir-plus-aide button-typo"
                                 (click)="onClickVoirAides(codesAidesEnum.AIDE_MOBILITE)">
                                 En savoir plus
-                                <img
-                                    alt=""
-                                    class="icon-fleche-en-savoir-plus"
+                                <img alt="" class="icon-fleche-en-savoir-plus"
                                     src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
                             </a>
                         </div>
@@ -58,13 +47,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <div
-                    class="card card-aides"
+                <div class="card card-aides"
                     (click)="screenService.isExtraSmallScreen() && onClickVoirAides(codesAidesEnum.PRIME_ACTIVITE)">
                     <div class="card-title-aides row">
                         <div class="col-2 col-md-2">
-                            <div
-                                class="mt-auto mb-auto code-ressource"
+                            <div class="mt-auto mb-auto code-ressource"
                                 [ngClass]="[codesAidesEnum.PRIME_ACTIVITE.toLowerCase()]">
                                 <div>
                                     <span class="overline-typo">{{codesAidesEnum.PRIME_ACTIVITE}}</span>
@@ -74,33 +61,26 @@
                         <div class="col-8 col-md-10">
                             <span class="intitule-aide headline-4-typo">La prime d'activité</span>
                         </div>
-                        <div
-                            class="col-2"
-                            *ngIf="screenService.isExtraSmallScreen()">
-                            <div
-                                class="col-auto mt-auto mb-auto col-picto-arrow"
-                                *ngIf="true">
+                        <div class="col-2" *ngIf="screenService.isExtraSmallScreen()">
+                            <div class="col-auto mt-auto mb-auto col-picto-arrow" *ngIf="true">
                                 <span class="span-chevron">
-                                    <i class="fas fa-chevron-right"></i>
+                                    <em class="fas fa-chevron-right"></em>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="!screenService.isExtraSmallScreen()"
-                        class="description-aide-container">
+                    <div *ngIf="!screenService.isExtraSmallScreen()" class="description-aide-container">
                         <hr class="pa">
                         <div class="card-body card-body-aides body-1-typo">
                             <p>
-                                La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.
+                                La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à
+                                soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée
+                                sur la base d’une déclaration trimestrielle.
                             </p>
-                            <a
-                                class="en-savoir-plus-aide button-typo"
+                            <a class="en-savoir-plus-aide button-typo"
                                 (click)="onClickVoirAides(codesAidesEnum.PRIME_ACTIVITE)">
                                 En savoir plus
-                                <img
-                                    alt=""
-                                    class="icon-fleche-en-savoir-plus"
+                                <img alt="" class="icon-fleche-en-savoir-plus"
                                     src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
                             </a>
                         </div>
@@ -109,13 +89,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-4">
-                <div
-                    class="card card-aides"
+                <div class="card card-aides"
                     (click)="screenService.isExtraSmallScreen() && onClickVoirAides(codesAidesEnum.AGEPI)">
                     <div class="card-title-aides row">
                         <div class="col-2 col-md-2">
-                            <div
-                                class="mt-auto mb-auto code-ressource"
+                            <div class="mt-auto mb-auto code-ressource"
                                 [ngClass]="[codesAidesEnum.AGEPI.toLowerCase()]">
                                 <div>
                                     <span class="overline-typo">{{codesAidesEnum.AGEPI}}</span>
@@ -127,33 +105,25 @@
                                 L'aide à la garde d'enfants pour parent isolé
                             </span>
                         </div>
-                        <div
-                            class="col-2"
-                            *ngIf="screenService.isExtraSmallScreen()">
-                            <div
-                                class="col-auto mt-auto mb-auto col-picto-arrow"
-                                *ngIf="true">
+                        <div class="col-2" *ngIf="screenService.isExtraSmallScreen()">
+                            <div class="col-auto mt-auto mb-auto col-picto-arrow" *ngIf="true">
                                 <span class="span-chevron">
-                                    <i class="fas fa-chevron-right"></i>
+                                    <em class="fas fa-chevron-right"></em>
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="!screenService.isExtraSmallScreen()"
-                        class="description-aide-container">
+                    <div *ngIf="!screenService.isExtraSmallScreen()" class="description-aide-container">
                         <hr class="agepi">
                         <div class="card-body card-body-aides body-1-typo">
                             <p>
-                                L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf, divorcé).
+                                L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de
+                                reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf,
+                                divorcé).
                             </p>
-                            <a
-                                class="en-savoir-plus-aide button-typo"
-                                (click)="onClickVoirAides(codesAidesEnum.AGEPI)">
+                            <a class="en-savoir-plus-aide button-typo" (click)="onClickVoirAides(codesAidesEnum.AGEPI)">
                                 En savoir plus
-                                <img
-                                    alt=""
-                                    class="icon-fleche-en-savoir-plus"
+                                <img alt="" class="icon-fleche-en-savoir-plus"
                                     src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
                             </a>
                         </div>
@@ -163,18 +133,12 @@
             </div>
         </div>
         <div class="row row-button-aides justify-content-center mb-3">
-            <button
-                id="btn-voir-toutes-les-aides"
-                type="button"
-                aria-label="Je commence ma simulation"
+            <button id="btn-voir-toutes-les-aides" type="button" aria-label="Je commence ma simulation"
                 class="btn-homepage mt-4 d-flex justify-content-center button-typo"
-                data-testid="btn-voir-toutes-les-aides"
-                tag-action="clic_bouton_voir_toutes_les_aides"
+                data-testid="btn-voir-toutes-les-aides" tag-action="clic_bouton_voir_toutes_les_aides"
                 (click)="onClickVoirAides('')">
                 <span>Voir toutes les aides</span>
-                <img
-                    alt=""
-                    src="./assets/images/icon-bt-primaire.svg">
+                <img alt="" src="./assets/images/icon-bt-primaire.svg">
             </button>
         </div>
     </div>

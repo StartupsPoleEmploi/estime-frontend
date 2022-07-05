@@ -58,7 +58,7 @@ export class CarouselSwipeDirective implements OnInit {
     }
   }
 
-  private onTouchEnd(e: TouchEvent): void {
+  private onTouchEnd(): void {
     this.cancelTouch();
   }
 

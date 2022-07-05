@@ -1,5 +1,5 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Aide } from '@app/commun/models/aide';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
@@ -10,7 +10,7 @@ import { SideModalService } from '@app/core/services/utile/side-modal.service';
   styleUrls: ['./detail-aide-apres-simulation.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class DetailAideApresSimulationComponent implements OnInit {
+export class DetailAideApresSimulationComponent {
 
   @Input() aide: Aide;
 
@@ -23,10 +23,6 @@ export class DetailAideApresSimulationComponent implements OnInit {
       this.sideModalService.closeSideModalAide();
     });
   }
-
-  ngOnInit(): void {
-  }
-
   onClickFaireLaDemandeAide = function () {
     window.open(this.aide.lienExterne, '_blank');
   }

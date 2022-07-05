@@ -7,21 +7,18 @@ import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
 import { CommuneApiService } from '@app/core/services/communes-api/communes-api.service';
 import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
-import { DeConnecteInfosPersonnellesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from "@app/core/services/utile/date-util.service";
-import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
 import { NationalitesEnum } from "@enumerations/nationalites.enum";
 import { SituationsFamilialesEnum } from "@enumerations/situations-familiales.enum";
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { DateDecomposee } from "@models/date-decomposee";
-import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { ModalService } from '@app/core/services/utile/modal.service';
+import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 
 @Component({
   selector: 'app-ma-situation',
@@ -52,26 +49,23 @@ export class MaSituationComponent implements OnInit {
   ];
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
     private communeApiService: CommuneApiService,
-    public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
+    private dateUtileService: DateUtileService,
+    private deConnecteService: DeConnecteService,
+    private demandeurEmploiService: DemandeurEmploiService,
+    private router: Router,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
-    public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    private informationsPersonnellesService: InformationsPersonnellesService,
+    public controleChampFormulaireService: ControleChampFormulaireService,
     public modalService: ModalService,
-    public screenService: ScreenService,
-    private situationFamilialeUtileService: SituationFamilialeUtileService,
-    private router: Router
-  ) {
-  }
+    public screenService: ScreenService
+  ) { }
 
   ngOnInit(): void {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
-    this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
-    this.loadDataSituationFamiliale(demandeurEmploiConnecte);
+    this.beneficiaireAides = this.demandeurEmploiService.loadDataBeneficiaireAides(demandeurEmploiConnecte);
+    this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
+    this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
     this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
   }
@@ -478,24 +472,6 @@ export class MaSituationComponent implements OnInit {
       && (this.isNonBeneficiaireACRE() || this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise))
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
-  }
-
-  private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (!demandeurEmploiConnecte.informationsPersonnelles) {
-      this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
-      this.informationsPersonnelles.nationalite = null;
-      this.informationsPersonnelles.isBeneficiaireACRE = null;
-    } else {
-      this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
-    }
-  }
-
-  private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.situationFamiliale) {
-      this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
-    } else {
-      this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
-    }
   }
 
   private isNonBeneficiaireACRE() {

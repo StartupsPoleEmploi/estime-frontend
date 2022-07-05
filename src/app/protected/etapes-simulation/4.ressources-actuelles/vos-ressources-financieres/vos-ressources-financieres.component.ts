@@ -15,10 +15,9 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { SituationFamiliale } from '@models/situation-familiale';
-import { SituationFamilialeUtileService } from '@app/core/services/utile/situation-familiale.service';
-import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { ModalService } from '@app/core/services/utile/modal.service';
+import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -50,17 +49,17 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   constructor(
+    private dateUtileService: DateUtileService,
+    private deConnecteService: DeConnecteService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
+    private demandeurEmploiService: DemandeurEmploiService,
     public controleChampFormulaireService: ControleChampFormulaireService,
-    public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
-    public deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public modalService: ModalService,
     public ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public screenService: ScreenService,
-    private situationFamilialeUtileService: SituationFamilialeUtileService
   ) {
   }
 
@@ -77,7 +76,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
       this.ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.initSalairesAvantPeriodeSimulation(this.ressourcesFinancieresAvantSimulation);
     }
-    this.loadDataSituationFamiliale(demandeurEmploiConnecte);
+    this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
   }
 
@@ -281,13 +280,5 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(event): void {
     event.stopPropagation();
     this.dateUtileService.checkFormatAnnee(this.dateDernierOuvertureDroitASS);
-  }
-
-  private loadDataSituationFamiliale(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.situationFamiliale) {
-      this.situationFamiliale = demandeurEmploiConnecte.situationFamiliale;
-    } else {
-      this.situationFamiliale = this.situationFamilialeUtileService.creerSituationFamiliale();
-    }
   }
 }

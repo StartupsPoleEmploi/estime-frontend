@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Personne } from '@models/personne';
 import { SituationPersonneEnum } from '@enumerations/situations-personne.enum';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -15,7 +15,7 @@ import { DateDecomposee } from '@app/commun/models/date-decomposee';
   templateUrl: './form-personne-a-charge-situation.component.html',
   styleUrls: ['./form-personne-a-charge-situation.component.scss']
 })
-export class FormPersonneAChargeSituationComponent implements OnInit {
+export class FormPersonneAChargeSituationComponent {
 
   @Input() nouvellePersonneACharge: Personne;
   @Input() isNouvellePersonnesAChargeFormSubmitted: boolean;
@@ -32,8 +32,6 @@ export class FormPersonneAChargeSituationComponent implements OnInit {
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteService: DeConnecteService
   ) { }
-
-  ngOnInit(): void { }
 
   public hasAgeEligibleRetraite(): boolean {
     return this.personneUtileService.isAgeEligibleRetraite(this.dateNaissanceNouvellePersonne);

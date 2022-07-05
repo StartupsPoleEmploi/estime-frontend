@@ -15,9 +15,7 @@ export class SectionTemoignagesComponent implements OnInit {
   constructor(
     public screenService: ScreenService,
     private temoignageService: TemoignageService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     this.loadTemoignages();

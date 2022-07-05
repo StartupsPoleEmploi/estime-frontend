@@ -5,12 +5,14 @@ import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { Aide } from '@app/commun/models/aide';
 import { AidesService } from './aides.service';
+import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresService {
 
   constructor(
-    private aidesService: AidesService
+    private aidesService: AidesService,
+    private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService
   ) { }
 
 
@@ -98,4 +100,12 @@ export class RessourcesFinancieresService {
       return this.aidesService.isAideAvecDetail(aide);
     }
   }
+
+  public isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+    if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()) {
+      return this.isRessourceFinanciereDemandeurPourraObtenirRSA(ressourceFinanciereOuAide);
+    }
+    return this.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciereOuAide);
+  }
+
 }

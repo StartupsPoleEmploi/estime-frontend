@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Temoignage } from '@app/commun/models/temoignage';
 
 @Component({
@@ -6,13 +6,7 @@ import { Temoignage } from '@app/commun/models/temoignage';
   templateUrl: './temoignages-desktop.component.html',
   styleUrls: ['./temoignages-desktop.component.scss']
 })
-export class TemoignagesDesktopComponent implements OnInit {
+export class TemoignagesDesktopComponent {
 
   @Input() temoignages: Array<Temoignage>;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

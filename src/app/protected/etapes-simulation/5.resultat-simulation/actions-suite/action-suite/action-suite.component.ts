@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
 
 @Component({
@@ -6,18 +6,12 @@ import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
   templateUrl: './action-suite.component.html',
   styleUrls: ['./action-suite.component.scss']
 })
-export class ActionSuiteComponent implements OnInit {
+export class ActionSuiteComponent {
 
   @Output() clickAction = new EventEmitter<string>();
   @Input() imageLink: string;
   @Input() text: string;
   @Input() codeAction: string;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 
   public onClickAction(event, codeAction: string): void {
     event.preventDefault();

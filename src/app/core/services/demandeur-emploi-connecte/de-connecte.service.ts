@@ -13,8 +13,6 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { BrutNetService } from '../utile/brut-net.service';
 import { RessourcesFinancieresAvantSimulationUtileService } from '../utile/ressources-financieres-avant-simulation-utile.service';
-import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
-import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 
@@ -23,9 +21,6 @@ export class DeConnecteService {
 
   private demandeurEmploiConnecte: DemandeurEmploi;
 
-  private statutOccupationLogementEnum: typeof StatutOccupationLogementEnum = StatutOccupationLogementEnum;
-  private statutOccupationLogementLibelleEnum: typeof StatutOccupationLogementLibelleEnum = StatutOccupationLogementLibelleEnum;
-
   constructor(
     private brutNetService: BrutNetService,
     private numberUtileService: NumberUtileService,
@@ -33,9 +28,7 @@ export class DeConnecteService {
     private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     private router: Router,
     private sessionStorageEstimeService: SessionStorageEstimeService
-  ) {
-
-  }
+  ) { }
 
   /**
    * Si on tente un accès au composant etape-simulation ou à ses fils

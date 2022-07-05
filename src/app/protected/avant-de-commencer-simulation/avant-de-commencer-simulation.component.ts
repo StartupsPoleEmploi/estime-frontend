@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
@@ -15,7 +15,7 @@ import { RoutesEnum } from '@enumerations/routes.enum';
   templateUrl: './avant-de-commencer-simulation.component.html',
   styleUrls: ['./avant-de-commencer-simulation.component.scss']
 })
-export class AvantDeCommencerSimulationComponent implements OnInit {
+export class AvantDeCommencerSimulationComponent {
 
   isPageLoadingDisplay = false;
   messageErreur: string;
@@ -28,11 +28,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     private router: Router,
     public screenService: ScreenService,
     public modalService: ModalService
-  ) {
-  }
-
-  ngOnInit(): void {
-  }
+  ) { }
 
   public onClickButtonJeContinue(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
@@ -53,7 +49,7 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
   }
 
-  private traiterErreurCreerDemandeurEmploi(error: HttpErrorResponse): void {
+  private traiterErreurCreerDemandeurEmploi(_error: HttpErrorResponse): void {
     this.isPageLoadingDisplay = false;
     this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
   }

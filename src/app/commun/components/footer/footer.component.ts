@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   stickyFooter: boolean = false;
   subscriptionRouteNavigationEndObservable: Subscription;
@@ -20,8 +20,6 @@ export class FooterComponent implements OnInit {
   ) {
     this.subscribeRouteNavigationEndObservable();
   }
-
-  ngOnInit(): void { }
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();

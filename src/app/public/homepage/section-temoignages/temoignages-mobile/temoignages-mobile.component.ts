@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Temoignage } from '@app/commun/models/temoignage';
 
 @Component({
@@ -6,15 +6,9 @@ import { Temoignage } from '@app/commun/models/temoignage';
   templateUrl: './temoignages-mobile.component.html',
   styleUrls: ['./temoignages-mobile.component.scss']
 })
-export class TemoignagesMobileComponent implements OnInit {
+export class TemoignagesMobileComponent {
 
 
   @Input() temoignages: Array<Temoignage>;
   @Input() isSmallScreen: boolean;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -6,7 +6,6 @@ import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { AidesService } from '@app/core/services/utile/aides.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SimulationService } from '@app/core/services/utile/simulation.service';
@@ -32,9 +31,8 @@ export class MoisApresSimulationComponent implements OnInit {
   demandeurEmploiConnecte: DemandeurEmploi;
 
   constructor(
-    public aidesService: AidesService,
+    private deConnecteService: DeConnecteService,
     public dateUtileService: DateUtileService,
-    public deConnecteService: DeConnecteService,
     public deConnecteSimulationService: DeConnecteSimulationService,
     public simulationService: SimulationService,
     public screenService: ScreenService

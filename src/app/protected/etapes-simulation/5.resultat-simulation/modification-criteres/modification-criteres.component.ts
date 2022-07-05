@@ -1,5 +1,5 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit, Input, ViewEncapsulation, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -7,8 +7,6 @@ import { Simulation } from '@app/commun/models/simulation';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
-import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -20,7 +18,7 @@ import { ContratTravailComponent } from '../../1.contrat-travail/contrat-travail
   styleUrls: ['./modification-criteres.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ModificationCriteresComponent implements OnInit {
+export class ModificationCriteresComponent {
 
   @Input() modalRef: BsModalRef;
   @Output() displayLoading = new EventEmitter<boolean>();
@@ -30,12 +28,10 @@ export class ModificationCriteresComponent implements OnInit {
   messageErreur: string;
 
   constructor(
-    public controleChampFormulaireService: ControleChampFormulaireService,
     private deConnecteService: DeConnecteService,
     private deConnecteSimulationService: DeConnecteSimulationService,
     private estimeApiService: EstimeApiService,
     private location: LocationStrategy,
-    public modalService: ModalService,
     private router: Router,
     public screenService: ScreenService,
     public sideModalService: SideModalService
@@ -45,8 +41,6 @@ export class ModificationCriteresComponent implements OnInit {
       this.sideModalService.closeSideModalModificationCriteres();
     });
   }
-
-  ngOnInit(): void { }
 
   public handleKeyUpOnRetour(event: any) {
     if (event.keyCode === 13) {

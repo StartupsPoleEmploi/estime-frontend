@@ -1,13 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
-import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -19,9 +17,9 @@ import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-fo
 import { RessourcesFinancieresPersonnesAChargeComponent } from './ressources-financieres-personnes-a-charge/ressources-financieres-personnes-a-charge.component';
 import { VosRessourcesFinancieresComponent } from './vos-ressources-financieres/vos-ressources-financieres.component';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
-import { InformationsPersonnellesService } from '@app/core/services/utile/informations-personnelles.service';
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 import { Simulation } from '@app/commun/models/simulation';
+import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -75,25 +73,23 @@ export class RessourcesActuellesComponent implements OnInit {
   @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
 
   constructor(
-    private elementRef: ElementRef,
-    public controleChampFormulaireService: ControleChampFormulaireService,
-    public deConnecteService: DeConnecteService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    private deConnecteService: DeConnecteService,
     private deConnecteRessourcesFinancieresService: DeConnecteRessourcesFinancieresAvantSimulationService,
-    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    public deConnecteSimulationService: DeConnecteSimulationService,
+    private deConnecteSimulationService: DeConnecteSimulationService,
+    private demandeurEmploiService: DemandeurEmploiService,
     private estimeApiService: EstimeApiService,
-    private informationsPersonnellesService: InformationsPersonnellesService,
+    private router: Router,
+    public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
     public screenService: ScreenService,
-    private router: Router
+    public controleChampFormulaireService: ControleChampFormulaireService,
   ) {
   }
 
   ngOnInit(): void {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    this.loadDataRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte);
-    this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
+    this.ressourcesFinancieresAvantSimulation = this.demandeurEmploiService.loadDataRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte);
+    this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.ressourceConjointSeulementRSA = this.checkConjointToucheSeulementRSA();
     this.ressourcePersonnesAChargeSeulementRSA = this.checkPersonnesAChargeToucheSeulementRSA();
     if (this.deConnecteService.getDemandeurEmploiConnecte().situationFamiliale.isEnCouple
@@ -235,20 +231,6 @@ export class RessourcesActuellesComponent implements OnInit {
 
   public isRessourcesFoyerValides(): boolean {
     return !this.isRessourcesFoyerDisplay && this.ressourcesFoyerValidees;
-  }
-
-  private loadDataRessourcesFinancieresAvantSimulation(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation) {
-      this.ressourcesFinancieresAvantSimulation = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
-    }
-  }
-
-  private loadDataInformationsPersonnelles(demandeurEmploiConnecte: DemandeurEmploi): void {
-    if (demandeurEmploiConnecte.informationsPersonnelles) {
-      this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
-    } else {
-      this.informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
-    }
   }
 
   private isSaisieFormulairesValide(): boolean {

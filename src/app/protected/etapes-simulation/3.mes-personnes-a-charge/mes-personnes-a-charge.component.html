@@ -27,12 +27,12 @@
                 <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                     <div class="card">
                         <div class="card-header">
-                            <i id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
+                            <em id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
                                 aria-label="Supprimer personne à charge" alt="Supprimer personne à charge"
                                 class="fas fa-times-circle float-end"
                                 (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
                                 (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
-                            </i>
+                            </em>
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <div class="row">

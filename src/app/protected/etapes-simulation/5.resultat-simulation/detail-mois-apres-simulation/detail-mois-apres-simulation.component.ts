@@ -4,7 +4,6 @@ import { Aide } from '@app/commun/models/aide';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
-import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { RessourcesFinancieresService } from '@app/core/services/utile/ressources-financieres.service';
@@ -32,12 +31,11 @@ export class DetailMoisApresSimulationComponent implements OnInit {
 
   constructor(
     private ressourcesFinancieresService: RessourcesFinancieresService,
+    private location: LocationStrategy,
     public dateUtileService: DateUtileService,
     public deConnecteSimulationService: DeConnecteSimulationService,
-    public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public simulationService: SimulationService,
     public screenService: ScreenService,
-    private location: LocationStrategy,
     public sideModalService: SideModalService) {
     history.pushState(null, null, window.location.href);
     this.location.onPopState(() => {
@@ -57,15 +55,8 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     this.ressourcesFinancieresEtAidesMois.sort((a, b) => b.montant - a.montant);
   }
 
-  public isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
-    if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()) {
-      return this.ressourcesFinancieresService.isRessourceFinanciereDemandeurPourraObtenirRSA(ressourceFinanciereOuAide);
-    }
-    return this.ressourcesFinancieresService.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciereOuAide);
-  }
-
   public onClickOnRessourceFinanciereOuAide(aide): void {
-    if (this.isRessourceFinanciereOuAideAvecDetail(aide)) {
+    if (this.ressourcesFinancieresService.isRessourceFinanciereAvecDetail(aide)) {
       this.ressourceFinanciereOuAideSelected = aide;
       this.aideSelection.emit(aide);
     }
@@ -85,9 +76,5 @@ export class DetailMoisApresSimulationComponent implements OnInit {
 
   public isRessourceFinanciereOuAideSelected(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
     return this.ressourceFinanciereOuAideSelected == ressourceFinanciereOuAide;
-  }
-
-  public isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide): boolean {
-    return this.ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide);
   }
 }

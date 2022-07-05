@@ -3,7 +3,7 @@
         (click)="sideModalService.closeSideModalMois()" (keyup)="handleKeyUpOnRetour($event);" tabindex="0"
         tag-action="clic_bouton_retour_detail_mois" data-testid="bouton_retour_detail_mois">
         <span class="bouton_retour body-2-typo color-blue-10-typo">
-            <i alt class="ps-2 pe-2 fas fa-chevron-left span-montant-mensuel"></i>
+            <em alt class="ps-2 pe-2 fas fa-chevron-left span-montant-mensuel"></em>
             <span class="body-2-typo color-blue-10-typo">Retour</span>
         </span>
     </div>
@@ -44,11 +44,11 @@
     </div>
     <div class="div_detail_mois_with_padding">
         <div class="card my-2 p-3"
-            [ngClass]="{'aide-avec-detail':isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)}"
+            [ngClass]="{'aide-avec-detail':ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide)}"
             *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois"
             (click)="onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);"
             (keyup)="handleKeyUpOnRessourceFinanciereOuAide($event,ressourceFinanciereOuAide);"
-            [tabindex]="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)?0:-1"
+            [tabindex]="ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide)?0:-1"
             tag-action="clic_bouton_detail_aide">
             <div class="row pe-3">
                 <div class="col-md-1 col-2 div-vertically-centered">
@@ -67,7 +67,8 @@
                                 attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
                                 {{ ressourceFinanciereOuAide.montant }} €
                             </span>
-                            <span *ngIf="isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
+                            <span
+                                *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
                                 class="demande-a-effectuer overline-typo">
                                 DEMANDE À EFFECTUER
                             </span>
@@ -97,12 +98,13 @@
                     </app-message-info>
                 </div>
             </div>
-            <div *ngIf="isRessourceFinanciereOuAideAvecDetail(ressourceFinanciereOuAide)" class="row mt-3">
+            <div *ngIf="ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide)"
+                class="row mt-3">
                 <div class="col-md-12 col-12 div-vertically-centered justify-content-end">
                     <span class="bouton-detail body-2-typo color-blue-10-typo">
                         <span *ngIf="!screenService.isExtraSmallScreen()" class="body-2-typo color-blue-10-typo">Voir le
                             détail</span>
-                        <i alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></i>
+                        <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
                     </span>
                 </div>
             </div>
