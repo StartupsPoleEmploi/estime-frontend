@@ -339,41 +339,6 @@
                         </span>
                     </div>
                 </div>
-                <div class="row pb-3">
-                    <label class="label headline-4-typo"
-                        [for]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1">
-                        * Allocation supplémentaire d'invalidité perçue
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input [name]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1"
-                            [id]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1" type="text"
-                            attr.aria-label="Allocation supplémentaire d'invalidité perçue le mois dernier par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                            maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                            [ngClass]="{'ng-invalid': !personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite }"
-                            placeholder="Montant" inputmode="numeric" required
-                            #allocationSupplementaireInvalidite="ngModel">
-                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                    </div>
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                        </span>
-                    </div>
-                </div>
             </div>
             <div *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
                 <div class="row pb-3">

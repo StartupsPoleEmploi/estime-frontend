@@ -118,10 +118,6 @@ export class BlockRessourcesEstimeesService {
       this.addRowAide(body, simulation, CodesAidesEnum.PENSION_INVALIDITE, LibellesAidesEnum.PENSION_INVALIDITE, ImagesBase64Enum.PENSION_INVALIDITE);
       nbrRows++;
     }
-    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE)) {
-      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
-      nbrRows++;
-    }
     return nbrRows;
   }
 

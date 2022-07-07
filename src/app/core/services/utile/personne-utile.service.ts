@@ -33,7 +33,6 @@ export class PersonneUtileService {
       personne.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
       personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
       personne.ressourcesFinancieresAvantSimulation.aidesCPAM = new AidesCPAM();
-      personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = 0;
     }
     return personne;
   }

@@ -54,7 +54,6 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
       && !personne.beneficiaireAides.beneficiaireARE
       && !personne.beneficiaireAides.beneficiaireASS
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
-      && personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0
       && !personne.informationsPersonnelles.microEntrepreneur
       && !personne.informationsPersonnelles.travailleurIndependant
       && !personne.informationsPersonnelles.hasPensionRetraite) {

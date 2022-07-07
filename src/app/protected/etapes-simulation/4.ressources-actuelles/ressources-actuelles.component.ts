@@ -116,8 +116,6 @@ export class RessourcesActuellesComponent implements OnInit {
           && !personne.beneficiaireAides.beneficiaireARE
           && !personne.beneficiaireAides.beneficiaireASS
           && !personne.beneficiaireAides.beneficiairePensionInvalidite
-          && (personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === null
-            || personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0)
           && !personne.informationsPersonnelles.microEntrepreneur
           && !personne.informationsPersonnelles.travailleurIndependant) {
           result = true;
@@ -141,8 +139,6 @@ export class RessourcesActuellesComponent implements OnInit {
         && !conjoint.beneficiaireAides.beneficiaireARE
         && !conjoint.beneficiaireAides.beneficiaireASS
         && !conjoint.beneficiaireAides.beneficiairePensionInvalidite
-        && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === null
-          || conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0)
         && !conjoint.informationsPersonnelles.microEntrepreneur
         && !conjoint.informationsPersonnelles.travailleurIndependant)
     ) {

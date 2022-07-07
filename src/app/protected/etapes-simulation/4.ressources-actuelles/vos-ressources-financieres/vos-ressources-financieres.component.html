@@ -548,38 +548,6 @@
                     </span>
                 </div>
             </div>
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="allocationSupplementaireInvalidite">
-                    * Allocation supplémentaire d'invalidité perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="allocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        data-testid="input-allocation-supplementaire-invalidite" maxlength="6"
-                        class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite == 0)}"
-                        required inputmode="numeric" #allocationSupplementaireInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-            </div>
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row pb-3">

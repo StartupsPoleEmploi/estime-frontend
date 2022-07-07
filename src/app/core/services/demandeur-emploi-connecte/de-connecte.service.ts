@@ -119,10 +119,8 @@ export class DeConnecteService {
   public setPensionInvalidite(): void {
     this.setAidesCPAM();
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM
-      && (!this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite
-        || !this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite)) {
+      && !this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite) {
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = null;
-      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = null;
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
@@ -311,7 +309,6 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM) {
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = null;
-      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = null;
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
@@ -428,7 +425,6 @@ export class DeConnecteService {
       if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation
         && this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi) {
         this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = null;
-        this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = null;
       }
       this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
@@ -439,7 +435,6 @@ export class DeConnecteService {
     if (this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM
       && !this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = null;
-      this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = null;
     }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }

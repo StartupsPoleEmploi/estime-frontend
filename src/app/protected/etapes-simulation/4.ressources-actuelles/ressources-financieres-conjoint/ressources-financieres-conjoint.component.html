@@ -75,8 +75,8 @@
                             type="radio" class="form-check-input"
                             [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
                             [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
-                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non"
-                            required #hasTravailleAuCoursDerniersMois="ngModel"
+                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non" required
+                            #hasTravailleAuCoursDerniersMois="ngModel"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
                         <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
                             non
@@ -308,37 +308,6 @@
                         <span class="error-input-message"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                        </span>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <label class="label headline-4-typo" for="conjointAllocationSupplementaireInvalidite">
-                        * Allocation supplémentaire d'invalidité perçue
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input id="conjointAllocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
-                            type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                            maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                            placeholder="Montant" inputmode="numeric" required
-                            #allocationSupplementaireInvalidite="ngModel">
-                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                    </div>
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                 </div>

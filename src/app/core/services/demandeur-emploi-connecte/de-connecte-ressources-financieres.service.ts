@@ -193,7 +193,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
     if (aidesCPAM != null) {
       montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite);
-      montant += this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }
     return montant;
   }
@@ -212,15 +211,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite > 0) {
       montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite;
-    }
-    return montant;
-  }
-
-  public getAllocationSupplementaireInvalidite(): number {
-    let montant = 0;
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite > 0) {
-      montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite;
     }
     return montant;
   }
@@ -503,8 +493,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     let montant = 0;
     if (ressourcesFinancieresAvantSimulation.aidesCPAM) {
       const aidesCPAM = ressourcesFinancieresAvantSimulation.aidesCPAM;
-      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
-        + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
+      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite);
     }
     return montant;
   }
@@ -584,9 +573,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     if (aidesCPAM != null) {
       if (aidesCPAM.pensionInvalidite != null && aidesCPAM.pensionInvalidite > 0) {
         ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.PENSION_INVALIDITE);
-      }
-      if (aidesCPAM.allocationSupplementaireInvalidite != null && aidesCPAM.allocationSupplementaireInvalidite > 0) {
-        ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
       }
     }
     return ressourcesAvantSimulationCPAMArray;

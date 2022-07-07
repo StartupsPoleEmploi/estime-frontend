@@ -34,7 +34,6 @@ export class RessourcesFinancieresAvantSimulationUtileService {
 
   public creerAidesCPAM(): AidesCPAM {
     const aidesCPAM = new AidesCPAM();
-    aidesCPAM.allocationSupplementaireInvalidite = 0;
     return aidesCPAM;
   }
 
@@ -283,7 +282,6 @@ export class RessourcesFinancieresAvantSimulationUtileService {
   private replaceCommaByDotMontantsAidesCPAM(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): void {
     if (ressourcesFinancieresAvantSimulation.aidesCPAM) {
       ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite);
-      ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite);
     }
   }
 
