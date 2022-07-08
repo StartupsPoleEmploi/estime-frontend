@@ -20,7 +20,6 @@ export class InformationsPersonnellesService {
     logement.isColloc = false;
     logement.isConventionne = false;
     logement.isCrous = false;
-    logement.montantCharges = null;
     logement.montantLoyer = null;
     logement.statutOccupationLogement = this.creerStatutOccupationLogement();
     logement.coordonnees = this.creerCoordonnees();

@@ -179,10 +179,6 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-montant-loyer]').type(montant);
   }
 
-  public saisirMontantCharges(montant: string): void {
-    cy.get('[data-testid=input-montant-charges]').type(montant);
-  }
-
   public saisirAllocationFamilialeFoyer(montant: string): void {
     cy.get('[data-testid=input-af]').type(montant);
   }

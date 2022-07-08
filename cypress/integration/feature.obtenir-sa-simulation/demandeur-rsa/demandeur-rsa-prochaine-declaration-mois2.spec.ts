@@ -43,7 +43,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "2";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2 = montantMensuelRSA;
       const montantRSA_M3_M4_M5 = "102";
@@ -83,7 +82,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation();
@@ -151,7 +149,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE MES RESSOURCES
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const montantMensuelRSA = "500";
       const montantSalaireMoisMoins0 = "500";
       const montantSalaireMoisMoins2 = "500";
@@ -198,7 +195,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation();

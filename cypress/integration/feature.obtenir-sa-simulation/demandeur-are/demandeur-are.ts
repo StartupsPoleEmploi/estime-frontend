@@ -44,7 +44,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "37";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -87,7 +86,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -157,7 +155,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "37";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -199,7 +196,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -270,7 +266,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "37";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -311,7 +306,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -377,7 +371,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "82";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -420,7 +413,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -486,7 +478,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "37";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -529,7 +520,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -599,7 +589,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationJournaliereBrute = "37";
       const montantAPL = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const prochaineDeclarationTrimestrielle = "1";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantARECalculé = "1102";
@@ -641,7 +630,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 

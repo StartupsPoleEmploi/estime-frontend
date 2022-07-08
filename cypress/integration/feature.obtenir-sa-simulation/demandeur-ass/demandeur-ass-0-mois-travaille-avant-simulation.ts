@@ -163,7 +163,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const allocationSoutienFamiliale = "117";
 
       const montantLoyer = "500";
-      const montantCharges = "50";
       const prochaineDeclarationTrimestrielle = "0";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
@@ -209,7 +208,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.saisirAllocationSoutienFamilialeFoyer(allocationSoutienFamiliale);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();

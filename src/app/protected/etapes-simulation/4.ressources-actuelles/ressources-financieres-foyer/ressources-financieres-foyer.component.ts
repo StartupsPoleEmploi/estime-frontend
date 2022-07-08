@@ -425,6 +425,5 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   private unsetInformationsLogement(): void {
     this.informationsPersonnelles.logement.montantLoyer = 0;
-    this.informationsPersonnelles.logement.montantCharges = 0;
   }
 }

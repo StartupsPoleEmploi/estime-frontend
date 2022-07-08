@@ -387,38 +387,6 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="isConcerneParAideLogement()">
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="montantCharges">
-                    * Montant des charges mensuelles de votre logement
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="montantCharges" name="montantCharges" type="text" data-testid="input-montant-charges"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="8" class="form-control d-inline" (click)="$event.target.select()"
-                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
-                        inputmode="numeric" #montantCharges="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-            </div>
-        </div>
         <div *ngIf="isConcerneParDeclarationTrimestrielle()">
             <div class="row flex-column">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">

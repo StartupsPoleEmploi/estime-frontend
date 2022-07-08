@@ -172,7 +172,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantSalaireMoisMoins1 = "800";
 
       const montantLoyer = "500";
-      const montantCharges = "50";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAAH_M1_M2_M3_M4 = "900";
       const montantAAH_M5_M6 = "171";
@@ -221,7 +220,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.saisirAllocationSoutienFamilialeFoyer(allocationSoutienFamiliale);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();

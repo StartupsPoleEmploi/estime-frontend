@@ -171,7 +171,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       const montantSalaireMoisMoins5 = "500";
       const montantAPL = "120";
       const montantLoyer = "500";
-      const montantCharges = "30";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
       const montantALS_M1_M2_M3_M4_M5_M6 = "271";
@@ -215,7 +214,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -298,7 +296,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       const montantSalaireMoisMoins2 = "500"
       const montantAPL = "120";
       const montantLoyer = "500";
-      const montantCharges = "30";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
       const montantAgepi = "400";
@@ -346,7 +343,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -438,7 +434,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       const montantSalaireMoisMoins5 = "500";
       const montantAPL = "120";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const allocationFamilialeFoyer = "250";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
@@ -489,7 +484,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPL);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.saisirAllocationFamilialeFoyer(allocationFamilialeFoyer);
       ressourcesActuellesPage.selectOptionMoisProchaineDeclarationTrimestrielleFoyer(prochaineDeclarationTrimestrielle);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
