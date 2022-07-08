@@ -1,9 +1,8 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { DateDecomposee } from '@models/date-decomposee';
 import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { DeConnecteInfosPersonnellesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-infos-personnelles.service";
 import { DeConnecteBeneficiaireAidesService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service";
@@ -29,7 +28,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   SEUIL_DEGRESSIVITE_ARE = 140;
 
-  dateDernierOuvertureDroitASS: DateDecomposee;
   isRessourcesFinancieresFormSubmitted = false;
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
   optionsProchaineDeclarationTrimestrielle: Array<NumeroProchainMoisDeclarationTrimestrielle>;
@@ -43,10 +41,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
-  @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
-  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
-
 
   constructor(
     private dateUtileService: DateUtileService,
@@ -66,9 +61,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-      this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
-    }
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) {
       this.initOptionsProchaineDeclarationTrimestrielle();
     }
@@ -223,20 +215,11 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
-    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
-      this.checkAndSaveDateDernierOuvertureDroitASS();
-    }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
       this.validationVosRessourcesEventEmitter.emit();
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
-    }
-  }
-
-  private checkAndSaveDateDernierOuvertureDroitASS(): void {
-    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
     }
   }
 
@@ -255,30 +238,5 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       }
     }
     return isValide;
-  }
-
-  /*** gestion évènement dateDernierOuvertureDroitASS */
-
-  public onChangeOrKeyUpDateDerniereOuvertureDroitASSJour(event): void {
-    event.stopPropagation();
-    const value = this.dateDernierOuvertureDroitASS.jour;
-    if (value && value.length === 2) {
-      this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
-    }
-    this.dateUtileService.checkFormatJour(this.dateDernierOuvertureDroitASS);
-  }
-
-  public onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event): void {
-    event.stopPropagation();
-    const value = this.dateDernierOuvertureDroitASS.mois;
-    if (value && value.length === 2) {
-      this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
-    }
-    this.dateUtileService.checkFormatMois(this.dateDernierOuvertureDroitASS);
-  }
-
-  public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(event): void {
-    event.stopPropagation();
-    this.dateUtileService.checkFormatAnnee(this.dateDernierOuvertureDroitASS);
   }
 }

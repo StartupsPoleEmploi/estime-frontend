@@ -43,11 +43,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       // VARIABLES PAGE PERSONNES A CHARGE
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
-      const dateDerniereOuvertureDroitASS = {
-        "jour": "16",
-        "mois": "05",
-        "annee": "2019"
-      };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
       const montantSalaireMoisMoins1 = "500";
@@ -86,7 +81,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
-      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
       ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins1, 1);
@@ -158,11 +152,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       const nationalite = NationalitesEnum.FRANCAISE;
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
-      const dateDerniereOuvertureDroitASS = {
-        "jour": "16",
-        "mois": "05",
-        "annee": "2019"
-      };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
       const montantSalaireMoisMoins2 = "500";
@@ -201,7 +190,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
-      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
       ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins2, 2);
@@ -284,11 +272,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       };
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
-      const dateDerniereOuvertureDroitASS = {
-        "jour": "16",
-        "mois": "05",
-        "annee": "2019"
-      };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
       const montantSalaireMoisMoins0 = "500"
@@ -331,7 +314,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
-      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
       ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins0, 0);
@@ -422,11 +404,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       };
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
-      const dateDerniereOuvertureDroitASS = {
-        "jour": "16",
-        "mois": "05",
-        "annee": "2019"
-      };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
       const montantSalaireMoisMoins3 = "500";
@@ -472,7 +449,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
-      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
       ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);
@@ -577,11 +553,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
       };
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
-      const dateDerniereOuvertureDroitASS = {
-        "jour": "16",
-        "mois": "05",
-        "annee": "2019"
-      };
       const montantMensuelAAH = "500";
       const prochaineDeclarationTrimestrielle = "0";
       const montantSalaireMoisMoins3 = "500";
@@ -624,7 +595,6 @@ describe(specTitleSimulationDeASSEtAAH('FEATURE - Obtenir ma simulation - Demand
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
-      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.saisirMontantMensuelAAH(montantMensuelAAH);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisOui();
       ressourcesActuellesPage.saisirSalaireMoisMoinsXAvantSimulation(montantSalaireMoisMoins3, 3);

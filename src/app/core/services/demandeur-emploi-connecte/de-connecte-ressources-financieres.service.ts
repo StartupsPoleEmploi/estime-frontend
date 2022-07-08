@@ -434,9 +434,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
 
   private isDonneesASSSaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
-    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit
-      && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
-      && !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierAssInvalide(ressourcesFinancieresAvantSimulation);
+    return !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierAssInvalide(ressourcesFinancieresAvantSimulation);
   }
 
   private isDonneesRSASaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {

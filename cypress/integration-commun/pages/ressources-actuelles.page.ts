@@ -187,12 +187,6 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-asf]').type(montant);
   }
 
-  public saisirDateDerniereOuvertureDroitASS(jour: string, mois: string, annee: string): void {
-    cy.get('[data-testid=input-jour-date]').type(jour);
-    cy.get('[data-testid=input-mois-date]').type(mois);
-    cy.get('[data-testid=input-annee-date]').type(annee);
-  }
-
   public clickOnAvezVousTravailleAuCoursDesDerniersMoisNon(): void {
     cy.get('[data-testid=btn-has-travaille-au-cours-derniers-mois-non]').click({ force: true });
   }

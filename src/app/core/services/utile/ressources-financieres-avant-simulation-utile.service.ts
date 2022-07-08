@@ -33,8 +33,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
   }
 
   public creerAidesCPAM(): AidesCPAM {
-    const aidesCPAM = new AidesCPAM();
-    return aidesCPAM;
+    return new AidesCPAM();
   }
 
   public creerAidesFamiliales(): AidesFamiliales {
@@ -84,7 +83,6 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     const allocationASS = new AllocationASS();
     allocationASS.allocationJournaliereNet = null;
     allocationASS.allocationMensuelleNet = null;
-    allocationASS.dateDerniereOuvertureDroit = null;
     return allocationASS;
   }
 
