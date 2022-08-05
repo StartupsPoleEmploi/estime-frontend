@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
@@ -10,25 +10,19 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  isLoggedIn = false;
   isHomepage = false;
   isPageResultat = false;
   subscriptionStatutIndividuChangedObservable: Subscription;
   subscriptionRouteNavigationEndObservable: Subscription;
 
   constructor(
-    private individuConnectedService: IndividuConnectedService,
+    public individuConnectedService: IndividuConnectedService,
     private peConnectService: PeConnectService,
     private router: Router
   ) {
-    this.subscribeStatutIndividuChangedObservable();
     this.subscribeRouteNavigationEndObservable();
-  }
-
-  ngOnInit(): void {
-    this.isLoggedIn = this.individuConnectedService.isLoggedIn();
   }
 
   ngOnDestroy(): void {
@@ -46,12 +40,6 @@ export class HeaderComponent implements OnInit {
 
   public onClickLogoEstime(): void {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
-  }
-
-  private subscribeStatutIndividuChangedObservable(): void {
-    this.subscriptionStatutIndividuChangedObservable = this.individuConnectedService.statutIndividuChanged.subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;
-    });
   }
 
   private subscribeRouteNavigationEndObservable(): void {

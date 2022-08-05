@@ -1,0 +1,50 @@
+@import "../../../../assets/scss/variables";
+
+.modal-body {
+
+  @media #{$extra-small-device} {
+    width: 100% !important;
+  }
+
+  #btn-se-connecter {
+    box-shadow: unset;
+    display: inline-flex;
+
+    @media #{$extra-small-device} {
+      width: 100% !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    img {
+      @media #{$extra-small-device} {
+        margin-left: -0.5rem;
+      }
+    }
+
+    span {
+      text-decoration: none;
+      padding-left: 0;
+      padding-right: 0.5rem;
+    }
+  }
+
+  #btn-sans-connexion {
+    box-shadow: unset;
+    background-color: $color-white-3;
+    display: inline-flex;
+    border: 1px solid $color-blue-2;
+
+    @media #{$extra-small-device} {
+      min-width: 60% !important;
+    }
+
+    span {
+      color: $color-blue-2;
+      text-decoration: none;
+      margin: 0;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
+}

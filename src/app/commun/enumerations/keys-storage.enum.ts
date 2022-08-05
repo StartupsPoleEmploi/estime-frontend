@@ -8,5 +8,6 @@ export enum KeysStorageEnum {
   DEMANDEUR_EMPLOI_CONNECTE_ROUTE_ACTIVATED_STORAGE_SESSION_KEY = 'estime.demandeurEmploiConnecte.routeActivated',
   DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE = "estime.demandeurEmploiConnecte.messageNonAutorisee",
   INDIVIDU_CONNECTE_STORAGE_SESSION_KEY = 'estime.individuConnecte',
+  IS_LOGGED_IN = 'estime.isLoggedIn',
   TRAFFIC_SOURCE = 'estime.trafficSource'
 }

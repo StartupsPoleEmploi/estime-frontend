@@ -176,7 +176,7 @@
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || hasDegressiviteAre.touched)  && hasDegressiviteAre.errors?.required">
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasDegressiviteAre.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
@@ -430,7 +430,7 @@
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasTravailleAuCoursDerniersMois.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>

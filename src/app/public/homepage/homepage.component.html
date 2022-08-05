@@ -1,3 +1,5 @@
+<app-page-loading *ngIf="modalChoixConnexionComponent != null && modalChoixConnexionComponent.isPageLoadingDisplay"
+    message="Connexion en cours..."></app-page-loading>
 <section id="section-presentation">
     <div class="container-fluid pt-4">
         <div id="div-message-erreur-homepage">
@@ -17,7 +19,7 @@
                     <div class="row row-btn-je-commence">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
                             class="btn-homepage button-typo" data-testid="btn-je-commence"
-                            tag-action="clic_bouton_je_commence" (click)="login()">
+                            tag-action="clic_bouton_je_commence" (click)="openModalChoixConnexion()">
                             <span>Je commence la simulation</span>
                             <img alt="" class="image-2" src="./assets/images/icon-bt-primaire.svg">
                         </button>

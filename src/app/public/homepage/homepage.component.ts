@@ -7,8 +7,8 @@ import { IndividuConnectedService } from "@app/core/services/connexion/individu-
 import { PeConnectService } from "@app/core/services/connexion/pe-connect.service";
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { RoutesEnum } from '@enumerations/routes.enum';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { ModalChoixConnexionComponent } from './modal-choix-connexion/modal-choix-connexion.component';
 import { ModalPopulationNonAutoriseeComponent } from './modal-population-non-autorisee/modal-population-non-autorisee.component';
 
 @Component({
@@ -23,6 +23,7 @@ export class HomepageComponent implements OnInit {
   scrollPositionOffset: number;
 
   @ViewChild('messageErreurElement', { static: true }) messageErreurElement;
+  @ViewChild(ModalChoixConnexionComponent) modalChoixConnexionComponent;
 
   constructor(
     private authorizationService: AuthorizationService,
@@ -30,23 +31,34 @@ export class HomepageComponent implements OnInit {
     public modalService: ModalService,
     public individuConnectedService: IndividuConnectedService,
     public peConnectService: PeConnectService,
-    private router: Router,
     public screenService: ScreenService
   ) {
   }
 
+  config: ModalOptions = {
+    backdrop: 'static',
+    keyboard: false,
+    animated: true,
+    ignoreBackdropClick: true,
+    class: 'gray half-top full-height-modal'
+  };
+
   ngOnInit(): void {
     this.checkDemandeurEmploiConnecte();
     this.scrollPositionOffset = document.getElementById('image-homepage-calculette').offsetTop;
+
+  }
+
+  public openModalChoixConnexion() {
+    const modalRef = this.bsModalService.show(ModalChoixConnexionComponent, this.config);
+    modalRef.content.notifyParent.subscribe((result) => {
+      console.error(result)
+      this.checkDemandeurEmploiConnecte();
+    })
   }
 
   public login(): void {
     this.peConnectService.login();
-  }
-
-  public onClickButtonJeCommence(): void {
-    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
-    else this.login();
   }
 
   public getLibelleBoutonPeConnect(): string {
