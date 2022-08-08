@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Lato';
   src: url('./black/Lato-Black.woff2') format('woff2'),
-      url('./black/Lato-Black.woff') format('woff');
+    url('./black/Lato-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 @font-face {
   font-family: 'Lato';
   src: url('./italic/Lato-Italic.woff2') format('woff2'),
-      url('./italic/Lato-Italic.woff') format('woff');
+    url('./italic/Lato-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
   font-display: swap;
@@ -19,7 +19,7 @@
 @font-face {
   font-family: 'Lato';
   src: url('./bold/Lato-Bold.woff2') format('woff2'),
-      url('./bold/Lato-Bold.woff') format('woff');
+    url('./bold/Lato-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -28,7 +28,7 @@
 @font-face {
   font-family: 'Lato';
   src: url('./regular/Lato-Regular.woff2') format('woff2'),
-      url('./regular/Lato-Regular.woff') format('woff');
+    url('./regular/Lato-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -61,6 +61,49 @@
 @font-face {
   font-family: 'Poppins';
   src: url('./regular/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./regular/Helvetica-Neue-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./italic/Helvetica-Neue-Italic.woff2') format('woff2'),
+    url('./italic/Helvetica-Neue-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./bold/Helvetica-Neue-Bold.woff2') format('woff2'),
+    url('./bold/Helvetica-Neue-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Helvetica Neue';
+  src: url('./black/Helvetica-Neue-Black.woff2') format('woff2'),
+    url('./black/Helvetica-Neue-Black.woff') format('woff');
+  font-weight: black;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('./regular/Roboto-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

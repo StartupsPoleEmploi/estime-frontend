@@ -33,7 +33,7 @@ body {
   position: relative;
   display: table;
   width: 100%;
-  background-color: $color-white-2;
+  background-color: $color-pe-grey-x-light;
   padding-bottom: calc(#{$footer-height-desktop} + 2rem);
 
   @media #{$extra-small-device} {

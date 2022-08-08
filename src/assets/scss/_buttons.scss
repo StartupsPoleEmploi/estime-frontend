@@ -54,11 +54,11 @@
 }
 
 .btn-primary-perso {
-  background-color: $color-blue-10;
+  background-color: $color-pe-red;
 
   &:hover,
   &:focus-visible {
-    background-color: $color-blue-2;
+    background-color: $color-pe-grey-dark;
   }
 
   div {
@@ -94,11 +94,11 @@
   right: 0;
   border: 0.0625rem solid;
   border-radius: 0 0 0 6.25rem;
-  border-color: $color-blue-10;
+  border-color: $color-pe-red;
   height: calc(#{$header-height} - 0.625rem);
   width: 22rem;
   padding-right: 2rem;
-  background-color: $color-blue-10;
+  background-color: $color-pe-red;
   cursor: pointer;
   text-align: center;
   display: flex;
@@ -121,14 +121,14 @@
 .btn-se-deconnecter {
   @extend .action-btn-base;
   background-color: $color-white-3;
-  border: 0.0625rem $color-blue-2 solid;
+  border: 0.0625rem $color-pe-grey-dark solid;
   float: right;
   height: 2.5rem;
   width: 12.25rem;
 
   &:hover,
   &:focus-visible {
-    background-color: $color-blue-2;
+    background-color: $color-pe-grey-dark;
     border: none;
 
     span {
@@ -145,7 +145,7 @@
   }
 
   span {
-    color: $color-blue-2;
+    color: $color-pe-grey-dark;
     font-size: 0.75em;
     margin-left: 0.4375rem;
   }
@@ -189,7 +189,7 @@
 .btn-style-perso-2 {
   @extend .action-btn-base;
   background-color: $color-white-3;
-  color: $color-blue-10;
+  color: $color-pe-red;
   display: inline-flex;
 
   &:hover,
@@ -264,11 +264,11 @@
   min-height: 3.75rem;
   width: 100%;
   background-color: white;
-  border: 1px solid $color-blue-2;
+  border: 1px solid $color-pe-grey-dark;
 
   span {
     @extend .button-typo;
-    color: $color-blue-2;
+    color: $color-pe-grey-dark;
   }
 
   @media #{$small-device} {
@@ -282,8 +282,8 @@
   @extend .action-btn-base;
   min-height: 3.75rem;
   width: 100%;
-  background-color: $color-blue-10;
-  border: 1px solid $color-blue-10;
+  background-color: $color-pe-red;
+  border: 1px solid $color-pe-red;
 
   img {
     color: $color-white-1;
@@ -320,7 +320,7 @@
   min-height: unset;
   height: 2.875rem !important;
   margin: 0 auto;
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
 }
 
 .btn-group-input-date {
@@ -495,7 +495,7 @@ option {
 
   span {
     @extend .button-typo;
-    @extend .color-blue-10-typo;
+    @extend .color-pe-red-typo;
 
     text-decoration: none;
   }

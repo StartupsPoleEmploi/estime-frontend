@@ -90,7 +90,7 @@ select {
 .card-form-style-2 {
   margin-top: 2rem;
   padding: 1.5rem !important;
-  border: 0.0625rem solid $color-grey-1 !important;
+  border: 0.0625rem solid $color-pe-grey-light !important;
   border-radius: 0.25rem;
 
   @media #{$extra-small-device} {
@@ -101,7 +101,7 @@ select {
 .card-form-style-3 {
   margin-top: 2rem;
   padding: 1.5rem !important;
-  border: 0.0625rem solid $color-grey-1 !important;
+  border: 0.0625rem solid $color-pe-grey-light !important;
   border-top: unset !important;
   border-radius: 0.25rem;
 
@@ -165,7 +165,7 @@ form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-l
 }
 
 .form-control {
-  border-color: $color-grey-1;
+  border-color: $color-pe-grey-light;
 
   &:focus {
     border-color: $color-blue-1;
@@ -279,7 +279,7 @@ input:-webkit-autofill:focus {
 
   .label,
   span {
-    color: $color-blue-2;
+    color: $color-pe-grey-dark;
     font-size: 1em;
     margin-bottom: 0;
   }

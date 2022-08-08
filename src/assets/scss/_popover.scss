@@ -5,7 +5,7 @@ popover-container {
 }
 
 .popover {
-  background: $color-blue-5;
+  background: $color-pe-blue-light;
   color: $color-white-3;
 
   h5 {
@@ -24,16 +24,16 @@ popover-container {
 
 /* Needed to have the triangle match the grey background of the popover */
 .popover.top .arrow:after {
-  border-top-color: $color-blue-5;
+  border-top-color: $color-pe-blue-light;
 }
 
 .popover.right .arrow:after {
-  border-right-color: $color-blue-5;
-  border-left-color: $color-blue-5;
+  border-right-color: $color-pe-blue-light;
+  border-left-color: $color-pe-blue-light;
 }
 
 .popover.bottom .arrow:after {
-  border-bottom-color: $color-blue-5;
+  border-bottom-color: $color-pe-blue-light;
 }
 
 .popover-container {

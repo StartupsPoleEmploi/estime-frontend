@@ -8,7 +8,7 @@
     .btn-close {
       float: right;
       @extend .button-typo;
-      color: $color-blue-10 !important;
+      color: $color-pe-red !important;
       margin: 0.5rem;
     }
 
@@ -16,7 +16,7 @@
       float: right;
       margin-left: auto;
       @extend .button-typo;
-      color: $color-blue-10 !important;
+      color: $color-pe-red !important;
       cursor: pointer;
       font-weight: normal;
     }
@@ -47,7 +47,7 @@
 
     .link-modal {
 
-      color: $color-blue-10 !important;
+      color: $color-pe-red !important;
       text-decoration: none;
     }
 
@@ -130,7 +130,7 @@ body.modal-open {
   padding: 1rem;
 
   span {
-    color: $color-blue-2
+    color: $color-pe-grey-dark
   }
 
   .row {
