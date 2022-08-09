@@ -28,36 +28,10 @@ export class ModalChoixConnexionComponent {
     private individuConnectedService: IndividuConnectedService,
     private router: Router,
     public bsModalRef: BsModalRef,
-    public screenService: ScreenService,
-    private estimeApiService: EstimeApiService,
-    private sessionStorageEstimeService: SessionStorageEstimeService) { }
+    public screenService: ScreenService) { }
 
   public onClickButtonClosePopup(): void {
     this.bsModalRef.hide();
-  }
-
-  public authentifierSansConnexion(): void {
-    const trafficSource = this.sessionStorageEstimeService.getTrafficSource();
-    this.estimeApiService.authentifier(null, trafficSource).subscribe({
-      next: this.traiterRetourAuthentifierIndividu.bind(this),
-      error: this.traiterErreurAuthentifierIndividu.bind(this)
-    });
-
-  }
-
-  private traiterRetourAuthentifierIndividu(individu: Individu): void {
-    this.isPageLoadingDisplay = false;
-    this.individuConnectedService.saveIndividuConnected(individu);
-    this.bsModalRef.hide();
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
-  }
-
-  private traiterErreurAuthentifierIndividu(): void {
-    this.sessionStorageEstimeService.storeMessageDemandeurEmploiConnexionImpossible();
-    this.isPageLoadingDisplay = false;
-    this.bsModalRef.hide();
-    this.notifyParent.emit(MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE);
-    this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
   public onClickButtonSeConnecter(): void {
@@ -66,6 +40,7 @@ export class ModalChoixConnexionComponent {
   }
 
   public onClickButtonContinuerSansConnexion(): void {
-    this.authentifierSansConnexion();
+    this.bsModalRef.hide();
+    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 }
