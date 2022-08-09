@@ -9,7 +9,7 @@
     <g id="wireframes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Q_step1_0" transform="translate(-385.000000, -607.000000)">
             <g id="Question" transform="translate(380.000000, 602.000000)">
-                <g id="Group-4-Copy" transform="translate(6.000000, 6.000000)" fill="#FFFFFF" stroke="#1B2B67">
+                <g id="Group-4-Copy" transform="translate(6.000000, 6.000000)" fill="#FFFFFF" stroke="#FF5950">
                     <g id="Group" transform="translate(10.000000, 10.000000) rotate(90.000000) translate(-10.000000, -10.000000) " fill-rule="nonzero">
                         <circle id="Oval-3" cx="10" cy="10" r="10"></circle>
                     </g>
@@ -18,7 +18,7 @@
                     <mask id="mask-2" fill="white">
                         <use xlink:href="#path-1"></use>
                     </mask>
-                    <use id="Shape" fill="#1B2B67" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <use id="Shape" fill="#FF5950" fill-rule="nonzero" xlink:href="#path-1"></use>
                 </g>
             </g>
         </g>

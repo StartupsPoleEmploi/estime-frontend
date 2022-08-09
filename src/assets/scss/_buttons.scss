@@ -458,9 +458,9 @@ option {
 
 
   span {
-    height: 1.8125rem;
     color: #FFFFFF;
     vertical-align: top;
+    text-transform: uppercase;
 
     @media #{$medium-device} {
       margin-right: auto;
@@ -475,6 +475,7 @@ option {
     }
 
     padding-left: 0.5rem;
+    padding-bottom: 0.125rem;
     margin-right: 0;
 
   }
@@ -544,13 +545,13 @@ option {
       span {
         @extend .button-typo;
         margin: unset;
-        padding-left: 1.5rem;
+        padding-left: 1rem;
         padding-right: 0.5rem;
       }
 
       img {
         margin: unset;
-        padding-right: 0.5rem;
+        padding-right: 1rem;
       }
     }
   }

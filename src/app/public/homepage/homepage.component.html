@@ -12,22 +12,22 @@
             <div class="row-1-first-col col-md-auto">
                 <div id="first-div-inside-first-col" class="align-text-bottom">
                     <div>
-                        <h1 class="headline-1-typo">
+                        <h1 class="headline-1-typo color-pe-grey-dark-typo">
                             Découvrez le montant de vos aides en cas d'embauche
                         </h1>
                     </div>
                     <div class="row row-btn-je-commence">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
-                            class="btn-homepage button-typo" data-testid="btn-je-commence"
-                            tag-action="clic_bouton_je_commence" (click)="openModalChoixConnexion()">
-                            <span>Je commence la simulation</span>
-                            <img alt="" class="image-2" src="./assets/images/icon-bt-primaire.svg">
+                            class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
+                            (click)="openModalChoixConnexion()">
+                            <span class="button-typo">Je commence la simulation</span>
+                            <img alt="" class="image-2" src="./assets/images/fleche-droite-pe-white.svg">
                         </button>
                     </div>
                 </div>
             </div>
             <div class="row-1-second-col d-md-block d-lg-block d-xl-block col-md-auto">
-                <img id="image-homepage-calculette" alt="" src="../../../assets/images/homepage-calculette-v5.svg">
+                <img id="image-homepage-calculette" alt="" src="../../../assets/images/homepage-calculette.svg">
             </div>
         </div>
     </div>
@@ -43,10 +43,9 @@
 <app-section-temoignages></app-section-temoignages>
 
 <div *ngIf="this.stickyButton" class="btn-sticks">
-    <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation"
-        class="btn-homepage button-typo" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
-        (click)="login()">
-        <span>Je commence la simulation</span>
-        <img alt="" src="./assets/images/icon-bt-primaire.svg">
+    <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation" class="btn-homepage"
+        data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
+        <span class="button-typo">Je commence la simulation</span>
+        <img alt="" src="./assets/images/fleche-droite-pe-white.svg">
     </button>
 </div>

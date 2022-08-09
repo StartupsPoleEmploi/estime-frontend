@@ -1,7 +1,7 @@
 @import "../../../../assets/scss/variables";
 
 #section-aides {
-  background-color: $color-pe-blue-light;
+  background-color: $color-pe-grey-x-light;
   padding-top: 2rem;
   padding-bottom: 1.5rem;
 
@@ -55,15 +55,15 @@
     margin: 0;
 
     &.agepi {
-      border-top: 0.4rem solid $color-agepi;
+      border-top: 0.3rem solid $color-agepi;
     }
 
     &.am {
-      border-top: 0.4rem solid $color-am;
+      border-top: 0.3rem solid $color-am;
     }
 
     &.pa {
-      border-top: 0.4rem solid $color-pa;
+      border-top: 0.3rem solid $color-pa;
     }
   }
 
@@ -100,6 +100,10 @@
       color: #FFFFFF;
       vertical-align: top;
     }
+  }
+
+  .icon-fleche-en-savoir-plus {
+    padding-bottom: 0.125rem;
   }
 
 }

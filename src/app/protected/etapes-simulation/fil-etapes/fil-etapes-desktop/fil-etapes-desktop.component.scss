@@ -47,13 +47,17 @@
 
     .hoveredEtape {
       .numero-etape {
-        background-color: $color-blue-6 !important;
-        color: $color-blue-6 !important;
-        border-color: $color-blue-6 !important;
+        background-color: $color-pe-red !important;
+        border-color: $color-pe-red !important;
+
+        span {
+          color: white !important;
+
+        }
       }
 
       .titre-etape {
-        color: $color-blue-6 !important;
+        color: $color-pe-red !important;
       }
     }
 
@@ -111,13 +115,13 @@
     .etape-active {
       .numero-etape {
         span {
-          color: $color-white-1;
+          color: $color-pe-red;
           font-weight: 700;
         }
 
         opacity: unset;
-        background-color: $color-pe-red;
-        border-color: $color-pe-red;
+        background-color: $color-pe-red-light;
+        border-color: $color-pe-red-light;
       }
 
       .titre-etape {
