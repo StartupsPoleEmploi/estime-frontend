@@ -29,8 +29,12 @@ export class IndividuConnectedService {
   public getIndividuConnected(): Individu {
     if (!this.individuConnecte) {
       const individuConnected = this.sessionStorageEstimeService.getIndividuConnected();
-      individuConnected.peConnectAuthorization = this.getPeConnectAuthorization();
-      this.individuConnecte = individuConnected;
+      if (individuConnected) {
+        individuConnected.peConnectAuthorization = this.getPeConnectAuthorization();
+        this.individuConnecte = individuConnected;
+      } else {
+        this.individuConnecte = null;
+      }
     }
     return this.individuConnecte;
   }
@@ -66,6 +70,9 @@ export class IndividuConnectedService {
   private getPeConnectAuthorization(): PeConnectAuthorization {
     if (!this.individuConnectePeConnectAuthorization) {
       this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+      if (!this.individuConnectePeConnectAuthorization) {
+        this.individuConnectePeConnectAuthorization = this.createIndividuConnectePeConnectAuthorization(new Individu());
+      }
     }
     return this.individuConnectePeConnectAuthorization.peConnectAuthorization;
   }
