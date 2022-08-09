@@ -2,7 +2,7 @@
 
 #details-mois-container {
   min-height: 100vh;
-  background-color: $color-white-2;
+  background-color: $color-pe-grey-x-light;
   padding-bottom: 1rem;
 
   .div_detail_mois_with_padding {
@@ -63,14 +63,14 @@
 
     .demande-a-effectuer {
       margin-top: 0.5rem;
-      background-color: $color-grey-1;
+      background-color: $color-pe-grey-light;
       border-radius: 0.3125rem;
       text-align: center;
 
       width: fit-content;
 
       span {
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
         padding: 0.75rem;
       }
     }
@@ -81,7 +81,7 @@
   .ressource-actuelle-row,
   .aide-a-demander-row {
     border-radius: unset !important;
-    border-bottom: 0.0125rem solid $color-grey-1;
+    border-bottom: 0.0125rem solid $color-pe-grey-light;
     margin: 0rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -155,7 +155,7 @@
   }
 
   .aide-selected {
-    background-color: $color-blue-5;
+    background-color: $color-pe-blue-light;
     border-radius: 0.5rem 0.5rem 0 0;
 
     .row-premiere-col {

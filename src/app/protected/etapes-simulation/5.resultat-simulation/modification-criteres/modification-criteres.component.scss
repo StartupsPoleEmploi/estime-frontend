@@ -2,7 +2,7 @@
 
 #modification-criteres-container {
   min-height: 100vh;
-  background-color: $color-white-2;
+  background-color: $color-pe-grey-x-light;
   padding-bottom: 7rem;
 
   @media #{$extra-small-device} {
@@ -61,7 +61,7 @@
 
     #btn-modification-autres-criteres {
       span {
-        color: $color-blue-10 !important;
+        color: $color-pe-red !important;
       }
     }
 

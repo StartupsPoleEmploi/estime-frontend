@@ -2,7 +2,7 @@
 
 .card-body {
   border-radius: 0;
-  border: 0.0625rem solid $color-grey-1;
+  border: 0.0625rem solid $color-pe-grey-light;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
   border-top: 0;
@@ -24,7 +24,7 @@
 
   .col-salaire-with-border {
     @media #{$large-device} {
-      border-bottom: 0.5px solid $color-grey-1;
+      border-bottom: 0.5px solid $color-pe-grey-light;
     }
   }
 }

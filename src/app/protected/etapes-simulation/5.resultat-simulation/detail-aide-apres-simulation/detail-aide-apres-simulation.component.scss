@@ -1,7 +1,7 @@
 @import "../../../../../assets/scss/variables";
 
 #details-aide-container {
-  background-color: $color-white-2;
+  background-color: $color-pe-grey-x-light;
   margin-bottom: 1rem;
 
   .div_detail_aide_with_padding {
@@ -112,7 +112,7 @@
 .titre-detail-aide {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
 }
 
 .rectangle {
@@ -239,5 +239,5 @@ li.leaf4 {
 }
 
 .headlines-descriptions-aides {
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
 }

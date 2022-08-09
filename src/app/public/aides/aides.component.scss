@@ -98,10 +98,10 @@
   }
 
   .intitule-aide {
-    color: $color-blue-2;
+    color: $color-pe-grey-dark;
 
     .aide-organisme {
-      color: $color-grey-5;
+      color: $color-pe-blue-light;
     }
   }
 }
@@ -113,7 +113,7 @@
 
 
 .en-savoir-plus {
-  color: $color-blue-10;
+  color: $color-pe-red;
   text-decoration: none;
   float: left;
   cursor: pointer;
@@ -126,7 +126,7 @@
 .titre-aides {
   text-align: left;
   padding-left: 1rem;
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
 
 }
 

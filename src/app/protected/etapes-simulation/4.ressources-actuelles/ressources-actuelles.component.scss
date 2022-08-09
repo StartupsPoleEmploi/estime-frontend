@@ -11,7 +11,7 @@
     border-radius: 0;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
-    border: 0.0625rem solid $color-grey-1;
+    border: 0.0625rem solid $color-pe-grey-light;
     color: $color-blue-1;
     font-size: 1em;
     margin-top: 1rem;
@@ -68,7 +68,7 @@
         text-align: left;
 
         .text-button {
-          color: $color-blue-10;
+          color: $color-pe-red;
           font-weight: 700;
           font-weight: bold;
         }

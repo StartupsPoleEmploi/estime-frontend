@@ -2,137 +2,149 @@
 
 
 .titre-carte {
-   margin-top: 2rem !important;
+  margin-top: 2rem !important;
 }
 
 .titre-aides {
-   vertical-align: baseline;
-   font-size: 2.25rem;
-   font-family: Poppins, sans-serif;
-   font-weight: 700;
-   letter-spacing: 0;
-   line-height: 2.25rem;
-   margin-left: auto;
-   margin-right: auto;
+  vertical-align: baseline;
+  font-size: 2.25rem;
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 2.25rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .titre-detail-aide {
-   margin-top: 1rem;
-   margin-bottom: 0.5rem;
-   color: $color-blue-2;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: $color-pe-grey-dark;
 }
 
 .rectangle {
-   align-items: left;
-   height: 0.188rem;
-   width: 100%;
+  align-items: left;
+  height: 0.188rem;
+  width: 100%;
 
-   &.paie {
-     background-color: $color-paie;
-   }
-   &.immo {
-     background-color: $color-immo;
-   }
-   &.indp {
-     background-color: $color-indp;
-   }
-   &.ass {
-     background-color: $color-ass;
-   }
-   &.aah {
-     background-color: $color-aah;
-   }
-   &.are {
-     background-color: $color-are;
-   }
-   &.pi {
-     background-color: $color-pi;
-   }
-   &.rsa {
-     background-color: $color-rsa;
-   }
-   &.apl {
-     background-color: $color-af;
-   }
-   &.af {
-     background-color: $color-af;
-   }
-   &.agepi {
-     background-color: $color-agepi;
-   }
-   &.am {
-     background-color: $color-am;
-   }
-   &.pa {
-     background-color: $color-pa;
-   }
+  &.paie {
+    background-color: $color-paie;
+  }
+
+  &.immo {
+    background-color: $color-immo;
+  }
+
+  &.indp {
+    background-color: $color-indp;
+  }
+
+  &.ass {
+    background-color: $color-ass;
+  }
+
+  &.aah {
+    background-color: $color-aah;
+  }
+
+  &.are {
+    background-color: $color-are;
+  }
+
+  &.pi {
+    background-color: $color-pi;
+  }
+
+  &.rsa {
+    background-color: $color-rsa;
+  }
+
+  &.apl {
+    background-color: $color-af;
+  }
+
+  &.af {
+    background-color: $color-af;
+  }
+
+  &.agepi {
+    background-color: $color-agepi;
+  }
+
+  &.am {
+    background-color: $color-am;
+  }
+
+  &.pa {
+    background-color: $color-pa;
+  }
 }
 
 
 
-.card-body-btn-action{
-    @media #{$extra-small-device} {
-        padding-left: 0rem !important;
-        padding-right: 0rem !important;
-     }
+.card-body-btn-action {
+  @media #{$extra-small-device} {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+  }
 }
 
-.card-body-description{
-    padding-right: 0rem;
-    padding-left: 0rem;
+.card-body-description {
+  padding-right: 0rem;
+  padding-left: 0rem;
 
 }
 
 .card-paragraph {
-   margin: 0rem;
-   padding: 1rem;
-   font-size: 1rem;
-   font-weight: 400;
-   line-height: 1.5rem;
-   text-align: left;
+  margin: 0rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  text-align: left;
 }
 
-.card{
-    margin-bottom: 1rem;
-    border: none;
+.card {
+  margin-bottom: 1rem;
+  border: none;
 }
 
-.btn-aides-suite{
-    @media #{$extra-small-device} {
-       margin-left: 0rem;
-       margin-right: 0rem;
-    }
+.btn-aides-suite {
+  @media #{$extra-small-device} {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
 }
 
- ol.no_number{
-    list-style-type: none;
-    padding-left: 0rem !important;
- }
+ol.no_number {
+  list-style-type: none;
+  padding-left: 0rem !important;
+}
 
- li.leaf1{
-    background: url("../../../../assets/images//liste1.svg") no-repeat left top;
-    padding-left: 3rem;
-    padding-bottom: 1.219rem;
- }
+li.leaf1 {
+  background: url("../../../../assets/images//liste1.svg") no-repeat left top;
+  padding-left: 3rem;
+  padding-bottom: 1.219rem;
+}
 
- li.leaf2{
-    background: url("../../../../assets/images//liste2.svg") no-repeat left top;
-    padding-left: 3rem;
-    padding-bottom: 1.219rem;
- }
+li.leaf2 {
+  background: url("../../../../assets/images//liste2.svg") no-repeat left top;
+  padding-left: 3rem;
+  padding-bottom: 1.219rem;
+}
 
- li.leaf3{
-    background: url("../../../../assets/images//liste3.svg") no-repeat left top;
-    padding-left: 3rem;
-    padding-bottom: 1.219rem;
- }
+li.leaf3 {
+  background: url("../../../../assets/images//liste3.svg") no-repeat left top;
+  padding-left: 3rem;
+  padding-bottom: 1.219rem;
+}
 
- li.leaf4{
-    background: url("../../../../assets/images//liste4.svg") no-repeat left top;
-    padding-left: 3rem;
-    padding-bottom: 1.219rem;
- }
+li.leaf4 {
+  background: url("../../../../assets/images//liste4.svg") no-repeat left top;
+  padding-left: 3rem;
+  padding-bottom: 1.219rem;
+}
 
 .headlines-descriptions-aides {
-   color: $color-blue-2;
+  color: $color-pe-grey-dark;
 }

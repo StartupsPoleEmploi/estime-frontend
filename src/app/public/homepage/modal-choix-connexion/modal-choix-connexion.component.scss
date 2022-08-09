@@ -33,14 +33,14 @@
     box-shadow: unset;
     background-color: $color-white-3;
     display: inline-flex;
-    border: 1px solid $color-blue-2;
+    border: 1px solid $color-pe-grey-dark;
 
     @media #{$extra-small-device} {
       min-width: 60% !important;
     }
 
     span {
-      color: $color-blue-2;
+      color: $color-pe-grey-dark;
       text-decoration: none;
       margin: 0;
       padding-left: 0.5rem;

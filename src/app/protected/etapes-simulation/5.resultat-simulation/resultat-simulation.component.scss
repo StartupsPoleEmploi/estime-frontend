@@ -25,7 +25,7 @@
         width: 1.5rem;
         height: 1.5rem;
         margin-right: 0.5rem;
-        color: $color-blue-10;
+        color: $color-pe-red;
       }
 
       span {
@@ -34,7 +34,7 @@
         font-weight: bold;
         font-size: 0.875rem;
         line-height: 1.3125rem;
-        color: $color-blue-10;
+        color: $color-pe-red;
       }
 
       &:hover {
@@ -80,9 +80,9 @@
     .btn-onglet-resultat-simulation {
       width: calc(100%);
       min-height: 3rem;
-      background-color: $color-blue-2;
+      background-color: $color-pe-grey-dark;
       border-radius: 0.5rem;
-      border: 0.0625rem solid $color-blue-2;
+      border: 0.0625rem solid $color-pe-grey-dark;
 
       @media #{$extra-small-device} {
         min-height: 2rem;
@@ -93,7 +93,7 @@
       }
 
       &:focus {
-        background-color: $color-blue-2-darker !important;
+        background-color: $color-pe-grey-dark-darker !important;
       }
 
       &.isOngletInactive {
@@ -106,20 +106,20 @@
 
         &:hover {
           background-color: unset !important;
-          border: 0.125rem solid $color-blue-2-darker !important;
+          border: 0.125rem solid $color-pe-grey-dark-darker !important;
 
           span {
-            color: $color-blue-2-darker !important;
+            color: $color-pe-grey-dark-darker !important;
 
           }
         }
 
         &:focus {
           background-color: unset !important;
-          border: 0.125rem solid $color-blue-2-darker !important;
+          border: 0.125rem solid $color-pe-grey-dark-darker !important;
 
           span {
-            color: $color-blue-2-darker !important;
+            color: $color-pe-grey-dark-darker !important;
           }
         }
       }
@@ -148,7 +148,7 @@
           max-width: 35.3125rem;
         }
 
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
       }
     }
 
@@ -277,7 +277,7 @@
           }
 
           .span-mois-annee {
-            color: $color-blue-10 !important;
+            color: $color-pe-red !important;
 
             @media #{$extra-small-device} {
               padding-left: 0.5rem;
@@ -287,7 +287,7 @@
           }
 
           .span-montant-mensuel {
-            color: $color-blue-2;
+            color: $color-pe-grey-dark;
           }
         }
 
