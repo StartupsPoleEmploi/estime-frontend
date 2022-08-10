@@ -261,6 +261,10 @@
                 <div class="row pb-3">
                     <label class="label headline-4-typo" [for]="'allocationAAHPersonneACharge'+personneDTO.index + 1">
                         * AAH (Allocation Adulte Handicapé) perçue
+                        <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
+                            (click)="modalService.openModal($event, modalMontantAAHTemplate)">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -489,6 +493,20 @@
         </div>
     </form>
 </div>
+
+<ng-template #modalMontantAAHTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-aah.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
 
 <ng-template #modalPensionInvaliditeTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
