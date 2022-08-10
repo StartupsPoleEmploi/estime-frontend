@@ -2,11 +2,12 @@
     <div class="container-fluid" [ngClass]="{'result-container-fluid': this.isPageResultat}">
         <div class="row">
             <div class="col-auto ps-0 ms-0">
-                <img id="logo-marianne-header" alt="Logo république Française" src="./assets/images/marianne.svg"
+                <img id="logo-marianne-header" alt="Logo république Française"
+                    src="./assets/images/logos/logo-marianne.svg"
                     [ngClass]="{'logo-marianne-header-homepage':isHomepage}">
             </div>
             <div class="col-auto ps-0 ms-0">
-                <img id="logo-estime-header" alt="Logo du service Estime" src="./assets/images/logo-estime.svg"
+                <img id="logo-estime-header" alt="Logo du service Estime" src="./assets/images/logos/logo-estime.svg"
                     [ngClass]="{'logo-estime-header-homepage':isHomepage}" (click)="onClickLogoEstime()"
                     tag-navigation="clic_logo_estime_header_retour_accueil">
             </div>

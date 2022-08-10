@@ -3,7 +3,11 @@
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-net-ass">
-                    * Montant net de votre allocation journalière ASS
+                    * Montant de votre allocation journalière ASS
+                    <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle montant ASS"
+                        (click)="modalService.openModal($event, modalAllocationASSTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -16,7 +20,7 @@
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet"
                         required placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel">
-                    <app-text-with-euro-symbol message="net/jour"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol message="/jour"></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
@@ -50,9 +54,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_obtenir_ressources_are"
+                        aria-label="Infobulle salaire journalier référence ARE"
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -94,9 +99,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-nombre-jours-restants">
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_obtenir_ressources_are"
+                        aria-label="Infobulle nombre jours restants ARE"
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -138,8 +144,8 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité"
+                    <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
                         (click)="modalService.openModal($event, modalDegressiviteTemplate)">
                     </button>
                 </label>
@@ -235,7 +241,7 @@
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
-                        (click)="modalService.openModal($event, modalSituationDemandeurAllocationJournaliereTemplate)">
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -663,7 +669,7 @@
     </div>
 </div>
 
-<ng-template #modalSituationDemandeurTemplate>
+<ng-template #modalAllocationARETemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
@@ -672,7 +678,7 @@
             Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
         </p>
         <div class='row mb-5'>
-            <img alt='' src='./assets/images/img_tooltip-are.png'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
         </div>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
@@ -708,30 +714,16 @@
     </app-tooltip>
 </ng-template>
 
-<ng-template #modalSituationDemandeurAllocationJournaliereTemplate>
+<ng-template #modalAllocationASSTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <div class='card card-body card-message-info mb-3'>
-            <div class='row'>
-                <div class='img-card-message-info col-auto'>
-                    <div>
-                        <img alt='' src='./assets/images/info.svg'>
-                    </div>
-                </div>
-                <div class='col'>
-                    <span class='body-2-typo'>
-                        Si vous êtes soumis à la dégressivité, c'est dans ce champ que vous pouvez renseigner votre montant brut d'allocation journalière réduite
-                    </span>
-                </div>
-            </div>
-        </div>
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
         <p class='body-2-typo'>
-            Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
+            Sur votre dernière attestation de période indemnisée Pôle emploi 👇
         </p>
         <div class='row mb-5'>
-            <img alt='' src='./assets/images/img_tooltip-are.png'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
         </div>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?

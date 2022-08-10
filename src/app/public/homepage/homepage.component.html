@@ -21,13 +21,13 @@
                             class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
                             (click)="openModalChoixConnexion()">
                             <span class="button-typo">Je commence la simulation</span>
-                            <img alt="" class="image-2" src="./assets/images/fleche-droite-pe-white.svg">
+                            <img alt="" class="image-2" src="./assets/images/icones/fleche-droite-pe-white.svg">
                         </button>
                     </div>
                 </div>
             </div>
             <div class="row-1-second-col d-md-block d-lg-block d-xl-block col-md-auto">
-                <img id="image-homepage-calculette" alt="" src="../../../assets/images/homepage-calculette.svg">
+                <img id="image-homepage-calculette" alt="" src="./assets/images/illustrations/homepage-calculette.svg">
             </div>
         </div>
     </div>
@@ -38,8 +38,8 @@
     </div>
 </section>
 <app-section-description></app-section-description>
-<app-section-etapes-simulation [login]="openModalChoixConnexion"
-    (openModalChoixConnexion)="openModalChoixConnexion()"></app-section-etapes-simulation>
+<app-section-etapes-simulation [login]="openModalChoixConnexion" (openModalChoixConnexion)="openModalChoixConnexion()">
+</app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
 <app-section-temoignages></app-section-temoignages>
 
@@ -47,6 +47,6 @@
     <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation" class="btn-homepage"
         data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="login()">
         <span class="button-typo">Je commence la simulation</span>
-        <img alt="" src="./assets/images/fleche-droite-pe-white.svg">
+        <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
     </button>
 </div>

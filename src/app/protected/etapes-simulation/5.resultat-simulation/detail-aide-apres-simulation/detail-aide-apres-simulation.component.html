@@ -12,7 +12,7 @@
             <div class="col-md-1 col-2 pe-1">
                 <div *ngIf="aide.organisme" class="icone-organisme me-1" [ngClass]="aide.organisme.toLowerCase()">
                     <div class="">
-                        <img alt="" [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
+                        <img alt="" [src]="'./assets/images/logos/logo-carre-'+aide.organisme.toLowerCase()+'.png'">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 tag-action="clique_bouton_demande_aide_synthèse_{{aide.code}}" (click)="onClickFaireLaDemandeAide()">
                 <div class="text-center">
                     <span class="me-2 button-typo">Faire la demande d'aide</span>
-                    <img alt="" src="./assets/images/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

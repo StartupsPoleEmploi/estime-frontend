@@ -17,9 +17,8 @@
     padding-top: 0;
 
     @media #{$small-device} {
-      margin-top: 2.8125rem;
       max-width: 61.25rem;
-      padding: 4.6875rem 1.875rem 0 1.875rem;
+      padding: 2.5rem 1.875rem 0 1.875rem;
     }
 
     a {

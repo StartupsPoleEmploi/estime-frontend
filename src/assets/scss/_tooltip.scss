@@ -5,15 +5,15 @@
   width: 1.4375rem;
   height: 1.4375rem;
   border: 0;
-  background: no-repeat url("../images/question.svg");
+  background: no-repeat url("../images/icones/question.svg");
   background-size: 100% 100%;
   cursor: pointer;
 
   &:hover {
-    background: no-repeat url("../images/question_hover.svg");
+    background: no-repeat url("../images/icones/question_hover.svg");
   }
 
   &.popover-open {
-    background: no-repeat url("../images/question_click.svg");
+    background: no-repeat url("../images/icones/question_click.svg");
   }
 }

@@ -121,28 +121,28 @@ ol.no_number {
   padding-left: 0rem !important;
 }
 
-li.leaf1 {
-  background: url("../../../../assets/images//liste1.svg") no-repeat left top;
-  padding-left: 3rem;
-  padding-bottom: 1.219rem;
+ol {
+  list-style: none;
+  counter-reset: item;
 }
 
-li.leaf2 {
-  background: url("../../../../assets/images//liste2.svg") no-repeat left top;
-  padding-left: 3rem;
-  padding-bottom: 1.219rem;
+li {
+  counter-increment: item;
+  margin-bottom: 0.6125rem;
 }
 
-li.leaf3 {
-  background: url("../../../../assets/images//liste3.svg") no-repeat left top;
-  padding-left: 3rem;
-  padding-bottom: 1.219rem;
-}
-
-li.leaf4 {
-  background: url("../../../../assets/images//liste4.svg") no-repeat left top;
-  padding-left: 3rem;
-  padding-bottom: 1.219rem;
+li.leaf1:before,
+li.leaf2:before,
+li.leaf3:before,
+li.leaf4:before {
+  margin-right: 0.6125rem;
+  content: counter(item);
+  background: $color-pe-red-light;
+  border-radius: 100%;
+  color: $color-pe-red;
+  width: 1.5em;
+  text-align: center;
+  display: inline-block;
 }
 
 .headlines-descriptions-aides {

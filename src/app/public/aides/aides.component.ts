@@ -16,23 +16,21 @@ import { Subscription } from 'rxjs';
 export class AidesComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
-  ICONS_PATH = "../../assets/images/";
-
   aideSelected: Aide;
   aideSelectedCode: string;
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
-  libellesAidesEnum: typeof LibellesAidesEnum  = LibellesAidesEnum;
+  libellesAidesEnum: typeof LibellesAidesEnum = LibellesAidesEnum;
   subscriptionRouteNavigationEndObservable: Subscription;
   isAideSelected: boolean;
 
   constructor(
     private router: Router,
     public screenService: ScreenService
-    ) {
-   }
+  ) {
+  }
 
   public onClickAideSavoirPlus(codeAide): void {
-    this.router.navigate([RoutesEnum.AIDES,codeAide]);
+    this.router.navigate([RoutesEnum.AIDES, codeAide]);
   }
 
   ngOnInit(): void {
@@ -46,7 +44,7 @@ export class AidesComponent implements OnInit {
 
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
-      if(routerEvent instanceof NavigationEnd) {
+      if (routerEvent instanceof NavigationEnd) {
         this.setAideSelected();
       }
     });
@@ -54,7 +52,7 @@ export class AidesComponent implements OnInit {
 
   private setAideSelected(): void {
     this.isAideSelected = this.getRouteFromUrl(this.router.url) !== RoutesEnum.AIDES;
-    if(!this.isAideSelected) this.aideSelectedCode = '';
+    if (!this.isAideSelected) this.aideSelectedCode = '';
     else this.aideSelectedCode = this.getAideCodeFromUrl(this.router.url);
   }
 
