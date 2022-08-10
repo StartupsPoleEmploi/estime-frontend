@@ -284,6 +284,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="allocationRSA">
                     * RSA (Revenu de Solidarité Active) perçu
+                    <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
+                        (click)="modalService.openModal($event, modalMontantRSATemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -365,6 +369,11 @@
             <div class="row flex-column">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
+                    <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
+                        aria-label="Infobulle prochaine déclaration trimestrielle"
+                        (click)="modalService.openModal($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                    </button>
                 </label>
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
@@ -782,6 +791,31 @@
         <div class='row mb-5'>
             <img alt='' src='./assets/images/exemples/attestation-pi.png'>
         </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalMontantRSATemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-rsa.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalProchaineDeclarationTrimestrielleTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre espace CAF, dans la rubrique “mon agenda”
+        </p>">
     </app-tooltip>
 </ng-template>
 
