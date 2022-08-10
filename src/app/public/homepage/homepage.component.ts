@@ -27,7 +27,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
-    private bsModalService: BsModalService,
+    public bsModalService: BsModalService,
     public modalService: ModalService,
     public individuConnectedService: IndividuConnectedService,
     public peConnectService: PeConnectService,

@@ -34,10 +34,10 @@ body {
   display: table;
   width: 100%;
   background-color: $color-pe-grey-x-light;
-  padding-bottom: calc(#{$footer-height-desktop} + 2rem);
+  padding-bottom: calc(#{$footer-height-desktop} + 3rem);
 
   @media #{$extra-small-device} {
-    padding-bottom: calc(#{$footer-height-mobile} + 2rem);
+    padding-bottom: calc(#{$footer-height-mobile} + 3rem);
   }
 
   &.body-with-sticky-footer {

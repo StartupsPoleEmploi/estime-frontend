@@ -5,14 +5,10 @@ footer {
   background-color: $color-white-1;
   display: block;
   position: absolute;
-  height: $footer-height-desktop;
   bottom: 0;
   left: 0;
   right: 0;
 
-  @media #{$extra-small-device} {
-    height: $footer-height-mobile;
-  }
 
   a {
     color: $color-blue-1;
@@ -24,10 +20,15 @@ footer {
     }
   }
 
-  .row-1-footer {
+  .desktop-row-1-footer {
+    max-width: 72vw !important;
+    margin-left: auto;
+    margin-right: auto;
     padding-bottom: 1rem;
     padding-right: 1rem;
-    padding-top: 0.5rem;
+    padding-top: 2rem;
+    height: 7rem;
+    margin-bottom: 0.75rem;
 
     @media #{$extra-small-device} {
       padding-bottom: 0rem;
@@ -91,7 +92,7 @@ footer {
       }
     }
 
-    .row-1-footer-div-3 {
+    .row-1-col-2-footer {
       line-height: 0.25rem !important;
       padding-top: 0.9375rem;
       padding-bottom: 0.9375rem;
@@ -100,7 +101,6 @@ footer {
         line-height: 0.625rem !important;
         margin-left: auto;
         margin-right: 0;
-        max-width: 17.8125rem;
       }
 
       .row-col-1 {
@@ -110,28 +110,50 @@ footer {
           margin-bottom: 0.75rem;
           padding-right: 0.9375rem;
         }
+      }
 
-        #logo-pole-emploi-colored {
-          width: 2.8125rem;
-          margin-right: 0.625rem;
+      #logo-pole-emploi-colored {
+        width: 2.8125rem;
+        margin-right: 0.625rem;
 
-          @media #{$medium-device} {
-            margin-left: 2.8125rem;
-            margin-right: 0;
-            width: 4.875rem;
-          }
+        @media #{$medium-device} {
+          margin-left: 1.5rem;
+          margin-right: 0;
+          width: 4rem;
         }
+      }
 
-        #logo-fonds-social-europeen-footer {
-          width: 3.1875rem;
-          margin-left: 0.625rem;
+      #logo-fonds-social-europeen-footer {
+        width: 3.1875rem;
+        margin-left: 0.625rem;
+        margin-right: 0.625rem;
+
+        @media #{$medium-device} {
+          margin-left: 1.5rem;
           margin-right: 0.625rem;
+          width: 5rem;
+        }
+      }
 
-          @media #{$medium-device} {
-            margin-left: 0;
-            margin-right: 0;
-            width: 6.125rem;
-          }
+      #logo-ue-footer {
+        width: 4.0625rem;
+        margin-left: 0.625rem;
+        margin-right: 0.625rem;
+
+        @media #{$medium-device} {
+          margin-top: 0.125rem;
+          margin-right: 0;
+          margin-left: 1.5rem;
+          width: 3.5rem;
+        }
+      }
+
+      #text-fse-footer {
+        font-size: 0.375em !important;
+        line-height: 1.6em !important;
+
+        @media #{$medium-device} {
+          font-size: 0.563em !important;
         }
       }
 
@@ -143,59 +165,236 @@ footer {
           margin-top: 0.75rem;
         }
 
-        #logo-ue-footer {
-          margin-left: 0.625rem;
-          margin-right: 0.625rem;
 
-          @media #{$medium-device} {
-            margin-top: 0.125rem;
-          }
-
-          width: 2.5625rem;
-
-          @media #{$small-device} {
-            width: 4.0625rem;
-          }
-        }
-
-        #text-fse-footer {
-          width: 5.25rem;
-
-          @media #{$medium-device} {
-            width: 11rem;
-          }
-
-          p {
-            font-size: 0.375em !important;
-            line-height: 1.6em !important;
-
-            @media #{$medium-device} {
-              font-size: 0.563em !important;
-            }
-          }
-        }
       }
     }
   }
 
-  .row-2-footer {
+  .desktop-row-2-footer {
     border-top: 0.0625rem solid $color-pe-grey-light;
-    padding-top: 0.9375rem;
+    padding-top: 1.25rem;
     text-align: center;
+    background-color: $color-pe-grey-x-dark;
+
+    .row-footer-content {
+      max-width: 52vw !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     span {
       font-size: 0.5em;
       width: 100%;
+      color: white;
 
       @media #{$medium-device} {
         font-size: 0.75em;
       }
+    }
+
+    a,
+    p {
+      color: white;
+    }
+
+    .col-copyright {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 0.0125rem solid white;
+    }
+  }
+
+  .mobile-row-1-footer {
+    padding-top: 1.25rem;
+    text-align: start;
+    background-color: $color-pe-grey-x-dark;
+
+    span {
+      font-size: 0.5em;
+      width: 100%;
+      color: white;
+
+      @media #{$medium-device} {
+        font-size: 0.75em;
+      }
+    }
+
+    a,
+    p {
+      color: white;
+      margin-top: 1rem;
+    }
+  }
+
+  .mobile-row-2-footer {
+    max-width: 100vw !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+    padding-top: 2rem;
+    height: 7rem;
+    margin-bottom: 0.75rem;
+
+    @media #{$extra-small-device} {
+      padding-bottom: 0rem;
+      padding-top: 0.5rem;
+      padding-right: 0rem;
+
+    }
+
+    .row-1-footer-div-1 {
+      display: -webkit-box;
+      /* OLD - iOS 6-, Safari 3.1-6, BB7 */
+      display: -ms-flexbox;
+      /* TWEENER - IE 10 */
+      display: -webkit-flex;
+      /* NEW - Safari 6.1+. iOS 7.1+, BB10 */
+      display: flex;
+      /* NEW, Spec - Firefox, Chrome, Opera */
+      justify-content: center;
+      align-items: center;
+      line-height: 1.625rem !important;
+
+      @media #{$medium-device} {
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .row {
+        max-width: 16.25rem;
+
+        img {
+          cursor: pointer;
+          width: 4.3125rem;
+
+          @media #{$medium-device} {
+            width: 9.8125rem;
+          }
+        }
+
+        .col-texte-service-estime {
+          max-width: 16.5625rem;
+
+          p {
+            line-height: 2.125em !important;
+          }
+        }
+      }
+    }
+
+    .row-1-footer-div-2 {
+      font-size: 0.75em;
+      margin-left: 0;
+      margin-right: auto;
+
+      @media #{$medium-device} {
+        font-size: 1rem;
+        min-width: 23.75rem;
+      }
+
+      div {
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+      }
+    }
+
+    .row-1-col-2-footer {
+      line-height: 0.25rem !important;
+      padding-top: 0.9375rem;
+      padding-bottom: 0.9375rem;
+
+      @media #{$medium-device} {
+        line-height: 0.625rem !important;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      .row-col-1 {
+        padding-right: 0;
+
+        @media #{$medium-device} {
+          margin-bottom: 0.75rem;
+          padding-right: 0.9375rem;
+        }
+      }
+
+      #logo-pole-emploi-colored {
+        width: 2.8125rem;
+        margin-right: 0.625rem;
+
+        @media #{$medium-device} {
+          margin-left: 1.5rem;
+          margin-right: 0;
+          width: 4rem;
+        }
+      }
+
+      #logo-fonds-social-europeen-footer {
+        width: 3.1875rem;
+        margin-left: 0.625rem;
+        margin-right: 0.625rem;
+
+        @media #{$medium-device} {
+          margin-left: 1.5rem;
+          margin-right: 0.625rem;
+          width: 5rem;
+        }
+      }
+
+      #logo-ue-footer {
+        width: 4.0625rem;
+        margin-left: 0.625rem;
+        margin-right: 0.625rem;
+
+        @media #{$medium-device} {
+          margin-top: 0.125rem;
+          margin-right: 0;
+          margin-left: 1.5rem;
+          width: 3.5rem;
+        }
+      }
+
+      #text-fse-footer {
+        font-size: 0.375em !important;
+        line-height: 1.6em !important;
+
+        @media #{$medium-device} {
+          font-size: 0.563em !important;
+        }
+      }
+
+      .row-col-2 {
+        padding-right: 0.4375rem;
+        padding-left: 0.4375rem;
+
+        @media #{$medium-device} {
+          margin-top: 0.75rem;
+        }
+
+
+      }
+    }
+
+    .col-copyright {
+      margin-top: 0.5rem;
+      padding-top: 0.5rem;
+      border-top: 0.0125rem solid $color-pe-grey-light;
     }
   }
 }
 
 .footer-avec-sticky-button {
   @media #{$extra-small-device} {
-    bottom: #{$button-sticky-height};
+    bottom: calc(#{$button-sticky-height} + 1rem);
+  }
+}
+
+#logo-estime-footer {
+  cursor: pointer;
+  width: 4.3125rem;
+
+  @media #{$medium-device} {
+    width: 9.8125rem;
   }
 }

@@ -38,7 +38,8 @@
     </div>
 </section>
 <app-section-description></app-section-description>
-<app-section-etapes-simulation [login]="login"></app-section-etapes-simulation>
+<app-section-etapes-simulation [login]="openModalChoixConnexion"
+    (openModalChoixConnexion)="openModalChoixConnexion()"></app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
 <app-section-temoignages></app-section-temoignages>
 

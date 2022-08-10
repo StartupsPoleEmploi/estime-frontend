@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 
@@ -10,10 +10,15 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 export class SectionEtapesSimulationComponent {
 
   @Input() login: () => void;
+  @Output() openModalChoixConnexion = new EventEmitter();
 
   constructor(
     public peConnectService: PeConnectService,
     public screenService: ScreenService
   ) { }
+
+  public onClickOpenModalChoixConnexion(): void {
+    this.openModalChoixConnexion.emit();
+  }
 
 }
