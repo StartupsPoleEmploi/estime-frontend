@@ -303,6 +303,11 @@
                     <label class="label headline-4-typo"
                         [for]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1">
                         * Pension d'invalidité perçue
+                        <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_pension_invalidite"
+                            aria-label="Infobulle montant pension invalidité"
+                            (click)="modalService.openModal($event, modalPensionInvaliditeTemplate)">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -484,3 +489,17 @@
         </div>
     </form>
 </div>
+
+<ng-template #modalPensionInvaliditeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement de pension 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-pi.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
