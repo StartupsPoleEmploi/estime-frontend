@@ -60,8 +60,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -171,8 +174,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();

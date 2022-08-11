@@ -3,7 +3,7 @@ import rules from "modele-social";
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class BrutNetService {
+export class SalaireService {
 
     private static MONTANT_SMIC_HORAIRE_NET = 8.37;
     private static MONTANT_SMIC_HORAIRE_BRUT = 10.57;
@@ -50,13 +50,23 @@ export class BrutNetService {
         return this.getSmicMensuelNetFromNombreHeure(nombreHeure)
     }
 
+    public getMontantMensuelFromMontantHoraire(montantHoraire: number, nombreHeureSemaine: number = 35): number {
+        if (nombreHeureSemaine == null) nombreHeureSemaine = 35;
+        return Math.floor(montantHoraire * nombreHeureSemaine * (52 / 12));
+    }
+
+    public getMontantHoraireFromMontantMensuel(montantMensuel: number, nombreHeureSemaine: number = 35): number {
+        if (nombreHeureSemaine == null) nombreHeureSemaine = 35;
+        return Math.floor(montantMensuel / nombreHeureSemaine / (52 / 12) * 100) / 100;
+    }
+
     public getSmicMensuelNetFromNombreHeure(nombreHeure: number): number {
         if (nombreHeure == null) nombreHeure = 35;
-        return Math.floor(BrutNetService.MONTANT_SMIC_HORAIRE_NET * nombreHeure * (52 / 12));
+        return Math.floor(SalaireService.MONTANT_SMIC_HORAIRE_NET * nombreHeure * (52 / 12));
     }
 
     public getSmicMensuelBrutFromNombreHeure(nombreHeure: number): number {
         if (nombreHeure == null) nombreHeure = 35;
-        return Math.floor(BrutNetService.MONTANT_SMIC_HORAIRE_BRUT * nombreHeure * (52 / 12));
+        return Math.floor(SalaireService.MONTANT_SMIC_HORAIRE_BRUT * nombreHeure * (52 / 12));
     }
 }

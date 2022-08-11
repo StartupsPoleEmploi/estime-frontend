@@ -44,6 +44,10 @@ class MonFuturContratTravailPage {
     cy.get('[data-testid=input-duree-hebdomadaire]').type(dureeHebdomadaire);
   }
 
+  public selectSalaireMensuelNet(): void {
+    cy.get('[data-testid=select-type-salaire]').select('mensuel_net');
+  }
+
   public saisirSalaireMensuelNet(salaire: string): void {
     cy.get('[data-testid=input-salaire-mensuel-net]').type(salaire);
   }

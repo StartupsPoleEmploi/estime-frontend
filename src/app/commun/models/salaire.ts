@@ -1,4 +1,6 @@
 export class Salaire {
-  montantBrut: number;
-  montantNet: number;
+  montantHoraireBrut: number;
+  montantHoraireNet: number;
+  montantMensuelBrut: number;
+  montantMensuelNet: number;
 }

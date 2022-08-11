@@ -14,8 +14,8 @@
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)}"
+                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
+                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
                         required placeholder="Montant" inputmode="decimal" #salaireNet="ngModel">
                     <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                 </div>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)">
+                        *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
                 </div>
@@ -126,7 +126,7 @@
                                             class="max-with-input-type-montant form-control d-inline"
                                             placeholder="Montant"
                                             (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
+                                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
                                             [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaireConjoint()}" required
                                             inputmode="decimal" (click)="$event.target.select()"
                                             #salaireMoisAvantPeriodeSimulee="ngModel">

@@ -14,7 +14,7 @@ import { AidesFamiliales } from '@models/aides-familiales';
 import { AidesPoleEmploi } from "@models/aides-pole-emploi";
 import { MoisTravailleAvantSimulation } from '@models/mois-travaille-avant-simulation';
 import { RessourcesFinancieresAvantSimulation } from "@app/commun/models/ressources-financieres-avant-simulation";
-import { BrutNetService } from './brut-net.service';
+import { SalaireService } from './salaire.service';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 import { DateUtileService } from './date-util.service';
 
@@ -27,7 +27,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     private controleChampFormulaireService: ControleChampFormulaireService,
     private dateUtileService: DateUtileService,
     private numberUtileService: NumberUtileService,
-    private brutNetService: BrutNetService
+    private salaireService: SalaireService
   ) {
 
   }
@@ -106,8 +106,8 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       this.replaceCommaByDotMontantsAidesCPAM(ressourcesFinancieresAvantSimulation);
     }
     if (ressourcesFinancieresAvantSimulation.salaire) {
-      ressourcesFinancieresAvantSimulation.salaire.montantNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.salaire.montantNet);
-      ressourcesFinancieresAvantSimulation.salaire.montantBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.salaire.montantBrut);
+      ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet);
+      ressourcesFinancieresAvantSimulation.salaire.montantMensuelBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.salaire.montantMensuelBrut);
     }
     ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice);
     ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice);
@@ -150,17 +150,17 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     let periodeTravailleeAvantSimulation = new PeriodeTravailleeAvantSimulation();
     const moisTravaillesArray = new Array<MoisTravailleAvantSimulation>();
     const dateActuelle = new Date();
-    let montantNet = 0;
-    let montantBrut = 0;
-    if (personne.ressourcesFinancieresAvantSimulation != null && personne.ressourcesFinancieresAvantSimulation.salaire != null && personne.ressourcesFinancieresAvantSimulation.salaire.montantNet > 0) {
-      montantNet = personne.ressourcesFinancieresAvantSimulation.salaire.montantNet;
-      montantBrut = personne.ressourcesFinancieresAvantSimulation.salaire.montantBrut;
+    let montantMensuelNet = 0;
+    let montantMensuelBrut = 0;
+    if (personne.ressourcesFinancieresAvantSimulation != null && personne.ressourcesFinancieresAvantSimulation.salaire != null && personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet > 0) {
+      montantMensuelNet = personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet;
+      montantMensuelBrut = personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelBrut;
     }
     for (let index = 0; index < this.NOMBRE_MAX_MOIS_TRAVAILLES; index++) {
       const moisTravaille = new MoisTravailleAvantSimulation();
       const salaire = new Salaire();
-      salaire.montantNet = montantNet;
-      salaire.montantBrut = montantBrut;
+      salaire.montantMensuelNet = montantMensuelNet;
+      salaire.montantMensuelBrut = montantMensuelBrut;
       moisTravaille.isSansSalaire = false;
       moisTravaille.salaire = salaire;
       moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
@@ -178,8 +178,8 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     for (let index = 0; index < this.NOMBRE_MAX_MOIS_TRAVAILLES; index++) {
       const moisTravaille = new MoisTravailleAvantSimulation();
       const salaire = new Salaire();
-      salaire.montantNet = 0;
-      salaire.montantBrut = 0;
+      salaire.montantMensuelNet = 0;
+      salaire.montantMensuelBrut = 0;
       moisTravaille.isSansSalaire = false;
       moisTravaille.salaire = salaire;
       moisTravaille.date = this.dateUtileService.enleverMoisToDate(dateActuelle, index);
@@ -205,7 +205,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null &&
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
-        nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+        nombreMoisTravaillesAvantSimulation += mois.salaire.montantMensuelNet > 0 ? 1 : 0;
       })
     }
     return nombreMoisTravaillesAvantSimulation;
@@ -219,7 +219,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois, index) => {
         if (index < nombreMoisAConsiderer) {
-          nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+          nombreMoisTravaillesAvantSimulation += mois.salaire.montantMensuelNet > 0 ? 1 : 0;
         }
       })
     }
@@ -227,14 +227,14 @@ export class RessourcesFinancieresAvantSimulationUtileService {
   }
 
   private isMoisTravaille(moisTravailleAvantSimulation: MoisTravailleAvantSimulation): boolean {
-    return !moisTravailleAvantSimulation.isSansSalaire && moisTravailleAvantSimulation.salaire.montantNet > 0;
+    return !moisTravailleAvantSimulation.isSansSalaire && moisTravailleAvantSimulation.salaire.montantMensuelNet > 0;
   }
 
   public calculSalaireMensuelBrut(salaire: Salaire) {
-    if (salaire.montantNet != null) {
-      salaire.montantBrut = this.brutNetService.getBrutFromNet(salaire.montantNet);
+    if (salaire.montantMensuelNet != null) {
+      salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(salaire.montantMensuelNet);
     } else {
-      salaire.montantBrut = undefined;
+      salaire.montantMensuelBrut = undefined;
     }
   }
 
@@ -305,7 +305,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       if (ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null) {
         let tousLesSalairesAZero = true;
         ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
-          if (mois.salaire != null && mois.salaire.montantNet != 0) {
+          if (mois.salaire != null && mois.salaire.montantMensuelNet != 0) {
             tousLesSalairesAZero = false;
           }
         });

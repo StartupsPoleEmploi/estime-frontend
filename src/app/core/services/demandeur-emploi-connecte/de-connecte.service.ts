@@ -11,7 +11,7 @@ import { Personne } from '@models/personne';
 import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
-import { BrutNetService } from '../utile/brut-net.service';
+import { SalaireService } from '../utile/salaire.service';
 import { RessourcesFinancieresAvantSimulationUtileService } from '../utile/ressources-financieres-avant-simulation-utile.service';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -22,7 +22,7 @@ export class DeConnecteService {
   private demandeurEmploiConnecte: DemandeurEmploi;
 
   constructor(
-    private brutNetService: BrutNetService,
+    private salaireService: SalaireService,
     private numberUtileService: NumberUtileService,
     private personneUtileService: PersonneUtileService,
     private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
@@ -67,7 +67,7 @@ export class DeConnecteService {
 
   public setConjointRessourcesFinancieres(conjoint: Personne) {
     if (conjoint.ressourcesFinancieresAvantSimulation.salaire) {
-      conjoint.ressourcesFinancieresAvantSimulation.salaire.montantBrut = this.brutNetService.getBrutFromNet(conjoint.ressourcesFinancieresAvantSimulation.salaire.montantNet);
+      conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet);
     }
     const ressourcesFinancieresMontantsAvecDot = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(conjoint.ressourcesFinancieresAvantSimulation);
     this.demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation = ressourcesFinancieresMontantsAvecDot;
@@ -85,7 +85,7 @@ export class DeConnecteService {
   }
 
   public setFuturTravail(futurTravail: FuturTravail) {
-    futurTravail.salaire.montantNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaire.montantNet);
+    futurTravail.salaire.montantMensuelNet = this.numberUtileService.replaceCommaByDot(futurTravail.salaire.montantMensuelNet);
     futurTravail.nombreHeuresTravailleesSemaine = this.numberUtileService.replaceCommaByDot(futurTravail.nombreHeuresTravailleesSemaine);
     this.demandeurEmploiConnecte.futurTravail = futurTravail;
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
@@ -140,7 +140,7 @@ export class DeConnecteService {
   public setPersonnesChargeRessourcesFinancieres(personnesDTO: Array<PersonneDTO>): void {
     personnesDTO.forEach(personneDTO => {
       if (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire) {
-        personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantBrut = this.brutNetService.getBrutFromNet(personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet);
+        personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet);
       }
       personneDTO.personne.ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(personneDTO.personne.ressourcesFinancieresAvantSimulation);
       this.demandeurEmploiConnecte.situationFamiliale.personnesACharge[personneDTO.index].ressourcesFinancieresAvantSimulation = personneDTO.personne.ressourcesFinancieresAvantSimulation;
@@ -531,13 +531,13 @@ export class DeConnecteService {
 
   private setMontantsBrutSalairesAvantPeriodeSimulation(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
     periodeTravailleeAvantSimulation.mois.forEach(mois => {
-      mois.salaire.montantBrut = this.brutNetService.getBrutFromNet(mois.salaire.montantNet);
+      mois.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(mois.salaire.montantMensuelNet);
     });
   }
 
   private setSansSalaire(periodeTravailleeAvantSimulation: PeriodeTravailleeAvantSimulation): void {
     periodeTravailleeAvantSimulation.mois.forEach(mois => {
-      mois.isSansSalaire = mois.salaire.montantNet === 0;
+      mois.isSansSalaire = mois.salaire.montantMensuelNet === 0;
     });
   }
 
