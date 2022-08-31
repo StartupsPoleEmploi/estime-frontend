@@ -42,7 +42,7 @@ body {
 
   &.body-with-sticky-footer {
     @media #{$extra-small-device} {
-      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 2.5rem) !important;
+      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 1.5rem) !important;
     }
   }
 }

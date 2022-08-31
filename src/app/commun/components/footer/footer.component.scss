@@ -9,6 +9,10 @@ footer {
   left: 0;
   right: 0;
 
+  @media #{$extra-small-device} {
+    padding-bottom: 0.5rem;
+  }
+
 
   a {
     color: $color-blue-1;
@@ -386,7 +390,8 @@ footer {
 
 .footer-avec-sticky-button {
   @media #{$extra-small-device} {
-    bottom: calc(#{$button-sticky-height} + 1rem);
+    bottom: calc(#{$button-sticky-height});
+    padding-bottom: 0.5rem;
   }
 }
 
