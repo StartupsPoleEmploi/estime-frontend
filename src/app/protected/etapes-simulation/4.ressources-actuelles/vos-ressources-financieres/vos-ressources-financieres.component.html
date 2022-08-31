@@ -20,7 +20,7 @@
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet"
                         required placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel">
-                    <app-text-with-euro-symbol message="/jour"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
@@ -255,7 +255,7 @@
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute== 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute"
                         required placeholder="Montant" inputmode="decimal" #allocationJournaliereBrute="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
@@ -695,39 +695,8 @@
             Sur votre dernière attestation de période indemnisée Pôle emploi 👇
         </p>
         <div class='row mb-5'>
-            <img alt='' src='./assets/images/exemples/releve-are.png'>
-        </div>
-        <h4 class='headline-4-typo headline-4-typo-color'>
-            Où trouver votre dernier relevé de situation ARE ?
-        </h4>
-        <h5 class='headline-5-typo headline-5-typo-color'>
-            Sur Internet :
-        </h5>
-        <ol class='body-2-typo'>
-            <li>
-                Rendez-vous votre espace personnel Pôle emploi, dans la rubrique <i>'Mes courriers reçus' </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
-            </li>
-            <li>
-                Dans la liste des courriers reçus vous trouverez vos notifications ARE
-            </li>
-            <li>
-                Choisissez le relevé de situation le plus récent et cliquez sur <i>'Télécharger'</i>
-            </li>
-        </ol>
-        <h5 class='headline-5-typo headline-5-typo-color'>
-            Sur l'application mobile <i>'Mon Espace'</i> de Pôle emploi :
-        </h5>
-        <ol class='body-2-typo'>
-            <li>
-                Ouvrez l'application et connectez-vous si nécessaire
-            </li>
-            <li>
-                Accédez à vos courriers depuis la barre de menu en bas de l'écran
-            </li>
-            <li>
-                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
-            </li>
-        </ol>">
+            <img alt='' src='./assets/images/exemples/attestation-ass.png'>
+        </div>">
     </app-tooltip>
 </ng-template>
 
