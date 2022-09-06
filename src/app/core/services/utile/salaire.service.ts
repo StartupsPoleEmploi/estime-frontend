@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class SalaireService {
 
-    private static MONTANT_SMIC_HORAIRE_NET = 8.37;
-    private static MONTANT_SMIC_HORAIRE_BRUT = 10.57;
+    private static MONTANT_SMIC_HORAIRE_NET = 8.76;
+    // Source : https://www.insee.fr/fr/statistiques/serie/000822501
+    private static MONTANT_SMIC_HORAIRE_BRUT = 11.07;
 
 
     formatOptions: Object = {
