@@ -122,27 +122,33 @@
             <div id="img-text-info-suppression-donnees-perso" class="col-auto">
                 <div>
                     <img alt="Suppression des données personnelles"
-                        [src]="isErreurMessageInfoSuppression ? './assets/images/info-blue-1.svg' : './assets/images/check-mark.svg'">
+                        [src]="isErreurMessageInfoSuppression ? './assets/images/icones/info-red.svg' : './assets/images/icones/check-red.svg'">
                 </div>
             </div>
-            <div id="text-info-suppression-donnees-perso" class="col-auto">
+            <div id="text-info-suppression-donnees-perso" class="col-auto ps-3">
                 <span>{{messageInfoSuppressionDonneesPerso}}</span>
             </div>
         </div>
     </div>
 
-    <h2 class="h2-style-2 headline-2-typo" [ngClass]="this.isLoggedIn ? 'mt-5' : ''">
+    <h2 class=" h2-style-2 headline-2-typo" [ngClass]="this.isLoggedIn ? 'mt-5' : ''">
         6. Cookies et autres traceurs
     </h2>
 
     <h3 class="h3-style-1 headline-3-typo">6.1. Qu'est-ce qu'un cookie ?</h3>
     <p class="body-2-typo">
-        Un cookie est un petit fichier texte déposé sur le terminal des utilisateurs (par exemple un ordinateur, une
-        tablette, un « Smartphone», etc.) lors de la visite d’un site internet. Il contient plusieurs données : le nom
-        du serveur qui l’a déposé, un identifiant sous forme de numéro unique, et une date d’expiration. Les cookies ont
-        différentes fonctionnalités. Ils ont pour but d’enregistrer les paramètres de langue d’un site, de collecter des
-        informations relatives à votre navigation sur les sites, d’adresser des services personnalisés, etc. Seul
-        l’émetteur d’un cookie est susceptible de lire, enregistrer ou de modifier les informations qui y sont
+        Un cookie est un petit fichier texte déposé sur le terminal des utilisateurs (par exemple un
+        ordinateur, une
+        tablette, un « Smartphone», etc.) lors de la visite d’un site internet. Il contient plusieurs
+        données : le nom
+        du serveur qui l’a déposé, un identifiant sous forme de numéro unique, et une date d’expiration. Les
+        cookies ont
+        différentes fonctionnalités. Ils ont pour but d’enregistrer les paramètres de langue d’un site, de
+        collecter des
+        informations relatives à votre navigation sur les sites, d’adresser des services personnalisés, etc.
+        Seul
+        l’émetteur d’un cookie est susceptible de lire, enregistrer ou de modifier les informations qui y
+        sont
         contenues.
     </p>
 
@@ -164,12 +170,17 @@
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
         </a>
-        pour permettre le bon fonctionnement du site internet et l’utilisation des principales fonctionnalités du site.
+        pour permettre le bon fonctionnement du site internet et l’utilisation des principales
+        fonctionnalités du site.
         Ces cookies ne sont pas soumis au consentement de l’utilisateur (par exemple, cookie permettant
-        l’authentification). Sans ces cookies, l’utilisation du site peut être dégradée et l’accès à certains services
-        être rendu impossible (par exemple, l’usage des formulaires permettant l’utilisation de vos informations par le
-        moteur de calcul chargé de la simulation de vos ressources financières). Il est déconseillé de les désactiver.
-        L’utilisateur peut cependant s’opposer à leur dépôt en suivant les indications données au point 6.3. Ces cookies
+        l’authentification). Sans ces cookies, l’utilisation du site peut être dégradée et l’accès à
+        certains services
+        être rendu impossible (par exemple, l’usage des formulaires permettant l’utilisation de vos
+        informations par le
+        moteur de calcul chargé de la simulation de vos ressources financières). Il est déconseillé de les
+        désactiver.
+        L’utilisateur peut cependant s’opposer à leur dépôt en suivant les indications données au point 6.3.
+        Ces cookies
         sont exclusivement déposés par Pôle emploi.
     </p>
     <p class="body-2-typo">
@@ -182,13 +193,17 @@
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
         </a>
-        afin d’effectuer de la mesure d’audience, des analyses statistiques dans le but d'améliorer l'expérience
-        utilisateur et la performance du site internet. Ces cookies sont déposés par des tiers pour le compte de Pôle
-        emploi. L’utilisateur peut paramétrer le dépôt des cookies en suivant les indications données au point 6.3. Le
+        afin d’effectuer de la mesure d’audience, des analyses statistiques dans le but d'améliorer
+        l'expérience
+        utilisateur et la performance du site internet. Ces cookies sont déposés par des tiers pour le
+        compte de Pôle
+        emploi. L’utilisateur peut paramétrer le dépôt des cookies en suivant les indications données au
+        point 6.3. Le
         fait de refuser la mise en œuvre de tels cookies n'a pas d'incidence sur la navigation sur le site.
     </p>
     <p class="body-2-typo">
-        Pour plus d’informations sur les cookies notamment sur le type de cookies déposés ainsi que leurs finalités
+        Pour plus d’informations sur les cookies notamment sur le type de cookies déposés ainsi que leurs
+        finalités
         précises, vous pouvez consulter la plateforme de gestion du consentement,
         <a onclick="tC.privacyCenter.showPrivacyCenter();return false">disponible ici</a>
         .
@@ -196,14 +211,18 @@
 
     <h3 class="h3-style-1 headline-3-typo">6.3. Accepter ou refuser les cookies</h3>
     <p class="body-2-typo">
-        L’utilisateur dispose de différents moyens pour gérer ses choix en matière de cookies. Les modalités de gestion
-        diffèrent selon que le cookie est soumis ou non à un consentement préalable. L’utilisateur peut modifier ses
-        choix à tout moment. Pour information, le paramétrage des cookies est susceptible de modifier les conditions de
+        L’utilisateur dispose de différents moyens pour gérer ses choix en matière de cookies. Les modalités
+        de gestion
+        diffèrent selon que le cookie est soumis ou non à un consentement préalable. L’utilisateur peut
+        modifier ses
+        choix à tout moment. Pour information, le paramétrage des cookies est susceptible de modifier les
+        conditions de
         navigation sur le site internet
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
         </a>
-        , ainsi que les conditions d’accès à certains services et d’entrainer des dysfonctionnements de certaines
+        , ainsi que les conditions d’accès à certains services et d’entrainer des dysfonctionnements de
+        certaines
         fonctionnalités.
     </p>
     <p class="body-2-typo">
@@ -212,14 +231,18 @@
         </strong>
     </p>
     <p class="body-2-typo">
-        Pour les cookies donnant lieu à consentement préalable, l’utilisateur peut accepter ou refuser le dépôt de tout
-        ou partie des cookies, à tout moment, en formulant des choix sur la plateforme de gestion du consentement
+        Pour les cookies donnant lieu à consentement préalable, l’utilisateur peut accepter ou refuser le
+        dépôt de tout
+        ou partie des cookies, à tout moment, en formulant des choix sur la plateforme de gestion du
+        consentement
         <a onclick="tC.privacyCenter.showPrivacyCenter();return false">via ce lien dédié</a>
         .
     </p>
     <p class="body-2-typo"><strong>Le paramétrage du navigateur</strong></p>
-    <p class="body-2-typo">L’utilisateur peut accepter ou refuser le dépôt de tout ou partie des cookies, à tout moment,
-        en modifiant les paramètres de son navigateur (consulter la fonction « Aide » du navigateur pour en savoir plus)
+    <p class="body-2-typo">L’utilisateur peut accepter ou refuser le dépôt de tout ou partie des cookies, à
+        tout moment,
+        en modifiant les paramètres de son navigateur (consulter la fonction « Aide » du navigateur pour en
+        savoir plus)
         ou en se rendant sur l’une des pages suivantes, selon le navigateur utilisé :</p>
 
     <ul class="ul-liens-aide-navigateur">
@@ -263,13 +286,17 @@
     </ul>
 
     <p class="body-2-typo">
-        Pour information, la plupart des navigateurs acceptent par défaut le dépôt de cookies. L’utilisateur peut
-        modifier ses choix en matière de cookies à tout moment. Le paramétrage des cookies est susceptible de modifier
-        les conditions de navigation sur le site internet, ainsi que les conditions d’accès à certains services, et
+        Pour information, la plupart des navigateurs acceptent par défaut le dépôt de cookies. L’utilisateur
+        peut
+        modifier ses choix en matière de cookies à tout moment. Le paramétrage des cookies est susceptible
+        de modifier
+        les conditions de navigation sur le site internet, ainsi que les conditions d’accès à certains
+        services, et
         d’entrainer des dysfonctionnements de certaines fonctionnalités.
     </p>
     <p class="body-2-typo">
-        Pour plus d’informations sur les cookies et les moyens permettant d’empêcher leur installation, l’utilisateur
+        Pour plus d’informations sur les cookies et les moyens permettant d’empêcher leur installation,
+        l’utilisateur
         peut se rendre sur la page dédiée sur le site internet de la CNIL :
         <a href="https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser" target="_blank"
             rel="noopener noreferrer">
@@ -279,23 +306,29 @@
     </p>
 
     <h2 class="h2-style-2 headline-2-typo">7. Usages non autorisés</h2>
-    <p class="body-2-typo">L’utilisateur ne doit pas utiliser le service dans un autre but que celui fixé à l’article 2
+    <p class="body-2-typo">L’utilisateur ne doit pas utiliser le service dans un autre but que celui fixé à
+        l’article 2
         ou de façon contraire aux conditions générales d’utilisation.</p>
-    <p class="body-2-typo">Pôle emploi peut bloquer l’accès au compte de l’utilisateur en cas de violation de ces
+    <p class="body-2-typo">Pôle emploi peut bloquer l’accès au compte de l’utilisateur en cas de violation
+        de ces
         dispositions.</p>
 
     <h2 class="h2-style-2 headline-2-typo">8. Responsabilité</h2>
     <p class="body-2-typo">
-        L’utilisateur doit veiller à l’exactitude des données qu’il inscrit dans les formulaires du service proposé par
+        L’utilisateur doit veiller à l’exactitude des données qu’il inscrit dans les formulaires du service
+        proposé par
         le site
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
         </a>
-        pour permettre au moteur de calcul l’estimation la plus précise possible de ses ressources financières.
+        pour permettre au moteur de calcul l’estimation la plus précise possible de ses ressources
+        financières.
     </p>
     <p class="body-2-typo">
-        Les résultats de la simulation réalisée par le moteur de calcul n’ont qu’une valeur informative et sont
-        susceptibles d’évoluer notamment en fonction des évolutions législatives et règlementaires. En aucun cas
+        Les résultats de la simulation réalisée par le moteur de calcul n’ont qu’une valeur informative et
+        sont
+        susceptibles d’évoluer notamment en fonction des évolutions législatives et règlementaires. En aucun
+        cas
         l’estimation réalisée par le site
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
@@ -303,15 +336,18 @@
         n’a une valeur de décision.
     </p>
     <p class="body-2-typo">
-        L’utilisateur ne peut prétendre à aucune indemnité en cas d’impossibilité d’accéder au service ou en cas de
+        L’utilisateur ne peut prétendre à aucune indemnité en cas d’impossibilité d’accéder au service ou en
+        cas de
         dommages de toute nature, directs ou indirects, résultant de l’utilisation du service.
     </p>
 
     <h2 class="h2-style-2 headline-2-typo">9. Propriété intellectuelle</h2>
     <p class="body-2-typo">
         La marque Pôle emploi est protégée au titre des articles L.712-1 et suivants du code de la propriété
-        intellectuelle. Toute représentation, reproduction ou diffusion, intégrale ou partielle de la marque Pôle emploi
-        sur quelque support que ce soit, sans l'autorisation expresse et préalable de Pôle emploi constitue un acte de
+        intellectuelle. Toute représentation, reproduction ou diffusion, intégrale ou partielle de la marque
+        Pôle emploi
+        sur quelque support que ce soit, sans l'autorisation expresse et préalable de Pôle emploi constitue
+        un acte de
         contrefaçon, sanctionné en application des articles L.716-1 du même code.
     </p>
     <p class="body-2-typo">
@@ -319,13 +355,17 @@
         <a href="https://estime.pole-emploi.fr" target="_blank" rel="noopener noreferrer">
             https://estime.pole-emploi.fr
         </a>
-        contient des contenus sur lesquels des tiers détiennent des droits de propriété intellectuelle (dessin,
-        graphisme, marque, etc.) ou un droit à l’image (photo, visuel mettant en scène une personne physique, vidéo,
-        etc.). Les internautes ne sont pas autorisés à réutiliser ces contenus en l’absence de l’autorisation préalable
+        contient des contenus sur lesquels des tiers détiennent des droits de propriété intellectuelle
+        (dessin,
+        graphisme, marque, etc.) ou un droit à l’image (photo, visuel mettant en scène une personne
+        physique, vidéo,
+        etc.). Les internautes ne sont pas autorisés à réutiliser ces contenus en l’absence de
+        l’autorisation préalable
         et expresse de ces tiers.
     </p>
     <p class="body-2-typo">
-        Les autres contenus constituent des informations publiques librement réutilisables sous réserve du respect de la
+        Les autres contenus constituent des informations publiques librement réutilisables sous réserve du
+        respect de la
         licence ouverte pour la réutilisation d’informations publiques consultable à l’adresse suivante :
         <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence" target="_blank" rel="noopener noreferrer">
             https://www.etalab.gouv.fr/licence-ouverte-open-licence.

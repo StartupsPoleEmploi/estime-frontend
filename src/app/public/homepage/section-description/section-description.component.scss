@@ -1,7 +1,7 @@
 @import "../../../../assets/scss/variables";
 
 #section-description {
-  background-color: $color-blue-2;
+  background-color: $color-pe-grey-x-light;
   padding-bottom: 2.5rem;
   padding-top: 2.5rem;
 
@@ -32,14 +32,20 @@
     }
 
     #text-description {
-      color: $color-white-1;
       padding-left: 3rem;
 
       @media #{$extra-small-device} {
         padding-left: 1rem;
       }
 
+      #titre-text-description {
+        color: $color-pe-grey-dark;
+
+      }
+
       .body-text-description {
+        color: $color-pe-grey-dark;
+        text-align: start;
         margin-top: 1rem;
       }
     }

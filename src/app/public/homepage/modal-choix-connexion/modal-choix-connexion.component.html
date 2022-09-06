@@ -1,0 +1,46 @@
+<div class="modal-header" tag-page="popup_choix_connexion">
+    <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
+    <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
+        focus>
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="headline-2-typo color-blue-2-typo text-start">Comment voulez-vous continuer ?</h2>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 mb-3">
+                <span class="body-2-typo">Vous voulez une simulation <strong>précise et rapide</strong> :</span>
+            </div>
+            <div class="col-12">
+                <button id="btn-se-connecter" type="button" aria-label="Se connecter avec Pôle emploi"
+                    class="btn-homepage button-typo" data-testid="btn-se-connecter" tag-action="clic_bouton_connexion"
+                    (click)="onClickButtonSeConnecter()">
+                    <img alt="" class="image-1" src="./assets/images/logos/logo-pe-white.svg">
+                    <span class="span-se-connecter">
+                        Se connecter avec Pôle emploi
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col-12 mb-3">
+                <span class="body-2-typo">Vous n'avez pas vos identifiants Pôle emploi :</span>
+            </div>
+            <div class="col-12">
+                <button id="btn-sans-connexion" type="button" aria-label="Commencer la simulation sans connexion"
+                    class="btn-homepage button-typo" data-testid="btn-commencer-sans-connexion"
+                    tag-action="clic_bouton_sans_connexion" (click)="onClickButtonContinuerSansConnexion()">
+                    <span class="span-se-connecter">Commencer sans se connecter</span>
+                </button>
+            </div>
+        </div>
+        <app-message-info
+            contenu="Le simulateur s'adresse aux demandeurs d'emploi inscrits qui dépendent du régime général de l'assurance chômage ainsi qu'aux bénéficiaires de minima sociaux">
+        </app-message-info>
+    </div>
+</div>

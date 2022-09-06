@@ -21,7 +21,7 @@ export class BlockDonneesSaisiesService {
   public addBlockDonneesSaisies(content: Array<any>, demandeurEmploi: DemandeurEmploi): void {
     let body = new Array<Array<Cell>>();
     this.addRowDateSimulation(body);
-    this.addRowContratCible(body,demandeurEmploi);
+    this.addRowContratCible(body, demandeurEmploi);
     this.addRowRessourcesFinancieresAvantSimulation(body);
     content.push(this.createTableElement(body));
   }
@@ -51,7 +51,7 @@ export class BlockDonneesSaisiesService {
   private getContratCible(demandeurEmploi: DemandeurEmploi) {
     const typeContrat = demandeurEmploi.futurTravail.typeContrat;
     const nombreMoisContratCDD = demandeurEmploi.futurTravail.typeContrat == 'CDD' ? `${demandeurEmploi.futurTravail.nombreMoisContratCDD} mois ` : '';
-    const salaireNet = demandeurEmploi.futurTravail.salaire.montantNet;
+    const salaireNet = demandeurEmploi.futurTravail.salaire.montantMensuelNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploi.futurTravail.nombreHeuresTravailleesSemaine;
     return `• Contrat ciblé : ${typeContrat} ${nombreMoisContratCDD}- ${salaireNet}€ net par mois - ${nombreHeuresTravailleesSemaine}h par semaine`;
   }

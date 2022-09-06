@@ -1,16 +1,14 @@
 <div class="container-fluid">
-    <alert
-        type="danger"
-        *ngIf="messageErreur">
+    <alert type="danger" *ngIf="messageErreur">
         {{messageErreur}}
     </alert>
     <div class="titre-carte">
         <div class="row">
             <div class="col-md-12 col-12">
                 <div class="mt-auto mb-auto code-ressource" [ngClass]="[aideSelectedCode.toLowerCase()]">
-                     <div>
-                       <span class="overline-typo">{{aideSelectedCode}}</span>
-                     </div>
+                    <div>
+                        <span class="overline-typo">{{aideSelectedCode}}</span>
+                    </div>
                 </div>
             </div>
             <div class="col-md-12 col-12">
@@ -25,18 +23,13 @@
     </div>
     <div class="card-body card-body-description">
         <div id="block-detail-aide" class="card-text" [innerHTML]="aideSelected.detail"></div>
-        <div *ngIf="aideSelected.lienExterne"
-            class="text-center">
-            <button id="btn-aides-detail"
-                type="button"
-                aria-label="Faire la demande d'aide"
-                class="btn-style-perso-1 btn-aides-suite button-typo"
-                data-testid="btn-aides-detail"
-                tag-action="clique_bouton_demande_aide"
-                (click)="onClickFaireLaDemandeAide()">
+        <div *ngIf="aideSelected.lienExterne" class="text-center">
+            <button id="btn-aides-detail" type="button" aria-label="Faire la demande d'aide"
+                class="btn-style-perso-1 btn-aides-suite button-typo" data-testid="btn-aides-detail"
+                tag-action="clique_bouton_demande_aide" (click)="onClickFaireLaDemandeAide()">
                 <div class="text-center">
                     <span class="me-2">Faire la demande d'aide</span>
-                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

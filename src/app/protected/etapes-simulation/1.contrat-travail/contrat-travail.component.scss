@@ -32,7 +32,7 @@ input {
 }
 
 .net-ou-brut {
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
   line-height: 2.2rem;
 
   @media #{$extra-small-device} {
@@ -124,7 +124,7 @@ input {
   }
 
   .label-precision {
-    color: $color-grey-5;
+    color: $color-pe-grey-medium;
   }
 }
 

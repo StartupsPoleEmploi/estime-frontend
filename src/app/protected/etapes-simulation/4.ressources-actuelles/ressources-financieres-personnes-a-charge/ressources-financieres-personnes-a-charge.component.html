@@ -26,8 +26,8 @@
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet"
-                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)}"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
                             required placeholder="Montant" inputmode="numeric" #salaireNet="ngModel">
                         <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-12">
                         <span class="error-input-message"
-                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantNet == 0)">
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
                     </div>
@@ -143,7 +143,7 @@
                                             class="max-with-input-type-montant form-control d-inline"
                                             placeholder="Montant"
                                             (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
+                                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
                                             [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire(personneDTO.personne)}"
                                             required inputmode="numeric" (click)="$event.target.select()"
                                             #salaireMoisAvantPeriodeSimulee="ngModel">
@@ -261,6 +261,10 @@
                 <div class="row pb-3">
                     <label class="label headline-4-typo" [for]="'allocationAAHPersonneACharge'+personneDTO.index + 1">
                         * AAH (Allocation Adulte Handicapé) perçue
+                        <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
+                            (click)="modalService.openModal($event, modalMontantAAHTemplate)">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -302,7 +306,12 @@
                 <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1">
-                        * Pension d'invalidité perçue
+                        * Pension d'invalidité nette imposable perçue
+                        <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_pension_invalidite"
+                            aria-label="Infobulle montant pension invalidité"
+                            (click)="modalService.openModal($event, modalPensionInvaliditeTemplate)">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -336,41 +345,6 @@
                         <span class="error-input-message"
                             *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                        </span>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <label class="label headline-4-typo"
-                        [for]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1">
-                        * Allocation supplémentaire d'invalidité perçue
-                    </label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input [name]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1"
-                            [id]="'allocationSupplementaireInvaliditePersonneACharge'+personneDTO.index + 1" type="text"
-                            attr.aria-label="Allocation supplémentaire d'invalidité perçue le mois dernier par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                            maxlength="6" class="form-control d-inline"
-                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                            [ngClass]="{'ng-invalid': !personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite }"
-                            placeholder="Montant" inputmode="numeric" required
-                            #allocationSupplementaireInvalidite="ngModel">
-                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                        </span>
-                    </div>
-                    <div class="col-12">
-                        <span class="error-input-message"
-                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationSupplementaireInvalidite.touched)  && allocationSupplementaireInvalidite.errors?.pattern">
-                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                 </div>
@@ -519,3 +493,31 @@
         </div>
     </form>
 </div>
+
+<ng-template #modalMontantAAHTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-aah.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalPensionInvaliditeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement de pension 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-pi.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>

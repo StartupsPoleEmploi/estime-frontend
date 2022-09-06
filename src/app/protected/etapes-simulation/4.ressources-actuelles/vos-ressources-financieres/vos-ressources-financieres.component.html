@@ -3,7 +3,11 @@
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-net-ass">
-                    * Montant net de votre allocation journalière ASS
+                    * Montant de votre allocation journalière ASS
+                    <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle montant ASS"
+                        (click)="modalService.openModal($event, modalAllocationASSTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -16,7 +20,7 @@
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet == 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet > this.controleChampFormulaireService.MONTANT_ASS_JOURNALIER_MAX)}"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationJournaliereNet"
                         required placeholder="Montant" inputmode="decimal" #allocationJournaliereNetASS="ngModel">
-                    <app-text-with-euro-symbol message="net/jour"></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
@@ -46,27 +50,14 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
-            <div class="row pb-3">
-                <label class="label headline-4-typo">
-                    * Date de votre ouverture de droits à l'ASS ou de votre dernier renouvellement
-                </label>
-            </div>
-            <div class="row pb-3">
-                <div class="col">
-                    <app-date-inputs [dateSaisie]="dateDernierOuvertureDroitASS"
-                        [isFormSubmitted]="isRessourcesFinancieresFormSubmitted">
-                    </app-date-inputs>
-                </div>
-            </div>
-        </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_obtenir_ressources_are"
+                        aria-label="Infobulle salaire journalier référence ARE"
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -108,9 +99,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-nombre-jours-restants">
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_obtenir_ressources_are" aria-label="Infobulle ressources perçues"
-                        (click)="modalService.openModal($event, modalSituationDemandeurTemplate)">
+                    <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_obtenir_ressources_are"
+                        aria-label="Infobulle nombre jours restants ARE"
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -152,8 +144,8 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité"
+                    <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
                         (click)="modalService.openModal($event, modalDegressiviteTemplate)">
                     </button>
                 </label>
@@ -190,7 +182,7 @@
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || hasDegressiviteAre.touched)  && hasDegressiviteAre.errors?.required">
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasDegressiviteAre.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
@@ -249,7 +241,7 @@
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
-                        (click)="modalService.openModal($event, modalSituationDemandeurAllocationJournaliereTemplate)">
+                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
                     </button>
                 </label>
             </div>
@@ -263,7 +255,7 @@
                         [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute== 0 || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute > this.controleChampFormulaireService.MONTANT_ARE_ALLOCATION_JOURNALIERE_BRUT_MAX)}"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute"
                         required placeholder="Montant" inputmode="decimal" #allocationJournaliereBrute="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                    <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
@@ -292,6 +284,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="allocationRSA">
                     * RSA (Revenu de Solidarité Active) perçu
+                    <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
+                        (click)="modalService.openModal($event, modalMontantRSATemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -332,6 +328,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="allocationAAH">
                     * Allocation Adulte Handicapé (AAH) perçue
+                    <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
+                        (click)="modalService.openModal($event, modalMontantAAHTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -373,6 +373,11 @@
             <div class="row flex-column">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
+                    <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
+                        aria-label="Infobulle prochaine déclaration trimestrielle"
+                        (click)="modalService.openModal($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                    </button>
                 </label>
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
@@ -444,7 +449,7 @@
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)  && hasTravailleAuCoursDerniersMois.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
@@ -481,7 +486,7 @@
                                         type="text" maxlength="6" min="0"
                                         class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
                                         (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                        [(ngModel)]="ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantNet"
+                                        [(ngModel)]="ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
                                         [ngClass]="{'ng-invalid': hasQuatorzeMoisSansSalaire()}" required
                                         inputmode="numeric" (click)="$event.target.select()"
                                         #salaireMoisAvantPeriodeSimulee="ngModel">
@@ -512,7 +517,11 @@
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="pensionInvalidite">
-                    * Pension d'invalidité perçue
+                    * Pension d'invalidité nette imposable perçue
+                    <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_pension_invalidite" aria-label="Infobulle montant pension invalidité"
+                        (click)="modalService.openModal($event, modalPensionInvaliditeTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -545,38 +554,6 @@
                     <span class="error-input-message"
                         *ngIf="this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="allocationSupplementaireInvalidite">
-                    * Allocation supplémentaire d'invalidité perçue
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="allocationSupplementaireInvalidite" name="allocationSupplementaireInvalidite"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        data-testid="input-allocation-supplementaire-invalidite" maxlength="6"
-                        class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite == 0)}"
-                        required inputmode="numeric" #allocationSupplementaireInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || allocationSupplementaireInvalidite?.touched)  && allocationSupplementaireInvalidite?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                 </div>
             </div>
@@ -709,67 +686,22 @@
     </div>
 </div>
 
-<ng-template #modalSituationDemandeurTemplate>
+<ng-template #modalAllocationASSTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
         <p class='body-2-typo'>
-            Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
+            Sur votre dernière attestation de période indemnisée Pôle emploi 👇
         </p>
         <div class='row mb-5'>
-            <img alt='' src='./assets/images/img_tooltip-are.png'>
-        </div>
-        <h4 class='headline-4-typo headline-4-typo-color'>
-            Où trouver votre dernier relevé de situation ARE ?
-        </h4>
-        <h5 class='headline-5-typo headline-5-typo-color'>
-            Sur Internet :
-        </h5>
-        <ol class='body-2-typo'>
-            <li>
-                Rendez-vous votre espace personnel Pôle emploi, dans la rubrique <i>'Mes courriers reçus' </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
-            </li>
-            <li>
-                Dans la liste des courriers reçus vous trouverez vos notifications ARE
-            </li>
-            <li>
-                Choisissez le relevé de situation le plus récent et cliquez sur <i>'Télécharger'</i>
-            </li>
-        </ol>
-        <h5 class='headline-5-typo headline-5-typo-color'>
-            Sur l'application mobile <i>'Mon Espace'</i> de Pôle emploi :
-        </h5>
-        <ol class='body-2-typo'>
-            <li>
-                Ouvrez l'application et connectez-vous si nécessaire
-            </li>
-            <li>
-                Accédez à vos courriers depuis la barre de menu en bas de l'écran
-            </li>
-            <li>
-                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
-            </li>
-        </ol>">
+            <img alt='' src='./assets/images/exemples/attestation-ass.png'>
+        </div>">
     </app-tooltip>
 </ng-template>
 
-<ng-template #modalSituationDemandeurAllocationJournaliereTemplate>
+<ng-template #modalAllocationARETemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <div class='card card-body card-message-info mb-3'>
-            <div class='row'>
-                <div class='img-card-message-info col-auto'>
-                    <div>
-                        <img alt='' src='./assets/images/info.svg'>
-                    </div>
-                </div>
-                <div class='col'>
-                    <span class='body-2-typo'>
-                        Si vous êtes soumis à la dégressivité, c'est dans ce champ que vous pouvez renseigner votre montant brut d'allocation journalière réduite
-                    </span>
-                </div>
-            </div>
-        </div>
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
@@ -777,7 +709,7 @@
             Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
         </p>
         <div class='row mb-5'>
-            <img alt='' src='./assets/images/img_tooltip-are.png'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
         </div>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
@@ -817,6 +749,59 @@
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-2-typo'>
             La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et qui bénéficiaient d'un salaire brut supérieur à 4545 euros par mois
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalPensionInvaliditeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement de pension 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-pi.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalMontantRSATemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-rsa.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalMontantAAHTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-aah.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalProchaineDeclarationTrimestrielleTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre espace CAF, dans la rubrique “mon agenda”
         </p>">
     </app-tooltip>
 </ng-template>

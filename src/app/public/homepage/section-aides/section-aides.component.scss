@@ -1,12 +1,12 @@
 @import "../../../../assets/scss/variables";
 
 #section-aides {
-  background-color: $color-blue-5;
+  background-color: $color-pe-grey-x-light;
   padding-top: 2rem;
   padding-bottom: 1.5rem;
 
   #titre-section-aides {
-    color: $color-blue-2;
+    color: $color-pe-grey-dark;
     padding-bottom: 2rem;
     padding-top: 2rem;
 
@@ -41,7 +41,7 @@
     }
 
     .intitule-aide {
-      color: $color-blue-2;
+      color: $color-pe-grey-dark;
     }
   }
 
@@ -55,24 +55,24 @@
     margin: 0;
 
     &.agepi {
-      border-top: 0.4rem solid $color-agepi;
+      border-top: 0.3rem solid $color-agepi;
     }
 
     &.am {
-      border-top: 0.4rem solid $color-am;
+      border-top: 0.3rem solid $color-am;
     }
 
     &.pa {
-      border-top: 0.4rem solid $color-pa;
+      border-top: 0.3rem solid $color-pa;
     }
   }
 
   .en-savoir-plus-aide {
     padding-top: 0.5rem;
 
-      color: $color-blue-10;
-      text-decoration: none;
-      cursor: pointer;
+    color: $color-pe-red;
+    text-decoration: none;
+    cursor: pointer;
 
   }
 
@@ -100,6 +100,10 @@
       color: #FFFFFF;
       vertical-align: top;
     }
+  }
+
+  .icon-fleche-en-savoir-plus {
+    padding-bottom: 0.125rem;
   }
 
 }

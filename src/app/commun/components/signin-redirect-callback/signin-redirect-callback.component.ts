@@ -58,7 +58,4 @@ export class SigninRedirectCallbackComponent implements OnInit {
     this.isPageLoadingDisplay = false;
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
-
-
-
 }

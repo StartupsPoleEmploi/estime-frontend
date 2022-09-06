@@ -5,7 +5,7 @@
 }
 
 .code-ressource {
-  background-color: $color-grey-1;
+  background-color: $color-pe-grey-light;
   border-radius: 0.25rem;
   height: 2.0625rem !important;
   width: 2.75rem !important;
@@ -51,8 +51,7 @@
     background-color: $color-are;
   }
 
-  &.pi,
-  &.asi {
+  &.pi {
     background-color: $color-pi;
   }
 

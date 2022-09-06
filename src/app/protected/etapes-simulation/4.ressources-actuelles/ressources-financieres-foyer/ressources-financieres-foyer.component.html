@@ -6,6 +6,10 @@
                 <div class="row pb-3">
                     <label class="label headline-4-typo" for="allocationRSA">
                         * RSA (Revenu de Solidarité Active) perçu
+                        <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
+                            (click)="modalService.openModal($event, modalMontantRSATemplate)">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -387,42 +391,15 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="isConcerneParAideLogement()">
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="montantCharges">
-                    * Montant des charges mensuelles de votre logement
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="montantCharges" name="montantCharges" type="text" data-testid="input-montant-charges"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="8" class="form-control d-inline" (click)="$event.target.select()"
-                        [(ngModel)]="informationsPersonnelles.logement.montantCharges" required placeholder="Montant"
-                        inputmode="numeric" #montantCharges="ngModel">
-                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || montantCharges.touched)  && montantCharges.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-            </div>
-        </div>
         <div *ngIf="isConcerneParDeclarationTrimestrielle()">
             <div class="row flex-column">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
+                    <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
+                        aria-label="Infobulle prochaine déclaration trimestrielle"
+                        (click)="modalService.openModal($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                    </button>
                 </label>
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
@@ -637,3 +614,28 @@
         </div>
     </form>
 </div>
+
+<ng-template #modalMontantRSATemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre dernière attestation de paiement CAF 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-rsa.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalProchaineDeclarationTrimestrielleTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-2-typo'>
+            Sur votre espace CAF, dans la rubrique “mon agenda”
+        </p>">
+    </app-tooltip>
+</ng-template>

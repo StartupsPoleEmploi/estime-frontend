@@ -57,8 +57,7 @@ export class SimulationService {
   public calculerMontantAidesCPAM(aidesCPAM: AidesCPAM) {
     let montant = 0;
     if (aidesCPAM) {
-      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
-        + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
+      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite);
     }
     return montant
   }
@@ -70,7 +69,6 @@ export class SimulationService {
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.AIDE_RETOUR_EMPLOI), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE), aides);
-    this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE), aides);
     this.addAideToAidesArray(this.aidesService.getAideByCodeFromSimulationMensuelle(simulationMensuelle, this.codesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE), aides);

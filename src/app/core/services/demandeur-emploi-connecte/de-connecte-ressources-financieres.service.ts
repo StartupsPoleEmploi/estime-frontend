@@ -88,7 +88,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     let montant = 0;
     if (ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null) {
       Object.values(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois).forEach(mois => {
-        montant += this.numberUtileService.getMontantSafe(mois.salaire.montantNet);
+        montant += this.numberUtileService.getMontantSafe(mois.salaire.montantMensuelNet);
       });
     }
     return montant;
@@ -99,8 +99,8 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.situationFamiliale && demandeurEmploiConnecte.situationFamiliale.conjoint) {
       const ressourcesFinancieresConjoint = demandeurEmploiConnecte.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation;
-      if (ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantNet);
+      if (ressourcesFinancieresConjoint.salaire && ressourcesFinancieresConjoint.salaire.montantMensuelNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.salaire.montantMensuelNet);
       }
       if (ressourcesFinancieresConjoint.beneficesMicroEntrepriseDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresConjoint.beneficesMicroEntrepriseDernierExercice);
@@ -127,8 +127,8 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     let montant = 0;
     if (this.personneUtileService.hasRessourcesFinancieresAvantSimulation(personne)) {
       const ressourcesFinancieresPersonne = personne.ressourcesFinancieresAvantSimulation;
-      if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantNet) {
-        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantNet);
+      if (ressourcesFinancieresPersonne.salaire && ressourcesFinancieresPersonne.salaire.montantMensuelNet) {
+        montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.salaire.montantMensuelNet);
       }
       if (ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice) {
         montant += this.numberUtileService.getMontantSafe(ressourcesFinancieresPersonne.beneficesMicroEntrepriseDernierExercice);
@@ -193,7 +193,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
     if (aidesCPAM != null) {
       montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite);
-      montant += this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
     }
     return montant;
   }
@@ -201,8 +200,8 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public getFuturSalaireNet(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.futurTravail && demandeurEmploiConnecte.futurTravail.salaire && demandeurEmploiConnecte.futurTravail.salaire.montantNet > 0) {
-      montant += demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    if (demandeurEmploiConnecte.futurTravail && demandeurEmploiConnecte.futurTravail.salaire && demandeurEmploiConnecte.futurTravail.salaire.montantMensuelNet > 0) {
+      montant += demandeurEmploiConnecte.futurTravail.salaire.montantMensuelNet;
     }
     return montant;
   }
@@ -212,15 +211,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite > 0) {
       montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite;
-    }
-    return montant;
-  }
-
-  public getAllocationSupplementaireInvalidite(): number {
-    let montant = 0;
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite > 0) {
-      montant += demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite;
     }
     return montant;
   }
@@ -355,7 +345,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
       if (ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null) {
         let tousLesSalairesAZero = true;
         ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
-          if (mois.salaire != null && mois.salaire.montantNet != 0) {
+          if (mois.salaire != null && mois.salaire.montantMensuelNet != 0) {
             tousLesSalairesAZero = false;
           }
         });
@@ -444,9 +434,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
 
   private isDonneesASSSaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
-    return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit
-      && !this.dateUtileService.isDateAfterDateJour(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit)
-      && !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierAssInvalide(ressourcesFinancieresAvantSimulation);
+    return !this.ressourcesFinancieresAvantSimulationUtileService.isMontantJournalierAssInvalide(ressourcesFinancieresAvantSimulation);
   }
 
   private isDonneesRSASaisiesValide(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
@@ -503,8 +491,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     let montant = 0;
     if (ressourcesFinancieresAvantSimulation.aidesCPAM) {
       const aidesCPAM = ressourcesFinancieresAvantSimulation.aidesCPAM;
-      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite)
-        + this.numberUtileService.getMontantSafe(aidesCPAM.allocationSupplementaireInvalidite);
+      montant += this.numberUtileService.getMontantSafe(aidesCPAM.pensionInvalidite);
     }
     return montant;
   }
@@ -585,9 +572,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
       if (aidesCPAM.pensionInvalidite != null && aidesCPAM.pensionInvalidite > 0) {
         ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.PENSION_INVALIDITE);
       }
-      if (aidesCPAM.allocationSupplementaireInvalidite != null && aidesCPAM.allocationSupplementaireInvalidite > 0) {
-        ressourcesAvantSimulationCPAMArray.push(CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
-      }
     }
     return ressourcesAvantSimulationCPAMArray;
   }
@@ -598,7 +582,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
       && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois != null &&
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.length != 0) {
       ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.forEach((mois) => {
-        nombreMoisTravaillesAvantSimulation += mois.salaire.montantNet > 0 ? 1 : 0;
+        nombreMoisTravaillesAvantSimulation += mois.salaire.montantMensuelNet > 0 ? 1 : 0;
       })
     }
     return nombreMoisTravaillesAvantSimulation;
@@ -608,7 +592,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const typeContrat = this.getLibelleTypeContrat(demandeurEmploiConnecte.futurTravail.typeContrat);
     const nombreMoisContratCDD = (demandeurEmploiConnecte.futurTravail.typeContrat == 'CDD' || demandeurEmploiConnecte.futurTravail.typeContrat == 'INTERIM' || demandeurEmploiConnecte.futurTravail.typeContrat == 'IAE') ? `${demandeurEmploiConnecte.futurTravail.nombreMoisContratCDD} mois ` : '';
-    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantMensuelNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
     return `${typeContrat} ${nombreMoisContratCDD} · ${nombreHeuresTravailleesSemaine}h par semaine · ${salaireNet}€ mensuel`
   }
@@ -617,7 +601,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public getCriteresSimulationLibelleCourt(): string {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     const typeContrat = this.getLibelleTypeContratCourt(demandeurEmploiConnecte.futurTravail.typeContrat);
-    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantNet;
+    const salaireNet = demandeurEmploiConnecte.futurTravail.salaire.montantMensuelNet;
     const nombreHeuresTravailleesSemaine = demandeurEmploiConnecte.futurTravail.nombreHeuresTravailleesSemaine;
     return `${typeContrat} · ${nombreHeuresTravailleesSemaine}h · ${salaireNet}€`
   }

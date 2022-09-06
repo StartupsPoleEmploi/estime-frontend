@@ -40,7 +40,7 @@
                             {{ dateUtileService.getLibelleDateActuelle() }}
                         </h4>
                         <h5 id="montant_ressources_avant_simulation"
-                            class="headline-5-typo color-blue-10-typo text-start"
+                            class="headline-5-typo color-pe-red-typo text-start"
                             data-testid="montant_ressources_actuelles">
                             {{simulation.montantRessourcesFinancieresMoisAvantSimulation}} € net
                         </h5>
@@ -95,7 +95,7 @@
                             (click)="onClickButtonImprimerMaSimulation()"
                             (keyup)="handleKeyUpOnTelechargerSimulation($event)"
                             tag-download="clic_bouton_telecharger_ma_simulation">
-                            <img alt="" src="./assets/images/download-blue.svg">
+                            <img alt="" src="./assets/images/icones/download-red.svg">
                             <span>Télécharger</span>
                         </button>
                     </div>
@@ -131,7 +131,7 @@
         <button class="btn-telecharger-simulation-mobile" data-testid="btn-telecharger-simulation" tabindex="0"
             (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
             tag-download="clic_bouton_telecharger_ma_simulation">
-            <img alt="" src="./assets/images/download-blue.svg">
+            <img alt="" src="./assets/images/icones/download-red.svg">
             <span>Télécharger</span>
         </button>
     </div>

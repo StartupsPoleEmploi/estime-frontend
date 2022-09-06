@@ -85,7 +85,7 @@ export class MoisApresSimulationComponent implements OnInit {
     if (this.detailMensuel.details.length > 0) {
       resume = this.detailMensuel.details[0];
       if (this.detailMensuel.details.length > 1) {
-        resume += "... <span class='color-blue-10-typo pointer'>Lire la suite</span>";
+        resume += "... <span class='color-pe-red-typo pointer'>Lire la suite</span>";
       }
     }
     return resume;

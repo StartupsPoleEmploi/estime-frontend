@@ -33,7 +33,6 @@ export class PersonneUtileService {
       personne.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
       personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
       personne.ressourcesFinancieresAvantSimulation.aidesCPAM = new AidesCPAM();
-      personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = 0;
     }
     return personne;
   }
@@ -126,7 +125,7 @@ export class PersonneUtileService {
       isValide = personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois != null;
     }
     if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
-      isValide = personne.ressourcesFinancieresAvantSimulation.salaire.montantNet > 0;
+      isValide = personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet > 0;
     }
     if (isValide && personne.informationsPersonnelles.microEntrepreneur) {
       isValide = personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0;

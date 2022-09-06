@@ -22,6 +22,7 @@ export class CookiesEstimeService {
     } else {
       this.cookieService.set(KeysStorageEnum.PE_CONNECT_INDIVIDU, JSON.stringify(individuConnectePeConnectAuthorization), { expires: dateTokenExpired });
     }
+    this.cookieService.set(KeysStorageEnum.IS_LOGGED_IN, JSON.stringify(true));
   }
 
   public getIndividuConnectePeConnectAuthorization(): IndividuConnectePeConnectAuthorization {
@@ -33,8 +34,17 @@ export class CookiesEstimeService {
     return individu;
   }
 
+  public isLoggedIn(): boolean {
+    const isLoggedIn = this.cookieService.get(KeysStorageEnum.IS_LOGGED_IN);
+    if (isLoggedIn && JSON.parse(isLoggedIn)) {
+      return this.getIndividuConnectePeConnectAuthorization() !== null;
+    }
+    return false;
+  }
+
   public clear(): void {
     this.cookieService.delete(KeysStorageEnum.PE_CONNECT_INDIVIDU);
+    this.cookieService.delete(KeysStorageEnum.IS_LOGGED_IN);
   }
 
   private getDateCookieExpire(tokenPeConnectExpireIn: number): Date {

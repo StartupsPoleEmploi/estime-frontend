@@ -17,7 +17,9 @@
                             </div>
                         </div>
                         <div class="col-8 col-md-10">
-                            <h2 class="intitule-aide headline-4-typo">Aide à la mobilité</h2>
+                            <span class="intitule-aide headline-4-typo">
+                                Aide à la mobilité
+                            </span>
                         </div>
                         <div class="col-2" *ngIf="screenService.isExtraSmallScreen()">
                             <div class="col-auto mt-auto mb-auto col-picto-arrow" *ngIf="true">
@@ -39,7 +41,7 @@
                                 (click)="onClickVoirAides(codesAidesEnum.AIDE_MOBILITE)">
                                 En savoir plus
                                 <img alt="" class="icon-fleche-en-savoir-plus"
-                                    src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
+                                    src="./assets/images/icones/fleche-droite-red.svg">
                             </a>
                         </div>
 
@@ -81,7 +83,7 @@
                                 (click)="onClickVoirAides(codesAidesEnum.PRIME_ACTIVITE)">
                                 En savoir plus
                                 <img alt="" class="icon-fleche-en-savoir-plus"
-                                    src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
+                                    src="./assets/images/icones/fleche-droite-red.svg">
                             </a>
                         </div>
 
@@ -124,7 +126,7 @@
                             <a class="en-savoir-plus-aide button-typo" (click)="onClickVoirAides(codesAidesEnum.AGEPI)">
                                 En savoir plus
                                 <img alt="" class="icon-fleche-en-savoir-plus"
-                                    src="../../../../assets/images/homepage-fleche-en-savoir-plus.svg">
+                                    src="./assets/images/icones/fleche-droite-red.svg">
                             </a>
                         </div>
 
@@ -138,7 +140,7 @@
                 data-testid="btn-voir-toutes-les-aides" tag-action="clic_bouton_voir_toutes_les_aides"
                 (click)="onClickVoirAides('')">
                 <span>Voir toutes les aides</span>
-                <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
             </button>
         </div>
     </div>

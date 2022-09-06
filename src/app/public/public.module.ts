@@ -19,6 +19,7 @@ import { AidesComponent } from './aides/aides.component';
 import { AidesDescriptionComponent } from './aides/aides-description/aides-description.component';
 import { StatsComponent } from './stats/stats.component';
 import { FormsModule } from '@angular/forms';
+import { ModalChoixConnexionComponent } from './homepage/modal-choix-connexion/modal-choix-connexion.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     SectionAidesComponent,
     AidesComponent,
     AidesDescriptionComponent,
-    StatsComponent
+    StatsComponent,
+    ModalChoixConnexionComponent
   ],
   imports: [
     AlertModule.forRoot(),

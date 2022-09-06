@@ -2,9 +2,9 @@
     <div class="div_bouton_retour_detail_aide div-vertically-centered justify-content-start div_detail_aide_with_padding"
         (click)="sideModalService.closeSideModalAide()" (keyup)="handleKeyUpOnRetour($event);" tabindex="0"
         tag-action="clic_bouton_retour_detail_aide">
-        <span class="bouton_retour body-2-typo color-blue-10-typo">
+        <span class="bouton_retour body-2-typo color-pe-red-typo">
             <em alt class="ps-2 pe-2 fas fa-chevron-left"></em>
-            <span class="body-2-typo color-blue-10-typo">Retour</span>
+            <span class="body-2-typo color-pe-red-typo">Retour</span>
         </span>
     </div>
     <div class="div_nom_aide justify-content-start div_detail_aide_with_padding">
@@ -12,7 +12,7 @@
             <div class="col-md-1 col-2 pe-1">
                 <div *ngIf="aide.organisme" class="icone-organisme me-1" [ngClass]="aide.organisme.toLowerCase()">
                     <div class="">
-                        <img alt="" [src]="'./assets/images/icon-'+aide.organisme.toLowerCase()+'.png'">
+                        <img alt="" [src]="'./assets/images/logos/logo-carre-'+aide.organisme.toLowerCase()+'.png'">
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 tag-action="clique_bouton_demande_aide_synthèse_{{aide.code}}" (click)="onClickFaireLaDemandeAide()">
                 <div class="text-center">
                     <span class="me-2 button-typo">Faire la demande d'aide</span>
-                    <img alt="" src="./assets/images/icon-bt-primaire.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

@@ -1,8 +1,10 @@
 @import "../../../../assets/scss/variables";
 
 #section-temoignages {
+  background-color: white;
+
   @media #{$medium-device} {
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
   }
 
   padding-top: 2rem;

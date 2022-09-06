@@ -39,7 +39,7 @@ header {
     }
 
     #signout-sm:hover {
-      color: $color-blue-3 !important;
+      color: $color-pe-red !important;
     }
 
     #logo-marianne-header {
@@ -90,7 +90,7 @@ header {
 
     #div-beta {
       border-radius: 1rem;
-      background-color: $color-blue-5;
+      background-color: $color-pe-blue-light;
       padding-left: 0.7rem;
       padding-right: 0.7rem;
       height: 1.8rem;
@@ -98,7 +98,7 @@ header {
       margin-top: auto;
 
       span {
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
         font-size: 0.8em;
         font-weight: bold;
         margin-top: auto;

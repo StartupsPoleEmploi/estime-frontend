@@ -133,7 +133,6 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM = new AidesCPAM();
-    this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite = 0;
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois = 0;
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice = 0;
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice = 0;

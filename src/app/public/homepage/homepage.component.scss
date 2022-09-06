@@ -27,7 +27,7 @@
     }
 
     span {
-      color: $color-blue-2;
+      color: $color-pe-grey-dark;
 
       @media #{$extra-small-device} {
         padding-left: 10px !important;
@@ -205,7 +205,7 @@
 }
 
 .btn-sticks {
-  background-color: $color-blue-5;
+  background-color: $color-pe-blue-light;
   width: 100%;
   bottom: 0;
   position: fixed;

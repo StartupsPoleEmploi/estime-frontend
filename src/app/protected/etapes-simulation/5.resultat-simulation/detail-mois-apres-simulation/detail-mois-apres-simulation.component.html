@@ -2,9 +2,9 @@
     <div class="div_bouton_retour_detail_mois div-vertically-centered justify-content-start div_detail_mois_with_padding"
         (click)="sideModalService.closeSideModalMois()" (keyup)="handleKeyUpOnRetour($event);" tabindex="0"
         tag-action="clic_bouton_retour_detail_mois" data-testid="bouton_retour_detail_mois">
-        <span class="bouton_retour body-2-typo color-blue-10-typo">
+        <span class="bouton_retour body-2-typo color-pe-red-typo">
             <em alt class="ps-2 pe-2 fas fa-chevron-left span-montant-mensuel"></em>
-            <span class="body-2-typo color-blue-10-typo">Retour</span>
+            <span class="body-2-typo color-pe-red-typo">Retour</span>
         </span>
     </div>
     <div class="div_mois_montant_mois_detail_mois div_detail_mois_with_padding" data-testid="div-montant-ressource">
@@ -14,7 +14,7 @@
                     {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
                     screenService.isTabletScreen())}}
                 </h2>
-                <h3 class="headline-3-typo color-blue-10-typo text-start d-inline ms-2" data-testid="montant-ressource">
+                <h3 class="headline-3-typo color-pe-red-typo text-start d-inline ms-2" data-testid="montant-ressource">
                     {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}} €
                     net
                 </h3>
@@ -63,7 +63,7 @@
                 <div class="col-md-10 col-8">
                     <div class="row mb-1 ps-2">
                         <div class="col">
-                            <span class="headline-4-typo color-blue-10-typo justify-content-start"
+                            <span class="headline-4-typo color-pe-red-typo justify-content-start"
                                 attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
                                 {{ ressourceFinanciereOuAide.montant }} €
                             </span>
@@ -86,7 +86,7 @@
                             [ngClass]="ressourceFinanciereOuAide.organisme.toLowerCase()">
                             <div>
                                 <img alt=""
-                                    [src]="'./assets/images/icon-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
+                                    [src]="'./assets/images/logos/logo-carre-'+ressourceFinanciereOuAide.organisme.toLowerCase()+'.png'">
                             </div>
                         </div>
                     </div>
@@ -101,8 +101,8 @@
             <div *ngIf="ressourcesFinancieresService.isRessourceFinanciereAvecDetail(ressourceFinanciereOuAide)"
                 class="row mt-3">
                 <div class="col-md-12 col-12 div-vertically-centered justify-content-end">
-                    <span class="bouton-detail body-2-typo color-blue-10-typo">
-                        <span *ngIf="!screenService.isExtraSmallScreen()" class="body-2-typo color-blue-10-typo">Voir le
+                    <span class="bouton-detail body-2-typo color-pe-red-typo">
+                        <span *ngIf="!screenService.isExtraSmallScreen()" class="body-2-typo color-pe-red-typo">Voir le
                             détail</span>
                         <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
                     </span>

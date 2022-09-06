@@ -209,6 +209,15 @@
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                             </button>
                         </div>
+                        <div class="row pt-3">
+                            <div class="col-12">
+                                <span id="btn-aucune-ressource" class="body-2-typo color-pe-red-typo" tabindex="0"
+                                    (click)="modalService.openModal($event, modalAucuneRessourceTemplate)">
+                                    Aucune de ces ressources
+                                    <img alt="" src="./assets/images/icones/fleche-droite-red.svg">
+                                </span>
+                            </div>
+                        </div>
                         <div class="row pb-3">
                             <div class="col-12">
                                 <span class="error-input-message"
@@ -484,7 +493,7 @@
                 aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
                 tag-navigation="clic_bouton_retour" type="button">
                 <div>
-                    <img alt="" src="./assets/images/fleche-retour.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -494,7 +503,7 @@
                 tag-navigation="clic_bouton_suivant">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" src="./assets/images/fleche-suivant.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>
@@ -522,6 +531,18 @@
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-2-typo'>
             Votre conjoint est la personne avec laquelle vous êtes marié.e, pacsé.e ou en concubinage.
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalAucuneRessourceTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <img alt='' src='./assets/images/logos/logo-estime.svg'>
+        <h4 class='pt-3 headline-4-typo color-blue-2-typo'>
+            Estime est disponible uniquement pour les ressources listées précédemment.
+        </h4>
+        <p class='body-2-typo'>
+            Nous faisons évoluer l'outil en permanence afin de couvrir toujours plus de publics et de situations.
         </p>">
     </app-tooltip>
 </ng-template>

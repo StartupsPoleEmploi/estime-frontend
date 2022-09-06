@@ -9,5 +9,4 @@ export class Logement {
   isConventionne: boolean;
   isChambre: boolean;
   montantLoyer: number;
-  montantCharges: number;
 }

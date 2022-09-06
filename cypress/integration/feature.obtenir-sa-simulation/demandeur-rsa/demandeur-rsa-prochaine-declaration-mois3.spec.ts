@@ -44,7 +44,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       const prochaineDeclarationTrimestrielle = "3";
       const montantAPLDeclare = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantRSA_M1_M2_M3 = "500";
       const montantPrimeActivite_M4_M5_M6 = "116";
@@ -60,8 +59,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -82,7 +84,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation();
@@ -154,7 +155,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantAF = "130";
       const montantAPLDeclare = "490";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const montantPAJE = "170";
       const montantMensuelRSA = "350";
       const prochaineDeclarationTrimestrielle = "3";
@@ -175,8 +175,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -208,7 +211,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.saisirAllocationFamilialeFoyer(montantAF);
       ressourcesActuellesPage.saisirPrestationAccueilJeuneEnfant(montantPAJE);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
@@ -285,7 +287,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE RESSOURCES
       const montantAPLDeclare = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const montantMensuelRSA = "380";
       const montantSalaireMoisMoins0 = "380";
       const montantSalaireMoisMoins1 = "380";
@@ -306,8 +307,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -330,7 +334,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation();
@@ -398,7 +401,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       // VARIABLES PAGE RESSOURCES
       const montantAPLDeclare = "310";
       const montantLoyer = "500";
-      const montantCharges = "30";
       const montantMensuelRSA = "500";
       const montantSalaireMoisMoins1 = "380";
       const montantSalaireMoisMoins2 = "500";
@@ -419,8 +421,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
@@ -443,7 +448,6 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.selectionnerAPL();
       ressourcesActuellesPage.saisirAPL(montantAPLDeclare);
       ressourcesActuellesPage.saisirMontantLoyer(montantLoyer);
-      ressourcesActuellesPage.saisirMontantCharges(montantCharges);
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
       ressourcesActuellesPage.clickOnObtenirMaSimulation();
@@ -528,8 +532,11 @@ describe(specTitleSimulationDeRSA('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
       monFuturContratTravailPage.saisirDureeHebdomadaire(dureeHebdomadaire);
-      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire);
-      monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+
+      monFuturContratTravailPage.selectSalaireMensuelNet();
+      monFuturContratTravailPage.saisirSalaireMensuelNet(salaire); monFuturContratTravailPage.saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail);
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();

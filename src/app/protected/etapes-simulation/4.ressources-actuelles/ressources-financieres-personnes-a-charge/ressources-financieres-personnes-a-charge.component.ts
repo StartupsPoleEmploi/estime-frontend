@@ -11,6 +11,7 @@ import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles'
 import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 import { Personne } from '@app/commun/models/personne';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ressources-financieres-personnes-a-charge',
@@ -38,6 +39,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public dateUtileService: DateUtileService,
+    public modalService: ModalService,
     public screenService: ScreenService
   ) { }
 
@@ -54,7 +56,6 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
       && !personne.beneficiaireAides.beneficiaireARE
       && !personne.beneficiaireAides.beneficiaireASS
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
-      && personne.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite === 0
       && !personne.informationsPersonnelles.microEntrepreneur
       && !personne.informationsPersonnelles.travailleurIndependant
       && !personne.informationsPersonnelles.hasPensionRetraite) {

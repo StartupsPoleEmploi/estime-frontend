@@ -51,7 +51,7 @@ ul {
     font-size: 2.25em;
   }
 
-  color: $color-blue-2 !important;
+  color: $color-pe-grey-dark !important;
 }
 
 .h2-style-1 {
@@ -65,7 +65,7 @@ ul {
 .h2-style-2 {
   @extend .font-effect-title;
   text-align: left;
-  color: $color-blue-3;
+  color: $color-pe-red;
   font-size: 1.125em;
 
   @media #{$medium-device},
@@ -82,108 +82,108 @@ ul {
 }
 
 .font-effect {
-  font-family: "Lato", "Roboto", Helvetica, sans-serif;
+  font-family: "Helvetica Neue", "Roboto", Helvetica, sans-serif;
   color: $color-blue-1;
 }
 
 .font-effect-title {
-  font-family: Poppins, "Lato", "Roboto", Helvetica, sans-serif;
+  font-family: "Roboto", Helvetica, sans-serif;
   color: $color-blue-1;
 }
 
 .text-important {
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
   font-weight: bold;
 }
 
 .text-under-h1 {
   margin-top: -0.5rem;
   font-size: 0.9em;
-  color: $color-blue-2;
+  color: $color-pe-grey-dark;
 }
 
 /** NEW UI TYPO SYSTEM */
 
 .headline-1-typo {
-  font-size: 2.375rem !important; // 38px
+  font-size: 2.625rem !important; // 42px
   line-height: 3.375rem !important; // 54px
-  font-family: Poppins, sans-serif !important;
-  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .headline-2-typo {
   font-size: 1.75rem !important; // 28px
   line-height: 2.5rem !important; // 40px
-  font-family: Poppins, sans-serif !important;
-  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .headline-3-typo {
   font-size: 1.375rem !important; // 22px
   line-height: 2.0625rem !important; // 33px
-  font-family: Poppins, sans-serif !important;
-  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .headline-4-typo {
   font-size: 1.125rem !important; // 18px
   line-height: 1.6875rem !important; // 27px
-  font-family: Poppins, sans-serif !important;
-  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .headline-5-typo {
   text-align: start;
   font-size: 1rem !important; // 16px
   line-height: 1.5rem !important; // 24px
-  font-family: Poppins, sans-serif !important;
-  font-weight: bold !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .intro-typo {
   font-size: 1.25rem !important; // 20px
   line-height: 1.875rem !important; // 30px
-  font-family: Lato, sans-serif !important;
+  font-family: 'Roboto', sans-serif !important;
   font-weight: normal !important;
 }
 
 .button-typo {
-  font-size: 1.125rem !important; // 18px
-  line-height: 1.6875rem !important; // 27px
-  font-family: Lato, sans-serif !important;
-  font-weight: bold !important;
+  font-size: 1rem !important; // 16px
+  line-height: 1.5rem !important; // 24px
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: normal !important;
 }
 
 .body-1-typo {
-  font-size: 1.125rem !important; // 18px
-  line-height: 1.6875rem !important; // 27px
-  font-family: Lato, sans-serif !important;
+  font-size: 1rem !important; // 16px
+  line-height: 1.5rem !important; // 24px
+  font-family: 'Helvetica Neue', sans-serif !important;
   font-weight: normal !important;
 }
 
 .body-2-typo {
-  font-size: 1rem !important; // 16px
-  line-height: 1.5rem !important; // 24px
-  font-family: Lato, sans-serif !important;
+  font-size: 0.875rem !important; // 14px
+  line-height: 1.25rem !important; // 20px
+  font-family: 'Helvetica Neue', sans-serif !important;
   font-weight: normal !important;
 }
 
 .overline-typo {
   font-size: 0.75rem !important; // 12px
   line-height: 1.125rem !important; // 18px
-  font-family: Lato, sans-serif !important;
+  font-family: 'Helvetica Neue', sans-serif !important;
   font-weight: bold !important;
 }
 
 .caption-typo {
   font-size: 0.75rem !important; // 12px
   line-height: 1.125rem !important; // 18px
-  font-family: Lato, sans-serif !important;
+  font-family: 'Helvetica Neue', sans-serif !important;
   font-weight: normal !important;
 }
 
 .headline-3-typo-color {
-  color: $color-blue-2 !important;
+  color: $color-pe-grey-dark !important;
 }
 
 .headline-4-typo-color {
@@ -195,11 +195,15 @@ ul {
 }
 
 .color-blue-2-typo {
-  color: $color-blue-2 !important;
+  color: $color-pe-grey-dark !important;
 }
 
-.color-blue-10-typo {
-  color: $color-blue-10 !important;
+.color-pe-grey-dark-typo {
+  color: $color-pe-grey-dark !important;
+}
+
+.color-pe-red-typo {
+  color: $color-pe-red !important;
 }
 
 .color-white-typo {

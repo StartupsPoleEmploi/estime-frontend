@@ -6,7 +6,7 @@ import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libell
 import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
-import { BrutNetService } from '@app/core/services/utile/brut-net.service';
+import { SalaireService } from '@app/core/services/utile/salaire.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -72,7 +72,7 @@ export class ContratTravailComponent implements OnInit {
 
   constructor(
     private aidesService: AidesService,
-    private brutNetService: BrutNetService,
+    private salaireService: SalaireService,
     private deConnecteService: DeConnecteService,
     public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService,
@@ -84,7 +84,7 @@ export class ContratTravailComponent implements OnInit {
   ngOnInit(): void {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.loadDataFuturTravail();
-    this.typeSalaireDisplay = 'net';
+    this.typeSalaireDisplay = 'mensuel_brut';
   }
 
   private loadDataFuturTravail(): void {
@@ -115,8 +115,10 @@ export class ContratTravailComponent implements OnInit {
       this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
       this.futurTravail.salaire = new Salaire();
-      this.futurTravail.salaire.montantBrut = null;
-      this.futurTravail.salaire.montantNet = null;
+      this.futurTravail.salaire.montantMensuelBrut = null;
+      this.futurTravail.salaire.montantMensuelNet = null;
+      this.futurTravail.salaire.montantHoraireBrut = null;
+      this.futurTravail.salaire.montantHoraireNet = null;
       this.futurTravail.hasOffreEmploiEnVue = null;
     }
   }
@@ -151,8 +153,8 @@ export class ContratTravailComponent implements OnInit {
 
   private isDonneesSaisiesValides(form: FormGroup): boolean {
     return form.valid
-      && this.futurTravail.salaire.montantBrut > 0
-      && this.futurTravail.salaire.montantNet > 0
+      && this.futurTravail.salaire.montantMensuelBrut > 0
+      && this.futurTravail.salaire.montantMensuelNet > 0
       && !this.isNombreHeuresTravailleesSemaineInvalide()
       && !this.isTypeContratInvalide()
       && !this.isDureeHebdoInvalide()
@@ -183,7 +185,7 @@ export class ContratTravailComponent implements OnInit {
     return this.hasOffreEmploiNon && (
       (this.isSalaireSouhaiteSMIC == null && this.isSalaireSouhaiteAutre == null)
       || (this.isSalaireSouhaiteSMIC == this.isSalaireSouhaiteAutre)
-      || (this.isSalaireSouhaiteAutre && this.futurTravail.salaire.montantNet == null)
+      || (this.isSalaireSouhaiteAutre && this.futurTravail.salaire.montantMensuelNet == null)
     );
   }
 
@@ -456,23 +458,58 @@ export class ContratTravailComponent implements OnInit {
     }
   }
 
-  public calculSalaireMensuelNet() {
-    this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaire.montantBrut >= 100 && this.futurTravail.salaire.montantBrut != null) {
-      this.futurTravail.salaire.montantNet = this.brutNetService.getNetFromBrut(this.futurTravail.salaire.montantBrut, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
-
-    } else {
-      this.futurTravail.salaire.montantNet = undefined;
+  public calculSalaireFromMensuelNet() {
+    if (this.futurTravail.salaire.montantMensuelNet >= 57) {
+      this.futurTravail.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.typeContrat);
+      this.futurTravail.salaire.montantHoraireNet = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelNet);
+      this.futurTravail.salaire.montantHoraireBrut = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelBrut);
     }
   }
 
-  public calculSalaireMensuelBrut() {
-    this.isFuturTravailSalaireFormSubmitted = false;
-    if (this.futurTravail.salaire.montantNet >= 57 && this.futurTravail.salaire.montantNet != null) {
-      this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+  public calculSalaireFromMensuelBrut() {
+    if (this.futurTravail.salaire.montantMensuelBrut >= 100) {
+      this.futurTravail.salaire.montantMensuelNet = this.salaireService.getNetFromBrut(this.futurTravail.salaire.montantMensuelBrut, this.futurTravail.typeContrat);
+      this.futurTravail.salaire.montantHoraireBrut = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelBrut);
+      this.futurTravail.salaire.montantHoraireNet = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelNet);
+    }
+  }
 
+  public calculSalaireFromHoraireNet() {
+    this.futurTravail.salaire.montantMensuelNet = this.salaireService.getMontantMensuelFromMontantHoraire(this.futurTravail.salaire.montantHoraireNet);
+    this.futurTravail.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.typeContrat);
+    this.futurTravail.salaire.montantHoraireBrut = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelBrut);
+
+  }
+
+  public calculSalaireFromHoraireBrut() {
+    this.futurTravail.salaire.montantMensuelBrut = this.salaireService.getMontantMensuelFromMontantHoraire(this.futurTravail.salaire.montantHoraireBrut);
+    this.futurTravail.salaire.montantMensuelNet = this.salaireService.getNetFromBrut(this.futurTravail.salaire.montantMensuelBrut, this.futurTravail.typeContrat);
+    this.futurTravail.salaire.montantHoraireNet = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelNet);
+
+  }
+
+  public propagateSalaireHoraireMensuel() {
+    this.isFuturTravailSalaireFormSubmitted = false;
+    if (this.futurTravail.salaire.montantHoraireNet != null || this.futurTravail.salaire.montantHoraireBrut != null || this.futurTravail.salaire.montantMensuelNet != null || this.futurTravail.salaire.montantMensuelBrut != null) {
+      switch (this.typeSalaireDisplay) {
+        case "mensuel_net":
+          this.calculSalaireFromMensuelNet();
+          break;
+        case "mensuel_brut":
+          this.calculSalaireFromMensuelBrut();
+          break;
+        case "horaire_net":
+          this.calculSalaireFromHoraireNet();
+          break;
+        case "horaire_brut":
+          this.calculSalaireFromHoraireBrut();
+          break;
+      }
     } else {
-      this.futurTravail.salaire.montantBrut = undefined;
+      this.futurTravail.salaire.montantHoraireBrut = undefined;
+      this.futurTravail.salaire.montantHoraireNet = undefined;
+      this.futurTravail.salaire.montantMensuelBrut = undefined;
+      this.futurTravail.salaire.montantMensuelNet = undefined;
     }
   }
 
@@ -487,7 +524,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public getMontantSmicMensuelNet() {
-    return this.brutNetService.getSmicMensuelNetFromNombreHeure(this.futurTravail.nombreHeuresTravailleesSemaine)
+    return this.salaireService.getSmicMensuelNetFromNombreHeure(this.futurTravail.nombreHeuresTravailleesSemaine)
   }
 
   public afficherNombreTrajetsDomicileTravail(): boolean {
@@ -544,14 +581,18 @@ export class ContratTravailComponent implements OnInit {
     this.isSalaireSouhaiteAutre = false;
     this.futurTravail.salaireSouhaiteSMIC = true;
     this.futurTravail.salaireSouhaiteAutre = false;
-    this.futurTravail.salaire.montantNet = this.getMontantSmicMensuelNet();
-    this.futurTravail.salaire.montantBrut = this.brutNetService.getBrutFromNet(this.futurTravail.salaire.montantNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+    this.futurTravail.salaire.montantMensuelNet = this.getMontantSmicMensuelNet();
+    this.futurTravail.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
+    this.futurTravail.salaire.montantHoraireNet = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.nombreHeuresTravailleesSemaine);
+    this.futurTravail.salaire.montantHoraireBrut = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelBrut, this.futurTravail.nombreHeuresTravailleesSemaine);
   }
 
   public unsetSalaireSouhaiteSMIC() {
     this.futurTravail.salaireSouhaiteSMIC = false;
-    this.futurTravail.salaire.montantNet = null;
-    this.futurTravail.salaire.montantBrut = null;
+    this.futurTravail.salaire.montantMensuelNet = null;
+    this.futurTravail.salaire.montantMensuelBrut = null;
+    this.futurTravail.salaire.montantHoraireNet = null;
+    this.futurTravail.salaire.montantHoraireBrut = null;
   }
 
   public setSalaireSouhaiteAutre() {
@@ -562,8 +603,10 @@ export class ContratTravailComponent implements OnInit {
 
   public unsetSalaireSouhaiteAutre() {
     this.futurTravail.dureeHebdoTempsPlein = false;
-    this.futurTravail.salaire.montantNet = null;
-    this.futurTravail.salaire.montantBrut = null;
+    this.futurTravail.salaire.montantMensuelNet = null;
+    this.futurTravail.salaire.montantMensuelBrut = null;
+    this.futurTravail.salaire.montantHoraireNet = null;
+    this.futurTravail.salaire.montantHoraireBrut = null;
   }
 
   public setNombreTrajets1JourSemaine() {

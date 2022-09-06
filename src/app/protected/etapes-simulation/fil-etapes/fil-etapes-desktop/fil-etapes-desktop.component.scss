@@ -47,13 +47,17 @@
 
     .hoveredEtape {
       .numero-etape {
-        background-color: $color-blue-6 !important;
-        color: $color-blue-6 !important;
-        border-color: $color-blue-6 !important;
+        background-color: $color-pe-red !important;
+        border-color: $color-pe-red !important;
+
+        span {
+          color: white !important;
+
+        }
       }
 
       .titre-etape {
-        color: $color-blue-6 !important;
+        color: $color-pe-red !important;
       }
     }
 
@@ -68,7 +72,7 @@
         position: absolute;
         width: 70%;
         height: 0.0625rem;
-        background-color: $color-grey-1;
+        background-color: $color-pe-grey-light;
         top: 50%;
         left: -35%;
         z-index: -1;
@@ -77,9 +81,9 @@
       .numero-etape {
         align-items: center;
         background-color: $color-white-3;
-        border: 0.0625rem solid $color-grey-1;
+        border: 0.0625rem solid $color-pe-grey-light;
         border-radius: 50%;
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
         // cursor: auto;
         display: inline-flex;
         height: 2rem;
@@ -98,7 +102,7 @@
 
       .titre-etape {
         bottom: -0.3125rem;
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
         height: 0;
         left: 0;
         margin: auto 0;
@@ -111,39 +115,39 @@
     .etape-active {
       .numero-etape {
         span {
-          color: $color-white-1;
+          color: $color-pe-red;
           font-weight: 700;
         }
 
         opacity: unset;
-        background-color: $color-blue-10;
-        border-color: $color-blue-10;
+        background-color: $color-pe-red-light;
+        border-color: $color-pe-red-light;
       }
 
       .titre-etape {
-        color: $color-blue-10;
+        color: $color-pe-red;
         opacity: unset;
       }
 
       &:not(:first-child)::after {
-        background-color: $color-blue-2 !important;
+        background-color: $color-pe-grey-dark !important;
       }
     }
 
     .etape-completee {
       .numero-etape {
-        background-color: $color-blue-2;
-        border-color: $color-blue-2;
+        background-color: $color-pe-grey-dark;
+        border-color: $color-pe-grey-dark;
         opacity: unset;
       }
 
       .titre-etape {
         opacity: unset;
-        color: $color-blue-2;
+        color: $color-pe-grey-dark;
       }
 
       &:not(:first-child)::after {
-        background-color: $color-blue-2 !important;
+        background-color: $color-pe-grey-dark !important;
       }
     }
   }

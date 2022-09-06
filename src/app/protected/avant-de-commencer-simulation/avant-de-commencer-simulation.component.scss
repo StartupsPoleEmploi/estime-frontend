@@ -28,7 +28,7 @@
     }
 
     #div-info-simulation {
-      background-color: $color-grey-1;
+      background-color: $color-pe-grey-light;
       padding: 0.5rem;
 
       .row {
@@ -61,7 +61,7 @@
           line-height: 1.125rem;
 
           span {
-            color: $color-blue-2 !important;
+            color: $color-pe-grey-dark !important;
             font-size: 0.75em;
           }
         }
@@ -84,7 +84,7 @@
     margin: 2.5rem 0rem;
 
     hr {
-      color: $color-grey-1;
+      color: $color-pe-grey-light;
       opacity: 1;
     }
 

@@ -5,6 +5,8 @@ import { CookiesEstimeService } from '../storage/cookies-estime.service';
 import { SessionStorageEstimeService } from '../storage/session-storage-estime.service';
 import { IndividuConnectePeConnectAuthorization } from "@models/individu-connecte-pe-connect-authorization";
 import { PeConnectAuthorization } from '@app/commun/models/pe-connect-authorization';
+import { KeysStorageEnum } from '@app/commun/enumerations/keys-storage.enum';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class IndividuConnectedService {
@@ -16,7 +18,8 @@ export class IndividuConnectedService {
 
   constructor(
     private cookiesEstimeService: CookiesEstimeService,
-    private sessionStorageEstimeService: SessionStorageEstimeService
+    private sessionStorageEstimeService: SessionStorageEstimeService,
+    private cookieService: CookieService
 
   ) {
     this.isStatutIndividuChangedSubject = new Subject<boolean>();
@@ -26,8 +29,12 @@ export class IndividuConnectedService {
   public getIndividuConnected(): Individu {
     if (!this.individuConnecte) {
       const individuConnected = this.sessionStorageEstimeService.getIndividuConnected();
-      individuConnected.peConnectAuthorization = this.getPeConnectAuthorization();
-      this.individuConnecte = individuConnected;
+      if (individuConnected) {
+        individuConnected.peConnectAuthorization = this.getPeConnectAuthorization();
+        this.individuConnecte = individuConnected;
+      } else {
+        this.individuConnecte = null;
+      }
     }
     return this.individuConnecte;
   }
@@ -36,8 +43,11 @@ export class IndividuConnectedService {
     const individuConnectePeConnectAuthorization = this.createIndividuConnectePeConnectAuthorization(individu);
     this.individuConnectePeConnectAuthorization = individuConnectePeConnectAuthorization;
     //pour des raison de sécurité, on stocke les données authorization dans un cookie et non dans session storage
-    this.cookiesEstimeService.storeIndividuConnectePeConnectAuthorization(individuConnectePeConnectAuthorization);
-    individu.peConnectAuthorization = null;
+    this.cookieService.set(KeysStorageEnum.IS_LOGGED_IN, JSON.stringify(true));
+    if (this.individuConnectePeConnectAuthorization.peConnectAuthorization != null) {
+      this.cookiesEstimeService.storeIndividuConnectePeConnectAuthorization(individuConnectePeConnectAuthorization);
+      individu.peConnectAuthorization = null;
+    }
     this.sessionStorageEstimeService.storeIndividuConnecte(individu);
     this.isStatutIndividuChangedSubject.next(true);
   }
@@ -47,7 +57,7 @@ export class IndividuConnectedService {
   }
 
   public isLoggedIn(): boolean {
-    return this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization() !== null;
+    return this.cookiesEstimeService.isLoggedIn();
   }
 
   private createIndividuConnectePeConnectAuthorization(individuConnecte: Individu): IndividuConnectePeConnectAuthorization {
@@ -60,6 +70,9 @@ export class IndividuConnectedService {
   private getPeConnectAuthorization(): PeConnectAuthorization {
     if (!this.individuConnectePeConnectAuthorization) {
       this.individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
+      if (!this.individuConnectePeConnectAuthorization) {
+        this.individuConnectePeConnectAuthorization = this.createIndividuConnectePeConnectAuthorization(new Individu());
+      }
     }
     return this.individuConnectePeConnectAuthorization.peConnectAuthorization;
   }

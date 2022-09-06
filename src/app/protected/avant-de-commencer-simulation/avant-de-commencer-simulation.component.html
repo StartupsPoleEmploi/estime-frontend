@@ -47,6 +47,11 @@
                         <hr>
                         <div class="items-documents-demandes">
                             <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
+                            <button id="infobulle-trouver-derniere-attestation-pension-invalidite"
+                                aria-label="Infobulle trouver derniere attestation de pension d'invalidité"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-derniere-attestation-pension-invalidite"
+                                (click)="modalService.openModal($event, modalDerniereAttestationPensionInvaliditeTemplate, true)"></button>
                         </div>
                     </div>
                     <app-message-info contenu="Les résultats qui vous seront donnés ne sont qu’une estimation, ils sont susceptibles
@@ -60,7 +65,7 @@
                 class="btn-suivant" (click)="onClickButtonJeContinue()" tag-navigation="clic_bouton_je_continue">
                 <div>
                     <span class="button-typo">Je continue</span>
-                    <img alt="" src="./assets/images/fleche-suivant.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>
@@ -94,7 +99,7 @@
 <ng-template #modalDerniereNotificationDroitASSTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData='
         <h4 class="headline-4-typo headline-4-typo-color">
-            Où trouver votre dernière notification de droits ASS ?
+            Où trouver les informations concernant vos droits ASS ?
         </h4>
         <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
         <ol class="body-2-typo">
@@ -103,19 +108,21 @@
                     candidat.pole-emploi.fr
                 </a> ;
             </li>
-            <li>Accédez à la rubrique mes courriers et retrouvez votre dernière notification de droits ASS.</li>
+            <li>Accédez à la rubrique mon dossier demandeur d’emploi, puis “mes allocations“ ;</li>
+            <li>Cliquez sur “attestations Pôle emploi“ et sélectionnez “attestation des périodes indemnisées“.</li>
         </ol>
         <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “Mon Espace” de Pôle emploi :</h5>
         <ol class="body-2-typo">
             <li>Ouvrez l’application et connectez-vous si nécessaire ;</li>
-            <li>Accédez à vos courriers depuis la barre de menu en bas de l’écran ;</li>
-            <li>Dans la liste, identifiez votre dernière notification de droits ASS et tapez dessus pour l’ouvrir.</li>
+            <li>Cliquez sur “Demander une attestation“ en bas de l’écran ;</li>
+            <li>Dans la liste, sélectionnez "attestation des périodes indemnisées".</li>
         </ol>'>
     </app-tooltip>
 </ng-template>
 
 <ng-template #modalDerniereAttestationCafTemplate>
-    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+    <app-tooltip [modalRef]="modalService.modalRef"
+        htmlData='
         <h4 class="headline-4-typo headline-4-typo-color">
             Où trouver votre dernière attestation de paiement CAF ?
         </h4>
@@ -124,9 +131,7 @@
             <li>Connectez-vous à votre compte sur
                 <a class="link-modal" href="https://caf.fr">caf.fr</a> ;
             </li>
-            <li>
-                Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et mes droits”.
-            </li>
+            <li>Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et mes droits”.</li>
         </ol>
         <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “CAF”</h5>
         <ol class="body-2-typo">
@@ -134,6 +139,32 @@
             <li>Accédez à la rubrique mes attestations depuis l’écran d’accueil ;</li>
             <li>Dans la liste, sélectionnez attestation de paiement ;</li>
             <li>Vous pouvez ensuite la télécharger.</li>
-        </ol>'>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Si vous êtes affilié(e) à la MSA, connectez-vous à votre compte sur <a class="link-modal" href="https://www.msa.fr/lfp/services-en-ligne/particuliers">MSA.fr</a></h5>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereAttestationPensionInvaliditeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef"
+        htmlData='
+        <h4 class="headline-4-typo headline-4-typo-color">
+            Où trouver votre dernière attestation de paiement ?
+        </h4>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur internet :</h5>
+        <ol class="body-2-typo">
+            <li>Connectez-vous à votre compte sur
+                <a class="link-modal" href="https://ameli.fr">ameli.fr</a> ;
+            </li>
+            <li>Cochez “invalidité“ dans la section “mes paiements“ ;</li>
+            <li>Télécharger votre dernier relevé mensuel.</li>
+        </ol>
+        <h5 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “AMELI”</h5>
+        <ol class="body-2-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire ;</li>
+            <li>Cliquez sur “tous les derniers paiements“ dans la section “mes paiements“ depuis l’écran d’accueil ;</li>
+            <li>Cliquez sur le dernier paiement “pension d’invalidité“ ;</li>
+            <li>Vous pouvez ensuite télécharger votre relevé mensuel.</li>
+        </ol>
+        <span class="body-2-typo">Si vous êtes affilié(e) à un autre organisme, merci de vous rendre sur le site dédié.</span>'>
     </app-tooltip>
 </ng-template>

@@ -4,7 +4,6 @@ import { CouleursAidesDiagrammeEnum } from '@enumerations/couleurs-aides-diagram
 import { DevisesEnum } from '@enumerations/devises.enum';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { DeConnecteSimulationService } from '../demandeur-emploi-connecte/de-connecte-simulation.service';
-import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 import { DateUtileService } from '../utile/date-util.service';
 import { ScreenService } from '../utile/screen.service';
 import { SimulationService } from '../utile/simulation.service';
@@ -31,7 +30,6 @@ export class ChartUtileService {
   private static BAR_PERCENTAGE_MOBILE = 0.5;
 
   constructor(
-    private deConnecteService: DeConnecteService,
     private deConnecteSimulationService: DeConnecteSimulationService,
     private dateUtileService: DateUtileService,
     private screenService: ScreenService,
@@ -206,7 +204,7 @@ export class ChartUtileService {
     const font = new Font();
     font.weight = 'normal';
     font.size = this.screenService.isExtraSmallScreen() ? 12 : 15;
-    font.family = 'Lato';
+    font.family = 'Helvetica';
 
     return font;
   }

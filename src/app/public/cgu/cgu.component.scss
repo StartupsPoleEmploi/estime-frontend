@@ -4,11 +4,11 @@
   margin-top: 2rem;
 
   h1 {
-    color: $color-blue-10;
+    color: $color-pe-red;
   }
 
   h2 {
-    color: $color-blue-10;
+    color: $color-pe-red;
   }
 }
 
@@ -73,7 +73,7 @@
       padding: 0;
 
       span {
-        color: $color-blue-3;
+        color: $color-pe-red;
       }
 
       @media #{$extra-small-device} {

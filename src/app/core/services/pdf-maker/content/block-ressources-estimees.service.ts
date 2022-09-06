@@ -118,10 +118,6 @@ export class BlockRessourcesEstimeesService {
       this.addRowAide(body, simulation, CodesAidesEnum.PENSION_INVALIDITE, LibellesAidesEnum.PENSION_INVALIDITE, ImagesBase64Enum.PENSION_INVALIDITE);
       nbrRows++;
     }
-    if (this.aidesService.hasAide(simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE)) {
-      this.addRowAide(body, simulation, CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, LibellesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE, ImagesBase64Enum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE);
-      nbrRows++;
-    }
     return nbrRows;
   }
 
@@ -183,7 +179,7 @@ export class BlockRessourcesEstimeesService {
 
     //add cellule1
     const titleCell2 = '\nDétail des ressources estimées après reprise d’emploi pour les ' + nbrMoisSimule + ' mois à venir';
-    row.push(this.addTitleMesRessourcesEstimees(titleCell2, '#DEEEFF', nbrMoisSimule + 2, 'left'));
+    row.push(this.addTitleMesRessourcesEstimees(titleCell2, '#E6E7E8', nbrMoisSimule + 2, 'left'));
     //add cellules vides pour obtenir un nombre de colonnes = nbrMoisSimule + 2
     for (let i = 0; i < nbrMoisSimule + 1; i++) {
       row.push(new Cell());
@@ -232,7 +228,7 @@ export class BlockRessourcesEstimeesService {
     text1.style = new Style();
     text1.style.alignment = 'center';
     text1.style.bold = true;
-    text1.style.color = '#3853B9';
+    text1.style.color = '#FF5950';
     text1.style.fontSize = 10;
     contenu.push(text1);
   }
@@ -250,8 +246,8 @@ export class BlockRessourcesEstimeesService {
   private createTableElementMesRessourcesEstimees(body: Array<Array<Cell>>, nbrColumns: number): TableElement {
     const tableElement = new TableElement();
     const layoutTable = new LayoutTable();
-    layoutTable.hLineColor = '#DEEEFF';
-    layoutTable.vLineColor = '#DEEEFF';
+    layoutTable.hLineColor = '#E6E7E8';
+    layoutTable.vLineColor = '#E6E7E8';
     tableElement.layout = layoutTable;
     tableElement.style = 'tableStyle3';
     tableElement.table = new Table();
@@ -265,7 +261,7 @@ export class BlockRessourcesEstimeesService {
 
   private addHeaderTable(body: Array<Array<Cell>>, nbrMoisSimule: number, title: string): void {
     const row = new Array<Cell>();
-    row.push(this.createCellTitle(title, '#DEEEFF', nbrMoisSimule + 2));
+    row.push(this.createCellTitle(title, '#E6E7E8', nbrMoisSimule + 2));
     //on ajoute des cellules vides pour obtenir un nombre de colonnes = nbrMoisSimule + 2
     for (let i = 0; i < nbrMoisSimule + 1; i++) {
       row.push(new Cell());
@@ -276,7 +272,7 @@ export class BlockRessourcesEstimeesService {
   private createTableElement(body: Array<Array<Cell>>, nbrColumns: number, nbrRows: number): TableElement {
     const tableElement = new TableElement();
     const layoutTable = new LayoutTable();
-    layoutTable.hLineColor = '#DEEEFF';
+    layoutTable.hLineColor = '#E6E7E8';
     layoutTable.vLineColor = 'white';
     tableElement.layout = layoutTable;
     tableElement.style = 'tableStyle4';
@@ -326,7 +322,7 @@ export class BlockRessourcesEstimeesService {
     cell.fillColor = fillColor;
     cell.style = new Style();
     cell.style.background = fillColor;
-    cell.style.color = '#1B2B67';
+    cell.style.color = '#E6E7E8';
     cell.style.fontSize = 11;
     cell.text = title;
     return cell;

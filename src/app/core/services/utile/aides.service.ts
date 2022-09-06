@@ -168,15 +168,6 @@ export class AidesService {
     return montant;
   }
 
-  public getMontantAllocationSupplementaireInvalidite(demandeurEmploiConnecte: DemandeurEmploi): number {
-    let montant = 0;
-    if (demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
-      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM &&
-      demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite
-    ) montant = Number(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCPAM.allocationSupplementaireInvalidite);
-    return montant;
-  }
-
   public hasAidesObtenirSimulation(simulation: Simulation): boolean {
     let hasAidesObtenirSimulation = false;
     simulation.simulationsMensuelles.forEach(simulationMensuelle => {
@@ -255,7 +246,6 @@ export class AidesService {
       && aide.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT
       && aide.code !== CodesAidesEnum.PENSIONS_ALIMENTAIRES
       && aide.code !== CodesAidesEnum.PENSION_INVALIDITE
-      && aide.code !== CodesAidesEnum.ALLOCATION_SUPPLEMENTAIRE_INVALIDITE
       && aide.code !== CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
       && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
       && aide.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE;
