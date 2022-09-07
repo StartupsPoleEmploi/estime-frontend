@@ -1,14 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { Individu } from '@app/commun/models/individu';
-import { PeConnectPayload } from '@app/commun/models/pe-connect-payload';
-import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
-import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 

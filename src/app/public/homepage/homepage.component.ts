@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
 import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
