@@ -58,7 +58,7 @@
 
   &:hover,
   &:focus-visible {
-    background-color: $color-pe-grey-dark;
+    background-color: darken($color-pe-red, 30%);
   }
 
   div {
@@ -461,11 +461,8 @@ option {
     color: #FFFFFF;
     vertical-align: top;
     text-transform: uppercase;
-
-    @media #{$medium-device} {
-      margin-right: auto;
-      padding-left: 0.75rem;
-    }
+    margin-right: auto;
+    padding-left: 0.75rem;
   }
 
   img {
@@ -475,6 +472,7 @@ option {
     }
 
     padding-left: 0.5rem;
+    padding-right: 0.75rem;
     padding-bottom: 0.125rem;
     margin-right: 0;
 

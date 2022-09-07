@@ -34,21 +34,21 @@ body {
   display: table;
   width: 100%;
   background-color: $color-pe-grey-x-light;
-  padding-bottom: calc(#{$footer-height-desktop} + 3rem);
+  padding-bottom: #{$footer-height-desktop};
 
   @media #{$extra-small-device} {
-    padding-bottom: calc(#{$footer-height-mobile} + 3rem);
+    padding-bottom: #{$footer-height-mobile};
   }
 
   &.body-with-sticky-footer {
     @media #{$extra-small-device} {
-      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height} + 1.5rem) !important;
+      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height}) !important;
     }
   }
 }
 
 body.modal-open {
-  &:has(.side-modal) {
+  &:has(.side-modal, .full-height-modal) {
     overflow: hidden;
     position: fixed;
   }
@@ -68,6 +68,10 @@ body.modal-open {
 
   @media #{$large-device} {
     max-width: 72.5rem;
+  }
+
+  &.container-etape {
+    margin-bottom: 2rem;
   }
 }
 

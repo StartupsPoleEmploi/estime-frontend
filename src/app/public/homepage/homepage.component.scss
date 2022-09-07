@@ -141,6 +141,7 @@
       }
 
       @media #{$extra-small-device} {
+        text-align: center;
         margin-top: 2rem;
       }
 
@@ -205,7 +206,7 @@
 }
 
 .btn-sticks {
-  background-color: $color-pe-blue-light;
+  background-color: white;
   width: 100%;
   bottom: 0;
   position: fixed;

@@ -3,6 +3,7 @@
 .liste-actions {
   margin: 0;
   padding: 0.5rem;
+  padding-bottom: 0rem;
 
   @media #{$extra-small-device} {
     padding: 0rem;

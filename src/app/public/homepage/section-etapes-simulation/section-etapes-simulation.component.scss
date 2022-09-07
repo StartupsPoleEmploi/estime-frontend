@@ -57,19 +57,12 @@
     .text-etapes {
       padding-left: 0rem;
       padding-right: 0rem;
-
-      @media #{$extra-small-device} {
-        text-align: center;
-      }
+      text-align: center;
 
       h2 {
         color: $color-pe-grey-dark;
         font-weight: bold !important;
-        text-align: left !important;
-
-        @media #{$extra-small-device} {
-          text-align: center !important;
-        }
+        text-align: center !important;
       }
 
       .intro-text-etape {

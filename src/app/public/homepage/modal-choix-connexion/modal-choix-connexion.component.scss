@@ -24,6 +24,12 @@
 
     span {
       text-decoration: none;
+
+      @media #{$extra-small-device} {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+
       padding-left: 0;
       padding-right: 0.5rem;
     }
@@ -35,8 +41,13 @@
     display: inline-flex;
     border: 1px solid $color-pe-grey-dark;
 
+    &:hover {
+      background-color: darken($color-white-3, 10%);
+    }
+
     @media #{$extra-small-device} {
       min-width: 60% !important;
+      width: 100% !important;
     }
 
     span {

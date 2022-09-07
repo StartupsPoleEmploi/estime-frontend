@@ -2,7 +2,7 @@
     message="Calcul de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid" role="form">
+<div class="container-fluid container-etape" role="form">
     <div class="form-container-fluid">
         <alert type="danger" *ngIf="messageErreur">
             {{messageErreur}}
