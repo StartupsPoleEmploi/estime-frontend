@@ -39,7 +39,7 @@ export class HomepageComponent implements OnInit {
     keyboard: false,
     animated: true,
     ignoreBackdropClick: true,
-    class: 'gray half-top full-height-modal'
+    class: 'gray half-top full-height-modal not-side-modal'
   };
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class HomepageComponent implements OnInit {
     const messageErreur = this.authorizationService.getMessageErreur();
     if (messageErreur) {
       if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
-        this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg' });
+        this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg not-side-modal' });
       } else {
         this.messageErreur = messageErreur;
         if (this.messageErreur) {

@@ -20,7 +20,7 @@ export class ModalService {
 
     openModal(event: Event, template: TemplateRef<any>, isFullHeight: boolean = false) {
         event.preventDefault();
-        const modalClasses = isFullHeight ? 'gray modal-lg full-height-modal' : 'gray modal-lg';
+        const modalClasses = isFullHeight ? 'gray modal-lg full-height-modal not-side-modal' : 'gray modal-lg not-side-modal';
         this.modalRef = this.modalService.show(template,
             Object.assign({}, { class: modalClasses }));
     }

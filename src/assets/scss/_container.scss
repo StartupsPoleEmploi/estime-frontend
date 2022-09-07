@@ -48,8 +48,10 @@ body {
 }
 
 body.modal-open {
-  overflow: hidden;
-  position: fixed;
+  &:has(.side-modal) {
+    overflow: hidden;
+    position: fixed;
+  }
 }
 
 .container-fluid {

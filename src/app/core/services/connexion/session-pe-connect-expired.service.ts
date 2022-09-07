@@ -34,6 +34,7 @@ export class SessionPeConnectExpiredService {
     keyboard: false,
     animated: true,
     ignoreBackdropClick: true,
+    class: 'gray half-top full-height-modal not-side-modal'
   };
 
   public startCheckUserInactivity() {
@@ -68,7 +69,7 @@ export class SessionPeConnectExpiredService {
     let isMemeIndividu = false;
     const deConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
     const individuConnectePeConnectAuthorization = this.cookiesEstimeService.getIndividuConnectePeConnectAuthorization();
-    if(deConnecte && individuConnectePeConnectAuthorization) {
+    if (deConnecte && individuConnectePeConnectAuthorization) {
       isMemeIndividu = deConnecte.idPoleEmploi === individuConnectePeConnectAuthorization.idPoleEmploi;
     }
     return isMemeIndividu;
@@ -76,8 +77,8 @@ export class SessionPeConnectExpiredService {
 
   private traiterReconnexionMemeIndividu(): void {
     const pathRouteActivated = this.sessionStorageEstimeService.getPathRouteActivatedByUser();
-    if(pathRouteActivated !== RoutesEnum.ETAPES_SIMULATION) {
-      if(this.etapeSimulationService.isPathRouteEtapesSimulation(pathRouteActivated)) {
+    if (pathRouteActivated !== RoutesEnum.ETAPES_SIMULATION) {
+      if (this.etapeSimulationService.isPathRouteEtapesSimulation(pathRouteActivated)) {
         this.router.navigate([RoutesEnum.ETAPES_SIMULATION, pathRouteActivated]);
       } else {
         this.router.navigate([pathRouteActivated]);
