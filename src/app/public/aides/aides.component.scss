@@ -35,11 +35,11 @@
 }
 
 .card-aides {
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   margin-right: 1rem;
   margin-left: 1rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   border: unset;
 
   @media #{$extra-small-device} {
@@ -132,7 +132,7 @@
 
 .titre-autres-aides {
   @extend .titre-aides;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .leaf1,
@@ -152,4 +152,16 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+}
+
+.row-aides {
+  &>div {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .card-aides {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
 }

@@ -3,7 +3,7 @@
 <div class="container-fluid result-container-fluid container-etape" role="form">
     <div class="row">
         <div class="col">
-            <h1 class="h1-style-1 headline-1-typo">
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 5. {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
                 <button id="infobulle-resultat-simulation" class="img-interrogation-icon"
                     aria-label="Infobulle évolution de résultat" style="vertical-align: baseline;" placement="right top"
@@ -95,7 +95,7 @@
                             (click)="onClickButtonImprimerMaSimulation()"
                             (keyup)="handleKeyUpOnTelechargerSimulation($event)"
                             tag-download="clic_bouton_telecharger_ma_simulation">
-                            <img alt="" src="./assets/images/icones/download-red.svg">
+                            <img alt="" src="./assets/images/icones/download.svg">
                             <span>Télécharger</span>
                         </button>
                     </div>
@@ -127,11 +127,11 @@
         <app-actions-suite>
         </app-actions-suite>
     </div>
-    <div class="row mb-3 px-3">
+    <div class="row mb-4 px-3">
         <button class="btn-telecharger-simulation-mobile" data-testid="btn-telecharger-simulation" tabindex="0"
             (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
             tag-download="clic_bouton_telecharger_ma_simulation">
-            <img alt="" src="./assets/images/icones/download-red.svg">
+            <img alt="" src="./assets/images/icones/download.svg">
             <span>Télécharger</span>
         </button>
     </div>
@@ -161,7 +161,7 @@
 </div>
 <ng-template #modalResultatSimulationTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             Pour information, si votre situation change et que vous reprenez un emploi, vos allocations sont
             susceptibles d'évoluer.
         </p>">

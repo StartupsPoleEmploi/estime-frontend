@@ -3,7 +3,9 @@
 <div class="container-fluid container-etape" role="form">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
-            <h1 class="h1-style-1 headline-1-typo">2. {{pageTitlesEnum.MA_SITUATION}}</h1>
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
+                2. {{pageTitlesEnum.MA_SITUATION}}
+            </h1>
             <div class="text-under-h1 body-2-typo">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
             </div>
@@ -512,7 +514,7 @@
 
 <ng-template #modalSituationDemandeurTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             Ces situations ou les sommes reçues vont avoir une incidence sur le montant de vos aides ou allocations,
             c’est pourquoi il est important de les déclarer.
         </p>">
@@ -521,7 +523,7 @@
 
 <ng-template #modalSituationBeneficiaireACRETemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             L'ACRE consiste en une exonération partielle ou totale de charges sociales, dite exonération de début d'activité pour une durée de 12 mois.
         </p>">
     </app-tooltip>
@@ -529,7 +531,7 @@
 
 <ng-template #modalSituationConjointTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             Votre conjoint est la personne avec laquelle vous êtes marié.e, pacsé.e ou en concubinage.
         </p>">
     </app-tooltip>
@@ -538,10 +540,10 @@
 <ng-template #modalAucuneRessourceTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <img alt='' src='./assets/images/logos/logo-estime.svg'>
-        <h4 class='pt-3 headline-4-typo color-blue-2-typo'>
+        <h3 class='pt-3 headline-3-typo color-blue-2-typo'>
             Estime est disponible uniquement pour les ressources listées précédemment.
-        </h4>
-        <p class='body-2-typo'>
+        </h3>
+        <p class='body-1-typo'>
             Nous faisons évoluer l'outil en permanence afin de couvrir toujours plus de publics et de situations.
         </p>">
     </app-tooltip>

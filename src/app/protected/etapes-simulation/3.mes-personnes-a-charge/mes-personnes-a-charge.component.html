@@ -3,7 +3,7 @@
 <div class="container-fluid container-etape" role="form">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
-            <h1 class="h1-style-1 headline-1-typo">
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 3. {{pageTitlesEnum.MES_PERSONNES_CHARGE}}
             </h1>
             <div class="text-under-h1 body-2-typo">
@@ -27,12 +27,13 @@
                 <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                     <div class="card">
                         <div class="card-header">
-                            <em id="btn-supprimer-personne-a-charge" role="button" tabindex="0"
-                                aria-label="Supprimer personne à charge" alt="Supprimer personne à charge"
-                                class="fas fa-times-circle float-end"
+                            <button d="btn-supprimer-personne-a-charge" type="button" class="btn-close close float-end"
+                                role="button" tabindex="0" aria-label="Supprimer personne à charge"
+                                alt="Supprimer personne à charge"
                                 (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
                                 (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
-                            </em>
+                                <span aria-hidden="true" class="visually-hidden">&times;</span>
+                            </button>
                         </div>
                         <div class="card-body d-flex align-items-center">
                             <div class="row">
@@ -127,8 +128,8 @@
 
 <ng-template #modalPersonnesAChargeTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h4 class='headline-4-typo headline-4-typo-color'>Qui sont les « personnes à charge » ?</h4>
-        <p class='body-2-typo'>
+        <h3 class='headline-3-typo headline-3-typo-color'>Qui sont les « personnes à charge » ?</h3>
+        <p class='body-1-typo'>
             Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
         </p>">
     </app-tooltip>

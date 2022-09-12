@@ -70,7 +70,6 @@
   .card {
     border: 0.0625rem solid black !important;
     border-radius: .25rem !important;
-    width: 14rem;
 
     @media #{$extra-small-device} {
       max-width: 40vw !important;
@@ -95,6 +94,10 @@
 
     .col-card-body {
       margin: auto;
+
+      @media #{$extra-small-device} {
+        text-align: center;
+      }
 
       i {
         font-size: 1.5em;
@@ -135,15 +138,9 @@
   padding: 0;
 
   @media #{$extra-small-device} {
-    width: 40vw !important;
+    width: 100% !important;
     min-height: 22vh !important;
     margin-right: 1rem;
-  }
-
-  &:hover,
-  &:focus {
-    border-color: $color-black-1;
-    box-shadow: -0.0625rem 0.0625rem 0.375rem 0.125rem $color-black-3;
   }
 
   .active {
@@ -159,6 +156,7 @@
     cursor: pointer;
 
     .card-body {
+      text-align: start;
       line-height: 1;
       max-width: 12.8125rem;
       margin: 0;
@@ -191,6 +189,10 @@
     img {
       width: 1.7rem;
       margin-left: 0.8125rem;
+
+      @media #{$extra-small-device} {
+        margin-left: 0rem;
+      }
     }
   }
 }

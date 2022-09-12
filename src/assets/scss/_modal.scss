@@ -9,7 +9,10 @@
       float: right;
       @extend .button-typo;
       color: $color-pe-red !important;
+      border-color: $color-pe-red;
       margin: 0.5rem;
+      background: transparent url('../images/icones/close.svg') center/1em auto no-repeat !important;
+      opacity: 1;
     }
 
     .label-close {
@@ -80,12 +83,15 @@
 
   .modal-content {
     min-height: 100vh;
-    border: none;
   }
 
   @media #{$extra-small-device} {
     width: 100% !important;
   }
+}
+
+.modal-content {
+  border: 0px;
 }
 
 .fade {

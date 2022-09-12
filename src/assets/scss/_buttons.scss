@@ -58,7 +58,7 @@
 
   &:hover,
   &:focus-visible {
-    background-color: darken($color-pe-red, 30%);
+    background-color: $color-pe-red-darken;
   }
 
   div {
@@ -525,7 +525,6 @@ option {
 
       img {
         margin: unset;
-        padding-left: 1.5rem;
         padding-right: 0.125rem;
       }
     }

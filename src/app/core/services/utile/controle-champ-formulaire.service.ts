@@ -38,6 +38,16 @@ export class ControleChampFormulaireService {
     return patt.test(event.key) || this.isExceptKeyAuthorized(event);
   }
 
+  public focusOnFirstElement(): void {
+    const firstElement = document.querySelectorAll('.div-title-formulaire');
+    let firstElementToFocus = null;
+    firstElement.forEach(firstElement => {
+      firstElementToFocus = firstElement;
+      firstElementToFocus.focus();
+    });
+
+  }
+
   public focusOnFirstInvalidElement(): void {
     const invalidElements = document.querySelectorAll('.ng-invalid');
     if (invalidElements) {

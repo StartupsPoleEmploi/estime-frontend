@@ -26,6 +26,11 @@ footer {
 
   .desktop-row-1-footer {
     max-width: 72vw !important;
+
+    @media #{$medium-device} {
+      max-width: 72rem !important;
+    }
+
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 1rem;
@@ -182,6 +187,11 @@ footer {
 
     .row-footer-content {
       max-width: 52vw !important;
+
+      @media #{$medium-device} {
+        max-width: 72rem !important;
+      }
+
       margin-left: auto;
       margin-right: auto;
     }
@@ -390,6 +400,8 @@ footer {
       margin-top: 0.5rem;
       padding-top: 0.5rem;
       border-top: 0.0125rem solid $color-pe-grey-light;
+
+      text-align: center;
     }
   }
 }

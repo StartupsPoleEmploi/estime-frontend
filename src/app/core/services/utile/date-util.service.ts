@@ -13,12 +13,12 @@ export class DateUtileService {
     { label: "Avril", labelCourt: "Avril", value: 4 },
     { label: "Mai", labelCourt: "Mai", value: 5 },
     { label: "Juin", labelCourt: "Juin", value: 6 },
-    { label: "Juillet", labelCourt: "Juil", value: 7 },
+    { label: "Juillet", labelCourt: "Juil.", value: 7 },
     { label: "Août", labelCourt: "Août", value: 8 },
-    { label: "Septembre", labelCourt: "Sept", value: 9 },
-    { label: "Octobre", labelCourt: "Oct", value: 10 },
-    { label: "Novembre", labelCourt: "Nov", value: 11 },
-    { label: "Décembre", labelCourt: "Déc", value: 12 },
+    { label: "Septembre", labelCourt: "Sept.", value: 9 },
+    { label: "Octobre", labelCourt: "Oct.", value: 10 },
+    { label: "Novembre", labelCourt: "Nov.", value: 11 },
+    { label: "Décembre", labelCourt: "Déc.", value: 12 },
   ];
 
   MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE = 37; // 3 ans et 1 mois
@@ -126,7 +126,7 @@ export class DateUtileService {
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateToFormat
    */
-   public getLibelleDateFromDate(dateToFormat: Date): string {
+  public getLibelleDateFromDate(dateToFormat: Date): string {
     const month = dateToFormat.getMonth() + 1;
     const year = dateToFormat.getFullYear();
     const moisLabel = this.getLibelleMoisByMoisNumber(month);
@@ -142,7 +142,7 @@ export class DateUtileService {
     const month = dateToFormat.getMonth() + 1;
     const year = dateToFormat.getFullYear();
     const hours = dateToFormat.getHours();
-    const minutes = dateToFormat.getMinutes().toString().length == 1 ? `0${dateToFormat.getMinutes().toString()}`: dateToFormat.getMinutes().toString();
+    const minutes = dateToFormat.getMinutes().toString().length == 1 ? `0${dateToFormat.getMinutes().toString()}` : dateToFormat.getMinutes().toString();
     const moisLabel = this.getLibelleMoisByMoisNumber(month);
     return `${date} ${moisLabel} ${year} - ${hours}h${minutes}`;
   }
@@ -153,7 +153,7 @@ export class DateUtileService {
    */
   public getLibelleMoisCourtFromDate(dateToFormat: Date): string {
     const month = dateToFormat.getMonth() + 1;
-    const moisLabel = this.getLibelleMoisByMoisNumber(month).toUpperCase();
+    const moisLabel = this.getLibelleMoisCourtByMoisNumber(month).toUpperCase();
     return `${moisLabel}`;
   }
 
@@ -413,6 +413,16 @@ export class DateUtileService {
     this.mois.forEach(mois => {
       if (moisNumber === mois.value) {
         moisLabel = mois.label;
+      }
+    });
+    return moisLabel;
+  }
+
+  private getLibelleMoisCourtByMoisNumber(moisNumber: number): string {
+    let moisLabel = '';
+    this.mois.forEach(mois => {
+      if (moisNumber === mois.value) {
+        moisLabel = mois.labelCourt;
       }
     });
     return moisLabel;

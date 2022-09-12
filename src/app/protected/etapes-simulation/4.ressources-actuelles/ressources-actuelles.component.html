@@ -8,7 +8,7 @@
             {{messageErreur}}
         </alert>
         <div class="div-title-formulaire">
-            <h1 class="h1-style-1 headline-1-typo">
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 4. {{pageTitlesEnum.MES_RESSOURCES_ACTUELLES}}
             </h1>
             <div class="text-under-h1 body-2-typo">
@@ -161,7 +161,7 @@
                     </div>
                 </button>
             </div>
-            <div *ngIf="this.screenService.isExtraSmallScreen()" class="text-center col-12">
+            <div *ngIf="this.screenService.isExtraSmallScreen()" class="text-center col-12 mt-3">
                 <button class="btn-precedent" (click)="onClickButtonRetour()" aria-label="Retour à la page précédente"
                     data-testid="btn-personnes-charge-retour" tag-navigation="clic_bouton_retour">
                     <div>

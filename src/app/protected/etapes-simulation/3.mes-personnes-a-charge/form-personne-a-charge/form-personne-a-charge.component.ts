@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
@@ -36,12 +36,12 @@ export class FormPersonneAChargeComponent implements OnInit {
     public dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
     private deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    private elementRef: ElementRef,
     public personneUtileService: PersonneUtileService
   ) { }
 
   ngOnInit(): void {
     this.gererAffichageNouvellePersonneSituationForm();
+    this.controleChampFormulaireService.focusOnFirstElement();
   }
 
   public onSubmitNouvellePersonneAChargeForm(form: FormGroup): void {

@@ -102,6 +102,7 @@ export class RessourcesActuellesComponent implements OnInit {
     this.ressourcesConjointValidees = !this.hasConjointAvecRessourcesFinancieresInvalide();
     this.ressourcesPersonnesAChargeValidees = !this.hasPersonneAChargeAvecRessourcesFinancieresInvalide();
     this.ressourcesFoyerValidees = this.isDonneesSaisieRessourcesFinancieresFoyerValide();
+    this.controleChampFormulaireService.focusOnFirstElement();
   }
 
   private checkPersonnesAChargeToucheSeulementRSA(): boolean {

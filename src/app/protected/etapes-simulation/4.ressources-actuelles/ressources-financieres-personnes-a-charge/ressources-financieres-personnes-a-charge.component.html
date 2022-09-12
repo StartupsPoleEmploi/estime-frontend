@@ -5,7 +5,7 @@
         <div *ngFor="let personneDTO of personnesDTO">
             <div class="row pb-3">
                 <div class="col-12">
-                    <span *ngIf="!personneRecoitRSASeulement(personneDTO)" class="libelle-personne headline-4-typo">
+                    <span *ngIf="!personneRecoitRSASeulement(personneDTO)" class="libelle-personne headline-3-typo">
                         Personne {{personneDTO.index + 1}}
                         ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})
                     </span>
@@ -499,7 +499,7 @@
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             Sur votre dernière attestation de paiement CAF 👇
         </p>
         <div class='row mb-5'>
@@ -513,7 +513,7 @@
         <h3 class='headline-3-typo headline-3-typo-color'>
             Où trouver cette information ?
         </h3>
-        <p class='body-2-typo'>
+        <p class='body-1-typo'>
             Sur votre dernière attestation de paiement de pension 👇
         </p>
         <div class='row mb-5'>

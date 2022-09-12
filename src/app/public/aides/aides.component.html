@@ -1,12 +1,11 @@
-<div class="container-fluid form-container-fluid">
+<div class="container-fluid mb-3">
     <div class="row row-aides">
         <div class="col-12 align-self-center toutes-les-aides">
-            <h1 *ngIf="!isAideSelected" class="titre-aides headline-1-typo">
+            <h1 *ngIf="!isAideSelected" class="titre-aides h1-style-1 headline-1-typo">
                 {{pageTitlesEnum.AIDES}}
                 <div id="liste-aides" placement="right top" tag-action="liste-aides"></div>
             </h1>
         </div>
-
         <div class="col-12 align-self-center">
             <router-outlet class="row"></router-outlet>
         </div>
@@ -15,7 +14,6 @@
                 Les autres aides
             </h2>
         </div>
-
         <div class="col-sm-12 align-self-center">
             <div *ngIf="aideSelectedCode != codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE" class="row">
                 <div class="col-12">
@@ -32,8 +30,8 @@
                                 </div>
                             </div>
                             <div class="col-9 col-md-auto col-title">
-                                <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <h2 class="intitule-aide headline-4-typo">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
                                         {{libellesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}}
                                     </h2>
                                 </div>
@@ -53,7 +51,7 @@
                                 relais de l’allocation d’aide au retour à l’emploi (ARE), quand vos droits à
                                 l’allocation ARE se terminent.
                             </p>
-                            <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
+                            <nav aria-label=" En savoir plus sur l'allocation de solidarité spécifique">
                                 <a class="en-savoir-plus en-savoir-plus button-typo"
                                     (click)="onClickAideSavoirPlus(codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)"
                                     tag-navigation="details-en-savoir-plus-ass">
@@ -79,8 +77,8 @@
                                 </div>
                             </div>
                             <div class="col-9 col-md-auto col-title">
-                                <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <h2 class="intitule-aide headline-4-typo">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
                                         {{libellesAidesEnum.AIDE_MOBILITE}}
                                     </h2>
                                 </div>
@@ -125,8 +123,8 @@
                                 </div>
                             </div>
                             <div class="col-9 col-md-auto col-title">
-                                <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <h2 class="intitule-aide headline-4-typo">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
                                         {{libellesAidesEnum.PRIME_ACTIVITE}}
                                     </h2>
                                 </div>
@@ -172,8 +170,8 @@
                                 </div>
                             </div>
                             <div class="col-9 col-md-auto col-title">
-                                <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <h2 class="intitule-aide headline-4-typo">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
                                         {{libellesAidesEnum.AGEPI}}
                                     </h2>
                                 </div>
@@ -220,8 +218,8 @@
                                 </div>
                             </div>
                             <div class="col-9 col-md-auto col-title">
-                                <div [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
-                                    <h2 class="intitule-aide headline-4-typo">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
                                         {{libellesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}}
                                     </h2>
                                 </div>

@@ -84,7 +84,9 @@ export class MoisApresSimulationComponent implements OnInit {
     let resume = "";
     if (this.detailMensuel.details.length > 0) {
       resume = this.detailMensuel.details[0];
-      if (this.detailMensuel.details.length > 1) {
+      const threshold = this.screenService.isExtraSmallScreen() ? 75 : 80;
+      if (this.detailMensuel.details.length > 1 || resume.length >= threshold) {
+        resume = resume.substring(0, threshold - 10);
         resume += "... <span class='color-pe-red-typo pointer'>Lire la suite</span>";
       }
     }

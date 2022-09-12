@@ -215,8 +215,8 @@ input:-webkit-autofill:focus {
 
 /** end change style after autofill **/
 
-
 .card-form {
+
   border: 0;
 
   @media #{$extra-small-device} {
@@ -228,11 +228,19 @@ input:-webkit-autofill:focus {
     margin-top: 2rem;
     padding-left: 4rem;
   }
+}
+
+
+
+.card-form,
+.subcard-contrat-travail {
 
   input {
+
+    @extend .body-2-typo;
     color: $color-blue-1;
     font-size: 1em;
-    font-weight: bold;
+    // font-weight: bold;
     max-width: 6.25rem;
 
     @media #{$extra-small-device} {

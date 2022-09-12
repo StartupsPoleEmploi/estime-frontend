@@ -1,9 +1,11 @@
 <div class="card card-form-style-2">
     <div class="card-title">
         <span class="headline-3-typo color-pe-red-typo">Personne {{numeroNouvellePersonne}}</span>
-        <em tabindex="0" class="fas fa-times-circle float-end pointer" (click)="onClickButtonAnnuler()"
+        <button d="btn-supprimer-personne-a-charge" type="button" class="btn-close close float-end" aria-label="Fermer"
+            role="button" tabindex="0" alt="Supprimer personne à charge" (click)="onClickButtonAnnuler()"
             (keyup)="handleKeyUpOnButtonAnnuler($event)">
-        </em>
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
     </div>
     <div class="card-body">
         <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"

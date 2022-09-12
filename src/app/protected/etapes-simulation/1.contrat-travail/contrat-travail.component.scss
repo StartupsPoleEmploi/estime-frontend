@@ -185,3 +185,39 @@ input {
     }
   }
 }
+
+.subcard-contrat-travail {
+  padding: 0rem 1.5rem !important;
+  margin-top: 1rem;
+
+  @media #{$extra-small-device} {
+    padding: 0rem 1rem !important;
+    margin-top: 0.5rem;
+  }
+
+  border-top: 1px solid $color-pe-grey-light;
+
+  &.no-border {
+    border-top: none;
+    margin-top: 0;
+  }
+}
+
+.subcard-contrat-travail>div {
+
+  &:first-child {
+    margin-top: 1.5rem;
+
+    @media #{$extra-small-device} {
+      margin-top: 1rem;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0.5rem;
+
+    @media #{$extra-small-device} {
+      margin-top: 1rem;
+    }
+  }
+}
