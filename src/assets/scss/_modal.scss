@@ -33,12 +33,13 @@
 
     &.full-height-modal {
       @media #{$extra-small-device} {
-        height: 100%;
+        overflow-y: auto !important;
+        height: unset !important;
         top: 0;
         margin: 0;
 
         .modal-content {
-          height: 100%;
+          min-height: 100vh;
           border-radius: unset;
         }
       }

@@ -57,7 +57,7 @@
                     <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
                         aria-label="Infobulle salaire journalier référence ARE"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
+                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -102,7 +102,7 @@
                     <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
                         aria-label="Infobulle nombre jours restants ARE"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
+                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -241,7 +241,7 @@
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate)">
+                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -717,28 +717,28 @@
         <h5 class='headline-5-typo headline-5-typo-color'>
             Sur Internet :
         </h5>
-        <ol class='body-1-typo'>
-            <li>
+        <ol>
+            <li class='body-1-typo'>
                 Rendez-vous votre espace personnel Pôle emploi, dans la rubrique <i>'Mes courriers reçus' </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
             </li>
-            <li>
+            <li class='body-1-typo'>
                 Dans la liste des courriers reçus vous trouverez vos notifications ARE
             </li>
-            <li>
+            <li class='body-1-typo'>
                 Choisissez le relevé de situation le plus récent et cliquez sur <i>'Télécharger'</i>
             </li>
         </ol>
         <h5 class='headline-5-typo headline-5-typo-color'>
             Sur l'application mobile <i>'Mon Espace'</i> de Pôle emploi :
         </h5>
-        <ol class='body-1-typo'>
-            <li>
+        <ol>
+            <li class='body-1-typo'>
                 Ouvrez l'application et connectez-vous si nécessaire
             </li>
-            <li>
+            <li class='body-1-typo'>
                 Accédez à vos courriers depuis la barre de menu en bas de l'écran
             </li>
-            <li>
+            <li class='body-1-typo'>
                 Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
             </li>
         </ol>">

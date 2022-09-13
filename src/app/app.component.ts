@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   isLazyModulesLoading: boolean;
   isDisplayFilAriane: boolean;
   subscriptionRouteNavigationEndObservable: Subscription;
-  subscriptionPopstateEventObservable: Subscription;
   subscriptionTrafficSourceObservable: Subscription;
   private static TRAFFIC_SOURCE: string = 'at_campaign';
 
@@ -26,7 +25,6 @@ export class AppComponent implements OnInit {
     private sessionStorageEstimeService: SessionStorageEstimeService,
     private route: ActivatedRoute
   ) {
-    this.subscribePopstateEventObservable();
     this.subscribeRouteNavigationEndObservable();
     this.subscribeTrafficSourceObservable();
   }
@@ -43,7 +41,6 @@ export class AppComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
-    this.subscriptionPopstateEventObservable.unsubscribe();
   }
 
   private subscribeRouteNavigationEndObservable(): void {
@@ -57,24 +54,6 @@ export class AppComponent implements OnInit {
           this.renderer.addClass(document.body, 'body-with-sticky-footer');
         } else {
           this.renderer.removeClass(document.body, 'body-with-sticky-footer');
-        }
-      }
-    });
-  }
-
-  /** Subscription
-   *
-   * Permet d'observer les évenements de router et notamment les événements type "popstate" qui concernent les retours en arrière du navigateur
-   * Si le retour en arrière pointe vers la route /signin-callback, on le redirige vers la homepage
-   *
-   * Permet de régler le soucis de l'appel à l'authentification côté backend au retour à l'arrière générant des erreurs 400
-   * en évitant d'utiliser deux fois le même code de récupération d'access_token
-   */
-  private subscribePopstateEventObservable(): void {
-    this.subscriptionPopstateEventObservable = this.router.events.subscribe(routerEvent => {
-      if (routerEvent instanceof NavigationStart && routerEvent.navigationTrigger === "popstate") {
-        if (routerEvent.url.split('?')[0] == `/${RoutesEnum.SIGNIN_CALLBACK}`) {
-          this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
         }
       }
     });

@@ -1,8 +1,9 @@
 <section id="section-etapes">
     <div class="container-fluid">
-        <h1 id="titre-section-etapes" class="text-center headline-2-typo">
+        <h2 id="titre-section-etapes" class="text-center"
+            [ngClass]="screenService.isExtraSmallScreen()?'headline-3-typo':'headline-2-typo'">
             Comment ça marche ?
-        </h1>
+        </h2>
         <div class="row row-etape">
             <div class="col-12 col-md-3">
                 <div class="numero-etape-container">

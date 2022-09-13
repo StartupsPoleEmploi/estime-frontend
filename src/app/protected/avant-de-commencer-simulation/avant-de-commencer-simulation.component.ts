@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -9,18 +9,20 @@ import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 import { RoutesEnum } from '@enumerations/routes.enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
   templateUrl: './avant-de-commencer-simulation.component.html',
   styleUrls: ['./avant-de-commencer-simulation.component.scss']
 })
-export class AvantDeCommencerSimulationComponent {
+export class AvantDeCommencerSimulationComponent implements OnDestroy {
 
   isPageLoadingDisplay = false;
   messageErreur: string;
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  subscriptionPopstateEventObservable: Subscription;
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -28,7 +30,13 @@ export class AvantDeCommencerSimulationComponent {
     private router: Router,
     public screenService: ScreenService,
     public modalService: ModalService
-  ) { }
+  ) {
+    this.subscribePopstateEventObservable();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionPopstateEventObservable.unsubscribe();
+  }
 
   public onClickButtonJeContinue(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
@@ -52,5 +60,23 @@ export class AvantDeCommencerSimulationComponent {
   private traiterErreurCreerDemandeurEmploi(_error: HttpErrorResponse): void {
     this.isPageLoadingDisplay = false;
     this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
+  }
+
+  /** Subscription
+   *
+   * Permet d'observer les évenements de router et notamment les événements type "popstate" qui concernent les retours en arrière du navigateur
+   * Si le retour en arrière pointe vers la route /signin-callback, on le redirige vers la homepage
+   *
+   * Permet de régler le soucis de l'appel à l'authentification côté backend au retour à l'arrière générant des erreurs 400
+   * en évitant d'utiliser deux fois le même code de récupération d'access_token
+   */
+  private subscribePopstateEventObservable(): void {
+    this.subscriptionPopstateEventObservable = this.router.events.subscribe(routerEvent => {
+      if (routerEvent instanceof NavigationStart && routerEvent.navigationTrigger === "popstate") {
+        if (routerEvent.url.split('?')[0] == `/${RoutesEnum.SIGNIN_CALLBACK}`) {
+          this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+        }
+      }
+    });
   }
 }

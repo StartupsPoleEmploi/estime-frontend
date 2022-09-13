@@ -1,8 +1,9 @@
 <section id="section-aides">
     <div class="container-fluid">
-        <h1 id="titre-section-aides" class="text-center headline-2-typo">
+        <h2 id="titre-section-aides" class="text-center"
+            [ngClass]="screenService.isExtraSmallScreen()?'headline-3-typo':'headline-2-typo'">
             Tout savoir sur les aides et comment en bénéficier
-        </h1>
+        </h2>
         <div class="row">
             <div class="col-12 col-md-4">
                 <div class="card card-aides"

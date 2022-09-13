@@ -1,6 +1,6 @@
 <section id="section-temoignages">
   <div class="container-fluid">
-    <h1 class="headline-2-typo">Nos utilisateurs approuvent !</h1>
+    <h2 class="headline-2-typo">Nos utilisateurs approuvent !</h2>
     <app-temoignages-desktop *ngIf="!this.screenService.isExtraSmallScreen()" [temoignages]="temoignages">
     </app-temoignages-desktop>
     <app-temoignages-mobile *ngIf="this.screenService.isExtraSmallScreen()" [temoignages]="temoignages">
