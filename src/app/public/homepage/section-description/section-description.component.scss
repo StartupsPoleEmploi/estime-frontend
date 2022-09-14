@@ -1,9 +1,17 @@
 @import "../../../../assets/scss/variables";
 
 #section-description {
-  background-color: $color-pe-grey-x-light;
+  background-color: white;
+
   padding-bottom: 2.5rem;
-  padding-top: 2.5rem;
+
+  .container-fluid {
+    background-color: $color-pe-teal;
+
+    @media #{$medium-device} {
+      border-radius: 1.5rem;
+    }
+  }
 
   h1,
   p {
@@ -12,16 +20,18 @@
   }
 
   .row {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 0.75rem;
+    padding-bottom: .75rem;
 
     #img-description {
-      padding-right: 2rem;
-      margin-top: 0.5rem;
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+      text-align: center;
     }
 
     #img-description-small-screen {
-      padding-top: 4rem;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -33,20 +43,17 @@
 
     #text-description {
       padding-left: 3rem;
+      margin-top: auto;
+      margin-bottom: auto;
 
       @media #{$extra-small-device} {
         padding-left: 1rem;
       }
 
-      #titre-text-description {
-        color: $color-pe-grey-dark;
-
-      }
-
-      .body-text-description {
-        color: $color-pe-grey-dark;
+      h4,
+      span {
+        color: white;
         text-align: start;
-        margin-top: 1rem;
       }
     }
   }
