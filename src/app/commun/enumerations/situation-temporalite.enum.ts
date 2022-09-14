@@ -22,9 +22,11 @@ export enum SituationTemporaliteEnum {
     ASS_2_MOIS_CUMUL = "Vous percevez l'ASS avec votre salaire pendant 1 mois encore",
     FIN_ASS = "Vous ne percevez plus l'ASS car le droit au cumul avec votre salaire est interrompu",
     FIN_ASS_BENEFICIAIRE_ACRE = "Vous ne percevez plus l'ASS car le droit au cumul avec votre salaire est interrompu",
+    ELIGIBLE_AL = "Vous êtes éligible à l'aide au logement",
     AL_CHANGEMENT_SITUATION = "Votre aide au logement est recalculée suite à votre changement de situation",
     AL_DECLA_TRI = "Votre aide au logement est recalculée suite à votre déclaration trimestrielle",
     FIN_AL = "Vous n'êtes plus éligible à l'aide au logement",
+    PRIME_ACTIVITE_ANTICIPE = "Votre demande de prime d'activité sera à effectuer au cours du mois ",
     PRIME_ACTIVITE = "Vous êtes éligible à la prime d'activité",
     PRIME_ACTIVITE_RECALCUL = "Le montant de votre prime d'activité est recalculé",
     SALAIRE = "Votre nouveau salaire est pris en compte dans la simulation pour la durée du contrat"

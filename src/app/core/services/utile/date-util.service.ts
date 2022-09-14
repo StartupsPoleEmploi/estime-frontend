@@ -159,6 +159,16 @@ export class DateUtileService {
 
   /**
    * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
+   * @param dateToFormat
+   */
+  public getLibelleMoisFromDate(dateToFormat: Date): string {
+    const month = dateToFormat.getMonth() + 1;
+    const moisLabel = this.getLibelleMoisByMoisNumber(month).toLowerCase();
+    return `${moisLabel}`;
+  }
+
+  /**
+   * Retourne un string au format "mois en lettre + année (ex : janvier 2020)"
    * @param dateSimulation
    */
   public getLibelleDateStringFormat(dateSimulation: string): string {
