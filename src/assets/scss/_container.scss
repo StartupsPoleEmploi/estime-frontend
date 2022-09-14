@@ -79,3 +79,32 @@ body.modal-open {
   align-items: center !important;
   display: flex !important;
 }
+
+ol.no_number {
+  list-style-type: none;
+  padding-left: 0rem !important;
+}
+
+ol {
+  list-style: none;
+  counter-reset: item;
+}
+
+li {
+  counter-increment: item;
+  margin-bottom: 0.6125rem;
+}
+
+li.leaf1:before,
+li.leaf2:before,
+li.leaf3:before,
+li.leaf4:before {
+  margin-right: 0.6125rem;
+  content: counter(item);
+  background: $color-pe-red-light;
+  border-radius: 100%;
+  color: $color-pe-red;
+  width: 1.5em;
+  text-align: center;
+  display: inline-block;
+}

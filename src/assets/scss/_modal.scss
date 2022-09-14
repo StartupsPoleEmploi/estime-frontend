@@ -89,6 +89,14 @@
   @media #{$extra-small-device} {
     width: 100% !important;
   }
+
+  &.modal-aide {
+
+    .modal-content {
+      background-color: $color-pe-grey-x-light;
+    }
+
+  }
 }
 
 .modal-content {

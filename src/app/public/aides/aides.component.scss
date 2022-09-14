@@ -135,25 +135,6 @@
   margin-top: 2rem;
 }
 
-.leaf1,
-.leaf2,
-.leaf3,
-.leaf4 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  gap: 1rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  background: $color-pe-red-light;
-  border-radius: 4.875rem;
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-}
-
 .row-aides {
   &>div {
     padding-left: 0.5rem;

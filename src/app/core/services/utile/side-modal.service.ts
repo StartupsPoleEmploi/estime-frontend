@@ -22,7 +22,7 @@ export class SideModalService {
     }
 
     openSideModalAide(template: TemplateRef<any>) {
-        const modalClasses = 'gray modal-lg full-height-modal side-modal';
+        const modalClasses = 'gray modal-lg full-height-modal side-modal modal-aide';
         this.modalRefAide = this.modalService.show(template,
             Object.assign({}, { class: modalClasses }));
     }

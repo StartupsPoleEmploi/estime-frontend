@@ -79,9 +79,6 @@ export class RessourcesFinancieresService {
       && ressourceFinanciere.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT
       && ressourceFinanciere.code !== CodesAidesEnum.PENSIONS_ALIMENTAIRES
       && ressourceFinanciere.code !== CodesAidesEnum.PENSION_INVALIDITE
-      && ressourceFinanciere.code !== CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
-      && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
-      && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
       && ressourceFinanciere.code !== CodesAidesEnum.SALAIRE
       && ressourceFinanciere.code !== CodesAidesEnum.IMMOBILIER
       && ressourceFinanciere.code !== CodesAidesEnum.MICRO_ENTREPRENEUR

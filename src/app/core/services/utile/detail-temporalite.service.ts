@@ -226,15 +226,20 @@ export class DetailTemporaliteService {
   }
 
   private handleChangementAAH(simulationMensuelle: SimulationMensuelle, indexMois: number) {
-    // Si le montant de l'AAH a changé par rapport au mois précédent
-    if (this.checkForChangeInSituation(this.situation.aah, this.aidesService.getMontantAAH(simulationMensuelle))) {
-      // Si le demandeur a toujours de l'AAH
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AAH_PARTIEL);
-      }
-      // Sinon le demandeur n'a plus le droit a de l'AAH
-      else {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_AAH);
+    // Si on est au premier mois
+    if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AAH);
+    } else {
+      // Si le montant de l'AAH a changé par rapport au mois précédent
+      if (this.checkForChangeInSituation(this.situation.aah, this.aidesService.getMontantAAH(simulationMensuelle))) {
+        // Si le demandeur a toujours de l'AAH
+        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AAH_PARTIEL);
+        }
+        // Sinon le demandeur n'a plus le droit a de l'AAH
+        else {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_AAH);
+        }
       }
     }
   }

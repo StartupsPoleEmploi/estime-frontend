@@ -12,6 +12,7 @@ export enum SituationTemporaliteEnum {
     COMPLEMENT_ARE = "Vous percevez un complément ARE en plus de votre salaire",
     FIN_COMPLEMENT_ARE = "Vous ne percevez plus de complément ARE car vos droits sont épuisés à ce jour",
     COMPLEMENT_ARE_PARTIEL = "Vous percevez un complément ARE partiel à hauteur de vos droits restants",
+    AAH = "Vous cumulez votre AAH avec votre salaire pour les 6 premiers mois de votre activité",
     AAH_PARTIEL = "Le montant de votre AAH est réduit car vous avez cumulé 6 mois de salaire",
     FIN_AAH = "Vous ne percevez plus d'AAH car vos droits sont épuisés à ce jour",
     ASS_BENEFICIAIRE_ACRE = "Vous pouvez cumuler votre ASS avec les revenus de votre activité non salariée pendant 12 mois à compter de la date de création ou de reprise de l’entreprise",

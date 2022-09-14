@@ -250,6 +250,53 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="aideSelectedCode != codesAidesEnum.AIDES_LOGEMENT" class="row">
+                <div class="col-12">
+                    <div class="card card-aides"
+                        (click)="screenService.isExtraSmallScreen() && onClickAideSavoirPlus(codesAidesEnum.AIDES_LOGEMENT)">
+                        <div class="card-title-aides row">
+                            <div class="col-2 col-md-auto col-icon">
+                                <div class="mt-auto mb-auto code-ressource"
+                                    [ngClass]="[codesAidesEnum.AIDES_LOGEMENT.toLowerCase()]">
+                                    <div>
+                                        <span class="overline-typo">{{codesAidesEnum.AIDES_LOGEMENT}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9 col-md-auto col-title">
+                                <div class="ps-2" [ngClass]="{'row': !this.screenService.isExtraSmallScreen()}">
+                                    <h2 class="intitule-aide headline-4-typo text-start">
+                                        {{libellesAidesEnum.AIDES_LOGEMENT}}
+                                    </h2>
+                                </div>
+                                <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
+                                    <div class="rectangle al"></div>
+                                </div>
+                            </div>
+                            <div class="col-1 col-chevron" *ngIf="this.screenService.isExtraSmallScreen()">
+                                <span class="span-chevron">
+                                    <em alt="" class="fas fa-chevron-right"></em>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngIf="!this.screenService.isExtraSmallScreen()" class="description-aide-container">
+                            <p class="card-text texte-aide body-1-typo">
+                                L'aide au logement vous aide payer le loyer de votre résidence principale si vos
+                                ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des
+                                ressources de votre foyer.
+                            </p>
+                            <nav aria-label="En savoir plus sur l'allocation de solidarité spécifique">
+                                <a class="en-savoir-plus en-savoir-plus button-typo"
+                                    (click)="onClickAideSavoirPlus(codesAidesEnum.AIDES_LOGEMENT)"
+                                    tag-navigation="details-en-savoir-plus-aah">
+                                    En savoir plus
+                                    <img alt="" src="./assets/images/icones/fleche-droite-red.svg">
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

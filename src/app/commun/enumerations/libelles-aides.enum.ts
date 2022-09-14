@@ -1,6 +1,7 @@
 export enum LibellesAidesEnum {
   AGEPI = 'Aide à la Garde d\'Enfants pour Parent Isolé',
   AIDE_MOBILITE = 'Aide à la mobilité',
+  AIDES_LOGEMENT = 'Aides au Logement',
   AIDE_PERSONNALISEE_LOGEMENT = 'Aide Personnalisée au Logement',
   ALLOCATION_ADULTES_HANDICAPES = 'Allocation aux Adultes Handicapés',
   ALLOCATION_LOGEMENT_FAMILIALE = 'Allocation de Logement Familial',
