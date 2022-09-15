@@ -16,7 +16,7 @@
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
             </div>
         </div>
-        <div class="card mt-4">
+        <div class="card mt-4 pb-2">
             <div class="subcard-contrat-travail no-border">
                 <div class="row pb-3">
                     <div class="col-md-12">
@@ -461,7 +461,39 @@
                                 </app-message-info>
                             </div>
                         </div>
-                        <div>
+                        <div *ngIf="hasOffreEmploiOui">
+                            <div class="row flex-column pb-3">
+                                <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
+                                    * Distance entre votre domicile et votre lieu de travail
+                                    <button id="infobulle-contrat-travail-distance-travail"
+                                        aria-label="Infobulle calcul de distance domicile / travail" tabindex="0"
+                                        class="img-interrogation-icon" placement="right"
+                                        tag-action="clic_infobulle_calcul_distance_domicile_travail"
+                                        (click)="modalService.openModal($event, modalDistanceTravailTemplate, true)"></button>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail"
+                                        data-testid="input-distance-domicile-lieu-travail" type="text"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        min="0" maxlength="4" class="form-control d-inline" placeholder="Distance"
+                                        [(ngModel)]="futurTravail.distanceKmDomicileTravail" required
+                                        inputmode="numeric" #distanceDomicileLieuTravail="ngModel">
+                                    <span class="text-side-input d-inline body-2-typo">km</span>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <span class="error-input-message"
+                                        *ngIf="(isFuturTravailFormSubmitted || distanceDomicileLieuTravail.touched)  && distanceDomicileLieuTravail.errors?.required">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div *ngIf="hasOffreEmploiNon">
                             <div class="row flex-column pb-3">
                                 <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
                                     * Distance envisagée entre votre domicile et lieu de travail
