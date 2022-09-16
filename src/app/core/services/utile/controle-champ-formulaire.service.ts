@@ -39,9 +39,9 @@ export class ControleChampFormulaireService {
   }
 
   public focusOnFirstElement(): void {
-    const firstElement = document.querySelectorAll('.div-title-formulaire');
+    const firstElements = document.querySelectorAll('.div-title-formulaire');
     let firstElementToFocus = null;
-    firstElement.forEach(firstElement => {
+    firstElements.forEach(firstElement => {
       firstElementToFocus = firstElement;
       firstElementToFocus.focus();
     });
