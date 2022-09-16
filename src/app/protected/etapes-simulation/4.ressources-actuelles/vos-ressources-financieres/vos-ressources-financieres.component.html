@@ -50,6 +50,20 @@
                 </div>
             </div>
         </div>
+        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo">
+                    * Date de votre ouverture de droits à l'ASS
+                </label>
+            </div>
+            <div class="row pb-3">
+                <div class="col">
+                    <app-date-inputs [dateSaisie]="dateDernierOuvertureDroitASS"
+                        [isFormSubmitted]="isRessourcesFinancieresFormSubmitted">
+                    </app-date-inputs>
+                </div>
+            </div>
+        </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">

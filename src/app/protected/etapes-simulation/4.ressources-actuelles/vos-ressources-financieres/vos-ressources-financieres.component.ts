@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
@@ -17,6 +17,7 @@ import { SituationFamiliale } from '@models/situation-familiale';
 import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
+import { DateDecomposee } from '@app/commun/models/date-decomposee';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -25,6 +26,7 @@ import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emplo
 })
 export class VosRessourcesFinancieresComponent implements OnInit {
 
+  dateDernierOuvertureDroitASS: DateDecomposee;
 
   SEUIL_DEGRESSIVITE_ARE = 140;
 
@@ -42,6 +44,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
 
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
+  @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
+  @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
+
 
   constructor(
     private dateUtileService: DateUtileService,
@@ -61,6 +66,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   ngOnInit(): void {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = demandeurEmploiConnecte.beneficiaireAides;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
+      this.dateDernierOuvertureDroitASS = this.dateUtileService.getDateDecomposeeFromStringDate(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit, "date derniere ouverture droit ASS", "DateDerniereOuvertureDroitASS");
+    }
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireAAH()) {
       this.initOptionsProchaineDeclarationTrimestrielle();
     }
@@ -215,6 +223,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
+      this.checkAndSaveDateDernierOuvertureDroitASS();
+    }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
       this.validationVosRessourcesEventEmitter.emit();
@@ -223,9 +234,41 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
+  private checkAndSaveDateDernierOuvertureDroitASS(): void {
+    if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateDernierOuvertureDroitASS)) {
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.dateDerniereOuvertureDroit = this.dateUtileService.getStringDateFromDateDecomposee(this.dateDernierOuvertureDroitASS);
+    }
+  }
+
   public isTauxDegressiviteAreSelectionne(): boolean {
     return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null);
   }
+
+  /*** gestion évènement dateDernierOuvertureDroitASS */
+
+  public onChangeOrKeyUpDateDerniereOuvertureDroitASSJour(event): void {
+    event.stopPropagation();
+    const value = this.dateDernierOuvertureDroitASS.jour;
+    if (value && value.length === 2) {
+      this.moisDateDerniereOuvertureDroitASSInput.nativeElement.focus();
+    }
+    this.dateUtileService.checkFormatJour(this.dateDernierOuvertureDroitASS);
+  }
+
+  public onChangeOrKeyUpDateDerniereOuvertureDroitASSMois(event): void {
+    event.stopPropagation();
+    const value = this.dateDernierOuvertureDroitASS.mois;
+    if (value && value.length === 2) {
+      this.anneeDateDerniereOuvertureDroitASSInput.nativeElement.focus();
+    }
+    this.dateUtileService.checkFormatMois(this.dateDernierOuvertureDroitASS);
+  }
+
+  public onChangeOrKeyUpDateDerniereOuvertureDroitASSAnnee(event): void {
+    event.stopPropagation();
+    this.dateUtileService.checkFormatAnnee(this.dateDernierOuvertureDroitASS);
+  }
+
 
   private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
     let isValide = form.valid;

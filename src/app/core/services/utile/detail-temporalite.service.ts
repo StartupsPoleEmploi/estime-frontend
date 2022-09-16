@@ -246,22 +246,18 @@ export class DetailTemporaliteService {
     // Si on est au premier mois
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RELIQUAT_ARE);
-
-    } else if (indexMois == 1 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
-      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
+    } else if (indexMois == 1) {
+      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
+      } else {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.NON_ELIGIBLE_COMPLEMENT_ARE);
+      }
     }
     // Sinon si on est à n'importe quel autre mois
     else {
       // Si le montant de l'ARE a changé par rapport au mois précédent
-      if (this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
-        // Si le demandeur a toujours de l'ARE
-        if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
-          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE_PARTIEL);
-        }
-        // Sinon le demandeur n'a plus le droit a de l'ARE
-        else {
-          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_COMPLEMENT_ARE);
-        }
+      if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
+        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_COMPLEMENT_ARE);
       }
     }
   }

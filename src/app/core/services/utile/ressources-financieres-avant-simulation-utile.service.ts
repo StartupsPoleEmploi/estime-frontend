@@ -83,6 +83,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     const allocationASS = new AllocationASS();
     allocationASS.allocationJournaliereNet = null;
     allocationASS.allocationMensuelleNet = null;
+    allocationASS.dateDerniereOuvertureDroit = null;
     return allocationASS;
   }
 
