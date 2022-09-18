@@ -2,7 +2,7 @@
 <app-fil-etapes-mobile *ngIf=" screenService.isExtraSmallScreen() && !isModificationCriteres">
 </app-fil-etapes-mobile>
 <div class="container-fluid container-etape" role="form">
-    <div class="form-container-fluid">
+    <div class="form-container-fluid" [ngClass]="isModificationCriteres?'modification-criteres-container':''">
         <div class="div-title-formulaire">
             <h1 *ngIf="!isModificationCriteres" class="h1-style-1"
                 [ngClass]="screenService.isExtraSmallScreen()?'headline-2-typo':'headline-1-typo'">
