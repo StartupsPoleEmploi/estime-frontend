@@ -42,13 +42,13 @@ export class SessionPeConnectExpiredService {
     //appelé quand la session utilisateur PE Connect a expirée
     this.subscriptionStartWatchingObservable = this.bnNgIdleService.startWatching(individuConnectePeConnectAuthorization.peConnectAuthorization.expireIn).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
-        this.openModal();
+        this.openModalOnEvent();
         this.bnNgIdleService.stopTimer();
       }
     });
   }
 
-  public openModal(): void {
+  public openModalOnEvent(): void {
     this.bsModalService.show(ModalSessionExpiredComponent, this.config);
   }
 

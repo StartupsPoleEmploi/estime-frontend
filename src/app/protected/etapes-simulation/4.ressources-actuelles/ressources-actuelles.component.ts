@@ -20,6 +20,7 @@ import { InformationsPersonnelles } from '@app/commun/models/informations-person
 import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles';
 import { Simulation } from '@app/commun/models/simulation';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
+import { ModalService } from '@app/core/services/utile/modal.service';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -43,6 +44,9 @@ export class RessourcesActuellesComponent implements OnInit {
   //appel service http : gestion loading et erreur
   isPageLoadingDisplay = false;
   messageErreur: string;
+
+  //gestion de la pension d'invalidité et des salaires
+  isSimulationImpossiblePensionInvaliditeEtSalaire = false;
 
   ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   informationsPersonnelles: InformationsPersonnelles;
@@ -71,6 +75,7 @@ export class RessourcesActuellesComponent implements OnInit {
   @ViewChild(RessourcesFinancieresFoyerComponent) ressourcesFinancieresFoyerComponent: RessourcesFinancieresFoyerComponent;
   @ViewChild(RessourcesFinancieresPersonnesAChargeComponent) ressourcesFinancieresPersonnesAChargeComponent: RessourcesFinancieresPersonnesAChargeComponent;
   @ViewChild(VosRessourcesFinancieresComponent) vosRessourcesFinancieresComponent: VosRessourcesFinancieresComponent;
+  @ViewChild('modalPensionInvaliditeEtSalaires') modalPensionInvaliditeEtSalaires;
 
   constructor(
     private deConnecteService: DeConnecteService,
@@ -80,6 +85,7 @@ export class RessourcesActuellesComponent implements OnInit {
     private estimeApiService: EstimeApiService,
     private router: Router,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
+    private modalService: ModalService,
     public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService,
   ) {
@@ -98,6 +104,7 @@ export class RessourcesActuellesComponent implements OnInit {
     } else {
       this.conjointRSA = false;
     }
+    this.isSimulationImpossiblePensionInvaliditeEtSalaire = false;
     this.vosRessourcesValidees = this.isDonneesSaisieVosRessourcesFinancieresAvantSimulationValide();
     this.ressourcesConjointValidees = !this.hasConjointAvecRessourcesFinancieresInvalide();
     this.ressourcesPersonnesAChargeValidees = !this.hasPersonneAChargeAvecRessourcesFinancieresInvalide();
@@ -168,10 +175,17 @@ export class RessourcesActuellesComponent implements OnInit {
     if (this.isSaisieFormulairesValide()) {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-      this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).subscribe({
-        next: this.traiterRetourSimulerMesAides.bind(this),
-        error: this.traiterErreurSimulerMesAides.bind(this)
-      });
+      if (!this.deConnecteRessourcesFinancieresService.hasPensionInvaliditeAvecSalaireAvantSimulation()) {
+        this.isSimulationImpossiblePensionInvaliditeEtSalaire = false;
+        this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).subscribe({
+          next: this.traiterRetourSimulerMesAides.bind(this),
+          error: this.traiterErreurSimulerMesAides.bind(this)
+        });
+      } else {
+        this.isPageLoadingDisplay = false;
+        this.modalService.openModal(this.modalPensionInvaliditeEtSalaires);
+        // this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE_PENSION_INVALIDITE_ET_SALAIRES;
+      }
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }

@@ -166,7 +166,7 @@ export class MaSituationComponent implements OnInit {
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     this.checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      if (this.isAllocationPeOuCafSelectionnee()) {
+      if (this.isAllocationDEntreeSelectionnee()) {
         this.getCodeInseeFromCodePostal(this.informationsPersonnelles.logement.coordonnees.codePostal);
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
@@ -194,11 +194,12 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  public isAllocationPeOuCafSelectionnee(): boolean {
+  public isAllocationDEntreeSelectionnee(): boolean {
     return (this.beneficiaireAides.beneficiaireASS
       || this.beneficiaireAides.beneficiaireRSA
       || this.beneficiaireAides.beneficiaireAAH
-      || this.beneficiaireAides.beneficiaireARE);
+      || this.beneficiaireAides.beneficiaireARE
+      || this.beneficiaireAides.beneficiairePensionInvalidite);
   }
 
   public isConcerneACRE(): boolean {

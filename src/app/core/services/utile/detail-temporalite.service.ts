@@ -27,7 +27,8 @@ export class DetailTemporaliteService {
     ppa: 0,
     apl: 0,
     als: 0,
-    alf: 0
+    alf: 0,
+    pi: 0
   }
 
   constructor(
@@ -79,10 +80,11 @@ export class DetailTemporaliteService {
     if (this.demandeurEmploi != null && this.demandeurEmploi.ressourcesFinancieresAvantSimulation != null) {
       this.initSituationAidesCAF();
       this.initSituationAidesPoleEmploi();
+      this.initSituationAidesCPAM();
     }
   }
 
-  private initSituationAidesCAF() {
+  private initSituationAidesCAF(): void {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH != null) {
         this.situation.aah = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH);
@@ -94,7 +96,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private initSituationAidesLogement() {
+  private initSituationAidesLogement(): void {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement != null) {
         this.situation.apl = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement.aidePersonnaliseeLogement.moisNMoins1);
@@ -108,7 +110,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private initSituationAidesPoleEmploi() {
+  private initSituationAidesPoleEmploi(): void {
     if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null) {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null) {
         this.situation.are = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
@@ -119,7 +121,13 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleMois(simulationMensuelle: SimulationMensuelle, indexMois) {
+  private initSituationAidesCPAM(): void {
+    if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM != null) {
+      this.situation.pi = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite);
+    }
+  }
+
+  private handleMois(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     this.handleChangementSalaire(indexMois);
     this.handleChangementAGEPIEtAideMob(simulationMensuelle, indexMois);
     this.handleBeneficiaireACRE(simulationMensuelle, indexMois);
@@ -129,15 +137,16 @@ export class DetailTemporaliteService {
     this.handleChangementARE(simulationMensuelle, indexMois);
     this.handleChangementAL(simulationMensuelle, indexMois);
     this.handleChangementPPA(simulationMensuelle, indexMois);
+    this.handleChangementPI(simulationMensuelle, indexMois);
   }
 
-  private handleChangementSalaire(indexMois) {
+  private handleChangementSalaire(indexMois: number): void {
     if (indexMois == 0) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.SALAIRE);
     }
   }
 
-  private handleChangementAGEPIEtAideMob(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementAGEPIEtAideMob(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AGEPI) || this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_MOBILITE)) {
       // Si uniquement AGEPI
       if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AGEPI)) {
@@ -154,7 +163,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleChangementASS(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementASS(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     if (!this.deConnecteInfosPersonellesService.isBeneficiaireACRE()) {
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
         // Si on est au premier mois
@@ -186,7 +195,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleBeneficiaireACRE(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleBeneficiaireACRE(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     if (this.deConnecteInfosPersonellesService.isBeneficiaireACRE()) {
       if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_BENEFICIAIRE_ACRE);
@@ -196,7 +205,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleChangementRSA(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementRSA(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si le demandeur reçoit du RSA le premier mois on lui indique qu'il peut le cumuler avec un salaire
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.RSA)) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RSA);
@@ -223,7 +232,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleChangementAAH(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementAAH(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si on est au premier mois
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES)) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AAH);
@@ -242,7 +251,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleChangementARE(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementARE(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si on est au premier mois
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RELIQUAT_ARE);
@@ -254,30 +263,26 @@ export class DetailTemporaliteService {
       }
     }
     // Sinon si on est à n'importe quel autre mois
-    else {
-      // Si le montant de l'ARE a changé par rapport au mois précédent
-      if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
-        this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_COMPLEMENT_ARE);
-      }
+    else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_COMPLEMENT_ARE);
     }
   }
 
-  private handleChangementAL(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementAL(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si le montant de l'aide au logement a changé par rapport au mois précédent
     if (this.checkForChangeInSituation(this.situation.apl, this.aidesService.getMontantAidePersonnaliseeLogement(simulationMensuelle)) || this.checkForChangeInSituation(this.situation.alf, this.aidesService.getMontantAllocationLogementFamiliale(simulationMensuelle)) || this.checkForChangeInSituation(this.situation.als, this.aidesService.getMontantAllocationLogementSociale(simulationMensuelle))) {
       // Si le demandeur a toujours de l'aide au logement
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT) || this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE) || this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)) {
         if (this.checkPasDAide(this.situation.apl) && this.checkPasDAide(this.situation.alf) && this.checkPasDAide(this.situation.als)) {
+          // Si le demandeur d'emploi n'avait pas d'AL avant
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ELIGIBLE_AL);
-        } else {
-          // Si on est au second mois
-          if (indexMois == 1) {
-            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AL_CHANGEMENT_SITUATION);
-          }
-          // Sinon c'est la déclaration trimestrielle qui a modifié le montant de l'al
-          else {
-            this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AL_DECLA_TRI);
-          }
+        } else if (indexMois == 1) {
+          // Si le montant de l'AL à changer car sa situation a changé suite à sa reprise d'emploi
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AL_CHANGEMENT_SITUATION);
+        }
+        // Sinon c'est la déclaration trimestrielle qui a modifié le montant de l'al
+        else {
+          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.AL_DECLA_TRI);
         }
       }
       // Sinon le demandeur n'a plus le droit a de l'aide au logement
@@ -287,7 +292,7 @@ export class DetailTemporaliteService {
     }
   }
 
-  private handleChangementPPA(simulationMensuelle: SimulationMensuelle, indexMois: number) {
+  private handleChangementPPA(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si le montant de la prime d'activité a changé par rapport au mois précédent
     if (this.checkForChangeInSituation(this.situation.ppa, this.aidesService.getMontantPrimeActivite(simulationMensuelle))) {
       // Si le demandeur a toujours de la prime d'activité
@@ -305,8 +310,14 @@ export class DetailTemporaliteService {
     }
   }
 
+  private handleChangementPI(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
+    if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.PENSION_INVALIDITE) && indexMois == 0) {
+      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PENSION_INVALIDITE_CUMUL);
+    }
+  }
+
   // Méthode qui permet de mettre à jour la situation mensuelle du demandeur avec les données du mois en cours
-  private applyNewSituation(simulationMensuelle: SimulationMensuelle) {
+  private applyNewSituation(simulationMensuelle: SimulationMensuelle): void {
     this.situation.rsa = this.aidesService.getMontantRSA(simulationMensuelle);
     this.situation.are = this.aidesService.getMontantComplementARE(simulationMensuelle);
     this.situation.aah = this.aidesService.getMontantAAH(simulationMensuelle);
@@ -317,7 +328,7 @@ export class DetailTemporaliteService {
     this.situation.alf = this.aidesService.getMontantAllocationLogementFamiliale(simulationMensuelle);
   }
 
-  private checkPasDAide(montantAide: number) {
+  private checkPasDAide(montantAide: number): boolean {
     return this.getMontantReel(montantAide) == 0;
   }
 
@@ -326,15 +337,15 @@ export class DetailTemporaliteService {
     return this.getMontantReel(montantMoisPrecedent) != this.getMontantReel(montantActuel);
   }
 
-  private addDetailTemporaliteMois(indexMois: number, situation: string) {
+  private addDetailTemporaliteMois(indexMois: number, situation: string): void {
     this.detailTemporalite.detailsMensuels[indexMois].details.push(situation);
   }
 
-  private getMontantReel(valeur) {
+  private getMontantReel(valeur): number {
     return valeur != null ? valeur : 0;
   }
 
-  private getPhrasePPAAnticipee(simulationMensuelle: SimulationMensuelle) {
+  private getPhrasePPAAnticipee(simulationMensuelle: SimulationMensuelle): string {
     const dateSimulation = this.dateUtileService.getDateFromStringDate(simulationMensuelle.datePremierJourMoisSimule);
     const dateSimulationMMoins1 = this.dateUtileService.enleverMoisToDate(dateSimulation, 1);
     const moisSimulationMMoins1 = this.dateUtileService.getLibelleMoisFromDate(dateSimulationMMoins1);

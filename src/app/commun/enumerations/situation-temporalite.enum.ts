@@ -35,6 +35,8 @@ export enum SituationTemporaliteEnum {
     // PPA
     PRIME_ACTIVITE = "Vous êtes éligible à la prime d'activité",
     PRIME_ACTIVITE_RECALCUL = "Le montant de votre prime d'activité est recalculé",
+    // PI
+    PENSION_INVALIDITE_CUMUL = "Vous cumulez votre pension d'invalidité avec votre salaire les 6 premiers mois de votre reprise d'emploi",
     // SALALIRE
     SALAIRE = "Votre nouveau salaire est pris en compte dans la simulation pour la durée du contrat"
 }

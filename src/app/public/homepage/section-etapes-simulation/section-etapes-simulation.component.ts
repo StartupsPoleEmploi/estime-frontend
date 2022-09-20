@@ -10,15 +10,15 @@ import { ScreenService } from "@app/core/services/utile/screen.service";
 export class SectionEtapesSimulationComponent {
 
   @Input() login: () => void;
-  @Output() openModalChoixConnexion = new EventEmitter();
+  @Output() openModalOnEventChoixConnexion = new EventEmitter();
 
   constructor(
     public peConnectService: PeConnectService,
     public screenService: ScreenService
   ) { }
 
-  public onClickOpenModalChoixConnexion(): void {
-    this.openModalChoixConnexion.emit();
+  public onClickopenModalOnEventChoixConnexion(): void {
+    this.openModalOnEventChoixConnexion.emit();
   }
 
 }

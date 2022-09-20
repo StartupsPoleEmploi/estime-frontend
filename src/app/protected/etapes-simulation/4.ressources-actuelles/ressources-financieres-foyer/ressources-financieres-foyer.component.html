@@ -8,7 +8,7 @@
                         * RSA (Revenu de Solidarité Active) perçu
                         <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
-                            (click)="modalService.openModal($event, modalMontantRSATemplate)">
+                            (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
                         </button>
                     </label>
                 </div>
@@ -398,7 +398,7 @@
                     <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
                         placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
                         aria-label="Infobulle prochaine déclaration trimestrielle"
-                        (click)="modalService.openModal($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)">
                     </button>
                 </label>
                 <div class="col">

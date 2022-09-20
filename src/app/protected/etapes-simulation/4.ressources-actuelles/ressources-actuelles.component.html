@@ -173,3 +173,14 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalPensionInvaliditeEtSalaires>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo color-pe-red-darken-typo' tag-page='popup_pension_invalidite_et_salaires'>
+            Simulation impossible
+        </h3>
+        <p class='body-1-typo color-pe-red-darken-typo'>
+            Estime n'est pas en mesure d'effectuer la simulation au regard de votre situation, merci de vous renseigner auprès de l'organisme en charge du paiement de votre pension d'invalidité.
+        </p>">
+    </app-tooltip>
+</ng-template>

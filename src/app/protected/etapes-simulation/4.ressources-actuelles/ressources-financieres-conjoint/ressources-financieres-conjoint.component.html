@@ -240,7 +240,7 @@
                         * AAH (Allocation Adulte Handicapé) perçue
                         <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
-                            (click)="modalService.openModal($event, modalMontantAAHTemplate)">
+                            (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)">
                         </button>
                     </label>
                 </div>
@@ -284,7 +284,7 @@
                         <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_pension_invalidite"
                             aria-label="Infobulle montant pension invalidité"
-                            (click)="modalService.openModal($event, modalPensionInvaliditeTemplate)">
+                            (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)">
                         </button>
                     </label>
                 </div>
@@ -450,7 +450,7 @@
                         <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                             aria-label="Infobulle revenus immobilier"
-                            (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
+                            (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)"></button>
                     </label>
                 </div>
                 <div class="row">

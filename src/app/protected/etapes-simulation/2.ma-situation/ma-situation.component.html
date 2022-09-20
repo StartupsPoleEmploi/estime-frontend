@@ -135,7 +135,7 @@
                             <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-vous-percevez"
                                 aria-label="Infobulle ressources perçues"
-                                (click)="modalService.openModal($event, modalSituationDemandeurTemplate)"></button>
+                                (click)="modalService.openModalOnEvent($event, modalSituationDemandeurTemplate)"></button>
                         </label>
                     </div>
                     <div class="row">
@@ -215,7 +215,7 @@
                             <div class="col-12">
                                 <span id="btn-aucune-ressource" class="body-2-typo color-pe-red-typo" tabindex="0"
                                     tag-action="clic-sur-aucune-ressource"
-                                    (click)="modalService.openModal($event, modalAucuneRessourceTemplate)">
+                                    (click)="modalService.openModalOnEvent($event, modalAucuneRessourceTemplate)">
                                     Aucune de ces ressources
                                     <img alt="" src="./assets/images/icones/fleche-droite-red.svg">
                                 </span>
@@ -224,7 +224,7 @@
                         <div class="row pb-3">
                             <div class="col-12">
                                 <span class="error-input-message"
-                                    *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationPeOuCafSelectionnee()">
+                                    *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationDEntreeSelectionnee()">
                                     {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
                                 </span>
                             </div>
@@ -238,7 +238,7 @@
                             <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
                                 aria-label="Infobulle bénéficiaire de l'ACRE"
-                                (click)="modalService.openModal($event, modalSituationBeneficiaireACRETemplate)"></button>
+                                (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)"></button>
                         </label>
                     </div>
                     <div class="row">
@@ -298,7 +298,7 @@
                             <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-conjoint"
                                 aria-label="Infobulle conjoint"
-                                (click)="modalService.openModal($event, modalSituationConjointTemplate)"></button>
+                                (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)"></button>
                         </label>
                     </div>
                     <div class="row">

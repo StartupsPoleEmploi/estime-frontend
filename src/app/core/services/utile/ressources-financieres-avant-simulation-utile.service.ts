@@ -227,6 +227,15 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     return nombreMoisTravaillesAvantSimulation;
   }
 
+
+  public hasSalaireAvantSimulation(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+    if (ressourcesFinancieresAvantSimulation != null && ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation != null) {
+      return ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois.some((mois: MoisTravailleAvantSimulation) => {
+        return (mois != null && mois.salaire != null && mois.salaire.montantMensuelNet > 0);
+      });
+    } return false;
+  }
+
   private isMoisTravaille(moisTravailleAvantSimulation: MoisTravailleAvantSimulation): boolean {
     return !moisTravailleAvantSimulation.isSansSalaire && moisTravailleAvantSimulation.salaire.montantMensuelNet > 0;
   }

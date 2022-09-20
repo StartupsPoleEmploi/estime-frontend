@@ -20,7 +20,7 @@
                     <div class="row row-btn-je-commence">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
                             class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
-                            (click)="openModalChoixConnexion()">
+                            (click)="openModalOnEventChoixConnexion()">
                             <span class="button-typo">Je commence la simulation</span>
                             <img alt="" class="image-2" src="./assets/images/icones/fleche-droite-pe-white.svg">
                         </button>
@@ -39,14 +39,15 @@
     </div>
 </section>
 <app-section-description></app-section-description>
-<app-section-etapes-simulation [login]="openModalChoixConnexion" (openModalChoixConnexion)="openModalChoixConnexion()">
+<app-section-etapes-simulation [login]="openModalOnEventChoixConnexion"
+    (openModalOnEventChoixConnexion)="openModalOnEventChoixConnexion()">
 </app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
 <app-section-temoignages></app-section-temoignages>
 
 <div *ngIf="this.stickyButton" class="btn-sticks">
     <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation" class="btn-homepage"
-        data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="openModalChoixConnexion()">
+        data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="openModalOnEventChoixConnexion()">
         <span class="button-typo">Je commence la simulation</span>
         <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
     </button>

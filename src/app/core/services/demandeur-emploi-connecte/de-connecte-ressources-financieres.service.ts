@@ -621,4 +621,10 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     if (typeContrat == TypesContratTravailEnum.INTERIM) return LibellesCourtsTypesContratTravailEnum.INTERIM;
     if (typeContrat == TypesContratTravailEnum.IAE) return LibellesCourtsTypesContratTravailEnum.IAE;
   }
+
+  public hasPensionInvaliditeAvecSalaireAvantSimulation(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    console.log(this.ressourcesFinancieresAvantSimulationUtileService.hasSalaireAvantSimulation(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation))
+    return demandeurEmploiConnecte.beneficiaireAides.beneficiairePensionInvalidite && this.ressourcesFinancieresAvantSimulationUtileService.hasSalaireAvantSimulation(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation);
+  }
 }

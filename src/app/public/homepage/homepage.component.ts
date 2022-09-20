@@ -48,7 +48,7 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  public openModalChoixConnexion() {
+  public openModalOnEventChoixConnexion() {
     const modalRef = this.bsModalService.show(ModalChoixConnexionComponent, this.config);
     modalRef.content.notifyParent.subscribe((result) => {
       console.error(result)

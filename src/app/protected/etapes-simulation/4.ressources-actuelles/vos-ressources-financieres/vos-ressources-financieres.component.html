@@ -6,7 +6,7 @@
                     * Montant de votre allocation journalière ASS
                     <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle montant ASS"
-                        (click)="modalService.openModal($event, modalAllocationASSTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalAllocationASSTemplate)">
                     </button>
                 </label>
             </div>
@@ -71,7 +71,7 @@
                     <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
                         aria-label="Infobulle salaire journalier référence ARE"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
+                        (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -116,7 +116,7 @@
                     <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
                         aria-label="Infobulle nombre jours restants ARE"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
+                        (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -160,7 +160,7 @@
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                     <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
-                        (click)="modalService.openModal($event, modalDegressiviteTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
                     </button>
                 </label>
             </div>
@@ -209,7 +209,7 @@
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
-                        (click)="modalService.openModal($event, modalSituationDemandeurAllocationJournaliereTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalSituationDemandeurAllocationJournaliereTemplate)">
                     </button>
                 </label>
             </div>
@@ -255,7 +255,7 @@
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
-                        (click)="modalService.openModal($event, modalAllocationARETemplate, true)">
+                        (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
                     </button>
                 </label>
             </div>
@@ -300,7 +300,7 @@
                     * RSA (Revenu de Solidarité Active) perçu
                     <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
-                        (click)="modalService.openModal($event, modalMontantRSATemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
                     </button>
                 </label>
             </div>
@@ -344,7 +344,7 @@
                     * Allocation Adulte Handicapé (AAH) perçue
                     <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
-                        (click)="modalService.openModal($event, modalMontantAAHTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)">
                     </button>
                 </label>
             </div>
@@ -390,7 +390,7 @@
                     <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
                         placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
                         aria-label="Infobulle prochaine déclaration trimestrielle"
-                        (click)="modalService.openModal($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                        (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)">
                     </button>
                 </label>
                 <div class="col">
@@ -416,6 +416,50 @@
                     <span class="error-input-message"
                         *ngIf="(isRessourcesFinancieresFormSubmitted || prochaineDeclarationTrimestrielle.touched)  && prochaineDeclarationTrimestrielle.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="pensionInvalidite">
+                    * Pension d'invalidité nette imposable perçue
+                    <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_pension_invalidite" aria-label="Infobulle montant pension invalidité"
+                        (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="pensionInvalidite" name="pensionInvalidite"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                        data-testid="input-pension-invalidite"
+                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
+                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)}"
+                        required inputmode="numeric" #pensionInvalidite="ngModel">
+                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                </div>
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.pattern">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                    </span>
+                </div>
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
+                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
                 </div>
             </div>
@@ -528,50 +572,6 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()">
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="pensionInvalidite">
-                    * Pension d'invalidité nette imposable perçue
-                    <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_pension_invalidite" aria-label="Infobulle montant pension invalidité"
-                        (click)="modalService.openModal($event, modalPensionInvaliditeTemplate)">
-                    </button>
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="pensionInvalidite" name="pensionInvalidite"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                        data-testid="input-pension-invalidite"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)}"
-                        required inputmode="numeric" #pensionInvalidite="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (this.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
-                </div>
-            </div>
-        </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="beneficesMicroEntrepriseDernierExercice">
@@ -648,7 +648,7 @@
                     <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                         aria-label="Infobulle revenus immobilier"
-                        (click)="modalService.openModal($event, modalRevenusImmobiliersTemplate)"></button>
+                        (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)"></button>
                 </label>
             </div>
             <div class="row">
