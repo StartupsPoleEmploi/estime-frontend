@@ -153,7 +153,7 @@ export class DateUtileService {
    */
   public getLibelleMoisCourtFromDate(dateToFormat: Date): string {
     const month = dateToFormat.getMonth() + 1;
-    const moisLabel = this.getLibelleMoisCourtByMoisNumber(month).toUpperCase();
+    const moisLabel = this.getLibelleCourtMoisByMoisNumber(month).toUpperCase();
     return `${moisLabel}`;
   }
 
@@ -423,16 +423,6 @@ export class DateUtileService {
     this.mois.forEach(mois => {
       if (moisNumber === mois.value) {
         moisLabel = mois.label;
-      }
-    });
-    return moisLabel;
-  }
-
-  private getLibelleMoisCourtByMoisNumber(moisNumber: number): string {
-    let moisLabel = '';
-    this.mois.forEach(mois => {
-      if (moisNumber === mois.value) {
-        moisLabel = mois.labelCourt;
       }
     });
     return moisLabel;
