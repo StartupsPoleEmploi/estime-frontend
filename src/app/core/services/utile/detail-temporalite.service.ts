@@ -246,7 +246,7 @@ export class DetailTemporaliteService {
     } else if (indexMois == 1) {
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
-      } else {
+      } else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.NON_ELIGIBLE_COMPLEMENT_ARE);
       }
     }
