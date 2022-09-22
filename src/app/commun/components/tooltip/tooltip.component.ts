@@ -12,6 +12,7 @@ export class TooltipComponent {
 
   @Input('modalRef') public modalRef: BsModalRef;
   @Input('htmlData') public htmlData: string;
+  @Input('atTag') public atTag: string;
 
   constructor(
     private location: LocationStrategy,

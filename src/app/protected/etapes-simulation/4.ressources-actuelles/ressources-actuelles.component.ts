@@ -21,6 +21,7 @@ import { NombreMoisTravailles } from '@app/commun/models/nombre-mois-travailles'
 import { Simulation } from '@app/commun/models/simulation';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
+import { RessourcesFinancieresAvantSimulationUtileService } from '@app/core/services/utile/ressources-financieres-avant-simulation-utile.service';
 
 @Component({
   selector: 'app-ressources-actuelles',
@@ -83,9 +84,10 @@ export class RessourcesActuellesComponent implements OnInit {
     private deConnecteSimulationService: DeConnecteSimulationService,
     private demandeurEmploiService: DemandeurEmploiService,
     private estimeApiService: EstimeApiService,
+    private ressourcesFinancieresAvantSimulationUtileService: RessourcesFinancieresAvantSimulationUtileService,
     private router: Router,
     public deConnecteSituationFamilialeService: DeConnecteSituationFamilialeService,
-    private modalService: ModalService,
+    public modalService: ModalService,
     public screenService: ScreenService,
     public controleChampFormulaireService: ControleChampFormulaireService,
   ) {
@@ -175,7 +177,7 @@ export class RessourcesActuellesComponent implements OnInit {
     if (this.isSaisieFormulairesValide()) {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-      if (!this.deConnecteRessourcesFinancieresService.hasPensionInvaliditeAvecSalaireAvantSimulation()) {
+      if (!this.ressourcesFinancieresAvantSimulationUtileService.hasPensionInvaliditeAvecSalaireAvantSimulation(demandeurEmploiConnecte)) {
         this.isSimulationImpossiblePensionInvaliditeEtSalaire = false;
         this.estimeApiService.simulerMesAides(demandeurEmploiConnecte).subscribe({
           next: this.traiterRetourSimulerMesAides.bind(this),
@@ -184,7 +186,6 @@ export class RessourcesActuellesComponent implements OnInit {
       } else {
         this.isPageLoadingDisplay = false;
         this.modalService.openModal(this.modalPensionInvaliditeEtSalaires);
-        // this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE_PENSION_INVALIDITE_ET_SALAIRES;
       }
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();

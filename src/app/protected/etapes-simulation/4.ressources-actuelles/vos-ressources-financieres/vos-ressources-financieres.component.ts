@@ -42,6 +42,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
+  @Output() openModalPensionInvaliditeEtSalaires = new EventEmitter<void>();
 
   @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
@@ -140,6 +141,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       }
       if (this.optionsNombreMoisTravailles == null) {
         this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
+      }
+      if (this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()) {
+        this.openModalPensionInvaliditeEtSalaires.emit();
       }
     }
   }
@@ -281,5 +285,13 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       }
     }
     return isValide;
+  }
+
+  public checkChangePensionInvaliditeEtSalaire(nouveauSalaire) {
+    if (this.deConnecteBeneficiaireAidesService.isBeneficiairePensionInvalidite()) {
+      if (nouveauSalaire > 0) {
+        this.openModalPensionInvaliditeEtSalaires.emit();
+      }
+    }
   }
 }

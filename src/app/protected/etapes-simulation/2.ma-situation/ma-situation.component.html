@@ -154,9 +154,7 @@
                                 [(ngModel)]="beneficiaireAides.beneficiaireRSA" btnCheckbox tabindex="0"
                                 #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)">
-                                <div>
-                                    <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
-                                </div>
+                                <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                             </button>
                             <button id="btn-situation-are" name="beneficiaireARE"
                                 aria-label="Vous êtes bénéficiaire de l'ARE" class="radio-button-style-1"
@@ -164,9 +162,7 @@
                                 btnCheckbox tabindex="0" role="button" #beneficiaireARE="ngModel"
                                 (click)="onClickCheckBoxHasARE()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ARE)">
-                                <div>
-                                    <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
-                                </div>
+                                <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
                             </button>
                             <button id="btn-is-micro-entrepreneur" name="microEntrepreneur"
                                 aria-label="Vous êtes micro entrepreneur"

@@ -17,6 +17,7 @@ import { RessourcesFinancieresAvantSimulation } from "@app/commun/models/ressour
 import { SalaireService } from './salaire.service';
 import { ControleChampFormulaireService } from './controle-champ-formulaire.service';
 import { DateUtileService } from './date-util.service';
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresAvantSimulationUtileService {
@@ -327,6 +328,10 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       }
     }
     return isChampsSalairesValides;
+  }
+
+  public hasPensionInvaliditeAvecSalaireAvantSimulation(demandeurEmploi: DemandeurEmploi): boolean {
+    return demandeurEmploi.beneficiaireAides.beneficiairePensionInvalidite && this.hasSalaireAvantSimulation(demandeurEmploi.ressourcesFinancieresAvantSimulation);
   }
 
 }

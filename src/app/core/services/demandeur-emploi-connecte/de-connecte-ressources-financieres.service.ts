@@ -624,7 +624,6 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
 
   public hasPensionInvaliditeAvecSalaireAvantSimulation(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    console.log(this.ressourcesFinancieresAvantSimulationUtileService.hasSalaireAvantSimulation(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation))
-    return demandeurEmploiConnecte.beneficiaireAides.beneficiairePensionInvalidite && this.ressourcesFinancieresAvantSimulationUtileService.hasSalaireAvantSimulation(demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation);
+    return this.ressourcesFinancieresAvantSimulationUtileService.hasPensionInvaliditeAvecSalaireAvantSimulation(demandeurEmploiConnecte);
   }
 }
