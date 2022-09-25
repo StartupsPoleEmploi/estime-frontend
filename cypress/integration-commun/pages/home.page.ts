@@ -16,18 +16,9 @@ class HomePage {
     mirePeConnectPage.clickOnSeConnecter();
   }
 
-  clickOnCommencerSansSeConnecter(nomUtilisateur: string, motDePasse: string) {
+  clickOnCommencerSansSeConnecter() {
     cy.get('[data-testid=btn-je-commence]').click();
     cy.get('[data-testid=btn-commencer-sans-connexion]').click();
-
-    //wait pour affichage mise PE Connect
-    cy.wait(3000);
-
-    const mirePeConnectPage = new MirePeConnectPage();
-    mirePeConnectPage.saisirNomUtilisateur(nomUtilisateur);
-    mirePeConnectPage.clickOnPoursuivre();
-    mirePeConnectPage.saisirMotDePasse(motDePasse);
-    mirePeConnectPage.clickOnSeConnecter();
   }
 }
 export default HomePage
