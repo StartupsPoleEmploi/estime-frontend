@@ -4,6 +4,12 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-journaliere-net-ass]').type(montant);
   }
 
+  public saisirDateDerniereOuvertureDroitASS(jour: string, mois: string, annee: string): void {
+    cy.get('[data-testid=input-jour-date]').type(jour);
+    cy.get('[data-testid=input-mois-date]').type(mois);
+    cy.get('[data-testid=input-annee-date]').type(annee);
+  }
+
   public saisirSalaireJournalierReference(montant: string): void {
     cy.get('[data-testid=input-salaire-journalier-reference-are]').type(montant);
   }

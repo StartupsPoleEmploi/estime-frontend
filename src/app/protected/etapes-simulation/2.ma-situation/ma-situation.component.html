@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input id="codePostal" name="codePostal" type="text"
+                            <input id="codePostal" name="codePostal" type="text" data-testid="code-postal"
                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
                                 maxlength="5" minlength="5" class="form-control" placeholder="ex : 75001"
                                 [(ngModel)]="informationsPersonnelles.logement.coordonnees.codePostal" required
@@ -51,7 +51,8 @@
                     </div>
                     <div class="row pb-3">
                         <app-date-inputs [dateSaisie]="dateNaissance"
-                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted">
+                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
+                            data_testid="naissance-demandeur">
                         </app-date-inputs>
                     </div>
                 </div>

@@ -11,7 +11,6 @@ import { DateUtileTests } from "../../../integration-commun/utile/date-utile-tes
 import RessourcesActuellesPage from '../../../integration-commun/pages/ressources-actuelles.page';
 import ResultatMaSimulationPage from '../../../integration-commun/pages/resultat-ma-simulation.page';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import HeaderSection from '../../../integration-commun/sections/header.section';
 
 describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi AAH - 3 mois travaillé avant simulation'), () => {
 
@@ -61,7 +60,7 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
 
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAahIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -77,7 +76,10 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -142,9 +144,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActiviteM4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
 
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
-
     });
 
   it('En tant que demandeur emploi célibataire,' +
@@ -187,7 +186,7 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALF_M1_M2_M3_M4_M5_M6 = "380";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAahIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -203,7 +202,10 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -277,9 +279,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE, 6, montantALF_M1_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActiviteM4_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
 
     });
 });

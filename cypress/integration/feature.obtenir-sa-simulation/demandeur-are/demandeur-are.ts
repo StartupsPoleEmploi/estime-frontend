@@ -7,7 +7,6 @@ import PersonnesAChargePage from '../../../integration-commun/pages/personnes-a-
 import RessourcesActuellesPage from '../../../integration-commun/pages/ressources-actuelles.page'
 import ResultatMaSimulationPage from '../../../integration-commun/pages/resultat-ma-simulation.page'
 import AvantDeCommencerPage from '../../../integration-commun/pages/avant-de-commencer.page'
-import HeaderSection from '../../../integration-commun/sections/header.section'
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service'
 import { environment } from '../../../environment'
 import { CodesAidesEnum } from "../../../../src/app/commun/enumerations/codes-aides.enum";
@@ -53,7 +52,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -68,8 +67,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationARE();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -130,9 +131,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 
   it('demandeur célibataire, non propriétaire, sans enfant,' +
@@ -164,7 +162,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -180,8 +178,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationARE();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -244,9 +244,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 
   it('demandeur célibataire, non propriétaire, sans enfant,' +
@@ -276,7 +273,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -292,8 +289,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationARE();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -351,9 +350,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 
   it('demandeur célibataire, non propriétaire, sans enfant,' +
@@ -383,7 +379,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -399,8 +395,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationARE();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -460,9 +458,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 
   it('demandeur célibataire, non propriétaire, sans enfant,' +
@@ -493,7 +488,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -508,8 +503,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationARE();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
 
@@ -568,9 +565,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 
 
@@ -603,7 +597,7 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -620,7 +614,10 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.AIDE_RETOUR_EMPLOI);
       maSituationPage.clickOnSituationARE();
       maSituationPage.clickOnSituationFamilialeSeul();
       maSituationPage.clickOnSuivant();
@@ -706,9 +703,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE, 6, montantALS_M2_M3_M4_M5_M6);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActivite_M5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
     });
 });
 

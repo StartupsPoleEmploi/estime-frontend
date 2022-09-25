@@ -1,4 +1,17 @@
+import { CodesAidesEnum } from "@app/commun/enumerations/codes-aides.enum";
+
 class MaSituationPage {
+
+  public saisirCodePostal() {
+    cy.get('[data-testid=code-postal]').type('44000');
+
+  }
+
+  public saisirDateNaissance(jour: string = '01', mois: string = '01', annee: string = '1990'): void {
+    cy.get('[data-testid=input-jour-date-naissance-demandeur]').type(jour);
+    cy.get('[data-testid=input-mois-date-naissance-demandeur]').type(mois);
+    cy.get('[data-testid=input-annee-date-naissance-demandeur]').type(annee);
+  }
 
   public selectNationalite(nationalite: string) {
     cy.get('[data-testid=select-nationalite]').select(nationalite);
@@ -14,6 +27,23 @@ class MaSituationPage {
 
   public clickOnSituationIndependant() {
     cy.get('[data-testid=btn-situation-travailleur-independant]').click();
+  }
+
+  public clickOnSituationBeneficiaire(codeAide: CodesAidesEnum) {
+    switch (codeAide) {
+      case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE:
+        this.clickOnSituationASS();
+        break;
+      case CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES:
+        this.clickOnSituationAAH();
+        break;
+      case CodesAidesEnum.RSA:
+        this.clickOnSituationRSA();
+        break;
+      case CodesAidesEnum.AIDE_RETOUR_EMPLOI:
+        this.clickOnSituationARE();
+        break;
+    }
   }
 
   public clickOnSituationAAH() {

@@ -11,7 +11,6 @@ import { DateUtileTests } from "../../../integration-commun/utile/date-utile-tes
 import RessourcesActuellesPage from '../../../integration-commun/pages/ressources-actuelles.page';
 import ResultatMaSimulationPage from '../../../integration-commun/pages/resultat-ma-simulation.page';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import HeaderSection from '../../../integration-commun/sections/header.section';
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS avec des enfants'), () => {
 
@@ -47,6 +46,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(9);
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
+      const dateDerniereOuvertureDroitASS = {
+        "jour": "16",
+        "mois": "05",
+        "annee": "2019"
+      };
       const revenusIndependant = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -55,7 +59,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM5_M6 = "97";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -71,7 +75,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
       maSituationPage.clickOnSituationIndependant();
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
@@ -86,6 +93,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
+      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -133,9 +141,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActiviteM5_M6);
       resultatMaSimulationPage.clickOnRetour();
 
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
-
     });
 
   it('En tant que demandeur emploi célibataire,' +
@@ -161,6 +166,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(9);
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
+      const dateDerniereOuvertureDroitASS = {
+        "jour": "16",
+        "mois": "05",
+        "annee": "2019"
+      };
       const revenusIndependant = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -169,7 +179,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM5_M6 = "97";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -185,8 +195,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
       maSituationPage.clickOnSituationIndependant();
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
       maSituationPage.clickOnSituationFamilialeSeul();
@@ -200,6 +213,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
+      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -243,9 +257,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActiviteM5_M6);
       resultatMaSimulationPage.clickOnRetour();
 
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
-
     });
 
   it('En tant que demandeur emploi célibataire,' +
@@ -271,6 +282,11 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const dateNaissancePersonne1 = dateUtileTests.getDateNaissanceFromAge(9);
       // VARIABLES PAGE MES RESSOURCES
       const allocationJournaliereNetASS = "16.49";
+      const dateDerniereOuvertureDroitASS = {
+        "jour": "16",
+        "mois": "05",
+        "annee": "2019"
+      };
       const revenusIndependant = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
@@ -279,7 +295,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM5_M6 = "97";
 
       const homePage = new HomePage();
-      homePage.clickOnSeConnecterAvecPoleEmploi(environment.peConnectUserAssIdentifiant, environment.peConnectUserMotDePasse);
+      homePage.clickOnCommencerSansSeConnecter();
 
       const avantDeCommencerPage = new AvantDeCommencerPage();
       avantDeCommencerPage.clickOnJeCommence();
@@ -295,7 +311,10 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       monFuturContratTravailPage.clickOnSuivant();
 
       const maSituationPage = new MaSituationPage();
+      maSituationPage.saisirCodePostal();
+      maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
+      maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
       maSituationPage.clickOnSituationIndependant();
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
@@ -310,6 +329,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
       const ressourcesActuellesPage = new RessourcesActuellesPage();
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
+      ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
       ressourcesActuellesPage.clickOnValiderVosRessources();
@@ -353,9 +373,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.SALAIRE, 6, salaireNet);
       resultatMaSimulationPage.checkMontantRessourceFinanciere(CodesAidesEnum.PRIME_ACTIVITE, 6, montantPrimeActiviteM5_M6);
       resultatMaSimulationPage.clickOnRetour();
-
-      const headerSection = new HeaderSection();
-      headerSection.clickOnSeDeconnecter();
 
     });
 });
