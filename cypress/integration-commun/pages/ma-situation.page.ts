@@ -43,6 +43,9 @@ class MaSituationPage {
       case CodesAidesEnum.AIDE_RETOUR_EMPLOI:
         this.clickOnSituationARE();
         break;
+      case CodesAidesEnum.PENSION_INVALIDITE:
+        this.clickOnSituationPensionInvalidite();
+        break;
     }
   }
 

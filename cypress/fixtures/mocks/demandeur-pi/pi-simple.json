@@ -1,0 +1,215 @@
+{
+	"montantRessourcesFinancieresMoisAvantSimulation": 1110.0,
+	"simulationsMensuelles": [
+		{
+			"datePremierJourMoisSimule": "2022-10-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"APL": {
+					"code": "APL",
+					"nom": "Aide Personnalisée au Logement",
+					"montant": 310.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": true
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2022-11-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"nom": "Allocation de Logement Sociale",
+					"montant": 272.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": false
+				},
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2022-12-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"nom": "Allocation de Logement Sociale",
+					"montant": 272.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": false
+				},
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-01-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"nom": "Allocation de Logement Sociale",
+					"montant": 272.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": false
+				},
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-02-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"nom": "Allocation de Logement Sociale",
+					"montant": 272.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": false
+				},
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-03-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1000.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"ALS": {
+					"code": "ALS",
+					"nom": "Allocation de Logement Sociale",
+					"montant": 272.0,
+					"messagesAlerte": [
+						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
+					],
+					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L'aide au logement vous aide à payer le loyer de votre résidence principale si vos ressources sont modestes. Elle est recalculée tous les 3 mois, en fonction des ressources de votre foyer.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l'aide au logement dépend : </h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">du nombre d’enfants et des autres personnes à charge ;</li>\n\t\t    <li class=\"body-1-typo\">du lieu de résidence ;</li>\n            <li class=\"body-1-typo\">du montant du loyer dans la limite d'un certain plafond ;</li>\n            <li class=\"body-1-typo\">des ressources du foyer des 12 derniers mois.</li>\n\t\t</ul>\n\t</div>\n</div>\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir :</h6>\n\t\t<ul>\n            <li class=\"body-1-typo\">L’APL est directement versée au propriétaire ou au prêteur qui la déduit du montant de votre loyer ou de vos mensualités.</li>\n            <li class=\"body-1-typo\">L’ALF et l’ALS vous sont versées directement mais peuvent être versées au propriétaire ou au prêteur s’il le demande.</li>\n        </ul>\n\t</div>\n</div>",
+					"organisme": "CAF",
+					"lienExterne": "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+					"reportee": false
+				},
+				"PI": {
+					"code": "PI",
+					"nom": "Pension d'Invalidité",
+					"montant": 800.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "CPAM",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		}
+	]
+}
