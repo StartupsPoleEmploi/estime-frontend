@@ -11,12 +11,6 @@
                     [ngClass]="{'logo-estime-header-homepage':isHomepage}" (click)="onClickLogoEstime()"
                     tag-navigation="clic_logo_estime_header_retour_accueil">
             </div>
-            <div class="col-auto ps-0 ms-0">
-                <div id="div-beta" [ngClass]="{'mt-4':isHomepage, 'd-none': !isHomepage}" class="ms-2">
-                    <span>BETA</span>
-                </div>
-            </div>
-
             <div class="col pe-0">
                 <button id="btn-se-deconnecter" class="btn-se-deconnecter d-none d-sm-block"
                     aria-label="Bouton de déconnexion" *ngIf="this.individuConnectedService.isLoggedIn()"
