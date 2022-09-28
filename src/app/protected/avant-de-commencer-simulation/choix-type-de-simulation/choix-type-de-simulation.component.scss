@@ -1,0 +1,50 @@
+@import "../../../../assets/scss/variables";
+
+
+.container-fluid {
+  @media #{$extra-small-device} {
+    margin-bottom: 2rem;
+  }
+
+  .card-container {
+    background-color: $color-white-3;
+    border: none;
+    max-width: 37.5rem;
+    margin: auto;
+    padding: 1rem;
+
+    @media #{$small-device} {
+      padding: 2.5rem;
+    }
+
+    .title-container {
+      max-width: 37.5rem;
+
+      h1 {
+        text-align: left;
+      }
+    }
+
+    .row {
+      margin: 0;
+
+      .button-card-choix-simulation {
+        min-height: 6rem;
+        margin-top: 1rem;
+        padding: 0.75rem;
+
+        border-radius: 0.5rem;
+
+        .row {
+          padding: 0rem;
+          padding-right: 0.25rem;
+          padding-left: 0.25rem;
+
+          &>* {
+            padding: 0rem;
+          }
+        }
+      }
+    }
+  }
+}

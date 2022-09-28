@@ -2,6 +2,7 @@ export enum PageTitlesEnum {
   AIDES = 'Toutes les aides',
   ACCESSIBILITE = 'Accessibilité',
   AVANT_COMMENCER_SIMULATION = 'Avant de commencer',
+  CHOIX_SIMULATION = 'Quel type de simulation voulez-vous faire ?',
   CGU = 'Conditions générales d\'utilisation',
   CONTACT = 'Nous contacter',
   CONTRAT_TRAVAIL = 'Votre futur emploi',

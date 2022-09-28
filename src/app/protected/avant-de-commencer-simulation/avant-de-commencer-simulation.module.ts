@@ -9,9 +9,13 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ChartModule } from 'angular2-chartjs';
 import { AvantDeCommencerSimulationRoutingModule } from './avant-de-commencer-simulation-routing.module';
+import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation/choix-type-de-simulation.component';
+import { DocumentsAvantDeCommencerComponent } from './documents-avant-de-commencer/documents-avant-de-commencer.component';
 @NgModule({
   declarations: [
-    AvantDeCommencerSimulationComponent
+    AvantDeCommencerSimulationComponent,
+    ChoixTypeDeSimulationComponent,
+    DocumentsAvantDeCommencerComponent
   ],
   imports: [
     AlertModule.forRoot(),

@@ -1,0 +1,171 @@
+<app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
+<div class="container-fluid container-etape" role="form">
+    <div class="form-container-fluid">
+        <alert type="danger" *ngIf="messageErreur">
+            {{messageErreur}}
+        </alert>
+        <div class="card card-form-style-2">
+            <div class="title-container">
+                <h1 class="h2-style-1"
+                    [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
+                    {{pageTitlesEnum.AVANT_COMMENCER_SIMULATION}}
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="body-1-typo">
+                        Pour faire l’estimation la plus juste, en fonction de votre situation, veuillez vous munir de
+                        ces
+                        documents :
+                    </p>
+                    <div class="documents-demandes">
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Relevé de situation ARE</span>
+                            <button id="infobulle-trouver-dernier-releve-situation-are"
+                                aria-label="Infobulle trouver dernier relevé de situation ARE"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
+                                (click)="modalService.openModalOnEvent($event, modalDernierReleveDeSituationARE, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Notification de droits ASS</span>
+                            <button id="infobulle-trouver-notification-droits-ass"
+                                aria-label="Infobulle trouver notification de droits ASS"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-notification-droits-ass"
+                                (click)="modalService.openModalOnEvent($event, modalDerniereNotificationDroitASSTemplate, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Droits CAF ou MSA</span>
+                            <button id="infobulle-trouver-derniere-attestation-caf"
+                                aria-label="Infobulle trouver derniere attestation CAF"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
+                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationCafTemplate, true)"></button>
+                        </div>
+                        <hr>
+                        <div class="items-documents-demandes">
+                            <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
+                            <button id="infobulle-trouver-derniere-attestation-pension-invalidite"
+                                aria-label="Infobulle trouver derniere attestation de pension d'invalidité"
+                                class="img-interrogation-icon float-end" placement="right"
+                                tag-action="ouverture-infobulle-trouver-derniere-attestation-pension-invalidite"
+                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationPensionInvaliditeTemplate, true)"></button>
+                        </div>
+                    </div>
+                    <app-message-info contenu="Les résultats qui vous seront donnés ne sont qu’une estimation, ils sont susceptibles
+                d’évoluer en fonction de votre situation, et des évolutions réglementaires.">
+                    </app-message-info>
+                </div>
+            </div>
+        </div>
+        <div class="row-btn-form">
+            <button id="btn-je-continue-avant-commencer" data-testid="btn-je-continue-avant-commencer" type="button"
+                class="btn-suivant" (click)="onClickButtonJeContinue()" tag-navigation="clic_bouton_je_continue">
+                <div>
+                    <span class="button-typo">Je continue</span>
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalDernierReleveDeSituationARE>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h3 class="headline-3-typo headline-4-typo-color">
+            Où trouver votre dernier relevé de situation ARE ? </h3>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur internet :</h4>
+        <ol>
+            <li class="body-1-typo">Connectez-vous sur
+                <a class="link-modal" href="https://candidat.pole-emploi.fr">
+                    candidat.pole-emploi.fr
+                </a> ;
+            </li>
+            <li class="body-1-typo">Rendez-vous dans “Mes courriers reçus dans le menu en haut à droite de l’écran ;</li>
+            <li class="body-1-typo">Dans la liste des courriers reçus vous trouverez vos relevés de situation ;</li>
+            <li class="body-1-typo">Choisissez le relevé de situation le plus récent et cliquez sur “Télécharger”.</li>
+        </ol>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur l’application mobile “Mon Espace” de Pôle emploi :</h4>
+        <ol>
+            <li class="body-1-typo">Ouvrez l’application et connectez-vous si nécessaire ;</li>
+            <li class="body-1-typo">Accédez à vos courriers depuis la barre de menu en bas de l’écran ;</li>
+            <li class="body-1-typo">Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l’ouvrir.</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereNotificationDroitASSTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData='
+        <h3 class="headline-3-typo headline-3-typo-color">
+            Où trouver les informations concernant vos droits ASS ?
+        </h4>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur internet :</h4>
+        <ol>
+            <li class="body-1-typo">Connectez-vous sur
+                <a class="link-modal" href="https://candidat.pole-emploi.fr">
+                    candidat.pole-emploi.fr
+                </a> ;
+            </li>
+            <li class="body-1-typo">Accédez à la rubrique mon dossier demandeur d’emploi, puis “mes allocations“ ;</li>
+            <li class="body-1-typo">Cliquez sur “attestations Pôle emploi“ et sélectionnez “attestation des périodes indemnisées“.</li>
+        </ol>
+        <h4 class="headline-5-typo headline-4-typo-color">Sur l’application mobile “Mon Espace” de Pôle emploi :</h4>
+        <ol>
+            <li class="body-1-typo">Ouvrez l’application et connectez-vous si nécessaire ;</li>
+            <li class="body-1-typo">Cliquez sur “Demander une attestation“ en bas de l’écran ;</li>
+            <li class="body-1-typo">Dans la liste, sélectionnez "attestation des périodes indemnisées".</li>
+        </ol>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereAttestationCafTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef"
+        htmlData='
+        <h3 class="headline-3-typo headline-3-typo-color">
+            Où trouver votre dernière attestation de paiement CAF ?
+        </h3>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur internet :</h4>
+        <ol class="body-1-typo">
+            <li class="body-1-typo">Connectez-vous à votre compte sur
+                <a class="link-modal" href="https://caf.fr">caf.fr</a> ;
+            </li>
+            <li class="body-1-typo">Cliquez sur le bouton “Télécharger ma dernière attestation” dans la section “Mes paiements et mes droits”.</li>
+        </ol>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur l’application mobile “CAF”</h4>
+        <ol>
+            <li class="body-1-typo">Ouvrez l’application et connectez-vous si nécessaire ;</li>
+            <li class="body-1-typo">Accédez à la rubrique mes attestations depuis l’écran d’accueil ;</li>
+            <li class="body-1-typo">Dans la liste, sélectionnez attestation de paiement ;</li>
+            <li class="body-1-typo">Vous pouvez ensuite la télécharger.</li>
+        </ol>
+        <h4 class="headline-4-typo headline-4-typo-color">Si vous êtes affilié(e) à la MSA, connectez-vous à votre compte sur <a class="link-modal" href="https://www.msa.fr/lfp/services-en-ligne/particuliers">MSA.fr</a></h4>'>
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDerniereAttestationPensionInvaliditeTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef"
+        htmlData='
+        <h3 class="headline-3-typo headline-3-typo-color">
+            Où trouver votre dernière attestation de paiement ?
+        </h3>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur internet :</h4>
+        <ol class="body-1-typo">
+            <li>Connectez-vous à votre compte sur
+                <a class="link-modal" href="https://ameli.fr">ameli.fr</a> ;
+            </li>
+            <li>Cochez “invalidité“ dans la section “mes paiements“ ;</li>
+            <li>Téléchargez votre dernier relevé mensuel.</li>
+        </ol>
+        <h4 class="headline-4-typo headline-4-typo-color">Sur l’application mobile “AMELI”</h4>
+        <ol class="body-1-typo">
+            <li>Ouvrez l’application et connectez-vous si nécessaire ;</li>
+            <li>Cliquez sur “tous les derniers paiements“ dans la section “mes paiements“ depuis l’écran d’accueil ;</li>
+            <li>Cliquez sur le dernier paiement “pension d’invalidité“ ;</li>
+            <li>Vous pouvez ensuite télécharger votre relevé mensuel.</li>
+        </ol>
+        <span class="body-1-typo">Si vous êtes affilié(e) à un autre organisme, merci de vous rendre sur le site dédié.</span>'>
+    </app-tooltip>
+</ng-template>

@@ -25,11 +25,8 @@ footer {
   }
 
   .desktop-row-1-footer {
-    max-width: 72vw !important;
 
-    @media #{$medium-device} {
-      max-width: 72rem !important;
-    }
+    max-width: 72rem !important;
 
     margin-left: auto;
     margin-right: auto;
@@ -186,11 +183,7 @@ footer {
     background-color: $color-pe-grey-x-dark;
 
     .row-footer-content {
-      max-width: 52vw !important;
-
-      @media #{$medium-device} {
-        max-width: 72rem !important;
-      }
+      max-width: 72rem !important;
 
       margin-left: auto;
       margin-right: auto;
@@ -415,7 +408,7 @@ footer {
 
 #logo-estime-footer {
   cursor: pointer;
-  width: 4.3125rem;
+  width: 7.3125rem;
 
   @media #{$medium-device} {
     width: 9.8125rem;

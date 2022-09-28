@@ -4,6 +4,8 @@ export enum RoutesEnum {
   AIDES = 'aides',
   AIDES_DESCRIPTION = 'description-aides',
   AVANT_COMMENCER_SIMULATION = 'avant-de-commencer',
+  CHOIX_TYPE_SIMULATION = 'type-de-simulation',
+  DOCUMENTS = 'documents',
   CGU = 'conditions-generales-utilisation',
   CONTACT = 'contact',
   CONTRAT_TRAVAIL = 'contrat-de-travail',

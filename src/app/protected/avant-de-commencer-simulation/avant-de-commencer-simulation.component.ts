@@ -1,10 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
-import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
+import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
@@ -16,17 +12,18 @@ import { Subscription } from 'rxjs';
   templateUrl: './avant-de-commencer-simulation.component.html',
   styleUrls: ['./avant-de-commencer-simulation.component.scss']
 })
-export class AvantDeCommencerSimulationComponent implements OnDestroy {
+export class AvantDeCommencerSimulationComponent implements OnInit, OnDestroy {
 
   isPageLoadingDisplay = false;
+  isChoixSimulationDisplay = false;
+  isBeneficiaireARE = false;
   messageErreur: string;
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   subscriptionPopstateEventObservable: Subscription;
 
   constructor(
-    private deConnecteService: DeConnecteService,
-    private estimeApiService: EstimeApiService,
+    private individuConnectedService: IndividuConnectedService,
     private router: Router,
     public screenService: ScreenService,
     public modalService: ModalService
@@ -34,32 +31,12 @@ export class AvantDeCommencerSimulationComponent implements OnDestroy {
     this.subscribePopstateEventObservable();
   }
 
+  ngOnInit(): void {
+    this.isChoixSimulationDisplay = this.isEligibleChoixConnexion();
+  }
+
   ngOnDestroy(): void {
     this.subscriptionPopstateEventObservable.unsubscribe();
-  }
-
-  public onClickButtonJeContinue(): void {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    if (!demandeurEmploiConnecte) {
-      this.isPageLoadingDisplay = true;
-      this.estimeApiService.creerDemandeurEmploi().subscribe({
-        next: this.traiterRetourCreerDemandeurEmploi.bind(this),
-        error: this.traiterErreurCreerDemandeurEmploi.bind(this)
-      });
-    } else {
-      this.router.navigate([`/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`]);
-    }
-  }
-
-  private traiterRetourCreerDemandeurEmploi(demandeurEmploi: DemandeurEmploi): void {
-    this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
-    this.isPageLoadingDisplay = false;
-    this.router.navigate([RoutesEnum.ETAPES_SIMULATION, RoutesEnum.CONTRAT_TRAVAIL]);
-  }
-
-  private traiterErreurCreerDemandeurEmploi(_error: HttpErrorResponse): void {
-    this.isPageLoadingDisplay = false;
-    this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
   }
 
   /** Subscription
@@ -78,5 +55,20 @@ export class AvantDeCommencerSimulationComponent implements OnDestroy {
         }
       }
     });
+  }
+
+  public commencerSimulation() {
+    this.isChoixSimulationDisplay = false;
+  }
+
+
+  private isEligibleChoixConnexion(): boolean {
+    const individuConnected = this.individuConnectedService.getIndividuConnected();
+    if (individuConnected === null || (individuConnected.beneficiaireAides != null && individuConnected.beneficiaireAides.beneficiaireARE)) {
+      if (individuConnected != null && individuConnected.beneficiaireAides != null && individuConnected.beneficiaireAides.beneficiaireARE) {
+        this.isBeneficiaireARE = true;
+      }
+      return true;
+    } return false;
   }
 }

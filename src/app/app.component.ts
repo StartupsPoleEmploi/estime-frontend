@@ -51,7 +51,6 @@ export class AppComponent implements OnInit {
         if ((routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
           || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`)
           && this.screenService.isExtraSmallScreen()) {
-          console.log('bjr');
           this.renderer.addClass(document.body, 'body-with-sticky-footer');
         } else {
           this.renderer.removeClass(document.body, 'body-with-sticky-footer');

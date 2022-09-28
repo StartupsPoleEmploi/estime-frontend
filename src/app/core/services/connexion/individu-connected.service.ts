@@ -39,6 +39,10 @@ export class IndividuConnectedService {
     return this.individuConnecte;
   }
 
+  public unsetIndividuConnected(): void {
+    this.individuConnecte = null;
+  }
+
   public saveIndividuConnected(individu: Individu): void {
     const individuConnectePeConnectAuthorization = this.createIndividuConnectePeConnectAuthorization(individu);
     this.individuConnectePeConnectAuthorization = individuConnectePeConnectAuthorization;

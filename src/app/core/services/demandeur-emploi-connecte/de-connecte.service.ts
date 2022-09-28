@@ -44,6 +44,10 @@ export class DeConnecteService {
     }
   }
 
+  public unsetDemandeurEmploiConnecte(): void {
+    this.demandeurEmploiConnecte = null;
+  }
+
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
       this.demandeurEmploiConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
