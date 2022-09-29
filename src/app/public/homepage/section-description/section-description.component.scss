@@ -6,6 +6,13 @@
   padding-bottom: 2.5rem;
 
   .container-fluid {
+
+    @media #{$extra-small-device} {
+      background-color: $color-pe-teal;
+    }
+  }
+
+  .container-description {
     background-color: $color-pe-teal;
 
     @media #{$medium-device} {
