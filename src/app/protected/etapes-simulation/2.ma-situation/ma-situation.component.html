@@ -133,10 +133,6 @@
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Vous percevez
-                            <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
-                                placement="right" tag-action="ouverture-infobulle-ma-situation-vous-percevez"
-                                aria-label="Infobulle ressources perçues"
-                                (click)="modalService.openModalOnEvent($event, modalSituationDemandeurTemplate)"></button>
                         </label>
                     </div>
                     <div class="row">
@@ -510,15 +506,6 @@
     </div>
 </div>
 
-<ng-template #modalSituationDemandeurTemplate>
-    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-1-typo'>
-            Ces situations ou les sommes reçues vont avoir une incidence sur le montant de vos aides ou allocations,
-            c’est pourquoi il est important de les déclarer.
-        </p>">
-    </app-tooltip>
-</ng-template>
-
 <ng-template #modalSituationBeneficiaireACRETemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
@@ -530,7 +517,7 @@
 <ng-template #modalSituationConjointTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
-            Votre conjoint est la personne avec laquelle vous êtes marié.e, pacsé.e ou en concubinage.
+            Votre conjoint·e est la personne avec laquelle vous êtes marié·e, pacsé·e ou en concubinage.
         </p>">
     </app-tooltip>
 </ng-template>
