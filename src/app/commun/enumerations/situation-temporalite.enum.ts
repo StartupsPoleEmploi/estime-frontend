@@ -16,8 +16,8 @@ export enum SituationTemporaliteEnum {
     FIN_COMPLEMENT_ARE = "Vous ne percevez plus de complément ARE car vos droits sont épuisés à ce jour",
     // AAH
     AAH_PARTIEL = "Le montant de votre AAH est réduit car vous avez cumulé 6 mois de salaire",
-    FIN_AAH = "Vous ne percevez plus d'AAH car vos droits sont épuisés à ce jour",
-    AAH = "Vous cumulez votre AAH avec votre salaire pour les 6 premiers mois de votre activité",
+    FIN_AAH = "Vous n'êtes plus éligible à l'AAH",
+    AAH = "Vous cumulez votre AAH avec votre salaire les 6 premiers mois de votre activité",
     // ASS
     ASS_MAINTIEN = "Vous continuez à percevoir votre ASS le premier mois avec votre nouveau salaire",
     ASS_SANS_CUMUL = "Vous percevez l'ASS avec votre salaire pendant 3 mois encore",
