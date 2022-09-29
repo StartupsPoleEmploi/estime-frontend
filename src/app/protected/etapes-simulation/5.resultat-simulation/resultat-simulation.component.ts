@@ -17,6 +17,7 @@ import { DetailTemporaliteService } from '@app/core/services/utile/detail-tempor
 import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { ModificationCriteresComponent } from './modification-criteres/modification-criteres.component';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -44,6 +45,7 @@ export class ResultatSimulationComponent implements OnInit {
   @ViewChild(ModificationCriteresComponent) modificationCriteresComponent: ModificationCriteresComponent;
 
   constructor(
+    private deConnecteService: DeConnecteService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private deConnecteSimulationService: DeConnecteSimulationService,
     private detailTemporaliteService: DetailTemporaliteService,
@@ -57,6 +59,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     this.afficherDetails = true;
     this.loadDataSimulation();
     this.loadDetailTemporalite();
