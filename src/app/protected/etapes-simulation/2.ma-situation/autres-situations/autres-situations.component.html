@@ -1,0 +1,101 @@
+<div class="modal-header" attr.tag-page="{{atTag}}">
+    <span class="float-right label-close" (click)="modalRef?.hide()">Fermer</span>
+    <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="modalRef?.hide()" focus>
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <alert type="danger" *ngIf="messageErreur">
+        {{messageErreur}}
+    </alert>
+    <alert type="success" class="alert-success" *ngIf="messageSucces">
+        {{messageSucces}}
+    </alert>
+    <img alt='' src='./assets/images/logos/logo-estime.svg'>
+    <h3 class='pt-3 headline-3-typo color-blue-2-typo'>
+        Estime est disponible uniquement pour les ressources listées précédemment.
+    </h3>
+    <p class='body-1-typo'>
+        Aidez-nous à faire évoluer l’outil en nous indiquant votre situation
+    </p>
+    <h4 class="headline-4-typo">De quelle(s) ressources disposez-vous à l’heure actuelle ?</h4>
+    <div class="row">
+        <div class="col">
+            <button name="autre-situation-salaire" aria-label="Vous percevez un salaire" class="radio-button-style-1"
+                data-testid="btn-autre-situation-salaire" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-salaire" (click)="onClickCheckBoxAutreSituationSalaire()"
+                (keyup)="handleKeyUpOnButtonAutreSituationSalaire($event)" [(ngModel)]="autresSituations.salaire">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.SALAIRE}}</span>
+            </button>
+            <button name="autre-situation-alternant" aria-label="Vous percevez un salaire d'alternant"
+                class="radio-button-style-1" data-testid="btn-autre-situation-alternant" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-alternant" (click)="onClickCheckBoxAutreSituationAlternant()"
+                (keyup)="handleKeyUpOnButtonAutreSituationAlternant($event)" [(ngModel)]="autresSituations.alternant">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.ALTERNANT}}</span>
+            </button>
+            <button name="autre-situation-remu-formation" aria-label="Vous percevez une rémunération de formation"
+                class="radio-button-style-1" data-testid="btn-autre-situation-remu-formation" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-remu-formation" (click)="onClickCheckBoxAutreSituationRemuFormation()"
+                (keyup)="handleKeyUpOnButtonAutreSituationRemuFormation($event)"
+                [(ngModel)]="autresSituations.formation">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.FORMATION}}</span>
+            </button>
+            <button name="autre-situation-cej" aria-label="Vous percevez une allocation CEJ"
+                class="radio-button-style-1" data-testid="btn-autre-situation-cej" btnCheckbox tabindex="0"
+                (click)="onClickCheckBoxAutreSituationCEJ()" tag-action="clic-autre-situation-cej"
+                (keyup)="handleKeyUpOnButtonAutreSituationCEJ($event)" [(ngModel)]="autresSituations.cej">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.CEJ}}</span>
+            </button>
+            <button name="autre-situation-ada" aria-label="Vous percevez une allocation de demandeur d'asile"
+                class="radio-button-style-1" data-testid="btn-autre-situation-ada" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-ada" (click)="onClickCheckBoxAutreSituationADA()"
+                (keyup)="handleKeyUpOnButtonAutreSituationADA($event)" [(ngModel)]="autresSituations.ada">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.ADA}}</span>
+            </button>
+            <button name="autre-situation-allocation-securisation-professionnelle"
+                aria-label="Vous percevez une allocation de sécurisation professionnelle" class="radio-button-style-1"
+                data-testid="btn-autre-situation-allocation-securisation-professionnelle" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-allocation-securisation-professionnelle"
+                (click)="onClickCheckBoxAutreSituationAllocationSecurisationProfessionnelle()"
+                (keyup)="handleKeyUpOnButtonAutreSituationAllocationSecurisationProfessionnelle($event)"
+                [(ngModel)]="autresSituations.securisation_professionnelle">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.SECURISATION_PROFESSIONNELLE}}</span>
+            </button>
+            <button name="autre-situation-aucune-ressource" aria-label="Vous ne percevez aucune ressource"
+                class="radio-button-style-1" data-testid="btn-autre-situation-aucune-ressource" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-aucune-ressource"
+                (click)="onClickCheckBoxAutreSituationAucuneRessource()"
+                (keyup)="handleKeyUpOnButtonAutreSituationAucuneRessource($event)"
+                [(ngModel)]="autresSituations.aucune_ressource">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.AUCUNE_RESSOURCE}}</span>
+            </button>
+            <button name="autre-situation-autre" aria-label="Vous percevez autre chose"
+                class="radio-button-style-1 me-1" data-testid="btn-autre-situation-autre" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-autre" (click)="onClickCheckBoxAutreSituationAutre()"
+                (keyup)="handleKeyUpOnButtonAutreSituationAutre($event)" [(ngModel)]="autresSituations.autre">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.AUTRE}}</span>
+            </button>
+            <input *ngIf="autresSituations.autre === true" id="autre-input" class="form-control d-inline mb-2"
+                data-testid="input-autre-situation-autre" aria-label="Vous percevez d'autres ressources"
+                name="dureeHebdomadaire" [(ngModel)]="autresSituations.autre_contenu" placeholder="Précisez" required
+                type="text">
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message" *ngIf="isFormSubmitted  && !checkFormIsValid()">
+                        {{controleChampFormulaireService.MESSAGE_SELECTION_AUTRES_SITUATIONS}}
+                    </span>
+                </div>
+            </div>
+            <div class="row-btn-form">
+                <button id="btn-ma-situation-suivant" data-testid="btn-ma-situation-suivant" class="btn-suivant"
+                    aria-label="Passer à la page suivante" aria-label="Passer à la page suivante"
+                    (click)="onSubmitAutresSituationsForm()" tag-navigation="clic_bouton_suivant">
+                    <div>
+                        <span>Enregistrer</span>
+                        <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

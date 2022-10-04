@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
+import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -20,6 +21,7 @@ export class ModalChoixConnexionComponent {
   constructor(
     private peConnectService: PeConnectService,
     private individuConnectedService: IndividuConnectedService,
+    private sessionStorageEstimeService: SessionStorageEstimeService,
     private router: Router,
     public bsModalRef: BsModalRef,
     public screenService: ScreenService) { }

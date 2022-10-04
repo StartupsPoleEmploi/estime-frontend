@@ -27,6 +27,9 @@ import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emplo
 })
 export class MaSituationComponent implements OnInit {
 
+  //appel service http : gestion loading et erreur
+  isPageLoadingDisplay = false;
+
   beneficiaireAides: BeneficiaireAides;
   dateNaissance: DateDecomposee;
   dateRepriseCreationEntreprise: DateDecomposee;
@@ -484,5 +487,9 @@ export class MaSituationComponent implements OnInit {
     this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
     this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
+  }
+
+  public displayLoading(displayLoading: boolean) {
+    this.isPageLoadingDisplay = displayLoading;
   }
 }

@@ -6,6 +6,7 @@ import { SituationFamiliale } from "@models/situation-familiale";
 import { PeConnectAuthorization } from "./pe-connect-authorization";
 
 export class DemandeurEmploi {
+  idEstime: string;
   idPoleEmploi: string;
   beneficiaireAides: BeneficiaireAides;
   futurTravail: FuturTravail;
