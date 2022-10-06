@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
 import { IndividuConnectedService } from "@app/core/services/connexion/individu-connected.service";
@@ -26,6 +28,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private authorizationService: AuthorizationService,
+    private router: Router,
     public bsModalService: BsModalService,
     public modalService: ModalService,
     public individuConnectedService: IndividuConnectedService,
@@ -49,11 +52,14 @@ export class HomepageComponent implements OnInit {
   }
 
   public openModalOnEventChoixConnexion() {
-    const modalRef = this.bsModalService.show(ModalChoixConnexionComponent, this.config);
-    modalRef.content.notifyParent.subscribe((result) => {
-      console.error(result);
-      this.checkDemandeurEmploiConnecte();
-    })
+    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    else {
+      const modalRef = this.bsModalService.show(ModalChoixConnexionComponent, this.config);
+      modalRef.content.notifyParent.subscribe((result) => {
+        console.error(result);
+        this.checkDemandeurEmploiConnecte();
+      });
+    }
   }
 
   public login(): void {

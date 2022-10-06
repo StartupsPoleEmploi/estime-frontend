@@ -303,7 +303,7 @@ export class DetailTemporaliteService {
         }
         // Si le demandeur n'avait de prime d'activité au mois précédent
         else {
-          this.addDetailTemporaliteMois(indexMois - 1, this.getPhrasePPAAnticipee(simulationMensuelle));
+          if (indexMois != 0) this.addDetailTemporaliteMois(indexMois - 1, this.getPhrasePPAAnticipee(simulationMensuelle));
           this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.PRIME_ACTIVITE);
         }
       }

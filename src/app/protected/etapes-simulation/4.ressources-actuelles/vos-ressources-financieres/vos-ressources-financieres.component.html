@@ -54,6 +54,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo">
                     * Date de votre ouverture de droits à l'ASS
+                    <button id="infobulle-date-ouverture-ass" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle date d'ouverture ASS"
+                        (click)="modalService.openModalOnEvent($event, modalDateOuvertureASSTemplate)">
+                    </button>
                 </label>
             </div>
             <div class="row pb-3">
@@ -711,6 +715,20 @@
         </p>
         <div class='row mb-5'>
             <img alt='' src='./assets/images/exemples/attestation-ass.png'>
+        </div>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDateOuvertureASSTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-1-typo'>
+            Sur votre notification d'admission à l'ASS 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/ouverture-droit-ass.png'>
         </div>">
     </app-tooltip>
 </ng-template>
