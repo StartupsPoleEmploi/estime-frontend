@@ -204,22 +204,30 @@
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                             </button>
+                            <button name="beneficiaireAucuneRessource" class="radio-button-style-1"
+                                data-testid="btn-situation-aucune-ressource"
+                                aria-label="Vous ne percevez pas de ressources" [(ngModel)]="isSansRessource"
+                                btnCheckbox tabindex="0" #beneficiaireAucuneRessource="ngModel"
+                                (click)="onClickCheckBoxHasAucuneRessource()"
+                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.SANS_RESSOURCE)">
+                                <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
+                            </button>
                         </div>
-                        <div class="row pt-3">
+                        <div class="row py-2">
                             <div class="col-12">
-                                <span id="btn-aucune-ressource" class="body-2-typo color-pe-red-typo" tabindex="0"
-                                    tag-action="clic-sur-aucune-ressource"
-                                    (click)="modalService.openModalOnEvent($event, modalAucuneRessourceTemplate, true)">
-                                    Aucune de ces ressources
-                                    <img alt="" src="./assets/images/icones/fleche-droite-red.svg">
+                                <span class="error-input-message"
+                                    *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationDEntreeSelectionnee()">
+                                    {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
                                 </span>
                             </div>
                         </div>
                         <div class="row pb-3">
                             <div class="col-12">
-                                <span class="error-input-message"
-                                    *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationDEntreeSelectionnee()">
-                                    {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
+                                <span id="btn-aucune-ressource" class="body-2-typo color-pe-red-typo" tabindex="0"
+                                    tag-action="clic-sur-aucune-ressource"
+                                    (click)="modalService.openModalOnEvent($event, modalAucuneRessourceTemplate, true)">
+                                    Autres ressources
+                                    <img alt="" src="./assets/images/icones/fleche-droite-red.svg">
                                 </span>
                             </div>
                         </div>

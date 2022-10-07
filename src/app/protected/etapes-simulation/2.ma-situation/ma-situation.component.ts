@@ -31,6 +31,7 @@ export class MaSituationComponent implements OnInit {
   isPageLoadingDisplay = false;
 
   beneficiaireAides: BeneficiaireAides;
+  isSansRessource: boolean;
   dateNaissance: DateDecomposee;
   dateRepriseCreationEntreprise: DateDecomposee;
   informationsPersonnelles: InformationsPersonnelles;
@@ -100,6 +101,7 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.deConnecteService.unsetChiffreAffairesIndependant();
       this.informationsPersonnelles.travailleurIndependant = false;
+      this.isSansRessource = false;
     }
   }
 
@@ -111,12 +113,15 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.deConnecteService.unsetBeneficesMicroEntreprise();
       this.informationsPersonnelles.microEntrepreneur = false;
+      this.isSansRessource = false;
     }
   }
 
   public onClickCheckBoxHasAAH(): void {
     if (!this.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetAllocationMensuelleNetAAH();
+    } else {
+      this.isSansRessource = false;
     }
   }
 
@@ -129,6 +134,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.setAllocationMensuelleNetASS();
       this.deConnecteService.unsetAllocationMensuelleNetARE();
       this.beneficiaireAides.beneficiaireARE = false;
+      this.isSansRessource = false;
     }
   }
   public onClickCheckBoxHasARE(): void {
@@ -138,6 +144,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.setAllocationMensuelleNetARE();
       this.deConnecteService.unsetAllocationMensuelleNetASS();
       this.beneficiaireAides.beneficiaireASS = false;
+      this.isSansRessource = false;
     }
   }
 
@@ -147,12 +154,15 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.deConnecteService.setAllocationRSA();
       this.deConnecteService.unsetConjointAllocationRSA();
+      this.isSansRessource = false;
     }
   }
 
   public onClickCheckBoxHasRevenusImmobilier(): void {
     if (!this.informationsPersonnelles.hasRevenusImmobilier) {
       this.deConnecteService.unsetRevenusImmobilier();
+    } else {
+      this.isSansRessource = false;
     }
   }
 
@@ -161,7 +171,28 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetPensionInvalidite();
     } else {
       this.deConnecteService.setPensionInvalidite();
+      this.isSansRessource = false;
     }
+  }
+
+  public onClickCheckBoxHasAucuneRessource(): void {
+    if (!this.isSansRessource) {
+    } else {
+      this.unsetAides();
+      this.deConnecteService.unsetAides();
+    }
+  }
+
+  private unsetAides(): void {
+    this.beneficiaireAides.beneficiaireASS = false;
+    this.beneficiaireAides.beneficiaireARE = false;
+    this.beneficiaireAides.beneficiaireAAH = false;
+    this.beneficiaireAides.beneficiaireRSA = false;
+    this.beneficiaireAides.beneficiairePensionInvalidite = false;
+    this.informationsPersonnelles.hasRevenusImmobilier = false;
+    this.informationsPersonnelles.microEntrepreneur = false;
+    this.informationsPersonnelles.travailleurIndependant = false;
+
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
@@ -202,7 +233,8 @@ export class MaSituationComponent implements OnInit {
       || this.beneficiaireAides.beneficiaireRSA
       || this.beneficiaireAides.beneficiaireAAH
       || this.beneficiaireAides.beneficiaireARE
-      || this.beneficiaireAides.beneficiairePensionInvalidite);
+      || this.beneficiaireAides.beneficiairePensionInvalidite
+      || this.isSansRessource);
   }
 
   public isConcerneACRE(): boolean {
@@ -266,6 +298,9 @@ export class MaSituationComponent implements OnInit {
       }
       else if (situationPersonne === this.situationPersonneEnum.RSA) {
         this.onClickCheckBoxHasRSA();
+      }
+      else if (situationPersonne === this.situationPersonneEnum.SANS_RESSOURCE) {
+        this.onClickCheckBoxHasAucuneRessource();
       }
     }
   }

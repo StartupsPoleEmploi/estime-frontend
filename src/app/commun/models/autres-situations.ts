@@ -5,7 +5,6 @@ export class AutresSituations {
   cej: boolean;
   ada: boolean;
   securisation_professionnelle: boolean;
-  aucune_ressource: boolean;
   autre: boolean;
   autre_contenu: string;
 }

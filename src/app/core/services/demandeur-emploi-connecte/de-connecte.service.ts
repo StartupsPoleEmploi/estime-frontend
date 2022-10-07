@@ -325,6 +325,18 @@ export class DeConnecteService {
     }
   }
 
+  public unsetAides(): void {
+    this.unsetAllocationMensuelleNetAAH();
+    this.unsetAllocationMensuelleNetARE();
+    this.unsetAllocationMensuelleNetASS();
+    this.unsetBeneficiaireACRE();
+    this.unsetInfosRSA();
+    this.unsetPensionInvalidite();
+    this.unsetBeneficesMicroEntreprise();
+    this.unsetChiffreAffairesIndependant();
+    this.unsetRevenusImmobilier();
+  }
+
   public unsetConjoint(): void {
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.conjoint = null;
