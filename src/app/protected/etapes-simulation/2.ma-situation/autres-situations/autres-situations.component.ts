@@ -56,92 +56,12 @@ export class AutresSituationsComponent implements OnInit {
     this.autresSituations.cej = false;
     this.autresSituations.ada = false;
     this.autresSituations.securisation_professionnelle = false;
-    this.autresSituations.aucune_ressource = false;
     this.autresSituations.autre = false;
     this.autresSituations.autre_contenu = '';
   }
 
-  public onClickCheckBoxAutreSituationSalaire(): void {
-    if (this.autresSituations.salaire) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationSalaire(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationSalaire();
-  }
-
-  public onClickCheckBoxAutreSituationAlternant(): void {
-    if (this.autresSituations.alternant) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationAlternant(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationAlternant();
-  }
-
-  public onClickCheckBoxAutreSituationRemuFormation(): void {
-    if (this.autresSituations.formation) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationRemuFormation(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationRemuFormation();
-  }
-
-  public onClickCheckBoxAutreSituationCEJ(): void {
-    if (this.autresSituations.cej) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationCEJ(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationCEJ();
-  }
-
-  public onClickCheckBoxAutreSituationADA(): void {
-    if (this.autresSituations.ada) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationADA(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationADA();
-  }
-
-  public onClickCheckBoxAutreSituationAllocationSecurisationProfessionnelle(): void {
-    if (this.autresSituations.securisation_professionnelle) {
-      this.unsetAucuneRessource();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationAllocationSecurisationProfessionnelle(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationAllocationSecurisationProfessionnelle();
-  }
-
-  public onClickCheckBoxAutreSituationAucuneRessource(): void {
-    if (this.autresSituations.aucune_ressource) {
-      this.unsetAutresSituations();
-    }
-  }
-
-  public handleKeyUpOnButtonAutreSituationAucuneRessource(event: any): void {
-    event.preventDefault();
-    this.onClickCheckBoxAutreSituationAucuneRessource();
-  }
-
   public onClickCheckBoxAutreSituationAutre(): void {
-    if (this.autresSituations.autre) {
-      this.unsetAucuneRessource();
-    } else {
+    if (!this.autresSituations.autre) {
       this.autresSituations.autre_contenu = '';
     }
   }
@@ -164,21 +84,13 @@ export class AutresSituationsComponent implements OnInit {
 
   public checkFormIsValid() {
     this.isFormSubmitted = true;
+    let isValid = true;
     if (this.autresSituations != null) {
-      if (this.autresSituations.aucune_ressource) {
-        return !this.autresSituations.salaire
-          && !this.autresSituations.alternant
-          && !this.autresSituations.formation
-          && !this.autresSituations.cej
-          && !this.autresSituations.ada
-          && !this.autresSituations.securisation_professionnelle
-          && !this.autresSituations.autre
-          && this.autresSituations.autre_contenu == '';
-      }
       if (this.autresSituations.autre) {
-        return this.autresSituations.autre_contenu != '';
+        isValid = this.autresSituations.autre_contenu != '';
       }
     }
+    return isValid;
   }
 
   private traiterRetourCreerAutresSituations() {
@@ -193,21 +105,4 @@ export class AutresSituationsComponent implements OnInit {
     this.messageErreur = MessagesErreurEnum.ERREUR_ENREGISTREMENT_AUTRES_SITUATIONS;
 
   }
-
-  private unsetAucuneRessource(): void {
-    this.autresSituations.aucune_ressource = false;
-  }
-
-  private unsetAutresSituations(): void {
-    this.autresSituations.salaire = false;
-    this.autresSituations.alternant = false;
-    this.autresSituations.formation = false;
-    this.autresSituations.cej = false;
-    this.autresSituations.ada = false;
-    this.autresSituations.securisation_professionnelle = false;
-    this.autresSituations.autre = false;
-    this.autresSituations.autre_contenu = '';
-  }
-
-
 }

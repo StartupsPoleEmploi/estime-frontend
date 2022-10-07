@@ -5,6 +5,5 @@ export enum AutresSituationsPersonneEnum {
   CEJ = "Allocation CEJ (jeune)",
   ADA = "Allocation de Demandeur d'Asile (ADA)",
   SECURISATION_PROFESSIONNELLE = "Allocation de Sécurisation Professionnelle",
-  AUCUNE_RESSOURCE = "Aucune ressource",
   AUTRE = "Autre"
 }
