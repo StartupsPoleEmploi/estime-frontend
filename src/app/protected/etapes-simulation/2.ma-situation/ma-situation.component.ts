@@ -176,8 +176,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasAucuneRessource(): void {
-    if (!this.isSansRessource) {
-    } else {
+    if (this.isSansRessource) {
       this.unsetAides();
       this.deConnecteService.unsetAides();
     }
