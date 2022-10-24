@@ -168,7 +168,7 @@ export class DetailTemporaliteService {
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE)) {
         // Si on est au premier mois
         if (indexMois == 0) {
-          this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.ASS_MAINTIEN);
+          this.addDetailTemporaliteMois(indexMois, this.getPhraseAllocationPEPremierMois(simulationMensuelle));
         }
         else if (indexMois == 1) {
           // On conditionne l'affichage du détail au nombre de mois travaillés avant la simulation
@@ -254,7 +254,7 @@ export class DetailTemporaliteService {
   private handleChangementARE(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
     // Si on est au premier mois
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
-      this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.RELIQUAT_ARE);
+      this.addDetailTemporaliteMois(indexMois, this.getPhraseAllocationPEPremierMois(simulationMensuelle, false));
     } else if (indexMois == 1) {
       if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
@@ -362,6 +362,29 @@ export class DetailTemporaliteService {
         break;
     }
     return SituationTemporaliteEnum.PRIME_ACTIVITE_ANTICIPE + libelleMois;
+  }
+
+
+  private getPhraseAllocationPEPremierMois(simulationMensuelle: SimulationMensuelle, isASS: boolean = true): string {
+    const dateSimulation = this.dateUtileService.getDateFromStringDate(simulationMensuelle.datePremierJourMoisSimule);
+    const libelleMoisM = this.dateUtileService.getLibelleMoisFromDate(dateSimulation)
+    const dateSimulationMMoins1 = this.dateUtileService.enleverMoisToDate(dateSimulation, 1);
+    const moisSimulationMMoins1 = this.dateUtileService.getLibelleMoisFromDate(dateSimulationMMoins1);
+    let libelleMoisMMoins1 = "";
+    const typeAllocation = isASS ? 'ASS' : 'ARE';
+
+    switch (moisSimulationMMoins1) {
+      case "août":
+      case "avril":
+      case "octobre":
+        libelleMoisMMoins1 = `d'${moisSimulationMMoins1}`;
+        break;
+      default:
+        libelleMoisMMoins1 = `de ${moisSimulationMMoins1}`;
+        break;
+    }
+
+    return `Vous percevez début ${libelleMoisM} le paiement de votre droit ${typeAllocation} ${libelleMoisMMoins1}, et fin ${libelleMoisM} votre nouveau salaire.`;
   }
 
 }
