@@ -121,13 +121,13 @@ export class RessourcesActuellesComponent implements OnInit {
     if (personnesACharge != null && personnesACharge.length > 0) {
       for (let personne of personnesACharge) {
         if (personne.beneficiaireAides.beneficiaireRSA
-          && !personne.informationsPersonnelles.salarie
+          && !personne.informationsPersonnelles.isSalarie
           && !personne.beneficiaireAides.beneficiaireAAH
           && !personne.beneficiaireAides.beneficiaireARE
           && !personne.beneficiaireAides.beneficiaireASS
           && !personne.beneficiaireAides.beneficiairePensionInvalidite
-          && !personne.informationsPersonnelles.microEntrepreneur
-          && !personne.informationsPersonnelles.travailleurIndependant) {
+          && !personne.informationsPersonnelles.isMicroEntrepreneur
+          && !personne.informationsPersonnelles.isTravailleurIndependant) {
           result = true;
         } else {
           result = false;
@@ -144,13 +144,13 @@ export class RessourcesActuellesComponent implements OnInit {
     if (demandeurEmploiConnecte.situationFamiliale.isEnCouple
       && conjoint != null
       && (conjoint.beneficiaireAides.beneficiaireRSA
-        && !conjoint.informationsPersonnelles.salarie
+        && !conjoint.informationsPersonnelles.isSalarie
         && !conjoint.beneficiaireAides.beneficiaireAAH
         && !conjoint.beneficiaireAides.beneficiaireARE
         && !conjoint.beneficiaireAides.beneficiaireASS
         && !conjoint.beneficiaireAides.beneficiairePensionInvalidite
-        && !conjoint.informationsPersonnelles.microEntrepreneur
-        && !conjoint.informationsPersonnelles.travailleurIndependant)
+        && !conjoint.informationsPersonnelles.isMicroEntrepreneur
+        && !conjoint.informationsPersonnelles.isTravailleurIndependant)
     ) {
       result = true;
     }

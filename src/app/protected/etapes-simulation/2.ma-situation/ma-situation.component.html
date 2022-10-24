@@ -168,20 +168,10 @@
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                                 data-testid="btn-situation-micro-entrepreneur"
                                 tag-action="clic-sur-situation-micro-entrepreneur"
-                                [(ngModel)]="informationsPersonnelles.microEntrepreneur" btnCheckbox tabindex="0"
+                                [(ngModel)]="informationsPersonnelles.isMicroEntrepreneur" btnCheckbox tabindex="0"
                                 #microEntrepreneur="ngModel" (click)="onClickCheckBoxIsMicroEntrepreneur()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
                                 <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
-                            </button>
-                            <button id="btn-is-travailleur-independant" name="travailleurIndependant"
-                                aria-label="Vous êtes travailleur indépendant"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm"
-                                data-testid="btn-situation-travailleur-independant"
-                                tag-action="clic-sur-situation-revenu-immobilier"
-                                [(ngModel)]="informationsPersonnelles.travailleurIndependant" btnCheckbox tabindex="0"
-                                #travailleurIndependant="ngModel" (click)="onClickCheckBoxIsTravailleurIndependant()"
-                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
-                                <span class="body-2-typo">{{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
                             </button>
                             <button id="btn-has-revenus-immobilier" name="hasRevenusImmobilier"
                                 data-testid="btn-situation-revenu-immobilier"

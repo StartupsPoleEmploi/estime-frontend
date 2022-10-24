@@ -26,8 +26,8 @@ export class PersonneUtileService {
     const personne = new Personne();
     personne.beneficiaireAides = this.initBeneficiaireAides();
     personne.informationsPersonnelles = new InformationsPersonnelles();
-    personne.informationsPersonnelles.salarie = false;
-    personne.informationsPersonnelles.sansRessource = false;
+    personne.informationsPersonnelles.isSalarie = false;
+    personne.informationsPersonnelles.isSansRessource = false;
     if (isAvecRessourcesFinancieres) {
       personne.ressourcesFinancieresAvantSimulation = new RessourcesFinancieresAvantSimulation();
       personne.ressourcesFinancieresAvantSimulation.aidesCAF = new AidesCAF();
@@ -43,8 +43,8 @@ export class PersonneUtileService {
       if (this.isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete(personne)) {
         hasRessourcesFinancieres = true;
       }
-      if (!personne.informationsPersonnelles.sansRessource
-        && (personne.informationsPersonnelles.salarie
+      if (!personne.informationsPersonnelles.isSansRessource
+        && (personne.informationsPersonnelles.isSalarie
           || this.hasRessourcesAides(personne)
           || this.hasRevenus(personne)
         )
@@ -58,7 +58,7 @@ export class PersonneUtileService {
   private isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete(personne: Personne) {
     let isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete = false;
     if (personne.informationsPersonnelles) {
-      if (personne.informationsPersonnelles.sansRessource && personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois == null) {
+      if (personne.informationsPersonnelles.isSansRessource && personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois == null) {
         isSansRessourceEtHasTravailleAuCoursDernierMoisNonComplete = true;
       }
     }
@@ -121,16 +121,16 @@ export class PersonneUtileService {
 
   private isRevenusValides(personne: Personne): boolean {
     let isValide = true;
-    if (personne.informationsPersonnelles && personne.informationsPersonnelles.sansRessource) {
+    if (personne.informationsPersonnelles && personne.informationsPersonnelles.isSansRessource) {
       isValide = personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois != null;
     }
-    if (personne.informationsPersonnelles && personne.informationsPersonnelles.salarie) {
+    if (personne.informationsPersonnelles && personne.informationsPersonnelles.isSalarie) {
       isValide = personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet > 0;
     }
-    if (isValide && personne.informationsPersonnelles.microEntrepreneur) {
+    if (isValide && personne.informationsPersonnelles.isMicroEntrepreneur) {
       isValide = personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice > 0;
     }
-    if (isValide && personne.informationsPersonnelles.travailleurIndependant) {
+    if (isValide && personne.informationsPersonnelles.isTravailleurIndependant) {
       isValide = personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice > 0;
     }
     if (isValide && personne.informationsPersonnelles.hasRevenusImmobilier) {
@@ -166,8 +166,8 @@ export class PersonneUtileService {
     return personne.informationsPersonnelles
       && (
         personne.informationsPersonnelles.hasRevenusImmobilier
-        || personne.informationsPersonnelles.microEntrepreneur
-        || personne.informationsPersonnelles.travailleurIndependant
+        || personne.informationsPersonnelles.isMicroEntrepreneur
+        || personne.informationsPersonnelles.isTravailleurIndependant
       );
   }
 

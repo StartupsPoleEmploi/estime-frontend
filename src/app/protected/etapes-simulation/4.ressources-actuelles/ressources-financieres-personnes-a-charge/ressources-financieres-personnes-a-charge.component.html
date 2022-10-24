@@ -11,7 +11,7 @@
                     </span>
                 </div>
             </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.salarie">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isSalarie">
                 <div class="row pb-3">
                     <label class="label headline-4-typo" [for]="'salaireNetPersonneACharge'+personneDTO.index + 1">
                         * Salaire net perçu
@@ -349,7 +349,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.microEntrepreneur">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isMicroEntrepreneur">
                 <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1">
@@ -394,7 +394,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.travailleurIndependant">
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isTravailleurIndependant">
                 <div class="row pb-3">
                     <label class="label headline-4-typo"
                         [for]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1">

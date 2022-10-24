@@ -108,15 +108,15 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private isSituationValide(): boolean {
-    return this.nouvellePersonneACharge.informationsPersonnelles.salarie
-      || this.nouvellePersonneACharge.informationsPersonnelles.sansRessource
+    return this.nouvellePersonneACharge.informationsPersonnelles.isSalarie
+      || this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
       || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
-      || this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant
-      || this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur
+      || this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant
+      || this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur
       || this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite;
   }
 
@@ -141,10 +141,10 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   private resetInformationsPersonnelles(): void {
     if (this.nouvellePersonneACharge.informationsPersonnelles) {
-      this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
-      this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
-      this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur = false;
       this.nouvellePersonneACharge.informationsPersonnelles.hasRevenusImmobilier = false;
     }
   }

@@ -55,14 +55,15 @@ export class AutresSituationsComponent implements OnInit {
     this.autresSituations.formation = false;
     this.autresSituations.cej = false;
     this.autresSituations.ada = false;
-    this.autresSituations.securisation_professionnelle = false;
+    this.autresSituations.securisationProfessionnelle = false;
+    this.autresSituations.travailleurIndependant = false;
     this.autresSituations.autre = false;
-    this.autresSituations.autre_contenu = '';
+    this.autresSituations.autreContenu = '';
   }
 
   public onClickCheckBoxAutreSituationAutre(): void {
     if (!this.autresSituations.autre) {
-      this.autresSituations.autre_contenu = '';
+      this.autresSituations.autreContenu = '';
     }
   }
 
@@ -87,7 +88,7 @@ export class AutresSituationsComponent implements OnInit {
     let isValid = true;
     if (this.autresSituations != null) {
       if (this.autresSituations.autre) {
-        isValid = this.autresSituations.autre_contenu != '';
+        isValid = this.autresSituations.autreContenu != '';
       }
     }
     return isValid;

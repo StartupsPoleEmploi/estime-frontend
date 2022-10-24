@@ -17,14 +17,9 @@ export class DeConnecteInfosPersonnellesService {
     return demandeurEmploiConnecte.informationsPersonnelles.hasRevenusImmobilier === true;
   }
 
-  public isTravailleurIndependant(): boolean {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.travailleurIndependant === true;
-  }
-
   public isMicroEntrepreneur(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.microEntrepreneur === true;
+    return demandeurEmploiConnecte.informationsPersonnelles.isMicroEntrepreneur === true;
   }
 
   public isBeneficiaireACRE(): boolean {

@@ -31,6 +31,13 @@
                 tag-action="clic-autre-situation-alternant" [(ngModel)]="autresSituations.alternant">
                 <span class="body-2-typo">{{autresSituationsPersonneEnum.ALTERNANT}}</span>
             </button>
+            <button name="autre-situation-travailleur-independant"
+                aria-label="Vous percevez des revenus de travailleur indépendant" class="radio-button-style-1"
+                data-testid="btn-autre-situation-travailleur-independant" btnCheckbox tabindex="0"
+                tag-action="clic-autre-situation-travailleur-independant"
+                [(ngModel)]="autresSituations.travailleurIndependant">
+                <span class="body-2-typo">{{autresSituationsPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
+            </button>
             <button name="autre-situation-remu-formation" aria-label="Vous percevez une rémunération de formation"
                 class="radio-button-style-1" data-testid="btn-autre-situation-remu-formation" btnCheckbox tabindex="0"
                 tag-action="clic-autre-situation-remu-formation" [(ngModel)]="autresSituations.formation">
@@ -50,7 +57,7 @@
                 aria-label="Vous percevez une allocation de sécurisation professionnelle" class="radio-button-style-1"
                 data-testid="btn-autre-situation-allocation-securisation-professionnelle" btnCheckbox tabindex="0"
                 tag-action="clic-autre-situation-allocation-securisation-professionnelle"
-                [(ngModel)]="autresSituations.securisation_professionnelle">
+                [(ngModel)]="autresSituations.securisationProfessionnelle">
                 <span class="body-2-typo">{{autresSituationsPersonneEnum.SECURISATION_PROFESSIONNELLE}}</span>
             </button>
             <button name="autre-situation-autre" aria-label="Vous percevez autre chose"
@@ -61,7 +68,7 @@
             </button>
             <input *ngIf="autresSituations.autre === true" id="autre-input" class="form-control d-inline mb-2"
                 data-testid="input-autre-situation-autre" aria-label="Vous percevez d'autres ressources"
-                name="dureeHebdomadaire" [(ngModel)]="autresSituations.autre_contenu" placeholder="Précisez" required
+                name="dureeHebdomadaire" [(ngModel)]="autresSituations.autreContenu" placeholder="Précisez" required
                 type="text">
             <div class="row pb-3">
                 <div class="col-12">

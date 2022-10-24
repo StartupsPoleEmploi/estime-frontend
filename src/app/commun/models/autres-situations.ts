@@ -4,7 +4,8 @@ export class AutresSituations {
   formation: boolean;
   cej: boolean;
   ada: boolean;
-  securisation_professionnelle: boolean;
+  securisationProfessionnelle: boolean;
+  travailleurIndependant: boolean
   autre: boolean;
-  autre_contenu: string;
+  autreContenu: string;
 }

@@ -51,13 +51,13 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     let result = false;
     const personne = personneDTO.personne;
     if (personne.beneficiaireAides.beneficiaireRSA
-      && !personne.informationsPersonnelles.salarie
+      && !personne.informationsPersonnelles.isSalarie
       && !personne.beneficiaireAides.beneficiaireAAH
       && !personne.beneficiaireAides.beneficiaireARE
       && !personne.beneficiaireAides.beneficiaireASS
       && !personne.beneficiaireAides.beneficiairePensionInvalidite
-      && !personne.informationsPersonnelles.microEntrepreneur
-      && !personne.informationsPersonnelles.travailleurIndependant
+      && !personne.informationsPersonnelles.isMicroEntrepreneur
+      && !personne.informationsPersonnelles.isTravailleurIndependant
       && !personne.informationsPersonnelles.hasPensionRetraite) {
       result = true;
     }

@@ -611,41 +611,6 @@
                 </div>
             </div>
         </div>
-        <div *ngIf="deConnecteInfosPersonnellesService.isTravailleurIndependant()">
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="chiffreAffairesIndependantDernierExercice">
-                    * Chiffre d'affaires en tant qu'indépendant
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="chiffreAffairesIndependantDernierExercice"
-                        name="chiffreAffairesIndependantDernierExercice"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
-                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        placeholder="Montant" data-testid="input-revenus-independant"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (this.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
-                        required inputmode="numeric" #chiffreAffairesIndependantDernierExercice="ngModel">
-                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
-                </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || chiffreAffairesIndependantDernierExercice?.touched)  && chiffreAffairesIndependantDernierExercice?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-            </div>
-        </div>
         <div *ngIf="deConnecteInfosPersonnellesService.hasRevenusImmobilier()">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="revenusImmobilierFoyer">

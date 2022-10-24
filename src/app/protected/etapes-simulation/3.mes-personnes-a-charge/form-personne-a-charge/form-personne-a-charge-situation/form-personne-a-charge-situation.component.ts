@@ -43,7 +43,7 @@ export class FormPersonneAChargeSituationComponent {
       this.unsetAAH();
     } else {
       this.setAAH();
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
@@ -53,7 +53,7 @@ export class FormPersonneAChargeSituationComponent {
       this.unsetARE();
     } else {
       this.setARE();
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
@@ -63,7 +63,7 @@ export class FormPersonneAChargeSituationComponent {
       this.unsetASS();
     } else {
       this.setASS();
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
@@ -73,26 +73,26 @@ export class FormPersonneAChargeSituationComponent {
       this.unsetRSA();
     } else {
       this.setRSA();
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
   public onClickCheckBoxIsMicroEntrepreneur(event): void {
     event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
+    if (!this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur) {
       this.unsetBeneficesMicroEntreprise();
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
       this.unsetChiffreAffairesIndependant();
     }
   }
 
   public onClickCheckBoxIsTravailleurIndependant(event): void {
     event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
+    if (!this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant) {
       this.unsetChiffreAffairesIndependant();
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
       this.unsetBeneficesMicroEntreprise();
     }
   }
@@ -103,7 +103,7 @@ export class FormPersonneAChargeSituationComponent {
       this.unsetPensionInvalidite();
     } else {
       this.setPensionInvalidite();
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
@@ -112,16 +112,16 @@ export class FormPersonneAChargeSituationComponent {
     if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
       this.unsetPensionRetraite();
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
   public onClickCheckBoxIsSalarie(event): void {
     event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.salarie) {
+    if (!this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = null;
     } else {
-      this.nouvellePersonneACharge.informationsPersonnelles.sansRessource = false;
+      this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = new Salaire();
     }
   }
@@ -178,7 +178,7 @@ export class FormPersonneAChargeSituationComponent {
   }
 
   private unsetSalaire(): void {
-    this.nouvellePersonneACharge.informationsPersonnelles.salarie = false;
+    this.nouvellePersonneACharge.informationsPersonnelles.isSalarie = false;
     this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = null;
   }
 
@@ -248,15 +248,15 @@ export class FormPersonneAChargeSituationComponent {
   }
 
   private unsetBeneficesMicroEntreprise(): void {
-    if (this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur) {
-      this.nouvellePersonneACharge.informationsPersonnelles.microEntrepreneur = false;
+    if (this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur) {
+      this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur = false;
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice = null;
     }
   }
 
   private unsetChiffreAffairesIndependant(): void {
-    if (this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant) {
-      this.nouvellePersonneACharge.informationsPersonnelles.travailleurIndependant = false;
+    if (this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant) {
+      this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant = false;
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice = null;
     }
   }

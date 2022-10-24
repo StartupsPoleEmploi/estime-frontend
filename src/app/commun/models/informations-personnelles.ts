@@ -2,18 +2,17 @@ import { Logement } from "./logement";
 
 export class InformationsPersonnelles {
   dateNaissance: string;
-  email: string;
-  hasRevenusImmobilier: boolean;
-  travailleurIndependant: boolean;
-  microEntrepreneur: boolean;
-  hasPensionRetraite: boolean;
-  logement: Logement;
-  salarie: boolean;
-  sansRessource: boolean;
   nationalite: string;
   nom: string;
   prenom: string;
-  titreSejourEnFranceValide: boolean;
+  logement: Logement;
+  hasTitreSejourEnFranceValide: boolean;
+  hasRevenusImmobilier: boolean;
+  hasPensionRetraite: boolean;
+  isSalarie: boolean;
+  isSansRessource: boolean;
+  isMicroEntrepreneur: boolean;
+  isTravailleurIndependant: boolean;
   isBeneficiaireACRE: boolean;
   dateRepriseCreationEntreprise: string;
 }

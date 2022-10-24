@@ -2,7 +2,7 @@
     <form (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
         #ressourcesFinancieresConjointForm="ngForm">
-        <div *ngIf="conjoint.informationsPersonnelles.salarie">
+        <div *ngIf="conjoint.informationsPersonnelles.isSalarie">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="conjointSalaireNet">
                     * Salaire net perçu
@@ -321,7 +321,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="conjoint.informationsPersonnelles.microEntrepreneur">
+            <div *ngIf="conjoint.informationsPersonnelles.isMicroEntrepreneur">
                 <div class="row pb-3">
                     <label class="label headline-4-typo" for="conjointBeneficesMicroEntrepriseDernierExercice">
                         * Bénéfices en tant que micro entrepreneur
@@ -362,7 +362,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="conjoint.informationsPersonnelles.travailleurIndependant">
+            <div *ngIf="conjoint.informationsPersonnelles.isTravailleurIndependant">
                 <div class="row pb-3">
                     <label class="label headline-4-typo" for="conjointChiffreAffairesIndependantDernierExercice">
                         * Chiffre d'affaires en tant qu'indépendant
