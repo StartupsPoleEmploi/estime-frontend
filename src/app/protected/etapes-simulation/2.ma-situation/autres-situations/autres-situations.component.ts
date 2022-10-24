@@ -96,7 +96,7 @@ export class AutresSituationsComponent implements OnInit {
   private traiterRetourCreerAutresSituations() {
     this.displayLoading.emit(false);
     this.isFormSubmitted = false;
-    this.messageSucces = "Votre situation a bien été enregistrée";
+    this.messageSucces = "Votre situation a bien été enregistrée. Merci d'avoir contribué à l'évolution du service.";
 
   }
 
