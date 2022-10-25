@@ -390,7 +390,8 @@
                         <div class="col">
                             <button #conjointIsSalarie="ngModel" name="conjointIsSalarie"
                                 aria-label="Votre conjoint(e) perçoit un salaire" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-salarie" btnCheckbox tabindex="0"
+                                data-testid="btn-situation-conjoint-salarie"
+                                tag-action="clic-sur-situation-conjoint-salarie" btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
                                 (click)="onClickCheckBoxConjointIsSalarie()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
@@ -398,7 +399,8 @@
                             </button>
                             <button #conjointHasARE="ngModel" name="conjointHasARE"
                                 aria-label="Votre conjoint(e) perçoit l' ARE" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-are" btnCheckbox tabindex="0"
+                                data-testid="btn-situation-conjoint-are" tag-action="clic-sur-situation-conjoint-are"
+                                btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE"
                                 (click)="onClickCheckBoxConjointHasARE()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
@@ -406,7 +408,8 @@
                             </button>
                             <button #conjointHasASS="ngModel" name="conjointHasASS"
                                 aria-label="Votre conjoint(e) perçoit l' ASS" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-ass" btnCheckbox tabindex="0"
+                                data-testid="btn-situation-conjoint-ass" tag-action="clic-sur-situation-conjoint-ass"
+                                btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS"
                                 (click)="onClickCheckBoxConjointHasASS()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
@@ -415,7 +418,8 @@
                             <button *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('conjoint')"
                                 #conjointHasRSA="ngModel" name="conjointHasRSA"
                                 aria-label="Votre conjoint(e) perçoit le RSA" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-rsa" btnCheckbox tabindex="0"
+                                data-testid="btn-situation-conjoint-rsa" tag-action="clic-sur-situation-conjoint-rsa"
+                                btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA"
                                 (click)="onClickCheckBoxConjointHasRSA()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
@@ -425,6 +429,7 @@
                                 aria-label="Votre conjoint(e) est micro entrepreneur"
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                                 data-testid="btn-situation-conjoint-micro-entrepreneur"
+                                tag-action="clic-sur-situation-conjoint-micro-entrepreneur"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur"
                                 btnCheckbox tabindex="0" #conjointIsMicroEntrepreneur="ngModel"
                                 (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
@@ -435,6 +440,7 @@
                                 aria-label="Votre conjoint(e) est travailleur indépendant"
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                                 data-testid="btn-situation-conjoint-travailleur-independant"
+                                tag-action="clic-sur-situation-conjoint-travailleur-independant"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant"
                                 btnCheckbox tabindex="0" #conjointIsTravailleurIndependant="ngModel"
                                 (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
@@ -443,6 +449,7 @@
                             </button>
                             <button id="btn-conjoint-has-revenus-immobilier" name="conjointHasRevenusImmobilier"
                                 data-testid="btn-situation-conjoint-revenu-immobilier"
+                                tag-action="clic-sur-situation-conjoint-revenus-immobiliers"
                                 aria-label="Votre conjoint(e) a des revenus immobiliers"
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier"
@@ -454,7 +461,7 @@
                             <button #conjointHasPensionInvalidite="ngModel" name="conjointIsRetraite"
                                 aria-label="Votre conjoint(e) perçoit une pension de retraite"
                                 class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-retraite"
-                                btnCheckbox tabindex="0"
+                                tag-action="clic-sur-situation-conjoint-pension-retraite" btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite"
                                 (click)="onClickCheckBoxConjointHasPensionRetraite()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_RETRAITE)">
@@ -462,7 +469,8 @@
                             </button>
                             <button #conjointHasAAH="ngModel" name="conjointHasAAH"
                                 aria-label="Votre conjoint(e) perçoit l'AAH" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-aah" btnCheckbox tabindex="0"
+                                data-testid="btn-situation-conjoint-aah" tag-action="clic-sur-situation-conjoint-aah"
+                                btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH"
                                 (click)="onClickCheckBoxConjointHasAAH()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
@@ -471,7 +479,7 @@
                             <button #conjointHasPensionInvalidite="ngModel" name="conjointHasInvalidite"
                                 aria-label="Votre conjoint(e) perçoit une pension d'invalidité"
                                 class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-invalidite"
-                                btnCheckbox tabindex="0"
+                                tag-action="clic-sur-situation-conjoint-pension-invalidite" btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite"
                                 (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
@@ -480,7 +488,7 @@
                             <button #conjointIsSansRessource="ngModel" name="conjointIsSansRessource"
                                 aria-label="Votre conjoint(e) est sans ressources financières"
                                 class="radio-button-style-1" data-testid="btn-situation-conjoint-sans-ressource"
-                                btnCheckbox tabindex="0"
+                                tag-action="clic-sur-situation-conjoint-sans-ressource" btnCheckbox tabindex="0"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
                                 (click)="onClickCheckBoxConjointIsSansRessource()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">

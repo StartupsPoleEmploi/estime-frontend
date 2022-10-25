@@ -54,7 +54,10 @@
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.AAH)">
             <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
         </button>
-        <button name="beneficiairePensionInvalidite" class="radio-button-style-1"
+        <button name="beneficiairePensionInvalidite"
+            aria-label="Cette personne à charge perçoit une pension d'invalidité" class="radio-button-style-1"
+            data-testid="btn-situation-conjoint-pension-invalidite"
+            tag-action="clic-sur-situation-personne-a-charge-pension-invalidite"
             [(ngModel)]="nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite" btnCheckbox
             tabindex="0" (click)="onClickCheckBoxHasPensionInvalidite($event)" #beneficiairePensionInvalidite="ngModel"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.PENSION_INVALIDITE)">
@@ -62,13 +65,16 @@
         </button>
         <button *ngIf="hasAgeEligibleRetraite()" #personneAChargeHasPensionInvalidite="ngModel"
             name="beneficiairePensionInvalidite" aria-label="Cette personne à charge perçoit une pension de retraite"
-            class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-retraite" btnCheckbox tabindex="0"
+            class="radio-button-style-1" data-testid="btn-situation-personne-a-charge-pension-retraite"
+            tag-action="clic-sur-situation-personne-a-charge-pension-retraite" btnCheckbox tabindex="0"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite"
             (click)="onClickCheckBoxHasPensionRetraite($event)"
             (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_RETRAITE)">
             <span class="body-2-typo">{{situationPersonneEnum.PENSION_RETRAITE}}</span>
         </button>
-        <button name="sansRessource" class="radio-button-style-1"
+        <button name="sansRessource" aria-label="Cette personne à charge ne perçoit pas de ressources"
+            class="radio-button-style-1" data-testid="btn-situation-personne-a-charge-sans-ressource"
+            tag-action="clic-sur-situation-personne-a-charge-sans-ressource"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.sansRessource" btnCheckbox tabindex="0"
             #isSansEmploi="ngModel" (click)="onClickCheckBoxIsSansRessource($event)"
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SANS_RESSOURCE)">
