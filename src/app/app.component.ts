@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   isDisplayFilAriane: boolean;
   subscriptionRouteNavigationEndObservable: Subscription;
   subscriptionTrafficSourceObservable: Subscription;
-  private static TRAFFIC_SOURCE: string = 'at_campaign';
 
   constructor(
     private router: Router,
