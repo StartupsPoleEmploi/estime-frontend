@@ -45,7 +45,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
       if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
         this.sessionPeConnectExpiredService.navigateToRouteActivated();
       } else {
-        this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+        this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { skipLocationChange: false, replaceUrl: false });
       }
     } else {
       this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();

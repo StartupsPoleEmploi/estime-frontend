@@ -34,7 +34,7 @@ export class SessionPeConnectExpiredService {
     keyboard: false,
     animated: true,
     ignoreBackdropClick: true,
-    class: 'gray half-top full-height-modal not-side-modal'
+    class: 'gray half-top not-side-modal'
   };
 
   public startCheckUserInactivity() {

@@ -109,4 +109,32 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
     return 'input-annee-date';
   }
 
+  public isJourInvalide(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && jourDate.errors?.required && (!moisDate.errors?.required && !anneeDate.errors?.required);
+  }
+
+  public isMoisInvalide(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && moisDate.errors?.required && (!jourDate.errors?.required && !anneeDate.errors?.required);
+  }
+
+  public isAnneeInvalide(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && anneeDate.errors?.required && (!jourDate.errors?.required && !moisDate.errors?.required);
+  }
+
+  public isJourMoisInvalides(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && jourDate.errors?.required && moisDate.errors?.required && !anneeDate.errors?.required;
+  }
+
+  public isJourAnneeInvalides(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && jourDate.errors?.required && anneeDate.errors?.required && !moisDate.errors?.required;
+  }
+
+  public isMoisAnneeInvalides(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && moisDate.errors?.required && anneeDate.errors?.required && !jourDate.errors?.required;
+  }
+
+  public isJourMoisAnneeInvalides(jourDate, moisDate, anneeDate): boolean {
+    return (this.isFormSubmitted) && moisDate.errors?.required && anneeDate.errors?.required && jourDate.errors?.required;
+  }
+
 }

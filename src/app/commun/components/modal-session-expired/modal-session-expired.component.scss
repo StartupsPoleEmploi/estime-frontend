@@ -1,56 +1,29 @@
 @import "../../../../assets/scss/variables";
 
+#btn-se-connecter {
+  box-shadow: unset;
 
+  @media #{$extra-small-device} {
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
+  }
 
-.modal-base {
-  background-color: $color-white-1;
-  color: $color-blue-1;
-}
-
-.modal-header {
-  @extend .modal-base;
-  border-bottom: 0;
-  padding-bottom: 0;
-  padding-top: 1rem;
-  button {
-    opacity: unset !important;
-    span {
-      font-size: 1.5em;
-      color: $color-blue-1;
-    }
-    &:focus {
-      outline: unset;
+  img {
+    @media #{$extra-small-device} {
+      margin-left: -0.5rem;
     }
   }
-}
 
-.modal-body {
-  @extend .modal-base;
-  border-bottom: 0;
   span {
-    font-weight: bold;
-    font-size: 1.125em;
-  }
+    text-decoration: none;
 
-  .col-1, .col-11 {
-    padding-left: 0.5rem;
+    @media #{$extra-small-device} {
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    padding-left: 0;
     padding-right: 0.5rem;
   }
 }
-
-.modal-footer {
-  button {
-    margin-left: auto;
-    margin-right: auto;
-
-    @media #{$medium-device} {
-      min-width: 22rem;
-    }
-
-    img {
-      vertical-align: top;
-    }
-  }
-  border-top: 0;
-}
-

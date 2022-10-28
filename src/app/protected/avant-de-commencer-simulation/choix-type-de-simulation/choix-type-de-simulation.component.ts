@@ -29,7 +29,6 @@ export class ChoixTypeDeSimulationComponent {
 
   public clickOnSimulationComplete() {
     this.commencerSimulation.emit();
-
   }
   public handleKeyUpOnSimulationComplete(e: any): void {
     e.preventDefault();
@@ -39,11 +38,9 @@ export class ChoixTypeDeSimulationComponent {
   }
 
   public clickOnSimulationRapide() {
-
-
     this.redirectionExterneService.navigate(ChoixTypeDeSimulationComponent.URL_SIMUL_CALCUL);
-
   }
+
   public handleKeyUpOnSimulationRapide(e: any): void {
     e.preventDefault();
     if (e.keyCode === 13) {

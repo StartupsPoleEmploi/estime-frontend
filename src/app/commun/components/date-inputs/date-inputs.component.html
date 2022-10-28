@@ -29,18 +29,38 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <span class="error-input-message" *ngIf="(isFormSubmitted || jourDate.touched)  && jourDate.errors?.required">
+        <span class="error-input-message" *ngIf="isJourInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="(isFormSubmitted || moisDate.touched)  && moisDate.errors?.required">
+        <span class="error-input-message" *ngIf="isMoisInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="(isFormSubmitted || anneeDate.touched) && anneeDate.errors?.required">
+        <span class="error-input-message" *ngIf="isAnneeInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="isJourMoisInvalides(jourDate, moisDate, anneeDate)">
+            {{controleChampFormulaireService.MESSAGE_DATE_JOUR_MOIS_OBLIGATOIRES}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="isJourAnneeInvalides(jourDate, moisDate, anneeDate)">
+            {{controleChampFormulaireService.MESSAGE_DATE_JOUR_ANNEE_OBLIGATOIRES}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="isMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
+            {{controleChampFormulaireService.MESSAGE_DATE_MOIS_ANNEE_OBLIGATOIRES}}
+        </span>
+    </div>
+    <div class="col-12">
+        <span class="error-input-message" *ngIf="isJourMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
+            {{controleChampFormulaireService.MESSAGE_DATE_JOUR_MOIS_ANNEE_OBLIGATOIRES}}
         </span>
     </div>
     <div class="col-12">

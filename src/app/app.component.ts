@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
 import { Subscription } from 'rxjs';
 import { SessionStorageEstimeService } from './core/services/storage/session-storage-estime.service';
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   isDisplayFilAriane: boolean;
   subscriptionRouteNavigationEndObservable: Subscription;
   subscriptionTrafficSourceObservable: Subscription;
+  subscriptionPopstateEventObservable: Subscription;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   ) {
     this.subscribeRouteNavigationEndObservable();
     this.subscribeTrafficSourceObservable();
+    this.subscribePopstateEventObservable();
   }
 
   ngOnInit(): void {
@@ -66,6 +68,28 @@ export class AppComponent implements OnInit {
           this.sessionStorageEstimeService.storeTrafficSource(trafficSource);
         } else {
           this.sessionStorageEstimeService.storeTrafficSource(trafficSource.join(', '));
+        }
+      }
+    });
+  }
+
+
+
+  /** Subscription
+   *
+   * Permet d'observer les évenements de router et notamment les événements type "popstate" qui concernent les retours en arrière du navigateur
+   * Si le retour en arrière pointe vers la route /signin-callback, on le redirige vers la homepage
+   *
+   * Permet de régler le soucis de l'appel à l'authentification côté backend au retour à l'arrière générant des erreurs 400
+   * en évitant d'utiliser deux fois le même code de récupération d'access_token
+   */
+  private subscribePopstateEventObservable(): void {
+    this.subscriptionPopstateEventObservable = this.router.events.subscribe(routerEvent => {
+      if (routerEvent instanceof NavigationStart) {
+        if (routerEvent.navigationTrigger === "popstate") {
+          if (routerEvent.url.split('?')[0] == `/${RoutesEnum.SIGNIN_CALLBACK}`) {
+            this.router.navigate([RoutesEnum.HOMEPAGE], { replaceUrl: true });
+          }
         }
       }
     });

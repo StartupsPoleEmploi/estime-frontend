@@ -1,8 +1,9 @@
 <div class="modal-header">
-    <div class="close-popover col" aria-label="Close">
-        <em class="fas fa-times-circle mb-2 ms-auto float-end" (click)="onClickButtonClosePopup()">
-        </em>
-    </div>
+    <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
+    <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
+        focus>
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
 </div>
 <div class="modal-body">
     <div class="container-fluid">
@@ -14,12 +15,17 @@
                 <span>Votre session a expiré, vous devez vous reconnecter pour continuer votre simulation.</span>
             </div>
         </div>
+        <div class="row mt-4">
+            <div class="col">
+                <button id="btn-se-connecter" type="button" aria-label="Se connecter avec Pôle emploi"
+                    class="btn-homepage button-typo mx-auto" (click)="onClickButtonSeConnecterAvecPE()">
+                    <img alt="" class="image-1" src="./assets/images/logos/logo-pe-white.svg"
+                        *ngIf="!screenService.isExtraSmallScreen()">
+                    <span class="span-se-connecter">
+                        Se connecter avec Pôle emploi
+                    </span>
+                </button>
+            </div>
+        </div>
     </div>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn-homepage btn-pe-connect" (click)="onClickButtonSeConnecterAvecPE()">
-        <span class="button-typo">Me connecter avec Pôle emploi</span>
-        <img *ngIf="!screenService.isExtraSmallScreen()" alt="Connexion Pôle emploi"
-            src="./assets/images/logos/logo-pe-white.svg">
-    </button>
 </div>

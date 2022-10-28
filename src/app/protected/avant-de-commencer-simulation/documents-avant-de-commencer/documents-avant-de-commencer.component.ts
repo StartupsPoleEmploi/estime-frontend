@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './documents-avant-de-commencer.component.html',
   styleUrls: ['./documents-avant-de-commencer.component.scss']
 })
-export class DocumentsAvantDeCommencerComponent implements OnDestroy {
+export class DocumentsAvantDeCommencerComponent {
 
   isPageLoadingDisplay = false;
   isChoixSimulationDisplay = false;
@@ -32,10 +32,6 @@ export class DocumentsAvantDeCommencerComponent implements OnDestroy {
     public screenService: ScreenService,
     public modalService: ModalService
   ) {
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptionPopstateEventObservable.unsubscribe();
   }
 
   public onClickButtonJeContinue(): void {

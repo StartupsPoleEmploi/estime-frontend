@@ -12,6 +12,10 @@ export class ControleChampFormulaireService {
   MESSAGE_DATE_ANNEE_OBLIGATOIRE = "L'année est obligatoire";
   MESSAGE_DATE_JOUR_OBLIGATOIRE = "Le jour est obligatoire";
   MESSAGE_DATE_MOIS_OBLIGATOIRE = "Le mois est obligatoire";
+  MESSAGE_DATE_JOUR_ANNEE_OBLIGATOIRES = "Le jour et l'année sont obligatoires";
+  MESSAGE_DATE_JOUR_MOIS_OBLIGATOIRES = "Le jour et le mois sont obligatoires";
+  MESSAGE_DATE_MOIS_ANNEE_OBLIGATOIRES = "Le mois et l'année sont obligatoires";
+  MESSAGE_DATE_JOUR_MOIS_ANNEE_OBLIGATOIRES = "Le jour, le mois et l'année sont obligatoires";
   MESSAGE_DUREE_HEBDO_INCORRECTE = "La durée hebdomadaire renseignée est incorrecte";
   MESSAGE_MONTANT_ERREUR = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 900,49)";
   MESSAGE_MONTANT_ERREUR_2 = "Le montant doit être un nombre avec 2 décimales maximum séparées par une virgule (exemple : 16,89)";
