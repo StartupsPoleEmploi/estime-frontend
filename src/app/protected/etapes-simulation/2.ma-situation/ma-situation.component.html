@@ -539,3 +539,37 @@
     <app-autres-situations [modalRef]="modalService.modalRef" (displayLoading)="displayLoading($event)">
     </app-autres-situations>
 </ng-template>
+
+<ng-template #modalPensionInvaliditeEtMicro>
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_micro" htmlData="
+        <img alt='' src='./assets/images/icones/warning.svg'>
+        <h4 class='headline-4-typo mt-4 mb-3'>
+            Estime n'est pas en mesure d'effectuer la simulation au regard de votre situation.
+        </h3>
+        <p class='body-1-typo'>
+            Merci de vous renseigner auprès de l'organisme en charge du paiement de votre pension d'invalidité.
+        </p>
+        <a href='https://www.service-public.fr/particuliers/vosdroits/F15973' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
+            Site de la Caisse primaire d’assurance maladie
+            <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
+        </a>
+        ">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalAAHEtMicro>
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_micro" htmlData="
+        <img alt='' src='./assets/images/icones/warning.svg'>
+        <h4 class='headline-4-typo mt-4 mb-3'>
+            Estime n'est pas en mesure d'effectuer la simulation au regard de votre situation.
+        </h3>
+        <p class='body-1-typo'>
+            Merci de vous renseigner auprès de l'organisme en charge du paiement de votre Allocation Adulte Handicapé.
+        </p>
+        <a href='https://caf.fr/' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
+            Site de la Caisse d'allocations familiales
+            <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
+        </a>
+        ">
+    </app-tooltip>
+</ng-template>

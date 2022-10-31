@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -52,6 +52,10 @@ export class MaSituationComponent implements OnInit {
     { label: NationalitesEnum.AUTRE }
   ];
 
+  @ViewChild('modalPensionInvaliditeEtMicro') modalPensionInvaliditeEtMicro;
+  @ViewChild('modalAAHEtMicro') modalAAHEtMicro;
+
+
   constructor(
     private communeApiService: CommuneApiService,
     private dateUtileService: DateUtileService,
@@ -99,6 +103,10 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetBeneficiaireACRE();
       this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
+      // évite de déclencher deux fois l'ouverture de modale
+      if (!this.checkSiAAHEtMicro()) {
+        this.checkSiPensionInvaliditeEtMicro();
+      };
       this.isSansRessource = false;
     }
   }
@@ -107,6 +115,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetAllocationMensuelleNetAAH();
     } else {
+      this.checkSiAAHEtMicro();
       this.isSansRessource = false;
     }
   }
@@ -157,6 +166,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetPensionInvalidite();
     } else {
       this.deConnecteService.setPensionInvalidite();
+      this.checkSiPensionInvaliditeEtMicro();
       this.isSansRessource = false;
     }
   }
@@ -487,7 +497,9 @@ export class MaSituationComponent implements OnInit {
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
       && (this.isNonBeneficiaireACRE() || this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise))
       && (!this.situationFamiliale.isEnCouple
-        || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide);
+        || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide)
+      && !this.checkSiAAHEtMicro()
+      && !this.checkSiPensionInvaliditeEtMicro();
   }
 
   private isNonBeneficiaireACRE() {
@@ -502,5 +514,21 @@ export class MaSituationComponent implements OnInit {
 
   public displayLoading(displayLoading: boolean) {
     this.isPageLoadingDisplay = displayLoading;
+  }
+
+  public checkSiAAHEtMicro(): boolean {
+    if (this.beneficiaireAides.beneficiaireAAH && this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.modalService.openModal(this.modalAAHEtMicro);
+      return true;
+    }
+    return false;
+  }
+
+  public checkSiPensionInvaliditeEtMicro(): boolean {
+    if (this.beneficiaireAides.beneficiairePensionInvalidite && this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.modalService.openModal(this.modalPensionInvaliditeEtMicro);
+      return true;
+    }
+    return false;
   }
 }
