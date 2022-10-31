@@ -7,6 +7,35 @@
   .row-style-3 {
     margin: 0;
 
+    &.infos-resultat-container {
+      background-color: $color-pe-teal;
+      border-radius: 1.5rem;
+      padding:1.5rem;
+      margin-top:1.5rem;
+
+      @media #{$extra-small-device} {
+        border-radius:unset;
+        margin-right:-1rem;
+        margin-left:-1rem;
+        padding:1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      img {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      h4, span {
+        color:white;
+        text-align: start;
+
+        &#mois-versement-infos-resultat {
+          font-weight: bold;
+        }
+      }
+    }
+
     .col-12 {
       margin: 0;
       padding: 0;

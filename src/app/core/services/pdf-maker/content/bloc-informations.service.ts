@@ -6,68 +6,158 @@ import { Table } from "../models/table/table";
 import { TableElement } from "../models/table/table-element";
 import { Rectangle } from "../models/figure/elements/rectangle";
 import { Figure } from "../models/figure/figure";
+import { DateUtileService } from '../../utile/date-util.service';
+import { ImagesBase64Enum } from '@app/commun/enumerations/images-base64.enum';
+import { Text } from '../models/text';
 
 @Injectable({ providedIn: 'root' })
 export class BlockInformationsService {
 
+  informationData;
+
+  constructor(
+    private dateUtileService: DateUtileService
+  ) {
+
+  }
   public addBlockInformations(content: Array<any>): any {
+
+    this.informationData = this.getInformationData();
+    this.addSeparator(content);
     this.addTableInformations(content);
-    this.addRectangle(content);
+    this.addSeparator(content);
+  }
+
+  private getInformationData(): Object {
+    return {
+      localisation: {
+        image: ImagesBase64Enum.ICONE_LOCALISATION,
+        title: 'Basée sur une reprise d\'emploi',
+        text: `en ${this.dateUtileService.getLibelleMoisApresDateJour(1).toLowerCase()} et un versement des salaires en fin de mois`
+      },
+      calendrier: {
+        image: ImagesBase64Enum.ICONE_CALENDRIER,
+        title: 'Visibilité sur 6 mois maximum',
+        text: 'Vous pourriez bénéficier d’aides et d’allocations au-delà en fonction de votre situation'
+      },
+      euro: {
+        image: ImagesBase64Enum.ICONE_EURO,
+        title: 'Montants nets',
+        text: 'avant éventuel impôt sur le revenu'
+      },
+      information: {
+        image: ImagesBase64Enum.ICONE_INFO,
+        title: 'Simulation à titre d’information',
+        text: 'aucune valeur contractuelle'
+      }
+    };
   }
 
 
   private addTableInformations(content: Array<any>): any {
-    let body = new Array<Array<Cell>>();
-
-    const row = new Array<Cell>();
-    row.push(this.createCell1());
-    row.push(this.createCell2());
-    body.push(row);
+    let body = new Array<Array<Array<Cell>>>();
+    body.push(this.createRow1());
+    body.push(this.createEmptyRow());
+    body.push(this.createRow2());
     content.push(this.createTableElement(body));
   }
 
-  private createTableElement(body: Array<Array<Cell>>): TableElement {
+  private createTableElement(body: Array<Array<Array<Cell>>>): TableElement {
     const tableElement = new TableElement();
-    tableElement.style = 'tableStyle1';
+    tableElement.style = 'tableStyle6';
     tableElement.layout = 'noBorders';
 
     const table = new Table();
-    table.widths = ['auto', '*'];
+    table.widths = ['auto', '*', 'auto', '*'];
     table.body = body;
     tableElement.table = table;
 
     return tableElement;
   }
 
-  private createCell1(): Cell {
+  private createRow1() {
+    const row = new Array<Array<Cell>>();
+
+    row.push(this.createColImage(this.informationData.localisation.image));
+    row.push(this.createColText(this.informationData.localisation.title, this.informationData.localisation.text));
+
+    row.push(this.createColImage(this.informationData.calendrier.image));
+    row.push(this.createColText(this.informationData.calendrier.title, this.informationData.calendrier.text));
+
+    return row;
+  }
+
+  private createEmptyRow() {
+    const row = new Array<Array<Cell>>();
+
+    const col = Array<Cell>();
     const cell = new Cell();
-    cell.image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACUAAAAlCAYAAADFniADAAAACXBIWXMAABCcAAAQnAEmzTo0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAANBSURBVHgB7VjdcdpAEP5OSQF0EDkNmA5yKAWYDiy/5c24AnAFwRUYd0Ae8xBzdIArsDoIFZzyre5khKxfBjLJDN+MQOL2dj/t7e3tApzxH0OhJ7TWA34NAwRXKZQG0pDPAz+85fNGQW0s1NqYX0scgM6khAyJ3KbApEDCE8kuQVialtDAwsI+GWMSHJMUCV0rBPMdmdTQS0+ANWVjlA2BQFNG02PXOTm+zL0xz4sO5tpJRTr67r0jwg986xmJbNEBjqCa5eQ4f/5snu/a5qkWQo8kFPOt+abpjbgFB4DkxGuPNBfKcpLYTZP8B9QTEg9984RG5LPBgUiIMAx/kNCYxPTn8GLwmrz+rJOv9JTWUcyBxwKhpE6BLBHjbSX3KWwHWbUSj1E2puxTlVxQPRFTZyRbsgSNCGK4XRf6+1qILtEp97JxfHppJ8WfJCj5Jlh0iyG7EI+6S+6bITqp+4G3kmImVTLvlm+ko1dHyl70yS19IB6ip37zduvt7O3mj/vCX8eSob2XErQqj2LsJUzbaZ6QoC2jmMv4OJSfaknBCYnyNTrAbYbCbBcNM3RCKkGuuYTjFlLqUlSXhWrVAhK03BjpFecO0QvWSEgz8L+UR/YCncozxV1jSY4NXjOSe0FPeBtbSQ9oIgV3tiX4e9hi/3DPEOAfRJlUJfMTIsSu7HlDiZRK+DGIougTTgxXQQjSTSMp7oQsFViLEU6OQMsnz8KXRlKks3SC6TVODBrOUoHNUsO7sT2IK2Wb6rrD8hiQpcvrNKaGZSMpSf/+sORAMMWJkOtWWUldNf4OVmpxITcRd+HIEJ25l2xNVVFT5GkWeYGca0ld4UaZW7UrPQb+8p2N2jIulyx770tz8oJQqhCp1RZV9iuTpwj7ZcyU7LZvcWKg8VbcveW2gXtOh9zJ4zpC0oDUERI0Ng4jPVrAdSKJfzNTNJJv62rs2i/XOGSeD6U6WJlVjAa0tlismeYUuvXC0ljedz2wfQM7LbZoXNJJ27yOzag0Euk0P9EdOaybmlGX66StzyAV5l3TkvUmVTAWe2NhaTjx33nAY0dGYtPOuzawvUiVCI5dPKlLX4MV/+Bg/Km1Px02fcicccap8Ae5xHokpVMqkgAAAABJRU5ErkJggg==';
+    cell.text = new Text();
+    cell.text.text = ' ';
+    col.push(cell);
+
+    row.push(col);
+    row.push(col);
+    row.push(col);
+    row.push(col);
+
+    return row;
+  }
+
+  private createRow2() {
+    const row = new Array<Array<Cell>>();
+
+    row.push(this.createColImage(this.informationData.euro.image));
+    row.push(this.createColText(this.informationData.euro.title, this.informationData.euro.text));
+
+    row.push(this.createColImage(this.informationData.information.image));
+    row.push(this.createColText(this.informationData.information.title, this.informationData.information.text));
+
+    return row;
+  }
+
+  private createColImage(image: string) {
+    const col = new Array<Cell>();
+    const cell = new Cell();
+    cell.image = `data:image/png;base64,${image}`;
     cell.width = 23;
     cell.height = 23;
-    return cell;
+    col.push(cell);
+    return col;
   }
 
-  private createCell2(): Cell {
-    const cell = new Cell();
-    cell.text = 'Montants nets, avant éventuel impôt sur le revenu. \nSimulation à titre d’information, aucune valeur contractuelle.';
+  private createColText(title: string, text: string) {
+    const col = new Array<any>();
 
-    const style = new Style();
-    style.color = '#2B2E30';
-    style.fontSize = 11;
-    cell.style = style;
+    const titleCell = new Text();
+    titleCell.text = title;
+    const titleStyle = new Style();
+    titleStyle.color = '#FF5950';
+    titleStyle.fontSize = 14;
+    titleCell.style = titleStyle;
 
-    return cell;
+    const textCell = new Text();
+    textCell.text = text;
+    const textStyle = new Style();
+    textStyle.color = '#737679';
+    textStyle.fontSize = 12;
+    textCell.style = textStyle;
+
+    col.push(titleCell);
+    col.push(textCell);
+
+    return col;
   }
 
-  private addRectangle(content: Array<any>): any {
+  private addSeparator(content: Array<any>): any {
     const figure = new Figure(new Array<any>());
     const rectangle = new Rectangle(
       0,
-      -50,
+      0,
       515,
-      50,
+      0.25,
       5,
-      '#FF5950'
+      '#D8D8D8'
     );
     figure.canvas.push(rectangle);
     content.push(figure);

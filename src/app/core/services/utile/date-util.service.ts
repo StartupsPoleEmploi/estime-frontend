@@ -254,6 +254,13 @@ export class DateUtileService {
     return this.getLibelleMoisByMoisNumber(mois);
   }
 
+  public getLibelleMoisAvantDateJour(nMoisAvantDateJour): string {
+    const dateJour = new Date();
+    const dateAvantSimulation = this.enleverMoisToDate(dateJour, nMoisAvantDateJour);
+    const mois = dateAvantSimulation.getMonth() + 1;
+    return this.getLibelleMoisByMoisNumber(mois);
+  }
+
   /**
   * Permet de récupérer une date au format "mois en lettre + année (ex : janvier 2020)" avant la date du jour
   * exemple :

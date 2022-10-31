@@ -81,10 +81,10 @@ export class DetailAidesEligiblesService {
     this.addContentAideAAH(content, aide);
   }
 
-  private addTableTitle(content: Array<any>, aide: Aide, imageBase64: string, colorLineTitle: string): void {
+  private addTableTitle(content: Array<any>, aide: Aide, image: string, colorLineTitle: string): void {
     let body = new Array<Array<Cell>>();
     const row = new Array<Cell>();
-    row.push(this.createCell1(imageBase64));
+    row.push(this.createCell1(image));
     row.push(this.createCell2(aide));
     body.push(row);
     content.push(this.createTableElement(body));
@@ -104,9 +104,9 @@ export class DetailAidesEligiblesService {
     return tableElement;
   }
 
-  private createCell1(imageBAse64: string): Cell {
+  private createCell1(image: string): Cell {
     const cell = new Cell();
-    cell.image = `data:image/jpeg;base64,${imageBAse64}`;
+    cell.image = `data:image/jpeg;base64,${image}`;
     cell.width = 60;
     cell.height = 60;
     return cell;

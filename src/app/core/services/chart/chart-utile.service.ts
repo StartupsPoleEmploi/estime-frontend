@@ -163,7 +163,7 @@ export class ChartUtileService {
   }
 
   private getAspectRatio() {
-    if (this.screenService.isExtraSmallScreen()) return 0.9;
+    if (this.screenService.isExtraSmallScreen()) return 1.25;
     if (this.screenService.isTabletScreen()) return 1;
     return 3;
   }

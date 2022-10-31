@@ -3,6 +3,9 @@
 #ressources-financieres-diagramme-container {
   border-radius: 0.625rem;
   margin-bottom: 1rem;
+  @media #{$extra-small-device} {
+    padding:0;
+  }
 }
 
 #ressources-financieres-diagramme-title {
@@ -13,6 +16,13 @@
 .simulateur-caf-link {
   color: $color-pe-red !important;
   font-weight: bold;
+}
+
+#diagramme-canvas-container {
+  @media #{$extra-small-device} {
+    margin:0rem;
+    padding:0;
+  }
 }
 
 #chart-container {

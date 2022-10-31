@@ -14,17 +14,81 @@
     </div>
     <div class="row">
         <div class="col-diagramme-et-mois col-md-8 col-12">
-            <div class="row row-style-2">
-                <div id="info-resultat-simulation" class="col-12 col-md-12 mt-auto mb-auto">
-                    <div id="label-alerte-montants-resultat-simulation"
-                        class="text-start body-1-typo color-blue-3-typo">
-                        Montants nets, avant éventuel impôt sur le revenu.
-                        <br *ngIf="!screenService.isExtraSmallScreen()">
-                        Simulation à titre d’information, aucune valeur contractuelle.
+            <div *ngIf="screenService.isExtraSmallScreen();" class="row row-style-3">
+                <div class="col-12">
+                    <app-ressources-financieres-diagramme>
+                    </app-ressources-financieres-diagramme>
+                </div>
+            </div>
+            <div class="row row-style-3 infos-resultat-container">
+                <div class="col-12 col-md-6">
+                    <div class="row">
+                        <div class="col-2 d-flex flex-column align-items-center">
+                            <img alt="" src="./assets/images/icones/localisation-white.svg">
+                        </div>
+                        <div class="col-10">
+                            <div>
+                                <h4 class="headline-4-typo">
+                                    Basée sur une reprise d’emploi
+                                </h4>
+                                <span class="body-2-typo">
+                                    <span id="mois-versement-infos-resultat">
+                                        en {{ dateUtileService.getLibelleMoisApresDateJour(1).toLowerCase() }}
+                                    </span>
+                                    et un versement des salaires en fin de mois
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6" [ngClass]="{'mt-4':screenService.isExtraSmallScreen()}">
+                    <div class="row">
+                        <div class="col-2 d-flex flex-column align-items-center">
+                            <img alt="" src="./assets/images/icones/calendrier-white.svg">
+                        </div>
+                        <div class="col-10">
+                            <h4 class="headline-4-typo">
+                                Visibilité sur 6 mois maximum
+                            </h4>
+                            <span class="body-2-typo">
+                                Vous pourriez bénéficier d’aides et d’allocations au-delà en fonction de votre situation
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="row">
+                        <div class="col-2 d-flex flex-column align-items-center">
+                            <img alt="" src="./assets/images/icones/euro-white.svg">
+
+                        </div>
+                        <div class="col-10">
+                            <h4 class="headline-4-typo">
+                                Montants nets
+                            </h4>
+                            <span class="body-2-typo">
+                                avant éventuel impôt sur le revenu
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-4">
+                    <div class="row">
+                        <div class="col-2 d-flex flex-column align-items-center">
+                            <img alt="" src="./assets/images/icones/info-white.svg">
+                        </div>
+                        <div class="col-10">
+                            <h4 class="headline-4-typo">
+                                Simulation à titre d’information
+                            </h4>
+                            <span class="body-2-typo">
+                                aucune valeur contractuelle
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row row-style-3">
+            <div *ngIf="!screenService.isExtraSmallScreen();" class="row row-style-3">
                 <div class="col-12">
                     <app-ressources-financieres-diagramme>
                     </app-ressources-financieres-diagramme>
@@ -40,7 +104,7 @@
                             {{ dateUtileService.getLibelleDateActuelle() }}
                         </h4>
                         <h5 id="montant_ressources_avant_simulation"
-                            class="headline-5-typo color-pe-red-typo text-start"
+                            class="headline-5-typo color-pe-teal-typo text-start"
                             data-testid="montant_ressources_actuelles">
                             {{simulation.montantRessourcesFinancieresMoisAvantSimulation}} € net
                         </h5>
@@ -66,7 +130,7 @@
             </div>
         </div>
         <div class="col-md-4 col-12">
-            <div *ngIf="!screenService.isExtraSmallScreen()" class="pt-5 sticky-top">
+            <div *ngIf="!screenService.isExtraSmallScreen()" class="pt-4 sticky-top">
                 <div *ngIf="!screenService.isExtraSmallScreen()" class="row mb-3">
                     <div class="col-md-12">
                         <div>
