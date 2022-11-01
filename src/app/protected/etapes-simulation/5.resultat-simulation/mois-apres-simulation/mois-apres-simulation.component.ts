@@ -93,4 +93,9 @@ export class MoisApresSimulationComponent implements OnInit {
     return resume;
   }
 
+  // Permet d'afficher le même code pour les complément ARE et pour le reliquat ARE
+  public getCodeFromRessourceFinanciereOuAide(ressourceFinanciereOuAide: RessourceFinanciere): string {
+    if (ressourceFinanciereOuAide.code === 'CARE') return 'ARE';
+    return ressourceFinanciereOuAide.code;
+  }
 }

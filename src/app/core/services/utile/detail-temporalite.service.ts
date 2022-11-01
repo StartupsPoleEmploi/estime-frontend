@@ -135,6 +135,7 @@ export class DetailTemporaliteService {
     this.handleChangementRSA(simulationMensuelle, indexMois);
     this.handleChangementAAH(simulationMensuelle, indexMois);
     this.handleChangementARE(simulationMensuelle, indexMois);
+    this.handleChangementComplementARE(simulationMensuelle, indexMois);
     this.handleChangementAL(simulationMensuelle, indexMois);
     this.handleChangementPPA(simulationMensuelle, indexMois);
     this.handleChangementPI(simulationMensuelle, indexMois);
@@ -255,15 +256,20 @@ export class DetailTemporaliteService {
     // Si on est au premier mois
     if (indexMois == 0 && this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
       this.addDetailTemporaliteMois(indexMois, this.getPhraseAllocationPEPremierMois(simulationMensuelle, false));
-    } else if (indexMois == 1) {
-      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI)) {
+    }
+  }
+
+  private handleChangementComplementARE(simulationMensuelle: SimulationMensuelle, indexMois: number): void {
+    // Si on est au premier ou deuxième mois
+    if (indexMois <= 1) {
+      if (this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.COMPLEMENT_ARE);
-      } else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
+      } else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
         this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.NON_ELIGIBLE_COMPLEMENT_ARE);
       }
     }
     // Sinon si on est à n'importe quel autre mois
-    else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
+    else if (!this.aidesService.hasAideByCode(simulationMensuelle, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI) && this.checkForChangeInSituation(this.situation.are, this.aidesService.getMontantComplementARE(simulationMensuelle))) {
       this.addDetailTemporaliteMois(indexMois, SituationTemporaliteEnum.FIN_COMPLEMENT_ARE);
     }
   }
