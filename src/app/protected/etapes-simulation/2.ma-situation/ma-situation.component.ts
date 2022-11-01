@@ -106,7 +106,7 @@ export class MaSituationComponent implements OnInit {
       // évite de déclencher deux fois l'ouverture de modale
       if (!this.checkSiAAHEtMicro()) {
         this.checkSiPensionInvaliditeEtMicro();
-      };
+      }
       this.isSansRessource = false;
     }
   }
