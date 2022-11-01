@@ -25,10 +25,6 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-micro-entrepreneur]').click();
   }
 
-  public clickOnSituationIndependant() {
-    cy.get('[data-testid=btn-situation-travailleur-independant]').click();
-  }
-
   public clickOnSituationBeneficiaire(codeAide: CodesAidesEnum) {
     switch (codeAide) {
       case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE:

@@ -471,6 +471,7 @@ export class MaSituationComponent implements OnInit {
     this.deConnecteService.unsetConjointBeneficesMicroEntreprise();
     this.deConnecteService.unsetConjointChiffreAffairesIndependant();
     this.deConnecteService.unsetConjointRevenusImmobilier();
+    this.deConnecteService.unsetConjointPensionRetraite();
   }
 
 

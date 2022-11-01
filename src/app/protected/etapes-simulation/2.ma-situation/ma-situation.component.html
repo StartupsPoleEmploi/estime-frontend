@@ -382,7 +382,7 @@
                                 aria-label="Votre conjoint(e) perçoit un salaire" class="radio-button-style-1"
                                 data-testid="btn-situation-conjoint-salarie"
                                 tag-action="clic-sur-situation-conjoint-salarie" btnCheckbox tabindex="0"
-                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.salarie"
+                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isSalarie"
                                 (click)="onClickCheckBoxConjointIsSalarie()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
                                 <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
@@ -420,7 +420,7 @@
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                                 data-testid="btn-situation-conjoint-micro-entrepreneur"
                                 tag-action="clic-sur-situation-conjoint-micro-entrepreneur"
-                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.microEntrepreneur"
+                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isMicroEntrepreneur"
                                 btnCheckbox tabindex="0" #conjointIsMicroEntrepreneur="ngModel"
                                 (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
@@ -431,7 +431,7 @@
                                 class="radio-button-style-1 mt-perso-sm ms-perso-lm"
                                 data-testid="btn-situation-conjoint-travailleur-independant"
                                 tag-action="clic-sur-situation-conjoint-travailleur-independant"
-                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.travailleurIndependant"
+                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isTravailleurIndependant"
                                 btnCheckbox tabindex="0" #conjointIsTravailleurIndependant="ngModel"
                                 (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
@@ -479,7 +479,7 @@
                                 aria-label="Votre conjoint(e) est sans ressources financières"
                                 class="radio-button-style-1" data-testid="btn-situation-conjoint-sans-ressource"
                                 tag-action="clic-sur-situation-conjoint-sans-ressource" btnCheckbox tabindex="0"
-                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.sansRessource"
+                                [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isSansRessource"
                                 (click)="onClickCheckBoxConjointIsSansRessource()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">
                                 <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>

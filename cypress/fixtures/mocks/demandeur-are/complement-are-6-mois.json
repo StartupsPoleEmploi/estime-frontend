@@ -16,7 +16,7 @@
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 1102.0,
-					"nom": "Allocation de Retour à l'Emploi",
+					"nom": "Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -43,12 +43,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Complément d'Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -75,12 +75,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Complément d'Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -107,12 +107,12 @@
 				}
 			},
 			"aides": {
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Complément d'Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -149,12 +149,12 @@
 					"lienExterne": "https://www.caf.fr/allocataires/mes-services-en-ligne/faire-une-demande-de-prestation",
 					"reportee": false
 				},
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Complément d'Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -191,12 +191,12 @@
 					"lienExterne": "https://www.caf.fr/allocataires/mes-services-en-ligne/faire-une-demande-de-prestation",
 					"reportee": false
 				},
-				"ARE": {
-					"code": "ARE",
+				"CARE": {
+					"code": "CARE",
 					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
-					"nom": "Complément d'Allocation de Retour à l'Emploi",
+					"nom": "Complément d'Allocation d'aide au Retour à l'Emploi",
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false

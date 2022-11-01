@@ -66,7 +66,7 @@
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
     "codelyzer": "6.0.2",
-    "cypress": "8.3.0",
+    "cypress": "8.4.0",
     "cypress-sonarqube-reporter": "1.10.0",
     "cypress-wait-until": "1.7.2",
     "eslint": "^8.15.0",

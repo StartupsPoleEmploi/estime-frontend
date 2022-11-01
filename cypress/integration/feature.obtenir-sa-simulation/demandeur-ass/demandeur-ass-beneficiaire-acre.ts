@@ -51,7 +51,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
-      const revenusIndependant = "1000";
+      const revenusMicroEntrepreneur = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
@@ -79,7 +79,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
       maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
-      maSituationPage.clickOnSituationIndependant();
+      maSituationPage.clickOnSituationMicroEntreprise();
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
       maSituationPage.clickOnSituationFamilialeSeul();
@@ -95,7 +95,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
-      ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
+      ressourcesActuellesPage.saisirRevenusMicroEntrepreneur(revenusMicroEntrepreneur);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();
@@ -171,7 +171,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
-      const revenusIndependant = "1000";
+      const revenusMicroEntrepreneur = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
@@ -198,7 +198,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       maSituationPage.saisirCodePostal();
       maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
-      maSituationPage.clickOnSituationIndependant();
+      maSituationPage.clickOnSituationMicroEntreprise();
       maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
@@ -215,7 +215,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
-      ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
+      ressourcesActuellesPage.saisirRevenusMicroEntrepreneur(revenusMicroEntrepreneur);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();
@@ -287,7 +287,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
         "mois": "05",
         "annee": "2019"
       };
-      const revenusIndependant = "1000";
+      const revenusMicroEntrepreneur = "1000";
       const allocationSoutienFamiliale = "117";
       // VARIABLES PAGE RESULTAT SIMULATION
       const montantAideMobilite = "504";
@@ -315,7 +315,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       maSituationPage.saisirDateNaissance();
       maSituationPage.selectNationalite(nationalite);
       maSituationPage.clickOnSituationBeneficiaire(CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
-      maSituationPage.clickOnSituationIndependant();
+      maSituationPage.clickOnSituationMicroEntreprise();
       maSituationPage.clickOnSituationBeneficiaireACREOui();
       maSituationPage.saisirDateCreationRepriseEntreprise(dateRepriseCreationEntreprise.jour, dateRepriseCreationEntreprise.mois, dateRepriseCreationEntreprise.annee);
       maSituationPage.clickOnSituationFamilialeSeul();
@@ -331,7 +331,7 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       ressourcesActuellesPage.saisirAllocationJournaliereNetASS(allocationJournaliereNetASS);
       ressourcesActuellesPage.saisirDateDerniereOuvertureDroitASS(dateDerniereOuvertureDroitASS.jour, dateDerniereOuvertureDroitASS.mois, dateDerniereOuvertureDroitASS.annee);
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
-      ressourcesActuellesPage.saisirRevenusIndependant(revenusIndependant);
+      ressourcesActuellesPage.saisirRevenusMicroEntrepreneur(revenusMicroEntrepreneur);
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
       ressourcesActuellesPage.selectionnerProprietaire();
