@@ -38,7 +38,7 @@ export class BlockInformationsService {
       calendrier: {
         image: ImagesBase64Enum.ICONE_CALENDRIER,
         title: 'Visibilité sur 6 mois maximum',
-        text: 'Vous pourriez bénéficier d’aides et d’allocations au-delà en fonction de votre situation'
+        text: 'Vous pourriez bénéficier d’aides et d’allocations au-delà'
       },
       euro: {
         image: ImagesBase64Enum.ICONE_EURO,

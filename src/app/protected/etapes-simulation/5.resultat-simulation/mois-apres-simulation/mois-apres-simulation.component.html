@@ -31,8 +31,7 @@
                             [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                 class="">
-                                <span
-                                    class="overline-typo">{{getCodeFromRessourceFinanciereOuAide(ressourceFinanciereOuAide)}}</span>
+                                <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">
@@ -64,8 +63,7 @@
                                     [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                                     <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                         class="">
-                                        <span
-                                            class="overline-typo">{{getCodeFromRessourceFinanciereOuAide(ressourceFinanciereOuAide)}}</span>
+                                        <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
                                     </div>
                                     <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                         class="">
