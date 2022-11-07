@@ -433,7 +433,7 @@
                                                 name="salaireMensuelNet" aria-label="Salaire mensuel net"
                                                 data-testid="input-salaire-mensuel-net" type="text"
                                                 (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                                (keyup)="calculSalaireMensuelBrut();" maxlength="6"
+                                                (keyup)="calculSalaireFromMensuelNet();" maxlength="6"
                                                 class="form-control d-inline" placeholder="Montant"
                                                 [(ngModel)]="futurTravail.salaire.montantMensuelNet"
                                                 [ngClass]="{'ng-invalid':futurTravail.salaire.montantMensuelNet && futurTravail.salaire.montantMensuelNet == 0 || (isFuturTravailSalaireFormSubmitted && !futurTravail.salaire.montantMensuelNet), 'd-none': typeSalaireDisplay == 'brut'}"
