@@ -11,8 +11,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class ChoixTypeDeSimulationComponent {
 
-
-  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simucalcul/repriseemploi"
+  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simulationcalcul?serviceId=repriseEmploi"
 
   isPageLoadingDisplay: boolean = false;
   demandeurConnecte: DemandeurEmploi;
