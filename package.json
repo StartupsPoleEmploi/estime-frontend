@@ -1,6 +1,6 @@
 {
   "name": "estime",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "scripts": {
     "build:dev": "npm install && ng build",
     "build:prod": "npm ci && ng build --configuration production --build-optimizer",
@@ -65,6 +65,7 @@
     "@types/node": "17.0.32",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
+    "coverage-istanbul-loader": "3.0.5",
     "cypress": "8.3.0",
     "cypress-sonarqube-reporter": "1.10.0",
     "cypress-wait-until": "1.7.2",
