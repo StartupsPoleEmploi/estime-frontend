@@ -7,6 +7,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
+import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -36,6 +37,7 @@ export class AutresSituationsComponent implements OnInit {
     private modalService: ModalService,
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
+    private redirectionExterneService: RedirectionExterneService,
     public controleChampFormulaireService: ControleChampFormulaireService,
   ) {
     history.pushState(null, null, window.location.href);
@@ -83,15 +85,35 @@ export class AutresSituationsComponent implements OnInit {
     }
   }
 
+  public redirectionVersSitePoleEmploi() {
+    const LIEN_PE = "https://www.pole-emploi.fr/accueil/";
+    this.redirectionExterneService.redirect(LIEN_PE, '_self');
+  }
+
   public checkFormIsValid() {
     this.isFormSubmitted = true;
     let isValid = true;
-    if (this.autresSituations != null) {
-      if (this.autresSituations.autre) {
-        isValid = this.autresSituations.autreContenu != '';
+    if (this.checkAuMoinsUneAutreSituation()) {
+      if (this.autresSituations != null) {
+        if (this.autresSituations.autre) {
+          isValid = this.autresSituations.autreContenu != '';
+        }
       }
+    } else {
+      isValid = false;
     }
     return isValid;
+  }
+
+  private checkAuMoinsUneAutreSituation() {
+    return this.autresSituations.ada ||
+      this.autresSituations.alternant ||
+      this.autresSituations.autre ||
+      this.autresSituations.cej ||
+      this.autresSituations.formation ||
+      this.autresSituations.salaire ||
+      this.autresSituations.securisationProfessionnelle ||
+      this.autresSituations.travailleurIndependant;
   }
 
   private traiterRetourCreerAutresSituations() {
@@ -104,6 +126,5 @@ export class AutresSituationsComponent implements OnInit {
   private traiterErreurCreerAutresSituations() {
     this.displayLoading.emit(false);
     this.messageErreur = MessagesErreurEnum.ERREUR_ENREGISTREMENT_AUTRES_SITUATIONS;
-
   }
 }
