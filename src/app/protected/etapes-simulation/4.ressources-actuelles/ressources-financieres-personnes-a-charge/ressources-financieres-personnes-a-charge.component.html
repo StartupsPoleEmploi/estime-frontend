@@ -56,7 +56,7 @@
             <div>
                 <div class="row pb-3">
                     <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
-                        * Personne {{personneDTO.index + 1}} a-t-elle travaillé au cours des
+                        * Personne {{personneDTO.index + 1}} a-t-elle travaillé en tant que salarié au cours des
                         {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                         derniers
                         mois ?
@@ -75,7 +75,7 @@
                                 (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, true)"
                                 required [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
                                 (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, true)">
-                            <label class="form-check-label"
+                            <label class="form-check-label body-2-typo"
                                 for="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}">
                                 oui
                             </label>
@@ -92,7 +92,7 @@
                                 (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, false)"
                                 required #hasTravailleAuCoursDerniersMois="ngModel"
                                 (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, false)">
-                            <label class="form-check-label"
+                            <label class="form-check-label body-2-typo"
                                 for="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}">
                                 non
                             </label>
@@ -112,7 +112,7 @@
                 <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
-                            Indiquez le montant de vos salaires de
+                            Indiquez le montant des salaires de
                             {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                             {{optionsNombreMoisTravailles[0].label}}.
                             <br>

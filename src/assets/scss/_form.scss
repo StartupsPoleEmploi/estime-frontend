@@ -334,7 +334,12 @@ input:-webkit-autofill:focus {
   margin-bottom: 1rem;
 }
 
-.form-check-input:checked {
-  background-color: $color-pe-red;
-  border-color: $color-pe-red;
+.form-check-input {
+
+  margin-top:0.4rem;
+
+  &:checked {
+    background-color: $color-pe-red;
+    border-color: $color-pe-red;
+  }
 }

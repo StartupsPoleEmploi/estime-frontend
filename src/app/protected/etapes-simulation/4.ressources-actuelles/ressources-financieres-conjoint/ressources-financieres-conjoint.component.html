@@ -44,7 +44,7 @@
         <div>
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
-                    * A-t-il/elle travaillé au cours des
+                    * A-t-il/elle travaillé en tant que salarié au cours des
                     {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                     derniers
                     mois ?
@@ -63,7 +63,7 @@
                             [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
                             tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_oui"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
+                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
                             oui
                         </label>
                     </div>
@@ -78,7 +78,7 @@
                             tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non" required
                             #hasTravailleAuCoursDerniersMois="ngModel"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNonConjoint">
+                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisNonConjoint">
                             non
                         </label>
                     </div>
@@ -96,7 +96,7 @@
                 <div>
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
-                            Indiquez le montant de vos salaires de
+                            Indiquez le montant des salaires de
                             {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                             {{optionsNombreMoisTravailles[0].label}}.
                             <br>

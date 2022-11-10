@@ -178,7 +178,7 @@
                             (click)="onClickButtonRadioHasDegressiviteAre(true)" required [value]="true"
                             #hasDegressiviteAre="ngModel" tag-action="clic_concerne_degressivite_are_oui"
                             (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, true)">
-                        <label class="form-check-label" for="hasDegressiviteAreOui">
+                        <label class="form-check-label body-2-typo" for="hasDegressiviteAreOui">
                             oui
                         </label>
                     </div>
@@ -191,7 +191,7 @@
                             [value]="false" (click)="onClickButtonRadioHasDegressiviteAre(false)" required
                             #hasDegressiviteAre="ngModel" tag-action="clic_concerne_degressivite_are_non"
                             (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, false)">
-                        <label class="form-check-label" for="hasDegressiviteAreNon">
+                        <label class="form-check-label body-2-typo" for="hasDegressiviteAreNon">
                             non
                         </label>
                     </div>
@@ -471,7 +471,7 @@
         <div>
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
-                    * Avez-vous travaillé au cours des
+                    * Avez-vous travaillé en tant que salarié au cours des
                     {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                     derniers mois ?
                 </label>
@@ -488,7 +488,7 @@
                             #hasTravailleAuCoursDerniersMois="ngModel"
                             tag-action="clic_a_travaille_au_cours_14_derniers_mois_oui"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, true)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisOui">
+                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisOui">
                             oui
                         </label>
                     </div>
@@ -502,7 +502,7 @@
                             #hasTravailleAuCoursDerniersMois="ngModel"
                             tag-action="clic_a_travaille_au_cours_14_derniers_mois_non"
                             (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMois($event, false)">
-                        <label class="form-check-label" for="hasTravailleAuCoursDerniersMoisNon">
+                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisNon">
                             non
                         </label>
                     </div>
