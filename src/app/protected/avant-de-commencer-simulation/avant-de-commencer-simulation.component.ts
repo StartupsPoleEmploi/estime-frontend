@@ -46,17 +46,12 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     this.isChoixSimulationDisplay = false;
   }
   public accesParcoursComplementARE(): void {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.isParcoursComplementARE = true;
-    if (!demandeurEmploiConnecte) {
-      this.isPageLoadingDisplay = true;
-      this.estimeApiService.creerDemandeurEmploi().subscribe({
-        next: this.traiterRetourCreerDemandeurEmploi.bind(this),
-        error: this.traiterErreurCreerDemandeurEmploi.bind(this)
-      });
-    } else {
-      this.router.navigate([`/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.MA_SITUATION}`]);
-    }
+    this.isPageLoadingDisplay = true;
+    this.estimeApiService.creerDemandeurEmploi().subscribe({
+      next: this.traiterRetourCreerDemandeurEmploi.bind(this),
+      error: this.traiterErreurCreerDemandeurEmploi.bind(this)
+    });
 
   }
 
