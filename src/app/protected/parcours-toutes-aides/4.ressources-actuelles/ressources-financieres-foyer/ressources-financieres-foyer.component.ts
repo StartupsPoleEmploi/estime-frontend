@@ -153,6 +153,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
       && demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement) {
       this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement = demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement;
     } else {
+      this.ressourcesFinancieresAvantSimulation.aidesCAF = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesCAF();
       this.ressourcesFinancieresAvantSimulation.aidesCAF.aidesLogement = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesLogement();
     }
   }
