@@ -25,6 +25,7 @@ export class ControleChampFormulaireService {
   MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE = "La valeur renseignée ne peut excéder 48, qui est la durée maximale de travail effectif sur une même semaine.";
   MESSAGE_SELECTION_AU_MOINS_UNE_AIDE = "Veuillez sélectionner au moins une allocation Pôle emploi, CAF ou CPAM (ASS, AAH, RSA, ARE, pension d'invalidité) ou cliquez sur “Aucune ressource”.";
   MESSAGE_SELECTION_AU_MOINS_UN_STATUT_OCCUPATION_LOGEMENT = "Veuillez sélectionner l'option correspondant à votre situation.";
+  MESSAGE_SELECTION_DEGRESSIVITE_ARE = "Veuillez indiquer si vous êtes concerné par la dégressivité ou non.";
   MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE = "Veuillez sélectionner le taux plein ou le taux réduit pour votre simulation.";
   MESSAGE_SELECTION_AUTRES_SITUATIONS = "Veuillez sélectionner une des situations proposées.";
   MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";

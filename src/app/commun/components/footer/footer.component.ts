@@ -54,7 +54,8 @@ export class FooterComponent {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
         this.stickyFooter = routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
-          || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`;
       }
     });
   }

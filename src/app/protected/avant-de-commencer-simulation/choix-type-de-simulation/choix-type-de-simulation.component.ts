@@ -19,7 +19,8 @@ export class ChoixTypeDeSimulationComponent {
 
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   @Input() isBeneficiaireARE: boolean;
-  @Output() commencerSimulation = new EventEmitter<any>();
+  @Output() commencerSimulationParcoursToutesAides = new EventEmitter<any>();
+  @Output() commencerSimulationParcoursComplementARE = new EventEmitter<any>();
 
   constructor(
     public screenService: ScreenService,
@@ -27,7 +28,7 @@ export class ChoixTypeDeSimulationComponent {
   ) { }
 
   public clickOnSimulationComplete() {
-    this.commencerSimulation.emit();
+    this.commencerSimulationParcoursToutesAides.emit();
   }
   public handleKeyUpOnSimulationComplete(e: any): void {
     e.preventDefault();
@@ -37,7 +38,11 @@ export class ChoixTypeDeSimulationComponent {
   }
 
   public clickOnSimulationRapide() {
-    this.redirectionExterneService.navigate(ChoixTypeDeSimulationComponent.URL_SIMUL_CALCUL);
+    if (this.isBeneficiaireARE) {
+      this.redirectionExterneService.navigate(ChoixTypeDeSimulationComponent.URL_SIMUL_CALCUL);
+    } else {
+      this.commencerSimulationParcoursComplementARE.emit();
+    }
   }
 
   public handleKeyUpOnSimulationRapide(e: any): void {

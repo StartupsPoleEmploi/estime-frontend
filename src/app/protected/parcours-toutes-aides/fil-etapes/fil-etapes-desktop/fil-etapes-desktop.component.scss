@@ -1,0 +1,154 @@
+@import "../../../../../assets/scss/variables";
+
+.checkmark {
+  display: inline-block;
+  width: 1.375rem;
+  height: 1.375rem;
+  border-radius: 50%;
+  -ms-transform: rotate(45deg);
+  /* IE 9 */
+  -webkit-transform: rotate(45deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+  margin-top: 0.125rem;
+}
+
+.checkmark:before {
+  content: "";
+  position: absolute;
+  width: 0.125rem;
+  height: 1rem;
+  background-color: $color-white-3;
+  left: 0.6875rem;
+  top: -0.0625;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  width: 0.4375rem;
+  height: 0.125rem;
+  background-color: $color-white-3;
+  left: 0.25rem;
+  top: 0.875rem;
+}
+
+.div-fil-etapes-simulation {
+  margin-bottom: 5rem;
+
+  .etapes {
+    width: 100%;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    margin: 0 auto;
+    padding-left: 0;
+    cursor: pointer;
+
+    .hoveredEtape {
+      .numero-etape {
+        background-color: $color-pe-red !important;
+        border-color: $color-pe-red !important;
+
+        span {
+          color: white !important;
+
+        }
+      }
+
+      .titre-etape {
+        color: $color-pe-red !important;
+      }
+    }
+
+    .etape {
+      font-size: 0.8125rem;
+      position: relative;
+      text-align: center;
+      width: 33.33%;
+
+      &:not(:first-child)::after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 0.0625rem;
+        background-color: $color-pe-grey-light;
+        top: 50%;
+        left: -35%;
+        z-index: -1;
+      }
+
+      .numero-etape {
+        align-items: center;
+        background-color: $color-white-3;
+        border: 0.0625rem solid $color-pe-grey-light;
+        border-radius: 50%;
+        color: $color-pe-grey-dark;
+        // cursor: auto;
+        display: inline-flex;
+        height: 2rem;
+        justify-content: center;
+        opacity: 0.7;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        width: 2rem;
+
+        span {
+          font-size: 0.8125rem;
+          margin-top: 0.0625rem;
+        }
+      }
+
+      .titre-etape {
+        bottom: -0.3125rem;
+        color: $color-pe-grey-dark;
+        height: 0;
+        left: 0;
+        margin: auto 0;
+        opacity: 0.7;
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    .etape-active {
+      .numero-etape {
+        span {
+          color: white;
+          font-weight: 700;
+        }
+
+        opacity: unset;
+        background-color: $color-pe-red;
+        border-color: $color-pe-red;
+      }
+
+      .titre-etape {
+        color: $color-pe-red;
+        opacity: unset;
+      }
+
+      &:not(:first-child)::after {
+        background-color: $color-pe-grey-dark !important;
+      }
+    }
+
+    .etape-completee {
+      .numero-etape {
+        background-color: $color-pe-grey-dark;
+        border-color: $color-pe-grey-dark;
+        opacity: unset;
+      }
+
+      .titre-etape {
+        opacity: unset;
+        color: $color-pe-grey-dark;
+      }
+
+      &:not(:first-child)::after {
+        background-color: $color-pe-grey-dark !important;
+      }
+    }
+  }
+}

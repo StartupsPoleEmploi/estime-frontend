@@ -42,7 +42,7 @@ export class FilArianeComponent implements OnInit {
   }
 
   public onClickLinkRoute(libelleRoute): void {
-    if(libelleRoute === PageTitlesEnum.AIDES) {
+    if (libelleRoute === PageTitlesEnum.AIDES) {
       this.router.navigate([RoutesEnum.AIDES]);
     }
   }
@@ -87,19 +87,28 @@ export class FilArianeComponent implements OnInit {
       case RoutesEnum.CONTACT:
         this.libelleRouteActive = PageTitlesEnum.CONTACT;
         break;
-      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.CONTRAT_TRAVAIL}`:
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}`:
         this.libelleRouteActive = PageTitlesEnum.CONTRAT_TRAVAIL;
         break;
-      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MA_SITUATION}`:
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MA_SITUATION}`:
         this.libelleRouteActive = PageTitlesEnum.MA_SITUATION;
         break;
-      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.MES_PERSONNES_A_CHARGE}`:
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MES_PERSONNES_A_CHARGE}`:
         this.libelleRouteActive = PageTitlesEnum.MES_PERSONNES_CHARGE;
         break;
-      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESSOURCES_ACTUELLES}`:
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESSOURCES_ACTUELLES}`:
         this.libelleRouteActive = PageTitlesEnum.MES_RESSOURCES_ACTUELLES;
         break;
-      case `${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`:
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`:
+        this.libelleRouteActive = PageTitlesEnum.RESULTAT_MA_SIMULATION;
+        break;
+      case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.ACTIVITE_REPRISE}`:
+        this.libelleRouteActive = PageTitlesEnum.ACTIVITE_REPRISE;
+        break;
+      case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.MA_SITUATION}`:
+        this.libelleRouteActive = PageTitlesEnum.MA_SITUATION;
+        break;
+      case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`:
         this.libelleRouteActive = PageTitlesEnum.RESULTAT_MA_SIMULATION;
         break;
     }

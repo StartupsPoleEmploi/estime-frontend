@@ -206,6 +206,15 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     return montant;
   }
 
+  public getFuturSalaireBrut(): number {
+    let montant = 0;
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (demandeurEmploiConnecte.futurTravail && demandeurEmploiConnecte.futurTravail.salaire && demandeurEmploiConnecte.futurTravail.salaire.montantMensuelBrut > 0) {
+      montant += demandeurEmploiConnecte.futurTravail.salaire.montantMensuelBrut;
+    }
+    return montant;
+  }
+
   public getPensionInvalidite(): number {
     let montant = 0;
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
@@ -451,6 +460,7 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   //is donnees ARE SAISIE VALIDE comprend tout les champs
   private isDonneesARESaisiesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     return ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute > 0 &&
+      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein > 0 &&
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut > 0 &&
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants > 0;
   }
@@ -625,5 +635,31 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   public hasPensionInvaliditeAvecSalaireAvantSimulation(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     return this.ressourcesFinancieresAvantSimulationUtileService.hasPensionInvaliditeAvecSalaireAvantSimulation(demandeurEmploiConnecte);
+  }
+
+  public hasAllocationARE(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return this.ressourcesFinancieresAvantSimulationUtileService.hasAllocationARE(demandeurEmploiConnecte);
+  }
+
+  public getSalaireJournalierReferenceARE(): number {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (this.ressourcesFinancieresAvantSimulationUtileService.hasAllocationARE(demandeurEmploiConnecte)) {
+      return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut;
+    } return 0;
+  }
+
+  public getAllocationJournaliereARE(): number {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (this.ressourcesFinancieresAvantSimulationUtileService.hasAllocationARE(demandeurEmploiConnecte)) {
+      return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute;
+    } return 0;
+  }
+
+  public getDegressiviteARE(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (this.ressourcesFinancieresAvantSimulationUtileService.hasAllocationARE(demandeurEmploiConnecte)) {
+      return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre;
+    } return false;
   }
 }

@@ -148,7 +148,7 @@ export class BlockRessourcesEstimeesService {
     row.push(this.createCellLibelleRessource(libelle));
     //création des cellules pour chaque simulation mensuelle
     simulation.simulationsMensuelles.forEach(simulationMensuelle => {
-      const montant = this.aidesService.getMontantAideByCode(simulationMensuelle, code);
+      const montant = this.aidesService.getMontantAideByCodeFromSimulationMensuelle(simulationMensuelle, code);
       row.push(this.createCellMontant(montant));
     });
     body.push(row);

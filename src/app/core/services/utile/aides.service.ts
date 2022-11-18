@@ -31,59 +31,59 @@ export class AidesService {
   }
 
   public getMontantAAH(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES);
   }
 
   public getMontantASS(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE);
   }
 
   public getMontantARE(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_RETOUR_EMPLOI);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.AIDE_RETOUR_EMPLOI);
   }
 
   public getMontantComplementARE(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI);
   }
 
   public getMontantRSA(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.RSA);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.RSA);
   }
 
   public getMontantPrimeActivite(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PRIME_ACTIVITE);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.PRIME_ACTIVITE);
   }
 
   public getMontantAllocationsFamiliales(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATIONS_FAMILIALES);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATIONS_FAMILIALES);
   }
 
   public getMontantAllocationSoutienFamilial(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL);
   }
 
   public getMontantComplementFamilial(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.COMPLEMENT_FAMILIAL);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.COMPLEMENT_FAMILIAL);
   }
 
   public getMontantPrestationAccueilJeuneEnfant(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT);
   }
 
   public getMontantPensionsAlimentaires(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.PENSIONS_ALIMENTAIRES);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.PENSIONS_ALIMENTAIRES);
   }
 
   public getMontantAidePersonnaliseeLogement(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT);
   }
 
   public getMontantAllocationLogementFamiliale(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE);
   }
 
   public getMontantAllocationLogementSociale(simulationSelected: SimulationMensuelle): number {
-    return this.getMontantAideByCode(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
+    return this.getMontantAideByCodeFromSimulationMensuelle(simulationSelected, CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE);
   }
 
   public getMessageAlerteAGEPI(simulationSelected: SimulationMensuelle): string {
@@ -274,10 +274,18 @@ export class AidesService {
         && distanceKmDomicileTravail >= AidesService.AIDE_MOBILITE_TRAJET_KM_ALLER_MINIMUM);
   }
 
-  public getMontantAideByCode(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
+  public getMontantAideByCodeFromSimulationMensuelle(simulationSelected: SimulationMensuelle, codeAideSelected: string) {
     let montant = 0;
     if (this.getAideByCodeFromSimulationMensuelle(simulationSelected, codeAideSelected)) {
       montant = this.getAideByCodeFromSimulationMensuelle(simulationSelected, codeAideSelected).montant;
+    }
+    return montant;
+  }
+
+  public getMontantAideByCode(simulation: Simulation, codeAideSelected: string) {
+    let montant = 0;
+    if (this.getAideByCode(simulation, codeAideSelected)) {
+      montant = this.getAideByCode(simulation, codeAideSelected).montant;
     }
     return montant;
   }

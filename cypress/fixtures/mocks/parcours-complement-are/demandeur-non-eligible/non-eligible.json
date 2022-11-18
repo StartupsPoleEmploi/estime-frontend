@@ -1,0 +1,60 @@
+{
+	"montantRessourcesFinancieresMoisAvantSimulation": 0.0,
+	"simulationsMensuelles": [
+		{
+			"datePremierJourMoisSimule": "2022-11-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 1165.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"CRDS": {
+					"code": "CRDS",
+					"nom": "Contribution au Remboursement de la Dette Sociale",
+					"montant": 0.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "PE",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"CRC": {
+					"code": "CRC",
+					"nom": "Cotisation Retraite Complémentaire",
+					"montant": 0.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "PE",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"CSG": {
+					"code": "CSG",
+					"nom": "Contribution Sociale Généralisée",
+					"montant": 0.0,
+					"messagesAlerte": null,
+					"detail": null,
+					"organisme": "PE",
+					"lienExterne": "",
+					"reportee": false
+				},
+				"cARE": {
+					"code": "cARE",
+					"nom": "Complément d'allocation d'Aide au Retour à l'Emploi",
+					"montant": 0.0,
+					"messagesAlerte": [
+						"Pensez à faire votre actualisation mensuelle auprès de Pôle emploi pour percevoir l'allocation d'Aide au Retour à l'Emploi en complément de votre salaire."
+					],
+					"detail": null,
+					"organisme": "PE",
+					"lienExterne": "",
+					"reportee": false
+				}
+			}
+		}
+	]
+}

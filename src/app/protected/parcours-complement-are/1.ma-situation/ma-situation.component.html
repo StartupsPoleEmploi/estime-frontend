@@ -1,0 +1,338 @@
+<app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
+<app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
+<div class="container-fluid container-etape" role="form">
+    <div class="form-container-fluid">
+        <div *ngIf="!isModificationCriteres" class="div-title-formulaire">
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
+                1. {{pageTitlesEnum.MA_SITUATION}}
+            </h1>
+            <div class="text-under-h1 body-2-typo">
+                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
+            </div>
+        </div>
+        <div class="card card-form card-form-style-2">
+            <form #maSituationForm="ngForm" [ngClass]="{'submitted':isMaSituationFormSubmitted}">
+                <div>
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                            * Êtes-vous concerné.e par la dégressivité de l'ARE ?
+                            <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
+                                tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
+                                (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
+                            </button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button id="degressiviteAreOui" #degressiviteAreOui="ngModel" name="degressiviteAreOui"
+                                data-testid="btn-has-degressivite-are-oui"
+                                attr.aria-label="Vous êtes concerné par la dégressivité de l'ARE" type="radio"
+                                class="btn-checkbox-oui-non me-2 d-inline" btnCheckbox
+                                [(ngModel)]="hasDegressiviteAreOui" [value]="true"
+                                (click)="onClickButtonRadioHasDegressiviteAreOui($event)" required
+                                tag-action="clic_concerne_degressivite_are_oui"
+                                (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAreOui($event)">
+                                <span class="body-2-typo">
+                                    Oui
+                                </span>
+                            </button>
+                            <button id="degressiviteAreNon" name="degressiviteAreNon" #degressiviteAreNon="ngModel"
+                                data-testid="btn-has-degressivite-are-non"
+                                attr.aria-label="Vous n'êtes pas concerné par la dégressivité de l'ARE" type="radio"
+                                class="btn-checkbox-oui-non" btnCheckbox [(ngModel)]="hasDegressiviteAreNon"
+                                [value]="false" (click)="onClickButtonRadioHasDegressiviteAreNon($event)" required
+                                tag-action="clic_concerne_degressivite_are_non"
+                                (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAreNon($event)">
+                                <span class="body-2-typo">
+                                    Non
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="isMaSituationFormSubmitted && !hasDegressiviteAreSelectionne()">
+                                {{controleChampFormulaireService.MESSAGE_SELECTION_DEGRESSIVITE_ARE}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <app-message-info contenu="La dégressivité correspond à une réduction de l'indemnisation
+                             qui peut s’appliquer à partir du 7e mois pour des demandeurs d'emploi qui bénéficiaient
+                             d'un revenu mensuel brut de plus de 4677 € en tant que salarié.">
+                    </app-message-info>
+                </div>
+                <div *ngIf="afficherQuestionTypeTauxDegressiviteAre()" class="mt-3">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                            * Vous souhaitez avoir une estimation du montant :
+                            <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                                placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                                aria-label="Infobulle taux réduit degressivité"
+                                (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
+                            </button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button id="btn-taux-plein-degressivite-are" #tauxPleinDegressiviteAre="ngModel"
+                                (click)="onClickCheckBoxTauxPlein($event)" name="tauxPleinDegressiviteAre"
+                                aria-label="Vous souhaitez simuler le montant de votre allocation en taux plein"
+                                [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}"
+                                class="btn-checkbox-oui-non me-2 d-inline" data-testid="btn-taux-plein-degressivite-are"
+                                btnCheckbox tabindex="0" [(ngModel)]="isTauxPlein"
+                                (keyup)="handleKeyUpOnButtonTauxPlein($event)">
+                                <span class="body-2-typo">
+                                    Avant la dégressivité
+                                </span>
+                            </button>
+                            <button id="btn-taux-reduit-degressivite-are" #tauxReduitDegressiviteAre="ngModel"
+                                (click)="onClickCheckBoxTauxReduit($event)" name="tauxReduitDegressiviteAre"
+                                aria-label="Vous souhaitez simuler le montant de votre allocation en taux réduit"
+                                [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="btn-checkbox-oui-non"
+                                data-testid="btn-taux-reduit-degressivite-are" btnCheckbox tabindex="0"
+                                [(ngModel)]="isTauxReduit" (keyup)="handleKeyUpOnButtonTauxReduit($event)">
+                                <span class="body-2-typo">
+                                    Après la dégressivité
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="isMaSituationFormSubmitted && !isTauxDegressiviteAreSelectionne()">
+                                {{controleChampFormulaireService.MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="afficherMontantAllocationAre()"
+                    [ngClass]="{'mt-3':!afficherQuestionTypeTauxDegressiviteAre()}">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
+                            * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
+                            <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
+                                tag-action="clic_infobulle_obtenir_ressources_are"
+                                aria-label="Infobulle salaire journalier référence ARE"
+                                (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                            </button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut"
+                                type="text" data-testid="input-salaire-journalier-reference-are"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                                maxlength="6" class="form-control d-inline"
+                                [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0)}"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut"
+                                required placeholder="Montant" inputmode="decimal"
+                                #salaireJournalierReferenceBrut="ngModel">
+                            <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0)">
+                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isMaSituationFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.required">
+                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isMaSituationFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.pattern">
+                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                            </span>
+                        </div>
+                    </div>
+                    <div *ngIf="isTauxReduit === true">
+                        <div class="row pb-3">
+                            <label class="label headline-4-typo"
+                                for="input-montant-allocation-journaliere-brut-taux-plein-are">
+                                * Montant brut de votre allocation journalière
+                                <span class="fw-bold">à taux plein</span>
+                                pour l’ARE
+                                <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
+                                    placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                                    aria-label="Infobulle taux réduit degressivité"
+                                    (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                                </button>
+                            </label>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input id="input-montant-journalier-brut-taux-plein"
+                                    name="allocationJournaliereBruteTauxPlein" type="text"
+                                    data-testid="input-montant-allocation-journaliere-brut-taux-plein-are"
+                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                                    maxlength="6" class="form-control d-inline"
+                                    [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == 0)}"
+                                    [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein"
+                                    required placeholder="Montant" inputmode="decimal"
+                                    #allocationJournaliereBruteTauxPlein="ngModel">
+                                <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <span class="error-input-message"
+                                    *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == 0)">
+                                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <span class="error-input-message"
+                                    *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein.touched) && allocationJournaliereBruteTauxPlein.errors?.required">
+                                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <span class="error-input-message"
+                                    *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein.touched) && allocationJournaliereBruteTauxPlein.errors?.pattern">
+                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                            * Montant brut de votre allocation journalière
+                            <span class="fw-bold">{{ getLibelleMontantBrutAllocationJournaliere() }}</span>
+                            pour l’ARE
+                            <button *ngIf="isTauxReduit" id="infobulle-ma-situation-vous-percevez"
+                                class="img-interrogation-icon" placement="right"
+                                tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                                aria-label="Infobulle taux réduit degressivité"
+                                (click)="modalService.openModalOnEvent($event, modalTauxReduitTemplate)">
+                            </button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input id="input-montant-journalier-brut" name="allocationJournaliereBrute" type="text"
+                                data-testid="input-montant-allocation-journaliere-brut-are"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
+                                maxlength="6" class="form-control d-inline"
+                                [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == 0)}"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute"
+                                required placeholder="Montant" inputmode="decimal"
+                                #allocationJournaliereBrute="ngModel">
+                            <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == 0)">
+                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBrute.touched) && allocationJournaliereBrute.errors?.required">
+                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                            </span>
+                        </div>
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBrute.touched) && allocationJournaliereBrute.errors?.pattern">
+                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="!isModificationCriteres" class="row-btn-form">
+            <button id="btn-ma-situation-retour" data-testid="btn-ma-situation-retour" class="btn-precedent"
+                aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
+                tag-navigation="clic_bouton_retour" type="button">
+                <div>
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <span>Retour</span>
+                </div>
+            </button>
+            <button id="btn-ma-situation-suivant" data-testid="btn-ma-situation-suivant" class="btn-suivant"
+                aria-label="Passer à la page suivante" type="submit" aria-label="Passer à la page suivante"
+                (click)="onSubmitMaSituationForm()" tag-navigation="clic_bouton_suivant">
+                <div>
+                    <span>Suivant</span>
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalAllocationARETemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <h3 class='headline-3-typo headline-3-typo-color'>
+            Où trouver cette information ?
+        </h3>
+        <p class='body-1-typo'>
+            Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
+        </p>
+        <div class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
+        </div>
+        <h4 class='headline-4-typo headline-4-typo-color'>
+            Où trouver votre dernier relevé de situation ARE ?
+        </h4>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur Internet :
+        </h5>
+        <ol>
+            <li class='body-1-typo'>
+                Rendez-vous votre espace personnel Pôle emploi, dans la rubrique <i>“Mes courriers reçus” </i> <a href='https://courriers.pole-emploi.fr/courriersweb/mescourriers' target='_blank'>en cliquant ici</a>
+            </li>
+            <li class='body-1-typo'>
+                Dans la liste des courriers reçus vous trouverez vos notifications ARE
+            </li>
+            <li class='body-1-typo'>
+                Choisissez le relevé de situation le plus récent et cliquez sur <i>“Télécharger”</i>
+            </li>
+        </ol>
+        <h5 class='headline-5-typo headline-5-typo-color'>
+            Sur l'application mobile <i>'Mon Espace'</i> de Pôle emploi :
+        </h5>
+        <ol>
+            <li class='body-1-typo'>
+                Ouvrez l'application et connectez-vous si nécessaire
+            </li>
+            <li class='body-1-typo'>
+                Accédez à vos courriers depuis la barre de menu en bas de l'écran
+            </li>
+            <li class='body-1-typo'>
+                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
+            </li>
+        </ol>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalTauxReduitTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            Cette information est présente sur votre premier relevé de situation tenant compte de la dégressivité, si vous n'avez pas cette information, veuillez vous connecter à votre espace personnel
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalDegressiviteTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et qui bénéficiaient d'un salaire brut supérieur à 4677 euros par mois
+        </p>">
+    </app-tooltip>
+</ng-template>

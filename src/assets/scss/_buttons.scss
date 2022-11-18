@@ -478,6 +478,43 @@ option {
   }
 }
 
+#btn-faire-simulation-complete {
+
+  @extend .btn-style-perso-1;
+
+  height: 2.875rem;
+  min-width: 12.5rem;
+  width: unset !important;
+
+  @media #{$extra-small-device} {
+    width: 100% !important;
+  }
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+
+  span {
+      color: #FFFFFF;
+      vertical-align: top;
+      text-transform: uppercase;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+  }
+}
+
 .btn-link {
   background-color: unset;
   border: unset;

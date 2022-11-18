@@ -1,0 +1,83 @@
+@import "../../../../../assets/scss/variables";
+
+#modification-criteres-container {
+  min-height: 100vh;
+  background-color: $color-pe-grey-x-light;
+  padding-bottom: 7rem;
+
+  .div_modification_criteres_with_padding {
+    padding: 0rem 1.5rem;
+
+    @media #{$extra-small-device} {
+      padding: 0rem 1rem;
+    }
+  }
+
+  .div_bouton_retour_modification_criteres {
+    height: 5.5rem;
+    background-color: $color-white-1;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    @media #{$extra-small-device} {
+      height: 4rem;
+    }
+
+    .bouton_retour {
+      cursor: pointer;
+    }
+
+    span {
+      font-weight: bold !important;
+    }
+  }
+
+  #modification-criteres-form-container {
+    margin-top: 1.5rem;
+  }
+
+  .div_boutons_validation_modification_criteres {
+    height: 5.5rem;
+    background-color: $color-pe-grey-x-light;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    @media #{$extra-small-device} {
+      height: 7rem;
+    }
+
+    &.row {
+      margin: unset;
+      margin-bottom: 1rem;
+    }
+
+    #btn-modification-autres-criteres {
+      span {
+        color: $color-pe-red !important;
+      }
+    }
+
+    #btn-mettre-a-jour-simulation {
+      width: fit-content;
+
+      div {
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+        span {
+          padding: unset;
+        }
+      }
+    }
+  }
+}
+
+.modification-criteres-container {
+  margin-left: 0.25rem !important;
+  margin-right: 0.25rem !important;
+}

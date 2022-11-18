@@ -1,0 +1,25 @@
+@import "../../../../assets/scss/variables";
+
+.btn-checkbox-oui-non {
+    width: 9.375rem;
+    max-width: 9.375rem;
+    min-height: 2.5rem;
+    background-color: white;
+    border: 0.0625rem solid $color-blue-9;
+
+    border-radius: 0.25rem;
+
+    @media #{$extra-small-device} {
+      width: 50%;
+      max-width: 8.65rem;
+    }
+
+    &.active {
+      border: 0.0625rem solid $color-blue-1;
+      background-color: $color-blue-1;
+
+      span {
+        color: white;
+      }
+    }
+  }

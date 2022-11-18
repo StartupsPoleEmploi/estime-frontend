@@ -48,9 +48,11 @@ export class AppComponent implements OnInit {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
         this.isDisplayFilAriane = routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE
-          && routerEvent.url.split('?')[0] !== `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
+          && routerEvent.url.split('?')[0] !== `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
+          && routerEvent.url.split('?')[0] !== `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`;
         if ((routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
-          || routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`)
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`)
           && this.screenService.isExtraSmallScreen()) {
           this.renderer.addClass(document.body, 'body-with-sticky-footer');
         } else {

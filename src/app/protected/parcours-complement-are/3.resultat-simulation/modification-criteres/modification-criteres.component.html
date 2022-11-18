@@ -1,0 +1,24 @@
+<div id="modification-criteres-container">
+    <div class="div_bouton_retour_modification_criteres div-vertically-centered justify-content-start div_modification_criteres_with_padding"
+        (click)="sideModalService.closeSideModalModificationCriteres()" (keyup)="handleKeyUpOnRetour($event);"
+        tabindex="0" tag-action="clic_bouton_retour_modification_criteres"
+        data-testid="bouton_retour_modification_criteres">
+        <span class="bouton_retour body-2-typo color-pe-red-typo">
+            <em alt class="ps-2 pe-2 fas fa-chevron-left"></em>
+            <span class="body-2-typo color-pe-red-typo">Retour</span>
+        </span>
+    </div>
+    <app-ma-situation #maSituationComponent [isModificationCriteres]="true"></app-ma-situation>
+    <app-activite-reprise #activiteRepriseComponent [isModificationCriteres]="true"></app-activite-reprise>
+    <div class="div_boutons_validation_modification_criteres div-vertically-centered text-center row py-3">
+        <div class="col-md-12 col-12">
+            <button id="btn-mettre-a-jour-simulation" class="btn-style-perso-1 mx-auto"
+                aria-label="Mettre à jour la simulation" type="submit" data-testid="btn-mettre-a-jour-simulation"
+                (click)="onSubmitModificationCriteresForm()" tag-navigation="clic_bouton_mettre_a_jour_simulation">
+                <div>
+                    <span class="button-typo">Mettre à jour la simulation</span>
+                </div>
+            </button>
+        </div>
+    </div>
+</div>

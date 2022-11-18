@@ -75,8 +75,12 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     const allocationARE = new AllocationARE();
     allocationARE.allocationMensuelleNet = null;
     allocationARE.allocationJournaliereBrute = null;
+    allocationARE.allocationJournaliereBruteTauxPlein = null;
     allocationARE.salaireJournalierReferenceBrut = null;
     allocationARE.nombreJoursRestants = null;
+    allocationARE.hasDegressiviteAre = null;
+    allocationARE.isTauxPlein = null;
+    allocationARE.isTauxReduit = null;
     return allocationARE;
   }
 
@@ -302,6 +306,7 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     if (ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut);
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute);
+      ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein);
       ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet = this.numberUtileService.replaceCommaByDot(ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet);
     }
   }
@@ -332,6 +337,13 @@ export class RessourcesFinancieresAvantSimulationUtileService {
 
   public hasPensionInvaliditeAvecSalaireAvantSimulation(demandeurEmploi: DemandeurEmploi): boolean {
     return demandeurEmploi.beneficiaireAides.beneficiairePensionInvalidite && this.hasSalaireAvantSimulation(demandeurEmploi.ressourcesFinancieresAvantSimulation);
+  }
+
+  public hasAllocationARE(demandeurEmploi: DemandeurEmploi): boolean {
+    return (demandeurEmploi != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null)
   }
 
 }

@@ -48,7 +48,8 @@ export class HeaderComponent {
         this.isHomepage = routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE;
       }
       if (routerEvent instanceof NavigationEnd) {
-        this.isPageResultat = routerEvent.url.split('?')[0] === `/${RoutesEnum.ETAPES_SIMULATION}/${RoutesEnum.RESULTAT_SIMULATION}`;
+        this.isPageResultat = routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
+          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`;
       }
     });
   }

@@ -54,6 +54,11 @@ export class EstimeApiService {
     return this.http.post<Simulation>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_aides`, demandeurEmploi, options);
   }
 
+  public simulerComplementARE(demandeurEmploi: DemandeurEmploi): Observable<Simulation> {
+    const options = this.getHttpHeaders();
+    return this.http.post<Simulation>(`${this.pathDemandeurEmploiService}demandeurs_emploi/simulation_complement_are`, demandeurEmploi, options);
+  }
+
   public supprimerDonneesSuiviParcoursDemandeur(idPoleEmploi: string): Observable<Object> {
     const options = this.getHttpHeaders();
     options.params = new HttpParams().set(QueryParamEnum.ID_POLE_EMPLOI, idPoleEmploi);

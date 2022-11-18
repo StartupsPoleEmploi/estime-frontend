@@ -1,7 +1,14 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
 <div>
-    <app-choix-type-de-simulation *ngIf="isChoixSimulationDisplay" (commencerSimulation)="commencerSimulation()"
-        [isBeneficiaireARE]="isBeneficiaireARE">
+    <div *ngIf="messageErreur" class="form-container-fluid">
+        <alert type="danger">
+            {{messageErreur}}
+        </alert>
+    </div>
+    <app-choix-type-de-simulation *ngIf="isChoixSimulationDisplay" [isBeneficiaireARE]="isBeneficiaireARE"
+        (commencerSimulationParcoursToutesAides)="commencerSimulationParcoursToutesAides()"
+        (commencerSimulationParcoursComplementARE)="accesParcoursComplementARE()">
     </app-choix-type-de-simulation>
-    <app-documents-avant-de-commencer *ngIf="!isChoixSimulationDisplay"></app-documents-avant-de-commencer>
+    <app-documents-avant-de-commencer *ngIf="!isChoixSimulationDisplay" [messageErreur]="messageErreur"
+        (accesParcoursToutesAides)="accesParcoursToutesAides()"></app-documents-avant-de-commencer>
 </div>

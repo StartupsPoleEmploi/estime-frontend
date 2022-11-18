@@ -1,0 +1,58 @@
+@import "../../../../assets/scss/variables";
+
+
+
+.resultat-containers {
+    border-radius : 1rem;
+    background-color: white;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+
+}
+.resultat-complement-are-container {
+
+    #montant-complement-are {
+        color: $color-pe-red;
+    }
+}
+
+.faire-simulation-complete-container {
+    img {
+        width: 11.25rem;
+
+        @media #{$extra-small-device} {
+            width: 100%;
+        }
+    }
+
+
+}
+
+
+
+.listes-container {
+    li {
+        margin:unset;
+    }
+}
+
+#criteres-container {
+    button {
+        @media #{$extra-small-device} {
+            min-height: unset !important;
+
+        }
+    }
+}
+
+#actions-suite {
+    margin:0;
+    .row {
+        margin:0;
+    }
+
+    .liste-actions {
+        margin:0;
+        padding:0;
+    }
+}

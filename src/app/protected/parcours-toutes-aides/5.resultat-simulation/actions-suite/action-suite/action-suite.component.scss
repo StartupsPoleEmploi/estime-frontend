@@ -1,0 +1,20 @@
+@import "../../../../../../assets/scss/variables";
+
+.action-suite {
+  background: white;
+  border-radius: 1.5rem !important;
+  border: none;
+  padding: 1.5rem !important;
+  cursor: pointer;
+
+  img {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .col-text {
+    @media #{$extra-small-device} {
+      padding-left: 2rem;
+    }
+  }
+}

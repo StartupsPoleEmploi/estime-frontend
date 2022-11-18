@@ -10,25 +10,6 @@
             </div>
             <div class="row">
                 <button name="simulation-complete" class="card button-card-choix-simulation"
-                    aria-label="Effectuer une simulation complète" (click)="clickOnSimulationComplete()"
-                    (keyup)="handleKeyUpOnSimulationComplete($event)" data-testid="btn-effectuer-simulation-complete"
-                    tag-action="clic_bouton_effectuer_simulation_complete">
-                    <div class="row">
-                        <div class="col-md-11 col-10 text-start">
-                            <h5 class="headline-5-typo color-pe-red-typo">
-                                Simulation complète
-                            </h5>
-                            <span class="body-2-typo">
-                                Toutes les allocations et aides dans les 6 mois qui suivront votre reprise
-                                d'emploi
-                            </span>
-                        </div>
-                        <div class="col-md-1 col-2 text-end my-auto">
-                            <img alt="" src="../../../assets/images/icones/chevron-droite-red.svg">
-                        </div>
-                    </div>
-                </button>
-                <button name="simulation-complete" class="card button-card-choix-simulation"
                     aria-label="Effectuer une simulation complète" (click)="clickOnSimulationRapide()"
                     (keyup)="handleKeyUpOnSimulationRapide($event)" data-testid="btn-effectuer-simulation-rapide"
                     tag-action="clic_bouton_effectuer_simulation_rapide">
@@ -48,6 +29,25 @@
                         </div>
                         <div class="col-md-1 col-2 text-end my-auto">
                             <img alt="" src="../../../assets/images/icones/open-in-new-window.svg">
+                        </div>
+                    </div>
+                </button>
+                <button name="simulation-complete" class="card button-card-choix-simulation"
+                    aria-label="Effectuer une simulation complète" (click)="clickOnSimulationComplete()"
+                    (keyup)="handleKeyUpOnSimulationComplete($event)" data-testid="btn-effectuer-simulation-complete"
+                    tag-action="clic_bouton_effectuer_simulation_complete">
+                    <div class="row">
+                        <div class="col-md-11 col-10 text-start">
+                            <h5 class="headline-5-typo color-pe-red-typo">
+                                Simulation complète
+                            </h5>
+                            <span class="body-2-typo">
+                                Toutes les allocations et aides dans les 6 mois qui suivront votre reprise
+                                d'emploi
+                            </span>
+                        </div>
+                        <div class="col-md-1 col-2 text-end my-auto">
+                            <img alt="" src="../../../assets/images/icones/chevron-droite-red.svg">
                         </div>
                     </div>
                 </button>

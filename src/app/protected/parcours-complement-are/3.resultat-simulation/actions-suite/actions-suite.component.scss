@@ -1,0 +1,24 @@
+@import "../../../../../assets/scss/variables";
+
+.liste-actions {
+  margin: 0;
+  // padding: 0.5rem;
+  padding-bottom: 0rem;
+
+  @media #{$extra-small-device} {
+    padding: 0rem;
+  }
+
+  div {
+
+    @media #{$extra-small-device} {
+      padding: 0rem;
+      margin: 0rem;
+
+    }
+  }
+
+  .col-12 {
+    padding:0;
+  }
+}

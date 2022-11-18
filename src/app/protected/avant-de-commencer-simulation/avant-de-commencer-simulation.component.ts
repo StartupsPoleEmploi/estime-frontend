@@ -1,5 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
+import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
+import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
@@ -20,8 +27,13 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
   subscriptionPopstateEventObservable: Subscription;
 
+  isParcoursComplementARE: boolean = false;
+
   constructor(
     private individuConnectedService: IndividuConnectedService,
+    private deConnecteService: DeConnecteService,
+    private estimeApiService: EstimeApiService,
+    private router: Router,
     public screenService: ScreenService,
     public modalService: ModalService
   ) { }
@@ -30,8 +42,50 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     this.isChoixSimulationDisplay = this.isEligibleChoixConnexion();
   }
 
-  public commencerSimulation() {
+  public commencerSimulationParcoursToutesAides() {
     this.isChoixSimulationDisplay = false;
+  }
+  public accesParcoursComplementARE(): void {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.isParcoursComplementARE = true;
+    if (!demandeurEmploiConnecte) {
+      this.isPageLoadingDisplay = true;
+      this.estimeApiService.creerDemandeurEmploi().subscribe({
+        next: this.traiterRetourCreerDemandeurEmploi.bind(this),
+        error: this.traiterErreurCreerDemandeurEmploi.bind(this)
+      });
+    } else {
+      this.router.navigate([`/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.MA_SITUATION}`]);
+    }
+
+  }
+
+  public accesParcoursToutesAides(): void {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    if (!demandeurEmploiConnecte) {
+      this.isPageLoadingDisplay = true;
+      this.estimeApiService.creerDemandeurEmploi().subscribe({
+        next: this.traiterRetourCreerDemandeurEmploi.bind(this),
+        error: this.traiterErreurCreerDemandeurEmploi.bind(this)
+      });
+    } else {
+      this.router.navigate([`/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}`]);
+    }
+  }
+
+  private traiterRetourCreerDemandeurEmploi(demandeurEmploi: DemandeurEmploi): void {
+    this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+    this.isPageLoadingDisplay = false;
+    if (this.isParcoursComplementARE) {
+      this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.MA_SITUATION]);
+    } else {
+      this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.CONTRAT_TRAVAIL]);
+    }
+  }
+
+  private traiterErreurCreerDemandeurEmploi(_error: HttpErrorResponse): void {
+    this.isPageLoadingDisplay = false;
+    this.messageErreur = MessagesErreurEnum.ERREUR_SERVICE;
   }
 
 
@@ -43,5 +97,9 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
       }
       return true;
     } return false;
+  }
+
+  public isConnected(): boolean {
+    return this.individuConnectedService.getIndividuConnected() != null;
   }
 }

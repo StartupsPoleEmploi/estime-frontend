@@ -1,0 +1,294 @@
+<app-page-loading *ngIf="isPageLoadingDisplay"
+    message="Mise à jour de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
+<div class="container-fluid result-container-fluid container-etape" role="form">
+    <div class="row mt-4 mb-3">
+        <div class="col">
+            <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
+                {{pageTitlesEnum.RESULTAT_MA_SIMULATION}}
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-12">
+            <div *ngIf="isEligibleComplementARE" class="resultat-containers resultat-complement-are-container">
+                <div class="row">
+                    <h3 class="headline-3-typo text-start mb-3">
+                        En cas de reprise d'emploi, vous pourriez bénéficier d'un complément ARE d'un montant mensuel de
+                        <br>
+                        <span id="montant-complement-are" data-testid="montant_complement_are">
+                            {{ montantComplementARE }} € brut
+                        </span>
+                    </h3>
+                </div>
+                <div class="row">
+                    <span class="body-2-typo text-start mb-3">
+                        Estimation à titre d’information basée sur les critères que vous avez renseignés, aucune valeur
+                        contractuelle.
+                    </span>
+                </div>
+                <div *ngIf="screenService.isExtraSmallScreen()" class="deductions-container">
+                    <div class="row card-message-info">
+                        <div class="img-card-message-info col-auto my-auto">
+                            <div>
+                                <img alt="" src="./assets/images/icones/info-grey.svg">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="headline-5-typo">
+                                Somme{{hasDeductions?'s':''}} à déduire du montant brut :
+                            </h5>
+                        </div>
+                        <div class="col-1 my-auto" (click)="onClickCriteresDisplay()">
+                            <div class="">
+                                <em *ngIf="isCriteresDisplay" class="fas fa-chevron-up me-2 ms-auto"></em>
+                                <em *ngIf="!isCriteresDisplay" class="fas fa-chevron-down me-2 ms-auto"></em>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-2" *ngIf="isCriteresDisplay">
+                            <ul>
+                                <li *ngIf="(montantCRC > 0)">
+                                    <span class="body-2-typo" data-testid="montant_crc">
+                                        {{ this.numberUtileService.replaceDotByComma(montantCRC) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de cotisation retraire complémentaire (CRC)
+                                    </span>
+                                </li>
+                                <li *ngIf="(montantCSG > 0)">
+                                    <span class="body-2-typo" data-testid="montant_csg">
+                                        {{ this.numberUtileService.replaceDotByComma(montantCSG) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de contributions sociales généralisées (CSG)
+                                    </span>
+                                </li>
+                                <li *ngIf="(montantCRDS > 0)">
+                                    <span class="body-2-typo" data-testid="montant_crds">
+                                        {{ this.numberUtileService.replaceDotByComma(montantCRDS) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de contributions au remboursement de la dette sociale (CRDS)
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo">
+                                        L'application éventuelle du prélèvement à la source de l'impôt sur le revenu
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!screenService.isExtraSmallScreen()" id="deductions-container" class="listes-container">
+                    <div class="row card-message-info">
+                        <div class="img-card-message-info col-auto my-auto">
+                            <div>
+                                <img alt="" src="./assets/images/icones/info-grey.svg">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="headline-5-typo">
+                                Somme{{hasDeductions?'s':''}} à déduire du montant brut :
+                            </h5>
+                            <ul>
+                                <li *ngIf="(montantCRC > 0)">
+                                    <span class="body-2-typo" data-testid="montant_crc">{{
+                                        this.numberUtileService.replaceDotByComma(montantCRC) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de cotisation retraire complémentaire (CRC)
+                                    </span>
+                                </li>
+                                <li *ngIf="(montantCSG > 0)">
+                                    <span class="body-2-typo" data-testid="montant_csg">{{
+                                        this.numberUtileService.replaceDotByComma(montantCSG) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de contributions sociales généralisées (CSG)
+                                    </span>
+                                </li>
+                                <li *ngIf="(montantCRDS > 0)">
+                                    <span class="body-2-typo" data-testid="montant_crds">{{
+                                        this.numberUtileService.replaceDotByComma(montantCRDS) }}
+                                    </span>
+                                    <span class="body-2-typo">
+                                        € de contributions au remboursement de la dette sociale (CRDS)
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo">
+                                        L'application éventuelle du prélèvement à la source de l'impôt sur le revenu
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEligibleComplementARE" class="resultat-containers resultat-complement-are-container">
+                <div class="row">
+                    <h3 class="headline-3-typo text-start mb-3" data-testid="non-eligible-complement-are">
+                        Selon les critères de votre simulation, vous n'êtes pas éligible au complément ARE.
+                    </h3>
+                </div>
+                <div class="row">
+                    <span class="body-2-typo text-start mb-3">
+                        Estimation à titre d’information basée sur les critères que vous avez renseignés, aucune valeur
+                        contractuelle.
+                    </span>
+                </div>
+            </div>
+            <div *ngIf="screenService.isExtraSmallScreen()" id="criteres-container"
+                class="resultat-containers listes-container pt-4">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div>
+                            <span class="body-1-typo color-blue-2-typo text-start" style="font-weight: 700 !important">
+                                Vos critères :
+                            </span>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_degressivite">
+                                        {{ getCriteresSimulationDegressiviteARE() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_sjr">
+                                        {{ getCriteresSimulationSJR() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_allocation_journaliere">
+                                        {{ getCriteresSimulationAllocationJournaliere() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_futur_salaire">
+                                        {{ getCriteresSimulationFuturSalaire()}}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 my-auto">
+                        <button class="btn btn-style-perso-6" data-testid="btn-modification-criteres" tabindex="0"
+                            (click)="onClickButtonModificationCriteres()"
+                            (keyup)="handleKeyUpOnModificationCriteres($event)"
+                            tag-navigation="clic_bouton_modification_criteres_parcours_complement_are">
+                            <span>MODIFIER LES CRITÈRES</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="resultat-containers faire-simulation-complete-container">
+                <div class="row" *ngIf="!screenService.isExtraSmallScreen()">
+                    <div class="col-md-4">
+                        <img id="image-homepage-calculette" alt=""
+                            src="./assets/images/illustrations/homepage-calculette.svg">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="headline-4-typo text-start mb-3">
+                            Vous souhaitez connaître l’ensemble des aides et allocations pour les 6
+                            mois qui suivront votre reprise d’emploi ?
+                        </h4>
+                        <button id="btn-faire-simulation-complete" type="button"
+                            aria-label="Faire une simulation complète" data-testid="btn-je-commence"
+                            tag-action="clic_bouton_faire_simulation_complete_depuis_resultat"
+                            (click)="clickOnFaireSimulationComplete()">
+                            <span class="button-typo">FAIRE LA SIMULATION COMPLETE</span>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="screenService.isExtraSmallScreen()" class="row">
+                    <div class="col-12">
+                        <h4 class="headline-4-typo text-start mb-3">
+                            Vous souhaitez connaître l’ensemble des aides et allocations pour les 6
+                            mois qui suivront votre reprise d’emploi ?
+                        </h4>
+                    </div>
+                    <div class="col-12 mb-4">
+                        <img id="image-homepage-calculette" alt=""
+                            src="./assets/images/illustrations/homepage-calculette.svg">
+                    </div>
+                    <div class="col-md-12 mx-0 px-0">
+                        <button id="btn-faire-simulation-complete" type="button"
+                            aria-label="Faire une simulation complète" data-testid="btn-je-commence"
+                            tag-action="clic_bouton_faire_simulation_complete_depuis_resultat"
+                            (click)="clickOnFaireSimulationComplete()">
+                            <span class="button-typo">FAIRE LA SIMULATION COMPLETE</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-12">
+            <div *ngIf="!screenService.isExtraSmallScreen()" id="criteres-container"
+                class="resultat-containers listes-container pt-4">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div>
+                            <span class="body-1-typo color-blue-2-typo text-start" style="font-weight: 700 !important">
+                                Vos critères :
+                            </span>
+                        </div>
+                        <div>
+                            <ul>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_degressivite">
+                                        {{ getCriteresSimulationDegressiviteARE() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_sjr">
+                                        {{ getCriteresSimulationSJR() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_allocation_journaliere">
+                                        {{ getCriteresSimulationAllocationJournaliere() }}
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="body-2-typo" data-testid="critere_futur_salaire">
+                                        {{ getCriteresSimulationFuturSalaire()}}
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-12 my-auto">
+                        <button class="btn btn-style-perso-6" data-testid="btn-modification-criteres" tabindex="0"
+                            (click)="onClickButtonModificationCriteres()"
+                            (keyup)="handleKeyUpOnModificationCriteres($event)"
+                            tag-navigation="clic_bouton_modification_criteres_parcours_complement_are">
+                            <span>MODIFIER LES CRITÈRES</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="aller-plus-loin-container">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">
+                            Pour aller plus loin
+                        </h3>
+                    </div>
+                </div>
+                <div id="actions-suite">
+                    <app-actions-suite></app-actions-suite>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #modalModificationCriteres>
+    <app-modification-criteres (displayLoading)="displayLoading($event)">
+    </app-modification-criteres>
+</ng-template>
