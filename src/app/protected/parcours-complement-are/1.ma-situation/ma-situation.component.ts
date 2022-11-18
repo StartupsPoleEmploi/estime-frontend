@@ -7,7 +7,6 @@ import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
-import { DeConnecteBeneficiaireAidesService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -44,7 +43,6 @@ export class MaSituationComponent implements OnInit {
     public screenService: ScreenService,
     public modalService: ModalService,
     public deConnecteService: DeConnecteService,
-    private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     private ressourcesFinancieresAvantSimulationService: RessourcesFinancieresAvantSimulationUtileService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private router: Router

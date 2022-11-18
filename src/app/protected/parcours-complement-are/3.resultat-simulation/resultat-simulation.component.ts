@@ -53,7 +53,6 @@ export class ResultatSimulationComponent implements OnInit {
     this.initMontants();
   }
 
-
   private loadDataSimulation(): void {
     this.simulation = this.deConnecteSimulationService.getSimulation();
   }
