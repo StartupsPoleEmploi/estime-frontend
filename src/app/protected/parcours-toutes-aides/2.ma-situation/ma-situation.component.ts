@@ -87,7 +87,6 @@ export class MaSituationComponent implements OnInit {
 
   public onClickCheckBoxBeneficiaireACRE(value: boolean): void {
     if (value === false) {
-      this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
       this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
     }
   }
@@ -232,6 +231,10 @@ export class MaSituationComponent implements OnInit {
 
   public isConcerneACRE(): boolean {
     return this.beneficiaireAides.beneficiaireASS && this.informationsPersonnelles.isMicroEntrepreneur;
+  }
+
+  public isEntrepriseCreeeDansLes12Mois(): boolean {
+    return this.dateUtileService.isDateDansLes12Mois(this.dateUtileService.getDateFromDateDecomposee(this.dateRepriseCreationEntreprise));
   }
 
   /************ gestion évènements press enter ************************/
@@ -486,9 +489,6 @@ export class MaSituationComponent implements OnInit {
   private checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)) {
       this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
-      if (this.isNonBeneficiaireACRE()) {
-        this.unsetDateRepriseCreationEntreprise();
-      }
     }
   }
 
@@ -505,12 +505,6 @@ export class MaSituationComponent implements OnInit {
 
   private isNonBeneficiaireACRE() {
     return !this.isConcerneACRE() || this.informationsPersonnelles.isBeneficiaireACRE == null || !this.informationsPersonnelles.isBeneficiaireACRE;
-  }
-
-  private unsetDateRepriseCreationEntreprise() {
-    this.informationsPersonnelles.dateRepriseCreationEntreprise = null;
-    this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
-    this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
   }
 
   public displayLoading(displayLoading: boolean) {

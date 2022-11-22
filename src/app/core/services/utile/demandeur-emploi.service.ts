@@ -28,10 +28,7 @@ export class DemandeurEmploiService {
     if (demandeurEmploi.informationsPersonnelles) {
       return demandeurEmploi.informationsPersonnelles;
     }
-    const informationsPersonnelles = this.informationsPersonnellesService.creerInformationsPersonnelles();
-    informationsPersonnelles.nationalite = null;
-    informationsPersonnelles.isBeneficiaireACRE = null;
-    return informationsPersonnelles;
+    return this.informationsPersonnellesService.creerInformationsPersonnelles();
   }
 
   public loadDataSituationFamiliale(demandeurEmploi: DemandeurEmploi): SituationFamiliale {

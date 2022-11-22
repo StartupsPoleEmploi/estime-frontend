@@ -232,6 +232,19 @@
                 <div *ngIf="isConcerneACRE()">
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
+                            * Votre date de création ou de reprise d'entreprise
+                        </label>
+                    </div>
+                    <div class="row pb-3">
+                        <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
+                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
+                            data_testid="reprise-creation-entreprise">
+                        </app-date-inputs>
+                    </div>
+                </div>
+                <div *ngIf="isConcerneACRE() && isEntrepriseCreeeDansLes12Mois()">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
                             * Bénéficiez-vous de l'ACRE ?
                             <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
@@ -274,19 +287,6 @@
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="isConcerneACRE() && informationsPersonnelles.isBeneficiaireACRE">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
-                            * Votre date de création ou de reprise d'entreprise
-                        </label>
-                    </div>
-                    <div class="row pb-3">
-                        <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
-                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
-                            data_testid="reprise-creation-entreprise">
-                        </app-date-inputs>
                     </div>
                 </div>
                 <div>

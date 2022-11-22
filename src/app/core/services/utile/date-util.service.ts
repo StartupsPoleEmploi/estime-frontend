@@ -1,3 +1,4 @@
+import { getLocaleDateFormat } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DateDecomposee } from "@models/date-decomposee";
@@ -391,6 +392,11 @@ export class DateUtileService {
     let datePlus3Ans = this.ajouterMoisToDate(date, 36);
     let dateMoins21Ans = this.ajouterMoisToDate(date, 252);
     return moment(Date.now()).isBetween(datePlus3Ans, dateMoins21Ans);
+  }
+
+  public isDateDansLes12Mois(date: Date): boolean {
+    let dateMoins12Mois = this.enleverMoisToDate(new Date(), 12);
+    return moment(date).isSameOrAfter(dateMoins12Mois);
   }
 
   /**

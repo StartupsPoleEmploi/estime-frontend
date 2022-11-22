@@ -10,6 +10,8 @@ export class InformationsPersonnellesService {
 
   public creerInformationsPersonnelles(): InformationsPersonnelles {
     const informationsPersonnelles = new InformationsPersonnelles();
+    informationsPersonnelles.nationalite = null;
+    informationsPersonnelles.isBeneficiaireACRE = null;
     informationsPersonnelles.logement = this.creerLogement();
     return informationsPersonnelles;
   }
