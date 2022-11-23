@@ -12,7 +12,6 @@ import { TemoignagesMobileComponent } from './homepage/section-temoignages/temoi
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ContactComponent } from './contact/contact.component';
 import { AccessibiliteComponent } from './accessibilite/accessibilite.component';
-import { ModalPopulationNonAutoriseeComponent } from './homepage/modal-population-non-autorisee/modal-population-non-autorisee.component';
 import { SectionDescriptionComponent } from './homepage/section-description/section-description.component';
 import { SectionAidesComponent } from './homepage/section-aides/section-aides.component';
 import { AidesComponent } from './aides/aides.component';
@@ -31,7 +30,6 @@ import { ModalChoixConnexionComponent } from './homepage/modal-choix-connexion/m
     TemoignagesMobileComponent,
     ContactComponent,
     AccessibiliteComponent,
-    ModalPopulationNonAutoriseeComponent,
     SectionDescriptionComponent,
     SectionAidesComponent,
     AidesComponent,

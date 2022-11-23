@@ -6,7 +6,6 @@ import { InformationsPersonnelles } from "./informations-personnelles";
 export class Individu {
   beneficiaireAides: BeneficiaireAides;
   idPoleEmploi: string;
-  populationAutorisee: boolean;
   peConnectAuthorization: PeConnectAuthorization;
   ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   informationsPersonnelles: InformationsPersonnelles;

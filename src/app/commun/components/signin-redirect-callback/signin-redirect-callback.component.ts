@@ -40,16 +40,11 @@ export class SigninRedirectCallbackComponent implements OnInit {
   private traiterRetourAuthentifierIndividu(individu: Individu): void {
     this.isPageLoadingDisplay = false;
     this.individuConnectedService.saveIndividuConnected(individu);
-    if (individu.populationAutorisee) {
-      this.sessionPeConnectExpiredService.startCheckUserInactivity();
-      if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
-        this.sessionPeConnectExpiredService.navigateToRouteActivated();
-      } else {
-        this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { skipLocationChange: false, replaceUrl: false });
-      }
+    this.sessionPeConnectExpiredService.startCheckUserInactivity();
+    if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
+      this.sessionPeConnectExpiredService.navigateToRouteActivated();
     } else {
-      this.sessionStorageEstimeService.storeMessageDemandeurEmploiNonAutorise();
-      this.peConnectService.logout();
+      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { skipLocationChange: false, replaceUrl: false });
     }
   }
 
