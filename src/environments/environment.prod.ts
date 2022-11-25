@@ -6,5 +6,6 @@ export const environment = {
   peconnectRedirecturi: 'pe-connect.redirect-uri',
   peconnectScope: 'pe-connect.scope',
   peconnectIdentityServerURL: 'pe-connect.identity-server-url',
-  tagCommanderScriptUrl: 'tagcommander.script.url'
+  tagCommanderScriptUrl: 'tagcommander.script.url',
+  enableParcoursComplementARE: false
 };

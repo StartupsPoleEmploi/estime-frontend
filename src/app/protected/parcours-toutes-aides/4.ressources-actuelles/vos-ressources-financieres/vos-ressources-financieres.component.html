@@ -303,8 +303,10 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * {{ getLibelleMontantBrutAllocationJournaliere() }}
-                    <button *ngIf="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true" id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
-                        placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                    <button
+                        *ngIf="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true"
+                        id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         aria-label="Infobulle taux réduit degressivité"
                         (click)="modalService.openModalOnEvent($event, modalTauxReduitTemplate)">
                     </button>
@@ -774,7 +776,7 @@
             </li>
         </ol>
         <h5 class='headline-5-typo headline-5-typo-color'>
-            Sur l'application mobile <i>'Mon Espace'</i> de Pôle emploi :
+            Sur l'application mobile <i>“Mon Espace”</i> de Pôle emploi :
         </h5>
         <ol>
             <li class='body-1-typo'>
@@ -784,7 +786,7 @@
                 Accédez à vos courriers depuis la barre de menu en bas de l'écran
             </li>
             <li class='body-1-typo'>
-                Dans la liste, identifiez le relevé de situation le plus récent et tapez dessus pour l'ouvrir
+                Dans la liste, identifiez le relevé de situation le plus récent et ouvrez-le
             </li>
         </ol>">
     </app-tooltip>
@@ -801,7 +803,7 @@
 <ng-template #modalDegressiviteTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
-            La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et qui bénéficiaient d'un salaire brut supérieur à 4677 euros par mois
+            La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et dont les revenus excédaient un certain montant <a href='http://plmpl.fr/c/pXKCb'>(plus d'infos)</a>
         </p>">
     </app-tooltip>
 </ng-template>

@@ -6,4 +6,5 @@ export class Environment {
   readonly peconnectScope: string;
   readonly peconnectIdentityServerURL: string;
   readonly tagCommanderScriptUrl: string;
+  readonly enableParcoursComplementARE: boolean;
 }

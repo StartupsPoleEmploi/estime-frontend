@@ -18,10 +18,10 @@
                         </h1>
                     </div>
                     <div class="row row-btn-je-commence">
-                        <button id="btn-je-commence-homepage" type="button" aria-label="Commencer la simulation"
+                        <button id="btn-je-commence-homepage" type="button" aria-label="Commencer mon estimation"
                             class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
                             (click)="openModalOnEventChoixConnexion()">
-                            <span class="button-typo">Je commence la simulation</span>
+                            <span class="button-typo">Je commence mon estimation</span>
                             <img alt="" class="image-2" src="./assets/images/icones/fleche-droite-pe-white.svg">
                         </button>
                     </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="container-fluid div-info-beneficiaires">
         <app-message-info
-            contenu="Le simulateur s'adresse aux demandeurs d'emploi qui dépendent du régime général de l'assurance chômage ainsi qu'aux bénéficiaires de minima sociaux ou de la pension d'invalidité">
+            contenu="Le simulateur propose une estimation, réalisée sur la seule base des éléments que vous avez renseignés. Elle n’a aucun caractère contractuel. Il s'adresse aux demandeurs d'emploi inscrits qui dépendent du régime général de l'assurance chômage ainsi qu'aux bénéficiaires de minima sociaux">
         </app-message-info>
     </div>
 </section>
@@ -46,9 +46,10 @@
 <app-section-temoignages></app-section-temoignages>
 
 <div *ngIf="this.stickyButton" class="btn-sticks">
-    <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer la simulation" class="btn-homepage"
-        data-testid="btn-je-commence" tag-action="clic_bouton_je_commence" (click)="openModalOnEventChoixConnexion()">
-        <span class="button-typo">Je commence la simulation</span>
+    <button id="btn-je-commence-homepage-sticky" type="button" aria-label="Commencer mon estimation"
+        class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
+        (click)="openModalOnEventChoixConnexion()">
+        <span class="button-typo">Je commence mon estimation</span>
         <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
     </button>
 </div>
