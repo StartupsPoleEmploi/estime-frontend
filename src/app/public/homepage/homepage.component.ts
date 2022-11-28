@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { CodesMessagesErreurEnum } from '@app/commun/enumerations/codes-messages-erreur.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { MessageErreur } from '@app/commun/models/message-erreur';
 import { AuthorizationService } from '@app/core/services/connexion/authorization.service';
@@ -10,7 +9,6 @@ import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModalChoixConnexionComponent } from './modal-choix-connexion/modal-choix-connexion.component';
-import { ModalPopulationNonAutoriseeComponent } from './modal-population-non-autorisee/modal-population-non-autorisee.component';
 
 @Component({
   selector: 'app-homepage',
@@ -77,13 +75,9 @@ export class HomepageComponent implements OnInit {
   private checkDemandeurEmploiConnecte(): void {
     const messageErreur = this.authorizationService.getMessageErreur();
     if (messageErreur) {
-      if (messageErreur?.code === CodesMessagesErreurEnum.POPULATION_NON_AUTORISEE) {
-        this.bsModalService.show(ModalPopulationNonAutoriseeComponent, { class: 'modal-lg not-side-modal' });
-      } else {
-        this.messageErreur = messageErreur;
-        if (this.messageErreur) {
-          this.messageErreurElement.nativeElement.focus();
-        }
+      this.messageErreur = messageErreur;
+      if (this.messageErreur) {
+        this.messageErreurElement.nativeElement.focus();
       }
     }
   }

@@ -56,10 +56,13 @@ export class MaSituationComponent implements OnInit {
   }
 
   private initRessourcesFinancieresAvantSimulation(): void {
-    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null ||
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null) {
       this.ressourcesFinancieresAvantSimulation = new RessourcesFinancieresAvantSimulation();
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresAvantSimulationService.creerAllocationARE();
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulation;
+      this.checkAndSaveDemandeurEmploiConnecte();
     } else {
       this.ressourcesFinancieresAvantSimulation = this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation;
     }
@@ -77,7 +80,6 @@ export class MaSituationComponent implements OnInit {
       this.isTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein;
       this.isTauxReduit = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit;
     }
-    this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants = 1;
   }
 
   public hasDegressiviteAreSelectionne(): boolean {
@@ -220,6 +222,7 @@ export class MaSituationComponent implements OnInit {
     if (this.hasDegressiviteAreNon || (this.hasDegressiviteAreOui && this.isTauxPlein)) {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute;
     }
+    this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants = 1;
   }
 
   private checkAndSaveDemandeurEmploiConnecte(): void {

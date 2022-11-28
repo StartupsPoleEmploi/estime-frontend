@@ -21,7 +21,7 @@
                 <div class="row pb-3">
                     <div class="col-md-12">
                         <h4 class="headline-4-typo color-blue-2-typo text-start">
-                            * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire la simulation ?
+                            * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire une estimation ?
                         </h4>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-12">
                         <app-message-info
-                            contenu="Dans tous les cas vous aurez une simulation que vous pourrez modifier à tout moment.">
+                            contenu="Dans tous les cas vous aurez une estimation que vous pourrez modifier à tout moment.">
                         </app-message-info>
                     </div>
                 </div>
@@ -454,13 +454,6 @@
                         </div>
                     </div>
                     <div class="subcard-contrat-travail">
-                        <div class="row pb-3">
-                            <div class="col-md-12">
-                                <app-message-info
-                                    contenu="Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité">
-                                </app-message-info>
-                            </div>
-                        </div>
                         <div *ngIf="hasOffreEmploiOui">
                             <div class="row flex-column pb-3">
                                 <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
@@ -491,7 +484,6 @@
                                     </span>
                                 </div>
                             </div>
-
                         </div>
                         <div *ngIf="hasOffreEmploiNon">
                             <div class="row flex-column pb-3">
@@ -587,6 +579,13 @@
                                         {{controleChampFormulaireService.MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE}}
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row pb-3">
+                            <div class="col-md-12">
+                                <app-message-info
+                                    contenu="Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité">
+                                </app-message-info>
                             </div>
                         </div>
                         <div *ngIf="afficherNombreTrajetsDomicileTravail()">

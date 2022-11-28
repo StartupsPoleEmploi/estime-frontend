@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { RoutesEnum } from './commun/enumerations/routes.enum';
+import { EnableParcoursComplementAREGuard } from './commun/guard/enable-parcours-complement-are.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: RoutesEnum.PARCOURS_COMPLEMENT_ARE,
-    loadChildren: () => import('./protected/parcours-complement-are/parcours-complement-are.module').then(m => m.ParcoursComplementAreModule)
+    loadChildren: () => import('./protected/parcours-complement-are/parcours-complement-are.module').then(m => m.ParcoursComplementAreModule),
+    canActivate: [EnableParcoursComplementAREGuard]
   }
 ];
 

@@ -11,6 +11,8 @@ import { PublicModule } from './public/public.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { EnableParcoursComplementAREGuard } from './commun/guard/enable-parcours-complement-are.guard';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     CommunModule,
     CoreModule,
+    HttpClientModule,
     PublicModule,
     RouterModule
   ],
   providers: [
     { provide: Environment, useValue: environment },
-    CookieService
+    CookieService,
+    EnableParcoursComplementAREGuard
   ],
   bootstrap: [AppComponent]
 })
