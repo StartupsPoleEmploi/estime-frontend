@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { Environment } from '@app/commun/models/environment';
 import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 
@@ -24,7 +25,8 @@ export class ChoixTypeDeSimulationComponent {
 
   constructor(
     public screenService: ScreenService,
-    private redirectionExterneService: RedirectionExterneService
+    private redirectionExterneService: RedirectionExterneService,
+    private environment: Environment
   ) { }
 
   public clickOnSimulationComplete() {
@@ -38,7 +40,7 @@ export class ChoixTypeDeSimulationComponent {
   }
 
   public clickOnSimulationRapide() {
-    if (this.isBeneficiaireARE) {
+    if (this.isBeneficiaireARE || !this.environment.enableParcoursComplementARE) {
       this.redirectionExterneService.navigate(ChoixTypeDeSimulationComponent.URL_SIMUL_CALCUL);
     } else {
       this.commencerSimulationParcoursComplementARE.emit();

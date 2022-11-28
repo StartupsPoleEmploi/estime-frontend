@@ -52,17 +52,14 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
   public commencerSimulationParcoursToutesAides() {
     this.isChoixSimulationDisplay = false;
   }
+
   public accesParcoursComplementARE(): void {
-    if (this.environment.enableParcoursComplementARE) {
-      this.isParcoursComplementARE = true;
-      this.isPageLoadingDisplay = true;
-      this.estimeApiService.creerDemandeurEmploi().subscribe({
-        next: this.traiterRetourCreerDemandeurEmploi.bind(this),
-        error: this.traiterErreurCreerDemandeurEmploi.bind(this)
-      });
-    } else {
-      this.redirectionExterneService.redirect(AvantDeCommencerSimulationComponent.URL_SIMUL_CALCUL, '_self');
-    }
+    this.isParcoursComplementARE = true;
+    this.isPageLoadingDisplay = true;
+    this.estimeApiService.creerDemandeurEmploi().subscribe({
+      next: this.traiterRetourCreerDemandeurEmploi.bind(this),
+      error: this.traiterErreurCreerDemandeurEmploi.bind(this)
+    });
   }
 
   public accesParcoursToutesAides(): void {
