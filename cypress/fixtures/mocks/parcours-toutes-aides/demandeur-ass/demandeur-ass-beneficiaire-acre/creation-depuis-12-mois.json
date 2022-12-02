@@ -8,6 +8,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {
@@ -40,6 +48,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {
@@ -97,6 +113,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {
@@ -129,6 +153,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {
@@ -151,6 +183,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {
@@ -193,6 +233,14 @@
 					"code": "PAIE",
 					"nom": "Salaire",
 					"montant": 1245.0
+				},
+				"MICRO": {
+					"code": "MICRO",
+					"nom": "Revenus micro-entreprise",
+					"montant": 125.0,
+					"messagesAlerte": [
+						"Ce montant est une moyenne mensuelle abattue, calculé sur la base de ce que vous avez déclaré pour l'année en cours."
+					]
 				}
 			},
 			"aides": {

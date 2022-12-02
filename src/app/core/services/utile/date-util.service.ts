@@ -1,3 +1,4 @@
+import { getLocaleDateFormat } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DateDecomposee } from "@models/date-decomposee";
@@ -23,6 +24,13 @@ export class DateUtileService {
 
   MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE = 37; // 3 ans et 1 mois
   MOIS_ELIGIBILITE_RETRAITE = 360; // 30 ans
+
+  public creerDateDecomposee(libelleAriaLabel: string, libelleTypeDate: string): DateDecomposee {
+    const dateDecomposee = new DateDecomposee();
+    dateDecomposee.libelleTypeDate = libelleTypeDate;
+    dateDecomposee.libelleAriaLabel = libelleAriaLabel;
+    return dateDecomposee;
+  }
 
   public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
@@ -105,6 +113,11 @@ export class DateUtileService {
     const month = dateJour.getMonth();
     const year = dateJour.getFullYear();
     return this.getNombreJoursMois(month, year);
+  }
+
+  public getAnneeActuelle(): number {
+    const dateJour = new Date();
+    return dateJour.getFullYear();
   }
 
   public getLibelleDateActuelle(): string {
@@ -393,6 +406,11 @@ export class DateUtileService {
     return moment(Date.now()).isBetween(datePlus3Ans, dateMoins21Ans);
   }
 
+  public isDateDansLes12Mois(date: Date): boolean {
+    let dateMoins12Mois = this.enleverMoisToDate(new Date(), 12);
+    return moment(date).isSameOrAfter(dateMoins12Mois);
+  }
+
   /**
    * Fonction qui permet de déterminer quel déterminant ("de" ou "d'") on doit placer avant un mois donné
    * @param moisEtAnnee
@@ -433,5 +451,36 @@ export class DateUtileService {
       }
     });
     return moisLabel;
+  }
+
+  public isStringDateAnneeN(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBetweenTheseMonths(date, 12, 0);
+  }
+
+  public isStringDateAnneeAvantNMoins1(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBeforeXMonths(date, 12);
+  }
+
+  public isStringDateAnneeAvantNMoins2(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBeforeXMonths(date, 24);
+  }
+
+  private isDateBetweenTheseMonths(date: Date, numberOfMonthSinceStart: number, numberOfMonthSinceEnd: number): boolean {
+    const dateStart = this.enleverMoisToDate(new Date(), numberOfMonthSinceStart);
+    const dateEnd = this.enleverMoisToDate(new Date(), numberOfMonthSinceEnd);
+    return moment(date).isBetween(dateStart, dateEnd);
+  }
+
+  private isDateBeforeXMonths(date: Date, numberOfMonths: number): boolean {
+    const dateStart = this.enleverMoisToDate(new Date(), numberOfMonths);
+    return moment(date).isSameOrBefore(dateStart);
+  }
+
+  public getLibelleAnneeDepuisXAnnee(nombreAnneeASoustraire: number) {
+    const nombreMoisASoustraire = nombreAnneeASoustraire * 12;
+    return this.enleverMoisToDate(new Date(), nombreMoisASoustraire).getFullYear();
   }
 }

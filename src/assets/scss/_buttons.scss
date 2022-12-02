@@ -211,6 +211,7 @@
 .btn-style-perso-3 {
   @extend .action-btn-base;
   @extend .btn-primary-perso;
+  text-transform: uppercase;
 
   div {
     padding-left: 1rem;
@@ -269,6 +270,7 @@
   span {
     @extend .button-typo;
     color: $color-pe-grey-dark;
+    text-transform: uppercase;
   }
 
   @media #{$small-device} {
@@ -294,6 +296,7 @@
   span {
     @extend .button-typo;
     color: $color-white-1;
+    text-transform: uppercase;
   }
 
   @media #{$small-device} {
@@ -557,6 +560,7 @@ option {
         @extend .color-blue-2-typo;
         margin: unset;
         padding-right: 0.5rem;
+        text-transform: uppercase;
       }
 
       img {
@@ -580,6 +584,7 @@ option {
         margin: unset;
         padding-left: 1rem;
         padding-right: 0.5rem;
+        text-transform: uppercase;
       }
 
       img {

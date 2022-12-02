@@ -1,4 +1,5 @@
 import { Logement } from "./logement";
+import { MicroEntreprise } from "./micro-entreprise";
 
 export class InformationsPersonnelles {
   dateNaissance: string;
@@ -6,6 +7,7 @@ export class InformationsPersonnelles {
   nom: string;
   prenom: string;
   logement: Logement;
+  microEntreprise: MicroEntreprise;
   hasTitreSejourEnFranceValide: boolean;
   hasRevenusImmobilier: boolean;
   hasPensionRetraite: boolean;
@@ -14,5 +16,4 @@ export class InformationsPersonnelles {
   isMicroEntrepreneur: boolean;
   isTravailleurIndependant: boolean;
   isBeneficiaireACRE: boolean;
-  dateRepriseCreationEntreprise: string;
 }

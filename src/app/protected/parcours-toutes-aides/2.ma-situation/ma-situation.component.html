@@ -229,7 +229,20 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="isConcerneACRE()">
+                <div *ngIf="informationsPersonnelles.isMicroEntrepreneur">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
+                            * Votre date de création ou de reprise d'entreprise
+                        </label>
+                    </div>
+                    <div class="row pb-3">
+                        <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
+                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
+                            data_testid="reprise-creation-entreprise">
+                        </app-date-inputs>
+                    </div>
+                </div>
+                <div *ngIf="isConcerneACRE() && isEntrepriseCreeeDansLes12Mois()">
                     <div class="row pb-3">
                         <label class="label headline-4-typo">
                             * Bénéficiez-vous de l'ACRE ?
@@ -274,19 +287,6 @@
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div *ngIf="isConcerneACRE() && informationsPersonnelles.isBeneficiaireACRE">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
-                            * Votre date de création ou de reprise d'entreprise
-                        </label>
-                    </div>
-                    <div class="row pb-3">
-                        <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
-                            [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
-                            data_testid="reprise-creation-entreprise">
-                        </app-date-inputs>
                     </div>
                 </div>
                 <div>
@@ -568,6 +568,26 @@
         </p>
         <a href='https://caf.fr/' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
             Site de la Caisse d'allocations familiales
+            <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
+        </a>
+        ">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalAREEtMicro>
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_are_et_micro" htmlData="
+        <img alt='' src='./assets/images/icones/warning.svg'>
+        <h4 class='headline-4-typo mt-4 mb-3'>
+            Estime n'est pas en mesure d'effectuer la simulation au regard de votre situation.
+        </h3>
+        <p class='body-1-typo'>
+            Si vous avez opté pour l'ARCE (capital de vos droits ARE) ou si votre création d'entreprise a eu lieu avant la fin du contrat qui a permis votre ouverture droits (activité conservée), nous ne sommes pas en mesure de vous apporter un résultat de simulation.
+        </p>
+        <p class='body-1-typo'>
+            Vous pouvez vous renseigner auprès des services de Pôle emploi ou vous rapprocher de votre conseiller référent indemnisation.
+        </p>
+        <a href='https://www.pole-emploi.fr/candidat/mes-droits-aux-aides-et-allocati/a-chaque-situation-son-allocatio.html' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
+            Plus d'informations
             <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
         </a>
         ">

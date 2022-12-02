@@ -628,34 +628,125 @@
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="beneficesMicroEntrepriseDernierExercice">
-                    * Bénéfices en tant que micro entrepreneur
+                <label class="label headline-4-typo">
+                    Type de bénéfices
+                    <button id="infobulle-type-benefice" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle type de bénéfices"
+                        (click)="modalService.openModalOnEvent($event, modalTypeBeneficesTemplate)">
+                    </button>
+                </label>
+            </div>
+            <div class="row pb-3">
+                <div class="col">
+                    <button id="btn-types-benefices-bic" #BIC="ngModel" (click)="onClickCheckBoxIsBIC($event)"
+                        name="BIC" aria-label="Vous percevez des bénéfices de type BIC"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                        data-testid="btn-types-benefices-bic" btnCheckbox tabindex="0" [(ngModel)]="isBIC"
+                        (keyup)="handleKeyUpOnButtonIsBIC($event)">
+                        <span class="body-2-typo">{{libellesTypesBeneficesEnum.BIC}}</span>
+                    </button>
+                    <button id="btn-types-benefices-bnc" #BNC="ngModel" (click)="onClickCheckBoxIsBNC($event)"
+                        name="BNC" aria-label="Vous percevez des bénéfices de type BNC"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                        data-testid="btn-types-benefices-bnc" btnCheckbox tabindex="0" [(ngModel)]="isBNC"
+                        (keyup)="handleKeyUpOnButtonIsBNC($event)">
+                        <span class="body-2-typo">{{libellesTypesBeneficesEnum.BNC}}</span>
+                    </button>
+                    <button id="btn-types-benefices-ar" #AR="ngModel" (click)="onClickCheckBoxIsAR($event)" name="AR"
+                        aria-label="Vous percevez des bénéfices de type AR"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
+                        data-testid="btn-types-benefices-ar" btnCheckbox tabindex="0" [(ngModel)]="isAR"
+                        (keyup)="handleKeyUpOnButtonIsAR($event)">
+                        <span class="body-2-typo">{{libellesTypesBeneficesEnum.AR}}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isDateCreationRepriseEntrepriseAvantNMoins2()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins2">
+                    * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(2)}} (hors taxes)
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="beneficesMicroEntrepriseDernierExercice" name="beneficesMicroEntrepriseDernierExercice"
+                    <input id="chiffreAffairesMicroEntrepriseNMoins2" name="chiffreAffairesMicroEntrepriseNMoins2"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
-                        data-testid="input-revenus-micro-entrepreneur" placeholder="Montant"
-                        [(ngModel)]="ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
-                        [ngClass]="{'ng-invalid': this.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (this.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
-                        required inputmode="numeric" #beneficesMicroEntrepriseDernierExercice="ngModel">
-                    <app-text-with-euro-symbol message="sur le dernier exercice clos"></app-text-with-euro-symbol>
+                        data-testid="input-chiffre-affaires-micro-entreprise-n-moins-2" placeholder="Montant"
+                        [(ngModel)]="informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2"
+                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2 && (this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2 == 0)}"
+                        required inputmode="numeric" #chiffreAffairesMicroEntrepriseNMoins2="ngModel">
+                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
                 </div>
             </div>
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesMicroEntrepriseDernierExercice?.touched)  && beneficesMicroEntrepriseDernierExercice?.errors?.required">
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)
+                        || (chiffreAffairesMicroEntrepriseNMoins2?.touched  && chiffreAffairesMicroEntrepriseNMoins2?.errors?.required)">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
+            </div>
+        </div>
+        <div
+            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isDateCreationRepriseEntrepriseAvantNMoins1()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins1">
+                    * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(1)}} (hors taxes)
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="chiffreAffairesMicroEntrepriseNMoins1" name="chiffreAffairesMicroEntrepriseNMoins1"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        data-testid="input-chiffre-affaires-micro-entreprise-n-moins-1" placeholder="Montant"
+                        [(ngModel)]="informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1"
+                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1 && (this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1 == 0)}"
+                        required inputmode="numeric" #chiffreAffairesMicroEntrepriseNMoins1="ngModel">
+                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted || beneficesMicroEntrepriseDernierExercice?.touched)  && beneficesMicroEntrepriseDernierExercice?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)
+                    || (chiffreAffairesMicroEntrepriseNMoins1?.touched  && chiffreAffairesMicroEntrepriseNMoins1?.errors?.required)">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
+            <div class="row pb-3">
+                <label class="label headline-4-typo" for="chiffreAffairesMicroEntreprise">
+                    * Chiffre d’affaires estimé pour l’année {{dateUtileService.getAnneeActuelle()}} (hors taxes)
+                </label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input id="chiffreAffairesMicroEntrepriseN" name="chiffreAffairesMicroEntreprise"
+                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
+                        maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
+                        data-testid="input-chiffre-affaires-micro-entreprise-n" placeholder="Montant"
+                        [(ngModel)]="informationsPersonnelles.microEntreprise.chiffreAffairesN"
+                        [ngClass]="{'ng-invalid': this.informationsPersonnelles.microEntreprise.chiffreAffairesN && (this.informationsPersonnelles.microEntreprise.chiffreAffairesN == 0)}"
+                        required inputmode="numeric" #chiffreAffairesMicroEntrepriseN="ngModel">
+                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted)
+                        || (chiffreAffairesMicroEntrepriseN?.touched  && chiffreAffairesMicroEntrepriseN?.errors?.required)">
+                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
             </div>
@@ -804,6 +895,22 @@
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
             La dégressivité est une réduction de l'allocation chômage appliquée aux demandeurs d'emploi qui avaient moins de 57 ans au moment de leur fin de contrat et dont les revenus excédaient un certain montant <a href='http://plmpl.fr/c/pXKCb'>(plus d'infos)</a>
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalTypeBeneficesTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            Le chiffre d'affaires est la somme des ventes de biens ou de services d'une entreprise. Il est égal au montant (hors taxes) de l'ensemble des transactions réalisées par l'entreprise
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalTypeBeneficesTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            Le chiffre d'affaires est la somme des ventes de biens ou de services d'une entreprise. Il est égal au montant (hors taxes) de l'ensemble des transactions réalisées par l'entreprise
         </p>">
     </app-tooltip>
 </ng-template>
