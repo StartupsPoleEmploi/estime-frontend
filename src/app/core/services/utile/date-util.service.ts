@@ -25,6 +25,13 @@ export class DateUtileService {
   MOIS_MAXIMUM_ENFANT_POUR_BENEFECIER_PAJE = 37; // 3 ans et 1 mois
   MOIS_ELIGIBILITE_RETRAITE = 360; // 30 ans
 
+  public creerDateDecomposee(libelleAriaLabel: string, libelleTypeDate: string): DateDecomposee {
+    const dateDecomposee = new DateDecomposee();
+    dateDecomposee.libelleTypeDate = libelleTypeDate;
+    dateDecomposee.libelleAriaLabel = libelleAriaLabel;
+    return dateDecomposee;
+  }
+
   public checkDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): void {
     dateDecomposee.isDateSuperieurDateJour = false;
     if (this.isDateValide(dateDecomposee)) {
@@ -106,6 +113,11 @@ export class DateUtileService {
     const month = dateJour.getMonth();
     const year = dateJour.getFullYear();
     return this.getNombreJoursMois(month, year);
+  }
+
+  public getAnneeActuelle(): number {
+    const dateJour = new Date();
+    return dateJour.getFullYear();
   }
 
   public getLibelleDateActuelle(): string {
@@ -439,5 +451,36 @@ export class DateUtileService {
       }
     });
     return moisLabel;
+  }
+
+  public isStringDateAnneeN(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBetweenTheseMonths(date, 12, 0);
+  }
+
+  public isStringDateAnneeAvantNMoins1(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBeforeXMonths(date, 12);
+  }
+
+  public isStringDateAnneeAvantNMoins2(dateString: string): boolean {
+    const date = this.getDateFromStringDate(dateString);
+    return this.isDateBeforeXMonths(date, 24);
+  }
+
+  private isDateBetweenTheseMonths(date: Date, numberOfMonthSinceStart: number, numberOfMonthSinceEnd: number): boolean {
+    const dateStart = this.enleverMoisToDate(new Date(), numberOfMonthSinceStart);
+    const dateEnd = this.enleverMoisToDate(new Date(), numberOfMonthSinceEnd);
+    return moment(date).isBetween(dateStart, dateEnd);
+  }
+
+  private isDateBeforeXMonths(date: Date, numberOfMonths: number): boolean {
+    const dateStart = this.enleverMoisToDate(new Date(), numberOfMonths);
+    return moment(date).isSameOrBefore(dateStart);
+  }
+
+  public getLibelleAnneeDepuisXAnnee(nombreAnneeASoustraire: number) {
+    const nombreMoisASoustraire = nombreAnneeASoustraire * 12;
+    return this.enleverMoisToDate(new Date(), nombreMoisASoustraire).getFullYear();
   }
 }

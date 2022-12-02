@@ -18,6 +18,8 @@ import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
 import { DateDecomposee } from '@app/commun/models/date-decomposee';
+import { LibellesTypesBeneficesEnum } from '@app/commun/enumerations/libelles-types-benefices';
+import { CodesTypesBeneficesEnum } from '@app/commun/enumerations/codes-types-benefices';
 
 @Component({
   selector: 'app-vos-ressources-financieres',
@@ -27,6 +29,8 @@ import { DateDecomposee } from '@app/commun/models/date-decomposee';
 export class VosRessourcesFinancieresComponent implements OnInit {
 
   dateDernierOuvertureDroitASS: DateDecomposee;
+  libellesTypesBeneficesEnum: typeof LibellesTypesBeneficesEnum = LibellesTypesBeneficesEnum;
+  codesTypesBeneficesEnum: typeof CodesTypesBeneficesEnum = CodesTypesBeneficesEnum;
 
   SEUIL_DEGRESSIVITE_ARE = 140;
 
@@ -39,6 +43,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   informationsPersonnelles: InformationsPersonnelles;
   beneficiaireAides: BeneficiaireAides;
   situationFamiliale: SituationFamiliale;
+  isBNC: boolean = false;
+  isBIC: boolean = false;
+  isAR: boolean = false;
 
   @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
@@ -50,10 +57,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
 
   constructor(
-    private dateUtileService: DateUtileService,
     private deConnecteService: DeConnecteService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
     private demandeurEmploiService: DemandeurEmploiService,
+    public dateUtileService: DateUtileService,
     public controleChampFormulaireService: ControleChampFormulaireService,
     public deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
     public deConnecteInfosPersonnellesService: DeConnecteInfosPersonnellesService,
@@ -79,6 +86,9 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
     this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
+    if (this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.loadMicroEntreprise();
+    }
   }
 
   public isBeneficiaireRSACelibataireSansEnfants(): boolean {
@@ -233,8 +243,12 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireARE()) {
       this.propageAllocationJournaliereARE()
     }
+    if (this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.propageChiffreAffairesMicroEntreprise();
+    }
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
+      this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       this.validationVosRessourcesEventEmitter.emit();
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
@@ -254,6 +268,17 @@ export class VosRessourcesFinancieresComponent implements OnInit {
         && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein
       )) {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute;
+    }
+  }
+
+  private propageChiffreAffairesMicroEntreprise(): void {
+    if (this.informationsPersonnelles.microEntreprise != null) {
+      if (!this.isDateCreationRepriseEntrepriseAvantNMoins2()) {
+        this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2 = 0;
+      }
+      if (!this.isDateCreationRepriseEntrepriseAvantNMoins1()) {
+        this.informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1 = 0;
+      }
     }
   }
 
@@ -305,6 +330,95 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       if (nouveauSalaire > 0) {
         this.openModalPensionInvaliditeEtSalaires.emit();
       }
+    }
+  }
+
+  private loadMicroEntreprise(): void {
+    switch (this.informationsPersonnelles.microEntreprise.typeBenefices) {
+      case CodesTypesBeneficesEnum.BIC:
+        this.isBIC = true;
+        this.isBNC = false;
+        this.isAR = false;
+        break;
+      case CodesTypesBeneficesEnum.BNC:
+        this.isBNC = true;
+        this.isBIC = false;
+        this.isAR = false;
+        break;
+      case CodesTypesBeneficesEnum.AR:
+        this.isAR = true;
+        this.isBIC = false;
+        this.isBNC = false;
+        break;
+    }
+  }
+
+  public isDateCreationRepriseEntrepriseN(): boolean {
+    if (this.deConnecteInfosPersonnellesService.hasMicroEntreprise()) {
+      return this.dateUtileService.isStringDateAnneeN(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise);
+    }
+  }
+
+  public isDateCreationRepriseEntrepriseAvantNMoins1(): boolean {
+    if (this.deConnecteInfosPersonnellesService.hasMicroEntreprise()) {
+      return this.dateUtileService.isStringDateAnneeAvantNMoins1(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise);
+    }
+  }
+
+  public isDateCreationRepriseEntrepriseAvantNMoins2(): boolean {
+    if (this.deConnecteInfosPersonnellesService.hasMicroEntreprise()) {
+      return this.dateUtileService.isStringDateAnneeAvantNMoins2(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise);
+    }
+  }
+
+  public onClickCheckBoxIsBIC(event): void {
+    event.preventDefault();
+    if (this.isBIC) {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.BIC;
+      this.isBNC = false;
+      this.isAR = false;
+    } else {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
+    }
+  }
+
+  public handleKeyUpOnButtonIsBIC(event: any): void {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxIsBIC(event);
+    }
+  }
+
+  public onClickCheckBoxIsBNC(event): void {
+    event.preventDefault();
+    if (this.isBNC) {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.BNC;
+      this.isAR = false;
+      this.isBIC = false;
+    } else {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
+    }
+  }
+
+  public handleKeyUpOnButtonIsBNC(event: any): void {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxIsBNC(event);
+    }
+  }
+
+  public onClickCheckBoxIsAR(event): void {
+    event.preventDefault();
+    if (this.isAR) {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.AR;
+      this.isBIC = false;
+      this.isBNC = false;
+    } else {
+      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
+    }
+  }
+
+  public handleKeyUpOnButtonIsAR(event: any): void {
+    if (event.keyCode === 13) {
+      this.onClickCheckBoxIsAR(event);
     }
   }
 }

@@ -22,8 +22,13 @@ export class DeConnecteInfosPersonnellesService {
     return demandeurEmploiConnecte.informationsPersonnelles.isMicroEntrepreneur === true;
   }
 
+  public hasMicroEntreprise(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return this.isMicroEntrepreneur() && demandeurEmploiConnecte.informationsPersonnelles.microEntreprise != null;
+  }
+
   public isBeneficiaireACRE(): boolean {
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
-    return demandeurEmploiConnecte.informationsPersonnelles.isBeneficiaireACRE === true && demandeurEmploiConnecte.informationsPersonnelles.dateRepriseCreationEntreprise != null;
+    return demandeurEmploiConnecte.informationsPersonnelles.isBeneficiaireACRE === true && demandeurEmploiConnecte.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise != null;
   }
 }

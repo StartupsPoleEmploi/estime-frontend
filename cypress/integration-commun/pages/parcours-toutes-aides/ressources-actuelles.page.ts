@@ -58,8 +58,28 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-revenus-independant]').type(montant);
   }
 
-  public saisirRevenusMicroEntrepreneur(montant: string): void {
-    cy.get('[data-testid=input-revenus-micro-entrepreneur]').type(montant);
+  public clickOnTypesBeneficesAR(): void {
+    cy.get('[data-testid=btn-types-benefices-ar]').click();
+  }
+
+  public clickOnTypesBeneficesBIC(): void {
+    cy.get('[data-testid=btn-types-benefices-bic]').click();
+  }
+
+  public clickOnTypesBeneficesBNC(): void {
+    cy.get('[data-testid=btn-types-benefices-bnc]').click();
+  }
+
+  public saisirCAMicroEntrepriseN(montant: string): void {
+    cy.get('[data-testid=input-chiffre-affaires-micro-entreprise-n]').type(montant);
+  }
+
+  public saisirCAMicroEntrepriseNMoins1(montant: string): void {
+    cy.get('[data-testid=input-chiffre-affaires-micro-entreprise-n-moins-1]').type(montant);
+  }
+
+  public saisirCAMicroEntrepriseNMoins2(montant: string): void {
+    cy.get('[data-testid=input-chiffre-affaires-micro-entreprise-n-moins-2]').type(montant);
   }
 
   public saisirMontantMensuelRSAFoyer(montant: string): void {

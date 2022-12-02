@@ -19,6 +19,8 @@ import { InformationsPersonnelles } from '@models/informations-personnelles';
 import { SituationFamiliale } from '@models/situation-familiale';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
+import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
+import { MicroEntreprise } from '@app/commun/models/micro-entreprise';
 
 @Component({
   selector: 'app-ma-situation',
@@ -54,6 +56,7 @@ export class MaSituationComponent implements OnInit {
 
   @ViewChild('modalPensionInvaliditeEtMicro') modalPensionInvaliditeEtMicro;
   @ViewChild('modalAAHEtMicro') modalAAHEtMicro;
+  @ViewChild('modalAREEtMicro') modalAREEtMicro;
 
 
   constructor(
@@ -72,11 +75,19 @@ export class MaSituationComponent implements OnInit {
     this.deConnecteService.controlerSiDemandeurEmploiConnectePresent();
     const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
     this.beneficiaireAides = this.demandeurEmploiService.loadDataBeneficiaireAides(demandeurEmploiConnecte);
-    this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
-    this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
-    this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
+    this.loadDataInformationsPersonnelles(demandeurEmploiConnecte);
     this.controleChampFormulaireService.focusOnFirstElement();
+  }
+
+  private loadDataInformationsPersonnelles(demandeurEmploi: DemandeurEmploi) {
+    this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploi);
+    if (this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
+    } else {
+      this.dateRepriseCreationEntreprise = this.dateUtileService.creerDateDecomposee("de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
+    }
+    this.dateNaissance = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateNaissance, "de votre date de naissance", "DateNaissanceDemandeur");
   }
 
   public onClickButtonRetour(): void {
@@ -100,11 +111,13 @@ export class MaSituationComponent implements OnInit {
     if (!this.informationsPersonnelles.isMicroEntrepreneur) {
       this.deConnecteService.unsetBeneficesMicroEntreprise();
       this.deConnecteService.unsetBeneficiaireACRE();
-      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       // évite de déclencher deux fois l'ouverture de modale
-      if (!this.checkSiAAHEtMicro()) {
-        this.checkSiPensionInvaliditeEtMicro();
+      if (!this.checkSiAREEtMicro()) {
+        if (!this.checkSiAAHEtMicro()) {
+          this.checkSiPensionInvaliditeEtMicro();
+        }
       }
       this.isSansRessource = false;
     }
@@ -123,7 +136,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
       this.deConnecteService.unsetBeneficiaireACRE();
-      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
+      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
       this.deConnecteService.unsetAllocationMensuelleNetARE();
@@ -135,6 +148,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireARE) {
       this.deConnecteService.unsetAllocationMensuelleNetARE();
     } else {
+      this.checkSiAREEtMicro();
       this.deConnecteService.setAllocationMensuelleNetARE();
       this.deConnecteService.unsetAllocationMensuelleNetASS();
       this.beneficiaireAides.beneficiaireASS = false;
@@ -190,10 +204,10 @@ export class MaSituationComponent implements OnInit {
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
-    this.checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       if (this.isAllocationDEntreeSelectionnee()) {
-        this.getCodeInseeFromCodePostal(this.informationsPersonnelles.logement.coordonnees.codePostal);
+        this.getCodeInseeFromCodePostal();
+        this.setInfosMicroEntreprise();
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
         this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MES_PERSONNES_A_CHARGE]);
@@ -203,8 +217,8 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  private getCodeInseeFromCodePostal(codePostal: string): void {
-    const response = this.communeApiService.getCommuneFromCodePostal(codePostal);
+  private getCodeInseeFromCodePostal(): void {
+    const response = this.communeApiService.getCommuneFromCodePostal(this.informationsPersonnelles.logement.coordonnees.codePostal);
     response.subscribe(
       data => {
         let commune = data.pop();
@@ -212,6 +226,15 @@ export class MaSituationComponent implements OnInit {
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
       }
     );
+  }
+
+  private setInfosMicroEntreprise(): void {
+    if (this.informationsPersonnelles.isMicroEntrepreneur) {
+      if (this.informationsPersonnelles.microEntreprise == null) {
+        this.informationsPersonnelles.microEntreprise = new MicroEntreprise();
+      }
+      this.checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte();
+    }
   }
 
   public unsetTitreSejourEnFranceValide(nationalite: string): void {
@@ -226,7 +249,8 @@ export class MaSituationComponent implements OnInit {
       || this.beneficiaireAides.beneficiaireAAH
       || this.beneficiaireAides.beneficiaireARE
       || this.beneficiaireAides.beneficiairePensionInvalidite
-      || this.isSansRessource);
+      || this.isSansRessource
+      || this.informationsPersonnelles.isMicroEntrepreneur);
   }
 
   public isConcerneACRE(): boolean {
@@ -488,7 +512,7 @@ export class MaSituationComponent implements OnInit {
 
   private checkAndSaveDateRepriseCreationEntrepriseDemandeurEmploiConnecte(): void {
     if (this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise)) {
-      this.informationsPersonnelles.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
+      this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise = this.dateUtileService.getStringDateFromDateDecomposee(this.dateRepriseCreationEntreprise);
     }
   }
 
@@ -496,11 +520,12 @@ export class MaSituationComponent implements OnInit {
     this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
-      && (this.isNonBeneficiaireACRE() || this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateRepriseCreationEntreprise))
       && (!this.situationFamiliale.isEnCouple
         || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide)
+      && !this.checkSiAREEtMicro()
       && !this.checkSiAAHEtMicro()
-      && !this.checkSiPensionInvaliditeEtMicro();
+      && !this.checkSiPensionInvaliditeEtMicro()
+      ;
   }
 
   private isNonBeneficiaireACRE() {
@@ -509,6 +534,14 @@ export class MaSituationComponent implements OnInit {
 
   public displayLoading(displayLoading: boolean) {
     this.isPageLoadingDisplay = displayLoading;
+  }
+
+  public checkSiAREEtMicro(): boolean {
+    if (this.beneficiaireAides.beneficiaireARE && this.informationsPersonnelles.isMicroEntrepreneur) {
+      this.modalService.openModal(this.modalAREEtMicro);
+      return true;
+    }
+    return false;
   }
 
   public checkSiAAHEtMicro(): boolean {
