@@ -22,6 +22,10 @@ export class ActionsSuiteComponent {
     window.open('https://candidat.pole-emploi.fr/offres/emploi', '_blank');
   }
 
+  public onClickButtonComprendreMonAllocation(): void {
+    window.open('http://www.monallocation.pole-emploi.fr/', '_blank');
+  }
+
   public simulationSelection(codeAction: string) {
     switch (codeAction) {
       case CodesActionsEnum.MISE_A_JOUR:
@@ -32,6 +36,9 @@ export class ActionsSuiteComponent {
         break;
       case CodesActionsEnum.SERVICES_A_LA_CARTE:
         this.onClickButtonInscriptionAtelier();
+        break;
+      case CodesActionsEnum.COMPRENDRE_MON_ALLOCATION:
+        this.onClickButtonComprendreMonAllocation();
         break;
     }
   }

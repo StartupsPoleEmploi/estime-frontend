@@ -8,8 +8,13 @@
   cursor: pointer;
 
   img {
-    width: 2.75rem;
-    height: 2.75rem;
+    width: 4rem;
+    height: 4rem;
+
+    @media #{$extra-small-device} {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
   }
 
   .col-text {

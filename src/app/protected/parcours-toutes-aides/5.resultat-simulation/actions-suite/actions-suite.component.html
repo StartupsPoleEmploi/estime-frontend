@@ -5,6 +5,12 @@
         </app-action-suite>
     </div>
     <div class="col-12 mt-3">
+        <app-action-suite text="Comprendre le détail du calcul de mon allocation" imageLink="comprendre-allocation"
+            [codeAction]="codesActionsEnum.COMPRENDRE_MON_ALLOCATION"
+            (clickAction)="onClickButtonComprendreMonAllocation()">
+        </app-action-suite>
+    </div>
+    <div class="col-12 mt-3">
         <app-action-suite text="Mettre à jour votre profil candidat" imageLink="profil-candidat"
             [codeAction]="codesActionsEnum.MISE_A_JOUR" (clickAction)="onClickButtonMettreAJourProfil()">
         </app-action-suite>

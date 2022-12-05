@@ -26,6 +26,8 @@ export class ActionSuiteComponent {
         return "clic_bouton_voir_offres_emploi";
       case CodesActionsEnum.SERVICES_A_LA_CARTE:
         return "clic_bouton_voir_service_a_la_carte";
+      case CodesActionsEnum.COMPRENDRE_MON_ALLOCATION:
+        return "clic_bouton_comprendre_mon_allocation";
     }
 
   }
