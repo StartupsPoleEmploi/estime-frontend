@@ -72,6 +72,7 @@ export class RessourcesFinancieresService {
     return ressourceFinanciere && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
       && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
       && ressourceFinanciere.code !== CodesAidesEnum.AIDE_RETOUR_EMPLOI
+      && ressourceFinanciere.code !== CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI
       && ressourceFinanciere.code !== CodesAidesEnum.RSA
       && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
       && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
