@@ -448,3 +448,20 @@
       padding: 0rem 1rem;
     }
   }
+
+  .recommendation-block {
+    background: white;
+    border-radius: 1.5rem !important;
+    border: none;
+    padding: 1.5rem !important;
+    margin-right: 0.75rem !important;
+    margin-left: 1.75rem !important;
+
+    .copied-successfully {
+      background: $color-pe-blue-light;
+      border-radius: 0.5rem !important;
+      border: none;
+      padding:1rem;
+
+    }
+  }

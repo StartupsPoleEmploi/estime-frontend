@@ -213,8 +213,12 @@
                             </div>
                         </div>
                         <div class="row pb-3">
-                            <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire">
+                            <label class="label headline-4-typo" aria-describedby="contrat-travail-salaire">
                                 * Salaire
+                                <button id="infobulle-contrat-travail-salaire" aria-label="Infobulle salaire brut/net"
+                                    tabindex="0" class="img-interrogation-icon" placement="right"
+                                    tag-action="clic_infobulle_salaire"
+                                    (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)"></button>
                             </label>
                         </div>
                         <div class="row">
@@ -718,6 +722,9 @@
         <p class='body-1-typo'>
             En général, le salaire indiqué dans les offres publiées par Pôle emploi est brut. Il s'agit des sommes
             perçues avant déduction des cotisations sociales.
+        </p>
+        <p class='body-1-typo'>
+            La conversion du salaire brut en net prend en compte la prévoyance complémentaire santé obligatoire des salariés.
         </p>">
     </app-tooltip>
 </ng-template>

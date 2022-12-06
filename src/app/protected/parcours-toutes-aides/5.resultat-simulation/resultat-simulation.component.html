@@ -171,6 +171,25 @@
                         </h3>
                     </div>
                 </div>
+                <div class="row mb-3 recommendation-block">
+                    <div class="col-md-12">
+                        <span class="body-1-typo">
+                            Partager ce simulateur aux personnes qui pourraient en avoir besoin
+                        </span>
+                    </div>
+                    <div class="pt-3 col-md-12" (click)="onClickCopyLinkToEstime()">
+                        <img alt='' src='../../../assets/images/icones/copy.svg'>
+                        <span class="button-typo color-pe-red-typo pointer">
+                            COPIER LE LIEN DE PARTAGE
+                        </span>
+                    </div>
+                    <div *ngIf="isCopiedSuccessfully" class="mt-2 col-md-12 copied-successfully">
+                        <img alt='' src='../../../assets/images/icones/check-black.svg'>
+                        <span class="body-2-typo">
+                            Copié dans votre presse-papier
+                        </span>
+                    </div>
+                </div>
                 <div id="actions-suite">
                     <app-actions-suite>
                     </app-actions-suite>

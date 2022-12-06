@@ -18,6 +18,7 @@ import { DetailTemporalite } from '@app/commun/models/detail-temporalite';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { ModificationCriteresComponent } from './modification-criteres/modification-criteres.component';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-resultat-simulation',
@@ -38,6 +39,7 @@ export class ResultatSimulationComponent implements OnInit {
   afficherDetails: boolean;
   nombreMoisSimules: number;
   isPageLoadingDisplay: boolean;
+  isCopiedSuccessfully: boolean = false;
 
   @ViewChild('modalDetailAideApresSimulation') modalDetailAideApresSimulation;
   @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
@@ -55,6 +57,7 @@ export class ResultatSimulationComponent implements OnInit {
     public modalService: ModalService,
     public screenService: ScreenService,
     public sideModalService: SideModalService,
+    public clipboard: Clipboard
   ) {
   }
 
@@ -95,6 +98,15 @@ export class ResultatSimulationComponent implements OnInit {
 
   public onClickOnglet(afficherDetails: boolean): void {
     this.afficherDetails = afficherDetails;
+  }
+
+  public onClickCopyLinkToEstime() {
+    const link = this.getLink();
+    this.isCopiedSuccessfully = this.clipboard.beginCopy(link).copy();
+  }
+
+  private getLink() {
+    return this.router['location']._platformLocation.location.origin;
   }
 
   public onMouseOverButtonSimulationMensuelle(index) {
