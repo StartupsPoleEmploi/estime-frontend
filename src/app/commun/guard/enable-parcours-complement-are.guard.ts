@@ -12,7 +12,7 @@ export class EnableParcoursComplementAREGuard implements CanActivate {
     ) {
     }
 
-    canActivate(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
+    canActivate(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot) {
         const enableParcoursComplementAREGuard = this.environment.enableParcoursComplementARE;
         if (!enableParcoursComplementAREGuard) {
             this.router.navigate([RoutesEnum.HOMEPAGE]);
