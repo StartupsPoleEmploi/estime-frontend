@@ -1,8 +1,6 @@
 export enum RoutesEnum {
   HOMEPAGE = '/',
   ACCESSIBILITE = 'accessibilite',
-  AIDES = 'aides',
-  AIDES_DESCRIPTION = 'description-aides',
   AVANT_COMMENCER_SIMULATION = 'avant-de-commencer',
   CHOIX_TYPE_SIMULATION = 'type-de-simulation',
   DOCUMENTS = 'documents',

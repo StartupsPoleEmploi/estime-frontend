@@ -1,11 +1,14 @@
 import { LocationStrategy } from '@angular/common';
 import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import { LiensUtilesEnum } from '@app/commun/enumerations/liens-utiles.enum';
 import { Aide } from '@app/commun/models/aide';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
+import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
 import { RessourcesFinancieresService } from '@app/core/services/utile/ressources-financieres.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
@@ -23,15 +26,15 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   @Input() simulationActuelle: SimulationMensuelle;
   @Input() detailMensuel: DetailMensuel;
   @Input() modalRef: BsModalRef;
-  @Output() aideSelection = new EventEmitter<Aide>();
 
   ressourcesFinancieresEtAidesMois: RessourceFinanciere[];
   ressourceFinanciereOuAideSelected: RessourceFinanciere;
   titrePointEssentielLabel: string;
 
   constructor(
-    private ressourcesFinancieresService: RessourcesFinancieresService,
     private location: LocationStrategy,
+    private redirectionExterneService: RedirectionExterneService,
+    public ressourcesFinancieresService: RessourcesFinancieresService,
     public dateUtileService: DateUtileService,
     public deConnecteSimulationService: DeConnecteSimulationService,
     public simulationService: SimulationService,
@@ -56,9 +59,26 @@ export class DetailMoisApresSimulationComponent implements OnInit {
   }
 
   public onClickOnRessourceFinanciereOuAide(aide): void {
-    if (this.ressourcesFinancieresService.isRessourceFinanciereAvecDetail(aide)) {
-      this.ressourceFinanciereOuAideSelected = aide;
-      this.aideSelection.emit(aide);
+    if (this.ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(aide)) {
+      switch (aide.code) {
+        case CodesAidesEnum.AGEPI:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AGEPI);
+          break;
+        case CodesAidesEnum.AIDE_MOBILITE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AIDE_MOBILITE);
+          break;
+        case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_ASS);
+          break;
+        case CodesAidesEnum.PRIME_ACTIVITE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_PRIME_ACTIVITE);
+          break;
+        case CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT:
+        case CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE:
+        case CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AIDES_LOGEMENT);
+          break;
+      }
     }
   }
 
@@ -72,9 +92,5 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     if (event.keyCode === 13) {
       this.sideModalService.closeSideModalMois()
     }
-  }
-
-  public isRessourceFinanciereOuAideSelected(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
-    return this.ressourceFinanciereOuAideSelected == ressourceFinanciereOuAide;
   }
 }

@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 export class FilArianeComponent implements OnInit {
 
   libelleRouteActive: string;
-  libelleRouteActiveNiveau2: string;
   subscriptionRouteNavigationEndObservable: Subscription;
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
@@ -41,43 +40,12 @@ export class FilArianeComponent implements OnInit {
     this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 
-  public onClickLinkRoute(libelleRoute): void {
-    if (libelleRoute === PageTitlesEnum.AIDES) {
-      this.router.navigate([RoutesEnum.AIDES]);
-    }
-  }
-
   private setLibelleRouteActive(pathRouteActivated: string): void {
-
-    this.libelleRouteActiveNiveau2 = '';
 
     switch (pathRouteActivated) {
       case RoutesEnum.ACCESSIBILITE:
         this.libelleRouteActive = PageTitlesEnum.ACCESSIBILITE;
         break;
-      case RoutesEnum.AIDES:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        break;
-      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.AGEPI}`:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.AGEPI];
-        break
-      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.AIDE_MOBILITE}`:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.AIDE_MOBILITE];
-        break
-      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES}`:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.ALLOCATION_ADULTES_HANDICAPES];
-        break
-      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE}`:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE];
-        break
-      case `${RoutesEnum.AIDES}/${this.codesAidesEnum.PRIME_ACTIVITE}`:
-        this.libelleRouteActive = PageTitlesEnum.AIDES;
-        this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.PRIME_ACTIVITE];
-        break
       case RoutesEnum.CGU:
         this.libelleRouteActive = PageTitlesEnum.CGU;
         break;

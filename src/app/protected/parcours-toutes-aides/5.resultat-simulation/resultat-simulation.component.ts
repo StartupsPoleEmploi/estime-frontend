@@ -9,7 +9,6 @@ import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from "@app/core/services/utile/screen.service";
 import { SideModalService } from '@app/core/services/utile/side-modal.service';
-import { Aide } from '@models/aide';
 import { DemandeurEmploi } from '@models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from '@models/simulation-mensuelle';
@@ -27,7 +26,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 })
 export class ResultatSimulationComponent implements OnInit {
 
-  aideSelected: Aide;
   demandeurEmploiConnecte: DemandeurEmploi;
   simulation: Simulation;
   simulationSelected: SimulationMensuelle;
@@ -41,7 +39,6 @@ export class ResultatSimulationComponent implements OnInit {
   isPageLoadingDisplay: boolean;
   isCopiedSuccessfully: boolean = false;
 
-  @ViewChild('modalDetailAideApresSimulation') modalDetailAideApresSimulation;
   @ViewChild('modalDetailMoisApresSimulation') modalDetailMoisApresSimulation;
   @ViewChild('modalModificationCriteres') modalModificationCriteres;
   @ViewChild(ModificationCriteresComponent) modificationCriteresComponent: ModificationCriteresComponent;
@@ -73,11 +70,6 @@ export class ResultatSimulationComponent implements OnInit {
     this.sideModalService.openSideModalMois(this.modalDetailMoisApresSimulation)
     this.simulationSelected = simulationMensuelle;
     this.detailMensuelSelected = this.getDetailMensuelSelected(simulationMensuelle);
-  }
-
-  public aideSelection(aide: Aide) {
-    this.sideModalService.openSideModalAide(this.modalDetailAideApresSimulation);
-    this.aideSelected = aide;
   }
 
   public displayLoading(displayLoading: boolean) {
@@ -115,10 +107,6 @@ export class ResultatSimulationComponent implements OnInit {
 
   public onMouseLeaveButtonSimulationMensuelle() {
     this.hoveredButtonSimulationMensuelle = -1;
-  }
-
-  public changeAideSelected(aideSelected: Aide) {
-    this.aideSelected = aideSelected;
   }
 
   public getDateStringFormat(simulationMensuelle: SimulationMensuelle): string {

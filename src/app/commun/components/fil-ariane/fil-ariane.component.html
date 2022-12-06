@@ -2,11 +2,7 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb caption-typo">
       <li class="breadcrumb-item"><a (click)="onClickLinkAccueil()">Accueil</a></li>
-      <li class="breadcrumb-item" [ngClass]="{'active':!this.libelleRouteActiveNiveau2}" aria-current="page" role="link"
-        (click)="onClickLinkRoute(libelleRouteActive)"><span>{{libelleRouteActive}}</span></li>
-      <li class="breadcrumb-item active" aria-current="page" *ngIf="libelleRouteActiveNiveau2">
-        <span>{{libelleRouteActiveNiveau2}}</span>
-      </li>
+      <li class="breadcrumb-item active" aria-current="page" role="link"><span>{{libelleRouteActive}}</span></li>
     </ol>
   </nav>
 </div>

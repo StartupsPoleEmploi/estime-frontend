@@ -68,41 +68,19 @@ export class RessourcesFinancieresService {
     return montant;
   }
 
-  public isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciere: RessourceFinanciere): boolean {
-    return ressourceFinanciere && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
-      && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_ADULTES_HANDICAPES
-      && ressourceFinanciere.code !== CodesAidesEnum.AIDE_RETOUR_EMPLOI
-      && ressourceFinanciere.code !== CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI
-      && ressourceFinanciere.code !== CodesAidesEnum.RSA
-      && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATIONS_FAMILIALES
-      && ressourceFinanciere.code !== CodesAidesEnum.ALLOCATION_SOUTIEN_FAMILIAL
-      && ressourceFinanciere.code !== CodesAidesEnum.COMPLEMENT_FAMILIAL
-      && ressourceFinanciere.code !== CodesAidesEnum.PRESTATION_ACCUEIL_JEUNE_ENFANT
-      && ressourceFinanciere.code !== CodesAidesEnum.PENSIONS_ALIMENTAIRES
-      && ressourceFinanciere.code !== CodesAidesEnum.PENSION_INVALIDITE
-      && ressourceFinanciere.code !== CodesAidesEnum.SALAIRE
-      && ressourceFinanciere.code !== CodesAidesEnum.IMMOBILIER
-      && ressourceFinanciere.code !== CodesAidesEnum.MICRO_ENTREPRENEUR
-      && ressourceFinanciere.code !== CodesAidesEnum.TRAVAILLEUR_INDEPENDANT;
-  }
-
-  public isRessourceFinanciereDemandeurPourraObtenirRSA(ressourceFinanciere: RessourceFinanciere): boolean {
-    return this.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciere)
-      && ressourceFinanciere.code !== CodesAidesEnum.PRIME_ACTIVITE;
-  }
-
-  public isRessourceFinanciereAvecDetail(ressourceFinanciere): boolean {
-    if (ressourceFinanciere.hasOwnProperty('detail')) {
-      let aide = ressourceFinanciere as Aide;
-      return this.aidesService.isAideAvecDetail(aide);
-    }
-  }
-
   public isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
-    if (this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()) {
-      return this.isRessourceFinanciereDemandeurPourraObtenirRSA(ressourceFinanciereOuAide);
-    }
-    return this.isRessourceFinanciereDemandeurPourraObtenir(ressourceFinanciereOuAide);
+    return ressourceFinanciereOuAide && (
+      ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_MOBILITE
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.AGEPI
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE
+      || (
+        !(this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA())
+        && ressourceFinanciereOuAide.code == CodesAidesEnum.PRIME_ACTIVITE
+      )
+    )
   }
 
 }

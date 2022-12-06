@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { ScreenService } from "@app/core/services/utile/screen.service";
+import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
+import { LiensUtilesEnum } from '@app/commun/enumerations/liens-utiles.enum';
 
 @Component({
   selector: 'app-section-aides',
@@ -14,12 +14,24 @@ export class SectionAidesComponent {
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
 
   constructor(
-    private router: Router,
     public screenService: ScreenService,
+    private redirectionExterneService: RedirectionExterneService
   ) { }
+
+
   public onClickVoirAides(codeAide: string): void {
-    if (codeAide) this.router.navigate([RoutesEnum.AIDES, codeAide]);
-    else this.router.navigate([RoutesEnum.AIDES]);
+    switch (codeAide) {
+      case CodesAidesEnum.AGEPI:
+        this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AGEPI);
+        break;
+      case CodesAidesEnum.AIDE_MOBILITE:
+        this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AIDE_MOBILITE);
+        break;
+      case CodesAidesEnum.PRIME_ACTIVITE:
+        this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_PRIME_ACTIVITE);
+        break;
+
+    }
   }
 
 }

@@ -24,11 +24,7 @@ export class FooterComponent {
   ngOnDestroy(): void {
     this.subscriptionRouteNavigationEndObservable.unsubscribe();
   }
-
-  public onClickAides(): void {
-    this.router.navigate([RoutesEnum.AIDES]);
-  }
-
+  
   public onClickLinkAccessibilite(): void {
     this.router.navigate([RoutesEnum.ACCESSIBILITE]);
   }

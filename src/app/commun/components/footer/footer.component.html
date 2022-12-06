@@ -37,11 +37,6 @@
         <div class="row desktop-row-2-footer">
             <div class="row-footer-content row">
                 <div class="col-2">
-                    <a class="body-2-typo" (click)="onClickAides()" tag-navigation="clic_lien_footer_toutes_les_aides">
-                        Toutes les aides
-                    </a>
-                </div>
-                <div class="col-2">
                     <a class="body-2-typo" (click)="onClickLinkContact()"
                         tag-navigation="clic_lien_footer_nous_contacter">
                         Nous contacter
@@ -70,17 +65,17 @@
     <div *ngIf="screenService.isExtraSmallScreen();">
         <div class="row mobile-row-1-footer">
             <div class="row-footer-content row">
-                <div class="col-12">
-                    <a class="body-2-typo" (click)="onClickAides()"
-                        tag-navigation="clic_lien_footer_toutes_les_aides">Toutes les aides</a>
-                </div>
                 <div class="col-12 mt-2">
                     <a class="body-2-typo" (click)="onClickLinkContact()"
-                        tag-navigation="clic_lien_footer_nous_contacter">Nous contacter</a>
+                        tag-navigation="clic_lien_footer_nous_contacter">
+                        Nous contacter
+                    </a>
                 </div>
                 <div class="col-12 mt-2">
                     <a class="body-2-typo" (click)="onClickLinkStatistiques()"
-                        tag-navigation="clic_lien_footer_statistiques">Statistiques</a>
+                        tag-navigation="clic_lien_footer_statistiques">
+                        Statistiques
+                    </a>
                 </div>
                 <div class="col-12 mt-2">
                     <a class="body-2-typo" (click)="onClickLinkAccessibilite()"

@@ -7,10 +7,9 @@ import pdfFontsModule from 'pdfmake/build/vfs_fonts';
 import { ScreenService } from '../utile/screen.service';
 import { BlockInformationsService } from "./content/bloc-informations.service";
 import { BlockRessourcesEstimeesService } from "./content/block-ressources-estimees.service";
-import { DetailAidesEligiblesService } from "./content/detail-aides-eligibles";
 import { Style } from './models/style';
 import { Text } from "./models/text";
-import { BlockDonneesSaisiesService } from './content/block-donnees-saisies-service';
+import { BlockDonneesSaisiesService } from './content/block-donnees-saisies.service';
 import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
 import { ImagesBase64Enum } from '@app/commun/enumerations/images-base64.enum';
 
@@ -28,7 +27,6 @@ export class SimulationPdfMakerService {
     private blockDonneesSaisiesService: BlockDonneesSaisiesService,
     private blockRessourcesEstimeesService: BlockRessourcesEstimeesService,
     private deConnecteService: DeConnecteService,
-    private detailAidesEligiblesService: DetailAidesEligiblesService,
     private screenService: ScreenService
   ) {
     this.isExtraSmallScreen = this.screenService.isExtraSmallScreen();
@@ -46,7 +44,7 @@ export class SimulationPdfMakerService {
     };
 
     if (this.isExtraSmallScreen) {
-      pdfMakeModule.createPdf(def).download('simulation-estime-pole-emploi');
+      pdfMakeModule.createPdf(def).download('estimation-reprise-activite-pole-emploi');
     } else {
       pdfMakeModule.createPdf(def).open();
     }
@@ -54,12 +52,10 @@ export class SimulationPdfMakerService {
 
   private getContent(demandeurEmploi: DemandeurEmploi, simulation: Simulation): any {
     let content = [];
-    this.addLogoEstime(content);
     this.addTitle(content);
     this.blockDonneesSaisiesService.addBlockDonneesSaisies(content, demandeurEmploi);
     this.blockInformationsService.addBlockInformations(content);
     this.blockRessourcesEstimeesService.addElementTableMesRessourcesEstimees(content, simulation);
-    this.detailAidesEligiblesService.addPagesDetailAides(content, simulation);
     return content;
   }
 
@@ -84,14 +80,6 @@ export class SimulationPdfMakerService {
         margin: [0, 20, 0, 20]
       }
     };
-  }
-
-  private addLogoEstime(content: Array<any>): void {
-    content.push({
-      image: `data:image/png;base64,${ImagesBase64Enum.LOGO_ESTIME}`,
-      width: 153,
-      height: 60
-    });
   }
 
   private addTitle(content: Array<any>): void {
