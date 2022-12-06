@@ -78,14 +78,17 @@ export class FilArianeComponent implements OnInit {
         this.libelleRouteActive = PageTitlesEnum.AIDES;
         this.libelleRouteActiveNiveau2 = this.routesAides[this.codesAidesEnum.PRIME_ACTIVITE];
         break
-      case RoutesEnum.AVANT_COMMENCER_SIMULATION:
-        this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
-        break;
       case RoutesEnum.CGU:
         this.libelleRouteActive = PageTitlesEnum.CGU;
         break;
       case RoutesEnum.CONTACT:
         this.libelleRouteActive = PageTitlesEnum.CONTACT;
+        break;
+      case RoutesEnum.CHOIX_TYPE_SIMULATION:
+        this.libelleRouteActive = "Type de simulation";
+        break;
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.AVANT_COMMENCER_SIMULATION}`:
+        this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
         break;
       case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}`:
         this.libelleRouteActive = PageTitlesEnum.CONTRAT_TRAVAIL;

@@ -40,7 +40,7 @@ export class DeConnecteService {
   public controlerSiDemandeurEmploiConnectePresent(): void {
     const demandeurEmploiConnecte = this.getDemandeurEmploiConnecte();
     if (!demandeurEmploiConnecte) {
-      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+      this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
     }
   }
 

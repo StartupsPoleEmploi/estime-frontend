@@ -2,20 +2,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from '@angular/router';
 import { CommunModule } from '@app/commun/commun.module';
-import { AvantDeCommencerSimulationComponent } from '@app/protected/avant-de-commencer-simulation/avant-de-commencer-simulation.component';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ChartModule } from 'angular2-chartjs';
-import { AvantDeCommencerSimulationRoutingModule } from './avant-de-commencer-simulation-routing.module';
-import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation/choix-type-de-simulation.component';
-import { DocumentsAvantDeCommencerComponent } from './documents-avant-de-commencer/documents-avant-de-commencer.component';
+import { ChoixTypeDeSimulationRoutingModule } from './choix-type-de-simulation-routing.module';
+import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation.component';
+
 @NgModule({
   declarations: [
-    AvantDeCommencerSimulationComponent,
     ChoixTypeDeSimulationComponent,
-    DocumentsAvantDeCommencerComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -24,10 +21,10 @@ import { DocumentsAvantDeCommencerComponent } from './documents-avant-de-commenc
     FormsModule,
     ReactiveFormsModule,
     ProgressbarModule.forRoot(),
-    AvantDeCommencerSimulationRoutingModule,
+    ChoixTypeDeSimulationRoutingModule,
     RouterModule,
     ChartModule
   ],
   providers: [BnNgIdleService]
 })
-export class AvantDeCommencerSimulationModule { }
+export class ChoixTypeDeSimulationModule { }

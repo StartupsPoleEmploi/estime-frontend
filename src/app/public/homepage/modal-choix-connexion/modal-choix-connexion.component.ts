@@ -31,12 +31,12 @@ export class ModalChoixConnexionComponent {
   }
 
   public onClickButtonSeConnecter(): void {
-    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
     else this.peConnectService.login();
   }
 
   public onClickButtonContinuerSansConnexion(): void {
     this.bsModalRef.hide();
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
   }
 }

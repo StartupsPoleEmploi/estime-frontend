@@ -30,9 +30,11 @@ import { DetailAideApresSimulationComponent } from './5.resultat-simulation/deta
 import { ActionSuiteComponent } from './5.resultat-simulation/actions-suite/action-suite/action-suite.component';
 import { ModificationCriteresComponent } from './5.resultat-simulation/modification-criteres/modification-criteres.component';
 import { AutresSituationsComponent } from './2.ma-situation/autres-situations/autres-situations.component';
+import { AvantDeCommencerSimulationComponent } from './avant-de-commencer-simulation/avant-de-commencer-simulation.component';
 
 @NgModule({
   declarations: [
+    AvantDeCommencerSimulationComponent,
     ContratTravailComponent,
     FormPersonneAChargeComponent,
     FormPersonneAChargeSituationComponent,

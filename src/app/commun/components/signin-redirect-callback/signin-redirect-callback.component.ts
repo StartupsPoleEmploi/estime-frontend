@@ -4,7 +4,6 @@ import { AuthorizationService } from '@app/core/services/connexion/authorization
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { SessionPeConnectExpiredService } from "@app/core/services/connexion/session-pe-connect-expired.service";
 import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
-import { PeConnectService } from '@app/core/services/connexion/pe-connect.service';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { Individu } from '@app/commun/models/individu';
 
@@ -20,7 +19,6 @@ export class SigninRedirectCallbackComponent implements OnInit {
   constructor(
     private authorizationService: AuthorizationService,
     private individuConnectedService: IndividuConnectedService,
-    private peConnectService: PeConnectService,
     private router: Router,
     private sessionPeConnectExpiredService: SessionPeConnectExpiredService,
     private sessionStorageEstimeService: SessionStorageEstimeService
@@ -44,7 +42,11 @@ export class SigninRedirectCallbackComponent implements OnInit {
     if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
       this.sessionPeConnectExpiredService.navigateToRouteActivated();
     } else {
-      this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION], { skipLocationChange: false, replaceUrl: false });
+      if (this.isEligibleChoixConnexion()) {
+        this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
+      } else {
+        this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+      }
     }
   }
 
@@ -52,5 +54,11 @@ export class SigninRedirectCallbackComponent implements OnInit {
     this.sessionStorageEstimeService.storeMessageDemandeurEmploiConnexionImpossible();
     this.isPageLoadingDisplay = false;
     this.router.navigate([RoutesEnum.HOMEPAGE]);
+  }
+
+
+  private isEligibleChoixConnexion(): boolean {
+    const individuConnected = this.individuConnectedService.getIndividuConnected();
+    return (individuConnected === null || (individuConnected.beneficiaireAides != null && individuConnected.beneficiaireAides.beneficiaireARE));
   }
 }

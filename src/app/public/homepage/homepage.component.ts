@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
   }
 
   public openModalOnEventChoixConnexion() {
-    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    if (this.individuConnectedService.isLoggedIn()) this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
     else {
       const modalRef = this.bsModalService.show(ModalChoixConnexionComponent, this.config);
       modalRef.content.notifyParent.subscribe((result) => {

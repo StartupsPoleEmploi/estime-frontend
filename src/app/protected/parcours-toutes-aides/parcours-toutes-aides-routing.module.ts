@@ -6,9 +6,14 @@ import { MaSituationComponent } from './2.ma-situation/ma-situation.component';
 import { MesPersonnesAChargeComponent } from './3.mes-personnes-a-charge/mes-personnes-a-charge.component';
 import { RessourcesActuellesComponent } from './4.ressources-actuelles/ressources-actuelles.component';
 import { ResultatSimulationComponent } from './5.resultat-simulation/resultat-simulation.component';
+import { AvantDeCommencerSimulationComponent } from './avant-de-commencer-simulation/avant-de-commencer-simulation.component';
 
 
 const routes: Routes = [
+  {
+    path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
+    component: AvantDeCommencerSimulationComponent
+  },
   {
     path: RoutesEnum.CONTRAT_TRAVAIL,
     component: ContratTravailComponent

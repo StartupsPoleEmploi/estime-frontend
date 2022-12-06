@@ -1,4 +1,9 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
+<div *ngIf="messageErreur" class="form-container-fluid">
+    <alert type="danger">
+        {{messageErreur}}
+    </alert>
+</div>
 <div class="container-fluid container-etape" role="form">
     <div class="form-container-fluid">
         <div class="card card-form-style-2">

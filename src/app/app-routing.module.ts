@@ -5,8 +5,8 @@ import { EnableParcoursComplementAREGuard } from './commun/guard/enable-parcours
 
 const routes: Routes = [
   {
-    path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
-    loadChildren: () => import('./protected/avant-de-commencer-simulation/avant-de-commencer-simulation.module').then(m => m.AvantDeCommencerSimulationModule)
+    path: RoutesEnum.CHOIX_TYPE_SIMULATION,
+    loadChildren: () => import('./protected/choix-type-de-simulation/choix-type-de-simulation.module').then(m => m.ChoixTypeDeSimulationModule)
   },
   {
     path: RoutesEnum.PARCOURS_TOUTES_AIDES,
