@@ -34,17 +34,6 @@ body {
   display: table;
   width: 100%;
   background-color: $color-pe-grey-x-light;
-  padding-bottom: #{$footer-height-desktop};
-
-  @media #{$extra-small-device} {
-    padding-bottom: #{$footer-height-mobile};
-  }
-
-  &.body-with-sticky-footer {
-    @media #{$extra-small-device} {
-      padding-bottom: calc(#{$footer-height-mobile} + #{$button-sticky-height}) !important;
-    }
-  }
 }
 
 body.modal-open {
