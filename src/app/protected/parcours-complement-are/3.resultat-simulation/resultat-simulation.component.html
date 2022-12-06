@@ -1,5 +1,5 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"
-    message="Mise à jour de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
+    message="Mise à jour de votre estimation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <div class="container-fluid result-container-fluid container-etape" role="form">
     <div class="row mt-4 mb-3">
         <div class="col">
@@ -128,7 +128,7 @@
             <div *ngIf="!isEligibleComplementARE" class="resultat-containers resultat-complement-are-container">
                 <div class="row">
                     <h3 class="headline-3-typo text-start mb-3" data-testid="non-eligible-complement-are">
-                        Selon les critères de votre simulation, vous n'êtes pas éligible au complément ARE.
+                        Selon les critères de votre estimation, vous n'êtes pas éligible au complément ARE.
                     </h3>
                 </div>
                 <div class="row">
@@ -196,10 +196,10 @@
                             mois qui suivront votre reprise d’emploi ?
                         </h4>
                         <button id="btn-faire-simulation-complete" type="button"
-                            aria-label="Faire une simulation complète" data-testid="btn-je-commence"
+                            aria-label="Faire une estimation complète" data-testid="btn-je-commence"
                             tag-action="clic_bouton_faire_simulation_complete_depuis_resultat"
                             (click)="clickOnFaireSimulationComplete()">
-                            <span class="button-typo">FAIRE LA SIMULATION COMPLETE</span>
+                            <span class="button-typo">FAIRE L'ESTIMATION COMPLETE</span>
                         </button>
                     </div>
                 </div>
@@ -216,10 +216,10 @@
                     </div>
                     <div class="col-md-12 mx-0 px-0">
                         <button id="btn-faire-simulation-complete" type="button"
-                            aria-label="Faire une simulation complète" data-testid="btn-je-commence"
+                            aria-label="Faire une estimation complète" data-testid="btn-je-commence"
                             tag-action="clic_bouton_faire_simulation_complete_depuis_resultat"
                             (click)="clickOnFaireSimulationComplete()">
-                            <span class="button-typo">FAIRE LA SIMULATION COMPLETE</span>
+                            <span class="button-typo">FAIRE L'ESTIMATION COMPLETE</span>
                         </button>
                     </div>
                 </div>

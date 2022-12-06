@@ -56,8 +56,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   private initRessourcesFinancieresAvantSimulation(): void {
-    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null ||
-      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null) {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi == null) {
       this.ressourcesFinancieresAvantSimulation = new RessourcesFinancieresAvantSimulation();
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi = new AidesPoleEmploi();
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresAvantSimulationService.creerAllocationARE();

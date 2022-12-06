@@ -1,5 +1,5 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"
-    message="Calcul de votre simulation en cours, cela peut prendre quelques secondes..."></app-page-loading>
+    message="Calcul de votre estimation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
 <div class="container-fluid container-etape" role="form">
@@ -153,11 +153,11 @@
                 </button>
             </div>
             <div class="col" [ngClass]="{'text-center col-12': this.screenService.isExtraSmallScreen()}">
-                <button id="btn-obtenir-simulation" class="btn-suivant" aria-label="Obtenir ma simulation" type="submit"
-                    data-testid="btn-obtenir-simulation" (click)="onClickButtonObtenirSimulation()"
+                <button id="btn-obtenir-simulation" class="btn-suivant" aria-label="Obtenir mon estimation"
+                    type="submit" data-testid="btn-obtenir-simulation" (click)="onClickButtonObtenirSimulation()"
                     tag-navigation="clic_bouton_obtenir_ma_simulation">
                     <div>
-                        <span>Obtenir ma simulation</span>
+                        <span>Obtenir mon estimation</span>
                         <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                     </div>
                 </button>
@@ -179,7 +179,7 @@
     <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" htmlData="
         <img alt='' src='./assets/images/icones/warning.svg'>
         <h4 class='headline-4-typo mt-4 mb-3'>
-            Estime n'est pas en mesure d'effectuer la simulation au regard de votre situation.
+            Estime n'est pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>
             Merci de vous renseigner auprès de l'organisme en charge du paiement de votre pension d'invalidité.

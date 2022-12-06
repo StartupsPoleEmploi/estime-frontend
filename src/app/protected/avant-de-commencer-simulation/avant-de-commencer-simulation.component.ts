@@ -4,16 +4,13 @@ import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
-import { Environment } from '@app/commun/models/environment';
 import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
-import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageTitlesEnum } from "@enumerations/page-titles.enum";
 import { Subscription } from 'rxjs';
-import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation/choix-type-de-simulation.component';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -39,8 +36,6 @@ export class AvantDeCommencerSimulationComponent implements OnInit {
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
     private router: Router,
-    private environment: Environment,
-    private redirectionExterneService: RedirectionExterneService,
     public screenService: ScreenService,
     public modalService: ModalService
   ) { }

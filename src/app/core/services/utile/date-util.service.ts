@@ -1,4 +1,3 @@
-import { getLocaleDateFormat } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';
 import { DateDecomposee } from "@models/date-decomposee";
