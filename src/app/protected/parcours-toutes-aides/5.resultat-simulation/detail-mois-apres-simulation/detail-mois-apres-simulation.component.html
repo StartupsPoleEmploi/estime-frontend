@@ -44,12 +44,8 @@
     </div>
     <div class="div_detail_mois_with_padding">
         <div class="card my-2 p-3"
-            [ngClass]="{'aide-avec-detail':ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)}"
-            *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois"
-            (click)="onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);"
-            (keyup)="handleKeyUpOnRessourceFinanciereOuAide($event,ressourceFinanciereOuAide);"
-            [tabindex]="ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)?0:-1"
-            tag-action="clic_bouton_detail_aide">
+            [ngClass]="{'aide-avec-detail':ressourcesFinancieresService.isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide)}"
+            *ngFor="let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois">
             <div class="row pe-3">
                 <div class="col-md-1 col-2 div-vertically-centered">
                     <div>
@@ -61,23 +57,13 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-8">
-                    <div class="row mb-1 ps-2">
+                    <div *ngIf="screenService.isExtraSmallScreen()" class="row mb-1 ps-2">
                         <div class="col">
                             <span class="headline-4-typo color-pe-red-typo justify-content-start"
                                 attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
                                 {{ ressourceFinanciereOuAide.montant }} €
                             </span>
-                            <span
-                                *ngIf="!screenService.isExtraSmallScreen() && ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
-                                class="demande-a-effectuer overline-typo">
-                                DEMANDE À EFFECTUER
-                            </span>
                         </div>
-                        <span
-                            *ngIf="screenService.isExtraSmallScreen() && ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
-                            class="col-auto demande-a-effectuer overline-typo">
-                            DEMANDE À EFFECTUER
-                        </span>
                     </div>
                     <div class="row ps-2">
                         <div class="col">
@@ -103,14 +89,37 @@
                     </app-message-info>
                 </div>
             </div>
-            <div *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
-                class="row mt-3">
-                <div class="col-md-12 col-12 div-vertically-centered justify-content-end">
-                    <span class="bouton-detail body-2-typo color-pe-red-typo">
-                        <span *ngIf="!screenService.isExtraSmallScreen()" class="body-2-typo color-pe-red-typo">
-                            Voir le détail
+            <div class="row mt-3">
+                <div *ngIf="!screenService.isExtraSmallScreen()"
+                    [ngClass]="ressourcesFinancieresService.isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide)?'col-md-2 col-2':'col-md-12 col-12'">
+                    <div class="col">
+                        <span class="headline-4-typo color-pe-red-typo justify-content-start"
+                            attr.data-testid="aide_{{ressourceFinanciereOuAide.code}}_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+                            {{ ressourceFinanciereOuAide.montant }} €
                         </span>
-                        <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
+                    </div>
+                </div>
+                <div class="col-md-10 col-12 div-vertically-centered justify-content-end"
+                    [ngClass]="screenService.isExtraSmallScreen()?'row':''"
+                    *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide)">
+                    <span class="button-typo color-pe-red-typo boutons-redirections"
+                        [ngClass]="screenService.isExtraSmallScreen()?'col-12 mb-3':'me-5'"
+                        *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
+                        tabindex="0" tag-action="clic_bouton_faire_la_demande"
+                        (click)="onClickOnFaireLaDemande(ressourceFinanciereOuAide)"
+                        (keyup)="handleKeyUpOnFaireLaDemande($event, ressourceFinanciereOuAide)">
+                        FAIRE LA DEMANDE
+                        <img alt="" src="../../../assets/images/icones/open-in-new-window.svg"
+                            class="icone-open-in-new-window ms-1">
+                    </span>
+                    <span class="button-typo color-pe-red-typo boutons-redirections"
+                        [ngClass]="screenService.isExtraSmallScreen()?'col-12':'me-4'" tabindex="0"
+                        tag-action="clic_bouton_en_savoir_plus"
+                        (click)="onClickOnEnSavoirPlus(ressourceFinanciereOuAide)"
+                        (keyup)="handleKeyUpOnEnSavoirPlus($event, ressourceFinanciereOuAide)">
+                        EN SAVOIR PLUS
+                        <img alt="" src="../../../assets/images/icones/open-in-new-window.svg"
+                            class="icone-open-in-new-window ms-1">
                     </span>
                 </div>
             </div>

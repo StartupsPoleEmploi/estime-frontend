@@ -58,8 +58,8 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     this.ressourcesFinancieresEtAidesMois.sort((a, b) => b.montant - a.montant);
   }
 
-  public onClickOnRessourceFinanciereOuAide(aide): void {
-    if (this.ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(aide)) {
+  public onClickOnEnSavoirPlus(aide): void {
+    if (this.ressourcesFinancieresService.isRessourceFinanciereOuAideAvecDescription(aide)) {
       switch (aide.code) {
         case CodesAidesEnum.AGEPI:
           this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_AGEPI);
@@ -82,9 +82,34 @@ export class DetailMoisApresSimulationComponent implements OnInit {
     }
   }
 
-  public handleKeyUpOnRessourceFinanciereOuAide(event: any, ressourceFinanciereOuAide: RessourceFinanciere) {
+  public handleKeyUpOnEnSavoirPlus(event: any, ressourceFinanciereOuAide: RessourceFinanciere) {
     if (event.keyCode === 13) {
-      this.onClickOnRessourceFinanciereOuAide(ressourceFinanciereOuAide);
+      this.onClickOnEnSavoirPlus(ressourceFinanciereOuAide);
+    }
+  }
+
+  public onClickOnFaireLaDemande(aide): void {
+    if (this.ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(aide)) {
+      switch (aide.code) {
+        case CodesAidesEnum.AGEPI:
+        case CodesAidesEnum.AIDE_MOBILITE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DEMANDE_AGEPI_AIDE_MOBILITE);
+          break;
+        case CodesAidesEnum.PRIME_ACTIVITE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DEMANDE_AIDES_LOGEMENT);
+          break;
+        case CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT:
+        case CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE:
+        case CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DEMANDE_PRIME_ACTIVITE);
+          break;
+      }
+    }
+  }
+
+  public handleKeyUpOnFaireLaDemande(event: any, ressourceFinanciereOuAide: RessourceFinanciere) {
+    if (event.keyCode === 13) {
+      this.onClickOnFaireLaDemande(ressourceFinanciereOuAide);
     }
   }
 

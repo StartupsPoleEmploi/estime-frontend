@@ -5,4 +5,7 @@ export enum LiensUtilesEnum {
     DESCRIPTION_AIDES_LOGEMENT = 'https://www.caf.fr/allocataires/aides-et-demarches/droits-et-prestations/logement/les-aides-personnelles-au-logement',
     DESCRIPTION_ASS = 'http://plmpl.fr/c/61vmU',
     DESCRIPTION_COMPLEMENT_ARE = 'http://plmpl.fr/c/oUQWx',
+    DEMANDE_AIDES_LOGEMENT = "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
+    DEMANDE_AGEPI_AIDE_MOBILITE = "https://candidat.pole-emploi.fr/candidat/aides/mobilite/tableaudebord\\r\\n",
+    DEMANDE_PRIME_ACTIVITE = "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#/solidariteetactivite"
 }

@@ -181,3 +181,21 @@
   border-radius: 0.3125rem;
   color: $color-red-4;
 }
+
+.icone-open-in-new-window {
+  width: 1.1rem;
+  height: 1.1rem;
+  vertical-align: text-top;
+}
+
+.boutons-redirections {
+  margin-right: 1.5rem;
+
+  @media #{$extra-small-device} {
+    margin-right: 0rem;
+  }
+
+  &:focus, &:hover {
+    text-decoration: underline;
+  }
+}

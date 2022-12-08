@@ -6,13 +6,15 @@ import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { Aide } from '@app/commun/models/aide';
 import { AidesService } from './aides.service';
 import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresService {
 
   constructor(
     private aidesService: AidesService,
-    private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService
+    private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService
   ) { }
 
 
@@ -69,6 +71,22 @@ export class RessourcesFinancieresService {
   }
 
   public isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
+    return ressourceFinanciereOuAide && (
+      ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_MOBILITE
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.AGEPI
+      || (!this.deConnecteBeneficiaireAidesService.isBeneficiaireAideLogement()
+        && (ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
+          || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
+          || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)
+      )
+      || (
+        !(this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA())
+        && ressourceFinanciereOuAide.code == CodesAidesEnum.PRIME_ACTIVITE
+      )
+    )
+  }
+
+  public isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
     return ressourceFinanciereOuAide && (
       ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_MOBILITE
       || ressourceFinanciereOuAide.code == CodesAidesEnum.AGEPI
