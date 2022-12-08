@@ -13,7 +13,7 @@ export enum SituationTemporaliteEnum {
     RELIQUAT_ARE = "Vous continuez de percevoir votre allocation d'Aide au Retour à l'Emploi le premier mois",
     NON_ELIGIBLE_COMPLEMENT_ARE = "Vous n'êtes pas éligible au complément ARE",
     COMPLEMENT_ARE = "Vous percevez un complément ARE en plus de votre salaire",
-    FIN_COMPLEMENT_ARE = "Vous ne percevez plus de complément ARE car vos droits sont épuisés à ce jour",
+    FIN_COMPLEMENT_ARE = "Votre droit ARE est épuisé. Renseignez-vous sur le rechargement des droits.",
     // AAH
     AAH_PARTIEL = "Le montant de votre AAH est réduit car vous avez cumulé 6 mois de salaire",
     FIN_AAH = "Vous n'êtes plus éligible à l'AAH",
@@ -24,9 +24,8 @@ export enum SituationTemporaliteEnum {
     ASS_1_MOIS_CUMUL = "Vous percevez l'ASS avec votre salaire pendant 2 mois encore",
     ASS_2_MOIS_CUMUL = "Vous percevez l'ASS avec votre salaire pendant 1 mois encore",
     FIN_ASS = "Vous ne percevez plus l'ASS car le droit au cumul avec votre salaire est interrompu",
-    ASS_BENEFICIAIRE_ACRE = "Vous pouvez cumuler votre ASS avec les revenus de votre activité non salariée pendant 12 mois à compter de la date de création ou de reprise de l’entreprise",
+    ASS_BENEFICIAIRE_ACRE = "Vous pouvez cumuler votre ASS avec les revenus de votre activité non salariée pendant 12 mois à compter du mois suivant la date de création ou de reprise de l’entreprise",
     FIN_ASS_BENEFICIAIRE_ACRE = "Vous ne percevez plus l'ASS car le droit au cumul avec votre salaire est interrompu",
-    PRIME_ACTIVITE_ANTICIPE = "Votre demande de prime d'activité sera à effectuer au cours du mois ",
     // AL
     AL_CHANGEMENT_SITUATION = "Votre aide au logement est recalculée suite à votre changement de situation",
     AL_DECLA_TRI = "Votre aide au logement est recalculée suite à votre déclaration trimestrielle",
@@ -35,6 +34,7 @@ export enum SituationTemporaliteEnum {
     // PPA
     PRIME_ACTIVITE = "Vous êtes éligible à la prime d'activité",
     PRIME_ACTIVITE_RECALCUL = "Le montant de votre prime d'activité est recalculé",
+    PRIME_ACTIVITE_ANTICIPE = "Il vous est conseillé d'effectuer votre demande de prime d'activité au cours du mois ",
     // SALAIRE
     SALAIRE = "Votre nouveau salaire est pris en compte dans la simulation pour la durée du contrat",
     // PI
