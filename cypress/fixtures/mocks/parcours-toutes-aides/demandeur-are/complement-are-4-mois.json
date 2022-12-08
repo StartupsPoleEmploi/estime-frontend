@@ -13,7 +13,6 @@
 			"aides": {
 				"ARE": {
 					"code": "ARE",
-					"detail": null,
 					"messageAlerte": null,
 					"montant": 1102.0,
 					"nom": "Allocation d'aide au Retour à l'Emploi",
@@ -23,7 +22,6 @@
 				},
 				"APL": {
 					"code": "APL",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 310.0,
 					"nom": "Aide Personnalisée au Logement",
@@ -45,7 +43,6 @@
 			"aides": {
 				"cARE": {
 					"code": "cARE",
-					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
 					"nom": "Complément d'allocation d'Aide au Retour à l'Emploi",
@@ -55,7 +52,6 @@
 				},
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
@@ -77,7 +73,6 @@
 			"aides": {
 				"cARE": {
 					"code": "cARE",
-					"detail": null,
 					"messageAlerte": null,
 					"montant": 142.0,
 					"nom": "Complément d'allocation d'Aide au Retour à l'Emploi",
@@ -87,7 +82,6 @@
 				},
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
@@ -109,7 +103,6 @@
 			"aides": {
 				"cARE": {
 					"code": "cARE",
-					"detail": null,
 					"messageAlerte": "À l'issu de ce mois, vous ne percevrez plus l'ARE car votre reliquat sera épuisé sauf si un rechargement a lieu à ce moment-là.",
 					"montant": 106.0,
 					"nom": "Complément d'allocation d'Aide au Retour à l'Emploi",
@@ -119,7 +112,6 @@
 				},
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
@@ -141,7 +133,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 62.0,
 					"nom": "Prime d'Activité",
@@ -151,7 +142,6 @@
 				},
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
@@ -173,7 +163,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 62.0,
 					"nom": "Prime d'Activité",
@@ -183,7 +172,6 @@
 				},
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",

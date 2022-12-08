@@ -13,7 +13,6 @@
 			"aides": {
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -23,7 +22,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 900.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -33,7 +31,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",
@@ -55,7 +52,6 @@
 			"aides": {
 				"AM": {
 					"code": "AM",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Vous reprenez un emploi éloigné de votre lieu de résidence, une aide à la mobilité peut vous être accordée sous la forme d’une prise en charge de tout ou partie de vos frais de déplacement, de repas, et d’hébergement.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous devez être inscrit à Pôle emploi et être disponible pour occuper un emploi, ou stagiaire de la formation professionnelle.</li> \n\t\t    <li class=\"leaf2 body-1-typo\">Le lieu de votre reprise d’emploi doit être situé sur le territoire français et à plus de 60 km aller-retour, ou à 2 heures de trajet aller-retour du lieu de votre domicile (pour l’Outre-mer, la condition est de 20 km aller-retour).</li>         \n\t\t    <li class=\"leaf3 body-1-typo\">L’emploi repris doit concerner soit un contrat à durée indéterminée (CDI), soit un contrat à durée déterminée (CDD) ou un contrat de travail temporaire de 3 mois consécutifs minimum à temps plein ou à temps partiel.</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Dans le détail</h6>\n\t\t<p class=\"body-1-typo\"> Le kilométrage aller-retour (ou le cas échéant le temps de trajet) est évalué en sélectionnant le trajet le plus court via le site <a target=\"_blank\" href=\"https://fr.mappy.com\">https://fr.mappy.com</a></p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Quels peuvent être les frais pris en charge ?</h6>\n\t\t<span class=\"body-1-typo\">Il s’agit de frais durant le premier mois de reprise d’emploi (de date à date) :</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Frais de déplacement : prise en charge à hauteur de 0,20 €/km multiplié par le nombre de kilomètres parcourus aller-retour.</li>\n\t\t    <li class=\"body-1-typo\">Frais de repas : forfait de 6 € par jour. Si les frais de repas sont pris en charge par votre employeur, l’aide ne vous sera pas attribuée.</li>\n\t\t    <li class=\"body-1-typo\">Frais d’hébergement : plafond de 30 € par nuitée, dans la limite des frais que vous engagez et sur présentation des justificatifs.</li>\n\t\t</ul>\n\t</div>\n</div>",
 					"messageAlerte": [
 						"Cette aide est versée à condition d'en faire la demande dans les 30 jours suivant la date de début de votre contrat.",
 						"Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période."
@@ -68,7 +64,6 @@
 				},
 				"AGEPI": {
 					"code": "AGEPI",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">L’AGEPI est une participation aux frais de garde d’enfants de moins de 10 ans en cas de reprise d'emploi ou d'entrée en formation pour un parent isolé (célibataire, veuf, divorcé). Cette aide n’est proposée que pour le premier mois de la reprise d’emploi. Montant de l'aide Entre 170 et 520 euros selon le nombre d'enfants la durée hebdomadaire du contrat de travail ou de la formation.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">\n\t\t          <span>Vous êtes parent isolé et élevez seul(e) 1 ou plusieurs enfants de moins de 10 ans.</span>\n\t        </li> \n\t\t    <li class=\"leaf2 body-1-typo\">Vous devez être inscrit à Pôle emploi et  disponible pour occuper un emploi, ou stagiaire de la formation professionnelle ou encore, bénéficier d’un « contrat aidé ».</li> \n\t\t    <li class=\"leaf3 body-1-typo\">La reprise d’emploi doit être effectuée soit en contrat à durée indéterminée (CDI), soit en contrat à durée déterminée (CDD) ou en contrat de travail temporaire de 3 mois consécutifs minimum (y compris à temps partiel, quelle que soit l’intensité horaire).</li>\n\t\t    <li class=\"leaf4 body-1-typo\">Vous ne devez pas avoir perçu cette aide au cours des 12 derniers mois à l’occasion d’une autre reprise d’emploi ou d’une entrée en formation.</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t    <h6 class=\"headline-3-typo headlines-descriptions-aides\">Comment en faire la demande ?</h6>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Votre demande doit être effectuée le plus tôt possible, dès la connaissance de votre embauche et au plus tard dans les 30 jours.</li> \n\t\t    <li class=\"body-1-typo\">Formulez votre demande sur votre espace personnel et téléchargez les pièces justificatives nécessaires (copie de votre contrat de travail, copie du livret de famille ou attestation de naissance, etc.).</li>         \n\t\t    <li class=\"body-1-typo\">La demande d’aide peut également être déposée auprès de votre conseiller Pôle emploi.</li>\n\t\t    <li class=\"body-1-typo\">Lorsque l’aide vous est attribuée, le versement est effectué sans condition, sauf si les enfants à garder ne sont pas scolarisés. Dans ce cas, vous devrez fournir notamment un justificatif (exemple : inscription dans une crèche, contrat de travail d’une assistante maternelle, etc.).</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Lorsque l’aide vous est attribuée, le versement est effectué sans condition, sauf si les enfants à garder ne sont pas scolarisés. Dans ce cas, vous devrez fournir notamment un justificatif. Exemple : inscription dans une crèche, contrat de travail d’une assistante maternelle, etc.).</p>\n\t</div>\n</div>",
 					"messageAlerte": [
 						"Cette aide est versée à condition d'en faire la demande dans les 30 jours suivant la date de début de votre contrat."
 					],
@@ -80,7 +75,6 @@
 				},
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 158.0,
 					"nom": "Prime d'Activité",
@@ -90,7 +84,6 @@
 				},
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -100,7 +93,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 900.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -110,7 +102,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",
@@ -132,7 +123,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 158.0,
 					"nom": "Prime d'Activité",
@@ -142,7 +132,6 @@
 				},
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -152,7 +141,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 900.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -162,7 +150,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",
@@ -184,7 +171,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 117.0,
 					"nom": "Prime d'Activité",
@@ -194,7 +180,6 @@
 				},
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -204,7 +189,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 900.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -214,7 +198,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",
@@ -236,7 +219,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 117.0,
 					"nom": "Prime d'Activité",
@@ -246,7 +228,6 @@
 				},
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -256,7 +237,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 171.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -266,7 +246,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",
@@ -288,7 +267,6 @@
 			"aides": {
 				"PA": {
 					"code": "PA",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">La Prime d’activité est une aide financière, versée par la CAF ou la MSA, qui vise à soutenir le pouvoir d’achat des travailleurs aux ressources modestes. Elle est calculée sur la base d’une déclaration trimestrielle.</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Les conditions à remplir</h6>\n\t\t<ol class=\"no_number\">\n\t\t    <li class=\"leaf1 body-1-typo\">Vous avez travaillé au cours des 3 mois précédant la demande.</li>\n\t\t    <li class=\"leaf2 body-1-typo\">Vous résidez en France de manière stable et effective.</li>\n\t\t    <li class=\"leaf3 body-1-typo\">D’autres conditions de séjour à remplir dépendent de votre nationalité (européen ou étranger d’un autre pays).</li>\n\t\t</ol>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de la prime d’activité</h6>\n\t\t<p class=\"body-1-typo\">Le montant de la prime d’activité est égal à la différence entre le montant forfaitaire et l’ensemble des ressources ressources du foyer les 3 mois précédant la demande. Il peut être majoré selon la situation (ex. parent isolé).</p>\n\t\t<p class=\"body-1-typo\">Plusieurs ressources sont prises en compte pour le calcul, notamment :</p>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">Les revenus d’activité professionnelle.</li>\n\t\t    <li class=\"body-1-typo\">Les revenus de remplacement (indemnités chômage, pension, etc.).</li>\n\t\t    <li class=\"body-1-typo\">Les prestations et les aides sociales.</li>\n\t\t    <li class=\"body-1-typo\">Pour les travailleurs indépendants, la prime est calculée sur la base des derniers revenus professionnels connus.</li>\n\t\t</ul>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Bon à savoir</h6>\n\t\t<p class=\"body-1-typo\">Le fait d’exercer son activité à temps plein ou temps partiel n’est pas en soi une condition d’attribution de la prime. Le montant qui vous est versé est fixe pendant 3 mois, il ne tient pas compte des changements de ressources de votre foyer pendant ce trimestre.</p>\n\t</div>\n</div>",
 					"messageAlerte": "Si vous êtes bénéficiaire du RSA, vos droits à la prime d’activité seront automatiquement calculés lors de votre prochaine déclaration trimestrielle.",
 					"montant": 117.0,
 					"nom": "Prime d'Activité",
@@ -298,7 +276,6 @@
 				},
 				"ASF": {
 					"code": "ASF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 117.0,
 					"nom": "Allocation de Soutien Familial",
@@ -308,7 +285,6 @@
 				},
 				"AAH": {
 					"code": "AAH",
-					"detail": "<div class=\"card\">\n    <p class=\"card-body card-paragraph body-1-typo\">Lorsque vous commencez à travailler, vos revenus professionnels ne sont pas pris en compte pendant les 6 premiers mois pour le calcul de votre AAH. Durant cette période, vous percevez donc l’intégralité de votre AAH. Après les 6 mois, votre AAH est réduite (on parle d’une AAH différentielle).</p>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Le calcul de l’Allocation Adulte Handicapé</h6>\n\t\t<p class=\"body-1-typo\">Pour calculer votre AAH, la Caf prend en compte vos revenus professionnels à partir desquels elle applique un abattement.</p>\n\t\t<span class=\"body-1-typo\">Prise en compte</span>\n\t\t<ul>\n\t\t    <li class=\"body-1-typo\">des revenus professionnels</li> \n\t\t    <li class=\"body-1-typo\">Salaire brut mensuel</li> \n\t\t    <li class=\"body-1-typo\">Taux d’abattement</li>\n\t\t    <li class=\"body-1-typo\">Revenus pris en compte</li>\n\t\t</ul>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Jusqu’à 466,38 € , l’abattement est de 80 % :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 20 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t\t<p>\n\t\t\t<span class=\"body-1-typo texte-style-1\">Plus de 466,38 € , l’abattement est de 40 %  :</span>\n\t\t\t<br>\n\t\t\t<span class=\"body-1-typo\">La Caf prend en compte 60 % de votre salaire brut mensuel</span>\n\t\t</p>\n\t</div>\n</div>\n\n<div class=\"card\">\n\t<div class=\"card-body card-paragraph\">\n\t\t<h6 class=\"headline-3-typo headlines-descriptions-aides\">Exemple</h6>\n\t\t<p class=\"body-1-typo\">Vous percevez l'AAH à taux plein (902,70 €) et reprenez une activité de 9 mois en milieu ordinaire.</p>\n\t\t<p class=\"body-1-typo\">Vous percevez 600 € brut pour cette activité. Au cours des 6 premiers mois d'activité, le cumul AAH et votre salaire est intégral.</p>\n\t\t<p class=\"body-1-typo\">Pour les 3 derniers mois, le calcul est le suivant :\n\t\t    <br> \n\t\t    <span class=\"texte-style-1\">AAH 902,70 € – [60 % X 600 € (salaire brut)]</span>\n\t   </p>\n\t\t<p class=\"body-1-typo\">Le montant de l'AAH réduite est de 542,70 €. Vous percevez donc 542,70 € d'AAH et 600 € de salaire (brut).</p>\n\t</div>\n</div>",
 					"messageAlerte": null,
 					"montant": 171.0,
 					"nom": "Allocation aux Adultes Handicapés",
@@ -318,7 +294,6 @@
 				},
 				"ALF": {
 					"code": "ALF",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 380.0,
 					"nom": "Allocation de Logement Familiale",

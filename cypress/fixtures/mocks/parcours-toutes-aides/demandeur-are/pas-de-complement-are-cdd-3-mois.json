@@ -13,7 +13,6 @@
 			"aides": {
 				"ARE": {
 					"code": "ARE",
-					"detail": null,
 					"messageAlerte": null,
 					"montant": 1102.0,
 					"nom": "Allocation d'aide au Retour à l'Emploi",
@@ -23,7 +22,6 @@
 				},
 				"APL": {
 					"code": "APL",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 310.0,
 					"nom": "Aide Personnalisée au Logement",
@@ -45,7 +43,6 @@
 			"aides": {
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",
@@ -67,7 +64,6 @@
 			"aides": {
 				"ALS": {
 					"code": "ALS",
-					"detail": null,
 					"messageAlerte": "Les montants des prestations familiales peuvent être susceptibles d'évoluer en cas d'événement familial ou si le recalcul annuel survient durant cette période.",
 					"montant": 271.0,
 					"nom": "Allocation de Logement Sociale",

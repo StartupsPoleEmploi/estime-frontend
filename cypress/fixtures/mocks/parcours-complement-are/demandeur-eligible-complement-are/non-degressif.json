@@ -17,7 +17,6 @@
 					"nom": "Contribution au Remboursement de la Dette Sociale",
 					"montant": 10.81,
 					"messagesAlerte": null,
-					"detail": null,
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -27,7 +26,6 @@
 					"nom": "Cotisation Retraite Complémentaire",
 					"montant": 103.5,
 					"messagesAlerte": null,
-					"detail": null,
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -37,7 +35,6 @@
 					"nom": "Contribution Sociale Généralisée",
 					"montant": 133.86,
 					"messagesAlerte": null,
-					"detail": null,
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
@@ -49,7 +46,6 @@
 					"messagesAlerte": [
 						"Pensez à faire votre actualisation mensuelle auprès de Pôle emploi pour percevoir l'allocation d'Aide au Retour à l'Emploi en complément de votre salaire."
 					],
-					"detail": null,
 					"organisme": "PE",
 					"lienExterne": "",
 					"reportee": false
