@@ -209,15 +209,6 @@
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
                             </button>
-                            <button name="autresRessources" class="radio-button-style-1"
-                                data-testid="btn-situation-autres-ressources" tabindex="0"
-                                tag-action="clic-sur-autres-ressources"
-                                (click)="modalService.openModalOnEvent($event, modalAucuneRessourceTemplate, true)"
-                                (keyup)="modalService.openModalOnEvent($event, modalAucuneRessourceTemplate, true)">
-                                <span class="body-2-typo">
-                                    Votre principale ressource n'est pas dans cette liste ?
-                                </span>
-                            </button>
                         </div>
                         <div class="row py-2">
                             <div class="col-12">
@@ -533,11 +524,6 @@
             Votre conjoint·e est la personne avec laquelle vous êtes marié·e, pacsé·e ou en concubinage.
         </p>">
     </app-tooltip>
-</ng-template>
-
-<ng-template #modalAucuneRessourceTemplate>
-    <app-autres-situations [modalRef]="modalService.modalRef" (displayLoading)="displayLoading($event)">
-    </app-autres-situations>
 </ng-template>
 
 <ng-template #modalPensionInvaliditeEtMicro>

@@ -9,9 +9,7 @@ import { OptionsHTTP } from "@models/options-http";
 import { PeConnectPayload } from '@models/pe-connect-payload';
 import { Simulation } from '@app/commun/models/simulation';
 import { Observable } from 'rxjs';
-
 import { IndividuConnectedService } from '../connexion/individu-connected.service';
-import { AutresSituations } from '@app/commun/models/autres-situations';
 
 @Injectable({ providedIn: 'root' })
 export class EstimeApiService {
@@ -36,12 +34,6 @@ export class EstimeApiService {
     const options = this.getHttpHeaders();
     const individuConnected = this.individuConnectedService.getIndividuConnected();
     return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}demandeurs_emploi`, individuConnected, options);
-  }
-
-  public creerAutresSituations(demandeurEmploi: DemandeurEmploi, autresSituations: AutresSituations): Observable<DemandeurEmploi> {
-    const options = this.getHttpHeaders();
-    options.params = new HttpParams().set(QueryParamEnum.ID_ESTIME, demandeurEmploi.idEstime);
-    return this.http.put<DemandeurEmploi>(`${this.pathDemandeurEmploiService}autres_situations`, autresSituations, options);
   }
 
   public getAideByCode(codeAide: string): Observable<Aide> {
