@@ -10,12 +10,23 @@ import AvantDeCommencerPage from '../../../../integration-commun/pages/avant-de-
 import EstimeSessionService from '../../../../integration-commun/utile/estime-session.service'
 import { environment } from '../../../../environment'
 import { CodesAidesEnum } from "../../../../../src/app/commun/enumerations/codes-aides.enum";
+import ChoixTypeSimulationPage from '../../../../integration-commun/pages/choix-type-simulation.page';
 
 describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ARE'), () => {
 
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
+
+    const homePage = new HomePage();
+    homePage.clickOnCommencerSimulation();
+
+    const choixTypeSimulation = new ChoixTypeSimulationPage();
+    choixTypeSimulation.clickOnJeCommenceSimulationComplete();
+    choixTypeSimulation.clickOnCommencerSansSeConnecter();
+
+    const avantDeCommencerPage = new AvantDeCommencerPage();
+    avantDeCommencerPage.clickOnContinuer();
   });
 
   afterEach(() => {
@@ -50,12 +61,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantComplementAREReduit = "106";
       const montantPrimeActivite_M5_M6 = "62";
       const montantALS_M2_M3_M4_M5_M6 = "271";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -160,12 +165,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantComplementARE = "142";
       const montantPrimeActivite_M5_M6 = "62";
       const montantALS_M2_M3_M4_M5_M6 = "271";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -273,12 +272,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantALS_M2_M3_M4 = "265";
       const montantALS_M5_M6 = "187";
 
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
-
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
@@ -380,12 +373,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActivite_M5_M6 = "128";
       const montantALS_M2_M3_M4 = "265";
       const montantALS_M5_M6 = "187";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -491,12 +478,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActivite_M5_M6 = "170";
       const montantALS_M2_M3_M4_M5_M6 = "271";
 
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
-
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiNon();
       monFuturContratTravailPage.clickOnIsDureeHebdoTempsPlein();
@@ -599,12 +580,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantARECalculé = "1102";
       const montantPrimeActivite_M5_M6 = "170";
       const montantALS_M2_M3_M4_M5_M6 = "271";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();

@@ -11,11 +11,22 @@ import { DateUtileTests } from "../../../../integration-commun/utile/date-utile-
 import RessourcesActuellesPage from '../../../../integration-commun/pages/parcours-toutes-aides/ressources-actuelles.page';
 import ResultatMaSimulationPage from '../../../../integration-commun/pages/parcours-toutes-aides/resultat-ma-simulation.page';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import ChoixTypeSimulationPage from '../../../../integration-commun/pages/choix-type-simulation.page';
 
 describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi ASS avec des enfants'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
+
+    const homePage = new HomePage();
+    homePage.clickOnCommencerSimulation();
+
+    const choixTypeSimulation = new ChoixTypeSimulationPage();
+    choixTypeSimulation.clickOnJeCommenceSimulationComplete();
+    choixTypeSimulation.clickOnCommencerSansSeConnecter();
+
+    const avantDeCommencerPage = new AvantDeCommencerPage();
+    avantDeCommencerPage.clickOnContinuer();
   });
 
   afterEach(() => {
@@ -58,12 +69,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantAideMobilite = "504";
       const montantAgepi = "400";
       const montantPrimeActiviteM5_M6 = "97";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -187,12 +192,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantAgepi = "400";
       const montantPrimeActiviteM5_M6 = "97";
 
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
-
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
@@ -311,12 +310,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantAideMobilite = "504";
       const montantAgepi = "400";
       const montantPrimeActiviteM5_M6 = "97";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();

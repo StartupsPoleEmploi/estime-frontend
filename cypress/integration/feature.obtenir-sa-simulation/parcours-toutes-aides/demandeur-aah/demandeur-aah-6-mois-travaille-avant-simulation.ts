@@ -11,11 +11,22 @@ import { DateUtileTests } from "../../../../integration-commun/utile/date-utile-
 import RessourcesActuellesPage from '../../../../integration-commun/pages/parcours-toutes-aides/ressources-actuelles.page';
 import ResultatMaSimulationPage from '../../../../integration-commun/pages/parcours-toutes-aides/resultat-ma-simulation.page';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import ChoixTypeSimulationPage from '../../../../integration-commun/pages/choix-type-simulation.page';
 
 describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi AAH - 6 mois travaillé avant simulation'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
+
+    const homePage = new HomePage();
+    homePage.clickOnCommencerSimulation();
+
+    const choixTypeSimulation = new ChoixTypeSimulationPage();
+    choixTypeSimulation.clickOnJeCommenceSimulationComplete();
+    choixTypeSimulation.clickOnCommencerSansSeConnecter();
+
+    const avantDeCommencerPage = new AvantDeCommencerPage();
+    avantDeCommencerPage.clickOnContinuer();
   });
 
   afterEach(() => {
@@ -60,12 +71,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM2_M3 = "172";
       const montantPrimeActiviteM4_M5_M6 = "306";
 
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -190,12 +195,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation - Demandeurs 
       const montantPrimeActiviteM4_M5_M6 = "280";
       const montantAPLDeclare = "200";
       const montantALF_M1_M2_M3_M4_M5_M6 = "380";
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();

@@ -16,7 +16,6 @@ import { SectionDescriptionComponent } from './homepage/section-description/sect
 import { SectionAidesComponent } from './homepage/section-aides/section-aides.component';
 import { StatsComponent } from './stats/stats.component';
 import { FormsModule } from '@angular/forms';
-import { ModalChoixConnexionComponent } from './homepage/modal-choix-connexion/modal-choix-connexion.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,7 @@ import { ModalChoixConnexionComponent } from './homepage/modal-choix-connexion/m
     AccessibiliteComponent,
     SectionDescriptionComponent,
     SectionAidesComponent,
-    StatsComponent,
-    ModalChoixConnexionComponent
+    StatsComponent
   ],
   imports: [
     AlertModule.forRoot(),

@@ -9,10 +9,12 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { ChartModule } from 'angular2-chartjs';
 import { ChoixTypeDeSimulationRoutingModule } from './choix-type-de-simulation-routing.module';
 import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation.component';
+import { ModalChoixConnexionComponent } from './modal-choix-connexion/modal-choix-connexion.component';
 
 @NgModule({
   declarations: [
     ChoixTypeDeSimulationComponent,
+    ModalChoixConnexionComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -23,7 +25,7 @@ import { ChoixTypeDeSimulationComponent } from './choix-type-de-simulation.compo
     ProgressbarModule.forRoot(),
     ChoixTypeDeSimulationRoutingModule,
     RouterModule,
-    ChartModule
+    ChartModule,
   ],
   providers: [BnNgIdleService]
 })

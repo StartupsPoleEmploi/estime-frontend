@@ -22,9 +22,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
     private router: Router,
     private sessionPeConnectExpiredService: SessionPeConnectExpiredService,
     private sessionStorageEstimeService: SessionStorageEstimeService
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.isPageLoadingDisplay = true;
@@ -42,11 +40,7 @@ export class SigninRedirectCallbackComponent implements OnInit {
     if (this.sessionPeConnectExpiredService.isIndividuBackAfterSessionExpired()) {
       this.sessionPeConnectExpiredService.navigateToRouteActivated();
     } else {
-      if (this.isEligibleChoixConnexion()) {
-        this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
-      } else {
-        this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.AVANT_COMMENCER_SIMULATION]);
-      }
+      this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.AVANT_COMMENCER_SIMULATION]);
     }
   }
 
@@ -54,11 +48,5 @@ export class SigninRedirectCallbackComponent implements OnInit {
     this.sessionStorageEstimeService.storeMessageDemandeurEmploiConnexionImpossible();
     this.isPageLoadingDisplay = false;
     this.router.navigate([RoutesEnum.HOMEPAGE]);
-  }
-
-
-  private isEligibleChoixConnexion(): boolean {
-    const individuConnected = this.individuConnectedService.getIndividuConnected();
-    return (individuConnected === null || (individuConnected.beneficiaireAides != null && individuConnected.beneficiaireAides.beneficiaireARE));
   }
 }

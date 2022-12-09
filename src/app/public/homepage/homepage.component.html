@@ -1,13 +1,5 @@
-<app-page-loading *ngIf="modalChoixConnexionComponent != null && modalChoixConnexionComponent.isPageLoadingDisplay"
-    message="Connexion en cours..."></app-page-loading>
 <section id="section-presentation">
     <div class="container-fluid pt-4">
-        <div id="div-message-erreur-homepage">
-            <input type="hidden" ngModel #messageErreurElement>
-            <alert type="{{messageErreur.niveau}}" *ngIf="messageErreur">
-                {{messageErreur.texte}}
-            </alert>
-        </div>
         <div class="row row-1 align-items-end">
             <div class="row-1-first-col col-md-auto">
                 <div id="first-div-inside-first-col" class="align-text-bottom">
@@ -20,7 +12,7 @@
                     <div class="row row-btn-je-commence">
                         <button id="btn-je-commence-homepage" type="button" aria-label="Commencer mon estimation"
                             class="btn-homepage" data-testid="btn-je-commence" tag-action="clic_bouton_je_commence"
-                            (click)="openModalOnEventChoixConnexion()">
+                            (click)="onClickCommencerSimulation()">
                             <span class="button-typo">Je commence mon estimation</span>
                             <img alt="" class="image-2" src="./assets/images/icones/fleche-droite-pe-white.svg">
                         </button>
@@ -39,8 +31,7 @@
     </div>
 </section>
 <app-section-description></app-section-description>
-<app-section-etapes-simulation [login]="openModalOnEventChoixConnexion"
-    (openModalOnEventChoixConnexion)="openModalOnEventChoixConnexion()">
+<app-section-etapes-simulation (clickCommencerSimulation)="onClickCommencerSimulation()">
 </app-section-etapes-simulation>
 <app-section-aides></app-section-aides>
 <app-section-temoignages></app-section-temoignages>

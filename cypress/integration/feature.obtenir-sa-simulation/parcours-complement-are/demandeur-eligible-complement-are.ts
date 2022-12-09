@@ -1,16 +1,22 @@
 const specTitleSimulationDeAAH = require("cypress-sonarqube-reporter/specTitle");
 import { environment } from '../../../environment';
-import AvantDeCommencerPage from '../../../integration-commun/pages/avant-de-commencer.page';
 import HomePage from '../../../integration-commun/pages/home.page';
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service';
 import ResultatMaSimulationPage from '../../../integration-commun/pages/parcours-complement-are/resultat-ma-simulation.page';
 import MaSituationPage from '../../../integration-commun/pages/parcours-complement-are/ma-situation.page';
 import ActiviteReprisePage from '../../../integration-commun/pages/parcours-complement-are/activite-reprise.page';
+import ChoixTypeSimulationPage from '../../../integration-commun/pages/choix-type-simulation.page';
 
 describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation parcours complément ARE - éligible au complement ARE'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
+
+    const homePage = new HomePage();
+    homePage.clickOnCommencerSimulation();
+
+    const choixTypeSimulation = new ChoixTypeSimulationPage();
+    choixTypeSimulation.clickOnJeCommenceSimulationRapide();
   });
 
   afterEach(() => {
@@ -39,12 +45,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation parcours comp
         const montantCRC = "103,5";
         const montantCSG = "133,86";
         const montantCRDS = "10,81";
-
-        const homePage = new HomePage();
-        homePage.clickOnCommencerSansSeConnecter();
-
-        const avantDeCommencerPage = new AvantDeCommencerPage();
-        avantDeCommencerPage.clickOnJeCommenceSimulationRapide();
 
         const maSituationPage = new MaSituationPage();
         maSituationPage.clickOnDegressiviteARENon();
@@ -95,11 +95,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation parcours comp
         const montantCSG = "139,68";
         const montantCRDS = "11,28";
 
-        const homePage = new HomePage();
-        homePage.clickOnCommencerSansSeConnecter();
-
-        const avantDeCommencerPage = new AvantDeCommencerPage();
-        avantDeCommencerPage.clickOnJeCommenceSimulationRapide();
 
         const maSituationPage = new MaSituationPage();
         maSituationPage.clickOnDegressiviteAREOui();
@@ -150,11 +145,6 @@ describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation parcours comp
         const montantCSG = "122,22";
         const montantCRDS = "9,87";
 
-        const homePage = new HomePage();
-        homePage.clickOnCommencerSansSeConnecter();
-
-        const avantDeCommencerPage = new AvantDeCommencerPage();
-        avantDeCommencerPage.clickOnJeCommenceSimulationRapide();
 
         const maSituationPage = new MaSituationPage();
         maSituationPage.clickOnDegressiviteAREOui();

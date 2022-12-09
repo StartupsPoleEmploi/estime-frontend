@@ -11,11 +11,22 @@ import { DateUtileTests } from "../../../../integration-commun/utile/date-utile-
 import RessourcesActuellesPage from '../../../../integration-commun/pages/parcours-toutes-aides/ressources-actuelles.page';
 import ResultatMaSimulationPage from '../../../../integration-commun/pages/parcours-toutes-aides/resultat-ma-simulation.page';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
+import ChoixTypeSimulationPage from '../../../../integration-commun/pages/choix-type-simulation.page';
 
 describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeurs d\'emploi Micro entrepreneur - entreprise créée année N-1'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
+
+    const homePage = new HomePage();
+    homePage.clickOnCommencerSimulation();
+
+    const choixTypeSimulation = new ChoixTypeSimulationPage();
+    choixTypeSimulation.clickOnJeCommenceSimulationComplete();
+    choixTypeSimulation.clickOnCommencerSansSeConnecter();
+
+    const avantDeCommencerPage = new AvantDeCommencerPage();
+    avantDeCommencerPage.clickOnContinuer();
   });
 
   afterEach(() => {
@@ -52,12 +63,6 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       const montantPrimeActiviteM2_M3_M4 = "29";
       const montantPrimeActiviteM5_M6 = "439";
 
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
@@ -169,12 +174,6 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       const montantPrimeActiviteM5_M6 = "432";
 
 
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
-
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
       monFuturContratTravailPage.clickOnTypeContratCDI();
@@ -283,12 +282,6 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       const montantPrimeActiviteM2_M3_M4 = "67";
       const montantPrimeActiviteM5_M6 = "427";
 
-
-      const homePage = new HomePage();
-      homePage.clickOnCommencerSansSeConnecter();
-
-      const avantDeCommencerPage = new AvantDeCommencerPage();
-      avantDeCommencerPage.clickOnJeCommenceSimulationComplete();
 
       const monFuturContratTravailPage = new MonFuturContratTravailPage();
       monFuturContratTravailPage.clickOnHasOffreEmploiOui();
