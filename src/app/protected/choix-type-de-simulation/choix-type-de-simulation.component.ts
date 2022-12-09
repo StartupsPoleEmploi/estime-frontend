@@ -6,7 +6,6 @@ import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Environment } from '@app/commun/models/environment';
-import { IndividuConnectedService } from '@app/core/services/connexion/individu-connected.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { RedirectionExterneService } from '@app/core/services/utile/redirection-externe.service';
@@ -19,7 +18,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class ChoixTypeDeSimulationComponent {
 
-  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simulationcalcul?serviceId=repriseEmploi"
+  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simucalcul/repriseemploi"
 
   isPageLoadingDisplay: boolean = false;
   demandeurConnecte: DemandeurEmploi;
@@ -37,7 +36,6 @@ export class ChoixTypeDeSimulationComponent {
     private environment: Environment,
     private estimeApiService: EstimeApiService,
     private deConnecteService: DeConnecteService,
-    private individuConnectedService: IndividuConnectedService,
     private router: Router
   ) { }
 
