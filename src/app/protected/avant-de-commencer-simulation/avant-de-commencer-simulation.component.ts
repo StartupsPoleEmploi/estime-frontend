@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
 })
 export class AvantDeCommencerSimulationComponent implements OnInit {
 
-  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simulationcalcul?serviceId=repriseEmploi"
+  private static URL_SIMUL_CALCUL = "https://candidat.pole-emploi.fr/candidat/simucalcul/repriseemploi"
 
   isPageLoadingDisplay = false;
   isChoixSimulationDisplay = false;
