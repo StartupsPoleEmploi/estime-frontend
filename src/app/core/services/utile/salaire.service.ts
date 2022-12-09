@@ -1,6 +1,7 @@
 import Engine, { formatValue } from "publicodes";
 import rules from "modele-social";
 import { Injectable } from '@angular/core';
+import { FuturTravail } from "@app/commun/models/futur-travail";
 
 @Injectable({ providedIn: 'root' })
 export class SalaireService {
@@ -69,5 +70,34 @@ export class SalaireService {
     public getSmicMensuelBrutFromNombreHeure(nombreHeure: number): number {
         if (nombreHeure == null) nombreHeure = 35;
         return Math.floor(SalaireService.MONTANT_SMIC_HORAIRE_BRUT * nombreHeure * (52 / 12));
+    }
+
+    public calculSalaireFromMensuelNet(futurTravail: FuturTravail) {
+        if (futurTravail.salaire.montantMensuelNet >= 57) {
+            futurTravail.salaire.montantMensuelBrut = this.getBrutFromNet(futurTravail.salaire.montantMensuelNet, futurTravail.typeContrat);
+            futurTravail.salaire.montantHoraireNet = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelNet, futurTravail.nombreHeuresTravailleesSemaine);
+            futurTravail.salaire.montantHoraireBrut = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelBrut, futurTravail.nombreHeuresTravailleesSemaine);
+        }
+    }
+
+    public calculSalaireFromMensuelBrut(futurTravail: FuturTravail) {
+        if (futurTravail.salaire.montantMensuelBrut >= 100) {
+            futurTravail.salaire.montantMensuelNet = this.getNetFromBrut(futurTravail.salaire.montantMensuelBrut, futurTravail.typeContrat);
+            futurTravail.salaire.montantHoraireBrut = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelBrut, futurTravail.nombreHeuresTravailleesSemaine);
+            futurTravail.salaire.montantHoraireNet = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelNet, futurTravail.nombreHeuresTravailleesSemaine);
+        }
+    }
+
+    public calculSalaireFromHoraireNet(futurTravail: FuturTravail) {
+        futurTravail.salaire.montantMensuelNet = this.getMontantMensuelFromMontantHoraire(futurTravail.salaire.montantHoraireNet, futurTravail.nombreHeuresTravailleesSemaine);
+        futurTravail.salaire.montantMensuelBrut = this.getBrutFromNet(futurTravail.salaire.montantMensuelNet, futurTravail.typeContrat);
+        futurTravail.salaire.montantHoraireBrut = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelBrut, futurTravail.nombreHeuresTravailleesSemaine);
+
+    }
+
+    public calculSalaireFromHoraireBrut(futurTravail: FuturTravail) {
+        futurTravail.salaire.montantMensuelBrut = this.getMontantMensuelFromMontantHoraire(futurTravail.salaire.montantHoraireBrut, futurTravail.nombreHeuresTravailleesSemaine);
+        futurTravail.salaire.montantMensuelNet = this.getNetFromBrut(futurTravail.salaire.montantMensuelBrut, futurTravail.typeContrat);
+        futurTravail.salaire.montantHoraireNet = this.getMontantHoraireFromMontantMensuel(futurTravail.salaire.montantMensuelNet, futurTravail.nombreHeuresTravailleesSemaine);
     }
 }
