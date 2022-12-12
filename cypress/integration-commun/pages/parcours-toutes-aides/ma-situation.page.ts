@@ -61,6 +61,10 @@ class MaSituationPage {
     cy.get('[data-testid=btn-situation-rsa]').click();
   }
 
+  public clickOnSituationSalarie() {
+    cy.get('[data-testid=btn-situation-salarie]').click();
+  }
+
   public clickOnSituationPensionInvalidite() {
     cy.get('[data-testid=btn-situation-pension-invalidite]').click();
   }
@@ -115,6 +119,14 @@ class MaSituationPage {
 
   public clickOnSituationBeneficiaireACRENon() {
     cy.get('[data-testid=btn-is-beneficiaire-acre-non]').click();
+  }
+
+  public clickOnSituationCumulAncienEtNouveauSalaireOui() {
+    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-oui]').click();
+  }
+
+  public clickOnSituationCumulAncienEtNouveauSalaireNon() {
+    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-non]').click();
   }
 
   public saisirDateCreationRepriseEntreprise(jour: string, mois: string, annee: string): void {

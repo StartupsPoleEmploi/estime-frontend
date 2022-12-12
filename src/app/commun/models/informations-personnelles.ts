@@ -12,6 +12,7 @@ export class InformationsPersonnelles {
   hasRevenusImmobilier: boolean;
   hasPensionRetraite: boolean;
   isSalarie: boolean;
+  hasCumulAncienEtNouveauSalaire: boolean;
   isSansRessource: boolean;
   isMicroEntrepreneur: boolean;
   isTravailleurIndependant: boolean;

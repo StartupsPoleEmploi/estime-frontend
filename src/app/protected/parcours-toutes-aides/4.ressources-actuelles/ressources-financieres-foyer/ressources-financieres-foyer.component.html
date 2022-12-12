@@ -2,6 +2,92 @@
     <form (ngSubmit)="onSubmitRessourcesFinancieresFoyerForm(ressourcesFinancieresFoyerForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresFoyerFormSubmitted}" #ressourcesFinancieresFoyerForm="ngForm">
         <div>
+            <div *ngIf="informationsPersonnelles.isSalarie">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo">
+                        * Percevez-vous une prime d'activité ?
+                        <button id="infobulle-prime-activite" class="img-interrogation-icon" placement="right"
+                            tag-action="ouverture-infobulle-prime-activite" aria-label="Infobulle prime d'activité"
+                            (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)"></button>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input id="hasPrimeActiviteOui" name="hasPrimeActiviteOui"
+                                aria-label="Vous percevez une prime d'activité" data-testid="btn-has-prime-activite-oui"
+                                type="radio" class="form-check-input"
+                                (keyup)="handleKeyUpOnButtonHasPrimeActivite($event)"
+                                (click)="onClickHasPrimeActivite($event)"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite" required
+                                [value]="true" #hasPrimeActivite="ngModel">
+                            <label class="form-check-label body-2-typo" for="hasPrimeActiviteOui">
+                                oui
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline ms-2">
+                            <input id="hasPrimeActiviteNon" name="hasPrimeActiviteNon"
+                                aria-label="Vous ne percevez pas de prime d'activité"
+                                data-testid="btn-has-prime-activite-non" type="radio" class="form-check-input"
+                                (click)="onClickHasPrimeActivite($event)"
+                                (keyup)="handleKeyUpOnButtonHasPrimeActivite($event)"
+                                [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite" required
+                                [value]="false" #hasPrimeActivite="ngModel">
+                            <label class="form-check-label body-2-typo" for="hasPrimeActiviteNon">
+                                non
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || hasPrimeActivite.touched) && hasPrimeActivite.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite">
+                <div class="row pb-3">
+                    <label class="label headline-4-typo" for="primeActivite">
+                        * Prime d'Activité perçue
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="primeActivite" name="primeActivite" type="text"
+                            data-testid="input-montant-prime-activite"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="8" class="form-control d-inline"
+                            [ngClass]="{'ng-invalid': ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite && ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite == 0}"
+                            [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite" required
+                            placeholder="Montant" inputmode="numeric" #primeActivite="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite && (ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || primeActivite.touched)  && primeActivite.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message"
+                            *ngIf="(isRessourcesFinancieresFoyerFormSubmitted || primeActivite.touched)  && primeActivite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA()">
                 <div class="row pb-3">
                     <label class="label headline-4-typo" for="allocationRSA">
@@ -636,6 +722,14 @@
         </h3>
         <p class='body-1-typo'>
             Sur votre espace CAF, dans la rubrique “mon agenda”
+        </p>">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalInfosPrimeActiviteTemplate>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            La Prime d'activité est une aide financière versée tous les mois par la Caf pour compléter les revenus d'une activité salariée ou indépendante.
         </p>">
     </app-tooltip>
 </ng-template>

@@ -1,0 +1,164 @@
+{
+	"montantRessourcesFinancieresMoisAvantSimulation": 1500.0,
+	"simulationsMensuelles": [
+		{
+			"datePremierJourMoisSimule": "2023-01-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 500.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de décembre"
+					],
+					"organisme": "CAF",
+					"reportee": true
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-02-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 500.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de décembre"
+					],
+					"organisme": "CAF",
+					"reportee": true
+				},
+				"AM": {
+					"code": "AM",
+					"nom": "Aide à la mobilité",
+					"montant": 192.0,
+					"messagesAlerte": [
+						"Cette aide est versée à condition d'en faire la demande dans les 30 jours suivant la date de début de votre contrat."
+					],
+					"organisme": "PE",
+					"reportee": false
+				},
+				"AGEPI": {
+					"code": "AGEPI",
+					"nom": "Aide à la Garde d'Enfants pour Parent Isolé",
+					"montant": 400.0,
+					"messagesAlerte": [
+						"Si vous êtes domicilé⸱e en Ile de France, veuillez vous rapprocher de votre conseiller référent pour en faire la demande. (Les montants peuvent être légèrement différents).",
+						"Cette aide est versée à condition d'en faire la demande dans les 30 jours suivant la date de début de votre contrat."
+					],
+					"organisme": "PE",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-03-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 500.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de décembre"
+					],
+					"organisme": "CAF",
+					"reportee": true
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-04-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 447.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de mars"
+					],
+					"organisme": "CAF",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-05-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 447.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de mars"
+					],
+					"organisme": "CAF",
+					"reportee": false
+				}
+			}
+		},
+		{
+			"datePremierJourMoisSimule": "2023-06-01",
+			"ressourcesFinancieres": {
+				"PAIE": {
+					"code": "PAIE",
+					"nom": "Salaire",
+					"montant": 940.0,
+					"messagesAlerte": null
+				}
+			},
+			"aides": {
+				"PA": {
+					"code": "PA",
+					"nom": "Prime d'Activité",
+					"montant": 447.0,
+					"messagesAlerte": [
+						"Votre demande de prime d'activité sera à effectuer au cours du mois de mars"
+					],
+					"organisme": "CAF",
+					"reportee": false
+				}
+			}
+		}
+	]
+}

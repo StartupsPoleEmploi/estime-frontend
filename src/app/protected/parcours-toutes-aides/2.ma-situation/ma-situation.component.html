@@ -153,7 +153,9 @@
                                 data-testid="btn-situation-ass" tag-action="clic-sur-situation-ass"
                                 [(ngModel)]="beneficiaireAides.beneficiaireASS" btnCheckbox tabindex="0"
                                 #beneficiaireASS="ngModel" (click)="onClickCheckBoxHasASS()"
-                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)">
+                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)"
+                                [ngClass]="{'disabled':informationsPersonnelles.isSalarie}"
+                                [disabled]="informationsPersonnelles.isSalarie">
                                 <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
                             </button>
                             <button
@@ -162,7 +164,9 @@
                                 aria-label="Vous êtes bénéficiaire du RSA" data-testid="btn-situation-rsa"
                                 tag-action="clic-sur-situation-rsa" [(ngModel)]="beneficiaireAides.beneficiaireRSA"
                                 btnCheckbox tabindex="0" #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
-                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)">
+                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)"
+                                [ngClass]="{'disabled':informationsPersonnelles.isSalarie}"
+                                [disabled]="informationsPersonnelles.isSalarie">
                                 <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
                             </button>
                             <button id="btn-situation-are" name="beneficiaireARE"
@@ -193,6 +197,16 @@
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.IMMOBILIER)">
                                 <span class="body-2-typo">{{situationPersonneEnum.IMMOBILIER}}</span>
                             </button>
+                            <button id="btn-has-salaire" name="hasSalaire" data-testid="btn-situation-salarie"
+                                tag-action="clic-sur-situation-salarie" aria-label="Vous percevez un salaire"
+                                class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
+                                [(ngModel)]="informationsPersonnelles.isSalarie" btnCheckbox tabindex="0"
+                                #hasSalaire="ngModel" (click)="onClickCheckBoxHasSalaire()"
+                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.SALARIE)"
+                                [ngClass]="{'disabled':(beneficiaireAides.beneficiaireRSA || beneficiaireAides.beneficiaireASS)}"
+                                [disabled]="(beneficiaireAides.beneficiaireRSA || beneficiaireAides.beneficiaireASS)">
+                                <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
+                            </button>
                             <button name="beneficiaireAAH" class="radio-button-style-1" data-testid="btn-situation-aah"
                                 tag-action="clic-sur-situation-aah" aria-label="Vous êtes bénéficiaire de l'AAH"
                                 [(ngModel)]="beneficiaireAides.beneficiaireAAH" btnCheckbox tabindex="0"
@@ -217,6 +231,56 @@
                                     {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
                                 </span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <app-message-info *ngIf="informationsPersonnelles.isSalarie && beneficiaireAides.beneficiaireARE"
+                    contenu="Attention : si vous bénéficiez de l'ARE et que votre activité salariée a débuté avant la fin du contrat de travail qui a permis votre ouverture droits (activité conservée) : Le simulateur n'est pas en mesure de vous apporter une estimation.">
+                </app-message-info>
+                <div *ngIf="informationsPersonnelles.isSalarie">
+                    <div class="row pb-3">
+                        <label class="label headline-4-typo">
+                            * Allez-vous cumuler votre ancien salaire avec votre nouveau ?
+                            <button id="infobulle-cumul-ancien-et-nouveau-salaire" class="img-interrogation-icon"
+                                placement="right" tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
+                                aria-label="Infobulle cumul entre l'ancien et le nouveau salaire"
+                                (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)"></button>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-check-inline">
+                                <input id="hasCumulAncienEtNouveauSalaireOui" name="hasCumulAncienEtNouveauSalaireOui"
+                                    aria-label="Vous cumulerez votre ancien et votre nouveau salaire"
+                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-oui" type="radio"
+                                    class="form-check-input"
+                                    (keyup)="handleKeyUpOnButtonHasCumulAncienEtNouveauSalaire($event, true)"
+                                    [(ngModel)]="informationsPersonnelles.hasCumulAncienEtNouveauSalaire" required
+                                    [value]="true" #hasCumulAncienEtNouveauSalaire="ngModel">
+                                <label class="form-check-label body-2-typo" for="hasCumulAncienEtNouveauSalaireOui">
+                                    oui
+                                </label>
+                            </div>
+                            <div class="form-check form-check-inline ms-2">
+                                <input id="hasCumulAncienEtNouveauSalaireNon" name="hasCumulAncienEtNouveauSalaireNon"
+                                    aria-label="Vous ne cumulerez pas votre ancien et votre nouveau salaire"
+                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-non" type="radio"
+                                    class="form-check-input"
+                                    (keyup)="handleKeyUpOnButtonHasCumulAncienEtNouveauSalaire($event, false)"
+                                    [(ngModel)]="informationsPersonnelles.hasCumulAncienEtNouveauSalaire" required
+                                    [value]="false" #hasCumulAncienEtNouveauSalaire="ngModel">
+                                <label class="form-check-label body-2-typo" for="hasCumulAncienEtNouveauSalaireNon">
+                                    non
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <span class="error-input-message"
+                                *ngIf="(isInformationsPersonnellesFormSubmitted || hasCumulAncienEtNouveauSalaire.touched) && hasCumulAncienEtNouveauSalaire.errors?.required">
+                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -518,6 +582,14 @@
     </app-tooltip>
 </ng-template>
 
+<ng-template #modalCumulEntreAncienEtNouveauSalaire>
+    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
+        <p class='body-1-typo'>
+            Ce salaire sera alors pris en compte chaque mois de la simulation en plus du nouveau salaire.
+        </p>">
+    </app-tooltip>
+</ng-template>
+
 <ng-template #modalSituationConjointTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
@@ -571,6 +643,40 @@
         </p>
         <a href='https://www.pole-emploi.fr/candidat/mes-droits-aux-aides-et-allocati/a-chaque-situation-son-allocatio.html' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
             Plus d'informations
+            <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
+        </a>
+        ">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalAAHEtSalaire>
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_salaire" htmlData="
+        <img alt='' src='./assets/images/icones/warning.svg'>
+        <h4 class='headline-4-typo mt-4 mb-3'>
+            Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
+        </h3>
+        <p class='body-1-typo'>
+            Merci de vous renseigner auprès de l'organisme en charge du paiement de votre Allocation Adulte Handicapé.
+        </p>
+        <a href='https://caf.fr/' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
+            Site de la Caisse d'allocations familiales
+            <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
+        </a>
+        ">
+    </app-tooltip>
+</ng-template>
+
+<ng-template #modalPensionInvaliditeEtSalaire>
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" htmlData="
+        <img alt='' src='./assets/images/icones/warning.svg'>
+        <h4 class='headline-4-typo mt-4 mb-3'>
+            Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
+        </h3>
+        <p class='body-1-typo'>
+            Merci de vous renseigner auprès de l'organisme en charge du paiement de votre pension d'invalidité.
+        </p>
+        <a href='https://www.service-public.fr/particuliers/vosdroits/F15973' target='_blank' class='body-1-typo color-pe-red-typo text-strong text-decoration-none fw-bold'>
+            Site de la Caisse primaire d’assurance maladie
             <img alt='' src='./assets/images/icones/open-in-new-window.svg'>
         </a>
         ">

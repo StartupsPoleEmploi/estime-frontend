@@ -57,6 +57,8 @@ export class MaSituationComponent implements OnInit {
   @ViewChild('modalPensionInvaliditeEtMicro') modalPensionInvaliditeEtMicro;
   @ViewChild('modalAAHEtMicro') modalAAHEtMicro;
   @ViewChild('modalAREEtMicro') modalAREEtMicro;
+  @ViewChild('modalPensionInvaliditeEtSalaire') modalPensionInvaliditeEtSalaire;
+  @ViewChild('modalAAHEtSalaire') modalAAHEtSalaire;
 
 
   constructor(
@@ -113,12 +115,7 @@ export class MaSituationComponent implements OnInit {
       this.deConnecteService.unsetBeneficiaireACRE();
       this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
-      // évite de déclencher deux fois l'ouverture de modale
-      if (!this.checkSiAREEtMicro()) {
-        if (!this.checkSiAAHEtMicro()) {
-          this.checkSiPensionInvaliditeEtMicro();
-        }
-      }
+      if (!this.checkSiAREEtMicro() && !this.checkSiAAHEtMicro() && !this.checkSiPensionInvaliditeEtMicro()) return;
       this.isSansRessource = false;
     }
   }
@@ -127,7 +124,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetAllocationMensuelleNetAAH();
     } else {
-      this.checkSiAAHEtMicro();
+      if (!this.checkSiAAHEtSalaire() && !this.checkSiAAHEtMicro()) return;
       this.isSansRessource = false;
     }
   }
@@ -174,24 +171,34 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
+  public onClickCheckBoxHasSalaire(): void {
+    if (!this.informationsPersonnelles.isSalarie) {
+      this.deConnecteService.unsetSalaire();
+    } else {
+      this.isSansRessource = false;
+      if (!this.checkSiAAHEtSalaire() && !this.checkSiPensionInvaliditeEtSalaire()) return;
+    }
+  }
+
   public onClickCheckBoxHasPensionInvalidite(): void {
     if (!this.beneficiaireAides.beneficiairePensionInvalidite) {
       this.deConnecteService.unsetPensionInvalidite();
     } else {
       this.deConnecteService.setPensionInvalidite();
-      this.checkSiPensionInvaliditeEtMicro();
+      if (!this.checkSiPensionInvaliditeEtMicro() && !this.checkSiPensionInvaliditeEtSalaire()) return;
       this.isSansRessource = false;
     }
   }
 
   public onClickCheckBoxHasAucuneRessource(): void {
     if (this.isSansRessource) {
-      this.unsetAides();
-      this.deConnecteService.unsetAides();
+      this.unsetSituations();
+      this.deConnecteService.unsetRevenus();
+      this.deConnecteService.unsetSalaire();
     }
   }
 
-  private unsetAides(): void {
+  private unsetSituations(): void {
     this.beneficiaireAides.beneficiaireASS = false;
     this.beneficiaireAides.beneficiaireARE = false;
     this.beneficiaireAides.beneficiaireAAH = false;
@@ -199,6 +206,8 @@ export class MaSituationComponent implements OnInit {
     this.beneficiaireAides.beneficiairePensionInvalidite = false;
     this.informationsPersonnelles.hasRevenusImmobilier = false;
     this.informationsPersonnelles.isMicroEntrepreneur = false;
+    this.informationsPersonnelles.isSalarie = false;
+    this.informationsPersonnelles.hasCumulAncienEtNouveauSalaire = null;
   }
 
   public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
@@ -250,7 +259,8 @@ export class MaSituationComponent implements OnInit {
       || this.beneficiaireAides.beneficiaireARE
       || this.beneficiaireAides.beneficiairePensionInvalidite
       || this.isSansRessource
-      || this.informationsPersonnelles.isMicroEntrepreneur);
+      || this.informationsPersonnelles.isMicroEntrepreneur
+      || this.informationsPersonnelles.isSalarie);
   }
 
   public isConcerneACRE(): boolean {
@@ -302,6 +312,9 @@ export class MaSituationComponent implements OnInit {
       }
       else if (situationPersonne === this.situationPersonneEnum.IMMOBILIER) {
         this.onClickCheckBoxHasRevenusImmobilier();
+      }
+      else if (situationPersonne === this.situationPersonneEnum.SALARIE) {
+        this.onClickCheckBoxHasSalaire();
       }
       else if (situationPersonne === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
         this.onClickCheckBoxIsMicroEntrepreneur();
@@ -525,7 +538,8 @@ export class MaSituationComponent implements OnInit {
       && !this.checkSiAREEtMicro()
       && !this.checkSiAAHEtMicro()
       && !this.checkSiPensionInvaliditeEtMicro()
-      ;
+      && !this.checkSiAAHEtSalaire()
+      && !this.checkSiAAHEtMicro();
   }
 
   private isNonBeneficiaireACRE() {
@@ -555,6 +569,22 @@ export class MaSituationComponent implements OnInit {
   public checkSiPensionInvaliditeEtMicro(): boolean {
     if (this.beneficiaireAides.beneficiairePensionInvalidite && this.informationsPersonnelles.isMicroEntrepreneur) {
       this.modalService.openModal(this.modalPensionInvaliditeEtMicro);
+      return true;
+    }
+    return false;
+  }
+
+  public checkSiPensionInvaliditeEtSalaire(): boolean {
+    if (this.beneficiaireAides.beneficiairePensionInvalidite && this.informationsPersonnelles.isSalarie) {
+      this.modalService.openModal(this.modalPensionInvaliditeEtSalaire);
+      return true;
+    }
+    return false;
+  }
+
+  public checkSiAAHEtSalaire(): boolean {
+    if (this.beneficiaireAides.beneficiaireAAH && this.informationsPersonnelles.isSalarie) {
+      this.modalService.openModal(this.modalAAHEtSalaire);
       return true;
     }
     return false;

@@ -203,9 +203,13 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     );
   }
 
+  public onClickHasPrimeActivite(): void {
+    if (!this.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite) {
+      this.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite = null;
+    }
+  }
+
   /** Gestion des champs logement */
-
-
 
   public onClickCheckBoxIsLocataireNonMeuble(event: any): void {
     event.preventDefault();
@@ -283,6 +287,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
         && !(this.deConnecteSituationFamilialeService.isCelibataireSansEnfant()
           && this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()
         )
+        || this.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite
       );
   }
 
@@ -290,6 +295,12 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     return this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
       || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
       || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble;
+  }
+
+  public handleKeyUpOnButtonHasPrimeActivite(event: any) {
+    if (event.keyCode === 13) {
+      this.onClickHasPrimeActivite();
+    }
   }
 
   public handleKeyUpOnButtonStatutOccupationLogement(event: any, statutOccupationLogementPersonne: string): void {

@@ -416,6 +416,11 @@
       color: $color-white-3 !important;
     }
   }
+
+  &:disabled, &.disabled {
+    cursor:initial;
+    opacity:0.5;
+  }
 }
 
 .disable-radio-button-style-1 {

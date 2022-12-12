@@ -46,6 +46,18 @@ class RessourcesActuellesPage {
     cy.get('[data-testid=input-allocation-mensuelle-aah]').type(montant);
   }
 
+  public clickOnHasPrimeActiviteOui() {
+    cy.get('[data-testid=btn-has-prime-activite-oui]').click();
+  }
+
+  public clickOnHasPrimeActiviteNon() {
+    cy.get('[data-testid=btn-has-prime-activite-non]').click();
+  }
+
+  public saisirMontantPrimeActivite(montant: string): void {
+    cy.get('[data-testid=input-montant-prime-activite]').type(montant);
+  }
+
   public saisirMontantMensuelRSA(montant: string): void {
     cy.get('[data-testid=input-allocation-mensuelle-net-rsa]').type(montant);
   }

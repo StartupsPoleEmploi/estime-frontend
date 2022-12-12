@@ -316,6 +316,15 @@ export class DeConnecteService {
     }
   }
 
+  public unsetSalaire(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.salaire) {
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.salaire = null;
+      this.demandeurEmploiConnecte.informationsPersonnelles.hasCumulAncienEtNouveauSalaire = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetSalairesAvantPeriodeSimulation(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation &&
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation) {
@@ -331,6 +340,10 @@ export class DeConnecteService {
     this.unsetBeneficiaireACRE();
     this.unsetInfosRSA();
     this.unsetPensionInvalidite();
+  }
+
+  public unsetRevenus() {
+    this.unsetSalaire();
     this.unsetBeneficesMicroEntreprise();
     this.unsetRevenusImmobilier();
   }
