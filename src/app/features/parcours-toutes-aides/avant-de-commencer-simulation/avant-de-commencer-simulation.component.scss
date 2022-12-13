@@ -83,14 +83,19 @@
   .documents-demandes {
     margin: 2.5rem 0rem;
 
-    hr {
-      color: $color-pe-grey-light;
-      opacity: 1;
-    }
-
-    .items-document-demandes {
-      height: 2.5rem;
+    .items-documents-demandes {
+      min-height: 3rem;
       margin: 0.5rem 0.5rem;
+      padding: 0.5rem;
+
+      &:not(.avec-border-bottom) {
+        padding-bottom:0rem;
+      }
+
+      &.avec-border-bottom {
+        border-bottom: 1px solid $color-pe-grey-light;
+        padding-bottom:1rem;
+      }
     }
   }
 }
