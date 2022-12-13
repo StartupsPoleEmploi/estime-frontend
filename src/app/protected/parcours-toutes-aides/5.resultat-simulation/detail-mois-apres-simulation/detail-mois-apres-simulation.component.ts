@@ -1,8 +1,7 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, Input, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LiensUtilesEnum } from '@app/commun/enumerations/liens-utiles.enum';
-import { Aide } from '@app/commun/models/aide';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { SimulationMensuelle } from '@app/commun/models/simulation-mensuelle';

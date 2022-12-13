@@ -11,7 +11,6 @@ import { Style } from './models/style';
 import { Text } from "./models/text";
 import { BlockDonneesSaisiesService } from './content/block-donnees-saisies.service';
 import { DeConnecteService } from '../demandeur-emploi-connecte/de-connecte.service';
-import { ImagesBase64Enum } from '@app/commun/enumerations/images-base64.enum';
 
 pdfMakeModule.vfs = pdfFontsModule.pdfMake.vfs;
 
