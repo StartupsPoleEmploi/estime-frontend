@@ -196,7 +196,6 @@
       }
     }
   },
-  "defaultProject": "estime",
   "cli": {
     "analytics": false,
     "cache": {

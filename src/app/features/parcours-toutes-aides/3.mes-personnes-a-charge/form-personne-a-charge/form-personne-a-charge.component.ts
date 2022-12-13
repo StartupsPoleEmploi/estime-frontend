@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { DateDecomposee } from '@models/date-decomposee';
 import { Personne } from '@models/personne';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
@@ -44,7 +44,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.controleChampFormulaireService.focusOnFirstElement();
   }
 
-  public onSubmitNouvellePersonneAChargeForm(form: FormGroup): void {
+  public onSubmitNouvellePersonneAChargeForm(form: UntypedFormGroup): void {
     this.isNouvellePersonnesAChargeFormSubmitted = true;
     this.checkAndSaveDateNaissanceNouvellePersonneConnecte();
     if (this.isDonneesFormulaireNouvellePersonneValides(form)) {
@@ -99,7 +99,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     }
   }
 
-  private isDonneesFormulaireNouvellePersonneValides(form: FormGroup): boolean {
+  private isDonneesFormulaireNouvellePersonneValides(form: UntypedFormGroup): boolean {
     this.isSituationNotValide = !this.isSituationValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)

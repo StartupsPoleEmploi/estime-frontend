@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
@@ -30,7 +30,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   isRessourcesFinancieresFoyerFormSubmitted = false;
 
-  @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: FormGroup;
+  @ViewChild('ressourcesFinancieresFoyerForm', { read: NgForm }) ressourcesFinancieresFoyerForm: UntypedFormGroup;
 
   @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
 
@@ -75,7 +75,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     this.isAucunCas = null;
   }
 
-  public onSubmitRessourcesFinancieresFoyerForm(form: FormGroup): void {
+  public onSubmitRessourcesFinancieresFoyerForm(form: UntypedFormGroup): void {
     this.isRessourcesFinancieresFoyerFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setRessourcesFinancieres(this.ressourcesFinancieresAvantSimulation);
@@ -158,7 +158,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+  private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     return form.valid && this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationFoyerValides(this.ressourcesFinancieresAvantSimulation, this.informationsPersonnelles);
   }
 

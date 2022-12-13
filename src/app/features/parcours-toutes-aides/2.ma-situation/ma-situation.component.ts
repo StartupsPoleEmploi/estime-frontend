@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -212,7 +212,7 @@ export class MaSituationComponent implements OnInit {
     this.informationsPersonnelles.hasCumulAncienEtNouveauSalaire = null;
   }
 
-  public onSubmitInformationsPersonnellesForm(form: FormGroup): void {
+  public onSubmitInformationsPersonnellesForm(form: UntypedFormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
     this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
@@ -531,7 +531,7 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+  private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     this.isSituationConjointNotValide = !this.isSituationConjointValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)

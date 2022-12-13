@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
@@ -26,7 +26,7 @@ export class ActiviteRepriseComponent implements OnInit {
   pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
 
   @Input() isModificationCriteres: boolean;
-  @ViewChild('activiteRepriseForm', { read: NgForm }) activiteRepriseForm: FormGroup;
+  @ViewChild('activiteRepriseForm', { read: NgForm }) activiteRepriseForm: UntypedFormGroup;
 
   isActiviteRepriseFormSubmitted: boolean = false;
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -51,7 +51,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
   @Output() openModalPensionInvaliditeEtSalaires = new EventEmitter<void>();
 
-  @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: FormGroup;
+  @ViewChild('vosRessourcesFinancieresForm', { read: NgForm }) vosRessourcesFinancieresForm: UntypedFormGroup;
   @ViewChild('anneeDateDerniereOuvertureDroitASS', { read: ElementRef }) anneeDateDerniereOuvertureDroitASSInput: ElementRef;
   @ViewChild('moisDateDerniereOuvertureDroitASS', { read: ElementRef }) moisDateDerniereOuvertureDroitASSInput: ElementRef;
 
@@ -235,7 +235,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     return this.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois;
   }
 
-  public onSubmitRessourcesFinancieresForm(form: FormGroup): void {
+  public onSubmitRessourcesFinancieresForm(form: UntypedFormGroup): void {
     this.isRessourcesFinancieresFormSubmitted = true;
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireASS()) {
       this.checkAndSaveDateDernierOuvertureDroitASS();
@@ -312,7 +312,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
 
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+  private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
       isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation);

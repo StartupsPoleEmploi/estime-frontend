@@ -3,7 +3,7 @@ import { SituationPersonneEnum } from '@app/commun/enumerations/situations-perso
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { PersonneDTO } from '@models/dto/personne-dto';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { DateUtileService } from '@app/core/services/utile/date-util.service';
 import { PersonneUtileService } from '@app/core/services/utile/personne-utile.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -28,7 +28,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
 
   optionsNombreMoisTravailles: Array<NombreMoisTravailles>;
 
-  @ViewChild('ressourcesFinancieresPersonnesChargeForm', { read: NgForm }) ressourcesFinancieresPersonnesChargeForm: FormGroup;
+  @ViewChild('ressourcesFinancieresPersonnesChargeForm', { read: NgForm }) ressourcesFinancieresPersonnesChargeForm: UntypedFormGroup;
 
   @Output() validationRessourcesPersonnesAChargeEventEmitter = new EventEmitter<void>();
 
@@ -64,7 +64,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     return result;
   }
 
-  public onSubmitRessourcesFinancieresPersonnesChargeForm(form: FormGroup): void {
+  public onSubmitRessourcesFinancieresPersonnesChargeForm(form: UntypedFormGroup): void {
     this.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setPersonnesChargeRessourcesFinancieres(this.personnesDTO);
@@ -74,7 +74,7 @@ export class RessourcesFinancieresPersonnesAChargeComponent implements OnInit {
     }
   }
 
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+  private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
       this.personnesDTO.forEach((personneDTO) => {

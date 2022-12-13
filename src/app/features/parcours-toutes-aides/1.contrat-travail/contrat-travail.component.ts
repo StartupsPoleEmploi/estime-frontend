@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libelles-types-contrat-travail.enum';
@@ -24,7 +24,7 @@ export class ContratTravailComponent implements OnInit {
 
   private static DISTANCE_MINI_AIDE_MOB = 10;
 
-  @ViewChild('futurTravailForm', { read: NgForm }) futurTravailForm: FormGroup;
+  @ViewChild('futurTravailForm', { read: NgForm }) futurTravailForm: UntypedFormGroup;
   @Input() isModificationCriteres: boolean;
 
   futurTravail: FuturTravail;
@@ -155,7 +155,7 @@ export class ContratTravailComponent implements OnInit {
     }
   }
 
-  private isDonneesSaisiesValides(form: FormGroup): boolean {
+  private isDonneesSaisiesValides(form: UntypedFormGroup): boolean {
     return form.valid
       && this.futurTravail.salaire.montantMensuelBrut > 0
       && this.futurTravail.salaire.montantMensuelNet > 0

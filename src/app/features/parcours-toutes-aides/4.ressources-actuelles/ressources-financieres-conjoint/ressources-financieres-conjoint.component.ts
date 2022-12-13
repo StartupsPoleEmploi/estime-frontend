@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Personne } from '@models/personne';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -23,7 +23,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
 
   erreurSaisieSalaires: boolean;
 
-  @ViewChild('ressourcesFinancieresConjointForm', { read: NgForm }) ressourcesFinancieresConjointForm: FormGroup;
+  @ViewChild('ressourcesFinancieresConjointForm', { read: NgForm }) ressourcesFinancieresConjointForm: UntypedFormGroup;
 
   @Output() validationRessourcesConjointEventEmitter = new EventEmitter<void>();
 
@@ -43,7 +43,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     this.optionsNombreMoisTravailles = this.ressourcesFinancieresAvantSimulationUtileService.initOptionsNombreMoisTravailles();
   }
 
-  public onSubmitRessourcesFinancieresConjointForm(form: FormGroup): void {
+  public onSubmitRessourcesFinancieresConjointForm(form: UntypedFormGroup): void {
     this.isRessourcesFinancieresConjointFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides(form)) {
       this.deConnecteService.setConjointRessourcesFinancieres(this.conjoint);
@@ -53,7 +53,7 @@ export class RessourcesFinancieresConjointComponent implements OnInit {
     }
   }
 
-  private isDonneesSaisiesFormulaireValides(form: FormGroup): boolean {
+  private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
       isValide = this.personneUtileService.isRessourcesFinancieresAvantSimulationValides(this.conjoint);

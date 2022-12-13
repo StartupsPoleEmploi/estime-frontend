@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, NgForm } from '@angular/forms';
+import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
@@ -26,7 +26,7 @@ export class MaSituationComponent implements OnInit {
   SEUIL_DEGRESSIVITE_ARE = 140;
 
   @Input() isModificationCriteres: boolean;
-  @ViewChild('maSituationForm', { read: NgForm }) maSituationForm: FormGroup;
+  @ViewChild('maSituationForm', { read: NgForm }) maSituationForm: UntypedFormGroup;
   isMaSituationFormSubmitted: boolean = false;
 
   demandeurEmploiConnecte: DemandeurEmploi;
