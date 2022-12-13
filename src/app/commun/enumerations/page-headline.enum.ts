@@ -1,7 +1,7 @@
 export enum PageHeadlineEnum {
   AIDES = 'Toutes les aides',
   ACTIVITE_REPRISE = 'Activité reprise',
-  AVANT_COMMENCER_SIMULATION = 'Avant de commencer',
+  AVANT_COMMENCER_SIMULATION = 'Documents demandés',
   CHOIX_SIMULATION = 'Vous reprenez un emploi, découvrez les aides ou allocations auxquelles vous avez droit.',
   CONTRAT_TRAVAIL = 'Votre futur emploi',
   SITUATION = 'Votre situation',
