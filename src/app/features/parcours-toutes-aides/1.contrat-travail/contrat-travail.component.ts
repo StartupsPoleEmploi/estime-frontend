@@ -139,7 +139,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 
   public onSubmitFuturTravailForm(): void {

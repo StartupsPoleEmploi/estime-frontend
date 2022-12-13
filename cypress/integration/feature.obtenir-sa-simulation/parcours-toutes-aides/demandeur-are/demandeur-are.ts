@@ -1,12 +1,11 @@
 const specTitleSimulationDeARE = require("cypress-sonarqube-reporter/specTitle");
-import HomePage from '../../../../integration-commun/pages/home.page';
 import MonFuturContratTravailPage from '../../../../integration-commun/pages/parcours-toutes-aides/mon-futur-contrat-travail.page';
 import MaSituationPage from '../../../../integration-commun/pages/parcours-toutes-aides/ma-situation.page'
 import { NationalitesEnum } from '../../../../../src/app/commun/enumerations/nationalites.enum'
 import PersonnesAChargePage from '../../../../integration-commun/pages/parcours-toutes-aides/personnes-a-charge.page';
 import RessourcesActuellesPage from '../../../../integration-commun/pages/parcours-toutes-aides/ressources-actuelles.page'
 import ResultatMaSimulationPage from '../../../../integration-commun/pages/parcours-toutes-aides/resultat-ma-simulation.page'
-import AvantDeCommencerPage from '../../../../integration-commun/pages/avant-de-commencer.page'
+import AvantDeCommencerPage from '../../../../integration-commun/pages/parcours-toutes-aides/avant-de-commencer.page'
 import EstimeSessionService from '../../../../integration-commun/utile/estime-session.service'
 import { environment } from '../../../../environment'
 import { CodesAidesEnum } from "../../../../../src/app/commun/enumerations/codes-aides.enum";
@@ -17,9 +16,6 @@ describe(specTitleSimulationDeARE('FEATURE - Obtenir ma simulation - Demandeurs 
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
-
-    const homePage = new HomePage();
-    homePage.clickOnCommencerSimulation();
 
     const choixTypeSimulation = new ChoixTypeSimulationPage();
     choixTypeSimulation.clickOnJeCommenceSimulationComplete();

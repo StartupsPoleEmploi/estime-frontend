@@ -3,7 +3,6 @@ import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
-import { Aide } from '@app/commun/models/aide';
 import { AidesService } from './aides.service';
 import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';

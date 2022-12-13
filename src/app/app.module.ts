@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { CommunModule } from './commun/commun.module';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
-import { PublicModule } from './public/public.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +25,6 @@ import { EnableParcoursComplementAREGuard } from './commun/guard/enable-parcours
     CommunModule,
     CoreModule,
     HttpClientModule,
-    PublicModule,
     RouterModule
   ],
   providers: [

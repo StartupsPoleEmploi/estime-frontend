@@ -10,7 +10,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { RessourcesFinancieresConjointComponent } from '@app/protected/parcours-toutes-aides/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
+import { RessourcesFinancieresConjointComponent } from '@app/features/parcours-toutes-aides/4.ressources-actuelles/ressources-financieres-conjoint/ressources-financieres-conjoint.component';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { RessourcesFinancieresAvantSimulation } from '@app/commun/models/ressources-financieres-avant-simulation';
 import { RessourcesFinancieresFoyerComponent } from './ressources-financieres-foyer/ressources-financieres-foyer.component';

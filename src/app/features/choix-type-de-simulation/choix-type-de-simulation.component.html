@@ -1,0 +1,67 @@
+<app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
+<div *ngIf="!isPageLoadingDisplay" class="container-fluid" role="form">
+    <div class="row mb-5">
+        <div class="col-12 col-md-8 title-container text-start div-vertically-centered">
+            <h1 class="h2-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
+                {{pageTitlesEnum.CHOIX_SIMULATION}}
+            </h1>
+        </div>
+        <div class="col-12 col-md-4">
+            <img alt="" src="../../../assets/images/illustrations/homepage-calculette.svg">
+        </div>
+    </div>
+    <div class="row">
+        <div class="card card-buttons-choix-simulation">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 [ngClass]="screenService.isExtraSmallScreen()?' headline-3-typo':'headline-2-typo'">
+                        Quel type d'estimation voulez-vous faire ?
+                    </h2>
+                </div>
+                <div class="col-12 col-md-6">
+                    <button name="simulation-complete" class="card button-card-choix-simulation"
+                        aria-label="Effectuer une simulation complète" (click)="clickOnSimulationRapide()"
+                        (keyup)="handleKeyUpOnSimulationRapide($event)" data-testid="btn-effectuer-simulation-rapide"
+                        tag-action="clic_bouton_effectuer_simulation_rapide">
+                        <div class="row">
+                            <div class="col-md-11 col-10 text-start">
+                                <h5 class="headline-5-typo color-pe-red-typo">
+                                    Estimation rapide pour les bénéficiaires de l'ARE
+                                </h5>
+                                <span class="body-2-typo">
+                                    Montant de votre complément d’allocation chômage (ARE) en cas de reprise
+                                    d’emploi
+                                </span>
+                            </div>
+                            <div class="col-md-1 col-2 text-end my-auto">
+                                <img alt="" src="../../../assets/images/icones/chevron-droite-red.svg">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <button name="simulation-complete" class="card button-card-choix-simulation"
+                        aria-label="Effectuer une simulation complète" (click)="clickOnSimulationComplete()"
+                        (keyup)="handleKeyUpOnSimulationComplete($event)"
+                        data-testid="btn-effectuer-simulation-complete"
+                        tag-action="clic_bouton_effectuer_simulation_complete">
+                        <div class="row">
+                            <div class="col-md-11 col-10 text-start">
+                                <h5 class="headline-5-typo color-pe-red-typo">
+                                    Estimation complète
+                                </h5>
+                                <span class="body-2-typo">
+                                    Toutes les allocations et aides dans les 6 mois qui suivront votre reprise
+                                    d'emploi
+                                </span>
+                            </div>
+                            <div class="col-md-1 col-2 text-end my-auto">
+                                <img alt="" src="../../../assets/images/icones/chevron-droite-red.svg">
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
