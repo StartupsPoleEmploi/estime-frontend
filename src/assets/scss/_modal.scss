@@ -53,6 +53,10 @@
 
       color: $color-pe-red !important;
       text-decoration: none;
+
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
     }
 
     h3 {
