@@ -82,11 +82,14 @@
 
   .documents-demandes {
     margin: 2.5rem 0rem;
+    padding-left: unset;
 
     .items-documents-demandes {
       min-height: 3rem;
       margin: 0.5rem 0.5rem;
       padding: 0.5rem;
+
+      list-style: none;
 
       &:not(.avec-border-bottom) {
         padding-bottom:0rem;
