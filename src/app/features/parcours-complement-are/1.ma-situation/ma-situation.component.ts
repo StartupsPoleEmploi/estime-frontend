@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
@@ -21,7 +21,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class MaSituationComponent implements OnInit {
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
 
   SEUIL_DEGRESSIVITE_ARE = 140;
 

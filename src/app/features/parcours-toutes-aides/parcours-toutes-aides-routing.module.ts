@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PageTitleEnum } from '@app/commun/enumerations/page-title.enum';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { ContratTravailComponent } from './1.contrat-travail/contrat-travail.component';
 import { MaSituationComponent } from './2.ma-situation/ma-situation.component';
@@ -12,27 +13,33 @@ import { AvantDeCommencerSimulationComponent } from './avant-de-commencer-simula
 const routes: Routes = [
   {
     path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
-    component: AvantDeCommencerSimulationComponent
+    component: AvantDeCommencerSimulationComponent,
+    title: `${PageTitleEnum.AVANT_COMMENCER_SIMULATION} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.CONTRAT_TRAVAIL,
-    component: ContratTravailComponent
+    component: ContratTravailComponent,
+    title: `${PageTitleEnum.CONTRAT_TRAVAIL} ${PageTitleEnum.SUFFIX}`
   },
   {
-    path: RoutesEnum.MA_SITUATION,
-    component: MaSituationComponent
+    path: RoutesEnum.SITUATION,
+    component: MaSituationComponent,
+    title: `${PageTitleEnum.SITUATION} ${PageTitleEnum.SUFFIX}`
   },
   {
-    path: RoutesEnum.MES_PERSONNES_A_CHARGE,
-    component: MesPersonnesAChargeComponent
+    path: RoutesEnum.PERSONNES_A_CHARGE,
+    component: MesPersonnesAChargeComponent,
+    title: `${PageTitleEnum.PERSONNES_A_CHARGE} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.RESSOURCES_ACTUELLES,
-    component: RessourcesActuellesComponent
+    component: RessourcesActuellesComponent,
+    title: `${PageTitleEnum.RESSOURCES_ACTUELLES} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.RESULTAT_SIMULATION,
-    component: ResultatSimulationComponent
+    component: ResultatSimulationComponent,
+    title: `${PageTitleEnum.RESULTAT_SIMULATION} ${PageTitleEnum.SUFFIX}`
   }
 ];
 

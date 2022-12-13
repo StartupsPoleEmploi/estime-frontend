@@ -8,7 +8,7 @@ import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/
 import { EstimeApiService } from '@app/core/services/estime-api/estime-api.service';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
-import { PageTitlesEnum } from "@enumerations/page-titles.enum";
+import { PageHeadlineEnum } from "@app/commun/enumerations/page-headline.enum";
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,7 +22,7 @@ export class AvantDeCommencerSimulationComponent {
   isPageLoadingDisplay = false;
   messageErreur: string;
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   subscriptionPopstateEventObservable: Subscription;
 
   constructor(

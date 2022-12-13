@@ -54,7 +54,7 @@ export class FilEtapesDesktopComponent implements OnInit {
     if (etapeActive >= numeroEtape) {
       switch (numeroEtape) {
         case 1: {
-          this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.MA_SITUATION]);
+          this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.SITUATION]);
           break;
         }
         case 2: {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
 import { DeConnecteSituationFamilialeService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-situation-familiale.service";
 import { ControleChampFormulaireService } from '@app/core/services/utile/controle-champ-formulaire.service';
@@ -24,7 +24,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   dateNaissanceNouvellePersonne: DateDecomposee;
   nouvellePersonneACharge: Personne;
   numeroNouvellePersonne: number;
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
 
   isModeModification = false;
   isNouvellePersonneAChargeFormDisplay = false;
@@ -94,7 +94,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MA_SITUATION]);
+    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.SITUATION]);
   }
 
   public onClickButtonSuivant(): void {

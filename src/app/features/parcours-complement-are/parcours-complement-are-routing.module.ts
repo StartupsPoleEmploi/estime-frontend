@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PageTitleEnum } from '@app/commun/enumerations/page-title.enum';
 import { EnableParcoursComplementAREGuard } from '@app/commun/guard/enable-parcours-complement-are.guard';
 import { RoutesEnum } from '@enumerations/routes.enum';
 import { MaSituationComponent } from './1.ma-situation/ma-situation.component';
@@ -9,19 +10,22 @@ import { ResultatSimulationComponent } from './3.resultat-simulation/resultat-si
 
 const routes: Routes = [
   {
-    path: RoutesEnum.MA_SITUATION,
+    path: RoutesEnum.SITUATION,
     component: MaSituationComponent,
-    canActivate: [EnableParcoursComplementAREGuard]
+    canActivate: [EnableParcoursComplementAREGuard],
+    title: `${PageTitleEnum.SITUATION} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.ACTIVITE_REPRISE,
     component: ActiviteRepriseComponent,
-    canActivate: [EnableParcoursComplementAREGuard]
+    canActivate: [EnableParcoursComplementAREGuard],
+    title: `${PageTitleEnum.ACTIVITE_REPRISE} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.RESULTAT_SIMULATION,
     component: ResultatSimulationComponent,
-    canActivate: [EnableParcoursComplementAREGuard]
+    canActivate: [EnableParcoursComplementAREGuard],
+    title: `${PageTitleEnum.RESULTAT_SIMULATION} ${PageTitleEnum.SUFFIX}`
   }
 ];
 

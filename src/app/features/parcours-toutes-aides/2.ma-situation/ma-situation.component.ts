@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { Salaire } from '@app/commun/models/salaire';
@@ -42,7 +42,7 @@ export class MaSituationComponent implements OnInit {
   situationFamiliale: SituationFamiliale;
 
   nationalitesEnum: typeof NationalitesEnum = NationalitesEnum;
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   situationsFamilialesEnum: typeof SituationsFamilialesEnum = SituationsFamilialesEnum;
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;
 
@@ -221,7 +221,7 @@ export class MaSituationComponent implements OnInit {
         this.setInfosMicroEntreprise();
         this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
         this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
-        this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MES_PERSONNES_A_CHARGE]);
+        this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.PERSONNES_A_CHARGE]);
       }
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();

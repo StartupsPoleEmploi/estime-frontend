@@ -58,11 +58,11 @@ export class FilEtapesDesktopComponent implements OnInit {
           break;
         }
         case 2: {
-          this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MA_SITUATION]);
+          this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.SITUATION]);
           break;
         }
         case 3: {
-          this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MES_PERSONNES_A_CHARGE]);
+          this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.PERSONNES_A_CHARGE]);
           break;
         }
         case 4: {

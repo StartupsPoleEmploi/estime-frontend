@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
@@ -31,7 +31,7 @@ export class ResultatSimulationComponent implements OnInit {
   simulationSelected: SimulationMensuelle;
   detailTemporalite: DetailTemporalite;
   detailMensuelSelected: DetailMensuel;
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   hoveredButtonSimulationMensuelle: number;
 
   afficherDetails: boolean;

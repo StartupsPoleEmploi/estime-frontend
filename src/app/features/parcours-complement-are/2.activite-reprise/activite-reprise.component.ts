@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { TypesContratTravailEnum } from '@app/commun/enumerations/types-contrat-travail.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
@@ -23,7 +23,7 @@ import { ScreenService } from '@app/core/services/utile/screen.service';
 })
 export class ActiviteRepriseComponent implements OnInit {
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
 
   @Input() isModificationCriteres: boolean;
   @ViewChild('activiteRepriseForm', { read: NgForm }) activiteRepriseForm: UntypedFormGroup;
@@ -100,7 +100,7 @@ export class ActiviteRepriseComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.MA_SITUATION]);
+    this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.SITUATION]);
   }
 
   public onSubmitActiviteRepriseForm(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Simulation } from '@app/commun/models/simulation';
@@ -20,7 +20,7 @@ import { SideModalService } from '@app/core/services/utile/side-modal.service';
 })
 export class ResultatSimulationComponent implements OnInit {
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   @ViewChild('modalModificationCriteres') modalModificationCriteres;
 
   constructor(

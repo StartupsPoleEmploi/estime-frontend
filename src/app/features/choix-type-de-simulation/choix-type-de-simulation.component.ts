@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { Environment } from '@app/commun/models/environment';
@@ -28,7 +28,7 @@ export class ChoixTypeDeSimulationComponent {
   demandeurConnecte: DemandeurEmploi;
   messageErreur: string;
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   @Input() isBeneficiaireARE: boolean;
   @Output() commencerSimulationParcoursToutesAides = new EventEmitter<any>();
   @Output() commencerSimulationParcoursComplementARE = new EventEmitter<any>();
@@ -104,7 +104,7 @@ export class ChoixTypeDeSimulationComponent {
   private traiterRetourCreerDemandeurEmploi(demandeurEmploi: DemandeurEmploi): void {
     this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
     this.isPageLoadingDisplay = false;
-    this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.MA_SITUATION]);
+    this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.SITUATION]);
   }
 
   private traiterErreurCreerDemandeurEmploi(_error: HttpErrorResponse): void {

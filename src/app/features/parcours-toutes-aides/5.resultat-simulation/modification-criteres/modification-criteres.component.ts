@@ -50,7 +50,7 @@ export class ModificationCriteresComponent {
 
   public onClickButtonModificationAutresCriteres(): void {
     this.sideModalService.closeSideModalModificationCriteres();
-    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MA_SITUATION]);
+    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.SITUATION]);
   }
 
   public onSubmitModificationCriteresForm(): void {

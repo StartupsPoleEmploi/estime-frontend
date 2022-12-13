@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libelles-types-contrat-travail.enum';
 import { Salaire } from '@app/commun/models/salaire';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
@@ -31,7 +31,7 @@ export class ContratTravailComponent implements OnInit {
   isFuturTravailFormSubmitted = false;
   isFuturTravailSalaireFormSubmitted = false;
   isNombreTrajetsDomicileTravailDisplay = false;
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
   TypesContratTravailEnum: typeof TypesContratTravailEnum = TypesContratTravailEnum;
   LibellesTypesContratTravailEnum: typeof LibellesTypesContratTravailEnum = LibellesTypesContratTravailEnum;
   LibellesCourtsTypesContratTravailEnum: typeof LibellesCourtsTypesContratTravailEnum = LibellesCourtsTypesContratTravailEnum
@@ -149,7 +149,7 @@ export class ContratTravailComponent implements OnInit {
     if (this.isDonneesSaisiesValides(this.futurTravailForm)) {
       if (!this.afficherNombreTrajetsDomicileTravail()) this.futurTravail.nombreTrajetsDomicileTravail = 0;
       this.deConnecteService.setFuturTravail(this.futurTravail);
-      if (!this.isModificationCriteres) this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MA_SITUATION]);
+      if (!this.isModificationCriteres) this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.SITUATION]);
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }

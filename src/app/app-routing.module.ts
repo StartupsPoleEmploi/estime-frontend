@@ -3,13 +3,14 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { NotFoundComponent } from './commun/components/not-found/not-found.component';
 import { SigninRedirectCallbackComponent } from './commun/components/signin-redirect-callback/signin-redirect-callback.component';
 import { StatsComponent } from './commun/components/stats/stats.component';
+import { PageTitleEnum } from './commun/enumerations/page-title.enum';
 import { RoutesEnum } from './commun/enumerations/routes.enum';
 import { EnableParcoursComplementAREGuard } from './commun/guard/enable-parcours-complement-are.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./features/choix-type-de-simulation/choix-type-de-simulation.module').then(m => m.ChoixTypeDeSimulationModule)
+    loadChildren: () => import('./features/choix-type-de-simulation/choix-type-de-simulation.module').then(m => m.ChoixTypeDeSimulationModule),
   },
   {
     path: RoutesEnum.PARCOURS_TOUTES_AIDES,
@@ -20,10 +21,25 @@ const routes: Routes = [
     loadChildren: () => import('./features/parcours-complement-are/parcours-complement-are.module').then(m => m.ParcoursComplementAreModule),
     canActivate: [EnableParcoursComplementAREGuard]
   },
-  { path: RoutesEnum.SIGNIN_CALLBACK, component: SigninRedirectCallbackComponent },
-  { path: RoutesEnum.STATS, component: StatsComponent },
-  { path: RoutesEnum.NOT_FOUND, component: NotFoundComponent },
-  { path: '**', redirectTo: '/404' }
+  {
+    path: RoutesEnum.SIGNIN_CALLBACK,
+    component: SigninRedirectCallbackComponent,
+    title: `${PageTitleEnum.SIGNIN_CALLBACK} ${PageTitleEnum.SUFFIX}`
+  },
+  {
+    path: RoutesEnum.STATS,
+    component: StatsComponent,
+    title: `${PageTitleEnum.STATS} ${PageTitleEnum.SUFFIX}`
+  },
+  {
+    path: RoutesEnum.NOT_FOUND,
+    component: NotFoundComponent,
+    title: `${PageTitleEnum.NOT_FOUND} ${PageTitleEnum.SUFFIX}`
+  },
+  {
+    path: '**',
+    redirectTo: '/404'
+  }
 ];
 
 //permet de gérer le scroll auto => ici scrollPositionRestoration: 'enabled' positionne le scroll à top

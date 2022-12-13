@@ -6,11 +6,11 @@
         <div class="div-title-formulaire">
             <h1 *ngIf="!isModificationCriteres" class="h1-style-1"
                 [ngClass]="screenService.isExtraSmallScreen()?'headline-2-typo':'headline-1-typo'">
-                1. {{pageTitlesEnum.CONTRAT_TRAVAIL}}
+                1. {{PageHeadlineEnum.CONTRAT_TRAVAIL}}
             </h1>
             <h1 *ngIf="isModificationCriteres" class="h1-style-1"
                 [ngClass]="screenService.isExtraSmallScreen()?'headline-2-typo':'headline-1-typo'">
-                {{pageTitlesEnum.CONTRAT_TRAVAIL}}
+                {{PageHeadlineEnum.CONTRAT_TRAVAIL}}
             </h1>
             <div class="text-under-h1 body-2-typo">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}

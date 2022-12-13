@@ -7,14 +7,14 @@ export class EtapeSimulationService {
 
   etapesSimulationToutesAides = [
     { numero: 1, titre: "Offre d'emploi", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}` },
-    { numero: 2, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MA_SITUATION}` },
-    { numero: 3, titre: "Mes personnes<br>à charge", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MES_PERSONNES_A_CHARGE}` },
+    { numero: 2, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.SITUATION}` },
+    { numero: 3, titre: "Mes personnes<br>à charge", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.PERSONNES_A_CHARGE}` },
     { numero: 4, titre: "Les ressources<br>actuelles", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESSOURCES_ACTUELLES}` },
     { numero: 5, titre: "Résultat<br>simulation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}` }
   ];
 
   etapesSimulationComplementARE = [
-    { numero: 1, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.MA_SITUATION}` },
+    { numero: 1, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.SITUATION}` },
     { numero: 2, titre: "Activité reprise", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.ACTIVITE_REPRISE}` },
     { numero: 3, titre: "Résultat<br>simulation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}` }
   ];
@@ -48,8 +48,8 @@ export class EtapeSimulationService {
   public isPathRouteEtapesSimulationParcoursToutesAides(pathRouteActivated: string): boolean {
     let isPathRouteEtapesSimulationToutesAides = false;
     if (pathRouteActivated === RoutesEnum.CONTRAT_TRAVAIL ||
-      pathRouteActivated === RoutesEnum.MA_SITUATION ||
-      pathRouteActivated === RoutesEnum.MES_PERSONNES_A_CHARGE ||
+      pathRouteActivated === RoutesEnum.SITUATION ||
+      pathRouteActivated === RoutesEnum.PERSONNES_A_CHARGE ||
       pathRouteActivated === RoutesEnum.RESSOURCES_ACTUELLES ||
       pathRouteActivated === RoutesEnum.RESULTAT_SIMULATION) {
       isPathRouteEtapesSimulationToutesAides = true;
@@ -59,7 +59,7 @@ export class EtapeSimulationService {
 
   public isPathRouteEtapesSimulationParcoursComplementARE(pathRouteActivated: string): boolean {
     let isPathRouteEtapesSimulationComplementARE = false;
-    if (pathRouteActivated === RoutesEnum.MA_SITUATION ||
+    if (pathRouteActivated === RoutesEnum.SITUATION ||
       pathRouteActivated === RoutesEnum.ACTIVITE_REPRISE ||
       pathRouteActivated === RoutesEnum.RESULTAT_SIMULATION) {
       isPathRouteEtapesSimulationComplementARE = true;

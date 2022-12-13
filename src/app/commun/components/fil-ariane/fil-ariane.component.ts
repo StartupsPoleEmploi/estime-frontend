@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { LibellesAidesEnum } from '@app/commun/enumerations/libelles-aides.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { Subscription } from 'rxjs';
 
@@ -44,31 +44,31 @@ export class FilArianeComponent implements OnInit {
 
     switch (pathRouteActivated) {
       case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.AVANT_COMMENCER_SIMULATION}`:
-        this.libelleRouteActive = PageTitlesEnum.AVANT_COMMENCER_SIMULATION;
+        this.libelleRouteActive = PageHeadlineEnum.AVANT_COMMENCER_SIMULATION;
         break;
       case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}`:
-        this.libelleRouteActive = PageTitlesEnum.CONTRAT_TRAVAIL;
+        this.libelleRouteActive = PageHeadlineEnum.CONTRAT_TRAVAIL;
         break;
-      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MA_SITUATION}`:
-        this.libelleRouteActive = PageTitlesEnum.MA_SITUATION;
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.SITUATION}`:
+        this.libelleRouteActive = PageHeadlineEnum.SITUATION;
         break;
-      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.MES_PERSONNES_A_CHARGE}`:
-        this.libelleRouteActive = PageTitlesEnum.MES_PERSONNES_CHARGE;
+      case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.PERSONNES_A_CHARGE}`:
+        this.libelleRouteActive = PageHeadlineEnum.PERSONNES_A_CHARGE;
         break;
       case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESSOURCES_ACTUELLES}`:
-        this.libelleRouteActive = PageTitlesEnum.MES_RESSOURCES_ACTUELLES;
+        this.libelleRouteActive = PageHeadlineEnum.RESSOURCES_ACTUELLES;
         break;
       case `${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`:
-        this.libelleRouteActive = PageTitlesEnum.RESULTAT_MA_SIMULATION;
+        this.libelleRouteActive = PageHeadlineEnum.RESULTAT_SIMULATION;
         break;
       case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.ACTIVITE_REPRISE}`:
-        this.libelleRouteActive = PageTitlesEnum.ACTIVITE_REPRISE;
+        this.libelleRouteActive = PageHeadlineEnum.ACTIVITE_REPRISE;
         break;
-      case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.MA_SITUATION}`:
-        this.libelleRouteActive = PageTitlesEnum.MA_SITUATION;
+      case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.SITUATION}`:
+        this.libelleRouteActive = PageHeadlineEnum.SITUATION;
         break;
       case `${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`:
-        this.libelleRouteActive = PageTitlesEnum.RESULTAT_MA_SIMULATION;
+        this.libelleRouteActive = PageHeadlineEnum.RESULTAT_SIMULATION;
         break;
     }
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
-import { PageTitlesEnum } from '@app/commun/enumerations/page-titles.enum';
+import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service";
 import { DeConnecteSimulationService } from "@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service";
@@ -57,7 +57,7 @@ export class RessourcesActuellesComponent implements OnInit {
   ressourcesPersonnesAChargeValidees: boolean;
   ressourcesFoyerValidees: boolean;
 
-  pageTitlesEnum: typeof PageTitlesEnum = PageTitlesEnum;
+  PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
 
   ressourceConjointSeulementRSA: boolean;
   ressourcePersonnesAChargeSeulementRSA: boolean;
@@ -193,7 +193,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   public onClickButtonRetour(): void {
-    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.MES_PERSONNES_A_CHARGE]);
+    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.PERSONNES_A_CHARGE]);
   }
 
   public traiterValidationVosRessourcesEventEmitter(): void {
