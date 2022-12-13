@@ -24,7 +24,7 @@
                 <div class="col-12 col-md-6">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" src="./assets/images/icones/localisation-white.svg">
+                            <img alt="" role="presentation" src="./assets/images/icones/localisation-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
                             <div>
@@ -44,7 +44,7 @@
                 <div class="col-12 col-md-6" [ngClass]="{'mt-4':screenService.isExtraSmallScreen()}">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" src="./assets/images/icones/calendrier-white.svg">
+                            <img alt="" role="presentation" src="./assets/images/icones/calendrier-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
                             <h4 class="headline-4-typo">
@@ -59,7 +59,7 @@
                 <div class="col-12 col-md-6 mt-4">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" src="./assets/images/icones/euro-white.svg">
+                            <img alt="" role="presentation" src="./assets/images/icones/euro-white.svg">
 
                         </div>
                         <div class="col-10 col-md-11">
@@ -75,7 +75,7 @@
                 <div class="col-12 col-md-6 mt-4">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" src="./assets/images/icones/info-white.svg">
+                            <img alt="" role="presentation" src="./assets/images/icones/info-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
                             <h4 class="headline-4-typo">
@@ -159,7 +159,7 @@
                             (click)="onClickButtonImprimerMaSimulation()"
                             (keyup)="handleKeyUpOnTelechargerSimulation($event)"
                             tag-download="clic_bouton_telecharger_ma_simulation">
-                            <img alt="" src="./assets/images/icones/download.svg">
+                            <img alt="" role="presentation" src="./assets/images/icones/download.svg">
                             <span>Télécharger</span>
                         </button>
                     </div>
@@ -178,13 +178,13 @@
                         </span>
                     </div>
                     <div class="pt-3 col-md-12" (click)="onClickCopyLinkToEstime()">
-                        <img alt='' src='../../../assets/images/icones/copy.svg'>
+                        <img alt='' role='presentation' src='./assets/images/icones/copy.svg'>
                         <span class="button-typo color-pe-red-typo pointer">
                             COPIER LE LIEN DE PARTAGE
                         </span>
                     </div>
                     <div *ngIf="isCopiedSuccessfully" class="mt-2 col-md-12 copied-successfully">
-                        <img alt='' src='../../../assets/images/icones/check-black.svg'>
+                        <img alt='' role='presentation' src='./assets/images/icones/check-black.svg'>
                         <span class="body-2-typo">
                             Copié dans votre presse-papier
                         </span>
@@ -214,7 +214,7 @@
         <button class="btn-telecharger-simulation-mobile" data-testid="btn-telecharger-simulation" tabindex="0"
             (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
             tag-download="clic_bouton_telecharger_ma_simulation">
-            <img alt="" src="./assets/images/icones/download.svg">
+            <img alt="" role="presentation" src="./assets/images/icones/download.svg">
             <span>Télécharger</span>
         </button>
     </div>
