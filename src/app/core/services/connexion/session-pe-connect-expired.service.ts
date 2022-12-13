@@ -84,13 +84,13 @@ export class SessionPeConnectExpiredService {
         this.router.navigate([pathRouteActivated]);
       }
     } else {
-      this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
+      this.router.navigate([RoutesEnum.HOMEPAGE]);
     }
     this.sessionStorageEstimeService.clearPathRouteActivatedByUser();
   }
 
   private traiterReconnexionIndividuDifferent(): void {
     this.sessionStorageEstimeService.clear();
-    this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
+    this.router.navigate([RoutesEnum.HOMEPAGE]);
   }
 }

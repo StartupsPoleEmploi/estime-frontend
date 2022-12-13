@@ -7,8 +7,6 @@ import { CallbackPipe } from "@app/commun/pipes/callback.pipe";
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PageLoadingComponent } from "./components/page-loading/page-loading.component";
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalSessionExpiredComponent } from './components/modal-session-expired/modal-session-expired.component';
 import { FilArianeComponent } from './components/fil-ariane/fil-ariane.component';
@@ -18,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/text-with-euro-symbol.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { MessageInfoComponent } from './components/message-info/message-info.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +24,6 @@ import { MessageInfoComponent } from './components/message-info/message-info.com
     CarouselSwipeDirective,
     CallbackPipe,
     FilArianeComponent,
-    FooterComponent,
-    HeaderComponent,
     ModalSessionExpiredComponent,
     NotFoundComponent,
     PageLoadingComponent,
@@ -34,7 +31,8 @@ import { MessageInfoComponent } from './components/message-info/message-info.com
     DateInputsComponent,
     TextWithEuroSymbolComponent,
     TooltipComponent,
-    MessageInfoComponent
+    MessageInfoComponent,
+    StatsComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -50,13 +48,12 @@ import { MessageInfoComponent } from './components/message-info/message-info.com
     CallbackPipe,
     CommonModule,
     FilArianeComponent,
-    FooterComponent,
-    HeaderComponent,
     PageLoadingComponent,
     DateInputsComponent,
     TextWithEuroSymbolComponent,
     TooltipComponent,
-    MessageInfoComponent
+    MessageInfoComponent,
+    StatsComponent
   ]
 })
 export class CommunModule { }

@@ -40,7 +40,7 @@ export class DeConnecteService {
   public controlerSiDemandeurEmploiConnectePresent(): void {
     const demandeurEmploiConnecte = this.getDemandeurEmploiConnecte();
     if (!demandeurEmploiConnecte) {
-      this.router.navigate([RoutesEnum.CHOIX_TYPE_SIMULATION]);
+      this.router.navigate([RoutesEnum.HOMEPAGE]);
     }
   }
 
@@ -251,6 +251,15 @@ export class DeConnecteService {
     }
     if (this.demandeurEmploiConnecte.situationFamiliale) {
       this.demandeurEmploiConnecte.situationFamiliale.isSeulPlusDe18Mois = null;
+    }
+  }
+
+  public unsetPrimeActivite(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
+      && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
     }
   }
 

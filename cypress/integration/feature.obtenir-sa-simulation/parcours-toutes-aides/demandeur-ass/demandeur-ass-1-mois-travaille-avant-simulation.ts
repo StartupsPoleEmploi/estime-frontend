@@ -1,8 +1,7 @@
 const specTitleSimulationDeASS = require("cypress-sonarqube-reporter/specTitle");
 import { NationalitesEnum } from '../../../../../src/app/commun/enumerations/nationalites.enum';
 import { environment } from '../../../../environment';
-import AvantDeCommencerPage from '../../../../integration-commun/pages/avant-de-commencer.page';
-import HomePage from '../../../../integration-commun/pages/home.page';
+import AvantDeCommencerPage from '../../../../integration-commun/pages/parcours-toutes-aides/avant-de-commencer.page';
 import MaSituationPage from '../../../../integration-commun/pages/parcours-toutes-aides/ma-situation.page';
 import MonFuturContratTravailPage from '../../../../integration-commun/pages/parcours-toutes-aides/mon-futur-contrat-travail.page';
 import PersonnesAChargePage from '../../../../integration-commun/pages/parcours-toutes-aides/personnes-a-charge.page';
@@ -17,9 +16,6 @@ describe(specTitleSimulationDeASS('FEATURE - Obtenir ma simulation - Demandeurs 
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
-
-    const homePage = new HomePage();
-    homePage.clickOnCommencerSimulation();
 
     const choixTypeSimulation = new ChoixTypeSimulationPage();
     choixTypeSimulation.clickOnJeCommenceSimulationComplete();

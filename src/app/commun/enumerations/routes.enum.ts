@@ -1,11 +1,6 @@
 export enum RoutesEnum {
   HOMEPAGE = '/',
-  ACCESSIBILITE = 'accessibilite',
   AVANT_COMMENCER_SIMULATION = 'avant-de-commencer',
-  CHOIX_TYPE_SIMULATION = 'type-de-simulation',
-  DOCUMENTS = 'documents',
-  CGU = 'conditions-generales-utilisation',
-  CONTACT = 'contact',
   CONTRAT_TRAVAIL = 'contrat-de-travail',
   ACTIVITE_REPRISE = 'activite-reprise',
   ETAPES_SIMULATION = 'etapes-simulation',

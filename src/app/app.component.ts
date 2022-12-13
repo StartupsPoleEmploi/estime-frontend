@@ -1,8 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
 import { RoutesEnum } from "@enumerations/routes.enum";
 import { Subscription } from 'rxjs';
-import { SessionStorageEstimeService } from './core/services/storage/session-storage-estime.service';
 import { ScreenService } from './core/services/utile/screen.service';
 
 @Component({
@@ -21,12 +20,9 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private screenService: ScreenService,
-    private renderer: Renderer2,
-    private sessionStorageEstimeService: SessionStorageEstimeService,
-    private route: ActivatedRoute
+    private renderer: Renderer2
   ) {
     this.subscribeRouteNavigationEndObservable();
-    this.subscribeTrafficSourceObservable();
     this.subscribePopstateEventObservable();
   }
 
@@ -47,11 +43,11 @@ export class AppComponent implements OnInit {
   private subscribeRouteNavigationEndObservable(): void {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
-        this.isDisplayFilAriane = routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE
+        this.isDisplayFilAriane = routerEvent.url.split('?')[0] !== RoutesEnum.STATS
+          && routerEvent.url.split('?')[0] !== RoutesEnum.HOMEPAGE
           && routerEvent.url.split('?')[0] !== `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
           && routerEvent.url.split('?')[0] !== `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`;
-        if ((routerEvent.url.split('?')[0] === RoutesEnum.HOMEPAGE
-          || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
+        if ((routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
           || routerEvent.url.split('?')[0] === `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`)
           && this.screenService.isExtraSmallScreen()) {
           this.renderer.addClass(document.body, 'body-with-sticky-footer');
@@ -61,21 +57,6 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  private subscribeTrafficSourceObservable(): void {
-    this.subscriptionTrafficSourceObservable = this.route.queryParams.subscribe(params => {
-      const trafficSource = params.at_campaign;
-      if (params.at_campaign) {
-        if (typeof params.at_campaign === 'string') {
-          this.sessionStorageEstimeService.storeTrafficSource(trafficSource);
-        } else {
-          this.sessionStorageEstimeService.storeTrafficSource(trafficSource.join(', '));
-        }
-      }
-    });
-  }
-
-
 
   /** Subscription
    *

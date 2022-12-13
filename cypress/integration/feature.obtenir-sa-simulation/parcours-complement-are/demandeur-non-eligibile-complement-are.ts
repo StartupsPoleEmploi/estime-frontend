@@ -1,19 +1,15 @@
-const specTitleSimulationDeAAH = require("cypress-sonarqube-reporter/specTitle");
+const specTitleSimulationRapide = require("cypress-sonarqube-reporter/specTitle");
 import { environment } from '../../../environment';
-import HomePage from '../../../integration-commun/pages/home.page';
 import MaSituationPage from '../../../integration-commun/pages/parcours-complement-are/ma-situation.page';
 import EstimeSessionService from '../../../integration-commun/utile/estime-session.service';
 import ActiviteReprisePage from '../../../integration-commun/pages/parcours-complement-are/activite-reprise.page';
 import ResultatMaSimulationPage from '../../../integration-commun/pages/parcours-complement-are/resultat-ma-simulation.page';
 import ChoixTypeSimulationPage from '../../../integration-commun/pages/choix-type-simulation.page';
 
-describe(specTitleSimulationDeAAH('FEATURE - Obtenir ma simulation parcours complément ARE - non éligible au complement ARE'), () => {
+describe(specTitleSimulationRapide('FEATURE - Obtenir ma simulation parcours complément ARE - non éligible au complement ARE'), () => {
 
   beforeEach(() => {
     cy.visit(environment.urlApplication);
-
-    const homePage = new HomePage();
-    homePage.clickOnCommencerSimulation();
 
     const choixTypeSimulation = new ChoixTypeSimulationPage();
     choixTypeSimulation.clickOnJeCommenceSimulationRapide();
