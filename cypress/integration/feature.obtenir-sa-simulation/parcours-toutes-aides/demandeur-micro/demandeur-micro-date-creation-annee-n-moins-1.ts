@@ -96,6 +96,7 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
+      ressourcesActuellesPage.clickOnHasPrimeActiviteNon();
       ressourcesActuellesPage.selectionnerProprietaire();
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -206,6 +207,7 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
+      ressourcesActuellesPage.clickOnHasPrimeActiviteNon();
       ressourcesActuellesPage.selectionnerProprietaire();
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 
@@ -315,6 +317,7 @@ describe(specTitleSimulationDeMicro('FEATURE - Obtenir ma simulation - Demandeur
       ressourcesActuellesPage.clickOnAvezVousTravailleAuCoursDesDerniersMoisNon();
       ressourcesActuellesPage.clickOnValiderVosRessources();
 
+      ressourcesActuellesPage.clickOnHasPrimeActiviteNon();
       ressourcesActuellesPage.selectionnerProprietaire();
       ressourcesActuellesPage.clickOnValiderRessourcesFoyer();
 

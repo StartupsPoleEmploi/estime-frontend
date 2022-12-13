@@ -2,7 +2,7 @@
     <form (ngSubmit)="onSubmitRessourcesFinancieresFoyerForm(ressourcesFinancieresFoyerForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresFoyerFormSubmitted}" #ressourcesFinancieresFoyerForm="ngForm">
         <div>
-            <div *ngIf="informationsPersonnelles.isSalarie">
+            <div *ngIf="(informationsPersonnelles.isSalarie || informationsPersonnelles.isMicroEntrepreneur)">
                 <div class="row pb-3">
                     <label class="label headline-4-typo">
                         * Percevez-vous une prime d'activité ?

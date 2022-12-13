@@ -254,6 +254,15 @@ export class DeConnecteService {
     }
   }
 
+  public unsetPrimeActivite(): void {
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
+      && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite = null;
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite = null;
+      this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
+    }
+  }
+
   public unsetAPL(): void {
     if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation
       && this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF

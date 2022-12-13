@@ -287,8 +287,7 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
         && !(this.deConnecteSituationFamilialeService.isCelibataireSansEnfant()
           && this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()
         )
-        || this.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite
-      );
+      ) || this.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite;
   }
 
   public isConcerneParAideLogement(): boolean {

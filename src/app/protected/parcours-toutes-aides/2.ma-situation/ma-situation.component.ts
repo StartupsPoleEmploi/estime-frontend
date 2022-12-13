@@ -113,6 +113,7 @@ export class MaSituationComponent implements OnInit {
     if (!this.informationsPersonnelles.isMicroEntrepreneur) {
       this.deConnecteService.unsetBeneficesMicroEntreprise();
       this.deConnecteService.unsetBeneficiaireACRE();
+      this.deConnecteService.unsetPrimeActivite();
       this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       if (!this.checkSiAREEtMicro() && !this.checkSiAAHEtMicro() && !this.checkSiPensionInvaliditeEtMicro()) return;
@@ -174,6 +175,7 @@ export class MaSituationComponent implements OnInit {
   public onClickCheckBoxHasSalaire(): void {
     if (!this.informationsPersonnelles.isSalarie) {
       this.deConnecteService.unsetSalaire();
+      this.deConnecteService.unsetPrimeActivite();
     } else {
       this.isSansRessource = false;
       if (!this.checkSiAAHEtSalaire() && !this.checkSiPensionInvaliditeEtSalaire()) return;
