@@ -17,8 +17,10 @@
                         <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                             * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                             <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
-                                tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
+                                tag-action="clic_infobulle_degressivite_are"
+                                aria-label="Qu'est ce que la degressivité de l'ARE ?"
                                 (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
                     </div>
@@ -69,8 +71,9 @@
                             * Vous souhaitez avoir une estimation du montant :
                             <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                                 placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                                aria-label="Infobulle taux réduit degressivité"
+                                aria-label="Qu'est ce que la degressivité de l'ARE"
                                 (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
                     </div>
@@ -115,8 +118,9 @@
                             * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
                             <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
                                 tag-action="clic_infobulle_obtenir_ressources_are"
-                                aria-label="Infobulle salaire journalier référence ARE"
+                                aria-label="Où trouver votre salaire journalier référence ARE ?"
                                 (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
                     </div>
@@ -163,8 +167,9 @@
                                 pour l’ARE
                                 <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
                                     placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                                    aria-label="Infobulle taux réduit degressivité"
+                                    aria-label="Où trouver votre montant brut d'allocation journalière ARE ?"
                                     (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                                    <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                 </button>
                             </label>
                         </div>
@@ -212,8 +217,9 @@
                             <button *ngIf="isTauxReduit" id="infobulle-ma-situation-vous-percevez"
                                 class="img-interrogation-icon" placement="right"
                                 tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                                aria-label="Infobulle taux réduit degressivité"
+                                aria-label="Où trouver votre montant brut d'allocation jouranliere à taux réduit ?"
                                 (click)="modalService.openModalOnEvent($event, modalTauxReduitTemplate)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
                     </div>

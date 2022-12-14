@@ -5,8 +5,9 @@
                 <label class="label headline-4-typo" for="input-allocation-journaliere-net-ass">
                     * Montant de votre allocation journalière ASS
                     <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle montant ASS"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Où trouver le montant de votre ASS ?"
                         (click)="modalService.openModalOnEvent($event, modalAllocationASSTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -55,8 +56,9 @@
                 <label class="label headline-4-typo">
                     * Date de votre ouverture de droits à l'ASS
                     <button id="infobulle-date-ouverture-ass" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle date d'ouverture ASS"
+                        tag-action="clic_infobulle_allocation_ass" aria-label="Où trouver votre date d'ouverture ASS ?"
                         (click)="modalService.openModalOnEvent($event, modalDateOuvertureASSTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -74,8 +76,9 @@
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
                     <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle salaire journalier référence ARE"
+                        aria-label="Où trouver votre salaire journalier référence ARE ?"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -119,8 +122,9 @@
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
                     <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
-                        aria-label="Infobulle nombre jours restants ARE"
+                        aria-label="Où trouver votre nombre jours restants d'ARE ?"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -163,8 +167,10 @@
                 <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                     <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_degressivite_are" aria-label="Infobulle degressivité ARE"
+                        tag-action="clic_infobulle_degressivite_are"
+                        aria-label="Qu'est ce que la degressivité de l'ARE ?"
                         (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -212,8 +218,9 @@
                     * Je souhaite simuler le montant de mon allocation en cas de reprise d'emploi en :
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                        aria-label="Infobulle taux réduit degressivité"
+                        aria-label="Où trouver votre taux réduit de degressivité ARE ?"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -259,8 +266,9 @@
                     * Montant brut de votre allocation journalière à taux plein pour l’ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                        aria-label="Infobulle taux réduit degressivité"
+                        aria-label="Où trouver votre montant brut d'allocation journalière à taux plein ?"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -307,8 +315,9 @@
                         *ngIf="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true"
                         id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
-                        aria-label="Infobulle taux réduit degressivité"
+                        aria-label="Où trouver votre montant brut d'allocation journalière à taux réduit ?"
                         (click)="modalService.openModalOnEvent($event, modalTauxReduitTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -352,8 +361,9 @@
                 <label class="label headline-4-typo" for="allocationRSA">
                     * RSA (Revenu de Solidarité Active) perçu
                     <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
+                        tag-action="clic_infobulle_rsa" aria-label="Où trouver votre montant de RSA ?"
                         (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -396,8 +406,9 @@
                 <label class="label headline-4-typo" for="allocationAAH">
                     * Allocation Adulte Handicapé (AAH) perçue
                     <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_aah" aria-label="Infobulle montant AAH"
+                        tag-action="clic_infobulle_aah" aria-label="Où trouver votre montant d'AAH ?"
                         (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -442,8 +453,9 @@
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
                     <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
                         placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
-                        aria-label="Infobulle prochaine déclaration trimestrielle"
+                        aria-label="Où trouver la date de votre prochaine déclaration trimestrielle CAF ?"
                         (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
                 <div class="col">
@@ -478,8 +490,10 @@
                 <label class="label headline-4-typo" for="pensionInvalidite">
                     * Pension d'invalidité nette imposable perçue
                     <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_pension_invalidite" aria-label="Infobulle montant pension invalidité"
+                        tag-action="clic_infobulle_pension_invalidite"
+                        aria-label="Où trouver votre montant de pension d'invalidité ?"
                         (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>
@@ -630,10 +644,6 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo">
                     Type de bénéfices
-                    <button id="infobulle-type-benefice" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_allocation_ass" aria-label="Infobulle type de bénéfices"
-                        (click)="modalService.openModalOnEvent($event, modalTypeBeneficesTemplate)">
-                    </button>
                 </label>
             </div>
             <div class="row pb-3">
@@ -667,6 +677,12 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins2">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(2)}} (hors taxes)
+                    <button id="infobulle-chiffre-affaires-n-moins-2" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_chiffre_affaires_n_moins_2"
+                        aria-label="Comment renseigner votre chiffre d'affaires ?"
+                        (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -697,6 +713,12 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins1">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(1)}} (hors taxes)
+                    <button id="infobulle-chiffre-affaires-n-moins-1" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_chiffre_affaires_n_moins_1"
+                        aria-label="Comment renseigner votre chiffre d'affaires ?"
+                        (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -726,6 +748,12 @@
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntreprise">
                     * Chiffre d’affaires estimé pour l’année {{dateUtileService.getAnneeActuelle()}} (hors taxes)
+                    <button id="infobulle-chiffre-affaires-n" class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_chiffre_affaires"
+                        aria-label="Comment renseigner votre chiffre d'affaires ?"
+                        (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                    </button>
                 </label>
             </div>
             <div class="row">
@@ -757,8 +785,9 @@
                     * Revenus annuels de placement ou du patrimoine
                     <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
-                        aria-label="Infobulle revenus immobilier"
+                        aria-label="où trouver vos revenus immobiliers ?"
                         (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)"></button>
+                    <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                 </label>
             </div>
             <div class="row">
@@ -899,15 +928,7 @@
     </app-tooltip>
 </ng-template>
 
-<ng-template #modalTypeBeneficesTemplate>
-    <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <p class='body-1-typo'>
-            Le chiffre d'affaires est la somme des ventes de biens ou de services d'une entreprise. Il est égal au montant (hors taxes) de l'ensemble des transactions réalisées par l'entreprise
-        </p>">
-    </app-tooltip>
-</ng-template>
-
-<ng-template #modalTypeBeneficesTemplate>
+<ng-template #modalChiffreAffairesTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
         <p class='body-1-typo'>
             Le chiffre d'affaires est la somme des ventes de biens ou de services d'une entreprise. Il est égal au montant (hors taxes) de l'ensemble des transactions réalisées par l'entreprise

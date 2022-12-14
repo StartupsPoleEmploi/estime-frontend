@@ -1,19 +1,26 @@
 .img-interrogation-icon {
   display: inline-block;
-  vertical-align: sub;
-  margin-left: 0.3125rem;
-  width: 1.4375rem;
-  height: 1.4375rem;
+  width: 3rem;
+  height: 3rem;
   border: 0;
-  background: no-repeat url("../images/icones/question.svg");
-  background-size: 100% 100%;
   cursor: pointer;
+  background-color: unset;
+  padding:0rem;
 
-  &:hover {
-    background: no-repeat url("../images/icones/question_hover.svg");
+  img {
+    width: 1.4375rem;
   }
 
-  &.popover-open {
-    background: no-repeat url("../images/icones/question_click.svg");
+  &:focus {
+    border:unset;
+    img {
+      width: 1.5rem;
+    }
+  }
+
+  &:hover {
+    img {
+      width: 1.5rem;
+    }
   }
 }

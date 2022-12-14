@@ -17,9 +17,10 @@
                     <div *ngIf="screenService.isExtraSmallScreen()"></div>
                     personne(s) à charge
                     <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
-                        aria-label="Infobulle statut de personne à charge" placement="right"
+                        aria-label="Qui considère-t-on comme votre personne à charge ?" placement="right"
                         tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
                         (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
             </div>

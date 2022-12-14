@@ -243,8 +243,10 @@
                             * Allez-vous cumuler votre ancien salaire avec votre nouveau ?
                             <button id="infobulle-cumul-ancien-et-nouveau-salaire" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
-                                aria-label="Infobulle cumul entre l'ancien et le nouveau salaire"
-                                (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)"></button>
+                                aria-label="Comment seront cumulés mon ancien et nouveau salaire ?"
+                                (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                            </button>
                         </label>
                     </div>
                     <div class="row">
@@ -303,8 +305,10 @@
                             * Bénéficiez-vous de l'ACRE ?
                             <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
-                                aria-label="Infobulle bénéficiaire de l'ACRE"
-                                (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)"></button>
+                                aria-label="Qu'est ce que l'ACRE ?"
+                                (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                            </button>
                         </label>
                     </div>
                     <div class="row">
@@ -350,8 +354,10 @@
                             * Votre situation familiale
                             <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-conjoint"
-                                aria-label="Infobulle conjoint"
-                                (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)"></button>
+                                aria-label="Qui considère-t-on comme votre conjoint ?"
+                                (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                            </button>
                         </label>
                     </div>
                     <div class="row">

@@ -7,8 +7,11 @@
                     <label class="label headline-4-typo">
                         * Percevez-vous une prime d'activité ?
                         <button id="infobulle-prime-activite" class="img-interrogation-icon" placement="right"
-                            tag-action="ouverture-infobulle-prime-activite" aria-label="Infobulle prime d'activité"
-                            (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)"></button>
+                            tag-action="ouverture-infobulle-prime-activite"
+                            aria-label="Qu'est ce que la prime d'activité ?"
+                            (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)">
+                            <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                        </button>
                     </label>
                 </div>
                 <div class="row">
@@ -93,8 +96,9 @@
                     <label class="label headline-4-typo" for="allocationRSA">
                         * RSA (Revenu de Solidarité Active) perçu
                         <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
-                            tag-action="clic_infobulle_rsa" aria-label="Infobulle montant RSA"
+                            tag-action="clic_infobulle_rsa" aria-label="Où trouver le montant du RSA de votre foyer ?"
                             (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
+                            <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                         </button>
                     </label>
                 </div>
@@ -483,8 +487,9 @@
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
                     <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
                         placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
-                        aria-label="Infobulle prochaine déclaration trimestrielle"
+                        aria-label="Où trouver la date de votre prochaine déclaration trimestrielle CAF ?"
                         (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
                 </label>
                 <div class="col">
