@@ -8,19 +8,19 @@ import { CodesActionsEnum } from '@app/commun/enumerations/codes-actions-enum';
 })
 export class ActionSuiteComponent {
 
-  @Output() clickAction = new EventEmitter<string>();
+  @Output() clickAction = new EventEmitter<CodesActionsEnum>();
   @Input() imageLink: string;
   @Input() text: string;
-  @Input() codeAction: string;
+  @Input() codeAction: CodesActionsEnum;
 
-  public onClickAction(event, codeAction: string): void {
+  public onClickAction(event, codeAction: CodesActionsEnum): void {
     event.preventDefault();
     this.clickAction.emit(codeAction);
   }
 
   public getTagAction(): string {
     switch (this.codeAction) {
-      case CodesActionsEnum.MISE_A_JOUR:
+      case CodesActionsEnum.MISE_A_JOUR_PROFIL:
         return "clic_bouton_mettre_a_jour_profil";
       case CodesActionsEnum.OFFRES_EMPLOI:
         return "clic_bouton_voir_offres_emploi";

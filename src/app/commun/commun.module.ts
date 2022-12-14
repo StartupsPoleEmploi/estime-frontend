@@ -17,6 +17,8 @@ import { TextWithEuroSymbolComponent } from './components/text-with-euro-symbol/
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { MessageInfoComponent } from './components/message-info/message-info.component';
 import { StatsComponent } from './components/stats/stats.component';
+import { ActionSuiteComponent } from './components/actions-suite/action-suite/action-suite.component';
+import { ActionsSuiteComponent } from './components/actions-suite/actions-suite.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { StatsComponent } from './components/stats/stats.component';
     TextWithEuroSymbolComponent,
     TooltipComponent,
     MessageInfoComponent,
-    StatsComponent
+    StatsComponent,
+    ActionSuiteComponent,
+    ActionsSuiteComponent
   ],
   imports: [
     AlertModule.forRoot(),
@@ -53,7 +57,9 @@ import { StatsComponent } from './components/stats/stats.component';
     TextWithEuroSymbolComponent,
     TooltipComponent,
     MessageInfoComponent,
-    StatsComponent
+    StatsComponent,
+    ActionSuiteComponent,
+    ActionsSuiteComponent
   ]
 })
 export class CommunModule { }

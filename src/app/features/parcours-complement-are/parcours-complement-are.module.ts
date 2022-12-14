@@ -11,18 +11,12 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModificationCriteresComponent } from './3.resultat-simulation/modification-criteres/modification-criteres.component';
-import { ActionsSuiteComponent } from './3.resultat-simulation/actions-suite/actions-suite.component';
-import { ActionSuiteComponent } from './3.resultat-simulation/actions-suite/action-suite/action-suite.component';
-
-
 
 @NgModule({
   declarations: [
     MaSituationComponent,
     ActiviteRepriseComponent,
     ResultatSimulationComponent,
-    ActionSuiteComponent,
-    ActionsSuiteComponent,
     ModificationCriteresComponent,
   ],
   imports: [
