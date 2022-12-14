@@ -131,8 +131,9 @@ select.ng-invalid.ng-touched {
 }
 
 form.submitted .radio-button-style-1.ng-invalid.ng-touched,
-form.submitted .custom-control-input.ng-invalid.ng-touched~.custom-control-label::before {
-  border-color: $color-red-5;
+form.submitted .custom-control-input.ng-invalid.ng-touched~.custom-control-label::before,
+button.ng-invalid {
+  border-color: $color-red-5 !important;
 }
 
 /*.radio-button-style-1.ng-invalid.ng-touched,

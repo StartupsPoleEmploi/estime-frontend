@@ -31,13 +31,13 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
                                 {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
                             </span>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || titreSejourValide.touched)  && titreSejourValide.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -226,7 +226,7 @@
                         </div>
                         <div class="row py-2">
                             <div class="col-12">
-                                <span class="error-input-message"
+                                <span class="error-input-message" role="alert"
                                     *ngIf="isInformationsPersonnellesFormSubmitted  && !isAllocationDEntreeSelectionnee()">
                                     {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UNE_AIDE}}
                                 </span>
@@ -279,7 +279,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || hasCumulAncienEtNouveauSalaire.touched) && hasCumulAncienEtNouveauSalaire.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -341,7 +341,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || isBeneficiaireACRE.touched) && isBeneficiaireACRE.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -383,7 +383,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="isInformationsPersonnellesFormSubmitted  && situationFamilialeDemandeur.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -424,7 +424,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || isSeulPlusDe18Mois.touched) && isSeulPlusDe18Mois.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
@@ -549,7 +549,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>

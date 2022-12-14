@@ -7,6 +7,7 @@ export class ControleChampFormulaireService {
   REGEX_NUMERIC = "^[0-9]{1,6}$";
   REGEX_EMAIL = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   MESSAGE_CHAMP_OBLIGATOIRE = "Ce champ est obligatoire";
+  MESSAGE_SELECTION_OBLIGATOIRE = "Cette sélection est obligatoire";
   MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX = "Tous les champs marqués d'un astérisque (*) sont obligatoires";
   MESSAGE_CODE_POSTAL_INCORRECT = "Le code postal est incorrect";
   MESSAGE_DATE_ANNEE_OBLIGATOIRE = "L'année est obligatoire";

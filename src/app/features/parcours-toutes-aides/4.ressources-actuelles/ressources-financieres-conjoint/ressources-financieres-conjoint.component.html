@@ -22,19 +22,19 @@
             </div>
             <div class="row pb-3">
                 <div class="col-12">
-                    <span class="error-input-message"
+                    <span class="error-input-message" role="alert"
                         *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
                 <div class="col-12">
-                    <span class="error-input-message"
+                    <span class="error-input-message" role="alert"
                         *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                     </span>
                 </div>
                 <div class="col-12">
-                    <span class="error-input-message"
+                    <span class="error-input-message" role="alert"
                         *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                     </span>
@@ -86,7 +86,7 @@
             </div>
             <div class="row pb-3">
                 <div class="col-12">
-                    <span class="error-input-message"
+                    <span class="error-input-message" role="alert"
                         *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <span class="error-input-message"
+                                        <span class="error-input-message" role="alert"
                                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
                                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                                         </span>
@@ -146,7 +146,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isRessourcesFinancieresConjointFormSubmitted)  && erreurSaisieSalaires">
                                 Vous avez déclaré que votre conjoint(e) a travaillé lors de ces
                                 {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
@@ -176,19 +176,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -215,19 +215,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (conjoint.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -260,19 +260,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (conjoint.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -305,19 +305,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (conjoint.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -346,19 +346,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointBeneficesMicroEntrepriseDernierExercice?.touched)  && conjointBeneficesMicroEntrepriseDernierExercice?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -387,19 +387,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointChiffreAffairesIndependantDernierExercice?.touched)  && conjointChiffreAffairesIndependantDernierExercice?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (conjoint.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -427,19 +427,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointPensionRetraite?.touched)  && conjointPensionRetraite?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite && (conjoint.ressourcesFinancieresAvantSimulation.conjointPensionRetraite == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>
@@ -472,19 +472,19 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.required">
                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresConjointFormSubmitted || conjointRevenusImmobilier?.touched)  && conjointRevenusImmobilier?.errors?.pattern">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
                         </span>
                     </div>
                     <div class="col-12">
-                        <span class="error-input-message"
+                        <span class="error-input-message" role="alert"
                             *ngIf="this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois && (this.conjoint.ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois == 0)">
                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                         </span>

@@ -53,7 +53,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !hasDegressiviteAreSelectionne()">
                                 {{controleChampFormulaireService.MESSAGE_SELECTION_DEGRESSIVITE_ARE}}
                             </span>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !isTauxDegressiviteAreSelectionne()">
                                 {{controleChampFormulaireService.MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE}}
                             </span>
@@ -140,19 +140,19 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                             </span>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isMaSituationFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isMaSituationFormSubmitted || salaireJournalierReferenceBrut.touched)  && salaireJournalierReferenceBrut.errors?.pattern">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
                             </span>
@@ -190,19 +190,19 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col-12">
-                                <span class="error-input-message"
+                                <span class="error-input-message" role="alert"
                                     *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == 0)">
                                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                                 </span>
                             </div>
                             <div class="col-12">
-                                <span class="error-input-message"
+                                <span class="error-input-message" role="alert"
                                     *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein.touched) && allocationJournaliereBruteTauxPlein.errors?.required">
                                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                                 </span>
                             </div>
                             <div class="col-12">
-                                <span class="error-input-message"
+                                <span class="error-input-message" role="alert"
                                     *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein.touched) && allocationJournaliereBruteTauxPlein.errors?.pattern">
                                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
                                 </span>
@@ -239,19 +239,19 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == 0)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                             </span>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBrute.touched) && allocationJournaliereBrute.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                             </span>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message"
+                            <span class="error-input-message" role="alert"
                                 *ngIf="(isMaSituationFormSubmitted || allocationJournaliereBrute.touched) && allocationJournaliereBrute.errors?.pattern">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
                             </span>

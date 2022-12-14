@@ -29,57 +29,57 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isJourInvalide(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isJourInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_OBLIGATOIRE}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isMoisInvalide(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isMoisInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_MOIS_OBLIGATOIRE}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isAnneeInvalide(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isAnneeInvalide(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_ANNEE_OBLIGATOIRE}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isJourMoisInvalides(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isJourMoisInvalides(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_MOIS_OBLIGATOIRES}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isJourAnneeInvalides(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isJourAnneeInvalides(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_ANNEE_OBLIGATOIRES}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_MOIS_ANNEE_OBLIGATOIRES}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="isJourMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
+        <span class="error-input-message" role="alert" *ngIf="isJourMoisAnneeInvalides(jourDate, moisDate, anneeDate)">
             {{controleChampFormulaireService.MESSAGE_DATE_JOUR_MOIS_ANNEE_OBLIGATOIRES}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="dateSaisie.isJourInvalide">
+        <span class="error-input-message" role="alert" *ngIf="dateSaisie.isJourInvalide">
             {{dateSaisie.messageErreurFormatJour}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="dateSaisie.isMoisInvalide">
+        <span class="error-input-message" role="alert" *ngIf="dateSaisie.isMoisInvalide">
             {{dateSaisie.messageErreurFormatMois}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message" *ngIf="dateSaisie.isAnneeInvalide">
+        <span class="error-input-message" role="alert" *ngIf="dateSaisie.isAnneeInvalide">
             {{dateSaisie.messageErreurFormatAnnee}}
         </span>
     </div>
     <div class="col-12">
-        <span class="error-input-message"
+        <span class="error-input-message" role="alert"
             *ngIf="!dateSaisie.isJourInvalide && !dateSaisie.isMoisInvalide && !dateSaisie.isAnneeInvalide && dateSaisie.isDateSuperieurDateJour">
             {{dateSaisie.messageErreurSuperieurDateJour}}
         </span>
