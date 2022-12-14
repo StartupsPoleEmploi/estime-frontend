@@ -7,5 +7,10 @@ export enum LiensUtilesEnum {
     DESCRIPTION_COMPLEMENT_ARE = 'https://plmpl.fr/c/oUQWx',
     DEMANDE_AIDES_LOGEMENT = "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#DAL",
     DEMANDE_AGEPI_AIDE_MOBILITE = "https://candidat.pole-emploi.fr/candidat/aides/mobilite/tableaudebord\\r\\n",
-    DEMANDE_PRIME_ACTIVITE = "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#/solidariteetactivite"
+    DEMANDE_PRIME_ACTIVITE = "https://wwwd.caf.fr/wps/portal/caffr/aidesetservices/lesservicesenligne/faireunedemandedeprestation#/solidariteetactivite",
+    MISE_A_JOUR_PROFIL = "https://candidat.pole-emploi.fr/profil-professionnel/#/profil/synthese",
+    SERVICES_A_LA_CARTE = "https://candidat.pole-emploi.fr/prestations/servicescarte",
+    OFFRES_EMPLOI = "https://candidat.pole-emploi.fr/offres/emploi",
+    COMPRENDRE_MON_ALLOCATION = "https://www.monallocation.pole-emploi.fr/"
+
 }
