@@ -101,6 +101,9 @@ export class DateUtileService {
       dateDecomposee.messageErreurFormatAnnee = "L'année doit être au format AAAA";
       dateDecomposee.isAnneeInvalide = true;
     }
+    if (this.isDateDecomposeeAfterDateJour(dateDecomposee)) {
+      dateDecomposee.isAnneeInvalide = true;
+    }
   }
 
   public getNombreJoursMois(mois: number, annee: number): number {
@@ -329,6 +332,12 @@ export class DateUtileService {
     const dateDecomposeeDateJour = this.getDateDecomposeeFromDate(new Date());
     const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateDecomposeeDateJour);
     return moment(dateToCheck).isAfter(dateDecomposeeDateJourFormat);
+  }
+
+  public isDateDecomposeeAfterDateJour(dateToCheck: DateDecomposee): boolean {
+    const dateString = this.getStringDateFromDateDecomposee(dateToCheck);
+    const dateDecomposeeDateJourFormat = this.getStringDateFromDateDecomposee(dateToCheck);
+    return moment(dateString).isAfter(dateDecomposeeDateJourFormat);
   }
 
   public isDateDecomposeAfterDateJour(dateDecomposee: DateDecomposee): boolean {

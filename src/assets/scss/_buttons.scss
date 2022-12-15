@@ -8,6 +8,15 @@
   }
 }
 
+button {
+
+  &:hover,
+  &:focus {
+    box-shadow: none !important;
+    outline-color: $color-blue-1;
+  }
+}
+
 .radio-btn-base {
   @extend .btn-base;
   border: 0.0625rem $color-blue-1 solid;

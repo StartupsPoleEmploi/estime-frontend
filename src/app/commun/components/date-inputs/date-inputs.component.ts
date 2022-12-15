@@ -37,22 +37,22 @@ export class DateInputsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public onChangeOrKeyUpDateJour(): void {
+  public onChangeOrKeyUpDateJour(event): void {
     if (this.dateSaisie.jour && this.dateSaisie.jour.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
       this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
-      if (!this.dateSaisie.isJourInvalide) {
+      if (!this.dateSaisie.isJourInvalide && event.keyCode != 9 && event.keyCode != 16) {
         this.moisDateInput.nativeElement.focus();
       }
     }
     this.dateChanged.emit();
   }
 
-  public onChangeOrKeyUpDateMois(): void {
+  public onChangeOrKeyUpDateMois(event): void {
     if (this.dateSaisie.mois && this.dateSaisie.mois.length === 2) {
       this.dateUtileService.checkFormatDate(this.dateSaisie);
       this.dateUtileService.checkDateDecomposeAfterDateJour(this.dateSaisie);
-      if (!this.dateSaisie.isMoisInvalide) {
+      if (!this.dateSaisie.isMoisInvalide && event.keyCode != 9 && event.keyCode != 16) {
         this.anneeDateInput.nativeElement.focus();
       }
     }

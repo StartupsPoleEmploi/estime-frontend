@@ -1,26 +1,33 @@
 .img-interrogation-icon {
   display: inline-block;
-  width: 3rem;
-  height: 3rem;
   border: 0;
   cursor: pointer;
   background-color: unset;
   padding:0rem;
+  height: 1.4375rem;
+  vertical-align: middle;
 
   img {
     width: 1.4375rem;
+    vertical-align: unset;
   }
 
   &:focus {
-    border:unset;
+    background-color: $color-pe-red;
+    border-radius: 100%;
+    border-color: $color-pe-red;
+    outline-color: $color-pe-red;
+
     img {
-      width: 1.5rem;
+      background-color: $color-pe-red;
+      border-radius: 100%;
     }
   }
 
   &:hover {
     img {
-      width: 1.5rem;
+      background-color: $color-pe-red;
+      border-radius: 100%;
     }
   }
 }

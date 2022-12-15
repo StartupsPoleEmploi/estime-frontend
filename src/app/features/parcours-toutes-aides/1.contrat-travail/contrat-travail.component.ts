@@ -106,7 +106,6 @@ export class ContratTravailComponent implements OnInit {
       this.isSalaireSouhaiteSMIC = this.futurTravail.salaireSouhaiteSMIC;
       this.isSalaireSouhaiteAutre = this.futurTravail.salaireSouhaiteAutre;
       this.loadDataDistanceDomicileTravail();
-      this.loadDataNombreAllersRetours();
     } else {
       this.futurTravail = new FuturTravail();
       this.futurTravail.nombreMoisContratCDD = null;
@@ -117,6 +116,7 @@ export class ContratTravailComponent implements OnInit {
       this.futurTravail.salaire.montantHoraireNet = null;
       this.futurTravail.hasOffreEmploiEnVue = null;
     }
+    this.loadDataNombreAllersRetours();
   }
 
   private loadDataDistanceDomicileTravail() {
@@ -514,7 +514,8 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public afficherNombreTrajetsDomicileTravail(): boolean {
-    return this.futurTravail.distanceKmDomicileTravail >= ContratTravailComponent.DISTANCE_MINI_AIDE_MOB;
+    return (this.hasOffreEmploiOui || this.hasOffreEmploiNon) &&
+      this.futurTravail.distanceKmDomicileTravail >= ContratTravailComponent.DISTANCE_MINI_AIDE_MOB;
   }
 
   public unsetNombreMoisContrat(): void {
@@ -722,6 +723,18 @@ export class ContratTravailComponent implements OnInit {
       && this.futurTravail.distanceKmDomicileTravail == null);
   }
 
+  public isChampsNombreTrajetsSemaineInvalides(): boolean {
+    return (this.isFuturTravailFormSubmitted
+      && (
+        !this.isNombreTrajets1JourSemaine
+        && !this.isNombreTrajets2JoursSemaine
+        && !this.isNombreTrajets3JoursSemaine
+        && !this.isNombreTrajets4JoursSemaine
+        && !this.isNombreTrajets5JoursSemaine
+      )
+    )
+  }
+
   public isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet) {
     return this.isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)
       || this.isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)
@@ -729,10 +742,19 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
-    return ((this.isFuturTravailFormSubmitted || salaireMensuelBrut?.touched) && this.futurTravail.salaire.montantMensuelBrut == null)
-      && ((this.isFuturTravailFormSubmitted || salaireHoraireBrut?.touched) && this.futurTravail.salaire.montantHoraireBrut == null)
-      && ((this.isFuturTravailFormSubmitted || salaireMensuelNet?.touched) && this.futurTravail.salaire.montantMensuelNet == null)
-      && ((this.isFuturTravailFormSubmitted || salaireHoraireNet?.touched) && this.futurTravail.salaire.montantHoraireNet == null)
+    return (this.isFuturTravailFormSubmitted ||
+      (
+        salaireMensuelBrut?.touched
+        || salaireHoraireBrut?.touched
+        || salaireMensuelNet?.touched
+        || salaireHoraireNet?.touched
+      ) && (
+        this.futurTravail.salaire.montantMensuelBrut == null
+        || this.futurTravail.salaire.montantHoraireBrut == null
+        || this.futurTravail.salaire.montantMensuelNet == null
+        || this.futurTravail.salaire.montantHoraireNet == null
+      )
+    );
   }
 
   public isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
