@@ -5,6 +5,7 @@
       class="etape" [aria-label]="'Étape '+etapeSimulation.numero">
       <div (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)" (mouseleave)="onMouseLeaveEtape()"
         (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)" role="button"
+        [attr.tabindex]="(etapeActive >= etapeSimulation.numero)?'0':''"
         [ngStyle]="{'cursor':(etapeActive >= etapeSimulation.numero)?'pointer':'not-allowed'}"
         [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}">
         <div class="numero-etape">
