@@ -127,6 +127,7 @@
       .titre-etape {
         color: $color-pe-red;
         opacity: unset;
+        font-weight: bold !important;
       }
 
       &:not(:first-child)::after {

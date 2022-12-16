@@ -76,4 +76,11 @@ export class FilEtapesDesktopComponent implements OnInit {
       }
     }
   }
+
+  public handleKeyUpOnEtape(event, etapeActive: number, numeroEtape: number): void {
+    if (event.keyCode === 13) {
+      this.onClickButtonEtape(etapeActive, numeroEtape);
+    }
+  }
+
 }

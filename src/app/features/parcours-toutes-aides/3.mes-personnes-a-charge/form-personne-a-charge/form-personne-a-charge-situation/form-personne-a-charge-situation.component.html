@@ -4,7 +4,7 @@
             * Cette personne perçoit
         </label>
     </div>
-    <div class="row situations">
+    <div class="row situations pb-3">
         <button name="salarie" class="radio-button-style-1"
             [(ngModel)]="nouvellePersonneACharge.informationsPersonnelles.isSalarie" btnCheckbox tabindex="0"
             #salarie="ngModel" (click)="onClickCheckBoxIsSalarie($event)"
@@ -80,13 +80,5 @@
             (keyup)="handleKeyUpOnButtonSituation($event, situationPersonneEnum.SANS_RESSOURCE)">
             <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
         </button>
-    </div>
-    <div class="row pb-3 situations">
-        <div class="col-12">
-            <span class="error-input-message" role="alert"
-                *ngIf="isNouvellePersonnesAChargeFormSubmitted && isSituationNotValide">
-                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-            </span>
-        </div>
     </div>
 </div>

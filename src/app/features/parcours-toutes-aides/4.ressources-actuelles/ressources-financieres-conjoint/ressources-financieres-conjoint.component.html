@@ -10,7 +10,9 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="conjointSalaireNet" name="salaireNet" data-testid="input-salaire-conjoint" type="text"
+                    <input id="conjointSalaireNet" name="salaireNet"
+                        aria-label="Montant du salaire ent mensuel de votre conjoint"
+                        data-testid="input-salaire-conjoint" type="text"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="6" class="form-control d-inline"
@@ -119,6 +121,7 @@
                                         <input
                                             id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
                                             name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
+                                            attr.aria-label="Montant du salaire mensuelle de {{ optionNombreMoisTravailles.label }} de votre conjoint"
                                             attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-conjoint"
                                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
@@ -164,7 +167,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE" type="text"
+                        <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE"
+                            aria-label="Montant de l'ARE mensuelle de votre conjoint" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -203,7 +207,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS" type="text"
+                        <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS"
+                            aria-label="Montant de l'ASS mensuelle de votre conjoint" type="text" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -248,7 +253,8 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH" type="text"
+                        <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH"
+                            aria-label="Montant de l'AAH mensuelle de votre conjoint" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -294,6 +300,7 @@
                 <div class="row">
                     <div class="col">
                         <input id="conjointPensionInvalidite" name="pensionInvalidite" type="text"
+                            aria-label="Montant de la pension d'invalidité de votre conjoint"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -334,6 +341,7 @@
                     <div class="col">
                         <input id="conjointBeneficesMicroEntrepriseDernierExercice"
                             name="conjointBeneficesMicroEntrepriseDernierExercice"
+                            aria-label="Montant des bénéfices de la micro-entreprise de votre conjoint"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -375,6 +383,7 @@
                     <div class="col">
                         <input id="conjointChiffreAffairesIndependantDernierExercice"
                             name="conjointChiffreAffairesIndependantDernierExercice"
+                            aria-label="Montant du chiffre d'affaires en tant qu'indépendant de votre conjoint"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -415,6 +424,7 @@
                 <div class="row">
                     <div class="col">
                         <input id="conjointPensionRetraite" name="conjointPensionRetraite"
+                            aria-label="Montant de la pension retraite de votre conjoint"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -460,6 +470,7 @@
                 <div class="row">
                     <div class="col">
                         <input id="conjointRevenusImmobilier" name="conjointRevenusImmobilier"
+                            aria-label="Montant des revenus immobiliers de votre conjoint"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
