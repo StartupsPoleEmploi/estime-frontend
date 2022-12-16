@@ -20,7 +20,7 @@
                 <div class="row">
                     <div class="col">
                         <input
-                            attr.aria-label="Salaire perçu par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="Salaire perçu par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             [name]="'salaireNetPersonneACharge'+personneDTO.index + 1"
                             [id]="'salaireNetPersonneACharge'+personneDTO.index + 1" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
@@ -136,6 +136,7 @@
                                         <input
                                             id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
                                             name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
+                                            attr.aria-label="Montant du salaire net perçu au mois de {{ optionNombreMoisTravailles.label }} par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                                             attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-personne-a-charge-{{personneDTO.index + 1}}"
                                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
@@ -183,7 +184,7 @@
                 <div class="row">
                     <div class="col">
                         <input
-                            attr.aria-label="ARE (Allocation Retour Emploi) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="ARE (Allocation Retour Emploi) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             [id]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1"
                             [name]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1" type="text"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
@@ -226,7 +227,7 @@
                     <div class="col">
                         <input [name]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
                             [id]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
-                            attr.aria-label="ASS (Allocation Solidarité Spécifique)) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="ASS (Allocation Solidarité Spécifique)) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -273,7 +274,7 @@
                     <div class="col">
                         <input [name]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
                             [id]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
-                            attr.aria-label="AAH (Allocation Adulte Handicapé) perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="AAH (Allocation Adulte Handicapé) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -321,7 +322,7 @@
                     <div class="col">
                         <input [name]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
                             [id]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
-                            attr.aria-label="Pension d'invalidité perçue par personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="Pension d'invalidité perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="6" class="form-control d-inline"
@@ -363,7 +364,7 @@
                     <div class="col">
                         <input [name]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
                             [id]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
-                            attr.aria-label="Chiffre d'affaires net total 3 derniers mois en tant que micro entrepreneur pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="Montant des bénéfices sur le dernier exercice en tant que micro entrepreneur pour personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -408,7 +409,7 @@
                     <div class="col">
                         <input [name]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
                             [id]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
-                            attr.aria-label="Bénéfices de l'année dernière en tant qu'indépendant pour personne {{personneDTO.index + 1}} ({{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
+                            attr.aria-label="Bénéfices de l'année dernière en tant qu'indépendant pour personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                             maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"

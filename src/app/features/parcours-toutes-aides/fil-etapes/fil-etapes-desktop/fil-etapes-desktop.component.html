@@ -4,7 +4,8 @@
       [ngClass]="{'etape-active': etapeActive === etapeSimulation.numero, 'etape-completee': etapeActive > etapeSimulation.numero, 'etape-a-completer': etapeActive < etapeSimulation.numero}"
       class="etape" [aria-label]="'Étape '+etapeSimulation.numero">
       <div (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)" (mouseleave)="onMouseLeaveEtape()"
-        (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)" role="button"
+        (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)"
+        (keyup)="handleKeyUpOnEtape($event, etapeActive, etapeSimulation.numero)" role="button"
         [attr.tabindex]="(etapeActive >= etapeSimulation.numero)?'0':''"
         [ngStyle]="{'cursor':(etapeActive >= etapeSimulation.numero)?'pointer':'not-allowed'}"
         [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}">

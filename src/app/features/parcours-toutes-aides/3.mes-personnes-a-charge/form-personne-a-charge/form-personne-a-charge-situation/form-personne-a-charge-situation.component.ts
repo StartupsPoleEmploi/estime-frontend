@@ -20,7 +20,6 @@ export class FormPersonneAChargeSituationComponent {
   @Input() nouvellePersonneACharge: Personne;
   @Input() isNouvellePersonnesAChargeFormSubmitted: boolean;
   @Input() dateNaissanceNouvellePersonne: DateDecomposee;
-  @Input() isSituationNotValide: boolean;
   beneficiaireAides: BeneficiaireAides;
 
   situationPersonneEnum: typeof SituationPersonneEnum = SituationPersonneEnum;

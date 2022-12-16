@@ -13,7 +13,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-allocation-journaliere-net-ass" name="allocationJournaliereNetASS" type="text"
+                    <input id="input-allocation-journaliere-net-ass" name="allocationJournaliereNetASS"
+                        aria-label="Montant de votre ASS journalière nette" type="text"
                         data-testid="input-allocation-journaliere-net-ass"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -85,7 +86,8 @@
             <div class="row">
                 <div class="col">
                     <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut"
-                        type="text" data-testid="input-salaire-journalier-reference-are"
+                        aria-label="Montant de votre salaire journalier de référence ARE" type="text"
+                        data-testid="input-salaire-journalier-reference-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="6" class="form-control d-inline"
@@ -130,7 +132,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-nombre-jours-restants" name="nombreJoursRestants" type="text"
+                    <input id="input-nombre-jours-restants" name="nombreJoursRestants"
+                        aria-label="Nombre de jours restants ARE" type="text"
                         data-testid="input-nombre-jours-restants-are"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
@@ -275,7 +278,8 @@
             <div class="row">
                 <div class="col">
                     <input id="input-montant-journalier-brut-taux-plein" name="allocationJournaliereBruteTauxPlein"
-                        type="text" data-testid="input-montant-allocation-journaliere-brut-taux-plein-are"
+                        aria-label="Montant de votre allocation journalière brute taux plein ARE" type="text"
+                        data-testid="input-montant-allocation-journaliere-brut-taux-plein-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
                         maxlength="6" class="form-control d-inline"
@@ -323,7 +327,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-montant-journalier-brut" name="allocationJournaliereBrute" type="text"
+                    <input id="input-montant-journalier-brut" name="allocationJournaliereBrute"
+                        aria-label="Montant de votre allocation journalière brute ARE" type="text"
                         data-testid="input-montant-allocation-journaliere-brut-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)" min="0"
@@ -369,8 +374,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="allocationRSA" name="allocationRSA" type="text"
-                        data-testid="input-allocation-mensuelle-net-rsa"
+                    <input id="allocationRSA" name="allocationRSA" aria-label="Montant de votre allocation RSA"
+                        type="text" data-testid="input-allocation-mensuelle-net-rsa"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="8" class="form-control d-inline"
@@ -414,7 +419,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="allocationAAH" name="allocationAAH" data-testid="input-allocation-mensuelle-aah"
+                    <input id="allocationAAH" name="allocationAAH" aria-label="Montant de votre allocation AAH"
+                        data-testid="input-allocation-mensuelle-aah"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0"
@@ -460,6 +466,7 @@
                 </label>
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
+                        aria-label="Date de votre prochaine déclaration trimestrielle"
                         data-testid="select-prochaine-declaration-trimestrielle"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle"
                         class="fit-content form-select"
@@ -500,6 +507,7 @@
             <div class="row">
                 <div class="col">
                     <input id="pensionInvalidite" name="pensionInvalidite"
+                        aria-label="Montant de votre pension d'invalidité"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
@@ -605,6 +613,7 @@
                                 <div class="col">
                                     <input [id]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"
                                         [name]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'"
+                                        attr.aria-label="Montant de votre salaire net perçu en {{ optionNombreMoisTravailles.label }}"
                                         attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation"
                                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                                         (change)="checkChangePensionInvaliditeEtSalaire(ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet)"
@@ -646,29 +655,40 @@
                     Type de bénéfices
                 </label>
             </div>
-            <div class="row pb-3">
+            <div class="row">
                 <div class="col">
                     <button id="btn-types-benefices-bic" #BIC="ngModel" (click)="onClickCheckBoxIsBIC($event)"
-                        name="BIC" aria-label="Vous percevez des bénéfices de type BIC"
-                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
-                        data-testid="btn-types-benefices-bic" btnCheckbox tabindex="0" [(ngModel)]="isBIC"
-                        (keyup)="handleKeyUpOnButtonIsBIC($event)">
+                        name="BIC" aria-label="Vous percevez des bénéfices de type BIC" aria-required="true"
+                        [attr.aria-invalid]="(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen(), 'ng-invalid':(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)}"
+                        class="radio-button-style-1" data-testid="btn-types-benefices-bic" btnCheckbox tabindex="0"
+                        [(ngModel)]="isBIC" (keyup)="handleKeyUpOnButtonIsBIC($event)">
                         <span class="body-2-typo">{{libellesTypesBeneficesEnum.BIC}}</span>
                     </button>
                     <button id="btn-types-benefices-bnc" #BNC="ngModel" (click)="onClickCheckBoxIsBNC($event)"
-                        name="BNC" aria-label="Vous percevez des bénéfices de type BNC"
-                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
-                        data-testid="btn-types-benefices-bnc" btnCheckbox tabindex="0" [(ngModel)]="isBNC"
-                        (keyup)="handleKeyUpOnButtonIsBNC($event)">
+                        name="BNC" aria-label="Vous percevez des bénéfices de type BNC" aria-required="true"
+                        [attr.aria-invalid]="(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen(), 'ng-invalid':(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)}"
+                        class="radio-button-style-1" data-testid="btn-types-benefices-bnc" btnCheckbox tabindex="0"
+                        [(ngModel)]="isBNC" (keyup)="handleKeyUpOnButtonIsBNC($event)">
                         <span class="body-2-typo">{{libellesTypesBeneficesEnum.BNC}}</span>
                     </button>
                     <button id="btn-types-benefices-ar" #AR="ngModel" (click)="onClickCheckBoxIsAR($event)" name="AR"
-                        aria-label="Vous percevez des bénéfices de type AR"
-                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}" class="radio-button-style-1"
-                        data-testid="btn-types-benefices-ar" btnCheckbox tabindex="0" [(ngModel)]="isAR"
-                        (keyup)="handleKeyUpOnButtonIsAR($event)">
+                        aria-label="Vous percevez des bénéfices de type AR" aria-required="true"
+                        [attr.aria-invalid]="(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)"
+                        [ngClass]="{'ms-1':!screenService.isExtraSmallScreen(), 'ng-invalid':(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)}"
+                        class="radio-button-style-1" data-testid="btn-types-benefices-ar" btnCheckbox tabindex="0"
+                        [(ngModel)]="isAR" (keyup)="handleKeyUpOnButtonIsAR($event)">
                         <span class="body-2-typo">{{libellesTypesBeneficesEnum.AR}}</span>
                     </button>
+                </div>
+            </div>
+            <div class="row pb-3">
+                <div class="col-12">
+                    <span class="error-input-message" role="alert"
+                        *ngIf="(isRessourcesFinancieresFormSubmitted) && (!isBIC && !isBNC && !isAR)">
+                        {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
+                    </span>
                 </div>
             </div>
         </div>
@@ -688,6 +708,7 @@
             <div class="row">
                 <div class="col">
                     <input id="chiffreAffairesMicroEntrepriseNMoins2" name="chiffreAffairesMicroEntrepriseNMoins2"
+                        attr.aria-label="Montant du chiffre d'affaires de votre micro entreprise en {{dateUtileService.getLibelleAnneeDepuisXAnnee(2)}}"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -724,6 +745,7 @@
             <div class="row">
                 <div class="col">
                     <input id="chiffreAffairesMicroEntrepriseNMoins1" name="chiffreAffairesMicroEntrepriseNMoins1"
+                        attr.aria-label="Montant du chiffre d'affaires de votre micro entreprise en {{dateUtileService.getLibelleAnneeDepuisXAnnee(1)}}"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -759,6 +781,7 @@
             <div class="row">
                 <div class="col">
                     <input id="chiffreAffairesMicroEntrepriseN" name="chiffreAffairesMicroEntreprise"
+                        attr.aria-label="Montant du chiffre d'affaires de votre micro entreprise en {{dateUtileService.getAnneeActuelle()}}"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"
@@ -772,8 +795,7 @@
             <div class="row pb-3">
                 <div class="col-12">
                     <span class="error-input-message" role="alert"
-                        *ngIf="(isRessourcesFinancieresFormSubmitted)
-                        || (chiffreAffairesMicroEntrepriseN?.touched  && chiffreAffairesMicroEntrepriseN?.errors?.required)">
+                        *ngIf="((isRessourcesFinancieresFormSubmitted || chiffreAffairesMicroEntrepriseN?.touched) && chiffreAffairesMicroEntrepriseN?.errors?.required)">
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
@@ -793,6 +815,7 @@
             <div class="row">
                 <div class="col">
                     <input id="revenusImmobilier" name="revenusImmobilier"
+                        aria-label="Montant de vos revenus immobiliers"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         maxlength="6" min="0" class="max-with-input-type-montant form-control d-inline"

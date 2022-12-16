@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col">
                         <input id="primeActivite" name="primeActivite" type="text"
-                            data-testid="input-montant-prime-activite"
+                            aria-label="Montant de votre prime d'activité" data-testid="input-montant-prime-activite"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                             maxlength="8" class="form-control d-inline"
@@ -105,6 +105,7 @@
                 <div class="row">
                     <div class="col">
                         <input id="allocationRSA" name="allocationRSA" type="text"
+                            aria-label="Montant de votre allocation RSA"
                             data-testid="input-allocation-mensuelle-net-rsa-foyer"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
@@ -145,8 +146,10 @@
                 <div class="row">
                     <div class="col">
                         <button id="btn-situation-locataire-non-meuble" name="isLocataireNonMeuble"
-                            aria-label="Vous êtes locataire d'un logement non meublé" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-non-meuble"
+                            aria-label="Vous êtes locataire d'un logement non meublé" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-locataire-non-meuble"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble"
                             btnCheckbox tabindex="0" #isLocataireNonMeuble="ngModel"
                             (click)="onClickCheckBoxIsLocataireNonMeuble($event)"
@@ -154,8 +157,10 @@
                             <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_VIDE}}</span>
                         </button>
                         <button id="btn-situation-locataire-meuble" name="isLocataireMeuble"
-                            aria-label="Vous êtes locataire d'un logement meublé" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-meuble"
+                            aria-label="Vous êtes locataire d'un logement meublé" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-locataire-meuble"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble"
                             btnCheckbox tabindex="0" #isLocataireMeuble="ngModel"
                             (click)="onClickCheckBoxIsLocataireMeuble($event)"
@@ -163,8 +168,10 @@
                             <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_MEUBLE}}</span>
                         </button>
                         <button id="btn-situation-locataire-hlm" name="isLocataireHLM"
-                            aria-label="Vous êtes locataire d'un HLM" class="radio-button-style-1"
-                            data-testid="btn-situation-locataire-hlm"
+                            aria-label="Vous êtes locataire d'un HLM" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-locataire-hlm"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM"
                             btnCheckbox tabindex="0" #isLocataireHLM="ngModel"
                             (click)="onClickCheckBoxIsLocataireHLM($event)"
@@ -172,8 +179,10 @@
                             <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.LOCATAIRE_HLM}}</span>
                         </button>
                         <button id="btn-situation-proprietaire-avec-emprunt" name="isProprietaireAvecEmprunt"
-                            aria-label="Vous êtes propriétaire avec emprunt" class="radio-button-style-1"
-                            data-testid="btn-situation-proprietaire-avec-emprunt"
+                            aria-label="Vous êtes propriétaire avec emprunt" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-proprietaire-avec-emprunt"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt"
                             btnCheckbox tabindex="0" #isProprietaireAvecEmprunt="ngModel"
                             (click)="onClickCheckBoxIsProprietaireAvecEmprunt($event)"
@@ -182,8 +191,10 @@
                                 class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE_AVEC_EMPRUNT}}</span>
                         </button>
                         <button id="btn-situation-proprietaire" name="isProprietaire"
-                            aria-label="Vous êtes propriétaire sans emprunt" class="radio-button-style-1"
-                            data-testid="btn-situation-proprietaire"
+                            aria-label="Vous êtes propriétaire sans emprunt" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-proprietaire"
                             [(ngModel)]="this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire"
                             btnCheckbox tabindex="0" #isProprietaire="ngModel"
                             (click)="onClickCheckBoxIsProprietaire($event)"
@@ -191,8 +202,10 @@
                             <span class="body-2-typo">{{statutOccupationLogementLibelleEnum.PROPRIETAIRE}}</span>
                         </button>
                         <button id="btn-situation-loge-gratuitement" name="isLogeGratuitement"
-                            aria-label="Vous êtes logé à titre gratuit" class="radio-button-style-1"
-                            data-testid="btn-situation-loge-gratuitement"
+                            aria-label="Vous êtes logé à titre gratuit" aria-required="true"
+                            [attr.aria-invalid]="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()"
+                            [ngClass]="{'ng-invalid':isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()}"
+                            class="radio-button-style-1" data-testid="btn-situation-loge-gratuitement"
                             [(ngModel)]="informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement"
                             btnCheckbox tabindex="0" #isLogeGratuitement="ngModel"
                             (click)="onClickCheckBoxIsLogeGratuitement($event)"
@@ -216,7 +229,7 @@
                         * Votre logement est :
                     </label>
                 </div>
-                <div class="row">
+                <div class="row pb-3">
                     <div class="col">
                         <button id="btn-situation-logement-crous" name="isCrous"
                             aria-label="Votre logement est un logement CROUS" class="radio-button-style-1"
@@ -257,14 +270,6 @@
                             (click)="onClickCheckBoxIsAucunCas($event)" (keyup)="handleKeyUpOnButtonIsAucunCas($event)">
                             <span class="body-2-typo">Aucun de ces cas</span>
                         </button>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message" role="alert"
-                            *ngIf="isRessourcesFinancieresFoyerFormSubmitted  && !isStatutOccupationLogementSelectionne()">
-                            {{controleChampFormulaireService.MESSAGE_SELECTION_AU_MOINS_UN_STATUT_OCCUPATION_LOGEMENT}}
-                        </span>
                     </div>
                 </div>
             </div>
@@ -450,8 +455,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="montantLoyer" name="montantLoyer" type="text" data-testid="input-montant-loyer"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                    <input id="montantLoyer" name="montantLoyer" aria-label="Montant de votre loyer" type="text"
+                        data-testid="input-montant-loyer" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="8" class="form-control d-inline" (click)="$event.target.select()"
                         [ngClass]="{'ng-invalid': this.informationsPersonnelles.logement.montantLoyer && this.informationsPersonnelles.logement.montantLoyer == 0}"
@@ -494,6 +499,7 @@
                 </label>
                 <div class="col">
                     <select id="prochaineDeclarationTrimestrielle" name="prochaineDeclarationTrimestrielle"
+                        aria-label="La date de votre prochaine déclaration trimestrielle"
                         data-testid="select-prochaine-declaration-rsa-foyer"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesCAF.prochaineDeclarationTrimestrielle"
                         class="fit-content form-select"
@@ -527,7 +533,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="montantAllocationsFamiliales" attr.aria-label="Allocations familiales du mois dernier"
+                    <input id="montantAllocationsFamiliales" aria-label="Allocations familiales du mois dernier"
                         name="montantAllocationsFamiliales" data-testid="input-af"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
@@ -562,7 +568,7 @@
             <div class="row">
                 <div class="col">
                     <input id="montantAllocationSoutienFamiliale"
-                        attr.aria-label="Allocation de soutien familiale du mois dernier"
+                        aria-label="Montant de votre allocation de soutien familiale du mois dernier"
                         name="montantAllocationSoutienFamiliale" data-testid="input-asf"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
@@ -597,7 +603,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="montantComplementFamilial" attr.aria-label="Complément familial du mois dernier"
+                    <input id="montantComplementFamilial"
+                        aria-label="Montant de votre complément familial du mois dernier"
                         name="montantComplementFamilial" data-testid="input-cf"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
@@ -632,6 +639,7 @@
             <div class="row">
                 <div class="col">
                     <input id="montantPAJEFoyer" name="montantPAJEFoyer"
+                        aria-label="Montant de votre prestation d'accueil pour jeune enfant"
                         data-testid="input-prestation-accueil-jeune-enfant"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
@@ -667,6 +675,7 @@
             <div class="row">
                 <div class="col">
                     <input id="montantPersionsAlimentairesFoyer" name="montantPersionsAlimentairesFoyer"
+                        aria-label="Montant de votre pension alimentaire perçue"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
                         min="0" maxlength="6" class="max-with-input-type-montant form-control d-inline"

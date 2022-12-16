@@ -214,15 +214,14 @@ export class MaSituationComponent implements OnInit {
 
   public onSubmitInformationsPersonnellesForm(form: UntypedFormGroup): void {
     this.isInformationsPersonnellesFormSubmitted = true;
-    this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
     if (this.isDonneesSaisiesFormulaireValides(form)) {
-      if (this.isAllocationDEntreeSelectionnee()) {
-        this.getCodeInseeFromCodePostal();
-        this.setInfosMicroEntreprise();
-        this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
-        this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
-        this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.PERSONNES_A_CHARGE]);
-      }
+      this.checkAndSaveDateNaissanceDemandeurEmploiConnecte();
+      this.getCodeInseeFromCodePostal();
+      this.setInfosMicroEntreprise();
+      this.deConnecteService.setBeneficiaireAides(this.beneficiaireAides);
+      this.deConnecteService.setInformationsPersonnelles(this.informationsPersonnelles);
+      this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.PERSONNES_A_CHARGE]);
+
     } else {
       this.controleChampFormulaireService.focusOnFirstInvalidElement();
     }
@@ -252,17 +251,6 @@ export class MaSituationComponent implements OnInit {
     if (nationalite !== NationalitesEnum.AUTRE) {
       this.informationsPersonnelles.hasTitreSejourEnFranceValide = null;
     }
-  }
-
-  public isAllocationDEntreeSelectionnee(): boolean {
-    return (this.beneficiaireAides.beneficiaireASS
-      || this.beneficiaireAides.beneficiaireRSA
-      || this.beneficiaireAides.beneficiaireAAH
-      || this.beneficiaireAides.beneficiaireARE
-      || this.beneficiaireAides.beneficiairePensionInvalidite
-      || this.isSansRessource
-      || this.informationsPersonnelles.isMicroEntrepreneur
-      || this.informationsPersonnelles.isSalarie);
   }
 
   public isConcerneACRE(): boolean {
@@ -402,21 +390,6 @@ export class MaSituationComponent implements OnInit {
 
   /************ est en couple, gestion situation conjoint *******************************/
 
-  public isSituationConjointValide(): boolean {
-    return this.situationFamiliale.conjoint
-      && (this.situationFamiliale.conjoint.informationsPersonnelles.isSalarie
-        || this.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource
-        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH
-        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE
-        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS
-        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA
-        || this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite
-        || this.situationFamiliale.conjoint.informationsPersonnelles.isTravailleurIndependant
-        || this.situationFamiliale.conjoint.informationsPersonnelles.isMicroEntrepreneur
-        || this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier
-        || this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite);
-  }
-
   public onClickCheckBoxConjointHasAAH(): void {
     if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetConjointAllocationAAH();
@@ -532,11 +505,10 @@ export class MaSituationComponent implements OnInit {
   }
 
   private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
-    this.isSituationConjointNotValide = !this.isSituationConjointValide();
+    console.log(form.valid)
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissance)
-      && (!this.situationFamiliale.isEnCouple
-        || this.situationFamiliale.isEnCouple && !this.isSituationConjointNotValide)
+      && !this.isChampsInvalides()
       && !this.checkSiAREEtMicro()
       && !this.checkSiAAHEtMicro()
       && !this.checkSiPensionInvaliditeEtMicro()
@@ -590,5 +562,43 @@ export class MaSituationComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  // Gestion des champs de formulaire
+
+  public isChampsInvalides(): boolean {
+    return this.isChampBeneficiaireACREInvalide()
+      || this.isChampSituationFamilialeInvalide()
+      || this.isChampTitreSejourInvalide()
+      || this.isChampCodePostalInvalide()
+      || this.isChampNationaliteInvalide();
+  }
+
+  public isChampCodePostalInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted && this.informationsPersonnelles.logement.coordonnees.codePostal == null;
+  }
+
+  public isChampNationaliteInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted && this.informationsPersonnelles.nationalite == null;
+  }
+
+  public isChampTitreSejourInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted && this.informationsPersonnelles.nationalite === this.nationalitesEnum.AUTRE && this.informationsPersonnelles.hasTitreSejourEnFranceValide == null;
+  }
+
+  public isChampBeneficiaireACREInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted &&
+      (this.isConcerneACRE() && this.informationsPersonnelles.isBeneficiaireACRE == null);
+  }
+
+  public isChampSituationFamilialeInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted &&
+      this.situationFamiliale.isEnCouple == null;
+  }
+
+  public isChampSeulDepuisPlusDe18MoisInvalide(): boolean {
+    return this.isInformationsPersonnellesFormSubmitted
+      && (this.situationFamiliale.isEnCouple === false && this.beneficiaireAides.beneficiaireRSA === true)
+      && (this.situationFamiliale.isSeulPlusDe18Mois === null);
   }
 }

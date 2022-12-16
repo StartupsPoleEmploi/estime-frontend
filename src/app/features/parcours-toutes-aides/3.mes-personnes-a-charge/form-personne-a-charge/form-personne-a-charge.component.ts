@@ -21,7 +21,6 @@ export class FormPersonneAChargeComponent implements OnInit {
 
   isNouvellePersonneAChargeSituationFormGroupDisplay = false;
   isNouvellePersonnesAChargeFormSubmitted = false;
-  isSituationNotValide = false;
 
   @Input() dateNaissanceNouvellePersonne: DateDecomposee;
   @Input() isModeModification: boolean;
@@ -100,25 +99,10 @@ export class FormPersonneAChargeComponent implements OnInit {
   }
 
   private isDonneesFormulaireNouvellePersonneValides(form: UntypedFormGroup): boolean {
-    this.isSituationNotValide = !this.isSituationValide();
     return form.valid
       && this.dateUtileService.isDateDecomposeeSaisieAvecInferieurDateJourValide(this.dateNaissanceNouvellePersonne)
-      && (!this.isNouvellePersonneAChargeSituationFormGroupDisplay
-        || (this.isNouvellePersonneAChargeSituationFormGroupDisplay && !this.isSituationNotValide))
   }
 
-  private isSituationValide(): boolean {
-    return this.nouvellePersonneACharge.informationsPersonnelles.isSalarie
-      || this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource
-      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH
-      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE
-      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS
-      || this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA
-      || this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite
-      || this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant
-      || this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur
-      || this.nouvellePersonneACharge.informationsPersonnelles.hasPensionRetraite;
-  }
 
   private unsetRessourcesFinancieres(): void {
     if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation) {

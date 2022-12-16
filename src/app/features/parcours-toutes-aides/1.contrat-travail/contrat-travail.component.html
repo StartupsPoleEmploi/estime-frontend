@@ -491,7 +491,7 @@
                                                 (keyup)="salaireService.calculSalaireFromMensuelNet(futurTravail)"
                                                 maxlength="6" class="form-control d-inline" placeholder="Montant"
                                                 [(ngModel)]="futurTravail.salaire.montantMensuelNet"
-                                                [ngClass]="{'ng-invalid':isChampSalaireSouhaiteInvalide(salaireMensuelNet), 'd-none': typeSalaireDisplay == 'brut'}"
+                                                [ngClass]="{'ng-invalid':isChampSalaireSouhaiteInvalide(salaireMensuelNet)}"
                                                 inputmode="decimal" #salaireMensuelNet="ngModel">
                                             <span class="text-side-input d-inline body-2-typo">€ net</span>
                                         </div>
