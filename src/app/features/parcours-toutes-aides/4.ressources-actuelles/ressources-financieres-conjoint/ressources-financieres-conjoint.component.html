@@ -45,12 +45,12 @@
         </div>
         <div>
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                <p class="label headline-4-typo">
                     * A-t-il/elle travaillé en tant que salarié au cours des
                     {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                     derniers
                     mois ?
-                </label>
+                </p>
             </div>
             <div class="row">
                 <div class="col">
@@ -97,13 +97,13 @@
             <div *ngIf="isAfficherChampsSalairesConjoint();">
                 <div>
                     <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                        <p class="label headline-4-typo">
                             Indiquez le montant des salaires de
                             {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                             {{optionsNombreMoisTravailles[0].label}}.
                             <br>
                             <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
-                        </label>
+                        </p>
                     </div>
                     <div class="row">
                         <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
@@ -458,7 +458,7 @@
             </div>
             <div *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
                 <div class="row pb-3">
-                    <label class="label headline-4-typo" for="revenusImmobilierFoyer">
+                    <label class="label headline-4-typo" for="conjointRevenusImmobilier">
                         * Revenus annuels de placement ou du patrimoine
                         <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"

@@ -2,7 +2,7 @@
     <form [ngClass]="{'submitted':isRessourcesFinancieresFormSubmitted}" #vosRessourcesFinancieresForm="ngForm">
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-allocation-journaliere-net-ass">
+                <label class="label headline-4-typo" for="allocationJournaliereNetASS">
                     * Montant de votre allocation journalière ASS
                     <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_allocation_ass" aria-label="Où trouver le montant de votre ASS ?"
@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-allocation-journaliere-net-ass" name="allocationJournaliereNetASS"
+                    <input id="allocationJournaliereNetASS" name="allocationJournaliereNetASS"
                         aria-label="Montant de votre ASS journalière nette" type="text"
                         data-testid="input-allocation-journaliere-net-ass"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -54,14 +54,14 @@
         </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireASS()">
             <div class="row pb-3">
-                <label class="label headline-4-typo">
+                <p class="label headline-4-typo">
                     * Date de votre ouverture de droits à l'ASS
                     <button id="infobulle-date-ouverture-ass" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_allocation_ass" aria-label="Où trouver votre date d'ouverture ASS ?"
                         (click)="modalService.openModalOnEvent($event, modalDateOuvertureASSTemplate)">
                         <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
-                </label>
+                </p>
             </div>
             <div class="row pb-3">
                 <div class="col">
@@ -73,7 +73,7 @@
         </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-salaire-journalier-reference-brut">
+                <label class="label headline-4-typo" for="salaireJournalierReferenceBrut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
                     <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
@@ -85,7 +85,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-salaire-journalier-reference-brut" name="salaireJournalierReferenceBrut"
+                    <input id="salaireJournalierReferenceBrut" name="salaireJournalierReferenceBrut"
                         aria-label="Montant de votre salaire journalier de référence ARE" type="text"
                         data-testid="input-salaire-journalier-reference-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -120,7 +120,7 @@
         </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-nombre-jours-restants">
+                <label class="label headline-4-typo" for="nombreJoursRestants">
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
                     <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_obtenir_ressources_are"
@@ -132,9 +132,8 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-nombre-jours-restants" name="nombreJoursRestants"
-                        aria-label="Nombre de jours restants ARE" type="text"
-                        data-testid="input-nombre-jours-restants-are"
+                    <input id="nombreJoursRestants" name="nombreJoursRestants" aria-label="Nombre de jours restants ARE"
+                        type="text" data-testid="input-nombre-jours-restants-are"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
                         maxlength="5" class="form-control d-inline"
@@ -167,7 +166,7 @@
         </div>
         <div *ngIf="afficherQuestionDegressiviteAre()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                <p class="label headline-4-typo">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
                     <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_degressivite_are"
@@ -175,7 +174,7 @@
                         (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
                         <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
-                </label>
+                </p>
             </div>
             <div class="row">
                 <div class="col">
@@ -217,7 +216,7 @@
         </div>
         <div *ngIf="afficherQuestionTypeTauxDegressiviteAre()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                <p class="label headline-4-typo">
                     * Je souhaite simuler le montant de mon allocation en cas de reprise d'emploi en :
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
@@ -225,7 +224,7 @@
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate)">
                         <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                     </button>
-                </label>
+                </p>
             </div>
             <div class="row">
                 <div class="col">
@@ -265,7 +264,7 @@
         <div
             *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE() && ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-montant-allocation-journaliere-brut-taux-plein-are">
+                <label class="label headline-4-typo" for="allocationJournaliereBruteTauxPlein">
                     * Montant brut de votre allocation journalière à taux plein pour l’ARE
                     <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_taux_reduit_degressivite_are"
@@ -277,7 +276,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-montant-journalier-brut-taux-plein" name="allocationJournaliereBruteTauxPlein"
+                    <input id="allocationJournaliereBruteTauxPlein" name="allocationJournaliereBruteTauxPlein"
                         aria-label="Montant de votre allocation journalière brute taux plein ARE" type="text"
                         data-testid="input-montant-allocation-journaliere-brut-taux-plein-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -313,7 +312,7 @@
         </div>
         <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireARE()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="input-allocation-journaliere-brut">
+                <label class="label headline-4-typo" for="allocationJournaliereBrute">
                     * {{ getLibelleMontantBrutAllocationJournaliere() }}
                     <button
                         *ngIf="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true"
@@ -327,7 +326,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="input-montant-journalier-brut" name="allocationJournaliereBrute"
+                    <input id="allocationJournaliereBrute" name="allocationJournaliereBrute"
                         aria-label="Montant de votre allocation journalière brute ARE" type="text"
                         data-testid="input-montant-allocation-journaliere-brut-are"
                         pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
@@ -541,11 +540,11 @@
         </div>
         <div>
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="hasTravailleAuCoursDerniersMois">
+                <p class="label headline-4-typo">
                     * Avez-vous travaillé en tant que salarié au cours des
                     {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                     derniers mois ?
-                </label>
+                </p>
             </div>
             <div class="row">
                 <div class="col">
@@ -591,13 +590,13 @@
         <div *ngIf="isAfficherChampsSalaires();">
             <div>
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         Indiquez le montant de vos salaires de
                         {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
                         {{optionsNombreMoisTravailles[0].label}}.
                         <br>
                         <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
-                    </label>
+                    </p>
                 </div>
                 <div class="row">
                     <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles" class="col-12 col-md-4"
@@ -651,9 +650,9 @@
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row pb-3">
-                <label class="label headline-4-typo">
+                <p class="label headline-4-typo">
                     Type de bénéfices
-                </label>
+                </p>
             </div>
             <div class="row">
                 <div class="col">
@@ -768,7 +767,7 @@
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="chiffreAffairesMicroEntreprise">
+                <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseN">
                     * Chiffre d’affaires estimé pour l’année {{dateUtileService.getAnneeActuelle()}} (hors taxes)
                     <button id="infobulle-chiffre-affaires-n" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_chiffre_affaires"
@@ -803,7 +802,7 @@
         </div>
         <div *ngIf="deConnecteInfosPersonnellesService.hasRevenusImmobilier()">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="revenusImmobilierFoyer">
+                <label class="label headline-4-typo" for="revenusImmobilier">
                     * Revenus annuels de placement ou du patrimoine
                     <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"

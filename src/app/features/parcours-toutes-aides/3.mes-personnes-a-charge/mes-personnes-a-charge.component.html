@@ -5,25 +5,18 @@
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 3. {{PageHeadlineEnum.PERSONNES_A_CHARGE}}
+                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
+                    aria-label="Qui considère-t-on comme votre personne à charge ?" placement="right"
+                    tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
+                    (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)">
+                    <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                </button>
             </h1>
             <div class="text-under-h1 body-2-typo">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
             </div>
         </div>
         <div class="card card-form card-form-style-2">
-            <div class="row mb-3">
-                <label class="label headline-4-typo" aria-describedby="infobulle-personnes-charge-nbr-enfant">
-                    Nombre d'enfant(s) ou de
-                    <div *ngIf="screenService.isExtraSmallScreen()"></div>
-                    personne(s) à charge
-                    <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
-                        aria-label="Qui considère-t-on comme votre personne à charge ?" placement="right"
-                        tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
-                        (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)">
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                    </button>
-                </label>
-            </div>
             <div class="card-group row row-cols-2 row-cols-md-4 gx-4 gy-2">
                 <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                     <div class="card">

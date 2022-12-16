@@ -20,9 +20,9 @@
             <div class="subcard-contrat-travail no-border">
                 <div class="row pb-3">
                     <div class="col-md-12">
-                        <h4 class="headline-4-typo color-blue-2-typo text-start">
+                        <h2 class="headline-4-typo color-blue-2-typo text-start">
                             * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire une estimation ?
-                        </h4>
+                        </h2>
                     </div>
                 </div>
                 <div class="row pb-3">
@@ -77,13 +77,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row pb-3">
-                                    <label class="label headline-4-typo">
+                                    <p class="label headline-4-typo">
                                         * Type de contrat
-                                    </label>
+                                    </p>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <button id="btn-type-contrat-cdd" name="typeContratCDD"
+                                        <button id="typeContratCDD" name="typeContratCDD"
                                             aria-label="Type de contrat CDD" aria-required="true"
                                             [attr.aria-invalid]="isChampFuturContratInvalide()"
                                             [ngClass]="{'active':isTypeContratCDD, 'ng-invalid':isChampFuturContratInvalide()}"
@@ -96,7 +96,7 @@
                                                 {{LibellesTypesContratTravailEnum.CDD}}
                                             </span>
                                         </button>
-                                        <button id="btn-type-contrat-iae" name="typeContratIAE"
+                                        <button id="typeContratIAE" name="typeContratIAE"
                                             aria-label="Type de contrat IAE" aria-required="true"
                                             [attr.aria-invalid]="isChampFuturContratInvalide()"
                                             [ngClass]="{'active':isTypeContratIAE, 'ng-invalid':isChampFuturContratInvalide()}"
@@ -110,7 +110,7 @@
                                                 LibellesCourtsTypesContratTravailEnum.IAE:LibellesTypesContratTravailEnum.IAE}}
                                             </span>
                                         </button>
-                                        <button id="btn-type-contrat-interim" name="typeContratInterim"
+                                        <button id="typeContratInterim" name="typeContratInterim"
                                             aria-label="Type de contrat Interim" aria-required="true"
                                             [attr.aria-invalid]="isChampFuturContratInvalide()"
                                             [ngClass]="{'active':isTypeContratInterim, 'ng-invalid':isChampFuturContratInvalide()}"
@@ -125,7 +125,7 @@
                                                 {{LibellesTypesContratTravailEnum.INTERIM}}
                                             </span>
                                         </button>
-                                        <button id="btn-type-contrat-cdi" name="typeContratCDI"
+                                        <button id="typeContratCDI" name="typeContratCDI"
                                             aria-label="Type de contrat CDI" aria-required="true"
                                             [attr.aria-invalid]="isChampFuturContratInvalide()"
                                             [ngClass]="{'active':isTypeContratCDI, 'ng-invalid':isChampFuturContratInvalide()}"
@@ -230,7 +230,8 @@
                             </div>
                         </div>
                         <div class="row pb-3">
-                            <label class="label headline-4-typo" aria-describedby="contrat-travail-salaire">
+                            <label class="label headline-4-typo" aria-describedby="infobulle-contrat-travail-salaire"
+                                for="salaireMensuelBrut">
                                 * Salaire
                                 <button id="infobulle-contrat-travail-salaire"
                                     aria-label="Quelle est la différence entre salaire net et brut ?" tabindex="0"
@@ -330,13 +331,13 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="row pb-3">
-                                    <label class="label headline-4-typo">
+                                    <p class="label headline-4-typo">
                                         * Temps de travail hebdomadaire souhaité
-                                    </label>
+                                    </p>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <button id="btn-duree-hebdo-temps-plein" name="dureeHebdoTempsPlein"
+                                        <button id="dureeHebdoTempsPlein" name="dureeHebdoTempsPlein"
                                             aria-label="Durée hebdomadaire temps plein"
                                             class="btn-checkbox-duree-hebdo me-2 mb-2 d-inline" aria-required="true"
                                             [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()"
@@ -440,13 +441,13 @@
                             </div>
                             <div class="col-12">
                                 <div class="row">
-                                    <label class="label mb-2 headline-4-typo">
+                                    <p class="label mb-2 headline-4-typo">
                                         * Salaire mensuel net souhaité
-                                    </label>
+                                    </p>
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <button id="btn-salaire-souhaite-smic" name="salaireSouhaiteSMIC"
+                                        <button id="salaireSouhaiteSMIC" name="salaireSouhaiteSMIC"
                                             aria-label="SMIC souhaité" aria-required="true"
                                             [attr.aria-invalid]="isSalaireSouhaiteNonSelectionne()"
                                             [ngClass]="{'active':isSalaireSouhaiteSMIC, 'ng-invalid':isSalaireSouhaiteNonSelectionne()}"
@@ -566,7 +567,7 @@
                         </div>
                         <div *ngIf="hasOffreEmploiNon">
                             <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
+                                <p class="label headline-4-typo">
                                     * Distance envisagée entre votre domicile et lieu de travail
                                     <button id="infobulle-contrat-travail-distance-travail"
                                         aria-label="Comment calculer la distance entre domicile et travail ?"
@@ -575,7 +576,7 @@
                                         (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)">
                                         <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                     </button>
-                                </label>
+                                </p>
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -688,9 +689,8 @@
                                 </div>
                             </div>
                             <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo"
-                                    aria-describedby="infobulle-contrat-travail-nombre-trajets"
-                                    for="nombreTrajetsDomicileTravail">
+                                <p class="label headline-4-typo"
+                                    aria-describedby="infobulle-contrat-travail-nombre-trajets">
                                     * Nombre de jours par semaine où vous vous rendrez sur votre lieu de travail
                                     <button id="infobulle-contrat-travail-nombre-trajets"
                                         aria-label="Comment calculer votre nombre de trajets par semaine ?" tabindex="0"
@@ -699,11 +699,11 @@
                                         (click)="modalService.openModalOnEvent($event, modalNombreTrajetTemplate, true)">
                                         <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                     </button>
-                                </label>
+                                </p>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button id="btn-nombres-trajets-1-jour-semaine" name="nombreTrajets1JourSemaine"
+                                    <button id="nombreTrajets1JourSemaine" name="nombreTrajets1JourSemaine"
                                         aria-label="1 jour travaillé par semaine" aria-required="true"
                                         [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
                                         [ngClass]="{'active':isNombreTrajets1JourSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
@@ -718,7 +718,7 @@
                                             1
                                         </span>
                                     </button>
-                                    <button id="btn-nombres-trajets-2-jours-semaine" name="nombreTrajets2JoursSemaine"
+                                    <button id="nombreTrajets2JoursSemaine" name="nombreTrajets2JoursSemaine"
                                         aria-label="2 jours travaillés par semaine" aria-required="true"
                                         [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
                                         [ngClass]="{'active':isNombreTrajets2JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
@@ -733,7 +733,7 @@
                                             2
                                         </span>
                                     </button>
-                                    <button id="btn-nombres-trajets-3-jours-semaine" name="nombreTrajets3JoursSemaine"
+                                    <button id="nombreTrajets3JoursSemaine" name="nombreTrajets3JoursSemaine"
                                         aria-label="3 jours travaillés par semaine" aria-required="true"
                                         [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
                                         [ngClass]="{'active':isNombreTrajets3JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
@@ -748,7 +748,7 @@
                                             3
                                         </span>
                                     </button>
-                                    <button id="btn-nombres-trajets-4-jours-semaine" name="nombreTrajets4JoursSemaine"
+                                    <button id="nombreTrajets4JoursSemaine" name="nombreTrajets4JoursSemaine"
                                         aria-label="4 jours travaillés par semaine" aria-required="true"
                                         [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
                                         [ngClass]="{'active':isNombreTrajets4JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
@@ -763,7 +763,7 @@
                                             4
                                         </span>
                                     </button>
-                                    <button id="btn-nombres-trajets-5-jours-semaine" name="nombreTrajets5JoursSemaine"
+                                    <button id="nombreTrajets5JoursSemaine" name="nombreTrajets5JoursSemaine"
                                         aria-label="5 jours travaillés par semaine" aria-required="true"
                                         [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
                                         [ngClass]="{'active':isNombreTrajets5JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"

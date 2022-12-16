@@ -4,7 +4,7 @@
         <div>
             <div *ngIf="(informationsPersonnelles.isSalarie || informationsPersonnelles.isMicroEntrepreneur)">
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         * Percevez-vous une prime d'activité ?
                         <button id="infobulle-prime-activite" class="img-interrogation-icon" placement="right"
                             tag-action="ouverture-infobulle-prime-activite"
@@ -12,7 +12,7 @@
                             (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)">
                             <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                         </button>
-                    </label>
+                    </p>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -93,7 +93,7 @@
             </div>
             <div *ngIf="deConnecteBeneficiaireAidesService.hasFoyerRSA()">
                 <div class="row pb-3">
-                    <label class="label headline-4-typo" for="allocationRSA">
+                    <label class="label headline-4-typo" for="allocationRSAFoyer">
                         * RSA (Revenu de Solidarité Active) perçu
                         <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
                             tag-action="clic_infobulle_rsa" aria-label="Où trouver le montant du RSA de votre foyer ?"
@@ -104,7 +104,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input id="allocationRSA" name="allocationRSA" type="text"
+                        <input id="allocationRSAFoyer" name="allocationRSAFoyer" type="text"
                             aria-label="Montant de votre allocation RSA"
                             data-testid="input-allocation-mensuelle-net-rsa-foyer"
                             pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
@@ -139,9 +139,9 @@
             </div>
             <div>
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         * Concernant votre logement, vous êtes :
-                    </label>
+                    </p>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -225,9 +225,9 @@
             </div>
             <div *ngIf="isConcerneParAideLogement()">
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         * Votre logement est :
-                    </label>
+                    </p>
                 </div>
                 <div class="row pb-3">
                     <div class="col">
@@ -275,9 +275,9 @@
             </div>
             <div>
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         Percevez-vous une de ces aides au logement ?
-                    </label>
+                    </p>
                 </div>
                 <div class="row pb-3">
                     <div class="col">
@@ -322,9 +322,9 @@
             </div>
             <div *ngIf="deConnecteBeneficiaireAidesService.isBeneficiaireAideLogement()">
                 <div class="row pb-3">
-                    <label class="label headline-4-typo">
+                    <p class="label headline-4-typo">
                         * Allocations logement perçues pour les 3 derniers mois
-                    </label>
+                    </p>
                 </div>
                 <div class="row pb-3">
                     <div class="col">
@@ -668,13 +668,13 @@
         </div>
         <div *ngIf="deConnecteSituationFamilialeService.hasPersonneAChargeSuperieur(0)">
             <div class="row pb-3">
-                <label class="label headline-4-typo" for="montantPersionsAlimentairesFoyer">
+                <label class="label headline-4-typo" for="montantPensionsAlimentairesFoyer">
                     * Pensions alimentaires du foyer perçues
                 </label>
             </div>
             <div class="row">
                 <div class="col">
-                    <input id="montantPersionsAlimentairesFoyer" name="montantPersionsAlimentairesFoyer"
+                    <input id="montantPensionsAlimentairesFoyer" name="montantPensionsAlimentairesFoyer"
                         aria-label="Montant de votre pension alimentaire perçue"
                         pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
                         (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" type="text"
