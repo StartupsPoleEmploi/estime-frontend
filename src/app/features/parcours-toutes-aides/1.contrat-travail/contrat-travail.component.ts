@@ -162,7 +162,8 @@ export class ContratTravailComponent implements OnInit {
       && !this.isTypeContratInvalide()
       && !this.isDureeHebdoInvalide()
       && !this.isSalaireSouhaiteInvalide()
-      && !this.isDistanceDomicileTravailInvalide();
+      && !this.isDistanceDomicileTravailInvalide()
+      && !this.isChampsNombreTrajetsSemaineInvalides();
   }
 
   public isNombreHeuresTravailleesSemaineInvalide(): boolean {
@@ -725,6 +726,7 @@ export class ContratTravailComponent implements OnInit {
 
   public isChampsNombreTrajetsSemaineInvalides(): boolean {
     return (this.isFuturTravailFormSubmitted
+      && this.afficherNombreTrajetsDomicileTravail()
       && (
         !this.isNombreTrajets1JourSemaine
         && !this.isNombreTrajets2JoursSemaine

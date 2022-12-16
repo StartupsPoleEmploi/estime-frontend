@@ -2,169 +2,178 @@
     <form (ngSubmit)="onSubmitRessourcesFinancieresConjointForm(ressourcesFinancieresConjointForm)"
         [ngClass]="{'submitted':isRessourcesFinancieresConjointFormSubmitted}"
         #ressourcesFinancieresConjointForm="ngForm">
-        <div *ngIf="conjoint.informationsPersonnelles.isSalarie">
-            <div class="row pb-3">
-                <label class="label headline-4-typo" for="conjointSalaireNet">
-                    * Salaire net perçu
-                </label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <input id="conjointSalaireNet" name="salaireNet"
-                        aria-label="Montant du salaire ent mensuel de votre conjoint"
-                        data-testid="input-salaire-conjoint" type="text"
-                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                        maxlength="6" class="form-control d-inline"
-                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
-                        [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
-                        required placeholder="Montant" inputmode="decimal" #salaireNet="ngModel">
-                    <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+        <div *ngIf="conjoint.informationsPersonnelles.isSalarie" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
+                    <label class="label headline-4-typo" for="conjointSalaireNet">
+                        * Salaire net perçu
+                    </label>
+                </legend>
+                <div class="row">
+                    <div class="col">
+                        <input id="conjointSalaireNet" name="salaireNet"
+                            aria-label="Montant du salaire ent mensuel de votre conjoint"
+                            data-testid="input-salaire-conjoint" type="text"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
+                            maxlength="6" class="form-control d-inline"
+                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
+                            [ngClass]="{'ng-invalid': conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
+                            required placeholder="Montant" inputmode="decimal" #salaireNet="ngModel">
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
+                    </div>
                 </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message" role="alert"
-                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span class="error-input-message" role="alert"
+                            *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
                 </div>
-                <div class="col-12">
-                    <span class="error-input-message" role="alert"
-                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                    </span>
-                </div>
-                <div class="col-12">
-                    <span class="error-input-message" role="alert"
-                        *ngIf="conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (conjoint.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
-                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                    </span>
-                </div>
-            </div>
+            </fieldset>
         </div>
-        <div>
-            <div class="row pb-3">
-                <p class="label headline-4-typo">
-                    * A-t-il/elle travaillé en tant que salarié au cours des
-                    {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                    derniers
-                    mois ?
-                </p>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-check form-check-inline">
-                        <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                            name="hasTravailleAuCoursDerniersMoisOuiConjoint"
-                            attr.aria-label="Votre conjoint.e a travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                            data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
-                            class="form-check-input"
-                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                            (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
-                            [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
-                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_oui"
-                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
-                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisOuiConjoint">
-                            oui
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline ms-2">
-                        <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
-                            name="hasTravailleAuCoursDerniersMoisNonConjoint"
-                            data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
-                            attr.aria-label="Votre conjoint.e n'a pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                            type="radio" class="form-check-input"
-                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                            [value]="false" (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
-                            tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non" required
-                            #hasTravailleAuCoursDerniersMois="ngModel"
-                            (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
-                        <label class="form-check-label body-2-typo" for="hasTravailleAuCoursDerniersMoisNonConjoint">
-                            non
-                        </label>
+        <div class="row">
+            <fieldset class="col-12">
+                <div class="row pb-3">
+                    <legend class="label headline-4-typo">
+                        * A-t-il/elle travaillé en tant que salarié au cours des
+                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                        derniers
+                        mois ?
+                    </legend>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input id="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                                name="hasTravailleAuCoursDerniersMoisOuiConjoint"
+                                attr.aria-label="Votre conjoint.e a travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-oui-conjoint" type="radio"
+                                class="form-check-input"
+                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(true)" required
+                                [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
+                                tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_oui"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, true)">
+                            <label class="form-check-label body-2-typo"
+                                for="hasTravailleAuCoursDerniersMoisOuiConjoint">
+                                oui
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline ms-2">
+                            <input id="hasTravailleAuCoursDerniersMoisNonConjoint"
+                                name="hasTravailleAuCoursDerniersMoisNonConjoint"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-non-conjoint"
+                                attr.aria-label="Votre conjoint.e n'a pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
+                                type="radio" class="form-check-input"
+                                [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                [value]="false"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisConjoint(false)"
+                                tag-action="clic_conjoint_a_travaille_au_cours_14_derniers_mois_non" required
+                                #hasTravailleAuCoursDerniersMois="ngModel"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisConjoint($event, false)">
+                            <label class="form-check-label body-2-typo"
+                                for="hasTravailleAuCoursDerniersMoisNonConjoint">
+                                non
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row pb-3">
-                <div class="col-12">
-                    <span class="error-input-message" role="alert"
-                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
-                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                    </span>
-                </div>
-            </div>
-            <div *ngIf="isAfficherChampsSalairesConjoint();">
-                <div>
-                    <div class="row pb-3">
-                        <p class="label headline-4-typo">
-                            Indiquez le montant des salaires de
-                            {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
-                            {{optionsNombreMoisTravailles[0].label}}.
-                            <br>
-                            <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au logement.</span>
-                        </p>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                    <div class="row">
-                        <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                            class="col-12 col-md-4 mt-2"
-                            [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
-                            <div class="ms-2 me-2">
-                                <div class="row pb-3">
-                                    <label class="label headline-4-typo"
-                                        [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
-                                        * Salaire en {{ optionNombreMoisTravailles.label }}
-                                    </label>
+                </div>
+            </fieldset>
+        </div>
+        <div *ngIf="isAfficherChampsSalairesConjoint();" class="row">
+            <fieldset class="col-12">
+                <div class="row pb-3">
+                    <legend class="label headline-4-typo">
+                        Indiquez le montant des salaires de
+                        {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
+                        {{optionsNombreMoisTravailles[0].label}}.
+                        <br>
+                        <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au
+                            logement.</span>
+                    </legend>
+                </div>
+                <div class="row">
+                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
+                        class="col-12 col-md-4 mt-2"
+                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
+                        <div class="ms-2 me-2">
+                            <div class="row pb-3">
+                                <label class="label headline-4-typo"
+                                    [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
+                                    * Salaire en {{ optionNombreMoisTravailles.label }}
+                                </label>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <input
+                                        id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
+                                        name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
+                                        attr.aria-label="Montant du salaire mensuelle de {{ optionNombreMoisTravailles.label }} de votre conjoint"
+                                        attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-conjoint"
+                                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        type="text" maxlength="6" min="0"
+                                        class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
+                                        (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
+                                        [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
+                                        [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaireConjoint()}" required
+                                        inputmode="decimal" (click)="$event.target.select()"
+                                        #salaireMoisAvantPeriodeSimulee="ngModel">
+                                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
                                 </div>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <input
-                                            id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
-                                            name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationConjoint"
-                                            attr.aria-label="Montant du salaire mensuelle de {{ optionNombreMoisTravailles.label }} de votre conjoint"
-                                            attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-conjoint"
-                                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                            type="text" maxlength="6" min="0"
-                                            class="max-with-input-type-montant form-control d-inline"
-                                            placeholder="Montant"
-                                            (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                            [(ngModel)]="conjoint.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
-                                            [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaireConjoint()}" required
-                                            inputmode="decimal" (click)="$event.target.select()"
-                                            #salaireMoisAvantPeriodeSimulee="ngModel">
-                                        <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
-                                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                                        </span>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="error-input-message" role="alert"
+                                        *ngIf="(isRessourcesFinancieresConjointFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresConjointFormSubmitted)  && erreurSaisieSalaires">
-                                Vous avez déclaré que votre conjoint(e) a travaillé lors de ces
-                                {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                                derniers mois. Veuillez renseigner au moins un salaire.
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresConjointFormSubmitted)  && erreurSaisieSalaires">
+                            Vous avez déclaré que votre conjoint(e) a travaillé lors de ces
+                            {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                            derniers mois. Veuillez renseigner au moins un salaire.
+                        </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.beneficiaireAides.beneficiaireARE">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.beneficiaireAides.beneficiaireARE" class="row">
+            <fieldset class="col-12">
+                <legend class="row pb-3">
                     <label class="label headline-4-typo" for="conjointAllocationMensuelleNetARE">
                         * ARE (Allocation Retour Emploi) perçue
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointAllocationMensuelleNetARE" name="allocationMensuelleNetARE"
@@ -198,13 +207,15 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.beneficiaireAides.beneficiaireASS">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.beneficiaireAides.beneficiaireASS" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointAllocationMensuelleNetASS">
                         * ASS (Allocation Solidarité Spécifique) perçue
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointAllocationMensuelleNetASS" name="allocationMensuelleNetASS"
@@ -238,9 +249,11 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.beneficiaireAides.beneficiaireAAH">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.beneficiaireAides.beneficiaireAAH" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointAllocationMensuelleNetAAH">
                         * AAH (Allocation Adulte Handicapé) perçue
                         <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
@@ -250,7 +263,7 @@
                             <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                         </button>
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointAllocationMensuelleNetAAH" name="allocationAAH"
@@ -284,9 +297,11 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.beneficiaireAides.beneficiairePensionInvalidite" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointPensionInvalidite">
                         * Pension d'invalidité nette imposable perçue
                         <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
@@ -296,7 +311,7 @@
                             <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                         </button>
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointPensionInvalidite" name="pensionInvalidite" type="text"
@@ -330,13 +345,15 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.informationsPersonnelles.isMicroEntrepreneur">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.informationsPersonnelles.isMicroEntrepreneur" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointBeneficesMicroEntrepriseDernierExercice">
                         * Bénéfices en tant que micro entrepreneur
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointBeneficesMicroEntrepriseDernierExercice"
@@ -372,13 +389,15 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.informationsPersonnelles.isTravailleurIndependant">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.informationsPersonnelles.isTravailleurIndependant" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointChiffreAffairesIndependantDernierExercice">
                         * Chiffre d'affaires en tant qu'indépendant
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointChiffreAffairesIndependantDernierExercice"
@@ -414,13 +433,15 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.informationsPersonnelles.hasPensionRetraite">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.informationsPersonnelles.hasPensionRetraite" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointPensionRetraite">
                         * Pension de retraite nette perçue
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointPensionRetraite" name="conjointPensionRetraite"
@@ -455,9 +476,11 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier">
-                <div class="row pb-3">
+            </fieldset>
+        </div>
+        <div *ngIf="conjoint.informationsPersonnelles.hasRevenusImmobilier" class="row">
+            <fieldset class="col-12">
+                <legend class="row">
                     <label class="label headline-4-typo" for="conjointRevenusImmobilier">
                         * Revenus annuels de placement ou du patrimoine
                         <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
@@ -466,7 +489,7 @@
                             (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)">
                             <img alt="" role="presentation" src="./assets/images/icones/question.svg"></button>
                     </label>
-                </div>
+                </legend>
                 <div class="row">
                     <div class="col">
                         <input id="conjointRevenusImmobilier" name="conjointRevenusImmobilier"
@@ -501,18 +524,18 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="row row-button-valider">
-                <div class="col">
-                    <button class="btn-style-perso-3 button-typo"
-                        aria-label="Valider ressources finançière de votre conjoint"
-                        data-testid="btn-ressources-conjoint-valider"
-                        tag-action="clic_bouton_valider_ressources_conjoint" type="submit">
-                        <div>
-                            <span>Valider</span>
-                        </div>
-                    </button>
-                </div>
+            </fieldset>
+        </div>
+        <div class="row row-button-valider">
+            <div class="col">
+                <button class="btn-style-perso-3 button-typo"
+                    aria-label="Valider ressources finançière de votre conjoint"
+                    data-testid="btn-ressources-conjoint-valider" tag-action="clic_bouton_valider_ressources_conjoint"
+                    type="submit">
+                    <div>
+                        <span>Valider</span>
+                    </div>
+                </button>
             </div>
         </div>
     </form>
