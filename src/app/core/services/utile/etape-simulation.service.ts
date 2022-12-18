@@ -8,15 +8,15 @@ export class EtapeSimulationService {
   etapesSimulationToutesAides = [
     { numero: 1, titre: "Offre d'emploi", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.CONTRAT_TRAVAIL}` },
     { numero: 2, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.SITUATION}` },
-    { numero: 3, titre: "Mes personnes<br>à charge", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.PERSONNES_A_CHARGE}` },
-    { numero: 4, titre: "Les ressources<br>actuelles", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESSOURCES_ACTUELLES}` },
-    { numero: 5, titre: "Résultat<br>simulation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}` }
+    { numero: 3, titre: "Mes personnes à charge", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.PERSONNES_A_CHARGE}` },
+    { numero: 4, titre: "Les ressources actuelles", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESSOURCES_ACTUELLES}` },
+    { numero: 5, titre: "Résultat simulation", pathRoute: `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}` }
   ];
 
   etapesSimulationComplementARE = [
     { numero: 1, titre: "Ma situation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.SITUATION}` },
     { numero: 2, titre: "Activité reprise", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.ACTIVITE_REPRISE}` },
-    { numero: 3, titre: "Résultat<br>simulation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}` }
+    { numero: 3, titre: "Résultat simulation", pathRoute: `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}` }
   ];
 
   public getEtapesSimulationParcoursToutesAides(): Array<EtapeSimulation> {
