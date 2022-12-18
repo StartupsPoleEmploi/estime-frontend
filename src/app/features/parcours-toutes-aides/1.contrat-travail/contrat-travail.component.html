@@ -850,7 +850,9 @@
 
 <ng-template #modalSalaireNetTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='headline-3-typo headline-3-typo-color'>Qu'est ce que le salaire brut et net ? </h3>
+        <h3 id='modalTitle' class='headline-3-typo headline-3-typo-color'>
+            Qu'est ce que le salaire brut et net ?
+         </h3>
         <p class='body-1-typo'>
             Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
             sociales et du prélèvement à la source.
@@ -867,7 +869,7 @@
 
 <ng-template #modalDistanceTravailTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='healine-3-typo headline-3-typo-color'>
+        <h3 id='modalTitle' class='healine-3-typo headline-3-typo-color'>
             Calcul de distance domicile / travail :
         </h3>
         <p class='body-1-typo'>
@@ -884,7 +886,7 @@
 
 <ng-template #modalNombreTrajetTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='healine-3-typo headline-3-typo-color'>
+        <h3 id='modalTitle' class='healine-3-typo headline-3-typo-color'>
             Exemples de calculs :
         </h3>
         <p class='body-1-typo'>
