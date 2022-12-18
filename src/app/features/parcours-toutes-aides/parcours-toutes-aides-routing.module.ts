@@ -12,6 +12,11 @@ import { AvantDeCommencerSimulationComponent } from './avant-de-commencer-simula
 
 const routes: Routes = [
   {
+    path: "",
+    component: AvantDeCommencerSimulationComponent,
+    title: `${PageTitleEnum.AVANT_COMMENCER_SIMULATION} ${PageTitleEnum.SUFFIX}`
+  },
+  {
     path: RoutesEnum.AVANT_COMMENCER_SIMULATION,
     component: AvantDeCommencerSimulationComponent,
     title: `${PageTitleEnum.AVANT_COMMENCER_SIMULATION} ${PageTitleEnum.SUFFIX}`

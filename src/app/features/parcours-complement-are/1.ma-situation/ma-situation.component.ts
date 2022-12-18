@@ -97,6 +97,7 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.resetDonneesARE();
     }
+    this.isMaSituationFormSubmitted = false;
   }
 
   public onClickButtonRadioHasDegressiviteAreNon(event: any): void {
@@ -108,6 +109,7 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.resetDonneesARE();
     }
+    this.isMaSituationFormSubmitted = false;
   }
 
   public onClickCheckBoxTauxPlein(event: any): void {
@@ -119,6 +121,7 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = null;
     }
+    this.isMaSituationFormSubmitted = false;
   }
 
   public onClickCheckBoxTauxReduit(event: any): void {
@@ -130,6 +133,7 @@ export class MaSituationComponent implements OnInit {
     } else {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = null;
     }
+    this.isMaSituationFormSubmitted = false;
   }
 
   public handleKeyUpOnButtonRadioHasDegressiviteAreOui(event: any) {
@@ -230,6 +234,86 @@ export class MaSituationComponent implements OnInit {
 
   private isDonneesSaisiesFormulaireValides(): boolean {
     return this.maSituationForm.valid && this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation);
+  }
+
+  public isChampSJRInvalide(salaireJournalierReferenceBrut): boolean {
+    return this.isChampSJREgalAZero(salaireJournalierReferenceBrut)
+      || this.isChampSJRNonPresent(salaireJournalierReferenceBrut)
+      || this.isChampSJRErreurMontant(salaireJournalierReferenceBrut);
+  }
+
+  public isChampSJREgalAZero(salaireJournalierReferenceBrut): boolean {
+    return (this.isMaSituationFormSubmitted || salaireJournalierReferenceBrut?.touched) && (
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE
+      && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == 0
+    );
+
+  }
+
+  public isChampSJRNonPresent(salaireJournalierReferenceBrut): boolean {
+    return (this.isMaSituationFormSubmitted || salaireJournalierReferenceBrut?.touched) && (
+      salaireJournalierReferenceBrut?.errors?.required
+      || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.salaireJournalierReferenceBrut == null
+    );
+  }
+
+  public isChampSJRErreurMontant(salaireJournalierReferenceBrut): boolean {
+    return (this.isMaSituationFormSubmitted || salaireJournalierReferenceBrut?.touched)
+      && salaireJournalierReferenceBrut?.errors?.pattern
+  }
+
+  public isChampAllocationJournaliereBrutTauxPleinInvalide(allocationJournaliereBruteTauxPlein): boolean {
+    return this.isChampAllocationJournaliereBrutTauxPleinEgalAZero(allocationJournaliereBruteTauxPlein)
+      || this.isChampAllocationJournaliereBrutTauxPleinNonPresent(allocationJournaliereBruteTauxPlein)
+      || this.isChampAllocationJournaliereBrutErreurMontant(allocationJournaliereBruteTauxPlein);
+  }
+
+  public isChampAllocationJournaliereBrutTauxPleinEgalAZero(allocationJournaliereBruteTauxPlein): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein?.touched) && (
+      this.isTauxReduit && (
+        this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE
+        && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == 0
+      )
+    );
+  }
+
+  public isChampAllocationJournaliereBrutTauxPleinNonPresent(allocationJournaliereBruteTauxPlein): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein?.touched) && (
+      this.isTauxReduit && (
+        allocationJournaliereBruteTauxPlein?.errors?.required
+        || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == null
+      )
+    );
+  }
+
+  public isChampAllocationJournaliereBrutTauxPleinErreurMontant(allocationJournaliereBruteTauxPlein): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein?.touched)
+      && allocationJournaliereBruteTauxPlein?.errors?.pattern
+  }
+
+  public isChampAllocationJournaliereBrutInvalide(allocationJournaliereBrute): boolean {
+    return this.isChampAllocationJournaliereBrutEgalAZero(allocationJournaliereBrute)
+      || this.isChampAllocationJournaliereBrutNonPresent(allocationJournaliereBrute)
+      || this.isChampAllocationJournaliereBrutErreurMontant(allocationJournaliereBrute);
+  }
+
+  public isChampAllocationJournaliereBrutEgalAZero(allocationJournaliereBrute): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBrute?.touched) && (
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE
+      && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == 0
+    );
+  }
+
+  public isChampAllocationJournaliereBrutNonPresent(allocationJournaliereBrute): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBrute?.touched) && (
+      allocationJournaliereBrute?.errors?.required
+      || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute == null
+    );
+  }
+
+  public isChampAllocationJournaliereBrutErreurMontant(allocationJournaliereBrute): boolean {
+    return (this.isMaSituationFormSubmitted || allocationJournaliereBrute?.touched)
+      && allocationJournaliereBrute?.errors?.pattern;
   }
 
 }

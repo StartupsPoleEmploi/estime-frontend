@@ -10,6 +10,12 @@ import { ResultatSimulationComponent } from './3.resultat-simulation/resultat-si
 
 const routes: Routes = [
   {
+    path: "",
+    component: MaSituationComponent,
+    canActivate: [EnableParcoursComplementAREGuard],
+    title: `${PageTitleEnum.SITUATION} ${PageTitleEnum.SUFFIX}`
+  },
+  {
     path: RoutesEnum.SITUATION,
     component: MaSituationComponent,
     canActivate: [EnableParcoursComplementAREGuard],

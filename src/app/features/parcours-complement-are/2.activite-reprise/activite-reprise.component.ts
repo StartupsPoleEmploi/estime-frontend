@@ -71,7 +71,6 @@ export class ActiviteRepriseComponent implements OnInit {
   }
 
   public propagateSalaireHoraireMensuel() {
-    this.isActiviteRepriseFormSubmitted = false;
     if (this.futurTravail.salaire.montantHoraireNet != null || this.futurTravail.salaire.montantHoraireBrut != null || this.futurTravail.salaire.montantMensuelNet != null || this.futurTravail.salaire.montantMensuelBrut != null) {
       switch (this.typeSalaireDisplay) {
         case "mensuel_net":
@@ -93,6 +92,7 @@ export class ActiviteRepriseComponent implements OnInit {
       this.futurTravail.salaire.montantMensuelBrut = undefined;
       this.futurTravail.salaire.montantMensuelNet = undefined;
     }
+    this.isActiviteRepriseFormSubmitted = false;
   }
 
   public getMontantSmicMensuelNet() {
@@ -104,6 +104,7 @@ export class ActiviteRepriseComponent implements OnInit {
   }
 
   public onSubmitActiviteRepriseForm(): void {
+    this.isActiviteRepriseFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides()) {
       this.checkAndSaveDemandeurEmploiConnecte();
       if (!this.isModificationCriteres) this.router.navigate([RoutesEnum.PARCOURS_COMPLEMENT_ARE, RoutesEnum.ACTIVITE_REPRISE]);
@@ -118,6 +119,7 @@ export class ActiviteRepriseComponent implements OnInit {
   }
 
   public onClickButtonObtenirSimulation(): void {
+    this.isActiviteRepriseFormSubmitted = true;
     if (this.isDonneesSaisiesFormulaireValides()) {
       this.isPageLoadingDisplay = true;
       this.checkAndSaveDemandeurEmploiConnecte();
@@ -146,5 +148,41 @@ export class ActiviteRepriseComponent implements OnInit {
   private traiterErreurSimulerMesAides(): void {
     this.isPageLoadingDisplay = false;
     this.messageErreur = MessagesErreurEnum.SIMULATION_IMPOSSIBLE;
+  }
+
+  public isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet) {
+    return this.isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)
+      || this.isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)
+      || this.isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet);
+  }
+
+  public isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
+    return (this.isActiviteRepriseFormSubmitted ||
+      (
+        salaireMensuelBrut?.touched
+        || salaireHoraireBrut?.touched
+        || salaireMensuelNet?.touched
+        || salaireHoraireNet?.touched
+      ) && (
+        this.futurTravail.salaire.montantMensuelBrut == null
+        || this.futurTravail.salaire.montantHoraireBrut == null
+        || this.futurTravail.salaire.montantMensuelNet == null
+        || this.futurTravail.salaire.montantHoraireNet == null
+      )
+    );
+  }
+
+  public isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
+    return ((this.isActiviteRepriseFormSubmitted || salaireMensuelBrut?.touched) && this.futurTravail.salaire.montantMensuelBrut != null && this.futurTravail.salaire.montantMensuelBrut <= 0)
+      || ((this.isActiviteRepriseFormSubmitted || salaireMensuelNet?.touched) && this.futurTravail.salaire.montantMensuelNet != null && this.futurTravail.salaire.montantMensuelNet <= 0)
+      || ((this.isActiviteRepriseFormSubmitted || salaireHoraireBrut?.touched) && this.futurTravail.salaire.montantHoraireBrut != null && this.futurTravail.salaire.montantHoraireBrut <= 0)
+      || ((this.isActiviteRepriseFormSubmitted || salaireHoraireNet?.touched) && this.futurTravail.salaire.montantHoraireNet != null && this.futurTravail.salaire.montantHoraireNet <= 0)
+  }
+
+  public isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
+    return ((this.isActiviteRepriseFormSubmitted || salaireMensuelBrut?.touched) && salaireMensuelBrut?.errors?.pattern)
+      || ((this.isActiviteRepriseFormSubmitted || salaireMensuelNet?.touched) && salaireMensuelNet?.errors?.pattern)
+      || ((this.isActiviteRepriseFormSubmitted || salaireHoraireBrut?.touched) && salaireHoraireBrut?.errors?.pattern)
+      || ((this.isActiviteRepriseFormSubmitted || salaireHoraireNet?.touched) && salaireHoraireNet?.errors?.pattern);
   }
 }
