@@ -1,7 +1,7 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
@@ -256,8 +256,10 @@
                                 * Allez-vous cumuler votre ancien salaire avec votre nouveau ?
                                 <button id="infobulle-cumul-ancien-et-nouveau-salaire" class="img-interrogation-icon"
                                     placement="right" tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
-                                    aria-label="Comment seront cumulés mon ancien et nouveau salaire ?"
                                     (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)">
+                                    <span class="sr-only">
+                                        Comment seront cumulés mon ancien et nouveau salaire ?
+                                    </span>
                                     <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                 </button>
                             </p>
@@ -324,8 +326,10 @@
                                 * Bénéficiez-vous de l'ACRE ?
                                 <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
                                     placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
-                                    aria-label="Qu'est ce que l'ACRE ?"
                                     (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)">
+                                    <span class="sr-only">
+                                        Qu'est ce que l'ACRE ?
+                                    </span>
                                     <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                 </button>
                             </p>
@@ -377,8 +381,10 @@
                                 * Votre situation familiale
                                 <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon"
                                     placement="right" tag-action="ouverture-infobulle-ma-situation-conjoint"
-                                    aria-label="Qui considère-t-on comme votre conjoint ?"
                                     (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)">
+                                    <span class="sr-only">
+                                        Qui considère-t-on comme votre conjoint ?
+                                    </span>
                                     <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                 </button>
                             </p>

@@ -1,3 +1,5 @@
+@import "../../../../assets/scss/variables";
+
 .container-fluid {
   margin-top: 2rem;
 
@@ -11,8 +13,7 @@
       }
     }
 
-    a,
-    span {
+    a {
       cursor: pointer;
       text-decoration: none;
 
@@ -20,6 +21,7 @@
       &:focus {
         text-decoration: underline;
         text-underline-position: under;
+        color:$color-blue-1;
       }
     }
   }

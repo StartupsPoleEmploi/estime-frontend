@@ -1,14 +1,16 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"
     message="Mise à jour de votre estimation en cours, cela peut prendre quelques secondes..."></app-page-loading>
-<div class="container-fluid result-container-fluid container-etape" role="form">
+<div class="container-fluid result-container-fluid container-etape">
     <div class="row">
         <div class="col">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 5. {{PageHeadlineEnum.RESULTAT_SIMULATION}}
-                <button id="infobulle-resultat-simulation" class="img-interrogation-icon"
-                    aria-label="Comment interpréter vos résultats ?" placement="right"
+                <button id="infobulle-resultat-simulation" class="img-interrogation-icon" placement="right"
                     tag-action="ouverture-infobulle-resultat-simulation"
                     (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)">
+                    <span class="sr-only">
+                        Comment interpréter vos résultats ?
+                    </span>
                     <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                 </button>
             </h1>

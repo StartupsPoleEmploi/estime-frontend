@@ -274,8 +274,10 @@
                             * AAH (Allocation Adulte Handicapé) perçue
                             <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
                                 tag-action="clic_infobulle_aah"
-                                aria-label="Où trouver le montant de l'AAH de votre personne à charge ?"
                                 (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)">
+                                <span class="sr-only">
+                                    Où trouver le montant de l'AAH de votre personne à charge ?
+                                </span>
                                 <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
@@ -324,8 +326,10 @@
                             * Pension d'invalidité nette imposable perçue
                             <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
                                 tag-action="clic_infobulle_pension_invalidite"
-                                aria-label="Où trouver le montant de la pension invalidité de votre personne à charge ?"
                                 (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)">
+                                <span class="sr-only">
+                                    Où trouver le montant de la pension invalidité de votre personne à charge ?
+                                </span>
                                 <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>

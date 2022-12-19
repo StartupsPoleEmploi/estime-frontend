@@ -1,14 +1,16 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 3. {{PageHeadlineEnum.PERSONNES_A_CHARGE}}
-                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
-                    aria-label="Qui considère-t-on comme votre personne à charge ?" placement="right"
+                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon" placement="right"
                     tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
                     (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)">
+                    <span class="sr-only">
+                        Qui considère-t-on comme votre personne à charge ?
+                    </span>
                     <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                 </button>
             </h1>

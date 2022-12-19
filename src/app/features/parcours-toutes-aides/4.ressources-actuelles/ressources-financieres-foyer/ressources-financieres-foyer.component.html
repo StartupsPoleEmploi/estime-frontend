@@ -10,8 +10,10 @@
                             * Percevez-vous une prime d'activité ?
                             <button id="infobulle-prime-activite" class="img-interrogation-icon" placement="right"
                                 tag-action="ouverture-infobulle-prime-activite"
-                                aria-label="Qu'est ce que la prime d'activité ?"
                                 (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)">
+                                <span class="sr-only">
+                                    Qu'est ce que la prime d'activité ?
+                                </span>
                                 <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </p>
@@ -104,8 +106,10 @@
                             * RSA (Revenu de Solidarité Active) perçu
                             <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
                                 tag-action="clic_infobulle_rsa"
-                                aria-label="Où trouver le montant du RSA de votre foyer ?"
                                 (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
+                                <span class="sr-only">
+                                    Où trouver le montant du RSA de votre foyer ?
+                                </span>
                                 <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                             </button>
                         </label>
@@ -519,8 +523,10 @@
                         * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
                         <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
                             placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
-                            aria-label="Où trouver la date de votre prochaine déclaration trimestrielle CAF ?"
                             (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)">
+                            <span class="sr-only">
+                                Où trouver la date de votre prochaine déclaration trimestrielle CAF ?
+                            </span>
                             <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                         </button>
                     </label>

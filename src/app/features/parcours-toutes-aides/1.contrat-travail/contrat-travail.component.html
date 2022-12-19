@@ -1,7 +1,7 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen() && !isModificationCriteres"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf=" screenService.isExtraSmallScreen() && !isModificationCriteres">
 </app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid" [ngClass]="isModificationCriteres?'modification-criteres-container':''">
         <div class="div-title-formulaire">
             <h1 *ngIf="!isModificationCriteres" class="h1-style-1"
@@ -18,12 +18,10 @@
         </div>
         <div class="card mt-4 pb-2">
             <fieldset class="subcard-contrat-travail no-border">
-                <div class="row pb-3">
+                <div class="row">
                     <div class="col-md-12">
-                        <legend>
-                            <h2 class="headline-4-typo color-blue-2-typo text-start">
-                                * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire une estimation ?
-                            </h2>
+                        <legend class="headline-4-typo color-blue-2-typo text-start">
+                            * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire une estimation ?
                         </legend>
                     </div>
                 </div>
@@ -192,13 +190,15 @@
                                 <legend class="row flex-column">
                                     <label class="label headline-4-typo" for="dureeHebdomadaire">
                                         * Durée hebdomadaire
+                                        <span class="sr-only">&nbsp;en heures par semaine</span>
                                     </label>
                                 </legend>
                                 <div class="row">
                                     <div>
                                         <input class="form-control d-inline" data-testid="input-duree-hebdomadaire"
-                                            id="dureeHebdomadaire" aria-label="Durée hebdomadaire en heures par semaine"
-                                            aria-required="true"
+                                            id="dureeHebdomadaire"
+                                            aria-describedby="champDureeHebdomadaireMontantDepasse champDureeHebdomadaireEgalAZero champDureeHebdomadaireNonPresent"
+                                            required
                                             [attr.aria-invalid]="isChampDureeHebdomadaireInvalide(dureeHebdomadaire)"
                                             inputmode="decimal"
                                             (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
@@ -208,25 +208,28 @@
                                             [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
                                             pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
                                             placeholder="Nombre" type="text" #dureeHebdomadaire="ngModel">
-                                        <span class="text-side-input d-inline body-2-typo">heures par semaine</span>
+                                        <span class="text-side-input d-inline body-2-typo" aria-hidden="true">
+                                            heures par semaine
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col-12">
-                                        <span class="error-input-message" role="alert"
+                                        <span id="champDureeHebdomadaireMontantDepasse" class="error-input-message"
+                                            role="alert"
                                             *ngIf="isChampDureeHebdomadaireErreurMontantMaxDepasse(dureeHebdomadaire)">
                                             {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
                                         </span>
                                     </div>
                                     <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)">
+                                        <span id="champDureeHebdomadaireEgalAZero" class="error-input-message"
+                                            role="alert" *ngIf="isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)">
                                             {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                                         </span>
                                     </div>
                                     <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)">
+                                        <span id="champDureeHebdomadaireNonPresent" class="error-input-message"
+                                            role="alert" *ngIf="isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)">
                                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                                         </span>
                                     </div>
@@ -235,18 +238,16 @@
                         </div>
                         <div class="row">
                             <fieldset class="col-md-12">
-                                <legend class="row">
-                                    <label class="label headline-4-typo"
-                                        aria-describedby="infobulle-contrat-travail-salaire" for="salaireMensuelBrut">
-                                        * Salaire
-                                        <button id="infobulle-contrat-travail-salaire"
-                                            aria-label="Quelle est la différence entre salaire net et brut ?"
-                                            tabindex="0" class="img-interrogation-icon" placement="right"
-                                            tag-action="clic_infobulle_salaire"
-                                            (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)">
-                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                                        </button>
-                                    </label>
+                                <legend class="row label headline-4-typo">
+                                    * Salaire
+                                    <button id="infobulle-contrat-travail-salaire" class="img-interrogation-icon"
+                                        placement="right" tag-action="clic_infobulle_salaire"
+                                        (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)">
+                                        <span class="sr-only">
+                                            Quelle est la différence entre salaire net et brut ?
+                                        </span>
+                                        <img alt="" src="./assets/images/icones/question.svg">
+                                    </button>
                                 </legend>
                                 <div class="row">
                                     <div class="col-12 d-flex">
@@ -300,7 +301,7 @@
                                             inputmode="decimal" #salaireHoraireNet="ngModel">
                                         <app-text-with-euro-symbol></app-text-with-euro-symbol>
                                         <select id="typeSalaireDisplay" name="typeSalaireDisplay"
-                                            aria-label="Type de salaire à afficher (brut/net)"
+                                            aria-label="Changer le type de salaire (brut/net - mensuel/horaire) recalculera dans le champ précédent le montant affiché"
                                             data-testid="select-type-salaire" [(ngModel)]="typeSalaireDisplay"
                                             class="form-select" data-width="auto"
                                             [ngClass]="{'option-selected': typeSalaireDisplay !== null}"
@@ -551,10 +552,11 @@
                                         <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
                                             * Distance entre votre domicile et votre lieu de travail
                                             <button id="infobulle-contrat-travail-distance-travail"
-                                                aria-label="Comment calculer la distance entre domicile et travail ?"
-                                                tabindex="0" class="img-interrogation-icon" placement="right"
+                                                class="img-interrogation-icon" placement="right"
                                                 tag-action="clic_infobulle_calcul_distance_domicile_travail"
                                                 (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)">
+                                                <span class="sr-only">Comment calculer la distance entre domicile et
+                                                    travail ?</span>
                                                 <img alt="" role="presentation"
                                                     src="./assets/images/icones/question.svg">
                                             </button>
@@ -594,10 +596,11 @@
                                         <p class="label headline-4-typo">
                                             * Distance envisagée entre votre domicile et lieu de travail
                                             <button id="infobulle-contrat-travail-distance-travail"
-                                                aria-label="Comment calculer la distance entre domicile et travail ?"
-                                                tabindex="0" class="img-interrogation-icon" placement="right"
+                                                class="img-interrogation-icon" placement="right"
                                                 tag-action="clic_infobulle_calcul_distance_domicile_travail"
                                                 (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)">
+                                                <span class="sr-only">Comment calculer la distance entre domicile et
+                                                    travail ?</span>
                                                 <img alt="" role="presentation"
                                                     src="./assets/images/icones/question.svg">
                                             </button>
@@ -727,10 +730,12 @@
                                         aria-describedby="infobulle-contrat-travail-nombre-trajets">
                                         * Nombre de jours par semaine où vous vous rendrez sur votre lieu de travail
                                         <button id="infobulle-contrat-travail-nombre-trajets"
-                                            aria-label="Comment calculer votre nombre de trajets par semaine ?"
-                                            tabindex="0" class="img-interrogation-icon" placement="right"
+                                            class="img-interrogation-icon" placement="right"
                                             tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                                             (click)="modalService.openModalOnEvent($event, modalNombreTrajetTemplate, true)">
+                                            <span class="sr-only">
+                                                Comment calculer votre nombre de trajets par semaine ?
+                                            </span>
                                             <img alt="" role="presentation" src="./assets/images/icones/question.svg">
                                         </button>
                                     </p>
