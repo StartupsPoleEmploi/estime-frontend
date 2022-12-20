@@ -1,4 +1,5 @@
-<div class="action-suite" attr.tag-action="{{getTagAction()}}" (click)="onClickAction($event, codeAction)" tabindex="1">
+<button class="action-suite no-style-button" attr.tag-action="{{getTagAction()}}"
+    (click)="onClickAction($event, codeAction)" tabindex="0">
     <div class="row my-auto">
         <div class="col-2 col-md-auto col-xl-3 justify-content-center">
             <img alt="" role="presentation" [src]="'./assets/images/illustrations/'+imageLink+'.svg'">
@@ -9,4 +10,4 @@
             </h5>
         </div>
     </div>
-</div>
+</button>

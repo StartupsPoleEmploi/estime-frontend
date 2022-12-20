@@ -111,11 +111,11 @@ export class MaSituationComponent implements OnInit {
 
   public onClickCheckBoxIsMicroEntrepreneur(): void {
     if (!this.informationsPersonnelles.isMicroEntrepreneur) {
-      this.deConnecteService.unsetBeneficesMicroEntreprise();
+      this.unsetMicroEntreprise();
       this.deConnecteService.unsetBeneficiaireACRE();
       this.deConnecteService.unsetPrimeActivite();
-      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
+      this.setInfosMicroEntreprise();
       if (!this.checkSiAREEtMicro() && !this.checkSiAAHEtMicro() && !this.checkSiPensionInvaliditeEtMicro()) return;
       this.isSansRessource = false;
     }
@@ -210,6 +210,11 @@ export class MaSituationComponent implements OnInit {
     this.informationsPersonnelles.isMicroEntrepreneur = false;
     this.informationsPersonnelles.isSalarie = false;
     this.informationsPersonnelles.hasCumulAncienEtNouveauSalaire = null;
+  }
+
+  private unsetMicroEntreprise() {
+    this.deConnecteService.unsetBeneficesMicroEntreprise();
+    this.dateRepriseCreationEntreprise = this.dateUtileService.creerDateDecomposee("de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
   }
 
   public onSubmitInformationsPersonnellesForm(form: UntypedFormGroup): void {

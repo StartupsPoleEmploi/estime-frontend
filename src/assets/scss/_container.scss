@@ -97,3 +97,7 @@ li.leaf4:before {
   text-align: center;
   display: inline-block;
 }
+
+.body-with-sticky-footer {
+  padding-bottom : $button-sticky-height !important;
+}

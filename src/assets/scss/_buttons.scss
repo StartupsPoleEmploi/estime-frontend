@@ -608,3 +608,13 @@ option {
     }
   }
 }
+
+.no-style-button {
+  border: none;
+  outline: none;
+  background: none;
+
+  &:focus {
+    outline: auto !important;
+  }
+}

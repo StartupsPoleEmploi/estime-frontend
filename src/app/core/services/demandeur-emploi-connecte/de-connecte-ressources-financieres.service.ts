@@ -311,9 +311,14 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     return montant;
   }
 
-  public isDonneesRessourcesFinancieresAvantSimulationValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+  public isDonneesRessourcesFinancieresAvantSimulationValidesComplementARE(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
     ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(ressourcesFinancieresAvantSimulation);
-    return this.isAidesValides(ressourcesFinancieresAvantSimulation) && this.isRevenusValides(ressourcesFinancieresAvantSimulation);
+    return this.isDonneesARESaisiesValides(ressourcesFinancieresAvantSimulation);
+  }
+
+  public isDonneesRessourcesFinancieresAvantSimulationValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation, informationsPersonnelles: InformationsPersonnelles): boolean {
+    ressourcesFinancieresAvantSimulation = this.ressourcesFinancieresAvantSimulationUtileService.replaceCommaByDotMontantsRessourcesFinancieresAvantSimulation(ressourcesFinancieresAvantSimulation);
+    return this.isAidesValides(ressourcesFinancieresAvantSimulation) && this.isRevenusValides(ressourcesFinancieresAvantSimulation, informationsPersonnelles);
   }
 
   private isAidesValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
@@ -336,10 +341,32 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     return isValide;
   }
 
-  private isRevenusValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation): boolean {
+  private isRevenusValides(ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation, informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = true;
-    if (isValide && this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
+    if (this.deConnecteInfosPersonnellesService.hasRevenusImmobilier()) {
       isValide = ressourcesFinancieresAvantSimulation.revenusImmobilier3DerniersMois > 0;
+    }
+    if (isValide && this.deConnecteInfosPersonnellesService.hasMicroEntreprise()) {
+      isValide = this.isChampsMicroEntrepriseValides(informationsPersonnelles);
+    }
+    if (isValide && this.deConnecteInfosPersonnellesService.isSalarie()) {
+      isValide = ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois;
+    }
+    return isValide;
+  }
+
+  private isChampsMicroEntrepriseValides(informationsPersonnelles: InformationsPersonnelles): boolean {
+    let isValide = true;
+
+    isValide = informationsPersonnelles.microEntreprise.typeBenefices != null;
+    if (isValide) {
+      isValide = (informationsPersonnelles.microEntreprise.chiffreAffairesN != null && informationsPersonnelles.microEntreprise.chiffreAffairesN > 0);
+    }
+    if (isValide && this.deConnecteInfosPersonnellesService.isDateCreationRepriseEntrepriseAvantNMoins1(informationsPersonnelles)) {
+      isValide = (informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1 != null && informationsPersonnelles.microEntreprise.chiffreAffairesNMoins1 > 0);
+    }
+    if (isValide && this.deConnecteInfosPersonnellesService.isDateCreationRepriseEntrepriseAvantNMoins2(informationsPersonnelles)) {
+      isValide = (informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2 != null && informationsPersonnelles.microEntreprise.chiffreAffairesNMoins2 > 0);
     }
     return isValide;
   }
@@ -661,5 +688,10 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
     if (this.ressourcesFinancieresAvantSimulationUtileService.hasAllocationARE(demandeurEmploiConnecte)) {
       return demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre;
     } return false;
+  }
+
+  public hasPrimeActiviteAvantSimulation(): boolean {
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    return this.ressourcesFinancieresAvantSimulationUtileService.hasPrimeActivite(demandeurEmploiConnecte);
   }
 }

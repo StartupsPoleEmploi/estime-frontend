@@ -6,7 +6,7 @@
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 5. {{PageHeadlineEnum.RESULTAT_SIMULATION}}
                 <button id="infobulle-resultat-simulation" class="img-interrogation-icon"
-                    aria-label="Comment interpréter vos résultats ?" style="vertical-align: baseline;"
+                    aria-label="Comment interpréter vos résultats ?" tabindex="0" style="vertical-align: baseline;"
                     placement="right top" tag-action="ouverture-infobulle-resultat-simulation"
                     (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)"></button>
                 <img alt="" role="presentation" src="./assets/images/icones/question.svg">
@@ -178,12 +178,12 @@
                             Partager ce simulateur aux personnes qui pourraient en avoir besoin
                         </span>
                     </div>
-                    <div class="pt-3 col-md-12" (click)="onClickCopyLinkToEstime()">
+                    <button class="pt-3 col-md-12 no-style-button" (click)="onClickCopyLinkToEstime()" tabindex="0">
                         <img alt='' role='presentation' src='./assets/images/icones/copy.svg'>
                         <span class="button-typo color-pe-red-typo pointer">
                             COPIER LE LIEN DE PARTAGE
                         </span>
-                    </div>
+                    </button>
                     <div *ngIf="isCopiedSuccessfully" class="mt-2 col-md-12 copied-successfully">
                         <img alt='' role='presentation' src='./assets/images/icones/check-black.svg'>
                         <span class="body-2-typo">
@@ -199,12 +199,31 @@
         </div>
     </div>
 </div>
-<div *ngIf="screenService.isExtraSmallScreen()" class="container-fluid result-container-fluid pt-3">
+<div *ngIf="screenService.isExtraSmallScreen()" class="container-fluid result-container-fluid">
     <div class="row mb-3">
         <div class="col-md-12">
             <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">
                 Pour aller plus loin
             </h3>
+        </div>
+    </div>
+    <div class="row mb-3 recommendation-block">
+        <div class="col-md-12">
+            <span class="body-1-typo">
+                Partager ce simulateur aux personnes qui pourraient en avoir besoin
+            </span>
+        </div>
+        <button class="pt-3 col-md-12 no-style-button" (click)="onClickCopyLinkToEstime()" tabindex="0">
+            <img alt='' role='presentation' src='./assets/images/icones/copy.svg'>
+            <span class="button-typo color-pe-red-typo pointer">
+                COPIER LE LIEN DE PARTAGE
+            </span>
+        </button>
+        <div *ngIf="isCopiedSuccessfully" class="mt-2 col-md-12 copied-successfully">
+            <img alt='' role='presentation' src='./assets/images/icones/check-black.svg'>
+            <span class="body-2-typo">
+                Copié dans votre presse-papier
+            </span>
         </div>
     </div>
     <div id="actions-suite" class="row mb-3">

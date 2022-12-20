@@ -98,7 +98,7 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   private getLink() {
-    return this.router['location']._platformLocation.location.origin;
+    return window.location.origin;
   }
 
   public onMouseOverButtonSimulationMensuelle(index) {

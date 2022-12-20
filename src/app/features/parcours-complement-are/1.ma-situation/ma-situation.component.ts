@@ -229,7 +229,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   private isDonneesSaisiesFormulaireValides(): boolean {
-    return this.maSituationForm.valid && this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation);
+    return this.maSituationForm.valid && this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValidesComplementARE(this.ressourcesFinancieresAvantSimulation);
   }
 
 }

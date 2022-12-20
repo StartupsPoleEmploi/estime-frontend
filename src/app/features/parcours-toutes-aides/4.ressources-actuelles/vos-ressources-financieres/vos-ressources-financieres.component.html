@@ -586,6 +586,23 @@
                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                     </span>
                 </div>
+                <div class="col-12">
+                    <span class="error-input-message" role="alert" *ngIf="isRessourcesFinancieresFormSubmitted && deConnecteInfosPersonnellesService.isSalarie()
+                        && (
+                            ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois != null
+                            && ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois == false
+                    )">
+                        {{controleChampFormulaireService.MESSAGE_ERREUR_SALARIE_SANS_SALAIRE}}
+                    </span>
+                </div>
+                <div class="col-12">
+                    <app-message-info *ngIf="!(isRessourcesFinancieresFormSubmitted) && deConnecteInfosPersonnellesService.isSalarie()
+                            && (
+                                ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois != null
+                                && ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois == false
+                        )" [contenu]="controleChampFormulaireService.MESSAGE_ERREUR_SALARIE_SANS_SALAIRE">
+                    </app-message-info>
+                </div>
             </div>
         </div>
         <div *ngIf="isAfficherChampsSalaires();">
@@ -693,7 +710,7 @@
             </div>
         </div>
         <div
-            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isDateCreationRepriseEntrepriseAvantNMoins2()">
+            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && deConnecteInfosPersonnellesService.isDateCreationRepriseEntrepriseAvantNMoins2(informationsPersonnelles)">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins2">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(2)}} (hors taxes)
@@ -730,7 +747,7 @@
             </div>
         </div>
         <div
-            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && isDateCreationRepriseEntrepriseAvantNMoins1()">
+            *ngIf="deConnecteInfosPersonnellesService.isMicroEntrepreneur() && deConnecteInfosPersonnellesService.isDateCreationRepriseEntrepriseAvantNMoins1(informationsPersonnelles)">
             <div class="row pb-3">
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins1">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(1)}} (hors taxes)

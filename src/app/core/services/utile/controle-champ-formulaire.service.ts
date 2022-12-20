@@ -29,6 +29,7 @@ export class ControleChampFormulaireService {
   MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE = "Veuillez sélectionner le taux plein ou le taux réduit pour votre simulation.";
   MESSAGE_SELECTION_AUTRES_SITUATIONS = "Veuillez sélectionner une des situations proposées.";
   MESSAGE_ERREUR_MOIS_SANS_SALAIRE = "Vous avez indiqué avoir travaillé au cours des derniers mois. Veuillez renseigner au moins un salaire supplémentaire.";
+  MESSAGE_ERREUR_SALARIE_SANS_SALAIRE = "Attention, vous avez indiqué percevoir un salaire à l'étape 2. Ma Situation";
   MESSAGE_MONTANTS_0 = "Veuillez renseigner au moins un montant.";
   MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE = "La distance renseignée entre votre domicile et votre lieu de travail n'est pas supérieure à 30.";
   MONTANT_ASS_JOURNALIER_MAX = 50;
