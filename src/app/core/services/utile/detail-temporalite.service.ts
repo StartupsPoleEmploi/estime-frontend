@@ -92,6 +92,9 @@ export class DetailTemporaliteService {
       if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA != null) {
         this.situation.rsa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.allocationRSA);
       }
+      if (this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite != null) {
+        this.situation.ppa = this.getMontantReel(this.demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite);
+      }
       this.initSituationAidesLogement();
     }
   }

@@ -174,6 +174,14 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   public onClickButtonObtenirSimulation(): void {
+    this.vosRessourcesFinancieresComponent.isRessourcesFinancieresFormSubmitted = true;
+    if (this.ressourcesFinancieresConjointComponent) {
+      this.ressourcesFinancieresConjointComponent.isRessourcesFinancieresConjointFormSubmitted = true;
+    }
+    if (this.ressourcesFinancieresPersonnesAChargeComponent) {
+      this.ressourcesFinancieresPersonnesAChargeComponent.isRessourcesFinancieresPersonnesChargeFormSubmitted = true;
+    }
+    this.ressourcesFinancieresFoyerComponent.isRessourcesFinancieresFoyerFormSubmitted = true;
     if (this.isSaisieFormulairesValide()) {
       this.isPageLoadingDisplay = true;
       const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
@@ -293,7 +301,7 @@ export class RessourcesActuellesComponent implements OnInit {
   }
 
   private isDonneesSaisieVosRessourcesFinancieresAvantSimulationValide(): boolean {
-    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation)
+    return this.deConnecteRessourcesFinancieresService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation, this.informationsPersonnelles)
       && this.deConnecteRessourcesFinancieresService.isChampsSalairesValides(this.ressourcesFinancieresAvantSimulation);
   }
 

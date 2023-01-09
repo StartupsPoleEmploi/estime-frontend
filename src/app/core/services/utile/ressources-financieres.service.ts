@@ -4,12 +4,14 @@ import { Simulation } from '@app/commun/models/simulation';
 import { SimulationMensuelle } from "@models/simulation-mensuelle";
 import { RessourceFinanciere } from '@app/commun/models/ressource-financiere';
 import { DeConnecteBeneficiaireAidesService } from '../demandeur-emploi-connecte/de-connecte-beneficiaire-aides.service';
+import { DeConnecteRessourcesFinancieresAvantSimulationService } from '../demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 
 @Injectable({ providedIn: 'root' })
 export class RessourcesFinancieresService {
 
   constructor(
     private deConnecteBeneficiaireAidesService: DeConnecteBeneficiaireAidesService,
+    private deConnecteRessourcesFinanciresAvantSimulation: DeConnecteRessourcesFinancieresAvantSimulationService
   ) { }
 
 
@@ -74,11 +76,16 @@ export class RessourcesFinancieresService {
           || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
           || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE)
       )
-      || (
-        !(this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA())
+      || (this.isPrimeActiviteADemander()
         && ressourceFinanciereOuAide.code == CodesAidesEnum.PRIME_ACTIVITE
       )
     )
+  }
+
+  private isPrimeActiviteADemander(): boolean {
+    return !this.deConnecteBeneficiaireAidesService.hasFoyerRSA()
+      && !this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()
+      && !this.deConnecteRessourcesFinanciresAvantSimulation.hasPrimeActiviteAvantSimulation();
   }
 
   public isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide: RessourceFinanciere): boolean {
@@ -89,10 +96,8 @@ export class RessourcesFinancieresService {
       || ressourceFinanciereOuAide.code == CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT
       || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE
       || ressourceFinanciereOuAide.code == CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE
-      || (
-        !(this.deConnecteBeneficiaireAidesService.hasFoyerRSA() || this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA())
-        && ressourceFinanciereOuAide.code == CodesAidesEnum.PRIME_ACTIVITE
-      )
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI
+      || ressourceFinanciereOuAide.code == CodesAidesEnum.PRIME_ACTIVITE
     )
   }
 

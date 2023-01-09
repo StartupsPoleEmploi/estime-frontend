@@ -346,4 +346,13 @@ export class RessourcesFinancieresAvantSimulationUtileService {
       && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null)
   }
 
+  public hasPrimeActivite(demandeurEmploi: DemandeurEmploi): boolean {
+    return (demandeurEmploi != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.hasPrimeActivite
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite != null
+      && demandeurEmploi.ressourcesFinancieresAvantSimulation.aidesCAF.primeActivite > 0)
+  }
+
 }

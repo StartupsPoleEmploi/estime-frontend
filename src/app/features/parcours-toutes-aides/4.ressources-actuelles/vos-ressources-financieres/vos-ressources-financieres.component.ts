@@ -315,7 +315,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   private isDonneesSaisiesFormulaireValides(form: UntypedFormGroup): boolean {
     let isValide = form.valid;
     if (isValide) {
-      isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation);
+      isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isDonneesRessourcesFinancieresAvantSimulationValides(this.ressourcesFinancieresAvantSimulation, this.informationsPersonnelles);
       // on vérifie si lorsque le formulaire est valide au niveau des données la saisie des champs salaires est valide également
       if (isValide) {
         isValide = this.deConnecteRessourcesFinancieresAvantSimulationService.isChampsSalairesValides(this.ressourcesFinancieresAvantSimulation);

@@ -72,6 +72,9 @@ export class DetailMoisApresSimulationComponent implements OnInit {
         case CodesAidesEnum.PRIME_ACTIVITE:
           this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_PRIME_ACTIVITE);
           break;
+        case CodesAidesEnum.COMPLEMENT_AIDE_RETOUR_EMPLOI:
+          this.redirectionExterneService.navigate(LiensUtilesEnum.DESCRIPTION_COMPLEMENT_ARE);
+          break;
         case CodesAidesEnum.AIDE_PERSONNALISEE_LOGEMENT:
         case CodesAidesEnum.ALLOCATION_LOGEMENT_FAMILIALE:
         case CodesAidesEnum.ALLOCATION_LOGEMENT_SOCIALE:

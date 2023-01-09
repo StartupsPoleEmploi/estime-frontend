@@ -34,10 +34,8 @@ select {
   }
 
   @media #{extra-small-device} {
-
     margin-left: 1rem;
     margin-right: 1rem;
-
   }
 }
 
@@ -191,6 +189,7 @@ input::-webkit-inner-spin-button {
 
 /* Firefox */
 input[type=number] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 

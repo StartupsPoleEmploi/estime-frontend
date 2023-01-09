@@ -232,7 +232,7 @@ export class ContratTravailComponent implements OnInit {
     if (this.isTypeContratCDI) {
       this.isTypeContratCDD = false;
       this.isTypeContratIAE = false;
-      this.isTypeContratIAE = false;
+      this.isTypeContratInterim = false;
       this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDI;
       this.unsetNombreMoisContrat();
     } else {
@@ -245,7 +245,7 @@ export class ContratTravailComponent implements OnInit {
     if (this.isTypeContratCDD) {
       this.isTypeContratCDI = false;
       this.isTypeContratIAE = false;
-      this.isTypeContratIAE = false;
+      this.isTypeContratInterim = false;
       this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDD;
     } else {
       this.futurTravail.typeContrat = null;
