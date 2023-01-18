@@ -1,18 +1,17 @@
 import { DateDecomposee } from "../models/date-decomposee";
+import * as moment from 'moment';
 
 export class DateUtileTests {
 
   public getDateRepriseCreationEntrepriseDepuisXMois(nombreDeMoisDepuisRepriseCreationEntreprise: number): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
 
-    const dateJour = new Date();
-    const month = dateJour.getMonth() - nombreDeMoisDepuisRepriseCreationEntreprise;
-    const year = dateJour.getFullYear();
-    const dateNaissance = new Date(year, month, 0);
+    const m = moment(new Date());
+    const dateCreationEntreprise = m.subtract(nombreDeMoisDepuisRepriseCreationEntreprise, 'M').toDate();
 
-    dateDecomposee.jour = this.getJourOuMoisFormate(dateNaissance.getDay().toString());
-    dateDecomposee.mois = this.getJourOuMoisFormate(dateNaissance.getMonth().toString());
-    dateDecomposee.annee = dateNaissance.getFullYear().toString();
+    dateDecomposee.jour = this.getJourOuMoisFormate(dateCreationEntreprise.getDay().toString());
+    dateDecomposee.mois = this.getJourOuMoisFormate(dateCreationEntreprise.getMonth().toString());
+    dateDecomposee.annee = dateCreationEntreprise.getFullYear().toString();
 
     return dateDecomposee;
   }
@@ -20,10 +19,8 @@ export class DateUtileTests {
   public getDateNaissanceFromAge(age: number): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
 
-    const dateJour = new Date();
-    const month = dateJour.getMonth() - 1;
-    const year = dateJour.getFullYear() - age;
-    const dateNaissance = new Date(year, month, 0);
+    const m = moment(new Date());
+    const dateNaissance = m.subtract(age, 'year').toDate();
 
     dateDecomposee.jour = this.getJourOuMoisFormate(dateNaissance.getDay().toString());
     dateDecomposee.mois = this.getJourOuMoisFormate(dateNaissance.getMonth().toString());
