@@ -43,9 +43,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   informationsPersonnelles: InformationsPersonnelles;
   beneficiaireAides: BeneficiaireAides;
   situationFamiliale: SituationFamiliale;
-  isBNC: boolean = false;
-  isBIC: boolean = false;
-  isAR: boolean = false;
 
   @Input() ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
   @Output() validationVosRessourcesEventEmitter = new EventEmitter<void>();
@@ -86,14 +83,10 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
     this.situationFamiliale = this.demandeurEmploiService.loadDataSituationFamiliale(demandeurEmploiConnecte);
     this.informationsPersonnelles = demandeurEmploiConnecte.informationsPersonnelles;
-    if (this.informationsPersonnelles.isMicroEntrepreneur) {
-      this.loadMicroEntreprise();
-    }
   }
 
   public isBeneficiaireRSACelibataireSansEnfants(): boolean {
     let result = false;
-
     if (this.deConnecteBeneficiaireAidesService.isBeneficiaireRSA()
       && !this.deConnecteSituationFamilialeService.hasConjointSituationAvecRessource()
       && !this.deConnecteSituationFamilialeService.hasPersonneAChargeAvecRessourcesFinancieres()
@@ -120,23 +113,16 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   public onClickButtonRadioHasDegressiviteAre(hasDegressiviteAre: boolean): void {
     this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = hasDegressiviteAre;
     if (hasDegressiviteAre === false) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = null;
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = null;
     }
   }
 
-  public onClickCheckBoxTauxPlein(event: any): void {
-    event.preventDefault();
-    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
-    }
+  public onClickCheckBoxTauxPlein(): void {
+    this.isRessourcesFinancieresFormSubmitted = false;
   }
 
-  public onClickCheckBoxTauxReduit(event: any): void {
-    event.preventDefault();
-    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
-    }
+  public onClickCheckBoxTauxReduit(): void {
+    this.isRessourcesFinancieresFormSubmitted = false;
   }
 
   public onClickButtonRadioHasTravailleAuCoursDerniersMois(hasTravailleAuCoursDerniersMois: boolean): void {
@@ -167,17 +153,13 @@ export class VosRessourcesFinancieresComponent implements OnInit {
 
   public handleKeyUpOnButtonTauxPlein(event: any): void {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
-      this.onClickCheckBoxTauxPlein(event);
+      this.onClickCheckBoxTauxPlein();
     }
   }
 
   public handleKeyUpOnButtonTauxReduit(event: any): void {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
-      this.onClickCheckBoxTauxReduit(event);
+      this.onClickCheckBoxTauxReduit();
     }
   }
 
@@ -194,17 +176,14 @@ export class VosRessourcesFinancieresComponent implements OnInit {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null &&
       (
         !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre ||
-        (
-          this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null &&
-          this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null
-        )
+        this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null
       )
     )
   }
 
   public getLibelleMontantBrutAllocationJournaliere(): string {
     if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
-      if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) {
+      if (!this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit) {
         return "Montant brut de votre allocation journalière à taux plein pour l’ARE";
       } else {
         return "Montant brut de votre allocation journalière à taux réduit pour l’ARE";
@@ -265,7 +244,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     if (!this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre
       || (
         this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre
-        && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein
+        && !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit
       )) {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute;
     }
@@ -283,7 +262,7 @@ export class VosRessourcesFinancieresComponent implements OnInit {
   }
 
   public isTauxDegressiviteAreSelectionne(): boolean {
-    return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null);
+    return this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null;
   }
 
   /*** gestion évènement dateDernierOuvertureDroitASS */
@@ -333,26 +312,6 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  private loadMicroEntreprise(): void {
-    switch (this.informationsPersonnelles.microEntreprise.typeBenefices) {
-      case CodesTypesBeneficesEnum.BIC:
-        this.isBIC = true;
-        this.isBNC = false;
-        this.isAR = false;
-        break;
-      case CodesTypesBeneficesEnum.BNC:
-        this.isBNC = true;
-        this.isBIC = false;
-        this.isAR = false;
-        break;
-      case CodesTypesBeneficesEnum.AR:
-        this.isAR = true;
-        this.isBIC = false;
-        this.isBNC = false;
-        break;
-    }
-  }
-
   public isDateCreationRepriseEntrepriseN(): boolean {
     if (this.deConnecteInfosPersonnellesService.hasMicroEntreprise()) {
       return this.dateUtileService.isStringDateAnneeN(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise);
@@ -371,54 +330,48 @@ export class VosRessourcesFinancieresComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxIsBIC(event): void {
-    event.preventDefault();
-    if (this.isBIC) {
+  public onClickCheckBoxIsBIC(): void {
+    if (this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.BIC) {
       this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.BIC;
-      this.isBNC = false;
-      this.isAR = false;
-    } else {
-      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
     }
   }
 
   public handleKeyUpOnButtonIsBIC(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxIsBIC(event);
+      this.onClickCheckBoxIsBIC();
     }
   }
 
-  public onClickCheckBoxIsBNC(event): void {
-    event.preventDefault();
-    if (this.isBNC) {
+  public onClickCheckBoxIsBNC(): void {
+    if (this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.BNC) {
       this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.BNC;
-      this.isAR = false;
-      this.isBIC = false;
-    } else {
-      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
     }
   }
 
   public handleKeyUpOnButtonIsBNC(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxIsBNC(event);
+      this.onClickCheckBoxIsBNC();
     }
   }
 
-  public onClickCheckBoxIsAR(event): void {
-    event.preventDefault();
-    if (this.isAR) {
+  public onClickCheckBoxIsAR(): void {
+    if (this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.AR) {
       this.informationsPersonnelles.microEntreprise.typeBenefices = CodesTypesBeneficesEnum.AR;
-      this.isBIC = false;
-      this.isBNC = false;
-    } else {
-      this.informationsPersonnelles.microEntreprise.typeBenefices = null;
     }
   }
 
   public handleKeyUpOnButtonIsAR(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxIsAR(event);
+      this.onClickCheckBoxIsAR();
     }
+  }
+
+  public isTypeBeneficesMicroEntrepriseValide() {
+    return this.informationsPersonnelles.microEntreprise.typeBenefices
+      && (
+        this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.AR
+        || this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.BIC
+        || this.informationsPersonnelles.microEntreprise.typeBenefices == CodesTypesBeneficesEnum.BNC
+      );
   }
 }

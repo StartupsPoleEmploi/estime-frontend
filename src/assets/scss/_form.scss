@@ -343,3 +343,9 @@ input:-webkit-autofill:focus {
     border-color: $color-pe-red;
   }
 }
+
+.fieldset-row {
+  & > .row {
+    margin:0;
+  }
+}

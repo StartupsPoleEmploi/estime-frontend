@@ -64,6 +64,7 @@ export class MesPersonnesAChargeComponent implements OnInit {
     this.isNouvellePersonneAChargeFormDisplay = true;
     this.isModeModification = true;
     this.numeroNouvellePersonne = indexPersonneAModifier + 1;
+    this.dateNaissanceNouvellePersonne = this.dateUtileService.getDateDecomposeeFromStringDate(personneAModifier.informationsPersonnelles.dateNaissance, "de naissance de la personne à charge " + indexPersonneAModifier, "DateNaissancePersonneACharge");
   }
 
   public onClickButtonSupprimerPersonneACharge(index: number): void {
@@ -137,6 +138,12 @@ export class MesPersonnesAChargeComponent implements OnInit {
   public handleKeyUpOnButtonAjouterPersonne(event: any) {
     if (event.keyCode === 13) {
       this.onClickButtonAjouterPersonne();
+    }
+  }
+
+  public handleKeyUpOnButtonModifierPersonneACharge(event: any, personneAModifier: Personne, indexPersonneAModifier: number) {
+    if (event.keyCode === 13) {
+      this.onClickButtonModifierPersonneACharge(personneAModifier, indexPersonneAModifier);
     }
   }
 

@@ -10,6 +10,8 @@ import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { PageHeadlineEnum } from "@app/commun/enumerations/page-headline.enum";
 import { Subscription } from 'rxjs';
+import { TypeUtilisateurEnum } from '@app/commun/enumerations/type-utilisateur.enum';
+import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
 
 @Component({
   selector: 'app-avant-de-commencer-simulation',
@@ -29,12 +31,13 @@ export class AvantDeCommencerSimulationComponent {
     private deConnecteService: DeConnecteService,
     private estimeApiService: EstimeApiService,
     private router: Router,
+    private sessionStorageEstimeService: SessionStorageEstimeService,
     public screenService: ScreenService,
     public modalService: ModalService
   ) { }
 
   public onClickButtonJeContinue(): void {
-    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    const demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecteDebutParcours(TypeUtilisateurEnum.PARCOURS_TOUTES_AIDES);
     if (!demandeurEmploiConnecte) {
       this.isPageLoadingDisplay = true;
       this.estimeApiService.creerDemandeurEmploi().subscribe({
@@ -48,6 +51,7 @@ export class AvantDeCommencerSimulationComponent {
 
   private traiterRetourCreerDemandeurEmploi(demandeurEmploi: DemandeurEmploi): void {
     this.deConnecteService.setDemandeurEmploiConnecte(demandeurEmploi);
+    this.sessionStorageEstimeService.storeTypeUtilisateur(TypeUtilisateurEnum.PARCOURS_TOUTES_AIDES);
     this.isPageLoadingDisplay = false;
     this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.CONTRAT_TRAVAIL]);
   }

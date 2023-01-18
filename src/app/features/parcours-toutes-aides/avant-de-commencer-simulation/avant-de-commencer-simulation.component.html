@@ -28,9 +28,13 @@
                             <button id="infobulle-trouver-dernier-releve-situation-are"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
-                                (click)="modalService.openModalOnEvent($event, modalDernierReleveDeSituationARE, true)">
-                                <span class="sr-only">Où trouver votre dernier relevé de situation ARE ?</span>
-                                <img alt="" src="./assets/images/icones/question.svg">
+                                (click)="modalService.openModalOnEvent($event, modalDernierReleveDeSituationARE, true)"
+                                aria-describedby="labelInfobulleReleveSituationARE">
+                                <span id="labelInfobulleReleveSituationARE" class="sr-only">
+                                    Où trouver votre dernier relevé de situation ARE ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-bottom">
@@ -40,9 +44,13 @@
                             <button id="infobulle-trouver-notification-droits-ass"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-notification-droits-ass"
-                                (click)="modalService.openModalOnEvent($event, modalDerniereNotificationDroitASSTemplate, true)">
-                                <span class="sr-only">Où trouver votre notification de droits ASS ?</span>
-                                <img alt="" src="./assets/images/icones/question.svg">
+                                (click)="modalService.openModalOnEvent($event, modalDerniereNotificationDroitASSTemplate, true)"
+                                aria-describedby="labelInfobulleNotificationDroitsASS">
+                                <span id="labelInfobulleNotificationDroitsASS" class="sr-only">
+                                    Où trouver votre notification de droits ASS ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-bottom">
@@ -52,9 +60,13 @@
                             <button id="infobulle-trouver-derniere-attestation-caf"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
-                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationCafTemplate, true)">
-                                <span class="sr-only">Où trouver votre derniere attestation CAF ?</span>
-                                <img alt="" src="./assets/images/icones/question.svg">
+                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationCafTemplate, true)"
+                                aria-describedby="labelInfobulleAttestationCAF">
+                                <span id="labelInfobulleAttestationCAF" class="sr-only">
+                                    Où trouver votre derniere attestation CAF ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-top">
@@ -62,11 +74,13 @@
                             <button id="infobulle-trouver-derniere-attestation-pension-invalidite"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-derniere-attestation-pension-invalidite"
-                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationPensionInvaliditeTemplate, true)">
-                                <span class="sr-only">
+                                (click)="modalService.openModalOnEvent($event, modalDerniereAttestationPensionInvaliditeTemplate, true)"
+                                aria-describedby="labelInfobulleAttestationPensionInvalidite">
+                                <span id="labelInfobulleAttestationPensionInvalidite" class="sr-only">
                                     Où trouver votre dernière attestation de pension d'invalidité ?
                                 </span>
-                                <img alt="" src="./assets/images/icones/question.svg">
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
                         </li>
                     </ul>

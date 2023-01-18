@@ -24,20 +24,9 @@ export class InformationsPersonnellesService {
     logement.isConventionne = false;
     logement.isCrous = false;
     logement.montantLoyer = null;
-    logement.statutOccupationLogement = this.creerStatutOccupationLogement();
+    logement.statutOccupationLogement = null;
     logement.coordonnees = this.creerCoordonnees();
     return logement;
-  }
-
-  private creerStatutOccupationLogement(): StatutOccupationLogement {
-    const statutOccupationLogement = new StatutOccupationLogement();
-    statutOccupationLogement.isLocataireMeuble = false;
-    statutOccupationLogement.isLocataireNonMeuble = false;
-    statutOccupationLogement.isLocataireHLM = false;
-    statutOccupationLogement.isProprietaire = false;
-    statutOccupationLogement.isProprietaireAvecEmprunt = false;
-    statutOccupationLogement.isLogeGratuitement = false;
-    return statutOccupationLogement;
   }
 
   private creerCoordonnees(): Coordonnees {

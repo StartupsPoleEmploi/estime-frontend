@@ -9,5 +9,6 @@ export enum KeysStorageEnum {
   DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE = "estime.demandeurEmploiConnecte.messageNonAutorisee",
   INDIVIDU_CONNECTE_STORAGE_SESSION_KEY = 'estime.individuConnecte',
   IS_LOGGED_IN = 'estime.isLoggedIn',
+  TYPE_UTILISATEUR = 'estime.typeUtilisateur',
   TRAFFIC_SOURCE = 'estime.trafficSource'
 }

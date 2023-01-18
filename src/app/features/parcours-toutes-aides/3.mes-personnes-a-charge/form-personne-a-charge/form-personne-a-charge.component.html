@@ -1,37 +1,38 @@
 <div class="card card-form-style-2">
     <div class="card-title">
-        <span class="headline-3-typo color-pe-red-typo">Personne {{numeroNouvellePersonne}}</span>
-        <button d="btn-supprimer-personne-a-charge" type="button" class="btn-close close float-end" aria-label="Fermer"
-            role="button" tabindex="0" alt="Supprimer personne à charge" (click)="onClickButtonAnnuler()"
-            (keyup)="handleKeyUpOnButtonAnnuler($event)">
+        <h2 class="headline-3-typo color-pe-red-typo d-inline">Personne {{numeroNouvellePersonne}}</h2>
+        <button id="btn-annuler-modification-personne-a-charge" class="btn-close close float-end"
+            (click)="onClickButtonAnnuler()" (keyup)="handleKeyUpOnButtonAnnuler($event)"
+            aria-describedby="labelAnnulerModifierPersonneACharge">
+            <span id="labelAnnulerModifierPersonneACharge" class="sr-only">
+                Annuler la modification de personne à charge
+            </span>
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
     <div class="card-body">
-        <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
+        <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm($event, personnesAChargeForm)"
             [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}" #personnesAChargeForm="ngForm">
-            <div class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <p class="label headline-4-typo">
-                            * Date de naissance
-                        </p>
-                    </legend>
-                    <div class="row pb-3">
-                        <app-date-inputs [dateSaisie]="dateNaissanceNouvellePersonne"
-                            [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
-                            (dateChanged)="gererAffichageNouvellePersonneSituationForm()">
-                        </app-date-inputs>
-                    </div>
-                </fieldset>
-            </div>
+            <fieldset class="fieldset-row">
+                <legend class="row pb-2">
+                    <p class="label headline-4-typo">
+                        * Date de naissance
+                    </p>
+                </legend>
+                <div class="row pb-3">
+                    <app-date-inputs [dateSaisie]="dateNaissanceNouvellePersonne"
+                        [isFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted"
+                        (dateChanged)="gererAffichageNouvellePersonneSituationForm()">
+                    </app-date-inputs>
+                </div>
+            </fieldset>
             <app-form-personne-a-charge-situation *ngIf="isNouvellePersonneAChargeSituationFormGroupDisplay"
                 [nouvellePersonneACharge]="nouvellePersonneACharge"
                 [dateNaissanceNouvellePersonne]="dateNaissanceNouvellePersonne"
                 [isNouvellePersonnesAChargeFormSubmitted]="isNouvellePersonnesAChargeFormSubmitted">
             </app-form-personne-a-charge-situation>
             <div>
-                <button class="btn-style-perso-3 button-typo" type="submit" data-testid="btn-valider-personne-charge">
+                <button type="submit" class="btn-style-perso-3 button-typo" data-testid="btn-valider-personne-charge">
                     <div>
                         <span>Valider</span>
                     </div>

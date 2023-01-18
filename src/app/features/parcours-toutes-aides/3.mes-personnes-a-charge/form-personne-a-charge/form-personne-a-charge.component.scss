@@ -1,5 +1,11 @@
 @import "../../../../../assets/scss/variables";
 
+
+h3 {
+  text-align: start;
+  padding-left:0.75rem;
+}
+
 .card {
   margin-top: 1rem;
 
@@ -9,9 +15,5 @@
 }
 
 .card-body {
-  padding-top: 0;
-
-  @media #{$extra-small-device} {
-    padding: 0rem;
-  }
+  padding: 0rem;
 }

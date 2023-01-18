@@ -4,33 +4,6 @@
   margin-top: 2rem;
 }
 
-#contrat-travail-div-infos-lieu-travail {
-  margin-bottom: 1rem !important;
-
-  img {
-    width: 1.4375rem;
-    height: 1.4375rem;
-  }
-
-  span {
-    color: $color-blue-1;
-    font-style: italic;
-  }
-
-  .col-auto {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .col {
-    padding-left: 0.625rem;
-  }
-}
-
-input {
-  max-width: 6rem;
-}
-
 .net-ou-brut {
   color: $color-pe-grey-dark;
   line-height: 2.2rem;
@@ -38,151 +11,6 @@ input {
   @media #{$extra-small-device} {
     text-align: center;
 
-  }
-}
-
-.btn-checkbox-offre-emploi {
-  width: 9.375rem;
-  max-width: 9.375rem;
-  height: 2.5rem;
-  background-color: white;
-  border: 0.0625rem solid $color-blue-9;
-
-  border-radius: 0.25rem;
-
-  @media #{$extra-small-device} {
-    width: 50%;
-    max-width: 8.65rem;
-  }
-
-  &.active {
-    border: 0.0625rem solid $color-blue-1;
-    background-color: $color-blue-1;
-
-    span {
-      color: white;
-    }
-  }
-}
-
-
-.btn-checkbox-type-contrat {
-  width: 9.375rem;
-  max-width: 10.625rem;
-  min-width: fit-content;
-  height: 2.5rem;
-  background-color: white;
-  border: 0.0625rem solid $color-blue-9;
-
-
-  border-radius: 0.25rem;
-
-  @media #{$extra-small-device} {
-    width: 45%;
-    max-width: 8.65rem;
-    margin-bottom: 0.5rem;
-  }
-
-  &.active {
-    border: 0.0625rem solid $color-blue-1;
-    background-color: $color-blue-1;
-
-    span {
-      color: white;
-    }
-  }
-}
-
-
-.btn-checkbox-duree-hebdo,
-.btn-checkbox-salaire-souhaite {
-  width: 9.375rem;
-  max-width: 9.375rem;
-  height: 2.5rem;
-  background-color: white;
-  border: 0.0625rem solid $color-blue-9;
-
-  border-radius: 0.25rem;
-
-  @media #{$extra-small-device} {
-    width: 100%;
-    max-width: 100%;
-    text-align: start;
-  }
-
-  &.active {
-    border: 0.0625rem solid $color-blue-1;
-    background-color: $color-blue-1;
-
-    span {
-      color: white;
-    }
-  }
-
-  .label-general {
-    color: black;
-  }
-
-  .label-precision {
-    color: $color-pe-grey-medium;
-  }
-}
-
-.btn-checkbox-distance-envisagee {
-  width: 5.625rem;
-  max-width: 5.625rem;
-  min-width: fit-content;
-  height: 2.5rem;
-  background-color: white;
-  border: 0.0625rem solid $color-blue-9;
-  border-radius: 0.25rem;
-
-  span {
-    color: black;
-  }
-
-  @media #{$extra-small-device} {
-    width: 15%;
-    max-width: 5.625rem;
-    margin-bottom: 0.5rem;
-  }
-
-  &.active {
-    border: 0.0625rem solid $color-blue-1;
-    background-color: $color-blue-1;
-
-    span {
-      color: white;
-    }
-  }
-}
-
-.btn-checkbox-nombre-jours-travailles {
-  width: 2.625rem;
-  max-width: 2.625rem;
-  min-width: fit-content;
-  height: 2.5rem;
-  background-color: white;
-  border: 0.0625rem solid $color-blue-9;
-  border-radius: 0.25rem;
-
-  span {
-    color: black;
-  }
-
-  @media #{$extra-small-device} {
-    width: 15%;
-    max-width: 2.625rem;
-    margin-bottom: 0.5rem;
-  }
-
-  &.active {
-    border: 0.0625rem solid $color-blue-1;
-    background-color: $color-blue-1;
-
-    span {
-      color: white;
-    }
   }
 }
 
@@ -203,21 +31,28 @@ input {
   }
 }
 
-.subcard-contrat-travail>div {
+.subcard-contrat-travail>div,
+.subcard-contrat-travail>fieldset {
 
   &:first-child {
-    margin-top: 1.5rem;
+    margin-top: 1.5rem !important;
 
     @media #{$extra-small-device} {
-      margin-top: 1rem;
+      margin-top: 1rem !important;
     }
   }
 
   &:last-child {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem !important;
 
     @media #{$extra-small-device} {
-      margin-top: 1rem;
+      margin-bottom: 1rem !important;
     }
   }
+}
+
+.offre-emploi-invalid + label {
+
+  background-color: $color-red-6;
+  border: 0.0625rem solid $color-red-5;
 }

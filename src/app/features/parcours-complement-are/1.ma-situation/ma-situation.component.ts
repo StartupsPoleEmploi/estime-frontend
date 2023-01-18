@@ -3,6 +3,7 @@ import { UntypedFormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { TypeUtilisateurEnum } from '@app/commun/enumerations/type-utilisateur.enum';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { BeneficiaireAides } from '@app/commun/models/beneficiaire-aides';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
@@ -32,12 +33,6 @@ export class MaSituationComponent implements OnInit {
   demandeurEmploiConnecte: DemandeurEmploi;
   ressourcesFinancieresAvantSimulation: RessourcesFinancieresAvantSimulation;
 
-
-  hasDegressiviteAreOui: boolean;
-  hasDegressiviteAreNon: boolean;
-  isTauxReduit: boolean;
-  isTauxPlein: boolean;
-
   constructor(
     public controleChampFormulaireService: ControleChampFormulaireService,
     public screenService: ScreenService,
@@ -49,10 +44,9 @@ export class MaSituationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecte();
+    this.demandeurEmploiConnecte = this.deConnecteService.getDemandeurEmploiConnecteDebutParcours(TypeUtilisateurEnum.PARCOURS_RAPIDE);
     this.initRessourcesFinancieresAvantSimulation();
     this.initBeneficiaireAides();
-    this.loadDataForm();
   }
 
   private initRessourcesFinancieresAvantSimulation(): void {
@@ -72,95 +66,57 @@ export class MaSituationComponent implements OnInit {
     this.demandeurEmploiConnecte.beneficiaireAides.beneficiaireARE = true;
   }
 
-  private loadDataForm(): void {
-    if (this.ressourcesFinancieresAvantSimulation != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE != null) {
-      this.hasDegressiviteAreNon = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre === false;
-      this.hasDegressiviteAreOui = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre === true;
-      this.isTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein;
-      this.isTauxReduit = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit;
-    }
-  }
-
   public hasDegressiviteAreSelectionne(): boolean {
-    return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null && (this.hasDegressiviteAreOui != null || this.hasDegressiviteAreNon != null));
+    return this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null;
   }
 
   public isTauxDegressiviteAreSelectionne(): boolean {
-    return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null);
+    return this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null;
   }
 
-  public onClickButtonRadioHasDegressiviteAreOui(event: any): void {
-    event.preventDefault();
-    if (this.hasDegressiviteAreOui) {
-      this.hasDegressiviteAreNon = false;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = true;
-    } else {
-      this.resetDonneesARE();
-    }
-    this.isMaSituationFormSubmitted = false;
-  }
-
-  public onClickButtonRadioHasDegressiviteAreNon(event: any): void {
-    event.preventDefault();
-    if (this.hasDegressiviteAreNon) {
-      this.hasDegressiviteAreOui = false;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = false;
+  public onClickButtonRadioHasDegressiviteAreOui(): void {
+    if (!this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
       this.resetDonneesDegressivite();
-    } else {
-      this.resetDonneesARE();
     }
     this.isMaSituationFormSubmitted = false;
   }
 
-  public onClickCheckBoxTauxPlein(event: any): void {
-    event.preventDefault();
-    if (this.isTauxPlein) {
-      this.isTauxReduit = false;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = true;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
-    } else {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = null;
+  public onClickButtonRadioHasDegressiviteAreNon(): void {
+    if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
+      this.resetDonneesDegressivite();
     }
     this.isMaSituationFormSubmitted = false;
   }
 
-  public onClickCheckBoxTauxReduit(event: any): void {
-    event.preventDefault();
-    if (this.isTauxReduit) {
-      this.isTauxPlein = false;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = true;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
-    } else {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = null;
-    }
+  public onClickCheckBoxTauxPlein(): void {
+    this.isMaSituationFormSubmitted = false;
+  }
+
+  public onClickCheckBoxTauxReduit(): void {
     this.isMaSituationFormSubmitted = false;
   }
 
   public handleKeyUpOnButtonRadioHasDegressiviteAreOui(event: any) {
     if (event.keyCode === 13) {
-      this.onClickButtonRadioHasDegressiviteAreOui(event);
+      this.onClickButtonRadioHasDegressiviteAreOui();
     }
   }
 
   public handleKeyUpOnButtonRadioHasDegressiviteAreNon(event: any) {
     if (event.keyCode === 13) {
-      this.onClickButtonRadioHasDegressiviteAreNon(event);
+      this.onClickButtonRadioHasDegressiviteAreNon();
     }
   }
 
   public handleKeyUpOnButtonTauxPlein(event: any): void {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = false;
-      this.onClickCheckBoxTauxPlein(event);
+      this.onClickCheckBoxTauxPlein();
     }
   }
 
   public handleKeyUpOnButtonTauxReduit(event: any): void {
     if (event.keyCode === 13) {
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit;
-      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = false;
-      this.onClickCheckBoxTauxReduit(event);
+      this.onClickCheckBoxTauxReduit();
     }
   }
 
@@ -169,39 +125,27 @@ export class MaSituationComponent implements OnInit {
   }
 
   public afficherQuestionTypeTauxDegressiviteAre(): boolean {
-    return (this.hasDegressiviteAreOui || this.hasDegressiviteAreNon) && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre;
+    return this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre;
   }
 
   public afficherMontantAllocationAre(): boolean {
     return (
-      (this.hasDegressiviteAreOui || this.hasDegressiviteAreNon) &&
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre != null &&
       (
         !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre ||
-        (
-          this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein != null &&
-          this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null
-        )
+        this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit != null
       )
     )
   }
 
   public getLibelleMontantBrutAllocationJournaliere(): string {
     if (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre) {
-      return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein) ? "à taux plein" : "à taux réduit";
+      return (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit) ? "à taux réduit" : "à taux plein";
     }
     return "";
   }
 
-  private resetDonneesARE() {
-    this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre = null;
-    this.resetDonneesDegressivite();
-  }
-
   private resetDonneesDegressivite(): void {
-    this.isTauxPlein = null;
-    this.isTauxReduit = null;
-    this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxPlein = null;
     this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit = null;
   }
 
@@ -222,7 +166,12 @@ export class MaSituationComponent implements OnInit {
   }
 
   private propagateAllocationJournaliere(): void {
-    if (this.hasDegressiviteAreNon || (this.hasDegressiviteAreOui && this.isTauxPlein)) {
+    if (!this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre ||
+      (
+        this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre
+        && !this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit
+      )
+    ) {
       this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein = this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBrute;
     }
     this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants = 1;
@@ -270,7 +219,7 @@ export class MaSituationComponent implements OnInit {
 
   public isChampAllocationJournaliereBrutTauxPleinEgalAZero(allocationJournaliereBruteTauxPlein): boolean {
     return (this.isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein?.touched) && (
-      this.isTauxReduit && (
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit && (
         this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE
         && this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == 0
       )
@@ -279,7 +228,7 @@ export class MaSituationComponent implements OnInit {
 
   public isChampAllocationJournaliereBrutTauxPleinNonPresent(allocationJournaliereBruteTauxPlein): boolean {
     return (this.isMaSituationFormSubmitted || allocationJournaliereBruteTauxPlein?.touched) && (
-      this.isTauxReduit && (
+      this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit && (
         allocationJournaliereBruteTauxPlein?.errors?.required
         || this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationJournaliereBruteTauxPlein == null
       )

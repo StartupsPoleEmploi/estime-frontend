@@ -12,100 +12,94 @@
         </div>
         <div class="card card-form card-form-style-2">
             <form #activiteRepriseForm="ngForm" [ngClass]="{'submitted':isActiviteRepriseFormSubmitted}">
-                <div class="row">
-                    <fieldset class="col-12">
-                        <legend class="row">
-                            <label class="label headline-4-typo" for="salaireMensuelBrut">
-                                * Salaire mensuel de l'activité reprise
-                            </label>
-                        </legend>
+                <div class="fieldset-row">
+                    <div class="row pb-2">
+                        <label class="label headline-4-typo" for="salaireMensuelBrut">
+                            * Salaire mensuel de l'activité reprise
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex">
+                            <input id="salaireMensuelBrut" name="salaireMensuelBrut" type="number"
+                                class="form-control d-inline"
+                                [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_brut'}"
+                                data-testid="input-salaire-mensuel-brut"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                placeholder="Montant" inputmode="decimal"
+                                [(ngModel)]="futurTravail.salaire.montantMensuelBrut" #salaireMensuelBrut="ngModel"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                (keyup)="propagateSalaireHoraireMensuel()" required aria-label="Salaire mensuel brut"
+                                [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                            <input id="salaireMensuelNet" name="salaireMensuelNet" type="number"
+                                class="form-control d-inline"
+                                [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_net'}"
+                                data-testid="input-salaire-mensuel-net"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                placeholder="Montant" inputmode="decimal"
+                                [(ngModel)]="futurTravail.salaire.montantMensuelNet" #salaireMensuelNet="ngModel"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                (keyup)="propagateSalaireHoraireMensuel()" required aria-label="Salaire mensuel net"
+                                [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                            <input id="salaireHoraireBrut" name="salaireHoraireBrut" type="number"
+                                class="form-control d-inline"
+                                [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_brut'}"
+                                data-testid="input-salaire-horaire-brut"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                placeholder="Montant" inputmode="decimal"
+                                [(ngModel)]="futurTravail.salaire.montantHoraireBrut" #salaireHoraireBrut="ngModel"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                (keyup)="propagateSalaireHoraireMensuel()" required aria-label="Salaire horaire brut"
+                                [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                            <input id="salaireHoraireNet" name="salaireHoraireNet" type="number"
+                                class="form-control d-inline"
+                                [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_net'}"
+                                data-testid="input-salaire-horaire-net"
+                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                placeholder="Montant" inputmode="decimal"
+                                [(ngModel)]="futurTravail.salaire.montantHoraireNet" #salaireHoraireNet="ngModel"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                (keyup)="propagateSalaireHoraireMensuel()" required aria-label="Salaire horaire net"
+                                [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                            <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                            <select id="typeSalaireDisplay" name="typeSalaireDisplay"
+                                aria-label="Type de salaire à afficher (brut/net)" data-testid="select-type-salaire"
+                                [(ngModel)]="typeSalaireDisplay" class="form-select" data-width="auto" required
+                                [ngClass]="{'option-selected': typeSalaireDisplay !== null}" #nombreMoisCDD="ngModel">
+                                <option value="mensuel_brut">
+                                    brut mensuel
+                                </option>
+                                <option value="mensuel_net">
+                                    net mensuel
+                                </option>
+                                <option value="horaire_brut">
+                                    brut horaire
+                                </option>
+                                <option value="horaire_net">
+                                    net horaire
+                                </option>
+                            </select>
+                        </div>
                         <div class="row">
-                            <div class="col-12 d-flex">
-                                <input id="salaireMensuelBrut"
-                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" name="salaireMensuelBrut"
-                                    aria-label="Salaire mensuel brut" data-testid="input-salaire-mensuel-brut"
-                                    aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_brut'}"
-                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantMensuelBrut"
-                                    inputmode="decimal" #salaireMensuelBrut="ngModel">
-                                <input id="salaireMensuelNet" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                    name="salaireMensuelNet" aria-label="Salaire mensuel net" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-mensuel-net" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline" placeholder="Montant"
-                                    [(ngModel)]="futurTravail.salaire.montantMensuelNet"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_net'}"
-                                    inputmode="decimal" #salaireMensuelNet="ngModel">
-                                <input id="salaireHoraireBrut"
-                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" name="salaireHoraireBrut"
-                                    aria-label="Salaire horaire brut" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-horaire-brut" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event);"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_brut'}"
-                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantHoraireBrut"
-                                    inputmode="decimal" #salaireHoraireBrut="ngModel">
-                                <input id="salaireHoraireNet" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                    name="salaireHoraireNet" aria-label="Salaire horaire net" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-horaire-net" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline" placeholder="Montant"
-                                    [(ngModel)]="futurTravail.salaire.montantHoraireNet"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_net'}"
-                                    inputmode="decimal" #salaireHoraireNet="ngModel">
-                                <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                                <select id="typeSalaireDisplay" name="typeSalaireDisplay"
-                                    aria-label="Type de salaire à afficher (brut/net)" data-testid="select-type-salaire"
-                                    [(ngModel)]="typeSalaireDisplay" class="form-select" data-width="auto" required
-                                    [ngClass]="{'option-selected': typeSalaireDisplay !== null}"
-                                    #nombreMoisCDD="ngModel">
-                                    <option value="mensuel_brut">
-                                        brut mensuel
-                                    </option>
-                                    <option value="mensuel_net">
-                                        net mensuel
-                                    </option>
-                                    <option value="horaire_brut">
-                                        brut horaire
-                                    </option>
-                                    <option value="horaire_net">
-                                        net horaire
-                                    </option>
-                                </select>
+                            <div class="col-12">
+                                <span class="error-input-message" role="alert"
+                                    *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                                </span>
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                    </span>
-                                </div>
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
-                                </div>
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                    </span>
-                                </div>
+                            <div class="col-12">
+                                <span class="error-input-message" role="alert"
+                                    *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                </span>
+                            </div>
+                            <div class="col-12">
+                                <span class="error-input-message" role="alert"
+                                    *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                                </span>
                             </div>
                         </div>
-                    </fieldset>
+                    </div>
                 </div>
             </form>
         </div>

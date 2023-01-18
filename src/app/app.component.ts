@@ -45,10 +45,10 @@ export class AppComponent implements OnInit {
     this.subscriptionRouteNavigationEndObservable = this.router.events.subscribe((routerEvent) => {
       if (routerEvent instanceof NavigationEnd) {
         const currentURL = routerEvent.url.split('?')[0];
-        this.isDisplayFilAriane = currentURL !== RoutesEnum.STATS
+        this.isDisplayFilAriane = (currentURL !== RoutesEnum.STATS
           && currentURL !== RoutesEnum.HOMEPAGE
           && currentURL !== `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
-          && currentURL !== `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`;
+          && currentURL !== `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`);
         if ((currentURL === `/${RoutesEnum.PARCOURS_TOUTES_AIDES}/${RoutesEnum.RESULTAT_SIMULATION}`
           || currentURL === `/${RoutesEnum.PARCOURS_COMPLEMENT_ARE}/${RoutesEnum.RESULTAT_SIMULATION}`)
           && this.screenService.isExtraSmallScreen()) {

@@ -19,19 +19,19 @@ class RessourcesActuellesPage {
   }
 
   public clickOnDegressiviteAREOui(): void {
-    cy.get('[data-testid=btn-has-degressivite-are-oui]').click();
+    cy.get('[data-testid=btn-has-degressivite-are-oui]').click({ force: true });
   }
 
   public clickOnDegressiviteARENon(): void {
-    cy.get('[data-testid=btn-has-degressivite-are-non]').click();
+    cy.get('[data-testid=btn-has-degressivite-are-non]').click({ force: true });
   }
 
   public clickOnTauxPleinDegressiviteARE(): void {
-    cy.get('[data-testid=btn-taux-plein-degressivite-are]').click();
+    cy.get('[data-testid=btn-taux-plein-degressivite-are]').click({ force: true });
   }
 
   public clickOnTauxReduitDegressiviteARE(): void {
-    cy.get('[data-testid=btn-taux-reduit-degressivite-are]').click();
+    cy.get('[data-testid=btn-taux-reduit-degressivite-are]').click({ force: true });
   }
 
   public saisirAllocationJournaliereBruteAre(montant: string): void {
@@ -47,11 +47,11 @@ class RessourcesActuellesPage {
   }
 
   public clickOnHasPrimeActiviteOui() {
-    cy.get('[data-testid=btn-has-prime-activite-oui]').click();
+    cy.get('[data-testid=btn-has-prime-activite-oui]').click({ force: true });
   }
 
   public clickOnHasPrimeActiviteNon() {
-    cy.get('[data-testid=btn-has-prime-activite-non]').click();
+    cy.get('[data-testid=btn-has-prime-activite-non]').click({ force: true });
   }
 
   public saisirMontantPrimeActivite(montant: string): void {
@@ -71,15 +71,15 @@ class RessourcesActuellesPage {
   }
 
   public clickOnTypesBeneficesAR(): void {
-    cy.get('[data-testid=btn-types-benefices-ar]').click();
+    cy.get('[data-testid=btn-types-benefices-ar]').click({ force: true });
   }
 
   public clickOnTypesBeneficesBIC(): void {
-    cy.get('[data-testid=btn-types-benefices-bic]').click();
+    cy.get('[data-testid=btn-types-benefices-bic]').click({ force: true });
   }
 
   public clickOnTypesBeneficesBNC(): void {
-    cy.get('[data-testid=btn-types-benefices-bnc]').click();
+    cy.get('[data-testid=btn-types-benefices-bnc]').click({ force: true });
   }
 
   public saisirCAMicroEntrepriseN(montant: string): void {
@@ -107,59 +107,59 @@ class RessourcesActuellesPage {
   }
 
   public selectionnerLocataireNonMeuble(): void {
-    cy.get('[data-testid=btn-situation-locataire-non-meuble]').click();
+    cy.get('[data-testid=btn-situation-locataire-non-meuble]').click({ force: true });
   }
 
   public selectionnerLocataireMeuble(): void {
-    cy.get('[data-testid=btn-situation-locataire-meuble]').click();
+    cy.get('[data-testid=btn-situation-locataire-meuble]').click({ force: true });
   }
 
   public selectionnerLocataireHLM(): void {
-    cy.get('[data-testid=btn-situation-locataire-hlm]').click();
+    cy.get('[data-testid=btn-situation-locataire-hlm]').click({ force: true });
   }
 
   public selectionnerLogeGratuitement(): void {
-    cy.get('[data-testid=btn-situation-loge-gratuitement]').click();
+    cy.get('[data-testid=btn-situation-loge-gratuitement]').click({ force: true });
   }
 
   public selectionnerProprietaire(): void {
-    cy.get('[data-testid=btn-situation-proprietaire]').click();
+    cy.get('[data-testid=btn-situation-proprietaire]').click({ force: true });
   }
 
   public selectionnerProprietaireAvecEmprunt(): void {
-    cy.get('[data-testid=btn-situation-proprietaire-avec-emprunt]').click();
+    cy.get('[data-testid=btn-situation-proprietaire-avec-emprunt]').click({ force: true });
   }
 
   public selectionnerIsCrous(): void {
-    cy.get('[data-testid=btn-situation-logement-crous]').click();
+    cy.get('[data-testid=btn-situation-logement-crous]').click({ force: true });
   }
 
   public selectionnerIsConventionne(): void {
-    cy.get('[data-testid=btn-situation-logement-conventionne]').click();
+    cy.get('[data-testid=btn-situation-logement-conventionne]').click({ force: true });
   }
 
   public selectionnerisColloc(): void {
-    cy.get('[data-testid=btn-situation-colloc]').click();
+    cy.get('[data-testid=btn-situation-colloc]').click({ force: true });
   }
 
   public selectionnerIsChambre(): void {
-    cy.get('[data-testid=btn-situation-chambre]').click();
+    cy.get('[data-testid=btn-situation-chambre]').click({ force: true });
   }
 
   public selectionnerAucunCas(): void {
-    cy.get('[data-testid=btn-situation-aucun-cas]').click();
+    cy.get('[data-testid=btn-situation-aucun-cas]').click({ force: true });
   }
 
   public selectionnerAPL(): void {
-    cy.get('[data-testid=btn-beneficiaire-apl]').click();
+    cy.get('[data-testid=btn-beneficiaire-apl]').click({ force: true });
   }
 
   public selectionnerALF(): void {
-    cy.get('[data-testid=btn-beneficiaire-alf]').click();
+    cy.get('[data-testid=btn-beneficiaire-alf]').click({ force: true });
   }
 
   public selectionnerALS(): void {
-    cy.get('[data-testid=btn-beneficiaire-als]').click();
+    cy.get('[data-testid=btn-beneficiaire-als]').click({ force: true });
   }
 
   public saisirAPL(montant: string): void {

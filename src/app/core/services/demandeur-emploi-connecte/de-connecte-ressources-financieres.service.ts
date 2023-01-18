@@ -13,9 +13,10 @@ import { AidesCAF } from '@app/commun/models/aides-caf';
 import { AidesCPAM } from '@app/commun/models/aides-cpam';
 import { AidesPoleEmploi } from '@app/commun/models/aides-pole-emploi';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
-import { TypesContratTravailEnum } from '@app/commun/enumerations/types-contrat-travail.enum';
+import { TypeContratTravailEnum } from '@app/commun/enumerations/enumerations-formulaire/type-contrat-travail.enum';
 import { LibellesTypesContratTravailEnum } from '@app/commun/enumerations/libelles-types-contrat-travail.enum';
 import { LibellesCourtsTypesContratTravailEnum } from '@app/commun/enumerations/libelles-courts-types-contrat-travail.enum';
+import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteRessourcesFinancieresAvantSimulationService {
@@ -412,13 +413,15 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   private isDonneesLogementValides(informationsPersonnelles: InformationsPersonnelles): boolean {
     let isValide = false;
     if (informationsPersonnelles.logement && informationsPersonnelles.logement.statutOccupationLogement &&
-      (informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
-        || informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
-        || informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble
-        || informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement
-        || informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
-        || informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt)) {
-      if (!informationsPersonnelles.logement.statutOccupationLogement.isProprietaire && !informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt && !informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
+      (informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_VIDE
+        || informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_MEUBLE
+        || informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_HLM
+        || informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.PROPRIETAIRE
+        || informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT
+        || informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOGE_GRATUITEMENT)) {
+      if (informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.PROPRIETAIRE
+        && informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT
+        && informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.LOGE_GRATUITEMENT) {
         if (informationsPersonnelles.logement.montantLoyer && informationsPersonnelles.logement.montantLoyer > 0) {
           isValide = true;
         }
@@ -646,17 +649,17 @@ export class DeConnecteRessourcesFinancieresAvantSimulationService {
   }
 
   private getLibelleTypeContrat(typeContrat: string): string {
-    if (typeContrat == TypesContratTravailEnum.CDD) return LibellesTypesContratTravailEnum.CDD;
-    if (typeContrat == TypesContratTravailEnum.CDI) return LibellesTypesContratTravailEnum.CDI;
-    if (typeContrat == TypesContratTravailEnum.INTERIM) return LibellesTypesContratTravailEnum.INTERIM;
-    if (typeContrat == TypesContratTravailEnum.IAE) return LibellesTypesContratTravailEnum.IAE;
+    if (typeContrat == TypeContratTravailEnum.CDD) return LibellesTypesContratTravailEnum.CDD;
+    if (typeContrat == TypeContratTravailEnum.CDI) return LibellesTypesContratTravailEnum.CDI;
+    if (typeContrat == TypeContratTravailEnum.INTERIM) return LibellesTypesContratTravailEnum.INTERIM;
+    if (typeContrat == TypeContratTravailEnum.IAE) return LibellesTypesContratTravailEnum.IAE;
   }
 
   private getLibelleTypeContratCourt(typeContrat: string): string {
-    if (typeContrat == TypesContratTravailEnum.CDD) return LibellesCourtsTypesContratTravailEnum.CDD;
-    if (typeContrat == TypesContratTravailEnum.CDI) return LibellesCourtsTypesContratTravailEnum.CDI;
-    if (typeContrat == TypesContratTravailEnum.INTERIM) return LibellesCourtsTypesContratTravailEnum.INTERIM;
-    if (typeContrat == TypesContratTravailEnum.IAE) return LibellesCourtsTypesContratTravailEnum.IAE;
+    if (typeContrat == TypeContratTravailEnum.CDD) return LibellesCourtsTypesContratTravailEnum.CDD;
+    if (typeContrat == TypeContratTravailEnum.CDI) return LibellesCourtsTypesContratTravailEnum.CDI;
+    if (typeContrat == TypeContratTravailEnum.INTERIM) return LibellesCourtsTypesContratTravailEnum.INTERIM;
+    if (typeContrat == TypeContratTravailEnum.IAE) return LibellesCourtsTypesContratTravailEnum.IAE;
   }
 
   public hasPensionInvaliditeAvecSalaireAvantSimulation(): boolean {

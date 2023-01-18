@@ -7,11 +7,12 @@
                 5. {{PageHeadlineEnum.RESULTAT_SIMULATION}}
                 <button id="infobulle-resultat-simulation" class="img-interrogation-icon" placement="right"
                     tag-action="ouverture-infobulle-resultat-simulation"
-                    (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)">
-                    <span class="sr-only">
+                    (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)"
+                    aria-describedby="labelInfobulleResultatSimulation">
+                    <span id="labelInfobulleResultatSimulation" class="sr-only">
                         Comment interpréter vos résultats ?
                     </span>
-                    <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                    <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
                 </button>
             </h1>
         </div>

@@ -79,7 +79,6 @@ export class RessourcesFinancieresAvantSimulationUtileService {
     allocationARE.salaireJournalierReferenceBrut = null;
     allocationARE.nombreJoursRestants = null;
     allocationARE.hasDegressiviteAre = null;
-    allocationARE.isTauxPlein = null;
     allocationARE.isTauxReduit = null;
     return allocationARE;
   }

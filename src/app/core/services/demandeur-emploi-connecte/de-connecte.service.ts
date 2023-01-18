@@ -15,6 +15,7 @@ import { SalaireService } from '../utile/salaire.service';
 import { RessourcesFinancieresAvantSimulationUtileService } from '../utile/ressources-financieres-avant-simulation-utile.service';
 import { Router } from '@angular/router';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
+import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-occupation-logement.enum';
 
 @Injectable({ providedIn: 'root' })
 export class DeConnecteService {
@@ -48,6 +49,13 @@ export class DeConnecteService {
     this.demandeurEmploiConnecte = null;
   }
 
+  public getDemandeurEmploiConnecteDebutParcours(typeUtilisateur: string) {
+    if (typeUtilisateur == this.sessionStorageEstimeService.getTypeUtilisateur() && !this.demandeurEmploiConnecte) {
+      this.demandeurEmploiConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
+    }
+    return this.demandeurEmploiConnecte;
+  }
+
   public getDemandeurEmploiConnecte(): DemandeurEmploi {
     if (!this.demandeurEmploiConnecte) {
       this.demandeurEmploiConnecte = this.sessionStorageEstimeService.getDemandeurEmploiConnected();
@@ -60,7 +68,9 @@ export class DeConnecteService {
   }
 
   public setAidesFamiliales(): void {
-    this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesFamiliales();
+    if (this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF) {
+      this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesCAF.aidesFamiliales = this.ressourcesFinancieresAvantSimulationUtileService.creerAidesFamiliales();
+    }
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
@@ -101,6 +111,7 @@ export class DeConnecteService {
       && !this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS) {
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationASS();
     }
+    console.log(this.demandeurEmploiConnecte);
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 
@@ -572,35 +583,30 @@ export class DeConnecteService {
   }
 
   public unsetStatutOccupationLogement(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = false;
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = false;
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = false;
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = false;
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = false;
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = false;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = null;
   }
 
   public setIsLocataireMeuble(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_MEUBLE;
   }
 
   public setIsLocataireNonMeuble(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_VIDE;
   }
 
   public setIsLocataireHLM(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_HLM;
   }
 
   public setIsProprietaire(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.PROPRIETAIRE;
   }
 
   public setIsProprietaireAvecEmprunt(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT;
   }
 
   public setIsLogeGratuitement(): void {
-    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = true;
+    this.demandeurEmploiConnecte.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOGE_GRATUITEMENT;
   }
 }

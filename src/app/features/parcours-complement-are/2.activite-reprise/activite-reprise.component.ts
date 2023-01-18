@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MessagesErreurEnum } from '@app/commun/enumerations/messages-erreur.enum';
 import { PageHeadlineEnum } from '@app/commun/enumerations/page-headline.enum';
 import { RoutesEnum } from '@app/commun/enumerations/routes.enum';
-import { TypesContratTravailEnum } from '@app/commun/enumerations/types-contrat-travail.enum';
+import { TypeContratTravailEnum } from '@app/commun/enumerations/enumerations-formulaire/type-contrat-travail.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { FuturTravail } from '@app/commun/models/futur-travail';
 import { Salaire } from '@app/commun/models/salaire';
@@ -64,7 +64,7 @@ export class ActiviteRepriseComponent implements OnInit {
       this.futurTravail.nombreHeuresTravailleesSemaine = 35;
       this.futurTravail.distanceKmDomicileTravail = 0;
       this.futurTravail.nombreTrajetsDomicileTravail = 0;
-      this.futurTravail.typeContrat = TypesContratTravailEnum.CDI;
+      this.futurTravail.typeContrat = TypeContratTravailEnum.CDI;
     } else {
       this.futurTravail = this.demandeurEmploiConnecte.futurTravail;
     }
@@ -157,13 +157,13 @@ export class ActiviteRepriseComponent implements OnInit {
   }
 
   public isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
-    return (this.isActiviteRepriseFormSubmitted ||
+    return ((this.isActiviteRepriseFormSubmitted ||
       (
         salaireMensuelBrut?.touched
         || salaireHoraireBrut?.touched
         || salaireMensuelNet?.touched
         || salaireHoraireNet?.touched
-      ) && (
+      )) && (
         this.futurTravail.salaire.montantMensuelBrut == null
         || this.futurTravail.salaire.montantHoraireBrut == null
         || this.futurTravail.salaire.montantMensuelNet == null

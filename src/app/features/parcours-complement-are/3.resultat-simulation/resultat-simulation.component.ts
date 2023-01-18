@@ -8,6 +8,8 @@ import { Simulation } from '@app/commun/models/simulation';
 import { DeConnecteRessourcesFinancieresAvantSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-ressources-financieres.service';
 import { DeConnecteSimulationService } from '@app/core/services/demandeur-emploi-connecte/de-connecte-simulation.service';
 import { DeConnecteService } from '@app/core/services/demandeur-emploi-connecte/de-connecte.service';
+import { CookiesEstimeService } from '@app/core/services/storage/cookies-estime.service';
+import { SessionStorageEstimeService } from '@app/core/services/storage/session-storage-estime.service';
 import { AidesService } from '@app/core/services/utile/aides.service';
 import { NumberUtileService } from '@app/core/services/utile/number-util.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
@@ -25,11 +27,13 @@ export class ResultatSimulationComponent implements OnInit {
 
   constructor(
     public screenService: ScreenService,
+    private cookieEstimeService: CookiesEstimeService,
     private deConnecteService: DeConnecteService,
     private deConnecteSimulationService: DeConnecteSimulationService,
     private aidesService: AidesService,
     private numberUtileService: NumberUtileService,
     private deConnecteRessourcesFinancieresAvantSimulationService: DeConnecteRessourcesFinancieresAvantSimulationService,
+    private sessionStorageEstimeService: SessionStorageEstimeService,
     private sideModalService: SideModalService,
     private router: Router
   ) { }
@@ -70,7 +74,9 @@ export class ResultatSimulationComponent implements OnInit {
   }
 
   public clickOnFaireSimulationComplete() {
-    this.router.navigate([RoutesEnum.AVANT_COMMENCER_SIMULATION]);
+    this.cookieEstimeService.clear();
+    this.sessionStorageEstimeService.clear();
+    this.router.navigate([RoutesEnum.PARCOURS_TOUTES_AIDES, RoutesEnum.AVANT_COMMENCER_SIMULATION]);
   }
 
   public getCriteresSimulationDegressiviteARE(): string {

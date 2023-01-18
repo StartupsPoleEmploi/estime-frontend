@@ -1,7 +1,7 @@
 <div class="row btn-group-input-date">
     <div class="col-12">
         <input id="inputJour{{ dateSaisie.libelleTypeDate }}" name="jourDate"
-            attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}" aria-required="true"
+            attr.aria-label="jour {{ dateSaisie.libelleAriaLabel }}"
             [attr.aria-invalid]="dateSaisie.isJourInvalide || dateSaisie.isDateSuperieurDateJour"
             class="form-control jour-input d-inline"
             [ngClass]="{'date-invalid': dateSaisie.isJourInvalide || dateSaisie.isDateSuperieurDateJour}"
@@ -10,7 +10,7 @@
             (keypress)="this.controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" maxlength="2" min="0"
             [(ngModel)]="dateSaisie.jour" placeholder="JJ" required type="text" #jourDate="ngModel">
         <input attr.id="inputMois{{ dateSaisie.libelleTypeDate }}" name="moisDate"
-            attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}" aria-required="true"
+            attr.aria-label="mois {{ dateSaisie.libelleAriaLabel }}"
             [attr.aria-invalid]="dateSaisie.isMoisInvalide || dateSaisie.isDateSuperieurDateJour"
             class="form-control mois-input d-inline"
             [ngClass]="{'date-invalid': dateSaisie.isMoisInvalide || dateSaisie.isDateSuperieurDateJour}"
@@ -19,7 +19,7 @@
             (keyup)="onChangeOrKeyUpDateMois($event)" maxlength="2" min="0" [(ngModel)]="dateSaisie.mois"
             placeholder="MM" type="text" required #moisDate="ngModel">
         <input attr.id="inputAnnee{{ dateSaisie.libelleTypeDate }}" name="anneeDate"
-            attr.aria-label="annee {{dateSaisie.libelleAriaLabel }}" aria-required="true"
+            attr.aria-label="annee {{dateSaisie.libelleAriaLabel }}"
             [attr.aria-invalid]="dateSaisie.isAnneeInvalide || dateSaisie.isDateSuperieurDateJour"
             class="form-control annee-input d-inline"
             [ngClass]="{'date-invalid': dateSaisie.isAnneeInvalide || dateSaisie.isDateSuperieurDateJour}"

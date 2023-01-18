@@ -84,7 +84,7 @@ export class MaSituationComponent implements OnInit {
 
   private loadDataInformationsPersonnelles(demandeurEmploi: DemandeurEmploi) {
     this.informationsPersonnelles = this.demandeurEmploiService.loadDataInformationsPersonnelles(demandeurEmploi);
-    if (this.informationsPersonnelles.isMicroEntrepreneur) {
+    if (this.informationsPersonnelles.isMicroEntrepreneur && this.informationsPersonnelles.microEntreprise != null) {
       this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.dateRepriseCreationEntreprise = this.dateUtileService.creerDateDecomposee("de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
@@ -104,13 +104,14 @@ export class MaSituationComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxSituationFamiliale(): void {
+  public onClickCheckBoxSituationFamiliale(isEnCouple: boolean): void {
+    this.situationFamiliale.isEnCouple = isEnCouple;
     this.situationFamiliale.isSeulPlusDe18Mois = null;
     this.deConnecteService.setSituationFamiliale(this.situationFamiliale);
   }
 
   public onClickCheckBoxIsMicroEntrepreneur(): void {
-    if (!this.informationsPersonnelles.isMicroEntrepreneur) {
+    if (this.informationsPersonnelles.isMicroEntrepreneur) {
       this.unsetMicroEntreprise();
       this.deConnecteService.unsetBeneficiaireACRE();
       this.deConnecteService.unsetPrimeActivite();
@@ -122,7 +123,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasAAH(): void {
-    if (!this.beneficiaireAides.beneficiaireAAH) {
+    if (this.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetAllocationMensuelleNetAAH();
     } else {
       if (!this.checkSiAAHEtSalaire() && !this.checkSiAAHEtMicro()) return;
@@ -131,10 +132,9 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasASS(): void {
-    if (!this.beneficiaireAides.beneficiaireASS) {
+    if (this.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetAllocationMensuelleNetASS();
       this.deConnecteService.unsetBeneficiaireACRE();
-      this.dateRepriseCreationEntreprise = this.dateUtileService.getDateDecomposeeFromStringDate(this.informationsPersonnelles.microEntreprise.dateRepriseCreationEntreprise, "de la création ou de la reprise d'entreprise", "DateRepriseCreationEntrepriseDemandeur");
     } else {
       this.deConnecteService.setAllocationMensuelleNetASS();
       this.deConnecteService.unsetAllocationMensuelleNetARE();
@@ -143,7 +143,7 @@ export class MaSituationComponent implements OnInit {
     }
   }
   public onClickCheckBoxHasARE(): void {
-    if (!this.beneficiaireAides.beneficiaireARE) {
+    if (this.beneficiaireAides.beneficiaireARE) {
       this.deConnecteService.unsetAllocationMensuelleNetARE();
     } else {
       this.checkSiAREEtMicro();
@@ -155,7 +155,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasRSA(): void {
-    if (!this.beneficiaireAides.beneficiaireRSA) {
+    if (this.beneficiaireAides.beneficiaireRSA) {
       this.deConnecteService.unsetInfosRSA();
     } else {
       this.deConnecteService.setAllocationRSA();
@@ -165,7 +165,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasRevenusImmobilier(): void {
-    if (!this.informationsPersonnelles.hasRevenusImmobilier) {
+    if (this.informationsPersonnelles.hasRevenusImmobilier) {
       this.deConnecteService.unsetRevenusImmobilier();
     } else {
       this.isSansRessource = false;
@@ -173,7 +173,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasSalaire(): void {
-    if (!this.informationsPersonnelles.isSalarie) {
+    if (this.informationsPersonnelles.isSalarie) {
       this.deConnecteService.unsetSalaire();
       this.deConnecteService.unsetPrimeActivite();
     } else {
@@ -183,7 +183,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxHasPensionInvalidite(): void {
-    if (!this.beneficiaireAides.beneficiairePensionInvalidite) {
+    if (this.beneficiaireAides.beneficiairePensionInvalidite) {
       this.deConnecteService.unsetPensionInvalidite();
     } else {
       this.deConnecteService.setPensionInvalidite();
@@ -259,7 +259,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public isConcerneACRE(): boolean {
-    return this.beneficiaireAides.beneficiaireASS && this.informationsPersonnelles.isMicroEntrepreneur;
+    return this.beneficiaireAides.beneficiaireASS && this.informationsPersonnelles.isMicroEntrepreneur && this.isEntrepriseCreeeDansLes12Mois();
   }
 
   public isEntrepriseCreeeDansLes12Mois(): boolean {
@@ -276,8 +276,7 @@ export class MaSituationComponent implements OnInit {
 
   public handleKeyUpOnButtonSituationFamiliale(event: any, value: boolean): void {
     if (event.keyCode === 13) {
-      this.situationFamiliale.isEnCouple = value;
-      this.onClickCheckBoxSituationFamiliale();
+      this.onClickCheckBoxSituationFamiliale(value);
     }
   }
 
@@ -396,7 +395,7 @@ export class MaSituationComponent implements OnInit {
   /************ est en couple, gestion situation conjoint *******************************/
 
   public onClickCheckBoxConjointHasAAH(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH) {
+    if (this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH) {
       this.deConnecteService.unsetConjointAllocationAAH();
     } else {
       this.deConnecteService.setConjointAllocationAAH();
@@ -405,7 +404,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasASS(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS) {
+    if (this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS) {
       this.deConnecteService.unsetConjointAllocationASS();
     } else {
       this.deConnecteService.setConjointAllocationASS();
@@ -415,7 +414,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasARE(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE) {
+    if (this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE) {
       this.deConnecteService.unsetConjointAllocationARE();
     } else {
       this.deConnecteService.setConjointAllocationARE();
@@ -425,7 +424,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasRSA(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA) {
+    if (this.situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA) {
       this.deConnecteService.unsetConjointAllocationRSA();
     } else {
       this.deConnecteService.setConjointAllocationRSA();
@@ -434,7 +433,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointIsMicroEntrepreneur(): void {
-    if (!this.situationFamiliale.conjoint.informationsPersonnelles.isMicroEntrepreneur) {
+    if (this.situationFamiliale.conjoint.informationsPersonnelles.isMicroEntrepreneur) {
       this.deConnecteService.unsetConjointBeneficesMicroEntreprise();
     } else {
       this.deConnecteService.unsetConjointChiffreAffairesIndependant();
@@ -452,7 +451,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasRevenusImmobilier(): void {
-    if (!this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier) {
+    if (this.situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier) {
       this.deConnecteService.unsetConjointRevenusImmobilier();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource = false;
@@ -460,7 +459,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointIsSalarie(): void {
-    if (!this.situationFamiliale.conjoint.informationsPersonnelles.isSalarie) {
+    if (this.situationFamiliale.conjoint.informationsPersonnelles.isSalarie) {
       this.deConnecteService.unsetConjointSalaire();
     } else {
       this.situationFamiliale.conjoint.ressourcesFinancieresAvantSimulation.salaire = new Salaire();
@@ -469,7 +468,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasPensionInvalidite(): void {
-    if (!this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite) {
+    if (this.situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite) {
       this.deConnecteService.unsetConjointPensionInvalidite();
     } else {
       this.deConnecteService.setConjointPensionInvalidite();
@@ -478,7 +477,7 @@ export class MaSituationComponent implements OnInit {
   }
 
   public onClickCheckBoxConjointHasPensionRetraite(): void {
-    if (!this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite) {
+    if (this.situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite) {
       this.deConnecteService.unsetConjointPensionRetraite();
     } else {
       this.situationFamiliale.conjoint.informationsPersonnelles.isSansRessource = false;
@@ -516,12 +515,7 @@ export class MaSituationComponent implements OnInit {
       && !this.checkSiAREEtMicro()
       && !this.checkSiAAHEtMicro()
       && !this.checkSiPensionInvaliditeEtMicro()
-      && !this.checkSiAAHEtSalaire()
-      && !this.checkSiAAHEtMicro();
-  }
-
-  private isNonBeneficiaireACRE() {
-    return !this.isConcerneACRE() || this.informationsPersonnelles.isBeneficiaireACRE == null || !this.informationsPersonnelles.isBeneficiaireACRE;
+      && !this.checkSiAAHEtSalaire();
   }
 
   public displayLoading(displayLoading: boolean) {

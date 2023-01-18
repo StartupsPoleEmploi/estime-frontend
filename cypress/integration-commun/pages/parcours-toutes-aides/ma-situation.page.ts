@@ -17,14 +17,6 @@ class MaSituationPage {
     cy.get('[data-testid=select-nationalite]').select(nationalite);
   }
 
-  public clickOnSituationRevenuImmobilier() {
-    cy.get('[data-testid=btn-situation-revenu-immobilier]').click();
-  }
-
-  public clickOnSituationMicroEntreprise() {
-    cy.get('[data-testid=btn-situation-micro-entrepreneur]').click();
-  }
-
   public clickOnSituationBeneficiaire(codeAide: CodesAidesEnum) {
     switch (codeAide) {
       case CodesAidesEnum.ALLOCATION_SOLIDARITE_SPECIFIQUE:
@@ -46,63 +38,71 @@ class MaSituationPage {
   }
 
   public clickOnSituationAAH() {
-    cy.get('[data-testid=btn-situation-aah]').click();
+    cy.get('[data-testid=btn-situation-aah]').click({ force: true });
   }
 
   public clickOnSituationARE() {
-    cy.get('[data-testid=btn-situation-are]').click();
+    cy.get('[data-testid=btn-situation-are]').click({ force: true });
   }
 
   public clickOnSituationASS() {
-    cy.get('[data-testid=btn-situation-ass]').click();
+    cy.get('[data-testid=btn-situation-ass]').click({ force: true });
   }
 
   public clickOnSituationRSA() {
-    cy.get('[data-testid=btn-situation-rsa]').click();
+    cy.get('[data-testid=btn-situation-rsa]').click({ force: true });
   }
 
   public clickOnSituationSalarie() {
-    cy.get('[data-testid=btn-situation-salarie]').click();
+    cy.get('[data-testid=btn-situation-salarie]').click({ force: true });
   }
 
   public clickOnSituationPensionInvalidite() {
-    cy.get('[data-testid=btn-situation-pension-invalidite]').click();
+    cy.get('[data-testid=btn-situation-pension-invalidite]').click({ force: true });
+  }
+
+  public clickOnSituationRevenuImmobilier() {
+    cy.get('[data-testid=btn-situation-revenu-immobilier]').click({ force: true });
+  }
+
+  public clickOnSituationMicroEntreprise() {
+    cy.get('[data-testid=btn-situation-micro-entrepreneur]').click({ force: true });
   }
 
   public clickOnSituationFamilialeSeul() {
-    cy.get('[data-testid=btn-situation-familiale-seul]').click();
+    cy.get('[data-testid=btn-situation-familiale-seul]').click({ force: true });
   }
 
   public clickOnSituationFamilialeCouple() {
-    cy.get('[data-testid=btn-situation-familiale-couple]').click();
+    cy.get('[data-testid=btn-situation-familiale-couple]').click({ force: true });
   }
 
   public clickOnSituationConjointSalarie() {
-    cy.get('[data-testid=btn-situation-conjoint-salarie]').click();
+    cy.get('[data-testid=btn-situation-conjoint-salarie]').click({ force: true });
   }
 
   public clickOnSituationConjointARE() {
-    cy.get('[data-testid=btn-situation-conjoint-are]').click();
+    cy.get('[data-testid=btn-situation-conjoint-are]').click({ force: true });
   }
 
   public clickOnSituationConjointASS() {
-    cy.get('[data-testid=btn-situation-conjoint-ass]').click();
+    cy.get('[data-testid=btn-situation-conjoint-ass]').click({ force: true });
   }
 
   public clickOnSituationConjointRSA() {
-    cy.get('[data-testid=btn-situation-conjoint-rsa]').click();
+    cy.get('[data-testid=btn-situation-conjoint-rsa]').click({ force: true });
   }
 
   public clickOnSituationConjointAAH() {
-    cy.get('[data-testid=btn-situation-conjoint-aah]').click();
+    cy.get('[data-testid=btn-situation-conjoint-aah]').click({ force: true });
   }
 
   public clickOnSituationConjointPensionInvalidite() {
-    cy.get('[data-testid=btn-situation-conjoint-pension-invalidite]').click();
+    cy.get('[data-testid=btn-situation-conjoint-pension-invalidite]').click({ force: true });
   }
 
   public clickOnSituationConjointAucuneRessource() {
-    cy.get('[data-testid=btn-situation-conjoint-sans-ressource]').click();
+    cy.get('[data-testid=btn-situation-conjoint-sans-ressource]').click({ force: true });
   }
 
   public clickOnVousVivezSeulDepuisPlusDe18MoisOui(): void {
@@ -114,19 +114,19 @@ class MaSituationPage {
   }
 
   public clickOnSituationBeneficiaireACREOui() {
-    cy.get('[data-testid=btn-is-beneficiaire-acre-oui]').click();
+    cy.get('[data-testid=btn-is-beneficiaire-acre-oui]').click({ force: true });
   }
 
   public clickOnSituationBeneficiaireACRENon() {
-    cy.get('[data-testid=btn-is-beneficiaire-acre-non]').click();
+    cy.get('[data-testid=btn-is-beneficiaire-acre-non]').click({ force: true });
   }
 
   public clickOnSituationCumulAncienEtNouveauSalaireOui() {
-    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-oui]').click();
+    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-oui]').click({ force: true });
   }
 
   public clickOnSituationCumulAncienEtNouveauSalaireNon() {
-    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-non]').click();
+    cy.get('[data-testid=btn-has-cumul-ancien-et-nouveau-salaire-non]').click({ force: true });
   }
 
   public saisirDateCreationRepriseEntreprise(jour: string, mois: string, annee: string): void {

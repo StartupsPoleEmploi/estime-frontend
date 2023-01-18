@@ -11,511 +11,552 @@
                     </span>
                 </div>
             </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.isSalarie" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo" [for]="'salaireNetPersonneACharge'+personneDTO.index + 1">
-                            * Salaire net perçu
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input
-                                attr.aria-label="Salaire perçu par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                [name]="'salaireNetPersonneACharge'+personneDTO.index + 1"
-                                [id]="'salaireNetPersonneACharge'+personneDTO.index + 1" type="text"
-                                pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                                maxlength="6" class="form-control d-inline"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
-                                required placeholder="Montant" inputmode="numeric" #salaireNet="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isSalarie" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo" for="salaireNetPersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant du&nbsp;</span>
+                        Salaire net perçu
+                        <span class="sr-only">
+                            par personne {{personneDTO.index + 1}}
+                        </span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="salaireNetPersonneACharge{{personneDTO.index + 1}}"
+                            name="salaireNetPersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" min="0" maxlength="6"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet"
+                            #salaireNet="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurChampMontantSalaireNetNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurChampMontantSalaireNetErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireNet?.touched)  && salaireNet?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurChampMontantSalaireNetAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.salaire.montantMensuelNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <p class="label headline-4-typo">
-                            * Personne {{personneDTO.index + 1}} a-t-elle travaillé en tant que salarié au cours des
+            <fieldset class="fieldset-row">
+                <legend class="row pb-2">
+                    <p class="label headline-4-typo">
+                        * Personne {{personneDTO.index + 1}} a-t-elle travaillé en tant que salarié au cours des
+                        {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                        derniers
+                        mois ?
+                    </p>
+                </legend>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input id="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
+                                name="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
+                                type="radio" [value]="true" class="form-check-input"
+                                tag-action="clic_personne_a_charge_{{personneDTO.index + 1}}_a_travaille_au_cours_14_derniers_mois_oui"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-oui-personne-a-charge-{{personneDTO.index + 1}}"
+                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                #hasTravailleAuCoursDerniersMois="ngModel"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, true)"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, true)"
+                                required>
+                            <label class="form-check-label body-2-typo"
+                                for="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}">
+                                oui
+                                <span class="sr-only">
+                                    , j'ai travaillé au cours des
+                                    {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                                    derniers mois
+                                </span>
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline ms-2">
+                            <input id="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
+                                name="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
+                                type="radio" [value]="false" class="form-check-input"
+                                tag-action="clic_personne_a_charge_{{personneDTO.index + 1}}_a_travaille_au_cours_14_derniers_mois_non"
+                                data-testid="btn-has-travaille-au-cours-derniers-mois-non-personne-a-charge-{{personneDTO.index + 1}}"
+                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
+                                #hasTravailleAuCoursDerniersMois="ngModel"
+                                (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, false)"
+                                (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, false)"
+                                required>
+                            <label class="form-check-label body-2-typo"
+                                for="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}">
+                                non
+                                <span class="sr-only">
+                                    , je n'ai pas travaillé au cours des
+                                    {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
+                                    derniers mois
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurChampATravailleNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset *ngIf="isAfficherChampsSalairesPersonne(personneDTO.personne)" class="fieldset-row">
+                <legend class="row pb-2">
+                    <p class="label headline-4-typo">
+                        Indiquez le montant des salaires de
+                        {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
+                        {{optionsNombreMoisTravailles[0].label}}.
+                        <br>
+                        <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au
+                            logement.</span>
+                    </p>
+                </legend>
+                <div class="row">
+                    <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
+                        class="col-12 col-md-4 mt-2"
+                        [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
+                        <div class="ms-2 me-2">
+                            <div class="row pb-2">
+                                <label class="label headline-4-typo"
+                                    for="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}">
+                                    *&nbsp;
+                                    <span class="sr-only">Montant du&nbsp;</span>
+                                    Salaire net perçu en {{ optionNombreMoisTravailles.label }}
+                                    <span class="sr-only">
+                                        par personne {{personneDTO.index + 1}}
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <input
+                                        id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
+                                        name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
+                                        type="text" class="max-with-input-type-montant form-control d-inline"
+                                        [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire(personneDTO.personne)}"
+                                        attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-personne-a-charge-{{personneDTO.index + 1}}"
+                                        pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" maxlength="6" min="0"
+                                        placeholder="Montant" inputmode="numeric"
+                                        [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
+                                        #salaireMoisAvantPeriodeSimulee="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire)"
+                                        required>
+                                    <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span
+                                        id="erreurChampSalaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurChampSalaireNonPresent" class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
+                            Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
                             {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                            derniers
-                            mois ?
-                        </p>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <input id="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
-                                    name="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}"
-                                    attr.aria-label="Vous avez travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                                    data-testid="btn-has-travaille-au-cours-derniers-mois-oui-personne-a-charge-{{personneDTO.index + 1}}"
-                                    type="radio" class="form-check-input"
-                                    [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                                    tag-action="clic_personne_a_charge_{{personneDTO.index + 1}}_a_travaille_au_cours_14_derniers_mois_oui"
-                                    (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, true)"
-                                    required [value]="true" #hasTravailleAuCoursDerniersMois="ngModel"
-                                    (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, true)">
-                                <label class="form-check-label body-2-typo"
-                                    for="hasTravailleAuCoursDerniersMoisOuiPersonneACharge{{personneDTO.index + 1}}">
-                                    oui
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline ms-2">
-                                <input id="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
-                                    name="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}"
-                                    data-testid="btn-has-travaille-au-cours-derniers-mois-non-personne-a-charge-{{personneDTO.index + 1}}"
-                                    attr.aria-label="Vous n'avez pas travaillé au cours des {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}} derniers mois"
-                                    type="radio" class="form-check-input"
-                                    [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.hasTravailleAuCoursDerniersMois"
-                                    [value]="false"
-                                    tag-action="clic_personne_a_charge_{{personneDTO.index + 1}}_a_travaille_au_cours_14_derniers_mois_non"
-                                    (click)="onClickButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, false)"
-                                    required #hasTravailleAuCoursDerniersMois="ngModel"
-                                    (keyup)="handleKeyUpOnButtonRadioHasTravailleAuCoursDerniersMoisPersonne(personneDTO.personne, $event, false)">
-                                <label class="form-check-label body-2-typo"
-                                    for="hasTravailleAuCoursDerniersMoisNonPersonneACharge{{personneDTO.index + 1}}">
-                                    non
-                                </label>
-                            </div>
-                        </div>
+                            derniers mois. Veuillez renseigner au moins un salaire.
+                        </span>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || hasTravailleAuCoursDerniersMois.touched)  && hasTravailleAuCoursDerniersMois.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
+                </div>
+            </fieldset>
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo"
+                        for="allocationMensuelleNetAREPersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant de l'&nbsp;</span>
+                        ARE (Allocation Retour Emploi) perçue
+                        <span class="sr-only"> par personne {{personneDTO.index + 1}} </span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="allocationMensuelleNetAREPersonneACharge{{personneDTO.index + 1}}"
+                            name="allocationMensuelleNetAREPersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="form-control d-inline" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
+                            min="0" maxlength="6" placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
+                            #allocationMensuelleNetARE="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                </fieldset>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantARENonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantAREErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantAREAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="isAfficherChampsSalairesPersonne(personneDTO.personne);" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <p class="label headline-4-typo">
-                            Indiquez le montant des salaires de
-                            {{optionsNombreMoisTravailles[optionsNombreMoisTravailles.length-1].label}} à
-                            {{optionsNombreMoisTravailles[0].label}}.
-                            <br>
-                            <span class="body-2-typo">Nécessaire pour calculer vos droits à l'aide au
-                                logement.</span>
-                        </p>
-                    </legend>
-                    <div class="row">
-                        <div *ngFor="let optionNombreMoisTravailles of optionsNombreMoisTravailles"
-                            class="col-12 col-md-4 mt-2"
-                            [ngClass]="{'col-salaire-with-border':optionNombreMoisTravailles.index-12<0}">
-                            <div class="ms-2 me-2">
-                                <div class="row pb-3">
-                                    <label class="label headline-4-typo"
-                                        [for]="'salaireMoisMoins'+optionNombreMoisTravailles.index+'AvantSimulation'">
-                                        * Salaire en {{ optionNombreMoisTravailles.label }}
-                                    </label>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col">
-                                        <input
-                                            id="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
-                                            name="salaireMoisMoins{{optionNombreMoisTravailles.index}}AvantSimulationPersonneACharge{{personneDTO.index + 1}}"
-                                            attr.aria-label="Montant du salaire net perçu au mois de {{ optionNombreMoisTravailles.label }} par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                            attr.data-testid="input-salaire-mois-moins-{{optionNombreMoisTravailles.index}}-avant-simulation-personne-a-charge-{{personneDTO.index + 1}}"
-                                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                            type="text" maxlength="6" min="0"
-                                            class="max-with-input-type-montant form-control d-inline"
-                                            placeholder="Montant"
-                                            (blur)="this.ressourcesFinancieresAvantSimulationUtileService.calculSalaireMensuelBrut(personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire);"
-                                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.periodeTravailleeAvantSimulation.mois[optionNombreMoisTravailles.index].salaire.montantMensuelNet"
-                                            [ngClass]="{'ng-invalid': hasDouzeMoisSansSalaire(personneDTO.personne)}"
-                                            required inputmode="numeric" (click)="$event.target.select()"
-                                            #salaireMoisAvantPeriodeSimulee="ngModel">
-                                        <app-text-with-euro-symbol message="net"></app-text-with-euro-symbol>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || salaireMoisAvantPeriodeSimulee?.touched)  && salaireMoisAvantPeriodeSimulee?.errors?.pattern">
-                                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo"
+                        for="allocationMensuelleNetASSPersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant de l'&nbsp;</span>
+                        ASS (Allocation Solidarité Spécifique) perçue
+                        <span class="sr-only"> par personne {{personneDTO.index + 1}} </span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="allocationMensuelleNetASSPersonneACharge{{personneDTO.index + 1}}"
+                            name="allocationMensuelleNetASSPersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" min="0" maxlength="6"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
+                            #allocationMensuelleNetASS="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
-                                Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
-                                {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
-                                derniers mois. Veuillez renseigner au moins un salaire.
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantASSNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurMontantASSErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantASSAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireARE" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1">
-                            * ARE (Allocation Retour Emploi) perçue
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input
-                                attr.aria-label="ARE (Allocation Retour Emploi) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                [id]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1"
-                                [name]="'allocationMensuelleNetAREPersonneACharge_'+personneDTO.index + 1" type="text"
-                                pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                                maxlength="6" class="form-control d-inline"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet"
-                                placeholder="Montant" inputmode="numeric" required #allocationMensuelleNetARE="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo" for="allocationAAHPersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant de l'&nbsp;</span>
+                        AAH (Allocation Adulte Handicapé) perçue
+                        <span class="sr-only"> par personne {{personneDTO.index + 1}} </span>
+                        <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_aah"
+                            (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)"
+                            aria-describedby="labelInfobulleMontantAAHPersonneACharge{{personneDTO.index + 1}}">
+                            <span id="labelInfobulleMontantAAHPersonneACharge{{personneDTO.index + 1}}" class="sr-only">
+                                Où trouver le montant de l'AAH de votre personne à charge ?
+                            </span>
+                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                aria-hidden="true">
+                        </button>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="allocationAAHPersonneACharge{{personneDTO.index + 1}}"
+                            name="allocationAAHPersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" min="0" maxlength="6"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH"
+                            #allocationAAH="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetARE?.touched)  && allocationMensuelleNetARE?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.allocationMensuelleNet == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantAAHNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurMontantAAHErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantAAHAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireASS" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1">
-                            * ASS (Allocation Solidarité Spécifique) perçue
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [name]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
-                                [id]="'allocationMensuelleNetASSPersonneACharge'+personneDTO.index + 1"
-                                attr.aria-label="ASS (Allocation Solidarité Spécifique)) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                                maxlength="6" class="form-control d-inline"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)}"
-                                placeholder="Montant" inputmode="numeric" required #allocationMensuelleNetASS="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo"
+                        for="pensionInvaliditePersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant de la</span>
+                        Pension d'invalidité nette imposable perçue
+                        <span class="sr-only"> par personne {{personneDTO.index + 1}} </span>
+                        <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
+                            tag-action="clic_infobulle_pension_invalidite"
+                            (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)"
+                            aria-describedby="labelInfobulleMontantPensionInvaliditePersonneACharge{{personneDTO.index + 1}}">
+                            <span id="labelInfobulleMontantPensionInvaliditePersonneACharge{{personneDTO.index + 1}}"
+                                class="sr-only">
+                                Où trouver le montant de la pension invalidité de votre personne à charge ?
+                            </span>
+                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                aria-hidden="true">
+                        </button>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="pensionInvaliditePersonneACharge{{personneDTO.index + 1}}"
+                            name="pensionInvaliditePersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" min="0" maxlength="6"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
+                            #pensionInvalidite="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationMensuelleNetASS?.touched)  && allocationMensuelleNetASS?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS.allocationMensuelleNet == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantPensionInvaliditeNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurMontantPensionInvaliditeErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantPensionInvaliditeAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiaireAAH" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'allocationAAHPersonneACharge'+personneDTO.index + 1">
-                            * AAH (Allocation Adulte Handicapé) perçue
-                            <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
-                                tag-action="clic_infobulle_aah"
-                                (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)">
-                                <span class="sr-only">
-                                    Où trouver le montant de l'AAH de votre personne à charge ?
-                                </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                            </button>
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [name]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
-                                [id]="'allocationAAHPersonneACharge'+personneDTO.index + 1"
-                                attr.aria-label="AAH (Allocation Adulte Handicapé) perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                                maxlength="6" class="form-control d-inline"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)}"
-                                placeholder="Montant" inputmode="numeric" required #allocationAAH="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isMicroEntrepreneur" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo"
+                        for="beneficesMicroEntreprisePersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant des&nbsp;</span>
+                        Bénéfices en tant que micro entrepreneur
+                        <span class="sr-only"> perçus par personne {{personneDTO.index + 1}} </span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="beneficesMicroEntreprisePersonneACharge{{personneDTO.index + 1}}"
+                            name="beneficesMicroEntreprisePersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="max-with-input-type-montant form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" maxlength="6" min="0"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
+                            #personneAChargeBeneficesMicroEntreprise3DerniersMois="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos">
+                        </app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH?.touched)  && allocationAAH?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || allocationAAH.touched)  && allocationAAH.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCAF.allocationAAH == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantMicroEnrepriseNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurMontantMicroEnrepriseErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantMicroEnrepriseAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="personneDTO.personne.beneficiaireAides.beneficiairePensionInvalidite" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1">
-                            * Pension d'invalidité nette imposable perçue
-                            <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
-                                tag-action="clic_infobulle_pension_invalidite"
-                                (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)">
-                                <span class="sr-only">
-                                    Où trouver le montant de la pension invalidité de votre personne à charge ?
-                                </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                            </button>
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [name]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
-                                [id]="'pensionInvaliditePersonneACharge'+personneDTO.index + 1"
-                                attr.aria-label="Pension d'invalidité perçue par personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                type="text" pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" min="0"
-                                maxlength="6" class="form-control d-inline"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0}"
-                                placeholder="Montant" inputmode="numeric" required #pensionInvalidite="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.isTravailleurIndependant" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo"
+                        for="chiffreAffairesIndependantPersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant du&nbsp;</span>
+                        Chiffre d'affaires en tant qu'indépendant
+                        <span class="sr-only"> perçu par personne {{personneDTO.index + 1}}</span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="chiffreAffairesIndependantPersonneACharge{{personneDTO.index + 1}}"
+                            name="chiffreAffairesIndependantPersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="max-with-input-type-montant form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" maxlength="6" min="0"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
+                            #personneAChargeChiffreAffairesIndependantDernierExercice="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="sur le dernier exercice clos">
+                        </app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite?.touched)  && pensionInvalidite?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || pensionInvalidite.touched)  && pensionInvalidite.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.aidesCPAM.pensionInvalidite == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantIndependantNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
+                    <div class="col-12">
+                        <span id="erreurMontantIndependantErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
+                    </div>
+                    <div class="col-12">
+                        <span id="erreurMontantIndependantAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
+                    </div>
+                </div>
             </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.isMicroEntrepreneur" class="row">
-                <fieldset class="col-12">
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1">
-                            * Bénéfices en tant que micro entrepreneur
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [name]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
-                                [id]="'beneficesMicroEntreprisePersonneACharge'+personneDTO.index + 1"
-                                attr.aria-label="Montant des bénéfices sur le dernier exercice en tant que micro entrepreneur pour personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                type="text" maxlength="6" min="0"
-                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)}"
-                                required inputmode="numeric"
-                                #personneAChargeBeneficesMicroEntreprise3DerniersMois="ngModel">
-                            <app-text-with-euro-symbol message="sur le dernier exercice clos">
-                            </app-text-with-euro-symbol>
-                        </div>
+            <div *ngIf="personneDTO.personne.informationsPersonnelles.hasPensionRetraite" class="fieldset-row">
+                <div class="row pb-2">
+                    <label class="label headline-4-typo" for="pensionRetraitePersonneACharge{{personneDTO.index + 1}}">
+                        *&nbsp;
+                        <span class="sr-only">Montant de la&nbsp;</span>
+                        Pension de retraite nette perçue
+                        <span class="sr-only"> par personne {{personneDTO.index + 1}} </span>
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input id="pensionRetraitePersonneACharge{{personneDTO.index + 1}}"
+                            name="pensionRetraitePersonneACharge{{personneDTO.index + 1}}" type="text"
+                            class="max-with-input-type-montant form-control d-inline"
+                            [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)}"
+                            pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}" maxlength="6" min="0"
+                            placeholder="Montant" inputmode="numeric"
+                            [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite"
+                            #personneAChargePensionRetraite="ngModel"
+                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && personneAChargeBeneficesMicroEntreprise?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeBeneficesMicroEntreprise3DerniersMois?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.beneficesMicroEntrepriseDernierExercice == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                </div>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <span id="erreurMontantPensionRetraiteNonPresentPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.required">
+                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                        </span>
                     </div>
-                </fieldset>
-            </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.isTravailleurIndependant">
-                <fieldset>
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1">
-                            * Chiffre d'affaires en tant qu'indépendant
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [name]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
-                                [id]="'chiffreAffairesIndependantPersonneACharge'+personneDTO.index + 1"
-                                attr.aria-label="Bénéfices de l'année dernière en tant qu'indépendant pour personne {{personneDTO.index + 1}} (né·e le {{dateUtileService.getDateStringFormat(personneDTO.personne.informationsPersonnelles.dateNaissance)}})"
-                                pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                type="text" maxlength="6" min="0"
-                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)}"
-                                required inputmode="numeric"
-                                #personneAChargeChiffreAffairesIndependantDernierExercice="ngModel">
-                            <app-text-with-euro-symbol message="sur le dernier exercice clos">
-                            </app-text-with-euro-symbol>
-                        </div>
+                    <div class="col-12">
+                        <span id="erreurMontantPensionRetraiteErreurPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.pattern">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
+                        </span>
                     </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && personneAChargeChiffreAffairesIndependant?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargeChiffreAffairesIndependantDernierExercice?.touched) && (personneDTO.personne.ressourcesFinancieresAvantSimulation.chiffreAffairesIndependantDernierExercice == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
+                    <div class="col-12">
+                        <span id="erreurMontantPensionRetraiteAZeroPersonneACharge{{personneDTO.index + 1}}"
+                            class="error-input-message" role="alert"
+                            *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)">
+                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                        </span>
                     </div>
-                </fieldset>
-            </div>
-            <div *ngIf="personneDTO.personne.informationsPersonnelles.hasPensionRetraite">
-                <fieldset>
-                    <legend class="row">
-                        <label class="label headline-4-typo"
-                            [for]="'pensionRetraitePersonneACharge'+personneDTO.index + 1">
-                            * Pension de retraite nette perçue
-                        </label>
-                    </legend>
-                    <div class="row">
-                        <div class="col">
-                            <input [id]="'pensionRetraitePersonneACharge'+personneDTO.index + 1"
-                                [name]="'pensionRetraitePersonneACharge'+personneDTO.index + 1"
-                                pattern="{{controleChampFormulaireService.REGEX_NUMERIC}}"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                type="text" maxlength="6" min="0"
-                                class="max-with-input-type-montant form-control d-inline" placeholder="Montant"
-                                [(ngModel)]="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite"
-                                [ngClass]="{'ng-invalid': personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)}"
-                                required inputmode="numeric" #personneAChargePensionRetraite="ngModel">
-                            <app-text-with-euro-symbol message="le mois dernier"></app-text-with-euro-symbol>
-                        </div>
-                    </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.required">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted || personneAChargePensionRetraite?.touched)  && personneAChargePensionRetraite?.errors?.pattern">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_ENTIER}}
-                            </span>
-                        </div>
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert"
-                                *ngIf="personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite && (personneDTO.personne.ressourcesFinancieresAvantSimulation.pensionRetraite == 0)">
-                                {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
-                        </div>
-                    </div>
-                </fieldset>
+                </div>
             </div>
         </div>
         <div class="row row-button-valider">
             <div class="col">
-                <button class="btn-style-perso-3 button-typo"
-                    aria-label="Valider ressources finançières de vos personnes à charge" type="submit"
+                <button class="btn-style-perso-3 button-typo" type="submit"
                     tag-action="clic_bouton_valider_ressources_personnes_a_charge">
                     <div>
                         <span>Valider</span>
+                        <span class="sr-only">&nbsp;les ressources financières de vos personnes à charge</span>
                     </div>
                 </button>
             </div>
