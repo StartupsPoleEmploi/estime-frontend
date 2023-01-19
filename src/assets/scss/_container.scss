@@ -98,6 +98,10 @@ li.leaf4:before {
   display: inline-block;
 }
 
+legend {
+  margin-bottom: 1rem;
+}
+
 .body-with-sticky-footer {
   padding-bottom : $button-sticky-height !important;
 }

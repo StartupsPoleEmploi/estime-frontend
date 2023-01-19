@@ -3,19 +3,24 @@
     <li *ngFor="let etapeSimulation of etapesSimulation; let index = index;"
       [ngClass]="{'etape-active': etapeActive === etapeSimulation.numero, 'etape-completee': etapeActive > etapeSimulation.numero, 'etape-a-completer': etapeActive < etapeSimulation.numero}"
       class="etape" [aria-label]="'Étape '+etapeSimulation.numero">
-      <div (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)" (mouseleave)="onMouseLeaveEtape()"
-        (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)"
-        (keyup)="handleKeyUpOnEtape($event, etapeActive, etapeSimulation.numero)" role="button"
-        [attr.tabindex]="(etapeActive >= etapeSimulation.numero)?'0':''"
+      <button class="button-etape" [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}"
         [ngStyle]="{'cursor':(etapeActive >= etapeSimulation.numero)?'pointer':'not-allowed'}"
-        [ngClass]="{'hoveredEtape': etapeSimulation.numero == hoveredEtape}">
+        (click)="onClickButtonEtape(etapeActive, etapeSimulation.numero)"
+        (mouseover)="onMouseOverEtape(etapeActive,etapeSimulation.numero)" (mouseleave)="onMouseLeaveEtape()"
+        (keyup)="handleKeyUpOnEtape($event, etapeActive, etapeSimulation.numero)"
+        [attr.tabindex]="(etapeActive >= etapeSimulation.numero)?'0':''"
+        [disabled]="(etapeActive < etapeSimulation.numero)"
+        [attr.aria-current]="(etapeActive == etapeSimulation.numero)?'step':''">
         <div class="numero-etape">
-          <span *ngIf="etapeActive <= etapeSimulation.numero" class="overline-typo">{{etapeSimulation.numero}}</span>
+          <span *ngIf="etapeActive <= etapeSimulation.numero" class="overline-typo"
+            aria-hidden="true">{{etapeSimulation.numero}}</span>
           <span *ngIf="etapeActive > etapeSimulation.numero" class="checkmark"
-            [id]="'checkmark_etape_'+etapeSimulation.numero"></span>
+            [id]="'checkmark_etape_'+etapeSimulation.numero">
+            <img alt="" role="presentation" src="./assets/images/icones/checkmark.svg" aria-hidden="true">
+          </span>
         </div>
         <div class="titre-etape caption-typo" [innerHTML]="etapeSimulation.titre"></div>
-      </div>
+      </button>
     </li>
   </ol>
 </div>

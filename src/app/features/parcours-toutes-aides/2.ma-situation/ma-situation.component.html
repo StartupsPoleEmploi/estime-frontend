@@ -1,7 +1,7 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
@@ -14,66 +14,65 @@
         <div class="card card-form card-form-style-2">
             <form [ngClass]="{'submitted':isInformationsPersonnellesFormSubmitted}"
                 #informationsPersonnellesForm="ngForm">
-                <div>
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo" for="codePostal">
+                <div class="fieldset-row">
+                    <div class="row pb-2">
+                        <label class="headline-4-typo label" for="codePostal">
                             * Votre code postal
                         </label>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            <input id="codePostal" name="codePostal" type="text" aria-label="Code postal"
-                                aria-required="true" [attr.aria-invalid]="isChampCodePostalInvalide()"
-                                data-testid="code-postal"
-                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                maxlength="5" minlength="5" class="form-control" placeholder="ex : 75001"
-                                [(ngModel)]="informationsPersonnelles.logement.coordonnees.codePostal" required
-                                #codePostal="ngModel" inputmode="numeric">
+                        <div class="col-12">
+                            <input id="codePostal" name="codePostal" type="text" class="form-control"
+                                data-testid="code-postal" maxlength="5" minlength="5" placeholder="ex : 75001"
+                                inputmode="numeric"
+                                [(ngModel)]="informationsPersonnelles.logement.coordonnees.codePostal"
+                                #codePostal="ngModel"
+                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required
+                                [attr.aria-invalid]="isChampCodePostalInvalide()">
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p id="erreurChampCodePostalNonPresent" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p id="erreurChampCodePostalIncorrect" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
                                 {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                <fieldset class="fieldset-row">
+                    <legend class="row pb-2">
+                        <span class="label headline-4-typo">
                             * Votre date de naissance
-                        </label>
-                    </div>
+                        </span>
+                    </legend>
                     <div class="row pb-3">
                         <app-date-inputs [dateSaisie]="dateNaissance"
                             [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
                             data_testid="naissance-demandeur">
                         </app-date-inputs>
                     </div>
-                </div>
-                <div>
-                    <div class="row pb-3">
+                </fieldset>
+                <div class="fieldset-row">
+                    <div class="row pb-2">
                         <label class="label headline-4-typo" for="nationalite">
                             * Votre nationalité
                         </label>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <select id="nationalite" name="nationalite" data-testid="select-nationalite"
-                                aria-label="Votre nationalité" aria-required="true"
-                                [attr.aria-invalid]="isChampNationaliteInvalide()"
-                                [(ngModel)]="informationsPersonnelles.nationalite" class="form-select"
+                            <select id="nationalite" name="nationalite" class="form-select"
                                 [ngClass]="{'option-selected':this.informationsPersonnelles.nationalite !== null}"
-                                data-width="auto" (ngModelChange)="unsetTitreSejourEnFranceValide($event)" required
-                                #nationalite="ngModel">
+                                data-testid="select-nationalite" data-width="auto"
+                                [(ngModel)]="informationsPersonnelles.nationalite" #nationalite="ngModel"
+                                (ngModelChange)="unsetTitreSejourEnFranceValide($event)" required
+                                [attr.aria-invalid]="isChampNationaliteInvalide()">
                                 <option [value]="null" disabled>
                                     Sélectionner
                                 </option>
@@ -86,495 +85,547 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p id="erreurChampNationaliteNonPresent" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="informationsPersonnelles.nationalite === nationalitesEnum.AUTRE">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo" for="titreSejourValide">
-                            Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
-                        </label>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-check form-check-inline">
-                                <input id="titreSejourValideTrue" name="titreSejourValideTrue"
-                                    aria-label="Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide"
-                                    aria-required="true" [attr.aria-invalid]="isChampTitreSejourInvalide()" type="radio"
-                                    class="form-check-input d-inline"
-                                    [(ngModel)]="informationsPersonnelles.hasTitreSejourEnFranceValide" [value]="true"
-                                    #titreSejourValide="ngModel" (keyup)="handleKeyUpOnButtonTitreSejour($event, true)">
-                                <label class="form-check-label body-2-typo d-inline" for="titreSejourValideTrue">
-                                    oui
-                                </label>
-                            </div>
-                            <div class="form-check form-check-inline ms-2">
-                                <input id="titreSejourValideFalse" name="titreSejourValideFalse"
-                                    aria-label="Vous résidez en France depuis plus de 5 ans et vous n'avez pas un titre de séjour valide"
-                                    aria-required="true" [attr.aria-invalid]="isChampTitreSejourInvalide()" type="radio"
-                                    class="form-check-input d-inline"
-                                    [(ngModel)]="informationsPersonnelles.hasTitreSejourEnFranceValide" [value]="false"
-                                    #titreSejourValide="ngModel"
-                                    (keyup)="handleKeyUpOnButtonTitreSejour($event, false)">
-                                <label class="form-check-label body-2-typo d-inline" for="titreSejourValideFalse">
-                                    non
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pb-3">
-                        <div class="col-12">
-                            <span class="error-input-message" role="alert" *ngIf="isChampTitreSejourInvalide()">
-                                {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                    <fieldset class="fieldset-row">
+                        <legend class="row pb-2">
+                            <span class="label headline-4-typo">
+                                Vous résidez en France depuis plus de 5 ans et avez un titre de séjour valide
                             </span>
+                        </legend>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check form-check-inline">
+                                    <input id="titreSejourValideTrue" name="titreSejourValide"
+                                        [attr.aria-invalid]="isChampTitreSejourInvalide()" type="radio"
+                                        class="form-check-input d-inline"
+                                        [(ngModel)]="informationsPersonnelles.hasTitreSejourEnFranceValide"
+                                        [value]="true" #titreSejourValide="ngModel"
+                                        (keyup)="handleKeyUpOnButtonTitreSejour($event, true)" required>
+                                    <label class="form-check-label body-2-typo d-inline" for="titreSejourValideTrue">
+                                        oui
+                                        <span class="sr-only">
+                                            , je possède un titre de séjour valide
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline ms-2">
+                                    <input id="titreSejourValideFalse" name="titreSejourValide"
+                                        [attr.aria-invalid]="isChampTitreSejourInvalide()" type="radio"
+                                        class="form-check-input d-inline"
+                                        [(ngModel)]="informationsPersonnelles.hasTitreSejourEnFranceValide"
+                                        [value]="false" #titreSejourValide="ngModel"
+                                        (keyup)="handleKeyUpOnButtonTitreSejour($event, false)" required>
+                                    <label class="form-check-label body-2-typo d-inline" for="titreSejourValideFalse">
+                                        non
+                                        <span class="sr-only">
+                                            , je ne possède pas de titre de séjour valide
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row pb-3">
+                            <div class="col-12">
+                                <p class="error-input-message" role="alert" *ngIf="isChampTitreSejourInvalide()">
+                                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                </p>
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-                <div>
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                <fieldset class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             Vos principales ressources financières
-                        </label>
+                        </p>
                         <span class="body-2-typo">Plusieurs choix possibles</span>
-                    </div>
+                    </legend>
                     <div class="row pb-3">
                         <div class="col">
-                            <button name="beneficiaireAucuneRessource" class="radio-button-style-1"
-                                data-testid="btn-situation-aucune-ressource"
-                                tag-action="clic-sur-situation-aucune-ressource"
-                                aria-label="Vous ne percevez pas de ressources" [(ngModel)]="isSansRessource"
-                                btnCheckbox tabindex="0" #beneficiaireAucuneRessource="ngModel"
-                                (click)="onClickCheckBoxHasAucuneRessource()"
+                            <input id="beneficiaireAucuneRessource" name="beneficiaireAucuneRessource" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-aucune-ressource"
+                                tag-action="clic-sur-situation-aucune-ressource" [(ngModel)]="isSansRessource"
+                                #beneficiaireAucuneRessource="ngModel" (click)="onClickCheckBoxHasAucuneRessource()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.SANS_RESSOURCE)">
-                                <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
-                            </button>
-                            <button id="btn-situation-ass" name="beneficiaireASS"
-                                aria-label="Vous êtes bénéficiaire de l'ASS" class="radio-button-style-1"
-                                data-testid="btn-situation-ass" tag-action="clic-sur-situation-ass"
-                                [(ngModel)]="beneficiaireAides.beneficiaireASS" btnCheckbox tabindex="0"
+                            <label for="beneficiaireAucuneRessource" class="mb-2 me-2">
+                                <span class="sr-only">Vous n'êtes bénéficiaire d'</span>
+                                <span class="body-2-typo"> {{situationPersonneEnum.SANS_RESSOURCE}} </span>
+                            </label>
+                            <input id="beneficiaireASS" name="beneficiaireASS" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-ass"
+                                tag-action="clic-sur-situation-ass" [(ngModel)]="beneficiaireAides.beneficiaireASS"
                                 #beneficiaireASS="ngModel" (click)="onClickCheckBoxHasASS()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ASS)"
                                 [ngClass]="{'disabled':informationsPersonnelles.isSalarie}"
                                 [disabled]="informationsPersonnelles.isSalarie">
+                            <label for="beneficiaireASS" class="mb-2 me-2">
+                                <span class="sr-only">Vous êtes bénéficiaire de&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
-                            </button>
-                            <button
-                                *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('demandeur')"
-                                id="btn-situation-rsa" name="beneficiaireRSA" class="radio-button-style-1"
-                                aria-label="Vous êtes bénéficiaire du RSA" data-testid="btn-situation-rsa"
-                                tag-action="clic-sur-situation-rsa" [(ngModel)]="beneficiaireAides.beneficiaireRSA"
-                                btnCheckbox tabindex="0" #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
-                                (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)"
-                                [ngClass]="{'disabled':informationsPersonnelles.isSalarie}"
-                                [disabled]="informationsPersonnelles.isSalarie">
-                                <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
-                            </button>
-                            <button id="btn-situation-are" name="beneficiaireARE"
-                                aria-label="Vous êtes bénéficiaire de l'ARE" class="radio-button-style-1"
-                                data-testid="btn-situation-are" tag-action="clic-sur-situation-are"
-                                [(ngModel)]="beneficiaireAides.beneficiaireARE" btnCheckbox tabindex="0" role="button"
+                            </label>
+                            <div *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('demandeur')"
+                                class="d-inline">
+                                <input id="beneficiaireRSA" name="beneficiaireRSA" type="checkbox"
+                                    class="checkbox-as-button extra-large" data-testid="btn-situation-rsa"
+                                    tag-action="clic-sur-situation-rsa" [(ngModel)]="beneficiaireAides.beneficiaireRSA"
+                                    #beneficiaireRSA="ngModel" (click)="onClickCheckBoxHasRSA()"
+                                    (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.RSA)"
+                                    [ngClass]="{'disabled':informationsPersonnelles.isSalarie}"
+                                    [disabled]="informationsPersonnelles.isSalarie">
+                                <label for="beneficiaireRSA" class="mb-2 me-2">
+                                    <span class="sr-only">Vous percevez&nbsp;</span>
+                                    <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
+                                </label>
+                            </div>
+                            <input id="beneficiaireARE" name="beneficiaireARE" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-are"
+                                tag-action="clic-sur-situation-are" [(ngModel)]="beneficiaireAides.beneficiaireARE"
                                 #beneficiaireARE="ngModel" (click)="onClickCheckBoxHasARE()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.ARE)">
+                            <label for="beneficiaireARE" class="mb-2 me-2">
+                                <span class="sr-only">Vous êtes bénéficiaire de&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
-                            </button>
-                            <button id="btn-is-micro-entrepreneur" name="microEntrepreneur"
-                                aria-label="Vous êtes micro entrepreneur"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm"
-                                data-testid="btn-situation-micro-entrepreneur"
+                            </label>
+                            <input id="microEntrepreneur" name="microEntrepreneur" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-micro-entrepreneur"
                                 tag-action="clic-sur-situation-micro-entrepreneur"
-                                [(ngModel)]="informationsPersonnelles.isMicroEntrepreneur" btnCheckbox tabindex="0"
-                                #microEntrepreneur="ngModel" (click)="onClickCheckBoxIsMicroEntrepreneur()"
+                                [(ngModel)]="informationsPersonnelles.isMicroEntrepreneur" #microEntrepreneur="ngModel"
+                                (click)="onClickCheckBoxIsMicroEntrepreneur()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+                            <label for="microEntrepreneur" class="mb-2 me-2">
+                                <span class="sr-only">Vous percevez&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
-                            </button>
-                            <button id="btn-has-revenus-immobilier" name="hasRevenusImmobilier"
-                                data-testid="btn-situation-revenu-immobilier"
+                            </label>
+                            <input id="hasRevenusImmobilier" name="hasRevenusImmobilier" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-revenu-immobilier"
                                 tag-action="clic-sur-situation-revenu-immobilier"
-                                aria-label="Vous avez des revenus immobiliers"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
-                                [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier" btnCheckbox tabindex="0"
+                                [(ngModel)]="informationsPersonnelles.hasRevenusImmobilier"
                                 #hasRevenusImmobilier="ngModel" (click)="onClickCheckBoxHasRevenusImmobilier()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.IMMOBILIER)">
+                            <label for="hasRevenusImmobilier" class="mb-2 me-2">
+                                <span class="sr-only">Vous percevez&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.IMMOBILIER}}</span>
-                            </button>
-                            <button id="btn-has-salaire" name="hasSalaire" data-testid="btn-situation-salarie"
-                                tag-action="clic-sur-situation-salarie" aria-label="Vous percevez un salaire"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
-                                [(ngModel)]="informationsPersonnelles.isSalarie" btnCheckbox tabindex="0"
+                            </label>
+                            <input id="hasSalaire" name="hasSalaire" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-salarie"
+                                tag-action="clic-sur-situation-salarie" [(ngModel)]="informationsPersonnelles.isSalarie"
                                 #hasSalaire="ngModel" (click)="onClickCheckBoxHasSalaire()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.SALARIE)"
                                 [ngClass]="{'disabled':(beneficiaireAides.beneficiaireRSA || beneficiaireAides.beneficiaireASS)}"
                                 [disabled]="(beneficiaireAides.beneficiaireRSA || beneficiaireAides.beneficiaireASS)">
+                            <label for="hasSalaire" class="mb-2 me-2">
+                                <span class="sr-only">Vous percevez&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
-                            </button>
-                            <button name="beneficiaireAAH" class="radio-button-style-1" data-testid="btn-situation-aah"
-                                tag-action="clic-sur-situation-aah" aria-label="Vous êtes bénéficiaire de l'AAH"
-                                [(ngModel)]="beneficiaireAides.beneficiaireAAH" btnCheckbox tabindex="0"
+                            </label>
+                            <input id="beneficiaireAAH" name="beneficiaireAAH" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-aah"
+                                tag-action="clic-sur-situation-aah" [(ngModel)]="beneficiaireAides.beneficiaireAAH"
                                 #beneficiaireAAH="ngModel" (click)="onClickCheckBoxHasAAH()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.AAH)">
-                                <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
-                            </button>
-                            <button name="beneficiairePensionInvalidite" class="radio-button-style-1"
+                            <label for="beneficiaireAAH" class="mb-2 me-2">
+                                <span class="sr-only">Vous êtes bénéficiaire de&nbsp;</span>
+                                <span class="body-2-typo"> {{situationPersonneEnum.AAH}} </span>
+                            </label>
+                            <input id="beneficiairePensionInvalidite" name="beneficiairePensionInvalidite"
+                                type="checkbox" class="checkbox-as-button extra-large"
                                 data-testid="btn-situation-pension-invalidite"
                                 tag-action="clic-sur-situation-pension-invalidite"
-                                aria-label="Vous percevez une pension d'invalidité"
-                                [(ngModel)]="beneficiaireAides.beneficiairePensionInvalidite" btnCheckbox tabindex="0"
+                                [(ngModel)]="beneficiaireAides.beneficiairePensionInvalidite"
                                 #beneficiairePensionInvalidite="ngModel" (click)="onClickCheckBoxHasPensionInvalidite()"
                                 (keyup)="handleKeyUpOnButtonSituationDemandeur($event, situationPersonneEnum.PENSION_INVALIDITE)">
-                                <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
-                            </button>
+                            <label for="beneficiairePensionInvalidite" class="mb-2 me-2">
+                                <span class="sr-only">Vous êtes bénéficiaire d'</span>
+                                <span class="body-2-typo"> {{situationPersonneEnum.PENSION_INVALIDITE}} </span>
+                            </label>
                         </div>
                     </div>
-                </div>
+                </fieldset>
                 <app-message-info *ngIf="informationsPersonnelles.isSalarie && beneficiaireAides.beneficiaireARE"
                     contenu="Attention : si vous bénéficiez de l'ARE et que votre activité salariée a débuté avant la fin du contrat de travail qui a permis votre ouverture droits (activité conservée) : Le simulateur n'est pas en mesure de vous apporter une estimation.">
                 </app-message-info>
-                <div *ngIf="informationsPersonnelles.isSalarie">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                <fieldset *ngIf="informationsPersonnelles.isSalarie" class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Allez-vous cumuler votre ancien salaire avec votre nouveau ?
                             <button id="infobulle-cumul-ancien-et-nouveau-salaire" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
-                                aria-label="Comment seront cumulés mon ancien et nouveau salaire ?"
                                 (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)">
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                                <span class="sr-only">
+                                    Comment seront cumulés mon ancien et nouveau salaire ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check form-check-inline">
-                                <input id="hasCumulAncienEtNouveauSalaireOui" name="hasCumulAncienEtNouveauSalaireOui"
-                                    aria-label="Vous cumulerez votre ancien et votre nouveau salaire"
-                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-oui" type="radio"
-                                    class="form-check-input"
+                                <input id="hasCumulAncienEtNouveauSalaireOui" name="hasCumulAncienEtNouveauSalaire"
+                                    type="radio" class="form-check-input"
+                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-oui"
                                     (keyup)="handleKeyUpOnButtonHasCumulAncienEtNouveauSalaire($event, true)"
                                     [(ngModel)]="informationsPersonnelles.hasCumulAncienEtNouveauSalaire" [value]="true"
                                     #hasCumulAncienEtNouveauSalaire="ngModel">
                                 <label class="form-check-label body-2-typo" for="hasCumulAncienEtNouveauSalaireOui">
                                     oui
+                                    <span class="sr-only">, je vais cumuler mon ancien et mon nouveau salaire</span>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline ms-2">
-                                <input id="hasCumulAncienEtNouveauSalaireNon" name="hasCumulAncienEtNouveauSalaireNon"
-                                    aria-label="Vous ne cumulerez pas votre ancien et votre nouveau salaire"
-                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-non" type="radio"
-                                    class="form-check-input"
+                                <input id="hasCumulAncienEtNouveauSalaireNon" name="hasCumulAncienEtNouveauSalaire"
+                                    type="radio" class="form-check-input"
+                                    data-testid="btn-has-cumul-ancien-et-nouveau-salaire-non"
                                     (keyup)="handleKeyUpOnButtonHasCumulAncienEtNouveauSalaire($event, false)"
                                     [(ngModel)]="informationsPersonnelles.hasCumulAncienEtNouveauSalaire"
                                     [value]="false" #hasCumulAncienEtNouveauSalaire="ngModel">
                                 <label class="form-check-label body-2-typo" for="hasCumulAncienEtNouveauSalaireNon">
                                     non
+                                    <span class="sr-only">
+                                        , je ne vais pas cumuler mon ancien et mon nouveau salaire
+                                    </span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || hasCumulAncienEtNouveauSalaire.touched) && hasCumulAncienEtNouveauSalaire.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="informationsPersonnelles.isMicroEntrepreneur">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                </fieldset>
+                <fieldset *ngIf="informationsPersonnelles.isMicroEntrepreneur" class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Votre date de création ou de reprise d'entreprise
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row pb-3">
                         <app-date-inputs [dateSaisie]="dateRepriseCreationEntreprise"
                             [isFormSubmitted]="isInformationsPersonnellesFormSubmitted"
                             data_testid="reprise-creation-entreprise">
                         </app-date-inputs>
                     </div>
-                </div>
-                <div *ngIf="isConcerneACRE() && isEntrepriseCreeeDansLes12Mois()">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                </fieldset>
+                <fieldset *ngIf="isConcerneACRE()" class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Bénéficiez-vous de l'ACRE ?
                             <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
-                                aria-label="Qu'est ce que l'ACRE ?"
-                                (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)">
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                                (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)"
+                                aria-describedby="labelInfobulleACRE">
+                                <span id="labelInfobulleACRE" class="sr-only">
+                                    Qu'est ce que l'ACRE ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check form-check-inline">
-                                <input id="isBeneficiaireACREOui" name="isBeneficiaireACREOui"
-                                    aria-label="Vous êtes bénéficiaire de l'ACRE" aria-required="true"
-                                    [attr.aria-invalid]="isChampBeneficiaireACREInvalide()"
-                                    data-testid="btn-is-beneficiaire-acre-oui" type="radio" class="form-check-input"
+                                <input id="isBeneficiaireACREOui" name="isBeneficiaireACRE" type="radio"
+                                    class="form-check-input" [value]="true" data-testid="btn-is-beneficiaire-acre-oui"
                                     (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, true)"
                                     (click)="onClickCheckBoxBeneficiaireACRE(true)"
-                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" [value]="true"
-                                    #isBeneficiaireACRE="ngModel">
-                                <label class="form-check-label body-2-typo" for="isBeneficiaireACREOui">
+                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE"
+                                    #isBeneficiaireACRE="ngModel" required
+                                    [attr.aria-invalid]="isChampBeneficiaireACREInvalide()">
+                                <label class=" form-check-label body-2-typo" for="isBeneficiaireACREOui">
                                     oui
+                                    <span class="sr-only">, vous bénéficiez de l'ACRE</span>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline ms-2">
-                                <input id="isBeneficiaireACRENon" name="isBeneficiaireACRENon"
-                                    aria-label="Vous n'êtes pas bénéficiaire de l'ACRE" aria-required="true"
-                                    [attr.aria-invalid]="isChampBeneficiaireACREInvalide()"
-                                    data-testid="btn-is-beneficiaire-acre-non" type="radio" class="form-check-input"
+                                <input id="isBeneficiaireACRENon" name="isBeneficiaireACRE" type="radio"
+                                    class="form-check-input" [value]="false" data-testid="btn-is-beneficiaire-acre-non"
                                     (keyup)="handleKeyUpOnButtonBeneficiaireACRE($event, false)"
                                     (click)="onClickCheckBoxBeneficiaireACRE(false)"
-                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE" [value]="false"
-                                    #isBeneficiaireACRE="ngModel">
+                                    [(ngModel)]="informationsPersonnelles.isBeneficiaireACRE"
+                                    #isBeneficiaireACRE="ngModel" required
+                                    [attr.aria-invalid]="isChampBeneficiaireACREInvalide()">
                                 <label class="form-check-label body-2-typo" for="isBeneficiaireACRENon">
                                     non
+                                    <span class="sr-only">, vous ne bénéficiez pas de l'ACRE</span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert" *ngIf="isChampBeneficiaireACREInvalide()">
+                            <p id="erreurChampBeneficiaireACREInvalide" class="error-input-message" role="alert"
+                                *ngIf="isChampBeneficiaireACREInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                </fieldset>
+                <fieldset class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Votre situation familiale
                             <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-conjoint"
-                                aria-label="Qui considère-t-on comme votre conjoint ?"
-                                (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)">
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                                (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)"
+                                aria-describedby="labelInfobulleConjoint">
+                                <span id="labelInfobulleConjoint" class="sr-only">
+                                    Qui considère-t-on comme votre conjoint ?
+                                </span>
+                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                    aria-hidden="true">
                             </button>
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row">
                         <div class="col">
-                            <button id="btn-situation-familiale-seul" #situationFamilialeDemandeur="ngModel"
-                                (click)="onClickCheckBoxSituationFamiliale()" name="situationFamilialeDemandeur"
-                                aria-label="Vous êtes célibataire" aria-required="true"
-                                [attr.aria-invalid]="isChampSituationFamilialeInvalide()"
+                            <input id="situationFamilialeSeul" name="situationFamilialeDemandeur" type="radio"
+                                [value]="false" class="radio-as-button small"
                                 [ngClass]="{'ng-invalid': isChampSituationFamilialeInvalide()}"
-                                class="radio-button-style-1" data-testid="btn-situation-familiale-seul"
-                                [btnRadio]="false" tabindex="0" [(ngModel)]="situationFamiliale.isEnCouple"
-                                (keyup)="handleKeyUpOnButtonSituationFamiliale($event, false)">
+                                data-testid="btn-situation-familiale-seul" [(ngModel)]="situationFamiliale.isEnCouple"
+                                #situationFamilialeDemandeur="ngModel"
+                                (click)="onClickCheckBoxSituationFamiliale(false)"
+                                (keyup)="handleKeyUpOnButtonSituationFamiliale($event, false)" required
+                                [attr.aria-invalid]="isChampSituationFamilialeInvalide()">
+                            <label for="situationFamilialeSeul">
+                                <span class="sr-only">Vous êtes&nbsp;</span>
                                 <span class="body-2-typo">{{situationsFamilialesEnum.SEULE}}</span>
-                            </button>
-                            <button id="btn-situation-familiale-couple" #situationFamilialeDemandeur="ngModel"
-                                (click)="onClickCheckBoxSituationFamiliale()" name="situationFamilialeDemandeur"
-                                [ngClass]="{'ms-1':!screenService.isExtraSmallScreen()}"
-                                aria-label="Vous êtes en couple" aria-required="true"
-                                [attr.aria-invalid]="isChampSituationFamilialeInvalide()"
-                                [ngClass]="{'ng-invalid': isChampSituationFamilialeInvalide()}"
-                                class="radio-button-style-1" data-testid="btn-situation-familiale-couple"
-                                [btnRadio]="true" tabindex="0" [(ngModel)]="situationFamiliale.isEnCouple"
-                                (keyup)="handleKeyUpOnButtonSituationFamiliale($event, true)">
+                            </label>
+                            <input id="situationFamilialeEnCouple" name="situationFamilialeDemandeur" type="radio"
+                                [value]="true" class="radio-as-button small"
+                                [ngClass]="{'ms-1':!screenService.isExtraSmallScreen(), 'ng-invalid': isChampSituationFamilialeInvalide()}"
+                                data-testid="btn-situation-familiale-couple" [(ngModel)]="situationFamiliale.isEnCouple"
+                                #situationFamilialeDemandeur="ngModel" (click)="onClickCheckBoxSituationFamiliale(true)"
+                                (keyup)="handleKeyUpOnButtonSituationFamiliale($event, true)" required
+                                [attr.aria-invalid]="isChampSituationFamilialeInvalide()">
+                            <label for="situationFamilialeEnCouple">
+                                <span class="sr-only">Vous êtes&nbsp;</span>
                                 <span class="body-2-typo">{{situationsFamilialesEnum.EN_COUPLE}}</span>
-                            </button>
+                            </label>
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert" *ngIf="isChampSituationFamilialeInvalide()">
+                            <p id="erreurChampSituationFamilialeInvalide" class="error-input-message" role="alert"
+                                *ngIf="isChampSituationFamilialeInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                </fieldset>
+                <fieldset *ngIf="situationFamiliale.isEnCouple === false && beneficiaireAides.beneficiaireRSA === true"
+                    class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Vous vivez seul·e depuis plus de 18 mois ?
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row">
                         <div class="col">
                             <div class="form-check form-check-inline">
-                                <input id="isSeulPlusDe18MoisOui" name="isSeulPlusDe18MoisOui"
-                                    aria-label="Vous vivez seul.e depuis plus de 18 mois" aria-required="true"
-                                    [attr.aria-invalid]="isChampSeulDepuisPlusDe18MoisInvalide()"
+                                <input id="isSeulPlusDe18MoisOui" name="isSeulPlusDe18Mois" type="radio" [value]="true"
+                                    class="form-check-input"
                                     [ngClass]="{'ng-invalid':isChampSeulDepuisPlusDe18MoisInvalide()}"
-                                    data-testid="btn-is-seul-plus-de-18-mois-oui" type="radio" class="form-check-input"
-                                    (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, true)"
-                                    [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois" [value]="true"
-                                    #isSeulPlusDe18Mois="ngModel">
+                                    data-testid="btn-is-seul-plus-de-18-mois-oui"
+                                    [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois" #isSeulPlusDe18Mois="ngModel"
+                                    (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, true)" required
+                                    [attr.aria-invalid]="isChampSeulDepuisPlusDe18MoisInvalide()">
                                 <label class="form-check-label body-2-typo" for="isSeulPlusDe18MoisOui">
                                     oui
+                                    <span class="sr-only">, vous vivez seul.e depuis plus de 18 mois</span>
                                 </label>
                             </div>
                             <div class="form-check form-check-inline ms-2">
-                                <input id="isSeulPlusDe18MoisNon" name="isSeulPlusDe18MoisNon"
-                                    aria-label="Vous vivez seul.e depuis moins de 18 mois" aria-required="true"
-                                    [attr.aria-invalid]="isChampSeulDepuisPlusDe18MoisInvalide()"
+                                <input id="isSeulPlusDe18MoisNon" name="isSeulPlusDe18Mois" type="radio" [value]="false"
+                                    class="form-check-input"
                                     [ngClass]="{'ng-invalid':isChampSeulDepuisPlusDe18MoisInvalide()}"
-                                    data-testid="btn-is-seul-plus-de-18-mois-non" type="radio" class="form-check-input"
-                                    (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, false)"
-                                    [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois" [value]="false"
-                                    #isSeulPlusDe18Mois="ngModel">
+                                    data-testid="btn-is-seul-plus-de-18-mois-non"
+                                    [(ngModel)]="situationFamiliale.isSeulPlusDe18Mois" #isSeulPlusDe18Mois="ngModel"
+                                    (keyup)="handleKeyUpOnButtonSeulPlusDe18Mois($event, false)" required
+                                    [attr.aria-invalid]="isChampSeulDepuisPlusDe18MoisInvalide()">
                                 <label class="form-check-label body-2-typo" for="isSeulPlusDe18MoisNon">
                                     non
+                                    <span class="sr-only">, vous ne vivez pas seul.e depuis plus de 18 mois</span>
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p id="erreurChampSeulDepuisPlusDe18MoisInvalide" class="error-input-message" role="alert"
                                 *ngIf="isChampSeulDepuisPlusDe18MoisInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div *ngIf="situationFamiliale.isEnCouple === true">
-                    <div class="row pb-3">
-                        <label class="label headline-4-typo">
+                </fieldset>
+                <fieldset *ngIf="situationFamiliale.isEnCouple === true" class="fieldset-row">
+                    <legend class="row pb-2">
+                        <p class="label headline-4-typo">
                             * Votre conjoint·e perçoit
-                        </label>
-                    </div>
+                        </p>
+                    </legend>
                     <div class="row">
                         <div class="col">
-                            <button #conjointIsSalarie="ngModel" name="conjointIsSalarie"
-                                aria-label="Votre conjoint(e) perçoit un salaire" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-salarie"
-                                tag-action="clic-sur-situation-conjoint-salarie" btnCheckbox tabindex="0"
+                            <input id="conjointIsSalarie" name="conjointIsSalarie" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-conjoint-salarie"
+                                tag-action="clic-sur-situation-conjoint-salarie"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isSalarie"
-                                (click)="onClickCheckBoxConjointIsSalarie()"
+                                #conjointIsSalarie="ngModel" (click)="onClickCheckBoxConjointIsSalarie()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SALARIE)">
+                            <label for="conjointIsSalarie" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.SALARIE}}</span>
-                            </button>
-                            <button #conjointHasARE="ngModel" name="conjointHasARE"
-                                aria-label="Votre conjoint(e) perçoit l' ARE" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-are" tag-action="clic-sur-situation-conjoint-are"
-                                btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointHasARE" name="conjointHasARE" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-conjoint-are"
+                                tag-action="clic-sur-situation-conjoint-are"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireARE"
-                                (click)="onClickCheckBoxConjointHasARE()"
+                                #conjointHasARE="ngModel" (click)="onClickCheckBoxConjointHasARE()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ARE)">
+                            <label for="conjointHasARE" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.ARE}}</span>
-                            </button>
-                            <button #conjointHasASS="ngModel" name="conjointHasASS"
-                                aria-label="Votre conjoint(e) perçoit l' ASS" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-ass" tag-action="clic-sur-situation-conjoint-ass"
-                                btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointHasASS" name="conjointHasASS" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-conjoint-ass"
+                                tag-action="clic-sur-situation-conjoint-ass"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireASS"
-                                (click)="onClickCheckBoxConjointHasASS()"
+                                #conjointHasASS="ngModel" (click)="onClickCheckBoxConjointHasASS()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.ASS)">
+                            <label for="conjointHasASS" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.ASS}}</span>
-                            </button>
-                            <button *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('conjoint')"
-                                #conjointHasRSA="ngModel" name="conjointHasRSA"
-                                aria-label="Votre conjoint(e) perçoit le RSA" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-rsa" tag-action="clic-sur-situation-conjoint-rsa"
-                                btnCheckbox tabindex="0"
-                                [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA"
-                                (click)="onClickCheckBoxConjointHasRSA()"
-                                (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
-                                <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
-                            </button>
-                            <button id="btn-conjoint-is-micro-entrepreneur" name="conjointIsMicroEntrepreneur"
-                                aria-label="Votre conjoint(e) est micro entrepreneur"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm"
+                            </label>
+                            <div *ngIf="!deConnecteBeneficiaireAidesService.hasFoyerAutreBeneficiaireRSA('conjoint')"
+                                class="d-inline">
+                                <input id="conjointHasRSA" name="conjointHasRSA" type="checkbox"
+                                    class="checkbox-as-button extra-large" data-testid="btn-situation-conjoint-rsa"
+                                    tag-action="clic-sur-situation-conjoint-rsa"
+                                    [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireRSA"
+                                    #conjointHasRSA="ngModel" (click)="onClickCheckBoxConjointHasRSA()"
+                                    (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.RSA)">
+                                <label for="conjointHasRSA" class="mb-2 me-2">
+                                    <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
+                                    <span class="body-2-typo">{{situationPersonneEnum.RSA}}</span>
+                                </label>
+                            </div>
+                            <input id="conjointIsMicroEntrepreneur" name="conjointIsMicroEntrepreneur" type="checkbox"
+                                class="checkbox-as-button extra-large"
                                 data-testid="btn-situation-conjoint-micro-entrepreneur"
                                 tag-action="clic-sur-situation-conjoint-micro-entrepreneur"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isMicroEntrepreneur"
-                                btnCheckbox tabindex="0" #conjointIsMicroEntrepreneur="ngModel"
+                                #conjointIsMicroEntrepreneur="ngModel"
                                 (click)="onClickCheckBoxConjointIsMicroEntrepreneur()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.MICRO_ENTREPRENEUR)">
+                            <label for="conjointIsMicroEntrepreneur" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.MICRO_ENTREPRENEUR}}</span>
-                            </button>
-                            <button id="btn-conjoint-is-travailleur-independant" name="conjointIsTravailleurIndependant"
-                                aria-label="Votre conjoint(e) est travailleur indépendant"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm"
+                            </label>
+                            <input id="conjointIsTravailleurIndependant" name="conjointIsTravailleurIndependant"
+                                type="checkbox" class="checkbox-as-button extra-large"
                                 data-testid="btn-situation-conjoint-travailleur-independant"
                                 tag-action="clic-sur-situation-conjoint-travailleur-independant"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isTravailleurIndependant"
-                                btnCheckbox tabindex="0" #conjointIsTravailleurIndependant="ngModel"
+                                #conjointIsTravailleurIndependant="ngModel"
                                 (click)="onClickCheckBoxConjointIsTravailleurIndependant()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.TRAVAILLEUR_INDEPENDANT)">
+                            <label for="conjointIsTravailleurIndependant" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.TRAVAILLEUR_INDEPENDANT}}</span>
-                            </button>
-                            <button id="btn-conjoint-has-revenus-immobilier" name="conjointHasRevenusImmobilier"
+                            </label>
+                            <input id="conjointHasRevenusImmobilier" name="conjointHasRevenusImmobilier" type="checkbox"
+                                class="checkbox-as-button extra-large"
                                 data-testid="btn-situation-conjoint-revenu-immobilier"
                                 tag-action="clic-sur-situation-conjoint-revenus-immobiliers"
-                                aria-label="Votre conjoint(e) a des revenus immobiliers"
-                                class="radio-button-style-1 mt-perso-sm ms-perso-lm button-typo"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasRevenusImmobilier"
-                                btnCheckbox tabindex="0" #hasRevenusImmobilier="ngModel"
+                                #conjointHasRevenusImmobilier="ngModel"
                                 (click)="onClickCheckBoxConjointHasRevenusImmobilier()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.IMMOBILIER)">
+                            <label for="conjointHasRevenusImmobilier" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.IMMOBILIER}}</span>
-                            </button>
-                            <button #conjointHasPensionInvalidite="ngModel" name="conjointIsRetraite"
-                                aria-label="Votre conjoint(e) perçoit une pension de retraite"
-                                class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-retraite"
-                                tag-action="clic-sur-situation-conjoint-pension-retraite" btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointIsRetraite" name="conjointIsRetraite" type="checkbox"
+                                class="checkbox-as-button extra-large"
+                                data-testid="btn-situation-conjoint-pension-retraite"
+                                tag-action="clic-sur-situation-conjoint-pension-retraite"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.hasPensionRetraite"
-                                (click)="onClickCheckBoxConjointHasPensionRetraite()"
+                                #conjointIsRetraite="ngModel" (click)="onClickCheckBoxConjointHasPensionRetraite()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_RETRAITE)">
+                            <label for="conjointIsRetraite" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_RETRAITE}}</span>
-                            </button>
-                            <button #conjointHasAAH="ngModel" name="conjointHasAAH"
-                                aria-label="Votre conjoint(e) perçoit l'AAH" class="radio-button-style-1"
-                                data-testid="btn-situation-conjoint-aah" tag-action="clic-sur-situation-conjoint-aah"
-                                btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointHasAAH" name="conjointHasAAH" type="checkbox"
+                                class="checkbox-as-button extra-large" data-testid="btn-situation-conjoint-aah"
+                                tag-action="clic-sur-situation-conjoint-aah"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiaireAAH"
-                                (click)="onClickCheckBoxConjointHasAAH()"
+                                #conjointHasAAH="ngModel" (click)="onClickCheckBoxConjointHasAAH()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.AAH)">
+                            <label for="conjointHasAAH" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.AAH}}</span>
-                            </button>
-                            <button #conjointHasPensionInvalidite="ngModel" name="conjointHasInvalidite"
-                                aria-label="Votre conjoint(e) perçoit une pension d'invalidité"
-                                class="radio-button-style-1" data-testid="btn-situation-conjoint-pension-invalidite"
-                                tag-action="clic-sur-situation-conjoint-pension-invalidite" btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointHasPensionInvalidite" name="conjointHasPensionInvalidite" type="checkbox"
+                                class="checkbox-as-button extra-large"
+                                data-testid="btn-situation-conjoint-pension-invalidite"
+                                tag-action="clic-sur-situation-conjoint-pension-invalidite"
                                 [(ngModel)]="situationFamiliale.conjoint.beneficiaireAides.beneficiairePensionInvalidite"
+                                #conjointHasPensionInvalidite="ngModel"
                                 (click)="onClickCheckBoxConjointHasPensionInvalidite()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.PENSION_INVALIDITE)">
+                            <label for="conjointHasPensionInvalidite" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.PENSION_INVALIDITE}}</span>
-                            </button>
-                            <button #conjointIsSansRessource="ngModel" name="conjointIsSansRessource"
-                                aria-label="Votre conjoint(e) est sans ressources financières"
-                                class="radio-button-style-1" data-testid="btn-situation-conjoint-sans-ressource"
-                                tag-action="clic-sur-situation-conjoint-sans-ressource" btnCheckbox tabindex="0"
+                            </label>
+                            <input id="conjointIsSansRessource" name="conjointIsSansRessource" type="checkbox"
+                                class="checkbox-as-button extra-large"
+                                data-testid="btn-situation-conjoint-sans-ressource"
+                                tag-action="clic-sur-situation-conjoint-sans-ressource"
                                 [(ngModel)]="situationFamiliale.conjoint.informationsPersonnelles.isSansRessource"
-                                (click)="onClickCheckBoxConjointIsSansRessource()"
+                                #conjointIsSansRessource="ngModel" (click)="onClickCheckBoxConjointIsSansRessource()"
                                 (keyup)="handleKeyUpOnButtonSituationConjoint($event, situationPersonneEnum.SANS_RESSOURCE)">
+                            <label for="conjointIsSansRessource" class="mb-2 me-2">
+                                <span class="sr-only">Votre conjoint(e) ne perçoit&nbsp;</span>
                                 <span class="body-2-typo">{{situationPersonneEnum.SANS_RESSOURCE}}</span>
-                            </button>
+                            </label>
                         </div>
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
+                </fieldset>
             </form>
         </div>
         <div class="row-btn-form">
-            <button id="btn-ma-situation-retour" data-testid="btn-ma-situation-retour" class="btn-precedent"
-                aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
-                tag-navigation="clic_bouton_retour" type="button">
+            <button id="btn-ma-situation-retour" class="btn-precedent" tag-navigation="clic_bouton_retour"
+                data-testid="btn-ma-situation-retour" (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente">
                 <div>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-ma-situation-suivant" data-testid="btn-ma-situation-suivant" class="btn-suivant"
-                aria-label="Passer à la page suivante" type="submit" aria-label="Passer à la page suivante"
+            <button id="btn-ma-situation-suivant" type="submit" class="btn-suivant" tag-navigation="clic_bouton_suivant"
+                data-testid="btn-ma-situation-suivant"
                 (click)="onSubmitInformationsPersonnellesForm(informationsPersonnellesForm)"
-                tag-navigation="clic_bouton_suivant">
+                aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
@@ -609,9 +660,10 @@
 </ng-template>
 
 <ng-template #modalPensionInvaliditeEtMicro>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_micro" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_micro" modalRole="alertdialog"
+        htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>
@@ -626,9 +678,9 @@
 </ng-template>
 
 <ng-template #modalAAHEtMicro>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_micro" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_micro" modalRole="alertdialog" htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>
@@ -643,9 +695,9 @@
 </ng-template>
 
 <ng-template #modalAREEtMicro>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_are_et_micro" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_are_et_micro" modalRole="alertdialog" htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>
@@ -660,9 +712,9 @@
 </ng-template>
 
 <ng-template #modalAAHEtSalaire>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_salaire" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_aah_et_salaire" modalRole="alertdialog" htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>
@@ -677,9 +729,10 @@
 </ng-template>
 
 <ng-template #modalPensionInvaliditeEtSalaire>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" modalRole="alertdialog"
+        htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>

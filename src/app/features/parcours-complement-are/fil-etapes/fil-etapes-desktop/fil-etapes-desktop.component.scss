@@ -5,16 +5,10 @@
   width: 1.375rem;
   height: 1.375rem;
   border-radius: 50%;
-  -ms-transform: rotate(45deg);
-  /* IE 9 */
-  -webkit-transform: rotate(45deg);
-  /* Chrome, Safari, Opera */
-  transform: rotate(45deg);
   margin-top: 0.125rem;
 }
 
 .checkmark:before {
-  content: "";
   position: absolute;
   width: 0.125rem;
   height: 1rem;
@@ -24,7 +18,6 @@
 }
 
 .checkmark:after {
-  content: "";
   position: absolute;
   width: 0.4375rem;
   height: 0.125rem;

@@ -10,22 +10,28 @@ import { ResultatSimulationComponent } from './3.resultat-simulation/resultat-si
 
 const routes: Routes = [
   {
-    path: RoutesEnum.SITUATION,
+    path: "",
     component: MaSituationComponent,
     canActivate: [EnableParcoursComplementAREGuard],
     title: `${PageTitleEnum.SITUATION} ${PageTitleEnum.SUFFIX}`
   },
   {
+    path: RoutesEnum.SITUATION,
+    component: MaSituationComponent,
+    canActivate: [EnableParcoursComplementAREGuard],
+    title: `${PageTitleEnum.SITUATION_PARCOURS_COMPLEMENT_ARE} ${PageTitleEnum.SUFFIX}`
+  },
+  {
     path: RoutesEnum.ACTIVITE_REPRISE,
     component: ActiviteRepriseComponent,
     canActivate: [EnableParcoursComplementAREGuard],
-    title: `${PageTitleEnum.ACTIVITE_REPRISE} ${PageTitleEnum.SUFFIX}`
+    title: `${PageTitleEnum.ACTIVITE_REPRISE_PARCOURS_COMPLEMENT_ARE} ${PageTitleEnum.SUFFIX}`
   },
   {
     path: RoutesEnum.RESULTAT_SIMULATION,
     component: ResultatSimulationComponent,
     canActivate: [EnableParcoursComplementAREGuard],
-    title: `${PageTitleEnum.RESULTAT_SIMULATION} ${PageTitleEnum.SUFFIX}`
+    title: `${PageTitleEnum.RESULTAT_SIMULATION_PARCOURS_COMPLEMENT_ARE} ${PageTitleEnum.SUFFIX}`
   }
 ];
 

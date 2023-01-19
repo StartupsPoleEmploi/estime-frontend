@@ -31,3 +31,14 @@
     }
   }
 }
+
+h1 > .img-interrogation-icon {
+  vertical-align: top !important;
+
+  &:focus {
+    vertical-align: middle !important;
+    img {
+      vertical-align: top !important;
+    }
+  }
+}

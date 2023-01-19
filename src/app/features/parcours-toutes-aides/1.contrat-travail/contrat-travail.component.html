@@ -1,7 +1,7 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen() && !isModificationCriteres"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf=" screenService.isExtraSmallScreen() && !isModificationCriteres">
 </app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid" [ngClass]="isModificationCriteres?'modification-criteres-container':''">
         <div class="div-title-formulaire">
             <h1 *ngIf="!isModificationCriteres" class="h1-style-1"
@@ -18,792 +18,854 @@
         </div>
         <div class="card mt-4 pb-2">
             <div class="subcard-contrat-travail no-border">
-                <div class="row pb-3">
-                    <div class="col-md-12">
-                        <h4 class="headline-4-typo color-blue-2-typo text-start">
+                <fieldset class="fieldset-row">
+                    <legend class="row pb-2">
+                        <span class="headline-4-typo label">
                             * Avez-vous une offre d’emploi à partir de laquelle vous voulez faire une estimation ?
-                        </h4>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-md-12">
-                        <button id="btn-situation-offre-emploi-oui" name="offreEmploiOui"
-                            aria-label="Vous avez une offre d'emploi en vue"
-                            class="btn-checkbox-offre-emploi me-2 d-inline" aria-required="true"
-                            [attr.aria-invalid]="(isFuturTravailFormSubmitted && (!hasOffreEmploiNon && !hasOffreEmploiOui))"
-                            [ngClass]="{'active':hasOffreEmploiOui, 'ng-invalid':(isFuturTravailFormSubmitted && (!hasOffreEmploiNon && !hasOffreEmploiOui))}"
-                            data-testid="btn-situation-offre-emploi-oui" [(ngModel)]="hasOffreEmploiOui" btnCheckbox
-                            tabindex="0" #offreEmploiOui="ngModel" tag-action="situation-offre-emploi-connue-oui"
-                            (click)="onClickCheckBoxHasOffreEmploiOui()"
-                            (keyup)="handleKeyUpOnButtonOffreEmploiOui($event)">
-                            <span class="body-2-typo">Oui</span>
-                        </button>
-                        <button id="btn-situation-offre-emploi-non" name="offreEmploiNon"
-                            class="btn-checkbox-offre-emploi d-inline" aria-required="true"
-                            [attr.aria-invalid]="(isFuturTravailFormSubmitted && (!hasOffreEmploiNon && !hasOffreEmploiOui))"
-                            [ngClass]="{'active':hasOffreEmploiNon, 'ng-invalid':(isFuturTravailFormSubmitted && (!hasOffreEmploiNon && !hasOffreEmploiOui))}"
-                            aria-label="Vous n'avez pas d'offre d'emploi en vue"
-                            data-testid="btn-situation-offre-emploi-non" [(ngModel)]="hasOffreEmploiNon" tabindex="0"
-                            #offreEmploiNon="ngModel" btnCheckbox tag-action="situation-offre-emploi-connue-non"
-                            (click)="onClickCheckBoxHasOffreEmploiNon()"
-                            (keyup)="handleKeyUpOnButtonOffreEmploiNon($event)">
-                            <div>
-                                <span class="body-2-typo">Non</span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-                <div class="row pb-3">
-                    <div class="col-12">
-                        <span class="error-input-message" role="alert"
-                            *ngIf="(isFuturTravailFormSubmitted && (!hasOffreEmploiNon && !hasOffreEmploiOui))">
-                            {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
                         </span>
+                    </legend>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input id="offreEmploiOui" name="hasOffreEmploi" type="radio" [value]="true"
+                                class="radio-as-button medium d-inline"
+                                [ngClass]="{'offre-emploi-invalid':(isFuturTravailFormSubmitted && (hasOffreEmploi == null))}"
+                                tag-action="situation-offre-emploi-connue-oui"
+                                data-testid="btn-situation-offre-emploi-oui" [(ngModel)]="hasOffreEmploi"
+                                #offreEmploiOui="ngModel" (click)="onClickCheckBoxHasOffreEmploiOui()"
+                                (keyup)="handleKeyUpOnButtonOffreEmploiOui($event)" required
+                                [attr.aria-invalid]="(isFuturTravailFormSubmitted && (hasOffreEmploi == null))">
+                            <label for="offreEmploiOui" class="me-2">
+                                <span class="body-2-typo">Oui</span>
+                                <span class="sr-only">, j'ai une offre d'emploi en vue</span>
+                            </label>
+                            <input id="offreEmploiNon" name="hasOffreEmploi" type="radio" [value]="false"
+                                class="radio-as-button medium d-inline"
+                                [ngClass]="{'offre-emploi-invalid':(isFuturTravailFormSubmitted && (hasOffreEmploi == null))}"
+                                tag-action="situation-offre-emploi-connue-non"
+                                data-testid="btn-situation-offre-emploi-non" [(ngModel)]="hasOffreEmploi"
+                                #offreEmploiNon="ngModel" (click)="onClickCheckBoxHasOffreEmploiNon()"
+                                (keyup)="handleKeyUpOnButtonOffreEmploiNon($event)" required
+                                [attr.aria-invalid]="(isFuturTravailFormSubmitted && (hasOffreEmploi == null))">
+                            <label for="offreEmploiNon" class="me-2">
+                                <span class="body-2-typo">Non</span>
+                                <span class="sr-only">, je n'ai pas d'offre d'emploi en vue</span>
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <app-message-info
-                            contenu="Dans tous les cas vous aurez une estimation que vous pourrez modifier à tout moment.">
-                        </app-message-info>
+                    <div class="row pb-3">
+                        <div class="col-12">
+                            <p id="erreurSelectionTypeOffreEmploiNonPresente" class="error-input-message" role="alert"
+                                *ngIf="(isFuturTravailFormSubmitted && (hasOffreEmploi == null))">
+                                {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <app-message-info
+                                contenu="Dans tous les cas vous aurez une estimation que vous pourrez modifier à tout moment.">
+                            </app-message-info>
+                        </div>
+                    </div>
+                </fieldset>
             </div>
-            <div
-                *ngIf="(hasOffreEmploiOui != null && hasOffreEmploiNon != null) || (hasOffreEmploiOui || hasOffreEmploiNon)">
+            <div *ngIf="hasOffreEmploi != null">
                 <form id="futurTravailForm" [ngClass]="{'submitted':isFuturTravailFormSubmitted}"
                     #futurTravailForm="ngForm">
-                    <div *ngIf="hasOffreEmploiOui" class="subcard-contrat-travail">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row pb-3">
-                                    <label class="label headline-4-typo">
-                                        * Type de contrat
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <button id="btn-type-contrat-cdd" name="typeContratCDD"
-                                            aria-label="Type de contrat CDD" aria-required="true"
-                                            [attr.aria-invalid]="isChampFuturContratInvalide()"
-                                            [ngClass]="{'active':isTypeContratCDD, 'ng-invalid':isChampFuturContratInvalide()}"
-                                            class="btn-checkbox-type-contrat me-2" data-testid="btn-type-contrat-cdd"
-                                            [(ngModel)]="isTypeContratCDD" btnCheckbox tabindex="0"
-                                            #typeContratCDD="ngModel" tag-action="situation-contrat-cdd"
-                                            (click)="onClickCheckBoxIsTypeContratCDD()"
-                                            (keyup)="handleKeyUpOnButtonIsTypeContratCDD($event)">
-                                            <span class="body-2-typo">
-                                                {{LibellesTypesContratTravailEnum.CDD}}
-                                            </span>
-                                        </button>
-                                        <button id="btn-type-contrat-iae" name="typeContratIAE"
-                                            aria-label="Type de contrat IAE" aria-required="true"
-                                            [attr.aria-invalid]="isChampFuturContratInvalide()"
-                                            [ngClass]="{'active':isTypeContratIAE, 'ng-invalid':isChampFuturContratInvalide()}"
-                                            class="btn-checkbox-type-contrat me-2" data-testid="btn-type-contrat-iae"
-                                            [(ngModel)]="isTypeContratIAE" btnCheckbox tabindex="0"
-                                            #typeContratIAE="ngModel" tag-action="situation-contrat-iae"
-                                            (click)="onClickCheckBoxIsTypeContratIAE()"
-                                            (keyup)="handleKeyUpOnButtonIsTypeContratIAE($event)">
-                                            <span class="body-2-typo">
-                                                {{screenService.isExtraSmallScreen() ?
-                                                LibellesCourtsTypesContratTravailEnum.IAE:LibellesTypesContratTravailEnum.IAE}}
-                                            </span>
-                                        </button>
-                                        <button id="btn-type-contrat-interim" name="typeContratInterim"
-                                            aria-label="Type de contrat Interim" aria-required="true"
-                                            [attr.aria-invalid]="isChampFuturContratInvalide()"
-                                            [ngClass]="{'active':isTypeContratInterim, 'ng-invalid':isChampFuturContratInvalide()}"
-                                            class="btn-checkbox-type-contrat me-2"
-                                            [ngClass]="{'active':isTypeContratInterim}"
-                                            data-testid="btn-type-contrat-interim" [(ngModel)]="isTypeContratInterim"
-                                            btnCheckbox tabindex="0" #typeContratInterim="ngModel"
-                                            tag-action="situation-contrat-interim"
-                                            (click)="onClickCheckBoxIsTypeContratInterim()"
-                                            (keyup)="handleKeyUpOnButtonIsTypeContratINTERIM($event)">
-                                            <span class="body-2-typo">
-                                                {{LibellesTypesContratTravailEnum.INTERIM}}
-                                            </span>
-                                        </button>
-                                        <button id="btn-type-contrat-cdi" name="typeContratCDI"
-                                            aria-label="Type de contrat CDI" aria-required="true"
-                                            [attr.aria-invalid]="isChampFuturContratInvalide()"
-                                            [ngClass]="{'active':isTypeContratCDI, 'ng-invalid':isChampFuturContratInvalide()}"
-                                            class="btn-checkbox-type-contrat me-2" data-testid="btn-type-contrat-cdi"
-                                            [(ngModel)]="isTypeContratCDI" btnCheckbox tabindex="0"
-                                            #typeContratCDI="ngModel" tag-action="situation-contrat-cdi"
-                                            (click)="onClickCheckBoxIsTypeContratCDI()"
-                                            (keyup)="handleKeyUpOnButtonIsTypeContratCDI($event)">
-                                            <span class="body-2-typo">
-                                                {{LibellesTypesContratTravailEnum.CDI}}
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampFuturContratInvalide()">
-                                            {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 pb-3"
-                                *ngIf="isTypeContratCDD || isTypeContratIAE || isTypeContratInterim">
-                                <div class="row pb-3">
-                                    <label class="label headline-4-typo" for="nombreMoisCDD">
-                                        * Nombre de mois
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <select id="nombreMoisCDD" name="nombreMoisCDD"
-                                            aria-label="Nombre de mois de votre contrat CDD"
-                                            data-testid="select-nombre-mois-cdd"
-                                            [(ngModel)]="futurTravail.nombreMoisContratCDD" class="form-select"
-                                            data-width="auto"
-                                            [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null}"
-                                            #nombreMoisCDD="ngModel">
-                                            <option [value]="null" disabled>
-                                                Sélectionner
-                                            </option>
-                                            <option *ngFor="let nombreMois of nombreMoisCDDSelectOptions"
-                                                [value]="nombreMois.value">
-                                                {{ nombreMois.label }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="(isFuturTravailFormSubmitted || nombreMoisCDD.touched)  && nombreMoisCDD.errors?.required">
-                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo" for="dureeHebdomadaire">
-                                    * Durée hebdomadaire
-                                </label>
-                            </div>
+                    <div *ngIf="hasOffreEmploi" class="subcard-contrat-travail">
+                        <fieldset class="fieldset-row">
+                            <legend class="row pb-2">
+                                <span class="headline-4-typo label">
+                                    * Type de contrat
+                                </span>
+                            </legend>
                             <div class="row">
-                                <div>
-                                    <input class="form-control d-inline" data-testid="input-duree-hebdomadaire"
-                                        id="dureeHebdomadaire" aria-label="Durée hebdomadaire en heures par semaine"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDureeHebdomadaireInvalide(dureeHebdomadaire)"
-                                        inputmode="decimal"
-                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                                        (keyup)="propagateSalaireHoraireMensuel()" maxlength="4"
-                                        name="dureeHebdomadaire"
-                                        [ngClass]="{'ng-invalid': isChampDureeHebdomadaireInvalide(dureeHebdomadaire)}"
-                                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
-                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" placeholder="Nombre"
-                                        type="text" #dureeHebdomadaire="ngModel">
-                                    <span class="text-side-input d-inline body-2-typo">heures par semaine</span>
+                                <div class="col">
+                                    <input id="typeContratCDD" name="typeContrat" type="radio"
+                                        [value]="TypeContratTravailEnum.CDD" class="radio-as-button medium"
+                                        [ngClass]="{'ng-invalid':isChampFuturContratInvalide()}"
+                                        tag-action="situation-contrat-cdd" data-testid="btn-type-contrat-cdd"
+                                        [(ngModel)]="typeContrat" #typeContratCDD="ngModel"
+                                        (click)="onClickCheckBoxIsTypeContratCDD()"
+                                        (keyup)="handleKeyUpOnButtonIsTypeContratCDD($event)" required
+                                        [attr.aria-invalid]="isChampFuturContratInvalide()">
+                                    <label for="typeContratCDD" class="me-2">
+                                        <span class="body-2-typo label-general">
+                                            {{LibellesTypesContratTravailEnum.CDD}}
+                                        </span>
+                                    </label>
+                                    <input id="typeContratIAE" name="typeContrat" type="radio"
+                                        [value]="TypeContratTravailEnum.IAE" class="radio-as-button medium"
+                                        [ngClass]="{'ng-invalid':isChampFuturContratInvalide()}"
+                                        tag-action="situation-contrat-iae" data-testid="btn-type-contrat-iae"
+                                        [(ngModel)]="typeContrat" #typeContratIAE="ngModel"
+                                        (click)="onClickCheckBoxIsTypeContratIAE()"
+                                        (keyup)="handleKeyUpOnButtonIsTypeContratIAE($event)" required
+                                        [attr.aria-invalid]="isChampFuturContratInvalide()">
+                                    <label for="typeContratIAE" class="me-2">
+                                        <span class="body-2-typo label-general">
+                                            {{screenService.isExtraSmallScreen() ?
+                                            LibellesCourtsTypesContratTravailEnum.IAE:LibellesTypesContratTravailEnum.IAE}}
+                                        </span>
+                                    </label>
+                                    <input id="typeContratInterim" name="typeContrat" type="radio"
+                                        [value]="TypeContratTravailEnum.INTERIM" class="radio-as-button medium"
+                                        [ngClass]="{'ng-invalid':isChampFuturContratInvalide()}"
+                                        tag-action="situation-contrat-interim" data-testid="btn-type-contrat-interim"
+                                        [(ngModel)]="typeContrat" #typeContratInterim="ngModel"
+                                        (click)="onClickCheckBoxIsTypeContratInterim()"
+                                        (keyup)="handleKeyUpOnButtonIsTypeContratINTERIM($event)" required
+                                        [attr.aria-invalid]="isChampFuturContratInvalide()">
+                                    <label for="typeContratInterim" class="me-2">
+                                        <span class="body-2-typo label-general">
+                                            {{LibellesTypesContratTravailEnum.INTERIM}}
+                                        </span>
+                                    </label>
+                                    <input id="typeContratCDI" name="typeContrat" type="radio"
+                                        [value]="TypeContratTravailEnum.CDI" class="radio-as-button medium"
+                                        [ngClass]="{'ng-invalid':isChampFuturContratInvalide()}"
+                                        tag-action="situation-contrat-cdi" data-testid="btn-type-contrat-cdi"
+                                        [(ngModel)]="typeContrat" #typeContratCDI="ngModel"
+                                        (click)="onClickCheckBoxIsTypeContratCDI()"
+                                        (keyup)="handleKeyUpOnButtonIsTypeContratCDI($event)" required
+                                        [attr.aria-invalid]="isChampFuturContratInvalide()">
+                                    <label for="typeContratCDI" class="me-2">
+                                        <span class="body-2-typo label-general">
+                                            {{LibellesTypesContratTravailEnum.CDI}}
+                                        </span>
+                                    </label>
                                 </div>
                             </div>
                             <div class="row pb-3">
                                 <div class="col-12">
-                                    <span class="error-input-message" role="alert"
+                                    <p id="erreurSelectionTypeDeContratNonPresente" class="error-input-message"
+                                        role="alert" *ngIf="isChampFuturContratInvalide()">
+                                        {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div *ngIf="isNombreMoisContratCDDAAfficher()" class="fieldset-row">
+                            <div class="row pb-2">
+                                <label class="label headline-4-typo" for="nombreMoisCDD">
+                                    * Nombre de mois
+                                    <span class="sr-only">&nbsp; de votre contrat CDD</span>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <select id="nombreMoisCDD" name="nombreMoisCDD" class="form-select"
+                                        [ngClass]="{'option-selected': futurTravail.nombreMoisContratCDD !== null, 'ng-invalid': isFuturTravailFormSubmitted && isNombreMoisContratCDDInvalide()}"
+                                        data-testid="select-nombre-mois-cdd" data-width="auto"
+                                        [(ngModel)]="futurTravail.nombreMoisContratCDD" #nombreMoisCDD="ngModel"
+                                        required>
+                                        <option [value]="null" disabled>
+                                            Sélectionner
+                                        </option>
+                                        <option *ngFor="let nombreMois of nombreMoisCDDSelectOptions"
+                                            [value]="nombreMois.value">
+                                            {{ nombreMois.label }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <p id="erreurChampNombreDeMoisContratCDDNonPresent" class="error-input-message"
+                                        role="alert"
+                                        *ngIf="isFuturTravailFormSubmitted  && isNombreMoisContratCDDInvalide()">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fieldset-row">
+                            <div class="row flex-column pb-2">
+                                <label class="label headline-4-typo" for="dureeHebdomadaire">
+                                    * Durée hebdomadaire
+                                    <span class="sr-only">&nbsp;en heures par semaine</span>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input id="dureeHebdomadaire" name="dureeHebdomadaire" type="text"
+                                        class="form-control d-inline"
+                                        [ngClass]="{'ng-invalid': isChampDureeHebdomadaireInvalide(dureeHebdomadaire)}"
+                                        data-testid="input-duree-hebdomadaire"
+                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" placeholder="Nombre"
+                                        inputmode="decimal" maxlength="4"
+                                        [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
+                                        #dureeHebdomadaire="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                        (keyup)="propagateSalaireHoraireMensuel()" required
+                                        [attr.aria-invalid]="isChampDureeHebdomadaireInvalide(dureeHebdomadaire)">
+                                    <span class="text-side-input d-inline body-2-typo" aria-hidden="true">
+                                        heures par semaine
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <p id="erreurChampDureeHebdomadaireMontantDepasse" class="error-input-message"
+                                        role="alert"
                                         *ngIf="isChampDureeHebdomadaireErreurMontantMaxDepasse(dureeHebdomadaire)">
+                                        {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p id="erreurChampDureeHebdomadaireEgalAZero" class="error-input-message"
+                                        role="alert" *ngIf="isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p id="erreurChampDureeHebdomadaireNonPresent" class="error-input-message"
+                                        role="alert" *ngIf="isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="fieldset-row">
+                            <legend class="row pb-2">
+                                <div class="label headline-4-typo">
+                                    * Salaire
+                                    <button id="infobulle-contrat-travail-salaire" class="img-interrogation-icon"
+                                        placement="right" tag-action="clic_infobulle_salaire"
+                                        (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)"
+                                        aria-describedby="labelInfobulleDifferenceSalaireBrutNet">
+                                        <span id="labelInfobulleDifferenceSalaireBrutNet" class="sr-only">
+                                            Quelle est la différence entre salaire net et brut ?
+                                        </span>
+                                        <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                            aria-hidden="true">
+                                    </button>
+                                </div>
+                            </legend>
+                            <div class="row">
+                                <div class="col-12 d-flex">
+                                    <input id="salaireMensuelBrut" name="salaireMensuelBrut" type="number"
+                                        class="form-control d-inline"
+                                        [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_brut'}"
+                                        data-testid="input-salaire-mensuel-brut"
+                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                        placeholder="Montant" inputmode="decimal"
+                                        [(ngModel)]="futurTravail.salaire.montantMensuelBrut"
+                                        #salaireMensuelBrut="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        (keyup)="propagateSalaireHoraireMensuel()" required
+                                        aria-label="Salaire mensuel brut"
+                                        [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    <input id="salaireMensuelNet" name="salaireMensuelNet" type="number"
+                                        class="form-control d-inline"
+                                        [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_net'}"
+                                        data-testid="input-salaire-mensuel-net"
+                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                        placeholder="Montant" inputmode="decimal"
+                                        [(ngModel)]="futurTravail.salaire.montantMensuelNet"
+                                        #salaireMensuelNet="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                        (keyup)="propagateSalaireHoraireMensuel()" required
+                                        aria-label="Salaire mensuel net"
+                                        [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    <input id="salaireHoraireBrut" name="salaireHoraireBrut" type="number"
+                                        class="form-control d-inline"
+                                        [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_brut'}"
+                                        data-testid="input-salaire-horaire-brut"
+                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                        placeholder="Montant" inputmode="decimal"
+                                        [(ngModel)]="futurTravail.salaire.montantHoraireBrut"
+                                        #salaireHoraireBrut="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                        (keyup)="propagateSalaireHoraireMensuel()" required
+                                        aria-label="Salaire horaire brut"
+                                        [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    <input id="salaireHoraireNet" name="salaireHoraireNet"
+                                        data-testid="input-salaire-horaire-net" type="number"
+                                        class="form-control d-inline"
+                                        [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_net'}"
+                                        pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                        placeholder="Montant" inputmode="decimal"
+                                        [(ngModel)]="futurTravail.salaire.montantHoraireNet"
+                                        #salaireHoraireNet="ngModel"
+                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                        (keyup)="propagateSalaireHoraireMensuel()" required
+                                        aria-label="Salaire horaire net"
+                                        [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                    <app-text-with-euro-symbol></app-text-with-euro-symbol>
+                                    <select id="typeSalaireDisplay" name="typeSalaireDisplay" class="form-select"
+                                        [ngClass]="{'option-selected': typeSalaireDisplay !== null}"
+                                        data-testid="select-type-salaire" data-width="auto"
+                                        [(ngModel)]="typeSalaireDisplay" #nombreMoisCDD="ngModel"
+                                        aria-label="Changer le type de salaire (brut/net - mensuel/horaire) recalculera dans le champ précédent le montant affiché">
+                                        <option [value]="TypeSalaireDisplayEnum.MENSUEL_BRUT">
+                                            brut mensuel
+                                        </option>
+                                        <option [value]="TypeSalaireDisplayEnum.MENSUEL_NET">
+                                            net mensuel
+                                        </option>
+                                        <option [value]="TypeSalaireDisplayEnum.HORAIRE_BRUT">
+                                            brut horaire
+                                        </option>
+                                        <option [value]="TypeSalaireDisplayEnum.HORAIRE_NET">
+                                            net horaire
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <p id="erreurChampFuturSalaireEgalAZero" class="error-input-message" role="alert"
+                                        *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                                    </p>
+                                </div>
+                                <div id="erreurChampFuturSalaireNonPresent" class="col-12">
+                                    <p class="error-input-message" role="alert"
+                                        *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                                <div id="erreurChampFuturSalaireErreurMontant" class="col-12">
+                                    <p class="error-input-message" role="alert"
+                                        *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                                    </p>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div *ngIf="!hasOffreEmploi" class="subcard-contrat-travail">
+                        <fieldset class="fieldset-row">
+                            <legend class="row pb-2">
+                                <span class="headline-4-typo label">
+                                    * Temps de travail hebdomadaire souhaité
+                                </span>
+                            </legend>
+                            <div class="row pb-3">
+                                <div class="col">
+                                    <input id="dureeHebdoTempsPlein" name="typeDureeHebdo" type="radio"
+                                        [value]="TypeDureeHebdoEnum.TEMPS_PLEIN" class="radio-as-button large"
+                                        [ngClass]="{'active':typeDureeHebdo == TypeDureeHebdoEnum.TEMPS_PLEIN, 'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
+                                        tag-action="situation-duree-hebdo-temps-plein"
+                                        data-testid="btn-situation-duree-hebdo-temps-plein" [(ngModel)]="typeDureeHebdo"
+                                        #dureeHebdoTempsPlein="ngModel"
+                                        (click)="onClickCheckBoxIsDureeHebdoTempsPlein()"
+                                        (keyup)="handleKeyUpOnButtonIsDureeHebdoTempsPlein($event)" required
+                                        [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()">
+                                    <label for="dureeHebdoTempsPlein" class="me-2 mb-2">
+                                        <span class="body-2-typo label-general">
+                                            Temps plein
+                                        </span>
+                                        <span class="body-2-typo label-precision">
+                                            · 35h
+                                        </span>
+                                    </label>
+                                    <input id="dureeHebdoMiTemps" name="typeDureeHebdo" type="radio"
+                                        [value]="TypeDureeHebdoEnum.MI_TEMPS" class="radio-as-button large"
+                                        [ngClass]="{'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
+                                        tag-action="situation-contrat-cdd"
+                                        data-testid="btn-situation-duree-hebdo-mi-temps" [(ngModel)]="typeDureeHebdo"
+                                        #dureeHebdoMiTemps="ngModel" (click)="onClickCheckBoxIsDureeHebdoMiTemps()"
+                                        (keyup)="handleKeyUpOnButtonIsDureeHebdoMiTemps($event)" required
+                                        [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()">
+                                    <label for="dureeHebdoMiTemps" class="me-2 mb-2">
+                                        <span class="body-2-typo label-general">
+                                            Mi-temps
+                                        </span>
+                                        <span class="body-2-typo label-precision">
+                                            · 20h
+                                        </span>
+                                    </label>
+                                    <input id="dureeHebdomadaireAutre" name="typeDureeHebdo" type="radio"
+                                        [value]="TypeDureeHebdoEnum.AUTRE" class="radio-as-button large"
+                                        [ngClass]="{'active':typeDureeHebdo == TypeDureeHebdoEnum.AUTRE, 'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
+                                        tag-action="situation-contrat-cdd" data-testid="btn-situation-duree-hebdo-autre"
+                                        [(ngModel)]="typeDureeHebdo" #dureeHebdomadaireAutre="ngModel"
+                                        (click)="onClickCheckBoxIsDureeHebdoAutre()"
+                                        (keyup)="handleKeyUpOnButtonIsDureeHebdoAutre($event)" required
+                                        [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()">
+                                    <label for="dureeHebdomadaireAutre" class="me-2 mb-2">
+                                        <span class="body-2-typo label-general">
+                                            Autre
+                                        </span>
+                                    </label>
+                                    <div *ngIf="typeDureeHebdo == TypeDureeHebdoEnum.AUTRE"
+                                        [ngClass]="{'d-inline':!screenService.isExtraSmallScreen()}">
+                                        <input id="dureeHebdomadaire" name="dureeHebdomadaire" type="text"
+                                            class="form-control d-inline mb-2"
+                                            [ngClass]="{'ng-invalid': isChampDureeHebdomadaireEnvisageeInvalide(dureeHebdomadaire)}"
+                                            data-testid="input-duree-hebdomadaire"
+                                            pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="4"
+                                            placeholder="Nombre" inputmode="decimal"
+                                            [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
+                                            #dureeHebdomadaire="ngModel"
+                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
+                                            required aria-label="Durée hebdomadaire en heures par semaine"
+                                            [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeInvalide(dureeHebdomadaire)">
+                                        <span class="text-side-input d-inline body-2-typo">
+                                            heures par semaine
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span id="erreurChampDureeHebdomadaireEnvisageeMontantMaxDepasse"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="isChampDureeHebdomadaireEnvisageeErreurMontantMaxDepasse(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
                                     </span>
                                 </div>
                                 <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)">
+                                    <span id="erreurChampDureeHebdomadaireEnvisageeEgalAZero"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="isChampDureeHebdomadaireEnvisageeEgalAZero(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
                                     </span>
                                 </div>
                                 <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)">
-                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row pb-3">
-                            <label class="label headline-4-typo" aria-describedby="contrat-travail-salaire">
-                                * Salaire
-                                <button id="infobulle-contrat-travail-salaire"
-                                    aria-label="Quelle est la différence entre salaire net et brut ?" tabindex="0"
-                                    class="img-interrogation-icon" placement="right" tag-action="clic_infobulle_salaire"
-                                    (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)">
-                                    <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                                </button>
-                            </label>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 d-flex">
-                                <input id="salaireMensuelBrut"
-                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" name="salaireMensuelBrut"
-                                    aria-label="Salaire mensuel brut" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-mensuel-brut" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event);"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_brut'}"
-                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantMensuelBrut"
-                                    inputmode="decimal" #salaireMensuelBrut="ngModel">
-                                <input id="salaireMensuelNet" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                    name="salaireMensuelNet" aria-label="Salaire mensuel net" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-mensuel-net" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline" placeholder="Montant"
-                                    [(ngModel)]="futurTravail.salaire.montantMensuelNet"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'mensuel_net'}"
-                                    inputmode="decimal" #salaireMensuelNet="ngModel">
-                                <input id="salaireHoraireBrut"
-                                    pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" name="salaireHoraireBrut"
-                                    aria-label="Salaire horaire brut" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-horaire-brut" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event);"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_brut'}"
-                                    placeholder="Montant" [(ngModel)]="futurTravail.salaire.montantHoraireBrut"
-                                    inputmode="decimal" #salaireHoraireBrut="ngModel">
-                                <input id="salaireHoraireNet" pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                    name="salaireHoraireNet" aria-label="Salaire horaire net" aria-required="true"
-                                    [attr.aria-invalid]="isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)"
-                                    data-testid="input-salaire-horaire-net" type="number"
-                                    (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                                    (keyup)="propagateSalaireHoraireMensuel();" maxlength="6"
-                                    class="form-control d-inline" placeholder="Montant"
-                                    [(ngModel)]="futurTravail.salaire.montantHoraireNet"
-                                    [ngClass]="{'ng-invalid':isChampFuturSalaireInvalide(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet), 'd-none': typeSalaireDisplay != 'horaire_net'}"
-                                    inputmode="decimal" #salaireHoraireNet="ngModel">
-                                <app-text-with-euro-symbol></app-text-with-euro-symbol>
-                                <select id="typeSalaireDisplay" name="typeSalaireDisplay"
-                                    aria-label="Type de salaire à afficher (brut/net)" data-testid="select-type-salaire"
-                                    [(ngModel)]="typeSalaireDisplay" class="form-select" data-width="auto"
-                                    [ngClass]="{'option-selected': typeSalaireDisplay !== null}"
-                                    #nombreMoisCDD="ngModel">
-                                    <option value="mensuel_brut">
-                                        brut mensuel
-                                    </option>
-                                    <option value="mensuel_net">
-                                        net mensuel
-                                    </option>
-                                    <option value="horaire_brut">
-                                        brut horaire
-                                    </option>
-                                    <option value="horaire_net">
-                                        net horaire
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <span class="error-input-message" role="alert"
-                                    *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                    {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                </span>
-                            </div>
-                            <div class="col-12">
-                                <span class="error-input-message" role="alert"
-                                    *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                    {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                </span>
-                            </div>
-                            <div class="col-12">
-                                <span class="error-input-message" role="alert"
-                                    *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
-                                    {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="hasOffreEmploiNon" class="subcard-contrat-travail">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="row pb-3">
-                                    <label class="label headline-4-typo">
-                                        * Temps de travail hebdomadaire souhaité
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <button id="btn-duree-hebdo-temps-plein" name="dureeHebdoTempsPlein"
-                                            aria-label="Durée hebdomadaire temps plein"
-                                            class="btn-checkbox-duree-hebdo me-2 mb-2 d-inline" aria-required="true"
-                                            [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()"
-                                            [ngClass]="{'active':isDureeHebdoTempsPlein, 'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
-                                            data-testid="btn-situation-duree-hebdo-temps-plein"
-                                            [(ngModel)]="isDureeHebdoTempsPlein" btnCheckbox tabindex="0"
-                                            #dureeHebdoTempsPlein="ngModel"
-                                            tag-action="situation-duree-hebdo-temps-plein"
-                                            (click)="onClickCheckBoxIsDureeHebdoTempsPlein()"
-                                            (keyup)="handleKeyUpOnButtonIsDureeHebdoTempsPlein($event)">
-                                            <span class="body-2-typo label-general">
-                                                Temps plein
-                                            </span>
-                                            <span class="body-2-typo label-precision">
-                                                · 35h
-                                            </span>
-                                        </button>
-                                        <button id="btn-duree-hebdo-mi-temps" name="dureeHebdoMiTemps"
-                                            aria-label="Durée hebdomadaire mi-temps" aria-required="true"
-                                            [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()"
-                                            [ngClass]="{'active':isDureeHebdoMiTemps, 'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
-                                            class="btn-checkbox-duree-hebdo me-2 mb-2 d-inline"
-                                            data-testid="btn-situation-duree-hebdo-mi-temps"
-                                            [(ngModel)]="isDureeHebdoMiTemps" btnCheckbox tabindex="0"
-                                            #dureeHebdoMiTemps="ngModel" tag-action="situation-contrat-cdd"
-                                            (click)="onClickCheckBoxIsDureeHebdoMiTemps()"
-                                            (keyup)="handleKeyUpOnButtonIsDureeHebdoMiTemps($event)">
-                                            <span class="body-2-typo label-general">
-                                                Mi-temps
-                                            </span>
-                                            <span class="body-2-typo label-precision">
-                                                · 20h
-                                            </span>
-                                        </button>
-                                        <button id="btn-duree-hebdo-autre" name="dureeHebdomadaireAutre"
-                                            aria-label="Durée hebdomadaire autre" aria-required="true"
-                                            [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeNonSelectionne()"
-                                            [ngClass]="{'active':isDureeHebdoAutre, 'ng-invalid':isChampDureeHebdomadaireEnvisageeNonSelectionne()}"
-                                            class="btn-checkbox-duree-hebdo me-2 mb-2 d-inline"
-                                            data-testid="btn-situation-duree-hebdo-autre"
-                                            [(ngModel)]="isDureeHebdoAutre" btnCheckbox tabindex="0"
-                                            #dureeHebdomadaireAutre="ngModel" tag-action="situation-contrat-cdd"
-                                            (click)="onClickCheckBoxIsDureeHebdoAutre()"
-                                            (keyup)="handleKeyUpOnButtonIsDureeHebdoAutre($event)">
-                                            <span class="body-2-typo label-general">
-                                                Autre
-                                            </span>
-                                        </button>
-                                        <div *ngIf="isDureeHebdoAutre"
-                                            [ngClass]="{'d-inline':!screenService.isExtraSmallScreen()}">
-                                            <input class="form-control d-inline mb-2"
-                                                data-testid="input-duree-hebdomadaire" id="dureeHebdomadaire"
-                                                aria-label="Durée hebdomadaire en heures par semaine"
-                                                aria-required="true"
-                                                [attr.aria-invalid]="isChampDureeHebdomadaireEnvisageeInvalide(dureeHebdomadaire)"
-                                                inputmode="decimal"
-                                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForDecimal($event)"
-                                                maxlength="4" name="dureeHebdomadaire"
-                                                [ngClass]="{'ng-invalid': isChampDureeHebdomadaireEnvisageeInvalide(dureeHebdomadaire)}"
-                                                [(ngModel)]="futurTravail.nombreHeuresTravailleesSemaine"
-                                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                                placeholder="Nombre" type="text" #dureeHebdomadaire="ngModel">
-                                            <span class="text-side-input d-inline body-2-typo">
-                                                heures par semaine
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row pb-3">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEnvisageeErreurMontantMaxDepasse(dureeHebdomadaire)">
-                                            {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEnvisageeEgalAZero(dureeHebdomadaire)">
-                                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEnvisageeNonPresent(dureeHebdomadaire)">
-                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEnvisageeNonSelectionne()">
-                                            {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampDureeHebdomadaireEnvisageeErreurMontant(dureeHebdomadaire)">
-                                            {{controleChampFormulaireService.MESSAGE_DUREE_HEBDO_INCORRECTE}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <label class="label mb-2 headline-4-typo">
-                                        * Salaire mensuel net souhaité
-                                    </label>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <button id="btn-salaire-souhaite-smic" name="salaireSouhaiteSMIC"
-                                            aria-label="SMIC souhaité" aria-required="true"
-                                            [attr.aria-invalid]="isSalaireSouhaiteNonSelectionne()"
-                                            [ngClass]="{'active':isSalaireSouhaiteSMIC, 'ng-invalid':isSalaireSouhaiteNonSelectionne()}"
-                                            class="btn-checkbox-salaire-souhaite mb-2 me-2"
-                                            [ngClass]="{'active':isSalaireSouhaiteSMIC}"
-                                            data-testid="btn-situation-salaire-souhaite-smic"
-                                            [(ngModel)]="isSalaireSouhaiteSMIC" btnCheckbox tabindex="0"
-                                            #salaireSouhaiteSMIC="ngModel" tag-action="situation-salaire-souhaite-smic"
-                                            (click)="onClickCheckBoxIsSalaireSouhaiteSMIC()"
-                                            (keyup)="handleKeyUpOnButtonIsSalaireSouhaiteSMIC($event)">
-                                            <span class="body-2-typo label-general">
-                                                SMIC
-                                            </span>
-                                            <span class="body-2-typo label-precision">
-                                                · {{getMontantSmicMensuelNet()}}€ net
-                                            </span>
-                                        </button>
-                                        <button id="btn-salaire-souhaite-autre" name="salaireSouhaiteAutre"
-                                            aria-label="Autre salaire souhaité" aria-required="true"
-                                            [attr.aria-invalid]="isSalaireSouhaiteNonSelectionne()"
-                                            [ngClass]="{'active':isSalaireSouhaiteAutre, 'ng-invalid':isSalaireSouhaiteNonSelectionne()}"
-                                            class="btn-checkbox-salaire-souhaite me-2 mb-2"
-                                            [ngClass]="{'active':isSalaireSouhaiteAutre}"
-                                            data-testid="btn-salaire-souhaite-autre"
-                                            [(ngModel)]="isSalaireSouhaiteAutre" btnCheckbox tabindex="0"
-                                            #salaireSouhaiteAutre="ngModel"
-                                            tag-action="situation-salaire-souhaite-autre"
-                                            (click)="onClickCheckBoxIsSalaireSouhaiteAutre()"
-                                            (keyup)="handleKeyUpOnButtonIsSalaireSouhaiteAutre($event)">
-                                            <span class="body-2-typo label-general">
-                                                Autre
-                                            </span>
-                                        </button>
-                                        <div *ngIf="isSalaireSouhaiteAutre" class="d-inline">
-                                            <input id="salaireMensuelNetOffreEmploiNon"
-                                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}"
-                                                name="salaireMensuelNet" aria-label="Salaire mensuel brut"
-                                                aria-required="true"
-                                                [attr.aria-invalid]="isChampSalaireSouhaiteInvalide(salaireMensuelNet)"
-                                                data-testid="input-salaire-mensuel-net" type="text"
-                                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                                (keyup)="salaireService.calculSalaireFromMensuelNet(futurTravail)"
-                                                maxlength="6" class="form-control d-inline" placeholder="Montant"
-                                                [(ngModel)]="futurTravail.salaire.montantMensuelNet"
-                                                [ngClass]="{'ng-invalid':isChampSalaireSouhaiteInvalide(salaireMensuelNet)}"
-                                                inputmode="decimal" #salaireMensuelNet="ngModel">
-                                            <span class="text-side-input d-inline body-2-typo">€ net</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampSalaireSouhaiteEgalAZero(salaireMensuelNet)">
-                                            {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampSalaireSouhaiteNonPresent(salaireMensuelNet)">
-                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isChampSalaireSouhaiteErreurMontant(salaireMensuelNet)">
-                                            {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                        </span>
-                                    </div>
-                                    <div class="col-12">
-                                        <span class="error-input-message" role="alert"
-                                            *ngIf="isSalaireSouhaiteNonSelectionne()">
-                                            {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="subcard-contrat-travail">
-                        <div *ngIf="hasOffreEmploiOui">
-                            <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
-                                    * Distance entre votre domicile et votre lieu de travail
-                                    <button id="infobulle-contrat-travail-distance-travail"
-                                        aria-label="Comment calculer la distance entre domicile et travail ?"
-                                        tabindex="0" class="img-interrogation-icon" placement="right"
-                                        tag-action="clic_infobulle_calcul_distance_domicile_travail"
-                                        (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)">
-                                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                                    </button>
-                                </label>
-                            </div>
-                            <div class="row">
-                                <div>
-                                    <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail"
-                                        aria-label="Distance entre votre domicile et votre lieu de travail"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)"
-                                        [ngClass]="{'active':isDistanceDomicileTravailEntre0Et9, 'ng-invalid':isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)}"
-                                        data-testid="input-distance-domicile-lieu-travail" type="text"
-                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                        min="0" maxlength="4" class="form-control d-inline" placeholder="Distance"
-                                        [(ngModel)]="futurTravail.distanceKmDomicileTravail" inputmode="numeric"
-                                        #distanceDomicileLieuTravail="ngModel">
-                                    <span class="text-side-input d-inline body-2-typo">km</span>
-                                </div>
-                            </div>
-                            <div class="row pb-3">
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)">
-                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div *ngIf="hasOffreEmploiNon">
-                            <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
-                                    * Distance envisagée entre votre domicile et lieu de travail
-                                    <button id="infobulle-contrat-travail-distance-travail"
-                                        aria-label="Comment calculer la distance entre domicile et travail ?"
-                                        tabindex="0" class="img-interrogation-icon" placement="right"
-                                        tag-action="clic_infobulle_calcul_distance_domicile_travail"
-                                        (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)">
-                                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                                    </button>
-                                </label>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button id="btn-distance-envisagee-0-9" name="distanceDomicileTravailEntre0Et9"
-                                        aria-label="Distance entre lieu domicile et lieu de travail entre 0 et 9km"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()"
-                                        [ngClass]="{'active':isDistanceDomicileTravailEntre0Et9, 'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
-                                        class="btn-checkbox-distance-envisagee me-2"
-                                        data-testid="btn-distance-envisagee-0-9"
-                                        [(ngModel)]="isDistanceDomicileTravailEntre0Et9" btnCheckbox tabindex="0"
-                                        #distanceDomicileTravailEntre0Et9="ngModel"
-                                        tag-action="btn-distance-envisagee-0-9"
-                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre0Et9()"
-                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre0Et9($event)">
-                                        <span class="body-2-typo">
-                                            0 - 9km
-                                        </span>
-                                    </button>
-                                    <button id="btn-distance-envisagee-10-19" name="distanceDomicileTravailEntre10Et19"
-                                        aria-label="Distance entre lieu domicile et lieu de travail entre 10 et 19km"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()"
-                                        [ngClass]="{'active':isDistanceDomicileTravailEntre10Et19, 'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
-                                        class="btn-checkbox-distance-envisagee me-2"
-                                        data-testid="btn-distance-envisagee-10-19"
-                                        [(ngModel)]="isDistanceDomicileTravailEntre10Et19" btnCheckbox tabindex="0"
-                                        #distanceDomicileTravailEntre10Et19="ngModel"
-                                        tag-action="btn-distance-envisagee-10-19"
-                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre10Et19()"
-                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre10Et19($event)">
-                                        <span class="body-2-typo">
-                                            10 - 19km
-                                        </span>
-                                    </button>
-                                    <button id="btn-distance-envisagee-20-30" name="distanceDomicileTravailEntre20Et30"
-                                        aria-label="Distance entre lieu domicile et lieu de travail entre 20 et 30km"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()"
-                                        [ngClass]="{'active':isDistanceDomicileTravailEntre20Et30, 'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
-                                        class="btn-checkbox-distance-envisagee me-2"
-                                        data-testid="btn-distance-envisagee-20-30"
-                                        [(ngModel)]="isDistanceDomicileTravailEntre20Et30" btnCheckbox tabindex="0"
-                                        #distanceDomicileTravailEntre20Et30="ngModel"
-                                        tag-action="btn-distance-envisagee-20-30"
-                                        (click)="onClickCheckBoxDistanceDomicileTravailEntre20Et30()"
-                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre20Et30($event)">
-                                        <span class="body-2-typo">
-                                            20 - 30km
-                                        </span>
-                                    </button>
-                                    <button id="btn-distance-envisagee-plus-de-30"
-                                        name="distanceDomicileTravailPlusDe30"
-                                        aria-label="Distance entre lieu domicile et lieu de travail plus de 30km"
-                                        aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()"
-                                        [ngClass]="{'active':isDistanceDomicileTravailPlusDe30, 'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
-                                        class="btn-checkbox-distance-envisagee me-2"
-                                        data-testid="btn-distance-envisagee-plus-de-30"
-                                        [(ngModel)]="isDistanceDomicileTravailPlusDe30" btnCheckbox tabindex="0"
-                                        #distanceDomicileTravailPlusDe30="ngModel"
-                                        tag-action="btn-distance-envisagee-plus-de-30"
-                                        (click)="onClickCheckBoxDistanceDomicileTravailPlusDe30()"
-                                        (keyup)="handleKeyUpOnButtonDistanceDomicileTravailPlusDe30($event)">
-                                        <span class="body-2-typo">
-                                            + de 30km
-                                        </span>
-                                    </button>
-                                    <input *ngIf="isDistanceDomicileTravailPlusDe30"
-                                        id="distanceDomicileLieuTravailPrecision" name="distanceDomicileLieuTravail"
-                                        aria-label="Distance entre votre domicile et votre travail" aria-required="true"
-                                        [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeInvalide(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)"
-                                        data-testid="input-distance-domicile-lieu-travail" type="text"
-                                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
-                                        min="30" maxlength="4" class="form-control d-inline" placeholder="Distance"
-                                        [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeInvalide(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)}"
-                                        [(ngModel)]="futurTravail.distanceKmDomicileTravail" inputmode="numeric"
-                                        #distanceDomicileLieuTravail="ngModel">
-                                    <span *ngIf="isDistanceDomicileTravailPlusDe30"
-                                        class="text-side-input d-inline body-2-typo">km</span>
-                                </div>
-                            </div>
-                            <div class="row pb-3">
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDistanceDomicileTravailEnvisageeNonPresent(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)">
+                                    <span id="erreurChampDureeHebdomadaireEnvisageeNonPresent"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="isChampDureeHebdomadaireEnvisageeNonPresent(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
                                     </span>
                                 </div>
                                 <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDistanceDomicileTravailEnvisageeErreurMontant(distanceDomicileLieuTravail)">
-                                        {{controleChampFormulaireService.MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE}}
-                                    </span>
-                                </div>
-                                <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                    <span id="erreurChampDureeHebdomadaireEnvisageeNonSelectionne"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="isChampDureeHebdomadaireEnvisageeNonSelectionne()">
                                         {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
                                     </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div *ngIf="afficherNombreTrajetsDomicileTravail()">
-                            <div class="row pb-3">
-                                <div class="col-md-12">
-                                    <app-message-info
-                                        contenu="Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité">
-                                    </app-message-info>
-                                </div>
-                            </div>
-                            <div class="row flex-column pb-3">
-                                <label class="label headline-4-typo"
-                                    aria-describedby="infobulle-contrat-travail-nombre-trajets"
-                                    for="nombreTrajetsDomicileTravail">
-                                    * Nombre de jours par semaine où vous vous rendrez sur votre lieu de travail
-                                    <button id="infobulle-contrat-travail-nombre-trajets"
-                                        aria-label="Comment calculer votre nombre de trajets par semaine ?" tabindex="0"
-                                        class="img-interrogation-icon" placement="right"
-                                        tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
-                                        (click)="modalService.openModalOnEvent($event, modalNombreTrajetTemplate, true)">
-                                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                                    </button>
-                                </label>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button id="btn-nombres-trajets-1-jour-semaine" name="nombreTrajets1JourSemaine"
-                                        aria-label="1 jour travaillé par semaine" aria-required="true"
-                                        [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
-                                        [ngClass]="{'active':isNombreTrajets1JourSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
-                                        class="btn-checkbox-nombre-jours-travailles me-2"
-                                        data-testid="btn-nombres-trajets-1-jour-semaine"
-                                        [(ngModel)]="isNombreTrajets1JourSemaine" btnCheckbox tabindex="0"
-                                        #nombreTrajets1JourSemaine="ngModel"
-                                        tag-action="situation-nombres-trajets-1-jour-semaine"
-                                        (click)="onClickCheckBoxNombresTrajets(1)"
-                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,1)">
-                                        <span class="body-2-typo">
-                                            1
-                                        </span>
-                                    </button>
-                                    <button id="btn-nombres-trajets-2-jours-semaine" name="nombreTrajets2JoursSemaine"
-                                        aria-label="2 jours travaillés par semaine" aria-required="true"
-                                        [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
-                                        [ngClass]="{'active':isNombreTrajets2JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
-                                        class="btn-checkbox-nombre-jours-travailles me-2"
-                                        data-testid="btn-nombres-trajets-2-jours-semaine"
-                                        [(ngModel)]="isNombreTrajets2JoursSemaine" btnCheckbox tabindex="0"
-                                        #nombreTrajets2JoursSemaine="ngModel"
-                                        tag-action="situation-nombres-trajets-2-jours-semaine"
-                                        (click)="onClickCheckBoxNombresTrajets(2)"
-                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,2)">
-                                        <span class="body-2-typo">
-                                            2
-                                        </span>
-                                    </button>
-                                    <button id="btn-nombres-trajets-3-jours-semaine" name="nombreTrajets3JoursSemaine"
-                                        aria-label="3 jours travaillés par semaine" aria-required="true"
-                                        [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
-                                        [ngClass]="{'active':isNombreTrajets3JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
-                                        class="btn-checkbox-nombre-jours-travailles me-2"
-                                        data-testid="btn-nombres-trajets-3-jours-semaine"
-                                        [(ngModel)]="isNombreTrajets3JoursSemaine" btnCheckbox tabindex="0"
-                                        #nombreTrajets3JoursSemaine="ngModel"
-                                        tag-action="situation-nombres-trajets-3-jours-semaine"
-                                        (click)="onClickCheckBoxNombresTrajets(3)"
-                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,3)">
-                                        <span class="body-2-typo">
-                                            3
-                                        </span>
-                                    </button>
-                                    <button id="btn-nombres-trajets-4-jours-semaine" name="nombreTrajets4JoursSemaine"
-                                        aria-label="4 jours travaillés par semaine" aria-required="true"
-                                        [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
-                                        [ngClass]="{'active':isNombreTrajets4JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
-                                        class="btn-checkbox-nombre-jours-travailles me-2"
-                                        data-testid="btn-nombres-trajets-4-jours-semaine"
-                                        [(ngModel)]="isNombreTrajets4JoursSemaine" btnCheckbox tabindex="0"
-                                        #nombreTrajets4JoursSemaine="ngModel"
-                                        tag-action="situation-nombres-trajets-4-jours-semaine"
-                                        (click)="onClickCheckBoxNombresTrajets(4)"
-                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event,4)">
-                                        <span class="body-2-typo">
-                                            4
-                                        </span>
-                                    </button>
-                                    <button id="btn-nombres-trajets-5-jours-semaine" name="nombreTrajets5JoursSemaine"
-                                        aria-label="5 jours travaillés par semaine" aria-required="true"
-                                        [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()"
-                                        [ngClass]="{'active':isNombreTrajets5JoursSemaine, 'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
-                                        class="btn-checkbox-nombre-jours-travailles me-2"
-                                        data-testid="btn-nombres-trajets-5-jours-semaine"
-                                        [(ngModel)]="isNombreTrajets5JoursSemaine" btnCheckbox tabindex="0"
-                                        #nombreTrajets5JoursSemaine="ngModel"
-                                        tag-action="situation-nombres-trajets-5-jours-semaine"
-                                        (click)="onClickCheckBoxNombresTrajets(5)"
-                                        (keyup)="handleKeyUpOnButtonNombresTrajets($event, 5)">
-                                        <span class="body-2-typo">
-                                            5
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-12">
-                                    <span class="error-input-message" role="alert"
-                                        *ngIf="isChampsNombreTrajetsSemaineInvalides()">
-                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    <span id="erreurChampDureeHebdomadaireEnvisageeErreurMontant"
+                                        class="error-input-message" role="alert"
+                                        *ngIf="isChampDureeHebdomadaireEnvisageeErreurMontant(dureeHebdomadaire)">
+                                        {{controleChampFormulaireService.MESSAGE_DUREE_HEBDO_INCORRECTE}}
                                     </span>
                                 </div>
                             </div>
+                        </fieldset>
+                        <fieldset class="fieldset-row">
+                            <legend class="row pb-2">
+                                <span class="headline-4-typo label">
+                                    * Salaire mensuel net souhaité
+                                </span>
+                            </legend>
+                            <div class="row">
+                                <div class="col">
+                                    <input id="salaireSouhaiteSMIC" name="typeSalaireSouhaite" type="radio"
+                                        [value]="TypeSalaireSouhaiteEnum.SMIC" class="radio-as-button large"
+                                        [ngClass]="{'active':typeSalaireSouhaite == TypeSalaireSouhaiteEnum.SMIC, 'ng-invalid':isSalaireSouhaiteNonSelectionne()}"
+                                        tag-action="situation-salaire-souhaite-smic"
+                                        data-testid="btn-situation-salaire-souhaite-smic"
+                                        [(ngModel)]="typeSalaireSouhaite" #salaireSouhaiteSMIC="ngModel"
+                                        (click)="onClickCheckBoxIsSalaireSouhaiteSMIC()"
+                                        (keyup)="handleKeyUpOnButtonIsSalaireSouhaiteSMIC($event)" required
+                                        [attr.aria-invalid]="isSalaireSouhaiteNonSelectionne()">
+                                    <label for="salaireSouhaiteSMIC" class="mb-2 me-2">
+                                        <span class="body-2-typo label-general">
+                                            SMIC
+                                        </span>
+                                        <span class="body-2-typo label-precision">
+                                            · {{getMontantSmicMensuelNet()}}€ net
+                                        </span>
+                                    </label>
+                                    <input id="salaireSouhaiteAutre" name="typeSalaireSouhaite" type="radio"
+                                        [value]="TypeSalaireSouhaiteEnum.AUTRE" class="radio-as-button large"
+                                        [ngClass]="{'active':typeSalaireSouhaite == TypeSalaireSouhaiteEnum.AUTRE, 'ng-invalid':isSalaireSouhaiteNonSelectionne()}"
+                                        tag-action="situation-salaire-souhaite-autre"
+                                        data-testid="btn-salaire-souhaite-autre" [(ngModel)]="typeSalaireSouhaite"
+                                        #salaireSouhaiteAutre="ngModel"
+                                        (click)="onClickCheckBoxIsSalaireSouhaiteAutre()"
+                                        (keyup)="handleKeyUpOnButtonIsSalaireSouhaiteAutre($event)" required
+                                        [attr.aria-invalid]="isSalaireSouhaiteNonSelectionne()">
+                                    <label for="salaireSouhaiteAutre" class="mb-2 me-2">
+                                        <span class="body-2-typo label-general">
+                                            Autre
+                                        </span>
+                                    </label>
+                                    <div *ngIf="typeSalaireSouhaite == TypeSalaireSouhaiteEnum.AUTRE" class="d-inline">
+                                        <input id="salaireMensuelNetOffreEmploiNon" name="salaireMensuelNet" type="text"
+                                            class="form-control d-inline"
+                                            [ngClass]="{'ng-invalid':isChampSalaireSouhaiteInvalide(salaireMensuelNet)}"
+                                            data-testid="input-salaire-mensuel-net"
+                                            pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" maxlength="6"
+                                            placeholder="Montant" inputmode="decimal"
+                                            [(ngModel)]="futurTravail.salaire.montantMensuelNet"
+                                            #salaireMensuelNet="ngModel"
+                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                            (keyup)="salaireService.calculSalaireFromMensuelNet(futurTravail)" required
+                                            aria-label="Salaire mensuel brut"
+                                            [attr.aria-invalid]="isChampSalaireSouhaiteInvalide(salaireMensuelNet)">
+                                        <span class="text-side-input d-inline body-2-typo">€ net</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pb-3">
+                                <div class="col-12">
+                                    <p id="erreurChampSalaireSouhaiteEgalAZero" class="error-input-message" role="alert"
+                                        *ngIf="isChampSalaireSouhaiteEgalAZero(salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p id="erreurChampSalaireSouhaiteNonPresent" class="error-input-message"
+                                        role="alert" *ngIf="isChampSalaireSouhaiteNonPresent(salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p id="erreurChampSalaireSouhaiteErreurMontant" class="error-input-message"
+                                        role="alert" *ngIf="isChampSalaireSouhaiteErreurMontant(salaireMensuelNet)">
+                                        {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p id="erreurSalaireSouhaiteNonSelectionne" class="error-input-message" role="alert"
+                                        *ngIf="isSalaireSouhaiteNonSelectionne()">
+                                        {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
+                                    </p>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="subcard-contrat-travail">
+                        <div *ngIf="hasOffreEmploi">
+                            <div class="fieldset-row">
+                                <div class="row flex-column pb-2">
+                                    <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
+                                        * Distance entre votre domicile et votre lieu de travail
+                                        <button id="infobulle-contrat-travail-distance-travail"
+                                            class="img-interrogation-icon" placement="right"
+                                            tag-action="clic_infobulle_calcul_distance_domicile_travail"
+                                            (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)"
+                                            aria-describedby="labelInfobulleCalculDistanceDomicileTravail">
+                                            <span id="labelInfobulleCalculDistanceDomicileTravail" class="sr-only">
+                                                Comment calculer la distance entre domicile et travail ?
+                                            </span>
+                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                                aria-hidden="true">
+                                        </button>
+                                    </label>
+                                </div>
+                                <div class="row pb-3">
+                                    <div>
+                                        <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail"
+                                            type="text" class="form-control d-inline"
+                                            [ngClass]="{'active':isDistanceDomicileTravailEntre0Et9, 'ng-invalid':isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)}"
+                                            data-testid="input-distance-domicile-lieu-travail"
+                                            (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                            min="0" maxlength="4" placeholder="Distance" inputmode="numeric"
+                                            [(ngModel)]="futurTravail.distanceKmDomicileTravail"
+                                            #distanceDomicileLieuTravail="ngModel" required
+                                            aria-label="Distance entre votre domicile et votre lieu de travail"
+                                            [attr.aria-invalid]="isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)">
+                                        <span class="text-side-input d-inline body-2-typo">km</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <span id="erreurChampDistanceDomicileTravailInvalide"
+                                            class="error-input-message" role="alert"
+                                            *ngIf="isChampDistanceDomicileTravailInvalide(distanceDomicileLieuTravail)">
+                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!hasOffreEmploi">
+                            <fieldset class="fieldset-row">
+                                <legend class="row pb-2">
+                                    <div class="headline-4-typo label">
+                                        * Distance envisagée entre votre domicile et lieu de travail
+                                        <button id="infobulle-contrat-travail-distance-travail"
+                                            class="img-interrogation-icon" placement="right"
+                                            tag-action="clic_infobulle_calcul_distance_domicile_travail"
+                                            (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)"
+                                            aria-describedby="labelInfobulleCalculDistanceDomicileTravail2">
+                                            <span id="labelInfobulleCalculDistanceDomicileTravail2" class="sr-only">
+                                                Comment calculer la distance entre domicile et travail ?
+                                            </span>
+                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                                aria-hidden="true">
+                                        </button>
+                                    </div>
+                                </legend>
+                                <div class="row">
+                                    <div class="col">
+                                        <input id="distanceDomicileTravailEntre0Et9" name="typeDistanceDomicileTravail"
+                                            type="radio" [value]="TypeDistanceDomicileTravailEnum.ENTRE_0_ET_9"
+                                            class="radio-as-button small"
+                                            [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
+                                            tag-action="btn-distance-envisagee-0-9"
+                                            data-testid="btn-distance-envisagee-0-9"
+                                            [(ngModel)]="typeDistanceDomicileTravail"
+                                            #distanceDomicileTravailEntre0Et9="ngModel"
+                                            (click)="onClickCheckBoxDistanceDomicileTravailEntre0Et9()"
+                                            (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre0Et9($event)"
+                                            required
+                                            [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                        <label for="distanceDomicileTravailEntre0Et9" class="me-2">
+                                            <span class="body-2-typo label-general">
+                                                0 - 9km
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;entre votre domicile et votre lieu de travail
+                                            </span>
+                                        </label>
+                                        <input id="distanceDomicileTravailEntre10Et19"
+                                            name="typeDistanceDomicileTravail" type="radio"
+                                            [value]="TypeDistanceDomicileTravailEnum.ENTRE_10_ET_19"
+                                            class="radio-as-button small"
+                                            [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
+                                            tag-action="btn-distance-envisagee-10-19"
+                                            data-testid="btn-distance-envisagee-10-19"
+                                            [(ngModel)]="typeDistanceDomicileTravail"
+                                            #distanceDomicileTravailEntre10Et19="ngModel"
+                                            (click)="onClickCheckBoxDistanceDomicileTravailEntre10Et19()"
+                                            (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre10Et19($event)"
+                                            required
+                                            [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                        <label for="distanceDomicileTravailEntre10Et19" class="me-2">
+                                            <span class="body-2-typo label-general">
+                                                10 - 19km
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;entre votre domicile et votre lieu de travail
+                                            </span>
+                                        </label>
+                                        <input id="distanceDomicileTravailEntre20Et30"
+                                            name="typeDistanceDomicileTravail" type="radio"
+                                            [value]="TypeDistanceDomicileTravailEnum.ENTRE_20_ET_30"
+                                            class="radio-as-button small"
+                                            [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
+                                            tag-action="btn-distance-envisagee-20-30"
+                                            data-testid="btn-distance-envisagee-20-30"
+                                            [(ngModel)]="typeDistanceDomicileTravail"
+                                            #distanceDomicileTravailEntre20Et30="ngModel"
+                                            (click)="onClickCheckBoxDistanceDomicileTravailEntre20Et30()"
+                                            (keyup)="handleKeyUpOnButtonDistanceDomicileTravailEntre20Et30($event)"
+                                            required
+                                            [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                        <label for="distanceDomicileTravailEntre20Et30" class="me-2">
+                                            <span class="body-2-typo label-general">
+                                                20 - 30km
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;entre votre domicile et votre lieu de travail
+                                            </span>
+                                        </label>
+                                        <input id="distanceDomicileTravailPlusDe30" name="typeDistanceDomicileTravail"
+                                            type="radio" [value]="TypeDistanceDomicileTravailEnum.PLUS_DE_30"
+                                            class="radio-as-button small"
+                                            [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeNonSelectionne()}"
+                                            tag-action="btn-distance-envisagee-plus-de-30"
+                                            data-testid="btn-distance-envisagee-plus-de-30"
+                                            [(ngModel)]="typeDistanceDomicileTravail"
+                                            #distanceDomicileTravailPlusDe30="ngModel"
+                                            (click)="onClickCheckBoxDistanceDomicileTravailPlusDe30()"
+                                            (keyup)="handleKeyUpOnButtonDistanceDomicileTravailPlusDe30($event)"
+                                            required
+                                            [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                        <label for="distanceDomicileTravailPlusDe30" class="me-2">
+                                            <span class="body-2-typo label-general">
+                                                + de 30km
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;entre votre domicile et votre lieu de travail
+                                            </span>
+                                        </label>
+                                        <div *ngIf="typeDistanceDomicileTravail==TypeDistanceDomicileTravailEnum.PLUS_DE_30"
+                                            class="d-inline">
+                                            <input id="distanceDomicileLieuTravailPrecision"
+                                                name="distanceDomicileLieuTravail" type="text"
+                                                class="form-control d-inline"
+                                                [ngClass]="{'ng-invalid':isChampDistanceDomicileTravailEnvisageeInvalide(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)}"
+                                                data-testid="input-distance-domicile-lieu-travail"
+                                                pattern="{{controleChampFormulaireService.REGEX_DECIMAL}}" min="30"
+                                                maxlength="4" placeholder="Distance" inputmode="numeric"
+                                                [(ngModel)]="futurTravail.distanceKmDomicileTravail"
+                                                #distanceDomicileLieuTravail="ngModel"
+                                                (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)"
+                                                required aria-label="Distance entre votre domicile et votre travail"
+                                                [attr.aria-invalid]="isChampDistanceDomicileTravailEnvisageeInvalide(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)">
+                                            <span class="text-side-input d-inline body-2-typo">km</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-12">
+                                        <span id="erreurChampDistanceDomicileTravailEnvisageeNonPresent"
+                                            class="error-input-message" role="alert"
+                                            *ngIf="isChampDistanceDomicileTravailEnvisageeNonPresent(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30)">
+                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <span id="erreurChampDistanceDomicileTravailEnvisageeErreurMontant"
+                                            class="error-input-message" role="alert"
+                                            *ngIf="isChampDistanceDomicileTravailEnvisageeErreurMontant(distanceDomicileLieuTravail)">
+                                            {{controleChampFormulaireService.MESSAGE_DISTANCE_DOMICILE_TRAVAIL_INVALIDE}}
+                                        </span>
+                                    </div>
+                                    <div class="col-12">
+                                        <span id="erreurChampDistanceDomicileTravailEnvisageeNonSelectionne"
+                                            class="error-input-message" role="alert"
+                                            *ngIf="isChampDistanceDomicileTravailEnvisageeNonSelectionne()">
+                                            {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div *ngIf="afficherNombreTrajetsDomicileTravail()">
+                            <fieldset class="fieldset-row">
+                                <div class="row pb-3">
+                                    <div class="col-md-12">
+                                        <app-message-info
+                                            contenu="Les informations ci-dessous servent à déterminer si vous pourrez bénéficier de l'aide à la mobilité">
+                                        </app-message-info>
+                                    </div>
+                                </div>
+                                <legend class="row flex-column pb-2">
+                                    <div class="headline-4-typo label"
+                                        aria-describedby="infobulle-contrat-travail-nombre-trajets">
+                                        * Nombre de jours par semaine où vous vous rendrez sur votre lieu de
+                                        travail
+                                        <button id="infobulle-contrat-travail-nombre-trajets"
+                                            class="img-interrogation-icon" placement="right"
+                                            tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
+                                            (click)="modalService.openModalOnEvent($event, modalNombreTrajetTemplate, true)"
+                                            aria-describedby="labelInfobulleCalculNombreJoursTrajetsSemaine">
+                                            <span id="labelInfobulleCalculNombreJoursTrajetsSemaine" class="sr-only">
+                                                Comment calculer votre nombre de trajets par semaine ?
+                                            </span>
+                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
+                                                aria-hidden="true">
+                                        </button>
+                                    </div>
+                                </legend>
+                                <div class="row">
+                                    <div class="col">
+                                        <input id="nombreTrajets1JourSemaine" name="typeNombreTrajetsSemaine"
+                                            type="radio" [value]="TypeNombreTrajetsSemaineEnum.UN"
+                                            class="radio-as-button extra-small"
+                                            [ngClass]="{'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
+                                            tag-action="situation-nombres-trajets-1-jour-semaine"
+                                            data-testid="btn-nombres-trajets-1-jour-semaine"
+                                            [(ngModel)]="typeNombreTrajetsSemaine" #nombreTrajets1JourSemaine="ngModel"
+                                            (click)="onClickCheckBoxNombresTrajets(1)"
+                                            (keyup)="handleKeyUpOnButtonNombresTrajets($event,1)" required
+                                            [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()">
+                                        <label for="nombreTrajets1JourSemaine" class=" me-2">
+                                            <span class="body-2-typo">
+                                                1
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;jour travaillé par semaine
+                                            </span>
+                                        </label>
+                                        <input id="nombreTrajets2JoursSemaine" name="typeNombreTrajetsSemaine"
+                                            type="radio" [value]="TypeNombreTrajetsSemaineEnum.DEUX"
+                                            class="radio-as-button extra-small"
+                                            [ngClass]="{'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
+                                            tag-action="situation-nombres-trajets-2-jours-semaine"
+                                            data-testid="btn-nombres-trajets-2-jours-semaine"
+                                            [(ngModel)]="typeNombreTrajetsSemaine" #nombreTrajets2JoursSemaine="ngModel"
+                                            (click)="onClickCheckBoxNombresTrajets(2)"
+                                            (keyup)="handleKeyUpOnButtonNombresTrajets($event,2)" required
+                                            [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()">
+                                        <label for="nombreTrajets2JoursSemaine" class=" me-2">
+                                            <span class="body-2-typo">
+                                                2
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;jours travaillés par semaine
+                                            </span>
+                                        </label>
+                                        <input id="nombreTrajets3JoursSemaine" name="typeNombreTrajetsSemaine"
+                                            type="radio" [value]="TypeNombreTrajetsSemaineEnum.TROIS"
+                                            class="radio-as-button extra-small"
+                                            [ngClass]="{'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
+                                            tag-action="situation-nombres-trajets-3-jours-semaine"
+                                            data-testid="btn-nombres-trajets-3-jours-semaine"
+                                            [(ngModel)]="typeNombreTrajetsSemaine" #nombreTrajets3JoursSemaine="ngModel"
+                                            (click)="onClickCheckBoxNombresTrajets(3)"
+                                            (keyup)="handleKeyUpOnButtonNombresTrajets($event,3)" required
+                                            [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()">
+                                        <label for="nombreTrajets3JoursSemaine" class=" me-2">
+                                            <span class="body-2-typo">
+                                                3
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;jours travaillés par semaine
+                                            </span>
+                                        </label>
+                                        <input id="nombreTrajets4JoursSemaine" name="typeNombreTrajetsSemaine"
+                                            type="radio" [value]="TypeNombreTrajetsSemaineEnum.QUATRE"
+                                            class="radio-as-button extra-small"
+                                            [ngClass]="{'ng-invalid':isChampsNombreTrajetsSemaineInvalides()}"
+                                            tag-action="situation-nombres-trajets-4-jours-semaine"
+                                            data-testid="btn-nombres-trajets-4-jours-semaine"
+                                            [(ngModel)]="typeNombreTrajetsSemaine" #nombreTrajets4JoursSemaine="ngModel"
+                                            (click)="onClickCheckBoxNombresTrajets(4)"
+                                            (keyup)="handleKeyUpOnButtonNombresTrajets($event,4)" required
+                                            [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()">
+                                        <label for="nombreTrajets4JoursSemaine" class=" me-2">
+                                            <span class="body-2-typo">
+                                                4
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;jours travaillés par semaine
+                                            </span>
+                                        </label>
+                                        <input id="nombreTrajets5JoursSemaine" name="typeNombreTrajetsSemaine"
+                                            type="radio" [value]="TypeNombreTrajetsSemaineEnum.CINQ"
+                                            class="radio-as-button extra-small"
+                                            tag-action="situation-nombres-trajets-5-jours-semaine"
+                                            data-testid="btn-nombres-trajets-5-jours-semaine"
+                                            [(ngModel)]="typeNombreTrajetsSemaine" #nombreTrajets5JoursSemaine="ngModel"
+                                            (click)="onClickCheckBoxNombresTrajets(5)"
+                                            (keyup)="handleKeyUpOnButtonNombresTrajets($event, 5)" required
+                                            [attr.aria-invalid]="isChampsNombreTrajetsSemaineInvalides()">
+                                        <label for="nombreTrajets5JoursSemaine" class=" me-2">
+                                            <span class="body-2-typo">
+                                                5
+                                            </span>
+                                            <span class="sr-only">
+                                                &nbsp;jours travaillés par semaine
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row pb-3">
+                                    <div class="col-12">
+                                        <p id="erreurChampsNombreTrajetsSemaineInvalides" class="error-input-message"
+                                            role="alert" *ngIf="isChampsNombreTrajetsSemaineInvalides()">
+                                            {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
         <div *ngIf="!isModificationCriteres" class="row-btn-form">
-            <button class="btn-precedent" (click)="onClickButtonRetour()" aria-label="Retour à la page précédente"
-                data-testid="btn-futur-travail-retour" tag-navigation="clic_bouton_retour">
+            <button class="btn-precedent" tag-navigation="clic_bouton_retour" data-testid="btn-futur-travail-retour"
+                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
                 <div>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-futur-travail-suivant" class="btn-suivant" aria-label="Passer à la page suivante"
-                type="submit" data-testid="btn-futur-travail-suivant" (click)="onSubmitFuturTravailForm()"
-                tag-navigation="clic_bouton_suivant">
+            <button id="btn-futur-travail-suivant" type="submit" class="btn-suivant"
+                tag-navigation="clic_bouton_suivant" data-testid="btn-futur-travail-suivant"
+                (click)="onSubmitFuturTravailForm()" aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
@@ -815,7 +877,9 @@
 
 <ng-template #modalSalaireNetTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='headline-3-typo headline-3-typo-color'>Qu'est ce que le salaire brut et net ? </h3>
+        <h3 id='modalTitle' class='headline-3-typo headline-3-typo-color'>
+            Qu'est ce que le salaire brut et net ?
+         </h3>
         <p class='body-1-typo'>
             Le salaire net correspond à la somme versée sur votre compte bancaire après soustraction des cotisations
             sociales et du prélèvement à la source.
@@ -832,7 +896,7 @@
 
 <ng-template #modalDistanceTravailTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='healine-3-typo headline-3-typo-color'>
+        <h3 id='modalTitle' class='healine-3-typo headline-3-typo-color'>
             Calcul de distance domicile / travail :
         </h3>
         <p class='body-1-typo'>
@@ -849,7 +913,7 @@
 
 <ng-template #modalNombreTrajetTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='healine-3-typo headline-3-typo-color'>
+        <h3 id='modalTitle' class='healine-3-typo headline-3-typo-color'>
             Exemples de calculs :
         </h3>
         <p class='body-1-typo'>

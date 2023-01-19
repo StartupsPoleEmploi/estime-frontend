@@ -618,3 +618,155 @@ option {
     outline: auto !important;
   }
 }
+
+
+
+.radio-as-button, .checkbox-as-button {
+  appearance:unset;
+  border:none !important;
+
+  @media #{$extra-small-device} {
+    margin:0;
+  }
+
+
+  & + label {
+    width: 9.375rem;
+    max-width: 9.375rem;
+    min-width: fit-content;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    background-color: white;
+    border: 0.0625rem solid $color-blue-9;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+
+    @media #{$extra-small-device} {
+      width: 50%;
+      max-width: 8.65rem;
+      padding-left: 0.375rem;
+      padding-right: 0.375rem;
+    }
+
+    .label-general {
+      color: black;
+    }
+
+    .label-precision {
+      color: $color-pe-grey-medium;
+    }
+  }
+
+  &.extra-large + label {
+
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    max-width: fit-content;
+
+    @media #{$extra-small-device} {
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  &.large + label {
+
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    max-width: fit-content;
+
+    @media #{$extra-small-device} {
+      width: 90%;
+      max-width: 90%;
+      text-align:start;
+    }
+  }
+
+  &.medium + label {
+    width: 9.375rem;
+    max-width: 10.625rem;
+
+    @media #{$extra-small-device} {
+      width: 45%;
+      max-width: 8.65rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &.small + label {
+    width: 5.625rem;
+    max-width: 5.625rem;
+
+    @media #{$extra-small-device} {
+      width: 15%;
+      max-width: 5.625rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &.extra-small + label  {
+    width: 2.625rem;
+    max-width: 2.625rem;
+
+    @media #{$extra-small-device} {
+      width: 15%;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  form.submitted &.ng-invalid + label,
+  &.ng-invalid.ng-touched + label {
+    background-color: $color-red-6;
+    border: 0.0625rem solid $color-red-5;
+  }
+
+
+  &:disabled + label,
+  &.disabled + label {
+    cursor:default;
+    opacity:0.5;
+  }
+
+  &:checked + label {
+    background-image: none;
+    border: 0.0625rem solid $color-blue-1;
+    background-color: $color-blue-1;
+    span {
+      color: white;
+    }
+    cursor: pointer;
+  }
+
+  &:not(:checked) + label:hover {
+    background-color: #e7e7e7 !important;
+    border-color: #ddd !important;
+    color: inherit !important;
+  }
+
+  &:focus-visible {
+    border-color: $color-grey-4;
+    background-color: $color-grey-4;
+
+    span {
+      color: $color-white-3;
+    }
+  }
+
+  &:not(:checked):focus + label {
+    background-color: $color-blue-1-o5;
+    border: 0.0625rem $color-black-1 solid;
+  }
+}
+
+.button-as-link {
+  border: none;
+  background-color: unset;
+  text-decoration: underline;
+}
+
+.button-etape {
+  border: none;
+  background-color: unset;
+}

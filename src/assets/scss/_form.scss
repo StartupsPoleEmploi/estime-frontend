@@ -143,6 +143,7 @@ form.submitted  .custom-control-input.ng-invalid.ng-touched  ~ .custom-control-l
 .error-input-message {
   color: $color-red-5 !important;
   margin-top: 0.125rem;
+  margin-bottom: 0rem;
   @extend .caption-typo;
 }
 
@@ -341,5 +342,11 @@ input:-webkit-autofill:focus {
   &:checked {
     background-color: $color-pe-red;
     border-color: $color-pe-red;
+  }
+}
+
+.fieldset-row {
+  & > .row {
+    margin:0;
   }
 }

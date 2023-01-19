@@ -1,8 +1,13 @@
 <div class="container-fluid">
-  <nav aria-label="breadcrumb">
+  <nav role="navigation">
     <ol class="breadcrumb caption-typo">
-      <li class="breadcrumb-item"><a (click)="onClickLinkAccueil()">Accueil</a></li>
-      <li class="breadcrumb-item active" aria-current="page" role="link"><span>{{libelleRouteActive}}</span></li>
+      <li class="breadcrumb-item">
+        <p class="sr-only">Vous êtes ici</p>
+        <a href="javascript:0;" (click)="onClickLinkAccueil()">
+          Accueil
+        </a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page"><span>{{libelleRouteActive}}</span></li>
     </ol>
   </nav>
 </div>

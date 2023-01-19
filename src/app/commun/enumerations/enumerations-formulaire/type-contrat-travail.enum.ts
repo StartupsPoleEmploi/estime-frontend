@@ -1,4 +1,4 @@
-export enum TypesContratTravailEnum {
+export enum TypeContratTravailEnum {
   CDI = 'CDI',
   CDD = 'CDD',
   INTERIM = 'INTERIM',

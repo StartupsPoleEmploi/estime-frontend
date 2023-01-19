@@ -1,7 +1,7 @@
 <div class="modal-header" tag-page="popup_choix_connexion">
     <span class="float-right label-close" (click)="onClickButtonClosePopup()">Fermer</span>
-    <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="onClickButtonClosePopup()"
-        focus>
+    <button type="button" class="btn-close close pull-right" aria-label="Fermer la modale de choix de connexion"
+        (click)="onClickButtonClosePopup()" focus>
         <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
 </div>
@@ -17,7 +17,8 @@
                 <span class="body-1-typo">Vous voulez une estimation <strong>précise et rapide</strong> :</span>
             </div>
             <div class="col-12">
-                <button id="btn-se-connecter" type="button" aria-label="Se connecter avec Pôle emploi"
+                <button id="btn-se-connecter" type="button"
+                    aria-label="Commencer l'estimation en se connectant avec Pôle emploi"
                     class="btn-homepage button-typo" data-testid="btn-se-connecter" tag-action="clic_bouton_connexion"
                     (click)="onClickButtonSeConnecter()">
                     <img alt="" role="presentation" class="image-1" src="./assets/images/logos/logo-pe-white.svg"

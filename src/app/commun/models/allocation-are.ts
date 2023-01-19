@@ -6,5 +6,4 @@ export class AllocationARE {
   nombreJoursRestants: number;
   hasDegressiviteAre: boolean;
   isTauxReduit: boolean;
-  isTauxPlein: boolean;
 }

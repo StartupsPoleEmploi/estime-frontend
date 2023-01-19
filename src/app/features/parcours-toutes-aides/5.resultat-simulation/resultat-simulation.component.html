@@ -1,15 +1,19 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"
     message="Mise à jour de votre estimation en cours, cela peut prendre quelques secondes..."></app-page-loading>
-<div class="container-fluid result-container-fluid container-etape" role="form">
+<div class="container-fluid result-container-fluid container-etape">
     <div class="row">
         <div class="col">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 5. {{PageHeadlineEnum.RESULTAT_SIMULATION}}
-                <button id="infobulle-resultat-simulation" class="img-interrogation-icon"
-                    aria-label="Comment interpréter vos résultats ?" tabindex="0" style="vertical-align: baseline;"
-                    placement="right top" tag-action="ouverture-infobulle-resultat-simulation"
-                    (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)"></button>
-                <img alt="" role="presentation" src="./assets/images/icones/question.svg">
+                <button id="infobulle-resultat-simulation" class="img-interrogation-icon" placement="right"
+                    tag-action="ouverture-infobulle-resultat-simulation"
+                    (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)"
+                    aria-describedby="labelInfobulleResultatSimulation">
+                    <span id="labelInfobulleResultatSimulation" class="sr-only">
+                        Comment interpréter vos résultats ?
+                    </span>
+                    <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                </button>
             </h1>
         </div>
     </div>
@@ -29,15 +33,15 @@
                         </div>
                         <div class="col-10 col-md-11">
                             <div>
-                                <h4 class="headline-4-typo">
+                                <h2 class="headline-4-typo">
                                     Basée sur une reprise d’emploi
-                                </h4>
-                                <span class="body-2-typo">
+                                </h2>
+                                <h3 class="body-2-typo">
                                     <span id="mois-versement-infos-resultat">
                                         en {{ dateUtileService.getLibelleMoisApresDateJour(1).toLowerCase() }}
                                     </span>
                                     et un versement de salaire en fin de mois
-                                </span>
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -48,12 +52,12 @@
                             <img alt="" role="presentation" src="./assets/images/icones/calendrier-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
-                            <h4 class="headline-4-typo">
+                            <h2 class="headline-4-typo">
                                 Visibilité sur 6 mois maximum
-                            </h4>
-                            <span class="body-2-typo">
+                            </h2>
+                            <h3 class="body-2-typo">
                                 Vous pourriez bénéficier d’aides et d’allocations au-delà
-                            </span>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -64,12 +68,12 @@
 
                         </div>
                         <div class="col-10 col-md-11">
-                            <h4 class="headline-4-typo">
+                            <h2 class="headline-4-typo">
                                 Montants nets
-                            </h4>
-                            <span class="body-2-typo">
+                            </h2>
+                            <h3 class="body-2-typo">
                                 avant éventuel impôt sur le revenu
-                            </span>
+                            </h3>
                         </div>
                     </div>
                 </div>
@@ -79,12 +83,12 @@
                             <img alt="" role="presentation" src="./assets/images/icones/info-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
-                            <h4 class="headline-4-typo">
+                            <h2 class="headline-4-typo">
                                 Estimation à titre d’information
-                            </h4>
-                            <span class="body-2-typo">
+                            </h2>
+                            <h3 class="body-2-typo">
                                 aucune valeur contractuelle
-                            </span>
+                            </h3>
                         </div>
                     </div>
                 </div>

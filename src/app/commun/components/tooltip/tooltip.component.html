@@ -1,9 +1,11 @@
-<div class="modal-header" attr.tag-page="{{atTag}}">
-    <span class="float-right label-close" (click)="modalRef?.hide()">Fermer</span>
-    <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="modalRef?.hide()" focus>
-        <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-    <div [innerHtml]="htmlData"></div>
+<div aria-labelledby="modalTitle" attr.role="{{modalRole}}">
+    <div class="modal-header" attr.tag-page="{{atTag}}">
+        <span class="float-right label-close" (click)="modalRef?.hide()">Fermer</span>
+        <button type="button" class="btn-close close pull-right" aria-label="Fermer" (click)="modalRef?.hide()" focus>
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div [innerHtml]="htmlData"></div>
+    </div>
 </div>

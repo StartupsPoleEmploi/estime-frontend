@@ -11,7 +11,9 @@
         <div class="numero-etape">
           <span *ngIf="etapeActive <= etapeSimulation.numero" class="overline-typo">{{etapeSimulation.numero}}</span>
           <span *ngIf="etapeActive > etapeSimulation.numero" class="checkmark"
-            [id]="'checkmark_etape_'+etapeSimulation.numero"></span>
+            [id]="'checkmark_etape_'+etapeSimulation.numero">
+            <img alt="" role="presentation" src="./assets/images/icones/checkmark.svg">
+          </span>
         </div>
         <div class="titre-etape caption-typo" [innerHTML]="etapeSimulation.titre"></div>
       </div>

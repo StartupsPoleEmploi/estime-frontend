@@ -29,6 +29,12 @@ export class SessionStorageEstimeService {
     this.sessionStorageService.clear(KeysStorageEnum.TRAFFIC_SOURCE);
   }
 
+  public clearDemandeurEmploi(): void {
+    this.clearPathRouteActivatedByUser();
+    this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_STORAGE_SESSION_KEY);
+    this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_CONNECTE_SIMULATION);
+  }
+
   public clearMessageDemandeurEmploi(): void {
     return this.sessionStorageService.clear(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE);
   }
@@ -59,6 +65,10 @@ export class SessionStorageEstimeService {
 
   public getTrafficSource(): string {
     return this.sessionStorageService.retrieve(KeysStorageEnum.TRAFFIC_SOURCE);
+  }
+
+  public getTypeUtilisateur(): string {
+    return this.sessionStorageService.retrieve(KeysStorageEnum.TYPE_UTILISATEUR);
   }
 
   public storeDemandeurEmploiConnecte(demandeurEmploiConnecte: DemandeurEmploi): void {
@@ -95,6 +105,10 @@ export class SessionStorageEstimeService {
     message.texte = MessagesErreurEnum.CONNEXION_ESTIME_IMPOSSIBLE;
     message.niveau = NiveauMessagesErreurEnum.ERROR;
     this.sessionStorageService.store(KeysStorageEnum.DEMANDEUR_EMPLOI_MESSAGE_NON_AUTORISE, message);
+  }
+
+  public storeTypeUtilisateur(typeUtilisateur: string): void {
+    this.sessionStorageService.store(KeysStorageEnum.TYPE_UTILISATEUR, typeUtilisateur);
   }
 
 }

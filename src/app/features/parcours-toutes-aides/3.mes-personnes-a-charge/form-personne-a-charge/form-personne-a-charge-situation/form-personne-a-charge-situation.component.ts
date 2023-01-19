@@ -36,9 +36,8 @@ export class FormPersonneAChargeSituationComponent {
     return this.personneUtileService.isAgeEligibleRetraite(this.dateNaissanceNouvellePersonne);
   }
 
-  public onClickCheckBoxHasAAH(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH) {
+  public onClickCheckBoxHasAAH(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiaireAAH) {
       this.unsetAAH();
     } else {
       this.setAAH();
@@ -46,9 +45,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxHasARE(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE) {
+  public onClickCheckBoxHasARE(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiaireARE) {
       this.unsetARE();
     } else {
       this.setARE();
@@ -56,9 +54,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxHasASS(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS) {
+  public onClickCheckBoxHasASS(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiaireASS) {
       this.unsetASS();
     } else {
       this.setASS();
@@ -66,9 +63,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxHasRSA(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA) {
+  public onClickCheckBoxHasRSA(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiaireRSA) {
       this.unsetRSA();
     } else {
       this.setRSA();
@@ -76,9 +72,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxIsMicroEntrepreneur(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur) {
+  public onClickCheckBoxIsMicroEntrepreneur(): void {
+    if (this.nouvellePersonneACharge.informationsPersonnelles.isMicroEntrepreneur) {
       this.unsetBeneficesMicroEntreprise();
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
@@ -86,9 +81,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxIsTravailleurIndependant(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant) {
+  public onClickCheckBoxIsTravailleurIndependant(): void {
+    if (this.nouvellePersonneACharge.informationsPersonnelles.isTravailleurIndependant) {
       this.unsetChiffreAffairesIndependant();
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
@@ -96,9 +90,8 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxHasPensionInvalidite(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
+  public onClickCheckBoxHasPensionInvalidite(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
       this.unsetPensionInvalidite();
     } else {
       this.setPensionInvalidite();
@@ -106,18 +99,16 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxHasPensionRetraite(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
+  public onClickCheckBoxHasPensionRetraite(): void {
+    if (this.nouvellePersonneACharge.beneficiaireAides.beneficiairePensionInvalidite) {
       this.unsetPensionRetraite();
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
     }
   }
 
-  public onClickCheckBoxIsSalarie(event): void {
-    event.preventDefault();
-    if (!this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
+  public onClickCheckBoxIsSalarie(): void {
+    if (this.nouvellePersonneACharge.informationsPersonnelles.isSalarie) {
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.salaire = null;
     } else {
       this.nouvellePersonneACharge.informationsPersonnelles.isSansRessource = false;
@@ -125,8 +116,7 @@ export class FormPersonneAChargeSituationComponent {
     }
   }
 
-  public onClickCheckBoxIsSansRessource(event): void {
-    event.preventDefault();
+  public onClickCheckBoxIsSansRessource(): void {
     this.unsetSalaire();
     this.unsetRessourcesAllocations();
     this.unsetBeneficesMicroEntreprise();
@@ -135,35 +125,36 @@ export class FormPersonneAChargeSituationComponent {
 
   public handleKeyUpOnButtonSituation(e: any, situationPersonneACharge: string) {
     if (e.keyCode === 13) {
+      e.preventDefault();
       if (situationPersonneACharge === this.situationPersonneEnum.AAH) {
-        this.onClickCheckBoxHasAAH(e);
+        this.onClickCheckBoxHasAAH();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.SALARIE) {
-        this.onClickCheckBoxIsSalarie(e);
+        this.onClickCheckBoxIsSalarie();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.RSA) {
-        this.onClickCheckBoxHasRSA(e);
+        this.onClickCheckBoxHasRSA();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.ARE) {
-        this.onClickCheckBoxHasARE(e);
+        this.onClickCheckBoxHasARE();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.ASS) {
-        this.onClickCheckBoxHasASS(e);
+        this.onClickCheckBoxHasASS();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_INVALIDITE) {
-        this.onClickCheckBoxHasPensionInvalidite(e);
+        this.onClickCheckBoxHasPensionInvalidite();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.PENSION_RETRAITE) {
-        this.onClickCheckBoxHasPensionRetraite(e);
+        this.onClickCheckBoxHasPensionRetraite();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.MICRO_ENTREPRENEUR) {
-        this.onClickCheckBoxIsMicroEntrepreneur(e);
+        this.onClickCheckBoxIsMicroEntrepreneur();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.TRAVAILLEUR_INDEPENDANT) {
-        this.onClickCheckBoxIsTravailleurIndependant(e);
+        this.onClickCheckBoxIsTravailleurIndependant();
       }
       else if (situationPersonneACharge === this.situationPersonneEnum.SANS_RESSOURCE) {
-        this.onClickCheckBoxIsSansRessource(e);
+        this.onClickCheckBoxIsSansRessource();
       }
     }
   }
@@ -201,8 +192,8 @@ export class FormPersonneAChargeSituationComponent {
     if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
       && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS) {
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationASS();
-      this.unsetARE();
     }
+    this.unsetARE();
   }
 
   private unsetASS(): void {
@@ -218,8 +209,8 @@ export class FormPersonneAChargeSituationComponent {
     if (this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi
       && !this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE) {
       this.nouvellePersonneACharge.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationARE();
-      this.unsetASS();
     }
+    this.unsetASS();
   }
 
   private unsetARE(): void {

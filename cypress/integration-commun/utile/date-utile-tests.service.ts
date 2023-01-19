@@ -3,9 +3,9 @@ import * as moment from 'moment';
 
 export class DateUtileTests {
 
+
   public getDateRepriseCreationEntrepriseDepuisXMois(nombreDeMoisDepuisRepriseCreationEntreprise: number): DateDecomposee {
     const dateDecomposee = new DateDecomposee();
-
     const m = moment(new Date());
     const dateCreationEntreprise = m.subtract(nombreDeMoisDepuisRepriseCreationEntreprise, 'M').toDate();
 

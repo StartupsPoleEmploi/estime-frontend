@@ -1,38 +1,37 @@
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid">
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 3. {{PageHeadlineEnum.PERSONNES_A_CHARGE}}
+                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon" placement="right"
+                    tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
+                    (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)"
+                    aria-describedby="labelInfobullePersonneACharge">
+                    <span id="labelInfobullePersonneACharge" class="sr-only">
+                        Qui considère-t-on comme votre personne à charge ?
+                    </span>
+                    <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                </button>
             </h1>
             <div class="text-under-h1 body-2-typo">
                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE_ASTERIX}}
             </div>
         </div>
         <div class="card card-form card-form-style-2">
-            <div class="row mb-3">
-                <label class="label headline-4-typo" aria-describedby="infobulle-personnes-charge-nbr-enfant">
-                    Nombre d'enfant(s) ou de
-                    <div *ngIf="screenService.isExtraSmallScreen()"></div>
-                    personne(s) à charge
-                    <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon"
-                        aria-label="Qui considère-t-on comme votre personne à charge ?" placement="right"
-                        tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
-                        (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)">
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg">
-                    </button>
-                </label>
-            </div>
             <div class="card-group row row-cols-2 row-cols-md-4 gx-4 gy-2">
                 <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                     <div class="card">
                         <div class="card-header">
-                            <button d="btn-supprimer-personne-a-charge" type="button" class="btn-close close float-end"
-                                role="button" tabindex="0" aria-label="Supprimer personne à charge"
-                                alt="Supprimer personne à charge"
+                            <button [id]="'btn-supprimer-personne-a-charge'+indexOfelement"
+                                class="btn-close close float-end"
                                 (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
-                                (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)">
+                                (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)"
+                                [attr.aria-describedby]="'labelSupprimerPersonneACharge'+indexOfelement">
+                                <span [id]="'labelSupprimerPersonneACharge'+indexOfelement" class="sr-only">
+                                    Supprimer la personne à charge
+                                </span>
                                 <span aria-hidden="true" class="visually-hidden">&times;</span>
                             </button>
                         </div>
@@ -51,20 +50,26 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a tabindex="0" alt="Modifier personne à charge" class="float-end caption-2-typo"
-                                (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)">
-                                Modifier
-                            </a>
+                            <button class="button-as-link float-end caption-typo"
+                                (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)"
+                                (keyup)="handleKeyUpOnButtonModifierPersonneACharge($event, personne, indexOfelement)"
+                                attr.aria-describedby="labelModifierPersonneACharge{{indexOfelement}}">
+                                <span id="labelModifierPersonneACharge{{indexOfelement}}">
+                                    Modifier
+                                    <span class="sr-only">la personne à charge</span>
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <button name="button-card-add-personne" class="button-card-add-personne"
-                        aria-label="Ajouter une personne à charge" (click)="onClickButtonAjouterPersonne()"
+                    <button *ngIf="isNouvellePersonneAChargeFormDisplay === false" name="button-card-add-personne"
+                        class="button-card-add-personne" (click)="onClickButtonAjouterPersonne()"
                         (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
-                        *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-                        <div class="card card-add-personne align-items-center" data-testid="btn-ajouter-personne-charge"
-                            [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}">
+                        aria-describedby="labelAjouterPersonneACharge">
+                        <div class="card card-add-personne align-items-center"
+                            [ngClass]="{'active':isNouvellePersonneAChargeFormDisplay === true}"
+                            data-testid="btn-ajouter-personne-charge">
                             <div class="card-body d-flex align-items-center">
                                 <div id="row-card-body-add-personne" class="row">
                                     <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
@@ -73,7 +78,7 @@
                                     </div>
                                     <div class="col-md-9 col-xs-12 col-card-body"
                                         [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
-                                        <span class="body-2-typo">
+                                        <span id="labelAjouterPersonneACharge" class="body-2-typo">
                                             Ajouter un enfant ou une personne à charge
                                         </span>
                                     </div>
@@ -85,14 +90,15 @@
                 <div class="col">
                     <button *ngIf="!hasPersonneACharge() &&   isNouvellePersonneAChargeFormDisplay === false"
                         name="button-card-pas-de-personne-a-charge" class="button-card-pas-de-personne-a-charge"
-                        aria-label="Je n'ai pas de personne à charge" (click)="onClickButtonPasDePersonneACharge()"
-                        (keyup)="handleKeyUpOnButtonPasDePersonneACharge($event)">
+                        (click)="onClickButtonPasDePersonneACharge()"
+                        (keyup)="handleKeyUpOnButtonPasDePersonneACharge($event)"
+                        aria-describedby="labelPasDePersonneACharge">
                         <div class="card card-add-personne align-items-center"
                             data-testid="btn-pas-de-personne-a-charge">
                             <div class="card-body d-flex align-items-center">
                                 <div id="row-card-body-add-personne" class="row">
                                     <div id="pas-de-personne-text" class="col-12 col-card-body text-center">
-                                        <span class="body-2-typo">
+                                        <span id="labelPasDePersonneACharge" class="body-2-typo">
                                             Je n'ai pas d'enfant ou de personne à charge
                                         </span>
                                     </div>
@@ -110,16 +116,16 @@
             </app-form-personne-a-charge>
         </div>
         <div class="row-btn-form" *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-            <button class="btn-precedent" (click)="onClickButtonRetour()" aria-label="Retour à la page précédente"
-                data-testid="btn-personnes-charge-retour" tag-navigation="clic_bouton_retour">
+            <button class="btn-precedent" tag-navigation="clic_bouton_retour" data-testid="btn-personnes-charge-retour"
+                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
                 <div>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-personnes-charge-suivant" class="btn-suivant" aria-label="Passer à la page suivante"
-                type="submit" data-testid="btn-personnes-charge-suivant" (click)="onClickButtonSuivant()"
-                tag-navigation="clic_bouton_suivant">
+            <button id="btn-personnes-charge-suivant" type="submit" class="btn-suivant"
+                tag-navigation="clic_bouton_suivant" data-testid="btn-personnes-charge-suivant"
+                (click)="onClickButtonSuivant()" aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
                     <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
@@ -131,7 +137,9 @@
 
 <ng-template #modalPersonnesAChargeTemplate>
     <app-tooltip [modalRef]="modalService.modalRef" htmlData="
-        <h3 class='headline-3-typo headline-3-typo-color'>Qui sont les « personnes à charge » ?</h3>
+        <h3 id='modalTitle' class='headline-3-typo headline-3-typo-color'>
+            Qui sont les « personnes à charge » ?
+        </h3>
         <p class='body-1-typo'>
             Ce sont les personnes qui apparaissent sur votre fiche d’imposition (enfants ou parents).
         </p>">

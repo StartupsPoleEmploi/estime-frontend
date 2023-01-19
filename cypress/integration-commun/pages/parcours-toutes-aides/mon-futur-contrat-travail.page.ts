@@ -77,19 +77,19 @@ class MonFuturContratTravailPage {
   }
 
   private clickOnNombreTrajets1JourParSemaine(): void {
-    cy.get('[data-testid=btn-nombres-trajets-1-jour-semaine]').click();
+    cy.get('[data-testid=btn-nombres-trajets-1-jour-semaine]').click({ force: true });
   }
   private clickOnNombreTrajets2JoursParSemaine(): void {
-    cy.get('[data-testid=btn-nombres-trajets-2-jours-semaine]').click();
+    cy.get('[data-testid=btn-nombres-trajets-2-jours-semaine]').click({ force: true });
   }
   private clickOnNombreTrajets3JoursParSemaine(): void {
-    cy.get('[data-testid=btn-nombres-trajets-3-jours-semaine]').click();
+    cy.get('[data-testid=btn-nombres-trajets-3-jours-semaine]').click({ force: true });
   }
   private clickOnNombreTrajets4JoursParSemaine(): void {
-    cy.get('[data-testid=btn-nombres-trajets-4-jours-semaine]').click();
+    cy.get('[data-testid=btn-nombres-trajets-4-jours-semaine]').click({ force: true });
   }
   private clickOnNombreTrajets5JoursParSemaine(): void {
-    cy.get('[data-testid=btn-nombres-trajets-5-jours-semaine]').click();
+    cy.get('[data-testid=btn-nombres-trajets-5-jours-semaine]').click({ force: true });
   }
 
   public saisirDistanceDomicileLieuTravail(distanceDomicileLieuTravail: string): void {
@@ -97,19 +97,19 @@ class MonFuturContratTravailPage {
   }
 
   public clickDistanceDomicileTravailEntre0Et9(): void {
-    cy.get('[data-testid=btn-distance-envisagee-0-9]').click();
+    cy.get('[data-testid=btn-distance-envisagee-0-9]').click({ force: true });
   }
 
   public clickDistanceDomicileTravailEntre10Et19(): void {
-    cy.get('[data-testid=btn-distance-envisagee-10-19]').click();
+    cy.get('[data-testid=btn-distance-envisagee-10-19]').click({ force: true });
   }
 
   public clickDistanceDomicileTravailEntre20Et30(): void {
-    cy.get('[data-testid=btn-distance-envisagee-20-30]').click();
+    cy.get('[data-testid=btn-distance-envisagee-20-30]').click({ force: true });
   }
 
   public clickDistanceDomicileTravailPlusDe30(): void {
-    cy.get('[data-testid=btn-distance-envisagee-plus-de-30]').click();
+    cy.get('[data-testid=btn-distance-envisagee-plus-de-30]').click({ force: true });
   }
 
   public clickOnSuivant(): void {

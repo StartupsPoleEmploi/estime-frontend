@@ -1,4 +1,5 @@
 import { Salaire } from "@models/salaire";
+import { TypeDureeHebdoEnum } from "../enumerations/enumerations-formulaire/type-duree-hebdo.enum";
 
 export class FuturTravail {
   hasOffreEmploiEnVue: boolean;
@@ -8,18 +9,8 @@ export class FuturTravail {
   nombreTrajetsDomicileTravail: number;
   salaire: Salaire;
   typeContrat: string;
-  distanceDomicileTravailEntre0Et9: boolean;
-  distanceDomicileTravailEntre10Et19: boolean;
-  distanceDomicileTravailEntre20Et30: boolean;
-  distanceDomicileTravailPlusDe30: boolean;
-  nombreTrajets1JourSemaine: boolean;
-  nombreTrajets2JoursSemaine: boolean;
-  nombreTrajets3JoursSemaine: boolean;
-  nombreTrajets4JoursSemaine: boolean;
-  nombreTrajets5JoursSemaine: boolean;
-  dureeHebdoTempsPlein: boolean;
-  dureeHebdoMiTemps: boolean;
-  dureeHebdoAutre: boolean;
-  salaireSouhaiteSMIC: boolean;
-  salaireSouhaiteAutre: boolean;
+  typeDureeHebdo: string;
+  typeSalaireSouhaite: string;
+  typeNombreTrajetsSemaine: string;
+  typeDistanceDomicileTravail: string;
 }

@@ -2,7 +2,7 @@
     message="Calcul de votre estimation en cours, cela peut prendre quelques secondes..."></app-page-loading>
 <app-fil-etapes-desktop *ngIf="!screenService.isExtraSmallScreen()"></app-fil-etapes-desktop>
 <app-fil-etapes-mobile *ngIf="screenService.isExtraSmallScreen()"></app-fil-etapes-mobile>
-<div class="container-fluid container-etape" role="form">
+<div class="container-fluid container-etape">
     <div class="form-container-fluid">
         <alert type="danger" *ngIf="messageErreur">
             {{messageErreur}}
@@ -176,9 +176,10 @@
 </div>
 
 <ng-template #modalPensionInvaliditeEtSalaires>
-    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" htmlData="
+    <app-tooltip [modalRef]="modalService.modalRef" atTag="popup_pension_invalidite_et_salaire" modalRole="alertdialog"
+        htmlData="
         <img alt='' role='presentation' src='./assets/images/icones/warning.svg'>
-        <h4 class='headline-4-typo mt-4 mb-3'>
+        <h4 id='modalTitle' class='headline-4-typo mt-4 mb-3'>
             Nous ne sommes pas en mesure d'effectuer l'estimation au regard de votre situation.
         </h3>
         <p class='body-1-typo'>

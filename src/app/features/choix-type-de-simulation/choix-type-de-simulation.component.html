@@ -1,5 +1,5 @@
 <app-page-loading *ngIf="isPageLoadingDisplay"></app-page-loading>
-<div *ngIf="!isPageLoadingDisplay" class="container-fluid" role="form">
+<div *ngIf="!isPageLoadingDisplay" class="container-fluid">
     <div class="row mb-5">
         <div class="col-12 col-md-8 title-container text-start div-vertically-centered">
             <h1 class="h2-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
@@ -20,14 +20,14 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <button name="simulation-complete" class="card button-card-choix-simulation"
-                        aria-label="Effectuer une simulation complète" (click)="clickOnSimulationRapide()"
+                        aria-label="Effectuer une simulation rapide" (click)="clickOnSimulationRapide()"
                         (keyup)="handleKeyUpOnSimulationRapide($event)" data-testid="btn-effectuer-simulation-rapide"
                         tag-action="clic_bouton_effectuer_simulation_rapide">
                         <div class="row">
                             <div class="col-md-11 col-10 text-start">
-                                <h5 class="headline-5-typo color-pe-red-typo">
+                                <h3 class="headline-4-typo color-pe-red-typo text-start">
                                     Estimation rapide
-                                </h5>
+                                </h3>
                                 <span class="body-2-typo">
                                     pour estimer le montant de votre complément d'allocation chômage (ARE) en cas de
                                     reprise d'emploi
@@ -47,9 +47,9 @@
                         tag-action="clic_bouton_effectuer_simulation_complete">
                         <div class="row">
                             <div class="col-md-11 col-10 text-start">
-                                <h5 class="headline-5-typo color-pe-red-typo">
+                                <h3 class="headline-4-typo color-pe-red-typo text-start">
                                     Estimation complète
-                                </h5>
+                                </h3>
                                 <span class="body-2-typo">
                                     pour estimer toutes les allocations et aides dans les 6 mois qui suivront votre
                                     reprise d'emploi

@@ -1,9 +1,8 @@
 import { Coordonnees } from "./coordonnees";
-import { StatutOccupationLogement } from "./statut-occupation-logement";
 
 export class Logement {
   coordonnees: Coordonnees;
-  statutOccupationLogement: StatutOccupationLogement;
+  statutOccupationLogement: string;
   isCrous: boolean;
   isColloc: boolean;
   isConventionne: boolean;

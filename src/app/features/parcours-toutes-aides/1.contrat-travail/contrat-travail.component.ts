@@ -11,9 +11,15 @@ import { ControleChampFormulaireService } from '@app/core/services/utile/control
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { ScreenService } from '@app/core/services/utile/screen.service';
 import { RoutesEnum } from '@enumerations/routes.enum';
-import { TypesContratTravailEnum } from '@enumerations/types-contrat-travail.enum';
+import { TypeContratTravailEnum } from '@app/commun/enumerations/enumerations-formulaire/type-contrat-travail.enum';
 import { FuturTravail } from '@models/futur-travail';
 import { LibellesCourtsTypesContratTravailEnum } from '@app/commun/enumerations/libelles-courts-types-contrat-travail.enum';
+import { TypeDureeHebdoEnum } from '@app/commun/enumerations/enumerations-formulaire/type-duree-hebdo.enum';
+import { TypeDistanceDomicileTravailEnum } from '@app/commun/enumerations/enumerations-formulaire/type-distance-domicile-travail.enum';
+import { TypeNombreTrajetsSemaineEnum } from '@app/commun/enumerations/enumerations-formulaire/type-nombre-trajets-semaine.enum';
+import { TypeSalaireDisplayEnum } from '@app/commun/enumerations/enumerations-formulaire/type-salaire-display.enum';
+import { TypeSalaireSouhaiteEnum } from '@app/commun/enumerations/enumerations-formulaire/type-salaire-souhaite.enum';
+import { TypeUtilisateurEnum } from '@app/commun/enumerations/type-utilisateur.enum';
 
 @Component({
   selector: 'app-contrat-travail',
@@ -31,34 +37,25 @@ export class ContratTravailComponent implements OnInit {
   isFuturTravailFormSubmitted: boolean;
   isNombreTrajetsDomicileTravailDisplay = false;
   PageHeadlineEnum: typeof PageHeadlineEnum = PageHeadlineEnum;
-  TypesContratTravailEnum: typeof TypesContratTravailEnum = TypesContratTravailEnum;
+
+  TypeContratTravailEnum: typeof TypeContratTravailEnum = TypeContratTravailEnum;
+  TypeDureeHebdoEnum: typeof TypeDureeHebdoEnum = TypeDureeHebdoEnum;
+  TypeDistanceDomicileTravailEnum: typeof TypeDistanceDomicileTravailEnum = TypeDistanceDomicileTravailEnum;
+  TypeNombreTrajetsSemaineEnum: typeof TypeNombreTrajetsSemaineEnum = TypeNombreTrajetsSemaineEnum;
+  TypeSalaireDisplayEnum: typeof TypeSalaireDisplayEnum = TypeSalaireDisplayEnum;
+  TypeSalaireSouhaiteEnum: typeof TypeSalaireSouhaiteEnum = TypeSalaireSouhaiteEnum;
+
   LibellesTypesContratTravailEnum: typeof LibellesTypesContratTravailEnum = LibellesTypesContratTravailEnum;
-  LibellesCourtsTypesContratTravailEnum: typeof LibellesCourtsTypesContratTravailEnum = LibellesCourtsTypesContratTravailEnum
+  LibellesCourtsTypesContratTravailEnum: typeof LibellesCourtsTypesContratTravailEnum = LibellesCourtsTypesContratTravailEnum;
   messageErreurSalaire: string;
-  hasOffreEmploiOui: boolean;
-  hasOffreEmploiNon: boolean;
-  isTypeContratCDI: boolean;
-  isTypeContratCDD: boolean;
-  isTypeContratInterim: boolean;
-  isTypeContratIAE: boolean;
+  hasOffreEmploi: boolean;
+
+  typeContrat: string
   typeSalaireDisplay: string;
-
-  isDureeHebdoTempsPlein: boolean;
-  isDureeHebdoMiTemps: boolean;
-  isDureeHebdoAutre: boolean;
-  isSalaireSouhaiteSMIC: boolean;
-  isSalaireSouhaiteAutre: boolean;
-
-  isNombreTrajets1JourSemaine: boolean;
-  isNombreTrajets2JoursSemaine: boolean;
-  isNombreTrajets3JoursSemaine: boolean;
-  isNombreTrajets4JoursSemaine: boolean;
-  isNombreTrajets5JoursSemaine: boolean;
-
-  isDistanceDomicileTravailEntre0Et9: boolean;
-  isDistanceDomicileTravailEntre10Et19: boolean;
-  isDistanceDomicileTravailEntre20Et30: boolean;
-  isDistanceDomicileTravailPlusDe30: boolean;
+  typeDureeHebdo: string;
+  typeNombreTrajetsSemaine: string;
+  typeSalaireSouhaite: string;
+  typeDistanceDomicileTravail: string;
 
   nombreMoisCDDSelectOptions = [
     { label: "1 mois", value: 1 },
@@ -94,17 +91,11 @@ export class ContratTravailComponent implements OnInit {
       if (this.futurTravail.nombreTrajetsDomicileTravail) {
         this.isNombreTrajetsDomicileTravailDisplay = true;
       }
-      this.hasOffreEmploiOui = this.futurTravail.hasOffreEmploiEnVue;
-      this.hasOffreEmploiNon = !this.futurTravail.hasOffreEmploiEnVue;
-      this.isTypeContratCDI = this.futurTravail.typeContrat == this.TypesContratTravailEnum.CDI;
-      this.isTypeContratCDD = this.futurTravail.typeContrat == this.TypesContratTravailEnum.CDD;
-      this.isTypeContratInterim = this.futurTravail.typeContrat == this.TypesContratTravailEnum.INTERIM;
-      this.isTypeContratIAE = this.futurTravail.typeContrat == this.TypesContratTravailEnum.IAE;
-      this.isDureeHebdoTempsPlein = this.futurTravail.dureeHebdoTempsPlein;
-      this.isDureeHebdoMiTemps = this.futurTravail.dureeHebdoMiTemps;
-      this.isDureeHebdoAutre = this.futurTravail.dureeHebdoAutre;
-      this.isSalaireSouhaiteSMIC = this.futurTravail.salaireSouhaiteSMIC;
-      this.isSalaireSouhaiteAutre = this.futurTravail.salaireSouhaiteAutre;
+      this.hasOffreEmploi = this.futurTravail.hasOffreEmploiEnVue;
+      this.typeContrat = this.futurTravail.typeContrat;
+      this.typeDureeHebdo = this.futurTravail.typeDureeHebdo;
+      this.typeSalaireSouhaite = this.futurTravail.typeSalaireSouhaite;
+      this.typeDistanceDomicileTravail = this.futurTravail.typeDistanceDomicileTravail;
       this.loadDataDistanceDomicileTravail();
     } else {
       this.futurTravail = new FuturTravail();
@@ -120,22 +111,23 @@ export class ContratTravailComponent implements OnInit {
   }
 
   private loadDataDistanceDomicileTravail() {
-    this.isDistanceDomicileTravailEntre0Et9 = (this.futurTravail.distanceKmDomicileTravail > 0 && this.futurTravail.distanceKmDomicileTravail <= 9);
-    this.isDistanceDomicileTravailEntre10Et19 = (this.futurTravail.distanceKmDomicileTravail > 9 && this.futurTravail.distanceKmDomicileTravail <= 19);
-    this.isDistanceDomicileTravailEntre20Et30 = (this.futurTravail.distanceKmDomicileTravail > 19 && this.futurTravail.distanceKmDomicileTravail < 30);
-    this.isDistanceDomicileTravailPlusDe30 = (this.futurTravail.distanceKmDomicileTravail >= 30);
+    if (this.futurTravail.distanceKmDomicileTravail > 0 && this.futurTravail.distanceKmDomicileTravail <= 9) {
+      this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_0_ET_9;
+    } else if (this.futurTravail.distanceKmDomicileTravail > 9 && this.futurTravail.distanceKmDomicileTravail <= 19) {
+      this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_10_ET_19;
+    } else if (this.futurTravail.distanceKmDomicileTravail > 19 && this.futurTravail.distanceKmDomicileTravail < 30) {
+      this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_20_ET_30;
+    } else if (this.futurTravail.distanceKmDomicileTravail >= 30) {
+      this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.PLUS_DE_30;
+    }
 
-    if (this.isDistanceDomicileTravailEntre0Et9) this.futurTravail.distanceKmDomicileTravail = 5;
-    else if (this.isDistanceDomicileTravailEntre10Et19) this.futurTravail.distanceKmDomicileTravail = 15;
-    else if (this.isDistanceDomicileTravailEntre20Et30) this.futurTravail.distanceKmDomicileTravail = 25;
+    if (this.typeDistanceDomicileTravail == TypeDistanceDomicileTravailEnum.ENTRE_0_ET_9) this.futurTravail.distanceKmDomicileTravail = 5;
+    else if (this.typeDistanceDomicileTravail == TypeDistanceDomicileTravailEnum.ENTRE_10_ET_19) this.futurTravail.distanceKmDomicileTravail = 15;
+    else if (this.typeDistanceDomicileTravail == TypeDistanceDomicileTravailEnum.ENTRE_20_ET_30) this.futurTravail.distanceKmDomicileTravail = 25;
   }
 
   private loadDataNombreAllersRetours() {
-    this.isNombreTrajets1JourSemaine = this.futurTravail.nombreTrajets1JourSemaine;
-    this.isNombreTrajets2JoursSemaine = this.futurTravail.nombreTrajets2JoursSemaine;
-    this.isNombreTrajets3JoursSemaine = this.futurTravail.nombreTrajets3JoursSemaine;
-    this.isNombreTrajets4JoursSemaine = this.futurTravail.nombreTrajets4JoursSemaine;
-    this.isNombreTrajets5JoursSemaine = this.futurTravail.nombreTrajets5JoursSemaine;
+    this.typeNombreTrajetsSemaine = this.futurTravail.typeNombreTrajetsSemaine;
   }
 
   public onClickButtonRetour(): void {
@@ -160,9 +152,11 @@ export class ContratTravailComponent implements OnInit {
       && this.futurTravail.salaire.montantMensuelNet > 0
       && !this.isNombreHeuresTravailleesSemaineInvalide()
       && !this.isTypeContratInvalide()
+      && !this.isNombreMoisContratCDDInvalide()
       && !this.isDureeHebdoInvalide()
       && !this.isSalaireSouhaiteInvalide()
-      && !this.isDistanceDomicileTravailInvalide();
+      && !this.isDistanceDomicileTravailInvalide()
+      && !this.isChampsNombreTrajetsSemaineInvalides();
   }
 
   public isNombreHeuresTravailleesSemaineInvalide(): boolean {
@@ -170,156 +164,141 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public isTypeContratInvalide(): boolean {
-    return this.hasOffreEmploiOui
+    return this.hasOffreEmploi
       && (
         this.futurTravail.typeContrat == null
         || (
-          !this.isTypeContratCDI
-          && !this.isTypeContratCDD
-          && !this.isTypeContratInterim
-          && !this.isTypeContratIAE
+          this.typeContrat != TypeContratTravailEnum.CDD
+          && this.typeContrat != TypeContratTravailEnum.CDI
+          && this.typeContrat != TypeContratTravailEnum.IAE
+          && this.typeContrat != TypeContratTravailEnum.INTERIM
         )
       );
   }
 
+  public isNombreMoisContratCDDAAfficher() {
+    return (this.typeContrat == TypeContratTravailEnum.CDD || this.typeContrat == TypeContratTravailEnum.INTERIM || this.typeContrat == TypeContratTravailEnum.IAE);
+  }
+
+  public isNombreMoisContratCDDInvalide(): boolean {
+    return this.hasOffreEmploi
+      && (
+        this.futurTravail.typeContrat != null
+        && (
+          this.typeContrat == TypeContratTravailEnum.CDD
+          || this.typeContrat == TypeContratTravailEnum.IAE
+          || this.typeContrat == TypeContratTravailEnum.INTERIM
+        )
+        && this.futurTravail.nombreMoisContratCDD == null
+      );
+  }
+
   public isDureeHebdoInvalide(): boolean {
-    return this.hasOffreEmploiNon && (
-      (this.isDureeHebdoTempsPlein == null && this.isDureeHebdoMiTemps == null && this.isDureeHebdoAutre == null)
+    return !this.hasOffreEmploi && (
+      (this.typeDureeHebdo == null)
       || (
-        (this.isDureeHebdoTempsPlein == this.isDureeHebdoMiTemps)
-        && (this.isDureeHebdoTempsPlein == this.isDureeHebdoAutre)
-        && (this.isDureeHebdoMiTemps == this.isDureeHebdoAutre)
+        (this.typeDureeHebdo != this.TypeDureeHebdoEnum.TEMPS_PLEIN)
+        && (this.typeDureeHebdo != this.TypeDureeHebdoEnum.MI_TEMPS)
+        && (this.typeDureeHebdo != this.TypeDureeHebdoEnum.AUTRE)
       )
     );
   }
 
   public isSalaireSouhaiteInvalide(): boolean {
-    return this.hasOffreEmploiNon && (
-      (this.isSalaireSouhaiteSMIC == null && this.isSalaireSouhaiteAutre == null)
-      || (this.isSalaireSouhaiteSMIC == this.isSalaireSouhaiteAutre)
-      || (this.isSalaireSouhaiteAutre && this.futurTravail.salaire.montantMensuelNet == null)
+    return !this.hasOffreEmploi && (
+      (this.typeSalaireSouhaite == null)
+      || (this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.SMIC
+        && this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.AUTRE)
+      || (this.typeSalaireSouhaite == TypeSalaireSouhaiteEnum.AUTRE && this.futurTravail.salaire.montantMensuelNet == null)
     );
   }
 
   public isDistanceDomicileTravailInvalide(): boolean {
-    return !this.futurTravail.hasOffreEmploiEnVue && (this.isDistanceDomicileTravailPlusDe30 && this.futurTravail.distanceKmDomicileTravail < 30);
+    return !this.futurTravail.hasOffreEmploiEnVue && (this.typeDistanceDomicileTravail == TypeDistanceDomicileTravailEnum.PLUS_DE_30 && this.futurTravail.distanceKmDomicileTravail < 30);
   }
 
   public onClickCheckBoxHasOffreEmploiOui() {
-    if (this.hasOffreEmploiOui) {
-      this.hasOffreEmploiNon = false;
+    if (this.hasOffreEmploi != true) {
+      this.hasOffreEmploi = true;
       this.futurTravail.hasOffreEmploiEnVue = true;
-    } else {
-      this.futurTravail.hasOffreEmploiEnVue = null;
     }
     this.loadDataDistanceDomicileTravail();
   }
 
   public onClickCheckBoxHasOffreEmploiNon() {
-    if (this.hasOffreEmploiNon) {
-      this.hasOffreEmploiOui = false;
+    if (this.hasOffreEmploi != false) {
+      this.hasOffreEmploi = false;
       this.futurTravail.hasOffreEmploiEnVue = false;
-      this.futurTravail.typeContrat = TypesContratTravailEnum.CDI;
-    } else {
-      this.futurTravail.hasOffreEmploiEnVue = null;
+      this.futurTravail.typeContrat = TypeContratTravailEnum.CDI;
     }
     this.loadDataDistanceDomicileTravail();
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsTypeContratCDI() {
-    if (this.isTypeContratCDI) {
-      this.isTypeContratCDD = false;
-      this.isTypeContratIAE = false;
-      this.isTypeContratInterim = false;
-      this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDI;
+    if (this.typeContrat != TypeContratTravailEnum.CDI) {
+      this.typeContrat = TypeContratTravailEnum.CDI;
+      this.futurTravail.typeContrat = this.typeContrat;
       this.unsetNombreMoisContrat();
-    } else {
-      this.futurTravail.typeContrat = null;
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsTypeContratCDD() {
-    if (this.isTypeContratCDD) {
-      this.isTypeContratCDI = false;
-      this.isTypeContratIAE = false;
-      this.isTypeContratInterim = false;
-      this.futurTravail.typeContrat = this.TypesContratTravailEnum.CDD;
-    } else {
-      this.futurTravail.typeContrat = null;
-      this.unsetNombreMoisContrat();
+    if (this.typeContrat != TypeContratTravailEnum.CDD) {
+      this.typeContrat = TypeContratTravailEnum.CDD;
+      this.futurTravail.typeContrat = this.typeContrat;
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsTypeContratInterim() {
-    if (this.isTypeContratInterim) {
-      this.isTypeContratCDI = false;
-      this.isTypeContratCDD = false;
-      this.isTypeContratIAE = false;
-      this.futurTravail.typeContrat = this.TypesContratTravailEnum.INTERIM;
-    } else {
-      this.futurTravail.typeContrat = null;
-      this.unsetNombreMoisContrat();
+    if (this.typeContrat != TypeContratTravailEnum.INTERIM) {
+      this.typeContrat = TypeContratTravailEnum.INTERIM;
+      this.futurTravail.typeContrat = this.typeContrat;
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsTypeContratIAE() {
-    if (this.isTypeContratIAE) {
-      this.isTypeContratCDI = false;
-      this.isTypeContratCDD = false;
-      this.isTypeContratInterim = false;
-      this.futurTravail.typeContrat = this.TypesContratTravailEnum.IAE;
-    } else {
-      this.futurTravail.typeContrat = null;
-      this.unsetNombreMoisContrat();
+    if (this.typeContrat != TypeContratTravailEnum.IAE) {
+      this.typeContrat = TypeContratTravailEnum.IAE;
+      this.futurTravail.typeContrat = this.typeContrat;
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsDureeHebdoTempsPlein() {
-    if (this.isDureeHebdoTempsPlein) {
+    if (this.typeDureeHebdo != TypeDureeHebdoEnum.TEMPS_PLEIN) {
       this.setDureeHebdoTempsPlein();
-    } else {
-      this.unsetDureeHebdoTempsPlein();
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsDureeHebdoMiTemps() {
-    if (this.isDureeHebdoMiTemps) {
+    if (this.typeDureeHebdo != TypeDureeHebdoEnum.MI_TEMPS) {
       this.setDureeHebdoMiTemps();
-    } else {
-      this.unsetDureeHebdoMiTemps();
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsDureeHebdoAutre() {
-    if (this.isDureeHebdoAutre) {
+    if (this.typeDureeHebdo != TypeDureeHebdoEnum.AUTRE) {
       this.setDureeHebdoAutre();
-    } else {
-      this.unsetDureeHebdoAutre();
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsSalaireSouhaiteSMIC() {
-    if (this.isSalaireSouhaiteSMIC) {
+    if (this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.SMIC) {
       this.setSalaireSouhaiteSMIC();
-    } else {
-      this.unsetSalaireSouhaiteSMIC();
     }
     this.isFuturTravailFormSubmitted = false;
   }
 
   public onClickCheckBoxIsSalaireSouhaiteAutre() {
-    if (this.isSalaireSouhaiteAutre) {
+    if (this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.AUTRE) {
       this.setSalaireSouhaiteAutre();
-    } else {
-      this.unsetSalaireSouhaiteAutre();
     }
     this.isFuturTravailFormSubmitted = false;
   }
@@ -346,7 +325,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public setNombreTrajetsDomicileTravail(nombreTrajetsSemaine: number) {
-    this.futurTravail.nombreTrajetsDomicileTravail = Math.floor(nombreTrajetsSemaine * 4.33);
+    this.futurTravail.nombreTrajetsDomicileTravail = Math.floor(nombreTrajetsSemaine * 4.33 * 2);
   }
 
   public handleKeyUpOnButtonNombresTrajets(event: any, nombreTrajetsSemaine: number) {
@@ -413,14 +392,12 @@ export class ContratTravailComponent implements OnInit {
 
   public handleKeyUpOnButtonIsTypeContratCDI(event: any) {
     if (event.keyCode === 13) {
-      this.isTypeContratCDI = !this.isTypeContratCDI;
       this.onClickCheckBoxIsTypeContratCDI();
     }
   }
 
   public handleKeyUpOnButtonIsTypeContratCDD(event: any) {
     if (event.keyCode === 13) {
-      this.isTypeContratCDD = !this.isTypeContratCDD;
       this.onClickCheckBoxIsTypeContratCDD();
     }
   }
@@ -477,16 +454,16 @@ export class ContratTravailComponent implements OnInit {
   public propagateSalaireHoraireMensuel() {
     if (this.futurTravail.salaire.montantHoraireNet != null || this.futurTravail.salaire.montantHoraireBrut != null || this.futurTravail.salaire.montantMensuelNet != null || this.futurTravail.salaire.montantMensuelBrut != null) {
       switch (this.typeSalaireDisplay) {
-        case "mensuel_net":
+        case TypeSalaireDisplayEnum.MENSUEL_NET:
           this.salaireService.calculSalaireFromMensuelNet(this.futurTravail);
           break;
-        case "mensuel_brut":
+        case TypeSalaireDisplayEnum.MENSUEL_BRUT:
           this.salaireService.calculSalaireFromMensuelBrut(this.futurTravail);
           break;
-        case "horaire_net":
+        case TypeSalaireDisplayEnum.HORAIRE_NET:
           this.salaireService.calculSalaireFromHoraireNet(this.futurTravail);
           break;
-        case "horaire_brut":
+        case TypeSalaireDisplayEnum.HORAIRE_BRUT:
           this.salaireService.calculSalaireFromHoraireBrut(this.futurTravail);
           break;
       }
@@ -500,10 +477,10 @@ export class ContratTravailComponent implements OnInit {
   }
 
   private propagateSalaire() {
-    if (this.hasOffreEmploiNon) {
-      if (this.isSalaireSouhaiteSMIC) {
+    if (!this.hasOffreEmploi) {
+      if (this.typeSalaireSouhaite == TypeSalaireSouhaiteEnum.SMIC) {
         this.setSalaireSouhaiteSMIC();
-      } else if (this.isSalaireSouhaiteAutre) {
+      } else if (this.typeSalaireSouhaite == TypeSalaireSouhaiteEnum.AUTRE) {
         this.setSalaireSouhaiteAutre();
       }
     }
@@ -514,7 +491,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public afficherNombreTrajetsDomicileTravail(): boolean {
-    return (this.hasOffreEmploiOui || this.hasOffreEmploiNon) &&
+    return (this.hasOffreEmploi != null) &&
       this.futurTravail.distanceKmDomicileTravail >= ContratTravailComponent.DISTANCE_MINI_AIDE_MOB;
   }
 
@@ -523,51 +500,26 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public setDureeHebdoTempsPlein() {
-    this.isDureeHebdoMiTemps = false;
-    this.isDureeHebdoAutre = false;
-    this.futurTravail.dureeHebdoTempsPlein = true;
-    this.futurTravail.dureeHebdoMiTemps = false;
-    this.futurTravail.dureeHebdoAutre = false;
+    this.typeDureeHebdo = TypeDureeHebdoEnum.TEMPS_PLEIN;
+    this.futurTravail.typeDureeHebdo = this.typeDureeHebdo;
     this.futurTravail.nombreHeuresTravailleesSemaine = 35;
   }
 
-  public unsetDureeHebdoTempsPlein() {
-    this.futurTravail.dureeHebdoTempsPlein = false;
-    this.futurTravail.nombreHeuresTravailleesSemaine = null;
-  }
-
   public setDureeHebdoMiTemps() {
-    this.isDureeHebdoTempsPlein = false;
-    this.isDureeHebdoAutre = false;
-    this.futurTravail.dureeHebdoMiTemps = true;
-    this.futurTravail.dureeHebdoTempsPlein = false;
-    this.futurTravail.dureeHebdoAutre = false;
+    this.typeDureeHebdo = TypeDureeHebdoEnum.MI_TEMPS;
+    this.futurTravail.typeDureeHebdo = this.typeDureeHebdo;
     this.futurTravail.nombreHeuresTravailleesSemaine = 20;
   }
 
-  public unsetDureeHebdoMiTemps() {
-    this.futurTravail.dureeHebdoMiTemps = false;
-    this.futurTravail.nombreHeuresTravailleesSemaine = null;
-  }
-
   public setDureeHebdoAutre() {
-    this.isDureeHebdoTempsPlein = false;
-    this.isDureeHebdoMiTemps = false;
-    this.futurTravail.dureeHebdoAutre = true;
-    this.futurTravail.dureeHebdoTempsPlein = false;
-    this.futurTravail.dureeHebdoMiTemps = false;
-    this.futurTravail.nombreHeuresTravailleesSemaine = null;
-  }
-
-  public unsetDureeHebdoAutre() {
-    this.futurTravail.dureeHebdoAutre = false;
+    this.typeDureeHebdo = TypeDureeHebdoEnum.AUTRE;
+    this.futurTravail.typeDureeHebdo = this.typeDureeHebdo;
     this.futurTravail.nombreHeuresTravailleesSemaine = null;
   }
 
   public setSalaireSouhaiteSMIC() {
-    this.isSalaireSouhaiteAutre = false;
-    this.futurTravail.salaireSouhaiteSMIC = true;
-    this.futurTravail.salaireSouhaiteAutre = false;
+    this.typeSalaireSouhaite = TypeSalaireSouhaiteEnum.SMIC;
+    this.futurTravail.typeSalaireSouhaite = this.typeSalaireSouhaite
     this.futurTravail.salaire.montantMensuelNet = this.getMontantSmicMensuelNet();
     this.futurTravail.salaire.montantMensuelBrut = this.salaireService.getBrutFromNet(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.typeContrat, this.futurTravail.nombreHeuresTravailleesSemaine);
     this.futurTravail.salaire.montantHoraireNet = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelNet, this.futurTravail.nombreHeuresTravailleesSemaine);
@@ -575,7 +527,8 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public unsetSalaireSouhaiteSMIC() {
-    this.futurTravail.salaireSouhaiteSMIC = false;
+    this.typeSalaireSouhaite = null;
+    this.futurTravail.typeSalaireSouhaite = null;
     this.futurTravail.salaire.montantMensuelNet = null;
     this.futurTravail.salaire.montantMensuelBrut = null;
     this.futurTravail.salaire.montantHoraireNet = null;
@@ -583,13 +536,13 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public setSalaireSouhaiteAutre() {
-    this.isSalaireSouhaiteSMIC = false;
-    this.futurTravail.salaireSouhaiteAutre = true;
-    this.futurTravail.salaireSouhaiteSMIC = false;
+    this.typeSalaireSouhaite = TypeSalaireSouhaiteEnum.AUTRE;
+    this.futurTravail.typeSalaireSouhaite = this.typeSalaireSouhaite;
   }
 
   public unsetSalaireSouhaiteAutre() {
-    this.futurTravail.dureeHebdoTempsPlein = false;
+    this.typeSalaireSouhaite = null;
+    this.futurTravail.typeSalaireSouhaite = null;
     this.futurTravail.salaire.montantMensuelNet = null;
     this.futurTravail.salaire.montantMensuelBrut = null;
     this.futurTravail.salaire.montantHoraireNet = null;
@@ -598,89 +551,74 @@ export class ContratTravailComponent implements OnInit {
 
   public setNombreTrajets1JourSemaine() {
     this.unsetNombreTrajetsDomicileTravail();
-    this.isNombreTrajets1JourSemaine = true;
-    this.futurTravail.nombreTrajets1JourSemaine = true;
+    this.typeNombreTrajetsSemaine = TypeNombreTrajetsSemaineEnum.UN;
+    this.futurTravail.typeNombreTrajetsSemaine = this.typeNombreTrajetsSemaine;
     this.setNombreTrajetsDomicileTravail(1);
   }
 
   public setNombreTrajets2JoursSemaine() {
     this.unsetNombreTrajetsDomicileTravail();
-    this.isNombreTrajets2JoursSemaine = true;
-    this.futurTravail.nombreTrajets2JoursSemaine = true;
+    this.typeNombreTrajetsSemaine = TypeNombreTrajetsSemaineEnum.DEUX;
+    this.futurTravail.typeNombreTrajetsSemaine = this.typeNombreTrajetsSemaine;
     this.setNombreTrajetsDomicileTravail(2);
   }
 
   public setNombreTrajets3JoursSemaine() {
     this.unsetNombreTrajetsDomicileTravail();
-    this.isNombreTrajets3JoursSemaine = true;
-    this.futurTravail.nombreTrajets3JoursSemaine = true;
+    this.typeNombreTrajetsSemaine = TypeNombreTrajetsSemaineEnum.TROIS;
+    this.futurTravail.typeNombreTrajetsSemaine = this.typeNombreTrajetsSemaine;
     this.setNombreTrajetsDomicileTravail(3);
   }
 
   public setNombreTrajets4JoursSemaine() {
     this.unsetNombreTrajetsDomicileTravail();
-    this.isNombreTrajets4JoursSemaine = true;
-    this.futurTravail.nombreTrajets4JoursSemaine = true;
+    this.typeNombreTrajetsSemaine = TypeNombreTrajetsSemaineEnum.QUATRE;
+    this.futurTravail.typeNombreTrajetsSemaine = this.typeNombreTrajetsSemaine;
     this.setNombreTrajetsDomicileTravail(4);
   }
 
   public setNombreTrajets5JoursSemaine() {
     this.unsetNombreTrajetsDomicileTravail();
-    this.isNombreTrajets5JoursSemaine = true;
-    this.futurTravail.nombreTrajets5JoursSemaine = true;
+    this.typeNombreTrajetsSemaine = TypeNombreTrajetsSemaineEnum.CINQ;
+    this.futurTravail.typeNombreTrajetsSemaine = this.typeNombreTrajetsSemaine;
     this.setNombreTrajetsDomicileTravail(5);
   }
 
   public unsetNombreTrajetsDomicileTravail() {
-    this.isNombreTrajets1JourSemaine = false;
-    this.isNombreTrajets2JoursSemaine = false;
-    this.isNombreTrajets3JoursSemaine = false;
-    this.isNombreTrajets4JoursSemaine = false;
-    this.isNombreTrajets5JoursSemaine = false;
-    this.futurTravail.nombreTrajets1JourSemaine = false;
-    this.futurTravail.nombreTrajets2JoursSemaine = false;
-    this.futurTravail.nombreTrajets3JoursSemaine = false;
-    this.futurTravail.nombreTrajets4JoursSemaine = false;
-    this.futurTravail.nombreTrajets5JoursSemaine = false;
+    this.typeNombreTrajetsSemaine = null;
+    this.futurTravail.typeNombreTrajetsSemaine = null;
   }
 
   public setDistanceDomicileTravailEntre0Et9() {
     this.unsetDistanceDomicileTravail();
-    this.isDistanceDomicileTravailEntre0Et9 = true;
-    this.futurTravail.distanceDomicileTravailEntre0Et9 = true;
+    this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_0_ET_9;
+    this.futurTravail.typeDistanceDomicileTravail = this.typeDistanceDomicileTravail;
     this.futurTravail.distanceKmDomicileTravail = 5;
   }
 
   public setDistanceDomicileTravailEntre10Et19() {
     this.unsetDistanceDomicileTravail();
-    this.isDistanceDomicileTravailEntre10Et19 = true;
-    this.futurTravail.distanceDomicileTravailEntre10Et19 = true;
+    this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_10_ET_19;
+    this.futurTravail.typeDistanceDomicileTravail = this.typeDistanceDomicileTravail;
     this.futurTravail.distanceKmDomicileTravail = 15;
   }
 
   public setDistanceDomicileTravailEntre20Et30() {
     this.unsetDistanceDomicileTravail();
-    this.isDistanceDomicileTravailEntre20Et30 = true;
-    this.futurTravail.distanceDomicileTravailEntre20Et30 = true;
+    this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.ENTRE_20_ET_30;
+    this.futurTravail.typeDistanceDomicileTravail = this.typeDistanceDomicileTravail;
     this.futurTravail.distanceKmDomicileTravail = 25;
   }
 
   public setDistanceDomicileTravailPlusDe30() {
     this.unsetDistanceDomicileTravail();
-    this.isDistanceDomicileTravailPlusDe30 = true;
-    this.futurTravail.distanceDomicileTravailPlusDe30 = true;
+    this.typeDistanceDomicileTravail = TypeDistanceDomicileTravailEnum.PLUS_DE_30;
+    this.futurTravail.typeDistanceDomicileTravail = this.typeDistanceDomicileTravail;
   }
 
   public unsetDistanceDomicileTravail() {
-    this.isDistanceDomicileTravailEntre0Et9 = false;
-    this.isDistanceDomicileTravailEntre10Et19 = false;
-    this.isDistanceDomicileTravailEntre20Et30 = false;
-    this.isDistanceDomicileTravailPlusDe30 = false;
-    this.futurTravail.distanceKmDomicileTravail = null;
-    this.futurTravail.distanceDomicileTravailEntre0Et9 = false;
-    this.futurTravail.distanceDomicileTravailEntre10Et19 = false;
-    this.futurTravail.distanceDomicileTravailEntre20Et30 = false;
-    this.futurTravail.distanceDomicileTravailPlusDe30 = false;
+    this.typeDistanceDomicileTravail = null;
+    this.futurTravail.typeDistanceDomicileTravail = null;
   }
 
   // GESTION DES ERREURS DE FORMULAIRE
@@ -693,7 +631,7 @@ export class ContratTravailComponent implements OnInit {
   public isChampDureeHebdomadaireInvalide(dureeHebdomadaire): boolean {
     return this.isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)
       || this.isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)
-      || this.isChampDistanceDomicileTravailInvalide(dureeHebdomadaire);
+      || this.isChampDureeHebdomadaireErreurMontantMaxDepasse(dureeHebdomadaire);
   }
 
   public isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire): boolean {
@@ -725,12 +663,14 @@ export class ContratTravailComponent implements OnInit {
 
   public isChampsNombreTrajetsSemaineInvalides(): boolean {
     return (this.isFuturTravailFormSubmitted
+      && this.afficherNombreTrajetsDomicileTravail()
       && (
-        !this.isNombreTrajets1JourSemaine
-        && !this.isNombreTrajets2JoursSemaine
-        && !this.isNombreTrajets3JoursSemaine
-        && !this.isNombreTrajets4JoursSemaine
-        && !this.isNombreTrajets5JoursSemaine
+        !this.typeNombreTrajetsSemaine == null
+        || (this.typeNombreTrajetsSemaine != TypeNombreTrajetsSemaineEnum.UN
+          && this.typeNombreTrajetsSemaine != TypeNombreTrajetsSemaineEnum.DEUX
+          && this.typeNombreTrajetsSemaine != TypeNombreTrajetsSemaineEnum.TROIS
+          && this.typeNombreTrajetsSemaine != TypeNombreTrajetsSemaineEnum.QUATRE
+          && this.typeNombreTrajetsSemaine != TypeNombreTrajetsSemaineEnum.CINQ)
       )
     )
   }
@@ -748,13 +688,12 @@ export class ContratTravailComponent implements OnInit {
         || salaireHoraireBrut?.touched
         || salaireMensuelNet?.touched
         || salaireHoraireNet?.touched
-      ) && (
+      )) && (
         this.futurTravail.salaire.montantMensuelBrut == null
         || this.futurTravail.salaire.montantHoraireBrut == null
         || this.futurTravail.salaire.montantMensuelNet == null
         || this.futurTravail.salaire.montantHoraireNet == null
-      )
-    );
+      );
   }
 
   public isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet): boolean {
@@ -782,7 +721,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public isChampSalaireSouhaiteNonPresent(salaireMensuelNet): boolean {
-    return ((this.isFuturTravailFormSubmitted || salaireMensuelNet?.touched) && (this.isSalaireSouhaiteAutre && !this.futurTravail.salaire.montantMensuelNet));
+    return ((this.isFuturTravailFormSubmitted || salaireMensuelNet?.touched) && (this.typeSalaireSouhaite == TypeSalaireSouhaiteEnum.AUTRE && !this.futurTravail.salaire.montantMensuelNet));
   }
 
   public isChampSalaireSouhaiteErreurMontant(salaireMensuelNet): boolean {
@@ -792,9 +731,9 @@ export class ContratTravailComponent implements OnInit {
   public isSalaireSouhaiteNonSelectionne(): boolean {
     return (this.isFuturTravailFormSubmitted
       && (
-        this.hasOffreEmploiNon && (
-          !this.isSalaireSouhaiteSMIC
-          && !this.isSalaireSouhaiteAutre
+        !this.hasOffreEmploi && (
+          this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.SMIC
+          && this.typeSalaireSouhaite != TypeSalaireSouhaiteEnum.AUTRE
         )
       )
     );
@@ -811,10 +750,12 @@ export class ContratTravailComponent implements OnInit {
   public isChampDureeHebdomadaireEnvisageeNonSelectionne(): boolean {
     return (this.isFuturTravailFormSubmitted
       && (
-        this.hasOffreEmploiNon && (
-          !this.isDureeHebdoTempsPlein
-          && !this.isDureeHebdoMiTemps
-          && !this.isDureeHebdoAutre
+        !this.hasOffreEmploi &&
+        (this.typeDureeHebdo == null)
+        || (
+          (this.typeDureeHebdo != TypeDureeHebdoEnum.TEMPS_PLEIN)
+          && (this.typeDureeHebdo != TypeDureeHebdoEnum.MI_TEMPS)
+          && (this.typeDureeHebdo != TypeDureeHebdoEnum.AUTRE)
         )
       )
     );
@@ -827,7 +768,7 @@ export class ContratTravailComponent implements OnInit {
   public isChampDureeHebdomadaireEnvisageeNonPresent(dureeHebdomadaire): boolean {
     return ((this.isFuturTravailFormSubmitted || dureeHebdomadaire?.touched)
       && (
-        this.isDureeHebdoAutre
+        this.typeDureeHebdo == TypeDureeHebdoEnum.AUTRE
         && (
           !this.futurTravail.nombreHeuresTravailleesSemaine
           || dureeHebdomadaire?.errors?.required
@@ -853,7 +794,7 @@ export class ContratTravailComponent implements OnInit {
   public isChampDistanceDomicileTravailEnvisageeErreurMontant(distanceDomicileLieuTravail): boolean {
     return (this.isFuturTravailFormSubmitted || distanceDomicileLieuTravail?.touched)
       && !this.futurTravail.hasOffreEmploiEnVue
-      && (this.isDistanceDomicileTravailPlusDe30 && this.futurTravail.distanceKmDomicileTravail < 30);
+      && (this.typeDistanceDomicileTravail == TypeDistanceDomicileTravailEnum.PLUS_DE_30 && this.futurTravail.distanceKmDomicileTravail < 30);
   }
 
   public isChampDistanceDomicileTravailEnvisageeNonPresent(distanceDomicileLieuTravail, distanceDomicileTravailEntre0Et9, distanceDomicileTravailEntre10Et19, distanceDomicileTravailEntre20Et30, distanceDomicileTravailPlusDe30): boolean {
@@ -869,11 +810,11 @@ export class ContratTravailComponent implements OnInit {
   public isChampDistanceDomicileTravailEnvisageeNonSelectionne(): boolean {
     return (this.isFuturTravailFormSubmitted
       && (
-        this.hasOffreEmploiNon && (
-          !this.isDistanceDomicileTravailEntre0Et9
-          && !this.isDistanceDomicileTravailEntre10Et19
-          && !this.isDistanceDomicileTravailEntre20Et30
-          && !this.isDistanceDomicileTravailPlusDe30
+        !this.hasOffreEmploi && (
+          this.typeDistanceDomicileTravail != TypeDistanceDomicileTravailEnum.ENTRE_0_ET_9
+          && this.typeDistanceDomicileTravail != TypeDistanceDomicileTravailEnum.ENTRE_10_ET_19
+          && this.typeDistanceDomicileTravail != TypeDistanceDomicileTravailEnum.ENTRE_20_ET_30
+          && this.typeDistanceDomicileTravail != TypeDistanceDomicileTravailEnum.PLUS_DE_30
         )
       )
     );

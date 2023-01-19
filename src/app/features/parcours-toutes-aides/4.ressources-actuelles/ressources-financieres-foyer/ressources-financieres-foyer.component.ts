@@ -20,6 +20,7 @@ import { StatutOccupationLogementEnum } from '@app/commun/enumerations/statut-oc
 import { StatutOccupationLogementLibelleEnum } from '@app/commun/enumerations/statut-occupation-logement-libelle.enum';
 import { ModalService } from '@app/core/services/utile/modal.service';
 import { DemandeurEmploiService } from '@app/core/services/utile/demandeur-emploi.service';
+import { TypeAideLogementEnum } from '@app/commun/enumerations/enumerations-formulaire/type-aide-logement.enum';
 
 @Component({
   selector: 'app-ressources-financieres-foyer',
@@ -46,9 +47,11 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
   statutOccupationLogementEnum: typeof StatutOccupationLogementEnum = StatutOccupationLogementEnum;
   statutOccupationLogementLibelleEnum: typeof StatutOccupationLogementLibelleEnum = StatutOccupationLogementLibelleEnum;
+  typeAideLogementEnum: typeof TypeAideLogementEnum = TypeAideLogementEnum;
 
   isAucunCas: boolean;
   isNonBeneficiaireAL = false;
+  typeAideLogement: string;
 
 
   constructor(
@@ -86,11 +89,11 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxHasAPL(event: any): void {
-    event.preventDefault();
-    if (!this.beneficiaireAides.beneficiaireAPL) {
+  public onClickCheckBoxHasAPL(): void {
+    if (this.typeAideLogement == TypeAideLogementEnum.ALS) {
       this.deConnecteService.unsetAPL();
     } else {
+      this.beneficiaireAides.beneficiaireAPL = true;
       this.isNonBeneficiaireAL = false;
       this.deConnecteService.unsetALF();
       this.beneficiaireAides.beneficiaireALF = false;
@@ -99,11 +102,11 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxHasALF(event: any): void {
-    event.preventDefault();
-    if (!this.beneficiaireAides.beneficiaireALF) {
+  public onClickCheckBoxHasALF(): void {
+    if (this.typeAideLogement == TypeAideLogementEnum.ALS) {
       this.deConnecteService.unsetALF();
     } else {
+      this.beneficiaireAides.beneficiaireALF = true;
       this.isNonBeneficiaireAL = false;
       this.deConnecteService.unsetAPL();
       this.beneficiaireAides.beneficiaireAPL = false;
@@ -112,11 +115,11 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxHasALS(event: any): void {
-    event.preventDefault();
-    if (!this.beneficiaireAides.beneficiaireALS) {
+  public onClickCheckBoxHasALS(): void {
+    if (this.typeAideLogement == TypeAideLogementEnum.ALS) {
       this.deConnecteService.unsetALS();
     } else {
+      this.beneficiaireAides.beneficiaireALS = true;
       this.isNonBeneficiaireAL = false;
       this.deConnecteService.unsetAPL();
       this.beneficiaireAides.beneficiaireAPL = false;
@@ -125,9 +128,8 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
     }
   }
 
-  public onClickCheckBoxPasDAL(event: any): void {
-    event.preventDefault();
-    if (this.isNonBeneficiaireAL) {
+  public onClickCheckBoxPasDAL(): void {
+    if (!this.isNonBeneficiaireAL) {
       this.deConnecteService.unsetALS();
       this.beneficiaireAides.beneficiaireALS = false;
       this.deConnecteService.unsetAPL();
@@ -164,25 +166,25 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   public handleKeyUpOnButtonAPL(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxHasAPL(event);
+      this.onClickCheckBoxHasAPL();
     }
   }
 
   public handleKeyUpOnButtonALF(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxHasALF(event);
+      this.onClickCheckBoxHasALF();
     }
   }
 
   public handleKeyUpOnButtonALS(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxHasALS(event);
+      this.onClickCheckBoxHasALS();
     }
   }
 
   public handleKeyUpOnButtonPasDAL(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxPasDAL(event);
+      this.onClickCheckBoxPasDAL();
     }
   }
 
@@ -211,52 +213,46 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
 
   /** Gestion des champs logement */
 
-  public onClickCheckBoxIsLocataireNonMeuble(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble) {
+  public onClickCheckBoxIsLocataireNonMeuble(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.LOCATAIRE_VIDE) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireNonMeuble();
     }
 
   }
 
-  public onClickCheckBoxIsLocataireMeuble(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble) {
+  public onClickCheckBoxIsLocataireMeuble(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.LOCATAIRE_MEUBLE) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireMeuble();
     }
   }
 
-  public onClickCheckBoxIsLocataireHLM(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM) {
+  public onClickCheckBoxIsLocataireHLM(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.LOCATAIRE_HLM) {
       this.unsetStatutOccupationLogement();
       this.setIsLocataireHLM();
     }
   }
 
-  public onClickCheckBoxIsProprietaire(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire) {
+  public onClickCheckBoxIsProprietaire(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.PROPRIETAIRE) {
       this.unsetStatutOccupationLogement();
       this.unsetInformationsLogement();
       this.setIsProprietaire();
     }
   }
 
-  public onClickCheckBoxIsProprietaireAvecEmprunt(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt) {
+  public onClickCheckBoxIsProprietaireAvecEmprunt(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT) {
       this.unsetStatutOccupationLogement();
       this.unsetInformationsLogement();
       this.setIsProprietaireAvecEmprunt();
     }
   }
 
-  public onClickCheckBoxIsLogeGratuitement(event: any): void {
-    event.preventDefault();
-    if (this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement) {
+  public onClickCheckBoxIsLogeGratuitement(): void {
+    if (this.informationsPersonnelles.logement.statutOccupationLogement != StatutOccupationLogementEnum.LOGE_GRATUITEMENT) {
       this.unsetStatutOccupationLogement();
       this.unsetInformationsLogement();
       this.setIsLogeGratuitement();
@@ -264,12 +260,15 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
 
   public isStatutOccupationLogementSelectionne() {
-    return this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement;
+    return this.informationsPersonnelles.logement.statutOccupationLogement != null
+      && (
+        this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_VIDE
+        || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_MEUBLE
+        || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_HLM
+        || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.PROPRIETAIRE
+        || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT
+        || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOGE_GRATUITEMENT
+      );
   }
 
   public hasAideLogement(): boolean {
@@ -291,9 +290,9 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
 
   public isConcerneParAideLogement(): boolean {
-    return this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble
-      || this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble;
+    return this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_VIDE
+      || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_MEUBLE
+      || this.informationsPersonnelles.logement.statutOccupationLogement == StatutOccupationLogementEnum.LOCATAIRE_HLM;
   }
 
   public handleKeyUpOnButtonHasPrimeActivite(event: any) {
@@ -305,63 +304,52 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   public handleKeyUpOnButtonStatutOccupationLogement(event: any, statutOccupationLogementPersonne: string): void {
     if (event.keyCode === 13) {
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_MEUBLE) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble;
-        this.onClickCheckBoxIsLocataireMeuble(event);
+        this.onClickCheckBoxIsLocataireMeuble();
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_VIDE) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble;
-        this.onClickCheckBoxIsLocataireNonMeuble(event);
+        this.onClickCheckBoxIsLocataireNonMeuble();
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOCATAIRE_HLM) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = !this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM;
-        this.onClickCheckBoxIsLocataireHLM(event);
+        this.onClickCheckBoxIsLocataireHLM();
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.PROPRIETAIRE) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = !this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire;
-        this.onClickCheckBoxIsProprietaire(event);
+        this.onClickCheckBoxIsProprietaire();
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = !this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt;
-        this.onClickCheckBoxIsProprietaireAvecEmprunt(event);
+        this.onClickCheckBoxIsProprietaireAvecEmprunt();
       }
       if (statutOccupationLogementPersonne === this.statutOccupationLogementEnum.LOGE_GRATUITEMENT) {
-        this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = !this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement;
-        this.onClickCheckBoxIsLogeGratuitement(event);
+        this.onClickCheckBoxIsLogeGratuitement();
       }
     }
   }
 
-  public onClickCheckBoxIsCrous(event: any): void {
-    event.preventDefault();
+  public onClickCheckBoxIsCrous(): void {
     if (this.informationsPersonnelles.logement.isCrous) {
       this.isAucunCas = false;
     }
 
   }
 
-  public onClickCheckBoxIsConventionne(event: any): void {
-    event.preventDefault();
+  public onClickCheckBoxIsConventionne(): void {
     if (this.informationsPersonnelles.logement.isConventionne) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsColloc(event: any): void {
-    event.preventDefault();
+  public onClickCheckBoxIsColloc(): void {
     if (this.informationsPersonnelles.logement.isColloc) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsChambre(event: any): void {
-    event.preventDefault();
+  public onClickCheckBoxIsChambre(): void {
     if (this.informationsPersonnelles.logement.isChambre) {
       this.isAucunCas = false;
     }
   }
 
-  public onClickCheckBoxIsAucunCas(event: any): void {
-    event.preventDefault();
+  public onClickCheckBoxIsAucunCas(): void {
     this.unsetTypeLogement();
     this.isAucunCas = true;
   }
@@ -389,42 +377,37 @@ export class RessourcesFinancieresFoyerComponent implements OnInit {
   }
   public handleKeyUpOnButtonIsAucunCas(event: any): void {
     if (event.keyCode === 13) {
-      this.onClickCheckBoxIsAucunCas(event);
+      this.onClickCheckBoxIsAucunCas();
     }
   }
 
   public unsetStatutOccupationLogement(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = false;
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = false;
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = false;
-    this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = false;
-    this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = false;
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = false;
+    this.informationsPersonnelles.logement.statutOccupationLogement = null;
     this.unsetTypeLogement();
   }
 
   public setIsLocataireMeuble(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireMeuble = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_MEUBLE;
   }
 
   public setIsLocataireNonMeuble(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireNonMeuble = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_VIDE;
   }
 
   public setIsLocataireHLM(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLocataireHLM = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOCATAIRE_HLM;
   }
 
   public setIsProprietaire(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaire = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.PROPRIETAIRE;
   }
 
   public setIsProprietaireAvecEmprunt(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isProprietaireAvecEmprunt = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.PROPRIETAIRE_AVEC_EMPRUNT;
   }
 
   public setIsLogeGratuitement(): void {
-    this.informationsPersonnelles.logement.statutOccupationLogement.isLogeGratuitement = true;
+    this.informationsPersonnelles.logement.statutOccupationLogement = StatutOccupationLogementEnum.LOGE_GRATUITEMENT;
   }
 
   private unsetTypeLogement(): void {
