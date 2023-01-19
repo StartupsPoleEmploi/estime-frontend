@@ -185,12 +185,12 @@
                 </div>
                 <div class="row pb-3">
                     <div class="col-12">
-                        <span id="erreurChampSalaireNonPresent" class="error-input-message" role="alert"
+                        <p id="erreurChampSalaireNonPresent" class="error-input-message" role="alert"
                             *ngIf="(isRessourcesFinancieresPersonnesChargeFormSubmitted)  && erreurSaisieSalaires">
                             Vous avez déclaré que Personne {{personneDTO.index + 1}} a travaillé lors de ces
                             {{ressourcesFinancieresAvantSimulationUtileService.getNombreMaxMoisTravailleAuCoursDerniersMois()}}
                             derniers mois. Veuillez renseigner au moins un salaire.
-                        </span>
+                        </p>
                     </div>
                 </div>
             </fieldset>

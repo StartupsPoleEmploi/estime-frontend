@@ -111,7 +111,6 @@ export class DeConnecteService {
       && !this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS) {
       this.demandeurEmploiConnecte.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationASS = this.ressourcesFinancieresAvantSimulationUtileService.creerAllocationASS();
     }
-    console.log(this.demandeurEmploiConnecte);
     this.sessionStorageEstimeService.storeDemandeurEmploiConnecte(this.demandeurEmploiConnecte);
   }
 

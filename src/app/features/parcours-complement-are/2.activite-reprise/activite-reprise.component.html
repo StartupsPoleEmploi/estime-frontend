@@ -81,22 +81,22 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <span class="error-input-message" role="alert"
+                                <p class="error-input-message" role="alert"
                                     *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                     {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                </span>
+                                </p>
                             </div>
                             <div class="col-12">
-                                <span class="error-input-message" role="alert"
+                                <p class="error-input-message" role="alert"
                                     *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                </span>
+                                </p>
                             </div>
                             <div class="col-12">
-                                <span class="error-input-message" role="alert"
+                                <p class="error-input-message" role="alert"
                                     *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                     {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                </span>
+                                </p>
                             </div>
                         </div>
                     </div>

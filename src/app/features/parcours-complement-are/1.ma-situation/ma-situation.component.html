@@ -63,12 +63,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !hasDegressiviteAreSelectionne()">
                                 {{controleChampFormulaireService.MESSAGE_SELECTION_DEGRESSIVITE_ARE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -130,12 +130,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !isTauxDegressiviteAreSelectionne()">
                                 {{controleChampFormulaireService.MESSAGE_SELECTION_TAUX_DEGRESSIVITE_ARE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -172,24 +172,24 @@
                             <app-text-with-euro-symbol></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampSJREgalAZero(salaireJournalierReferenceBrut)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampSJRNonPresent(salaireJournalierReferenceBrut)">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampSJRErreurMontant(salaireJournalierReferenceBrut)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -229,24 +229,24 @@
                             <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutTauxPleinEgalAZero(allocationJournaliereBruteTauxPlein)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutTauxPleinNonPresent(allocationJournaliereBruteTauxPlein)">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutErreurMontant(allocationJournaliereBruteTauxPlein)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -287,24 +287,24 @@
                             <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row pb-3">
+                    <div class="row">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutEgalAZero(allocationJournaliereBrute)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutNonPresent(allocationJournaliereBrute)">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutErreurMontant(allocationJournaliereBrute)">
                                 {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR_2}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>

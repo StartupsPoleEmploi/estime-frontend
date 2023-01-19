@@ -33,16 +33,16 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurChampCodePostalNonPresent" class="error-input-message" role="alert"
+                            <p id="erreurChampCodePostalNonPresent" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                         <div class="col-12">
-                            <span id="erreurChampCodePostalIncorrect" class="error-input-message" role="alert"
+                            <p id="erreurChampCodePostalIncorrect" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || codePostal.touched)  && codePostal.invalid">
                                 {{controleChampFormulaireService.MESSAGE_CODE_POSTAL_INCORRECT}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -85,10 +85,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurChampNationaliteNonPresent" class="error-input-message" role="alert"
+                            <p id="erreurChampNationaliteNonPresent" class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || nationalite.touched)  && nationalite.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -133,9 +133,9 @@
                         </div>
                         <div class="row pb-3">
                             <div class="col-12">
-                                <span class="error-input-message" role="alert" *ngIf="isChampTitreSejourInvalide()">
+                                <p class="error-input-message" role="alert" *ngIf="isChampTitreSejourInvalide()">
                                     {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                </span>
+                                </p>
                             </div>
                         </div>
                     </fieldset>
@@ -296,10 +296,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="(isInformationsPersonnellesFormSubmitted || hasCumulAncienEtNouveauSalaire.touched) && hasCumulAncienEtNouveauSalaire.errors?.required">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -364,10 +364,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurChampBeneficiaireACREInvalide" class="error-input-message" role="alert"
+                            <p id="erreurChampBeneficiaireACREInvalide" class="error-input-message" role="alert"
                                 *ngIf="isChampBeneficiaireACREInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -416,10 +416,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurChampSituationFamilialeInvalide" class="error-input-message" role="alert"
+                            <p id="erreurChampSituationFamilialeInvalide" class="error-input-message" role="alert"
                                 *ngIf="isChampSituationFamilialeInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -462,10 +462,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurChampSeulDepuisPlusDe18MoisInvalide" class="error-input-message"
-                                role="alert" *ngIf="isChampSeulDepuisPlusDe18MoisInvalide()">
+                            <p id="erreurChampSeulDepuisPlusDe18MoisInvalide" class="error-input-message" role="alert"
+                                *ngIf="isChampSeulDepuisPlusDe18MoisInvalide()">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>
@@ -604,10 +604,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span class="error-input-message" role="alert"
+                            <p class="error-input-message" role="alert"
                                 *ngIf="isInformationsPersonnellesFormSubmitted && isSituationConjointNotValide">
                                 {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                 </fieldset>

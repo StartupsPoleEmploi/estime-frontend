@@ -54,10 +54,10 @@
                     </div>
                     <div class="row pb-3">
                         <div class="col-12">
-                            <span id="erreurSelectionTypeOffreEmploiNonPresente" class="error-input-message"
-                                role="alert" *ngIf="(isFuturTravailFormSubmitted && (hasOffreEmploi == null))">
+                            <p id="erreurSelectionTypeOffreEmploiNonPresente" class="error-input-message" role="alert"
+                                *ngIf="(isFuturTravailFormSubmitted && (hasOffreEmploi == null))">
                                 {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                            </span>
+                            </p>
                         </div>
                     </div>
                     <div class="row">
@@ -138,10 +138,10 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col-12">
-                                    <span id="erreurSelectionTypeDeContratNonPresente" class="error-input-message"
+                                    <p id="erreurSelectionTypeDeContratNonPresente" class="error-input-message"
                                         role="alert" *ngIf="isChampFuturContratInvalide()">
                                         {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                             </div>
                         </fieldset>
@@ -171,11 +171,11 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col-12">
-                                    <span id="erreurChampNombreDeMoisContratCDDNonPresent" class="error-input-message"
+                                    <p id="erreurChampNombreDeMoisContratCDDNonPresent" class="error-input-message"
                                         role="alert"
                                         *ngIf="isFuturTravailFormSubmitted  && isNombreMoisContratCDDInvalide()">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -206,23 +206,23 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col-12">
-                                    <span id="erreurChampDureeHebdomadaireMontantDepasse" class="error-input-message"
+                                    <p id="erreurChampDureeHebdomadaireMontantDepasse" class="error-input-message"
                                         role="alert"
                                         *ngIf="isChampDureeHebdomadaireErreurMontantMaxDepasse(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_NBR_HEURE_HEBDO_TRAVAILLE}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <span id="erreurChampDureeHebdomadaireEgalAZero" class="error-input-message"
+                                    <p id="erreurChampDureeHebdomadaireEgalAZero" class="error-input-message"
                                         role="alert" *ngIf="isChampDureeHebdomadaireEgalAZero(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <span id="erreurChampDureeHebdomadaireNonPresent" class="error-input-message"
+                                    <p id="erreurChampDureeHebdomadaireNonPresent" class="error-input-message"
                                         role="alert" *ngIf="isChampDureeHebdomadaireNonPresent(dureeHebdomadaire)">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -313,24 +313,24 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row pb-3">
                                 <div class="col-12">
-                                    <span id="erreurChampFuturSalaireEgalAZero" class="error-input-message" role="alert"
+                                    <p id="erreurChampFuturSalaireEgalAZero" class="error-input-message" role="alert"
                                         *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div id="erreurChampFuturSalaireNonPresent" class="col-12">
-                                    <span class="error-input-message" role="alert"
+                                    <p class="error-input-message" role="alert"
                                         *ngIf="isChampFuturSalaireNonPresent(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div id="erreurChampFuturSalaireErreurMontant" class="col-12">
-                                    <span class="error-input-message" role="alert"
+                                    <p class="error-input-message" role="alert"
                                         *ngIf="isChampFuturSalaireErreurMontant(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                    </span>
+                                    </p>
                                 </div>
                             </div>
                         </fieldset>
@@ -342,7 +342,7 @@
                                     * Temps de travail hebdomadaire souhaité
                                 </span>
                             </legend>
-                            <div class="row">
+                            <div class="row pb-3">
                                 <div class="col">
                                     <input id="dureeHebdoTempsPlein" name="typeDureeHebdo" type="radio"
                                         [value]="TypeDureeHebdoEnum.TEMPS_PLEIN" class="radio-as-button large"
@@ -409,7 +409,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pb-3">
+                            <div class="row">
                                 <div class="col-12">
                                     <span id="erreurChampDureeHebdomadaireEnvisageeMontantMaxDepasse"
                                         class="error-input-message" role="alert"
@@ -503,30 +503,30 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row pb-3">
                                 <div class="col-12">
-                                    <span id="erreurChampSalaireSouhaiteEgalAZero" class="error-input-message"
-                                        role="alert" *ngIf="isChampSalaireSouhaiteEgalAZero(salaireMensuelNet)">
+                                    <p id="erreurChampSalaireSouhaiteEgalAZero" class="error-input-message" role="alert"
+                                        *ngIf="isChampSalaireSouhaiteEgalAZero(salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_0}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <span id="erreurChampSalaireSouhaiteNonPresent" class="error-input-message"
+                                    <p id="erreurChampSalaireSouhaiteNonPresent" class="error-input-message"
                                         role="alert" *ngIf="isChampSalaireSouhaiteNonPresent(salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <span id="erreurChampSalaireSouhaiteErreurMontant" class="error-input-message"
+                                    <p id="erreurChampSalaireSouhaiteErreurMontant" class="error-input-message"
                                         role="alert" *ngIf="isChampSalaireSouhaiteErreurMontant(salaireMensuelNet)">
                                         {{controleChampFormulaireService.MESSAGE_MONTANT_ERREUR}}
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-12">
-                                    <span id="erreurSalaireSouhaiteNonSelectionne" class="error-input-message"
-                                        role="alert" *ngIf="isSalaireSouhaiteNonSelectionne()">
+                                    <p id="erreurSalaireSouhaiteNonSelectionne" class="error-input-message" role="alert"
+                                        *ngIf="isSalaireSouhaiteNonSelectionne()">
                                         {{controleChampFormulaireService.MESSAGE_SELECTION_OBLIGATOIRE}}
-                                    </span>
+                                    </p>
                                 </div>
                             </div>
                         </fieldset>
@@ -550,7 +550,7 @@
                                         </button>
                                     </label>
                                 </div>
-                                <div class="row">
+                                <div class="row pb-3">
                                     <div>
                                         <input id="distanceDomicileLieuTravail" name="distanceDomicileLieuTravail"
                                             type="text" class="form-control d-inline"
@@ -565,7 +565,7 @@
                                         <span class="text-side-input d-inline body-2-typo">km</span>
                                     </div>
                                 </div>
-                                <div class="row pb-3">
+                                <div class="row">
                                     <div class="col-12">
                                         <span id="erreurChampDistanceDomicileTravailInvalide"
                                             class="error-input-message" role="alert"
@@ -841,12 +841,12 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row pb-3">
                                     <div class="col-12">
-                                        <span id="erreurChampsNombreTrajetsSemaineInvalides" class="error-input-message"
+                                        <p id="erreurChampsNombreTrajetsSemaineInvalides" class="error-input-message"
                                             role="alert" *ngIf="isChampsNombreTrajetsSemaineInvalides()">
                                             {{controleChampFormulaireService.MESSAGE_CHAMP_OBLIGATOIRE}}
-                                        </span>
+                                        </p>
                                     </div>
                                 </div>
                             </fieldset>
