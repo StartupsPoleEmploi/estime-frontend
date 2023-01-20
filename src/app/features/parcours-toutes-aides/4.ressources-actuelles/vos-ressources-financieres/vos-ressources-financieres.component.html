@@ -4,13 +4,13 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="allocationJournaliereNetASS">
                     * Montant de votre allocation journalière ASS
-                    <button id="infobulle-allocation-ass" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-allocation-ass" type="button" class="img-interrogation-icon" placement="right"
                         aria-describedby="labelInfobulleMontantASS" tag-action="clic_infobulle_allocation_ass"
                         (click)="modalService.openModalOnEvent($event, modalAllocationASSTemplate)">
                         <span id="labelInfobulleMontantASS" class="sr-only">
                             Où trouver le montant de votre ASS ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -59,14 +59,14 @@
             <div class="row pb-2">
                 <legend class="label headline-4-typo">
                     * Date de votre ouverture de droits à l'ASS
-                    <button id="infobulle-date-ouverture-ass" class="img-interrogation-icon" placement="right"
-                        aria-describedby="labelInfobulleDateOuvertureDroitASS"
+                    <button id="infobulle-date-ouverture-ass" type="button" class="img-interrogation-icon"
+                        placement="right" aria-describedby="labelInfobulleDateOuvertureDroitASS"
                         tag-action="clic_infobulle_allocation_ass"
                         (click)="modalService.openModalOnEvent($event, modalDateOuvertureASSTemplate)">
                         <span id="labelInfobulleDateOuvertureDroitASS" class="sr-only">
                             Où trouver votre date d'ouverture ASS ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </legend>
             </div>
@@ -82,13 +82,13 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="salaireJournalierReferenceBrut">
                     * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
-                    <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-sjr-are" type="button" class="img-interrogation-icon" placement="right"
                         aria-describedby="labelMontantSJR" tag-action="clic_infobulle_obtenir_ressources_are"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
                         <span id="labelMontantSJR" class="sr-only">
                             Où trouver votre salaire journalier référence ARE ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -131,14 +131,14 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="nombreJoursRestants">
                     * Nombre de jours d'allocation restants (reliquat) pour l'ARE
-                    <button id="infobulle-nombre-jours-restants-are" class="img-interrogation-icon" placement="right"
-                        aria-describedby="labelInfobulleNombreJoursRestantsARE"
+                    <button id="infobulle-nombre-jours-restants-are" type="button" class="img-interrogation-icon"
+                        placement="right" aria-describedby="labelInfobulleNombreJoursRestantsARE"
                         tag-action="clic_infobulle_obtenir_ressources_are"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)">
                         <span id="labelInfobulleNombreJoursRestantsARE" class="sr-only">
                             Où trouver votre nombre jours restants d'ARE ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -151,7 +151,9 @@
                         placeholder="Nombre" inputmode="numeric"
                         [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants"
                         #nombreJoursRestants="ngModel"
-                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required>
+                        (keypress)="controleChampFormulaireService.isKeyAuthorizeForNumberOnly($event)" required
+                        [attr.aria-describedby]="(this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE && (this.ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.nombreJoursRestants == 0))?'erreurChampNombreJoursRestantsAREAZero':null">
+
                     <span class="text-side-input d-inline body-2-typo">jours</span>
                 </div>
             </div>
@@ -180,13 +182,14 @@
             <div class="row pb-2">
                 <legend class="label headline-4-typo">
                     * Êtes-vous concerné.e par la dégressivité de l'ARE ?
-                    <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
-                        aria-describedby="labelInfobulleDegressiviteARE" tag-action="clic_infobulle_degressivite_are"
+                    <button id="infobulle-degressivite-are" type="button" class="img-interrogation-icon"
+                        placement="right" aria-describedby="labelInfobulleDegressiviteARE"
+                        tag-action="clic_infobulle_degressivite_are"
                         (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)">
                         <span id="labelInfobulleDegressiviteARE" class="sr-only">
                             Qu'est ce que la degressivité de l'ARE ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </legend>
             </div>
@@ -210,7 +213,8 @@
                             tag-action="clic_concerne_degressivite_are_non"
                             [(ngModel)]="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.hasDegressiviteAre"
                             #hasDegressiviteAre="ngModel" (click)="onClickButtonRadioHasDegressiviteAre(false)"
-                            (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, false)" required>
+                            (keyup)="handleKeyUpOnButtonRadioHasDegressiviteAre($event, false)" required
+                            [attr.aria-describedby]="((isRessourcesFinancieresFormSubmitted)  && hasDegressiviteAre.errors?.required)?'erreurChampHasDegressiviteNonPresent':null">
                         <label class="form-check-label body-2-typo" for="hasDegressiviteAreNon">
                             non
                             <span class="sr-only">, je ne suis pas concerné par la dégressivité de l'ARE</span>
@@ -231,14 +235,14 @@
             <legend class="row pb-2">
                 <span class="label headline-4-typo">
                     * Je souhaite simuler le montant de mon allocation en cas de reprise d'emploi en :
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                    <button id="infobulle-ma-situation-vous-percevez" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate)"
                         aria-describedby="labelInfobulleauxDegressiviteARE">
                         <span id="labelInfobulleauxDegressiviteARE" class="sr-only">
                             Où trouver votre taux réduit de degressivité ARE ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </span>
             </legend>
@@ -284,14 +288,14 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="allocationJournaliereBruteTauxPlein">
                     * Montant brut de votre allocation journalière à taux plein pour l’ARE
-                    <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                    <button id="infobulle-ma-situation-vous-percevez" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)"
                         aria-describedby="labelInfobulleTauxDegressivite">
                         <span id="labelInfobulleTauxDegressivite" class="sr-only">
                             Où trouver votre montant brut d'allocation journalière à taux plein ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -339,14 +343,14 @@
                     * {{ getLibelleMontantBrutAllocationJournaliere() }}
                     <button
                         *ngIf="ressourcesFinancieresAvantSimulation.aidesPoleEmploi.allocationARE.isTauxReduit === true"
-                        id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                        id="infobulle-ma-situation-vous-percevez" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
                         (click)="modalService.openModalOnEvent($event, modalTauxReduitTemplate)"
                         aria-describedby="labelInfobulleAllocationJournaliereTauxReduit">
                         <span id="labelInfobulleAllocationJournaliereTauxReduit" class="sr-only">
                             Où trouver votre montant brut d'allocation journalière à taux réduit ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -393,14 +397,14 @@
                     *&nbsp;
                     <span class="sr-only">Montant mensuel du&nbsp;</span>
                     RSA (Revenu de Solidarité Active) perçu
-                    <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-montant-rsa" type="button" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_rsa"
                         (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)"
                         aria-describedby="labelInfobulleMontantRSA">
                         <span id="labelInfobulleMontantRSA" class="sr-only">
                             Où trouver votre montant de RSA ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -444,14 +448,14 @@
                     *&nbsp;
                     <span class="sr-only">Montant mensuel de l'</span>
                     Allocation Adulte Handicapé (AAH) perçue
-                    <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-montant-aah" type="button" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_aah"
                         (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)"
                         aria-describedby="labelInfobulleMontantAAH">
                         <span id="labelInfobulleMontantAAH" class="sr-only">
                             Où trouver votre montant d'AAH ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -495,14 +499,15 @@
             <div class="row pb-2">
                 <label class="label pb-3 headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
-                    <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
-                        placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
+                    <button id="infobulle-prochaine-declaration-trimestrielle" type="button"
+                        class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
                         (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)"
                         aria-describedby="labelInfobulleProchaineDeclarationTrimestrielle">
                         <span id="labelInfobulleProchaineDeclarationTrimestrielle" class="sr-only">
                             Où trouver la date de votre prochaine déclaration trimestrielle CAF ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -539,14 +544,14 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="pensionInvalidite">
                     * Pension d'invalidité nette imposable perçue
-                    <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_pension_invalidite"
+                    <button id="infobulle-pension-invalidite" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_pension_invalidite"
                         (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)"
                         aria-describedby="labelInfobullePensionInvalidite">
                         <span id="labelInfobullePensionInvalidite" class="sr-only">
                             Où trouver votre montant de pension d'invalidité ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -762,14 +767,14 @@
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins2">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(2)}} (hors
                     taxes)
-                    <button id="infobulle-chiffre-affaires-n-moins-2" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_chiffre_affaires_n_moins_2"
+                    <button id="infobulle-chiffre-affaires-n-moins-2" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_chiffre_affaires_n_moins_2"
                         (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)"
                         aria-describedby="labelInfobulleCAMicroAnneeNMoins2">
                         <span id="labelInfobulleCAMicroAnneeNMoins2" class="sr-only">
                             Comment renseigner votre chiffre d'affaires ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -802,14 +807,14 @@
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseNMoins1">
                     * Chiffre d’affaires réalisé en {{dateUtileService.getLibelleAnneeDepuisXAnnee(1)}} (hors
                     taxes)
-                    <button id="infobulle-chiffre-affaires-n-moins-1" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_chiffre_affaires_n_moins_1"
+                    <button id="infobulle-chiffre-affaires-n-moins-1" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_chiffre_affaires_n_moins_1"
                         (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)"
                         aria-describedby="labelInfobulleCAMicroAnneeNMoins1">
                         <span id="labelInfobulleCAMicroAnneeNMoins1" class="sr-only">
                             Comment renseigner votre chiffre d'affaires ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -841,14 +846,14 @@
                 <label class="label headline-4-typo" for="chiffreAffairesMicroEntrepriseN">
                     * Chiffre d’affaires estimé pour l’année {{dateUtileService.getAnneeActuelle()}} (hors
                     taxes)
-                    <button id="infobulle-chiffre-affaires-n" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_chiffre_affaires"
+                    <button id="infobulle-chiffre-affaires-n" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_chiffre_affaires"
                         (click)="modalService.openModalOnEvent($event, modalChiffreAffairesTemplate)"
                         aria-describedby="labelInfobulleCAMicroAnneeN">
                         <span id="labelInfobulleCAMicroAnneeN" class="sr-only">
                             Comment renseigner votre chiffre d'affaires ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -879,14 +884,15 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="revenusImmobilier">
                     * Revenus annuels de placement ou du patrimoine
-                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-revenus-immobilier" type="button" class="img-interrogation-icon"
+                        placement="right"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                         (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)"
                         aria-describedby="labelInfobulleRevenusImmo">
                         <span id="labelInfobulleRevenusImmo" class="sr-only">
                             Où trouver vos revenus immobiliers ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -927,7 +933,7 @@
     </form>
     <div class="row row-button-valider">
         <div class="col">
-            <button id="btn-vos-ressources-valider" class="btn-style-perso-3 button-typo"
+            <button id="btn-vos-ressources-valider" type="submit" class="btn-style-perso-3 button-typo"
                 data-testid="btn-vos-ressources-valider"
                 (click)="onSubmitRessourcesFinancieresForm(vosRessourcesFinancieresForm)"
                 tag-action="clic_bouton_valider_vos_ressources" aria-label="Valider votre saisie">
@@ -948,9 +954,12 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de période indemnisée Pôle emploi 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-ass.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-ass.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve dans la case  “Montant brut journalier” de votre dernière attestation de période indemnisée Pôle emploi.
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 
@@ -962,9 +971,12 @@
         <p class='body-1-typo'>
             Sur votre notification d'admission à l'ASS 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/ouverture-droit-ass.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/ouverture-droit-ass.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve dans le bloc “Vos droits” de votre notification d'admission à l'ASS.
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 
@@ -976,9 +988,12 @@
         <p class='body-1-typo'>
             Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/releve-are.png'>
-        </div>
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve dans le bloc “Informations sur vos droits” de votre relevé de situation Pôle emploi.
+            </figcaption>
+        </figure>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
         </h4>
@@ -1043,11 +1058,14 @@
             Où trouver cette information ?
         </h3>
         <p class='body-1-typo'>
-            Sur votre dernière attestation de paiement de pension 👇
+            Sur votre dernière attestation de paiement de pension d\'invalidité 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-pi.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-pi.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve sous le tableau récapitulatif de la période de paiment de votre dernière attestation de paiement de pension d\'invalidité.
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 
@@ -1059,9 +1077,12 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de paiement CAF 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-rsa.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-rsa.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve à la ligne Revenu de Solidarité Active de la rubrique prestations de votre dernière attestation de paiement CAF .
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 
@@ -1073,9 +1094,12 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de paiement CAF 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-aah.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-aah.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve à la ligne Allocation Adulte Handicapé de la rubrique prestations de votre dernière attestation de paiement CAF .
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 

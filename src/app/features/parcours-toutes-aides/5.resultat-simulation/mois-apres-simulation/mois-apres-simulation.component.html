@@ -1,24 +1,23 @@
-<div class="mois-apres-simulation-container" (click)="onClickAfficherDetail($event, simulationActuelle)"
-    tag-action="clic_bouton_detail_mois"
-    attr.data-testid="detail_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationActuelle.datePremierJourMoisSimule)}}">
+<div class="mois-apres-simulation-container">
     <div *ngIf="!screenService.isExtraSmallScreen()">
         <div class="row">
             <div class="libelle_montant_mois_apres_simulation_col col-md-3 col-10 align-items-start">
                 <div class="libelle_mois_apres_simulation_row row">
                     <div class="col-md-12">
-                        <h4 class="headline-4-typo color-blue-2-typo text-start">
+                        <h3 class="headline-4-typo color-blue-2-typo text-start">
+                            <span class="sr-only">Voir le détail pour&nbsp;</span>
                             {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
                             screenService.isTabletScreen())}}
-                        </h4>
+                        </h3>
                     </div>
                 </div>
                 <div class="montant_mois_apres_simulation_row row">
                     <div class="col-md-12">
-                        <h5 class="headline-5-typo color-pe-red-typo text-start">
+                        <h4 class="headline-5-typo color-pe-red-typo text-start">
                             {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
                             €
                             net
-                        </h5>
+                        </h4>
                     </div>
                 </div>
             </div>
@@ -29,9 +28,11 @@
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
                             class="code-ressource me-1"
                             [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
-                            <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
-                                class="">
-                                <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                            <div
+                                *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)">
+                                <abbr class="overline-typo" title="{{ressourceFinanciereOuAide.nom}}">
+                                    {{ressourceFinanciereOuAide.code}}
+                                </abbr>
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">
@@ -43,13 +44,11 @@
             </div>
             <div *ngIf="getResumeDetailMensuel() == ''"
                 class="col-md-4 col-2 div-vertically-centered justify-content-end">
-                <span class="bouton_detail body-2-typo color-pe-red-typo">
-                    <span class="bouton_detail body-2-typo color-pe-red-typo">Voir le détail</span>
-                    <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
-                </span>
+                <span class="bouton-detail body-2-typo color-pe-red-typo">Voir le détail</span>
+                <span class="ps-2 fas fa-chevron-right span-montant-mensuel color-pe-red-typo"></span>
             </div>
-            <div *ngIf="getResumeDetailMensuel() != ''" class="col-md-9">
-                <div id="row_resume_detail_mensuel" class="row ms-0 mb-2">
+            <div *ngIf="getResumeDetailMensuel() != ''" class="col-md-9" aria-hidden="true">
+                <div class="row-resume-detail-mensuel row ms-0 mb-2">
                     <span class=" body-2-typo ps-0" [innerHTML]="getResumeDetailMensuel()">
                     </span>
                 </div>
@@ -63,7 +62,8 @@
                                     [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                                     <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                         class="">
-                                        <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                                        <abbr class="overline-typo"
+                                            title="{{ressourceFinanciereOuAide.nom}}">{{ressourceFinanciereOuAide.code}}</abbr>
                                     </div>
                                     <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                         class="">
@@ -75,10 +75,8 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-2 div-vertically-centered justify-content-end">
-                        <span class="bouton_detail body-2-typo color-pe-red-typo">
-                            <span class="bouton_detail body-2-typo color-pe-red-typo">Voir le détail</span>
-                            <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
-                        </span>
+                        <span class="bouton-detail body-2-typo color-pe-red-typo">Voir le détail</span>
+                        <span class="ps-2 fas fa-chevron-right span-montant-mensuel color-pe-red-typo"></span>
                     </div>
                 </div>
             </div>
@@ -89,26 +87,26 @@
             <div class="col-10 align-items-start gx-0">
                 <div class="libelle_mois_apres_simulation_row row m-0">
                     <div class="col-md-12 ps-0">
-                        <h4 class="headline-4-typo color-blue-2-typo text-start">
+                        <h3 class="headline-4-typo color-blue-2-typo text-start">
                             {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
                             screenService.isTabletScreen())}}
-                        </h4>
+                        </h3>
                     </div>
                 </div>
                 <div class="montant_mois_apres_simulation_row row m-0">
                     <div class="col-md-12 ps-0">
-                        <h5 class="headline-5-typo color-pe-red-typo text-start">
+                        <h4 class="headline-5-typo color-pe-red-typo text-start">
                             {{simulationService.calculerMontantTotalRessourcesMois(simulationActuelle)}}
                             €
                             net
-                        </h5>
+                        </h4>
                     </div>
                 </div>
-                <div id="row_resume_detail_mensuel" class="row ms-0 mb-2">
-                    <span class=" body-2-typo px-0" [innerHTML]="getResumeDetailMensuel()">
+                <div class="row ms-0 mb-2" aria-hidden="true">
+                    <span class="row-resume-detail-mensuel body-2-typo px-0" [innerHTML]="getResumeDetailMensuel()">
                     </span>
                 </div>
-                <div id="row_icones_aides" class="row ms-0">
+                <div id="row_icones_aides" class="row ms-0" aria-hidden="true">
                     <div *ngFor=" let ressourceFinanciereOuAide of ressourcesFinancieresEtAidesMois; let i=index"
                         attr.data-index="i" class="icone-col">
                         <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 5) || (screenService.isExtraSmallScreen() && i <= 4)"
@@ -116,7 +114,9 @@
                             [ngClass]="[ressourceFinanciereOuAide.code.toLowerCase(), getOverflowClass(i)]">
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i <= 4) || (screenService.isExtraSmallScreen() && i <= 3)"
                                 class="">
-                                <span class="overline-typo">{{ressourceFinanciereOuAide.code}}</span>
+                                <abbr class="overline-typo" title="{{ressourceFinanciereOuAide.nom}}">
+                                    {{ressourceFinanciereOuAide.code}}
+                                </abbr>
                             </div>
                             <div *ngIf="(!screenService.isExtraSmallScreen() && i == 5) || (screenService.isExtraSmallScreen() && i == 4)"
                                 class="">
@@ -128,7 +128,7 @@
             </div>
             <div class="col-2 div-vertically-centered justify-content-end gx-0">
                 <span class="bouton_detail body-2-typo color-pe-red-typo">
-                    <em alt class="ps-2 fas fa-chevron-right span-montant-mensuel"></em>
+                    <span class="ps-2 fas fa-chevron-right span-montant-mensuel"></span>
                 </span>
             </div>
         </div>

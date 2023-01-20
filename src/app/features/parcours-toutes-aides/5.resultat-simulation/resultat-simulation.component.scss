@@ -27,9 +27,10 @@
         margin-bottom: auto;
       }
 
-      h2, h3, span {
+      p, span {
         color:white;
         text-align: start;
+        margin-bottom:0rem;
 
         &#mois-versement-infos-resultat {
           font-weight: bold;
@@ -416,6 +417,7 @@
   .card_ressources_apres_simulation {
     border-radius: 1rem;
     margin: 0;
+    width:100%;
 
     div {
       padding: 1rem 1.5rem;
@@ -470,4 +472,9 @@
       padding:1rem;
 
     }
+  }
+
+  .precision-telechargement {
+    font-size: 0.775rem !important;
+    text-transform: none;
   }

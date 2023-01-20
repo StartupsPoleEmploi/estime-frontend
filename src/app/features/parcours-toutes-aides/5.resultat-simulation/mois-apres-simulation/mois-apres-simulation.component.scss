@@ -1,11 +1,16 @@
 @import "../../../../../assets/scss/variables";
 
 .mois-apres-simulation-container {
-  cursor: pointer;
+
+  width:100%;
 
   .div-vertically-centered {
     display: flex;
     align-items: center;
+  }
+
+  .row-resume-detail-mensuel {
+    text-align: start;
   }
 }
 
@@ -25,4 +30,10 @@
 
 .libelle_montant_mois_apres_simulation_col {
   border-right: 1px solid $color-pe-grey-light;
+}
+
+.bouton-detail {
+  &:hover {
+    text-decoration: underline;
+  }
 }

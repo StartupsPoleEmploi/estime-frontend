@@ -79,7 +79,7 @@
                                 </option>
                             </select>
                         </div>
-                        <div class="row">
+                        <div class="row pb-3">
                             <div class="col-12">
                                 <p class="error-input-message" role="alert"
                                     *ngIf="isChampFuturSalaireEgalAZero(salaireHoraireBrut, salaireHoraireNet, salaireMensuelBrut, salaireMensuelNet)">
@@ -104,21 +104,21 @@
             </form>
         </div>
         <div *ngIf="!isModificationCriteres" class="row-btn-form">
-            <button id="btn-ma-situation-retour" data-testid="btn-ma-situation-retour" class="btn-precedent"
-                aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
-                tag-navigation="clic_bouton_retour" type="button">
+            <button id="btn-ma-situation-retour" type="button" class="btn-precedent"
+                data-testid="btn-ma-situation-retour" tag-navigation="clic_bouton_retour"
+                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
                 <div>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-obtenir-simulation-parcours-complement-are" class="btn-suivant"
-                aria-label="Obtenir ma simulation" type="submit"
-                data-testid="btn-obtenir-simulation-parcours-complement-are" (click)="onClickButtonObtenirSimulation()"
-                tag-navigation="clic_bouton_obtenir_ma_simulation_parcours_complement_are">
+            <button id="btn-obtenir-simulation-parcours-complement-are" type="submit" class="btn-suivant"
+                data-testid="btn-obtenir-simulation-parcours-complement-are"
+                tag-navigation="clic_bouton_obtenir_ma_simulation_parcours_complement_are"
+                (click)="onClickButtonObtenirSimulation()" aria-label="Obtenir ma simulation">
                 <div>
                     <span>Obtenir ma simulation</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

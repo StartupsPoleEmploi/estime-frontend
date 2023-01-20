@@ -230,15 +230,15 @@
                             <legend class="row pb-2">
                                 <div class="label headline-4-typo">
                                     * Salaire
-                                    <button id="infobulle-contrat-travail-salaire" class="img-interrogation-icon"
-                                        placement="right" tag-action="clic_infobulle_salaire"
+                                    <button id="infobulle-contrat-travail-salaire" type="button"
+                                        class="img-interrogation-icon" placement="right"
+                                        tag-action="clic_infobulle_salaire"
                                         (click)="modalService.openModalOnEvent($event, modalSalaireNetTemplate, true)"
                                         aria-describedby="labelInfobulleDifferenceSalaireBrutNet">
                                         <span id="labelInfobulleDifferenceSalaireBrutNet" class="sr-only">
                                             Quelle est la différence entre salaire net et brut ?
                                         </span>
-                                        <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                            aria-hidden="true">
+                                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                                     </button>
                                 </div>
                             </legend>
@@ -537,7 +537,7 @@
                                 <div class="row flex-column pb-2">
                                     <label class="label headline-4-typo" for="distanceDomicileLieuTravail">
                                         * Distance entre votre domicile et votre lieu de travail
-                                        <button id="infobulle-contrat-travail-distance-travail"
+                                        <button id="infobulle-contrat-travail-distance-travail" type="button"
                                             class="img-interrogation-icon" placement="right"
                                             tag-action="clic_infobulle_calcul_distance_domicile_travail"
                                             (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)"
@@ -545,8 +545,7 @@
                                             <span id="labelInfobulleCalculDistanceDomicileTravail" class="sr-only">
                                                 Comment calculer la distance entre domicile et travail ?
                                             </span>
-                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                                aria-hidden="true">
+                                            <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                                         </button>
                                     </label>
                                 </div>
@@ -581,7 +580,7 @@
                                 <legend class="row pb-2">
                                     <div class="headline-4-typo label">
                                         * Distance envisagée entre votre domicile et lieu de travail
-                                        <button id="infobulle-contrat-travail-distance-travail"
+                                        <button id="infobulle-contrat-travail-distance-travail" type="button"
                                             class="img-interrogation-icon" placement="right"
                                             tag-action="clic_infobulle_calcul_distance_domicile_travail"
                                             (click)="modalService.openModalOnEvent($event, modalDistanceTravailTemplate, true)"
@@ -589,8 +588,7 @@
                                             <span id="labelInfobulleCalculDistanceDomicileTravail2" class="sr-only">
                                                 Comment calculer la distance entre domicile et travail ?
                                             </span>
-                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                                aria-hidden="true">
+                                            <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                                         </button>
                                     </div>
                                 </legend>
@@ -735,7 +733,7 @@
                                         aria-describedby="infobulle-contrat-travail-nombre-trajets">
                                         * Nombre de jours par semaine où vous vous rendrez sur votre lieu de
                                         travail
-                                        <button id="infobulle-contrat-travail-nombre-trajets"
+                                        <button id="infobulle-contrat-travail-nombre-trajets" type="button"
                                             class="img-interrogation-icon" placement="right"
                                             tag-action="clic_infobulle_nombre_trajets_aller_retour_domicile_travail"
                                             (click)="modalService.openModalOnEvent($event, modalNombreTrajetTemplate, true)"
@@ -743,8 +741,7 @@
                                             <span id="labelInfobulleCalculNombreJoursTrajetsSemaine" class="sr-only">
                                                 Comment calculer votre nombre de trajets par semaine ?
                                             </span>
-                                            <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                                aria-hidden="true">
+                                            <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                                         </button>
                                     </div>
                                 </legend>
@@ -856,10 +853,11 @@
             </div>
         </div>
         <div *ngIf="!isModificationCriteres" class="row-btn-form">
-            <button class="btn-precedent" tag-navigation="clic_bouton_retour" data-testid="btn-futur-travail-retour"
-                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
+            <button class="btn-precedent" type="button" tag-navigation="clic_bouton_retour"
+                data-testid="btn-futur-travail-retour" (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente">
                 <div>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -868,7 +866,7 @@
                 (click)="onSubmitFuturTravailForm()" aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

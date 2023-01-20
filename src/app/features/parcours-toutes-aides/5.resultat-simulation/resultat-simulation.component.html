@@ -5,14 +5,14 @@
         <div class="col">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 5. {{PageHeadlineEnum.RESULTAT_SIMULATION}}
-                <button id="infobulle-resultat-simulation" class="img-interrogation-icon" placement="right"
-                    tag-action="ouverture-infobulle-resultat-simulation"
+                <button id="infobulle-resultat-simulation" type="button" class="img-interrogation-icon"
+                    placement="right" tag-action="ouverture-infobulle-resultat-simulation"
                     (click)="modalService.openModalOnEvent($event, modalResultatSimulationTemplate)"
                     aria-describedby="labelInfobulleResultatSimulation">
                     <span id="labelInfobulleResultatSimulation" class="sr-only">
                         Comment interpréter vos résultats ?
                     </span>
-                    <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                    <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                 </button>
             </h1>
         </div>
@@ -29,66 +29,64 @@
                 <div class="col-12 col-md-6">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" role="presentation" src="./assets/images/icones/localisation-white.svg">
+                            <img alt="" src="./assets/images/icones/localisation-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
-                            <div>
-                                <h2 class="headline-4-typo">
-                                    Basée sur une reprise d’emploi
-                                </h2>
-                                <h3 class="body-2-typo">
-                                    <span id="mois-versement-infos-resultat">
-                                        en {{ dateUtileService.getLibelleMoisApresDateJour(1).toLowerCase() }}
-                                    </span>
-                                    et un versement de salaire en fin de mois
-                                </h3>
-                            </div>
+                            <p class="headline-4-typo">
+                                Basée sur une reprise d’emploi
+                            </p>
+                            <p class="body-2-typo">
+                                <span id="mois-versement-infos-resultat">
+                                    en {{ dateUtileService.getLibelleMoisApresDateJour(1).toLowerCase() }}
+                                </span>
+                                et un versement de salaire en fin de mois
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6" [ngClass]="{'mt-4':screenService.isExtraSmallScreen()}">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" role="presentation" src="./assets/images/icones/calendrier-white.svg">
+                            <img alt="" src="./assets/images/icones/calendrier-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
-                            <h2 class="headline-4-typo">
+                            <p class="headline-4-typo">
                                 Visibilité sur 6 mois maximum
-                            </h2>
-                            <h3 class="body-2-typo">
+                            </p>
+                            <p class="body-2-typo">
                                 Vous pourriez bénéficier d’aides et d’allocations au-delà
-                            </h3>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-4">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" role="presentation" src="./assets/images/icones/euro-white.svg">
+                            <img alt="" src="./assets/images/icones/euro-white.svg">
 
                         </div>
                         <div class="col-10 col-md-11">
-                            <h2 class="headline-4-typo">
+                            <p class="headline-4-typo">
                                 Montants nets
-                            </h2>
-                            <h3 class="body-2-typo">
+                            </p>
+                            <p class="body-2-typo">
                                 avant éventuel impôt sur le revenu
-                            </h3>
+                            </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-4">
                     <div class="row">
                         <div class="col-2 col-md-1 d-flex flex-column align-items-center">
-                            <img alt="" role="presentation" src="./assets/images/icones/info-white.svg">
+                            <img alt="" src="./assets/images/icones/info-white.svg">
                         </div>
                         <div class="col-10 col-md-11">
-                            <h2 class="headline-4-typo">
+                            <p class="headline-4-typo">
                                 Estimation à titre d’information
-                            </h2>
-                            <h3 class="body-2-typo">
+                            </p>
+                            <p class="body-2-typo">
                                 aucune valeur contractuelle
-                            </h3>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -101,36 +99,37 @@
             </div>
             <div>
                 <div id="title_avant_simulation">
-                    <h3 class="headline-3-typo color-blue-2-typo text-start">Avant reprise d'emploi</h3>
+                    <h2 class="headline-3-typo color-blue-2-typo text-start">Avant reprise d'emploi</h2>
                 </div>
                 <div id="card_ressources_avant_simulation" class="card row mb-3">
                     <div class="col-12 col-md-12">
-                        <h4 id="mois_ressources_avant_simulation" class="headline-4-typo color-blue-2-typo text-start">
+                        <h3 id="mois_ressources_avant_simulation" class="headline-4-typo color-blue-2-typo text-start">
                             {{ dateUtileService.getLibelleDateActuelle() }}
-                        </h4>
-                        <h5 id="montant_ressources_avant_simulation"
+                        </h3>
+                        <h4 id="montant_ressources_avant_simulation"
                             class="headline-5-typo color-pe-teal-typo text-start"
                             data-testid="montant_ressources_actuelles">
                             {{simulation.montantRessourcesFinancieresMoisAvantSimulation}} € net
-                        </h5>
+                        </h4>
                     </div>
                 </div>
                 <div id="title_apres_simulation">
-                    <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">Après reprise d'emploi</h3>
+                    <h2 class="headline-3-typo color-blue-2-typo text-start mb-0">Après reprise d'emploi</h2>
                 </div>
                 <div class="ressources_avant_simulation">
-                    <div class="card_ressources_apres_simulation card row mt-3"
+                    <button class="card_ressources_apres_simulation card row mt-3" type="button"
                         [ngClass]="{'card-simulations-mobile': screenService.isExtraSmallScreen(), 'card-simulations-desktop': !screenService.isExtraSmallScreen()}"
                         *ngFor="let simulationMensuelle of simulation.simulationsMensuelles; let index = index;"
-                        tabindex="0" (keyup)="handleKeyUpOnSimulationMensuelle($event,simulationMensuelle);">
+                        (keyup)="handleKeyUpOnSimulationMensuelle($event,simulationMensuelle)"
+                        (click)="simulationSelection(simulationMensuelle)" tag-action="clic_bouton_detail_mois"
+                        attr.data-testid="detail_mois_{{dateUtileService.getIndexMoisSimule(deConnecteSimulationService.getDatePremierMoisSimule(), simulationMensuelle.datePremierJourMoisSimule)}}">
                         <div class="col-md-12 col-12">
                             <app-mois-apres-simulation [simulationSelected]="simulationSelected"
                                 [simulationActuelle]="simulationMensuelle"
-                                [detailMensuel]="this.getDetailMensuelSelected(simulationMensuelle)"
-                                (simulationSelection)="simulationSelection($event)">
+                                [detailMensuel]="getDetailMensuelSelected(simulationMensuelle)">
                             </app-mois-apres-simulation>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -152,37 +151,39 @@
                 </div>
                 <div *ngIf="!screenService.isExtraSmallScreen()" class="row mb-4">
                     <div class="col-12 col-md-12 my-auto">
-                        <button class="btn btn-style-perso-7" data-testid="btn-modification-criteres" tabindex="0"
+                        <button class="btn btn-style-perso-7" type="button" data-testid="btn-modification-criteres"
                             (click)="onClickButtonModificationCriteres()"
                             (keyup)="handleKeyUpOnModificationCriteres($event)"
-                            tag-navigation="clic_bouton_modification_criteres">
+                            tag-navigation="clic_bouton_modification_criteres"
+                            aria-label="Modifier les critères de la simulation">
                             <span>Modifier les critères</span>
                         </button>
                     </div>
                     <div class="col-12 col-md-12 my-auto mt-3">
-                        <button class="btn btn-style-perso-6" data-testid="btn-telecharger-simulation" tabindex="0"
+                        <button class="btn btn-style-perso-6" type="button" data-testid="btn-telecharger-simulation"
                             (click)="onClickButtonImprimerMaSimulation()"
                             (keyup)="handleKeyUpOnTelechargerSimulation($event)"
                             tag-download="clic_bouton_telecharger_ma_simulation">
-                            <img alt="" role="presentation" src="./assets/images/icones/download.svg">
+                            <img alt="" src="./assets/images/icones/download.svg">
                             <span>Télécharger</span>
+                            <span class="precision-telechargement">&nbsp;(PDF, 50Ko)</span>
                         </button>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <h3 class="headline-3-typo color-blue-2-typo text-start mb-0">
+                        <h2 class="headline-3-typo color-blue-2-typo text-start mb-0">
                             Pour aller plus loin
-                        </h3>
+                        </h2>
                     </div>
                 </div>
                 <div class="row mb-3 recommendation-block">
                     <div class="col-md-12">
-                        <span class="body-1-typo">
+                        <p class="body-1-typo mb-0">
                             Partager ce simulateur aux personnes qui pourraient en avoir besoin
-                        </span>
+                        </p>
                     </div>
-                    <button class="pt-3 col-md-12 no-style-button" (click)="onClickCopyLinkToEstime()" tabindex="0">
+                    <button class="pt-3 col-md-12 no-style-button" type="button" (click)="onClickCopyLinkToEstime()">
                         <img alt='' role='presentation' src='./assets/images/icones/copy.svg'>
                         <span class="button-typo color-pe-red-typo pointer">
                             COPIER LE LIEN DE PARTAGE
@@ -190,9 +191,9 @@
                     </button>
                     <div *ngIf="isCopiedSuccessfully" class="mt-2 col-md-12 copied-successfully">
                         <img alt='' role='presentation' src='./assets/images/icones/check-black.svg'>
-                        <span class="body-2-typo">
+                        <p class="body-2-typo d-inline">
                             Copié dans votre presse-papier
-                        </span>
+                        </p>
                     </div>
                 </div>
                 <div id="actions-suite">
@@ -217,7 +218,7 @@
                 Partager ce simulateur aux personnes qui pourraient en avoir besoin
             </span>
         </div>
-        <button class="pt-3 col-md-12 no-style-button" (click)="onClickCopyLinkToEstime()" tabindex="0">
+        <button class="pt-3 col-md-12 no-style-button" type="button" (click)="onClickCopyLinkToEstime()">
             <img alt='' role='presentation' src='./assets/images/icones/copy.svg'>
             <span class="button-typo color-pe-red-typo pointer">
                 COPIER LE LIEN DE PARTAGE
@@ -235,11 +236,12 @@
         </app-actions-suite>
     </div>
     <div class="row mb-4 px-3">
-        <button class="btn-telecharger-simulation-mobile" data-testid="btn-telecharger-simulation" tabindex="0"
+        <button class="btn-telecharger-simulation-mobile" type="button" data-testid="btn-telecharger-simulation"
             (click)="onClickButtonImprimerMaSimulation()" (keyup)="handleKeyUpOnTelechargerSimulation($event)"
             tag-download="clic_bouton_telecharger_ma_simulation">
-            <img alt="" role="presentation" src="./assets/images/icones/download.svg">
+            <img alt="" src="./assets/images/icones/download.svg">
             <span>Télécharger</span>
+            <span class="precision-telechargement">&nbsp;(PDF, 50Ko)</span>
         </button>
     </div>
 </div>
@@ -258,9 +260,9 @@
             </div>
         </div>
         <div class="col-5 px-1">
-            <button class="btn-modifier-criteres-sticky" data-testid="btn-modification-criteres" tabindex="0"
-                (click)="onClickButtonModificationCriteres()" (keyup)="handleKeyUpOnModificationCriteres($event)"
-                tag-navigation="clic_bouton_modifier_la_simulation">
+            <button class="btn-modifier-criteres-sticky" type="button" data-testid="btn-modification-criteres"
+                tag-navigation="clic_bouton_modifier_la_simulation" (click)="onClickButtonModificationCriteres()"
+                (keyup)="handleKeyUpOnModificationCriteres($event)">
                 <span>Modifier</span>
             </button>
         </div>

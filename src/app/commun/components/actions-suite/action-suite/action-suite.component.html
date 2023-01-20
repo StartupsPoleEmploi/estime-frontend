@@ -1,13 +1,13 @@
-<button class="action-suite no-style-button" attr.tag-action="{{getTagAction()}}"
-    (click)="onClickAction($event, codeAction)" tabindex="0">
+<button color-pe-red-typo class="action-suite no-style-button" attr.tag-action="{{getTagAction()}}"
+    (click)="onClickAction($event, codeAction)">
     <div class="row my-auto">
         <div class="col-2 col-md-auto col-xl-3 justify-content-center">
-            <img alt="" role="presentation" [src]="'./assets/images/illustrations/'+imageLink+'.svg'">
+            <img alt="" [src]="'./assets/images/illustrations/'+imageLink+'.svg'">
         </div>
         <div class="col-text col-10 col-md-auto col-xl-9 my-auto">
-            <h4 class="headline-5-typo color-blue-2-typo">
+            <h3 class="headline-5-typo color-blue-2-typo">
                 {{text}}
-            </h4>
+            </h3>
         </div>
     </div>
 </button>

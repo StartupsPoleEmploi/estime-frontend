@@ -16,15 +16,14 @@
                     <legend class="row pb-2">
                         <p class="label headline-4-typo">
                             * Êtes-vous concerné.e par la dégressivité de l'ARE ?
-                            <button id="infobulle-degressivite-are" class="img-interrogation-icon" placement="right"
-                                tag-action="clic_infobulle_degressivite_are"
+                            <button id="infobulle-degressivite-are" type="button" class="img-interrogation-icon"
+                                placement="right" tag-action="clic_infobulle_degressivite_are"
                                 (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)"
                                 aria-describedby="labelInfobulleDegressiviteARE">
                                 <span id="labelInfobulleDegressiviteARE" class="sr-only">
                                     Qu'est ce que la degressivité de l'ARE ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </p>
                     </legend>
@@ -63,7 +62,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="col-12">
                             <p class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !hasDegressiviteAreSelectionne()">
@@ -81,16 +80,16 @@
                     <legend class="row pb-2">
                         <p class="label headline-4-typo">
                             * Vous souhaitez avoir une estimation du montant :
-                            <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
-                                placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                            <button id="infobulle-ma-situation-vous-percevez" type="button"
+                                class="img-interrogation-icon" placement="right"
+                                tag-action="clic_infobulle_taux_reduit_degressivite_are"
                                 aria-label="Qu'est ce que la degressivité de l'ARE"
                                 (click)="modalService.openModalOnEvent($event, modalDegressiviteTemplate)"
                                 aria-describedby="labelInfobulleTauxDegressiviteARE">
                                 <span id="labelInfobulleTauxDegressiviteARE" class="sr-only">
                                     Qu'est ce que la degressivité de l'ARE ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </p>
                     </legend>
@@ -130,7 +129,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="col-12">
                             <p class="error-input-message" role="alert"
                                 *ngIf="isMaSituationFormSubmitted && !isTauxDegressiviteAreSelectionne()">
@@ -144,16 +143,15 @@
                     <div class="row pb-2">
                         <label class="label headline-4-typo" for="salaireJournalierReferenceBrut">
                             * Montant de votre salaire journalier brut de référence (SJR) pour l'ARE
-                            <button id="infobulle-sjr-are" class="img-interrogation-icon" placement="right"
-                                tag-action="clic_infobulle_obtenir_ressources_are"
+                            <button id="infobulle-sjr-are" type="button" class="img-interrogation-icon"
+                                placement="right" tag-action="clic_infobulle_obtenir_ressources_are"
                                 aria-label="Où trouver votre salaire journalier référence ARE ?"
                                 (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)"
                                 aria-describedby="labelInfobulleMontantSJR">
                                 <span id="labelInfobulleMontantSJR" class="sr-only">
                                     Comment trouver le montant de votre salaire journalier de référence ARE ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </label>
                     </div>
@@ -172,7 +170,7 @@
                             <app-text-with-euro-symbol></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="col-12">
                             <p class="error-input-message" role="alert"
                                 *ngIf="isChampSJREgalAZero(salaireJournalierReferenceBrut)">
@@ -200,8 +198,9 @@
                             * Montant brut de votre allocation journalière
                             <span class="fw-bold">à taux plein</span>
                             pour l’ARE
-                            <button id="infobulle-ma-situation-vous-percevez" class="img-interrogation-icon"
-                                placement="right" tag-action="clic_infobulle_taux_reduit_degressivite_are"
+                            <button id="infobulle-ma-situation-vous-percevez" type="button"
+                                class="img-interrogation-icon" placement="right"
+                                tag-action="clic_infobulle_taux_reduit_degressivite_are"
                                 aria-label="Où trouver votre montant brut d'allocation journalière ARE ?"
                                 (click)="modalService.openModalOnEvent($event, modalAllocationARETemplate, true)"
                                 aria-describedby="labelInfobulleMontantAllocationJournaliereBruteTauxPlein">
@@ -209,8 +208,7 @@
                                     Comment trouver le montant de votre allocation journalière brute ARE à taux
                                     plein ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </label>
                     </div>
@@ -229,7 +227,7 @@
                             <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="col-12">
                             <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutTauxPleinEgalAZero(allocationJournaliereBruteTauxPlein)">
@@ -267,8 +265,7 @@
                                     Comment trouver le montant de votre allocation journalière brute ARE à taux
                                     réduit ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </label>
                     </div>
@@ -287,7 +284,7 @@
                             <app-text-with-euro-symbol message="/ jour"></app-text-with-euro-symbol>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row pb-3">
                         <div class="col-12">
                             <p class="error-input-message" role="alert"
                                 *ngIf="isChampAllocationJournaliereBrutEgalAZero(allocationJournaliereBrute)">
@@ -311,20 +308,20 @@
             </form>
         </div>
         <div *ngIf="!isModificationCriteres" class="row-btn-form">
-            <button id="btn-ma-situation-retour" data-testid="btn-ma-situation-retour" class="btn-precedent"
-                aria-label="Retour à la page précédente" (click)="onClickButtonRetour()"
-                tag-navigation="clic_bouton_retour" type="button">
+            <button id="btn-ma-situation-retour" type="button" class="btn-precedent"
+                data-testid="btn-ma-situation-retour" tag-navigation="clic_bouton_retour"
+                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
                 <div>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
-            <button id="btn-ma-situation-suivant" data-testid="btn-ma-situation-suivant" class="btn-suivant"
-                aria-label="Passer à la page suivante" type="submit" aria-label="Passer à la page suivante"
-                (click)="onSubmitMaSituationForm()" tag-navigation="clic_bouton_suivant">
+            <button id="btn-ma-situation-suivant" type="submit" class="btn-suivant"
+                data-testid="btn-ma-situation-suivant" tag-navigation="clic_bouton_suivant"
+                (click)="onSubmitMaSituationForm()" aria-label="Passer à la page suivante">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>
@@ -339,9 +336,12 @@
         <p class='body-1-typo'>
             Sur la page 2 de votre dernier relevé de situation Pôle emploi 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/releve-are.png'>
-        </div>
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/releve-are.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve dans le bloc “Informations sur vos droits” de votre relevé de situation Pôle emploi.
+            </figcaption>
+        </figure>
         <h4 class='headline-4-typo headline-4-typo-color'>
             Où trouver votre dernier relevé de situation ARE ?
         </h4>

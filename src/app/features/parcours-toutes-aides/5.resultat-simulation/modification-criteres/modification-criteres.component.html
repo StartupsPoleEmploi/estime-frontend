@@ -1,26 +1,27 @@
 <div id="modification-criteres-container">
-    <div class="div_bouton_retour_modification_criteres div-vertically-centered justify-content-start div_modification_criteres_with_padding"
-        (click)="sideModalService.closeSideModalModificationCriteres()" (keyup)="handleKeyUpOnRetour($event);"
-        tabindex="0" tag-action="clic_bouton_retour_modification_criteres"
-        data-testid="bouton_retour_modification_criteres">
-        <span class="bouton_retour body-2-typo color-pe-red-typo">
-            <em alt class="ps-2 pe-2 fas fa-chevron-left"></em>
+    <div
+        class="div_bouton_retour_modification_criteres div-vertically-centered justify-content-start div_modification_criteres_with_padding">
+        <button class="no-style-button" tag-action="clic_bouton_retour_modification_criteres"
+            data-testid="bouton_retour_modification_criteres"
+            (click)="sideModalService.closeSideModalModificationCriteres()" (keyup)="handleKeyUpOnRetour($event)"
+            aria-label="Fermer la fenêtre de modification des critères">
+            <span alt class="ps-2 pe-2 fas fa-chevron-left color-pe-red-typo"></span>
             <span class="body-2-typo color-pe-red-typo">Retour</span>
-        </span>
+        </button>
     </div>
     <app-contrat-travail #contratTravailComponent [isModificationCriteres]="true"></app-contrat-travail>
     <div class="div_boutons_validation_modification_criteres div-vertically-centered text-center row py-3">
         <div *ngIf="screenService.isExtraSmallScreen()" class="col-md-6 col-12">
-            <button id="btn-mettre-a-jour-simulation" class="btn-style-perso-1 mx-auto"
-                aria-label="Mettre à jour l'estimation" type="submit" data-testid="btn-mettre-a-jour-simulation"
-                (click)="onSubmitModificationCriteresForm()" tag-navigation="clic_bouton_mettre_a_jour_simulation">
+            <button id="btn-mettre-a-jour-simulation" type="submit" class="btn-style-perso-1 mx-auto"
+                data-testid="btn-mettre-a-jour-simulation" tag-navigation="clic_bouton_mettre_a_jour_simulation"
+                (click)="onSubmitModificationCriteresForm()" aria-label="Mettre à jour l'estimation">
                 <div>
                     <span class="button-typo">Mettre à jour l'estimation</span>
                 </div>
             </button>
         </div>
         <div class="col-md-6 col-12">
-            <button id="btn-modification-autres-criteres" class="btn mx-auto my-3"
+            <button id="btn-modification-autres-criteres" type="button" class="btn mx-auto my-3"
                 (click)="onClickButtonModificationAutresCriteres()" aria-label="Modifier d'autres critères"
                 data-testid="btn-modification-autres-criteres"
                 tag-navigation="clic_bouton_modification_autres_criteres">
@@ -30,9 +31,9 @@
             </button>
         </div>
         <div *ngIf="!screenService.isExtraSmallScreen()" class="col-md-6 col-12">
-            <button id="btn-mettre-a-jour-simulation" class="btn-style-perso-1 mx-auto"
-                aria-label="Mettre à jour l'estimation" type="submit" data-testid="btn-mettre-a-jour-simulation"
-                (click)="onSubmitModificationCriteresForm()" tag-navigation="clic_bouton_mettre_a_jour_simulation">
+            <button id="btn-mettre-a-jour-simulation" type="submit" class="btn-style-perso-1 mx-auto"
+                data-testid="btn-mettre-a-jour-simulation" tag-navigation="clic_bouton_mettre_a_jour_simulation"
+                (click)="onSubmitModificationCriteresForm()" aria-label="Mettre à jour l'estimation">
                 <div>
                     <span class="button-typo">Mettre à jour l'estimation</span>
                 </div>

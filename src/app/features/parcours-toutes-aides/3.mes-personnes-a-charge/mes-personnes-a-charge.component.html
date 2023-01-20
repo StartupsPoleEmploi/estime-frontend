@@ -5,14 +5,14 @@
         <div class="div-title-formulaire">
             <h1 class="h1-style-1" [ngClass]="screenService.isExtraSmallScreen()?' headline-2-typo':'headline-1-typo'">
                 3. {{PageHeadlineEnum.PERSONNES_A_CHARGE}}
-                <button id="infobulle-personnes-charge-nbr-enfant" class="img-interrogation-icon" placement="right"
-                    tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
+                <button id="infobulle-personnes-charge-nbr-enfant" type="button" class="img-interrogation-icon"
+                    placement="right" tag-action="clic_infobulle_nombre_enfants_ou_personnes_a_charge"
                     (click)="modalService.openModalOnEvent($event, modalPersonnesAChargeTemplate)"
                     aria-describedby="labelInfobullePersonneACharge">
                     <span id="labelInfobullePersonneACharge" class="sr-only">
                         Qui considère-t-on comme votre personne à charge ?
                     </span>
-                    <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                    <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                 </button>
             </h1>
             <div class="text-under-h1 body-2-typo">
@@ -24,7 +24,7 @@
                 <div class="col" *ngFor="let personne of personnesACharge;let indexOfelement=index;">
                     <div class="card">
                         <div class="card-header">
-                            <button [id]="'btn-supprimer-personne-a-charge'+indexOfelement"
+                            <button [id]="'btn-supprimer-personne-a-charge'+indexOfelement" type="button"
                                 class="btn-close close float-end"
                                 (click)="onClickButtonSupprimerPersonneACharge(indexOfelement)"
                                 (keyup)="handleKeyUpOnButtonSupprimerPersonne($event, indexOfelement)"
@@ -38,7 +38,7 @@
                         <div class="card-body d-flex align-items-center">
                             <div class="row">
                                 <div class="col-md-3 col-xs-12 col-card-body">
-                                    <img alt="" role="presentation" class src="./assets/images/icones/personne.svg">
+                                    <img alt="" class src="./assets/images/icones/personne.svg">
                                 </div>
                                 <div id="div-infos-personne" class="col-md-9 col-xs-12 col-card-body">
                                     <span class="span-personne headline-4-typo">Personne {{indexOfelement +
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="button-as-link float-end caption-typo"
+                            <button type="button" class="button-as-link float-end caption-typo"
                                 (click)="onClickButtonModifierPersonneACharge(personne, indexOfelement)"
                                 (keyup)="handleKeyUpOnButtonModifierPersonneACharge($event, personne, indexOfelement)"
                                 attr.aria-describedby="labelModifierPersonneACharge{{indexOfelement}}">
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button *ngIf="isNouvellePersonneAChargeFormDisplay === false" name="button-card-add-personne"
+                    <button *ngIf="isNouvellePersonneAChargeFormDisplay === false" type="button"
                         class="button-card-add-personne" (click)="onClickButtonAjouterPersonne()"
                         (keyup)="handleKeyUpOnButtonAjouterPersonne($event)"
                         aria-describedby="labelAjouterPersonneACharge">
@@ -73,8 +73,7 @@
                             <div class="card-body d-flex align-items-center">
                                 <div id="row-card-body-add-personne" class="row">
                                     <div id="add-personne-icon" class="col-md-3 col-xs-12 col-card-body">
-                                        <img alt="" role="presentation"
-                                            src="./assets/images/icones/ajouter-personne.svg">
+                                        <img alt="" src="./assets/images/icones/ajouter-personne.svg">
                                     </div>
                                     <div class="col-md-9 col-xs-12 col-card-body"
                                         [ngClass]="{'text-left': !screenService.isExtraSmallScreen()}">
@@ -89,7 +88,7 @@
                 </div>
                 <div class="col">
                     <button *ngIf="!hasPersonneACharge() &&   isNouvellePersonneAChargeFormDisplay === false"
-                        name="button-card-pas-de-personne-a-charge" class="button-card-pas-de-personne-a-charge"
+                        type="button" class="button-card-pas-de-personne-a-charge"
                         (click)="onClickButtonPasDePersonneACharge()"
                         (keyup)="handleKeyUpOnButtonPasDePersonneACharge($event)"
                         aria-describedby="labelPasDePersonneACharge">
@@ -116,10 +115,11 @@
             </app-form-personne-a-charge>
         </div>
         <div class="row-btn-form" *ngIf="isNouvellePersonneAChargeFormDisplay === false">
-            <button class="btn-precedent" tag-navigation="clic_bouton_retour" data-testid="btn-personnes-charge-retour"
-                (click)="onClickButtonRetour()" aria-label="Retour à la page précédente">
+            <button type="button" class="btn-precedent" tag-navigation="clic_bouton_retour"
+                data-testid="btn-personnes-charge-retour" (click)="onClickButtonRetour()"
+                aria-label="Retour à la page précédente">
                 <div>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -128,7 +128,7 @@
                 (click)="onClickButtonSuivant()" aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

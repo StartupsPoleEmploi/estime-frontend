@@ -285,6 +285,13 @@ button {
   @media #{$small-device} {
     min-height: 1.25rem;
   }
+  &:hover,
+  &:focus-visible {
+    background-color: $color-pe-grey-light;
+    span {
+      font-weight: bold !important;
+    }
+  }
 
   max-height: fit-content;
 }
@@ -310,6 +317,14 @@ button {
 
   @media #{$small-device} {
     min-height: 1.25rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: $color-pe-red-darken;
+    span {
+      font-weight: bold !important;
+    }
   }
 
   max-height: fit-content;

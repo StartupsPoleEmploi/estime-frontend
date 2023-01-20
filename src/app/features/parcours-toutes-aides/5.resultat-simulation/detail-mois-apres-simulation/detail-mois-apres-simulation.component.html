@@ -1,11 +1,13 @@
 <div id="details-mois-container">
-    <div class="div_bouton_retour_detail_mois div-vertically-centered justify-content-start div_detail_mois_with_padding"
-        (click)="sideModalService.closeSideModalMois()" (keyup)="handleKeyUpOnRetour($event);" tabindex="0"
-        tag-action="clic_bouton_retour_detail_mois" data-testid="bouton_retour_detail_mois">
-        <span class="bouton_retour body-2-typo color-pe-red-typo">
-            <em alt class="ps-2 pe-2 fas fa-chevron-left span-montant-mensuel"></em>
-            <span class="body-2-typo color-pe-red-typo">Retour</span>
-        </span>
+    <div
+        class="div_bouton_retour_detail_mois div-vertically-centered justify-content-start div_detail_mois_with_padding">
+        <button type="button" class="no-style-button" tag-action="clic_bouton_retour_detail_mois"
+            data-testid="bouton_retour_detail_mois" (click)="sideModalService.closeSideModalMois()"
+            (keyup)="handleKeyUpOnRetour($event)" attr.aria-label="Fermer la fenêtre pour {{dateUtileService.getDateStringFormatSimulationMensuelle(simulationActuelle,
+                screenService.isTabletScreen())}}">
+            <span class="ps-2 pe-2 fas fa-chevron-left span-montant-mensuel color-pe-red-typo"></span>
+            <span class="body-2-typo color-pe-red-typo color-pe-red-typo">Retour</span>
+        </button>
     </div>
     <div class="div_mois_montant_mois_detail_mois div_detail_mois_with_padding" data-testid="div-montant-ressource">
         <div class="libelle_mois_apres_simulation_row row">
@@ -102,25 +104,26 @@
                 <div class="col-md-10 col-12 div-vertically-centered justify-content-end"
                     [ngClass]="screenService.isExtraSmallScreen()?'row':''"
                     *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideAvecDescription(ressourceFinanciereOuAide)">
-                    <span class="button-typo color-pe-red-typo boutons-redirections"
-                        [ngClass]="screenService.isExtraSmallScreen()?'col-12 mb-3':'me-5'"
+                    <button
                         *ngIf="ressourcesFinancieresService.isRessourceFinanciereOuAideADemander(ressourceFinanciereOuAide)"
-                        tabindex="0" tag-action="clic_bouton_faire_la_demande"
+                        type="button" class="no-style-button button-typo color-pe-red-typo boutons-redirections"
+                        [ngClass]="screenService.isExtraSmallScreen()?'col-12 mb-3':'me-5'"
+                        tag-action="clic_bouton_faire_la_demande"
                         (click)="onClickOnFaireLaDemande(ressourceFinanciereOuAide)"
                         (keyup)="handleKeyUpOnFaireLaDemande($event, ressourceFinanciereOuAide)">
                         FAIRE LA DEMANDE
                         <img alt="Ouverture dans une nouvelle fenêtre"
                             src="./assets/images/icones/open-in-new-window.svg" class="icone-open-in-new-window ms-1">
-                    </span>
-                    <span class="button-typo color-pe-red-typo boutons-redirections"
-                        [ngClass]="screenService.isExtraSmallScreen()?'col-12':'me-4'" tabindex="0"
+                    </button>
+                    <button type="button" class="no-style-button button-typo color-pe-red-typo boutons-redirections"
+                        [ngClass]="screenService.isExtraSmallScreen()?'col-12':'me-4'"
                         tag-action="clic_bouton_en_savoir_plus"
                         (click)="onClickOnEnSavoirPlus(ressourceFinanciereOuAide)"
                         (keyup)="handleKeyUpOnEnSavoirPlus($event, ressourceFinanciereOuAide)">
                         EN SAVOIR PLUS
                         <img alt="Ouverture dans une nouvelle fenêtre"
                             src="./assets/images/icones/open-in-new-window.svg" class="icone-open-in-new-window ms-1">
-                    </span>
+                    </button>
                 </div>
             </div>
         </div>

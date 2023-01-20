@@ -20,7 +20,6 @@ export class MoisApresSimulationComponent implements OnInit {
   @Input() simulationSelected: SimulationMensuelle;
   @Input() simulationActuelle: SimulationMensuelle;
   @Input() detailMensuel: DetailMensuel;
-  @Output() simulationSelection = new EventEmitter<SimulationMensuelle>();
 
   codesAidesEnum: typeof CodesAidesEnum = CodesAidesEnum;
 
@@ -48,11 +47,6 @@ export class MoisApresSimulationComponent implements OnInit {
 
   private orderRessourcesFinancieresMois() {
     this.ressourcesFinancieresEtAidesMois.sort((a, b) => b.montant - a.montant);
-  }
-
-  public onClickAfficherDetail(event, simulationActuelle: SimulationMensuelle): void {
-    event.preventDefault();
-    this.simulationSelection.emit(simulationActuelle);
   }
 
   public isNoSimulationMensuelleSelected(): boolean {

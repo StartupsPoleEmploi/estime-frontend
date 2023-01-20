@@ -253,14 +253,14 @@
                     <legend class="row pb-2">
                         <p class="label headline-4-typo">
                             * Allez-vous cumuler votre ancien salaire avec votre nouveau ?
-                            <button id="infobulle-cumul-ancien-et-nouveau-salaire" class="img-interrogation-icon"
-                                placement="right" tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
+                            <button id="infobulle-cumul-ancien-et-nouveau-salaire" type="button"
+                                class="img-interrogation-icon" placement="right"
+                                tag-action="ouverture-infobulle-cumul-ancien-et-nouveau-salaire"
                                 (click)="modalService.openModalOnEvent($event, modalCumulEntreAncienEtNouveauSalaire)">
                                 <span class="sr-only">
                                     Comment seront cumulés mon ancien et nouveau salaire ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </p>
                     </legend>
@@ -320,15 +320,15 @@
                     <legend class="row pb-2">
                         <p class="label headline-4-typo">
                             * Bénéficiez-vous de l'ACRE ?
-                            <button id="infobulle-ma-situation-beneficiaire-acre" class="img-interrogation-icon"
-                                placement="right" tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
+                            <button id="infobulle-ma-situation-beneficiaire-acre" type="button"
+                                class="img-interrogation-icon" placement="right"
+                                tag-action="ouverture-infobulle-ma-situation-beneficiaire-acre"
                                 (click)="modalService.openModalOnEvent($event, modalSituationBeneficiaireACRETemplate)"
                                 aria-describedby="labelInfobulleACRE">
                                 <span id="labelInfobulleACRE" class="sr-only">
                                     Qu'est ce que l'ACRE ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </p>
                     </legend>
@@ -375,15 +375,14 @@
                     <legend class="row pb-2">
                         <p class="label headline-4-typo">
                             * Votre situation familiale
-                            <button id="infobulle-ma-situation-conjoint" class="img-interrogation-icon"
+                            <button id="infobulle-ma-situation-conjoint" type="button" class="img-interrogation-icon"
                                 placement="right" tag-action="ouverture-infobulle-ma-situation-conjoint"
                                 (click)="modalService.openModalOnEvent($event, modalSituationConjointTemplate)"
                                 aria-describedby="labelInfobulleConjoint">
                                 <span id="labelInfobulleConjoint" class="sr-only">
                                     Qui considère-t-on comme votre conjoint ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </p>
                     </legend>
@@ -614,11 +613,11 @@
             </form>
         </div>
         <div class="row-btn-form">
-            <button id="btn-ma-situation-retour" class="btn-precedent" tag-navigation="clic_bouton_retour"
+            <button id="btn-ma-situation-retour" type="button" class="btn-precedent" tag-navigation="clic_bouton_retour"
                 data-testid="btn-ma-situation-retour" (click)="onClickButtonRetour()"
                 aria-label="Retour à la page précédente">
                 <div>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-gauche-grey.svg">
+                    <img alt="" src="./assets/images/icones/fleche-gauche-grey.svg">
                     <span>Retour</span>
                 </div>
             </button>
@@ -628,7 +627,7 @@
                 aria-label="Valider et passer à la page suivante">
                 <div>
                     <span>Suivant</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

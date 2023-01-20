@@ -263,14 +263,14 @@
                     <span class="sr-only">Montant mensuel de l'</span>
                     AAH (Allocation Adulte Handicapé) perçue
                     <span class="sr-only">&nbsp;par votre conjoint</span>
-                    <button id="infobulle-montant-aah" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-montant-aah" type="button" class="img-interrogation-icon" placement="right"
                         tag-action="clic_infobulle_aah"
                         (click)="modalService.openModalOnEvent($event, modalMontantAAHTemplate)"
                         aria-describedby="labelInfobulleAAHConjoint">
                         <span id="labelInfobulleAAHConjoint" class="sr-only">
                             Où trouver le montant de l'AAH de votre conjoint ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -315,14 +315,14 @@
                     <span class="sr-only">Montant mensuel de la</span>
                     Pension d'invalidité nette imposable perçue
                     <span class="sr-only">&nbsp;par votre conjoint</span>
-                    <button id="infobulle-pension-invalidite" class="img-interrogation-icon" placement="right"
-                        tag-action="clic_infobulle_pension_invalidite"
+                    <button id="infobulle-pension-invalidite" type="button" class="img-interrogation-icon"
+                        placement="right" tag-action="clic_infobulle_pension_invalidite"
                         (click)="modalService.openModalOnEvent($event, modalPensionInvaliditeTemplate)"
                         aria-describedby="labelInfobullePensionInvaliditeConjoint">
                         <span id="labelInfobullePensionInvaliditeConjoint" class="sr-only">
                             Où trouver le montant de la pension invalidité de votre conjoint ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -499,14 +499,14 @@
                     <span class="sr-only">Montant net des&nbsp;</span>
                     Revenus annuels de placement ou du patrimoine
                     <span class="sr-only">&nbsp;de votre conjoint sur les 3 derniers mois</span>
-                    <button id="infobulle-revenus-immobilier" class="img-interrogation-icon" placement="right"
-                        aria-describedby="labelInfobulleRevenusDePlacementConjoint"
+                    <button id="infobulle-revenus-immobilier" type="button" class="img-interrogation-icon"
+                        placement="right" aria-describedby="labelInfobulleRevenusDePlacementConjoint"
                         tag-action="clic_infobulle_ressources_du_foyer_revenus_annuels_placement_patrimoine"
                         (click)="modalService.openModalOnEvent($event, modalRevenusImmobiliersTemplate)">
                         <span id="labelInfobulleRevenusDePlacementConjoint" class="sr-only">
                             Où trouver les revenus immobiliers de votre conjoint ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -546,7 +546,7 @@
         </div>
         <div class="row row-button-valider">
             <div class="col">
-                <button class="btn-style-perso-3 button-typo" type="submit"
+                <button type="submit" class="btn-style-perso-3 button-typo"
                     data-testid="btn-ressources-conjoint-valider" tag-action="clic_bouton_valider_ressources_conjoint">
                     <div>
                         <span>Valider</span>
@@ -566,9 +566,12 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de paiement CAF 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-aah.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-aah.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve à la ligne Allocation Adulte Handicapé de la rubrique prestations de votre dernière attestation de paiement CAF .
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 
@@ -594,8 +597,11 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de paiement de pension 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-pi.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-pi.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve sous le tableau récapitulatif de la période de paiment de votre dernière attestation de paiement de pension d\'invalidité.
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>

@@ -25,7 +25,7 @@
                             <span class="headline-5-typo headline-5-typo-color">
                                 Relevé de situation allocation d'Aide au Retour Emploi (ARE)
                             </span>
-                            <button id="infobulle-trouver-dernier-releve-situation-are"
+                            <button id="infobulle-trouver-dernier-releve-situation-are" type="button"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-dernier-releve-situation-are"
                                 (click)="modalService.openModalOnEvent($event, modalDernierReleveDeSituationARE, true)"
@@ -33,15 +33,14 @@
                                 <span id="labelInfobulleReleveSituationARE" class="sr-only">
                                     Où trouver votre dernier relevé de situation ARE ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-bottom">
                             <span class="headline-5-typo headline-5-typo-color">
                                 Notification de droits Allocation Solidarité Spécifique (ASS)
                             </span>
-                            <button id="infobulle-trouver-notification-droits-ass"
+                            <button id="infobulle-trouver-notification-droits-ass" type="button"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-notification-droits-ass"
                                 (click)="modalService.openModalOnEvent($event, modalDerniereNotificationDroitASSTemplate, true)"
@@ -49,15 +48,14 @@
                                 <span id="labelInfobulleNotificationDroitsASS" class="sr-only">
                                     Où trouver votre notification de droits ASS ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-bottom">
                             <span class="headline-5-typo headline-5-typo-color">
                                 Droits Caisse d'Allocations Familiales (CAF) ou Mutualité Sociale Agricole (MSA)
                             </span>
-                            <button id="infobulle-trouver-derniere-attestation-caf"
+                            <button id="infobulle-trouver-derniere-attestation-caf" type="button"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-derniere-attestation-caf"
                                 (click)="modalService.openModalOnEvent($event, modalDerniereAttestationCafTemplate, true)"
@@ -65,13 +63,12 @@
                                 <span id="labelInfobulleAttestationCAF" class="sr-only">
                                     Où trouver votre derniere attestation CAF ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </li>
                         <li class="items-documents-demandes avec-border-top">
                             <span class="headline-5-typo headline-5-typo-color">Pension d’invalidité</span>
-                            <button id="infobulle-trouver-derniere-attestation-pension-invalidite"
+                            <button id="infobulle-trouver-derniere-attestation-pension-invalidite" type="button"
                                 class="img-interrogation-icon float-end" placement="right"
                                 tag-action="ouverture-infobulle-trouver-derniere-attestation-pension-invalidite"
                                 (click)="modalService.openModalOnEvent($event, modalDerniereAttestationPensionInvaliditeTemplate, true)"
@@ -79,8 +76,7 @@
                                 <span id="labelInfobulleAttestationPensionInvalidite" class="sr-only">
                                     Où trouver votre dernière attestation de pension d'invalidité ?
                                 </span>
-                                <img alt="" role="presentation" src="./assets/images/icones/question.svg"
-                                    aria-hidden="true">
+                                <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                             </button>
                         </li>
                     </ul>
@@ -91,11 +87,12 @@
             </div>
         </div>
         <div class="row-btn-form">
-            <button id="btn-je-continue-avant-commencer" data-testid="btn-je-continue-avant-commencer" type="button"
-                class="btn-suivant" (click)="onClickButtonJeContinue()" tag-navigation="clic_bouton_je_continue">
+            <button id="btn-je-continue-avant-commencer" type="button" class="btn-suivant"
+                data-testid="btn-je-continue-avant-commencer" tag-navigation="clic_bouton_je_continue"
+                (click)="onClickButtonJeContinue()">
                 <div>
                     <span class="button-typo">Je continue</span>
-                    <img alt="" role="presentation" src="./assets/images/icones/fleche-droite-pe-white.svg">
+                    <img alt="" src="./assets/images/icones/fleche-droite-pe-white.svg">
                 </div>
             </button>
         </div>

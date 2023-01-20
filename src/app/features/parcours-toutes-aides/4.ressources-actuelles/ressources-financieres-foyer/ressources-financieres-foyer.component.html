@@ -6,14 +6,14 @@
             <legend class="row pb-2">
                 <p class="label headline-4-typo">
                     * Percevez-vous une prime d'activité ?
-                    <button id="infobulle-prime-activite" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-prime-activite" type="button" class="img-interrogation-icon" placement="right"
                         aria-describedby="labelInfobullePrimeActiviteFoyer"
                         tag-action="ouverture-infobulle-prime-activite"
                         (click)="modalService.openModalOnEvent($event, modalInfosPrimeActiviteTemplate)">
                         <span id="labelInfobullePrimeActiviteFoyer" class="sr-only">
                             Qu'est ce que la prime d'activité ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </p>
             </legend>
@@ -106,13 +106,13 @@
                     <span class="sr-only">Montant mensuel du&nbsp;</span>
                     RSA (Revenu de Solidarité Active) perçu
                     <span class="sr-only">&nbsp;par votre foyer</span>
-                    <button id="infobulle-montant-rsa" class="img-interrogation-icon" placement="right"
+                    <button id="infobulle-montant-rsa" type="button" class="img-interrogation-icon" placement="right"
                         aria-describedby="labelInfobulleRSAFoyer" tag-action="clic_infobulle_rsa"
                         (click)="modalService.openModalOnEvent($event, modalMontantRSATemplate)">
                         <span id="labelInfobulleRSAFoyer" class="sr-only">
                             Où trouver le montant du RSA de votre foyer ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
                 <div class="row">
@@ -297,7 +297,7 @@
                         <span class="body-2-typo">Une chambre</span>
                     </label>
                     <input id="isAucunCas" name="isAucunCas" type="checkbox" class="checkbox-as-button large"
-                        data-testid="btn-situation-aucun-cas" [(ngModel)]="this.isAucunCas" role="button"
+                        data-testid="btn-situation-aucun-cas" [(ngModel)]="this.isAucunCas"
                         (click)="onClickCheckBoxIsAucunCas($event)" (keyup)="handleKeyUpOnButtonIsAucunCas($event)">
                     <label for="isAucunCas" class="mb-2 me-2">
                         <span class="sr-only">Votre logement n'est&nbsp;</span>
@@ -515,14 +515,15 @@
             <div class="row pb-2">
                 <label class="label headline-4-typo" for="prochaineDeclarationTrimestrielle">
                     * Au cours de quel mois ferez-vous votre prochaine déclaration trimestrielle CAF ?
-                    <button id="infobulle-prochaine-declaration-trimestrielle" class="img-interrogation-icon"
-                        placement="right" tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
+                    <button id="infobulle-prochaine-declaration-trimestrielle" type="button"
+                        class="img-interrogation-icon" placement="right"
+                        tag-action="clic_infobulle_prochaine_declaration_trimestrielle"
                         (click)="modalService.openModalOnEvent($event, modalProchaineDeclarationTrimestrielleTemplate)"
                         aria-describedby="labelInfobulleDeclarationTrimestrielle">
                         <span id="labelInfobulleDeclarationTrimestrielle" class="sr-only">
                             Où trouver la date de votre prochaine déclaration trimestrielle CAF ?
                         </span>
-                        <img alt="" role="presentation" src="./assets/images/icones/question.svg" aria-hidden="true">
+                        <img alt="" src="./assets/images/icones/question.svg" aria-hidden="true">
                     </button>
                 </label>
             </div>
@@ -759,9 +760,12 @@
         <p class='body-1-typo'>
             Sur votre dernière attestation de paiement CAF 👇
         </p>
-        <div class='row mb-5'>
-            <img alt='' role='presentation' src='./assets/images/exemples/attestation-rsa.png'>
-        </div>">
+        <figure class='row mb-5'>
+            <img alt='' src='./assets/images/exemples/attestation-rsa.png'>
+            <figcaption class='sr-only'>
+                L'information se trouve à la ligne Revenu de Solidarité Active de la rubrique prestations de votre dernière attestation de paiement CAF .
+            </figcaption>
+        </figure>">
     </app-tooltip>
 </ng-template>
 

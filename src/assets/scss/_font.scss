@@ -1,3 +1,7 @@
+abbr {
+  text-decoration:none !important;
+}
+
 h1 {
   @extend .font-effect-title;
   font-size: 1.8em;
