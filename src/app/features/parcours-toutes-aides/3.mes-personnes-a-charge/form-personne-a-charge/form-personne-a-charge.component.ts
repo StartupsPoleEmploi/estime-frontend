@@ -43,7 +43,7 @@ export class FormPersonneAChargeComponent implements OnInit {
     this.controleChampFormulaireService.focusOnFirstElement();
   }
 
-  public onSubmitNouvellePersonneAChargeForm(event: any, form: UntypedFormGroup): void {
+  public onSubmitNouvellePersonneAChargeForm(form: UntypedFormGroup): void {
     this.isNouvellePersonnesAChargeFormSubmitted = true;
     this.checkAndSaveDateNaissanceNouvellePersonneConnecte();
     if (this.isDonneesFormulaireNouvellePersonneValides(form)) {

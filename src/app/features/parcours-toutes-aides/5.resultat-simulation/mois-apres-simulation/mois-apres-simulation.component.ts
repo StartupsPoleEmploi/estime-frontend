@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CodesAidesEnum } from '@app/commun/enumerations/codes-aides.enum';
 import { DemandeurEmploi } from '@app/commun/models/demandeur-emploi';
 import { DetailMensuel } from '@app/commun/models/detail-mensuel';

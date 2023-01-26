@@ -1,5 +1,4 @@
 import { Salaire } from "@models/salaire";
-import { TypeDureeHebdoEnum } from "../enumerations/enumerations-formulaire/type-duree-hebdo.enum";
 
 export class FuturTravail {
   hasOffreEmploiEnVue: boolean;

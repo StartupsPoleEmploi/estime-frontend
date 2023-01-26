@@ -4,7 +4,6 @@ import { Coordonnees } from '@app/commun/models/coordonnees';
 import { InformationsPersonnelles } from '@app/commun/models/informations-personnelles';
 import { Logement } from '@app/commun/models/logement';
 import { MicroEntreprise } from '@app/commun/models/micro-entreprise';
-import { StatutOccupationLogement } from '@app/commun/models/statut-occupation-logement';
 
 @Injectable({ providedIn: 'root' })
 export class InformationsPersonnellesService {

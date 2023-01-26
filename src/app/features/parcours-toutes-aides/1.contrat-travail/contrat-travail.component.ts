@@ -19,7 +19,6 @@ import { TypeDistanceDomicileTravailEnum } from '@app/commun/enumerations/enumer
 import { TypeNombreTrajetsSemaineEnum } from '@app/commun/enumerations/enumerations-formulaire/type-nombre-trajets-semaine.enum';
 import { TypeSalaireDisplayEnum } from '@app/commun/enumerations/enumerations-formulaire/type-salaire-display.enum';
 import { TypeSalaireSouhaiteEnum } from '@app/commun/enumerations/enumerations-formulaire/type-salaire-souhaite.enum';
-import { TypeUtilisateurEnum } from '@app/commun/enumerations/type-utilisateur.enum';
 
 @Component({
   selector: 'app-contrat-travail',
@@ -218,7 +217,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public onClickCheckBoxHasOffreEmploiOui() {
-    if (this.hasOffreEmploi != true) {
+    if (this.hasOffreEmploi !== true) {
       this.hasOffreEmploi = true;
       this.futurTravail.hasOffreEmploiEnVue = true;
     }
@@ -226,7 +225,7 @@ export class ContratTravailComponent implements OnInit {
   }
 
   public onClickCheckBoxHasOffreEmploiNon() {
-    if (this.hasOffreEmploi != false) {
+    if (this.hasOffreEmploi !== false) {
       this.hasOffreEmploi = false;
       this.futurTravail.hasOffreEmploiEnVue = false;
       this.futurTravail.typeContrat = TypeContratTravailEnum.CDI;
@@ -526,27 +525,9 @@ export class ContratTravailComponent implements OnInit {
     this.futurTravail.salaire.montantHoraireBrut = this.salaireService.getMontantHoraireFromMontantMensuel(this.futurTravail.salaire.montantMensuelBrut, this.futurTravail.nombreHeuresTravailleesSemaine);
   }
 
-  public unsetSalaireSouhaiteSMIC() {
-    this.typeSalaireSouhaite = null;
-    this.futurTravail.typeSalaireSouhaite = null;
-    this.futurTravail.salaire.montantMensuelNet = null;
-    this.futurTravail.salaire.montantMensuelBrut = null;
-    this.futurTravail.salaire.montantHoraireNet = null;
-    this.futurTravail.salaire.montantHoraireBrut = null;
-  }
-
   public setSalaireSouhaiteAutre() {
     this.typeSalaireSouhaite = TypeSalaireSouhaiteEnum.AUTRE;
     this.futurTravail.typeSalaireSouhaite = this.typeSalaireSouhaite;
-  }
-
-  public unsetSalaireSouhaiteAutre() {
-    this.typeSalaireSouhaite = null;
-    this.futurTravail.typeSalaireSouhaite = null;
-    this.futurTravail.salaire.montantMensuelNet = null;
-    this.futurTravail.salaire.montantMensuelBrut = null;
-    this.futurTravail.salaire.montantHoraireNet = null;
-    this.futurTravail.salaire.montantHoraireBrut = null;
   }
 
   public setNombreTrajets1JourSemaine() {

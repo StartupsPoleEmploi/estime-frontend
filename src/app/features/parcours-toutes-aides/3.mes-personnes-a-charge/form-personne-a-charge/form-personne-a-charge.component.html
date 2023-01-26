@@ -11,7 +11,7 @@
         </button>
     </div>
     <div class="card-body">
-        <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm($event, personnesAChargeForm)"
+        <form (ngSubmit)="onSubmitNouvellePersonneAChargeForm(personnesAChargeForm)"
             [ngClass]="{'submitted':isNouvellePersonnesAChargeFormSubmitted}" #personnesAChargeForm="ngForm">
             <fieldset class="fieldset-row">
                 <legend class="row pb-2">
